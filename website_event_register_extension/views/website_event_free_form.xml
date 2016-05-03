@@ -57,12 +57,13 @@
             <!-- If all the tickets are expired or the event has passed, hide the table head -->
             <xpath expr="//form/table[@itemprop='offers']/thead/tr" position="replace">
                 <t t-set="headPresent" t-value="False"/>
+                <t t-set="today" t-value="time.strftime('%%Y-%%m-%%d')" />
                 <t t-foreach="event.event_ticket_ids" t-as="ticket">
-                    <t t-if="not ticket.is_expired">
+                    <t t-if="not ticket.is_expired and (today &lt; event.date_end)">
                         <t t-set="headPresent" t-value="True"/>
                     </t>
                 </t>
-                <t t-if="(event.seats_available or not event.seats_max) and (today &lt; event.date_end) and headPresent">
+                <t t-if="headPresent">
                     <tr>
                         <th>Ticket Type</th>
                         <th style="min-width: 100px">Sales End</th>
@@ -70,6 +71,9 @@
                         <th></th>
                         <th>Quantity</th>
                     </tr>
+                </t>
+                <t t-if="not headPresent">
+                    <h3>Tickets not available</h3>
                 </t>
             </xpath>
 
@@ -99,11 +103,12 @@
                 <t t-if="event.state in ['draft', 'confirm'] and event.event_ticket_ids">
                     <div class="pull-right" style="width:210px;">
                         <ul class="media-list">
+                            <t t-set="today" t-value="time.strftime('%%Y-%%m-%%d')" />
                             <li t-foreach="event.event_ticket_ids" t-as="ticket" class="media mt4">
-                                <span t-if="not ticket.seats_available and event.seats_max" class="label pull-left label-danger">
+                                <span t-if="((not ticket.seats_available and event.seats_max) or (event.seats_max == event.seats_reserved)) and (today &lt; event.date_end)" class="label pull-left label-danger">
                                     <t t-esc="ticket.name"/>: Sold Out
                                 </span>
-                                <span t-if="ticket.seats_available and ticket.seats_available &lt;= ((ticket.seats_max or 0) / 4)" class="label pull-left label-info">
+                                <span t-if="ticket.seats_available and ticket.seats_available &lt;= ((ticket.seats_max or 0) / 4) and (today &lt; event.date_end)" class="label pull-left label-info">
                                     <t t-esc="ticket.name"/>: Only <t t-esc="ticket.seats_available"/> Remaining
                                 </span>
                             </li>

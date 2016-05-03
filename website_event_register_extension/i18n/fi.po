@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 08:52+0000\n"
-"PO-Revision-Date: 2016-04-12 11:53+0200\n"
+"POT-Creation-Date: 2016-05-02 07:27+0000\n"
+"PO-Revision-Date: 2016-05-02 10:28+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,9 +38,24 @@ msgid "Event Registration"
 msgstr "Tapahtuman rekisteröinti"
 
 #. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Order Now"
+msgstr "Tilaa nyt"
+
+#. module: website_event_free_form
 #: view:website:website_event_free_form.event_free_form
 msgid "Phone"
 msgstr "Puhelin"
+
+#. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Price"
+msgstr "Hinta"
+
+#. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Quantity"
+msgstr "Määrä"
 
 #. module: website_event_free_form
 #: view:website:website_event_free_form.event_free_form
@@ -51,6 +66,11 @@ msgstr "Rekisteröidy"
 #: view:website:website_event.index
 msgid "Remaining"
 msgstr "Jäljellä"
+
+#. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Sales End"
+msgstr "Myynti päättyy"
 
 #. module: website_event_free_form
 #: view:website:website_event_free_form.event_free_form
@@ -68,6 +88,16 @@ msgid "Sold Out"
 msgstr "Loppuunmyyty"
 
 #. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Ticket Type"
+msgstr "Lipun tyyppi"
+
+#. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "Tickets not available"
+msgstr "Lippuja ei saatavilla"
+
+#. module: website_event_free_form
 #: view:website:website_event_free_form.event_free_form
 msgid "Your Details"
 msgstr "Tiedot"
@@ -76,3 +106,8 @@ msgstr "Tiedot"
 #: view:website:website_event_free_form.event_free_form
 msgid "Your Name / Company name"
 msgstr "Nimi / Yrityksen nimi"
+
+#. module: website_event_free_form
+#: view:website:website_event.event_description_full
+msgid "not ticket.is_expired and (time.strftime('%Y-%m-%d') < event.date_end)"
+msgstr "not ticket.is_expired and (time.strftime('%Y-%m-%d') < event.date_end)"
