@@ -41,6 +41,6 @@ class WebsiteSale(website_sale):
         has_paid_tickets = bool(order.order_line)
         if request.session.get('free_tickets') and not has_paid_tickets:
             values = self.checkout_values(data={'shipping_id': -1})
-            return request.website.render("website_event_free_form.event_free_form", values)
+            return request.website.render("website_event_register_extension.event_free_form", values)
         else:
             return super(WebsiteSale, self).checkout(**post)

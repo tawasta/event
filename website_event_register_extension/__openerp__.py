@@ -22,7 +22,7 @@
 {
     'name': 'Free Event form modifications',
     'summary': 'Changes the form for free events',
-    'version': '8.0.0.1.6',
+    'version': '8.0.0.1.7',
     'category': 'Website',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
