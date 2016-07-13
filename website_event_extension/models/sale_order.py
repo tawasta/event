@@ -39,6 +39,7 @@ class SaleOrder(models.Model):
                            line.event_ticket_id.name) if line.event_ticket_id.name else ""
             record.new_header = header
             header = ""
+
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
@@ -46,3 +47,13 @@ class SaleOrder(models.Model):
     # 7. Action methods
 
     # 8. Business methods
+    @api.model
+    def _cart_find_product_line(self, product_id=None, line_id=None, context=None, **kwargs):
+        # DO NOT REMOVE THIS METHOD
+        # While it seems to do nothing, it will actually set the context for the method
+        #
+        # We need to add "if not context: context = {}" to this function in website_event_sale,
+        # so it will work even when the method is called without context.
+        # The decorator will do it automatically, so we don't need to add anything manually.
+
+        return super(SaleOrder, self)._cart_find_product_line(**kwargs)
