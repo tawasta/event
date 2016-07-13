@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data noupdate="0">
+		<record id="event_coupon_message" model="email.template">
+	        <field name="name">Company voucher coupons</field>
+	        <field name="model_id" ref="event.model_event_registration"/>
+	        <field name="email_from" >${(object.user_id.email or object.company_id.email or 'noreply@' + object.company_id.name + '.com')|safe}</field>
+	        <field name="email_to" >${object.email|safe}</field>
+	        <field name="report_template" ref="sale.report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
+	        <field name="lang">${object.partner_id.lang}</field>
+	        <field name="subject">Your registration at ${object.event_id.name}</field>
+	        <field name="body_html"><![CDATA[
+	        <p>Hello ${object.name},</p>
+	        <p>The event ${object.event_id.name} that you registered for is confirmed and will be held from ${object.event_id.date_begin_located} to ${object.event_id.date_end_located}.
+	        For any further information please contact our event department.</p>
+	        <p>Thank you for your participation!</p>
+	        <p>Best regards</p>]]></field>
+        </record>
+
+        <record id="event_coupon_usage_message" model="email.template">
+	        <field name="name">Coupon usage for event registration</field>
+	        <field name="model_id" ref="event.model_event_registration"/>
+	        <field name="email_from" >${(object.user_id.email or object.company_id.email or 'noreply@' + object.company_id.name + '.com')|safe}</field>
+	        <field name="email_to" >${object.email|safe}</field>
+			<field name="report_template" ref="sale.report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
+	        <field name="lang">${object.partner_id.lang}</field>
+	        <field name="subject">Your registration at ${object.event_id.name}</field>
+	        <field name="body_html"><![CDATA[
+	        <p>Hello ${object.name},</p>
+	        <p>The event ${object.event_id.name} that you registered for is confirmed and will be held from ${object.event_id.date_begin_located} to ${object.event_id.date_end_located}.
+	        For any further information please contact our event department.</p>
+	        <p>Thank you for your participation!</p>
+	        <p>Best regards</p>]]></field>
+        </record>
+
+	</data>
+</openerp>
