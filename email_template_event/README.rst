@@ -12,6 +12,7 @@ Features
 --------
 
 * **Creates new email templates for confirming registrations**
+* **Creates report to be send as an attachment with new template with a nametag**
 
 Installation
 ============
