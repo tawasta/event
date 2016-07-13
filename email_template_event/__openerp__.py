@@ -22,7 +22,7 @@
 {
     'name': 'Email template for events',
     'summary': 'Email template that adds nameplate to email and other codes for voucher',
-    'version': '8.0.0.1.1',
+    'version': '8.0.0.1.2',
     'category': 'Marketing',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -30,7 +30,8 @@
     'application': False,
     'installable': True,
     'depends': [
-        'event'
+        'event',
+        'website_voucher'
     ],
     'data': [
         'report/event_purchase_confirmation_report.xml',

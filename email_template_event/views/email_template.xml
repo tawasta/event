@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
 	<data noupdate="0">
-		<record id="event_coupon_message" model="email.template">
-	        <field name="name">Company voucher coupons</field>
+		<record id="event_purchase_confirmation" model="email.template">
+	        <field name="name">Event Purchase Confirmation</field>
 	        <field name="model_id" ref="event.model_event_registration"/>
 	        <field name="email_from" >${(object.user_id.email or object.company_id.email or 'noreply@' + object.company_id.name + '.com')|safe}</field>
 	        <field name="email_to" >${object.email|safe}</field>
@@ -28,6 +28,43 @@
 	        Mindtrek 2016 takes place October 17­-19 at Tampere Hall - ­Congress and Concert Centre. The address is: Yliopistonkatu 55, 33100 Tampere, Finland. If you have any questions, please contact <a href="mailto:info@mindtrek.org">info@mindtrek.org</a>.<br/><br/>
 
 	        See you at the conference!<br/><br/>
+
+	        Best regards,<br/>
+	        Mindtrek Team / COSS ry
+	    	</p>]]></field>
+        </record>
+
+        <record id="event_voucher_coupons" model="email.template">
+        	<field name="name">Voucher coupons for Event</field>
+	        <field name="model_id" ref="event.model_event_registration"/>
+	        <field name="email_from" >${(object.user_id.email or object.company_id.email or 'noreply@' + object.company_id.name + '.com')|safe}</field>
+	        <field name="email_to" >${object.email|safe}</field>
+	        <field name="lang">${object.partner_id.lang}</field>
+	        <field name="subject">Your voucher coupons at ${object.event_id.name}</field>
+	        <field name="body_html"><![CDATA[
+	        <h4>VOUCHER COUPONS</h4>
+
+	        <p class="mt32">Hello ${object.name},</p>
+
+	        <p>Thank you for your purchase!<br/><br/>
+
+	        Below you can find your Mindtrek 2016 Voucher coupons. Distribute the coupons to the personel attending the event. <br/><br/>
+
+	        <b class="mt16">
+				Ticket type: ${object.event_ticket_id.name}<br/>
+			</b>
+
+	        % for voucher_coupon in object.voucher_coupons:
+
+	        ${voucher_coupons.voucher_id.voucher_code}<br/>
+
+	        % endfor
+	        <br/><br/><br/>
+
+
+	        With the coupons, attending personel will get their Conference Passes for free. To do so, attending personel must select the right ticket type from the webpages and then order those. At the shopping cart, they can use their Voucher Code and the price automatically accordingly. <br/><br/>
+
+	        Mindtrek 2016 takes place October 17­-19 at Tampere Hall - ­Congress and Concert Centre. The address is: Yliopistonkatu 55, 33100 Tampere, Finland. If you have any questions, please contact <a href="mailto:info@mindtrek.org">info@mindtrek.org</a>.<br/><br/>
 
 	        Best regards,<br/>
 	        Mindtrek Team / COSS ry
