@@ -14,25 +14,19 @@ from openerp import api, fields, models
 # 6. Unknown third party imports:
 
 
-class EventRegistration(models.Model):
-
+class WebsiteVoucher(models.Model):
     # 1. Private attributes
-    _inherit = 'event.registration'
+    _inherit = 'wk_website.history'
 
     # 2. Fields declaration
-    voucher_coupons = fields.One2many(
-        'wk_website.history', 'event_registration_id', compute='compute_voucher_coupons')
+    event_registration_id = fields.Many2one(
+        'event.registration',
+        'Related Event Registration',
+    )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.multi
-    def compute_voucher_coupons(self):
-
-        for record in self:
-            record.voucher_coupons = record.env['wk_website.history'].search(
-                [('order_id.name', '=', record.origin), ('voucher_id.product.id', '=', record.event_ticket_id.product_id.id)])
-
 
     # 5. Constraints and onchanges
 

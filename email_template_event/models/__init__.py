@@ -1,1 +1,1 @@
-import event_registration
+import event_registration, website_voucher
