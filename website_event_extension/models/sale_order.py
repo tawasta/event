@@ -48,7 +48,7 @@ class SaleOrder(models.Model):
 
     # 8. Business methods
     @api.model
-    def _cart_find_product_line(self, product_id=None, line_id=None, context=None, **kwargs):
+    def _cart_find_product_line(self, product_id=None, line_id=None, **kwargs):
         # DO NOT REMOVE THIS METHOD
         # While it seems to do nothing, it will actually set the context for the method
         #
@@ -56,4 +56,4 @@ class SaleOrder(models.Model):
         # so it will work even when the method is called without context.
         # The decorator will do it automatically, so we don't need to add anything manually.
 
-        return super(SaleOrder, self)._cart_find_product_line(**kwargs)
+        return super(SaleOrder, self)._cart_find_product_line(product_id=product_id, line_id=line_id, **kwargs)
