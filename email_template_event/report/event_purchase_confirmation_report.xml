@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<report id="report_event_purchase_confimation"
+			string="Event purchase confimation report"
+			model="event.registration"
+			report_type="qweb-html"
+			file="email_template_event.report_ev_purchase_confimation" 
+			name="email_template_event.report_ev_purchase_confimation"
+			/>
+
+		<!-- Define paperformat, use one from crm_customer_label_print module  -->
+		<record id="report_event_purchase_confimation" model="ir.actions.report.xml">
+			<field name="paperformat_id" ref="crm_customer_label_print.paperformat_euro_normargin"/>
+		</record>
+
+
+		<!-- Template for purchase confirmation report-->
+		<template id="report_ev_purchase_confimation">
+			<t t-call="report.html_container">
+
+				<div class="page">
+
+					<h4>PURCHASE CONFIRMATION</h4>
+
+					<p class="mt32">Thank you for your purchase!<br/><br/>
+
+					Below you can find your Mindtrek 2016 Conference Pass. Please print out this page and be sure to bring it with you to the conference. Registration opens at 8:30 on each conference day.<br/><br/>
+
+					Remember that with your pass you will have full access to all the events and presentations at Mindtrek, apart from a few closed sessions. Closed sessions are marked separately in the program. For full program details, please go to <a href="www.mindtrek.org/2016/program">www.mindtrek.org/2016/program</a>.<br/><br/>
+					
+					Mindtrek 2016 takes place October 17­-19 at Tampere Hall - ­Congress and Concert Centre. The address is: Yliopistonkatu 55, 33100 Tampere, Finland. If you have any questions, please contact <a href="mailto:info@mindtrek.org">info@mindtrek.org</a>.<br/><br/>
+
+					See you at the conference!<br/><br/>
+
+					Best regards,<br/>
+					Mindtrek Team / COSS ry
+					</p>
+
+					<div style="margin-top:80px;">
+						<b>Cut the nametag marked under <span class="caret"></span></b>
+						<div class="mt16" style="height:105mm !important; width: 74mm !important; border: 10px solid rgb(44, 147, 169);">
+							<img src="http://www.mindtrek.org/wp-content/uploads/sites/11/2016/02/MT-logo.png" 
+								style="display: block;margin-left: auto;margin-right: auto;" height="64"/>
+								<div class="col-xs-12">
+									<h3 class="mt64" style="text-align:center;">
+										<!-- Person name -->
+										<t t-esc="docs.name"/><br/>
+										<!-- Company name -->
+										<t t-esc="docs.partner_id.parent_id.name"/><br/>
+										<!-- Titteli -->
+										<t t-esc="docs.partner_id.function"/>
+									</h3>
+								</div>
+						</div>
+
+					</div>
+				</div>
+			</t>
+		</template>
+	</data>
+</openerp>
