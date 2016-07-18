@@ -34,7 +34,14 @@ class SaleOrder(models.Model):
         header = ""
         for record in self:
             for line in record.order_line:
-                header += _(line.event_id.name_get()[0][1]) or ""
+                event_name = line.event_id.name_get()
+                if 0 in event_name and 1 in event_name[0]:
+                    header_msg = event_name[0][1]
+                else:
+                    header_msg = ""
+
+                header += _(header_msg) or ""
+
                 header += ("\n " +
                            line.event_ticket_id.name) if line.event_ticket_id.name else ""
             record.new_header = header
