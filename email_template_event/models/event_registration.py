@@ -2,6 +2,7 @@
 
 # 1. Standard library imports:
 import vobject
+
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
@@ -40,12 +41,12 @@ class EventRegistration(models.Model):
         for record in self:
 
             name = record.name
-            organisation = record.partner_id.parent_id.name
+            organisation = record.partner_id.company_name
             title = record.partner_id.function
             email = record.email
             
             record.qr_string = "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % (name, title, organisation, email)
-            
+
     # 5. Constraints and onchanges
 
     # 6. CRUD methods

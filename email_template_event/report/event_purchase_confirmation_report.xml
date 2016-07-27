@@ -55,7 +55,7 @@
 										<b class="pb16" style="font-size:2em;line-height:70%;"><t t-esc="docs.name"/></b>
 										<hr style="margin:5px;height:5px;color:rgb(44, 147, 169); background-color:rgb(44, 147, 169);"/>
 										<!-- Company name -->
-										<p style="text-align:center;"><t t-esc="docs.partner_id.parent_id.name"/><br/>
+										<p style="text-align:center;"><t t-esc="docs.partner_id.company_name"/><br/>
 										<!-- Job title -->
 										<i><t t-esc="docs.partner_id.function"/></i></p>	
 									</p>
