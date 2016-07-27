@@ -31,7 +31,8 @@
     'installable': True,
     'depends': [
         'event',
-        'website_voucher'
+        'website_voucher',
+        'website_sale_extension'
     ],
     'data': [
         'report/event_purchase_confirmation_report.xml',
