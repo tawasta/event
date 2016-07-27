@@ -42,11 +42,11 @@
 					Mindtrek Team / COSS ry
 					</p>
 
-
-
-					<div style="margin-top:80px;">
-						<b>Cut the nametag marked under <span class="caret"></span></b>
-						<div class="mt16 row" style="height:105mm !important; width: 74mm !important; border: 10px solid rgb(44, 147, 169); overflow: hidden;">
+                    <!-- TODO: Better structure with absolute mm-heights. This margin amount is probably extremely sensitive about any changes -->
+					<div style="margin-top: 68.7mm;">
+						<b>Cut out the Conference Pass below and take it with you to the event<span class="caret"></span></b>
+                        <div style="border-bottom: 1px dotted #000; margin-left: -5mm;" />
+						<div class="" style="margin-left: -5mm; height:105mm !important; width: 74mm !important; border: 10px solid rgb(44, 147, 169); overflow: hidden;">
 
                             <!-- Logo -->
                             <div class="col-xs-12" style="height: 25mm;">
