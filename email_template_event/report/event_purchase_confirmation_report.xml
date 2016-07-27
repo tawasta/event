@@ -46,27 +46,48 @@
 
 					<div style="margin-top:80px;">
 						<b>Cut the nametag marked under <span class="caret"></span></b>
-						<div class="mt16" style="height:105mm !important; width: 74mm !important; border: 10px solid rgb(44, 147, 169);">
-							<img src="http://www.mindtrek.org/wp-content/uploads/sites/11/2016/02/MT-logo.png" 
-								style="display: block;margin-left: auto;margin-right: auto; height:15%" />
-								<div class="col-xs-12" style="height:40%;">
-									<p class="mt32" style="text-align:center;">
-										<!-- Person name -->
-										<b class="pb16" style="font-size:2em;line-height:70%;"><t t-esc="docs.name"/></b>
-										<hr style="margin:5px;height:5px;color:rgb(44, 147, 169); background-color:rgb(44, 147, 169);"/>
-										<!-- Company name -->
-										<p style="text-align:center;"><t t-esc="docs.partner_id.company_name"/><br/>
-										<!-- Job title -->
-										<i><t t-esc="docs.partner_id.function"/></i></p>	
-									</p>
-								</div>
-								<div>
-									<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s&amp;width=%s' % ('QR', docs.qr_string.replace(';','%0A'), 140, 140)" 
-										style="display:block;margin-left:auto;margin-right:auto;"/>
-								</div>
-								<div class="col-xs-12" style="height:15%;">
-									<b style="text-transform:uppercase;font-size:1.625em;">Conference pass</b>
-								</div>
+						<div class="mt16 row" style="height:105mm !important; width: 74mm !important; border: 10px solid rgb(44, 147, 169); overflow: hidden;">
+
+                            <!-- Logo -->
+                            <div class="col-xs-12" style="height: 25mm;">
+                                <div style="text-align:center;">
+                                    <img src="http://www.mindtrek.org/wp-content/uploads/sites/11/2016/02/MT-logo.png"
+                                        style="display: block; margin-left: auto; margin-right: auto; width: 60mm" />
+                                </div>
+                            </div>
+
+                            <!-- Customer info -->
+                            <div class="col-xs-12" style="height:25mm;">
+                                <div style="text-align:center;">
+
+                                    <!-- Person name -->
+                                    <b class="pb16" style="font-size:1.4em; line-height:100%;"><t t-esc="docs.name"/></b>
+                                    <hr style="margin:5px;height:5px;color:rgb(44, 147, 169); background-color:rgb(44, 147, 169);"/>
+
+                                    <!-- Company name -->
+                                    <p style="text-align:center;"><t t-esc="docs.partner_id.company_name"/><br/>
+
+                                    <!-- Job title -->
+                                    <i><t t-esc="docs.partner_id.function"/></i></p>
+                                </div>
+                            </div>
+
+                            <!-- QR-Code -->
+                            <div class="col-xs-12" style="height:40mm;">
+                                <div style="text-align:center;">
+                                    <div>
+                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s&amp;width=%s' % ('QR', docs.qr_string.replace(';','%0A'), 140, 140)"
+                                        style="display:block;margin-left:auto;margin-right:auto;"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Conference pass -->
+                            <div class="col-xs-12" style="height:15mm;">
+                                <div style="text-align:center;">
+                                    <p style="text-transform:uppercase; font-size:1.5em; font-weight:bold;">Conference pass</p>
+                                </div>
+                            </div>
 						</div>
 
 					</div>
