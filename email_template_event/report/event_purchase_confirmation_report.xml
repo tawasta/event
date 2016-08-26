@@ -43,12 +43,12 @@
 					</p>
 
                     <!-- TODO: Better structure with absolute mm-heights. This margin amount is probably extremely sensitive about any changes -->
-					<div style="margin-top: 110mm;">
+					<div style="margin-top: 95mm;">
 						<b>Cut out the Conference Pass below and take it with you to the event<span class="caret"></span></b>
                         <div style="border-bottom: 1px dashed #000;" />
 
                         <!-- The pass size is actually 105mm x 74mm but wkhtmltopdf 0.12.1 does some bizarre scaling -->
-						<div class="" style="height:122mm !important; width: 84mm !important; border: 10px solid rgb(44, 147, 169); overflow: hidden;">
+						<div class="" style="height:138mm !important; width: 96mm !important; border: 10px solid rgb(44, 147, 169); overflow: hidden;">
 
                             <!-- Logo -->
                             <div class="col-xs-12" style="height: 25mm;">
