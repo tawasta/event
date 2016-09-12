@@ -20,7 +20,8 @@ class EventRegistration(models.Model):
     _inherit = 'event.registration'
 
     # 2. Fields declaration
-    invoice = fields.Many2one('account.invoice', "Invoice", compute="compute_account_invoice")
+    invoice = fields.Many2one('account.invoice', "Invoice", compute='compute_account_invoice')
+    invoice_state = fields.Char('Invoice state', compute='compute_account_invoice')
 
     # 3. Default methods
 
@@ -28,11 +29,14 @@ class EventRegistration(models.Model):
     @api.multi
     def compute_account_invoice(self):
         for record in self:
-            self.env['account.invoice'].search([
+            invoice = self.env['account.invoice'].search([
                 ('name', '=', record.origin),
                 ('company_id', '=', record.company_id.id),
-            ])
-            record.invoice = False
+            ], limit=1)
+
+            if invoice:
+                record.invoice = invoice.id
+                record.invoice_state = invoice.state
 
     # 5. Constraints and onchanges
 

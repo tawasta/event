@@ -22,7 +22,7 @@
 {
     'name': 'Event extension',
     'summary': 'Extends event functionality',
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.2.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -37,6 +37,8 @@
         'event',
     ],
     'data': [
+        'views/event_registration_form.xml',
+        'views/event_registration_tree.xml',
     ],
     'demo': [
     ],
