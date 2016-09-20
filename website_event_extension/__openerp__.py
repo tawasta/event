@@ -20,9 +20,9 @@
 ##############################################################################
 
 {
-    'name': 'Event Extension',
-    'summary': 'Changes to Event app',
-    'version': '8.0.0.1.8',
+    'name': 'Website Event Extension',
+    'summary': 'Changes to Website Event app',
+    'version': '8.0.0.1.9',
     'category': 'Marketing',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -36,6 +36,7 @@
         'website_event_sale',
     ],
     'data': [
-        'views/res_partner_form.xml'
+        'views/event_event_form.xml',
+        'views/res_partner_form.xml',
     ]
 }
