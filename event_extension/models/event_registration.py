@@ -28,6 +28,7 @@ class EventRegistration(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.multi
     def compute_account_invoice(self):
+
         for record in self:
             invoice = self.env['account.invoice'].search([
                 ('name', '=', record.origin),

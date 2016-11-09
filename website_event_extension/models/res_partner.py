@@ -29,13 +29,23 @@ class ResPartner(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.multi
+    def compute_sale_orders(self):
+        for record in self:
+            if isinstance(record.id, models.NewId):
+                continue
+
+            record.event_sale_orders = record.env['sale.order'].search([(
+                'partner_id', '=', record.id),
+                ('order_line.event_id', '!=', False)])
 
     @api.one
-    def compute_sale_orders(self):
+    @api.depends('registrations.state')
+    def _compute_event_count(self):
+        if isinstance(self.id, models.NewId):
+            return False
 
-        self.event_sale_orders = self.env['sale.order'].search([(
-            'partner_id', '=', self.id),
-            ('order_line.event_id', '!=', False)])
+        super(ResPartner, self)._compute_event_count()
 
     # 5. Constraints and onchanges
 

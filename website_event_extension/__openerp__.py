@@ -22,7 +22,7 @@
 {
     'name': 'Website Event Extension',
     'summary': 'Changes to Website Event app',
-    'version': '8.0.0.1.9',
+    'version': '8.0.0.1.10',
     'category': 'Marketing',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

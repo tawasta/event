@@ -30,7 +30,6 @@ class EventRegistration(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.multi
     def compute_new_origin(self):
-
         sale_order = []
 
         for record in self:
