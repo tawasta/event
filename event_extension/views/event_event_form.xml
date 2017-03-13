@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="view_event_form" model="ir.ui.view">
+			<field name="name">view_event_form_analytic_account</field>
+			<field name="model">event.event</field>
+			<field name="inherit_id" ref="event.view_event_form" />
+			<field name="arch" type="xml">
+
+				<field name="organizer_id" position="after">
+                    <field name="analytic_account" />
+                </field>
+
+			</field>
+		</record> 
+
+	</data>
+</openerp>

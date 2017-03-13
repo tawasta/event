@@ -11,6 +11,7 @@ Extends event functionality
 Fetures
 -------
 * Adds invoice information to registrations
+* Adds analytic account to events
 
 Installation
 ============
