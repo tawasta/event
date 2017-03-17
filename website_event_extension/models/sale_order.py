@@ -50,6 +50,20 @@ class SaleOrder(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
+    @api.model
+    def create(self, values):
+        res = super(SaleOrder, self).create(values)
+
+        if not res.project_id:
+            for line in res.order_line:
+                event = line.event_id
+
+                if not event:
+                    continue
+
+                if hasattr(event, 'analytic_account') and event.analytic_account:
+                    res.project_id = event.analytic_account.id
+        return res
 
     # 7. Action methods
 
