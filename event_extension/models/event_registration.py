@@ -35,6 +35,17 @@ class EventRegistration(models.Model):
                 ('company_id', '=', record.company_id.id),
             ], limit=1)
 
+            # The origin is a SO-name
+            if not invoice:
+                sale_order = self.env['sale.order'].search([
+                    ('name', '=', record.origin),
+                    ('company_id', '=', record.company_id.id),
+                ], limit=1)
+
+                # TODO: what if multiple invoices?
+                if sale_order.invoice_ids:
+                    invoice = sale_order.invoice_ids[0]
+
             if invoice:
                 record.invoice = invoice.id
                 record.invoice_state = invoice.state
