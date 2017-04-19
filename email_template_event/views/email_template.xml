@@ -6,24 +6,35 @@
 	        <field name="model_id" ref="event.model_event_registration"/>
 	        <field name="email_from" >${(object.user_id.email or object.company_id.email or 'noreply@' + object.company_id.name + '.com')|safe}</field>
 	        <field name="email_to" >${object.email|safe}</field>
-	        <field name="report_template" ref="email_template_event.report_event_purchase_confimation"/>
             <field name="report_name">${(object.name or '').replace(' ','_')}</field>
 	        <field name="lang">${object.partner_id.lang}</field>
 	        <field name="subject">Your registration at ${object.event_id.name}</field>
 	        <field name="body_html"><![CDATA[
-	        <h4>PURCHASE CONFIRMATION</h4>
-			<b class="mt16">
-				Ticket type: ${object.event_ticket_id.name or 'None'}
-			</b>
+	        <h4>Confirm of Registration</h4>
 	        <p class="mt32">Hello ${object.name},</p>
-	        <p>Thank you for your purchase!<br/><br/>
-	        Below you can find your Mindtrek 2016 Conference Pass. Please print out this page and be sure to bring it with you to the conference. Registration opens at 8:30 on each conference day.<br/><br/>
-	        Remember that with your pass you will have full access to all the events and presentations at Mindtrek, apart from a few closed sessions. Closed sessions are marked separately in the program. For full program details, please go to <a href="www.mindtrek.org/2016/program">www.mindtrek.org/2016/program</a>.<br/><br/>
-	        Mindtrek 2016 takes place October 17­-19 at Tampere Hall - ­Congress and Concert Centre. The address is: Yliopistonkatu 55, 33100 Tampere, Finland. If you have any questions, please contact <a href="mailto:info@mindtrek.org">info@mindtrek.org</a>.<br/><br/>
+	        <p>Thank you for registering to Mindtrek 2017 conference!<br/><br/>
+
+	        Here are your registration details as a reference.<br/><br/>
+
+	        <b>
+				Ticket type: ${object.event_ticket_id.name or 'None'}
+			</b><br/><br/>
+
+	        <strong>Check-In opens at 8:30 a.m. on each conference day.<br/>
+	        Your Pass will be waiting for you at the Check-In desk.<br/><br/></strong>
+
+	        Remember that with your Pass you will have full access to all the events and presentations at Mindtrek, unless otherwise stated on the program. The conference sessions are first-come, first-served, so make sure to arrive on time to ensure a seat for yourself. For program details, please go to <a href="www.mindtrek.org/2017" target="_blank">www.mindtrek.org/2017</a>.<br/><br/>
+
+	        Mindtrek 2017 takes place on <strong>September 20th ­& 21st at Tampere Hall - Congress and Concert Centre</strong>. The address is: Yliopistonkatu 55, 33100 Tampere, Finland.<br/><br/>
+
+	        If you have any questions, please contact <a href="mailto:info@mindtrek.org" target="_blank">info@mindtrek.org</a>.<br/><br/>
+
 	        See you at the conference!<br/><br/>
+
 	        Best regards,<br/>
 	        Mindtrek Team / COSS ry
-	    	</p>]]></field>
+	    	</p>
+	    	]]></field>
         </record>
 	</data>
 </openerp>
