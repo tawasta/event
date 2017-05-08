@@ -4,112 +4,72 @@
         <template id="event_registration_pass">
             <t t-call="report.html_container">
                 <div class="page">
-                    <style type="text/css">
-                      <!-- The pass size is 105mm x 74mm -->
-                        .event-pass-print{
-                            margin: 0 auto;
-                            height: 42.85mm;
-                            height: 105mm !important;
-                            width: 74mm !important;
-                            page-break-inside: avoid;
-                            background: yellow;
-                            border: 2mm solid #C70296;
-                            overflow: hidden;
-                        }
-
-                        .event-pass-print-logo-container {
-                           height: 25mm;
-                        }
-                        .event-pass-print-logo {
-                            display: block;
-                            max-width: 280px;
-                            position: absolute;
-                            top:0;
-                            bottom: 0;
-                            left:0;
-                            right: 0;
-                            margin: auto;
-                        }
-                        .event-pass-print-customer {
-                            height:35mm;
-                        }
-                        .event-pass-print #card_name {
-                            font-size:2em;
-                            font-weight:bold;
-                            line-height:100%;
-                        }
-                        .event-pass-print-customer hr {
-                            margin: 5px;
-                            height: 5px;
-                            color: #C70296;
-                            background-color: #C70296;
-                        }
-                        .event-pass-print #card_company_name {
-                            font-size: 1.8em;
-                        }
-                        .event-pass-print #card_function {
-                            font-size: 1.4em;
-                        }
-                        .event-pass-print #qr_container {
-                            height: 40mm;
-                        }
-                        .event-pass-print #qr_container img {
-                            margin: 0 auto;
-                            max-height: 160px;
-                        }
-                        .event-pass-print #ticket_type {
-                            height: 15mm;
-                        }
-                        .event-pass-print #ticket_type p {
-                            text-transform:uppercase;
-                            font-size: 1.2em;
-                            font-weight: bold;
-                        }
-                    </style>
 
                     <t t-foreach="docs" t-as="o">
                         <t>
-                            <div class="col-xs-4 event-pass-print">
+                            <div class="col-xs-4 event-pass-print"
+                                 style="
+                                 margin: 0 auto;
+                                 height: 105mm !important;
+                                 width: 74mm !important;
+                                 page-break-inside: avoid;
+                                 border: 2mm solid #C70296;
+                                 margin-right: 1mm;
+                                 margin-bottom: 1mm;
+                                 overflow: hidden;" >
+
                                 <!-- Logo -->
-                                <div class="col-xs-12 event-pass-print-logo-container">
+                                <div class="col-xs-12 event-pass-print-logo-container"
+                                     style="
+                                     padding: 3mm 5mm;
+                                     display: block;
+                                     margin: auto;" >
+
                                     <div class="text-center">
                                         <img class="event-pass-print-logo"
                                              t-if="o.event_id.event_logo"
                                              t-att-src="'data:image/png;base64,%s' % o.event_id.event_logo"
-                                             style="max-width: 74mm;"
+                                             style="max-width: 55mm;"
                                         />
                                     </div>
                                 </div>
 
-
-
                                 <!-- Customer info -->
-                                <div class="col-xs-12 event-pass-print-customer">
-                                  <div class="text-center">
+                                <div class="col-xs-12 event-pass-print-customer" style="height:35mm; padding: 0 !important">
+                                    <div class="text-center">
 
-                                    <!-- Person name -->
-                                    <span id="card_name"><t t-esc="o.name"/></span>
-                                    <hr/>
+                                        <!-- Person name -->
+                                        <span class="card_name" style="font-size:1.8em; font-weight:bold; line-height:100%; height: 20mm;">
+                                            <t t-esc="o.name"/>
+                                        </span>
+                                        <hr style="margin: 5px; height: 5px; color: #C70296; background-color: #C70296;"/>
 
-                                    <!-- Company name -->
-                                    <span id="card_company_name"><t t-esc="o.partner_id.parent_id.name or ''"/></span><br/>
-                                    <!-- Job title -->
-                                    <i id="card_function"><t t-esc="o.partner_id.function"/></i>
-                                  </div>
+                                        <!-- Company name -->
+                                        <span class="card_company_name" style="font-size: 1.6em;">
+                                            <t t-esc="o.partner_id.parent_id.name or ''"/>
+                                        </span>
+                                        <br/>
+                                        <!-- Job title -->
+                                        <span class="card_function" style="font-size: 1.4em; font-style: italic;">
+                                            <t t-esc="o.partner_id.function"/>
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <!-- QR-Code -->
-                                <div id="qr_container" class="col-xs-12">
+                                <div class="qr_container col-xs-12" style="height: 35mm;">
                                   <div>
 									<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s&amp;width=%s' % ('QR', o.qr_string.replace(';','%0A'), 140, 140)"
-										style="display:block;margin-left:auto;margin-right:auto;"/>
+										style="display:block; margin: 0 auto; max-height: 160px;" />
                                   </div>
                                 </div>
 
                                 <!-- Conference pass -->
-                                <div id="ticket_type" class="col-xs-12">
+                                <div class="ticket_type col-xs-12" style="height: 15mm;">
                                   <div class="text-center">
-                                    <p><t t-esc="o.event_ticket_id.name"/></p>
+                                    <p style="text-transform:uppercase; font-size: 1.2em; font-weight: bold;">
+                                        <t t-esc="o.event_ticket_id.name"/>
+                                    </p>
                                   </div>
                                 </div>
                             </div>
