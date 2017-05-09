@@ -7,11 +7,17 @@
 
                     <t t-foreach="docs" t-as="o">
                         <t>
+                            <!-- The actual size is
+                                height: 105mm !important;
+                                width: 74mm !important;
+
+                                The printing process (wkthmltopdf?) does some scaling with unknown logic.
+                                -->
                             <div class="col-xs-4 event-pass-print"
                                  style="
                                  margin: 0 auto;
-                                 height: 105mm !important;
-                                 width: 74mm !important;
+                                 height: 122mm !important;
+                                 width: 84mm !important;
                                  page-break-inside: avoid;
                                  border: 2mm solid #C70296;
                                  margin-right: 1mm;
@@ -21,7 +27,7 @@
                                 <!-- Logo -->
                                 <div class="col-xs-12 event-pass-print-logo-container"
                                      style="
-                                     padding: 3mm 5mm;
+                                     padding: 5mm;
                                      display: block;
                                      margin: auto;" >
 
@@ -35,7 +41,7 @@
                                 </div>
 
                                 <!-- Customer info -->
-                                <div class="col-xs-12 event-pass-print-customer" style="height:35mm; padding: 0 !important">
+                                <div class="col-xs-12 event-pass-print-customer" style="height:50mm; padding: 0 !important">
                                     <div class="text-center">
 
                                         <!-- Person name -->
