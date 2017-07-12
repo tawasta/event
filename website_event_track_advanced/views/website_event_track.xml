@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template name="Event track proposal" id="event_track_proposal" inherit_id="website_event_track.event_track_proposal">
+        <xpath expr="//form/div[last() - 1]" position="after">
+            <div class="form-group">
+                <label class="col-md-3 col-sm-4 control-label" for="email_from">Attachments</label>
+                <div class="col-md-7 col-sm-8">
+                    <input type="file" name="attachments" id="attachments" multiple="1"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
