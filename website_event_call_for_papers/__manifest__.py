@@ -22,7 +22,7 @@
 {
     'name': 'Event call for papers',
     'summary': 'An advanced CFP for event tracks',
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.2.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -38,6 +38,8 @@
         'website_event_track',
     ],
     'data': [
+        'views/event_event_form.xml',
+        'views/website_event_cfp.xml',
     ],
     'demo': [
     ],
