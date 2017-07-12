@@ -3,10 +3,10 @@
    :alt: License: AGPL-3
 
 =====================
-Event call for papers
+Advanced event tracks
 =====================
 
-An advanced CFP for event tracks
+An advanced event tracks process
 
 Installation
 ============

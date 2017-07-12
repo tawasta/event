@@ -20,8 +20,8 @@
 ##############################################################################
 
 {
-    'name': 'Event call for papers',
-    'summary': 'An advanced CFP for event tracks',
+    'name': 'Advanced event tracks',
+    'summary': 'An advanced event tracks process',
     'version': '8.0.0.2.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
