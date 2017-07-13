@@ -22,7 +22,7 @@
 {
     'name': 'Advanced event tracks',
     'summary': 'An advanced event tracks process',
-    'version': '10.0.0.2.1',
+    'version': '10.0.0.3.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -34,6 +34,7 @@
         'bin': [],
     },
     'depends': [
+        'document',
         'event',
         'website_event_track',
     ],

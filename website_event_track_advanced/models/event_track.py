@@ -14,14 +14,16 @@ from odoo import api, fields, models
 # 6. Unknown third party imports:
 
 
-class EventEvent(models.Model):
+class EventTrack(models.Model):
     # 1. Private attributes
-    _inherit = 'event.event'
+    _inherit = 'event.track'
 
     # 2. Fields declaration
-    attachments = fields.Many2many(
+    attachment_ids = fields.One2many(
         comodel_name='ir.attachment',
-        string='Attachments'
+        inverse_name='res_id',
+        domain=[('res_model', '=', 'event.track')],
+        string='Attachments',
     )
 
     # 3. Default methods
