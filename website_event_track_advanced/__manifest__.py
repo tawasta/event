@@ -22,7 +22,7 @@
 {
     'name': 'Advanced event tracks',
     'summary': 'An advanced event tracks process',
-    'version': '10.0.0.3.0',
+    'version': '10.0.0.4.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -30,7 +30,9 @@
     'application': False,
     'installable': True,
     'external_dependencies': {
-        'python': [],
+        'python': [
+            'difflib'
+        ],
         'bin': [],
     },
     'depends': [
@@ -40,6 +42,7 @@
     ],
     'data': [
         'views/event_event_form.xml',
+        'views/event_track_form.xml',
         'views/website_event_track.xml',
     ],
     'demo': [
