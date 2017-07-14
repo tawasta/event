@@ -33,6 +33,18 @@ class EventTrack(models.Model):
         readonly=True,
     )
 
+    rating = fields.Selection([
+        ('0', 'Not rated'),
+        ('1', 'Weak'),
+        ('2', 'Decent'),
+        ('3', 'Good'),
+        ('4', 'Great')
+        ('5', 'Excellent')
+    ],
+        select=True,
+        string='Rating',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields

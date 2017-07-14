@@ -95,7 +95,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 col-sm-4 control-label" for="email_from">Attachments</label>
                                     <div class="col-md-7 col-sm-8">
-                                        <input type="file" class="o_website_form_input" name="attachment_ids" id="attachment_ids" />
+                                        <input type="file" class="o_website_form_input" name="attachment_ids" id="attachment_ids" multiple="1"/>
                                     </div>
                                 </div>
 
