@@ -28,26 +28,63 @@ class EventTrack(models.Model):
         domain=[('res_model', '=', 'event.track')],
         string='Attachments',
     )
+
     description_original = fields.Html(
         string='Original description',
         readonly=True,
     )
 
-    rating = fields.Selection([
-        ('0', 'Not rated'),
-        ('1', 'Weak'),
-        ('2', 'Decent'),
-        ('3', 'Good'),
-        ('4', 'Great')
-        ('5', 'Excellent')
-    ],
+    ratings = fields.One2many(
+        comodel_name='event.track.rating',
+        inverse_name='event_track',
+        string='Ratings',
+    )
+
+    rating = fields.Selection(
+        [
+            ('0', 'Not rated'),
+            ('1', 'Weak'),
+            ('2', 'Decent'),
+            ('3', 'Good'),
+            ('4', 'Great'),
+            ('5', 'Excellent'),
+        ],
         select=True,
         string='Rating',
+        compute='_get_rating',
+        inverse='_set_rating',
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields
+    def _get_rating(self):
+        for record in self:
+            existing_rating = record.ratings.search([
+                ('create_uid', '=', record.env.uid),
+                ('event_track', '=', record.id),
+            ])
+
+            rating = 0
+            if existing_rating:
+                rating = existing_rating.rating
+
+            record.rating = str(rating)
+
+    def _set_rating(self):
+        for record in self:
+            existing_rating = record.ratings.search([
+                ('create_uid', '=', record.env.uid),
+                ('event_track', '=', record.id),
+            ])
+
+            if existing_rating:
+                existing_rating.rating = record.rating
+            else:
+                rating = record.ratings.create({
+                    'event_track': record.id,
+                    'rating': record.rating,
+                })
 
     # 5. Constraints and onchanges
 
