@@ -8,6 +8,10 @@
 			<field name="inherit_id" ref="website_event_track.view_event_track_form" />
 			<field name="arch" type="xml">
 
+                <field name="tag_ids" position="after">
+                    <field name="review_group" />
+                </field>
+
 				<xpath expr="//sheet/group[last()]" position="after">
                     <notebook>
                         <page name="description" string="Content">

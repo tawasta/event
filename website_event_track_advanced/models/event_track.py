@@ -55,6 +55,11 @@ class EventTrack(models.Model):
         inverse='_set_rating',
     )
 
+    review_group = fields.Many2one(
+        comodel_name='event.track.review.group',
+        string='Review group',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
@@ -97,6 +102,7 @@ class EventTrack(models.Model):
 
     @api.multi
     def write(self, values):
+        # Save a diff in messages when the description is changed
         if values.get('description'):
             old_desc = html2plaintext(self.description).splitlines()
             new_desc = html2plaintext(values['description']).splitlines()
@@ -134,7 +140,20 @@ class EventTrack(models.Model):
                     body=body,
                 )
 
-        return super(EventTrack, self).write(values)
+        res = super(EventTrack, self).write(values)
+
+        # Update followers
+        if 'review_group' in values:
+            # Remove all old followers
+            for follower in self.message_follower_ids:
+                self.message_unsubscribe([follower.partner_id.id])
+
+            if values.get('review_group'):
+                # Add new followers
+                for partner in self.review_group.reviewers:
+                    self.message_subscribe([partner.id])
+
+        return res
 
     # 7. Action methods
 
