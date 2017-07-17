@@ -20,6 +20,22 @@ from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackCo
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
 
+    # Overrides the default event_track_proposal controller route
+    @http.route()
+    def event_track_proposal(self, event, **post):
+
+        target_groups = request.env['event.track.target.group'].search([])
+        languages = request.env['res.lang'].search([])
+
+        return request.render(
+            "website_event_track.event_track_proposal",
+            {
+                'event': event,
+                'target_groups': target_groups,
+                'languages': languages,
+            },
+        )
+
     # Overrides the default website_event_track controller route
     @http.route()
     def event_track_proposal_post(self, event, **post):

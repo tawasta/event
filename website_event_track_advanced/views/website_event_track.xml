@@ -68,7 +68,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-video-camera"/></span>
-                                                    <input name="track_video_url" placeholder="https://www.youtube.com, https://vimeo.com, ..." class="form-control" type="text" />
+                                                    <input name="video_url" placeholder="https://www.youtube.com, https://vimeo.com, ..." class="form-control" type="text" />
                                                 </div>
                                             </div>
                                         </div>
@@ -95,7 +95,21 @@
                                         </div>
 
                                         <div class="form-group" id="track-application-application-attachment-div">
-                                            <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <label for="language" class="control-label">Language</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-language"/></span>
+                                                    <select name="language" class="form-control" type="selection">
+                                                        <t t-foreach="languages" t-as="language">
+                                                            <option t-attf-value="#{language.id}"><t t-esc="language.name"/></option>
+                                                        </t>
+                                                        <option t-attf-value="0">Any language</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
                                                 <label for="attachment_ids" class="control-label">Attachment</label>
                                                 <input name="attachment_ids" type="file" />
                                             </div>
@@ -141,10 +155,10 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-bullseye"/></span>
-                                                    <select name="track_name" class="form-control" type="selection">
-                                                        <option>A</option>
-                                                        <option>B</option>
-                                                        <option>C</option>
+                                                    <select name="target_group" class="form-control" type="selection">
+                                                         <t t-foreach="target_groups" t-as="group">
+                                                             <option t-attf-value="#{group.id}"><t t-esc="group.name"/></option>
+                                                         </t>
                                                     </select>
                                                 </div>
                                             </div>

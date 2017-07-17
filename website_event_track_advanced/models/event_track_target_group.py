@@ -21,7 +21,10 @@ class EventTrackTargetGroup(models.Model):
 
     # 2. Fields declaration
     name = fields.Char(
-        string='Target group',
+        string='Name',
+    )
+    description = fields.Text(
+        string='Description',
     )
     event_track = fields.Many2many(
         comodel_name='event.track',

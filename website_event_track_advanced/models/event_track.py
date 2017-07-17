@@ -65,7 +65,7 @@ class EventTrack(models.Model):
         string='Target group info',
     )
 
-    track_video_url = fields.Char(
+    video_url = fields.Char(
         string='Track as a video (link to e.g. Youtube or Vimeo)'
     )
 
@@ -79,6 +79,11 @@ class EventTrack(models.Model):
     )
     webinar_info = fields.Text(
         string='Pre-event webinar info'
+    )
+
+    language = fields.Many2one(
+        comodel_name='res.lang',
+        string='Track language'
     )
 
     # 3. Default methods
