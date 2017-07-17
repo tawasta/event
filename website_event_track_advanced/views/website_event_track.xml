@@ -35,9 +35,8 @@
                             </section>
                             <section>
                                 <h3 class="page-header">Application</h3>
-                                <p>
-                                    Fill this form to propose your talk.
-
+                                <p class="alert alert-info">
+                                    Please fill this form to propose your talk.
                                 </p>
                             </section>
                         </div>
@@ -77,13 +76,18 @@
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Application content</label>
 
-                                                <textarea class="form-control" name="description" placeholder="Application content" rows="16"/>
+                                                <textarea class="form-control" name="description" placeholder="Application content..." rows="16"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-application-tags-div">
                                             <div class="col-md-12">
                                                 <label class="control-label">Tags</label>
+                                                <p class="alert alert-info mt8">
+                                                    Please select the tags that match your presentation.<br/>
+                                                    You should select the 2-4 tags that matches best.
+                                                    Selecting too many tags will make it harder to find your target audience.
+                                                </p>
 
                                                 <div class="row">
                                                     <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids" t-as="tag">
@@ -125,17 +129,28 @@
                                     </div>
 
                                     <div class="panel-body">
+                                        <p class="alert alert-info">
+                                            You can fill this if you want to hold a webinar before the actual event.
+                                        </p>
+
                                         <div class="form-group" id="track-application-webinar-div">
                                             <div class="col-md-4">
-                                                <label class="control-label">
-                                                    <span>I want to hold a webinar before the event</span>
-                                                    <input name="webinar" type="checkbox" />
-                                                </label>
+                                                <label for="webinar" class="control-label">I wish to hold a webinar before the event</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-microphone"/></span>
+                                                    <!-- This checkbox is presented as a selection for uniformitys sake -->
+                                                    <select name="webinar" class="form-control" type="selection">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </div>
+
                                             </div>
                                             <div class="col-md-8">
                                                 <label for="webinar_info" class="control-label">Webinar info</label>
 
-                                                <textarea class="form-control" name="webinar_info" placeholder="Webinar info" rows="4"/>
+                                                <textarea class="form-control" name="webinar_info" placeholder="Webinar info..." rows="4"/>
                                             </div>
                                         </div>
                                     </div>
@@ -149,6 +164,11 @@
                                     </div>
 
                                     <div class="panel-body">
+                                        <p class="alert alert-info">
+                                            Please select the target group that is best matching your target audience.<br/>
+                                            You can add special notes to the info box.
+                                        </p>
+
                                         <div class="form-group" id="track-application-targetgroup-info-div">
                                             <div class="col-md-4">
                                                 <label for="target_group" class="control-label">Target group</label>
@@ -181,6 +201,11 @@
                                     </div>
 
                                     <div class="panel-body" id="track-application-contact-div">
+                                        <p class="alert alert-info">
+                                            Please fill the contact persons information here.<br/>
+                                            Any newsletters and other guidance will be sent to the contact person.
+                                        </p>
+
                                         <div class="form-group" id="track-application-contact-info-div">
                                             <div class="col-md-4">
                                                 <label for="partner_first_name" class="control-label">First name</label>
@@ -252,7 +277,7 @@
                                             <div class="col-md-4">
                                                 <label for="city" class="control-label">City</label>
 
-                                                <div class="input-group">placeholder
+                                                <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-map-marker"/></span>
                                                     <input name="city" placeholder="City" class="form-control" type="text" />
                                                 </div>
@@ -285,6 +310,28 @@
 
                                 </div>
                                 <!-- / Contact info -->
+
+                                <!-- Extra info -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Extra info</h3>
+                                    </div>
+
+                                    <div class="panel-body" id="track-application-extra-div">
+                                        <p class="alert alert-info">
+                                            Any wishes about special arrangements concerning the premises, fitments, etc.
+                                        </p>
+
+                                        <div class="form-group" id="track-application-extra-info-div">
+                                            <div class="col-md-12">
+                                                <textarea class="form-control" name="extra_info"
+                                                          placeholder="Extra info..."
+                                                          rows="4"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / Extra info -->
 
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">

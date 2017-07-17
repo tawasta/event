@@ -86,6 +86,10 @@ class EventTrack(models.Model):
         string='Track language'
     )
 
+    extra_info = fields.Text(
+        string='Extra info',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
