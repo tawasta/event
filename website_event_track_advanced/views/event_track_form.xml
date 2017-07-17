@@ -10,6 +10,7 @@
 
                 <field name="tag_ids" position="after">
                     <field name="review_group" />
+                    <field name="track_video_url" />
                 </field>
 
 				<xpath expr="//sheet/group[last()]" position="after">

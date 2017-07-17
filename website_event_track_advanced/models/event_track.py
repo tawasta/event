@@ -55,6 +55,10 @@ class EventTrack(models.Model):
         inverse='_set_rating',
     )
 
+    track_video_url = fields.Char(
+        string='Track as a video (link to e.g. Youtube or Vimeo)'
+    )
+
     review_group = fields.Many2one(
         comodel_name='event.track.review.group',
         string='Review group',

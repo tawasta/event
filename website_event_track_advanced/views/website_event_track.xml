@@ -62,6 +62,15 @@
                                                     <input name="track_name" placeholder="Application title" class="form-control" type="text" />
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-8">
+                                                <label for="track_name" class="control-label">Application as a video (link to e.g. Youtube or Vimeo)</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-video-camera"/></span>
+                                                    <input name="track_video_url" placeholder="https://www.youtube.com, https://vimeo.com, ..." class="form-control" type="text" />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-group" id="track-application-application-info-div">
