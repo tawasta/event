@@ -87,7 +87,7 @@
 
                                                 <div class="row">
                                                     <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids" t-as="tag">
-                                                        <input type="checkbox" value="1" t-attf-name="tag_#{str(tag.id)}"/>
+                                                        <input type="checkbox" t-attf-name="tag_#{str(tag.id)}"/>
                                                         <t t-esc="tag.name"/>
                                                     </label>
                                                 </div>
@@ -103,6 +103,32 @@
                                     </div>
                                 </div>
                                 <!-- / Application info -->
+
+                                <!-- Webinar info -->
+                                <div class="panel panel-default" id="track-application-webinar-div">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Webinar info</h3>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="form-group" id="track-application-webinar-div">
+                                            <div class="col-md-12">
+                                                <label class="control-label">
+                                                    <span>I want to hold a webinar before the event</span>
+                                                    <input name="webinar" type="checkbox" />
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="track-application-webinar-info-div">
+                                            <div class="col-md-12">
+                                                <label for="webinar_info" class="control-label">Webinar info</label>
+
+                                                <textarea class="form-control" name="webinar_info" placeholder="Webinar info" rows="4"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Contact info -->
                                 <div class="panel panel-default">

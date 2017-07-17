@@ -64,6 +64,13 @@ class EventTrack(models.Model):
         string='Review group',
     )
 
+    webinar = fields.Boolean(
+        string='Pre-event webinar'
+    )
+    webinar_info = fields.Char(
+        string='Pre-event webinar info'
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields

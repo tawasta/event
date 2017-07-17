@@ -11,6 +11,8 @@
                 <field name="tag_ids" position="after">
                     <field name="review_group" />
                     <field name="track_video_url" />
+                    <field name="webinar" />
+                    <field name="webinar_info" />
                 </field>
 
 				<xpath expr="//sheet/group[last()]" position="after">
