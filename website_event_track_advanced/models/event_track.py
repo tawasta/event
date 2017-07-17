@@ -55,6 +55,16 @@ class EventTrack(models.Model):
         inverse='_set_rating',
     )
 
+    target_group = fields.Many2one(
+        comodel_name='event.track.target.group',
+        relation='event_track',
+        string='Target group',
+    )
+
+    target_group_info = fields.Text(
+        string='Target group info',
+    )
+
     track_video_url = fields.Char(
         string='Track as a video (link to e.g. Youtube or Vimeo)'
     )
@@ -67,7 +77,7 @@ class EventTrack(models.Model):
     webinar = fields.Boolean(
         string='Pre-event webinar'
     )
-    webinar_info = fields.Char(
+    webinar_info = fields.Text(
         string='Pre-event webinar info'
     )
 
