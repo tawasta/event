@@ -35,7 +35,8 @@
                             </section>
                             <section>
                                 <h3 class="page-header">Application</h3>
-                                <p class="alert alert-info">
+                                <p class="alert alert-info alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                     Fill this form to propose your talk.
                                 </p>
                             </section>
@@ -97,7 +98,8 @@
                                     </div>
 
                                     <div class="panel-body">
-                                        <p class="alert alert-info">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             Please give information about your primary target audience.
                                         </p>
 
@@ -137,7 +139,8 @@
                                         <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-targetgroup-tags-div">
                                             <div class="col-md-12">
                                                 <label class="control-label">Tags</label>
-                                                <p class="alert alert-info mt8">
+                                                <p class="alert alert-info alert-dismissable mt8">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                                     You should select 2-4 tags that matches your presentation best.<br/>
                                                     Selecting too many tags can make it harder to find the correct audience.
                                                 </p>
@@ -162,7 +165,8 @@
                                     </div>
 
                                     <div class="panel-body">
-                                        <p class="alert alert-info">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             You can fill this if you want to hold a webinar before the actual event.
                                         </p>
 
@@ -197,7 +201,8 @@
                                     </div>
 
                                     <div class="panel-body" id="track-application-contact-div">
-                                        <p class="alert alert-info">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             Please fill the contact persons information here.<br/>
                                             Any newsletters and other guidance will be sent to the contact person.
                                         </p>
@@ -314,7 +319,8 @@
                                     </div>
 
                                     <div class="panel-body" id="track-application-extra-div">
-                                        <p class="alert alert-info">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             Any wishes about special arrangements concerning the premises, fitments, etc.
                                         </p>
 
