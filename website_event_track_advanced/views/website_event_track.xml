@@ -4,6 +4,8 @@
     <!-- Overwrites the proposal layout -->
     <template name="Event track proposal" id="website_event_track.event_track_proposal">
         <t t-call="website_event.layout">
+            <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
+
             <div class="oe_structure"/>
             <div class="container">
                 <section>
@@ -311,6 +313,86 @@
 
                                 </div>
                                 <!-- / Contact info -->
+
+                                <!-- Speakers -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Speakers</h3>
+                                    </div>
+
+                                    <div class="panel-body" id="track-application-speakers-div">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            List all the speakers here
+                                        </p>
+
+                                        <div class="row" id="track-application-speakers-header-div">
+                                            <label for="email" class="col-md-2">Email</label>
+                                            <label for="partner_first_name" class="col-md-1">First name</label>
+                                            <label for="partner_last_name" class="col-md-1">Last name</label>
+                                            <label for="organization" class="col-md-2">Organization</label>
+                                            <label for="function" class="col-md-2">Title</label>
+                                            <label for="street" class="col-md-2">Street</label>
+                                            <label for="zip" class="col-md-1">Zip</label>
+                                            <label for="city" class="col-md-1">City</label>
+                                        </div>
+
+                                        <div class="row" id="track-application-speakers-input-div">
+                                            <div class="col-md-2">
+                                                <div class="input-group">
+                                                    <input name="email" placeholder="Email" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <div class="input-group">
+                                                    <input name="partner_first_name" placeholder="First Name" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <div class="input-group">
+                                                    <input name="partner_last_name" placeholder="Last Name" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="input-group">
+                                                    <input name="organization" placeholder="Organization" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="input-group">
+                                                    <input name="function" placeholder="Title" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="input-group">
+                                                    <input name="street" placeholder="Street" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <div class="input-group">
+                                                    <input name="zip" placeholder="Zip" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <div class="input-group">
+                                                    <input name="city" placeholder="City" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <button type="button" id="add_contact">Add contact</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / Speakers -->
 
                                 <!-- Extra info -->
                                 <div class="panel panel-default">
