@@ -80,39 +80,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-application-tags-div">
-                                            <div class="col-md-12">
-                                                <label class="control-label">Tags</label>
-                                                <p class="alert alert-info mt8">
-                                                    Please select tags that matches your presentation best.<br/>
-                                                    You should select 2-4 tags.
-                                                    Selecting too many tags can make it harder to find your target audience.
-                                                </p>
-
-                                                <div class="row">
-                                                    <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids" t-as="tag">
-                                                        <input type="checkbox" t-attf-name="tag_#{str(tag.id)}"/>
-                                                        <t t-esc="tag.name"/>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group" id="track-application-application-attachment-div">
-                                            <div class="col-md-4">
-                                                <label for="language" class="control-label">Language</label>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-language"/></span>
-                                                    <select name="language" class="form-control" type="selection">
-                                                        <t t-foreach="languages" t-as="language">
-                                                            <option t-attf-value="#{language.id}"><t t-esc="language.name"/></option>
-                                                        </t>
-                                                        <option t-attf-value="0">Any language</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-8">
                                                 <label for="attachment_ids" class="control-label">Attachment</label>
                                                 <input name="attachment_ids" type="file" />
@@ -130,8 +98,7 @@
 
                                     <div class="panel-body">
                                         <p class="alert alert-info">
-                                            Please select the target group that is best matching your target audience.<br/>
-                                            You can add special notes to the info box.
+                                            Please give information about your primary target audience.
                                         </p>
 
                                         <div class="form-group" id="track-application-targetgroup-info-div">
@@ -146,12 +113,41 @@
                                                          </t>
                                                     </select>
                                                 </div>
+
+                                                <label for="language" class="control-label">Language</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-language"/></span>
+                                                    <select name="language" class="form-control" type="selection">
+                                                        <t t-foreach="languages" t-as="language">
+                                                            <option t-attf-value="#{language.id}"><t t-esc="language.name"/></option>
+                                                        </t>
+                                                        <option t-attf-value="0">Any language</option>
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <div class="col-md-8">
                                                 <label for="target_group_info" class="control-label">Target group info</label>
 
                                                 <textarea class="form-control" name="target_group_info" placeholder="Target group info..." rows="4"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-targetgroup-tags-div">
+                                            <div class="col-md-12">
+                                                <label class="control-label">Tags</label>
+                                                <p class="alert alert-info mt8">
+                                                    You should select 2-4 tags that matches your presentation best.<br/>
+                                                    Selecting too many tags can make it harder to find the correct audience.
+                                                </p>
+
+                                                <div class="row">
+                                                    <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids" t-as="tag">
+                                                        <input type="checkbox" t-attf-name="tag_#{str(tag.id)}"/>
+                                                        <t t-esc="tag.name"/>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
 
