@@ -36,7 +36,7 @@
                             <section>
                                 <h3 class="page-header">Application</h3>
                                 <p class="alert alert-info">
-                                    Please fill this form to propose your talk.
+                                    Fill this form to propose your talk.
                                 </p>
                             </section>
                         </div>
@@ -84,9 +84,9 @@
                                             <div class="col-md-12">
                                                 <label class="control-label">Tags</label>
                                                 <p class="alert alert-info mt8">
-                                                    Please select the tags that match your presentation.<br/>
-                                                    You should select the 2-4 tags that matches best.
-                                                    Selecting too many tags will make it harder to find your target audience.
+                                                    Please select tags that matches your presentation best.<br/>
+                                                    You should select 2-4 tags.
+                                                    Selecting too many tags can make it harder to find your target audience.
                                                 </p>
 
                                                 <div class="row">
@@ -122,41 +122,6 @@
                                 </div>
                                 <!-- / Application info -->
 
-                                <!-- Webinar info -->
-                                <div class="panel panel-default" id="track-application-webinar-div">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Webinar info</h3>
-                                    </div>
-
-                                    <div class="panel-body">
-                                        <p class="alert alert-info">
-                                            You can fill this if you want to hold a webinar before the actual event.
-                                        </p>
-
-                                        <div class="form-group" id="track-application-webinar-div">
-                                            <div class="col-md-4">
-                                                <label for="webinar" class="control-label">I wish to hold a webinar before the event</label>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-microphone"/></span>
-                                                    <!-- This checkbox is presented as a selection for uniformitys sake -->
-                                                    <select name="webinar" class="form-control" type="selection">
-                                                        <option value="0">No</option>
-                                                        <option value="1">Yes</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-8">
-                                                <label for="webinar_info" class="control-label">Webinar info</label>
-
-                                                <textarea class="form-control" name="webinar_info" placeholder="Webinar info..." rows="4"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- / Webinar info -->
-
                                 <!-- Target group info -->
                                 <div class="panel panel-default" id="track-application-targetgroup-div">
                                     <div class="panel-heading">
@@ -190,6 +155,41 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                </div>
+                                <!-- / Target group info -->
+
+                                <!-- Webinar info -->
+                                <div class="panel panel-default" id="track-application-webinar-div">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Webinar info</h3>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <p class="alert alert-info">
+                                            You can fill this if you want to hold a webinar before the actual event.
+                                        </p>
+
+                                        <div class="form-group" id="track-application-webinar-div">
+                                            <div class="col-md-4">
+                                                <label for="webinar" class="control-label">I wish to hold a webinar before the event</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-microphone"/></span>
+                                                    <!-- This checkbox is presented as a selection for uniformitys sake -->
+                                                    <select name="webinar" class="form-control" type="selection">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="webinar_info" class="control-label">Webinar info</label>
+
+                                                <textarea class="form-control" name="webinar_info" placeholder="Webinar info..." rows="4"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- / Webinar info -->

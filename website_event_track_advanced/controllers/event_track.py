@@ -77,4 +77,5 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             partner = request.env['res.partner'].sudo().search([('email', '=', post['email_from'])])
             if partner:
                 track.sudo().message_subscribe(partner_ids=partner.ids)
+
         return request.render("website_event_track.event_track_proposal_success", {'track': track, 'event': event})
