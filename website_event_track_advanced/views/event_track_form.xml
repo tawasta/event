@@ -16,6 +16,7 @@
                     <field name="webinar_info" />
                     <field name="target_group" />
                     <field name="target_group_info" />
+                    <field name="returning_speaker" />
                 </field>
 
 				<xpath expr="//sheet/group[last()]" position="after">

@@ -1,17 +1,14 @@
 $(function() {
 
+    // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
-        var newContact = `
-            <div class='form-group col-lg-6'>
-                <label class='control-label'>Name</label>
-                <input type="text" name="contact_name" class="form-control"/>
-            </div>
-            <div class="form-group col-lg-6">
-                <label class="control-label">Email</label>
-                <input type="text" name="contact_email" class="form-control"/>
-            </div>
-        `;
-        $('#contact_info').append(newContact);
+        $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div').find("input[type='text']").val("");;
     });
+
+    // Disable or enable webinar info textarea
+    $('#track-application-webinar-selection-field').change(function(){
+        disabled = parseInt($('#track-application-webinar-selection-field').val());
+        $('#track-application-webinar-info-field').prop('disabled', !disabled);
+    })
 
 });

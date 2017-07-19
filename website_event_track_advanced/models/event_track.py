@@ -90,6 +90,10 @@ class EventTrack(models.Model):
         string='Extra info',
     )
 
+    returning_speaker = fields.Boolean(
+        string='Has been a speaker in an earlier event',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
