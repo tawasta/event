@@ -1,5 +1,19 @@
 $(function() {
 
+    function wordCount( val ){
+        var wom = val.match(/\S+/g);
+        return {
+            charactersNoSpaces : val.replace(/\s+/g, '').length,
+            characters         : val.length,
+            words              : wom ? wom.length : 0,
+            lines              : val.split(/\r*\n/).length
+        };
+    }
+
+    $('#track-application-application-description-field').keyup(function(e){
+        console.log(wordCount(this.value).words);
+    })
+
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
         // Clone the first row
@@ -10,10 +24,10 @@ $(function() {
         $('#track-application-speakers-input-index').val(input_index);
 
         // Clear the values
-        row.find("input[type='text']").val("");
+        row.find("input").val("");
 
         // Add an unique name
-        row.find("input[type='text']").each(function() {
+        row.find("input").each(function() {
             property_value = $(this).prop('name');
             console.log(property_value);
             index_name = property_value.substring(0, property_value.length - 3) + '[' + input_index + ']';

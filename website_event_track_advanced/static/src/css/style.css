@@ -5,3 +5,7 @@
 #track-application-speakers-input-div div{
     padding: 0;
 }
+
+.required {
+    background-color: #d6e9c6;
+}

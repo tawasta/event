@@ -71,7 +71,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-header"/></span>
-                                                    <input name="track_name" placeholder="Application title" class="form-control" type="text" />
+                                                    <input name="track_name" placeholder="Application title" class="form-control required" type="text" />
                                                 </div>
                                             </div>
 
@@ -89,7 +89,11 @@
                                             <div class="col-md-12">
                                                 <label for="description" class="control-label">Application content</label>
 
-                                                <textarea class="form-control" name="description" placeholder="Application content..." rows="16"/>
+                                                <textarea id="track-application-application-description-field"
+                                                          class="form-control required"
+                                                          name="description"
+                                                          placeholder="Application content..."
+                                                          rows="16"/>
                                             </div>
                                         </div>
 
@@ -350,7 +354,7 @@
                                         </p>
 
                                         <div class="form-group" id="track-application-speakers-header-div">
-                                            <label for="email" class="col-md-2">Email</label>
+                                            <label for="email" class="col-md-2" >Email</label>
                                             <label for="partner_first_name" class="col-md-1">First name</label>
                                             <label for="partner_last_name" class="col-md-1">Last name</label>
                                             <label for="organization" class="col-md-2">Organization</label>
@@ -365,15 +369,15 @@
 
                                             <div id="track-application-speakers-input-row">
                                                 <div class="col-md-2">
-                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control" type="text" />
+                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control required" type="email"/>
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" type="text" />
+                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control required" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" type="text" />
+                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control required" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
