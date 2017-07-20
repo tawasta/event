@@ -361,37 +361,39 @@
                                         </div>
 
                                         <div class="form-group" id="track-application-speakers-input-div">
+                                            <input id="track-application-speakers-input-index" name="speakers_input_index" value="0" class="hidden" />
+
                                             <div id="track-application-speakers-input-row">
                                                 <div class="col-md-2">
-                                                    <input name="speaker_email[1]" placeholder="Email" class="form-control" type="text" />
+                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_first_name[1]" placeholder="First Name" class="form-control" type="text" />
+                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_last_name[1]" placeholder="Last Name" class="form-control" type="text" />
+                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="speaker_organization[1]" placeholder="Organization" class="form-control" type="text" />
+                                                    <input name="speaker_organization[0]" placeholder="Organization" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="speaker_title[1]" placeholder="Title" class="form-control" type="text" />
+                                                    <input name="speaker_title[0]" placeholder="Title" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="speaker_street[1]" placeholder="Street" class="form-control" type="text" />
+                                                    <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_zip[1]" placeholder="Zip" class="form-control" type="text" />
+                                                    <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_city[1]" placeholder="City" class="form-control" type="text" />
+                                                    <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
                                                 </div>
                                             </div>
                                         </div>

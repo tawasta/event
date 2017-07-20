@@ -40,17 +40,17 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     @http.route()
     def event_track_proposal_post(self, event, **post):
 
-        print post
         values = self._get_event_track_proposal_post_values(event, **post)
-        print values
 
         partner = request.env['res.partner'].sudo().create(values['contact'])
+
+        speakers = list()
+        for speaker in values['speakers']:
+            speaker_id = request.env['res.partner'].sudo().create(speaker)
+            speakers.append(speaker_id.id)
+
+        values['track']['speaker_ids'] = [(6, 0, speakers)]
         track = request.env['event.track'].sudo().create(values['track'])
-
-        print partner
-        print track
-
-        raise Exception("Not yet!")
 
         # Create attachment
         # TODO: could this be done in the track create?
@@ -83,7 +83,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'phone': post.get('contact_phone'),
             'zip': post.get('contact_zip'),
             'city': post.get('contact_city'),
-            'organization': post.get('contact_organization'),
+            'comment': post.get('contact_organization'),  # TODO
             'function': post.get('contact_title'),
         }
 
@@ -92,6 +92,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         for tag in event.allowed_track_tag_ids:
             if post.get('tag_' + str(tag.id)):
                 tags.append(tag.id)
+
         track_values = {
             'name': post.get('track_name'),
             'event_id': event.id,
@@ -111,9 +112,26 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'language': post.get('language'),
         }
 
+        if post.get('speakers_input_index'):
+            speaker_values = list()
+            for speaker_index in range(0, int(post.get('speakers_input_index'))):
+                first_name = post.get('speaker_first_name[%s]' % speaker_index)
+                last_name = post.get('speaker_last_name[%s]' % speaker_index)
+                speaker_name = "%s %s" % (last_name, first_name)
+
+                speaker_values.append({
+                    'name': speaker_name,
+                    'email': post.get('speaker_email[%s]' % speaker_index),
+                    'zip': post.get('speaker_zip[%s]' % speaker_index),
+                    'city': post.get('speaker_city[%s]' % speaker_index),
+                    'comment': post.get('speaker_organization[%s]' % speaker_index),  # TODO
+                    'function': post.get('speaker_function[%s]' % speaker_index),
+                })
+
         values = {
             'contact': contact_values,
             'track': track_values,
+            'speakers': speaker_values,
         }
 
         return values
