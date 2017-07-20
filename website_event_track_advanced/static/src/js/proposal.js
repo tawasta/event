@@ -2,7 +2,12 @@ $(function() {
 
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
-        $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div').find("input[type='text']").val("");;
+        // Clone the first row
+        row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
+
+        // Clear the values
+        row.find("input[type='text']").val("");
+        row.find("input[type='text']").name("test"+"[2]");
     });
 
     // Disable or enable webinar info textarea

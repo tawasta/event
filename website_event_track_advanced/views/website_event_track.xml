@@ -76,7 +76,7 @@
                                             </div>
 
                                             <div class="col-md-8">
-                                                <label for="track_name" class="control-label">Application as a video (link to e.g. Youtube or Vimeo)</label>
+                                                <label for="video_url" class="control-label">Application as a video (link to e.g. Youtube or Vimeo)</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-video-camera"/></span>
@@ -231,109 +231,95 @@
 
                                         <div class="form-group" id="track-application-contact-info-div">
                                             <div class="col-md-4">
-                                                <label for="partner_first_name" class="control-label">First name</label>
+                                                <label for="contact_first_name" class="control-label">First name</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="partner_first_name" placeholder="First Name" class="form-control" type="text" />
+                                                    <input name="contact_first_name" placeholder="First Name" class="form-control" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="partner_first_name" class="control-label">Last name</label>
+                                                <label for="contact_first_name" class="control-label">Last name</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="partner_last_name" placeholder="Last Name" class="form-control" type="text" />
+                                                    <input name="contact_last_name" placeholder="Last Name" class="form-control" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="email_from" class="control-label">Email</label>
+                                                <label for="contact_email" class="control-label">Email</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-envelope"/></span>
-                                                    <input name="email_from" placeholder="Email" class="form-control" type="email" />
+                                                    <input name="contact_email" placeholder="Email" class="form-control" type="email" />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group" id="track-application-contact-info-extra-div">
                                             <div class="col-md-4">
-                                                <label for="organization" class="control-label">Organization</label>
+                                                <label for="contact_organization" class="control-label">Organization</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-building"/></span>
-                                                    <input name="organization" placeholder="Organization" class="form-control" type="text" />
+                                                    <input name="contact_organization" placeholder="Organization" class="form-control" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="function" class="control-label">Title</label>
+                                                <label for="contact_title" class="control-label">Title</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-info"/></span>
-                                                    <input name="function" placeholder="Title" class="form-control" type="text" />
+                                                    <input name="contact_title" placeholder="Title" class="form-control" type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label for="contact_phone" class="control-label">Phone</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-info"/></span>
+                                                    <input name="contact_phone" placeholder="Phone" class="form-control" type="text" />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group" id="track-application-contact-info-address-div">
                                             <div class="col-md-4">
-                                                <label for="street" class="control-label">Street</label>
+                                                <label for="contact_street" class="control-label">Street</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-road"/></span>
-                                                    <input name="street" placeholder="Street" class="form-control" type="text" />
+                                                    <input name="contact_street" placeholder="Street" class="form-control" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="zip" class="control-label">Zip</label>
+                                                <label for="contact_zip" class="control-label">Zip</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-map-marker"/></span>
-                                                    <input name="zip" placeholder="Zip" class="form-control" type="text" />
+                                                    <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="city" class="control-label">City</label>
+                                                <label for="contact_city" class="control-label">City</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-map-marker"/></span>
-                                                    <input name="city" placeholder="City" class="form-control" type="text" />
+                                                    <input name="contact_city" placeholder="City" class="form-control" type="text" />
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" id="track-application-contact-info-div">
-                                            <div class="col-md-4">
-                                                <label for="phone" class="control-label">Phone</label>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-phone"/></span>
-                                                    <input name="phone" placeholder="Phone" class="form-control" type="text" />
-                                                </div>
-
-                                                <label for="mobile" class="control-label">Mobile</label>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-mobile"/></span>
-                                                    <input name="mobile" placeholder="Mobile" class="form-control" type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <label for="biography" class="control-label">Speaker biography</label>
-
-                                                <textarea class="form-control" name="biography" placeholder="Speaker biography..." rows="4"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group" id="track-application-contact-extra-div">
                                             <div class="col-md-4">
                                                 <label for="returning_speaker" class="control-label">
-                                                    I have been a speaker in this event earlier
+                                                    I have been a speaker at this event earlier
                                                 </label>
 
                                                 <div class="input-group">
@@ -360,58 +346,58 @@
                                     <div class="panel-body" id="track-application-speakers-div">
                                         <p class="alert alert-info alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            List all the speakers here
+                                            List all of the speakers here
                                         </p>
 
-                                        <div class="row" id="track-application-speakers-header-div">
+                                        <div class="form-group" id="track-application-speakers-header-div">
                                             <label for="email" class="col-md-2">Email</label>
                                             <label for="partner_first_name" class="col-md-1">First name</label>
                                             <label for="partner_last_name" class="col-md-1">Last name</label>
                                             <label for="organization" class="col-md-2">Organization</label>
-                                            <label for="function" class="col-md-2">Title</label>
+                                            <label for="title" class="col-md-2">Title</label>
                                             <label for="street" class="col-md-2">Street</label>
                                             <label for="zip" class="col-md-1">Zip</label>
                                             <label for="city" class="col-md-1">City</label>
                                         </div>
 
-                                        <div id="track-application-speakers-input-div">
-                                            <div class="row" id="track-application-speakers-input-row">
+                                        <div class="form-group" id="track-application-speakers-input-div">
+                                            <div id="track-application-speakers-input-row">
                                                 <div class="col-md-2">
-                                                    <input name="email" placeholder="Email" class="form-control" type="text" />
+                                                    <input name="speaker_email[1]" placeholder="Email" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="partner_first_name" placeholder="First Name" class="form-control" type="text" />
+                                                    <input name="speaker_first_name[1]" placeholder="First Name" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="partner_last_name" placeholder="Last Name" class="form-control" type="text" />
+                                                    <input name="speaker_last_name[1]" placeholder="Last Name" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="organization" placeholder="Organization" class="form-control" type="text" />
+                                                    <input name="speaker_organization[1]" placeholder="Organization" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="function" placeholder="Title" class="form-control" type="text" />
+                                                    <input name="speaker_title[1]" placeholder="Title" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
-                                                    <input name="street" placeholder="Street" class="form-control" type="text" />
+                                                    <input name="speaker_street[1]" placeholder="Street" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="zip" placeholder="Zip" class="form-control" type="text" />
+                                                    <input name="speaker_zip[1]" placeholder="Zip" class="form-control" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="city" placeholder="City" class="form-control" type="text" />
+                                                    <input name="speaker_city[1]" placeholder="City" class="form-control" type="text" />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <button type="button" id="add_contact">Add a speaker</button>
+                                        <div class="form-group">
+                                            <button type="button" class="btn col-md-10 col-md-offset-1" id="add_contact">Add a speaker</button>
                                         </div>
                                     </div>
                                 </div>
@@ -441,9 +427,7 @@
                                 <!-- / Extra info -->
 
                                 <div class="form-group">
-                                    <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
-                                        <button type="submit" class="btn btn-primary">Submit Proposal</button>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary col-md-10 col-md-offset-1">Submit Application</button>
                                 </div>
                             </form>
                         </section>
