@@ -29,10 +29,11 @@
                             <field name="returning_speaker" />
                         </group>
                         <group>
-                            <field name="webinar" />
-                            <field name="webinar_info" />
                             <field name="target_group" />
                             <field name="target_group_info" />
+                            <field name="webinar" />
+                            <field name="webinar_info" />
+                            <field name="rating" widget="priority"/>
                         </group>
                     </group>
 
@@ -47,19 +48,17 @@
                                 <field name="description_original" nolabel="1"/>
                             </group>
                         </page>
+                        <page name="ratings" string="Ratings">
+                            <field name="ratings" readonly="1" nolabel="1" colspan="2">
+                                <tree>
+                                    <field name="create_uid" />
+                                    <field name="create_date" />
+                                    <field name="write_date" />
+                                    <field name="rating" widget="priority" avg="Average" />
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
-
-                    <group string="Ratings">
-                        <field name="rating" widget="priority"/>
-                        <field name="ratings" readonly="1" nolabel="1" colspan="2">
-                            <tree>
-                                <field name="create_uid" />
-                                <field name="create_date" />
-                                <field name="write_date" />
-                                <field name="rating" widget="priority" avg="Average" />
-                            </tree>
-                        </field>
-                    </group>
 				</xpath>
 
 			</field>
