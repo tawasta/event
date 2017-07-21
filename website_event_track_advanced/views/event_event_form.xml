@@ -14,6 +14,14 @@
 					</group>
 				</group>
 
+				<page name="registrations" position="before">
+					<page string="Tracks">
+						<field name="track_ids" context="{
+                                'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"
+                        />
+					</page>
+				</page>
+
 			</field>
 		</record> 
 

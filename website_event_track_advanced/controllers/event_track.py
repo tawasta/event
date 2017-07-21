@@ -49,7 +49,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             speaker_id = request.env['res.partner'].sudo().create(speaker)
             speakers.append(speaker_id.id)
 
+        # Add new values to track
+        values['track']['partner_id'] = partner.id
         values['track']['speaker_ids'] = [(6, 0, speakers)]
+
         track = request.env['event.track'].sudo().create(values['track'])
 
         # Create attachment

@@ -22,6 +22,10 @@ class EventTrack(models.Model):
     _inherit = 'event.track'
 
     # 2. Fields declaration
+    partner_id = fields.Many2one(
+        string='Contact',
+    )
+
     attachment_ids = fields.One2many(
         comodel_name='ir.attachment',
         inverse_name='res_id',
@@ -55,6 +59,12 @@ class EventTrack(models.Model):
         inverse='_set_rating',
     )
 
+    rating_avg = fields.Float(
+        digits=(3, 2),
+        string='Rating',
+        compute='_compute_rating_avg',
+    )
+
     target_group = fields.Many2one(
         comodel_name='event.track.target.group',
         relation='event_track',
@@ -83,7 +93,7 @@ class EventTrack(models.Model):
 
     language = fields.Many2one(
         comodel_name='res.lang',
-        string='Track language'
+        string='Language'
     )
 
     extra_info = fields.Text(
@@ -91,7 +101,7 @@ class EventTrack(models.Model):
     )
 
     returning_speaker = fields.Boolean(
-        string='Has been a speaker in an earlier event',
+        string='Has been a speaker at an earlier event',
     )
 
     # 3. Default methods
@@ -124,6 +134,20 @@ class EventTrack(models.Model):
                     'event_track': record.id,
                     'rating': record.rating,
                 })
+
+    def _compute_rating_avg(self):
+        for record in self:
+            if not record.ratings:
+                continue
+
+            sum = 0
+            for rating in record.ratings:
+                sum += rating.rating
+
+            avg = sum / len(record.ratings)
+
+            record.rating_avg = avg
+
 
     # 5. Constraints and onchanges
 

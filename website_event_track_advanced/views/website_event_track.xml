@@ -39,7 +39,8 @@
                                 <h3 class="page-header">Application</h3>
                                 <p class="alert alert-info alert-dismissable">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                    Fill this form to propose your talk.
+                                    Fill this form to propose your talk.<br/>
+                                    Anything with a <span style="padding: 1em" class="required">colored background</span> is a required information
                                 </p>
                             </section>
                         </div>
@@ -239,7 +240,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="contact_first_name" placeholder="First Name" class="form-control" type="text" />
+                                                    <input name="contact_first_name" placeholder="First Name" class="form-control required" type="text" />
                                                 </div>
                                             </div>
 
@@ -248,7 +249,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="contact_last_name" placeholder="Last Name" class="form-control" type="text" />
+                                                    <input name="contact_last_name" placeholder="Last Name" class="form-control required" type="text" />
                                                 </div>
                                             </div>
 
@@ -257,7 +258,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-envelope"/></span>
-                                                    <input name="contact_email" placeholder="Email" class="form-control" type="email" />
+                                                    <input name="contact_email" placeholder="Email" class="form-control required" type="email" />
                                                 </div>
                                             </div>
                                         </div>
@@ -268,7 +269,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-building"/></span>
-                                                    <input name="contact_organization" placeholder="Organization" class="form-control" type="text" />
+                                                    <input name="contact_organization" placeholder="Organization" class="form-control required" type="text" />
                                                 </div>
                                             </div>
 
