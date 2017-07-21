@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+        <record id="event_track_assign_wizard" model="ir.ui.view">
+            <field name="name">event.track.assign.wizard</field>
+            <field name="model">event.track.assign.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Assign reviewers">
+                    <group>
+                        <field name="event_id" readonly="1"/>
+                        <field name="assign_equally" />
+                    </group>
+
+					<field name="track_ids"
+                           colspan="2"
+                           context="{'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"
+                    />
+
+                    <footer>
+                        <button name="action_assign_tracks" string="Assign tracks" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+
+	</data>
+</odoo>

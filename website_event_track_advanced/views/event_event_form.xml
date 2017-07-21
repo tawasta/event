@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openerp>
+<odoo>
 	<data>
+
+        <act_window id="act_event_track_assign"
+                    name="Assign reviewers"
+                    src_model="event.event"
+                    res_model="event.track.assign.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
 
 		<record id="view_event_form" model="ir.ui.view">
 			<field name="name">view_event_form_call_for_papers</field>
 			<field name="model">event.event</field>
 			<field name="inherit_id" ref="event.view_event_form" />
 			<field name="arch" type="xml">
+                <button name="button_cancel" position="after">
+                    <button name="%(act_event_track_assign)d"
+                        type="action"
+                        string="Assign reviewers"
+                    />
+                </button>
 
 				<group name="main_field_group" position="after">
 					<group>
@@ -16,14 +30,14 @@
 
 				<page name="registrations" position="before">
 					<page string="Tracks">
-						<field name="track_ids" context="{
-                                'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"
+                        <field name="track_ids"
+                               context="{'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"
                         />
 					</page>
 				</page>
 
 			</field>
-		</record> 
+		</record>
 
 	</data>
-</openerp>
+</odoo>
