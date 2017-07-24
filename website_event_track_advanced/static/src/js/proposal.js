@@ -1,5 +1,11 @@
 $(function() {
 
+    // Add a '*' to required fields
+  $( "*[required='true']" ).each(function( index ) {
+    var label = $('label[for="'+$(this).attr('name')+'"]');
+    label.addClass('required-label text-primary');
+  });
+
     function wordCount( val ){
         var wom = val.match(/\S+/g);
         return {

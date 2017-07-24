@@ -18,14 +18,14 @@
                         This event does not accept proposals.
                     </p>
                 </section>
-                <section class="row">
+                <section class="row" id="track-application-section">
                     <div class="col-md-12">
                         <div class="oe_structure">
                             <section>
                                 <h3 class="page-header mt16">
-                                    Introduction
+                                    Application
                                 </h3>
-                                <p>
+                                <p class="alert">
                                     We will accept a broad range of
                                     presentations, from reports on academic and
                                     commercial projects to tutorials and case
@@ -34,18 +34,16 @@
                                     audience, it will be considered for
                                     inclusion in the programme.
                                 </p>
+
+                                <p class="alert text-primary">Required fields are marked with *</p>
                             </section>
-                            <section>
-                                <h3 class="page-header">Application</h3>
-                                <p class="alert alert-info alert-dismissable">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                    Fill this form to propose your talk.<br/>
-                                    Anything with a <span style="padding: 1em" class="required">colored background</span> is a required information
-                                </p>
-                            </section>
-                        </div>
-                        <section id="forms" t-if="event.show_track_proposal">
-                            <form class="form-horizontal mt32 js_website_submit_form" t-attf-action="/event/#{event.id}/track_proposal/post" method="post" enctype="multipart/form-data">
+
+                            <section id="forms" t-if="event.show_track_proposal">
+                            <form id="track-application-form"
+                                  class="form-horizontal mt32 js_website_submit_form"
+                                  t-attf-action="/event/#{event.id}/track_proposal/post"
+                                  method="post"
+                                  enctype="multipart/form-data">
 
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
@@ -72,7 +70,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-header"/></span>
-                                                    <input name="track_name" placeholder="Application title" class="form-control required" type="text" />
+                                                    <input name="track_name" placeholder="Application title" class="form-control" required="true" type="text" />
                                                 </div>
                                             </div>
 
@@ -91,7 +89,8 @@
                                                 <label for="description" class="control-label">Application content</label>
 
                                                 <textarea id="track-application-application-description-field"
-                                                          class="form-control required"
+                                                          class="form-control"
+                                                          required="true"
                                                           name="description"
                                                           placeholder="Application content..."
                                                           rows="16"/>
@@ -126,7 +125,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-bullseye"/></span>
-                                                    <select name="target_group" class="form-control" type="selection">
+                                                    <select name="target_group" required="true" class="form-control" type="selection">
                                                          <t t-foreach="target_groups" t-as="group">
                                                              <option t-attf-value="#{group.id}"><t t-esc="group.name"/></option>
                                                          </t>
@@ -137,7 +136,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-language"/></span>
-                                                    <select name="language" class="form-control" type="selection">
+                                                    <select name="language" required="true" class="form-control" type="selection">
                                                         <t t-foreach="languages" t-as="language">
                                                             <option t-attf-value="#{language.id}"><t t-esc="language.name"/></option>
                                                         </t>
@@ -160,7 +159,7 @@
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                                     You should select 2-4 tags that matches your presentation best.
                                                 </p>
-                                                <p class="alert alert-warning alert-dismissable mt8">
+                                                <p class="alert alert-warning alert-dismissable">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                                     Selecting too many tags can make it harder to find the correct audience.
                                                 </p>
@@ -240,16 +239,16 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="contact_first_name" placeholder="First Name" class="form-control required" type="text" />
+                                                    <input name="contact_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="contact_first_name" class="control-label">Last name</label>
+                                                <label for="contact_last_name" class="control-label">Last name</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user"/></span>
-                                                    <input name="contact_last_name" placeholder="Last Name" class="form-control required" type="text" />
+                                                    <input name="contact_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
                                                 </div>
                                             </div>
 
@@ -258,7 +257,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-envelope"/></span>
-                                                    <input name="contact_email" placeholder="Email" class="form-control required" type="email" />
+                                                    <input name="contact_email" placeholder="Email" class="form-control" required="true" type="email" />
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +268,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-building"/></span>
-                                                    <input name="contact_organization" placeholder="Organization" class="form-control required" type="text" />
+                                                    <input name="contact_organization" placeholder="Organization" class="form-control" required="true" type="text" />
                                                 </div>
                                             </div>
 
@@ -370,15 +369,15 @@
 
                                             <div id="track-application-speakers-input-row">
                                                 <div class="col-md-2">
-                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control required" type="email"/>
+                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control" required="true" type="email"/>
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control required" type="text" />
+                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" required="true" type="text" />
                                                 </div>
 
                                                 <div class="col-md-1">
-                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control required" type="text" />
+                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" required="true" type="text" />
                                                 </div>
 
                                                 <div class="col-md-2">
@@ -438,7 +437,7 @@
                                 </div>
                             </form>
                         </section>
-                        <div class="oe_structure"/>
+                        </div>
                     </div>
                 </section>
 

@@ -1,3 +1,7 @@
+#track-application-section .alert{
+    margin-bottom: 8px;
+}
+
 #track-application-speakers-header-div{
     font-size: 0.8em;
 }
@@ -6,7 +10,6 @@
     padding: 0;
 }
 
-.required {
-    color: #000;
-    background-color: #d9edf7;
+.required-label:after {
+  content: " *";
 }
