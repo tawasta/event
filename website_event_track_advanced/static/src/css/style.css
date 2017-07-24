@@ -3,7 +3,7 @@
 }
 
 #track-application-speakers-header-div{
-    font-size: 0.8em;
+    font-size: 1.0em;
 }
 
 #track-application-speakers-input-div div{
@@ -12,4 +12,9 @@
 
 .required-label:after {
   content: " *";
+}
+
+.track-application-speakers-input-row input, #track-application-speakers-header-div label{
+    width: 12.15%;
+    display: inline-block;
 }

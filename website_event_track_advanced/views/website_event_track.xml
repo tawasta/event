@@ -154,7 +154,7 @@
 
                                         <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-targetgroup-tags-div">
                                             <div class="col-md-12">
-                                                <label class="control-label">Tags</label>
+                                                <label class="control-label required-label text-primary">Tags</label>
                                                 <p class="alert alert-info alert-dismissable mt8">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                                     You should select 2-4 tags that matches your presentation best.
@@ -353,52 +353,29 @@
                                             List all of the speakers here
                                         </p>
 
-                                        <div class="form-group" id="track-application-speakers-header-div">
-                                            <label for="email" class="col-md-2" >Email</label>
-                                            <label for="partner_first_name" class="col-md-1">First name</label>
-                                            <label for="partner_last_name" class="col-md-1">Last name</label>
-                                            <label for="organization" class="col-md-2">Organization</label>
-                                            <label for="title" class="col-md-2">Title</label>
-                                            <label for="street" class="col-md-2">Street</label>
-                                            <label for="zip" class="col-md-1">Zip</label>
-                                            <label for="city" class="col-md-1">City</label>
+                                        <div id="track-application-speakers-header-div">
+                                            <label for="speaker_email[0]" class="" >Email</label>
+                                            <label for="speaker_first_name[0]" class="">First name</label>
+                                            <label for="speaker_last_name[0]" class="">Last name</label>
+                                            <label for="speaker_organization[0]" class="">Organization</label>
+                                            <label for="speaker_title[0]" class="">Title</label>
+                                            <label for="speaker_street[0]" class="">Street</label>
+                                            <label for="speaker_zip[0]" class="">Zip</label>
+                                            <label for="speaker_city[0]" class="">City</label>
                                         </div>
 
-                                        <div class="form-group" id="track-application-speakers-input-div">
+                                        <div id="track-application-speakers-input-div">
                                             <input id="track-application-speakers-input-index" name="speakers_input_index" value="0" class="hidden" />
 
-                                            <div id="track-application-speakers-input-row">
-                                                <div class="col-md-2">
-                                                    <input name="speaker_email[0]" placeholder="Email" class="form-control" required="true" type="email"/>
-                                                </div>
-
-                                                <div class="col-md-1">
-                                                    <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" required="true" type="text" />
-                                                </div>
-
-                                                <div class="col-md-1">
-                                                    <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" required="true" type="text" />
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <input name="speaker_organization[0]" placeholder="Organization" class="form-control" type="text" />
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <input name="speaker_title[0]" placeholder="Title" class="form-control" type="text" />
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
-                                                </div>
-
-                                                <div class="col-md-1">
-                                                    <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
-                                                </div>
-
-                                                <div class="col-md-1">
-                                                    <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
-                                                </div>
+                                            <div id="track-application-speakers-input-row" class="track-application-speakers-input-row">
+                                                <input name="speaker_email[0]" placeholder="Email" class="form-control" required="true" type="email"/>
+                                                <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" required="true" type="text" />
+                                                <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" required="true" type="text" />
+                                                <input name="speaker_organization[0]" placeholder="Organization" class="form-control" type="text" />
+                                                <input name="speaker_title[0]" placeholder="Title" class="form-control" type="text" />
+                                                <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
+                                                <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
+                                                <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
                                             </div>
                                         </div>
 
