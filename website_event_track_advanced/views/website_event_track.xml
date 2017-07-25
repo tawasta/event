@@ -4,7 +4,6 @@
     <!-- Overwrites the proposal layout -->
     <template name="Event track proposal" id="website_event_track.event_track_proposal">
         <t t-call="website_event.layout">
-            <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
 
             <div class="oe_structure"/>
             <div class="container">
@@ -86,12 +85,12 @@
 
                                         <div class="form-group" id="track-application-application-info-div">
                                             <div class="col-md-12">
-                                                <label for="description" class="control-label">Application content</label>
+                                                <label for="track_content" class="control-label">Application content</label>
 
-                                                <textarea id="track-application-application-description-field"
+                                                <textarea id="track-application-application-content-field"
                                                           class="form-control"
                                                           required="true"
-                                                          name="description"
+                                                          name="track_content"
                                                           placeholder="Application content..."
                                                           rows="16"/>
                                             </div>
@@ -421,7 +420,16 @@
             </div>
             <div class="oe_structure"/>
         </t>
-    </template>
+
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            CKEDITOR.replace('extra_info');
+            CKEDITOR.replace('target_group_info');
+            CKEDITOR.replace('webinar_info');
+            CKEDITOR.replace('track_content');
+        </script>
+   </template>
 
     <!-- Overwrites the agenda layout -->
     <template id="website_event_track.agenda">

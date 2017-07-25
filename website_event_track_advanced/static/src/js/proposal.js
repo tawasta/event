@@ -3,7 +3,6 @@ $(function() {
     // Add a '*' to required fields
     $( "*[required='true']" ).each(function( index ) {
         var label = $('label[for="'+$(this).attr('name')+'"]');
-        console.log($(this).attr('name'));
         label.addClass('required-label text-primary');
     });
 

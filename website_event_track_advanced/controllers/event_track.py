@@ -101,7 +101,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'event_id': event.id,
             'tag_ids': [(6, 0, tags)],
             'user_id': False,
-            'description': escape(post.get('description')),
+            'description': post.get('track_content'),
 
             'video_url': post.get('video_url'),
             'webinar': post.get('webinar'),
