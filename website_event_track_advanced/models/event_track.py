@@ -140,14 +140,13 @@ class EventTrack(models.Model):
             if not record.ratings:
                 continue
 
-            sum = 0
+            ratings_sum = 0
             for rating in record.ratings:
-                sum += rating.rating
+                ratings_sum += rating.rating
 
-            avg = sum / len(record.ratings)
+            avg = ratings_sum / len(record.ratings)
 
             record.rating_avg = avg
-
 
     # 5. Constraints and onchanges
 
