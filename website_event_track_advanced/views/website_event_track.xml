@@ -87,10 +87,12 @@
                                             <div class="col-md-12">
                                                 <label for="track_content" class="control-label">Application content</label>
 
-                                                <textarea id="track-application-application-content-field"
+                                                <p id="target_group_info_word_counter">Words <span id="target_group_info_word_count">0</span>/300</p>
+
+                                                <textarea name="track_content"
+                                                          id="track_content"
                                                           class="form-control"
                                                           required="true"
-                                                          name="track_content"
                                                           placeholder="Application content..."
                                                           rows="16"/>
                                             </div>
@@ -147,7 +149,11 @@
                                             <div class="col-md-8">
                                                 <label for="target_group_info" class="control-label">Target group info</label>
 
-                                                <textarea class="form-control" name="target_group_info" placeholder="Target group info..." rows="4"/>
+                                                <textarea name="target_group_info"
+                                                          id="target_group_info"
+                                                          class="form-control"
+                                                          placeholder="Target group info..."
+                                                          rows="4"/>
                                             </div>
                                         </div>
 
@@ -209,7 +215,7 @@
                                                 <label for="webinar_info" class="control-label">Webinar info</label>
 
                                                 <textarea class="form-control"
-                                                          id="track-application-webinar-info-field"
+                                                          id="webinar_info"
                                                           name="webinar_info"
                                                           placeholder="Webinar info..."
                                                           rows="4" disabled="1"/>
@@ -399,7 +405,9 @@
 
                                         <div class="form-group" id="track-application-extra-info-div">
                                             <div class="col-md-12">
-                                                <textarea class="form-control" name="extra_info"
+                                                <textarea class="form-control"
+                                                          id="extra_info"
+                                                          name="extra_info"
                                                           placeholder="Extra info..."
                                                           rows="4"/>
                                             </div>
@@ -421,14 +429,9 @@
             <div class="oe_structure"/>
         </t>
 
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            CKEDITOR.replace('extra_info');
-            CKEDITOR.replace('target_group_info');
-            CKEDITOR.replace('webinar_info');
-            CKEDITOR.replace('track_content');
-        </script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
+
    </template>
 
     <!-- Overwrites the agenda layout -->

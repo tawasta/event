@@ -6,19 +6,47 @@ $(function() {
         label.addClass('required-label text-primary');
     });
 
-    function wordCount( val ){
-        var wom = val.match(/\S+/g);
-        return {
-            charactersNoSpaces : val.replace(/\s+/g, '').length,
-            characters         : val.length,
-            words              : wom ? wom.length : 0,
-            lines              : val.split(/\r*\n/).length
-        };
+    function wordCount(val){
+        var regex = /\s+/gi;
+        var wordCount = val.trim().replace(regex, ' ').split(' ').length;
+
+        return wordCount;
     }
 
+    /*
     $('#track-application-application-description-field').keyup(function(e){
         console.log(wordCount(this.value).words);
     })
+    */
+
+    // Replace textarea-fields with CKEditor
+    track_content = CKEDITOR.replace('track_content');
+    target_group_info = CKEDITOR.replace('target_group_info');
+    webinar_info = CKEDITOR.replace('webinar_info');
+    extra_info = CKEDITOR.replace('extra_info');
+
+    track_content.on('instanceReady', function(){
+        this.document.on('keydown', function(event){
+            // var content = this.getBody().getText();
+            var content = track_content.getData();
+            word_count = wordCount(content);
+
+            keycode = event.data.getKey();
+
+            // 8 = backspace
+            // 46 = del
+            word_limit = 300;
+            if(word_count >= word_limit
+             && keycode != 8 && keycode != 46){
+                event.data.preventDefault();
+                $('#target_group_info_word_counter').addClass("text-danger");
+            }
+            else {
+                $('#target_group_info_word_counter').removeClass("text-danger");
+            }
+            $('#target_group_info_word_count').text(word_count);
+        });
+    });
 
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
