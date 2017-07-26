@@ -6,7 +6,8 @@ $(function() {
         label.addClass('required-label text-primary');
     });
 
-    function wordCount(val){
+    // Counts words in the given content
+    window.wordCount = function(val){
         var regex = /\s+/gi;
         var trimmed = val.trim().replace(regex, ' ').split(' ');
 
@@ -16,13 +17,14 @@ $(function() {
         return word_count;
     }
 
-    function wordCounter(event, counter_object, word_limit){
+    // Adds word-counter properties for textarea.
+    // The counter_object has to have a span-element inside itself for the counter
+    window.wordCounter = function (event, content, counter_object, word_limit){
         keycode = false;
         if(event){
             keycode = event.data.keyCode;
         }
 
-        var content = track_content.getData();
         word_count = wordCount(content);
 
         // Update word count class
@@ -47,28 +49,6 @@ $(function() {
         counter_object.find("span").text(word_count + "/" + word_limit);
     }
 
-    // Replace textarea-fields with CKEditor
-    track_content = CKEDITOR.replace('track_content');
-    target_group_info = CKEDITOR.replace('target_group_info');
-    webinar_info = CKEDITOR.replace('webinar_info');
-    extra_info = CKEDITOR.replace('extra_info');
-
-    track_content.on('instanceReady', function(){
-        word_limit = 300;
-        wordCounter(false, $('#target_group_info_word_counter'), word_limit);
-
-        this.on('key', function(event){
-            wordCounter(event, $('#target_group_info_word_counter'), word_limit);
-        });
-    });
-
-    track_content.on('paste', function(event) {
-        // The timeout is necessary so the content will have the pasted info before calculating words
-        setTimeout(function () {
-            wordCounter(event, word_limit);
-        }, 0);
-    })
-
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
         // Clone the first row
@@ -92,9 +72,11 @@ $(function() {
     });
 
     // Disable or enable webinar info textarea
+    /**
     $('#track-application-webinar-selection-field').change(function(){
         disabled = parseInt($('#track-application-webinar-selection-field').val());
-        $('#track-application-webinar-info-field').prop('disabled', !disabled);
+        $('#webinar_info').prop('disabled', !disabled);
     })
+    **/
 
 });

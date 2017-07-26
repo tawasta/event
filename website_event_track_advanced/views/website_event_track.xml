@@ -87,7 +87,7 @@
                                             <div class="col-md-12">
                                                 <label for="track_content" class="control-label">Application content</label>
 
-                                                <p id="target_group_info_word_counter">Words <span id="target_group_info_word_count"></span></p>
+                                                <p id="track_content_word_counter">Words <span id="track_content_word_count"></span></p>
 
                                                 <textarea name="track_content"
                                                           id="track_content"
@@ -149,6 +149,8 @@
                                             <div class="col-md-8">
                                                 <label for="target_group_info" class="control-label">Target group info</label>
 
+                                                <p id="target_group_info_word_counter">Words <span id="target_group_info_word_count"></span></p>
+
                                                 <textarea name="target_group_info"
                                                           id="target_group_info"
                                                           class="form-control"
@@ -162,7 +164,7 @@
                                                 <label class="control-label required-label text-primary">Tags</label>
                                                 <p class="alert alert-info alert-dismissable mt8">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                                    You should select 2-4 tags that matches your presentation best.
+                                                    You should select 3-5 tags that matches your presentation best.
                                                 </p>
                                                 <p class="alert alert-warning alert-dismissable">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
@@ -214,11 +216,13 @@
                                             <div class="col-md-8">
                                                 <label for="webinar_info" class="control-label">Webinar info</label>
 
+                                                <p id="webinar_info_word_counter">Words <span id="webinar_info_word_count"></span></p>
+
                                                 <textarea class="form-control"
                                                           id="webinar_info"
                                                           name="webinar_info"
                                                           placeholder="Webinar info..."
-                                                          rows="4" disabled="1"/>
+                                                          rows="4" />
                                             </div>
                                         </div>
                                     </div>
@@ -405,6 +409,8 @@
 
                                         <div class="form-group" id="track-application-extra-info-div">
                                             <div class="col-md-12">
+                                                 <p id="extra_info_word_counter">Words <span id="extra_info_word_count"></span></p>
+
                                                 <textarea class="form-control"
                                                           id="extra_info"
                                                           name="extra_info"
@@ -431,6 +437,10 @@
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js"></script>
 
    </template>
 
