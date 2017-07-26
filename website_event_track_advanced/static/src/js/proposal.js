@@ -8,16 +8,44 @@ $(function() {
 
     function wordCount(val){
         var regex = /\s+/gi;
-        var wordCount = val.trim().replace(regex, ' ').split(' ').length;
+        var trimmed = val.trim().replace(regex, ' ').split(' ');
 
-        return wordCount;
+        if(trimmed == "") word_count = 0;
+        else word_count = trimmed.length;
+
+        return word_count;
     }
 
-    /*
-    $('#track-application-application-description-field').keyup(function(e){
-        console.log(wordCount(this.value).words);
-    })
-    */
+    function wordCounter(event, word_limit){
+        keycode = false;
+        if(event){
+            keycode = event.data.keyCode;
+        }
+
+        var content = track_content.getData();
+        word_count = wordCount(content);
+
+        // Update word count class
+        if(word_count >= word_limit){
+            $('#target_group_info_word_counter').addClass("text-danger");
+            // This is not working for some reason
+            $('#target_group_info_word_counter').effect("shake", {times:3}, 800 );
+
+            // Disable enter and space when word count is full
+            // 13 = enter
+            // 31 = space
+            // 1114198 = Ctrl-v
+            var keycode_list = [13, 32, 1114198];
+            if ($.inArray(keycode, keycode_list) >= 0) {
+                event.cancel();
+            }
+        } else {
+            $('#target_group_info_word_counter').removeClass("text-danger");
+        }
+
+        // Update the counter number
+        $('#target_group_info_word_count').text(word_count + "/" + word_limit);
+    }
 
     // Replace textarea-fields with CKEditor
     track_content = CKEDITOR.replace('track_content');
@@ -26,27 +54,18 @@ $(function() {
     extra_info = CKEDITOR.replace('extra_info');
 
     track_content.on('instanceReady', function(){
-        this.document.on('keydown', function(event){
-            // var content = this.getBody().getText();
-            var content = track_content.getData();
-            word_count = wordCount(content);
+        word_limit = 5;
+        wordCounter(false, word_limit);
 
-            keycode = event.data.getKey();
-
-            // 8 = backspace
-            // 46 = del
-            word_limit = 300;
-            if(word_count >= word_limit
-             && keycode != 8 && keycode != 46){
-                event.data.preventDefault();
-                $('#target_group_info_word_counter').addClass("text-danger");
-            }
-            else {
-                $('#target_group_info_word_counter').removeClass("text-danger");
-            }
-            $('#target_group_info_word_count').text(word_count);
+        this.on('key', function(event){
+            wordCounter(event, word_limit);
         });
+
+        this.on('paste', function(event) {
+            wordCounter(event, word_limit);
+        })
     });
+
 
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {

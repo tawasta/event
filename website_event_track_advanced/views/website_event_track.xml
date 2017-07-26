@@ -87,7 +87,7 @@
                                             <div class="col-md-12">
                                                 <label for="track_content" class="control-label">Application content</label>
 
-                                                <p id="target_group_info_word_counter">Words <span id="target_group_info_word_count">0</span>/300</p>
+                                                <p id="target_group_info_word_counter">Words <span id="target_group_info_word_count"></span></p>
 
                                                 <textarea name="track_content"
                                                           id="track_content"
