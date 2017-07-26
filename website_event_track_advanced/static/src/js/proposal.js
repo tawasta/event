@@ -54,18 +54,20 @@ $(function() {
     extra_info = CKEDITOR.replace('extra_info');
 
     track_content.on('instanceReady', function(){
-        word_limit = 5;
+        word_limit = 300;
         wordCounter(false, word_limit);
 
         this.on('key', function(event){
             wordCounter(event, word_limit);
         });
-
-        this.on('paste', function(event) {
-            wordCounter(event, word_limit);
-        })
     });
 
+    track_content.on('paste', function(event) {
+        // The timeout is necessary so the content will have the pasted info before calculating words
+        setTimeout(function () {
+            wordCounter(event, word_limit);
+        }, 0);
+    })
 
     // Add speaker (contact) row(s)
     $('#add_contact').click(function() {
