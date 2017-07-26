@@ -8,6 +8,11 @@
 			<field name="inherit_id" ref="website_event_track.view_event_track_form" />
 			<field name="arch" type="xml">
 
+                <xpath expr="//sheet/group[1]" position="attributes">
+                    <attribute name="name">info_group</attribute>
+                    <attribute name="groups">event.group_event_manager</attribute>
+                </xpath>
+
                 <field name="partner_name" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
@@ -21,16 +26,24 @@
                 </field>
 
 				<xpath expr="//sheet/group[last()]" position="after">
-                    <group>
+                    <group name="portal">
                         <group>
                             <field name="review_group" />
-                            <field name="video_url" />
                             <field name="language" />
-                            <field name="returning_speaker" />
                         </group>
                         <group>
                             <field name="target_group" />
                             <field name="target_group_info" />
+                        </group>
+
+                    </group>
+
+                    <group name="extra" groups="event.group_event_manager">
+                        <group>
+                            <field name="video_url" />
+                            <field name="returning_speaker" />
+                        </group>
+                        <group>
                             <field name="webinar" />
                             <field name="webinar_info" />
                             <field name="rating" widget="priority"/>
@@ -48,7 +61,7 @@
                                 <field name="description_original" nolabel="1"/>
                             </group>
                         </page>
-                        <page name="ratings" string="Ratings">
+                        <page name="ratings" string="Ratings" groups="event.group_event_manager">
                             <field name="ratings" readonly="1" nolabel="1" colspan="2">
                                 <tree>
                                     <field name="create_uid" />
@@ -62,7 +75,7 @@
 				</xpath>
 
 			</field>
-		</record> 
+		</record>
 
 	</data>
 </odoo>
