@@ -16,7 +16,7 @@ $(function() {
         return word_count;
     }
 
-    function wordCounter(event, word_limit){
+    function wordCounter(event, counter_object, word_limit){
         keycode = false;
         if(event){
             keycode = event.data.keyCode;
@@ -27,9 +27,9 @@ $(function() {
 
         // Update word count class
         if(word_count >= word_limit){
-            $('#target_group_info_word_counter').addClass("text-danger");
+            counter_object.addClass("text-danger");
             // This is not working for some reason
-            $('#target_group_info_word_counter').effect("shake", {times:3}, 800 );
+            counter_object.effect("shake", {times:3}, 800 );
 
             // Disable enter and space when word count is full
             // 13 = enter
@@ -40,11 +40,11 @@ $(function() {
                 event.cancel();
             }
         } else {
-            $('#target_group_info_word_counter').removeClass("text-danger");
+            counter_object.removeClass("text-danger");
         }
 
         // Update the counter number
-        $('#target_group_info_word_count').text(word_count + "/" + word_limit);
+        counter_object.find("span").text(word_count + "/" + word_limit);
     }
 
     // Replace textarea-fields with CKEditor
@@ -55,10 +55,10 @@ $(function() {
 
     track_content.on('instanceReady', function(){
         word_limit = 300;
-        wordCounter(false, word_limit);
+        wordCounter(false, $('#target_group_info_word_counter'), word_limit);
 
         this.on('key', function(event){
-            wordCounter(event, word_limit);
+            wordCounter(event, $('#target_group_info_word_counter'), word_limit);
         });
     });
 
