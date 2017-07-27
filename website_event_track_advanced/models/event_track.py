@@ -102,6 +102,7 @@ class EventTrack(models.Model):
 
     returning_speaker = fields.Boolean(
         string='Has been a speaker at an earlier event',
+        default=False,
     )
 
     # 3. Default methods

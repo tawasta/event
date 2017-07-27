@@ -42,7 +42,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         values = self._get_event_track_proposal_post_values(event, **post)
 
-        partner = request.env['res.partner'].sudo().create(values['contact'])
+        user = request.env['res.users'].sudo()._signup_create_user(values['contact'])
+        user.action_reset_password()
+        partner = user.partner_id
 
         speakers = list()
         for speaker in values['speakers']:
@@ -71,7 +73,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         if request.env.user != request.website.user_id:
             track.sudo().message_subscribe_users(user_ids=request.env.user.ids)
         else:
-            partner = request.env['res.partner'].sudo().search([('email', '=', post['email_from'])])
+            partner = request.env['res.partner'].sudo().search([('email', '=', post['contact_email'])])
             if partner:
                 track.sudo().message_subscribe(partner_ids=partner.ids)
 
@@ -82,6 +84,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         contact_name = "%s %s" % (post['contact_last_name'], post['contact_first_name'])
         contact_values = {
             'name': contact_name,
+            'login': post.get('contact_email'),
             'email': post.get('contact_email'),
             'phone': post.get('contact_phone'),
             'zip': post.get('contact_zip'),
@@ -120,6 +123,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             for speaker_index in range(0, int(post.get('speakers_input_index'))):
                 first_name = post.get('speaker_first_name[%s]' % speaker_index)
                 last_name = post.get('speaker_last_name[%s]' % speaker_index)
+
+                if not first_name or not last_name:
+                    continue
+
                 speaker_name = "%s %s" % (last_name, first_name)
 
                 speaker_values.append({

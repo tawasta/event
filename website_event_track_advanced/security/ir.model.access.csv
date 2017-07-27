@@ -1,4 +1,5 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-event.track.rating.user,event_track_rating_user,model_event_track_rating,event.group_event_user,1,1,1,0
-event.track.rating.portal,event_track_rating_portal,model_event_track_rating,base.group_portal,1,0,0,0
-event.track.portal,event_track_portal,model_event_track,base.group_portal,1,1,0,0
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"event_track_rating_user","event_track_rating_user","model_event_track_rating","event.group_event_user",1,1,1,0
+"event_track_rating_portal","event_track_rating_portal","model_event_track_rating","base.group_portal",1,0,0,0
+"event_track_portal","event_track_portal","model_event_track","base.group_portal",1,1,0,0
+"event_track_target_group_public","event_track_target_group_public","model_event_track_target_group",,1,0,0,0

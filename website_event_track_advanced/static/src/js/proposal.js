@@ -55,7 +55,7 @@ odoo.define('proposal', function (require) {
         // Clone the first row
         row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
         row.removeAttr('id');
-        row.removeClass('hidden');
+        row.find('button').removeClass('hidden');
 
         input_index =  parseInt($('#track-application-speakers-input-index').val()) + 1;
         $('#track-application-speakers-input-index').val(input_index);
@@ -70,12 +70,6 @@ odoo.define('proposal', function (require) {
             $(this).prop('name', index_name);
         });
     });
-
-    // Add the first speaker
-    $(function() {
-        $('#add_speaker').trigger('click');
-        console.log("TRIGGERED!");
-    })
 
     // Remove speaker rows
     $(document).on('click', '.remove_speaker', function() {
