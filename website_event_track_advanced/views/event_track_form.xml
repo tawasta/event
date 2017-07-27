@@ -8,12 +8,30 @@
 			<field name="inherit_id" ref="website_event_track.view_event_track_form" />
 			<field name="arch" type="xml">
 
+                <!-- Hide extra fields from non-managers-->
                 <xpath expr="//header" position="attributes">
                     <attribute name="groups">event.group_event_manager</attribute>
                 </xpath>
 
                 <xpath expr="//sheet/group[1]" position="attributes">
                     <attribute name="name">info_group</attribute>
+                    <attribute name="groups">event.group_event_manager</attribute>
+                </xpath>
+
+                <div name="button_box" position="attributes">
+                    <attribute name="groups">event.group_event_manager</attribute>
+                </div>
+
+                <label for="event_id" position="attributes">
+                    <attribute name="groups">event.group_event_manager</attribute>
+                </label>
+
+                <field name="event_id" position="attributes">
+                    <attribute name="groups">event.group_event_manager</attribute>
+                </field>
+
+                <xpath expr="//div[@class='oe_chatter']" position="attributes">
+                    <attribute name="name">chatter</attribute>
                     <attribute name="groups">event.group_event_manager</attribute>
                 </xpath>
 
@@ -32,7 +50,7 @@
 				<xpath expr="//sheet/group[last()]" position="after">
                     <group name="portal">
                         <group>
-                            <field name="review_group" />
+                            <field name="review_group" groups="event.group_event_user"/>
                             <field name="language" />
                         </group>
                         <group>
@@ -40,6 +58,12 @@
                             <field name="target_group_info" />
                         </group>
 
+                    </group>
+
+                    <group name="reviewer" groups="event.group_track_reviewer">
+                        <group>
+                            <field name="rating" widget="priority"/>
+                        </group>
                     </group>
 
                     <group name="extra" groups="event.group_event_manager">
@@ -50,7 +74,6 @@
                         <group>
                             <field name="webinar" />
                             <field name="webinar_info" />
-                            <field name="rating" widget="priority"/>
                         </group>
                     </group>
 

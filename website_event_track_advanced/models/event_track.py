@@ -9,6 +9,7 @@ import difflib
 from odoo import api, fields, models
 from odoo import _
 from odoo.tools import html2plaintext
+from odoo.exceptions import AccessError
 
 # 4. Imports from Odoo modules:
 
@@ -162,41 +163,14 @@ class EventTrack(models.Model):
     def write(self, values):
         # Save a diff in messages when the description is changed
         if values.get('description'):
-            old_desc = html2plaintext(self.description).splitlines()
-            new_desc = html2plaintext(values['description']).splitlines()
+            self.create_diff(values)
 
-            d = difflib.Differ()
-            diff = d.compare(old_desc, new_desc)
+        # Force field access rights
+        allowed_fields = set(['description', 'rating'])
+        disallowed_fields = set(values.keys()) - allowed_fields
 
-            diff_msg = ''
-
-            for line in diff:
-                code = line[:2]
-                text = line[2:]
-
-                if code in ['+ ', '- ']:
-                    if code == '+ ':
-                        line_number = new_desc.index(text)
-                        css_style = 'color: #0275d8;'
-                    else:
-                        line_number = old_desc.index(text)
-                        css_style = 'color: #636c72;'
-
-                    line_number += 1
-
-                    if not text.isspace() and text.strip() != '':
-                        diff_msg += '<span style="%s">%s: %s</span><br/>' % (css_style, line_number, text)
-
-            if diff_msg != '':
-                subject = _('Content modified')
-
-                body = '<strong>' + subject + '</strong><br/>' +\
-                       '<p>' + diff_msg + '</p>'
-
-                self.message_post(
-                    subject=subject,
-                    body=body,
-                )
+        if disallowed_fields and not self.env.user.has_group('event.group_event_manager'):
+            raise AccessError(_("You don't have a permission to write fields %s") % disallowed_fields)
 
         res = super(EventTrack, self).write(values)
 
@@ -216,3 +190,39 @@ class EventTrack(models.Model):
     # 7. Action methods
 
     # 8. Business methods
+    def create_diff(self, values):
+        old_desc = html2plaintext(self.description).splitlines()
+        new_desc = html2plaintext(values['description']).splitlines()
+
+        d = difflib.Differ()
+        diff = d.compare(old_desc, new_desc)
+
+        diff_msg = ''
+
+        for line in diff:
+            code = line[:2]
+            text = line[2:]
+
+            if code in ['+ ', '- ']:
+                if code == '+ ':
+                    line_number = new_desc.index(text)
+                    css_style = 'color: #0275d8;'
+                else:
+                    line_number = old_desc.index(text)
+                    css_style = 'color: #636c72;'
+
+                line_number += 1
+
+                if not text.isspace() and text.strip() != '':
+                    diff_msg += '<span style="%s">%s: %s</span><br/>' % (css_style, line_number, text)
+
+        if diff_msg != '':
+            subject = _('Content modified')
+
+            body = '<strong>' + subject + '</strong><br/>' + \
+                   '<p>' + diff_msg + '</p>'
+
+            self.message_post(
+                subject=subject,
+                body=body,
+            )
