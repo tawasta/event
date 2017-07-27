@@ -8,11 +8,15 @@ $(function() {
         wordCounter(false, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
 
         this.on('key', function(event){
-            wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
+            setTimeout(function () {
+                wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
+            }, 0);
         });
     });
 
     extra_info.on('paste', function(event) {
+        var word_limit = 300;
+
         // The timeout is necessary so the content will have the pasted info before calculating words
         setTimeout(function () {
             wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
