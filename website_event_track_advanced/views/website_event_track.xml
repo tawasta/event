@@ -376,7 +376,7 @@
                                         <div id="track-application-speakers-input-div">
                                             <input id="track-application-speakers-input-index" name="speakers_input_index" value="0" class="hidden" />
 
-                                            <div id="track-application-speakers-input-row" class="track-application-speakers-input-row">
+                                            <div id="track-application-speakers-input-row" class="track-application-speakers-input-row hidden">
                                                 <input name="speaker_email[0]" placeholder="Email" class="form-control" required="true" type="email"/>
                                                 <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" required="true" type="text" />
                                                 <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" required="true" type="text" />
@@ -385,11 +385,12 @@
                                                 <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
                                                 <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
                                                 <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
+                                                <button type="button" class="btn remove_speaker"><i class="fa fa-trash"/></button>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="button" class="btn col-md-10 col-md-offset-1" id="add_contact">Add a speaker</button>
+                                            <button type="button" class="btn col-md-10 col-md-offset-1" id="add_speaker">Add a speaker</button>
                                         </div>
                                     </div>
                                 </div>

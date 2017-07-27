@@ -1,4 +1,5 @@
-$(function() {
+odoo.define('proposal', function (require) {
+    var _t = require('web.core')._t;
 
     // Add a '*' to required fields
     $( "*[required='true']" ).each(function( index ) {
@@ -50,10 +51,11 @@ $(function() {
     }
 
     // Add speaker (contact) row(s)
-    $('#add_contact').click(function() {
+    $('#add_speaker').click(function() {
         // Clone the first row
         row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
         row.removeAttr('id');
+        row.removeClass('hidden');
 
         input_index =  parseInt($('#track-application-speakers-input-index').val()) + 1;
         $('#track-application-speakers-input-index').val(input_index);
@@ -64,11 +66,32 @@ $(function() {
         // Add an unique name
         row.find("input").each(function() {
             property_value = $(this).prop('name');
-            console.log(property_value);
             index_name = property_value.substring(0, property_value.length - 3) + '[' + input_index + ']';
-            console.log(index_name);
             $(this).prop('name', index_name);
         });
+    });
+
+    // Add the first speaker
+    $(function() {
+        $('#add_speaker').trigger('click');
+        console.log("TRIGGERED!");
+    })
+
+    // Remove speaker rows
+    $(document).on('click', '.remove_speaker', function() {
+        var confirm_message = _t("Are you sure you want to delete this speaker?");
+
+         if (confirm(confirm_message)) {
+            $(this).parent().remove();
+         }
+    });
+
+    $('.remove_speaker').click(function() {
+        var confirm_message = _t("Are you sure you want to delete this speaker?");
+
+         if (confirm(confirm_message)) {
+            $(this).parent().remove();
+         }
     });
 
     // Disable or enable webinar info textarea
