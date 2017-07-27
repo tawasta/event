@@ -3,7 +3,7 @@ $(function() {
     target_group_info = CKEDITOR.replace('target_group_info');
 
     target_group_info.on('instanceReady', function(){
-        word_limit = 300;
+        var word_limit = 300;
 
         wordCounter(false, target_group_info.getData(), $('#target_group_info_word_counter'), word_limit);
 

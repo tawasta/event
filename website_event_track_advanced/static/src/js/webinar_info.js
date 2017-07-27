@@ -3,7 +3,7 @@ $(function() {
     webinar_info = CKEDITOR.replace('webinar_info');
 
     webinar_info.on('instanceReady', function(){
-        word_limit = 200;
+        var word_limit = 200;
 
         wordCounter(false, webinar_info.getData(), $('#webinar_info_word_counter'), word_limit);
 
