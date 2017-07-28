@@ -47,7 +47,7 @@
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
                                 <!-- Application type -->
-                                <div class="panel panel-default" id="track-application-type-div">
+                                <div class="panel panel-primary" id="track-application-type-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Application type</h3>
                                     </div>
@@ -81,7 +81,7 @@
                                 </div>
 
                                 <!-- Application info -->
-                                <div class="panel panel-default" id="track-application-application-div">
+                                <div class="panel panel-primary" id="track-application-application-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Application info</h3>
                                     </div>
@@ -144,7 +144,7 @@
                                 <!-- / Application info -->
 
                                 <!-- Target group info -->
-                                <div class="panel panel-default" id="track-application-targetgroup-div">
+                                <div class="panel panel-info" id="track-application-targetgroup-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Target group info</h3>
                                     </div>
@@ -220,7 +220,7 @@
                                 <!-- / Target group info -->
 
                                 <!-- Webinar info -->
-                                <div class="panel panel-default" id="track-application-webinar-div">
+                                <div class="panel panel-info" id="track-application-webinar-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Webinar info</h3>
                                     </div>
@@ -265,7 +265,7 @@
                                 <!-- / Webinar info -->
 
                                 <!-- Contact info -->
-                                <div class="panel panel-default" id="track-application-contact-div">
+                                <div class="panel panel-info" id="track-application-contact-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Contact</h3>
                                     </div>
@@ -322,7 +322,7 @@
                                 <!-- / Contact info -->                                
                                 
                                 <!-- Speakers -->
-                                <div class="panel panel-default" id="track-application-speakers-div">
+                                <div class="panel panel-info" id="track-application-speakers-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Speakers</h3>
                                     </div>
@@ -368,7 +368,7 @@
                                 <!-- / Speakers -->
 
                                 <!-- Contract info -->
-                                <div class="panel panel-default" id="track-application-contract-div">
+                                <div class="panel panel-warning" id="track-application-contract-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Workshop</h3>
                                     </div>
@@ -465,7 +465,7 @@
                                 <!-- / Contract info -->
 
                                 <!-- Extra info -->
-                                <div class="panel panel-default">
+                                <div class="panel panel-warning">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Extra info</h3>
                                     </div>
