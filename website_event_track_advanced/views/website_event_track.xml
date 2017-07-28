@@ -108,7 +108,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-8">s
                                                 <label for="video_url" class="control-label">Application as a video (link to e.g. Youtube or Vimeo)</label>
 
                                                 <div class="input-group">
@@ -265,12 +265,12 @@
                                 <!-- / Webinar info -->
 
                                 <!-- Contact info -->
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" id="track-application-contact-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Contact</h3>
                                     </div>
 
-                                    <div class="panel-body" id="track-application-contacts-div">
+                                    <div class="panel-body">
                                         <p class="alert alert-info alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             Please fill the contact persons information here.<br/>
@@ -288,10 +288,8 @@
                                             <label for="contact_city">City</label>
                                         </div>
 
-                                        <div id="track-application-contacts-input-div">
-                                            <input id="track-application-contact-input-index" name="contacts_input_index" value="0" class="hidden" />
-
-                                            <div id="track-application-contact-input-row" class="track-application-contact-input-row">
+                                        <div id="track-application-contract-input-div">
+                                            <div class="track-application-contact-input-row">
                                                 <input name="contact_email" placeholder="Email" class="form-control" required="true" type="email"/>
                                                 <input name="contact_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
                                                 <input name="contact_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
@@ -324,12 +322,12 @@
                                 <!-- / Contact info -->                                
                                 
                                 <!-- Speakers -->
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" id="track-application-speakers-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Speakers</h3>
                                     </div>
 
-                                    <div class="panel-body" id="track-application-speakers-div">
+                                    <div class="panel-body">
                                         <p class="alert alert-info alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             List all of the speakers here
@@ -368,6 +366,65 @@
                                     </div>
                                 </div>
                                 <!-- / Speakers -->
+
+                                <!-- Contract info -->
+                                <div class="panel panel-default" id="track-application-contract-div">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Workshop</h3>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <label class="control-label">
+                                            Contract signee
+                                        </label>
+
+                                        <div id="track-application-contract-header-div" class="track-application-contact-input-row">
+                                            <label for="signee_email" >Email</label>
+                                            <label for="signee_first_name">First name</label>
+                                            <label for="signee_last_name">Last name</label>
+                                            <label for="signee_organization">Organization</label>
+                                            <label for="signee_title">Title</label>
+                                            <label for="signee_street">Street</label>
+                                            <label for="signee_zip">Zip</label>
+                                            <label for="signee_city">City</label>
+                                        </div>
+
+                                        <div id="track-application-contract-input-div">
+                                            <div class="track-application-contact-input-row">
+                                                <input name="signee_email" placeholder="Email" class="form-control" required="true" type="email"/>
+                                                <input name="signee_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
+                                                <input name="signee_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
+                                                <input name="signee_organization" placeholder="Organization" class="form-control" type="text" />
+                                                <input name="signee_title" placeholder="Title" class="form-control" type="text" />
+                                                <input name="signee_street" placeholder="Street" class="form-control" type="text" />
+                                                <input name="signee_zip" placeholder="Zip" class="form-control" type="text" />
+                                                <input name="signee_city" placeholder="City" class="form-control" type="text" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="track-application-workshop-div">
+                                            <div class="col-md-4">
+                                                <label for="workshop_organization" class="control-label">Organization</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-building"/></span>
+                                                    <input name="workshop_organization" placeholder="Organization" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="workshop_participants" class="control-label">Max participants</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-users"/></span>
+                                                    <input name="workshop_participants" placeholder="E.g. 20" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- / Contract info -->
 
                                 <!-- Extra info -->
                                 <div class="panel panel-default">
