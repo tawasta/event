@@ -14,7 +14,7 @@
   content: " *";
 }
 
-.track-application-speakers-input-row input, #track-application-speakers-header-div label{
+.track-application-contact-input-row input, #track-application-contact-header-div label{
     width: 11.65%;
     display: inline-block;
 }
