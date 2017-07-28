@@ -20,12 +20,19 @@ class EventTrackReviewGroup(models.Model):
     _name = 'event.track.review.group'
 
     # 2. Fields declaration
-    name = fields.Char(
-        string='Group name',
+    name = fields.Char()
+    active = fields.Boolean(
+        default=True
     )
+
     reviewers = fields.Many2many(
         comodel_name='res.partner',
         string='Reviewers',
+    )
+    event_tracks = fields.One2many(
+        comodel_name='event.track',
+        inverse_name='review_group',
+        string='Event track',
     )
 
     # 3. Default methods

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="event_track_type_action" model="ir.actions.act_window" >
+        <field name="name">Track types</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">event.track.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="event_track_type_menu"
+              name="Track types"
+              action="event_track_type_action"
+              sequence="40"
+              parent="event.menu_event_configuration"
+              groups="event.group_event_manager"
+              />
+
+</odoo>

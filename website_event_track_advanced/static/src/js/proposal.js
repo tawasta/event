@@ -96,4 +96,11 @@ odoo.define('proposal', function (require) {
     })
     **/
 
+    $('#application_type').change(function(){
+        $('#application_type_description').val($('#application_type option:selected').attr('title'));
+    });
+    $(function() {
+        $('#application_type').trigger('change');
+    });
+
 });

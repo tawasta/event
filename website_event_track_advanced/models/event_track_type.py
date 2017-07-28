@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
-import difflib
 
 # 2. Known third party imports:
 
@@ -15,9 +14,9 @@ from odoo import api, fields, models
 # 6. Unknown third party imports:
 
 
-class EventTrackTargetGroup(models.Model):
+class EventTrackType(models.Model):
     # 1. Private attributes
-    _name = 'event.track.target.group'
+    _name = 'event.track.type'
 
     # 2. Fields declaration
     name = fields.Char()
@@ -25,9 +24,10 @@ class EventTrackTargetGroup(models.Model):
     active = fields.Boolean(
         default=True
     )
+
     event_tracks = fields.One2many(
         comodel_name='event.track',
-        inverse_name='target_group',
+        inverse_name='type',
         string='Event track',
     )
 

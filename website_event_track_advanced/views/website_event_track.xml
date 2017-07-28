@@ -46,6 +46,40 @@
 
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
+                                <!-- Application type -->
+                                <div class="panel panel-default" id="track-application-type-div">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Application type</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group" id="track-application-application-type-div">
+                                            <div class="col-md-4">
+                                                <label for="type" class="control-label">Application type</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-ellipsis-h"/></span>
+                                                    <select name="type" id="application_type" required="true" class="form-control" type="selection">
+                                                    <t t-foreach="types" t-as="application_type">
+                                                        <option t-attf-value="#{application_type['id']" t-attf-title="#{application_type['description']}">
+                                                            <t t-esc="application_type['name']"/>
+                                                        </option>
+                                                    </t>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <label for="type_description" class="control-label">Description</label>
+
+                                                <textarea class="form-control"
+                                                          id="application_type_description"
+                                                          name="type_description"
+                                                          rows="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Application info -->
                                 <div class="panel panel-default" id="track-application-application-div">
                                     <div class="panel-heading">
@@ -64,6 +98,7 @@
                                         </p>
 
                                         <div class="form-group" id="track-application-application-info-div">
+
                                             <div class="col-md-4">
                                                 <label for="track_name" class="control-label">Application title</label>
 
@@ -336,7 +371,7 @@
                                                 </label>
 
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-bullhorn"/></span>
+                                                    <span class="input-group-addon"><i class="fa fa-comment"/></span>
                                                     <select name="returning_speaker" class="form-control" type="selection">
                                                         <option value="0">No</option>
                                                         <option value="1">Yes</option>

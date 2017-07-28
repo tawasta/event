@@ -25,6 +25,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     def event_track_proposal(self, event, **post):
 
         target_groups = request.env['event.track.target.group'].search([])
+        types = request.env['event.track.type'].search_read([], ['id', 'name', 'description'])
         languages = request.env['res.lang'].search([])
 
         return request.render(
@@ -33,6 +34,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 'event': event,
                 'target_groups': target_groups,
                 'languages': languages,
+                'types': types,
             },
         )
 
@@ -107,11 +109,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'description': post.get('track_content'),
 
             'video_url': post.get('video_url'),
-            'webinar': post.get('webinar'),
+            'webinar': int(post.get('webinar')),
             'webinar_info': post.get('webinar_info'),
-            'returning_speaker': post.get('returning_speaker'),
+            'returning_speaker': int(post.get('returning_speaker')),
 
-            'extra_info': post.get('extra_info'),
+            'extra_info':post.get('extra_info'),
 
             'target_group': post.get('target_group'),
             'target_group_info': post.get('target_group_info'),

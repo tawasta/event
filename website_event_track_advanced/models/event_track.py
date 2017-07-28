@@ -60,6 +60,12 @@ class EventTrack(models.Model):
         inverse='_set_rating',
     )
 
+    type = fields.Many2one(
+        comodel_name='event.track.type',
+        inverse_name='event_track',
+        string='Type',
+    )
+
     rating_avg = fields.Float(
         digits=(3, 2),
         string='Rating',
