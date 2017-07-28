@@ -375,11 +375,11 @@
 
                                     <div class="panel-body">
 
-                                        <label class="control-label">
+                                        <h4>
                                             Contract signee
-                                        </label>
+                                        </h4>
 
-                                        <div id="track-application-contract-header-div" class="track-application-contact-input-row">
+                                        <div id="track-application-signee-header-div" class="track-application-contact-input-row">
                                             <label for="signee_email" >Email</label>
                                             <label for="signee_first_name">First name</label>
                                             <label for="signee_last_name">Last name</label>
@@ -390,7 +390,7 @@
                                             <label for="signee_city">City</label>
                                         </div>
 
-                                        <div id="track-application-contract-input-div">
+                                        <div id="track-application-signee-input-div">
                                             <div class="track-application-contact-input-row">
                                                 <input name="signee_email" placeholder="Email" class="form-control" required="true" type="email"/>
                                                 <input name="signee_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
@@ -403,15 +403,29 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group" id="track-application-workshop-div">
-                                            <div class="col-md-4">
-                                                <label for="workshop_organization" class="control-label">Organization</label>
+                                        <div>
+                                            <h4>Organizer invoice address</h4>
 
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-building"/></span>
-                                                    <input name="workshop_organization" placeholder="Organization" class="form-control" />
-                                                </div>
+                                            <div id="track-application-organizer-header-div" class="row">
+                                                <label for="organizer_organization" class="col-md-2">Organization</label>
+                                                <label for="organizer_street" class="col-md-2">Street</label>
+                                                <label for="organizer_zip" class="col-md-2">Zip</label>
+                                                <label for="organizer_city" class="col-md-2">City</label>
+                                                <label for="organizer_business_id" class="col-md-2">Business id</label>
+                                                <label for="organizer_reference" class="col-md-2">Your reference</label>
                                             </div>
+
+                                            <div id="track-application-organizer-input-div" class="row">
+                                                <input name="organizer_organization" placeholder="Organization" class="col-md-2" type="text" required="true" />
+                                                <input name="organizer_street" placeholder="Street" class="col-md-2" type="text" required="true" />
+                                                <input name="organizer_zip" placeholder="Zip" class="col-md-2" type="text" required="true" />
+                                                <input name="organizer_city" placeholder="City" class="col-md-2" type="text" required="true" />
+                                                <input name="organizer_business_id" placeholder="E.g. 1234567-1" class="col-md-2" type="text" required="true" />
+                                                <input name="organizer_reference" placeholder="Your reference" class="col-md-2" type="text" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="track-application-workshop-div">
                                             <div class="col-md-4">
                                                 <label for="workshop_participants" class="control-label">Max participants</label>
 
@@ -419,6 +433,30 @@
                                                     <span class="input-group-addon"><i class="fa fa-users"/></span>
                                                     <input name="workshop_participants" placeholder="E.g. 20" class="form-control" />
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <label for="workshop_goals" class="control-label">Workshop goals</label>
+
+                                                <p id="workshop_goals_word_counter">Words <span id="workshop_goals_word_count"></span></p>
+
+                                                <textarea class="form-control"
+                                                          id="workshop_goals"
+                                                          name="workshop_goals"
+                                                          placeholder="Workshop goals"
+                                                          rows="4" />
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label for="workshop_schedule" class="control-label">Workshop schedule</label>
+
+                                                <p id="workshop_schedule_word_counter">Words <span id="workshop_schedule_word_count"></span></p>
+
+                                                <textarea class="form-control"
+                                                          id="workshop_schedule"
+                                                          name="workshop_schedule"
+                                                          placeholder="Workshop schedule"
+                                                          rows="4" />
                                             </div>
                                         </div>
 
