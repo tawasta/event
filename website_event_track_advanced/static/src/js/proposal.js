@@ -2,7 +2,7 @@ odoo.define('proposal', function (require) {
     var _t = require('web.core')._t;
 
     // Add a '*' to required fields
-    $( "*[required='true']" ).each(function( index ) {
+    $( "*[required]" ).each(function( index ) {
         var label = $('label[for="'+$(this).attr('name')+'"]');
         label.addClass('required-label text-primary');
     });
@@ -61,10 +61,10 @@ odoo.define('proposal', function (require) {
         $('#track-application-speakers-input-index').val(input_index);
 
         // Clear the values
-        row.find("input").val("");
+        row.find('input').val('');
 
         // Add an unique name
-        row.find("input").each(function() {
+        row.find('input').each(function() {
             property_value = $(this).prop('name');
             index_name = property_value.substring(0, property_value.length - 3) + '[' + input_index + ']';
             $(this).prop('name', index_name);
@@ -100,8 +100,21 @@ odoo.define('proposal', function (require) {
         $('#application_type_description').val($('#application_type option:selected').attr('title'));
         var application_type = $('#application_type option:selected').val();
 
+        workshop = application_type == 'workshop';
         // Toggle display by form type
-        $('#track-application-workshop-div').toggle(application_type == 'workshop');
+        $('#track-application-workshop-div').toggle(workshop);
+
+        // Remove or add required-class from hidden fields
+        if(workshop){
+            $('#track-application-workshop-div').find('input[required_disabled]').each(function() {
+                $(this).attr('required', true);
+            });
+        } else {
+            $('#track-application-workshop-div').find('input[required]').each(function() {
+                $(this).removeAttr('required');
+                $(this).attr('required_disabled', true);
+            });
+        }
     });
 
     $(function() {
