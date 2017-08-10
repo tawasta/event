@@ -19,6 +19,11 @@
     display: inline-block;
 }
 
+.track-application-signee-input-row input, .track-application-signee-input-row label{
+    width: 23.7%;
+    display: inline-block;
+}
+
 .track-application-invoice-input-row input, .track-application-invoice-input-row label{
     width: 15.7%;
     display: inline-block;

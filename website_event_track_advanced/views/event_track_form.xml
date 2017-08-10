@@ -8,6 +8,11 @@
 			<field name="inherit_id" ref="website_event_track.view_event_track_form" />
 			<field name="arch" type="xml">
 
+                <field name="partner_id" position="after">
+                    <field name="organizer" />
+                    <field name="organizer_contact" />
+                </field>
+
                 <!-- Hide extra fields from non-managers-->
                 <xpath expr="//header" position="attributes">
                     <attribute name="groups">event.group_event_manager</attribute>
@@ -48,18 +53,6 @@
                 </field>
 
 				<xpath expr="//sheet/group[last()]" position="after">
-                    <group name="portal">
-                        <group>
-                            <field name="type" options="{'no_quick_create':True,'no_create_edit':True}" />
-                            <field name="language" options="{'no_quick_create':True,'no_create_edit':True}" />
-                        </group>
-                        <group>
-                            <field name="target_group" options="{'no_quick_create':True,'no_create_edit':True}" />
-                            <field name="target_group_info" />
-                        </group>
-
-                    </group>
-
                     <group name="reviewer" groups="event.group_track_reviewer">
                         <group>
                             <field name="review_group" groups="event.group_event_user" options="{'no_quick_create':True,'no_create_edit':True}"/>
@@ -73,8 +66,7 @@
                             <field name="returning_speaker" />
                         </group>
                         <group>
-                            <field name="webinar" />
-                            <field name="webinar_info" />
+
                         </group>
                     </group>
 
@@ -89,6 +81,23 @@
                                 <field name="description_original" nolabel="1"/>
                             </group>
                         </page>
+                        <page name="target_group" string="Target group">
+                            <group name="portal">
+                                <group>
+                                    <field name="type" options="{'no_quick_create':True,'no_create_edit':True}" />
+                                    <field name="language" options="{'no_quick_create':True,'no_create_edit':True}" />
+                                    <field name="target_group" options="{'no_quick_create':True,'no_create_edit':True}" />
+                                </group>
+
+                                <group>
+
+                                </group>
+
+                                <group colspan="2">
+                                    <field name="target_group_info" />
+                                </group>
+                            </group>
+                        </page>
                         <page name="ratings" string="Ratings" groups="event.group_event_manager">
                             <field name="ratings" readonly="1" nolabel="1" colspan="2">
                                 <tree>
@@ -98,6 +107,18 @@
                                     <field name="rating" widget="priority" avg="Average" />
                                 </tree>
                             </field>
+                        </page>
+                        <page name="webinar" string="Webinar">
+                            <group>
+                                <field name="webinar" />
+                                <field name="webinar_info" />
+                            </group>
+                        </page>
+                        <page name="workshop" string="Workshop">
+                            <group cols="1">
+                                <field name="goals" nolabel="0"/>
+                                <field name="schedule" nolabel="0"/>
+                            </group>
                         </page>
                     </notebook>
 				</xpath>

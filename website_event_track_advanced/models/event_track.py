@@ -27,6 +27,16 @@ class EventTrack(models.Model):
         string='Contact',
     )
 
+    organizer = fields.Many2one(
+        comodel_name='res.partner',
+        string='Organizer',
+    )
+
+    organizer_contact = fields.Many2one(
+        comodel_name='res.partner',
+        string='Organizer contact',
+    )
+
     attachment_ids = fields.One2many(
         comodel_name='ir.attachment',
         inverse_name='res_id',
@@ -78,7 +88,7 @@ class EventTrack(models.Model):
         string='Target group',
     )
 
-    target_group_info = fields.Text(
+    target_group_info = fields.Html(
         string='Target group info',
     )
 
@@ -94,7 +104,7 @@ class EventTrack(models.Model):
     webinar = fields.Boolean(
         string='Pre-event webinar'
     )
-    webinar_info = fields.Text(
+    webinar_info = fields.Html(
         string='Pre-event webinar info'
     )
 
@@ -103,8 +113,16 @@ class EventTrack(models.Model):
         string='Language'
     )
 
-    extra_info = fields.Text(
+    extra_info = fields.Html(
         string='Extra info',
+    )
+
+    goals = fields.Html(
+        string='Goals',
+    )
+
+    schedule = fields.Html(
+        string='Schedule',
     )
 
     returning_speaker = fields.Boolean(

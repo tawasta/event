@@ -26,7 +26,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         target_groups = request.env['event.track.target.group'].search([])
         types = request.env['event.track.type'].search_read([], ['code', 'name', 'description'])
-        languages = request.env['res.lang'].search([])
+        languages = request.env['res.lang'].search([], order='name DESC')
 
         return request.render(
             "website_event_track.event_track_proposal",
@@ -42,24 +42,74 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     @http.route()
     def event_track_proposal_post(self, event, **post):
 
+        # 1. Get the posted values in separate dicts
         values = self._get_event_track_proposal_post_values(event, **post)
 
-        user = request.env['res.users'].sudo()._signup_create_user(values['contact'])
-        user.action_reset_password()
-        partner = user.partner_id
+        # 2. Create user and contact (partner)
+        user = False
+        partner = False
+        if values.get('contact'):
+            existing_user = request.env['res.users'].sudo().search([('login', '=', values['contact']['email'])])
 
+            if not existing_user:
+                user = request.env['res.users'].sudo()._signup_create_user(values['contact'])
+                user.action_reset_password()
+                partner = user.partner_id
+            else:
+                partner = existing_user.partner_id
+
+            values['track']['partner_id'] = partner.id
+
+        # 3. Add contact to organization
+        organization = False
+        if values.get('contact_organization') and values.get('contact_organization').get('name'):
+            organization_name = values.get('contact_organization').get('name')
+            organization = request.env['res.partner'].search([
+                ('name', '=ilike', organization_name)
+            ], limit=1)
+
+        if not organization and values.get('contact_organization'):
+            # Organization doesn't exists. Create one
+            organization = request.env['res.partner'].sudo().create(values['contact_organization'])
+
+        if organization:
+            # Add contact to the existing organization
+            partner.parent_id = organization.id
+
+        # 4. Add speakers
         speakers = list()
         for speaker in values['speakers']:
             speaker_id = request.env['res.partner'].sudo().create(speaker)
             speakers.append(speaker_id.id)
-
-        # Add new values to track
-        values['track']['partner_id'] = partner.id
         values['track']['speaker_ids'] = [(6, 0, speakers)]
 
+        # 5. Add workshop organization
+        workshop_organizer = False
+        if values.get('workshop_organizer') and values.get('workshop_organizer').get('name'):
+            workshop_organizer_name = values.get('workshop_organizer').get('name')
+
+            workshop_organizer = request.env['res.partner'].search([
+                ('name', '=ilike', workshop_organizer_name)
+            ], limit=1)
+
+        if not workshop_organizer and values.get('workshop_organizer'):
+            # Organization doesn't exists. Create one
+            workshop_organizer = request.env['res.partner'].sudo().create(values['workshop_organizer'])
+
+        values['track']['organizer'] = workshop_organizer.id
+
+        # 6. Add organizer contact
+        if values.get('workshop_signee'):
+            if workshop_organizer:
+                values['workshop_signee']['parent_id'] = workshop_organizer.id
+
+            signee = request.env['res.partner'].sudo().create(values['workshop_signee'])
+            values['track']['organizer_contact'] = signee.id
+
+        # 7. Create the track
         track = request.env['event.track'].sudo().create(values['track'])
 
-        # Create attachment
+        # 8. Create attachment
         # TODO: could this be done in the track create?
         # TODO: multiple attachments?
         attachment_values = {
@@ -72,6 +122,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
         attachment = request.env['ir.attachment'].sudo().create(attachment_values)
 
+        # 9. Subscribe and return
         if request.env.user != request.website.user_id:
             track.sudo().message_subscribe_users(user_ids=request.env.user.ids)
         else:
@@ -82,6 +133,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         return request.render("website_event_track.event_track_proposal_success", {'track': track, 'event': event})
 
     def _get_event_track_proposal_post_values(self, event, **post):
+        # Organization
+        contact_organization_values = {
+            'name': post.get('contact_organization'),
+            'type': 'invoice',
+        }
+
         # Contact
         contact_name = "%s %s" % (post['contact_last_name'], post['contact_first_name'])
         contact_values = {
@@ -91,18 +148,29 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'phone': post.get('contact_phone'),
             'zip': post.get('contact_zip'),
             'city': post.get('contact_city'),
-            'comment': post.get('contact_organization'),  # TODO
             'function': post.get('contact_title'),
         }
 
-        # Track
+        # Tags
         tags = []
         for tag in event.allowed_track_tag_ids:
             if post.get('tag_' + str(tag.id)):
                 tags.append(tag.id)
 
+        # Application type
+        application_type = False
+        if post.get('application_type'):
+            event_track_type = request.env['event.track.type'].search([
+                ('code', '=', post.get('application_type'))
+            ], limit=1,
+            )
+            if event_track_type:
+                application_type = event_track_type.id
+
+        # Track
         track_values = {
             'name': post.get('track_name'),
+            'type': application_type,
             'event_id': event.id,
             'tag_ids': [(6, 0, tags)],
             'user_id': False,
@@ -117,12 +185,13 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'target_group': post.get('target_group'),
             'target_group_info': post.get('target_group_info'),
-            'language': post.get('language'),
+            'language': int(post.get('language')) or False,
         }
 
+        # Speakers
         if post.get('speakers_input_index'):
             speaker_values = list()
-            for speaker_index in range(0, int(post.get('speakers_input_index'))):
+            for speaker_index in range(0, int(post.get('speakers_input_index'))+1):
                 first_name = post.get('speaker_first_name[%s]' % speaker_index)
                 last_name = post.get('speaker_last_name[%s]' % speaker_index)
 
@@ -140,10 +209,31 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                     'function': post.get('speaker_function[%s]' % speaker_index),
                 })
 
+        # Workshop
+        workshop_organizer_values = {
+            'name': post.get('organizer_organization'),
+            'street': post.get('organizer_street'),
+            'zip': post.get('organizer_zip'),
+            'city': post.get('organizer_city'),
+            'comment': post.get('organizer_business_id'),
+            'ref': post.get('organizer_reference'),
+            'type': 'invoice',
+        }
+
+        signee_name = "%s %s" % (post['signee_last_name'], post['signee_first_name'])
+        workshop_signee_values = {
+            'name': signee_name,
+            'email': post.get('signee_email'),
+            'function': post.get('signee_title'),
+        }
+
         values = {
+            'contact_organization': contact_organization_values,
             'contact': contact_values,
             'track': track_values,
             'speakers': speaker_values,
+            'workshop_organizer': workshop_organizer_values,
+            'workshop_signee': workshop_signee_values,
         }
 
         return values

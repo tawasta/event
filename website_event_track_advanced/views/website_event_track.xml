@@ -54,11 +54,11 @@
                                     <div class="panel-body">
                                         <div class="form-group" id="track-application-application-type-div">
                                             <div class="col-md-4">
-                                                <label for="type" class="control-label">Application type</label>
+                                                <label for="application_type" class="control-label">Application type</label>
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-ellipsis-h"/></span>
-                                                    <select name="type" id="application_type" required="true" class="form-control" type="selection">
+                                                    <select name="application_type" id="application_type" required="true" class="form-control" type="selection">
                                                     <t t-foreach="types" t-as="application_type">
                                                         <option t-attf-value="#{application_type['code']}" t-attf-title="#{application_type['description']}">
                                                             <t t-esc="application_type['name']"/>
@@ -122,9 +122,10 @@
 
                                         <div class="form-group" id="track-application-application-info-div">
                                             <div class="col-md-12">
-                                                <label for="track_content" class="control-label">Application content</label>
-
-                                                <p id="track_content_word_counter">Words <span id="track_content_word_count"></span></p>
+                                                <label for="track_content" class="control-label">
+                                                    Application content
+                                                    <span id="track_content_word_counter">Words <span id="track_content_word_count"></span></span>
+                                                </label>
 
                                                 <textarea name="track_content"
                                                           id="track_content"
@@ -158,7 +159,7 @@
                                         </p>
                                         <p class="alert alert-warning alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            Selecting too many tags can make it harder to find the correct audience.
+                                            Select the most fitting group. You can expand your target group by writing a description.
                                         </p>
 
                                         <div class="form-group" id="track-application-targetgroup-info-div">
@@ -275,7 +276,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-comment"/></span>
                                                     <select name="returning_speaker" required="true" class="form-control" type="selection">
-                                                        <option value="0">-</option>
+                                                        <option value="0" selected="1">-</option>
                                                         <option value="0">No</option>
                                                         <option value="1">Yes</option>
                                                     </select>
@@ -398,11 +399,10 @@
                                             Contract signee
                                         </h4>
 
-                                        <div id="track-application-signee-header-div" class="track-application-contact-input-row">
+                                        <div id="track-application-signee-header-div" class="track-application-signee-input-row">
                                             <label for="signee_email" >Email</label>
                                             <label for="signee_first_name">First name</label>
                                             <label for="signee_last_name">Last name</label>
-                                            <label for="signee_organization">Organization</label>
                                             <label for="signee_title">Title</label>
                                             <!--
                                             <label for="signee_street">Street</label>
@@ -412,11 +412,10 @@
                                         </div>
 
                                         <div id="track-application-signee-input-div">
-                                            <div class="track-application-contact-input-row">
+                                            <div class="track-application-signee-input-row">
                                                 <input name="signee_email" placeholder="Email" class="form-control" required="true" type="email"/>
                                                 <input name="signee_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
                                                 <input name="signee_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
-                                                <input name="signee_organization" placeholder="Organization" required="true" class="form-control" type="text" />
                                                 <input name="signee_title" placeholder="Title" class="form-control" type="text" />
                                                 <!--
                                                 <input name="signee_street" placeholder="Street" class="form-control" type="text" />
