@@ -121,4 +121,19 @@ odoo.define('proposal', function (require) {
         $('#application_type').trigger('change');
     });
 
+    // Allow collapsing panel items
+    $( ".panel-heading" ).click(function() {
+        $(this).next().slideToggle('800', function() {});
+    });
+
+    // De-collapse all elements on submit (to show errors)
+    // TODO: only de-collable if has errors
+    $('#application-submit-button').click(function() {
+        $('#track-application-form').find('div.panel-body').each(function() {
+            if($(this).is(":hidden")){
+                $(this).slideToggle('800', function() {});
+            }
+        });
+    })
+
 });

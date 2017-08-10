@@ -512,7 +512,7 @@
                                 <!-- / Extra info -->
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary col-md-10 col-md-offset-1">Submit Application</button>
+                                    <button type="submit" id="application-submit-button" class="btn btn-primary col-md-10 col-md-offset-1">Submit Application</button>
                                 </div>
                             </form>
                         </section>
