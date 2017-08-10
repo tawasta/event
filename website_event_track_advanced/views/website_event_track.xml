@@ -144,7 +144,7 @@
                                 <!-- / Application info -->
 
                                 <!-- Target group info -->
-                                <div class="panel panel-info" id="track-application-targetgroup-div">
+                                <div class="panel panel-primary" id="track-application-targetgroup-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Target group info</h3>
                                     </div>
@@ -220,7 +220,7 @@
                                 <!-- / Target group info -->
 
                                 <!-- Webinar info -->
-                                <div class="panel panel-info" id="track-application-webinar-div">
+                                <div class="panel panel-primary" id="track-application-webinar-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Webinar info</h3>
                                     </div>
@@ -265,7 +265,7 @@
                                 <!-- / Webinar info -->
 
                                 <!-- Contact info -->
-                                <div class="panel panel-info" id="track-application-contact-div">
+                                <div class="panel panel-primary" id="track-application-contact-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Contact</h3>
                                     </div>
@@ -326,7 +326,7 @@
                                 <!-- / Contact info -->                                
                                 
                                 <!-- Speakers -->
-                                <div class="panel panel-info" id="track-application-speakers-div">
+                                <div class="panel panel-primary" id="track-application-speakers-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Speakers</h3>
                                     </div>
@@ -382,6 +382,10 @@
                                     </div>
 
                                     <div class="panel-body">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            Workshop organizer information and invoicing address.
+                                        </p>
 
                                         <h4>
                                             Contract signee
@@ -462,8 +466,6 @@
                                             <div class="col-md-12">
                                                 <label for="workshop_schedule" class="control-label">Workshop schedule</label>
 
-                                                <p id="workshop_schedule_word_counter">Words <span id="workshop_schedule_word_count"></span></p>
-
                                                 <textarea class="form-control"
                                                           id="workshop_schedule"
                                                           name="workshop_schedule"
@@ -484,7 +486,7 @@
 
                                     <div class="panel-body" id="track-application-extra-div">
                                         <p class="alert alert-info alert-dismissable">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            <a href="#" class="close" datla-dismiss="alert" aria-label="close">&#215;</a>
                                             Any wishes about special arrangements concerning the premises, fitments, etc.
                                         </p>
 
@@ -522,6 +524,7 @@
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js"></script>
 
    </template>
 
