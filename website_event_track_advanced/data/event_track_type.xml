@@ -3,22 +3,27 @@
     <data noupdate="0">
 
         <record id="event.event_track_type_froum" model="event.track.type">
+            <field name="code">forum</field>
             <field name="name">Forum</field>
         </record>
 
         <record id="event.event_track_type_lab" model="event.track.type">
+            <field name="code">lab</field>
             <field name="name">Lab</field>
         </record>
 
         <record id="event.event_track_type_poster" model="event.track.type">
+            <field name="code">poster</field>
             <field name="name">Poster</field>
         </record>
 
         <record id="event.event_track_type_seminar" model="event.track.type">
+            <field name="code">seminar</field>
             <field name="name">Seminar</field>
         </record>
 
         <record id="event.event_track_type_workshop" model="event.track.type">
+            <field name="code">workshop</field>
             <field name="name">Workshop</field>
         </record>
 

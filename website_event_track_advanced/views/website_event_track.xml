@@ -60,7 +60,7 @@
                                                     <span class="input-group-addon"><i class="fa fa-ellipsis-h"/></span>
                                                     <select name="type" id="application_type" required="true" class="form-control" type="selection">
                                                     <t t-foreach="types" t-as="application_type">
-                                                        <option t-attf-value="#{application_type['id']" t-attf-title="#{application_type['description']}">
+                                                        <option t-attf-value="#{application_type['code']}" t-attf-title="#{application_type['description']}">
                                                             <t t-esc="application_type['name']"/>
                                                         </option>
                                                     </t>
@@ -74,7 +74,9 @@
                                                 <textarea class="form-control"
                                                           id="application_type_description"
                                                           name="type_description"
-                                                          rows="4" />
+                                                          rows="4"
+                                                          disabled="1"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +110,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">s
+                                            <div class="col-md-8">
                                                 <label for="video_url" class="control-label">Application as a video (link to e.g. Youtube or Vimeo)</label>
 
                                                 <div class="input-group">
@@ -153,6 +155,10 @@
                                         <p class="alert alert-info alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             Please give information about your primary target audience.
+                                        </p>
+                                        <p class="alert alert-warning alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            Selecting too many tags can make it harder to find the correct audience.
                                         </p>
 
                                         <div class="form-group" id="track-application-targetgroup-info-div">
@@ -219,51 +225,6 @@
                                 </div>
                                 <!-- / Target group info -->
 
-                                <!-- Webinar info -->
-                                <div class="panel panel-primary" id="track-application-webinar-div">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">Webinar info</h3>
-                                    </div>
-
-                                    <div class="panel-body">
-                                        <p class="alert alert-info alert-dismissable">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            You can fill this if you want to hold a webinar before the actual event.
-                                        </p>
-
-                                        <div class="form-group" id="track-application-webinar-div">
-                                            <div class="col-md-4">
-                                                <label for="webinar" class="control-label">I wish to hold a webinar before the event</label>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-microphone"/></span>
-                                                    <!-- This checkbox is presented as a selection for uniformitys sake -->
-                                                    <select id="track-application-webinar-selection-field"
-                                                            name="webinar"
-                                                            class="form-control"
-                                                            type="selection">
-                                                        <option value="0">No</option>
-                                                        <option value="1">Yes</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-8">
-                                                <label for="webinar_info" class="control-label">Webinar info</label>
-
-                                                <p id="webinar_info_word_counter">Words <span id="webinar_info_word_count"></span></p>
-
-                                                <textarea class="form-control"
-                                                          id="webinar_info"
-                                                          name="webinar_info"
-                                                          placeholder="Webinar info..."
-                                                          rows="4" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- / Webinar info -->
-
                                 <!-- Contact info -->
                                 <div class="panel panel-primary" id="track-application-contact-div">
                                     <div class="panel-heading">
@@ -313,7 +274,8 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-comment"/></span>
-                                                    <select name="returning_speaker" class="form-control" type="selection">
+                                                    <select name="returning_speaker" required="true" class="form-control" type="selection">
+                                                        <option value="0">-</option>
                                                         <option value="0">No</option>
                                                         <option value="1">Yes</option>
                                                     </select>
@@ -369,14 +331,59 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="button" class="btn col-md-10 col-md-offset-1" id="add_speaker">Add a speaker</button>
+                                            <button type="button" class="btn col-md-10 col-md-offset-1 mt8" id="add_speaker">Add a speaker</button>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- / Speakers -->
 
-                                <!-- Contract info -->
-                                <div class="panel panel-warning" id="track-application-contract-div">
+                                <!-- Webinar info -->
+                                <div class="panel panel-warning" id="track-application-webinar-div">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Webinar info</h3>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <p class="alert alert-info alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            You can fill this if you want to hold a webinar before the actual event.
+                                        </p>
+
+                                        <div class="form-group" id="track-application-webinar-div">
+                                            <div class="col-md-4">
+                                                <label for="webinar" class="control-label">I wish to hold a webinar before the event</label>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-microphone"/></span>
+                                                    <!-- This checkbox is presented as a selection for uniformitys sake -->
+                                                    <select id="track-application-webinar-selection-field"
+                                                            name="webinar"
+                                                            class="form-control"
+                                                            type="selection">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="webinar_info" class="control-label">Webinar info</label>
+
+                                                <p id="webinar_info_word_counter">Words <span id="webinar_info_word_count"></span></p>
+
+                                                <textarea class="form-control"
+                                                          id="webinar_info"
+                                                          name="webinar_info"
+                                                          placeholder="Webinar info..."
+                                                          rows="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- / Webinar info -->
+
+                                <!-- Workshop info -->
+                                <div class="panel panel-warning" id="track-application-workshop-div">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Workshop</h3>
                                     </div>
@@ -451,7 +458,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-12">
                                                 <label for="workshop_goals" class="control-label">Workshop goals</label>
 
                                                 <p id="workshop_goals_word_counter">Words <span id="workshop_goals_word_count"></span></p>
@@ -476,7 +483,7 @@
 
                                     </div>
                                 </div>
-                                <!-- / Contract info -->
+                                <!-- / Workshop info -->
 
                                 <!-- Extra info -->
                                 <div class="panel panel-warning">

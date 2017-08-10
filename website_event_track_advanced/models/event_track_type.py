@@ -19,6 +19,10 @@ class EventTrackType(models.Model):
     _name = 'event.track.type'
 
     # 2. Fields declaration
+    code = fields.Char(
+        copy=False,
+        translate=False,
+    )
     name = fields.Char()
     description = fields.Text()
     active = fields.Boolean(
