@@ -27,6 +27,9 @@ class EventTrackRating(models.Model):
     rating = fields.Integer(
         string='Rating',
     )
+    comment = fields.Char(
+        string='Comment',
+    )
 
     # 3. Default methods
 

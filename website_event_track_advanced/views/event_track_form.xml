@@ -55,8 +55,17 @@
 				<xpath expr="//sheet/group[last()]" position="after">
                     <group name="reviewer" groups="event.group_track_reviewer">
                         <group>
-                            <field name="review_group" groups="event.group_event_user" options="{'no_quick_create':True,'no_create_edit':True}"/>
-                            <field name="rating" widget="priority"/>
+                            <field name="review_group"
+                                   groups="event.group_event_user"
+                                   options="{'no_quick_create':True,'no_create_edit':True}"
+                            />
+                        </group>
+                        <group>
+                            <label for="rating" />
+                            <span>
+                                <field name="rating" widget="priority" nolabel="1"/>
+                                <field name="rating_comment" nolabel="1" placeholder="Verbal rating"/>
+                            </span>
                         </group>
                     </group>
 
@@ -105,6 +114,7 @@
                                     <field name="create_date" />
                                     <field name="write_date" />
                                     <field name="rating" widget="priority" avg="Average" />
+                                    <field name="comment" />
                                 </tree>
                             </field>
                         </page>

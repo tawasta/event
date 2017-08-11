@@ -69,6 +69,11 @@ class EventTrack(models.Model):
         compute='_get_rating',
         inverse='_set_rating',
     )
+    rating_comment = fields.Char(
+        string='Verbal rating',
+        compute='_get_rating',
+        inverse='_set_rating',
+    )
 
     type = fields.Many2one(
         comodel_name='event.track.type',
@@ -141,10 +146,13 @@ class EventTrack(models.Model):
             ])
 
             rating = 0
+            rating_comment = False
             if existing_rating:
                 rating = existing_rating.rating
+                rating_comment = existing_rating.comment
 
             record.rating = str(rating)
+            record.rating_comment = rating_comment
 
     def _set_rating(self):
         for record in self:
@@ -155,10 +163,12 @@ class EventTrack(models.Model):
 
             if existing_rating:
                 existing_rating.rating = record.rating
+                existing_rating.comment = record.rating_comment
             else:
                 rating = record.ratings.create({
                     'event_track': record.id,
                     'rating': record.rating,
+                    'rating_comment': record.rating_comment,
                 })
 
     def _compute_rating_avg(self):
