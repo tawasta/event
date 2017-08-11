@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
+import collections
 
 # 2. Known third party imports:
 
@@ -17,4 +18,34 @@ from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackCo
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
-    pass
+
+    @http.route()
+    def event_agenda(self, event, tag=None, **post):
+        days_tracks = collections.defaultdict(lambda: [])
+
+        # TODO: fix the security rule
+        tracks = request.env['event.track'].sudo().search([('event_id', '=', event.id)])
+        print tracks
+        for track in tracks.sorted(lambda track: (track.date, bool(track.location_id))):
+            if not track.date:
+                continue
+            days_tracks[track.date[:10]].append(track)
+
+        days = {}
+        days_tracks_count = {}
+        for day, tracks in days_tracks.iteritems():
+            days_tracks_count[day] = len(tracks)
+            days[day] = self._prepare_calendar(event, tracks)
+
+        speakers = {}
+        for track in event.sudo().track_ids:
+            speakers_name = u" – ".join(track.speaker_ids.mapped('name'))
+            speakers[track.id] = speakers_name
+
+        return request.render("website_event_track.agenda", {
+            'event': event,
+            'days': days,
+            'days_nbr': days_tracks_count,
+            'speakers': speakers,
+            'tag': tag
+        })
