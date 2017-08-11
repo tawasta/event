@@ -196,18 +196,19 @@ class EventTrack(models.Model):
         if disallowed_fields and not self.env.user.has_group('event.group_event_manager'):
             raise AccessError(_("You don't have a permission to write fields %s") % disallowed_fields)
 
-        res = super(EventTrack, self).write(values)
-
         # Update followers
         if 'review_group' in values:
             # Remove all old followers
-            for follower in self.message_follower_ids:
-                self.message_unsubscribe([follower.partner_id.id])
+            for follower in self.review_group.reviewers:
+                self.message_unsubscribe([follower.id])
 
             if values.get('review_group'):
                 # Add new followers
-                for partner in self.review_group.reviewers:
+                review_group = self.env['event.track.review.group'].browse([values.get('review_group')])
+                for partner in review_group.reviewers:
                     self.message_subscribe([partner.id])
+
+        res = super(EventTrack, self).write(values)
 
         return res
 
