@@ -25,7 +25,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # TODO: fix the security rule
         tracks = request.env['event.track'].sudo().search([('event_id', '=', event.id)])
-        print tracks
         for track in tracks.sorted(lambda track: (track.date, bool(track.location_id))):
             if not track.date:
                 continue
