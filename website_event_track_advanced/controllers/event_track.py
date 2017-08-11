@@ -29,7 +29,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         languages = request.env['res.lang'].search([], order='name DESC')
 
         return request.render(
-            "website_event_track.event_track_proposal",
+            'website_event_track.event_track_proposal',
             {
                 'event': event,
                 'target_groups': target_groups,
@@ -44,62 +44,58 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # 1. Get the posted values in separate dicts
         values = self._get_event_track_proposal_post_values(event, **post)
+        followers = list()
 
         # 2. Create user and contact (partner)
         user = False
         partner = False
-        if values.get('contact'):
-            existing_user = request.env['res.users'].sudo().search([('login', '=', values['contact']['email'])])
+        if values.get('contact') and values.get('contact').get('name'):
+            user = self._create_signup_user(values.get('contact'))
+            partner = user.partner_id
 
-            if not existing_user:
-                user = request.env['res.users'].sudo()._signup_create_user(values['contact'])
-                user.action_reset_password()
-                partner = user.partner_id
-            else:
-                partner = existing_user.partner_id
-
+            followers.append(partner.id)
             values['track']['partner_id'] = partner.id
 
         # 3. Add contact to organization
-        organization = False
-        if values.get('contact_organization') and values.get('contact_organization').get('name'):
-            organization_name = values.get('contact_organization').get('name')
-            organization = request.env['res.partner'].search([
-                ('name', '=ilike', organization_name)
-            ], limit=1)
+        if values.get('contact_organization'):
+            organization = self._create_organization(values.get('contact_organization'))
 
-        if not organization and values.get('contact_organization'):
-            # Organization doesn't exists. Create one
-            organization = request.env['res.partner'].sudo().create(values['contact_organization'])
-
-        if organization:
             # Add contact to the existing organization
             partner.parent_id = organization.id
 
         # 4. Add speakers
         speakers = list()
         for speaker in values['speakers']:
-            speaker_id = request.env['res.partner'].sudo().create(speaker)
-            speakers.append(speaker_id.id)
+            # If user already exists, create a new partner
+            existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
+
+            # Get or create organization
+            if speaker.get('organization'):
+                organization = self._create_organization({'name': speaker.get('organization')})
+                del speaker['organization']
+                speaker['parent_id'] = organization.id
+
+            if existing_user:
+                new_speaker = request.env['res.partner'].sudo().create(speaker)
+                followers.append(existing_user.partner_id.id)
+
+            if not existing_user:
+                new_speaker = self._create_signup_user(speaker).partner_id
+
+            followers.append(new_speaker.id)
+            speakers.append(new_speaker.id)
+
         values['track']['speaker_ids'] = [(6, 0, speakers)]
 
         # 5. Add workshop organization
         workshop_organizer = False
-        if values.get('workshop_organizer') and values.get('workshop_organizer').get('name'):
-            workshop_organizer_name = values.get('workshop_organizer').get('name')
+        if values.get('workshop_organizer'):
+            workshop_organizer = self._create_organization(values.get('workshop_organizer'))
 
-            workshop_organizer = request.env['res.partner'].search([
-                ('name', '=ilike', workshop_organizer_name)
-            ], limit=1)
-
-        if not workshop_organizer and values.get('workshop_organizer'):
-            # Organization doesn't exists. Create one
-            workshop_organizer = request.env['res.partner'].sudo().create(values['workshop_organizer'])
-
-        values['track']['organizer'] = workshop_organizer.id
+            values['track']['organizer'] = workshop_organizer.id
 
         # 6. Add organizer contact
-        if values.get('workshop_signee'):
+        if values.get('workshop_signee') and values.get('workshop_signee').get('name'):
             if workshop_organizer:
                 values['workshop_signee']['parent_id'] = workshop_organizer.id
 
@@ -109,7 +105,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 7. Create the track
         track = request.env['event.track'].sudo().create(values['track'])
 
-        # 8. Create attachment
+        # 8. Create an attachment
         # TODO: could this be done in the track create?
         # TODO: multiple attachments?
         attachment_values = {
@@ -122,15 +118,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
         attachment = request.env['ir.attachment'].sudo().create(attachment_values)
 
-        # 9. Subscribe and return
-        if request.env.user != request.website.user_id:
-            track.sudo().message_subscribe_users(user_ids=request.env.user.ids)
-        else:
-            partner = request.env['res.partner'].sudo().search([('email', '=', post['contact_email'])])
-            if partner:
-                track.sudo().message_subscribe(partner_ids=partner.ids)
+        # 9. Subscribe followers
+        track.sudo().message_subscribe(partner_ids=followers)
 
-        return request.render("website_event_track.event_track_proposal_success", {'track': track, 'event': event})
+        # 10. Return
+        return request.render('website_event_track.event_track_proposal_success', {'track': track, 'event': event})
 
     def _get_event_track_proposal_post_values(self, event, **post):
         # Organization
@@ -140,7 +132,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         # Contact
-        contact_name = "%s %s" % (post['contact_last_name'], post['contact_first_name'])
+        contact_name = '%s %s' % (post['contact_last_name'], post['contact_first_name'])
         contact_values = {
             'name': contact_name,
             'login': post.get('contact_email'),
@@ -198,14 +190,14 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 if not first_name or not last_name:
                     continue
 
-                speaker_name = "%s %s" % (last_name, first_name)
+                speaker_name = '%s %s' % (last_name, first_name)
 
                 speaker_values.append({
                     'name': speaker_name,
                     'email': post.get('speaker_email[%s]' % speaker_index),
                     'zip': post.get('speaker_zip[%s]' % speaker_index),
                     'city': post.get('speaker_city[%s]' % speaker_index),
-                    'comment': post.get('speaker_organization[%s]' % speaker_index),  # TODO
+                    'organization': post.get('speaker_organization[%s]' % speaker_index),
                     'function': post.get('speaker_function[%s]' % speaker_index),
                 })
 
@@ -220,7 +212,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'type': 'invoice',
         }
 
-        signee_name = "%s %s" % (post['signee_last_name'], post['signee_first_name'])
+        signee_name = False
+        if post.get('signee_last_name') or post['signee_first_name']:
+            signee_name = '%s %s' % (post['signee_last_name'], post['signee_first_name'])
         workshop_signee_values = {
             'name': signee_name,
             'email': post.get('signee_email'),
@@ -237,3 +231,29 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         return values
+
+    def _create_signup_user(self, partner_values):
+        user = request.env['res.users'].sudo().search([
+            ('login', '=', partner_values.get('email'))
+        ])
+
+        if not user:
+            if not partner_values.get('login') and partner_values.get('email'):
+                partner_values['login'] = partner_values.get('email')
+
+            user = request.env['res.users'].sudo()._signup_create_user(partner_values)
+            user.action_reset_password()
+
+        return user
+
+    def _create_organization(self, organization_values):
+        organization_name = organization_values.get('name')
+        organization = request.env['res.partner'].search([
+            ('name', '=ilike', organization_name)
+        ], limit=1)
+
+        if not organization:
+            # Organization doesn't exists. Create one
+            organization = request.env['res.partner'].sudo().create(organization_values)
+
+        return organization

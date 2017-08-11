@@ -276,7 +276,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-comment"/></span>
                                                     <select name="returning_speaker" required="true" class="form-control" type="selection">
-                                                        <option value="0" selected="1">-</option>
+                                                        <option value="false" selected="1">-</option>
                                                         <option value="0">No</option>
                                                         <option value="1">Yes</option>
                                                     </select>
