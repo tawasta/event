@@ -4,6 +4,7 @@
     <!-- Overwrites the agenda layout -->
     <template id="website_event_track.agenda">
         <t t-call="website_event.layout">
+
             <section class="container">
                 <h1 class="text-center" t-field="event.name"/>
                 <div class="form-inline pull-right">
@@ -16,6 +17,7 @@
             </section>
             <t t-set="dayslist" t-value="days.keys()"/>
             <t t-set="dayslist2" t-value="dayslist.sort()"/> <!-- display days in the right order -->
+
             <section class="container" t-foreach="dayslist" t-as="day">
                 <t t-set="locations" t-value="days[day]['locations']"/>
                 <t t-set="dates" t-value="days[day]['dates']"/>
@@ -47,12 +49,7 @@
                                         <td t-att-rowspan="dt[1][location][3]"
                                             t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}">
                                             <t t-if="track">
-                                                <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
-                                                    <span t-esc="track and track.name"/>
-                                                </a>
-                                                <div class="text-muted">
-                                                    <small t-esc="speakers[track.id]"/>
-                                                </div>
+                                                <t t-call="website_event_track_advanced.agenda-track-td-content" />
                                             </t>
                                         </td>
                                     </t>
@@ -64,12 +61,7 @@
                             <t t-set="track" t-value="dt[1][False][0]"/>
                             <td t-att-colspan="len(locations)-1"
                                 t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
-                                <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
-                                    <span t-esc="track.name"/>
-                                </a>
-                                <div class="text-muted">
-                                    <small t-esc="speakers[track.id]"/>
-                                </div>
+                                <t t-call="website_event_track_advanced.agenda-track-td-content" />
                             </td>
                         </t>
                     </tr>
@@ -78,6 +70,27 @@
         </t>
 
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js"></script>
+    </template>
+
+    <!--Agenda td content -->
+    <template id="agenda-track-td-content">
+        <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
+            <div style="height:100%;width:100%">
+                <div class="track-td-name">
+                    <span t-esc="track and track.name"/>
+                </div>
+
+                <div class="track-td-speakers mt8">
+                    <i t-if="speakers[track.id]" class="fa fa-comment"/>
+                    <span t-esc="speakers[track.id]"/>
+                </div>
+
+                <div class="track-td-tags mt8">
+                    <i t-if="tags[track.id]" class="fa fa-tag"/>
+                    <span t-esc="tags[track.id]"/>
+                </div>
+            </div>
+        </a>
     </template>
 
 </odoo>

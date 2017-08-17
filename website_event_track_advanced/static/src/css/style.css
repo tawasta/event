@@ -34,3 +34,25 @@
 .agenda-timeslot-time{
     font-weight: bold;
 }
+
+.agenda-timeslot-row .event_track{
+    font-size: 0.9em;
+}
+
+.agenda-timeslot-row .event_track a{
+    color: #000;
+}
+
+.agenda-timeslot-row .event_track a:hover, .agenda-timeslot-row .event_track a:active{
+    text-decoration: none;
+}
+
+.track-td-name{
+    font-weight: bold;
+}
+
+.track-td-speakers{
+}
+
+.track-td-tags{
+}

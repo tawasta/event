@@ -33,22 +33,27 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 continue
             days_tracks[track.date[:10]].append(track)
 
-        days = {}
-        days_tracks_count = {}
+        days = dict()
+        days_tracks_count = dict()
         for day, tracks in days_tracks.iteritems():
             days_tracks_count[day] = len(tracks)
             days[day] = self._prepare_calendar(event, tracks)
 
-        speakers = {}
+        speakers = dict()
+        tags = dict()
         for track in event.sudo().track_ids:
-            speakers_name = u" – ".join(track.speaker_ids.mapped('name'))
+            speakers_name = u", ".join(track.speaker_ids.mapped('name'))
             speakers[track.id] = speakers_name
+
+            tag_names = u", ".join(track.tag_ids.mapped('name'))
+            tags[track.id] = tag_names
 
         return request.render("website_event_track.agenda", {
             'event': event,
             'days': days,
             'days_nbr': days_tracks_count,
             'speakers': speakers,
+            'tags': tags,
             'tag': tag
         })
 
