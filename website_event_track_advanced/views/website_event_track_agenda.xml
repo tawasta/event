@@ -27,7 +27,7 @@
                     </small>
                 </h3>
                 <table id="table_search" class="table table-bordered table-condensed">
-                    <tr>
+                    <tr class="agenda-locations-row">
                         <th/>
                         <t t-foreach="locations.keys()" t-as="location">
                             <th t-if="location" class="active">
@@ -35,8 +35,8 @@
                             </th>
                         </t>
                     </tr>
-                    <tr t-foreach="dates" t-as="dt">
-                        <td class="active">
+                    <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
+                        <td class="active agenda-timeslot-time">
                             <b t-esc="dt[0].strftime('%H:%M')"/>
                         </td>
                         <t t-if="dt[2]"> <!-- Not a multi location -->
@@ -76,6 +76,8 @@
                 </table>
             </section>
         </t>
+
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js"></script>
     </template>
 
 </odoo>

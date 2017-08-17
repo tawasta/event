@@ -1,3 +1,4 @@
+/* Proposal */
 #track-application-section .alert{
     margin-bottom: 8px;
 }
@@ -27,4 +28,9 @@
 .track-application-invoice-input-row input, .track-application-invoice-input-row label{
     width: 15.7%;
     display: inline-block;
+}
+
+/* Agenda */
+.agenda-timeslot-time{
+    font-weight: bold;
 }
