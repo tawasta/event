@@ -12,7 +12,19 @@
                         <span id="search_number">0</span>
                         Found
                     </label>
-                    <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
+                    <form method="post" t-att-action="keep('/event' + '/' + slug(event) + '/agenda', tags=(search_tags if search_tags else None))">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
+
+                        <div id="filter-track-tags">
+                            <t t-foreach="event.allowed_track_tag_ids" t-as="tag">
+                                <input type="submit"
+                                       t-att-class="'btn btn-primary' if str(tag.id) in search_tags_list else 'btn btn-default'"
+                                       t-attf-value="#{tag.name}"
+                                       t-attf-name="tag_#{tag.id}"/>
+                            </t>
+                        </div>
+                    </form>
                 </div>
             </section>
             <t t-set="dayslist" t-value="days.keys()"/>

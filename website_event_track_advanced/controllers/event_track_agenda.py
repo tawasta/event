@@ -13,6 +13,7 @@ from odoo.http import request
 
 # 4. Imports from Odoo modules (rarely, and only if necessary):
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
+from odoo.addons.website.controllers.main import QueryURL
 
 # 5. Local imports in the relative form:
 
@@ -26,9 +27,33 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     def event_agenda(self, event, tag=None, **post):
         days_tracks = collections.defaultdict(lambda: [])
 
-        # TODO: fix the security rule
-        tracks = request.env['event.track'].sudo().search([('event_id', '=', event.id)])
-        for track in tracks.sorted(lambda track: (track.date, bool(track.location_id))):
+        domain_filter = [('event_id', '=', event.id)]
+
+        # Tag filter
+        tags_list = list()
+        if post.get('tags'):
+            tags_list += post.get('tags').split(',')
+
+        for value in post:
+            if value[0:4] == 'tag_':
+                tag_id = str(value[4:])
+                if tag_id in tags_list:
+                    tags_list.remove(tag_id)
+                else:
+                    tags_list.append(tag_id)
+
+        # Remove duplicates
+        search_tags_list = list(set(tags_list))
+        search_tags = ','.join(search_tags_list)
+
+        keep = QueryURL('/event', tags=search_tags)
+
+        if tags_list:
+            domain_filter.append(('tag_ids', 'in', search_tags_list))
+
+        event_tracks = event.track_ids.sudo().search(domain_filter)
+
+        for track in event_tracks.sorted(lambda track: (track.date, bool(track.location_id))):
             if not track.date:
                 continue
             days_tracks[track.date[:10]].append(track)
@@ -41,7 +66,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         speakers = dict()
         tags = dict()
-        for track in event.sudo().track_ids:
+
+        for track in event_tracks:
             speakers_name = u", ".join(track.speaker_ids.mapped('name'))
             speakers[track.id] = speakers_name
 
@@ -53,8 +79,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'days': days,
             'days_nbr': days_tracks_count,
             'speakers': speakers,
+            'search_tags_list': search_tags_list,
+            'search_tags': search_tags,
             'tags': tags,
-            'tag': tag
+            'tag': tag,
+            'keep': keep,
         })
 
     # Overwrites the default _prepare_calendar
