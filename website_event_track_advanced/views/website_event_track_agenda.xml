@@ -37,7 +37,7 @@
                     </tr>
                     <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
                         <td class="active agenda-timeslot-time">
-                            <b t-esc="dt[0].strftime('%H:%M')"/>
+                            <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
                         </td>
                         <t t-if="dt[2]"> <!-- Not a multi location -->
                             <t t-foreach="locations" t-as="location">
