@@ -12,16 +12,25 @@
                         <span id="search_number">0</span>
                         Found
                     </label>
-                    <form method="post" t-att-action="keep('/event' + '/' + slug(event) + '/agenda', tags=(search_tags if search_tags else None))">
+                    <form method="post" t-att-action="keep('/event/' + slug(event) + '/agenda')">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
+                        <div class="pull-right">
+                            <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
+                            <br />
+                            <a id="tags-clear-button" t-attf-href="/event/#{slug(event)}/agenda" class="btn btn-default text-danger">
+                                <span class="fa fa-trash" />Clear tags
+                            </a>
+                        </div>
 
-                        <div id="filter-track-tags">
+                        <div id="filter-track-tags" class="mt16">
                             <t t-foreach="event.allowed_track_tag_ids" t-as="tag">
-                                <input type="submit"
+                                <button type="submit"
                                        t-att-class="'btn btn-primary' if str(tag.id) in search_tags_list else 'btn btn-default'"
                                        t-attf-value="#{tag.name}"
-                                       t-attf-name="tag_#{tag.id}"/>
+                                       t-attf-name="tag_#{tag.id}">
+                                    <span class="fa fa-tags" />
+                                    <t t-esc="tag.name" />
+                                </button>
                             </t>
                         </div>
                     </form>
@@ -30,7 +39,7 @@
             <t t-set="dayslist" t-value="days.keys()"/>
             <t t-set="dayslist2" t-value="dayslist.sort()"/> <!-- display days in the right order -->
 
-            <section class="container" t-foreach="dayslist" t-as="day">
+            <section class="container mt16" t-foreach="dayslist" t-as="day">
                 <t t-set="locations" t-value="days[day]['locations']"/>
                 <t t-set="dates" t-value="days[day]['dates']"/>
                 <h3 class="page-header mt0">

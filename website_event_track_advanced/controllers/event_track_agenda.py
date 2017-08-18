@@ -14,6 +14,7 @@ from odoo.http import request
 # 4. Imports from Odoo modules (rarely, and only if necessary):
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
 from odoo.addons.website.controllers.main import QueryURL
+from odoo.addons.website.models.website import slug
 
 # 5. Local imports in the relative form:
 
@@ -46,7 +47,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         search_tags_list = list(set(tags_list))
         search_tags = ','.join(search_tags_list)
 
-        keep = QueryURL('/event', tags=search_tags)
+        keep = QueryURL('/event/' + slug(event) + '/agenda', tags=search_tags)
 
         if tags_list:
             domain_filter.append(('tag_ids', 'in', search_tags_list))
