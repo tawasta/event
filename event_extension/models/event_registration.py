@@ -30,7 +30,10 @@ class EventRegistration(models.Model):
     def compute_account_invoice(self):
 
         for record in self:
-            invoice = self.env['account.invoice'].search([
+            if not record.origin:
+                continue
+
+            invoice = record.env['account.invoice'].search([
                 ('name', '=', record.origin),
                 ('company_id', '=', record.company_id.id),
             ], limit=1)
