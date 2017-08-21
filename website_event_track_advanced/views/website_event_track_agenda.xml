@@ -29,7 +29,7 @@
                                        t-attf-value="#{tag.name}"
                                        t-attf-name="tag_#{tag.id}">
                                     <span class="fa fa-tags" />
-                                    <t t-esc="tag.name" />
+                                    <t t-esc="tag.name" /> (<t t-esc="tag.track_count" />)
                                 </button>
                             </t>
                         </div>
