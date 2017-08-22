@@ -30,6 +30,21 @@
     display: inline-block;
 }
 
+/* For small screens */
+@media only screen and (max-width: 550px){
+    .track-application-contact-input-row input, .track-application-contact-input-row label{
+        width: 100%;
+    }
+
+    .track-application-signee-input-row input, .track-application-signee-input-row label{
+        width: 100%;
+    }
+
+    .track-application-invoice-input-row input, .track-application-invoice-input-row label{
+        width: 100%;
+    }
+}
+
 /* Agenda */
 .agenda-timeslot-time{
     font-weight: bold;
