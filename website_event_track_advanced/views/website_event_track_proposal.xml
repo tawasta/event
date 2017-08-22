@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-group" id="track-application-application-type-div">
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="application_type" class="control-label">Application type</label>
 
                                                 <div class="input-group">
@@ -68,15 +68,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-10">
                                                 <label for="type_description" class="control-label">Description</label>
 
-                                                <textarea class="form-control"
-                                                          id="application_type_description"
-                                                          name="type_description"
-                                                          rows="4"
-                                                          disabled="1"
-                                                />
+                                                <span id="application_type_description" name="type_description" />
                                             </div>
                                         </div>
                                     </div>
