@@ -55,7 +55,7 @@ odoo.define('proposal', function (require) {
         // Clone the first row
         row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
         row.removeAttr('id');
-        row.find('button').removeClass('hidden');
+        row.find('button').removeAttr('disabled');
 
         input_index =  parseInt($('#track-application-speakers-input-index').val()) + 1;
         $('#track-application-speakers-input-index').val(input_index);

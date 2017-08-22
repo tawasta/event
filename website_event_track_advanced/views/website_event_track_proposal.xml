@@ -259,6 +259,7 @@
                                                 <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
                                                 <input name="contact_city" placeholder="City" class="form-control" type="text" />
                                                 -->
+                                                <button type="button" class="btn" disabled="1"><i class="fa fa-trash"/></button>
                                             </div>
                                         </div>
 
@@ -322,7 +323,7 @@
                                                 <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
                                                 <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
                                                 -->
-                                                <button type="button" class="btn remove_speaker hidden"><i class="fa fa-trash"/></button>
+                                                <button type="button" class="btn remove_speaker" disabled="1"><i class="fa fa-trash"/></button>
                                             </div>
                                         </div>
 
