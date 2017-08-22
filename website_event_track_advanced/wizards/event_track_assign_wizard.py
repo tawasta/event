@@ -22,7 +22,7 @@ class EventTrackAssignWizard(models.TransientModel):
     # 2. Fields declaration
     assign_equally = fields.Boolean(
         string='Assign equally',
-        help='If un-checked, the assignation will use a "true" randomization'
+        help='If un-checked, the assignation will use a "true" randomization. '
         + 'You probably do not want to use this, as it will most likely cause an unequal assignation.',
         default=1,
     )
