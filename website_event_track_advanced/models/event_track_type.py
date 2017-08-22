@@ -23,8 +23,8 @@ class EventTrackType(models.Model):
         copy=False,
         translate=False,
     )
-    name = fields.Char()
-    description = fields.Text()
+    name = fields.Char(translate=True)
+    description = fields.Html(translate=True)
     active = fields.Boolean(
         default=True
     )

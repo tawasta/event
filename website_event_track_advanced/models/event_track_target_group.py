@@ -20,8 +20,8 @@ class EventTrackTargetGroup(models.Model):
     _name = 'event.track.target.group'
 
     # 2. Fields declaration
-    name = fields.Char()
-    description = fields.Text()
+    name = fields.Char(translate=True)
+    description = fields.Html(translate=True)
     active = fields.Boolean(
         default=True
     )
