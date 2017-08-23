@@ -169,9 +169,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'description': post.get('track_content'),
 
             'video_url': post.get('video_url'),
-            'webinar': int(post.get('webinar')),
+            'webinar': post.get('webinar') not in ['0', 'false'],
             'webinar_info': post.get('webinar_info'),
-            'returning_speaker': int(post.get('returning_speaker')),
+            'returning_speaker':  post.get('returning_speaker') not in ['0', 'false'],
 
             'extra_info':post.get('extra_info'),
 
@@ -242,7 +242,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 partner_values['login'] = partner_values.get('email')
 
             user = request.env['res.users'].sudo()._signup_create_user(partner_values)
-            user.action_reset_password()
+            user.with_context({'create_user': True}).action_reset_password()
 
         return user
 
