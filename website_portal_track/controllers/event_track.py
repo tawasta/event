@@ -7,17 +7,19 @@
 # 3. Odoo imports (openerp):
 from odoo import http, _
 from odoo.http import request
+from odoo.exceptions import AccessError
 
-# 4. Imports from Odoo modules (rarely, and only if necessary):
+# 4. Imports from Odoo modules:
 from odoo.addons.website_portal.controllers.main import website_account
 
 # 5. Local imports in the relative form:
 
-# 6. Unknown third party imports (One per line sorted and splitted in
+# 6. Unknown third party imports
 
 
 class WebsiteEventTrack(website_account):
 
+    # Add track count to account main menu
     @http.route()
     def account(self, **kw):
         """ Add track documents to main account page """
@@ -35,6 +37,7 @@ class WebsiteEventTrack(website_account):
         })
         return response
 
+    # All tracks
     @http.route(
         ['/my/tracks', '/my/tracks/page/<int:page>'],
         type='http',
@@ -76,3 +79,16 @@ class WebsiteEventTrack(website_account):
             'default_url': '/my/tracks',
         })
         return request.render("website_portal_track.portal_my_tracks", values)
+
+    # Single track
+    @http.route(['/my/tracks/<int:track>'], type='http', auth="user", website=True)
+    def tracks_followup(self, track=None, **kw):
+        # TODO: remove sudo
+        track = request.env['event.track'].sudo().browse([track])
+        try:
+            track.check_access_rights('read')
+            track.check_access_rule('read')
+        except AccessError:
+            return request.render("website.403")
+
+        return request.render("website_portal_track.tracks_followup", {'track': track})

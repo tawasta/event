@@ -43,11 +43,12 @@
                 <t t-foreach="tracks" t-as="track">
                     <tr>
                         <td>
-                            <a t-attf-href="/my/tracks/#{track.id}?#{keep_query()}"><t t-esc="track.name"/></a>
+                            <!--<a t-attf-href="/my/tracks/#{track.id}?#{keep_query()}"><t t-esc="track.name"/></a>-->
+                            <a t-att-href="'/web#model=event.track&amp;id=%s&amp;view_type=form' % (track.id)"><t t-esc="track.name"/></a>
                         </td>
                         <td>
                             <t t-if="track.date">
-                                <span t-esc="track.date" />
+                                <span t-field="track.date" t-options='{"widget": "datetime"}'/>
                             </t>
                             <t t-if="not track.date">
                                 -
@@ -64,16 +65,44 @@
                                 <t t-set="track_state">label-success</t>
                             </t>
 
+                            <t t-if="track.state in ['refused', 'cancel']">
+                                <t t-set="track_state">label-danger</t>
+                            </t>
+
                             <span t-esc="track.state" t-attf-class="tag label {{track_state}}" />
                         </td>
                     </tr>
                 </t>
             </table>
             <div t-if="pager" class="o_portal_pager text-center">
-              <t t-call="website.pager"/>
+                <t t-call="website.pager"/>
             </div>
         </t>
       </t>
     </template>
+
+   <template id="tracks_followup" name="Track">
+      <t t-call="website.layout">
+        <div id="wrap">
+            <div class="container">
+                <div class="oe_structure">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <ol class="breadcrumb mt8">
+                                <li><a href="/my/home"><i class="fa fa-home"/></a></li>
+                                <li><a href="/my/tracks">Tracks</a></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h2 t-field="track.name"/>
+                    <span t-field="track.description"/>
+
+                    <a class="btn btn-info" t-att-href="'/web#model=event.track&amp;id=%s&amp;view_type=form' % (track.id)">Edit this track</a>
+              </div>
+            </div>
+        </div>
+      </t>
+   </template>
 
 </odoo>
