@@ -31,6 +31,10 @@
 }
 
 /* Agenda */
+.page-header{
+    border-bottom: none;
+}
+
 .agenda-timeslot-time{
     font-weight: bold;
 }

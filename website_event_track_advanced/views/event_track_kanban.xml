@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<record id="view_event_track_kanban" model="ir.ui.view">
+			<field name="name">view_event_track_kanban_advanced</field>
+			<field name="model">event.track</field>
+			<field name="inherit_id" ref="website_event_track.view_event_track_kanban" />
+			<field name="arch" type="xml">
+
+                <field name="priority" position="replace">
+                    <field name="rating" widget="priority"/>
+                </field>
+
+			</field>
+		</record>
+
+	</data>
+</odoo>

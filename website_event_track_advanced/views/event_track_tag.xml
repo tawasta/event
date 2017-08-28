@@ -9,7 +9,7 @@
 			<field name="arch" type="xml">
 				<field name="name" position="after">
 					<field name="tracks" />
-					<field name="track_count" />
+					<field name="track_count"/>
 				</field>
 			</field>
 		</record>

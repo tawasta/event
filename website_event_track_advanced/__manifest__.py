@@ -50,6 +50,7 @@
         'views/event_event_form.xml',
         'views/event_track_form.xml',
         'views/event_track_form_portal.xml',
+        'views/event_track_kanban.xml',
         'views/event_track_review_group.xml',
         'views/event_track_tag.xml',
         'views/event_track_target_group.xml',
