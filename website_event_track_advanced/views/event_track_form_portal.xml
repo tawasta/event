@@ -14,7 +14,7 @@
                 </field>
 
                 <field name="language" position="after">
-                    <field name="tag_ids" readonly="1" widget="many2many_tags"/>
+                    <field name="tag_ids" readonly="0" widget="many2many_tags"/>
                 </field>
 
                 <field name="target_group" position="attributes">
@@ -22,7 +22,7 @@
                 </field>
 
                 <field name="target_group_info" position="attributes">
-                    <attribute name="readonly">1</attribute>
+                    <attribute name="readonly">0</attribute>
                 </field>
 
                 <field name="type" position="attributes">
