@@ -55,7 +55,7 @@ odoo.define('proposal', function (require) {
         // Clone the first row
         row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
         row.removeAttr('id');
-        row.find('button').removeClass('hidden');
+        row.find('button').removeAttr('disabled');
 
         input_index =  parseInt($('#track-application-speakers-input-index').val()) + 1;
         $('#track-application-speakers-input-index').val(input_index);
@@ -97,7 +97,7 @@ odoo.define('proposal', function (require) {
     **/
 
     $('#application_type').change(function(){
-        $('#application_type_description').val($('#application_type option:selected').attr('title'));
+        $('#application_type_description').html($('#application_type option:selected').attr('title'));
         var application_type = $('#application_type option:selected').val();
 
         workshop = application_type == 'workshop';

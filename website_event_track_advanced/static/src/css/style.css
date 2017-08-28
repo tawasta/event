@@ -30,6 +30,17 @@
     display: inline-block;
 }
 
+/* For small screens */
+@media only screen and (max-width: 550px){
+    .track-application-contact-input-row label, .track-application-invoice-input-row label, .track-application-signee-input-row label{
+        display: none;
+    }
+
+    .track-application-contact-input-row input, .track-application-signee-input-row input, .track-application-invoice-input-row input{
+        width: 100%;
+    }
+}
+
 /* Agenda */
 .page-header{
     border-bottom: none;

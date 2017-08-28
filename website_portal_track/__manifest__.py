@@ -20,9 +20,9 @@
 ##############################################################################
 
 {
-    'name': 'Advanced event tracks',
-    'summary': 'An advanced event tracks process',
-    'version': '10.0.0.10.11',
+    'name': 'Advanced event tracks portal',
+    'summary': 'Event tracks in website portal',
+    'version': '10.0.0.3.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -30,38 +30,14 @@
     'application': False,
     'installable': True,
     'external_dependencies': {
-        'python': [
-            'difflib'
-        ],
+        'python': [],
         'bin': [],
     },
     'depends': [
-        'document',
-        'event',
-        'website_event_track',
+        'website_event_track_advanced',
     ],
     'data': [
-        'data/event_track_type.xml',
-
-        'security/event_track_security.xml',
-        'security/ir.model.access.csv',
-        'security/res_groups.xml',
-
-        'views/event_event_form.xml',
-        'views/event_track_form.xml',
-        'views/event_track_form_portal.xml',
-        'views/event_track_kanban.xml',
-        'views/event_track_review_group.xml',
-        'views/event_track_tag.xml',
-        'views/event_track_target_group.xml',
-        'views/event_track_tree.xml',
-        'views/event_track_type.xml',
-
-        'views/website_event_assets.xml',
-        'views/website_event_track_agenda.xml',
-        'views/website_event_track_proposal.xml',
-
-        'wizards/event_track_assign_wizard.xml',
+        'views/event_track_website_portal.xml',
     ],
     'demo': [
     ],

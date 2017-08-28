@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-group" id="track-application-application-type-div">
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="application_type" class="control-label">Application type</label>
 
                                                 <div class="input-group">
@@ -68,15 +68,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-10">
                                                 <label for="type_description" class="control-label">Description</label>
 
-                                                <textarea class="form-control"
-                                                          id="application_type_description"
-                                                          name="type_description"
-                                                          rows="4"
-                                                          disabled="1"
-                                                />
+                                                <span id="application_type_description" name="type_description" />
                                             </div>
                                         </div>
                                     </div>
@@ -255,8 +250,8 @@
                                         <div id="track-application-contract-input-div">
                                             <div class="track-application-contact-input-row">
                                                 <input name="contact_email" placeholder="Email" class="form-control" required="true" type="email"/>
-                                                <input name="contact_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
-                                                <input name="contact_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
+                                                <input name="contact_first_name" placeholder="First name" class="form-control" required="true" type="text" />
+                                                <input name="contact_last_name" placeholder="Last name" class="form-control" required="true" type="text" />
                                                 <input name="contact_organization" placeholder="Organization" class="form-control" type="text" />
                                                 <input name="contact_title" placeholder="Title" class="form-control" type="text" />
                                                 <!--
@@ -264,6 +259,7 @@
                                                 <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
                                                 <input name="contact_city" placeholder="City" class="form-control" type="text" />
                                                 -->
+                                                <button type="button" class="btn" disabled="1"><i class="fa fa-trash"/></button>
                                             </div>
                                         </div>
 
@@ -318,8 +314,8 @@
 
                                             <div id="track-application-speakers-input-row" class="track-application-contact-input-row">
                                                 <input name="speaker_email[0]" placeholder="Email" class="form-control" required="true" type="email"/>
-                                                <input name="speaker_first_name[0]" placeholder="First Name" class="form-control" required="true" type="text" />
-                                                <input name="speaker_last_name[0]" placeholder="Last Name" class="form-control" required="true" type="text" />
+                                                <input name="speaker_first_name[0]" placeholder="First name" class="form-control" required="true" type="text" />
+                                                <input name="speaker_last_name[0]" placeholder="Last name" class="form-control" required="true" type="text" />
                                                 <input name="speaker_organization[0]" placeholder="Organization" required="true" class="form-control" type="text" />
                                                 <input name="speaker_title[0]" placeholder="Title" class="form-control" type="text" />
                                                 <!--
@@ -327,7 +323,7 @@
                                                 <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
                                                 <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
                                                 -->
-                                                <button type="button" class="btn remove_speaker hidden"><i class="fa fa-trash"/></button>
+                                                <button type="button" class="btn remove_speaker" disabled="1"><i class="fa fa-trash"/></button>
                                             </div>
                                         </div>
 
@@ -414,8 +410,8 @@
                                         <div id="track-application-signee-input-div">
                                             <div class="track-application-signee-input-row">
                                                 <input name="signee_email" placeholder="Email" class="form-control" required="true" type="email"/>
-                                                <input name="signee_first_name" placeholder="First Name" class="form-control" required="true" type="text" />
-                                                <input name="signee_last_name" placeholder="Last Name" class="form-control" required="true" type="text" />
+                                                <input name="signee_first_name" placeholder="First name" class="form-control" required="true" type="text" />
+                                                <input name="signee_last_name" placeholder="Last name" class="form-control" required="true" type="text" />
                                                 <input name="signee_title" placeholder="Title" class="form-control" type="text" />
                                                 <!--
                                                 <input name="signee_street" placeholder="Street" class="form-control" type="text" />

@@ -5,7 +5,7 @@
         <record id="event_track_owner" model="ir.rule">
             <field name="name">event tracks: Owner</field>
             <field name="model_id" ref="website_event_track.model_event_track"/>
-            <field name="domain_force">[('partner_id', '=', user.partner_id.id)]</field>
+            <field name="domain_force">[[('message_partner_ids', 'child_of', [user.partner_id.commercial_partner_id.id])]]</field>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
