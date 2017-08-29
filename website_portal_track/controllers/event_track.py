@@ -91,4 +91,17 @@ class WebsiteEventTrack(website_account):
         except AccessError:
             return request.render("website.403")
 
-        return request.render("website_portal_track.tracks_followup", {'track': track})
+        target_groups = request.env['event.track.target.group'].search([])
+        types = request.env['event.track.type'].search_read([], ['code', 'name', 'description'])
+        languages = request.env['res.lang'].search([], order='name DESC')
+
+        return request.render(
+            'website_portal_track.tracks_followup',
+            {
+                'event': track.event_id,
+                'track': track,
+                'target_groups': target_groups,
+                'languages': languages,
+                'types': types,
+            },
+        )

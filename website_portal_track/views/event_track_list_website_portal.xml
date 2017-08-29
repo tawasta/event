@@ -1,0 +1,58 @@
+<odoo>
+
+    <template id="portal_my_tracks" name="My Tracks">
+      <t t-call="website_portal.portal_layout">
+        <h3 class="page-header">Your tracks</h3>
+        <t t-if="not tracks">
+            <p>There are currently no tracks for your account.</p>
+        </t>
+        <t t-if="tracks">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                      <th>Track</th>
+                      <th>Timeslot</th>
+                      <th>State</th>
+                    </tr>
+                </thead>
+                <t t-foreach="tracks" t-as="track">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/tracks/#{track.id}?#{keep_query()}"><t t-esc="track.name"/></a>
+                        </td>
+                        <td>
+                            <t t-if="track.date">
+                                <span t-field="track.date" t-options='{"widget": "datetime"}'/>
+                            </t>
+                            <t t-if="not track.date">
+                                -
+                            </t>
+                        </td>
+                        <td>
+                            <t t-set="track_state">label-info</t>
+
+                            <t t-if="track.state == 'draft'">
+                                <t t-set="track_state">label-primary</t>
+                            </t>
+
+                            <t t-if="track.state == 'confirmed'">
+                                <t t-set="track_state">label-success</t>
+                            </t>
+
+                            <t t-if="track.state in ['refused', 'cancel']">
+                                <t t-set="track_state">label-danger</t>
+                            </t>
+
+                            <span t-field="track.state" t-attf-class="tag label {{track_state}}" />
+                        </td>
+                    </tr>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="website.pager"/>
+            </div>
+        </t>
+      </t>
+    </template>
+
+</odoo>

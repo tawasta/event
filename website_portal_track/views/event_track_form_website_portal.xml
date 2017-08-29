@@ -1,0 +1,55 @@
+<odoo>
+
+    <template id="tracks_followup" name="Track">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container">
+                    <div class="oe_structure">
+                        <!-- Breadcrumbs -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <ol class="breadcrumb mt8">
+                                    <li>
+                                        <a href="/my/home">
+                                            <i class="fa fa-home"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/my/tracks">Tracks</a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- / Breadcrumbs -->
+
+                        <section id="forms">
+                            <form id="track-application-form"
+                                  class="form-horizontal mt32 js_website_submit_form"
+                                  t-attf-action="/event/track/#{track.id}"
+                                  method="post"
+                                  enctype="multipart/form-data">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <t t-call="website_event_track.event_track_application"/>
+                                <div class="form-group">
+                                    <button type="submit" id="application-submit-button"
+                                            class="btn btn-primary col-md-10 col-md-offset-1">Save
+                                    </button>
+                                </div>
+                            </form>
+                        </section>
+
+                        <!-- Link to backend
+                        <a class="btn btn-info"
+                           t-att-href="'/web#model=event.track&amp;id=%s&amp;view_type=form' % (track.id)">Edit this
+                            track
+                        </a>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
