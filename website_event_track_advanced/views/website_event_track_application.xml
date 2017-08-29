@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Application form template -->
+    <template name="Event track application" id="website_event_track.event_track_application">
+
+        <!-- Application type -->
+        <div class="panel panel-primary" id="track-application-type-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Application type</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" id="track-application-application-type-div">
+                    <div class="col-md-2">
+                        <label for="application_type" class="control-label">Application type</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-ellipsis-h"/>
+                            </span>
+                            <select name="application_type" id="application_type" required="true"
+                                    class="form-control" type="selection">
+                                <t t-foreach="types" t-as="application_type">
+                                    <option t-attf-value="#{application_type['code']}"
+                                            t-attf-title="#{application_type['description']}">
+                                        <t t-esc="application_type['name']"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <label for="type_description" class="control-label">Description</label>
+
+                        <span id="application_type_description" name="type_description"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application info -->
+        <div class="panel panel-primary" id="track-application-application-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Application info</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    This is the part of your application that will be shown to the reviewers.
+                </p>
+                <p class="alert alert-warning alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Please refrain from using any identifying information (name, organization,
+                    project).
+                    <br/>
+                    Using identifying information in the application may be grounds for
+                    disqualification.
+                </p>
+
+                <div class="form-group" id="track-application-application-info-div">
+
+                    <div class="col-md-4">
+                        <label for="track_name" class="control-label">Application title</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-header"/>
+                            </span>
+                            <input name="track_name" placeholder="Application title"
+                                   class="form-control" required="true" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label for="video_url" class="control-label">Application as a video (link to
+                            e.g. Youtube or Vimeo)
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-video-camera"/>
+                            </span>
+                            <input name="video_url"
+                                   placeholder="https://www.youtube.com, https://vimeo.com, ..."
+                                   class="form-control" type="text"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="track-application-application-info-div">
+                    <div class="col-md-12">
+                        <label for="track_content" class="control-label">
+                            Application content
+                            <span id="track_content_word_counter">Words
+                                <span id="track_content_word_count"></span>
+                            </span>
+                        </label>
+
+                        <textarea name="track_content"
+                                  id="track_content"
+                                  class="form-control"
+                                  required="true"
+                                  placeholder="Application content..."
+                                  rows="16"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="track-application-application-attachment-div">
+                    <div class="col-md-8">
+                        <label for="attachment_ids" class="control-label">Attachment</label>
+                        <input name="attachment_ids" type="file"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Application info -->
+
+        <!-- Target group info -->
+        <div class="panel panel-primary" id="track-application-targetgroup-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Target group info</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Please give information about your primary target audience.
+                </p>
+                <p class="alert alert-warning alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Select the most fitting group. You can expand your target group by writing a
+                    description.
+                </p>
+
+                <div class="form-group" id="track-application-targetgroup-info-div">
+                    <div class="col-md-4">
+                        <label for="target_group" class="control-label">Target group</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-bullseye"/>
+                            </span>
+                            <select name="target_group" required="true" class="form-control"
+                                    type="selection">
+                                <t t-foreach="target_groups" t-as="group">
+                                    <option t-attf-value="#{group.id}">
+                                        <t t-esc="group.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <label for="language" class="control-label">Language</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-language"/>
+                            </span>
+                            <select name="language" required="true" class="form-control"
+                                    type="selection">
+                                <t t-foreach="languages" t-as="language">
+                                    <option t-attf-value="#{language.id}">
+                                        <t t-esc="language.name"/>
+                                    </option>
+                                </t>
+                                <option t-attf-value="0">Any language</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label for="target_group_info" class="control-label">Target group info
+                        </label>
+
+                        <p id="target_group_info_word_counter">Words
+                            <span id="target_group_info_word_count"></span>
+                        </p>
+
+                        <textarea name="target_group_info"
+                                  id="target_group_info"
+                                  class="form-control"
+                                  placeholder="Target group info..."
+                                  rows="4"/>
+                    </div>
+                </div>
+
+                <div class="form-group" t-if="len(event.allowed_track_tag_ids)"
+                     id="track-application-targetgroup-tags-div">
+                    <div class="col-md-12">
+                        <label class="control-label required-label text-primary">Tags</label>
+                        <p class="alert alert-info alert-dismissable mt8">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                                &#215;</a>
+                            You should select 3-5 tags that matches your presentation best.
+                        </p>
+                        <p class="alert alert-warning alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                                &#215;</a>
+                            Selecting too many tags can make it harder to find the correct audience.
+                        </p>
+
+                        <div class="row">
+                            <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids"
+                                   t-as="tag">
+                                <input type="checkbox" t-attf-name="tag_#{str(tag.id)}"/>
+                                <t t-esc="tag.name"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- / Target group info -->
+
+        <!-- Contact info -->
+        <div class="panel panel-primary" id="track-application-contact-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Contact</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Please fill the contact persons information here.
+                    <br/>
+                    Any newsletters and other guidance will be sent to the contact person.
+                </p>
+
+                <div id="track-application-contact-header-div"
+                     class="track-application-contact-input-row">
+                    <label for="contact_email">Email</label>
+                    <label for="contact_first_name">First name</label>
+                    <label for="contact_last_name">Last name</label>
+                    <label for="contact_organization">Organization</label>
+                    <label for="contact_title">Title</label>
+                    <!--
+                    <label for="contact_street">Street</label>
+                    <label for="contact_zip">Zip</label>
+                    <label for="contact_city">City</label>
+                    -->
+                </div>
+
+                <div id="track-application-contract-input-div">
+                    <div class="track-application-contact-input-row">
+                        <input name="contact_email" placeholder="Email" class="form-control"
+                               required="true" type="email"/>
+                        <input name="contact_first_name" placeholder="First name"
+                               class="form-control" required="true" type="text"/>
+                        <input name="contact_last_name" placeholder="Last name" class="form-control"
+                               required="true" type="text"/>
+                        <input name="contact_organization" placeholder="Organization"
+                               class="form-control" type="text"/>
+                        <input name="contact_title" placeholder="Title" class="form-control"
+                               type="text"/>
+                        <!--
+                        <input name="contact_street" placeholder="Street" class="form-control" type="text" />
+                        <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
+                        <input name="contact_city" placeholder="City" class="form-control" type="text" />
+                        -->
+                        <button type="button" class="btn" disabled="1">
+                            <i class="fa fa-trash"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="track-application-contact-extra-div">
+                    <div class="col-md-4">
+                        <label for="returning_speaker" class="control-label">
+                            I have been a speaker at this event earlier
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-comment"/>
+                            </span>
+                            <select name="returning_speaker" required="true" class="form-control"
+                                    type="selection">
+                                <option value="false" selected="1">-</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- / Contact info -->
+
+        <!-- Speakers -->
+        <div class="panel panel-primary" id="track-application-speakers-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Speakers</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    List all of the speakers here
+                </p>
+
+                <div id="track-application-speakers-header-div"
+                     class="track-application-contact-input-row">
+                    <label for="speaker_email[0]">Email</label>
+                    <label for="speaker_first_name[0]">First name</label>
+                    <label for="speaker_last_name[0]">Last name</label>
+                    <label for="speaker_organization[0]">Organization</label>
+                    <label for="speaker_title[0]">Title</label>
+                    <!--
+                    <label for="speaker_street[0]" >Street</label>
+                    <label for="speaker_zip[0]">Zip</label>
+                    <label for="speaker_city[0]">City</label>
+                    -->
+                </div>
+
+                <div id="track-application-speakers-input-div">
+                    <input id="track-application-speakers-input-index" name="speakers_input_index"
+                           value="0" class="hidden"/>
+
+                    <div id="track-application-speakers-input-row"
+                         class="track-application-contact-input-row">
+                        <input name="speaker_email[0]" placeholder="Email" class="form-control"
+                               required="true" type="email"/>
+                        <input name="speaker_first_name[0]" placeholder="First name"
+                               class="form-control" required="true" type="text"/>
+                        <input name="speaker_last_name[0]" placeholder="Last name"
+                               class="form-control" required="true" type="text"/>
+                        <input name="speaker_organization[0]" placeholder="Organization"
+                               required="true" class="form-control" type="text"/>
+                        <input name="speaker_title[0]" placeholder="Title" class="form-control"
+                               type="text"/>
+                        <!--
+                        <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
+                        <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
+                        <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
+                        -->
+                        <button type="button" class="btn remove_speaker" disabled="1">
+                            <i class="fa fa-trash"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="btn col-md-10 col-md-offset-1 mt8"
+                            id="add_speaker">Add a speaker
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- / Speakers -->
+
+        <!-- Webinar info -->
+        <div class="panel panel-warning" id="track-application-webinar-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Webinar info</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    You can fill this if you want to hold a webinar before the actual event.
+                </p>
+
+                <div class="form-group" id="track-application-webinar-div">
+                    <div class="col-md-4">
+                        <label for="webinar" class="control-label">I wish to hold a webinar before
+                            the event
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-microphone"/>
+                            </span>
+                            <!-- This checkbox is presented as a selection for uniformitys sake -->
+                            <select id="track-application-webinar-selection-field"
+                                    name="webinar"
+                                    class="form-control"
+                                    type="selection">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8">
+                        <label for="webinar_info" class="control-label">Webinar info</label>
+
+                        <p id="webinar_info_word_counter">Words
+                            <span id="webinar_info_word_count"></span>
+                        </p>
+
+                        <textarea class="form-control"
+                                  id="webinar_info"
+                                  name="webinar_info"
+                                  placeholder="Webinar info..."
+                                  rows="4"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Webinar info -->
+
+        <!-- Workshop info -->
+        <div class="panel panel-warning" id="track-application-workshop-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Workshop</h3>
+            </div>
+
+            <div class="panel-body">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Workshop organizer information and invoicing address.
+                </p>
+
+                <h4>
+                    Contract signee
+                </h4>
+
+                <div id="track-application-signee-header-div"
+                     class="track-application-signee-input-row">
+                    <label for="signee_email">Email</label>
+                    <label for="signee_first_name">First name</label>
+                    <label for="signee_last_name">Last name</label>
+                    <label for="signee_title">Title</label>
+                    <!--
+                    <label for="signee_street">Street</label>
+                    <label for="signee_zip">Zip</label>
+                    <label for="signee_city">City</label>
+                    -->
+                </div>
+
+                <div id="track-application-signee-input-div">
+                    <div class="track-application-signee-input-row">
+                        <input name="signee_email" placeholder="Email" class="form-control"
+                               required="true" type="email"/>
+                        <input name="signee_first_name" placeholder="First name"
+                               class="form-control" required="true" type="text"/>
+                        <input name="signee_last_name" placeholder="Last name" class="form-control"
+                               required="true" type="text"/>
+                        <input name="signee_title" placeholder="Title" class="form-control"
+                               type="text"/>
+                        <!--
+                        <input name="signee_street" placeholder="Street" class="form-control" type="text" />
+                        <input name="signee_zip" placeholder="Zip" class="form-control" type="text" />
+                        <input name="signee_city" placeholder="City" class="form-control" type="text" />
+                        -->
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Organizer invoice address</h4>
+
+                    <div id="track-application-organizer-header-div"
+                         class="track-application-invoice-input-row">
+                        <label for="organizer_organization">Organization</label>
+                        <label for="organizer_street">Street</label>
+                        <label for="organizer_zip">Zip</label>
+                        <label for="organizer_city">City</label>
+                        <label for="organizer_business_id">Business id</label>
+                        <label for="organizer_reference">Your reference</label>
+                    </div>
+
+                    <div id="track-application-organizer-input-div"
+                         class="track-application-invoice-input-row">
+                        <input name="organizer_organization" placeholder="Organization"
+                               class="form-control" type="text" required="true"/>
+                        <input name="organizer_street" placeholder="Street" class="form-control"
+                               type="text" required="true"/>
+                        <input name="organizer_zip" placeholder="Zip" class="form-control"
+                               type="text" required="true"/>
+                        <input name="organizer_city" placeholder="City" class="form-control"
+                               type="text" required="true"/>
+                        <input name="organizer_business_id" placeholder="E.g. 1234567-1"
+                               class="form-control" type="text" required="true"/>
+                        <input name="organizer_reference" placeholder="Your reference"
+                               class="form-control" type="text"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="track-application-workshop-div">
+                    <div class="col-md-4">
+                        <label for="workshop_participants" class="control-label">Max participants
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-users"/>
+                            </span>
+                            <input name="workshop_participants" placeholder="E.g. 20"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="workshop_goals" class="control-label">Workshop goals</label>
+
+                        <p id="workshop_goals_word_counter">Words
+                            <span id="workshop_goals_word_count"></span>
+                        </p>
+
+                        <textarea class="form-control"
+                                  id="workshop_goals"
+                                  name="workshop_goals"
+                                  placeholder="Workshop goals"
+                                  rows="4"/>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="workshop_schedule" class="control-label">Workshop schedule
+                        </label>
+
+                        <textarea class="form-control"
+                                  id="workshop_schedule"
+                                  name="workshop_schedule"
+                                  placeholder="Workshop schedule"
+                                  rows="4"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- / Workshop info -->
+
+        <!-- Extra info -->
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Extra info</h3>
+            </div>
+
+            <div class="panel-body" id="track-application-extra-div">
+                <p class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" datla-dismiss="alert" aria-label="close">&#215;</a>
+                    Any wishes about special arrangements concerning the premises, fitments, etc.
+                </p>
+
+                <div class="form-group" id="track-application-extra-info-div">
+                    <div class="col-md-12">
+                        <p id="extra_info_word_counter">Words
+                            <span id="extra_info_word_count"></span>
+                        </p>
+
+                        <textarea class="form-control"
+                                  id="extra_info"
+                                  name="extra_info"
+                                  placeholder="Extra info..."
+                                  rows="4"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Extra info -->
+
+        <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js"></script>
+    </template>
+
+</odoo>

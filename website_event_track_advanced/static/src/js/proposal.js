@@ -127,7 +127,7 @@ odoo.define('proposal', function (require) {
     });
 
     // De-collapse all elements on submit (to show errors)
-    // TODO: only de-collable if has errors
+    // TODO: only de-collapse if has errors
     $('#application-submit-button').click(function() {
         $('#track-application-form').find('div.panel-body').each(function() {
             if($(this).is(":hidden")){
