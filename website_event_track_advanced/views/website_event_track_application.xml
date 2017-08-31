@@ -477,13 +477,13 @@
                 <div id="track-application-signee-input-div">
                     <div class="track-application-signee-input-row">
                         <input name="signee_email" placeholder="Email" class="form-control"
-                               required="true" type="email"/>
+                               required="true" type="email" t-att-value="track.organizer_contact.email"/>
                         <input name="signee_first_name" placeholder="First name"
-                               class="form-control" required="true" type="text"/>
+                               class="form-control" required="true" type="text" t-att-value="track.organizer_contact.name.split(' ',1)[1]"/>
                         <input name="signee_last_name" placeholder="Last name" class="form-control"
-                               required="true" type="text"/>
+                               required="true" type="text" t-att-value="track.organizer_contact.name.split(' ',1)[0]"/>
                         <input name="signee_title" placeholder="Title" class="form-control"
-                               type="text"/>
+                               type="text" t-att-value="track.organizer_contact.function"/>
                         <!--
                         <input name="signee_street" placeholder="Street" class="form-control" type="text" />
                         <input name="signee_zip" placeholder="Zip" class="form-control" type="text" />
@@ -508,17 +508,17 @@
                     <div id="track-application-organizer-input-div"
                          class="track-application-invoice-input-row">
                         <input name="organizer_organization" placeholder="Organization"
-                               class="form-control" type="text" required="true"/>
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.name"/>
                         <input name="organizer_street" placeholder="Street" class="form-control"
-                               type="text" required="true"/>
+                               type="text" required="true" t-att-value="track.organizer.street"/>
                         <input name="organizer_zip" placeholder="Zip" class="form-control"
-                               type="text" required="true"/>
+                               type="text" required="true" t-att-value="track.organizer.zip"/>
                         <input name="organizer_city" placeholder="City" class="form-control"
-                               type="text" required="true"/>
+                               type="text" required="true" t-att-value="track.organizer.city"/>
                         <input name="organizer_business_id" placeholder="E.g. 1234567-1"
-                               class="form-control" type="text" required="true"/>
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.comment"/>
                         <input name="organizer_reference" placeholder="Your reference"
-                               class="form-control" type="text"/>
+                               class="form-control" type="text" t-att-value="track.organizer.ref"/>
                     </div>
                 </div>
 
@@ -531,8 +531,8 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-users"/>
                             </span>
-                            <input name="workshop_participants" placeholder="E.g. 20"
-                                   class="form-control"/>
+                            <input id="workshop_participants" name="workshop_participants" placeholder="E.g. 20"
+                                   class="form-control" t-att-value="track.workshop_participants"/>
                         </div>
                     </div>
 
@@ -547,7 +547,9 @@
                                   id="workshop_goals"
                                   name="workshop_goals"
                                   placeholder="Workshop goals"
-                                  rows="4"/>
+                                  rows="4">
+                            <t t-esc="track.workshop_goals" />
+                        </textarea>
                     </div>
 
                     <div class="col-md-12">
@@ -558,7 +560,9 @@
                                   id="workshop_schedule"
                                   name="workshop_schedule"
                                   placeholder="Workshop schedule"
-                                  rows="4"/>
+                                  rows="4">
+                            <t t-esc="track.workshop_schedule" />
+                        </textarea>
                     </div>
                 </div>
 

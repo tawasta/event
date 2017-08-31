@@ -122,12 +122,16 @@ class EventTrack(models.Model):
         string='Extra info',
     )
 
-    goals = fields.Html(
+    workshop_goals = fields.Html(
         string='Goals',
     )
 
-    schedule = fields.Html(
+    workshop_schedule = fields.Html(
         string='Schedule',
+    )
+
+    workshop_participants = fields.Integer(
+        string='Max participants',
     )
 
     returning_speaker = fields.Boolean(

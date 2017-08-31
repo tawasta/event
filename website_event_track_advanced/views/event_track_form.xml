@@ -104,6 +104,7 @@
 
                                 <group colspan="2">
                                     <field name="target_group_info" />
+                                    <field name="extra_info" />
                                 </group>
                             </group>
                         </page>
@@ -126,8 +127,9 @@
                         </page>
                         <page name="workshop" string="Workshop"><!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
                             <group cols="1">
-                                <field name="goals" nolabel="0"/>
-                                <field name="schedule" nolabel="0"/>
+                                <field name="workshop_participants" nolabel="0"/>
+                                <field name="workshop_goals" nolabel="0"/>
+                                <field name="workshop_schedule" nolabel="0"/>
                             </group>
                         </page>
                     </notebook>
