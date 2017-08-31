@@ -33,4 +33,15 @@ $(function() {
     // Hide speaker adding button
     $('#add_speaker').hide();
 
+    // Disable all speaker inputs
+    $('#track-application-workshop-div').removeClass('panel-warning');
+    $('#track-application-workshop-div').addClass('panel-default');
+
+    $('#track-application-workshop-div').find('input').each(function() {
+        $(this).prop('disabled', true);
+    });
+
+    // Enable workshop_participants
+    $('#workshop_participants').prop('disabled', false);
+
 });
