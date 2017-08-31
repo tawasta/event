@@ -40,7 +40,8 @@
                                     class="form-control" type="selection">
                                 <t t-foreach="types" t-as="application_type">
                                     <option t-attf-value="#{application_type['code']}"
-                                            t-attf-title="#{application_type['description']}">
+                                            t-attf-title="#{application_type['description']}"
+                                            t-att-selected="'selected' if track['type']['id'] == application_type['id'] else False" >
                                         <t t-esc="application_type['name']"/>
                                     </option>
                                 </t>
@@ -89,7 +90,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-header"/>
                             </span>
-                            <input name="track_name" placeholder="Application title"
+                            <input name="track_name" placeholder="Application title" t-att-value="track['name']"
                                    class="form-control" required="true" type="text"/>
                         </div>
                     </div>
@@ -103,7 +104,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-video-camera"/>
                             </span>
-                            <input name="video_url"
+                            <input name="video_url" t-att-value="track['video_url']"
                                    placeholder="https://www.youtube.com, https://vimeo.com, ..."
                                    class="form-control" type="text"/>
                         </div>
@@ -124,7 +125,9 @@
                                   class="form-control"
                                   required="true"
                                   placeholder="Application content..."
-                                  rows="16"/>
+                                  rows="16">
+                            <t t-esc="track['description']" />
+                        </textarea>
                     </div>
                 </div>
 
@@ -168,8 +171,8 @@
                             <select id="target_group_select" name="target_group" required="true" class="form-control"
                                     type="selection">
                                 <t t-foreach="target_groups" t-as="group">
-                                    <option t-attf-value="#{group.id}">
-                                        <t t-esc="group.name"/>
+                                    <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
+                                        <t t-esc="group.name" />
                                     </option>
                                 </t>
                             </select>
@@ -183,12 +186,12 @@
                             </span>
                             <select name="language" required="true" class="form-control"
                                     type="selection">
+                                <option t-attf-value="0">Any language</option>
                                 <t t-foreach="languages" t-as="language">
-                                    <option t-attf-value="#{language.id}">
+                                    <option t-attf-value="#{language.id}" t-att-selected="'selected' if track['language']['id'] == language['id'] else False">
                                         <t t-esc="language.name"/>
                                     </option>
                                 </t>
-                                <option t-attf-value="0">Any language</option>
                             </select>
                         </div>
                     </div>
@@ -205,7 +208,9 @@
                                   id="target_group_info"
                                   class="form-control"
                                   placeholder="Target group info..."
-                                  rows="4"/>
+                                  rows="4">
+                            <t t-esc="track['target_group_info']" />
+                        </textarea>
                     </div>
                 </div>
 
@@ -227,7 +232,7 @@
                         <div class="row">
                             <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids"
                                    t-as="tag">
-                                <input type="checkbox" t-attf-name="tag_#{str(tag.id)}"/>
+                                <input type="checkbox" t-attf-name="tag_#{str(tag.id)}" t-att-checked="'checked' if tag.id in track.tag_ids.ids else False"/>
                                 <t t-esc="tag.name"/>
                             </label>
                         </div>
@@ -272,15 +277,15 @@
                 <div id="track-application-contract-input-div">
                     <div class="track-application-contact-input-row">
                         <input name="contact_email" placeholder="Email" class="form-control"
-                               required="true" type="email"/>
+                               required="true" type="email" t-att-value="track.partner_id.email"/>
                         <input name="contact_first_name" placeholder="First name"
-                               class="form-control" required="true" type="text"/>
+                               class="form-control" required="true" type="text" t-att-value="track.partner_id.name.split(' ',1)[1]"/>
                         <input name="contact_last_name" placeholder="Last name" class="form-control"
-                               required="true" type="text"/>
+                               required="true" type="text" t-att-value="track.partner_id.name.split(' ',1)[0]"/>
                         <input name="contact_organization" placeholder="Organization"
-                               class="form-control" type="text"/>
+                               class="form-control" type="text" t-att-value="track.partner_id.parent_id.name"/>
                         <input name="contact_title" placeholder="Title" class="form-control"
-                               type="text"/>
+                               type="text" t-att-value="track.partner_id.function"/>
                         <!--
                         <input name="contact_street" placeholder="Street" class="form-control" type="text" />
                         <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
@@ -304,9 +309,9 @@
                             </span>
                             <select name="returning_speaker" required="true" class="form-control"
                                     type="selection">
-                                <option value="false" selected="1">-</option>
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="false">-</option>
+                                <option value="0" t-att-selected="'selected' if track['returning_speaker'] == False else False">No</option>
+                                <option value="1" t-att-selected="'selected' if track['returning_speaker'] == True else False">Yes</option>
                             </select>
                         </div>
                     </div>
@@ -411,8 +416,8 @@
                                     name="webinar"
                                     class="form-control"
                                     type="selection">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
+                                <option value="0" t-att-selected="'selected' if track['webinar'] == False else False">No</option>
+                                <option value="1" t-att-selected="'selected' if track['webinar'] == True else False">Yes</option>
                             </select>
                         </div>
 
@@ -428,7 +433,9 @@
                                   id="webinar_info"
                                   name="webinar_info"
                                   placeholder="Webinar info..."
-                                  rows="4"/>
+                                  rows="4">
+                            <t t-esc="track.webinar_info" />
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -584,7 +591,9 @@
                                   id="extra_info"
                                   name="extra_info"
                                   placeholder="Extra info..."
-                                  rows="4"/>
+                                  rows="4">
+                            <t t-esc="track.extra_info" />
+                        </textarea>
                     </div>
                 </div>
             </div>
