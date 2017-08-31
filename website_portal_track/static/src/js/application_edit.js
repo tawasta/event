@@ -1,5 +1,10 @@
 $(function() {
 
+    // Disable help boxes
+    $('#track-application-form').find('p.alert').each(function() {
+        $(this).hide();
+    });
+
     // Disable application type selection
     $('#application_type').prop('disabled', true);
 
@@ -9,18 +14,18 @@ $(function() {
     // Disable target group selection
     $('#target_group_select').prop('disabled', true);
 
-    // Hide contact info box
-    $('#track-application-contact-div p.alert').hide();
-
     // Disable all contact inputs
+    $('#track-application-contact-div').removeClass('panel-primary');
+    $('#track-application-contact-div').addClass('panel-default');
+
     $('#track-application-contact-div').find('input').each(function() {
         $(this).prop('disabled', true);
     });
 
-    // Hide speakers info box
-    $('#track-application-speakers-div p.alert').hide();
-
     // Disable all speaker inputs
+    $('#track-application-speakers-div').removeClass('panel-primary');
+    $('#track-application-speakers-div').addClass('panel-default');
+
     $('#track-application-speakers-div').find('input').each(function() {
         $(this).prop('disabled', true);
     });
