@@ -368,6 +368,9 @@
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
                                    type="text"/>
+                            <button type="button" class="btn remove_speaker" disabled="1">
+                                <i class="fa fa-trash"/>
+                            </button>
                         </div>
                     </t>
 

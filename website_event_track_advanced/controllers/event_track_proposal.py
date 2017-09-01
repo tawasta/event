@@ -8,7 +8,6 @@ import base64
 # 3. Odoo imports (openerp):
 from odoo import http, fields
 from odoo.http import request
-from odoo.tools import html_escape as escape, html2plaintext
 
 # 4. Imports from Odoo modules (rarely, and only if necessary):
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
@@ -135,8 +134,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # Contact
         contact_values = {
-            'firstname': post['contact_first_name'],
-            'lastname': post['contact_last_name'],
+            'firstname': post.get('contact_first_name'),
+            'lastname': post.get('contact_last_name'),
             'login': post.get('contact_email'),
             'email': post.get('contact_email'),
             'phone': post.get('contact_phone'),
@@ -187,8 +186,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         # Speakers
+        speaker_values = list()
         if post.get('speakers_input_index'):
-            speaker_values = list()
             for speaker_index in range(0, int(post.get('speakers_input_index'))+1):
                 first_name = post.get('speaker_first_name[%s]' % speaker_index)
                 last_name = post.get('speaker_last_name[%s]' % speaker_index)
