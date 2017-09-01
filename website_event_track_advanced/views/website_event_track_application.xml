@@ -354,6 +354,23 @@
                     <input id="track-application-speakers-input-index" name="speakers_input_index"
                            value="0" class="hidden"/>
 
+                    <!-- Existing speakers -->
+                    <t t-foreach="track.speaker_ids" t-as="speaker">
+                        <div id="track-application-speakers-input-row"
+                             class="track-application-contact-input-row">
+                            <input class="form-control" t-att-value="speaker.email"
+                                   required="true" type="email" />
+                            <input t-att-value="speaker.name.split(' ',1)[0]"
+                                   class="form-control" required="true" type="text"/>
+                            <input placeholder="Last name" t-att-value="speaker.name.split(' ',1)[0]"
+                                   class="form-control" required="true" type="text"/>
+                            <input placeholder="Organization" t-att-value="speaker.parent_id.name"
+                                   required="true" class="form-control" type="text"/>
+                            <input placeholder="Title" class="form-control" t-att-value="speaker.function"
+                                   type="text"/>
+                        </div>
+                    </t>
+
                     <div id="track-application-speakers-input-row"
                          class="track-application-contact-input-row">
                         <input name="speaker_email[0]" placeholder="Email" class="form-control"
