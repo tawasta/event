@@ -8,6 +8,7 @@
 from odoo import http, _
 from odoo.http import request
 from odoo.exceptions import AccessError
+from odoo.addons.website_event_track_advanced.controllers.event_track_proposal import WebsiteEventTrackController
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_portal.controllers.main import website_account
@@ -105,3 +106,22 @@ class WebsiteEventTrack(website_account):
                 'types': types,
             },
         )
+
+    # Save track modifications
+    @http.route(
+        ['/my/tracks/save/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['POST'])
+    def event_track_save(self, track, **post):
+
+        values = WebsiteEventTrackController._get_event_track_proposal_post_values(
+            WebsiteEventTrackController(),
+            track.event_id,
+            **post
+        )
+
+        track.sudo().write(values['track'])
+
+        return request.redirect("/my/tracks/%s" % track.id)
