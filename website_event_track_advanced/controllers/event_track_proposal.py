@@ -134,9 +134,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         # Contact
-        contact_name = '%s %s' % (post['contact_last_name'], post['contact_first_name'])
         contact_values = {
-            'name': contact_name,
+            'firstname': post['contact_first_name'],
+            'lastname': post['contact_last_name'],
             'login': post.get('contact_email'),
             'email': post.get('contact_email'),
             'phone': post.get('contact_phone'),
@@ -195,11 +195,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
                 if not first_name or not last_name:
                     continue
-
-                speaker_name = '%s %s' % (last_name, first_name)
-
                 speaker_values.append({
-                    'name': speaker_name,
+                    'firstname': first_name,
+                    'lastname': last_name,
                     'email': post.get('speaker_email[%s]' % speaker_index),
                     'zip': post.get('speaker_zip[%s]' % speaker_index),
                     'city': post.get('speaker_city[%s]' % speaker_index),
@@ -218,11 +216,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'type': 'invoice',
         }
 
-        signee_name = False
-        if post.get('signee_last_name') or post['signee_first_name']:
-            signee_name = '%s %s' % (post['signee_last_name'], post['signee_first_name'])
         workshop_signee_values = {
-            'name': signee_name,
+            'firstname': post.get('signee_first_name'),
+            'lastname': post.get('signee_last_name'),
             'email': post.get('signee_email'),
             'function': post.get('signee_title'),
         }

@@ -279,9 +279,9 @@
                         <input name="contact_email" placeholder="Email" class="form-control"
                                required="true" type="email" t-att-value="track.partner_id.email"/>
                         <input name="contact_first_name" placeholder="First name"
-                               class="form-control" required="true" type="text" t-att-value="track.partner_id.name.split(' ',1)[1]"/>
+                               class="form-control" required="true" type="text" t-att-value="track.partner_id.firstname"/>
                         <input name="contact_last_name" placeholder="Last name" class="form-control"
-                               required="true" type="text" t-att-value="track.partner_id.name.split(' ',1)[0]"/>
+                               required="true" type="text" t-att-value="track.partner_id.lastname"/>
                         <input name="contact_organization" placeholder="Organization"
                                class="form-control" type="text" t-att-value="track.partner_id.parent_id.name"/>
                         <input name="contact_title" placeholder="Title" class="form-control"
@@ -360,9 +360,9 @@
                              class="track-application-contact-input-row">
                             <input class="form-control" t-att-value="speaker.email"
                                    required="true" type="email" />
-                            <input t-att-value="speaker.name.split(' ',1)[0]"
+                            <input t-att-value="speaker.firstname"
                                    class="form-control" required="true" type="text"/>
-                            <input placeholder="Last name" t-att-value="speaker.name.split(' ',1)[0]"
+                            <input placeholder="Last name" t-att-value="speaker.lastname"
                                    class="form-control" required="true" type="text"/>
                             <input placeholder="Organization" t-att-value="speaker.parent_id.name"
                                    required="true" class="form-control" type="text"/>
@@ -496,9 +496,9 @@
                         <input name="signee_email" placeholder="Email" class="form-control"
                                required="true" type="email" t-att-value="track.organizer_contact.email"/>
                         <input name="signee_first_name" placeholder="First name"
-                               class="form-control" required="true" type="text" t-att-value="track.organizer_contact.name.split(' ',1)[1]"/>
+                               class="form-control" required="true" type="text" t-att-value="track.organizer_contact.firstname"/>
                         <input name="signee_last_name" placeholder="Last name" class="form-control"
-                               required="true" type="text" t-att-value="track.organizer_contact.name.split(' ',1)[0]"/>
+                               required="true" type="text" t-att-value="track.organizer_contact.lastname"/>
                         <input name="signee_title" placeholder="Title" class="form-control"
                                type="text" t-att-value="track.organizer_contact.function"/>
                         <!--
