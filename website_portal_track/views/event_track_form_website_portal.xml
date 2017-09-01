@@ -1,26 +1,30 @@
 <odoo>
+    <!-- Track followup breadcrumbs -->
+    <template id="track_followup_breadcrumbs">
+        <div class="row">
+            <div class="col-sm-4">
+                <ol class="breadcrumb mt8">
+                    <li>
+                        <a href="/my/home">
+                            <i class="fa fa-home"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/my/tracks">Tracks</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </template>
 
+    <!-- Default followup -->
     <template id="tracks_followup" name="Track">
         <t t-call="website.layout">
             <div id="wrap">
                 <div class="container">
                     <div class="oe_structure">
-                        <!-- Breadcrumbs -->
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <ol class="breadcrumb mt8">
-                                    <li>
-                                        <a href="/my/home">
-                                            <i class="fa fa-home"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/my/tracks">Tracks</a>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                        <!-- / Breadcrumbs -->
+
+                        <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
                         <section id="forms">
                             <form id="track-application-form"
@@ -50,6 +54,41 @@
                             track
                         </a>
                         -->
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Followup for reviewers -->
+    <template id="tracks_followup_reviewers" name="Track">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container">
+                    <div class="oe_structure">
+
+                        <t t-call="website_portal_track.track_followup_breadcrumbs" />
+
+                        <section id="forms">
+                            <form id="track-application-form"
+                                  class="form-horizontal mt32 js_website_submit_form"
+                                  t-attf-action="/my/tracks/save/#{track.id}"
+                                  method="post"
+                                  enctype="multipart/form-data">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <t t-call="website_portal_track.event_track_application_reviewer" />
+
+                                <script type="text/javascript" src="/website_portal_track/static/src/js/application_reviewer.js"></script>
+
+                                <div class="form-group">
+                                    <button type="submit" id="application-submit-button"
+                                            class="btn btn-primary col-md-10 col-md-offset-1">Save
+                                    </button>
+                                </div>
+                            </form>
+                        </section>
                     </div>
                 </div>
             </div>

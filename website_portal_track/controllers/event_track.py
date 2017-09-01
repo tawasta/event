@@ -82,7 +82,7 @@ class WebsiteEventTrack(website_account):
         return request.render("website_portal_track.portal_my_tracks", values)
 
     # Single track
-    @http.route(['/my/tracks/<int:track>'], type='http', auth="user", website=True)
+    @http.route(['/my/tracks/<int:track>'], type='http', auth='user', website=True)
     def tracks_followup(self, track=None, **kw):
         # TODO: remove sudo
         track = request.env['event.track'].sudo().browse([track])
@@ -90,14 +90,20 @@ class WebsiteEventTrack(website_account):
             track.check_access_rights('read')
             track.check_access_rule('read')
         except AccessError:
-            return request.render("website.403")
+            return request.render('website.403')
 
         target_groups = request.env['event.track.target.group'].search([])
         types = request.env['event.track.type'].search_read([], ['code', 'name', 'description'])
         languages = request.env['res.lang'].search([], order='name DESC')
 
+        view_name = 'website_portal_track.tracks_followup'
+
+        # Reviewers get their own view
+        if request.env.user.has_group('event.group_track_reviewer'):
+            view_name = 'website_portal_track.tracks_followup_reviewers'
+
         return request.render(
-            'website_portal_track.tracks_followup',
+            view_name,
             {
                 'event': track.event_id,
                 'track': track,
@@ -124,4 +130,4 @@ class WebsiteEventTrack(website_account):
 
         track.sudo().write(values['track'])
 
-        return request.redirect("/my/tracks/%s" % track.id)
+        return request.redirect('/my/tracks/%s' % track.id)
