@@ -28,7 +28,7 @@ class EventRegistration(models.Model):
 
     # 4. Compute and search fields, in the same order that fields declaration
     @api.multi
-    @api.depends('name', 'email', 'partner_id', 'partner_id.company_name', 'partner_id.function')
+    @api.depends('name', 'email', 'partner_id', 'partner_id.parent_id.name', 'partner_id.function')
     def compute_qr_string(self):
         
         for record in self:
