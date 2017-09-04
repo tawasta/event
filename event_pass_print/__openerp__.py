@@ -22,7 +22,8 @@
 {
     'name': 'Event pass print',
     'summary': 'Print event passes for visitors',
-    'version': '8.0.0.2.1',
+    'version': '8.0.0.2.2',
+    'version': '8.0.0.2.2',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
