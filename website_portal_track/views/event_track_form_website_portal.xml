@@ -76,9 +76,12 @@
                                   method="post"
                                   enctype="multipart/form-data">
 
-                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="csrf_token" id="csrf_token" t-att-value="request.csrf_token()"/>
 
                                 <t t-call="website_portal_track.event_track_application_reviewer" />
+
+                                <!-- Rating section -->
+                                <t t-call="website_portal_track.event_track_application_review" />
 
                                 <script type="text/javascript" src="/website_portal_track/static/src/js/application_reviewer.js"></script>
 
