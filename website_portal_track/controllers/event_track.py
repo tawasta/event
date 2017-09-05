@@ -118,7 +118,6 @@ class WebsiteEventTrack(website_account):
         website=True,
         methods=['POST'])
     def event_track_save(self, track, **post):
-
         # Reviewers get their own save
         if request.env.user.has_group('event.group_track_reviewer'):
             values = dict()
@@ -129,11 +128,7 @@ class WebsiteEventTrack(website_account):
                 WebsiteEventTrackController(),
                 track.event_id,
                 **post
-            )
-
-            # We don't allow editing the contact or speakers yet
-            values.pop('contact', False)
-            values.pop('speakers', False)
+            )['track']
 
         track.write(values)
 
