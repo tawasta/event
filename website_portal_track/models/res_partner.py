@@ -34,7 +34,7 @@ class ResPartner(models.Model):
         )
 
         for partner in self:
-            if partner.id in res:
+            if partner.id in res and res[partner.id]:
                 res[partner.id] += "&redirect=/my/tracks"
 
         return res
