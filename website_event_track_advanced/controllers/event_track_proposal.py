@@ -178,7 +178,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'target_group': post.get('target_group'),
             'target_group_info': post.get('target_group_info'),
-            'language': int(post.get('language')) or False,
+            'language': post.get('language') or False,
 
             'workshop_participants': post.get('workshop_participants'),
             'workshop_goals': post.get('workshop_goals'),
