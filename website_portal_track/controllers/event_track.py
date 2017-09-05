@@ -8,7 +8,6 @@
 from odoo import http, _
 from odoo.http import request
 from odoo.exceptions import AccessError
-from odoo.addons.website_event_track_advanced.controllers.event_track_proposal import WebsiteEventTrackController
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_portal.controllers.main import website_account
@@ -122,12 +121,10 @@ class WebsiteEventTrack(website_account):
         methods=['POST'])
     def event_track_save(self, track, **post):
 
-        values = WebsiteEventTrackController._get_event_track_proposal_post_values(
-            WebsiteEventTrackController(),
-            track.event_id,
-            **post
-        )
+        values = dict()
+        values['rating'] = post.get('rating')
+        values['rating_comment'] = post.get('rating_comment')
 
-        track.sudo().write(values['track'])
+        track.sudo().write(values)
 
         return request.redirect('/my/tracks/%s' % track.id)
