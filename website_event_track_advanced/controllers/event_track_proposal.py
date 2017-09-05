@@ -218,7 +218,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'type': 'invoice',
         }
 
-        name = "%s %s" % (post.get('signee_last_name'), post.get('signee_first_name')).strip()
+        name = "%s %s" % (post.get('signee_last_name'), post.get('signee_first_name'))
+        name = name.strip()
         workshop_signee_values = {
             'name': name,
             'email': post.get('signee_email'),
