@@ -1,3 +1,8 @@
+/* Clickable table rows */
+#event_track_list tr:hover{
+    cursor: pointer;
+}
+
 /* Review stars */
 div.stars {
   display: inline-block;

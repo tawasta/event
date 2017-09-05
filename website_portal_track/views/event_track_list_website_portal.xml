@@ -7,7 +7,7 @@
                 <p>There are currently no tracks for your account.</p>
             </t>
             <t t-if="tracks">
-                <table class="table table-hover o_my_status_table">
+                <table id="event_track_list" class="table table-hover o_my_status_table">
                     <thead>
                         <tr class="active">
                             <th>Track</th>
@@ -17,7 +17,7 @@
                         </tr>
                     </thead>
                     <t t-foreach="tracks" t-as="track">
-                        <tr>
+                        <tr t-attf-data-href="/my/tracks/#{track.id}?#{keep_query()}">
                             <td>
                                 <a t-attf-href="/my/tracks/#{track.id}?#{keep_query()}">
                                     <t t-esc="track.name"/>
@@ -76,6 +76,7 @@
                 </div>
             </t>
         </t>
+        <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js"></script>
     </template>
 
 </odoo>
