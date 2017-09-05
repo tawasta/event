@@ -203,12 +203,14 @@ class EventTrack(models.Model):
         if values.get('description'):
             self.create_diff(values)
 
+        '''
         # Force field access rights
         allowed_fields = set(['description', 'rating', 'rating_comment', 'tag_ids', 'target_group_info'])
         disallowed_fields = set(values.keys()) - allowed_fields
 
         if disallowed_fields and not self.env.user.has_group('event.group_event_manager'):
             raise AccessError(_("You don't have a permission to write fields %s") % disallowed_fields)
+        '''
 
         # Update followers
         if 'review_group' in values:
