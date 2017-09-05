@@ -134,9 +134,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         # Contact
+        name = "%s %s" % (post.get('contact_last_name'), post.get('contact_first_name'))
         contact_values = {
-            'firstname': post.get('contact_first_name'),
-            'lastname': post.get('contact_last_name'),
+            'name': name,
             'login': post.get('contact_email'),
             'email': post.get('contact_email'),
             'phone': post.get('contact_phone'),
@@ -195,9 +195,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
                 if not first_name or not last_name:
                     continue
+
+                name = "%s %s" % (last_name,first_name)
+
                 speaker_values.append({
-                    'firstname': first_name,
-                    'lastname': last_name,
+                    'name': name,
                     'email': post.get('speaker_email[%s]' % speaker_index),
                     'zip': post.get('speaker_zip[%s]' % speaker_index),
                     'city': post.get('speaker_city[%s]' % speaker_index),
@@ -216,9 +218,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'type': 'invoice',
         }
 
+        name = "%s %s" % (post.get('signee_last_name'), post.get('signee_first_name'))
         workshop_signee_values = {
-            'firstname': post.get('signee_first_name'),
-            'lastname': post.get('signee_last_name'),
+            'name': name,
             'email': post.get('signee_email'),
             'function': post.get('signee_title'),
         }
