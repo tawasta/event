@@ -133,3 +133,16 @@ class WebsiteEventTrack(website_account):
         track.write(values)
 
         return request.redirect('/my/tracks/')
+
+    # Confirm track
+    @http.route(
+        ['/my/tracks/confirm/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['POST'])
+    def event_track_confirm(self, track, **post):
+
+        track.sudo().write({'state': 'confirmed'})
+
+        return request.redirect('/my/tracks/')

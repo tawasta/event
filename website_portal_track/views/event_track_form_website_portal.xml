@@ -25,6 +25,22 @@
                     <div class="oe_structure">
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
+                        <section t-if="track.state == 'draft'">
+                            <form id="track-application-form-confirm"
+                                  class="form-horizontal mt32 js_website_submit_form"
+                                  t-attf-action="/my/tracks/confirm/#{track.id}"
+                                  method="post"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <!-- TODO: a real confirm dialog -->
+                                <button type="submit" id="application-confirm-button"
+                                        class="btn btn-warning col-md-12" onclick="return confirm('Are you sure?')">
+                                    Send to review
+                                </button>
+                            </form>
+                        </section>
+
+                        <hr />
 
                         <section id="forms">
                             <form id="track-application-form"
