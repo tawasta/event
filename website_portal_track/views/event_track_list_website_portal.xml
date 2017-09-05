@@ -67,7 +67,9 @@
                                     <label class="star-small star-1" for="star-1"></label>
                                 </div>
                             </td>
-
+                            <td t-if="user.has_group('event.group_track_reviewer')">
+                                <span t-field="track.rating_comment" />
+                            </td>
                         </tr>
                     </t>
                 </table>
