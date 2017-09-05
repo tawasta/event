@@ -179,12 +179,14 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'target_group': post.get('target_group'),
             'target_group_info': post.get('target_group_info'),
-            'language': post.get('language') or False,
 
             'workshop_participants': post.get('workshop_participants'),
             'workshop_goals': post.get('workshop_goals'),
             'workshop_schedule': post.get('workshop_schedule'),
         }
+
+        if post.get('language'):
+            track_values['language'] = post.get('language')
 
         # Speakers
         speaker_values = list()
