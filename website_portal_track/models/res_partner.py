@@ -23,7 +23,6 @@ class ResPartner(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields
-    '''
     @api.multi
     def _get_signup_url_for_action(self, action=None, view_type=None, menu_id=None, res_id=None, model=None):
         res = super(ResPartner, self)._get_signup_url_for_action(
@@ -38,7 +37,6 @@ class ResPartner(models.Model):
             res[partner.id] += "&redirect=/my/tracks"
 
         return res
-    '''
 
     # 5. Constraints and onchanges
 
