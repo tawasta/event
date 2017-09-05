@@ -224,6 +224,20 @@ class EventTrack(models.Model):
                 for partner in review_group.reviewers:
                     self.message_subscribe([partner.id])
 
+        # Auto-add review group on state change
+        # TODO: option for this
+        if not self.review_group \
+            and 'review_group' not in values \
+            and 'state' in values \
+            and values['state'] == 'confirmed':
+            # Moving a track without a review group to 'confirmed'-state
+
+            # Get the review group with least tracks to review
+            groups = self.env['event.track.review.group'].search([])
+            if groups:
+                sorted_groups = sorted(groups, key=lambda x: len(x.event_tracks))
+                self.review_group = sorted_groups[-1]
+
         res = super(EventTrack, self).write(values)
 
         return res
