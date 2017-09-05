@@ -22,7 +22,7 @@
 {
     'name': 'Advanced event tracks portal',
     'summary': 'Event tracks in website portal',
-    'version': '10.0.0.6.5',
+    'version': '10.0.0.6.6',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

@@ -131,6 +131,10 @@ class WebsiteEventTrack(website_account):
                 **post
             )
 
+            # We don't allow editing the contact or speakers yet
+            values.pop('contact', False)
+            values.pop('speakers', False)
+
         track.write(values)
 
         return request.redirect('/my/tracks/')
