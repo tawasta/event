@@ -62,7 +62,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             organization = self._create_organization(values.get('contact_organization'))
 
             # Add contact to the existing organization
-            partner.parent_id = organization.id
+            if partner:
+                partner.parent_id = organization.id
 
         # 4. Add speakers
         speakers = list()
