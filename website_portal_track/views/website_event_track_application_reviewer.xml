@@ -26,7 +26,7 @@
                 <div class="form-group" id="track-application-review-div">
                     <div class="col-md-4">
                         <div class="input-group stars">
-                            <input class="star star-5" type="radio" name="rating" value="5"
+                            <input class="star star-5" id="star-5" type="radio" name="rating" value="5"
                                    t-att-checked="'checked' if track.rating == '5' else False" />
                             <label class="star star-5" for="star-5"></label>
                             <input class="star star-4" id="star-4" type="radio" name="rating" value="4"
