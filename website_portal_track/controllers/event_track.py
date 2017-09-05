@@ -26,8 +26,7 @@ class WebsiteEventTrack(website_account):
         response = super(WebsiteEventTrack, self).account(**kw)
         partner = request.env.user.partner_id
 
-        # TODO: remove sudo
-        EventTrack = request.env['event.track'].sudo()
+        EventTrack = request.env['event.track']
         track_count = EventTrack.search_count([
             ('message_partner_ids', 'child_of', [partner.commercial_partner_id.id]),
         ])
@@ -47,8 +46,7 @@ class WebsiteEventTrack(website_account):
     def portal_my_tracks(self, page=1, date_begin=None, date_end=None, **kw):
         values = self._prepare_portal_layout_values()
         partner = request.env.user.partner_id
-        # TODO: remove sudo
-        EventTrack = request.env['event.track'].sudo()
+        EventTrack = request.env['event.track']
 
         domain = [
             ('message_partner_ids', 'child_of', [partner.commercial_partner_id.id]),
@@ -83,8 +81,7 @@ class WebsiteEventTrack(website_account):
     # Single track
     @http.route(['/my/tracks/<int:track>'], type='http', auth='user', website=True)
     def tracks_followup(self, track=None, **kw):
-        # TODO: remove sudo
-        track = request.env['event.track'].sudo().browse([track])
+        track = request.env['event.track'].browse([track])
         try:
             track.check_access_rights('read')
             track.check_access_rule('read')
@@ -125,6 +122,6 @@ class WebsiteEventTrack(website_account):
         values['rating'] = post.get('rating')
         values['rating_comment'] = post.get('rating_comment')
 
-        track.sudo().write(values)
+        track.write(values)
 
-        return request.redirect('/my/tracks/%s' % track.id)
+        return request.redirect('/my/tracks/')
