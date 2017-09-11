@@ -21,8 +21,7 @@ class EventRegistration(models.Model):
     _inherit = 'event.registration'
 
     # 2. Fields declaration
-    qr_string = fields.Char(string="User's vCard for QR", compute='compute_qr_string')
-    qr_string_stored = fields.Char(string="User's vCard for QR", compute='compute_qr_string', store=True, copy=False)
+    qr_string = fields.Char(string="vCard for QR", compute='compute_qr_string')
 
     # 3. Default methods
 
