@@ -42,7 +42,7 @@ class EventRegistration(models.Model):
 
             name = record.name
             organisation = record.partner_id.company_name
-            title = record.partner_id.function
+            title = record.organization_role
             email = record.email
             
             record.qr_string = "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % (name, title, organisation, email)
