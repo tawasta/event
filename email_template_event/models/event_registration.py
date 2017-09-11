@@ -41,7 +41,7 @@ class EventRegistration(models.Model):
         for record in self:
 
             name = record.name
-            organisation = record.partner_id.partner_id.name
+            organisation = record.partner_id.parent_id.name
             title = record.partner_id.function
             email = record.email
 
