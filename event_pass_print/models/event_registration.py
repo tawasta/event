@@ -21,7 +21,7 @@ class EventRegistration(models.Model):
     _inherit = 'event.registration'
 
     # 2. Fields declaration
-    qr_string = fields.Char(string="vCard for QR", compute='compute_qr_string')
+    qr_string = fields.Char(string="User's vCard for QR", compute='compute_qr_string')
 
     # 3. Default methods
 
@@ -32,12 +32,9 @@ class EventRegistration(models.Model):
         for record in self:
 
             name = record.name
-            organisation = record.partner_id.company_name or ''
-            title = ''
-            if record.organization_role:
-                title = dict(record.fields_get(
-                    ['organization_role'])['organization_role']['selection'])[record.organization_role]
-            email = record.email or ''
+            organisation = record.partner_id.company_name
+            title = record.partner_id.function
+            email = record.email
 
             record.qr_string = "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % (name, title, organisation, email)
 
