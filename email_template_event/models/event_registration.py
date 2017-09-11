@@ -37,13 +37,14 @@ class EventRegistration(models.Model):
 
     @api.multi
     def compute_qr_string(self):
-        
+
         for record in self:
 
             name = record.name
-            organisation = record.partner_id.company_name
-            title = record.organization_role
-            email = record.email
+            organisation = record.partner_id.company_name or ''
+            title = dict(record.fields_get(
+                ['organization_role'])['organization_role']['selection'])[record.organization_role] or ''
+            email = record.email or ''
             
             record.qr_string = "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % (name, title, organisation, email)
 
