@@ -28,14 +28,14 @@ class EventRegistration(models.Model):
 
     # 4. Compute and search fields, in the same order that fields declaration
     @api.multi
-    @api.depends('name', 'email', 'partner_id', 'partner_id.parent_id.name', 'partner_id.function')
+    @api.depends('name', 'email', 'partner_id', 'partner_id.parent_id.name')
     def compute_qr_string(self):
         
         for record in self:
 
             name = record.name
             organisation = record.partner_id.company_name
-            title = record.partner_id.function
+            title = record.organization_role
             email = record.email
             
             record.qr_string = "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % (name, title, organisation, email)

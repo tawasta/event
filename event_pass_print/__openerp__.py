@@ -32,6 +32,7 @@
     'depends': [
         'event',
         'report',
+        'website_voucher_redeem',
     ],
     'data': [
         'report/paperformat_european_a4_nomargin.xml',
