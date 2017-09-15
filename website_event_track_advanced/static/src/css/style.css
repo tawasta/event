@@ -16,7 +16,7 @@
 }
 
 .track-application-contact-input-row input, .track-application-contact-input-row label{
-    width: 18.9%;
+    width: 18.1%;
     display: inline-block;
 }
 
@@ -31,12 +31,14 @@
 }
 
 /* For small screens */
-@media only screen and (max-width: 550px){
-    .track-application-contact-input-row label, .track-application-invoice-input-row label, .track-application-signee-input-row label{
+@media only screen and (max-width: 700px){
+    .track-application-contact-input-row label, .track-application-invoice-input-row label,
+    .track-application-signee-input-row label{
         display: none;
     }
 
-    .track-application-contact-input-row input, .track-application-signee-input-row input, .track-application-invoice-input-row input{
+    .track-application-contact-input-row input, .track-application-signee-input-row input,
+    .track-application-invoice-input-row input, .btn-remove-speaker{
         width: 100%;
     }
 }

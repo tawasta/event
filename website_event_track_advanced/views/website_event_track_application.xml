@@ -132,9 +132,10 @@
                 </div>
 
                 <div class="form-group" id="track-application-application-attachment-div">
-                    <div class="col-md-8">
-                        <label for="attachment_ids" class="control-label">Attachment</label>
-                        <input name="attachment_ids" type="file"/>
+                    <div class="col-md-12">
+                        <label class="btn btn-default btn-file col-xs-10 col-xs-offset-1">
+                            Add an attachment <input type="file" name="attachment_ids" style="display: none;"/>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -291,7 +292,7 @@
                         <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
                         <input name="contact_city" placeholder="City" class="form-control" type="text" />
                         -->
-                        <button type="button" class="btn" disabled="1">
+                        <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
                         </button>
                     </div>
@@ -368,7 +369,7 @@
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
                                    type="text"/>
-                            <button type="button" class="btn remove_speaker" disabled="1">
+                            <button type="button" class="btn btn-remove-speaker" disabled="1">
                                 <i class="fa fa-trash"/>
                             </button>
                         </div>
@@ -391,14 +392,14 @@
                         <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
                         <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
                         -->
-                        <button type="button" class="btn remove_speaker" disabled="1">
+                        <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
                         </button>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn col-md-10 col-md-offset-1 mt8"
+                    <button type="button" class="btn col-xs-10 col-xs-offset-1 mt8"
                             id="add_speaker">Add a speaker
                     </button>
                 </div>
