@@ -136,4 +136,15 @@ odoo.define('proposal', function (require) {
         });
     })
 
+    // Suggest the contact as a speaker
+    $('#track-application-contract-input-div input').change(function(){
+        var changed_field = $(this).attr('name').substr(8);
+        var corresponding_field_name = 'speaker_' + changed_field + '[0]';
+        var corresponding_field = $("input[name='" + corresponding_field_name + "']" );
+
+        if(corresponding_field.val() == ''){
+            corresponding_field.val($(this).val())
+        }
+    });
+
 });

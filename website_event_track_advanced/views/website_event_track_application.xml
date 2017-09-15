@@ -134,7 +134,7 @@
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div class="col-md-12">
                         <label class="btn btn-default btn-file col-xs-10 col-xs-offset-1">
-                            Add an attachment <input type="file" name="attachment_ids" style="display: none;"/>
+                            Add an attachment <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" style="display: none;"/>
                         </label>
                     </div>
                 </div>
@@ -399,8 +399,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn col-xs-10 col-xs-offset-1 mt8"
-                            id="add_speaker">Add a speaker
+                    <button type="button" class="btn btn-default col-xs-10 col-xs-offset-1 mt8"
+                            id="add_speaker">Add a speaker <i class="fa fa-user"/>
                     </button>
                 </div>
             </div>
