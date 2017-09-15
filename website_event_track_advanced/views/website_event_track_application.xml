@@ -357,8 +357,7 @@
 
                     <!-- Existing speakers -->
                     <t t-foreach="track.speaker_ids" t-as="speaker">
-                        <div id="track-application-speakers-input-row"
-                             class="track-application-contact-input-row">
+                        <div class="track-application-contact-input-row">
                             <input class="form-control" t-att-value="speaker.email"
                                    required="true" type="email" />
                             <input t-att-value="speaker.firstname"

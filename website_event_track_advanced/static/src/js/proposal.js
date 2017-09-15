@@ -72,15 +72,7 @@ odoo.define('proposal', function (require) {
     });
 
     // Remove speaker rows
-    $(document).on('click', '.remove_speaker', function() {
-        var confirm_message = _t("Are you sure you want to delete this speaker?");
-
-         if (confirm(confirm_message)) {
-            $(this).parent().remove();
-         }
-    });
-
-    $('.remove_speaker').click(function() {
+    $(document).on('click', '.btn-remove-speaker', function() {
         var confirm_message = _t("Are you sure you want to delete this speaker?");
 
          if (confirm(confirm_message)) {

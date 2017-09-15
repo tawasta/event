@@ -67,7 +67,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # 4. Add speakers
         speakers = list()
-        for speaker in values['speakers']:
+        for speaker in values.get('speakers'):
             # If user already exists, create a new partner
             existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
 
@@ -185,7 +185,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'workshop_schedule': post.get('workshop_schedule'),
         }
 
-        if post.get('language'):
+        if post.get('language') and post.get('language') != '0':
             track_values['language'] = post.get('language')
 
         # Speakers
