@@ -6,13 +6,11 @@
         <t t-call="website_event_track.event_track_application_type" />
         <t t-call="website_event_track.event_track_application_info" />
         <t t-call="website_event_track.event_track_application_targetgroup_info" />
-        <t t-call="website_event_track.event_track_application_webinar" />
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js"></script>
     </template>
 
     <!-- Reviewer section -->

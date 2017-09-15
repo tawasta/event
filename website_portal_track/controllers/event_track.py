@@ -120,17 +120,45 @@ class WebsiteEventTrack(website_account):
     def event_track_save(self, track, **post):
         # Reviewers get their own save
         if request.env.user.has_group('event.group_track_reviewer'):
-            values = dict()
-            values['rating'] = post.get('rating')
-            values['rating_comment'] = post.get('rating_comment')
+            track_values = dict()
+            track_values['rating'] = post.get('rating')
+            track_values['rating_comment'] = post.get('rating_comment')
         else:
             values = WebsiteEventTrackController._get_event_track_proposal_post_values(
                 WebsiteEventTrackController(),
                 track.event_id,
                 **post
-            )['track']
+            )
+            track_values = values['track']
 
-        track.write(values)
+        speaker_ids = list()
+        speakers = list()
+        for speaker in values.get('speakers'):
+            # If user already exists, create a new partner
+            existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
+
+            # Get or create organization
+            if speaker.get('organization'):
+                organization = WebsiteEventTrackController._create_organization(
+                    WebsiteEventTrackController(),
+                    {'name': speaker.get('organization')}
+                )
+                del speaker['organization']
+                speaker['parent_id'] = organization.id
+
+            if existing_user:
+                new_speaker = request.env['res.partner'].sudo().create(speaker)
+
+            if not existing_user:
+                new_speaker = self._create_signup_user(speaker).partner_id
+
+            speaker_ids.append(new_speaker.id)
+            speakers.append((4, new_speaker.id))
+
+        track_values['speaker_ids'] = speakers
+
+        track.write(track_values)
+        track.sudo().message_subscribe(partner_ids=speaker_ids)
 
         return request.redirect('/my/tracks/')
 
