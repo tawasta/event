@@ -7,6 +7,33 @@
                 <p>There are currently no tracks for your account.</p>
             </t>
             <t t-if="tracks">
+                <div class="container list-group">
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-info">Draft</span></div>
+                        <div class="col-sm-10">Created by you. Waiting for you to send this to review.</div>
+                    </div>
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-warning">Confirmed</span></div>
+                        <div class="col-sm-10">Confirmed by you. Waiting for an approval from reviewers.</div>
+                    </div>
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-primary">Announced</span></div>
+                        <div class="col-sm-10">Approved by reviewers. Waiting for your confirmation.</div>
+                    </div>
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-success">Published</span></div>
+                        <div class="col-sm-10">Confirmed by you. Included in the event program.</div>
+                    </div>
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-danger">Refused</span></div>
+                        <div class="col-sm-10">Not approved by reviewers.</div>
+                    </div>
+                    <div class="list-group-item row">
+                        <div class="col-sm-2"><span class="tag label label-default">Cancelled</span></div>
+                        <div class="col-sm-10">Cancelled by you.</div>
+                    </div>
+                </div>
+
                 <table id="event_track_list" class="table table-hover o_my_status_table">
                     <thead>
                         <tr class="active">
@@ -32,18 +59,30 @@
                                 </t>
                             </td>
                             <td>
-                                <t t-set="track_state">label-info</t>
+                                <t t-set="track_state">label-default</t>
 
                                 <t t-if="track.state == 'draft'">
-                                    <t t-set="track_state">label-primary</t>
+                                    <t t-set="track_state">label-info</t>
                                 </t>
 
                                 <t t-if="track.state == 'confirmed'">
+                                    <t t-set="track_state">label-warning</t>
+                                </t>
+
+                                <t t-if="track.state == 'announced'">
+                                    <t t-set="track_state">label-primary</t>
+                                </t>
+
+                                <t t-if="track.state == 'published'">
                                     <t t-set="track_state">label-success</t>
                                 </t>
 
-                                <t t-if="track.state in ['refused', 'cancel']">
+                                <t t-if="track.state == 'refused'">
                                     <t t-set="track_state">label-danger</t>
+                                </t>
+
+                                <t t-if="track.state == 'cancel'">
+                                    <t t-set="track_state">label-default</t>
                                 </t>
 
                                 <span t-field="track.state" t-attf-class="tag label {{track_state}}"/>

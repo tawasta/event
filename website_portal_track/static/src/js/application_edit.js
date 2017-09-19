@@ -14,16 +14,46 @@ $(function() {
     $('#track-application-speakers-div').removeClass('panel-primary');
     $('#track-application-speakers-div').addClass('panel-default');
 
+    // Hide speaker template
+    $('#track-application-speakers-input-row').hide();
+
     $('#track-application-speakers-div').find('input').each(function() {
         var field_name = $(this).attr("name");
 
         // Don't disable the template
         if(field_name){
-            return true;
+            // Remove comment to enable
+            // return true;
         }
 
         $(this).prop('disabled', true);
     });
+
+    // Enable speaker fields
+    $('#add_speaker').click(function() {
+        var last_div = $('#track-application-speakers-input-div .track-application-contact-input-row:last');
+
+        last_div.show();
+
+        last_div.find('input').each(function() {
+            $(this).prop('disabled', false);
+        })
+    });
+
+    // Disable new speaker
+    $('#track-application-speakers-input-row').prop('disabled', true);
+
+    if(application_state != 'draft' && application_state != 'announced'){
+        // Hide speaker adding button
+        $('#add_speaker').hide();
+
+        // Enable workshop_participants
+        $('#workshop_participants').prop('disabled', false);
+
+        $('#track-application-workshop-div').find('input').each(function() {
+            $(this).prop('disabled', true);
+        });
+    };
 
     if(application_state != 'draft'){
         // Disable application type selection
@@ -32,21 +62,11 @@ $(function() {
         // Hide attachment div
         $('#track-application-application-attachment-div').hide();
 
-        // Disable target group selection
-        $('#target_group_select').prop('disabled', true);
-
-        // Hide speaker adding button
-        $('#add_speaker').hide();
-
         // Disable all speaker inputs
         $('#track-application-workshop-div').removeClass('panel-warning');
         $('#track-application-workshop-div').addClass('panel-default');
 
-        $('#track-application-workshop-div').find('input').each(function() {
-            $(this).prop('disabled', true);
-        });
-
-        // Enable workshop_participants
-        $('#workshop_participants').prop('disabled', false);
-    }
+        // Disable target group selection
+        $('#target_group_select').prop('disabled', true);
+    };
 });
