@@ -43,18 +43,6 @@ $(function() {
     // Disable new speaker
     $('#track-application-speakers-input-row').prop('disabled', true);
 
-    if(application_state != 'draft' && application_state != 'announced'){
-        // Hide speaker adding button
-        $('#add_speaker').hide();
-
-        // Enable workshop_participants
-        $('#workshop_participants').prop('disabled', false);
-
-        $('#track-application-workshop-div').find('input').each(function() {
-            $(this).prop('disabled', true);
-        });
-    };
-
     if(application_state != 'draft'){
         // Disable application type selection
         $('#application_type').prop('disabled', true);
@@ -69,4 +57,29 @@ $(function() {
         // Disable target group selection
         $('#target_group_select').prop('disabled', true);
     };
+
+    if(application_state != 'draft' && application_state != 'announced'){
+        // Hide speaker adding button
+        $('#add_speaker').hide();
+
+        // Enable workshop_participants
+        $('#workshop_participants').prop('disabled', false);
+
+        $('#track-application-workshop-div').find('input').each(function() {
+            $(this).prop('disabled', true);
+        });
+
+        // Disable inputs, except content editing
+        $('#track-application-form').find('input,select').each(function() {
+            $(this).prop('disabled', true);
+        });
+    };
+
+    if(application_state == 'cancel' || application_state == 'refused' || application_state == 'published'){
+        // Disable everything
+        $('#track-application-form').find('input,select,textarea').each(function() {
+            $(this).prop('disabled', true);
+        });
+    };
+
 });
