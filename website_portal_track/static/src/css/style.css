@@ -1,5 +1,5 @@
 /* Clickable table rows */
-#event_track_list tr:hover{
+#event_track_list .td-submit:hover{
     cursor: pointer;
 }
 

@@ -41,16 +41,20 @@
                             <th>Timeslot</th>
                             <th>State</th>
                             <th t-if="user.has_group('event.group_track_reviewer')">Review</th>
+                            <th t-if="not user.has_group('event.group_track_reviewer')"></th>
                         </tr>
                     </thead>
                     <t t-foreach="tracks" t-as="track">
                         <tr t-attf-data-href="/my/tracks/#{track.id}?#{keep_query()}">
-                            <td>
+                            <!-- Name -->
+                            <td class="td-submit">
                                 <a t-attf-href="/my/tracks/#{track.id}?#{keep_query()}">
                                     <t t-esc="track.name"/>
                                 </a>
                             </td>
-                            <td>
+
+                            <!-- Date -->
+                            <td class="td-submit">
                                 <t t-if="track.date">
                                     <span t-field="track.date" t-options='{"widget": "datetime"}'/>
                                 </t>
@@ -58,7 +62,9 @@
                                     -
                                 </t>
                             </td>
-                            <td>
+
+                            <!-- State -->
+                            <td class="td-submit">
                                 <t t-set="track_state">label-default</t>
 
                                 <t t-if="track.state == 'draft'">
@@ -87,6 +93,45 @@
 
                                 <span t-field="track.state" t-attf-class="tag label {{track_state}}"/>
                             </td>
+
+                            <!-- Action for presenter -->
+                            <td t-if="not user.has_group('event.group_track_reviewer')">
+                                <!-- Confirm or cancel an approved track -->
+                                <button t-if="track.state == 'draft'"
+                                        class="btn btn-primary mb8"
+                                        data-toggle="modal"
+                                        data-target="#track-confirm-action"
+                                        data-action="confirm"
+                                        t-attf-data-title="#{track.name}"
+                                        t-attf-data-href="/my/tracks/confirm/#{track.id}">Confirm</button>
+
+                                <button t-if="track.state in ['draft','confirmed']"
+                                        class="btn btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#track-confirm-action"
+                                        data-action="cancel"
+                                        t-attf-data-title="#{track.name}"
+                                        t-attf-data-href="/my/tracks/cancel/#{track.id}">Cancel</button>
+
+                                <!-- Approve or reject an approved track -->
+                                <button t-if="track.state == 'announced'"
+                                        class="btn btn-success mb8"
+                                        data-toggle="modal"
+                                        data-target="#track-confirm-action"
+                                        data-action="approve"
+                                        t-attf-data-title="#{track.name}"
+                                        t-attf-data-href="/my/tracks/approve/#{track.id}">Approve</button>
+
+                                <button t-if="track.state == 'announced'"
+                                        class="btn btn-warning"
+                                        data-toggle="modal"
+                                        data-target="#track-confirm-action"
+                                        data-action="reject"
+                                        t-attf-data-title="#{track.name}"
+                                        t-attf-data-href="/my/tracks/reject/#{track.id}">Reject</button>
+                            </td>
+
+                            <!-- Stars for reviewer -->
                             <td t-if="user.has_group('event.group_track_reviewer')">
                                 <div class="input-group stars">
                                     <input disabled="1" class="star star-5" id="star-5" type="radio"
@@ -106,6 +151,8 @@
                                     <label class="star-small star-1" for="star-1"></label>
                                 </div>
                             </td>
+
+                            <!-- Comment for reviewer -->
                             <td t-if="user.has_group('event.group_track_reviewer')">
                                 <span t-field="track.rating_comment" />
                             </td>
@@ -117,7 +164,28 @@
                 </div>
             </t>
         </t>
+        <t t-call="website_portal_track.confirm_dialog"/>
         <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js"></script>
+    </template>
+
+    <!-- Confirmation dialog template -->
+    <template id="confirm_dialog" name="Confirmation dialog for track actions">
+        <div class="modal fade" id="track-confirm-action" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Confirmation</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to <strong><span class="modal-track-action" /></strong> proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-ok">Yes</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </template>
 
 </odoo>
