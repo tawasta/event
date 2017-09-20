@@ -2,7 +2,9 @@ $(function() {
 
     // Turn the whole tr into a link
     $('#event_track_list .td-submit').click(function() {
-        window.location = $(this).data("href");
+        console.log($(this));
+        console.log($(this).data("href"));
+        window.location = $(this).parent().data("href");
     });
 
     // Confirmation dialog

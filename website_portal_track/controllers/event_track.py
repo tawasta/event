@@ -168,9 +168,48 @@ class WebsiteEventTrack(website_account):
         type='http',
         auth='user',
         website=True,
-        methods=['POST'])
+        methods=['GET'])
     def event_track_confirm(self, track, **post):
 
-        track.sudo().write({'state': 'confirmed'})
+        track.state = 'confirmed'
+
+        return request.redirect('/my/tracks/')
+
+    # Cancel track
+    @http.route(
+        ['/my/tracks/cancel/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['GET'])
+    def event_track_cancel(self, track, **post):
+
+        track.state = 'cancel'
+
+        return request.redirect('/my/tracks/')
+
+    # Open track (set to draft)
+    @http.route(
+        ['/my/tracks/open/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['GET'])
+    def event_track_open(self, track, **post):
+
+        track.state = 'draft'
+
+        return request.redirect('/my/tracks/')
+
+    # Approve track
+    @http.route(
+        ['/my/tracks/approve/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['GET'])
+    def event_track_open(self, track, **post):
+
+        track.state = 'published'
 
         return request.redirect('/my/tracks/')

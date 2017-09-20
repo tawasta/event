@@ -128,7 +128,16 @@
                                         data-target="#track-confirm-action"
                                         data-action="reject"
                                         t-attf-data-title="#{track.name}"
-                                        t-attf-data-href="/my/tracks/reject/#{track.id}">Reject</button>
+                                        t-attf-data-href="/my/tracks/cancel/#{track.id}">Reject</button>
+
+                                <!-- Re-open or reject an approved track -->
+                                <button t-if="track.state == 'cancel'"
+                                        class="btn btn-info"
+                                        data-toggle="modal"
+                                        data-target="#track-confirm-action"
+                                        data-action="re-open"
+                                        t-attf-data-title="#{track.name}"
+                                        t-attf-data-href="/my/tracks/open/#{track.id}">Re-open</button>
                             </td>
 
                             <!-- Stars for reviewer -->
