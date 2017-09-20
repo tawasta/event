@@ -18,16 +18,11 @@ $(function() {
     $('#track-application-speakers-input-row').hide();
 
     $('#track-application-speakers-div').find('input').each(function() {
-        var field_name = $(this).attr("name");
-
-        // Don't disable the template
-        if(field_name){
-            // Remove comment to enable
-            // return true;
-        }
-
         $(this).prop('disabled', true);
     });
+
+    // Enable input index
+    $('#track-application-speakers-input-index').prop('disabled', false);
 
     // Enable speaker fields
     $('#add_speaker').click(function() {
@@ -43,12 +38,12 @@ $(function() {
     // Disable new speaker
     $('#track-application-speakers-input-row').prop('disabled', true);
 
+    // Hide attachment div
+    $('#track-application-application-attachment-div').hide();
+
     if(application_state != 'draft'){
         // Disable application type selection
         $('#application_type').prop('disabled', true);
-
-        // Hide attachment div
-        $('#track-application-application-attachment-div').hide();
 
         // Disable all speaker inputs
         $('#track-application-workshop-div').removeClass('panel-warning');

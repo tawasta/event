@@ -150,7 +150,9 @@ class WebsiteEventTrack(website_account):
                 new_speaker = request.env['res.partner'].sudo().create(speaker)
 
             if not existing_user:
-                new_speaker = self._create_signup_user(speaker).partner_id
+                new_speaker = WebsiteEventTrackController._create_signup_user(
+                    WebsiteEventTrackController(), speaker
+                ).partner_id
 
             speaker_ids.append(new_speaker.id)
             speakers.append((4, new_speaker.id))
