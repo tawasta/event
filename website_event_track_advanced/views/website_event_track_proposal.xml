@@ -49,10 +49,33 @@
                                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
                                         <t t-call="website_event_track.event_track_application"/>
+
+
+                                        <p class="alert alert-warning alert-dismissable text-center">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            By clicking <strong>"Save"</strong> the proposition will be saved for later editing.
+                                            You will need to manually confirm it before it will be reviewed.
+                                        </p>
+
+                                        <p class="alert alert-warning alert-dismissable text-center">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                                            By clicking <strong>"Save and confirm"</strong> the proposition will be saved and sent for review.
+                                            You can not edit the proposition before it has been approved.
+                                        </p>
+
                                         <div class="form-group">
-                                            <button type="submit" id="application-submit-button"
-                                                    class="btn btn-primary col-md-10 col-md-offset-1">Save
-                                            </button>
+                                            <input type="submit"
+                                                   name="track-save"
+                                                   id="application-submit-button"
+                                                   class="btn btn-primary col-md-10 col-md-offset-1"
+                                                   value="Save" />
+
+                                            <input t-if="track.state in ['draft', ''] or not track.state"
+                                                   type="submit"
+                                                   name="track-confirm"
+                                                   id="application-submit-button"
+                                                   class="btn btn-primary col-md-10 col-md-offset-1 mt8"
+                                                   value="Save and confirm" />
                                         </div>
                                     </form>
                                 </section>

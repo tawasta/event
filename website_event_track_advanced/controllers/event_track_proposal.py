@@ -2,6 +2,7 @@
 
 # 1. Standard library imports:
 import base64
+import logging
 
 # 2. Known third party imports:
 
@@ -15,6 +16,7 @@ from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackCo
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports (One per line sorted and splitted in
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
@@ -42,6 +44,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     # Overrides the default website_event_track controller route
     @http.route()
     def event_track_proposal_post(self, event, **post):
+        # TODO: remove this "debug"
+        _logger.info("Posted values: %s" % dict(post))
 
         # 1. Get the posted values in separate dicts
         values = self._get_event_track_proposal_post_values(event, **post)
@@ -123,7 +127,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)
 
-        # 10. Return
+        # 10. Check if we want to confirm the track
+        if post.get('track-confirm') and post.get('track-confirm') != '':
+            track.state = 'confirmed'
+
+        # 11. Return
         return request.render('website_event_track.event_track_proposal_success', {'track': track, 'event': event})
 
     def _get_event_track_proposal_post_values(self, event, **post):

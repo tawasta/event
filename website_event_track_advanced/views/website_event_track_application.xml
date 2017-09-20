@@ -334,7 +334,7 @@
             <div class="panel-body">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    List all of the speakers here
+                    List all of the speakers here, including yourself if you are a speaker.
                 </p>
 
                 <div id="track-application-speakers-header-div"
@@ -601,7 +601,7 @@
 
             <div class="panel-body" id="track-application-extra-div">
                 <p class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" datla-dismiss="alert" aria-label="close">&#215;</a>
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Any wishes about special arrangements concerning the premises, fitments, etc.
                 </p>
 
