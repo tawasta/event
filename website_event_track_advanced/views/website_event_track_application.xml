@@ -115,10 +115,10 @@
                     <div class="col-md-12">
                         <label for="track_content" class="control-label">
                             Application content
-                            <span id="track_content_word_counter">Words
-                                <span id="track_content_word_count"></span>
-                            </span>
                         </label>
+                        <span id="track_content_word_counter" class="pull-right">Words
+                            <span id="track_content_word_count"></span>
+                        </span>
 
                         <textarea name="track_content"
                                   id="track_content"
@@ -198,12 +198,11 @@
                     </div>
 
                     <div class="col-md-8">
-                        <label for="target_group_info" class="control-label">Target group info
-                        </label>
+                        <label for="target_group_info" class="control-label">Target group info</label>
 
-                        <p id="target_group_info_word_counter">Words
+                        <span id="target_group_info_word_counter" class="pull-right">Words
                             <span id="target_group_info_word_count"></span>
-                        </p>
+                        </span>
 
                         <textarea name="target_group_info"
                                   id="target_group_info"
@@ -445,9 +444,9 @@
                     <div class="col-md-8">
                         <label for="webinar_info" class="control-label">Webinar info</label>
 
-                        <p id="webinar_info_word_counter">Words
+                        <span id="webinar_info_word_counter" class="pull-right">Words
                             <span id="webinar_info_word_count"></span>
-                        </p>
+                        </span>
 
                         <textarea class="form-control"
                                   id="webinar_info"
@@ -559,9 +558,9 @@
                     <div class="col-md-12">
                         <label for="workshop_goals" class="control-label">Workshop goals</label>
 
-                        <p id="workshop_goals_word_counter">Words
+                        <span id="workshop_goals_word_counter" class="pull-right">Words
                             <span id="workshop_goals_word_count"></span>
-                        </p>
+                        </span>
 
                         <textarea class="form-control"
                                   id="workshop_goals"
@@ -607,9 +606,11 @@
 
                 <div class="form-group" id="track-application-extra-info-div">
                     <div class="col-md-12">
-                        <p id="extra_info_word_counter">Words
+                        <label for="extra_info" class="control-label">Extra info</label>
+
+                        <span id="extra_info_word_counter" class="pull-right">Words
                             <span id="extra_info_word_count"></span>
-                        </p>
+                        </span>
 
                         <textarea class="form-control"
                                   id="extra_info"
