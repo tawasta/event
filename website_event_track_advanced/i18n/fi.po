@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-05 09:06+0000\n"
-"PO-Revision-Date: 2017-09-25 15:54+0300\n"
+"PO-Revision-Date: 2017-09-25 16:01+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -241,7 +241,7 @@ msgstr "Liitteet"
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_event_allowed_track_tag_ids
 msgid "Available Track Tags"
-msgstr "Käytettävissä olevat trackien tunnisteet"
+msgstr "Käytettävissä olevat trackien avainsanat"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
@@ -486,7 +486,7 @@ msgstr "Tapahtuman track"
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_tag_form
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_tag_tree
 msgid "Event Track Tag"
-msgstr "Tapahtuman trackin tunniste"
+msgstr "Tapahtuman trackin avainsana"
 
 #. module: website_event_track
 #: model:ir.actions.act_window,name:website_event_track.action_event_sponsor_from_event
@@ -1060,7 +1060,7 @@ msgstr "Valitse kaikkein sopivin ryhmä. Voit laajentaa kohderyhmää kirjoittam
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Selecting too many tags can make it harder to find the correct audience."
-msgstr "Liian monen tunnisteen valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
+msgstr "Liian monen avainsanan valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_sponsor_sequence
@@ -1143,13 +1143,13 @@ msgstr "Tunniste"
 #. module: website_event_track
 #: sql_constraint:event.track.tag:0
 msgid "Tag name already exists !"
-msgstr "Tunnisteen nimi on jo olemassa!"
+msgstr "Avainsa on jo olemassa!"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_ids
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Tags"
-msgstr "Tunnisteet"
+msgstr "Avainsanat"
 
 #. module: website_event_track
 #: code:addons/addons/website_event_track/models/event.py:28
@@ -1464,7 +1464,7 @@ msgstr "You don't have a permission to write fields %s"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "You should select 3-5 tags that matches your presentation best."
-msgstr "Valitse 3-5 tunnistetta jotka kuvaavat esitystä parhaiten"
+msgstr "Valitse 3-5 avainsanaa jotka kuvaavat esitystä parhaiten"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_workshop
