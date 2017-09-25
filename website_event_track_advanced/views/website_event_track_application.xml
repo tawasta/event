@@ -40,7 +40,7 @@
                                     class="form-control" type="selection">
                                 <t t-foreach="types" t-as="application_type">
                                     <option t-attf-value="#{application_type['code']}"
-                                            t-attf-title="#{application_type['description']}"
+                                            t-attf-description="#{application_type['description']}"
                                             t-att-selected="'selected' if track['type']['id'] == application_type['id'] else False" >
                                         <t t-esc="application_type['name']"/>
                                     </option>
