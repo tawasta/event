@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-05 09:06+0000\n"
-"PO-Revision-Date: 2017-09-05 12:08+0300\n"
+"PO-Revision-Date: 2017-09-25 15:54+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -920,7 +920,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Please give information about your primary target audience."
-msgstr "Ole hyvä ja anna tiedot ensisijaisesta kohderyhmästä"
+msgstr "Valitse esityksesi ensisijainen kohderyhmä, vaikka esityksesi sopisikin useammalle eri kohderyhmälle. Voit kirjoittaa kohderyhmän tietoihin tarkennuksia esityksen kohderyhmästä."
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_info

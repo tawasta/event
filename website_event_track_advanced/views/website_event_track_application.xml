@@ -153,10 +153,8 @@
             <div class="panel-body">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Please give information about your primary target audience.
-                </p>
-                <p class="alert alert-warning alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                    Please select your <strong>primary target audience</strong>.
+
                     Select the most fitting group. You can expand your target group by writing a
                     description.
                 </p>
@@ -221,12 +219,12 @@
                         <p class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">
                                 &#215;</a>
-                            You should select 3-5 tags that matches your presentation best.
+                            You should select 3-5 key words that matches your presentation best.
                         </p>
                         <p class="alert alert-warning alert-dismissable">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">
                                 &#215;</a>
-                            Selecting too many tags can make it harder to find the correct audience.
+                            Selecting too many key words can make it harder to find the correct audience.
                         </p>
 
                         <div class="row">
