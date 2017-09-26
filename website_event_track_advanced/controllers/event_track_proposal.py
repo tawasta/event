@@ -201,6 +201,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'workshop_participants': post.get('workshop_participants'),
             'workshop_goals': post.get('workshop_goals'),
             'workshop_schedule': post.get('workshop_schedule'),
+            'workshop_fee': post.get('workshop_fee'),
         }
 
         if post.get('language') and post.get('language') != '0':

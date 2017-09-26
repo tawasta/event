@@ -128,6 +128,7 @@
                         <page name="workshop" string="Workshop"><!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
                             <group cols="1">
                                 <field name="workshop_participants" nolabel="0"/>
+                                <field name="workshop_fee" nolabel="0"/>
                                 <field name="workshop_goals" nolabel="0"/>
                                 <field name="workshop_schedule" nolabel="0"/>
                             </group>

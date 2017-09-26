@@ -139,6 +139,11 @@ class EventTrack(models.Model):
         string='Max participants',
     )
 
+    workshop_fee = fields.Text(
+        string='Workshop participation fee',
+        help='Leave empty for free workshops',
+    )
+
     returning_speaker = fields.Boolean(
         string='Has been a speaker at an earlier event',
         default=False,

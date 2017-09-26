@@ -442,7 +442,8 @@
             <div class="panel-body">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Workshop information and invoicing address. The contract will be sent for the signee.
+                    Workshop information and invoicing address.<br/>
+                    The contract will be sent for the signee.
                 </p>
 
                 <h4>
@@ -511,6 +512,19 @@
                             </span>
                             <input id="workshop_participants" name="workshop_participants" placeholder="E.g. 20"
                                    class="form-control" required="true" t-att-value="track.workshop_participants"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="workshop_fee" class="control-label">Participation fee
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-users"/>
+                            </span>
+                            <input id="workshop_fee" name="workshop_fee" placeholder="Leave empty if free"
+                                   class="form-control" t-att-value="track.workshop_fee"/>
                         </div>
                     </div>
 
