@@ -51,13 +51,13 @@
                                         <t t-call="website_event_track.event_track_application"/>
 
 
-                                        <p class="alert alert-warning alert-dismissable text-center">
+                                        <p class="alert alert-danger alert-dismissable text-center">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             By clicking <strong>"Save"</strong> the proposition will be saved for later editing.
                                             You will need to manually confirm it before it will be reviewed.
                                         </p>
 
-                                        <p class="alert alert-warning alert-dismissable text-center">
+                                        <p class="alert alert-danger alert-dismissable text-center">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             By clicking <strong>"Save and confirm"</strong> the proposition will be saved and sent for review.
                                             You can not edit the proposition before it has been approved.

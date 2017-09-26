@@ -159,6 +159,16 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             if post.get('tag_' + str(tag.id)):
                 tags.append(tag.id)
 
+        if post.get('keywords'):
+            event_track_tag = request.env['event.track.tag']
+            keyword = post.get('keywords').strip()
+            tag = event_track_tag.search([('name', '=ilike', keyword)], limit=1)
+
+            if not tag:
+                tag = event_track_tag.create({'name': keyword})
+
+            tags.append(tag.id)
+
         # Application type
         application_type = False
         if post.get('application_type'):
@@ -174,6 +184,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'name': post.get('track_name'),
             'type': application_type,
             'event_id': event.id,
+            'keywords': post.get('keywords'),
             'tag_ids': [(6, 0, tags)],
             'user_id': False,
             'description': post.get('track_content'),
@@ -181,7 +192,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'video_url': post.get('video_url'),
             'webinar': post.get('webinar') not in ['0', 'false'],
             'webinar_info': post.get('webinar_info'),
-            'returning_speaker':  post.get('returning_speaker') not in ['0', 'false'],
 
             'extra_info':post.get('extra_info'),
 
