@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 09:08+0000\n"
-"PO-Revision-Date: 2017-09-05 13:59+0300\n"
+"POT-Creation-Date: 2017-09-26 13:16+0000\n"
+"PO-Revision-Date: 2017-09-26 16:24+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,109 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-danger\">Refused</span>"
+msgstr "<span class=\"tag label label-danger\">Hylätty</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-default\">Cancelled</span>"
+msgstr "<span class=\"tag label label-default\">Peruttu</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-info\">Draft</span>"
+msgstr "<span class=\"tag label label-info\">Luonnos</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-primary\">Announced</span>"
+msgstr "<span class=\"tag label label-primary\">Julkistettu</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-success\">Published</span>"
+msgstr "<span class=\"tag label label-success\">Julkaistu</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "<span class=\"tag label label-warning\">Confirmed</span>"
+msgstr "<span class=\"tag label label-warning\">Vahvistettu</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Approve"
+msgstr "Hyväksy"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Approved by reviewers. Waiting for your confirmation."
+msgstr "Arvioijien hyväksymä. Odottaa vahvistustasi."
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+msgid "Are you sure you want to <strong><span class=\"modal-track-action\"/></strong> proposal \"<strong><span class=\"modal-track-title\"/>\"</strong>?"
+msgstr "Oletko varma että haluat tehdä toiminnon <strong><span class=\"modal-track-action\"/></strong> esitykselle \"<strong><span class=\"modal-track-title\"/>\"</strong>?"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Cancelled by you."
+msgstr "Olet peruuttanut esityksen"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Confirm"
+msgstr "Vahvista"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+msgid "Confirmation"
+msgstr "Vahvistus"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Confirmed by you. Included in the event program."
+msgstr "Olet vahvistanut esityksen. Esitys on lisätty tapahtuman ohjelmaan"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Confirmed by you. Waiting for an approval from reviewers."
+msgstr "Olet vahvistanut esityksen. Esitys odottaa hyväksyntää arvioijilta."
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Created by you. Waiting for you to send this to review."
+msgstr "Olet luonut esityksen. Odottaa että lähetät sen arvioitavaksi."
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+msgid "No"
+msgstr "Ei"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Not approved by reviewers."
+msgstr "Esitystä ei ole hyväksytty"
+
+#. module: website_portal_track
 #: model:ir.model,name:website_portal_track.model_res_partner
 msgid "Partner"
 msgstr "Kumppani"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Re-open"
+msgstr "Avaa"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Reject"
+msgstr "Hylkää"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.event_track_application_review
@@ -37,13 +137,13 @@ msgstr "Tallenna"
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "State"
-msgstr "Tila"
+msgstr "Osavaltio/Maakunta"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_home_tracks
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "There are currently no tracks for your account."
-msgstr "Tälle tunnukselle ei ole trackeja"
+msgstr "Tälle tunnukselle ei ole esityksiä"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -53,24 +153,34 @@ msgstr "Timeslot"
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Track"
-msgstr "Track"
+msgstr "Esitys"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_home_menu_tracks
 #: model:ir.ui.view,arch_db:website_portal_track.track_followup_breadcrumbs
 msgid "Tracks"
-msgstr "Trackit"
+msgstr "Esitykset"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+msgid "Yes"
+msgstr "Kyllä"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_home_tracks
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Your tracks"
-msgstr "Omat trackit"
+msgstr "Omat esitykset"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "label-danger"
 msgstr "label-danger"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "label-default"
+msgstr "label-default"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -86,3 +196,8 @@ msgstr "label-primary"
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "label-success"
 msgstr "label-success"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "label-warning"
+msgstr "label-warning"
