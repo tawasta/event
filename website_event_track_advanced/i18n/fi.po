@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-05 09:06+0000\n"
-"PO-Revision-Date: 2017-09-05 12:08+0300\n"
+"PO-Revision-Date: 2017-09-25 16:23+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr "<b>Ehdottanut</b>:"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
 msgid "<b>Speakers Biography</b>:"
-msgstr "<b>Kuvaus puhujasta</b>:"
+msgstr "<b>Kuvaus esiintyjästä</b>:"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
@@ -116,7 +116,7 @@ msgstr "Aktiivinen"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_speakers
 msgid "Add a speaker"
-msgstr "Lisää puhuja"
+msgstr "Lisää esiintyjä"
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track19
@@ -153,7 +153,7 @@ msgstr "Mikä tahansa kieli"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_extra_info
 msgid "Any wishes about special arrangements concerning the premises, fitments, etc."
-msgstr "Toiveet eritysjärjestelyistä liittyen tiloihin, kalustukseen, tms."
+msgstr "Ole hyvä ja täytä lisätietoihin toiveesi esityksen erityisjärjestelyistä. Esimerkiksi toiveet esitystekniikkaan, tiloihin, kalustukseen, esityksen ajankohtaan tms. liittyen"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_proposal
@@ -209,7 +209,7 @@ msgstr "Arkistoitu"
 #: code:addons/website_event_track_advanced/static/src/js/proposal.js:84
 #, python-format
 msgid "Are you sure you want to delete this speaker?"
-msgstr "Oletko aivan varma että haluat poistaa tämän puhujan?"
+msgstr "Oletko aivan varma että haluat poistaa tämän esiintyjän?"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_assign_equally
@@ -241,7 +241,7 @@ msgstr "Liitteet"
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_event_allowed_track_tag_ids
 msgid "Available Track Tags"
-msgstr "Käytettävissä olevat trackien tunnisteet"
+msgstr "Käytettävissä olevat trackien avainsanat"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
@@ -486,7 +486,7 @@ msgstr "Tapahtuman track"
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_tag_form
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_tag_tree
 msgid "Event Track Tag"
-msgstr "Tapahtuman trackin tunniste"
+msgstr "Tapahtuman trackin avainsana"
 
 #. module: website_event_track
 #: model:ir.actions.act_window,name:website_event_track.action_event_sponsor_from_event
@@ -572,7 +572,7 @@ msgstr "Ryhmittely"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_returning_speaker
 msgid "Has been a speaker at an earlier event"
-msgstr "On ollut tapahtumassa aiemmin puhujana"
+msgstr "On ollut tapahtumassa aiemmin esiintyjänä"
 
 #. module: website_event_track
 #: selection:event.track,priority:0
@@ -713,7 +713,7 @@ msgstr "Sukunimi"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_speakers
 msgid "List all of the speakers here"
-msgstr "Listaa kaikki puhujat tässä"
+msgstr "Ole hyvä ja täytä kaikkien esiintyjien tiedot, mukaanlukien itsesi, jos olet esiintyjänä"
 
 #. module: website_event_track
 #: model:ir.ui.menu,name:website_event_track.menu_event_track_location
@@ -920,7 +920,7 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Please give information about your primary target audience."
-msgstr "Ole hyvä ja anna tiedot ensisijaisesta kohderyhmästä"
+msgstr "Valitse esityksesi ensisijainen kohderyhmä, vaikka esityksesi sopisikin useammalle eri kohderyhmälle. Voit kirjoittaa kohderyhmän tietoihin tarkennuksia esityksen kohderyhmästä."
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_info
@@ -1060,7 +1060,7 @@ msgstr "Valitse kaikkein sopivin ryhmä. Voit laajentaa kohderyhmää kirjoittam
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Selecting too many tags can make it harder to find the correct audience."
-msgstr "Liian monen tunnisteen valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
+msgstr "Liian monen avainsanan valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_sponsor_sequence
@@ -1090,7 +1090,7 @@ msgstr "Sosiaalinen media"
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_speakers
 #, python-format
 msgid "Speakers"
-msgstr "Puhujat"
+msgstr "Esiintyjät"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_sponsor_type_name
@@ -1143,13 +1143,13 @@ msgstr "Tunniste"
 #. module: website_event_track
 #: sql_constraint:event.track.tag:0
 msgid "Tag name already exists !"
-msgstr "Tunnisteen nimi on jo olemassa!"
+msgstr "Avainsa on jo olemassa!"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_ids
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "Tags"
-msgstr "Tunnisteet"
+msgstr "Avainsanat"
 
 #. module: website_event_track
 #: code:addons/addons/website_event_track/models/event.py:28
@@ -1464,7 +1464,7 @@ msgstr "You don't have a permission to write fields %s"
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_targetgroup_info
 msgid "You should select 3-5 tags that matches your presentation best."
-msgstr "Valitse 3-5 tunnistetta jotka kuvaavat esitystä parhaiten"
+msgstr "Valitse 3-5 avainsanaa jotka kuvaavat esitystä parhaiten"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_application_workshop

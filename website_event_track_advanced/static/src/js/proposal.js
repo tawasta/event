@@ -89,7 +89,7 @@ odoo.define('proposal', function (require) {
     **/
 
     $('#application_type').change(function(){
-        $('#application_type_description').html($('#application_type option:selected').attr('title'));
+        $('#application_type_description').html($('#application_type option:selected').attr('description'));
         var application_type = $('#application_type option:selected').val();
 
         workshop = application_type == 'workshop';
