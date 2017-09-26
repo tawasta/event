@@ -118,6 +118,11 @@ class EventTrack(models.Model):
         string='Language'
     )
 
+    keywords = fields.Text(
+        string='Keywords',
+        help='A free text key words',
+    )
+
     extra_info = fields.Html(
         string='Extra info',
     )

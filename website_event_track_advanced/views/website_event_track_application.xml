@@ -29,7 +29,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group" id="track-application-application-type-div">
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <label for="application_type" class="control-label">Application type</label>
 
                         <div class="input-group">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <label for="type_description" class="control-label">Description</label>
 
                         <span id="application_type_description" name="type_description"/>
@@ -76,14 +76,11 @@
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Please refrain from using any identifying information (name, organization,
                     project).
-                    <br/>
-                    Using identifying information in the application may be grounds for
-                    disqualification.
                 </p>
 
                 <div class="form-group" id="track-application-application-info-div">
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="track_name" class="control-label">Application title</label>
 
                         <div class="input-group">
@@ -95,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <label for="video_url" class="control-label">Application as a video (link to
                             e.g. Youtube or Vimeo)
                         </label>
@@ -109,9 +106,7 @@
                                    class="form-control" type="text"/>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group" id="track-application-application-info-div">
                     <div class="col-md-12">
                         <label for="track_content" class="control-label">
                             Application content
@@ -129,6 +124,24 @@
                             <t t-esc="track['description']" />
                         </textarea>
                     </div>
+
+                    <div class="col-md-4">
+                        <label for="language" class="control-label">Application language</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-language"/>
+                            </span>
+                            <select name="language" required="true" class="form-control"
+                                    type="selection">
+                                <t t-foreach="languages" t-as="language">
+                                    <option t-attf-value="#{language.id}" t-att-selected="'selected' if track['language']['id'] == language['id'] else False">
+                                        <t t-esc="language.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group" id="track-application-application-attachment-div">
@@ -138,6 +151,7 @@
                         </label>
                     </div>
                 </div>
+
             </div>
         </div>
     </template>
@@ -153,7 +167,8 @@
             <div class="panel-body">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Please give information about your primary target audience.
+                    <span>Select your <strong>primary target group</strong>, even if your presentation would fit to multiple target groups.</span>
+                    <br/><span>You can expand the target group by writing a description.</span>
                 </p>
                 <p class="alert alert-warning alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
@@ -174,23 +189,6 @@
                                 <t t-foreach="target_groups" t-as="group">
                                     <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
                                         <t t-esc="group.name" />
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <label for="language" class="control-label">Language</label>
-
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-language"/>
-                            </span>
-                            <select name="language" required="true" class="form-control"
-                                    type="selection">
-                                <option t-attf-value="0">Any language</option>
-                                <t t-foreach="languages" t-as="language">
-                                    <option t-attf-value="#{language.id}" t-att-selected="'selected' if track['language']['id'] == language['id'] else False">
-                                        <t t-esc="language.name"/>
                                     </option>
                                 </t>
                             </select>
@@ -217,16 +215,16 @@
                 <div class="form-group" t-if="len(event.allowed_track_tag_ids)"
                      id="track-application-targetgroup-tags-div">
                     <div class="col-md-12">
-                        <label class="control-label required-label text-primary">Tags</label>
+                        <label class="control-label required-label text-primary">Keywords</label>
                         <p class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">
                                 &#215;</a>
-                            You should select 3-5 tags that matches your presentation best.
+                            You should select a few keywords that matches your presentation best.
                         </p>
                         <p class="alert alert-warning alert-dismissable">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">
                                 &#215;</a>
-                            Selecting too many tags can make it harder to find the correct audience.
+                            Selecting too many keywords can make it harder to find the correct audience.
                         </p>
 
                         <div class="row">
@@ -234,6 +232,10 @@
                                    t-as="tag">
                                 <input type="checkbox" t-attf-name="tag_#{str(tag.id)}" t-att-checked="'checked' if tag.id in track.tag_ids.ids else False"/>
                                 <t t-esc="tag.name"/>
+                            </label>
+
+                            <label class="col-sm-4">
+                                <input name="keywords" placeholder="Other, what?" class="form-control" type="text" t-att-value="track.keywords"/>
                             </label>
                         </div>
                     </div>
@@ -256,8 +258,6 @@
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Please fill the contact persons information here.
-                    <br/>
-                    Any newsletters and other guidance will be sent to the contact person.
                 </p>
 
                 <div id="track-application-contact-header-div"
@@ -267,11 +267,6 @@
                     <label for="contact_last_name">Last name</label>
                     <label for="contact_organization">Organization</label>
                     <label for="contact_title">Title</label>
-                    <!--
-                    <label for="contact_street">Street</label>
-                    <label for="contact_zip">Zip</label>
-                    <label for="contact_city">City</label>
-                    -->
                 </div>
 
                 <div id="track-application-contract-input-div">
@@ -283,37 +278,13 @@
                         <input name="contact_last_name" placeholder="Last name" class="form-control"
                                required="true" type="text" t-att-value="track.partner_id.lastname"/>
                         <input name="contact_organization" placeholder="Organization"
-                               class="form-control" type="text" t-att-value="track.partner_id.parent_id.name"/>
+                               class="form-control" required="true" type="text" t-att-value="track.partner_id.parent_id.name"/>
                         <input name="contact_title" placeholder="Title" class="form-control"
-                               type="text" t-att-value="track.partner_id.function"/>
-                        <!--
-                        <input name="contact_street" placeholder="Street" class="form-control" type="text" />
-                        <input name="contact_zip" placeholder="Zip" class="form-control" type="text" />
-                        <input name="contact_city" placeholder="City" class="form-control" type="text" />
-                        -->
+                               type="text" required="true" t-att-value="track.partner_id.function"/>
+
                         <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
                         </button>
-                    </div>
-                </div>
-
-                <div class="form-group" id="track-application-contact-extra-div">
-                    <div class="col-md-4">
-                        <label for="returning_speaker" class="control-label">
-                            I have been a speaker at this event earlier
-                        </label>
-
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-comment"/>
-                            </span>
-                            <select name="returning_speaker" required="true" class="form-control"
-                                    type="selection">
-                                <option value="false">-</option>
-                                <option value="0" t-att-selected="'selected' if track['returning_speaker'] == False else False">No</option>
-                                <option value="1" t-att-selected="'selected' if track['returning_speaker'] == True else False">Yes</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
 
@@ -366,7 +337,7 @@
                             <input placeholder="Organization" t-att-value="speaker.parent_id.name"
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
-                                   type="text"/>
+                                   required="true" type="text"/>
                             <button type="button" class="btn btn-remove-speaker" disabled="1">
                                 <i class="fa fa-trash"/>
                             </button>
@@ -384,7 +355,7 @@
                         <input name="speaker_organization[0]" placeholder="Organization"
                                required="true" class="form-control" type="text"/>
                         <input name="speaker_title[0]" placeholder="Title" class="form-control"
-                               type="text"/>
+                               required="true" type="text"/>
                         <!--
                         <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
                         <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
@@ -422,9 +393,7 @@
 
                 <div class="form-group" id="track-application-webinar-div">
                     <div class="col-md-4">
-                        <label for="webinar" class="control-label">I wish to hold a webinar before
-                            the event
-                        </label>
+                        <label for="webinar" class="control-label">I wish to hold a webinar</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -473,7 +442,7 @@
             <div class="panel-body">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Workshop organizer information and invoicing address.
+                    Workshop information and invoicing address. The contract will be sent for the signee.
                 </p>
 
                 <h4>
@@ -486,11 +455,6 @@
                     <label for="signee_first_name">First name</label>
                     <label for="signee_last_name">Last name</label>
                     <label for="signee_title">Title</label>
-                    <!--
-                    <label for="signee_street">Street</label>
-                    <label for="signee_zip">Zip</label>
-                    <label for="signee_city">City</label>
-                    -->
                 </div>
 
                 <div id="track-application-signee-input-div">
@@ -503,16 +467,11 @@
                                required="true" type="text" t-att-value="track.organizer_contact.lastname"/>
                         <input name="signee_title" placeholder="Title" class="form-control"
                                type="text" t-att-value="track.organizer_contact.function"/>
-                        <!--
-                        <input name="signee_street" placeholder="Street" class="form-control" type="text" />
-                        <input name="signee_zip" placeholder="Zip" class="form-control" type="text" />
-                        <input name="signee_city" placeholder="City" class="form-control" type="text" />
-                        -->
                     </div>
                 </div>
 
-                <div>
-                    <h4>Organizer invoice address</h4>
+                <div class="mt16">
+                    <h4>Organization invoice address</h4>
 
                     <div id="track-application-organizer-header-div"
                          class="track-application-invoice-input-row">
@@ -541,7 +500,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="track-application-workshop-div">
+                <div class="form-group mt16" id="track-application-workshop-div">
                     <div class="col-md-4">
                         <label for="workshop_participants" class="control-label">Max participants
                         </label>
@@ -551,7 +510,7 @@
                                 <i class="fa fa-users"/>
                             </span>
                             <input id="workshop_participants" name="workshop_participants" placeholder="E.g. 20"
-                                   class="form-control" t-att-value="track.workshop_participants"/>
+                                   class="form-control" required="true" t-att-value="track.workshop_participants"/>
                         </div>
                     </div>
 
@@ -572,7 +531,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        <label for="workshop_schedule" class="control-label">Workshop schedule
+                        <label for="workshop_schedule" class="control-label">Workshop program and schedule
                         </label>
 
                         <textarea class="form-control"
@@ -601,7 +560,8 @@
             <div class="panel-body" id="track-application-extra-div">
                 <p class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Any wishes about special arrangements concerning the premises, fitments, etc.
+                    Please tell us any wishes about special arrangements.<br/>
+                    This can concern the presentation technology, premises, fitments, schedule, etc.
                 </p>
 
                 <div class="form-group" id="track-application-extra-info-div">
