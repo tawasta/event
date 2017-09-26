@@ -188,6 +188,17 @@ class WebsiteEventTrack(website_account):
 
         track.state = 'cancel'
 
+    # Refuse track
+    @http.route(
+        ['/my/tracks/refuse/<model("event.track"):track>'],
+        type='http',
+        auth='user',
+        website=True,
+        methods=['GET'])
+    def event_track_refuse(self, track, **post):
+
+        track.state = 'refused'
+
         return request.redirect('/my/tracks/')
 
     # Open track (set to draft)

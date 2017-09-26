@@ -128,7 +128,7 @@
                                         data-target="#track-confirm-action"
                                         data-action="reject"
                                         t-attf-data-title="#{track.name}"
-                                        t-attf-data-href="/my/tracks/cancel/#{track.id}">Reject</button>
+                                        t-attf-data-href="/my/tracks/refuse/#{track.id}">Reject</button>
 
                                 <!-- Re-open or reject an approved track -->
                                 <button t-if="track.state == 'cancel'"
