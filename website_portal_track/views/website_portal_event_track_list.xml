@@ -107,7 +107,7 @@
                                         t-attf-data-title="#{track.name}"
                                         t-attf-data-href="/my/tracks/confirm/#{track.id}">Confirm</button>
 
-                                <button t-if="track.state in ['draft','confirmed']"
+                                <button t-if="track.state in ['draft']"
                                         class="btn btn-danger"
                                         data-toggle="modal"
                                         data-target="#track-confirm-action"
