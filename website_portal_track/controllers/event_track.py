@@ -118,6 +118,8 @@ class WebsiteEventTrack(website_account):
         website=True,
         methods=['POST'])
     def event_track_save(self, track, **post):
+        values = dict()
+
         # Reviewers get their own save
         if request.env.user.has_group('event.group_track_reviewer'):
             track_values = dict()
@@ -133,7 +135,7 @@ class WebsiteEventTrack(website_account):
 
         speaker_ids = list()
         speakers = list()
-        for speaker in values.get('speakers'):
+        for speaker in values.get('speakers', []):
             # If user already exists, create a new partner
             existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
 

@@ -23,7 +23,8 @@
             <div class="panel-body">
                 <div class="form-group" id="track-application-review-div">
                     <div class="col-md-4">
-                        <div class="input-group stars">
+                        <label for="rating" class="control-label input-group">Rating</label>
+                        <div class="stars">
                             <input class="star star-5" id="star-5" type="radio" name="rating" value="5"
                                    t-att-checked="'checked' if track.rating == '5' else False" />
                             <label class="star star-5" for="star-5"></label>
@@ -42,13 +43,11 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="input-group mt4">
-                            <span class="input-group-addon">
-                                <i class="fa fa-comment"/>
-                            </span>
-                            <input id="rating_comment" name="rating_comment"
-                                   class="form-control" t-att-value="track.rating_comment"/>
-                        </div>
+                        <label for="rating_comment" class="control-label">Verbal rating</label>
+                        <textarea class="form-control"
+                                  id="rating_comment"
+                                  name="rating_comment"
+                                  rows="4"><t t-esc="track.rating_comment" /></textarea>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ $(function() {
     $('#csrf_token').removeAttr('disabled');
 
     // Enable review inputs
-    $('#track-application-review-div').find('input').each(function() {
+    $('#track-application-review-div').find('input,textarea').each(function() {
         $(this).removeAttr('disabled');
     });
 
