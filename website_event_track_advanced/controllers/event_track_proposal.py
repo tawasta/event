@@ -165,7 +165,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             tag = event_track_tag.search([('name', '=ilike', keyword)], limit=1)
 
             if not tag:
-                tag = event_track_tag.create({'name': keyword})
+                tag = event_track_tag.sudo().create({'name': keyword})
 
             tags.append(tag.id)
 
