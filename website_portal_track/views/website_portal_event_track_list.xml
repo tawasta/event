@@ -41,7 +41,7 @@
                             <th>Timeslot</th>
                             <th>State</th>
                             <th t-if="user.has_group('event.group_track_reviewer')">Review</th>
-                            <th t-if="not user.has_group('event.group_track_reviewer')"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <t t-foreach="tracks" t-as="track">
@@ -95,7 +95,9 @@
                             </td>
 
                             <!-- Action for presenter -->
-                            <td t-if="not user.has_group('event.group_track_reviewer')">
+                            <td t-if="user.partner_id.id != track.partner_id.id" />
+
+                            <td t-if="user.partner_id.id == track.partner_id.id">
                                 <!-- Confirm or cancel an approved track -->
                                 <button t-if="track.state == 'draft'"
                                         class="btn btn-primary mb8"
