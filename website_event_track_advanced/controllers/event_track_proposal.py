@@ -27,7 +27,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         target_groups = request.env['event.track.target.group'].search([])
         types = request.env['event.track.type'].search_read([], ['id', 'code', 'name', 'description'])
-        languages = request.env['res.lang'].search([], order='name DESC')
+        languages = request.env['res.lang'].search([], order='id')
         track = request.env['event.track']
 
         return request.render(
