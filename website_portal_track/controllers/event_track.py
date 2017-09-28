@@ -89,9 +89,9 @@ class WebsiteEventTrack(website_account):
         except AccessError:
             return request.render('website.403')
 
-        target_groups = request.env['event.track.target.group'].search([])
-        types = request.env['event.track.type'].search_read([], ['code', 'name', 'description'])
-        languages = request.env['res.lang'].search([], order='name DESC')
+        values = self._get_event_track_proposal_values()
+        values['event'] = track.event_id
+        values['track'] = track
 
         view_name = 'website_portal_track.tracks_followup'
 
@@ -101,14 +101,11 @@ class WebsiteEventTrack(website_account):
 
         return request.render(
             view_name,
-            {
-                'event': track.event_id,
-                'track': track,
-                'target_groups': target_groups,
-                'languages': languages,
-                'types': types,
-            },
+            values,
         )
+
+    def _get_event_track_proposal_values(self):
+        return WebsiteEventTrackController._get_event_track_proposal_values(WebsiteEventTrackController())
 
     # Save track modifications
     @http.route(
@@ -126,11 +123,7 @@ class WebsiteEventTrack(website_account):
             track_values['rating'] = post.get('rating')
             track_values['rating_comment'] = post.get('rating_comment')
         else:
-            values = WebsiteEventTrackController._get_event_track_proposal_post_values(
-                WebsiteEventTrackController(),
-                track.event_id,
-                **post
-            )
+            values = self._get_event_track_proposal_post_values(track, **post)
             track_values = values['track']
 
         speaker_ids = list()
@@ -165,6 +158,13 @@ class WebsiteEventTrack(website_account):
         track.sudo().message_subscribe(partner_ids=speaker_ids)
 
         return request.redirect('/my/tracks/')
+
+    def _get_event_track_proposal_post_values(self, track, **post):
+        return WebsiteEventTrackController._get_event_track_proposal_post_values(
+            WebsiteEventTrackController(),
+            track.event_id,
+            **post
+        )
 
     # Confirm track
     @http.route(
