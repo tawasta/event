@@ -444,28 +444,30 @@
                     Contract signee
                 </h4>
 
-                <div id="track-application-signee-header-div"
-                     class="track-application-signee-input-row">
-                    <label for="signee_email">Email</label>
-                    <label for="signee_first_name">First name</label>
-                    <label for="signee_last_name">Last name</label>
-                    <label for="signee_title">Title</label>
-                </div>
+                <div id="track-application-organization-signee-div">
+                    <div id="track-application-signee-header-div"
+                         class="track-application-signee-input-row">
+                        <label for="signee_email">Email</label>
+                        <label for="signee_first_name">First name</label>
+                        <label for="signee_last_name">Last name</label>
+                        <label for="signee_title">Title</label>
+                    </div>
 
-                <div id="track-application-signee-input-div">
-                    <div class="track-application-signee-input-row">
-                        <input name="signee_email" placeholder="Email" class="form-control"
-                               required="true" type="email" t-att-value="track.organizer_contact.email"/>
-                        <input name="signee_first_name" placeholder="First name"
-                               class="form-control" required="true" type="text" t-att-value="track.organizer_contact.firstname"/>
-                        <input name="signee_last_name" placeholder="Last name" class="form-control"
-                               required="true" type="text" t-att-value="track.organizer_contact.lastname"/>
-                        <input name="signee_title" placeholder="Title" class="form-control"
-                               type="text" t-att-value="track.organizer_contact.function"/>
+                    <div id="track-application-signee-input-div">
+                        <div class="track-application-signee-input-row">
+                            <input name="signee_email" placeholder="Email" class="form-control"
+                                   required="true" type="email" t-att-value="track.organizer_contact.email"/>
+                            <input name="signee_first_name" placeholder="First name"
+                                   class="form-control" required="true" type="text" t-att-value="track.organizer_contact.firstname"/>
+                            <input name="signee_last_name" placeholder="Last name" class="form-control"
+                                   required="true" type="text" t-att-value="track.organizer_contact.lastname"/>
+                            <input name="signee_title" placeholder="Title" class="form-control"
+                                   type="text" t-att-value="track.organizer_contact.function"/>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt16">
+                <div class="mt16" id="track-application-organization-invoice-div">
                     <h4>Organization invoice address</h4>
 
                     <div id="track-application-organizer-header-div"
