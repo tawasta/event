@@ -25,21 +25,28 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     @http.route()
     def event_track_proposal(self, event, **post):
 
+        values = self._get_event_track_proposal_values()
+        values['event'] = event
+
+        return request.render(
+            'website_event_track.event_track_proposal',
+            values,
+        )
+
+    def _get_event_track_proposal_values(self):
         target_groups = request.env['event.track.target.group'].search([])
         types = request.env['event.track.type'].search_read([], ['id', 'code', 'name', 'description'])
         languages = request.env['res.lang'].search([], order='id')
         track = request.env['event.track']
 
-        return request.render(
-            'website_event_track.event_track_proposal',
-            {
-                'event': event,
-                'target_groups': target_groups,
-                'languages': languages,
-                'types': types,
-                'track': track,
-            },
-        )
+        values = {
+            'target_groups': target_groups,
+            'languages': languages,
+            'types': types,
+            'track': track,
+        }
+
+        return values
 
     # Overrides the default website_event_track controller route
     @http.route()
