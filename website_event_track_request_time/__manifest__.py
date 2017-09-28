@@ -22,7 +22,7 @@
 {
     'name': 'Requested track times',
     'summary': 'Requested track times',
-    'version': '10.0.0.2.0',
+    'version': '10.0.0.3.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -43,6 +43,7 @@
 
         'views/event_track_form.xml',
         'views/event_track_request_time.xml',
+        'views/website_event_track_application.xml',
     ],
     'demo': [
     ],
