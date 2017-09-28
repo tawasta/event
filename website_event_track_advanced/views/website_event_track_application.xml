@@ -87,7 +87,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-header"/>
                             </span>
-                            <input name="track_name" placeholder="Application title" t-att-value="track['name']"
+                            <input id="track-application-name-field" name="track_name" placeholder="Application title" t-att-value="track['name']"
                                    class="form-control" required="true" type="text"/>
                         </div>
                     </div>
