@@ -35,6 +35,14 @@ $(function() {
         })
     });
 
+    // Disable workshop inputs
+    $('#track-application-organization-signee-div').find('input').each(function() {
+        $(this).prop('disabled', true);
+    });
+    $('#track-application-organization-invoice-div').find('input').each(function() {
+        $(this).prop('disabled', true);
+    });
+
     // Disable new speaker
     $('#track-application-speakers-input-row').prop('disabled', true);
 
@@ -44,10 +52,6 @@ $(function() {
     if(application_state != 'draft'){
         // Disable application type selection
         $('#application_type').prop('disabled', true);
-
-        // Disable all speaker inputs
-        $('#track-application-workshop-div').removeClass('panel-warning');
-        $('#track-application-workshop-div').addClass('panel-default');
 
         // Disable target group selection
         $('#target_group_select').prop('disabled', true);
