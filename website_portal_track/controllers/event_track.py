@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
+import logging
 
 # 2. Known third party imports:
 
@@ -16,6 +17,7 @@ from odoo.addons.website_event_track_advanced.controllers.event_track_proposal i
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteEventTrack(website_account):
@@ -126,33 +128,39 @@ class WebsiteEventTrack(website_account):
             values = self._get_event_track_proposal_post_values(track, **post)
             track_values = values['track']
 
-        speaker_ids = list()
-        speakers = list()
-        for speaker in values.get('speakers', []):
-            # If user already exists, create a new partner
-            existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
+        # Don't allow saving in certain states
+        if track.state in ['cancel', 'refused', 'published']:
+            _logger.warning("Trying to save in '%s' state" % track.state)
+            return request.redirect('/my/tracks/')
 
-            # Get or create organization
-            if speaker.get('organization'):
-                organization = WebsiteEventTrackController._create_organization(
-                    WebsiteEventTrackController(),
-                    {'name': speaker.get('organization')}
-                )
-                del speaker['organization']
-                speaker['parent_id'] = organization.id
+        if track.state not in ['confirmed']:
+            speaker_ids = list()
+            speakers = list()
+            for speaker in values.get('speakers', []):
+                # If user already exists, create a new partner
+                existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
 
-            if existing_user:
-                new_speaker = request.env['res.partner'].sudo().create(speaker)
+                # Get or create organization
+                if speaker.get('organization'):
+                    organization = WebsiteEventTrackController._create_organization(
+                        WebsiteEventTrackController(),
+                        {'name': speaker.get('organization')}
+                    )
+                    del speaker['organization']
+                    speaker['parent_id'] = organization.id
 
-            if not existing_user:
-                new_speaker = WebsiteEventTrackController._create_signup_user(
-                    WebsiteEventTrackController(), speaker
-                ).partner_id
+                if existing_user:
+                    new_speaker = request.env['res.partner'].sudo().create(speaker)
 
-            speaker_ids.append(new_speaker.id)
-            speakers.append((4, new_speaker.id))
+                if not existing_user:
+                    new_speaker = WebsiteEventTrackController._create_signup_user(
+                        WebsiteEventTrackController(), speaker
+                    ).partner_id
 
-        track_values['speaker_ids'] = speakers
+                speaker_ids.append(new_speaker.id)
+                speakers.append((4, new_speaker.id))
+
+            track_values['speaker_ids'] = speakers
 
         track.write(track_values)
         track.sudo().message_subscribe(partner_ids=speaker_ids)
