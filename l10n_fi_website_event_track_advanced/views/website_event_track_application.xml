@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="event_track_application_l10n_fi"
+              name="Website track Finnish localization"
+              inherit_id="website_event_track.event_track_application_workshop">
+
+        <xpath expr="//div[@id='track-application-organizer-input-div']" position="after">
+                <div class="mt16" id="track-application-organization-invoice-div">
+
+                    <div id="track-application-organizer-finnish-header-div"
+                         class="track-application-contact-input-row">
+                        <label for="organizer_business_id">Business ID</label>
+                        <label for="organizer_edicode">Edicode</label>
+                        <label for="organizer_einvoice_operator">eInvoice Operator</label>
+                        <label for="organizer_einvoice_operator_identifier">Operator ID</label>
+                    </div>
+
+                    <div id="track-application-organizer-finnish-input-div"
+                         class="track-application-contact-input-row">
+
+                        <input name="organizer_business_id" placeholder="Business ID. E.g. 1234567-1"
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.business_id"/>
+
+                        <input name="organizer_edicode" placeholder="Edicode. E.g. 003712345671"
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.edicode"/>
+
+                        <input name="organizer_einvoice_operator" placeholder="eInvoice operator"
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.einvoice_operator"/>
+
+                        <input name="organizer_einvoice_operator_identifier" placeholder="eInvoice operator ID"
+                               class="form-control" type="text" required="true" t-att-value="track.organizer.einvoice_operator_identifier"/>
+                    </div>
+                </div>
+        </xpath>
+
+    </template>
+</odoo>
