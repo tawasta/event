@@ -471,17 +471,16 @@
                     <h4>Organization invoice address</h4>
 
                     <div id="track-application-organizer-header-div"
-                         class="track-application-invoice-input-row">
+                         class="track-application-contact-input-row">
                         <label for="organizer_organization">Organization</label>
                         <label for="organizer_street">Street</label>
                         <label for="organizer_zip">Zip</label>
                         <label for="organizer_city">City</label>
-                        <label for="organizer_business_id">Business id</label>
                         <label for="organizer_reference">Your reference</label>
                     </div>
 
                     <div id="track-application-organizer-input-div"
-                         class="track-application-invoice-input-row">
+                         class="track-application-contact-input-row">
                         <input name="organizer_organization" placeholder="Organization"
                                class="form-control" type="text" required="true" t-att-value="track.organizer.name"/>
                         <input name="organizer_street" placeholder="Street" class="form-control"
@@ -490,8 +489,6 @@
                                type="text" required="true" t-att-value="track.organizer.zip"/>
                         <input name="organizer_city" placeholder="City" class="form-control"
                                type="text" required="true" t-att-value="track.organizer.city"/>
-                        <input name="organizer_business_id" placeholder="E.g. 1234567-1"
-                               class="form-control" type="text" required="true" t-att-value="track.organizer.comment"/>
                         <input name="organizer_reference" placeholder="Your reference"
                                class="form-control" type="text" t-att-value="track.organizer.ref"/>
                     </div>
