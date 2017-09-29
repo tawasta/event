@@ -241,7 +241,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'street': post.get('organizer_street'),
             'zip': post.get('organizer_zip'),
             'city': post.get('organizer_city'),
-            'comment': post.get('organizer_business_id'),
             'ref': post.get('organizer_reference'),
             'type': 'invoice',
         }
