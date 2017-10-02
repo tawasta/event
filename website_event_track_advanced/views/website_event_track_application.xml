@@ -147,8 +147,12 @@
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div class="col-md-12">
                         <label class="btn btn-default btn-file col-xs-10 col-xs-offset-1">
-                            Add an attachment <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" style="display: none;"/>
+                            Add an attachment <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
+                            <span class="text-success" id="attachment-label"></span>
                         </label>
+                        <button type="button" id="btn-remove-attachment" class="btn">
+                            <i class="fa fa-trash"/>
+                        </button>
                     </div>
                 </div>
 
@@ -211,7 +215,7 @@
                 <div class="form-group" t-if="len(event.allowed_track_tag_ids)"
                      id="track-application-targetgroup-tags-div">
                     <div class="col-md-12">
-                        <label class="control-label required-label text-primary">Keywords</label>
+                        <label class="control-label required-label text-success">Keywords</label>
                         <p class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                             You should select a few keywords that matches your presentation best.

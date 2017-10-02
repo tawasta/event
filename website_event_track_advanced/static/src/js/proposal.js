@@ -1,6 +1,19 @@
 odoo.define('proposal', function (require) {
     var _t = require('web.core')._t;
 
+    // Add file name to attachment input button
+    $(':file').change(function() {
+        label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+
+        $('#attachment-label').text("(" + label + ")");
+    });
+
+    // Remove attachment
+    $('#btn-remove-attachment').click(function() {
+        console.log($('#attachment-file').val());
+        console.log($('#attachment-file').val());
+    });
+
     // Add a '*' to required fields
     $( "*[required]" ).each(function( index ) {
         var label = $('label[for="'+$(this).attr('name')+'"]');
