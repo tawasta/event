@@ -72,7 +72,6 @@
                     <group name="extra" groups="event.group_event_manager">
                         <group>
                             <field name="video_url" />
-                            <field name="returning_speaker" />
                         </group>
                         <group>
 

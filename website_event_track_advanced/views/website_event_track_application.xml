@@ -302,26 +302,22 @@
                 </p>
 
                 <div id="track-application-speakers-header-div"
-                     class="track-application-contact-input-row">
+                     class="track-application-speaker-input-row">
                     <label for="speaker_email[0]">Email</label>
                     <label for="speaker_first_name[0]">First name</label>
                     <label for="speaker_last_name[0]">Last name</label>
                     <label for="speaker_organization[0]">Organization</label>
                     <label for="speaker_title[0]">Title</label>
-                    <!--
-                    <label for="speaker_street[0]" >Street</label>
-                    <label for="speaker_zip[0]">Zip</label>
-                    <label for="speaker_city[0]">City</label>
-                    -->
+                    <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning speaker</label>
                 </div>
 
                 <div id="track-application-speakers-input-div">
-                    <input id="track-application-speakers-input-index" name="speakers_input_index"
+                    <input id="track-application-speaker-input-index" name="speakers_input_index"
                            value="0" class="hidden"/>
 
                     <!-- Existing speakers -->
                     <t t-foreach="track.speaker_ids" t-as="speaker">
-                        <div class="track-application-contact-input-row">
+                        <div class="track-application-speaker-input-row">
                             <input class="form-control" t-att-value="speaker.email"
                                    required="true" type="email" />
                             <input t-att-value="speaker.firstname"
@@ -332,6 +328,10 @@
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
                                    required="true" type="text"/>
+                            <input class="track-application-speaker-returning form-control"
+                                   type="checkbox" t-att-checked="'checked' if speaker.returning_speaker else False"
+                                   title="Returning speaker"/>
+
                             <button type="button" class="btn btn-remove-speaker" disabled="1">
                                 <i class="fa fa-trash"/>
                             </button>
@@ -339,7 +339,7 @@
                     </t>
 
                     <div id="track-application-speakers-input-row"
-                         class="track-application-contact-input-row">
+                         class="track-application-speaker-input-row">
                         <input name="speaker_email[0]" placeholder="Email" class="form-control"
                                required="true" type="email"/>
                         <input name="speaker_first_name[0]" placeholder="First name"
@@ -350,11 +350,9 @@
                                required="true" class="form-control" type="text"/>
                         <input name="speaker_title[0]" placeholder="Title" class="form-control"
                                required="true" type="text"/>
-                        <!--
-                        <input name="speaker_street[0]" placeholder="Street" class="form-control" type="text" />
-                        <input name="speaker_zip[0]" placeholder="Zip" class="form-control" type="text" />
-                        <input name="speaker_city[0]" placeholder="City" class="form-control" type="text" />
-                        -->
+                        <input name="speaker_returning[0]" class="form-control track-application-speaker-returning"
+                               type="checkbox" title="Returning speaker"/>
+
                         <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
                         </button>
