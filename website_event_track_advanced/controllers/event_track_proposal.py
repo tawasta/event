@@ -29,7 +29,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         values['event'] = event
 
         return request.render(
-            'website_event_track.event_track_proposal',
+            'website_event_track_advanced.event_track_proposal',
             values,
         )
 
