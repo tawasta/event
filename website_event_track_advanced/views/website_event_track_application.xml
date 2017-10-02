@@ -68,11 +68,11 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-application-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     This is the part of your application that will be shown to the reviewers.
                 </p>
-                <p class="alert alert-warning alert-dismissable">
+                <p id="track-application-application-alert-warning" class="alert alert-warning alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Please refrain from using any identifying information (name, organization,
                     project).
@@ -169,7 +169,7 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-targetgroup-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
 
                     <span>Select your <strong>primary target group</strong>, even if your presentation would fit to multiple target groups.</span>
@@ -216,11 +216,11 @@
                      id="track-application-targetgroup-tags-div">
                     <div class="col-md-12">
                         <label class="control-label required-label text-success">Keywords</label>
-                        <p class="alert alert-info alert-dismissable mt8">
+                        <p id="track-application-targetgroup-tags-alert-info" class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                             You should select a few keywords that matches your presentation best.
                         </p>
-                        <p class="alert alert-warning alert-dismissable">
+                        <p id="track-application-targetgroup-tags-alert-warning" class="alert alert-warning alert-dismissable">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                             Selecting too many keywords can make it harder to find the correct audience.
                         </p>
@@ -253,7 +253,7 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-contact-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Please fill the contact persons information here.
                 </p>
@@ -300,7 +300,7 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     List all of the speakers here, including yourself if you are a speaker.
                 </p>
@@ -382,7 +382,7 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-webinar-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     You can fill this if you want to hold a webinar before the actual event.
                 </p>
@@ -436,7 +436,7 @@
             </div>
 
             <div class="panel-body">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-workshop-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Workshop information and invoicing address.<br/>
                     The contract will be sent for the signee.
@@ -567,7 +567,7 @@
             </div>
 
             <div class="panel-body" id="track-application-extra-div">
-                <p class="alert alert-info alert-dismissable">
+                <p id="track-application-extra-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                     Please tell us any wishes about special arrangements.<br/>
                     This can concern the presentation technology, premises, fitments, schedule, etc.
