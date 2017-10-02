@@ -22,7 +22,7 @@
 {
     'name': 'Finnish localization for advanced event tracks',
     'summary': 'Finnish localization for advanced event tracks',
-    'version': '10.0.0.1.0',
+    'version': '10.0.0.2.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -35,6 +35,8 @@
         'bin': [],
     },
     'depends': [
+        'l10n_fi_business_code',
+        'l10n_fi_edicode',
         'website_event_track_advanced',
         'website_portal_track',
     ],
