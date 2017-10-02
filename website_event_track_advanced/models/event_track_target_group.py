@@ -18,6 +18,7 @@ from odoo import api, fields, models
 class EventTrackTargetGroup(models.Model):
     # 1. Private attributes
     _name = 'event.track.target.group'
+    _order = 'name'
 
     # 2. Fields declaration
     name = fields.Char(translate=True)

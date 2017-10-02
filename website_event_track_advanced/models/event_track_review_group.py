@@ -18,6 +18,7 @@ from odoo import api, fields, models
 class EventTrackReviewGroup(models.Model):
     # 1. Private attributes
     _name = 'event.track.review.group'
+    _order = 'name'
 
     # 2. Fields declaration
     name = fields.Char()
