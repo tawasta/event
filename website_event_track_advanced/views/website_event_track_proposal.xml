@@ -26,7 +26,7 @@
                                     <h3 class="page-header mt16">
                                         Application
                                     </h3>
-                                    <p class="alert">
+                                    <p id="track-application-section-alert" class="alert">
                                         We will accept a broad range of
                                         presentations, from reports on academic and
                                         commercial projects to tutorials and case
