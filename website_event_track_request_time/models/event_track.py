@@ -24,7 +24,7 @@ class EventTrack(models.Model):
 
     # 2. Fields declaration
     request_time = fields.Many2one(
-        comodel_name='event.track.time',
+        comodel_name='event.track.request.time',
         string='Request time',
     )
 

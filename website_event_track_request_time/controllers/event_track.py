@@ -21,7 +21,8 @@ from odoo.addons.website_event_track_request_time.controllers.event_track_propos
 class WebsiteEventTrack(WebsiteEventTrack):
 
     def _get_event_track_proposal_values(self):
-        return WebsiteEventTrackController._get_event_track_proposal_values(WebsiteEventTrackController())
+        print "time"
+        return super(WebsiteEventTrackController, self)._get_event_track_proposal_values()
 
     def _get_event_track_proposal_post_values(self, track, **post):
         return WebsiteEventTrackController._get_event_track_proposal_post_values(

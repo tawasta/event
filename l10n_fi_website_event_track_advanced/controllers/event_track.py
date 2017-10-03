@@ -18,7 +18,7 @@ from odoo.addons.l10n_fi_website_event_track_advanced.controllers.event_track_pr
 class WebsiteEventTrack(WebsiteEventTrack):
 
     def _get_event_track_proposal_values(self):
-        return WebsiteEventTrackController._get_event_track_proposal_values(WebsiteEventTrackController())
+        return super(WebsiteEventTrackController, self)._get_event_track_proposal_values()
 
     def _get_event_track_proposal_post_values(self, track, **post):
         return WebsiteEventTrackController._get_event_track_proposal_post_values(
