@@ -2,15 +2,15 @@
 <odoo>
 
     <!-- Application form template -->
-    <template name="Event track application" id="website_event_track.event_track_application">
-        <t t-call="website_event_track.event_track_application_type" />
-        <t t-call="website_event_track.event_track_application_info" />
-        <t t-call="website_event_track.event_track_application_targetgroup_info" />
-        <t t-call="website_event_track.event_track_application_contact_info" />
-        <t t-call="website_event_track.event_track_application_speakers" />
-        <t t-call="website_event_track.event_track_application_webinar" />
-        <t t-call="website_event_track.event_track_application_workshop" />
-        <t t-call="website_event_track.event_track_application_extra_info" />
+    <template name="Event track application" id="website_event_track_advanced.event_track_application">
+        <t t-call="website_event_track_advanced.event_track_application_type" />
+        <t t-call="website_event_track_advanced.event_track_application_info" />
+        <t t-call="website_event_track_advanced.event_track_application_targetgroup_info" />
+        <t t-call="website_event_track_advanced.event_track_application_contact_info" />
+        <t t-call="website_event_track_advanced.event_track_application_speakers" />
+        <t t-call="website_event_track_advanced.event_track_application_webinar" />
+        <t t-call="website_event_track_advanced.event_track_application_workshop" />
+        <t t-call="website_event_track_advanced.event_track_application_extra_info" />
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
@@ -22,7 +22,7 @@
     </template>
 
     <!-- Application type -->
-    <template id="website_event_track.event_track_application_type">
+    <template id="website_event_track_advanced.event_track_application_type">
         <div class="panel panel-primary" id="track-application-type-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Application type</h3>
@@ -61,7 +61,7 @@
     <!-- Application type -->
 
     <!-- Application info -->
-    <template id="website_event_track.event_track_application_info">
+    <template id="website_event_track_advanced.event_track_application_info">
         <div class="panel panel-primary" id="track-application-application-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Application info</h3>
@@ -160,7 +160,7 @@
     <!-- / Application info -->
 
     <!-- Target group info -->
-    <template id="website_event_track.event_track_application_targetgroup_info">
+    <template id="website_event_track_advanced.event_track_application_targetgroup_info">
         <div class="panel panel-primary" id="track-application-targetgroup-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Target group info</h3>
@@ -243,7 +243,7 @@
     <!-- / Target group info -->
 
     <!-- Contact info -->
-    <template id="website_event_track.event_track_application_contact_info">
+    <template id="website_event_track_advanced.event_track_application_contact_info">
 
         <div class="panel panel-primary" id="track-application-contact-div">
             <div class="panel-heading">
@@ -290,7 +290,7 @@
     <!-- / Contact info -->
 
     <!-- Speakers -->
-    <template id="website_event_track.event_track_application_speakers">
+    <template id="website_event_track_advanced.event_track_application_speakers">
 
         <div class="panel panel-primary" id="track-application-speakers-div">
             <div class="panel-heading">
@@ -372,7 +372,7 @@
     <!-- / Speakers -->
 
     <!-- Webinar info -->
-    <template id="website_event_track.event_track_application_webinar">
+    <template id="website_event_track_advanced.event_track_application_webinar">
 
         <div class="panel panel-warning" id="track-application-webinar-div">
             <div class="panel-heading">
@@ -426,7 +426,7 @@
     <!-- / Webinar info -->
 
     <!-- Workshop info -->
-    <template id="website_event_track.event_track_application_workshop">
+    <template id="website_event_track_advanced.event_track_application_workshop">
 
         <div class="panel panel-warning" id="track-application-workshop-div">
             <div class="panel-heading">
@@ -553,7 +553,7 @@
     <!-- / Workshop info -->
 
     <!-- Extra info -->
-    <template id="website_event_track.event_track_application_extra_info">
+    <template id="website_event_track_advanced.event_track_application_extra_info">
 
         <div class="panel panel-warning">
             <div class="panel-heading">

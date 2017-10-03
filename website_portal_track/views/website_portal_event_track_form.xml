@@ -37,7 +37,7 @@
                                 <input type="hidden" id="application_state" name="state" t-att-value="track['state']"/>
 
                                 <!-- Call the full form for edit, but hide and disable irrelevant parts -->
-                                <t t-call="website_event_track.event_track_application"/>
+                                <t t-call="website_event_track_advanced.event_track_application"/>
 
                                 <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js"></script>
 
