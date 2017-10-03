@@ -10,8 +10,8 @@ odoo.define('proposal', function (require) {
 
     // Remove attachment
     $('#btn-remove-attachment').click(function() {
-        console.log($('#attachment-file').val());
-        console.log($('#attachment-file').val());
+        $('#attachment-label').text('');
+        $('#attachment-file').val('');
     });
 
     // Add a '*' to required fields

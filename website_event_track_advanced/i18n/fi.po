@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-03 08:05+0000\n"
-"PO-Revision-Date: 2017-10-03 11:11+0300\n"
+"POT-Creation-Date: 2017-10-03 09:38+0000\n"
+"PO-Revision-Date: 2017-10-03 12:39+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,68 @@ msgstr ""
 "Plural-Forms: \n"
 "Language: fi\n"
 "X-Generator: Poedit 1.8.7.1\n"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid ""
+"<span id=\"extra_info_word_counter\" class=\"pull-right\">Words\n"
+"                            <span id=\"extra_info_word_count\"/>\n"
+"                        </span>"
+msgstr ""
+"<span id=\"extra_info_word_counter\" class=\"pull-right\">Sanoja\n"
+"                            <span id=\"extra_info_word_count\"/>\n"
+"                        </span>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid ""
+"<span id=\"target_group_info_word_counter\" class=\"pull-right\">Words\n"
+"                            <span id=\"target_group_info_word_count\"/>\n"
+"                        </span>"
+msgstr ""
+"<span id=\"target_group_info_word_counter\" class=\"pull-right\">Sanoja\n"
+"                            <span id=\"target_group_info_word_count\"/>\n"
+"                        </span>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid ""
+"<span id=\"track_content_word_counter\" class=\"pull-right\">Words\n"
+"                            <span id=\"track_content_word_count\"/>\n"
+"                        </span>"
+msgstr ""
+"<span id=\"track_content_word_counter\" class=\"pull-right\">Sanoja\n"
+"                            <span id=\"track_content_word_count\"/>\n"
+"                        </span>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid ""
+"<span id=\"webinar_info_word_counter\" class=\"pull-right\">Words\n"
+"                            <span id=\"webinar_info_word_count\"/>\n"
+"                        </span>"
+msgstr ""
+"<span id=\"webinar_info_word_counter\" class=\"pull-right\">Sanoja\n"
+"                            <span id=\"webinar_info_word_count\"/>\n"
+"                        </span>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid ""
+"<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Words\n"
+"                            <span id=\"workshop_goals_word_count\"/>\n"
+"                        </span>"
+msgstr ""
+"<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Sanoja\n"
+"                            <span id=\"workshop_goals_word_count\"/>\n"
+"                        </span>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid ""
+"<span>Select your <strong>primary target group</strong>, even if your presentation would fit to multiple target groups.</span>\n"
+"                    <br/><span>You can expand the target group by writing a description.</span>"
+msgstr "<span>Valitse esityksesi <strong>ensisijainen kohderyhmä</strong>, vaikka esityksesi sopisikin useammalle eri kohderyhmälle. Voit kirjoittaa kohderyhmän tietoihin tarkennuksia esityksen kohderyhmästä.</span>"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_keywords
@@ -30,9 +92,56 @@ msgid "Active"
 msgstr "Aktiivinen"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Add a speaker <i class=\"fa fa-user\"/>"
+msgstr "Lisää puhuja <i class=\"fa fa-user\"/>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Add an attachment <i class=\"fa fa-paperclip\"/>"
+msgstr "Lisää liite <i class=\"fa fa-paperclip\"/>"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "Application"
-msgstr "Esitysehdotus"
+msgstr "Sovellus"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid ""
+"Application as a video (link to\n"
+"                            e.g. Youtube or Vimeo)"
+msgstr "Ehdotus videomuodossa (linkki esim. Youtubeen tai Vimeoon)"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application content"
+msgstr "Ehdotuksen sisältö"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application content..."
+msgstr "Ehdotuksen sisältö..."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application info"
+msgstr "Ehdotuksen tiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application language"
+msgstr "Ehdotuksen kieli"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application title"
+msgstr "Ehdotuksen otsikko"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
+msgid "Application type"
+msgstr "Ehdotuksen tyyppi"
 
 #. module: website_event_track_advanced
 #. openerp-web
@@ -89,6 +198,11 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "City"
+msgstr "Kaupunki"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type_code
 msgid "Code"
 msgstr "Koodi"
@@ -108,6 +222,11 @@ msgstr "Sisältö"
 #, python-format
 msgid "Content modified"
 msgstr "Sisältöä muokattu"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Contract signee"
+msgstr "Sopimuksen allekirjoittaja"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_create_uid
@@ -135,6 +254,7 @@ msgstr "Kohtalainen"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group_description
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type_description
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
 msgid "Description"
 msgstr "Kuvaus"
 
@@ -146,6 +266,18 @@ msgstr "Kuvaus"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type_display_name
 msgid "Display Name"
 msgstr "Näyttönimi"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "E.g. 20"
+msgstr "Esim. 20"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Email"
+msgstr "Sähköposti"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_event
@@ -174,8 +306,21 @@ msgstr "Erinomainen"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_extra_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
 msgid "Extra info"
 msgstr "Lisätiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid "Extra info..."
+msgstr "Lisätiedot..."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "First name"
+msgstr "Etunimi"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_goals
@@ -199,6 +344,11 @@ msgid "Has been a speaker at an earlier event"
 msgstr "On ollut tapahtumassa aiemmin puhujana"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "I wish to hold a webinar"
+msgstr "Haluan pitää webinaarin"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_id
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_id
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group_id
@@ -214,6 +364,7 @@ msgstr "Jos tämä ei ole valittuna, määritys käyttää aitoa satunnaisuutta.
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_keywords
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Keywords"
 msgstr "Avainsanat"
 
@@ -250,12 +401,30 @@ msgid "Last Updated on"
 msgstr "Viimeksi päivitetty"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Last name"
+msgstr "Sukunimi"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_workshop_fee
 msgid "Leave empty for free workshops"
 msgstr "Jätä tyhjäksi ilmaisessa workshopissa"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Leave empty if free"
+msgstr "Jätä tyhjäksi jos ilmainen"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "List all of the speakers here, including yourself if you are a speaker."
+msgstr "Listaa kaikki esiintyjät tässä, mukaanlukien itsesi jos olet esiintyjä."
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_participants
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Max participants"
 msgstr "Max. osallistujamäärä"
 
@@ -267,9 +436,26 @@ msgid "Name"
 msgstr "Nimi"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "No"
+msgstr "Ei"
+
+#. module: website_event_track_advanced
 #: selection:event.track,rating:0
 msgid "Not rated"
 msgstr "Ei arvioitu"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Organization"
+msgstr "Organisaatio"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Organization invoice address"
+msgstr "Organisaation laskutusosoite"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_organizer
@@ -292,9 +478,40 @@ msgid "Original description"
 msgstr "Alkuperäinen kuvaus"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Other, what?"
+msgstr "Muu, mikä?"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Participation fee"
+msgstr "Osallistumismaksu"
+
+#. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_res_partner
 msgid "Partner"
 msgstr "Kumppani"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+msgid "Please fill the contact persons information here."
+msgstr "Ole hyvä ja täytä yhteyshenkilön tiedot tässä."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid ""
+"Please refrain from using any identifying information (name, organization,\n"
+"                    project)."
+msgstr "Vältä käyttämästä tunnistetietoja (nimi, organisaatio, projekti)."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid ""
+"Please tell us any wishes about special arrangements.<br/>\n"
+"                    This can concern the presentation technology, premises, fitments, schedule, etc."
+msgstr ""
+"Ole hyvä ja täytä lisätietoihin toiveesi esityksen erityisjärjestelyistä. <br/>\n"
+"Esimerkiksi toiveet esitystekniikkaan, tiloihin, kalustukseen, esityksen ajankohtaan tms. liittyen. "
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_webinar
@@ -305,6 +522,11 @@ msgstr "Tapahtumaa edeltävä webinaari"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_webinar_info
 msgid "Pre-event webinar info"
 msgstr "Tapahtumaa edeltävän webinaarin tiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+msgid "Presentation contact"
+msgstr "Esityksen yhteyshenkilö"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
@@ -330,6 +552,11 @@ msgid "Required fields are marked with *"
 msgstr "Vaadituissa kentissä on merkki *"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Returning speaker"
+msgstr "Aiemmin puhujana"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group
 msgid "Review group"
 msgstr "Arviointiryhmä"
@@ -340,30 +567,42 @@ msgid "Reviewers"
 msgstr "Arvioijat"
 
 #. module: website_event_track_advanced
-#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
-msgid "Save"
-msgstr "Tallenna"
-
-#. module: website_event_track_advanced
-#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
-msgid "Save and send"
-msgstr "Tallenna ja lähetä"
-
-#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_schedule
 msgid "Schedule"
 msgstr "Aikataulu"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Selecting too many keywords can make it harder to find the correct audience."
+msgstr "Liian monen tunnisteen valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Speakers"
+msgstr "Puhujat"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Street"
+msgstr "Katuosoite"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 msgid "Target group"
 msgstr "Kohderyhmä"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Target group info"
 msgstr "Kohderyhmän tiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Target group info..."
+msgstr "Kohderyhmän tiedot..."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -374,6 +613,18 @@ msgstr "Kiitos ehdotuksestasi!"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "This event does not accept proposals."
 msgstr "Tämä tapahtuma ei ota vastaan ehdotuksia."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "This is the part of your application that will be shown to the reviewers."
+msgstr "Tämä osa hakemuksesta näytetään arvioijille."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Title"
+msgstr "Titteli"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track_tag
@@ -460,9 +711,34 @@ msgid "Webinar"
 msgstr "Webinaari"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Webinar info"
+msgstr "Webinaarin tiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Webinar info..."
+msgstr "Webinaarin tiedot..."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 msgid "Workshop"
 msgstr "Workshop"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Workshop goals"
+msgstr "Workshopin tavoitteet"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid ""
+"Workshop information and invoicing address.<br/>\n"
+"                    The contract will be sent for the signee."
+msgstr ""
+"Workshopin tiedot ja laskutusosoite.<br/>\n"
+"Sopimus lähetetään allekirjoittajalle."
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_fee
@@ -470,9 +746,44 @@ msgid "Workshop participation fee"
 msgstr "Workshopin osallistumismaksu"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Workshop program and schedule"
+msgstr "Workshopin ohjelma ja aikataulu"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Workshop schedule"
+msgstr "Workshopin aikataulu"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Yes"
+msgstr "Kyllä"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "You can fill this if you want to hold a webinar before the actual event."
+msgstr "Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista tapahtumaa."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "You should select a few keywords that matches your presentation best."
+msgstr "Valitse muutama avainsana jotka kuvaavat esitystä parhaiten."
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "You will receive an email containing a registration link for viewing and editing your proposal."
 msgstr "Tulet saamaan sähköpostin joka sisältää rekisteröintilinkin ehdotuksen tarkasteluun ja editointiin."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Your reference"
+msgstr "Viitteenne"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Zip"
+msgstr "Postinro"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_event_wizard
@@ -503,6 +814,11 @@ msgstr "event.track.target.group"
 #: model:ir.model,name:website_event_track_advanced.model_event_track_type
 msgid "event.track.type"
 msgstr "event.track.type"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "https://www.youtube.com, https://vimeo.com, ..."
+msgstr "https://www.youtube.com, https://vimeo.com, ..."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
