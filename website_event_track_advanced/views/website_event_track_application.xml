@@ -184,6 +184,8 @@
                             </span>
                             <select id="target_group_select" name="target_group" required="true" class="form-control"
                                     type="selection">
+                                <option value="false">-</option>
+
                                 <t t-foreach="target_groups" t-as="group">
                                     <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
                                         <t t-esc="group.name" />
@@ -213,7 +215,7 @@
                 <div class="form-group" t-if="len(event.allowed_track_tag_ids)"
                      id="track-application-targetgroup-tags-div">
                     <div class="col-md-12">
-                        <label class="control-label required-label text-success">Keywords</label>
+                        <label class="control-label required-label">Keywords</label>
                         <p id="track-application-targetgroup-tags-alert-info" class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                             You should select a few keywords that matches your presentation best.

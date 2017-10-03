@@ -204,7 +204,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'extra_info':post.get('extra_info'),
 
-            'target_group': post.get('target_group'),
+            'target_group': post.get('target_group') not in ['0', 'false'],
             'target_group_info': post.get('target_group_info'),
 
             'workshop_participants': post.get('workshop_participants'),
