@@ -5,9 +5,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import http, _
 from odoo.http import request
-from odoo.exceptions import AccessError
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_portal_track.controllers.event_track import WebsiteEventTrack
@@ -21,8 +19,11 @@ from odoo.addons.website_event_track_request_time.controllers.event_track_propos
 class WebsiteEventTrack(WebsiteEventTrack):
 
     def _get_event_track_proposal_values(self):
-        print "time"
-        return super(WebsiteEventTrackController, self)._get_event_track_proposal_values()
+        values = super(WebsiteEventTrack, self)._get_event_track_proposal_values()
+
+        values['request_times'] = request.env['event.track.request.time'].sudo().search([])
+
+        return values
 
     def _get_event_track_proposal_post_values(self, track, **post):
         return WebsiteEventTrackController._get_event_track_proposal_post_values(

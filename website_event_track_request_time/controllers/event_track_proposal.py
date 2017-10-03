@@ -28,7 +28,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
     def _get_event_track_proposal_post_values(self, event, **post):
         values = super(WebsiteEventTrackController, self)._get_event_track_proposal_post_values(event, **post)
-        print "time"
 
         if post.get('request_time') and post.get('request_time') != 'false':
             values['track']['request_time'] = post.get('request_time')
