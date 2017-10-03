@@ -2,9 +2,9 @@
 <odoo>
 
     <!-- Overwrites the proposal success layout -->
-    <template name="Event track proposal success" id="website_event_track.event_track_proposal_success">
+    <template name="Event track proposal success" id="website_event_track_advanced.event_track_proposal_success">
 
-        <t t-name="website_event_track.event_track_proposal_success">
+        <t t-name="website_event_track_advanced.event_track_proposal_success">
             <t t-call="website_event.event_details">
                 <p>Thank you for your submission!</p>
                 <p>You will receive an email containing a registration link for viewing and editing your proposal.</p>

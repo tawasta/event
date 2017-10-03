@@ -139,7 +139,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             track.state = 'confirmed'
 
         # 11. Return
-        return request.render('website_event_track.event_track_proposal_success', {'track': track, 'event': event})
+        return request.render(
+            'website_event_track_advanced.event_track_proposal_success', {'track': track, 'event': event}
+        )
 
     def _get_event_track_proposal_post_values(self, event, **post):
         # Organization
