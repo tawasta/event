@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-03 07:39+0000\n"
-"PO-Revision-Date: 2017-10-03 10:41+0300\n"
+"POT-Creation-Date: 2017-10-03 08:05+0000\n"
+"PO-Revision-Date: 2017-10-03 11:05+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "Keskiarvo"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
-msgid "By clicking <strong>\"Save and confirm\"</strong> the proposition will be saved and sent for review."
+msgid "By clicking <strong>\"Save and send\"</strong> the proposition will be saved and sent for review."
 msgstr "Klikkaamalla <strong>\"Tallenna ja vahvista\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi."
 
 #. module: website_event_track_advanced
@@ -340,6 +340,16 @@ msgid "Reviewers"
 msgstr "Arvioijat"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
+msgid "Save"
+msgstr "Tallenna"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
+msgid "Save and send"
+msgstr "Tallenna ja lähetä"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_schedule
 msgid "Schedule"
 msgstr "Aikataulu"
@@ -378,36 +388,36 @@ msgstr "Ehdotus videomuodossa (linkki esim. Youtubeen tai Vimeoon)"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_track_count
 msgid "Track count"
-msgstr "Esitysten lukumäärä"
+msgstr "Trackien lukumäärä"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_track_ids
 msgid "Track ids"
-msgstr "Esitysten id:t"
+msgstr "Trackien id:t"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_review_group_action
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_review_group_menu
 msgid "Track review groups"
-msgstr "Esityksen arviointiryhmät"
+msgstr "Trackin arviointiryhmät"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_target_group_action
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_target_group_menu
 msgid "Track target groups"
-msgstr "Esityksen kohderyhmät"
+msgstr "Trackin kohderyhmät"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_type_action
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_type_menu
 msgid "Track types"
-msgstr "Esityksen tyypit"
+msgstr "Trackin tyypit"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_tracks
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_form
 msgid "Tracks"
-msgstr "Esitykset"
+msgstr "Trackit"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type
