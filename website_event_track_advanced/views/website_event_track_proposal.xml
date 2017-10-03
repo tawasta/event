@@ -26,15 +26,16 @@
                                     <h3 class="page-header mt16">
                                         Application
                                     </h3>
-                                    <p id="track-application-section-alert" class="alert">
-                                        We will accept a broad range of
+                                    <div id="track-application-section-alert" class="alert">
+                                        <p>We will accept a broad range of
                                         presentations, from reports on academic and
                                         commercial projects to tutorials and case
                                         studies. As long as the presentation is
                                         interesting and potentially useful to the
                                         audience, it will be considered for
                                         inclusion in the programme.
-                                    </p>
+                                        </p>
+                                    </div>
 
                                     <p class="alert text-primary">Required fields are marked with *</p>
                                 </section>
