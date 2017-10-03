@@ -2,7 +2,7 @@
 <odoo>
     <template id="event_track_application_workshop"
               name="Website track time"
-              inherit_id="website_event_track.event_track_application_workshop">
+              inherit_id="website_event_track_advanced.event_track_application_workshop">
 
         <xpath expr="//div[@id='workshop-fee-div']" position="after">
             <div class="col-md-4" id="workshop-track-request-time-div">
