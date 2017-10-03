@@ -287,6 +287,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         if not organization:
             # Organization doesn't exists. Create one
+            organization_values['is_company'] = True
             organization = request.env['res.partner'].sudo().create(organization_values)
 
         return organization
