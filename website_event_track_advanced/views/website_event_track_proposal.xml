@@ -49,7 +49,7 @@
 
                                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
-                                        <t t-call="website_event_track.event_track_application"/>
+                                        <t t-call="website_event_track_advanced.event_track_application"/>
 
 
                                         <p class="alert alert-info alert-dismissable text-center">

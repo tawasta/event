@@ -2,7 +2,7 @@
 <odoo>
     <template id="event_track_application_l10n_fi"
               name="Website track Finnish localization"
-              inherit_id="website_event_track.event_track_application_workshop">
+              inherit_id="website_event_track_advanced.event_track_application_workshop">
 
         <xpath expr="//div[@id='track-application-organizer-input-div']" position="after">
                 <div class="mt16" id="track-application-organization-invoice-div">
