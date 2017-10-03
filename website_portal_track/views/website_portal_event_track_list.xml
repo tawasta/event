@@ -100,7 +100,7 @@
                             <td t-if="user.partner_id.id == track.partner_id.id">
                                 <!-- Confirm or cancel an approved track -->
                                 <button t-if="track.state == 'draft'"
-                                        class="btn btn-primary mb8"
+                                        class="btn btn-warning mb8"
                                         data-toggle="modal"
                                         data-target="#track-confirm-action"
                                         data-action="confirm"
@@ -125,7 +125,7 @@
                                         t-attf-data-href="/my/tracks/approve/#{track.id}">Approve</button>
 
                                 <button t-if="track.state == 'announced'"
-                                        class="btn btn-warning"
+                                        class="btn btn-danger"
                                         data-toggle="modal"
                                         data-target="#track-confirm-action"
                                         data-action="reject"
