@@ -121,6 +121,7 @@ class WebsiteEventTrack(website_account):
         methods=['POST'])
     def event_track_save(self, track, **post):
         values = dict()
+        _logger.info('Saving %s' % dict(post))
 
         # Reviewers get their own save
         if request.env.user.has_group('event.group_track_reviewer'):
@@ -130,6 +131,8 @@ class WebsiteEventTrack(website_account):
         else:
             values = self._get_event_track_proposal_post_values(track, **post)
             track_values = values['track']
+
+        _logger.info('Using values %s' % values)
 
         # Don't allow saving in certain states
         if track.state in ['cancel', 'refused', 'published']:

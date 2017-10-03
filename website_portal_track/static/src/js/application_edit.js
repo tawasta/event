@@ -1,5 +1,4 @@
 $(function() {
-
     var application_state = $('#application_state').val();
 
     // Disable all contact inputs
@@ -22,12 +21,11 @@ $(function() {
     });
 
     // Enable input index
-    $('#track-application-speakers-input-index').prop('disabled', false);
+    $('#track-application-speaker-input-index').prop('disabled', false);
 
     // Enable speaker fields
     $('#add_speaker').click(function() {
-        var last_div = $('#track-application-speakers-input-div .track-application-contact-input-row:last');
-
+        var last_div = $('#track-application-speakers-input-div .track-application-speaker-input-row:last');
         last_div.show();
 
         last_div.find('input').each(function() {

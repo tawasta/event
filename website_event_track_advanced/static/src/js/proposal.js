@@ -70,8 +70,8 @@ odoo.define('proposal', function (require) {
         row.removeAttr('id');
         row.find('button').removeAttr('disabled');
 
-        input_index =  parseInt($('#track-application-speakers-input-index').val()) + 1;
-        $('#track-application-speakers-input-index').val(input_index);
+        input_index =  parseInt($('#track-application-speaker-input-index').val()) + 1;
+        $('#track-application-speaker-input-index').val(input_index);
 
         // Clear the values
         row.find('input').val('');
