@@ -56,6 +56,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # 1. Get the posted values in separate dicts
         values = self._get_event_track_proposal_post_values(event, **post)
+        _logger.info("Used values: %s" % values)
         followers = list()
 
         # 2. Create user and contact (partner)
@@ -105,7 +106,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         if values.get('workshop_organizer'):
             workshop_organizer = self._create_organization(values.get('workshop_organizer'))
 
-            values['track']['organizer'] = workshop_organizer.id
+            if workshop_organizer:
+                values['track']['organizer'] = workshop_organizer.id
 
         # 6. Add organizer contact
         if values.get('workshop_signee') and values.get('workshop_signee').get('name'):
@@ -204,7 +206,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'extra_info':post.get('extra_info'),
 
-            'target_group': post.get('target_group') not in ['0', 'false'],
+            'target_group': post.get('target_group') if post.get('target_group') != 'false' else False,
             'target_group_info': post.get('target_group_info'),
 
             'workshop_participants': post.get('workshop_participants'),
@@ -283,6 +285,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
     def _create_organization(self, organization_values):
         organization_name = organization_values.get('name')
+        if not organization_name or organization_name == '':
+            _logger.warning("Could not create organization (missing name)")
+            return False
+
         organization = request.env['res.partner'].search([
             ('name', '=ilike', organization_name)
         ], limit=1)
