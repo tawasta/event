@@ -27,6 +27,7 @@
 
 .track-application-speaker-input-row input.track-application-speaker-returning, .track-application-speaker-input-row label.track-application-speaker-returning{
     width: 15px;
+    height: 15px;
 }
 
 .track-application-signee-input-row input, .track-application-signee-input-row label{
