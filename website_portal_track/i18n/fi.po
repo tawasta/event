@@ -89,8 +89,8 @@ msgstr "Olet vahvistanut esityksen. Esitys on lisätty tapahtuman ohjelmaan"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "Confirmed by you. Waiting for an approval from reviewers."
-msgstr "Olet vahvistanut esityksen. Esitys odottaa hyväksyntää arvioijilta."
+msgid "Sent by you. Waiting for an approval from reviewers."
+msgstr "Olet lähettänyt esityksen. Esitys odottaa hyväksyntää arvioijilta."
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks

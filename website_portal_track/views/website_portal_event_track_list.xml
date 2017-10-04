@@ -7,28 +7,28 @@
                 <p>There are currently no tracks for your account.</p>
             </t>
             <t t-if="tracks">
-                <div class="container list-group">
-                    <div class="list-group-item row">
+                <div class="container list-group" id="event-track-states-legend">
+                    <div class="list-group-item row" id="event-track-states-legend-draft">
                         <div class="col-sm-2"><span class="tag label label-info">Draft</span></div>
                         <div class="col-sm-10">Created by you. Waiting for you to send this to review.</div>
                     </div>
-                    <div class="list-group-item row">
+                    <div class="list-group-item row" id="event-track-states-legend-confirmed">
                         <div class="col-sm-2"><span class="tag label label-warning">Sent</span></div>
                         <div class="col-sm-10">Sent by you. Waiting for an approval from reviewers.</div>
                     </div>
-                    <div class="list-group-item row">
+                    <div class="list-group-item row" id="event-track-states-legend-announced">
                         <div class="col-sm-2"><span class="tag label label-primary">Announced</span></div>
                         <div class="col-sm-10">Approved by reviewers. Waiting for your confirmation.</div>
                     </div>
-                    <div class="list-group-item row">
+                    <div class="list-group-item row" id="event-track-states-legend-published">
                         <div class="col-sm-2"><span class="tag label label-success">Published</span></div>
                         <div class="col-sm-10">Confirmed by you. Included in the event program.</div>
                     </div>
-                    <div class="list-group-item row">
+                    <div class="list-group-item row" id="event-track-states-legend-refused">
                         <div class="col-sm-2"><span class="tag label label-danger">Refused</span></div>
                         <div class="col-sm-10">Not approved by reviewers.</div>
                     </div>
-                    <div class="list-group-item row">
+                    <div class="list-group-item row" id="event-track-states-legend-cancel">
                         <div class="col-sm-2"><span class="tag label label-default">Cancelled</span></div>
                         <div class="col-sm-10">Cancelled by you.</div>
                     </div>
