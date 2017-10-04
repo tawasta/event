@@ -169,6 +169,10 @@ class WebsiteEventTrack(website_account):
             track_values['speaker_ids'] = speakers
 
         track.write(track_values)
+
+        if post.get('track-confirm') and post.get('track-confirm') != '':
+            track.state = 'confirmed'
+
         track.sudo().message_subscribe(partner_ids=speaker_ids)
 
         return request.redirect('/my/tracks/')

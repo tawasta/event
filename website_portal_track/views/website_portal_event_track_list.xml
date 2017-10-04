@@ -13,8 +13,8 @@
                         <div class="col-sm-10">Created by you. Waiting for you to send this to review.</div>
                     </div>
                     <div class="list-group-item row">
-                        <div class="col-sm-2"><span class="tag label label-warning">Confirmed</span></div>
-                        <div class="col-sm-10">Confirmed by you. Waiting for an approval from reviewers.</div>
+                        <div class="col-sm-2"><span class="tag label label-warning">Sent</span></div>
+                        <div class="col-sm-10">Sent by you. Waiting for an approval from reviewers.</div>
                     </div>
                     <div class="list-group-item row">
                         <div class="col-sm-2"><span class="tag label label-primary">Announced</span></div>
@@ -38,7 +38,7 @@
                     <thead>
                         <tr class="active">
                             <th>Track</th>
-                            <th>Timeslot</th>
+                            <!--<th>Timeslot</th>-->
                             <th>State</th>
                             <th t-if="user.has_group('event.group_track_reviewer')">Review</th>
                             <th></th>
@@ -54,6 +54,7 @@
                             </td>
 
                             <!-- Date -->
+                            <!--
                             <td class="td-submit">
                                 <t t-if="track.date">
                                     <span t-field="track.date" t-options='{"widget": "datetime"}'/>
@@ -62,6 +63,7 @@
                                     -
                                 </t>
                             </td>
+                            -->
 
                             <!-- State -->
                             <td class="td-submit">
@@ -102,10 +104,10 @@
                                 <button t-if="track.state == 'draft'"
                                         class="btn btn-warning mb8"
                                         data-toggle="modal"
-                                        data-target="#track-confirm-action"
+                                        data-target="#track-confirm-action-send"
                                         data-action="confirm"
                                         t-attf-data-title="#{track.name}"
-                                        t-attf-data-href="/my/tracks/confirm/#{track.id}">Confirm</button>
+                                        t-attf-data-href="/my/tracks/confirm/#{track.id}">Send</button>
 
                                 <button t-if="track.state in ['draft']"
                                         class="btn btn-danger"
@@ -176,12 +178,13 @@
             </t>
         </t>
         <t t-call="website_portal_track.confirm_dialog"/>
+        <t t-call="website_portal_track.confirm_dialog_send"/>
         <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js?v100"></script>
     </template>
 
     <!-- Confirmation dialog template -->
     <template id="confirm_dialog" name="Confirmation dialog for track actions">
-        <div class="modal fade" id="track-confirm-action" tabindex="-1" role="dialog">
+        <div class="modal fade track-confirm-action" id="track-confirm-action" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -189,6 +192,27 @@
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to <strong><span class="modal-track-action" /></strong> proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-ok">Yes</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Send dialog template -->
+    <template id="confirm_dialog_send" name="Send dialog for track actions">
+        <div class="modal fade track-confirm-action" id="track-confirm-action-send" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Confirmation</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to send the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                        <p>After sending, the proposal can not be edited.</p>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-success btn-ok">Yes</a>
