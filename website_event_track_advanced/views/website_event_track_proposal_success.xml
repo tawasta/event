@@ -20,7 +20,7 @@
                 <p class="text-center">Thank you for your submission!</p>
                 <p class="text-center">Your submission has been saved as a draft.</p>
                 <p class="text-center">A registration link will be sent for contact and speakers.</p>
-                <p>After logging in, they can edit the submission.</p>
+                <p class="text-center">After logging in, they can edit the submission.</p>
                 <p class="text-center">Only the contact person can confirm the submission.</p>
             </t>
         </t>
@@ -35,7 +35,7 @@
                 <p class="text-center">Thank you for your submission!</p>
                 <p class="text-center">Your submission has been saved and sent to review.</p>
                 <p class="text-center">A registration link will be sent for contact and speakers.</p>
-                <p>After logging in, they can view the submission.</p>
+                <p class="text-center">After logging in, they can view the submission.</p>
             </t>
         </t>
 
