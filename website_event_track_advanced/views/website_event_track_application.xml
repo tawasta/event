@@ -144,7 +144,7 @@
 
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div class="col-md-12">
-                        <label class="btn btn-default btn-file col-xs-10 col-xs-offset-1">
+                        <label class="btn btn-default btn-file col-xs-10 col-sm-offset-1">
                             Add an attachment <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
                             <span class="text-success" id="attachment-label"></span>
                         </label>
