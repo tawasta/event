@@ -7,36 +7,39 @@
         <xpath expr="//div[@id='track-application-organizer-input-div']" position="after">
                 <div class="mt16" id="track-application-organization-invoice-div">
 
-                    <div id="track-application-organizer-finnish-header-div"
-                         class="track-application-contact-input-row">
-                        <label for="organizer_business_id">Business ID</label>
+                    <div id="track-application-organizer-finnish-header-div" class="row">
+                        <div class="col-md-4"><label for="organizer_business_id">Business ID</label></div>
                     </div>
 
-                    <div id="track-application-organizer-finnish-input-div"
-                         class="track-application-contact-input-row">
-
+                    <div id="track-application-organizer-finnish-input-div" class="row">
+                        <div class="col-md-4">
                         <input name="business_id" placeholder="Business ID. E.g. 1234567-1"
                                class="form-control" type="text" t-att-value="track.organizer.business_id"/>
+                        </div>
                     </div>
 
-                    <div id="track-application-organizer-finnish-header-div"
-                         class="track-application-contact-input-row">
-                        <label for="organizer_edicode">Edicode</label>
-                        <label for="organizer_einvoice_operator">eInvoice Operator</label>
-                        <label for="organizer_einvoice_operator_identifier">Operator ID</label>
+                    <div id="track-application-organizer-finnish-header-div" class="row">
+                        <div class="col-md-4"><label for="organizer_edicode">Edicode</label></div>
+                        <div class="col-md-4"><label for="organizer_einvoice_operator">eInvoice Operator</label></div>
+                        <div class="col-md-4"><label for="organizer_einvoice_operator_identifier">Operator ID</label></div>
                     </div>
 
-                    <div id="track-application-organizer-finnish-input-div"
-                         class="track-application-contact-input-row">
+                    <div id="track-application-organizer-finnish-input-div" class="row">
 
-                        <input name="organizer_edicode" placeholder="Edicode. E.g. 003712345671"
-                               class="form-control" type="text" t-att-value="track.organizer.edicode"/>
+                        <div class="col-md-4">
+                            <input name="organizer_edicode" placeholder="Edicode. E.g. 003712345671"
+                                   class="form-control" type="text" t-att-value="track.organizer.edicode"/>
+                        </div>
 
-                        <input name="organizer_einvoice_operator" placeholder="eInvoice operator"
-                               class="form-control" type="text" t-att-value="track.organizer.einvoice_operator.name"/>
+                        <div class="col-md-4">
+                            <input name="organizer_einvoice_operator" placeholder="eInvoice operator"
+                                   class="form-control" type="text" t-att-value="track.organizer.einvoice_operator.name"/>
+                        </div>
 
-                        <input name="organizer_einvoice_operator_identifier" placeholder="eInvoice operator ID"
-                               class="form-control" type="text" t-att-value="track.organizer.einvoice_operator_identifier"/>
+                        <div class="col-md-4">
+                            <input name="organizer_einvoice_operator_identifier" placeholder="eInvoice operator ID"
+                                   class="form-control" type="text" t-att-value="track.organizer.einvoice_operator_identifier"/>
+                        </div>
                     </div>
                 </div>
         </xpath>
