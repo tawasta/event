@@ -1,6 +1,12 @@
 odoo.define('proposal', function (require) {
     var _t = require('web.core')._t;
 
+    // TODO: remove these hacks for translating the input-fields
+    $(function() {
+        $('#application-submit-button').val(_t("Save as draft"));
+        $('#application-submit-button-send').val(_t("Save and send"));
+    });
+
     // Add file name to attachment input button
     $(':file').change(function() {
         label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -133,7 +139,7 @@ odoo.define('proposal', function (require) {
 
     // De-collapse all elements on submit (to show errors)
     // TODO: only de-collapse if has errors
-    $('#application-submit-button').click(function() {
+    $('.application-submit-button').click(function() {
         $('#track-application-form').find('div.panel-body').each(function() {
             if($(this).is(":hidden")){
                 $(this).slideToggle('800', function() {});

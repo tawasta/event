@@ -226,13 +226,13 @@
                         </p>
 
                         <div class="row">
-                            <label class="col-sm-4" t-foreach="event.allowed_track_tag_ids"
+                            <label class="col-sm-4 col-xs-12" t-foreach="event.allowed_track_tag_ids"
                                    t-as="tag">
                                 <input type="checkbox" t-attf-name="tag_#{str(tag.id)}" t-att-checked="'checked' if tag.id in track.tag_ids.ids else False"/>
                                 <t t-esc="tag.name"/>
                             </label>
 
-                            <label class="col-sm-4">
+                            <label class="col-sm-4 col-xs-12">
                                 <input name="keywords" placeholder="Other, what?" class="form-control" type="text" t-att-value="track.keywords"/>
                             </label>
                         </div>
