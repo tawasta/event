@@ -9,9 +9,7 @@ $(function() {
         wordCounter(false, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
 
         this.on('key', function(event){
-            setTimeout(function () {
-                wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
-            }, 0);
+            wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
         });
     });
 

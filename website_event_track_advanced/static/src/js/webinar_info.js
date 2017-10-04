@@ -8,9 +8,7 @@ $(function() {
         wordCounter(false, webinar_info.getData(), $('#webinar_info_word_counter'), word_limit);
 
         this.on('key', function(event){
-            setTimeout(function () {
-                wordCounter(event, webinar_info.getData(), $('#webinar_info_word_counter'), word_limit);
-            }, 0);
+            wordCounter(event, webinar_info.getData(), $('#webinar_info_word_counter'), word_limit);
         });
     });
 

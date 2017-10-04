@@ -209,7 +209,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             'extra_info':post.get('extra_info'),
 
-            'target_group': post.get('target_group') if post.get('target_group') != 'false' else False,
+            'target_group': post.get('target_group') if post.get('target_group') != '' else False,
             'target_group_info': post.get('target_group_info'),
 
             'workshop_participants': post.get('workshop_participants'),

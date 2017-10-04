@@ -8,9 +8,7 @@ $(function() {
         wordCounter(false, target_group_info.getData(), $('#target_group_info_word_counter'), word_limit);
 
         this.on('key', function(event){
-            setTimeout(function () {
-                wordCounter(event, target_group_info.getData(), $('#target_group_info_word_counter'), word_limit);
-             }, 0);
+            wordCounter(event, target_group_info.getData(), $('#target_group_info_word_counter'), word_limit);
         });
     });
 

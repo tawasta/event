@@ -54,10 +54,12 @@ odoo.define('proposal', function (require) {
             counter_object.effect("shake", {times:3}, 800 );
 
             // Disable enter and space when word count is full
-            // 13 = enter
+            // 10 = enter
+            // 13 = return
             // 31 = space
             // 1114198 = Ctrl-v
-            var keycode_list = [13, 32, 1114198];
+            console.log(keycode)
+            var keycode_list = [10, 13, 32, 1114198];
             if ($.inArray(keycode, keycode_list) >= 0) {
                 event.cancel();
             }

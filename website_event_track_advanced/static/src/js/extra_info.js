@@ -8,9 +8,7 @@ $(function() {
         wordCounter(false, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
 
         this.on('key', function(event){
-            setTimeout(function () {
-                wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
-            }, 0);
+            wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
         });
     });
 

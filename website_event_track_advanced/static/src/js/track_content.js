@@ -8,9 +8,7 @@ $(function() {
         wordCounter(false, track_content.getData(), $('#track_content_word_counter'), word_limit);
 
         this.on('key', function(event){
-            setTimeout(function () {
-                wordCounter(event, track_content.getData(), $('#track_content_word_counter'), word_limit);
-            }, 0);
+            wordCounter(event, track_content.getData(), $('#track_content_word_counter'), word_limit);
         });
     });
 
@@ -20,7 +18,7 @@ $(function() {
         // The timeout is necessary so the content will have the pasted info before calculating words
         setTimeout(function () {
             wordCounter(event, track_content.getData(), $('#track_content_word_counter'), word_limit);
-        }, 0);
+        }, 100);
     })
 
 });

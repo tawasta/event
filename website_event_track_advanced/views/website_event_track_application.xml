@@ -184,7 +184,7 @@
                             </span>
                             <select id="target_group_select" name="target_group" required="true" class="form-control"
                                     type="selection">
-                                <option value="false">-</option>
+                                <option value=""></option>
 
                                 <t t-foreach="target_groups" t-as="group">
                                     <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
