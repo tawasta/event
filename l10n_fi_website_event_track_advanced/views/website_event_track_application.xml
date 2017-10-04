@@ -10,6 +10,23 @@
                     <div id="track-application-organizer-finnish-header-div"
                          class="track-application-contact-input-row">
                         <label for="organizer_business_id">Business ID</label>
+                    </div>
+
+                    <div id="track-application-organizer-finnish-input-div"
+                         class="track-application-contact-input-row">
+
+                        <input name="organizer_edicode" placeholder="Edicode. E.g. 003712345671"
+                               class="form-control" type="text" t-att-value="track.organizer.edicode"/>
+
+                        <input name="organizer_einvoice_operator" placeholder="eInvoice operator"
+                               class="form-control" type="text" t-att-value="track.organizer.einvoice_operator.name"/>
+
+                        <input name="organizer_einvoice_operator_identifier" placeholder="eInvoice operator ID"
+                               class="form-control" type="text" t-att-value="track.organizer.einvoice_operator_identifier"/>
+                    </div>
+
+                    <div id="track-application-organizer-finnish-header-div"
+                         class="track-application-contact-input-row">
                         <label for="organizer_edicode">Edicode</label>
                         <label for="organizer_einvoice_operator">eInvoice Operator</label>
                         <label for="organizer_einvoice_operator_identifier">Operator ID</label>
@@ -17,9 +34,6 @@
 
                     <div id="track-application-organizer-finnish-input-div"
                          class="track-application-contact-input-row">
-
-                        <input name="organizer_business_id" placeholder="Business ID. E.g. 1234567-1"
-                               class="form-control" type="text" t-att-value="track.organizer.business_id"/>
 
                         <input name="organizer_edicode" placeholder="Edicode. E.g. 003712345671"
                                class="form-control" type="text" t-att-value="track.organizer.edicode"/>

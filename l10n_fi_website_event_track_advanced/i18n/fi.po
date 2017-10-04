@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-03 07:41+0000\n"
-"PO-Revision-Date: 2017-10-03 10:42+0300\n"
+"PO-Revision-Date: 2017-10-04 13:38+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "Tapahtuman esitys"
 #. module: l10n_fi_website_event_track_advanced
 #: model:ir.ui.view,arch_db:l10n_fi_website_event_track_advanced.event_track_application_l10n_fi
 msgid "Operator ID"
-msgstr "Operaattorin tunniste"
+msgstr "Operaattorin välittäjätunnus"
 
 #. module: l10n_fi_website_event_track_advanced
 #: model:ir.model.fields,field_description:l10n_fi_website_event_track_advanced.field_event_track_request_time
@@ -65,4 +65,4 @@ msgstr "Verkkolaskuoperaattori"
 #. module: l10n_fi_website_event_track_advanced
 #: model:ir.ui.view,arch_db:l10n_fi_website_event_track_advanced.event_track_application_l10n_fi
 msgid "eInvoice operator ID"
-msgstr "Operaattorin tunniste"
+msgstr "Operaattorin välittäjätunnus"
