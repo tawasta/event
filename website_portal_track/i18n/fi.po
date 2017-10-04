@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-26 13:16+0000\n"
-"PO-Revision-Date: 2017-10-03 14:20+0300\n"
+"POT-Creation-Date: 2017-10-04 13:08+0000\n"
+"PO-Revision-Date: 2017-10-04 16:10+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -44,8 +44,13 @@ msgstr "<span class=\"tag label label-success\">Julkaistu</span>"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "<span class=\"tag label label-warning\">Confirmed</span>"
-msgstr "<span class=\"tag label label-warning\">Vahvistettu</span>"
+msgid "<span class=\"tag label label-warning\">Sent</span>"
+msgstr "<span class=\"tag label label-warning\">Lähetetty</span>"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_send
+msgid "After sending, the proposal can not be edited."
+msgstr "Lähetyksen jälkeen ehdotusta ei voi muokata"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -63,9 +68,14 @@ msgid "Are you sure you want to <strong><span class=\"modal-track-action\"/></st
 msgstr "Oletko varma että haluat tehdä toiminnon <strong><span class=\"modal-track-action\"/></strong> esitykselle \"<strong><span class=\"modal-track-title\"/>\"</strong>?"
 
 #. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_send
+msgid "Are you sure you want to send the proposal \"<strong><span class=\"modal-track-title\"/>\"</strong>?"
+msgstr "Oletko varma että haluat lähettää esitysehdotuksen \"<strong><span class=\"modal-track-title\"/>\"</strong>?"
+
+#. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr "Peru"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -73,12 +83,8 @@ msgid "Cancelled by you."
 msgstr "Olet peruuttanut esityksen"
 
 #. module: website_portal_track
-#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "Confirm"
-msgstr "Vahvista"
-
-#. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_send
 msgid "Confirmation"
 msgstr "Vahvistus"
 
@@ -89,16 +95,12 @@ msgstr "Olet vahvistanut esityksen. Esitys on lisätty tapahtuman ohjelmaan"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "Sent by you. Waiting for an approval from reviewers."
-msgstr "Olet lähettänyt esityksen. Esitys odottaa hyväksyntää arvioijilta."
-
-#. module: website_portal_track
-#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Created by you. Waiting for you to send this to review."
 msgstr "Olet luonut esityksen. Odottaa että lähetät sen arvioitavaksi."
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_send
 msgid "No"
 msgstr "Ei"
 
@@ -111,6 +113,11 @@ msgstr "Esitystä ei ole hyväksytty"
 #: model:ir.model,name:website_portal_track.model_res_partner
 msgid "Partner"
 msgstr "Kumppani"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.event_track_application_review
+msgid "Rating"
+msgstr "Arviointi"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -129,10 +136,19 @@ msgid "Review"
 msgstr "Arvio"
 
 #. module: website_portal_track
-#: model:ir.ui.view,arch_db:website_portal_track.tracks_followup
 #: model:ir.ui.view,arch_db:website_portal_track.tracks_followup_reviewers
 msgid "Save"
 msgstr "Tallenna"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Send"
+msgstr "Lähetä"
+
+#. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
+msgid "Sent by you. Waiting for an approval from reviewers."
+msgstr "Olet lähettänyt esityksen. Esitys odottaa hyväksyntää arvioijilta."
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -147,11 +163,6 @@ msgstr "Tälle tunnukselle ei ole esityksiä"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "Timeslot"
-msgstr "Timeslot"
-
-#. module: website_portal_track
-#: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Track"
 msgstr "Esitys"
 
@@ -162,7 +173,13 @@ msgid "Tracks"
 msgstr "Esitykset"
 
 #. module: website_portal_track
+#: model:ir.ui.view,arch_db:website_portal_track.event_track_application_review
+msgid "Verbal rating"
+msgstr "Sanallinen arvio"
+
+#. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
+#: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_send
 msgid "Yes"
 msgstr "Kyllä"
 
