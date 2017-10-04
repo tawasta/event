@@ -76,7 +76,7 @@ $(function() {
         $('#track-application-name-field').prop('disabled', true);
     }
 
-    if(application_state == 'cancel' || application_state == 'refused' || application_state == 'published'){
+    if(application_state == 'cancel' || application_state == 'confirmed' || application_state == 'refused' || application_state == 'published'){
         // Disable everything
         $('#track-application-form').find('input,select,textarea').each(function() {
             $(this).prop('disabled', true);
