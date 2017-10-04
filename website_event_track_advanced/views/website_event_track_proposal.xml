@@ -54,7 +54,7 @@
 
                                         <p class="alert alert-info alert-dismissable text-center">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            By clicking <strong>"Save"</strong> the proposition will be saved for later editing.
+                                            By clicking <strong>"Save as draft"</strong> the proposition will be saved for later editing.
                                         </p>
 
                                         <p class="alert alert-info alert-dismissable text-center">
@@ -67,7 +67,7 @@
                                                    name="track-save"
                                                    id="application-submit-button"
                                                    class="btn btn-primary col-xs-10 col-xs-offset-1"
-                                                   value="Save" />
+                                                   value="Save as draft" />
 
                                             <input t-if="track.state in ['draft', ''] or not track.state"
                                                    type="submit"
