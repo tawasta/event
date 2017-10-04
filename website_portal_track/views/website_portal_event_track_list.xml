@@ -176,7 +176,7 @@
             </t>
         </t>
         <t t-call="website_portal_track.confirm_dialog"/>
-        <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js"></script>
+        <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js?v100"></script>
     </template>
 
     <!-- Confirmation dialog template -->

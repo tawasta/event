@@ -13,12 +13,12 @@
         <t t-call="website_event_track_advanced.event_track_application_extra_info" />
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js?v100"></script>
     </template>
 
     <!-- Application type -->

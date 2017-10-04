@@ -39,7 +39,7 @@
                                 <!-- Call the full form for edit, but hide and disable irrelevant parts -->
                                 <t t-call="website_event_track_advanced.event_track_application"/>
 
-                                <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js"></script>
+                                <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js?v100"></script>
 
                                 <div t-if="track.state not in ['cancel', 'refused', 'published']" class="form-group">
                                     <button type="submit" id="application-submit-button"
@@ -79,7 +79,7 @@
                                 <!-- Rating section -->
                                 <t t-call="website_portal_track.event_track_application_review" />
 
-                                <script type="text/javascript" src="/website_portal_track/static/src/js/application_reviewer.js"></script>
+                                <script type="text/javascript" src="/website_portal_track/static/src/js/application_reviewer.js?v100"></script>
 
                                 <div class="form-group">
                                     <button type="submit" id="application-submit-button"
