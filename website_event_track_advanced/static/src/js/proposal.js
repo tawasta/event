@@ -9,7 +9,7 @@ odoo.define('proposal', function (require) {
 
     // Add file name to attachment input button
     $(':file').change(function() {
-        label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
+        var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
 
         $('#attachment-label').text("(" + label + ")");
     });
@@ -25,10 +25,8 @@ odoo.define('proposal', function (require) {
             return true;
         }
 
-        attachment_size = this.files[0].size;
-        max_size =  30 * 1024 * 1024;
-        console.log(attachment_size);
-        console.log(max_size);
+        var attachment_size = this.files[0].size;
+        var max_size =  30 * 1024 * 1024;
 
         if(attachment_size > max_size){
             $('#attachment-label').text('');
@@ -62,12 +60,12 @@ odoo.define('proposal', function (require) {
     // Adds word-counter properties for textarea.
     // The counter_object has to have a span-element inside itself for the counter
     window.wordCounter = function (event, content, counter_object, word_limit){
-        keycode = false;
-        if(event){
+        var keycode = false;
+        if(event && event.data){
             keycode = event.data.keyCode;
         }
 
-        word_count = wordCount(content);
+        var word_count = wordCount(content);
 
         // Update word count class
         if(word_count >= word_limit){
@@ -78,7 +76,6 @@ odoo.define('proposal', function (require) {
             // 13 = return
             // 31 = space
             // 1114198 = Ctrl-v
-            console.log(keycode)
             var keycode_list = [10, 13, 32, 1114198];
             if ($.inArray(keycode, keycode_list) >= 0) {
                 event.cancel();
@@ -94,7 +91,7 @@ odoo.define('proposal', function (require) {
     // Add speaker (contact) row(s)
     $('#add_speaker').click(function() {
         // Clone the first row
-        row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
+        var row = $('#track-application-speakers-input-row').clone().appendTo('#track-application-speakers-input-div');
         row.removeAttr('id');
         row.find('button').removeAttr('disabled');
 
@@ -162,6 +159,7 @@ odoo.define('proposal', function (require) {
     // De-collapse all elements on submit (to show errors)
     // TODO: only de-collapse if has errors
     $('.application-submit-button').click(function() {
+
         $('#track-application-form').find('div.panel-body').each(function() {
             if($(this).is(":hidden")){
                 $(this).slideToggle('800', function() {});

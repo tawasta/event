@@ -13,8 +13,8 @@
         <t t-call="website_event_track_advanced.event_track_application_extra_info" />
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v100"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v101"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v101"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v100"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v100"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v100"></script>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div id="track-application-application-info-content" class="col-md-12">
                         <label for="track_content" class="control-label">
                             Application content
                         </label>
@@ -118,10 +118,18 @@
                         <textarea name="track_content"
                                   id="track_content"
                                   class="form-control"
-                                  required="true"
+                                  required="required"
                                   placeholder="Application content..."
                                   rows="16"><t t-esc="track['description']" /></textarea>
                     </div>
+
+                    <div id="track-application-track_content-error-div" class="col-md-12 hidden mt16">
+                        <p class="alert alert-danger alert-dismissable" >
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                            Please fill out the application content.
+                        </p>
+                    </div>
+
 
                     <div class="col-md-4">
                         <label for="language" class="control-label">Application language</label>
