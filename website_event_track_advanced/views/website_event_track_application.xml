@@ -488,7 +488,7 @@
                     <h4>Organization invoice address</h4>
 
                     <div id="track-application-organizer-header-div"
-                         class="track-application-contact-input-row">
+                         class="track-application-organizer-input-row">
                         <label for="organizer_organization">Organization</label>
                         <label for="organizer_street">Street</label>
                         <label for="organizer_zip">Zip</label>
@@ -497,7 +497,7 @@
                     </div>
 
                     <div id="track-application-organizer-input-div"
-                         class="track-application-contact-input-row">
+                         class="track-application-organizer-input-row">
                         <input name="organizer_organization" placeholder="Organization"
                                class="form-control" type="text" required="true" t-att-value="track.organizer.name"/>
                         <input name="organizer_street" placeholder="Street" class="form-control"
