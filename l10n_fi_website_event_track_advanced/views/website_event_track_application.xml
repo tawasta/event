@@ -8,7 +8,7 @@
                 <div class="mt16" id="track-application-organization-invoice-div">
 
                     <div id="track-application-organizer-finnish-header-div" class="row">
-                        <div class="col-md-4"><label for="organizer_business_id">Business ID</label></div>
+                        <div class="col-md-4 input-label"><label for="organizer_business_id">Business ID</label></div>
                     </div>
 
                     <div id="track-application-organizer-finnish-input-div" class="row">
@@ -19,9 +19,9 @@
                     </div>
 
                     <div id="track-application-organizer-finnish-header-div" class="row">
-                        <div class="col-md-4"><label for="organizer_edicode">Edicode</label></div>
-                        <div class="col-md-4"><label for="organizer_einvoice_operator">eInvoice Operator</label></div>
-                        <div class="col-md-4"><label for="organizer_einvoice_operator_identifier">Operator ID</label></div>
+                        <div class="col-md-4 input-label"><label for="organizer_edicode">Edicode</label></div>
+                        <div class="col-md-4 input-label"><label for="organizer_einvoice_operator">eInvoice Operator</label></div>
+                        <div class="col-md-4 input-label"><label for="organizer_einvoice_operator_identifier">Operator ID</label></div>
                     </div>
 
                     <div id="track-application-organizer-finnish-input-div" class="row">
