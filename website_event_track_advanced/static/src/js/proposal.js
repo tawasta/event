@@ -20,6 +20,28 @@ odoo.define('proposal', function (require) {
         $('#attachment-file').val('');
     });
 
+    $('#attachment-file').bind('change', function(){
+        if(!this.files[0]){
+            return true;
+        }
+
+        attachment_size = this.files[0].size;
+        max_size =  30 * 1024 * 1024;
+        console.log(attachment_size);
+        console.log(max_size);
+
+        if(attachment_size > max_size){
+            $('#attachment-label').text('');
+            $('#attachment-file').val('');
+            // Show the error div
+            $('#track-application-attachment-error-div').removeClass('hidden');
+        }
+        else {
+            // Hide the error div
+            $('#track-application-attachment-error-div').addClass('hidden');
+        };
+    });
+
     // Add a '*' to required fields
     $( "*[required]" ).each(function( index ) {
         var label = $('label[for="'+$(this).attr('name')+'"]');
