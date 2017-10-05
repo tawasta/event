@@ -72,8 +72,6 @@ odoo.define('proposal', function (require) {
         // Update word count class
         if(word_count >= word_limit){
             counter_object.addClass("text-danger");
-            // This is not working for some reason
-            counter_object.effect("shake", {times:3}, 800 );
 
             // Disable enter and space when word count is full
             // 10 = enter
@@ -172,6 +170,7 @@ odoo.define('proposal', function (require) {
     })
 
     // Suggest the contact as a speaker
+    /*
     $('#track-application-contract-input-div input').change(function(){
         var changed_field = $(this).attr('name').substr(8);
         var corresponding_field_name = 'speaker_' + changed_field + '[0]';
@@ -181,5 +180,6 @@ odoo.define('proposal', function (require) {
             corresponding_field.val($(this).val())
         }
     });
+    */
 
 });
