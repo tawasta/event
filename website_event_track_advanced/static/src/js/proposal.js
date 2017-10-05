@@ -1,11 +1,13 @@
 odoo.define('proposal', function (require) {
     var _t = require('web.core')._t;
 
+    /*
     // TODO: remove these hacks for translating the input-fields
     $(function() {
         $('#application-submit-button').val(_t("Save as draft"));
         $('#application-submit-button-send').val(_t("Save and send"));
     });
+    */
 
     // Add file name to attachment input button
     $(':file').change(function() {
