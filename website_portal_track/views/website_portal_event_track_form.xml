@@ -48,12 +48,14 @@
                                            class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1"
                                            value="Save as draft" />
 
-                                    <input t-if="track.state in ['draft', ''] or not track.state"
-                                           type="submit"
-                                           name="track-confirm"
-                                           id="application-submit-button-send"
-                                           class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8"
-                                           value="Save and send" />
+                                    <t t-if="user.partner_id.id == track.partner_id.id">
+                                        <input t-if="track.state in ['draft', ''] or not track.state"
+                                               type="submit"
+                                               name="track-confirm"
+                                               id="application-submit-button-send"
+                                               class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8"
+                                               value="Save and send" />
+                                    </t>
                                 </div>
                             </form>
                         </section>

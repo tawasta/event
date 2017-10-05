@@ -97,6 +97,7 @@ class WebsiteEventTrack(website_account):
         values = self._get_event_track_proposal_values()
         values['event'] = track.event_id
         values['track'] = track
+        values['user'] = request.env.user
 
         view_name = 'website_portal_track.tracks_followup'
 
