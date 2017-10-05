@@ -34,7 +34,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             existing_operator = einvoice_operator_module.sudo().search([
                 ('name', 'ilike', operator_name)
-            ])
+            ], limit=1)
 
             # Create an einvoice operator if one doesn't exist
             if not existing_operator:
