@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-04 10:22+0000\n"
-"PO-Revision-Date: 2017-10-04 14:06+0300\n"
+"PO-Revision-Date: 2017-10-05 09:59+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,12 +110,12 @@ msgstr "Lisää liite <i class=\"fa fa-paperclip\"/>"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_draft
 msgid "After logging in, they can edit the submission."
-msgstr "Kirjautumisen jälkeen pääsee muokkaamaan esitysehdotusta."
+msgstr "Kirjautumisen jälkeen pääset muokkaamaan esitysehdotusta."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_confirmed
 msgid "After logging in, they can view the submission."
-msgstr "Kirjautumisen jälkeen pääsee tarkastelemaan esitysehdotusta."
+msgstr "Kirjautumisen jälkeen pääset tarkastelemaan esitysehdotusta."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
@@ -196,7 +196,7 @@ msgstr "Keskiarvo"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "By clicking <strong>\"Save and send\"</strong> the proposition will be saved and sent for review."
-msgstr "Klikkaamalla <strong>\"Tallenna ja vahvista\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi."
+msgstr "Klikkaamalla <strong>\"Tallenna ja lähetä\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
