@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-05 09:16+0000\n"
-"PO-Revision-Date: 2017-10-05 12:19+0300\n"
+"POT-Creation-Date: 2017-10-04 10:22+0000\n"
+"PO-Revision-Date: 2017-10-04 14:06+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,12 +110,12 @@ msgstr "Lisää liite <i class=\"fa fa-paperclip\"/>"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_draft
 msgid "After logging in, they can edit the submission."
-msgstr "Kirjautumisen jälkeen pääset muokkaamaan esitysehdotusta."
+msgstr "Kirjautumisen jälkeen pääsee muokkaamaan esitysehdotusta."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_confirmed
 msgid "After logging in, they can view the submission."
-msgstr "Kirjautumisen jälkeen pääset tarkastelemaan esitysehdotusta."
+msgstr "Kirjautumisen jälkeen pääsee tarkastelemaan esitysehdotusta."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
@@ -161,8 +161,7 @@ msgstr "Ehdotuksen tyyppi"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/mpg/event/website_event_track_advanced/static/src/js/proposal.js:116
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:116
+#: code:addons/website_event_track_advanced/static/src/js/proposal.js:89
 #, python-format
 msgid "Are you sure you want to delete this speaker?"
 msgstr "Oletko aivan varma että haluat poistaa tämän esiintyjän?"
@@ -197,7 +196,7 @@ msgstr "Keskiarvo"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "By clicking <strong>\"Save and send\"</strong> the proposition will be saved and sent for review."
-msgstr "Klikkaamalla <strong>\"Tallenna ja lähetä'\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi."
+msgstr "Klikkaamalla <strong>\"Tallenna ja vahvista\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
@@ -212,7 +211,7 @@ msgstr "Call for Papers"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
 msgid "Cancel"
-msgstr "Peru"
+msgstr "Peruuta"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
@@ -225,7 +224,7 @@ msgid "Code"
 msgstr "Koodi"
 
 #. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_comment_2386
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_comment_3253
 msgid "Comment"
 msgstr "Kommentti"
 
@@ -235,7 +234,6 @@ msgid "Content"
 msgstr "Sisältö"
 
 #. module: website_event_track_advanced
-#: code:addons/mpg/event/website_event_track_advanced/models/event_track.py:266
 #: code:addons/website_event_track_advanced/models/event_track.py:266
 #, python-format
 msgid "Content modified"
@@ -516,11 +514,6 @@ msgid "Partner"
 msgstr "Kumppani"
 
 #. module: website_event_track_advanced
-#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid "Please fill out the application content."
-msgstr "Ole hyvä ja täytä ehdotuksen sisältö."
-
-#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
 msgid "Please fill the contact persons information here."
 msgstr "Ole hyvä ja täytä yhteyshenkilön tiedot tässä."
@@ -566,7 +559,7 @@ msgstr "Ehdotukset on suljettu!"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_avg
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_rating
 msgid "Rating"
-msgstr "Arviointi"
+msgstr "Arvostelu"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_ratings
@@ -582,7 +575,7 @@ msgstr "Vaadituissa kentissä on merkki *"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 msgid "Returning speaker"
-msgstr "Aiemmin puhujana"
+msgstr "Aiemmin esiintyjänä"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group
@@ -659,7 +652,7 @@ msgstr "Titteli"
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track_tag
 msgid "Track Tag"
-msgstr "Esityksen avainsana"
+msgstr "Trackin tunniste"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_video_url
@@ -798,7 +791,7 @@ msgstr "Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "You should select a few keywords that matches your presentation best."
-msgstr "Valitse muutama avainsana jotka kuvaavat esitystä parhaiten."
+msgstr "Valitse luettelosta n. 3 avainsanaa jotka kuvaavat esitystä parhaiten."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -806,14 +799,9 @@ msgid "You will receive an email containing a registration link for viewing and 
 msgstr "Sinulle lähetetään sähköposti, joka sisältää rekisteröintilinkin esityksen tarkastelua ja muokkaamista varten. Esiintyjät saavat myös rekisteröintilinkin."
 
 #. module: website_event_track_advanced
-#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid "Your attachment was too large. Maximum allowed size is 30MB."
-msgstr "Liite oli liian suuri. Maksimikoko on 30MB"
-
-#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Your reference"
-msgstr "Viitteenne"
+msgstr "Viite"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_confirmed
