@@ -13,7 +13,7 @@
                         Found
                     </label>
                     <form method="post" t-att-action="keep('/event/' + slug(event) + '/agenda')">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
                         <div class="pull-right">
                             <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
                             <br />

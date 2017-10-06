@@ -47,7 +47,7 @@
                                           method="post"
                                           enctype="multipart/form-data">
 
-                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
 
                                         <t t-call="website_event_track_advanced.event_track_application"/>
 

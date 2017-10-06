@@ -33,7 +33,7 @@
                                   method="post"
                                   enctype="multipart/form-data">
 
-                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
                                 <input type="hidden" id="application_state" name="state" t-att-value="track['state']"/>
 
                                 <!-- Call the full form for edit, but hide and disable irrelevant parts -->
@@ -82,7 +82,7 @@
                                   method="post"
                                   enctype="multipart/form-data">
 
-                                <input type="hidden" name="csrf_token" id="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="csrf_token" id="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
                                 <input type="hidden" id="application_state" name="state" t-att-value="track['state']"/>
 
                                 <t t-call="website_portal_track.event_track_application_reviewer" />
