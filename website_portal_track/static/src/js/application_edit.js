@@ -1,12 +1,6 @@
 $(function() {
     var application_state = $('#application_state').val();
 
-    // TODO: remove these hacks for translating the input-fields
-    $(function() {
-        $('#application-submit-button').val(_t("Save as draft"));
-        $('#application-submit-button-send').val(_t("Save and submit"));
-    });
-
     // Confirm language change
     $('.js_change_lang').click(function() {
         return confirm(_t("Are you sure? Any unsaved changes will be lost."));
