@@ -41,7 +41,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         values = {
             'target_groups': target_groups,
-            'languages': languages,
             'types': types,
             'track': track,
         }

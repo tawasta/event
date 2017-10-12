@@ -12,6 +12,10 @@
                     <h2 class="text-center text-muted mb32" t-esc="event.name"></h2>
                 </section>
 
+                <section name="call-for-papers-language" id="call-for-papers-language">
+                    <t t-call="website.language_selector" />
+                </section>
+
                 <section id="forms" t-if="not event.show_track_proposal">
                     <h1>Proposals are closed!</h1>
                     <p>

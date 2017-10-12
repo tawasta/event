@@ -1,4 +1,9 @@
 /* Proposal */
+
+#call-for-papers-language .js_language_selector{
+    text-align: center;
+}
+
 #track-application-section .alert{
     margin-bottom: 8px;
 }

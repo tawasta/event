@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-12 08:21+0000\n"
-"PO-Revision-Date: 2017-10-12 11:35+0300\n"
+"PO-Revision-Date: 2017-10-12 12:00+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr ""
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
 msgid "<span>You can fill this if you want to hold a webinar before the actual event.</span>"
-msgstr "Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista tapahtumaa."
+msgstr "<span>Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista tapahtumaa.</span>"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_keywords
