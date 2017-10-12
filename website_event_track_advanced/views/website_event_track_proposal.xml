@@ -7,10 +7,11 @@
 
             <div class="oe_structure"/>
             <div class="container">
-                <section>
+                <section id="call-for-papers-header" name="call-for-papers-header">
                     <h1 class="text-center mb0">Call for Papers</h1>
                     <h2 class="text-center text-muted mb32" t-esc="event.name"></h2>
                 </section>
+
                 <section id="forms" t-if="not event.show_track_proposal">
                     <h1>Proposals are closed!</h1>
                     <p>
