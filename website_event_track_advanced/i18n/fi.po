@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-12 09:38+0000\n"
-"PO-Revision-Date: 2017-10-12 12:40+0300\n"
+"PO-Revision-Date: 2017-10-12 14:03+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -619,7 +619,7 @@ msgstr "Arvioinnit"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 msgid "Returning presenter"
-msgstr "Palaava esiintyjä"
+msgstr "Aiemmin esiintyjänä"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers

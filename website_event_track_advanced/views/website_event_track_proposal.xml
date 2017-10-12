@@ -65,18 +65,20 @@
                                         </p>
 
                                         <div class="form-group">
-                                            <input type="submit"
+                                            <button type="submit"
                                                    name="track-save"
+                                                   value="track-save"
                                                    id="application-submit-button"
-                                                   class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1"
-                                                   value="Save as draft" />
+                                                   class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1">Save as draft
+                                            </button>
 
-                                            <input t-if="track.state in ['draft', ''] or not track.state"
+                                            <button t-if="track.state in ['draft', ''] or not track.state"
                                                    type="submit"
                                                    name="track-confirm"
+                                                   value="track-confirm"
                                                    id="application-submit-button-send"
-                                                   class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8"
-                                                   value="Save and submit" />
+                                                   class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8">Save and submit
+                                            </button>
                                         </div>
                                     </form>
                                 </section>
