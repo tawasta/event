@@ -18,6 +18,9 @@ class EventTrackTag(models.Model):
     _inherit = 'event.track.tag'
 
     # 2. Fields declaration
+    name = fields.Char(
+        translate=True
+    )
     tracks = fields.Many2many(
         comodel_name='event.track',
         string='Tracks',
