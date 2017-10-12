@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-12 08:21+0000\n"
-"PO-Revision-Date: 2017-10-12 12:00+0300\n"
+"POT-Creation-Date: 2017-10-12 09:38+0000\n"
+"PO-Revision-Date: 2017-10-12 12:40+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgstr "Rekisteröintilinkki lähetetään yhteyshenkilölle ja esiintyjille."
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted."
-msgstr "A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted."
+msgstr "Luonnosvaiheessa olevasta ehdotuksesta lähetetään ehdotuksen yhteyshenkilölle muistutussähköposti, jotta ehdotus ei jää tallentamatta."
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group_active
@@ -179,10 +179,17 @@ msgstr "Ehdotuksen tyyppi"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:114
+#: code:addons/website_event_track_advanced/static/src/js/proposal.js:119
 #, python-format
 msgid "Are you sure you want to delete this speaker?"
 msgstr "Oletko aivan varma että haluat poistaa tämän esiintyjän?"
+
+#. module: website_event_track_advanced
+#. openerp-web
+#: code:addons/website_event_track_advanced/static/src/js/proposal.js:12
+#, python-format
+msgid "Are you sure? Any unsaved changes will be lost."
+msgstr "Oletko varma? Kaikki tallentamattomat muutokset hävitetään."
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_assign_equally
@@ -336,7 +343,7 @@ msgstr "Tapahtuman esitys"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type_event_tracks
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_advanced_tree
 msgid "Event track"
-msgstr "Tapahtuman esitys"
+msgstr "Tapahtuman track"
 
 #. module: website_event_track_advanced
 #: selection:event.track,rating:0

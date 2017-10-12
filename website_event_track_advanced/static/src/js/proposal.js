@@ -7,6 +7,11 @@ odoo.define('proposal', function (require) {
         $('#application-submit-button-send').val(_t("Save and submit"));
     });
 
+    // Confirm language change
+    $('.js_change_lang').click(function() {
+        return confirm(_t("Are you sure? Any unsaved changes will be lost."));
+    });
+
     // Add file name to attachment input button
     $(':file').change(function() {
         var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
