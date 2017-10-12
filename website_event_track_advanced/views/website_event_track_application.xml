@@ -70,18 +70,17 @@
             <div class="panel-body">
                 <p id="track-application-application-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    This is the part of your application that will be shown to the reviewers.
+                    This part of the application is disclosed to the reviewers.
                 </p>
                 <p id="track-application-application-alert-warning" class="alert alert-warning alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Please refrain from using any identifying information (name, organization,
-                    project).
+                    Avoid using identifiable information (name, organisation, project).
                 </p>
 
                 <div class="form-group" id="track-application-application-info-div">
 
                     <div class="col-md-6">
-                        <label for="track_name" class="control-label">Application title</label>
+                        <label for="track_name" class="control-label">Proposal title</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -93,9 +92,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="video_url" class="control-label">Application as a video (link to
-                            e.g. Youtube or Vimeo)
-                        </label>
+                        <label for="video_url" class="control-label">Proposal in video format (link to e.g. YouTube or Vimeo)</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -108,9 +105,7 @@
                     </div>
 
                     <div id="track-application-application-info-content" class="col-md-12">
-                        <label for="track_content" class="control-label">
-                            Application content
-                        </label>
+                        <label for="track_content" class="control-label">Content of proposal</label>
                         <span id="track_content_word_counter" class="pull-right">Words
                             <span id="track_content_word_count" />
                         </span>
@@ -132,7 +127,7 @@
 
 
                     <div class="col-md-4">
-                        <label for="language" class="control-label">Application language</label>
+                        <label for="language" class="control-label">Language of proposal</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -153,13 +148,20 @@
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div id="track-application-application-attachment-attachment-div" class="col-md-12">
                         <label class="btn btn-default btn-file col-xs-10 col-sm-offset-1">
-                            Add an attachment <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
+                            Add attachment (optional) <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
                             <span class="text-success" id="attachment-label"></span>
                         </label>
                         <button type="button" id="btn-remove-attachment" class="btn">
                             <i class="fa fa-trash"/>
                         </button>
                     </div>
+                </div>
+
+                <div id="track-application-attachment-info-div" class="hidden">
+                    <p class="alert alert-info alert-dismissable" >
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                        The proposal text can be supplemented with an attachment file.
+                    </p>
                 </div>
 
                 <div id="track-application-attachment-error-div" class="hidden">
@@ -178,15 +180,15 @@
     <template id="website_event_track_advanced.event_track_application_targetgroup_info">
         <div class="panel panel-primary" id="track-application-targetgroup-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Target group info</h3>
+                <h3 class="panel-title">Target group details</h3>
             </div>
 
             <div class="panel-body">
                 <p id="track-application-targetgroup-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
 
-                    <span>Select your <strong>primary target group</strong>, even if your presentation would fit to multiple target groups.</span>
-                    <br/><span>You can expand the target group by writing a description.</span>
+                    <span>Select your presentation’s primary target group.</span><br/>
+                    <span>You can enter specifications of your presentation’s target group in the target group details.</span>
                 </p>
 
                 <div class="form-group" id="track-application-targetgroup-info-div">
@@ -211,7 +213,7 @@
                     </div>
 
                     <div class="col-md-8">
-                        <label for="target_group_info" class="control-label">Target group info</label>
+                        <label for="target_group_info" class="control-label">Target group details</label>
 
                         <span id="target_group_info_word_counter" class="pull-right">Words
                             <span id="target_group_info_word_count" />
@@ -233,7 +235,7 @@
                         <label class="control-label required-label">Keywords</label>
                         <p id="track-application-targetgroup-tags-alert-info" class="alert alert-info alert-dismissable mt8">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                            You should select a few keywords that matches your presentation best.
+                            Choose approx. 3 words from the list that best describe your presentation.
                         </p>
                         <p id="track-application-targetgroup-tags-alert-warning" class="alert alert-warning alert-dismissable">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
@@ -264,7 +266,7 @@
 
         <div class="panel panel-primary" id="track-application-contact-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Presentation contact</h3>
+                <h3 class="panel-title">Presentation’s contact person</h3>
             </div>
 
             <div class="panel-body">
@@ -311,13 +313,13 @@
 
         <div class="panel panel-primary" id="track-application-speakers-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Speakers</h3>
+                <h3 class="panel-title">Presenters</h3>
             </div>
 
             <div class="panel-body">
                 <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    List all of the speakers here, including yourself if you are a speaker.
+                    List the details of all presenters
                 </p>
 
                 <div id="track-application-speakers-header-div"
@@ -327,7 +329,7 @@
                     <label for="speaker_last_name[0]">Last name</label>
                     <label for="speaker_organization[0]">Organization</label>
                     <label for="speaker_title[0]">Title</label>
-                    <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning speaker</label>
+                    <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning presenter</label>
                 </div>
 
                 <div id="track-application-speakers-input-div">
@@ -380,7 +382,7 @@
 
                 <div class="form-group">
                     <button type="button" class="btn btn-default col-xs-10 col-xs-offset-1 mt8"
-                            id="add_speaker">Add a speaker <i class="fa fa-user"/>
+                            id="add_speaker">Add presenter <i class="fa fa-user"/>
                     </button>
                 </div>
             </div>
@@ -393,18 +395,18 @@
 
         <div class="panel panel-warning" id="track-application-webinar-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Webinar info</h3>
+                <h3 class="panel-title">Webinar details</h3>
             </div>
 
             <div class="panel-body">
                 <p id="track-application-webinar-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    You can fill this if you want to hold a webinar before the actual event.
+                    <span>You can fill this if you want to hold a webinar before the actual event.</span>
                 </p>
 
                 <div class="form-group" id="track-application-webinar-div">
                     <div class="col-md-4">
-                        <label for="webinar" class="control-label">I wish to hold a webinar</label>
+                        <label for="webinar" class="control-label">I would like to hold a webinar</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -422,7 +424,7 @@
 
                     </div>
                     <div class="col-md-8">
-                        <label for="webinar_info" class="control-label">Webinar info</label>
+                        <label for="webinar_info" class="control-label">Webinar details</label>
 
                         <span id="webinar_info_word_counter" class="pull-right">Words
                             <span id="webinar_info_word_count" />
@@ -574,14 +576,14 @@
 
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h3 class="panel-title">Extra info</h3>
+                <h3 class="panel-title">Additional details</h3>
             </div>
 
             <div class="panel-body" id="track-application-extra-div">
                 <p id="track-application-extra-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Please tell us any wishes about special arrangements.<br/>
-                    This can concern the presentation technology, premises, fitments, schedule, etc.
+                    <span>Please enter any special arrangements you wish for your presentation in the additional details section.</span><br/>
+                    <span>For example, any wishes for presentation technology, premises, furniture, presentation time, etc.</span>
                 </p>
 
                 <div class="form-group" id="track-application-extra-info-div">

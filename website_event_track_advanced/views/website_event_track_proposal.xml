@@ -24,20 +24,16 @@
                             <div class="oe_structure">
                                 <section>
                                     <h3 class="page-header mt16">
-                                        Application
+                                        Presentation proposal
                                     </h3>
                                     <div id="track-application-section-alert" class="alert">
-                                        <p>We will accept a broad range of
-                                        presentations, from reports on academic and
-                                        commercial projects to tutorials and case
-                                        studies. As long as the presentation is
-                                        interesting and potentially useful to the
-                                        audience, it will be considered for
-                                        inclusion in the programme.
-                                        </p>
+                                        <div>You can save the presentation proposal as a draft or when it is completed.</div>
+                                        <div class="mt16">A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted.</div>
+                                        <div class="mt16">Only the contact person of the presentation can submit the completed proposal.</div>
+                                        <div class="mt16">The proposal can also be submitted as a video. In this case, please include a short description as well as a link to the video.</div>
                                     </div>
 
-                                    <p class="alert text-primary">Required fields are marked with *</p>
+                                    <p class="alert text-primary">The required fields are marked with *</p>
                                 </section>
 
                                 <section id="forms">
@@ -54,12 +50,13 @@
 
                                         <p class="alert alert-info alert-dismissable text-center">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            By clicking <strong>"Save as draft"</strong> the proposition will be saved for later editing.
+                                            <span>By clicking <strong>"Save as draft"</strong> the proposal shall be saved and can be edited later.</span>
                                         </p>
 
                                         <p class="alert alert-info alert-dismissable text-center">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                                            By clicking <strong>"Save and send"</strong> the proposition will be saved and sent for review.
+                                            <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span><br />
+                                            <span>Please note that a completed proposal can no longer be edited.</span>
                                         </p>
 
                                         <div class="form-group">
@@ -74,7 +71,7 @@
                                                    name="track-confirm"
                                                    id="application-submit-button-send"
                                                    class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8"
-                                                   value="Save and send" />
+                                                   value="Save and submit" />
                                         </div>
                                     </form>
                                 </section>
