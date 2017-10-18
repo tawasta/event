@@ -144,6 +144,16 @@ class EventTrack(models.Model):
         help='Leave empty for free workshops',
     )
 
+    partner_string = fields.Text(
+        string='Partner',
+        compute='_compute_partner_string',
+    )
+
+    speakers_string = fields.Text(
+        string='Speakers',
+        compute='_compute_speakers_string',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
@@ -192,6 +202,20 @@ class EventTrack(models.Model):
             avg = ratings_sum / len(record.ratings)
 
             record.rating_avg = avg
+
+    def _compute_partner_string(self):
+        for record in self:
+            record.partner_string = record.partner_id.name
+
+    def _compute_speakers_string(self):
+        for record in self:
+            speakers = ''
+            for speaker in record.speaker_ids:
+                speakers += " %s," % speaker.name
+
+            speakers = speakers[1:-1]
+
+            record.speakers_string = speakers
 
     # 5. Constraints and onchanges
 

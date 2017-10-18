@@ -9,7 +9,8 @@
 
                 <xpath expr="//templates" position="before">
                     <field name="date"/>
-                    <field name="partner_id"/>
+                    <field name="partner_string"/>
+                    <field name="speakers_string"/>
                     <field name="duration"/>
                     <field name="location_id"/>
                 </xpath>
@@ -19,13 +20,13 @@
                         <field name="tag_ids"/>
                         <h4><field name="name"/></h4>
                         <div>
-                            <t t-set="partner" t-value="record.partner_id.raw_value" />
-                            <p><t t-esc="partner"/></p>
+                            <p><strong>Contact:</strong> <field name="partner_string"/></p>
+                            <p><strong>Presenters:</strong> <field name="speakers_string"/></p>
                         </div>
                         <div class="oe_kanban_bottom_right">
                             <field name="location_id"/><br/>
-                            <field name="date"/><br/>
-                            <t t-if="duration"><field name="duration" widget="float_time"/> hours</t>
+                            <field name="date" widget="date"/><br/>
+                            <t t-if="record.duration.raw_value"><field name="duration" widget="float_time"/> hours</t>
                         </div>
                         <div class="oe_kanban_footer_left">
                             Rating: <field name="rating_avg" />
