@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-12 09:38+0000\n"
-"PO-Revision-Date: 2017-10-12 14:03+0300\n"
+"POT-Creation-Date: 2017-10-19 04:06+0000\n"
+"PO-Revision-Date: 2017-10-19 07:07+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,6 +110,16 @@ msgid "<span>You can fill this if you want to hold a webinar before the actual e
 msgstr "<span>Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista tapahtumaa.</span>"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
+msgid "<strong>Contact:</strong>"
+msgstr "<strong>Kontakti:</strong>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
+msgid "<strong>Presenters:</strong>"
+msgstr "<strong>Esiintyjät:</strong>"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_keywords
 msgid "A free text key words"
 msgstr "Vapaat avainsanat"
@@ -160,7 +170,7 @@ msgstr "Kirjautumisen jälkeen pääset tarkastelemaan esitysehdotusta."
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "Application content..."
-msgstr "Ehdotuksen sisältö"
+msgstr "Ehdotuksen sisältö..."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
@@ -179,14 +189,16 @@ msgstr "Ehdotuksen tyyppi"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:119
+#: code:addons/mpg/event/website_event_track_advanced/static/src/js/proposal.js:113
+#: code:addons/website_event_track_advanced/static/src/js/proposal.js:113
 #, python-format
 msgid "Are you sure you want to delete this speaker?"
 msgstr "Oletko aivan varma että haluat poistaa tämän esiintyjän?"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:12
+#: code:addons/mpg/event/website_event_track_advanced/static/src/js/proposal.js:6
+#: code:addons/website_event_track_advanced/static/src/js/proposal.js:6
 #, python-format
 msgid "Are you sure? Any unsaved changes will be lost."
 msgstr "Oletko varma? Kaikki tallentamattomat muutokset hävitetään."
@@ -259,7 +271,8 @@ msgid "Content"
 msgstr "Sisältö"
 
 #. module: website_event_track_advanced
-#: code:addons/website_event_track_advanced/models/event_track.py:266
+#: code:addons/mpg/event/website_event_track_advanced/models/event_track.py:290
+#: code:addons/website_event_track_advanced/models/event_track.py:290
 #, python-format
 msgid "Content modified"
 msgstr "Sisältöä muokattu"
@@ -334,7 +347,7 @@ msgstr "Tapahtuma"
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track
 msgid "Event Track"
-msgstr "Tapahtuman esitys"
+msgstr "Tapahtuman track"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_event_track
@@ -550,6 +563,7 @@ msgstr "Osallistumismaksu"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_res_partner
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_partner_string
 msgid "Partner"
 msgstr "Kumppani"
 
@@ -608,7 +622,12 @@ msgstr "Ehdotukset on suljettu!"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_avg
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_rating
 msgid "Rating"
-msgstr "Arviointi"
+msgstr "Arvostelu"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
+msgid "Rating:"
+msgstr "Rating:"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_ratings
@@ -637,16 +656,12 @@ msgid "Reviewers"
 msgstr "Arvioijat"
 
 #. module: website_event_track_advanced
-#. openerp-web
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:7
-#, python-format
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "Save and submit"
 msgstr "Tallenna ja lähetä"
 
 #. module: website_event_track_advanced
-#. openerp-web
-#: code:addons/website_event_track_advanced/static/src/js/proposal.js:6
-#, python-format
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
 msgid "Save as draft"
 msgstr "Tallenna luonnoksena"
 
@@ -659,6 +674,11 @@ msgstr "Aikataulu"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Selecting too many keywords can make it harder to find the correct audience."
 msgstr "Liian monen tunnisteen valinta voi tehdä oikean kohderyhmän löytämisestä vaikeampaa."
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_speakers_string
+msgid "Speakers"
+msgstr "Esiintyjät"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
@@ -685,7 +705,7 @@ msgstr "Kohderyhmän tiedot"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Target group info..."
-msgstr "Kohderyhmän tiedot"
+msgstr "Kohderyhmän tiedot..."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -768,7 +788,7 @@ msgstr "Esityksen tyypit"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_tracks
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_form
 msgid "Tracks"
-msgstr "Esitykset"
+msgstr "Trackit"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type
@@ -859,17 +879,17 @@ msgstr "Liite oli liian suuri. Maksimikoko on 30MB"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Your reference"
-msgstr "Viite"
+msgstr "Viitteenne"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_confirmed
 msgid "Your submission has been saved and sent to review."
-msgstr "Esitysehdotuksesi on tallennettu ja lähetetty arvioitavaksi."
+msgstr "Esityksehdotuksesi on tallennettu ja lähetetty arvioitavaksi."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success_draft
 msgid "Your submission has been saved as a draft."
-msgstr "Esitysehdotuksesi on tallennettu luonnoksena."
+msgstr "Esityksehdotuksesi on tallennettu luonnoksena."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
@@ -900,6 +920,11 @@ msgstr "event.track.target.group"
 #: model:ir.model,name:website_event_track_advanced.model_event_track_type
 msgid "event.track.type"
 msgstr "event.track.type"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
+msgid "hours"
+msgstr "tunti;tuntia"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
