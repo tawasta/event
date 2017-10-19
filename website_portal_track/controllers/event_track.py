@@ -140,8 +140,8 @@ class WebsiteEventTrack(website_account):
             _logger.warning("Trying to save in '%s' state" % track.state)
             return request.redirect('/my/tracks/')
 
+        speaker_ids = list()
         if track.state not in ['confirmed']:
-            speaker_ids = list()
             speakers = list()
             for speaker in values.get('speakers', []):
                 # If user already exists, create a new partner
