@@ -122,15 +122,16 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 8. Create an attachment
         # TODO: could this be done in the track create?
         # TODO: multiple attachments?
-        attachment_values = {
-            'name': post['attachment_ids'].filename,
-            'datas': base64.encodestring(post['attachment_ids'].read()),
-            'datas_fname': post['attachment_ids'].filename,
-            'res_model': 'event.track',
-            'res_id': track.id,
-            'type': 'binary'
-        }
-        attachment = request.env['ir.attachment'].sudo().create(attachment_values)
+        if post.get('attachment_ids', False):
+            attachment_values = {
+                'name': post['attachment_ids'].filename,
+                'datas': base64.encodestring(post['attachment_ids'].read()),
+                'datas_fname': post['attachment_ids'].filename,
+                'res_model': 'event.track',
+                'res_id': track.id,
+                'type': 'binary'
+            }
+            attachment = request.env['ir.attachment'].sudo().create(attachment_values)
 
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)
