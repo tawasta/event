@@ -79,7 +79,7 @@
 
                 <div class="form-group" id="track-application-application-info-div">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="track_name" class="control-label">Proposal title</label>
 
                         <div class="input-group">
@@ -91,14 +91,21 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="video_url" class="control-label">Proposal in video format (link to e.g. YouTube or Vimeo)</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-video-camera"/>
                             </span>
-                            <input name="video_url" t-att-value="track['video_url']"
+
+                            <a t-if="user.has_group('event.group_track_reviewer')"
+                               t-att-href="track['video_url']"
+                               class="form-control" target="_blank">
+                                <span t-field="track.video_url" />
+                            </a>
+                            <input t-if="not user.has_group('event.group_track_reviewer')"
+                                   name="video_url" t-att-value="track['video_url']"
                                    placeholder="https://www.youtube.com, https://vimeo.com, ..."
                                    class="form-control" type="text"/>
                         </div>
@@ -169,6 +176,24 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                         Your attachment was too large. Maximum allowed size is 30MB.
                     </p>
+                </div>
+
+                <div class="form-group" id="track-application-attachment-reviewer-div"
+                     t-if="user.has_group('event.group_track_reviewer')">
+
+                    <div class="col-xs-12">
+                        <label for="attachment_ids" class="control-label">Attachments</label>
+                    </div>
+
+                    <t t-foreach="track.attachment_ids" t-as="attachment">
+                    <!-- File attachment and download -->
+                    <div class="col-xs-4">
+                        <a t-att-href="'/web/content/%s?download=1' % (attachment.id)">
+                            <div class="o_image" t-att-data-mimetype="'%s' % (attachment.mimetype)" style="display:block;"></div>
+                            <t t-esc="attachment.name"/>
+                        </a>
+                    </div>
+                    </t>
                 </div>
 
             </div>
