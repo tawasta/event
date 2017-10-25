@@ -81,6 +81,10 @@
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
+                        <section name="call-for-papers-language" id="call-for-papers-language">
+                            <t t-call="website.language_selector" />
+                        </section>
+
                         <section id="forms">
                             <form id="track-application-form"
                                   class="form-horizontal mt32 js_website_submit_form"
