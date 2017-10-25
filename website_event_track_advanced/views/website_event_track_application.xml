@@ -104,7 +104,7 @@
                                class="form-control" target="_blank">
                                 <span t-field="track.video_url" />
                             </a>
-                            <input t-if="user and not user.has_group('event.group_track_reviewer')"
+                            <input t-if="not user or user and not user.has_group('event.group_track_reviewer')"
                                    name="video_url" t-att-value="track['video_url']"
                                    placeholder="https://www.youtube.com, https://vimeo.com, ..."
                                    class="form-control" type="text"/>
