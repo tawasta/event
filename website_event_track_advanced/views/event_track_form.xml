@@ -56,7 +56,7 @@
                 <field name="speaker_ids" position="replace" />
 
 				<xpath expr="//sheet/group[last()]" position="after">
-                    <group name="speakers" string="Speakers">
+                    <group name="speakers" string="Presenters">
                         <field name="speaker_ids" nolabel="1" />
                     </group>
 
