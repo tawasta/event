@@ -27,9 +27,6 @@ $(function() {
         var field_content = CKEDITOR.instances['track_content'].getData();
         var word_count = wordCount(field_content);
 
-        console.log(field_content);
-        console.log(word_count);
-
         if(word_count == 0 || word_count > word_limit){
             event.preventDefault();
             $('#track-application-track_content-error-div').removeClass('hidden');
