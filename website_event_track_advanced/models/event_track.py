@@ -64,7 +64,7 @@ class EventTrack(models.Model):
             ('4', 'Great'),
             ('5', 'Excellent'),
         ],
-        select=True,
+        index=True,
         string='Rating',
         compute='_get_rating',
         inverse='_set_rating',
@@ -83,8 +83,10 @@ class EventTrack(models.Model):
 
     rating_avg = fields.Float(
         digits=(3, 2),
-        string='Rating',
+        string='Average rating',
         compute='_compute_rating_avg',
+        store=True,
+        copy=False,
     )
 
     target_group = fields.Many2one(
@@ -181,15 +183,16 @@ class EventTrack(models.Model):
             ])
 
             if existing_rating:
-                existing_rating.rating = record.rating
-                existing_rating.comment = record.rating_comment
+                existing_rating.rating = self.rating
+                existing_rating.comment = self.rating_comment
             else:
                 rating = record.ratings.create({
-                    'event_track': record.id,
-                    'rating': record.rating,
-                    'rating_comment': record.rating_comment,
+                    'event_track': self.id,
+                    'rating': self.rating,
+                    'rating_comment': self.rating_comment,
                 })
 
+    @api.depends('ratings', 'ratings.rating')
     def _compute_rating_avg(self):
         for record in self:
             if not record.ratings:

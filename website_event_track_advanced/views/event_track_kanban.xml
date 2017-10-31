@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//templates" position="before">
+                    <field name="type"/>
                     <field name="date"/>
                     <field name="partner_string"/>
                     <field name="speakers_string"/>
@@ -19,6 +20,9 @@
                     <div class="oe_kanban_content">
                         <field name="tag_ids"/>
                         <h4><field name="name"/></h4>
+                        <div>
+                            <p><strong><field name="type"/></strong></p>
+                        </div>
                         <div>
                             <p><strong>Contact:</strong> <field name="partner_string"/></p>
                             <p><strong>Presenters:</strong> <field name="speakers_string"/></p>
