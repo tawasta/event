@@ -52,7 +52,14 @@
                     <attribute name="invisible">1</attribute>
                 </field>
 
+                <!-- Add a "full" speaker_ids field without tags-widget -->
+                <field name="speaker_ids" position="replace" />
+
 				<xpath expr="//sheet/group[last()]" position="after">
+                    <group name="speakers" string="Speakers">
+                        <field name="speaker_ids" nolabel="1" />
+                    </group>
+
                     <group name="reviewer" groups="event.group_track_reviewer">
                         <group>
                             <field name="review_group"
