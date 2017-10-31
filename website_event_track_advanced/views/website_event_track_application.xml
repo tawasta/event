@@ -38,6 +38,7 @@
                             </span>
                             <select name="application_type" id="application_type" required="true"
                                     class="form-control" type="selection">
+                                <option value=""></option>
                                 <t t-foreach="types" t-as="application_type">
                                     <option t-attf-value="#{application_type['code']}"
                                             t-attf-description="#{application_type['description']}"
