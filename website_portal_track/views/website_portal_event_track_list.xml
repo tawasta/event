@@ -102,7 +102,7 @@
                             <td id="" t-if="user.partner_id.id == track.partner_id.id">
                                 <!-- Confirm or cancel an approved track -->
                                 <button t-if="track.state == 'draft'"
-                                        class="btn btn-warning mb8"
+                                        class="btn btn-warning"
                                         data-toggle="modal"
                                         data-target="#track-confirm-action-send"
                                         data-action="confirm"
