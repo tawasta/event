@@ -129,6 +129,13 @@ odoo.define('proposal', function (require) {
         $('#application_type_description').html($('#application_type option:selected').attr('description'));
         var application_type = $('#application_type option:selected').val();
 
+        if(!application_type){
+            $(".panel-body").hide();
+            $("#track-application-type-div .panel-body").show();
+        } else {
+            $(".panel-body").fadeIn("slow");
+        }
+
         workshop = application_type == 'workshop';
         // Toggle display by form type
         $('#track-application-workshop-div').toggle(workshop);
