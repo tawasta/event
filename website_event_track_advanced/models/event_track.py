@@ -4,6 +4,7 @@
 import difflib
 
 # 2. Known third party imports:
+from bs4 import BeautifulSoup
 
 # 3. Odoo imports:
 from odoo import api, fields, models
@@ -42,6 +43,11 @@ class EventTrack(models.Model):
         inverse_name='res_id',
         domain=[('res_model', '=', 'event.track')],
         string='Attachments',
+    )
+
+    description_plain = fields.Char(
+        string='Plain description',
+        compute='compute_description_plain',
     )
 
     description_original = fields.Html(
@@ -219,6 +225,12 @@ class EventTrack(models.Model):
             speakers = speakers[1:-1]
 
             record.speakers_string = speakers
+
+    @api.multi
+    @api.depends('description')
+    def compute_description_plain(self):
+        for record in self:
+            record.description_plain = BeautifulSoup(record.description).text
 
     # 5. Constraints and onchanges
 
