@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 11:55+0000\n"
-"PO-Revision-Date: 2017-11-08 13:57+0200\n"
+"POT-Creation-Date: 2017-11-09 12:31+0000\n"
+"PO-Revision-Date: 2017-11-09 14:36+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -168,6 +168,22 @@ msgid "After logging in, they can view the submission."
 msgstr "Kirjautumisen jälkeen pääset tarkastelemaan esitysehdotusta."
 
 #. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_all
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list_all
+msgid "All tracks"
+msgstr "Kaikki esitykset"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list_announced
+msgid "Announced"
+msgstr "Julkistettu"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_announced
+msgid "Announced tracks"
+msgstr "Julkistetut esitykset"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "Application content..."
 msgstr "Ehdotuksen sisältö..."
@@ -272,6 +288,16 @@ msgid "Comment"
 msgstr "Kommentti"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list_confirmed
+msgid "Confirmed"
+msgstr "Vahvistettu"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_confirmed
+msgid "Confirmed tracks"
+msgstr "Vahvistetut esitykset"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 msgid "Content"
 msgstr "Sisältö"
@@ -353,7 +379,7 @@ msgstr "Tapahtuma"
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track
 msgid "Event Track"
-msgstr "Tapahtuman track"
+msgstr "Esitys"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_event_track
@@ -362,7 +388,12 @@ msgstr "Tapahtuman track"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type_event_tracks
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_advanced_tree
 msgid "Event track"
-msgstr "Tapahtuman track"
+msgstr "Esitys"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_report
+msgid "Event tracks"
+msgstr "Esitykset"
 
 #. module: website_event_track_advanced
 #: selection:event.track,rating:0
@@ -630,6 +661,26 @@ msgid "Proposals are closed!"
 msgstr "Ehdotukset on suljettu!"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list_draft
+msgid "Proposed"
+msgstr "Ehdotettu"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_draft
+msgid "Proposed tracks"
+msgstr "Ehdotetut esitykset"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list_published
+msgid "Published"
+msgstr "Julkaistu"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_published
+msgid "Published tracks"
+msgstr "Julkaistut esitykset"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_rating
 msgid "Rating"
@@ -755,7 +806,7 @@ msgstr "Tämä osa hakemuksesta näytetään arvioijille. "
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Title"
-msgstr "Ehdotuksen otsikko"
+msgstr "Esityksen otsikko"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track_tag
@@ -765,7 +816,12 @@ msgstr "Esityksen avainsana"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_video_url
 msgid "Track as a video (link to e.g. Youtube or Vimeo)"
-msgstr "Ehdotus videomuodossa (linkki esim. Youtubeen tai Vimeoon)"
+msgstr "Esitys videomuodossa (linkki esim. Youtubeen tai Vimeoon)"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.report.xml,name:website_event_track_advanced.report_event_track_content
+msgid "Track content"
+msgstr "Esityksen sisältö"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_track_count
@@ -776,6 +832,11 @@ msgstr "Esitysten lukumäärä"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_track_ids
 msgid "Track ids"
 msgstr "Esitysten id:t"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_list
+msgid "Track lists"
+msgstr "Lista esityksistä"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_review_group_action
