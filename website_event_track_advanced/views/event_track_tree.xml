@@ -22,5 +22,22 @@
 			</field>
 		</record> 
 
+		<record id="view_event_track_tree" model="ir.ui.view">
+			<field name="name">view_event_track_tree_advanced</field>
+			<field name="model">event.track</field>
+			<field name="inherit_id" ref="website_event_track.view_event_track_tree" />
+			<field name="arch" type="xml">
+
+                <field name="event_id" position="after">
+                    <field name="partner_id"/>
+                    <field name="language"/>
+                    <field name="review_group"/>
+                    <field name="rating_avg"/>
+                    <field name="state"/>
+                </field>
+
+			</field>
+        </record>
+
 	</data>
 </odoo>
