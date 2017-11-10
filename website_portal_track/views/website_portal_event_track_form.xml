@@ -26,9 +26,11 @@
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
+                        <!--
                         <section name="call-for-papers-language" id="call-for-papers-language">
                             <t t-call="website.language_selector" />
                         </section>
+                        -->
 
                         <section id="forms">
                             <form id="track-application-form"
@@ -81,9 +83,11 @@
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
+                        <!--
                         <section name="call-for-papers-language" id="call-for-papers-language">
                             <t t-call="website.language_selector" />
                         </section>
+                        -->
 
                         <section id="forms">
                             <form id="track-application-form"
