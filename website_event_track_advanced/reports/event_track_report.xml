@@ -17,13 +17,13 @@
                 <div class="oe_structure"/>
                 <h1>Event tracks</h1>
                 <t t-foreach="docs" t-as="doc">
-                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.language or 'en_US'})"/>
                     <p><strong><span t-field="doc.id" /></strong> - <span t-field="doc.name" /></p>
                 </t>
             </div>
 
             <t t-foreach="docs" t-as="doc">
-                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.language or 'en_US'})"/>
 
                 <div class="page mb32">
                     <!-- This will be repeated a lot, but it won't work higher in the hierarchy -->
