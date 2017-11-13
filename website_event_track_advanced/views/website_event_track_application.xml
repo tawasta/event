@@ -114,11 +114,15 @@
 
                     <div id="track-application-application-info-content" class="col-md-12">
                         <label for="track_content" class="control-label">Content of proposal</label>
-                        <span id="track_content_word_counter" class="pull-right">Words
+                        <span t-if="user and not user.has_group('event.group_track_reviewer')"
+                              id="track_content_word_counter" class="pull-right">Words
                             <span id="track_content_word_count" />
                         </span>
 
-                        <textarea name="track_content"
+                        <span t-if="user and user.has_group('event.group_track_reviewer')" t-field="track.description" />
+
+                        <textarea t-if="user and not user.has_group('event.group_track_reviewer')"
+                                  name="track_content"
                                   id="track_content"
                                   class="form-control"
                                   required="required"
