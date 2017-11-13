@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="event_track_rating_action" model="ir.actions.act_window" >
+        <field name="name">Track ratings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">event.track.rating</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_groupby_track':1}</field>
+    </record>
+
+    <menuitem id="event_track_rating_menu"
+              name="Track ratings"
+              action="event_track_rating_action"
+              sequence="40"
+              parent="event.menu_event_configuration"
+              groups="event.group_event_manager"
+              />
+
+</odoo>

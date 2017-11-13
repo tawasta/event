@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_event_track_rating_search" model="ir.ui.view">
+            <field name="name">event_track_rating_search</field>
+            <field name="model">event.track.rating</field>
+            <field name="arch" type="xml">
+                <search string="Search track ratings">
+                    <group expand="0" string="Group By">
+                        <filter string="Track" name='groupby_track' context="{'group_by': 'event_track'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

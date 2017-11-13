@@ -18,6 +18,7 @@ class EventTrackRating(models.Model):
     # 1. Private attributes
     _name = 'event.track.rating'
     _rec_name = 'rating'
+    _order='event_track, rating'
 
     # 2. Fields declaration
     event_track = fields.Many2one(
@@ -26,6 +27,7 @@ class EventTrackRating(models.Model):
     )
     rating = fields.Integer(
         string='Rating',
+        group_operator='avg',
     )
     comment = fields.Char(
         string='Comment',
