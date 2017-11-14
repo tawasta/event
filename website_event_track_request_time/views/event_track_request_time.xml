@@ -14,7 +14,7 @@
               name="Track request times"
               action="event_track_request_time_action"
               sequence="40"
-              parent="event.menu_event_configuration"
+              parent="website_event_track_advanced.menu_event_track_configuration"
               groups="event.group_event_manager"
               />
 

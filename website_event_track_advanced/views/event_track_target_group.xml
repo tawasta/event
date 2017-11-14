@@ -14,7 +14,7 @@
               name="Track target groups"
               action="event_track_target_group_action"
               sequence="30"
-              parent="event.menu_event_configuration"
+              parent="website_event_track_advanced.menu_event_track_configuration"
               groups="event.group_event_manager"
               />
 

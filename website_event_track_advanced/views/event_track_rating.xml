@@ -14,8 +14,8 @@
     <menuitem id="event_track_rating_menu"
               name="Track ratings"
               action="event_track_rating_action"
-              sequence="40"
-              parent="event.menu_event_configuration"
+              sequence="10"
+              parent="website_event_track_advanced.menu_event_track_reviews"
               groups="event.group_event_manager"
               />
 

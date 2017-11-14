@@ -14,7 +14,7 @@
               name="Track review groups"
               action="event_track_review_group_action"
               sequence="20"
-              parent="event.menu_event_configuration"
+              parent="website_event_track_advanced.menu_event_track_configuration"
               groups="event.group_event_manager"
               />
 
