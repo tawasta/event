@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- TODO: change this model to event.track.reviewer -->
+    <record id="view_event_track_reviewer_tree" model="ir.ui.view">
+        <field name="name">view_event_track_reviewer_tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="20" />
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+
+            <tree string="Reviewers" create="false" delete="false">
+                <field name="name"/>
+                <field name="review_group_ids"/>
+                <field name="ratings_done_count"/>
+                <field name="ratings_todo_count"/>
+                <field name="ratings_done_percent"/>
+            </tree>
+
+        </field>
+    </record>
+
+</odoo>

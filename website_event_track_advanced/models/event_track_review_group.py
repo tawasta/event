@@ -26,6 +26,7 @@ class EventTrackReviewGroup(models.Model):
         default=True
     )
 
+    # TODO: link this to reviewers instead of partners
     reviewers = fields.Many2many(
         comodel_name='res.partner',
         string='Reviewers',
