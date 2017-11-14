@@ -208,7 +208,7 @@ class EventTrack(models.Model):
             for rating in record.ratings:
                 ratings_sum += rating.rating
 
-            avg = ratings_sum / len(record.ratings)
+            avg = float(ratings_sum) / float(len(record.ratings))
 
             record.rating_avg = avg
 
