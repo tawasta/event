@@ -52,10 +52,43 @@
                     <attribute name="invisible">1</attribute>
                 </field>
 
+                <!-- Replaces the group with speakers, location, date and tags information -->
                 <!-- Add a "full" speaker_ids field without tags-widget -->
-                <field name="speaker_ids" position="replace" />
+                <!-- Move date and duration to same place as end date and overlapping tracks -->
+                <xpath expr="//sheet/group[last()]/group[last()]" position="replace">
+                    <group>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                    </group>
+                </xpath>
 
 				<xpath expr="//sheet/group[last()]" position="after">
+
+                    <group name='dates'>
+                        <group>
+                            <field name="date"/>
+                            <label for="duration"/>
+                            <div>
+                                <field name="duration" class="oe_inline" widget="float_time"/> hours
+                            </div>
+                            <field name="date_end"/>
+                        </group>
+                        <group>
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+
+                    <group name="overlapping_tracks" col="1" attrs="{'invisible':[('overlapping_track_ids', '=', [])]}">
+                        <field name="overlapping_track_ids">
+                            <tree>
+                                <field name="name" />
+                                <field name="location_id" />
+                                <field name="date" />
+                                <field name="date_end" />
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </group>
+
                     <group name="speakers" string="Presenters">
                         <field name="speaker_ids" nolabel="1" />
                     </group>

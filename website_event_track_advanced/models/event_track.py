@@ -2,6 +2,8 @@
 
 # 1. Standard library imports:
 import difflib
+import dateutil.parser
+from datetime import datetime, timedelta
 
 # 2. Known third party imports:
 from bs4 import BeautifulSoup
@@ -10,7 +12,7 @@ from bs4 import BeautifulSoup
 from odoo import api, fields, models
 from odoo import _
 from odoo.tools import html2plaintext
-from odoo.exceptions import AccessError
+
 
 # 4. Imports from Odoo modules:
 
@@ -117,6 +119,7 @@ class EventTrack(models.Model):
     webinar = fields.Boolean(
         string='Pre-event webinar'
     )
+
     webinar_info = fields.Html(
         string='Pre-event webinar info'
     )
@@ -160,6 +163,20 @@ class EventTrack(models.Model):
     speakers_string = fields.Text(
         string='Speakers',
         compute='_compute_speakers_string',
+    )
+
+    date_end = fields.Datetime(
+        string='End date',
+        compute='compute_date_end',
+        readonly=True,
+        store=True,
+        copy=False,
+    )
+
+    overlapping_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping tracks',
+        compute='compute_overlapping_track_ids',
     )
 
     # 3. Default methods
@@ -231,6 +248,39 @@ class EventTrack(models.Model):
     def compute_description_plain(self):
         for record in self:
             record.description_plain = BeautifulSoup(record.description).text
+
+    @api.depends('date', 'duration')
+    def compute_date_end(self):
+        for record in self:
+            if record.date and record.duration:
+                end_date = dateutil.parser.parse(record.date) + timedelta(hours=record.duration)
+                record.date_end = end_date
+
+    @api.depends('date', 'duration', 'location_id')
+    def compute_overlapping_track_ids(self):
+        # Search overlapping tracks in the same room
+
+        track_model = self.env['event.track']
+        for record in self:
+            if not record.location_id or not record.date or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+
+            domain = list()
+
+            if not isinstance(record.id, models.NewId):
+                domain.append(('id', '!=', record.id))  # Exclude the record itself
+
+            domain += [
+                ('location_id', '=', record.location_id.id),  # Same location
+                ('date', '<', record.date_end),  # Starts before this ends
+                ('date_end', '>', record.date),  # Ends after this starts
+            ]
+
+            overlapping_tracks = track_model.search(domain)
+
+            if overlapping_tracks:
+                record.overlapping_track_ids = overlapping_tracks.ids
 
     # 5. Constraints and onchanges
 
