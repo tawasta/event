@@ -63,6 +63,11 @@ class EventTrack(models.Model):
         string='Ratings',
     )
 
+    ratings_count = fields.Integer(
+        string='Ratings',
+        compute='compute_ratings_count',
+    )
+
     rating = fields.Selection(
         [
             ('0', 'Not rated'),
@@ -214,6 +219,10 @@ class EventTrack(models.Model):
                     'rating': self.rating,
                     'rating_comment': self.rating_comment,
                 })
+
+    def compute_ratings_count(self):
+        for record in self:
+            record.ratings_count = len(record.ratings)
 
     @api.depends('ratings', 'ratings.rating')
     def _compute_rating_avg(self):

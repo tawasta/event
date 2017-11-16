@@ -32,6 +32,7 @@
                     <field name="partner_id"/>
                     <field name="language"/>
                     <field name="review_group"/>
+                    <field name="ratings_count"/>
                     <field name="rating_avg"/>
                     <field name="state"/>
                 </field>
