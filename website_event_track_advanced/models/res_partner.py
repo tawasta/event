@@ -32,6 +32,7 @@ class ResPartner(models.Model):
     ratings_done_percent = fields.Float(
         string='Rated %',
         compute='compute_ratings_percent',
+        group_operator='avg',
     )
 
     def compute_ratings_todo(self):
