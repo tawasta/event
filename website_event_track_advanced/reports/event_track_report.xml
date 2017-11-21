@@ -8,6 +8,7 @@
             report_type="qweb-pdf"
             file="website_event_track_advanced.event_track_content_report"
             name="website_event_track_advanced.event_track_content_report"
+            paperformat="event.paperformat_euro_lowmargin"
     />
 
     <template id="website_event_track_advanced.event_track_content_report">
