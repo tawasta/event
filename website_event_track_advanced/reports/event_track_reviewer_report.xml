@@ -26,7 +26,7 @@
                 </style>
 
                 <div class="oe_structure"/>
-                <h1>Event reviewers</h1>
+                <h1>Track ratings reviewer summary</h1>
 
                 <table name="track_ratings_table" class="table table-condensed">
                     <thead>
