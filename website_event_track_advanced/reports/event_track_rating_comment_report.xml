@@ -3,7 +3,7 @@
 
     <report
             id="report_event_track_rating_comment"
-            string="Track ratings"
+            string="Track rating comments summary"
             model="event.track"
             report_type="qweb-pdf"
             file="website_event_track_advanced.event_track_rating_comment_report"
@@ -26,7 +26,7 @@
                 </style>
 
                 <div class="oe_structure"/>
-                <h1>Event reviewers</h1>
+                <h1>Track rating comments summary</h1>
 
                 <table name="track_ratings_table" class="table table-condensed">
                     <thead>

@@ -3,7 +3,7 @@
 
     <report
             id="report_event_track_reviewer"
-            string="Track reviewers"
+            string="Track ratings reviewer summary"
             model="event.track"
             report_type="qweb-pdf"
             file="website_event_track_advanced.event_track_reviewer_report"
