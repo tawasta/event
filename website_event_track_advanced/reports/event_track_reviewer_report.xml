@@ -41,10 +41,17 @@
                     <tbody>
                         <t t-foreach="docs" t-as="doc">
                         <t t-set="doc" t-value="doc.with_context({'lang':doc.language.code or 'en_US'})"/>
+                            <tr>
+                                <td><span t-field="doc.id"/></td>
+                                <td><span t-field="doc.name"/></td>
+                                <td />
+                                <td />
+                            </tr>
+
                             <t t-foreach="doc.ratings" t-as="rating">
                                 <tr>
-                                    <td><span t-field="doc.id"/></td>
-                                    <td><span t-field="doc.name"/></td>
+                                    <td />
+                                    <td />
                                     <td><span t-field="rating.create_uid"/></td>
                                     <td><span t-field="rating.rating"/></td>
                                 </tr>
