@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-21 18:51+0000\n"
-"PO-Revision-Date: 2017-11-21 21:01+0200\n"
+"PO-Revision-Date: 2017-11-21 21:15+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -897,7 +897,7 @@ msgstr "Ehdotus videomuodossa (linkki esim. Youtubeen tai Vimeoon)"
 #. module: website_event_track_advanced
 #: model:ir.actions.report.xml,name:website_event_track_advanced.report_event_track_content
 msgid "Track content"
-msgstr "Esityksen sisältö"
+msgstr "Esitysten sisältö"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_track_count
