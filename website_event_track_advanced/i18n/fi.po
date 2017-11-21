@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-14 13:34+0000\n"
-"PO-Revision-Date: 2017-11-14 15:38+0200\n"
+"POT-Creation-Date: 2017-11-21 18:51+0000\n"
+"PO-Revision-Date: 2017-11-21 21:01+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -242,6 +242,11 @@ msgid "Average rating"
 msgstr "Keskiarvo"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
+msgid "Avg"
+msgstr "ka"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "Avoid using identifiable information (name, organisation, project)."
 msgstr "Vältä käyttämästä tunnistetietoja (nimi, organisaatio, projekti). "
@@ -278,6 +283,7 @@ msgstr "Koodi"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_comment_2386
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_comment_report
 msgid "Comment"
 msgstr "Kommentti"
 
@@ -292,13 +298,18 @@ msgid "Confirmed tracks"
 msgstr "Lähetetyt esitykset"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
+msgid "Contact organization, name"
+msgstr "Kontaktin organisaatio, nimi"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 msgid "Content"
 msgstr "Sisältö"
 
 #. module: website_event_track_advanced
-#: code:addons/mpg/event/website_event_track_advanced/models/event_track.py:305
-#: code:addons/website_event_track_advanced/models/event_track.py:305
+#: code:addons/mpg/event/website_event_track_advanced/models/event_track.py:364
+#: code:addons/website_event_track_advanced/models/event_track.py:364
 #, python-format
 msgid "Content modified"
 msgstr "Sisältöä muokattu"
@@ -365,6 +376,11 @@ msgid "Email"
 msgstr "Sähköposti"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_date_end
+msgid "End date"
+msgstr "Päättymispäivä"
+
+#. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_event
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_event_id
 msgid "Event"
@@ -373,7 +389,18 @@ msgstr "Tapahtuma"
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track
 msgid "Event Track"
-msgstr "Tapahtuman track"
+msgstr "Esitys"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
+msgid "Event ratings"
+msgstr "Arvioinnit"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_comment_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_reviewer_report
+msgid "Event reviewers"
+msgstr "Arvioijat"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_event_track
@@ -383,7 +410,7 @@ msgstr "Tapahtuman track"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_advanced_tree
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_tree
 msgid "Event track"
-msgstr "Tapahtuman track"
+msgstr "Esitys"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_report
@@ -594,6 +621,11 @@ msgid "Other, what?"
 msgstr "Muu, mikä?"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_overlapping_track_ids
+msgid "Overlapping tracks"
+msgstr "Päällekkäisiä esityksiä"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Participation fee"
 msgstr "Osallistumismaksu"
@@ -607,7 +639,7 @@ msgstr "Kumppani"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_description_plain
 msgid "Plain description"
-msgstr "Muotoilmaton kuvaus"
+msgstr "Muotoilematon kuvaus"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
@@ -689,8 +721,10 @@ msgstr "Arvioitu %"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_rating
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_comment_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_reviewer_report
 msgid "Rating"
-msgstr "Arviointi"
+msgstr "Arvostelu"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
@@ -699,6 +733,8 @@ msgstr "Arviointi"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_ratings
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_ratings_count
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 msgid "Ratings"
 msgstr "Arvioinnit"
@@ -735,6 +771,11 @@ msgstr "Arviointiryhmä"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_res_users_review_group_ids
 msgid "Review groups"
 msgstr "Arviointiryhmät"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_reviewer_report
+msgid "Reviewer"
+msgstr "Arvioija"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group_reviewers
@@ -814,7 +855,7 @@ msgstr "Ehdotus voidaan lähettää myös videona. Tässä tapauksessa lisää l
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "The proposal text can be supplemented with an attachment file."
-msgstr "Ehdotuksen sisältöä voidaan tukea liitetiedostolla."
+msgstr "Ehtoduksen sisältöä voidaan tukea liitetiedostolla."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
@@ -836,7 +877,7 @@ msgstr "Tämä osa hakemuksesta näytetään arvioijille. "
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Title"
-msgstr "Esityksen otsikko"
+msgstr "Otsikko"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
@@ -864,6 +905,13 @@ msgid "Track count"
 msgstr "Esitysten lukumäärä"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_comment_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_reviewer_report
+msgid "Track id"
+msgstr "Esityksen id"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard_track_ids
 msgid "Track ids"
 msgstr "Esitysten id:t"
@@ -875,6 +923,8 @@ msgstr "Lista esityksistä"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_rating_action
+#: model:ir.actions.report.xml,name:website_event_track_advanced.report_event_track_rating
+#: model:ir.actions.report.xml,name:website_event_track_advanced.report_event_track_rating_comment
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_rating_menu
 msgid "Track ratings"
 msgstr "Esitysten arviot"
@@ -887,6 +937,7 @@ msgstr "Esityksen arviointiryhmät"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_reviewers_action
+#: model:ir.actions.report.xml,name:website_event_track_advanced.report_event_track_reviewer
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_reviewers_menu
 msgid "Track reviewers"
 msgstr "Esitysten arvioijat"
@@ -901,6 +952,13 @@ msgstr "Esitysten arviot"
 #: model:ir.ui.menu,name:website_event_track_advanced.event_track_target_group_menu
 msgid "Track target groups"
 msgstr "Esityksen kohderyhmät"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_comment_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
+#: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_reviewer_report
+msgid "Track title"
+msgstr "Esityksen otsikko"
 
 #. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.event_track_type_action
@@ -1056,6 +1114,7 @@ msgid "event.track.type"
 msgstr "event.track.type"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban
 msgid "hours"
 msgstr "tunti;tuntia"
