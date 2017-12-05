@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-21 20:31+0000\n"
-"PO-Revision-Date: 2017-11-21 22:35+0200\n"
+"PO-Revision-Date: 2017-12-05 14:52+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -866,7 +866,7 @@ msgstr "Tämä osa hakemuksesta näytetään arvioijille. "
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Title"
-msgstr "Otsikko"
+msgstr "Titteli"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
