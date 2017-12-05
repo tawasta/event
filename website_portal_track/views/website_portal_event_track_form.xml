@@ -26,11 +26,9 @@
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
-                        <!--
                         <section name="call-for-papers-language" id="call-for-papers-language">
                             <t t-call="website.language_selector" />
                         </section>
-                        -->
 
                         <section id="forms">
                             <form id="track-application-form"
@@ -44,6 +42,8 @@
 
                                 <!-- Call the full form for edit, but hide and disable irrelevant parts -->
                                 <t t-call="website_event_track_advanced.event_track_application"/>
+
+                                <t t-if="track.state in ['announced', 'published', 'refused']" t-call="website_portal_track.event_track_ratings" />
 
                                 <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js?v100"></script>
 
@@ -83,11 +83,9 @@
 
                         <t t-call="website_portal_track.track_followup_breadcrumbs" />
 
-                        <!--
                         <section name="call-for-papers-language" id="call-for-papers-language">
                             <t t-call="website.language_selector" />
                         </section>
-                        -->
 
                         <section id="forms">
                             <form id="track-application-form"
@@ -118,5 +116,36 @@
             </div>
         </t>
     </template>
+
+    <!-- Track ratings -->
+    <template id="website_portal_track.event_track_ratings">
+        <div class="panel panel-primary" id="track-application-type-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Reviews</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Comment</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="track.ratings" t-as="rating">
+                            <td><span t-field="rating.comment"/></td>
+                            <td><span t-field="rating.rating"/></td>
+                        </tr>
+                        <tr lass="font-weight-bold">
+                            <th></th>
+                            <th><span t-field="track.rating_avg" /></th>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </template>
+    <!-- Application type -->
 
 </odoo>
