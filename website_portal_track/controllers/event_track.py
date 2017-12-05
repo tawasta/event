@@ -133,6 +133,11 @@ class WebsiteEventTrack(website_account):
             values = self._get_event_track_proposal_post_values(track, **post)
             track_values = values['track']
 
+        # Trim empty values to prevent them from saving
+        for key, val in track_values.copy().iteritems():
+            if not val or val is None:
+                track_values.pop(key, None)
+
         _logger.info('Using values %s' % values)
 
         # Don't allow saving in certain states
@@ -141,7 +146,7 @@ class WebsiteEventTrack(website_account):
             return request.redirect('/my/tracks/')
 
         speaker_ids = list()
-        if track.state not in ['confirmed']:
+        if track.state in ['draft', 'announced']:
             speakers = list()
             for speaker in values.get('speakers', []):
                 # If user already exists, create a new partner

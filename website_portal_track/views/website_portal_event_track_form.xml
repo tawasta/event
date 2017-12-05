@@ -47,7 +47,7 @@
 
                                 <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js?v100"></script>
 
-                                <div t-if="track.state not in ['cancel', 'refused', 'published', 'confirmed']" class="form-group">
+                                <div t-if="track.state in ['draft']" class="form-group">
                                     <button type="submit"
                                            name="track-save"
                                            value="track-save"
@@ -64,6 +64,15 @@
                                                class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1 mt8">Save and send
                                         </button>
                                     </t>
+                                </div>
+
+                                <div t-if="track.state in ['announced']" class="form-group">
+                                    <button type="submit"
+                                            name="track-save"
+                                            value="track-save"
+                                            id="application-submit-button"
+                                            class="application-submit-button btn btn-primary col-xs-10 col-xs-offset-1">Save
+                                    </button>
                                 </div>
                             </form>
                         </section>
