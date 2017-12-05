@@ -40,10 +40,11 @@
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
                                 <input type="hidden" id="application_state" name="state" t-att-value="track['state']"/>
 
+                                <!-- Show reviews after the track has been processed -->
+                                <t t-if="track.state in ['announced', 'published', 'refused']" t-call="website_portal_track.event_track_ratings" />
+
                                 <!-- Call the full form for edit, but hide and disable irrelevant parts -->
                                 <t t-call="website_event_track_advanced.event_track_application"/>
-
-                                <t t-if="track.state in ['announced', 'published', 'refused']" t-call="website_portal_track.event_track_ratings" />
 
                                 <script type="text/javascript" src="/website_portal_track/static/src/js/application_edit.js?v100"></script>
 
