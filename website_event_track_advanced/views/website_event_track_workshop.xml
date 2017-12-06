@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="workshop_list">
+        <t t-call="website_event.event_details">
+            <div class="oe_structure"/>
+            <div id="left_column">
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-warning" t-if="not len(tracks)">
+                    No tracks found!
+                </div>
+                <div class="col-sm-10 col-sm-offset-1 mb8">
+                    <a class="btn btn-primary pull-right" t-attf-href="/event/#{ slug(event) }/workshop/">Show all</a>
+                </div>
+
+                <div class="row mb8" t-foreach="tracks" t-as="track">
+                    <div class="well col-sm-10 col-sm-offset-1">
+                        <div>
+                            <strong><a t-attf-href="/event/#{ slug(event) }/workshop/#{ slug(track) }"><span t-field="track.name" /></a></strong>
+
+                            <small t-if="not track.website_published" class="label label-danger">unpublished</small>
+                        </div>
+                        <ul class="list-inline mb0 mt8">
+                            <li t-if="track.speaker_ids" class="text-muted fa fa-user">
+                                <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
+                            </li>
+                            <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
+                            <li class="text-muted fa fa-map-marker" t-if="track.location_id">
+                                <span t-field="track.location_id"/>
+                            </li>
+                        </ul>
+
+                        <ul class="list-group list-unstyled mt8">
+                            <li t-if="track.organizer">Organizer: <span t-field="track.organizer.name" /></li>
+                            <li t-if="track.location_id">Location: <span t-field="track.location_id.name" /></li>
+                            <li t-if="track.workshop_fee">Price: <span t-field="track.workshop_fee" /> <span t-field="track.event_id.company_id.currency_id.symbol" /></li>
+                        </ul>
+
+                        <ul class="list-inline mt8">
+                            <li t-foreach="track.tag_ids" t-as="tag_id" class="text-muted fa fa-tags">
+                                <a t-attf-href="/event/#{ slug(event) }/workshop/tag/#{ slug(tag_id) }">
+                                    <span t-field="tag_id.name"/>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="mt8"><t t-esc="html2plaintext(track.description or '')[0:500]"/><t t-if="track.description">...</t></p>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>
