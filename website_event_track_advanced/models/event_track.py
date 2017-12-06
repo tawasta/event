@@ -184,6 +184,9 @@ class EventTrack(models.Model):
         compute='compute_overlapping_track_ids',
     )
 
+    external_registration = fields.Char(
+        string='External registration link',
+    )
     # 3. Default methods
 
     # 4. Compute and search fields

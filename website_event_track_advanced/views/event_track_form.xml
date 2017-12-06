@@ -114,7 +114,7 @@
                             <field name="video_url" />
                         </group>
                         <group>
-
+                            <field name="external_registration" />
                         </group>
                     </group>
 

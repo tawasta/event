@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <template id="workshop_list">
         <t t-call="website_event.event_details">
             <div class="oe_structure"/>
@@ -48,6 +49,111 @@
                 </div>
             </div>
             <div class="oe_structure"/>
+        </t>
+    </template>
+
+    <template id="workshop_view">
+        <t t-call="website.layout">
+
+            <div class="container">
+                <div class="clearfix"/>
+
+                <h2 t-field="track.name" class="text-center"/>
+                <h3 t-field="event.name" class="text-center text-muted"/>
+
+                <ul class="text-center text-muted list-inline">
+                    <li t-if="track.speaker_ids" class="fa fa-user">
+                        <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
+                    </li>
+                    <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
+                    <li class="text-muted fa fa-map-marker" t-if="track.location_id">
+                        <span t-field="track.location_id"/>
+                    </li>
+                </ul>
+
+                <ul t-if="track.tag_ids" class="text-center text-muted list-inline">
+                    <li t-foreach="track.tag_ids" t-as="tag_id">
+                        <span class="fa fa-tags"></span>
+                        <a t-attf-href="/event/#{ slug(event) }/workshop/tag/#{ slug(tag_id) }">
+                            <span t-field="tag_id.name"/>
+                        </a>
+                    </li>
+                </ul>
+
+                <section class="row mt32">
+                    <div class="col-md-8">
+                        <section>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div t-field="track.description"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4" id="right_column">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Practical Info</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <div t-if="track.organizer">
+                                    <p>
+                                        <strong>Organizer</strong><br/>
+                                        <span t-field="track.organizer"/>
+                                    </p>
+                                </div>
+
+                                <div t-if="track.workshop_fee">
+                                    <p>
+                                        <strong>Price</strong><br/>
+                                        <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
+                                    </p>
+                                </div>
+
+                                <div t-if="track.date">
+                                    <p><strong>Date</strong><br/>
+                                        <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></p>
+                                </div>
+
+                                <div t-if="track.duration">
+                                    <p>
+                                        <strong>Duration</strong><br/>
+                                        <span t-field="track.duration" t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                                    </p>
+                                </div>
+
+                                <div t-if="track.location_id">
+                                    <p>
+                                        <strong>Location</strong><br/>
+                                        <span t-field="track.location_id"/>
+                                    </p>
+                                </div>
+
+                                <div t-if="track.external_registration">
+                                    <p>
+                                        <strong>Registration</strong><br/>
+                                        <span t-field="track.external_registration"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default" t-if="False">
+                            <div class="panel-heading">
+                                <h4>Documents</h4>
+                            </div>
+                            <div class="panel-body">
+                                Put here the list of documents, like slides of
+                                the presentations. Remove the above t-if when
+                                it's implemented.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </t>
     </template>
 </odoo>

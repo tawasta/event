@@ -5,8 +5,22 @@ from odoo.http import request
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
 from odoo.tools import html2plaintext
 
+
 class WebsiteEventTrackController(WebsiteEventTrackController):
 
+    # Single workshop
+    @http.route(
+        ['''/event/<model("event.event"):event>/workshop/<model("event.track", "[('event_id','=',event[0])]"):track>'''],
+        type='http',
+        auth='public',
+        website=True
+    )
+    def event_track_workshop_view(self, event, track, **post):
+        track = track.sudo()
+        values = {'track': track, 'event': track.event_id, 'main_object': track}
+        return request.render("website_event_track_advanced.workshop_view", values)
+
+    # Workshop listing
     @http.route([
         '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/workshop''',
         '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/workshop/tag/<model("event.track.tag"):tag>'''
