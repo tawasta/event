@@ -110,10 +110,8 @@
                     </group>
 
                     <group name="extra" groups="event.group_event_manager">
-                        <group>
+                        <group colspan="2">
                             <field name="video_url" />
-                        </group>
-                        <group>
                             <field name="external_registration" />
                         </group>
                     </group>

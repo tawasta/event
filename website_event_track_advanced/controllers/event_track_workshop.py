@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from operator import attrgetter
 from odoo import http, fields
 from odoo.http import request
 
@@ -27,10 +29,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         ], type='http', auth="public", website=True)
     def event_track_workshop(self, event, tag=None, **post):
         searches = {}
-        workshops = request.env['event.track'].search([
+
+        workshops = request.env['event.track'].with_context(tz=event.date_tz).search([
             ('type.code', '=', 'workshop'),
             ('state', '=', 'published'),
         ])
+        workshops = workshops.sorted(key=attrgetter('date', 'name'))
 
         if tag:
             searches.update(tag=tag.id)
@@ -43,6 +47,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'main_object': event,
             'tracks': tracks,
             'tags': event.tracks_tag_ids,
+            'tag_id': tag,
             'searches': searches,
             'html2plaintext': html2plaintext
         }
