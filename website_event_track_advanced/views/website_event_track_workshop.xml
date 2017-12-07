@@ -19,10 +19,12 @@
                         <span t-field="tag_id.name"/>
                     </p>
 
-                    <a class="btn btn-primary pull-right" t-attf-href="/event/#{ slug(event) }/workshop/">Show all</a>
+                    <a t-if="len(tracks)"
+                       class="btn btn-primary pull-right"
+                       t-attf-href="/event/#{ slug(event) }/workshop/">Show all</a>
                 </div>
 
-                <div class="row mb8" t-foreach="tracks" t-as="track">
+                <div name="track-row" class="track-row row mb8" t-foreach="tracks" t-as="track">
                     <div class="well col-sm-10 col-sm-offset-1">
                         <div>
                             <strong><a t-attf-href="/event/#{ slug(event) }/workshop/#{ slug(track) }"><span t-field="track.name" /></a></strong>

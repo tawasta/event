@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-07 04:14+0000\n"
-"PO-Revision-Date: 2017-12-07 06:25+0200\n"
+"PO-Revision-Date: 2017-12-07 10:13+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -217,12 +217,12 @@ msgstr "<strong>Hinta</strong><br/>"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list
 msgid "<strong>Registration:</strong>"
-msgstr "<strong>Rekisteröinti:</strong>"
+msgstr "<strong>Ilmoittautuminen:</strong>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
 msgid "<strong>Registration</strong><br/>"
-msgstr "<strong>Rekisteröinti</strong><br/>"
+msgstr "<strong>Ilmoittautuminen</strong><br/>"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_keywords
