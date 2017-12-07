@@ -18,6 +18,7 @@ from odoo import api, fields, models
 class EventTrackRequestTime(models.Model):
     # 1. Private attributes
     _name = 'event.track.request.time'
+    _order = 'sequence'
 
     # 2. Fields declaration
     name = fields.Char(
@@ -36,6 +37,9 @@ class EventTrackRequestTime(models.Model):
         comodel_name='event.track',
         inverse_name='request_time',
         string='Event track',
+    )
+    sequence = fields.Integer(
+        string='Order',
     )
 
     # 3. Default methods
