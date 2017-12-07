@@ -54,8 +54,12 @@
                 <li t-if="track.organizer" >
                     <strong>Organizer:</strong> <span t-field="track.organizer.name" />
                 </li>
-                <li t-if="track.workshop_fee">
-                    <strong>Price:</strong> <span t-field="track.workshop_fee" /> <span t-field="track.event_id.company_id.currency_id.symbol" />
+                <li>
+                    <strong>Price:</strong>
+                    <t t-if="track.workshop_fee">
+                        <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
+                    </t>
+                    <t t-if="not track.workshop_fee">Free</t>
                 </li>
                 <li t-if="track.external_registration">
                     <strong>Registration:</strong> <a t-att-href="track.external_registration" target="_blank">Register here</a>
@@ -139,10 +143,13 @@
                                     </p>
                                 </div>
 
-                                <div t-if="track.workshop_fee">
+                                <div>
                                     <p>
                                         <strong>Price</strong><br/>
-                                        <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
+                                        <t t-if="track.workshop_fee">
+                                            <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
+                                        </t>
+                                        <t t-if="not track.workshop_fee">Free</t>
                                     </p>
                                 </div>
 

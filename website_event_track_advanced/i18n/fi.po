@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 09:25+0000\n"
-"PO-Revision-Date: 2017-12-07 11:27+0200\n"
+"POT-Creation-Date: 2017-12-07 12:53+0000\n"
+"PO-Revision-Date: 2017-12-07 14:54+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -310,7 +310,6 @@ msgstr "Ehdotuksen tyyppi"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/mpg/event/website_event_track_advanced/static/src/js/proposal.js:113
 #: code:addons/website_event_track_advanced/static/src/js/proposal.js:113
 #, python-format
 msgid "Are you sure you want to delete this speaker?"
@@ -318,7 +317,6 @@ msgstr "Oletko aivan varma että haluat poistaa tämän esiintyjän?"
 
 #. module: website_event_track_advanced
 #. openerp-web
-#: code:addons/mpg/event/website_event_track_advanced/static/src/js/proposal.js:6
 #: code:addons/website_event_track_advanced/static/src/js/proposal.js:6
 #, python-format
 msgid "Are you sure? Any unsaved changes will be lost."
@@ -355,7 +353,7 @@ msgstr "Keskiarvo"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_avg
 msgid "Average rating"
-msgstr "Average rating"
+msgstr "Keskiarvo"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
@@ -424,7 +422,6 @@ msgid "Content"
 msgstr "Sisältö"
 
 #. module: website_event_track_advanced
-#: code:addons/mpg/event/website_event_track_advanced/models/event_track.py:367
 #: code:addons/website_event_track_advanced/models/event_track.py:367
 #, python-format
 msgid "Content modified"
@@ -530,7 +527,7 @@ msgstr "Erinomainen"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_external_registration
 msgid "External registration link"
-msgstr "External registration link"
+msgstr "Ulkoinen rekisteröintilinkki"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_extra_info
@@ -549,6 +546,12 @@ msgstr "Lisätiedot..."
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "First name"
 msgstr "Etunimi"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
+msgid "Free"
+msgstr "Maksuton"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_goals
@@ -1127,7 +1130,7 @@ msgstr "Esityksen tyypit"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag_tracks
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_form
 msgid "Tracks"
-msgstr "Esitykset"
+msgstr "Trackit"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type
