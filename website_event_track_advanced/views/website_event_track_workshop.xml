@@ -58,7 +58,7 @@
                     <strong>Price:</strong> <span t-field="track.workshop_fee" /> <span t-field="track.event_id.company_id.currency_id.symbol" />
                 </li>
                 <li t-if="track.external_registration">
-                    <strong>Registration:</strong> <a t-att-href="track.external_registration" target="_blank"><span t-field="track.external_registration"/></a>
+                    <strong>Registration:</strong> <a t-att-href="track.external_registration" target="_blank">Register here</a>
                 </li>
             </ul>
 
