@@ -119,9 +119,9 @@
 
                                 <!-- Approve or reject an approved track -->
                                 <button t-if="track.state == 'announced'"
-                                        class="btn btn-success mb8"
+                                        class="btn btn-success"
                                         data-toggle="modal"
-                                        data-target="#track-confirm-action"
+                                        data-target="#track-confirm-action-approve"
                                         data-action="approve"
                                         t-attf-data-title="#{track.name}"
                                         t-attf-data-href="/my/tracks/approve/#{track.id}">Approve</button>
@@ -179,6 +179,7 @@
         </t>
         <t t-call="website_portal_track.confirm_dialog"/>
         <t t-call="website_portal_track.confirm_dialog_send"/>
+        <t t-call="website_portal_track.confirm_dialog_approve"/>
         <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js?v100"></script>
     </template>
 
@@ -203,7 +204,7 @@
     </template>
 
     <!-- Send dialog template -->
-    <template id="confirm_dialog_send" name="Send dialog for track actions">
+    <template id="confirm_dialog_send" name="Confirmation dialog for track send">
         <div class="modal fade track-confirm-action" id="track-confirm-action-send" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -213,6 +214,27 @@
                     <div class="modal-body">
                         <p>Are you sure you want to send the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
                         <p>After sending, the proposal can not be edited.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-ok">Yes</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Approve dialog template -->
+    <template id="confirm_dialog_approve" name="Confirmation dialog for track approve">
+        <div class="modal fade track-confirm-action" id="track-confirm-action-approve" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Approval</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to approve the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                        <p>After approving, the proposal can not be edited.</p>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-success btn-ok">Yes</a>
