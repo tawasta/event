@@ -259,7 +259,7 @@ class EventTrack(models.Model):
     @api.depends('description')
     def compute_description_plain(self):
         for record in self:
-            record.description_plain = BeautifulSoup(record.description).text
+            record.description_plain = BeautifulSoup(record.description, 'lxml').text
 
     @api.depends('date', 'duration')
     def compute_date_end(self):
