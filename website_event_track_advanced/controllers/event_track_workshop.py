@@ -32,7 +32,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         workshops = request.env['event.track'].with_context(tz=event.date_tz).search([
             ('type.code', '=', 'workshop'),
-            ('state', '=', 'published'),
+            ('website_published', '=', True),
         ])
         workshops = workshops.sorted(key=attrgetter('date', 'name'))
 
