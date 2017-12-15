@@ -96,7 +96,7 @@
     <!--Agenda td content -->
     <template id="agenda-track-td-content">
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
-            <div style="height:100%;width:100%">
+            <div style="height:100%;width:100%" t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                 <div class="track-td-name">
                     <span t-esc="track and track.name"/>
                 </div>

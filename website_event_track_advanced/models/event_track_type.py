@@ -23,6 +23,7 @@ class EventTrackType(models.Model):
         copy=False,
         translate=False,
     )
+
     name = fields.Char(translate=True)
 
     description = fields.Html(translate=True)
@@ -35,6 +36,24 @@ class EventTrackType(models.Model):
         comodel_name='event.track',
         inverse_name='type',
         string='Event track',
+    )
+
+    show_in_proposals = fields.Boolean(
+        string='Show in proposals',
+        help='Show in proposals form',
+        default=True,
+    )
+
+    show_in_agenda = fields.Boolean(
+        string='Show in agenda',
+        help='Show in website agenda',
+        default=True,
+    )
+
+    attendable = fields.Boolean(
+        string='Attendable',
+        help='If the presentation type can be attended. Unattendable types will be muted in the agenda',
+        default=True,
     )
 
     # 3. Default methods

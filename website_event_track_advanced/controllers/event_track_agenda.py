@@ -23,8 +23,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         domain_filter.append(('event_id', '=', event.id))
         domain_filter.append(('date', '!=', False))
-        domain_filter.append(('location_id', '!=', False))
         domain_filter.append(('website_published', '=', True))
+        domain_filter.append(('type.show_in_agenda', '=', True))
 
         # Tag filter
         tags_list = list()
@@ -58,7 +58,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         days = dict()
         days_tracks_count = dict()
         for day, tracks in days_tracks.iteritems():
-            days_tracks_count[day] = len(tracks)
+            day_count = 0
+            for track in tracks:
+                if track.type.attendable:
+                    day_count += 1
+
+            days_tracks_count[day] = day_count
             days[day] = self._prepare_calendar(event, tracks)
 
         speakers = dict()

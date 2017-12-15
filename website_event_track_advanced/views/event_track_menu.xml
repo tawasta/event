@@ -5,34 +5,35 @@
         <field name="name">All tracks</field>
         <field name="res_model">event.track</field>
         <field name="view_mode">tree,kanban,form,calendar,graph</field>
+        <field name="domain">[('type.attendable', '=', True)]</field>
     </record>
 
     <record id="action_event_track_draft" model="ir.actions.act_window">
         <field name="name">Proposed tracks</field>
         <field name="res_model">event.track</field>
         <field name="view_mode">tree,kanban,form,calendar,graph</field>
-        <field name="domain">[('state', '=', 'draft'),('attendable', '=', True)]</field>
+        <field name="domain">[('state', '=', 'draft'),('type.attendable', '=', True)]</field>
     </record>
 
     <record id="action_event_track_confirmed" model="ir.actions.act_window">
         <field name="name">Confirmed tracks</field>
         <field name="res_model">event.track</field>
         <field name="view_mode">tree,kanban,form,calendar,graph</field>
-        <field name="domain">[('state', '=', 'confirmed'),('attendable', '=', True)]</field>
+        <field name="domain">[('state', '=', 'confirmed'),('type.attendable', '=', True)]</field>
     </record>
 
     <record id="action_event_track_announced" model="ir.actions.act_window">
         <field name="name">Announced tracks</field>
         <field name="res_model">event.track</field>
         <field name="view_mode">tree,kanban,form,calendar,graph</field>
-        <field name="domain">[('state', '=', 'announced'),('attendable', '=', True)]</field>
+        <field name="domain">[('state', '=', 'announced'),('type.attendable', '=', True)]</field>
     </record>
 
     <record id="action_event_track_published" model="ir.actions.act_window">
         <field name="name">Published tracks</field>
         <field name="res_model">event.track</field>
         <field name="view_mode">tree,kanban,form,calendar,graph</field>
-        <field name="domain">[('state', '=', 'published'),('attendable', '=', True)]</field>
+        <field name="domain">[('state', '=', 'published'),('type.attendable', '=', True)]</field>
     </record>
 
     <menuitem id="menu_event_track_configuration"

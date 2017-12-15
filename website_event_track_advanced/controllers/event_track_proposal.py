@@ -35,7 +35,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
     def _get_event_track_proposal_values(self):
         target_groups = request.env['event.track.target.group'].search([])
-        types = request.env['event.track.type'].search_read([], ['id', 'code', 'name', 'description'])
+        types = request.env['event.track.type'].search_read(
+            [('show_in_proposals', '=', True)],
+            ['id', 'code', 'name', 'description'],
+        )
         languages = request.env['res.lang'].search([], order='id')
         track = request.env['event.track']
 
