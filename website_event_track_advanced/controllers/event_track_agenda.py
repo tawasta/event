@@ -1,24 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# 1. Standard library imports:
 import collections
 import datetime
 import pytz
 
-# 2. Known third party imports:
-
-# 3. Odoo imports (openerp):
 from odoo import http, fields
 from odoo.http import request
 
-# 4. Imports from Odoo modules (rarely, and only if necessary):
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
 from odoo.addons.website.controllers.main import QueryURL
 from odoo.addons.website.models.website import slug
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports (One per line sorted and splitted in
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
@@ -28,7 +19,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     def event_agenda(self, event, tag=None, **post):
         days_tracks = collections.defaultdict(lambda: [])
 
-        domain_filter = [('event_id', '=', event.id)]
+        domain_filter = list()
+
+        domain_filter.append(('event_id', '=', event.id))
+        domain_filter.append(('date', '!=', False))
+        domain_filter.append(('location_id', '!=', False))
+        domain_filter.append(('website_published', '=', True))
 
         # Tag filter
         tags_list = list()
