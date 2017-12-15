@@ -187,6 +187,13 @@ class EventTrack(models.Model):
     external_registration = fields.Char(
         string='External registration link',
     )
+
+    attendable = fields.Boolean(
+        string='Attendable',
+        help='If the presentation can be attended. Unattendable presentations are not shown in agenda',
+        default=True,
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields

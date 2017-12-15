@@ -24,7 +24,9 @@ class EventTrackType(models.Model):
         translate=False,
     )
     name = fields.Char(translate=True)
+
     description = fields.Html(translate=True)
+
     active = fields.Boolean(
         default=True
     )
