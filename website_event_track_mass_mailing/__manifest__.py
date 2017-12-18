@@ -22,7 +22,7 @@
 {
     'name': 'Event track mass mailing',
     'summary': 'Allows sending mail to track contacts',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.1.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -36,10 +36,13 @@
     },
     'depends': [
         'mass_mailing',
+        'mass_mailing_partner',
         'website_event_track',
     ],
     'data': [
         'views/website_event_track.xml',
+
+        'wizards/track_mail_list_wizard.xml'
     ],
     'demo': [
     ],
