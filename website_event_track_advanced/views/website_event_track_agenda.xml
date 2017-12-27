@@ -7,37 +7,46 @@
 
             <section class="container">
                 <h1 class="text-center" t-field="event.name"/>
-                <div class="form-inline pull-right">
-                    <label class="invisible text-muted" id="search_summary">
-                        <span id="search_number">0</span>
-                        Found
-                    </label>
-                    <form method="post" t-att-action="keep('/event/' + slug(event) + '/agenda')">
-                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
-                        <div class="pull-right">
-                            <input type="text" class="form-control" placeholder="Filter Tracks..." id="event_track_search"/>
-                            <br />
-                            <a id="tags-clear-button" t-attf-href="/event/#{slug(event)}/agenda" class="btn btn-default text-danger">
-                                <span class="fa fa-trash" />Clear tags
-                            </a>
+                <div class="form-inline">
+                    <div id="filter-tracks" class="row mt16">
+                        <div id="filter-track-tags" class="col-sm-9 col-xs-12">
+                            <a id="tags-collapse-button"
+                               class="btn btn-default text-muted"
+                               data-toggle="collapse"
+                               data-target="#tags-collapse">Show filters...</a>
+
+                            <div id="tags-collapse" class="mt16 collapse">
+                                <t t-foreach="event.allowed_track_tag_ids" t-as="tag_id">
+                                    <a t-attf-href="/event/#{ slug(event) }/agenda/tag/#{ slug(tag_id) }"
+                                       t-att-class="'btn btn-primary' if searches.get('tag') == tag_id.id else 'btn btn-default'"
+                                       t-attf-value="#{tag_id.name}"
+                                       t-attf-name="tag_#{tag_id.id}">
+                                        <small>
+                                            <span class="fa fa-tags" />
+                                            <span t-field="tag_id.name"/> (<t t-esc="tag_id.track_count_agenda" />)
+                                        </small>
+                                    </a>
+                                </t>
+                            </div>
                         </div>
 
-                        <div id="filter-track-tags" class="mt16">
-                            <t t-foreach="event.allowed_track_tag_ids" t-as="tag">
-                                <button type="submit"
-                                       t-att-class="'btn btn-primary' if str(tag.id) in search_tags_list else 'btn btn-default'"
-                                       t-attf-value="#{tag.name}"
-                                       t-attf-name="tag_#{tag.id}">
-                                    <span class="fa fa-tags" />
-                                    <t t-esc="tag.name" /> (<t t-esc="tag.track_count" />)
-                                </button>
-                            </t>
+                        <div id="filter-tracks-search" class="col-sm-3 col-xs-12">
+                            <label class="hidden text-muted" id="event-track-search-summary"><span id="event-track-found">0</span> Found </label>
+                            <input type="text" class="form-control" placeholder="Filter presentations..." id="event-track-search"/>
+                            <br />
+                            <a id="tags-clear-button" t-attf-href="/event/#{slug(event)}/agenda" class="btn btn-default text-danger">
+                                <span class="fa fa-trash" />Clear filters
+                            </a>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </section>
             <t t-set="dayslist" t-value="days.keys()"/>
             <t t-set="dayslist2" t-value="dayslist.sort()"/>
+
+            <section t-if="not dayslist" class="container mt16">
+                <p>0 found.</p>
+            </section>
 
             <section class="container mt16" t-foreach="dayslist" t-as="day">
                 <t t-set="locations" t-value="days[day]['locations']"/>
@@ -74,13 +83,17 @@
                                             </t>
                                         </td>
                                     </t>
-                                    <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track"/>
+                                    <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
+                                        <div class="track-td-name">
+                                            Break
+                                        </div>
+                                    </td>
                                 </t>
                             </t>
                         </t>
                         <t t-if="not dt[2]">
                             <t t-set="track" t-value="dt[1][False][0]"/>
-                            <td t-att-colspan="len(locations)-1"
+                            <td t-att-colspan="len(locations)"
                                 t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
                                 <t t-call="website_event_track_advanced.agenda-track-td-content" />
                             </td>
@@ -96,20 +109,24 @@
     <!--Agenda td content -->
     <template id="agenda-track-td-content">
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
-            <div style="height:100%;width:100%" t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
-                <div class="track-td-name">
+            <div style="height:100%;width:100%" class="event_track_content track-td-name">
+                <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
                 </div>
 
+                <!-- Speakers
                 <div class="track-td-speakers mt8">
                     <i t-if="speakers[track.id]" class="fa fa-comment"/>
                     <span t-esc="speakers[track.id]"/>
                 </div>
+                -->
 
+                <!-- Track tags
                 <div class="track-td-tags mt8">
                     <i t-if="tags[track.id]" class="fa fa-tag"/>
                     <span t-esc="tags[track.id]"/>
                 </div>
+                -->
             </div>
         </a>
     </template>

@@ -30,6 +30,11 @@ class EventTrackTag(models.Model):
         compute='compute_track_count',
         store=True,
     )
+    track_count_agenda = fields.Integer(
+        string='Track count in agenda',
+        compute='compute_track_count_agenda',
+        store=True,
+    )
 
     # 3. Default methods
 
@@ -38,6 +43,16 @@ class EventTrackTag(models.Model):
     def compute_track_count(self):
         for record in self:
             record.track_count = len(record.tracks)
+
+    @api.depends('tracks')
+    def compute_track_count_agenda(self):
+        for record in self:
+            published_tracks = record.tracks.\
+                filtered('website_published').\
+                filtered('type.show_in_agenda').\
+                filtered(lambda t: t.date != False)
+
+            record.track_count_agenda = len(published_tracks)
 
     # 5. Constraints and onchanges
 

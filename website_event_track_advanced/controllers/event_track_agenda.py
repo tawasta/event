@@ -9,49 +9,36 @@ from odoo import http, fields
 from odoo.http import request
 
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
-from odoo.addons.website.controllers.main import QueryURL
-from odoo.addons.website.models.website import slug
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
 
     # Overwrites the default agenda controller
-    @http.route()
+    @http.route([
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/agenda''',
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/agenda/tag/<model("event.track.tag"):tag>'''
+        ],
+        type='http',
+        auth='public',
+        website=True)
     def event_agenda(self, event, tag=None, **post):
         days_tracks = collections.defaultdict(lambda: [])
 
         domain_filter = list()
+        searches = dict()
 
         domain_filter.append(('event_id', '=', event.id))
         domain_filter.append(('date', '!=', False))
         domain_filter.append(('website_published', '=', True))
         domain_filter.append(('type.show_in_agenda', '=', True))
 
-        # Tag filter
-        tags_list = list()
-        if post.get('tags'):
-            tags_list += post.get('tags').split(',')
-
-        for value in post:
-            if value[0:4] == 'tag_':
-                tag_id = str(value[4:])
-                if tag_id in tags_list:
-                    tags_list.remove(tag_id)
-                else:
-                    tags_list.append(tag_id)
-
-        # Remove duplicates
-        search_tags_list = list(set(tags_list))
-        search_tags = ','.join(search_tags_list)
-
-        keep = QueryURL('/event/' + slug(event) + '/agenda', tags=search_tags)
-
-        if tags_list:
-            domain_filter.append(('tag_ids', 'in', search_tags_list))
-
         event_tracks = event.track_ids.sudo().search(
             domain_filter,
         )
+
+        if tag:
+            searches.update(tag=tag.id)
+            event_tracks = event_tracks.filtered(lambda track: tag in track.tag_ids)
 
         for track in event_tracks:
             if not track.date:
@@ -84,12 +71,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'days': days,
             'days_nbr': days_tracks_count,
             'speakers': speakers,
-            'search_tags_list': search_tags_list,
-            'search_tags': search_tags,
-            'tags': tags,
             'tag': tag,
-            'keep': keep,
-            'dateparser': dateutil.parser
+            'searches': searches,
+            'dateparser': dateutil.parser,
         })
 
     # Overwrites the default _prepare_calendar
