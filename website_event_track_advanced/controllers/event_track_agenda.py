@@ -3,6 +3,7 @@
 import collections
 import datetime
 import pytz
+import dateutil.parser
 
 from odoo import http, fields
 from odoo.http import request
@@ -48,9 +49,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         if tags_list:
             domain_filter.append(('tag_ids', 'in', search_tags_list))
 
-        event_tracks = event.track_ids.sudo().search(domain_filter)
+        event_tracks = event.track_ids.sudo().search(
+            domain_filter,
+        )
 
-        for track in event_tracks.sorted(lambda track: (track.date, bool(track.location_id))):
+        for track in event_tracks:
             if not track.date:
                 continue
             days_tracks[track.date[:10]].append(track)
@@ -86,6 +89,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'tags': tags,
             'tag': tag,
             'keep': keep,
+            'dateparser': dateutil.parser
         })
 
     # Overwrites the default _prepare_calendar
@@ -119,7 +123,20 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 locations[location][-1][3] -= 1
             locations[location].append([track, start_date, end_date, 1])
             dates[-1][1][location] = locations[location][-1]
+
+        # Sort locations
+        locations_order = collections.OrderedDict()
+        locations_sorted = collections.OrderedDict()
+
+        for key, val in locations.iteritems():
+            if key:
+                locations_order[key.sequence] = key
+
+        for location in sorted(locations_order):
+            location_key = locations_order[location]
+            locations_sorted[location_key] = locations.get(location_key, False)
+
         return {
-            'locations': locations,
+            'locations': locations_sorted,
             'dates': dates
         }
