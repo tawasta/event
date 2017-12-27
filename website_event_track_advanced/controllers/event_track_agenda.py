@@ -70,8 +70,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'event': event,
             'days': days,
             'days_nbr': days_tracks_count,
-            'speakers': speakers,
             'tag': tag,
+            'speakers': speakers,
+            'tags': tags,
             'searches': searches,
             'dateparser': dateutil.parser,
         })

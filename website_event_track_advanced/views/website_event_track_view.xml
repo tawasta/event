@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Overwrites the track view layout -->
+    <template id="website_event_track.track_view">
+        <t t-call="website_event_track_advanced.track_view"/>
+    </template>
+
+
+    <template id="website_event_track_advanced.track_view">
+        <t t-call="website.layout">
+            <div id="wrap" class="js_event">
+                <div class="container">
+                    <div class="row mt8">
+                        <div class="col-sm-7" id="event_menu">
+                            <ol name="Event Menu" class="breadcrumb mb0"
+                                id="event_menu" t-if="event.menu_id"
+                                t-att-data-content_menu_id="editable and event.menu_id.id">
+                                <t t-foreach="event.menu_id.child_id"
+                                   t-as="submenu">
+                                    <t t-call="website.submenu"/>
+                                </t>
+                            </ol>
+                        </div>
+                        <t t-call="website.publish_management">
+                            <t t-set="object" t-value="track"/>
+                            <t t-set="publish_edit" t-value="True"/>
+                            <t t-set="action"
+                               t-value="'website_event_track.action_event_track'"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="clearfix"/>
+
+                <h2 t-field="track.name" class="text-center"/>
+                <h3 t-field="event.name" class="text-center text-muted"/>
+                <ul t-if="track.tag_ids"
+                    class="text-center text-muted list-inline">
+                    <li t-foreach="track.tag_ids" t-as="tag_id">
+                        <span class="fa fa-tags"></span>
+                        <a t-attf-href="/event/#{ slug(event) }/track/tag/#{ slug(tag_id) }">
+                            <span t-field="tag_id.name"/>
+                        </a>
+                    </li>
+                </ul>
+
+                <section class="row mt32">
+                    <div class="col-md-8">
+                        <section>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h2 t-field="track.name"/>
+                                        <small t-if="track.partner_name">
+                                            Proposed by
+                                            <span t-field="track.partner_name"/>
+                                        </small>
+                                    </div>
+                                    <div t-if="track.description"
+                                         class="col-md-12">
+                                        <div t-field="track.description"/>
+                                    </div>
+                                    <div t-if="track.partner_biography"
+                                         class="col-md-12">
+                                        <h3>About The Author</h3>
+                                        <div t-field="track.partner_biography"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-md-4" id="right_column">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Practical Info</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div t-if="track.date">
+                                    <b>Date</b>
+                                    <br/>
+                                    <span t-field="track.date"
+                                          t-options='{"hide_seconds":"True"}'/>
+                                    <br/>
+                                </div>
+
+                                <div t-if="track.duration">
+                                    <b>Duration</b>
+                                    <br/>
+                                    <span t-field="track.duration"
+                                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                                    <br/>
+                                </div>
+
+                                <div t-if="track.location_id">
+                                    <b>Location</b>
+                                    <br/>
+                                    <span t-field="track.location_id"/>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Presenters</h4>
+                            </div>
+
+                            <div class="panel-body">
+                                <div t-foreach="track.speaker_ids"
+                                     t-as="speaker" class="well">
+
+                                    <strong><span class="font-weight-bold" t-field="speaker.name" /></strong><br />
+                                    <span t-if="speaker.parent_id" t-field="speaker.parent_id.name" /><br />
+                                    <i><span t-field="speaker.function" /></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default" t-if="False">
+                            <div class="panel-heading">
+                                <h4>Documents</h4>
+                            </div>
+                            <div class="panel-body">
+                                Put here the list of documents, like slides of
+                                the presentations. Remove the above t-if when
+                                it's implemented.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>

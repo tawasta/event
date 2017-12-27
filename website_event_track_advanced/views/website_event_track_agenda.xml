@@ -3,6 +3,10 @@
 
     <!-- Overwrites the agenda layout -->
     <template id="website_event_track.agenda">
+        <t t-call="website_event_track_advanced.agenda" />
+    </template>
+
+    <template id="website_event_track_advanced.agenda">
         <t t-call="website_event.layout">
 
             <section class="container">
@@ -109,24 +113,26 @@
     <!--Agenda td content -->
     <template id="agenda-track-td-content">
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
+
             <div style="height:100%;width:100%" class="event_track_content track-td-name">
                 <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
                 </div>
 
-                <!-- Speakers
-                <div class="track-td-speakers mt8">
-                    <i t-if="speakers[track.id]" class="fa fa-comment"/>
-                    <span t-esc="speakers[track.id]"/>
-                </div>
-                -->
+                <!-- This could be shown with e.g -->
+                <div class="extra-info hidden">
+                    <!-- Speakers -->
+                    <div class="track-td-speakers mt8">
+                        <i t-if="speakers[track.id]" class="fa fa-comment"/>
+                        <span t-esc="speakers[track.id]"/>
+                    </div>
 
-                <!-- Track tags
-                <div class="track-td-tags mt8">
-                    <i t-if="tags[track.id]" class="fa fa-tag"/>
-                    <span t-esc="tags[track.id]"/>
+                    <!-- Track tags -->
+                    <div class="track-td-tags mt8">
+                        <i t-if="tags[track.id]" class="fa fa-tag"/>
+                        <span t-esc="tags[track.id]"/>
+                    </div>
                 </div>
-                -->
             </div>
         </a>
     </template>

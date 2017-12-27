@@ -28,4 +28,8 @@ odoo.define('agenda', function (require) {
     $('#tags-collapse-button').click(function(){
         $('#tags-collapse').fadeToggle();
     });
+
+    $('#event_track_content').hover(function(){
+        $( this ).children('.extra-info').removeClass('hidden');
+    });
 });
