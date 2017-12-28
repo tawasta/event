@@ -67,6 +67,24 @@
 }
 
 /* Agenda */
+@media only screen and (min-width: 1400px){
+    .container-wide{
+        width: 1370px;
+    }
+}
+
+@media only screen and (min-width: 1600px){
+    .container-wide{
+        width: 1570px;
+    }
+}
+
+@media only screen and (min-width: 1800px){
+    .container-wide{
+        width: 1770px;
+    }
+}
+
 .page-header{
     border-bottom: none;
 }
