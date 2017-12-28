@@ -55,55 +55,10 @@
             <section class="container mt16" t-foreach="dayslist" t-as="day">
                 <t t-set="locations" t-value="days[day]['locations']"/>
                 <t t-set="dates" t-value="days[day]['dates']"/>
-                <h3 class="page-header mt0">
-                    <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
-                    <small>
-                        <t t-esc="days_nbr[day]"/>
-                        talks
-                    </small>
-                </h3>
-                <table id="table_search" class="table table-bordered table-condensed">
-                    <tr class="agenda-locations-row">
-                        <th/>
-                        <t t-foreach="locations.keys()" t-as="location">
-                            <th t-if="location" class="active">
-                                <span t-esc="location and location.name or 'Unknown'"/>
-                            </th>
-                        </t>
-                    </tr>
-                    <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
-                        <td class="active agenda-timeslot-time">
-                            <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
-                        </td>
-                        <t t-if="dt[2]"> <!-- Not a multi location -->
-                            <t t-foreach="locations" t-as="location">
-                                <t t-if="location and dt[1].get(location, False)">
-                                    <t t-set="track" t-value="dt[1][location][0]"/>
-                                    <t t-if="track">
-                                        <td t-att-rowspan="dt[1][location][3]"
-                                            t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}">
-                                            <t t-if="track">
-                                                <t t-call="website_event_track_advanced.agenda-track-td-content" />
-                                            </t>
-                                        </td>
-                                    </t>
-                                    <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
-                                        <div class="track-td-name">
-                                            Break
-                                        </div>
-                                    </td>
-                                </t>
-                            </t>
-                        </t>
-                        <t t-if="not dt[2]">
-                            <t t-set="track" t-value="dt[1][False][0]"/>
-                            <td t-att-colspan="len(locations)"
-                                t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
-                                <t t-call="website_event_track_advanced.agenda-track-td-content" />
-                            </td>
-                        </t>
-                    </tr>
-                </table>
+
+                <t t-call="website_event_track_advanced.agenda-day-heading" />
+
+                <t t-call="website_event_track_advanced.agenda-day-content" />
             </section>
         </t>
 
@@ -135,6 +90,68 @@
                 </div>
             </div>
         </a>
+    </template>
+
+    <!--Agenda date heading -->
+    <template id="agenda-day-heading">
+        <h3 class="date-heading page-header mt0">
+            <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
+            <small>
+                <t t-esc="days_nbr[day]"/>
+                talks
+            </small>
+
+            <span class="fa fa-chevron-down chevron-toggle" style="display: none;"/>
+            <span class="fa fa-chevron-up chevron-toggle" />
+        </h3>
+    </template>
+
+    <!--Agenda date content -->
+    <template id="agenda-day-content">
+        <div class="agenda-day-content">
+            <table class="table table-bordered table-condensed">
+                <tr class="agenda-locations-row">
+                    <th/>
+                    <t t-foreach="locations.keys()" t-as="location">
+                        <th t-if="location" class="active">
+                            <span t-esc="location and location.name or 'Unknown'"/>
+                        </th>
+                    </t>
+                </tr>
+                <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
+                    <td class="active agenda-timeslot-time">
+                        <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
+                    </td>
+                    <t t-if="dt[2]"> <!-- Not a multi location -->
+                        <t t-foreach="locations" t-as="location">
+                            <t t-if="location and dt[1].get(location, False)">
+                                <t t-set="track" t-value="dt[1][location][0]"/>
+                                <t t-if="track">
+                                    <td t-att-rowspan="dt[1][location][3]"
+                                        t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}">
+                                        <t t-if="track">
+                                            <t t-call="website_event_track_advanced.agenda-track-td-content" />
+                                        </t>
+                                    </td>
+                                </t>
+                                <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
+                                    <div class="track-td-name">
+                                        Break
+                                    </div>
+                                </td>
+                            </t>
+                        </t>
+                    </t>
+                    <t t-if="not dt[2]">
+                        <t t-set="track" t-value="dt[1][False][0]"/>
+                        <td t-att-colspan="len(locations)"
+                            t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
+                            <t t-call="website_event_track_advanced.agenda-track-td-content" />
+                        </td>
+                    </t>
+                </tr>
+            </table>
+        </div>
     </template>
 
 </odoo>

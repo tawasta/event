@@ -25,8 +25,15 @@ odoo.define('agenda', function (require) {
         }
     });
 
+    // Allow collapsing tags list
     $('#tags-collapse-button').click(function(){
         $('#tags-collapse').fadeToggle();
+    });
+
+    // Allow days
+    $(".date-heading").click(function() {
+        $(this).find('.chevron-toggle').toggle();
+        $(this).next().slideToggle();
     });
 
     $('#event_track_content').hover(function(){

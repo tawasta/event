@@ -80,8 +80,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     # Overwrites the default _prepare_calendar
     def _prepare_calendar(self, event, event_track_ids):
         local_tz = pytz.timezone(event.date_tz or 'UTC')
-        locations = {}                  # { location: [track, start_date, end_date, rowspan]}
-        dates = []                      # [ (date, {}) ]
+        locations = {} # { location: [track, start_date, end_date, rowspan]}
+        dates = [] # [ (date, {}) ]
         for track in event_track_ids:
             locations.setdefault(track.location_id or False, [])
 
