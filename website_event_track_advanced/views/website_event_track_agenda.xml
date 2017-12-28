@@ -10,7 +10,7 @@
         <t t-call="website_event.layout">
 
             <section class="container">
-                <h1 class="text-center" t-field="event.name"/>
+                <h1 class="text-center" t-field="event.name" />
                 <div class="form-inline">
                     <div id="filter-tracks" class="row mt16">
                         <div id="filter-track-tags" class="col-sm-9 col-xs-12">
@@ -67,9 +67,10 @@
 
     <!--Agenda td content -->
     <template id="agenda-track-td-content">
+
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
-            <div style="height:100%;width:100%" class="event_track_content track-td-name" >
+            <div style="height:100%;width:100%" class="event_track_content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
                 <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
                 </div>
