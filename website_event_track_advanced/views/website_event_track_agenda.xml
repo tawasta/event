@@ -69,17 +69,30 @@
     <template id="agenda-track-td-content">
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
-            <div style="height:100%;width:100%" class="event_track_content track-td-name">
+            <div style="height:100%;width:100%" class="event_track_content track-td-name" >
                 <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
                 </div>
 
                 <!-- This could be shown with e.g -->
-                <div class="extra-info hidden">
+                <div t-if="track.type.attendable and track.speaker_ids" class="extra-info" style="display:none;">
+                    <!-- Time -->
+                    <div class="track-td-time mt8">
+                        <i t-if="track.date" class="fa fa-clock-o"/>
+                        <span t-field="track.date" t-options='{"hide_seconds":"True"}'/>,
+                        <span t-field="track.duration" t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                    </div>
+
                     <!-- Speakers -->
                     <div class="track-td-speakers mt8">
                         <i t-if="speakers[track.id]" class="fa fa-comment"/>
                         <span t-esc="speakers[track.id]"/>
+                    </div>
+
+                    <!-- Target group -->
+                    <div class="track-td-targetgroup mt8">
+                        <i t-if="track.target_group" class="fa fa-dot-circle-o"/>
+                        <span t-esc="track.target_group.name"/>
                     </div>
 
                     <!-- Track tags -->

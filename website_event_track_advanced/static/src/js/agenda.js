@@ -36,7 +36,14 @@ odoo.define('agenda', function (require) {
         $(this).next().slideToggle();
     });
 
-    $('#event_track_content').hover(function(){
-        $( this ).children('.extra-info').removeClass('hidden');
-    });
+    $('div.event_track_content')
+        .mouseenter(function() {
+            // This doesn't work with html very well
+            //var title = $(this).find('.extra-info').text();
+            //$(this).prop('title', title);
+            $(this).find('.extra-info').show();
+        })
+        .mouseleave(function() {
+            $(this).find('.extra-info').hide();
+        });
 });

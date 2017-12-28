@@ -119,3 +119,15 @@
     font-size: 0.9em;
     margin-bottom: 8px;
 }
+
+/* Agenda pop-up */
+.event_track_content .extra-info{
+    display: none;
+    position: absolute;
+    width: 240px;
+    padding: 10px;
+    background: rgba(221, 221, 221, 0.7);
+    color: @input-color;
+    border: @input-group-addon-border-color;
+    font-size: 90%;
+}
