@@ -115,7 +115,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         for key, val in locations.iteritems():
             if key:
-                locations_order[key.sequence] = key
+                code = key.sequence or key.name
+
+                locations_order[code] = key
 
         for location in sorted(locations_order):
             location_key = locations_order[location]
