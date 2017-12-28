@@ -33,9 +33,9 @@
             </div>
             <div class="container">
                 <div class="clearfix"/>
-
                 <h2 t-field="track.name" class="text-center"/>
                 <h3 t-field="event.name" class="text-center text-muted"/>
+                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda"><span class="fa fa-chevron-left" /> Back</a>
                 <ul t-if="track.tag_ids"
                     class="text-center text-muted list-inline">
                     <li t-foreach="track.tag_ids" t-as="tag_id">
@@ -47,13 +47,12 @@
                 </ul>
 
                 <section class="row mt32">
-                    <div class="col-md-8">
+                    <div class="col-md-8 mb32">
                         <section>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h2 t-field="track.name"/>
-                                        <small t-if="track.partner_name">
+                                    <div class="col-md-12 text-center" t-if="track.partner_name">
+                                        <small>
                                             Proposed by
                                             <span t-field="track.partner_name"/>
                                         </small>
@@ -71,49 +70,69 @@
                             </div>
                         </section>
                     </div>
+
                     <div class="col-md-4" id="right_column">
+
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4>Practical Info</h4>
                             </div>
                             <div class="panel-body">
                                 <div t-if="track.date">
-                                    <b>Date</b>
-                                    <br/>
+                                    <strong>Date</strong><br/>
                                     <span t-field="track.date"
-                                          t-options='{"hide_seconds":"True"}'/>
-                                    <br/>
+                                          t-options='{"hide_seconds":"True"}'/><br/>
                                 </div>
 
                                 <div t-if="track.duration">
-                                    <b>Duration</b>
-                                    <br/>
+                                    <strong>Duration</strong><br/>
                                     <span t-field="track.duration"
-                                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
-                                    <br/>
+                                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/><br/>
                                 </div>
 
                                 <div t-if="track.location_id">
-                                    <b>Location</b>
-                                    <br/>
-                                    <span t-field="track.location_id"/>
-                                    <br/>
+                                    <strong>Location</strong><br/>
+                                    <span t-field="track.location_id"/><br/>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" t-if="track.target_group">
+                            <div class="panel-heading">
+                                <h4>Presentation Info</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div t-if="track.target_group">
+                                    <p>
+                                        <strong>Target group</strong><br/>
+                                        <span t-field="track.target_group" />
+                                    </p>
+                                </div>
+
+                                <div t-if="track.target_group_info">
+                                    <p>
+                                        <strong>Target group info</strong><br/>
+                                        <span t-field="track.target_group_info" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default" t-if="track.speaker_ids">
                             <div class="panel-heading">
                                 <h4>Presenters</h4>
                             </div>
 
                             <div class="panel-body">
                                 <div t-foreach="track.speaker_ids"
-                                     t-as="speaker" class="well">
+                                     t-as="speaker" class="">
 
-                                    <strong><span class="font-weight-bold" t-field="speaker.name" /></strong><br />
-                                    <span t-if="speaker.parent_id" t-field="speaker.parent_id.name" /><br />
-                                    <i><span t-field="speaker.function" /></i>
+                                    <p>
+                                        <strong><span class="font-weight-bold" t-field="speaker.name" /></strong><br />
+                                        <span t-if="speaker.parent_id" t-field="speaker.parent_id.name" /><br />
+                                        <i><span t-field="speaker.function" /></i>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -132,6 +151,8 @@
                 </section>
             </div>
         </t>
+
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_view.js?v100"></script>
     </template>
 
 </odoo>
