@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="website_event_track_program_path.agenda_track_td_content"
+              inherit_id="website_event_track_advanced.agenda_track_td_content">
+        <a name="event-track-link" position="before">
+            <div t-if="track.type.attendable"
+                 name="event-track-program-path"
+                 class="event-track-program-path pull-right">
+
+                <!-- TODO: disable stars if not logged in -->
+
+                <span class="fa fa-star-o fa-2x track-program-path-icon"
+                      title="Add to personal program"
+                      data-placement="bottom"
+                      data-toggle="tooltip"/>
+
+                <span class="fa fa-star fa-2x track-program-path-icon"
+                      title="Remove from personal program"
+                      data-placement="bottom"
+                      data-toggle="tooltip"
+                      style="display: none;"
+                />
+            </div>
+        </a>
+    </template>
+
+    <template id="website_event_track_program_path.agenda" inherit_id="website_event_track_advanced.agenda">
+        <xpath expr="//script" position="after">
+            <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v100"></script>
+        </xpath>
+    </template>
+
+</odoo>
