@@ -10,12 +10,12 @@ odoo.define('agenda', function (require) {
 
     $('#event-track-search').bind('keyup', function(){
         var change_text = $(this).val();
-        $('.event_track_content').removeClass('text-muted');
+        $('.event-track-content').removeClass('text-muted');
         $('#event-track-search-summary').removeClass('hidden');
 
         if (change_text) {
-            var tracks_matching = $(".event_track_content:Contains("+change_text+")");
-            var tracks_not_matching = $(".event_track_content:not(:Contains("+change_text+"))");
+            var tracks_matching = $(".event-track-content:Contains("+change_text+")");
+            var tracks_not_matching = $(".event-track-content:not(:Contains("+change_text+"))");
 
             $('#event-track-found').text(tracks_matching.length);
             $(tracks_not_matching).addClass('text-muted');
@@ -36,7 +36,7 @@ odoo.define('agenda', function (require) {
         $(this).next().slideToggle();
     });
 
-    $('div.event_track_content')
+    $('div.event-track-content')
         .mouseenter(function() {
             var title = $(this).find('.extra-info').html();
             $(this).attr('data-original-title', title);

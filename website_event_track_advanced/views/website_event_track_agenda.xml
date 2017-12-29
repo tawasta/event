@@ -68,14 +68,14 @@
     <!-- Agenda td content -->
     <template id="agenda_track_td_content">
 
-        <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
+        <a name="event-track-link" t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
-            <div style="height:100%;width:100%" class="event_track_content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
+            <div style="height:100%;width:100%" class="event-track-content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
                 <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
                 </div>
 
-                <!-- This could be shown with e.g -->
+                <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
                 <div name="extra-info" t-if="track.type.attendable and track.speaker_ids" class="extra-info" style="display:none;">
                     <!-- Time -->
                     <div class="track-td-time mt8">
