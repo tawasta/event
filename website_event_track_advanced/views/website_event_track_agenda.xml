@@ -160,7 +160,7 @@
                         <t t-set="track" t-value="dt[1][False][0]"/>
                         <td t-att-colspan="len(locations)"
                             t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
-                            <t t-call="website_event_track_advanced.agenda-track-td-content" />
+                            <t t-call="website_event_track_advanced.agenda_track_td_content" />
                         </td>
                     </t>
                 </tr>
