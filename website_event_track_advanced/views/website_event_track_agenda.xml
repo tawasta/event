@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- This could be shown with e.g -->
-                <div t-if="track.type.attendable and track.speaker_ids" class="extra-info" style="display:none;">
+                <div name="extra-info" t-if="track.type.attendable and track.speaker_ids" class="extra-info" style="display:none;">
                     <!-- Time -->
                     <div class="track-td-time mt8">
                         <i t-if="track.date" class="fa fa-clock-o"/>
@@ -85,19 +85,19 @@
                     </div>
 
                     <!-- Speakers -->
-                    <div class="track-td-speakers mt8">
+                    <div name="track-td-speakers" class="track-td-speakers mt8">
                         <i t-if="speakers[track.id]" class="fa fa-comment"/>
                         <span t-esc="speakers[track.id]"/>
                     </div>
 
                     <!-- Target group -->
-                    <div class="track-td-targetgroup mt8">
+                    <div name="track-td-targetgroup" class="track-td-targetgroup mt8">
                         <i t-if="track.target_group" class="fa fa-dot-circle-o"/>
                         <span t-esc="track.target_group.name"/>
                     </div>
 
                     <!-- Track tags -->
-                    <div class="track-td-tags mt8">
+                    <div name="track-td-tags" class="track-td-tags mt8">
                         <i t-if="tags[track.id]" class="fa fa-tag"/>
                         <span t-esc="tags[track.id]"/>
                     </div>
