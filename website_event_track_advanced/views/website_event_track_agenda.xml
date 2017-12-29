@@ -56,17 +56,17 @@
                 <t t-set="locations" t-value="days[day]['locations']"/>
                 <t t-set="dates" t-value="days[day]['dates']"/>
 
-                <t t-call="website_event_track_advanced.agenda-day-heading" />
+                <t t-call="website_event_track_advanced.agenda_day_heading" />
 
-                <t t-call="website_event_track_advanced.agenda-day-content" />
+                <t t-call="website_event_track_advanced.agenda_day_content" />
             </section>
         </t>
 
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v100"></script>
     </template>
 
-    <!--Agenda td content -->
-    <template id="agenda-track-td-content">
+    <!-- Agenda td content -->
+    <template id="agenda_track_td_content">
 
         <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
@@ -107,7 +107,7 @@
     </template>
 
     <!--Agenda date heading -->
-    <template id="agenda-day-heading">
+    <template id="agenda_day_heading">
         <h3 class="date-heading page-header mt0">
             <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
             <small>
@@ -121,7 +121,7 @@
     </template>
 
     <!--Agenda date content -->
-    <template id="agenda-day-content">
+    <template id="agenda_day_content">
         <div class="agenda-day-content">
             <table class="table table-bordered table-condensed">
                 <tr class="agenda-locations-row">
@@ -144,7 +144,7 @@
                                     <td t-att-rowspan="dt[1][location][3]"
                                         t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}">
                                         <t t-if="track">
-                                            <t t-call="website_event_track_advanced.agenda-track-td-content" />
+                                            <t t-call="website_event_track_advanced.agenda_track_td_content" />
                                         </t>
                                     </td>
                                 </t>
