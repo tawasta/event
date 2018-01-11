@@ -1,180 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-	<data>
 
-		<record id="view_event_track_form" model="ir.ui.view">
-			<field name="name">view_event_track_form_advanced</field>
-			<field name="model">event.track</field>
-			<field name="inherit_id" ref="website_event_track.view_event_track_form" />
-			<field name="arch" type="xml">
+    <record id="view_event_track_form" model="ir.ui.view">
+        <field name="name">view_event_track_form_advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_form"/>
+        <field name="arch" type="xml">
 
-                <field name="partner_id" position="after">
-                    <field name="organizer" />
-                    <field name="organizer_contact" />
-                </field>
+            <field name="partner_id" position="after">
+                <field name="organizer"/>
+                <field name="organizer_contact"/>
+            </field>
 
-                <!-- Hide extra fields from non-managers-->
-                <xpath expr="//header" position="attributes">
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </xpath>
+            <!-- Hide extra fields from non-managers-->
+            <xpath expr="//header" position="attributes">
+                <attribute name="groups">event.group_event_manager</attribute>
+            </xpath>
 
-                <xpath expr="//sheet/group[1]" position="attributes">
-                    <attribute name="name">info_group</attribute>
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </xpath>
+            <xpath expr="//sheet/group[1]" position="attributes">
+                <attribute name="name">info_group</attribute>
+                <attribute name="groups">event.group_event_manager</attribute>
+            </xpath>
 
-                <div name="button_box" position="attributes">
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </div>
+            <div name="button_box" position="attributes">
+                <attribute name="groups">event.group_event_manager</attribute>
+            </div>
 
-                <label for="event_id" position="attributes">
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </label>
+            <label for="event_id" position="attributes">
+                <attribute name="groups">event.group_event_manager</attribute>
+            </label>
 
-                <field name="event_id" position="attributes">
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </field>
+            <field name="event_id" position="attributes">
+                <attribute name="groups">event.group_event_manager</attribute>
+            </field>
 
-                <xpath expr="//div[@class='oe_chatter']" position="attributes">
-                    <attribute name="name">chatter</attribute>
-                    <attribute name="groups">event.group_event_manager</attribute>
-                </xpath>
+            <xpath expr="//div[@class='oe_chatter']" position="attributes">
+                <attribute name="name">chatter</attribute>
+                <attribute name="groups">event.group_event_manager</attribute>
+            </xpath>
 
-                <field name="partner_name" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
+            <field name="partner_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
 
-                <field name="partner_email" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
+            <field name="partner_email" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
 
-                <field name="partner_phone" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </field>
+            <field name="partner_phone" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
 
-                <!-- Replaces the group with speakers, location, date and tags information -->
-                <!-- Add a "full" speaker_ids field without tags-widget -->
-                <!-- Move date and duration to same place as end date and overlapping tracks -->
-                <xpath expr="//sheet/group[last()]/group[last()]" position="replace">
+            <!-- Replaces the group with speakers, location, date and tags information -->
+            <!-- Add a "full" speaker_ids field without tags-widget -->
+            <!-- Move date and duration to same place as end date and overlapping tracks -->
+            <xpath expr="//sheet/group[last()]/group[last()]" position="replace">
+                <group>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//sheet/group[last()]" position="after">
+
+                <group name='dates'>
                     <group>
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="date"/>
+                        <label for="duration"/>
+                        <div>
+                            <field name="duration" class="oe_inline" widget="float_time"/>
+                            hours
+                        </div>
+                        <field name="date_end"/>
                     </group>
-                </xpath>
+                    <group>
+                        <field name="location_id"/>
+                    </group>
+                </group>
 
-				<xpath expr="//sheet/group[last()]" position="after">
-
-                    <group name='dates'>
-                        <group>
-                            <field name="date"/>
-                            <label for="duration"/>
-                            <div>
-                                <field name="duration" class="oe_inline" widget="float_time"/> hours
-                            </div>
-                            <field name="date_end"/>
-                        </group>
-                        <group>
+                <group name="overlapping_tracks" col="1" attrs="{'invisible':[('overlapping_track_ids', '=', [])]}">
+                    <field name="overlapping_track_ids">
+                        <tree>
+                            <field name="name"/>
                             <field name="location_id"/>
-                        </group>
-                    </group>
+                            <field name="date"/>
+                            <field name="date_end"/>
+                            <field name="duration" widget="float_time"/>
+                        </tree>
+                    </field>
+                </group>
 
-                    <group name="overlapping_tracks" col="1" attrs="{'invisible':[('overlapping_track_ids', '=', [])]}">
-                        <field name="overlapping_track_ids">
+                <group name="speakers" string="Presenters">
+                    <field name="speaker_ids" nolabel="1"/>
+                </group>
+
+                <group name="reviewer" groups="event.group_track_reviewer">
+                    <group>
+                        <field name="review_group"
+                               groups="event.group_event_user"
+                               options="{'no_quick_create':True,'no_create_edit':True}"
+                        />
+                    </group>
+                    <group>
+                        <label for="rating"/>
+                        <span>
+                            <field name="rating" widget="priority" nolabel="1"/>
+                            <field name="rating_comment" nolabel="1" placeholder="Verbal rating"/>
+                        </span>
+                    </group>
+                </group>
+
+                <group name="extra" groups="event.group_event_manager">
+                    <group colspan="2">
+                        <field name="video_url"/>
+                        <field name="external_registration"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page name="description" string="Content">
+                        <group>
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </page>
+                    <page name="description_original" string="Original content">
+                        <group>
+                            <field name="description_original" nolabel="1"/>
+                        </group>
+                    </page>
+                    <page name="target_group" string="Target group">
+                        <group name="portal">
+                            <group>
+                                <field name="type" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                                <field name="language" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                                <field name="target_group" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                            </group>
+
+                            <group>
+
+                            </group>
+
+                            <group colspan="2">
+                                <field name="target_group_info"/>
+                                <field name="extra_info"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="ratings" string="Ratings" groups="event.group_event_manager">
+                        <field name="ratings" readonly="1" nolabel="1" colspan="2">
                             <tree>
-                                <field name="name" />
-                                <field name="location_id" />
-                                <field name="date" />
-                                <field name="date_end" />
-                                <field name="duration" widget="float_time"/>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                                <field name="rating" widget="priority" avg="Average"/>
+                                <field name="comment"/>
                             </tree>
                         </field>
-                    </group>
-
-                    <group name="speakers" string="Presenters">
-                        <field name="speaker_ids" nolabel="1" />
-                    </group>
-
-                    <group name="reviewer" groups="event.group_track_reviewer">
+                    </page>
+                    <page name="webinar" string="Webinar">
                         <group>
-                            <field name="review_group"
-                                   groups="event.group_event_user"
-                                   options="{'no_quick_create':True,'no_create_edit':True}"
-                            />
+                            <field name="webinar"/>
+                            <field name="webinar_info" attrs="{'readonly': [('webinar', '=', False)]}"/>
                         </group>
-                        <group>
-                            <label for="rating" />
-                            <span>
-                                <field name="rating" widget="priority" nolabel="1"/>
-                                <field name="rating_comment" nolabel="1" placeholder="Verbal rating"/>
-                            </span>
+                    </page>
+                    <page name="workshop"
+                          string="Workshop"><!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
+                        <group cols="1">
+                            <field name="workshop_participants" nolabel="0"/>
+                            <field name="workshop_fee" nolabel="0"/>
+                            <field name="workshop_goals" nolabel="0"/>
+                            <field name="workshop_schedule" nolabel="0"/>
                         </group>
-                    </group>
+                    </page>
+                </notebook>
+            </xpath>
 
-                    <group name="extra" groups="event.group_event_manager">
-                        <group colspan="2">
-                            <field name="video_url" />
-                            <field name="external_registration" />
-                        </group>
-                    </group>
+        </field>
+    </record>
 
-                    <notebook>
-                        <page name="description" string="Content">
-                            <group>
-                                <field name="description" nolabel="1"/>
-                            </group>
-                        </page>
-                        <page name="description_original" string="Original content">
-                            <group>
-                                <field name="description_original" nolabel="1"/>
-                            </group>
-                        </page>
-                        <page name="target_group" string="Target group">
-                            <group name="portal">
-                                <group>
-                                    <field name="type" options="{'no_quick_create':True,'no_create_edit':True}" />
-                                    <field name="language" options="{'no_quick_create':True,'no_create_edit':True}" />
-                                    <field name="target_group" options="{'no_quick_create':True,'no_create_edit':True}" />
-                                </group>
-
-                                <group>
-
-                                </group>
-
-                                <group colspan="2">
-                                    <field name="target_group_info" />
-                                    <field name="extra_info" />
-                                </group>
-                            </group>
-                        </page>
-                        <page name="ratings" string="Ratings" groups="event.group_event_manager">
-                            <field name="ratings" readonly="1" nolabel="1" colspan="2">
-                                <tree>
-                                    <field name="create_uid" />
-                                    <field name="create_date" />
-                                    <field name="write_date" />
-                                    <field name="rating" widget="priority" avg="Average" />
-                                    <field name="comment" />
-                                </tree>
-                            </field>
-                        </page>
-                        <page name="webinar" string="Webinar">
-                            <group>
-                                <field name="webinar" />
-                                <field name="webinar_info" attrs="{'readonly': [('webinar', '=', False)]}" />
-                            </group>
-                        </page>
-                        <page name="workshop" string="Workshop"><!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
-                            <group cols="1">
-                                <field name="workshop_participants" nolabel="0"/>
-                                <field name="workshop_fee" nolabel="0"/>
-                                <field name="workshop_goals" nolabel="0"/>
-                                <field name="workshop_schedule" nolabel="0"/>
-                            </group>
-                        </page>
-                    </notebook>
-				</xpath>
-
-			</field>
-		</record>
-
-	</data>
 </odoo>
