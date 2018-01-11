@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <act_window name="Random location"
+                res_model="event.track"
+                src_model="event.track"
+                key2="client_action_multi"
+                view_mode="form" target="main"
+                view_type="form"
+                id="act_event_track_location_random" />
+
     <record id="view_event_track_form" model="ir.ui.view">
         <field name="name">view_event_track_form_advanced</field>
         <field name="model">event.track</field>
