@@ -39,7 +39,9 @@ odoo.define('agenda', function (require) {
     $('div.event-track-content')
         .mouseenter(function() {
             var title = $(this).find('.extra-info').html();
-            $(this).attr('data-original-title', title);
-            $(this).tooltip();
+
+            $(this).attr('data-original-title', title)
+            .tooltip('fixTitle')
+            .tooltip('show');
         })
 });
