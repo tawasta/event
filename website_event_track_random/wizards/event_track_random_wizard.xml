@@ -11,6 +11,11 @@
 
                 <group>
                     <field name="location" />
+
+                    <field name="date" />
+                    <field name="date_start" attrs="{'required': [('date', '=', True)], 'readonly': [('date', '!=', True)]}"/>
+                    <field name="date_end" attrs="{'required': [('date', '=', True)], 'readonly': [('date', '!=', True)]}"/>
+                    <field name="break_length" attrs="{'required': [('date', '=', True)], 'readonly': [('date', '!=', True)]}"/>
                 </group>
 
                 <footer>
