@@ -180,12 +180,8 @@ class EventTrack(models.Model):
 
     overlapping_track_ids = fields.Many2many(
         comodel_name='event.track',
-        relation='event_track_overlapping_rel',
-        column1='track_overlapping_id',
-        column2='track_current_id',
         string='Overlapping tracks',
         compute='compute_overlapping_track_ids',
-        store=True,
     )
 
     external_registration = fields.Char(
