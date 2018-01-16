@@ -182,6 +182,7 @@ class EventTrack(models.Model):
         comodel_name='event.track',
         string='Overlapping tracks',
         compute='compute_overlapping_track_ids',
+        store=True,
     )
 
     external_registration = fields.Char(
