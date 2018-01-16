@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-29 07:28+0000\n"
-"PO-Revision-Date: 2017-12-29 09:33+0200\n"
+"POT-Creation-Date: 2018-01-16 06:57+0000\n"
+"PO-Revision-Date: 2018-01-16 09:00+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -203,6 +203,11 @@ msgstr "<strong>Kesto</strong><br/>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
+msgid "<strong>Language:</strong>"
+msgstr "<strong>Language:</strong>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
 msgid "<strong>Location:</strong>"
 msgstr "<strong>Paikka:</strong>"
 
@@ -251,6 +256,11 @@ msgstr "<strong>Rekisteröinti</strong><br/>"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.track_view
 msgid "<strong>Target group info</strong><br/>"
 msgstr "<strong>Kohderyhmän tiedot</strong><br/>"
+
+#. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
+msgid "<strong>Target group:</strong>"
+msgstr "<strong>Kohderyhmä:</strong>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.track_view
@@ -576,7 +586,7 @@ msgstr "Erinomainen"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_external_registration
 msgid "External registration link"
-msgstr "Ulkoinen kirjautumislinkki"
+msgstr "Ulkoinen rekisteröitymislinkki"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_extra_info
@@ -763,7 +773,7 @@ msgstr "Vain ehdotuksen yhteyshenkilö voi vahvistaa valmiin esitysehdotuksen."
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location_sequence
 msgid "Order"
-msgstr "Order"
+msgstr "Tilaus"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
@@ -785,7 +795,7 @@ msgstr "Järjestäjä"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_organizer_contact
 msgid "Organizer contact"
-msgstr "Organisoijan kontakti"
+msgstr "Järjestäjän kontakti"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
@@ -922,6 +932,11 @@ msgstr ""
 "Laita tähän lista dokumenteista, kuten diaesitys\n"
 "                            esityksestä. Poista ylläoleva t-if kun\n"
 "                            tämä on otettu käyttöön."
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.act_event_track_location_random
+msgid "Random location"
+msgstr "Satunnainen sijainti"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_res_partner_ratings_done_percent
@@ -1133,7 +1148,7 @@ msgstr "Esitys"
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track_location
 msgid "Track Location"
-msgstr "Esityksen sijainti"
+msgstr "Trackin sijainti"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_track_tag
