@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 06:57+0000\n"
-"PO-Revision-Date: 2018-01-16 09:00+0200\n"
+"PO-Revision-Date: 2018-01-18 12:01+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgstr "<strong>Kesto</strong><br/>"
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
 msgid "<strong>Language:</strong>"
-msgstr "<strong>Language:</strong>"
+msgstr "<strong>Esityskieli:</strong>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
@@ -676,7 +676,7 @@ msgstr "Avainsanat"
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_language
 msgid "Language"
-msgstr "Kieli"
+msgstr "Esityskieli"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
