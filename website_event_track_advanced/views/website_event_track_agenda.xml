@@ -62,7 +62,7 @@
             </section>
         </t>
 
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v101"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v102"></script>
     </template>
 
     <!-- Agenda td content -->
@@ -142,7 +142,9 @@
                                 <t t-set="track" t-value="dt[1][location][0]"/>
                                 <t t-if="track">
                                     <td t-att-rowspan="dt[1][location][3]"
-                                        t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}">
+                                        t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}"
+                                        t-attf-name="track_#{track.id}"
+                                        t-att-draggable="'1' if user.has_group('event.group_event_manager') else 0">
                                         <t t-if="track">
                                             <t t-call="website_event_track_advanced.agenda_track_td_content" />
                                         </t>
@@ -159,7 +161,9 @@
                     <t t-if="not dt[2]">
                         <t t-set="track" t-value="dt[1][False][0]"/>
                         <td t-att-colspan="len(locations)"
-                            t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}">
+                            t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
+                            t-attf-name="track_#{track.id}"
+                            t-att-draggable="'1' if user.has_group('event.group_event_manager') else 0">
                             <t t-call="website_event_track_advanced.agenda_track_td_content" />
                         </td>
                     </t>

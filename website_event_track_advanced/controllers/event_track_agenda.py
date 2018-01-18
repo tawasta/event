@@ -4,11 +4,15 @@ import collections
 import datetime
 import pytz
 import dateutil.parser
+import re
+import logging
 
 from odoo import http, fields
 from odoo.http import request
+from odoo.exceptions import AccessError
 
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
@@ -75,6 +79,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'tags': tags,
             'searches': searches,
             'dateparser': dateutil.parser,
+            'user': request.env.user,
         })
 
     # Overwrites the default _prepare_calendar
@@ -127,3 +132,48 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'locations': locations_sorted,
             'dates': dates
         }
+
+    @http.route(
+        ['/event/track/move'],
+        type='json',
+        auth='public',
+        website=True)
+    def event_track_move(self, **post):
+        # JSON-route moving tracks
+
+        # Check variables
+        old_track_id = post.get('old_track_id', False)
+        new_track_id = post.get('new_track_id', False)
+        track_model = request.env['event.track']
+
+        try:
+            track_model.check_access_rights('read')
+            track_model.check_access_rights('write')
+        except AccessError:
+            _logger.warning('Access error while trying to move a track')
+            return 401
+
+        if old_track_id and new_track_id:
+            # Strip non numeric characters
+            old_track_id = re.sub('[^0-9]', '', old_track_id)
+            new_track_id = re.sub('[^0-9]', '', new_track_id)
+
+            old_track = track_model.browse([int(old_track_id)])
+            new_track = track_model.browse([int(new_track_id)])
+
+            # Store the variables
+            old_location = old_track.location_id
+            new_location = new_track.location_id
+            old_date = old_track.date
+            new_date = new_track.date
+
+            # Swap the values
+            old_track.location_id = new_location.id
+            new_track.location_id = old_location.id
+            old_track.date = new_date
+            new_track.date = old_date
+
+            return 200
+        else:
+            _logger.warning('Unexpected error while trying to move a track')
+            return 500
