@@ -112,6 +112,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             if locations[location] and locations[location][-1][1] > start_date:
                 locations[location][-1][3] -= 1
             locations[location].append([track, start_date, end_date, 1])
+
             dates[-1][1][location] = locations[location][-1]
 
         # Sort locations

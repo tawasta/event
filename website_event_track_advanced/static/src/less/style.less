@@ -85,16 +85,30 @@
     }
 }
 
+@media screen and (max-width: 767px){
+    #agenda-table .agenda-timeslot-row .event_track {
+        white-space: normal
+    }
+}
+web.assets_frontend.0.css:22
+
+
 .page-header{
     border-bottom: none;
 }
 
+#agenda-table{
+    table-layout: auto !important;
+}
+
 .agenda-timeslot-time{
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .agenda-timeslot-row .event_track{
     font-size: 0.9em;
+    max-width: 200px;
 }
 
 .agenda-timeslot-row .event_track a{
@@ -105,8 +119,15 @@
     text-decoration: none;
 }
 
-.track-td-name{
+.track-th-name{
+    white-space: nowrap;
+}
+
+.track-td-name, .track-th-name{
     font-weight: bold;
+    overflow-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-td-speakers{
