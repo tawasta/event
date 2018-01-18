@@ -14,8 +14,8 @@
                 <div class="form-inline">
 
                     <div id="filter-tracks" class="row mt16">
-                        <!--
                         <div id="filter-track-tags" class="col-sm-9 col-xs-12">
+                            <!--
                             <a id="tags-collapse-button"
                                class="btn btn-default text-muted"
                                data-toggle="collapse"
@@ -34,8 +34,8 @@
                                     </a>
                                 </t>
                             </div>
+                            -->
                         </div>
-                        -->
                         <div id="filter-tracks-search" class="col-sm-3 col-xs-12">
                             <label class="hidden text-muted" id="event-track-search-summary"><span id="event-track-found">0</span> Found </label>
                             <input type="text" class="form-control" placeholder="Filter presentations..." id="event-track-search"/>
