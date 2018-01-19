@@ -67,11 +67,16 @@
             </section>
         </t>
 
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v102"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v103"></script>
     </template>
 
     <!-- Agenda td content -->
     <template id="agenda_track_td_content">
+        <div class="event-track-program-move pull-right" t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
+            <span t-if="user.has_group('event.group_event_manager')"
+                  class="fa fa-arrows fa-2x track-program-move-icon"
+                  title="Move"/>
+        </div>
 
         <a name="event-track-link" t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
@@ -152,7 +157,7 @@
                                         <td t-att-rowspan="dt[1][location][3]"
                                             t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}"
                                             t-attf-name="track_#{track.id}"
-                                            t-att-draggable="'1' if user.has_group('event.group_event_manager') else 0">
+                                            t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
                                             <t t-if="track">
                                                 <t t-call="website_event_track_advanced.agenda_track_td_content" />
                                             </t>
@@ -171,7 +176,7 @@
                             <td t-att-colspan="len(locations)"
                                 t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
                                 t-attf-name="track_#{track.id}"
-                                t-att-draggable="'1' if user.has_group('event.group_event_manager') else 0">
+                                t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
                                 <t t-call="website_event_track_advanced.agenda_track_td_content" />
                             </td>
                         </t>

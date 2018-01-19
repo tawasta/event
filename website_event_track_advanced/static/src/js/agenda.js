@@ -47,8 +47,14 @@ odoo.define('agenda', function (require) {
         })
 
     // Drag & Drop events
+    $('.event_track').on('mouseover', function(ev) {
+        console.log('mouseover');
+        ev.preventDefault();
+    });
+
     // Starting to track an element
     $('.event_track').on('dragstart', function(ev) {
+        console.log('dragging');
         ev.originalEvent.dataTransfer.setData('text/html', null);
         ev.originalEvent.dataTransfer.setData('old_track', $(this).attr('name'));
     });
