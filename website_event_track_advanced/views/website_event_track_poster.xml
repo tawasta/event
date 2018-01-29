@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <template id="workshop_list">
+    <template id="poster_list">
         <t t-call="website_event.event_details">
             <div class="oe_structure"/>
 
@@ -21,22 +21,23 @@
 
                     <a t-if="len(tracks)"
                        class="btn btn-primary pull-right"
-                       t-attf-href="/event/#{ slug(event) }/workshop/">Show all</a>
+                       t-attf-href="/event/#{ slug(event) }/poster/">Show all</a>
                 </div>
 
                 <div name="track-row" class="row mb8" t-foreach="tracks" t-as="track">
-                    <t t-call="website_event_track_advanced.workshop_list_item" />
+                    <t t-call="website_event_track_advanced.poster_list_item" />
                 </div>
             </div>
             <div class="oe_structure"/>
         </t>
     </template>
 
-    <!-- Single workshop item in list view -->
-    <template id="workshop_list_item">
-        <div class="col-sm-10 col-sm-offset-1 workshop-list-item well">
+    <!-- Single poster item in list view -->
+    <template id="poster_list_item">
+        <div class="col-sm-10 col-sm-offset-1 poster-list-item well">
             <div>
-                <strong><a t-attf-href="/event/#{ slug(event) }/workshop/#{ slug(track) }"><span t-field="track.name" /></a></strong>
+                <strong><a
+                        t-attf-href="/event/#{ slug(event) }/poster/#{ slug(track) }"><span t-field="track.name" /></a></strong>
 
                 <small t-if="not track.website_published" class="label label-danger">unpublished</small>
             </div>
@@ -53,21 +54,6 @@
             </ul>
 
             <ul class="list-group list-unstyled mt8 col-md-6 col-sm-12">
-                <li t-if="track.organizer" >
-                    <strong>Organizer:</strong> <span t-field="track.organizer.name" />
-                </li>
-
-                <li>
-                    <strong>Price:</strong>
-                    <t t-if="track.workshop_fee">
-                        <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
-                    </t>
-                    <t t-if="not track.workshop_fee">Free</t>
-                </li>
-                <li t-if="track.external_registration">
-                    <strong>Registration:</strong> <a t-att-href="track.external_registration" target="_blank">Register here</a>
-                </li>
-
                 <li t-if="track.target_group" >
                     <strong>Target group:</strong> <span t-field="track.target_group" />
                 </li>
@@ -94,7 +80,7 @@
 
             <ul class="list-group list-inline mt8 col-xs-12">
                 <li t-foreach="track.tag_ids" t-as="tag_id" class="text-muted fa fa-tags">
-                    <a t-attf-href="/event/#{ slug(event) }/workshop/tag/#{ slug(tag_id) }">
+                    <a t-attf-href="/event/#{ slug(event) }/poster/tag/#{ slug(tag_id) }">
                         <span t-field="tag_id.name"/>
                     </a>
                 </li>
@@ -108,7 +94,7 @@
         </div>
     </template>
 
-    <template id="workshop_view">
+    <template id="poster_view">
         <t t-call="website.layout">
 
             <div class="container">
@@ -130,18 +116,19 @@
                 <ul t-if="track.tag_ids" class="text-center text-muted list-inline">
                     <li t-foreach="track.tag_ids" t-as="tag_id">
                         <span class="fa fa-tags"></span>
-                        <a t-attf-href="/event/#{ slug(event) }/workshop/tag/#{ slug(tag_id) }">
+                        <a
+                                t-attf-href="/event/#{ slug(event) }/poster/tag/#{ slug(tag_id) }">
                             <span t-field="tag_id.name"/>
                         </a>
                     </li>
                 </ul>
 
                 <section class="row mt32">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <section>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 well">
                                         <div t-field="track.description"/>
                                     </div>
                                 </div>
@@ -149,29 +136,11 @@
                         </section>
                     </div>
                     <div class="col-md-4" id="right_column">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default hidden">
                             <div class="panel-heading">
                                 <h4>Practical Info</h4>
                             </div>
                             <div class="panel-body">
-
-                                <div t-if="track.organizer">
-                                    <p>
-                                        <strong>Organizer</strong><br/>
-                                        <span t-field="track.organizer"/>
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <p>
-                                        <strong>Price</strong><br/>
-                                        <t t-if="track.workshop_fee">
-                                            <span t-field="track.workshop_fee"/> <span t-field="track.event_id.company_id.currency_id.symbol" />
-                                        </t>
-                                        <t t-if="not track.workshop_fee">Free</t>
-                                    </p>
-                                </div>
-
                                 <div t-if="track.date">
                                     <p><strong>Date</strong><br/>
                                         <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></p>

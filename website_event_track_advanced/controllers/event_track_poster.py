@@ -10,45 +10,45 @@ from odoo.tools import html2plaintext
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
 
-    # Single workshop
+    # Single poster
     @http.route(
-        ['''/event/<model("event.event"):event>/workshop/<model("event.track", "[('event_id','=',event[0])]"):track>'''],
+        ['''/event/<model("event.event"):event>/poster/<model("event.track","[('event_id','=',event[0])]"):track>'''],
         type='http',
         auth='public',
         website=True
     )
-    def event_track_workshop_view(self, event, track, **post):
+    def event_track_poster_view(self, event, track, **post):
         track = track.sudo()
         values = {
             'track': track,
             'event': track.event_id,
             'main_object': track
         }
-
         return request.render(
-            'website_event_track_advanced.workshop_view',
+            'website_event_track_advanced.poster_view',
             values
         )
 
-    # Workshop listing
+    # Poster listing
     @http.route([
-        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/workshop''',
-        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/workshop/tag/<model("event.track.tag"):tag>'''
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/poster''',
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/poster/tag/<model("event.track.tag"):tag>'''
         ], type='http', auth="public", website=True)
-    def event_track_workshop(self, event, tag=None, **post):
+    def event_track_poster(self, event, tag=None, **post):
         searches = {}
 
-        workshops = request.env['event.track'].with_context(tz=event.date_tz).search([
-            ('type.code', '=', 'workshop'),
+        posters = request.env['event.track'].with_context(
+            tz=event.date_tz).search([
+            ('type.code', '=', 'poster'),
             ('website_published', '=', True),
         ])
-        workshops = workshops.sorted(key=attrgetter('date', 'name'))
+        posters = posters.sorted(key=attrgetter('date', 'name'))
 
         if tag:
             searches.update(tag=tag.id)
-            tracks = workshops.filtered(lambda track: tag in track.tag_ids)
+            tracks = posters.filtered(lambda track: tag in track.tag_ids)
         else:
-            tracks = workshops
+            tracks = posters
 
         values = {
             'event': event,
@@ -59,4 +59,5 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'searches': searches,
             'html2plaintext': html2plaintext
         }
-        return request.render("website_event_track_advanced.workshop_list", values)
+        return request.render("website_event_track_advanced.poster_list",
+                              values)
