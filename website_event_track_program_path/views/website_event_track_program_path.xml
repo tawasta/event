@@ -9,17 +9,20 @@
                  class="event-track-program-path pull-right">
 
                 <!-- TODO: disable stars if not logged in -->
-
                 <span class="fa fa-star-o fa-2x track-program-path-icon"
+                      id="track-program-path-icon-disabled"
                       title="Add to personal program"
                       data-placement="bottom"
-                      data-toggle="tooltip"/>
+                      data-toggle="tooltip"
+                      t-att-style="'display: none;' if track.id in program_track_ids.ids else False"
+                />
 
                 <span class="fa fa-star fa-2x track-program-path-icon"
+                      id="track-program-path-icon-enabled"
                       title="Remove from personal program"
                       data-placement="bottom"
                       data-toggle="tooltip"
-                      style="display: none;"
+                      t-att-style="'display: none;' if track.id not in program_track_ids.ids else False"
                 />
             </div>
         </a>

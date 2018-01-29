@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="event_track_program_path_tree" model="ir.ui.view">
+        <field name="name">event_track_program_path_tree</field>
+        <field name="model">event.track.program.path</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+
+            <tree string="Program path">
+                <field name="name"/>
+                <field name="track_ids"/>
+            </tree>
+
+        </field>
+    </record>
+
+</odoo>
