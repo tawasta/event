@@ -48,7 +48,6 @@ odoo.define('agenda', function (require) {
 
     // Drag & Drop events
     $('.event_track').on('mouseover', function(ev) {
-        console.log('mouseover');
         ev.preventDefault();
     });
 
