@@ -26,6 +26,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         auth='public',
         website=True)
     def event_agenda(self, event, tag=None, **post):
+        values = self.get_event_agenda_values(event=event, tag=tag, **post)
+
+        return request.render("website_event_track.agenda", values)
+
+    def get_event_agenda_values(self, event, tag=None, **post):
         days_tracks = collections.defaultdict(lambda: [])
 
         domain_filter = list()
@@ -70,7 +75,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             tag_names = u", ".join(track.tag_ids.mapped('name'))
             tags[track.id] = tag_names
 
-        return request.render("website_event_track.agenda", {
+        values = {
             'event': event,
             'days': days,
             'days_nbr': days_tracks_count,
@@ -80,7 +85,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'searches': searches,
             'dateparser': dateutil.parser,
             'user': request.env.user,
-        })
+        }
+
+        return values
 
     # Overwrites the default _prepare_calendar
     def _prepare_calendar(self, event, event_track_ids):
