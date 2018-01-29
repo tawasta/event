@@ -15,7 +15,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         )
         EventTrackProgramPath = request.env['event.track.program.path']
 
-        program = EventTrackProgramPath.search([
+        program = EventTrackProgramPath.sudo().search([
             ('partner_id', '=', request.uid)
         ], limit=1)
 

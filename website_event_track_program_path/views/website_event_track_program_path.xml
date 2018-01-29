@@ -14,7 +14,7 @@
                       title="Add to personal program"
                       data-placement="bottom"
                       data-toggle="tooltip"
-                      t-att-style="'display: none;' if track.id in program_track_ids.ids else False"
+                      t-att-style="'display: none;' if program_track_ids and track.id in program_track_ids.ids else False"
                 />
 
                 <span class="fa fa-star fa-2x track-program-path-icon"
@@ -22,7 +22,7 @@
                       title="Remove from personal program"
                       data-placement="bottom"
                       data-toggle="tooltip"
-                      t-att-style="'display: none;' if track.id not in program_track_ids.ids else False"
+                      t-att-style="False if program_track_ids and track.id in program_track_ids.ids else 'display: none;'"
                 />
             </div>
         </a>
