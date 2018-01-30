@@ -167,7 +167,12 @@
                 <tbody>
                     <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
                         <td class="active agenda-timeslot-time">
-                            <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
+                            <t t-set="next_dt" t-value="dt" />
+                            <t t-if="not dt_last">
+                                <t t-set="next_dt" t-value="dates[dt_index + 1]" />
+                            </t>
+
+                            <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="next_dt[0].strftime('%H:%M')"/>
                         </td>
                         <t t-if="dt[2]"> <!-- Not a multi location -->
                             <t t-foreach="locations" t-as="location">
