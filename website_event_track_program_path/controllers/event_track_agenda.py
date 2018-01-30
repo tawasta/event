@@ -20,6 +20,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         ], limit=1)
 
         if program:
-            res['program_track_ids'] = program.track_ids
+            res['program'] = program
 
         return res
