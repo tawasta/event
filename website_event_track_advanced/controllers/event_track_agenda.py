@@ -75,6 +75,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             tag_names = u", ".join(track.tag_ids.mapped('name'))
             tags[track.id] = tag_names
 
+        target_groups = request.env['event.track.target.group'].search([])
+
         values = {
             'event': event,
             'days': days,
@@ -85,6 +87,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'searches': searches,
             'dateparser': dateutil.parser,
             'user': request.env.user,
+            'target_groups': target_groups,
         }
 
         return values

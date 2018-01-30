@@ -15,6 +15,24 @@
 
                     <div id="filter-tracks" class="row mt16">
                         <div id="filter-track-tags" class="col-sm-9 col-xs-12">
+                            <a id="target-groups-collapse-button"
+                               class="btn btn-default text-muted"
+                               data-toggle="collapse"
+                               data-target="#target-groups-collapse">Show filters...</a>
+
+                            <div id="target-groups-collapse" class="mt16 collapse">
+                                <t t-foreach="target_groups" t-as="target_group">
+                                    <a t-attf-href="#"
+                                       class="btn btn-default mt8"
+                                       t-attf-value="target_group_#{target_group.id}"
+                                       t-attf-name="target_group_#{target_group.id}">
+                                        <small>
+                                            <span t-field="target_group.name"/>
+                                        </small>
+                                    </a>
+                                </t>
+                            </div>
+
                             <!--
                             <a id="tags-collapse-button"
                                class="btn btn-default text-muted"
@@ -101,8 +119,10 @@
                     </div>
 
                     <!-- Target group -->
-                    <div name="track-td-targetgroup" class="track-td-targetgroup mt8">
-                        <i t-if="track.target_group" class="fa fa-dot-circle-o"/>
+                    <div t-if="track.target_group"
+                         t-attf-name="target_group_#{track.target_group.id}"
+                         class="track-td-targetgroup mt8">
+                        <i  class="fa fa-dot-circle-o"/>
                         <span t-esc="track.target_group.name"/>
                     </div>
 

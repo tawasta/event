@@ -26,9 +26,32 @@ odoo.define('agenda', function (require) {
         }
     });
 
-    // Allow collapsing tags list
-    $('#tags-collapse-button').click(function(){
-        $('#tags-collapse').fadeToggle();
+    $('#target-groups-collapse .btn').click(function(ev) {
+        ev.preventDefault();
+
+        // Unmute all
+        $('.event-track-content').removeClass('text-muted');
+
+        var active = $(this).hasClass('btn-primary');
+        var target_group = false;
+
+        // De-select selected
+        $( "#target-groups-collapse .btn-primary" ).each(function( index ) {
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-default');
+        });
+
+        if(!active){
+            $(this).removeClass('btn-default');
+            $(this).addClass('btn-primary');
+            target_group = $(this).attr('value');
+        }
+
+        // Mute not matching
+        if (target_group) {
+            var tracks_not_matching = $(".track-td-targetgroup[name!='"+target_group+"']").closest('.event-track-content');
+            $(tracks_not_matching).addClass('text-muted');
+        }
     });
 
     // Allow days
