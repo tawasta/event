@@ -19,12 +19,16 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             ('user_id.id', '=', request.uid)
         ], limit=1)
 
-        if not program and request.uid != request.website.user_id.id:
+        user_logged = request.uid != request.website.user_id.id
+
+        if not program and user_logged:
             program = EventTrackProgramPath.create({
                 'user_id': request.uid,
             })
 
         if program:
             res['program'] = program
+
+        res['user_logged'] = user_logged
 
         return res

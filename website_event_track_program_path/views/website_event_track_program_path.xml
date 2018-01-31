@@ -8,31 +8,42 @@
                  name="event-track-program-path"
                  class="event-track-program-path pull-right">
 
-                <!-- TODO: disable stars if not logged in -->
-                <span class="fa fa-star-o fa-2x track-program-path-icon"
-                      id="track-program-path-icon-disabled"
-                      title="Add to personal program"
-                      data-placement="bottom"
-                      data-toggle="tooltip"
-                      t-att-style="'display: none;' if program and track.id in program.track_ids.ids else False"
-                />
+                <t t-if="not user_logged">
+                    <span class="fa fa-star-o fa-2x track-program-path-icon-nologin"
+                          title="Please sign in before customizing your program"
+                          data-placement="bottom"
+                          data-toggle="tooltip"
+                    />
+                </t>
 
-                <span class="fa fa-star fa-2x track-program-path-icon"
-                      id="track-program-path-icon-enabled"
-                      title="Remove from personal program"
-                      data-placement="bottom"
-                      data-toggle="tooltip"
-                      t-att-style="False if program and track.id in program.track_ids.ids else 'display: none;'"
-                />
+                <t t-if="user_logged">
+                    <span class="fa fa-star-o fa-2x track-program-path-icon"
+                          id="track-program-path-icon-disabled"
+                          title="Add to personal program"
+                          data-placement="bottom"
+                          data-toggle="tooltip"
+                          t-att-style="'display: none;' if program and track.id in program.track_ids.ids else False"
+                    />
+
+                    <span class="fa fa-star fa-2x track-program-path-icon"
+                          id="track-program-path-icon-enabled"
+                          title="Remove from personal program"
+                          data-placement="bottom"
+                          data-toggle="tooltip"
+                          t-att-style="False if program and track.id in program.track_ids.ids else 'display: none;'"
+                    />
+                </t>
             </div>
         </a>
     </template>
 
     <template id="website_event_track_program_path.agenda" inherit_id="website_event_track_advanced.agenda">
         <xpath expr="//a[@id='target-groups-collapse-button']" position="after">
-            <a id='track-my-program-path'
-               t-att-class="'btn btn-default' if program and program.track_ids else 'btn btn-default hidden'"
-               t-attf-href="/event/#{slug(event)}/program-path/#{slug(program)}">My program path</a>
+            <t t-if="program">
+                <a id='track-my-program-path'
+                   t-att-class="'btn btn-default' if program.track_ids else 'btn btn-default hidden'"
+                   t-attf-href="/event/#{slug(event)}/program-path/#{slug(program)}">My program path</a>
+            </t>
         </xpath>
 
         <xpath expr="//script" position="after">

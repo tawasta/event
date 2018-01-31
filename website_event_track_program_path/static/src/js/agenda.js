@@ -33,6 +33,10 @@ odoo.define('agenda-program', function (require) {
             }
         })
 
+    $('.track-program-path-icon-nologin').click(function() {
+        alert(_t('Please sign in before customizing your program'));
+    });
+
     $('div.event-track-program-path')
         .mouseenter(function() {
             $(this).tooltip();
