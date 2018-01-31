@@ -24,7 +24,7 @@ class EventTrackProgramPath(models.Model):
         string='Presentations',
     )
 
-    @api.depends('partner_id')
+    @api.depends('user_id')
     def compute_name(self):
         for record in self:
             record.name = record.user_id.name
