@@ -6,7 +6,7 @@
         <t t-call="website_event_track_advanced.track_view"/>
     </template>
 
-
+    <!-- Single track item -->
     <template id="website_event_track_advanced.track_view">
         <t t-call="website.layout">
             <div id="wrap" class="js_event">
@@ -35,7 +35,9 @@
                 <div class="clearfix"/>
                 <h2 t-field="track.name" class="text-center"/>
                 <h3 t-field="event.name" class="text-center text-muted"/>
-                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda"><span class="fa fa-chevron-left" /> Back</a>
+                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
+                    <span class="fa fa-chevron-left" /> Back to agenda</a>
+
                 <ul t-if="track.tag_ids"
                     class="text-center text-muted list-inline">
                     <li t-foreach="track.tag_ids" t-as="tag_id">
@@ -152,6 +154,99 @@
         </t>
 
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_view.js?v100"></script>
+    </template>
+
+   <template id="presentation_list">
+        <t t-call="website_event.event_details">
+            <div class="oe_structure"/>
+
+            <div class="col-md-12">
+
+                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
+                    <span class="fa fa-chevron-left" /> Back to agenda</a>
+
+                <div class="alert alert-warning" t-if="not len(tracks)">
+                    No presentations found!
+                </div>
+
+                <div class="col-sm-10 col-sm-offset-1 mb8">
+                    <p t-if="tag_id" class="text-muted fa fa-tags mt8">
+                        <span t-field="tag_id.name"/>
+                    </p>
+
+                    <a t-if="tag_id"
+                       class="btn btn-primary pull-right"
+                       t-attf-href="/event/#{ slug(event) }/presentation/">Show all</a>
+                </div>
+
+                <div name="track-row" class="row mb8" t-foreach="tracks" t-as="track">
+                    <t t-call="website_event_track_advanced.presentation_list_item" />
+                </div>
+            </div>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+
+    <!-- Single presentation item in list view -->
+    <template id="presentation_list_item">
+        <div class="col-sm-10 col-sm-offset-1 presentation-list-item well">
+            <div>
+                <strong>
+                    <a t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"><span t-field="track.name" /></a></strong>
+
+                <small t-if="not track.website_published" class="label label-danger">unpublished</small>
+            </div>
+            <ul class="list-inline mb0 mt8">
+                <li t-if="track.speaker_ids" class="text-muted fa fa-user">
+                    <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
+                </li>
+
+                <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
+
+                <li class="text-muted fa fa-map-marker" t-if="track.location_id">
+                    <span t-field="track.location_id"/>
+                </li>
+            </ul>
+
+            <ul class="list-group list-unstyled mt8 col-md-6 col-sm-12">
+                <li t-if="track.target_group" >
+                    <strong>Target group:</strong> <span t-field="track.target_group" />
+                </li>
+
+                <li t-if="track.target_group_info" >
+                    <span t-esc="html2plaintext(track.target_group_info or '')" />
+                </li>
+            </ul>
+
+            <ul class="list-group list-unstyled mt8 col-md-6 col-sm-12">
+                <li t-if="track.location_id">
+                    <strong>Location:</strong> <span t-field="track.location_id.name" />
+                </li>
+                <li t-if="track.date">
+                    <strong>Date:</strong> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/>
+                </li>
+                <li t-if="track.duration">
+                    <strong>Duration:</strong> <span t-field="track.duration" t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                </li>
+                <li t-if="track.language" >
+                    <strong>Language:</strong> <span t-field="track.language" />
+                </li>
+            </ul>
+
+            <ul class="list-group list-inline mt8 col-xs-12">
+                <li t-foreach="track.tag_ids" t-as="tag_id" class="text-muted fa fa-tags">
+                    <a t-attf-href="/event/#{ slug(event) }/presentation/tag/#{ slug(tag_id) }">
+                        <span t-field="tag_id.name"/>
+                    </a>
+                </li>
+            </ul>
+            <div class="col-xs-12">
+                <p>
+                    <t t-esc="html2plaintext(track.description or '')[0:500]"/>
+                    <t t-if="track.description">...</t>
+                </p>
+            </div>
+        </div>
     </template>
 
 </odoo>

@@ -24,6 +24,7 @@ Usage
 Known issues / Roadmap
 ======================
 - This module is pretty massive. It should be broken down to smaller modules
+- Lots of redundancy in views and controllers
 
 Credits
 =======

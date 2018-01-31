@@ -5,10 +5,6 @@
         <t t-call="website_event.event_details">
             <div class="oe_structure"/>
 
-            <section class="text-center" name="language-selector" id="language-selector">
-                <t t-call="website.language_selector" />
-            </section>
-
             <div class="col-md-12">
                 <div class="alert alert-warning" t-if="not len(tracks)">
                     No presentations found!
@@ -19,7 +15,7 @@
                         <span t-field="tag_id.name"/>
                     </p>
 
-                    <a t-if="len(tracks)"
+                    <a t-if="tag_id"
                        class="btn btn-primary pull-right"
                        t-attf-href="/event/#{ slug(event) }/poster/">Show all</a>
                 </div>

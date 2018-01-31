@@ -10,36 +10,16 @@ from odoo.tools import html2plaintext
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
 
-    # Single poster
-    @http.route(
-        ['''/event/<model("event.event"):event>/poster/<model("event.track","[('event_id','=',event[0])]"):track>'''],
-        type='http',
-        auth='public',
-        website=True
-    )
-    def event_track_poster_view(self, event, track, **post):
-        track = track.sudo()
-        values = {
-            'track': track,
-            'event': track.event_id,
-            'main_object': track
-        }
-        return request.render(
-            'website_event_track_advanced.poster_view',
-            values
-        )
-
-    # Poster listing
+    # Presentation listing
     @http.route([
-        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/poster''',
-        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/poster/tag/<model("event.track.tag"):tag>'''
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/presentation''',
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/presentation/tag/<model("event.track.tag"):tag>'''
         ], type='http', auth="public", website=True)
-    def event_track_poster(self, event, tag=None, **post):
+    def event_track_presentation(self, event, tag=None, **post):
         searches = {}
 
         posters = request.env['event.track'].with_context(
             tz=event.date_tz).search([
-            ('type.code', '=', 'poster'),
             ('website_published', '=', True),
         ])
         posters = posters.sorted(key=attrgetter('date', 'name'))
@@ -60,6 +40,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'html2plaintext': html2plaintext
         }
         return request.render(
-            "website_event_track_advanced.poster_list",
+            "website_event_track_advanced.presentation_list",
             values
         )
