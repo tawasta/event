@@ -32,12 +32,70 @@
         <xpath expr="//a[@id='target-groups-collapse-button']" position="after">
             <a id='track-my-program-path'
                t-att-class="'btn btn-default' if program and program.track_ids else 'btn btn-default hidden'"
-               t-attf-href="/event/#{slug(event)}/agenda/#{slug(program)}">My program path</a>
+               t-attf-href="/event/#{slug(event)}/program-path/#{slug(program)}">My program path</a>
         </xpath>
 
         <xpath expr="//script" position="after">
             <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v100"></script>
         </xpath>
+    </template>
+
+    <template id="program_path_list">
+        <t t-call="website_event.event_details">
+            <div class="oe_structure"/>
+
+            <t t-call="website_event_track_program_path.program_path_share" />
+
+            <t t-call="website_event_track_advanced.presentation_list_content" />
+
+            <div class="oe_structure"/>
+        </t>
+    </template>
+
+    <template id="program_path_share">
+        <t t-set="share_url"
+           t-value="base_url + '/event/' + str(event.id) + '/program-path/' + str(program.id)" />
+
+        <t t-set="share">My <t t-esc="event.name" /> program path: <t t-esc="share_url" /></t>
+
+        <div class="pull-right" id="program-path-share">
+            <p>Share your program path: </p>
+            <t t-call="website_event_track_program_path.program_path_share_twitter" />
+            <t t-call="website_event_track_program_path.program_path_share_facebook" />
+            <t t-call="website_event_track_program_path.program_path_share_google" />
+        </div>
+    </template>
+
+    <template id="program_path_share_twitter">
+
+        <a class="twitter-share-button"
+           t-attf-href="https://twitter.com/intent/tweet?text=#{share}"
+           target="_blank"
+           data-size="large"
+           title="Share this program path on Twitter">
+            <i class="fa fa fa-twitter-square fa-2x" />
+        </a>
+    </template>
+
+    <template id="program_path_share_facebook">
+
+        <a class="facebook-share-button"
+           t-att-href="'https://www.facebook.com/sharer/sharer.php?u=' + share_url"
+           target="_blank"
+           title="Share this program path on Facebook">
+            <i class="fa fa fa-facebook-square fa-2x" />
+        </a>
+    </template>
+
+    <template id="program_path_share_google">
+
+        <a class="google-share-button"
+           t-att-href="'https://plus.google.com/share?url=' + share_url"
+           target="_blank"
+           title="Share this program path on Google+">
+            <i class="fa fa fa-google-plus-square fa-2x" />
+        </a>
+
     </template>
 
 </odoo>
