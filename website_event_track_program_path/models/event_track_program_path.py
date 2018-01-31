@@ -13,8 +13,8 @@ class EventTrackProgramPath(models.Model):
         store=True,
     )
 
-    partner_id = fields.Many2one(
-        comodel_name='res.partner',
+    user_id = fields.Many2one(
+        comodel_name='res.users',
         string='Owner',
         required=True,
     )
@@ -27,4 +27,4 @@ class EventTrackProgramPath(models.Model):
     @api.depends('partner_id')
     def compute_name(self):
         for record in self:
-            record.name = record.partner_id.name
+            record.name = record.user_id.name

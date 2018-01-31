@@ -16,12 +16,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         EventTrackProgramPath = request.env['event.track.program.path']
 
         program = EventTrackProgramPath.search([
-            ('partner_id.id', '=', request.uid)
+            ('user_id.id', '=', request.uid)
         ], limit=1)
 
         if not program and request.uid != request.website.user_id.id:
             program = EventTrackProgramPath.create({
-                'partner_id': request.uid,
+                'user_id': request.uid,
             })
 
         if program:

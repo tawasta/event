@@ -21,13 +21,13 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # Find an existing program path
         program = EventTrackProgramPath.search([
-            ('partner_id.id', '=', request.uid)
+            ('user_id.id', '=', request.uid)
         ], limit=1)
 
         # Program not found. Create a new
         if not program:
             program = EventTrackProgramPath.create({
-                'partner_id': request.uid,
+                'user_id': request.uid,
             })
 
         track_name = post.get('track_id', False)
