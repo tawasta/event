@@ -172,7 +172,12 @@
                                 <t t-set="next_dt" t-value="dates[dt_index + 1]" />
                             </t>
 
-                            <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="next_dt[0].strftime('%H:%M')"/>
+                            <t t-if="not dt_last">
+                                <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="next_dt[0].strftime('%H:%M')"/>
+                            </t>
+                            <t t-if="dt_last">
+                                <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
+                            </t>
                         </td>
                         <t t-if="dt[2]"> <!-- Not a multi location -->
                             <t t-foreach="locations" t-as="location">
