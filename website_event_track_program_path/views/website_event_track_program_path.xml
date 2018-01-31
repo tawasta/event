@@ -14,7 +14,7 @@
                       title="Add to personal program"
                       data-placement="bottom"
                       data-toggle="tooltip"
-                      t-att-style="'display: none;' if program.track_ids and track.id in program.track_ids.ids else False"
+                      t-att-style="'display: none;' if program and track.id in program.track_ids.ids else False"
                 />
 
                 <span class="fa fa-star fa-2x track-program-path-icon"
@@ -22,7 +22,7 @@
                       title="Remove from personal program"
                       data-placement="bottom"
                       data-toggle="tooltip"
-                      t-att-style="False if program.track_ids and track.id in program.track_ids.ids else 'display: none;'"
+                      t-att-style="False if program and track.id in program.track_ids.ids else 'display: none;'"
                 />
             </div>
         </a>
@@ -30,8 +30,8 @@
 
     <template id="website_event_track_program_path.agenda" inherit_id="website_event_track_advanced.agenda">
         <xpath expr="//a[@id='target-groups-collapse-button']" position="after">
-            <a t-if="program.track_ids"
-               class="btn btn-default"
+            <a id='track-my-program-path'
+               t-att-class="'btn btn-default' if program and program.track_ids else 'btn btn-default hidden'"
                t-attf-href="/event/#{slug(event)}/agenda/#{slug(program)}">My program path</a>
         </xpath>
 

@@ -19,9 +19,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         EventTrackProgramPath = request.env['event.track.program.path']
 
         # Find an existing program path
-        program = EventTrackProgramPath.sudo().search([
-            ('partner_id', '=', request.uid)
+        program = EventTrackProgramPath.search([
+            ('partner_id.id', '=', request.uid)
         ], limit=1)
+
+        print program
 
         # Program not found. Create a new
         if not program:
@@ -38,10 +40,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         if post.get('active', False):
             # Remove from program path
-            program.sudo().track_ids = [(3, track_id, False)]
+            program.track_ids = [(3, track_id, False)]
 
         else:
             # Add to program path
-            program.sudo().track_ids = [(4, track_id, False)]
+            program.track_ids = [(4, track_id, False)]
 
         return 200

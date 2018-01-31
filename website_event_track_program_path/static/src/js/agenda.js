@@ -25,6 +25,12 @@ odoo.define('agenda-program', function (require) {
             });
 
             $(this).find('.track-program-path-icon').toggle();
+
+            // Set my path link as visible
+            // TODO: don't show if path is empty
+            if($('#track-my-program-path').is(':hidden')){
+                $('#track-my-program-path').removeClass('hidden');
+            }
         })
 
     $('div.event-track-program-path')
