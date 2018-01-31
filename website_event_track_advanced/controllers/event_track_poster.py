@@ -37,7 +37,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
     def event_track_poster(self, event, tag=None, **post):
         searches = {}
 
-        posters = request.env['event.track'].with_context(
+        posters = request.env['event.track'].sudo().with_context(
             tz=event.date_tz).search([
             ('type.code', '=', 'poster'),
             ('website_published', '=', True),
