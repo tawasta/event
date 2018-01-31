@@ -138,6 +138,7 @@
 
     <!--Agenda date heading -->
     <template id="agenda_day_heading">
+        <a t-att-href="'#' + dateparser.parse(day).strftime('%Y-%m-%d')" class="hidden"><t t-esc="dateparser.parse(day).strftime('%Y-%m-%d')" /></a>
         <h3 class="date-heading page-header mt0">
             <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
             <small>
