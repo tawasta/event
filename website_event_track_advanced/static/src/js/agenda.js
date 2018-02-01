@@ -57,7 +57,7 @@ odoo.define('agenda', function (require) {
     // Allow days
     $(".date-heading").click(function() {
         $(this).find('.chevron-toggle').toggle();
-        $(this).next().slideToggle();
+        $(this).parent().next().slideToggle();
     });
 
     $('div.event-track-content')

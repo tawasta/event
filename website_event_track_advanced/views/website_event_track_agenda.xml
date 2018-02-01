@@ -138,17 +138,29 @@
 
     <!--Agenda date heading -->
     <template id="agenda_day_heading">
+        <!-- Anchor to date -->
         <a t-att-name="dateparser.parse(day).strftime('%Y-%m-%d')"></a>
-        <h3 class="date-heading page-header mt0">
-            <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
-            <small>
-                <t t-esc="days_nbr[day]"/>
-                talks
-            </small>
 
-            <span class="fa fa-chevron-down chevron-toggle" style="display: none;"/>
-            <span class="fa fa-chevron-up chevron-toggle" />
+        <h3 class="page-header mt0">
+            <span class="date-heading ">
+                <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
+                <small>
+                    <t t-esc="days_nbr[day]"/>
+                    talks
+                </small>
+
+                <span class="fa fa-chevron-down chevron-toggle" style="display: none;"/>
+                <span class="fa fa-chevron-up chevron-toggle" />
+            </span>
+
+            <span class="pull-right">
+                <small>
+                    <!-- Link to posters -->
+                    <a t-attf-href="/event/#{slug(event)}/poster">View posters</a>
+                </small>
+            </span>
         </h3>
+
     </template>
 
     <!--Agenda date content -->

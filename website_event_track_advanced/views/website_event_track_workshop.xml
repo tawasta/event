@@ -5,6 +5,9 @@
         <t t-call="website_event.event_details">
             <div class="oe_structure"/>
 
+            <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
+                <span class="fa fa-chevron-left" /> To agenda</a>
+
             <div class="col-md-12">
                 <div class="alert alert-warning" t-if="not len(tracks)">
                     No presentations found!
