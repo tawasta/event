@@ -67,9 +67,32 @@
 }
 
 /* Agenda */
+@media only screen and (max-width: 1200px){
+    #agenda-table .agenda-timeslot-row .event_track {
+        white-space: normal
+    }
+    .agenda-timeslot-row .event_track{
+        font-size: 0.8em;
+        max-width: 100px;
+    }
+    .agenda-timeslot-time{
+        white-space: normal !important;
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .agenda-timeslot-row .event_track{
+        font-size: 0.8em;
+        max-width: 100px;
+    }
+}
 @media only screen and (min-width: 1400px){
     .container-wide{
         width: 1370px;
+    }
+    .agenda-timeslot-row .event_track{
+        font-size: 0.8em;
+        max-width: 130px;
     }
 }
 
@@ -77,17 +100,35 @@
     .container-wide{
         width: 1570px;
     }
+    .agenda-timeslot-row .event_track{
+        font-size: 0.8em;
+        max-width: 180px;
+    }
+    .agenda-timeslot-time{
+        white-space: nowrap;
+    }
 }
 
 @media only screen and (min-width: 1800px){
     .container-wide{
         width: 1770px;
     }
+    .agenda-timeslot-row .event_track{
+        font-size: 0.9em;
+        max-width: 200px;
+    }
+    .agenda-timeslot-time{
+        white-space: nowrap;
+    }
 }
 
 @media screen and (max-width: 767px){
     #agenda-table .agenda-timeslot-row .event_track {
         white-space: normal
+    }
+    .agenda-timeslot-row .event_track{
+        font-size: 0.8em;
+        max-width: 100px;
     }
 }
 web.assets_frontend.0.css:22
@@ -103,12 +144,6 @@ web.assets_frontend.0.css:22
 
 .agenda-timeslot-time{
     font-weight: bold;
-    white-space: nowrap;
-}
-
-.agenda-timeslot-row .event_track{
-    font-size: 0.9em;
-    max-width: 200px;
 }
 
 .agenda-timeslot-row .event_track a{
