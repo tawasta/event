@@ -143,7 +143,7 @@
 
         <h3 class="page-header mt0">
             <span class="date-heading">
-                <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
+                <span>Program</span> <t t-esc="dateparser.parse(day).strftime('%d.%m.%Y')"/>
                 <small name="agenda-date-track-count">
                     <t t-esc="days_nbr[day]"/>
                     talks
