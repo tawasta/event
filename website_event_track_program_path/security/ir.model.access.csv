@@ -1,3 +1,4 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 "event_track_program_path_public","event_track_program_path_public","model_event_track_program_path","base.group_public",1,0,0,0
 "event_track_program_path_portal","event_track_program_path_portal","model_event_track_program_path","base.group_portal",1,1,1,0
+"event_track_program_path_user","event_track_program_path_user","model_event_track_program_path","base.group_user",1,1,1,0
