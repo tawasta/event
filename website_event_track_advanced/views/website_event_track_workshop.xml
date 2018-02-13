@@ -135,6 +135,11 @@
                     </li>
                 </ul>
 
+                <div class="row">
+                    <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/workshop">
+                        <span class="fa fa-chevron-left" /> To workshops</a>
+                </div>
+
                 <section class="row mt32">
                     <div class="col-md-8" id="workshop-view-column-left">
                         <section>

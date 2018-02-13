@@ -126,8 +126,10 @@
                     </li>
                 </ul>
 
-                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/poster">
-                    <span class="fa fa-chevron-left" /> To posters</a>
+                <div class="row">
+                    <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/poster">
+                        <span class="fa fa-chevron-left" /> To posters</a>
+                </div>
 
                 <section class="row mt32">
                     <div class="col-md-12">
