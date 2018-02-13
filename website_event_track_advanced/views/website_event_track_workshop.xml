@@ -173,7 +173,7 @@
                     <div class="col-md-4" id="workshop-view-column-right">
                         <div class="panel panel-default" t-if="track.target_group">
                             <div class="panel-heading">
-                                <h4>Target Group</h4>
+                                <h4>Target group</h4>
                             </div>
                             <div class="panel-body">
 
