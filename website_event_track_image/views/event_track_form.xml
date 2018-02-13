@@ -7,9 +7,8 @@
         <field name="inherit_id" ref="website_event_track.view_event_track_form"/>
         <field name="arch" type="xml">
             <field name="tag_ids" position="after">
-                <field name="image"
+                <field name="image_presentation"
                        widget="image"
-                       class="oe_avatar"
                 />
             </field>
         </field>
