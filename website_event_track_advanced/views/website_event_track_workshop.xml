@@ -166,6 +166,19 @@
                         </section>
                     </div>
                     <div class="col-md-4" id="workshop-view-column-right">
+                        <div class="panel panel-default" t-if="track.target_group">
+                            <div class="panel-heading">
+                                <h4>Target Group</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <div t-if="track.target_group">
+                                    <strong><p t-field="track.target_group"/></strong>
+                                    <p t-field="track.target_group_info"/>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4>Practical Info</h4>
