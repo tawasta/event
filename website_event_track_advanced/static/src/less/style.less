@@ -66,6 +66,36 @@
     }
 }
 
+/* Print */
+@media print {
+    /* Suggest horizontal paper */
+    @page {
+        size: A4 landscape;
+        max-height:100%;
+        max-width:100%
+    }
+    body {
+        writing-mode: horizontal-tb;
+    }
+
+    .container-wide{
+        width: 1400px;
+    }
+
+    /* Don't expand links */
+    a[href]:after {
+        content: none !important;
+    }
+
+    /* Hide unnecessary items */
+    #filter-tracks, footer, .page-header .fa, .page-header small {
+        display: none;
+    }
+    .page-header .fa, .page-header small{
+        display: none;
+    }
+}
+
 /* Agenda */
 @media only screen and (max-width: 1200px){
     #agenda-table .agenda-timeslot-row .event_track {
@@ -131,11 +161,17 @@
         max-width: 100px;
     }
 }
-web.assets_frontend.0.css:22
-
 
 .page-header{
     border-bottom: none;
+}
+
+.page-header .fa{
+    color: @link-color;
+}
+
+.page-header .fa:hover{
+    color: @link-hover-color;
 }
 
 #agenda-table{
