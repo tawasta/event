@@ -230,9 +230,11 @@
                                  t-att-src="'/web/image?model=event.track&amp;field=image_presentation&amp;id='+str(track.id)"/>
                             <!--</a>-->
 
+                            <!--
                             <div class="carousel-caption">
                                 <p class="track-carousel-caption" t-field="track.name" />
                             </div>
+                            -->
                         </div>
                     </t>
                 </t>
