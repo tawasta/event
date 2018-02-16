@@ -35,6 +35,8 @@
             </div>
             <div class="oe_structure"/>
         </t>
+
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/poster.js?v101"></script>
     </template>
 
     <!-- Single poster item in list view -->
@@ -201,7 +203,7 @@
     </template>
 
     <template id="poster_carousel">
-        <div id="poster-carousel" class="carousel slide col-md-12" data-ride="carousel">
+        <div id="poster-carousel" class="carousel carousel-collapsed slide col-md-12" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <t t-set="first" t-value="true" />
@@ -223,10 +225,10 @@
                             <!-- Unset the "first" -->
                             <t t-if="first" t-set="first" t-value="false" />
 
-                            <a t-attf-href="/event/#{ slug(event) }/poster/#{ slug(track) }">
+                            <!--<a t-attf-href="/event/#{ slug(event) }/poster/#{ slug(track) }">-->
                             <img class="track-carousel-image"
                                  t-att-src="'/web/image?model=event.track&amp;field=image_presentation&amp;id='+str(track.id)"/>
-                            </a>
+                            <!--</a>-->
 
                             <div class="carousel-caption">
                                 <p class="track-carousel-caption" t-field="track.name" />
