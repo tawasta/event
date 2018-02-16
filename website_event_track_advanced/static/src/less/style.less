@@ -1,3 +1,10 @@
+/* Generic */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 /* Proposal */
 
 #call-for-papers-language .js_language_selector{
@@ -72,6 +79,10 @@
     margin: 0;
 }
 
+.agenda-timeslot-time, .agenda-location-header{
+    opacity: 0.8;
+}
+
 @media only screen and (max-width: 1200px){
     #agenda-table .agenda-timeslot-row .event_track {
         white-space: normal
@@ -91,6 +102,22 @@
         max-width: 150px;
     }
 }
+
+@media only screen and (max-width: 1400px){
+    .agenda-locations-row th:first-child {
+        padding: 0;
+    }
+
+    .agenda-timeslot-time {
+        position: absolute;
+        padding: 0;
+    }
+
+    .track-td-name{
+        padding-top: 5px;
+    }
+}
+
 @media only screen and (min-width: 1400px){
     .agenda-timeslot-row .event_track{
         font-size: 0.8em;

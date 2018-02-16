@@ -113,4 +113,7 @@ odoo.define('agenda', function (require) {
             }
         });
     });
+
+    // Sticky elements
+     $('.agenda-table').stickyTableHeaders({fixedOffset: $('header')});
 });

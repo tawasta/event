@@ -85,6 +85,7 @@
             </section>
         </t>
 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sticky-table-headers/0.1.24/js/jquery.stickytableheaders.min.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v103"></script>
     </template>
 
@@ -159,18 +160,18 @@
     <!--Agenda date content -->
     <template id="agenda_day_content">
         <div class="agenda-day-content table-responsive">
-            <table id="agenda-table" class="table table-bordered table-condensed">
-                <thead>
+            <table id="agenda-table" class="table agenda-table table-bordered table-condensed">
+                <thead class="agenda-table-header">
                     <tr class="agenda-locations-row">
                         <th/>
                         <t t-foreach="locations.keys()" t-as="location">
-                            <th t-if="location" class="active track-th-name">
+                            <th t-if="location" class="active track-th-name agenda-location-header">
                                 <span t-esc="location and location.name or 'Unknown'"/>
                             </th>
                         </t>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="agenda-table-body">
                     <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
                         <td class="active agenda-timeslot-time">
                             <t t-set="next_dt" t-value="dt" />
