@@ -82,6 +82,15 @@
 .agenda-timeslot-time{
     opacity: 0.8;
     pointer-events: none;
+    padding: 0 !important;
+}
+
+.agenda-timeslot-time-inner{
+    padding: 5px;
+}
+
+.agenda-timeslot-time-dummy{
+    display: none;
 }
 
 @media only screen and (max-width: 1200px){
@@ -104,7 +113,7 @@
     }
 }
 
-@media only screen and (max-width: 1400px){
+@media only screen and (max-width: 1400px), only screen and (pointer: none) {
     .container-wide{
         padding: 0;
     }
@@ -118,7 +127,18 @@
 
     .agenda-timeslot-time {
         position: absolute;
-        padding: 0;
+        width: 60px;
+        min-height: 56px;
+    }
+
+    .agenda-timeslot-time-dummy{
+        display: table-cell;
+        padding: 0 !important;
+    }
+
+    .agenda-timeslot-time-dummy div{
+        width: 58px;
+        min-height: 54px;
     }
 
     .track-td-name{
