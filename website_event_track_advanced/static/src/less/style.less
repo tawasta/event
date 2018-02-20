@@ -106,6 +106,12 @@
     }
 }
 
+@media only screen and (max-width: 1500px){
+    .agenda-day-content{
+        max-height: 80vh;
+    }
+}
+
 @media only screen and (min-width: 1200px){
     .agenda-timeslot-row .event_track{
         font-size: 0.8em;
@@ -114,6 +120,10 @@
 }
 
 @media only screen and (max-width: 1400px), only screen and (pointer: none) {
+    .agenda-day-content{
+        max-height: none;
+    }
+
     .container-wide{
         padding: 0;
     }
