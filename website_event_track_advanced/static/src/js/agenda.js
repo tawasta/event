@@ -129,4 +129,7 @@ odoo.define('agenda', function (require) {
         }
     });
 
+    $('.print-event-program').click(function() {
+        window.print();
+     });
 });

@@ -86,7 +86,7 @@
         </t>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sticky-table-headers/0.1.24/js/jquery.stickytableheaders.min.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v104"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v105"></script>
     </template>
 
     <!-- Agenda td content -->
@@ -150,9 +150,10 @@
                     talks
                 </small>
 
-                <span class="fa fa-chevron-down chevron-toggle" style="display: none;"/>
-                <span class="fa fa-chevron-up chevron-toggle" />
+                <span class="fa fa-chevron-down chevron-toggle" title="Show program" style="display: none;"/>
+                <span class="fa fa-chevron-up chevron-toggle" title="Hide program" />
             </span>
+            <span class="fa fa-print print-event-program" title="Print event program" />
         </h3>
 
     </template>

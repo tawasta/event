@@ -73,6 +73,74 @@
     }
 }
 
+/* Print */
+@media print {
+    /* Suggest horizontal paper */
+    @page {
+        size: A4 landscape;
+        max-height:100%;
+        max-width:100%
+    }
+    body {
+        writing-mode: horizontal-tb;
+        padding: 0;
+    }
+
+    /* Try to avoid empty pages */
+    html, body {
+        height: auto;
+    }
+
+    /* Improve used sizes */
+    .container-wide{
+        width: 1400px;
+        margin: 0;
+        padding: 0;
+    }
+
+    #agenda-table td, #agenda-table th{
+        max-width: 7vw;
+    }
+
+    #agenda-table{
+        font-size: 0.6em;
+        border-collapse: unset;
+        padding: 0;
+    }
+
+    main, .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: left !important;
+        font-size: 2em;
+        margin: 0;
+    }
+
+    /* Don't expand links */
+    a[href]:after {
+        content: none !important;
+    }
+
+    /* Hide unnecessary items */
+    header, footer {
+        display: none !important;
+    }
+
+    #filter-tracks, .oe_structure, .page-header .fa, .page-header small {
+     display: none;
+    }
+
+    .page-header .fa, .page-header small{
+        display: none;
+    }
+    #agenda-table .fa{
+        display: none;
+    }
+}
+
 /* Agenda */
 .container-wide{
     width: 96%;
@@ -192,11 +260,17 @@
         max-width: 100px;
     }
 }
-web.assets_frontend.0.css:22
-
 
 .page-header{
     border-bottom: none;
+}
+
+.page-header .fa{
+    color: @link-color;
+}
+
+.page-header .fa:hover{
+    color: @link-hover-color;
 }
 
 #agenda-table{
