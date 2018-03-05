@@ -76,11 +76,19 @@
     }
     body {
         writing-mode: horizontal-tb;
+        padding: 0;
+    }
+
+    /* Try to avoid empty pages */
+    html, body {
+        height: auto;
     }
 
     /* Improve used sizes */
     .container-wide{
         width: 1400px;
+        margin: 0;
+        padding: 0;
     }
 
     #agenda-table td, #agenda-table th{
@@ -89,6 +97,19 @@
 
     #agenda-table{
         font-size: 0.6em;
+        border-collapse: unset;
+        padding: 0;
+    }
+
+    main, .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: left !important;
+        font-size: 2em;
+        margin: 0;
     }
 
     /* Don't expand links */
@@ -97,9 +118,14 @@
     }
 
     /* Hide unnecessary items */
-    #filter-tracks, footer, .page-header .fa, .page-header small {
-        display: none;
+    header, footer {
+        display: none !important;
     }
+
+    #filter-tracks, .oe_structure, .page-header .fa, .page-header small {
+     display: none;
+    }
+
     .page-header .fa, .page-header small{
         display: none;
     }
