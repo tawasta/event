@@ -30,6 +30,12 @@ class EventTrack(models.Model):
         string='Contact',
     )
 
+    chairperson_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Chairperson',
+        domain=[('is_company', '=', False)],
+    )
+
     organizer = fields.Many2one(
         comodel_name='res.partner',
         string='Organizer',
