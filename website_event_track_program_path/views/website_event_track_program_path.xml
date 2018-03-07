@@ -17,16 +17,14 @@
                 </t>
 
                 <t t-if="user_logged">
-                    <span class="fa fa-star-o fa-2x track-program-path-icon"
-                          id="track-program-path-icon-disabled"
+                    <span class="fa fa-star-o fa-2x track-program-path-icon track-program-path-icon-disabled"
                           title="Add to personal program"
                           data-placement="bottom"
                           data-toggle="tooltip"
                           t-att-style="'display: none;' if program and track.id in program.track_ids.ids else False"
                     />
 
-                    <span class="fa fa-star fa-2x track-program-path-icon"
-                          id="track-program-path-icon-enabled"
+                    <span class="fa fa-star fa-2x track-program-path-icon track-program-path-icon-enabled"
                           title="Remove from personal program"
                           data-placement="bottom"
                           data-toggle="tooltip"
@@ -47,7 +45,7 @@
         </xpath>
 
         <xpath expr="//script" position="after">
-            <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v100"></script>
+            <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v101"></script>
         </xpath>
     </template>
 

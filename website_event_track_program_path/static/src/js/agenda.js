@@ -6,7 +6,7 @@ odoo.define('agenda-program', function (require) {
         .click(function() {
             // TODO: AJAX save
             var action = '/event/agenda/program/save';
-            var active = $('#track-program-path-icon-enabled').is(":visible");
+            var active = $(this).find('.track-program-path-icon-enabled').is(":visible");
             var cell = $(this).closest('td');
 
             var values = {
