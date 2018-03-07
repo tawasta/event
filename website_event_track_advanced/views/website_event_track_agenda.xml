@@ -119,6 +119,14 @@
                         <span t-esc="speakers[track.id]"/>
                     </div>
 
+                    <!-- Chairperson -->
+                    <div t-if="track.chairperson_id"
+                         t-attf-name="chairperson_#{track.chairperson_id.id}"
+                         class="track-td-chairperson mt8">
+                        <i  class="fa fa-gavel"/>
+                        <span t-esc="track.chairperson_id.name"/>
+                    </div>
+
                     <!-- Target group -->
                     <div t-if="track.target_group"
                          t-attf-name="target_group_#{track.target_group.id}"
