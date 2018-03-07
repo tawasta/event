@@ -104,6 +104,13 @@
                                 <h4>Presentation Info</h4>
                             </div>
                             <div class="panel-body">
+                                <div t-if="track.chairperson_id">
+                                    <p>
+                                        <strong>Chairperson</strong><br/>
+                                        <span t-field="track.chairperson_id" />
+                                    </p>
+                                </div>
+
                                 <div t-if="track.target_group">
                                     <p>
                                         <strong>Target group</strong><br/>

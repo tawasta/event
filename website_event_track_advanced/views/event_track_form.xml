@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
 
             <field name="partner_id" position="after">
+                <field name="chairperson_id" />
                 <field name="organizer"/>
                 <field name="organizer_contact"/>
             </field>
