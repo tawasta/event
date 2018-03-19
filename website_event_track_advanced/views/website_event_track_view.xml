@@ -34,9 +34,8 @@
             <div class="container">
                 <div class="clearfix"/>
                 <h2 t-field="track.name" class="text-center"/>
+
                 <h3 t-field="event.name" class="text-center text-muted"/>
-                <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
-                    <span class="fa fa-chevron-left" /> Back to agenda</a>
 
                 <ul t-if="track.tag_ids"
                     class="text-center text-muted list-inline">
@@ -47,6 +46,24 @@
                         </a>
                     </li>
                 </ul>
+
+                <div t-if="event.show_track_twitter_hashtags" name="track-td-twitter" class="track-td-twitter mt8" >
+                    <h3 class="text-center text-muted">
+                        <div t-if="event.show_track_twitter_hashtags and track.type.attendable" class="event-track-content track-td-twitter">
+                            <a class="twitter-share-button twitter-link"
+                               t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
+                               target="_blank"
+                               title="Tweet about this presentation">
+                                <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
+                            </a>
+                        </div>
+                    </h3>
+                </div>
+
+                <div class="row">
+                    <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
+                        <span class="fa fa-chevron-left" /> Back to agenda</a>
+                </div>
 
                 <section class="row mt32">
                     <div class="col-md-8 mb32">

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
+import re
 
 # 2. Known third party imports:
 
@@ -56,11 +57,21 @@ class EventTrackType(models.Model):
         default=True,
     )
 
+    twitter_hashtag = fields.Char(
+        string='Twitter hashtag',
+        help='Twitter hashtag for tracks',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
 
     # 5. Constraints and onchanges
+    @api.onchange('twitter_hashtag')
+    def onchange_twitter_hashtag_sanitize(self):
+        for record in self:
+            hashtag = re.sub('[^A-Za-z0-9_]', '', record.twitter_hashtag)
+            record.twitter_hashtag = hashtag
 
     # 6. CRUD methods
 

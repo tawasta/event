@@ -19,6 +19,10 @@ class EventEvent(models.Model):
     _inherit = 'event.event'
 
     # 2. Fields declaration
+    show_track_twitter_hashtags = fields.Boolean(
+        string='Show Twitter hashtag',
+        help='Show Twitter hashtag in agenda',
+    )
 
     # 3. Default methods
 

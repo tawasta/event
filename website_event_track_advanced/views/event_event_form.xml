@@ -20,6 +20,10 @@
                 />
             </button>
 
+            <field name="twitter_hashtag" position="after">
+                <field name="show_track_twitter_hashtags" />
+            </field>
+
             <group name="main_field_group" position="after">
                 <group>
                     <field name="allowed_track_tag_ids" widget="many2many_tags"/>

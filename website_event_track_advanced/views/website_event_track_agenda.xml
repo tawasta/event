@@ -132,9 +132,23 @@
                         <i t-if="tags[track.id]" class="fa fa-tag"/>
                         <span t-esc="tags[track.id]"/>
                     </div>
+
+                    <!-- Twitter hashtag -->
+                    <div t-if="event.show_track_twitter_hashtags" name="track-td-twitter" class="twitter-link track-td-twitter mt8" >
+                        <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
+                    </div>
                 </div>
             </div>
         </a>
+
+        <div t-if="event.show_track_twitter_hashtags and track.type.attendable" class="event-track-content track-td-twitter">
+            <a class="twitter-share-button twitter-link mt8"
+               t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
+               target="_blank"
+               title="Tweet about this presentation">
+                <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
+            </a>
+        </div>
     </template>
 
     <!--Agenda date heading -->

@@ -194,6 +194,13 @@ class EventTrack(models.Model):
         string='External registration link',
     )
 
+    twitter_hashtag = fields.Char(
+        string='Twitter hashtag',
+        compute='compute_twitter_hashtag',
+        store=True,
+        copy=False,
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
@@ -300,6 +307,14 @@ class EventTrack(models.Model):
 
             if overlapping_tracks:
                 record.overlapping_track_ids = overlapping_tracks.ids
+
+    @api.depends('type.twitter_hashtag')
+    def compute_twitter_hashtag(self):
+        # TODO: allow user to decide the format
+        for record in self:
+            hashtag = "%s%s" % (record.type.twitter_hashtag, record.id)
+
+            record.twitter_hashtag = hashtag
 
     # 5. Constraints and onchanges
 
