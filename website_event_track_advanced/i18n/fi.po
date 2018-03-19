@@ -1,26 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_event_track_advanced
+#	* website_event_track_advanced
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-13 13:16+0000\n"
-"PO-Revision-Date: 2018-02-13 15:17+0200\n"
+"POT-Creation-Date: 2018-03-05 08:48+0000\n"
+"PO-Revision-Date: 2018-03-05 08:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: fi\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: website_event_track_advanced
 #: model:mail.template,body_html:website_event_track_advanced.email_template_event_track_announced
-msgid ""
-"\n"
+msgid "\n"
 "<p>Dear ${object.partner_id.name},</p>\n"
 "<p>Thank you for your proposal <strong>${object.name}</strong>.</p>\n"
 "\n"
@@ -35,8 +32,8 @@ msgid ""
 "</ul>\n"
 "\n"
 "<p>Welcome to the conference!</p>\n"
-msgstr ""
-"\n"
+""
+msgstr "\n"
 "<p>Dear ${object.partner_id.name},</p>\n"
 "<p>Thank you for your proposal <strong>${object.name}</strong>.</p>\n"
 "\n"
@@ -51,17 +48,16 @@ msgstr ""
 "</ul>\n"
 "\n"
 "<p>Welcome to the conference!</p>\n"
+""
 
 #. module: website_event_track_advanced
 #: model:mail.template,body_html:website_event_track_advanced.email_template_event_track_refused
-msgid ""
-"\n"
+msgid "\n"
 "<p>Dear ${object.partner_id.name},</p>\n"
 "<p>Thank you for your proposal.</p>\n"
 "<p>Unfortunately your presentation <strong>\"${object.name}\"</strong> was not selected to the programme.</p>\n"
 "<p>If you have any questions, please let us know.</p>"
-msgstr ""
-"\n"
+msgstr "\n"
 "<p>Dear ${object.partner_id.name},</p>\n"
 "<p>Thank you for your proposal.</p>\n"
 "<p>Unfortunately your presentation <strong>\"${object.name}\"</strong> was not selected to the programme.</p>\n"
@@ -80,11 +76,9 @@ msgstr "0 löytynyttä."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.poster_carousel
-msgid ""
-"<span class=\"fa fa-chevron-left\" aria-hidden=\"true\"/>\n"
+msgid "<span class=\"fa fa-chevron-left\" aria-hidden=\"true\"/>\n"
 "                <span class=\"sr-only\">Previous</span>"
-msgstr ""
-"<span class=\"fa fa-chevron-left\" aria-hidden=\"true\"/>\n"
+msgstr "<span class=\"fa fa-chevron-left\" aria-hidden=\"true\"/>\n"
 "                <span class=\"sr-only\">Edellinen</span>"
 
 #. module: website_event_track_advanced
@@ -111,11 +105,9 @@ msgstr "<span class=\"fa fa-chevron-left\"/> Workshoppeihin"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.poster_carousel
-msgid ""
-"<span class=\"fa fa-chevron-right\" aria-hidden=\"true\"/>\n"
+msgid "<span class=\"fa fa-chevron-right\" aria-hidden=\"true\"/>\n"
 "                <span class=\"sr-only\">Next</span>"
-msgstr ""
-"<span class=\"fa fa-chevron-right\" aria-hidden=\"true\"/>\n"
+msgstr "<span class=\"fa fa-chevron-right\" aria-hidden=\"true\"/>\n"
 "                <span class=\"sr-only\">Seuraava</span>"
 
 #. module: website_event_track_advanced
@@ -125,55 +117,45 @@ msgstr "<span id=\"event-track-found\">0</span> löytynyttä"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
-msgid ""
-"<span id=\"extra_info_word_counter\" class=\"pull-right\">Words\n"
+msgid "<span id=\"extra_info_word_counter\" class=\"pull-right\">Words\n"
 "                            <span id=\"extra_info_word_count\"/>\n"
 "                        </span>"
-msgstr ""
-"<span id=\"extra_info_word_counter\" class=\"pull-right\">Sanoja\n"
+msgstr "<span id=\"extra_info_word_counter\" class=\"pull-right\">Sanoja\n"
 "                            <span id=\"extra_info_word_count\"/>\n"
 "                        </span>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
-msgid ""
-"<span id=\"target_group_info_word_counter\" class=\"pull-right\">Words\n"
+msgid "<span id=\"target_group_info_word_counter\" class=\"pull-right\">Words\n"
 "                            <span id=\"target_group_info_word_count\"/>\n"
 "                        </span>"
-msgstr ""
-"<span id=\"target_group_info_word_counter\" class=\"pull-right\">Sanoja\n"
+msgstr "<span id=\"target_group_info_word_counter\" class=\"pull-right\">Sanoja\n"
 "                            <span id=\"target_group_info_word_count\"/>\n"
 "                        </span>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
-msgid ""
-"<span id=\"webinar_info_word_counter\" class=\"pull-right\">Words\n"
+msgid "<span id=\"webinar_info_word_counter\" class=\"pull-right\">Words\n"
 "                            <span id=\"webinar_info_word_count\"/>\n"
 "                        </span>"
-msgstr ""
-"<span id=\"webinar_info_word_counter\" class=\"pull-right\">Sanoja\n"
+msgstr "<span id=\"webinar_info_word_counter\" class=\"pull-right\">Sanoja\n"
 "                            <span id=\"webinar_info_word_count\"/>\n"
 "                        </span>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
-msgid ""
-"<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Words\n"
+msgid "<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Words\n"
 "                            <span id=\"workshop_goals_word_count\"/>\n"
 "                        </span>"
-msgstr ""
-"<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Sanoja\n"
+msgstr "<span id=\"workshop_goals_word_counter\" class=\"pull-right\">Sanoja\n"
 "                            <span id=\"workshop_goals_word_count\"/>\n"
 "                        </span>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal
-msgid ""
-"<span>By clicking <strong>\"Save and submit\"</strong> the proposal shall be saved and submitted for review.</span><br/>\n"
+msgid "<span>By clicking <strong>\"Save and submit\"</strong> the proposal shall be saved and submitted for review.</span><br/>\n"
 "                                            <span>Please note that a completed proposal can no longer be edited.</span>"
-msgstr ""
-"<span>Klikkaamalla <strong>\"Tallenna ja lähetä'\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi.</span><br/>\n"
+msgstr "<span>Klikkaamalla <strong>\"Tallenna ja lähetä'\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi.</span><br/>\n"
 "                                            <span>Huomioi että valmista ehdotusta ei voi enää muokata.</span>"
 
 #. module: website_event_track_advanced
@@ -183,11 +165,9 @@ msgstr "<span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tal
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
-msgid ""
-"<span>Please enter any special arrangements you wish for your presentation in the additional details section.</span><br/>\n"
+msgid "<span>Please enter any special arrangements you wish for your presentation in the additional details section.</span><br/>\n"
 "                    <span>For example, any wishes for presentation technology, premises, furniture, presentation time, etc.</span>"
-msgstr ""
-"<span>Ole hyvä ja täytä lisätietoihin toiveesi esityksen erityisjärjestelyistä. </span><br/>\n"
+msgstr "<span>Ole hyvä ja täytä lisätietoihin toiveesi esityksen erityisjärjestelyistä. </span><br/>\n"
 "                    <span>Esimerkiksi toiveet esitystekniikkaan, tiloihin, kalustukseen, esityksen ajankohtaan tms. liittyen. </span>"
 
 #. module: website_event_track_advanced
@@ -197,11 +177,9 @@ msgstr "<span>Ohjelma</span>"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
-msgid ""
-"<span>Select your presentation’s primary target group.</span><br/>\n"
+msgid "<span>Select your presentation’s primary target group.</span><br/>\n"
 "                    <span>You can enter specifications of your presentation’s target group in the target group details.</span>"
-msgstr ""
-"<span>Valitse esityksesi ensisijainen kohderyhmä, vaikka esityksesi sopisikin useammalle eri kohderyhmälle.</span><br/>\n"
+msgstr "<span>Valitse esityksesi ensisijainen kohderyhmä, vaikka esityksesi sopisikin useammalle eri kohderyhmälle.</span><br/>\n"
 "                    <span>Voit kirjoittaa kohderyhmän tietoihin tarkennuksia esityksen kohderyhmästä.</span>"
 
 #. module: website_event_track_advanced
@@ -996,12 +974,10 @@ msgstr "Julkaistut esitykset"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.poster_view
 #: model:ir.ui.view,arch_db:website_event_track_advanced.track_view
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
-msgid ""
-"Put here the list of documents, like slides of\n"
+msgid "Put here the list of documents, like slides of\n"
 "                                the presentations. Remove the above t-if when\n"
 "                                it's implemented."
-msgstr ""
-"Laita tähän lista dokumenteista, kuten diaesitys\n"
+msgstr "Laita tähän lista dokumenteista, kuten diaesitys\n"
 "                            esityksestä. Poista ylläoleva t-if kun\n"
 "                            tämä on otettu käyttöön."
 
@@ -1150,14 +1126,10 @@ msgid "Street"
 msgstr "Katuosoite"
 
 #. module: website_event_track_advanced
-#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
-msgid "Target Group"
-msgstr "Kohderyhmä"
-
-#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
 msgid "Target group"
 msgstr "Kohderyhmä"
 
@@ -1368,11 +1340,9 @@ msgstr "Webinaarin tiedot..."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid ""
-"Words\n"
+msgid "Words\n"
 "                            <span id=\"track_content_word_count\"/>"
-msgstr ""
-"Sanoja\n"
+msgstr "Sanoja\n"
 "                            <span id=\"track_content_word_count\"/>"
 
 #. module: website_event_track_advanced
@@ -1388,11 +1358,9 @@ msgstr "Workshopin tavoitteet"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
-msgid ""
-"Workshop information and invoicing address.<br/>\n"
+msgid "Workshop information and invoicing address.<br/>\n"
 "                    The contract will be sent for the signee."
-msgstr ""
-"Workshopin tiedot ja laskutusosoite.<br/>\n"
+msgstr "Workshopin tiedot ja laskutusosoite.<br/>\n"
 "Sopimus lähetetään allekirjoittajalle."
 
 #. module: website_event_track_advanced
@@ -1502,3 +1470,4 @@ msgstr "esitystä"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
 msgid "unpublished"
 msgstr "julkaisematon"
+

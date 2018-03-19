@@ -116,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default" t-if="track.target_group">
+                        <div class="panel panel-default" t-if="track.target_group or track.chairperson_id">
                             <div class="panel-heading">
                                 <h4>Presentation Info</h4>
                             </div>
@@ -135,7 +135,7 @@
                                     </p>
                                 </div>
 
-                                <div t-if="track.target_group_info">
+                                <div t-if="track.target_group_info and track.target_group">
                                     <p>
                                         <strong>Target group info</strong><br/>
                                         <span t-field="track.target_group_info" />
