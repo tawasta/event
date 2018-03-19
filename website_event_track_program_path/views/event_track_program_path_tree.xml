@@ -11,7 +11,8 @@
             <tree string="Program path">
                 <field name="name"/>
                 <field name="url" widget="url"/>
-                <field name="track_ids" />
+                <field name="create_date" />
+                <field name="write_date" />
             </tree>
 
         </field>
