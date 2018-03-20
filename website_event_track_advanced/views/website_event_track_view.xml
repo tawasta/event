@@ -37,6 +37,8 @@
 
                 <h3 t-field="event.name" class="text-center text-muted"/>
 
+                <t t-call="website_event_track_advanced.presentation_header_info" />
+
                 <ul t-if="track.tag_ids"
                     class="text-center text-muted list-inline">
                     <li t-foreach="track.tag_ids" t-as="tag_id">
@@ -46,19 +48,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <div t-if="event.show_track_twitter_hashtags" name="track-td-twitter" class="track-td-twitter mt8" >
-                    <h3 class="text-center text-muted">
-                        <div t-if="event.show_track_twitter_hashtags and track.type.attendable" class="event-track-content track-td-twitter">
-                            <a class="twitter-share-button twitter-link"
-                               t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
-                               target="_blank"
-                               title="Tweet about this presentation">
-                                <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
-                            </a>
-                        </div>
-                    </h3>
-                </div>
 
                 <div class="row">
                     <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
@@ -276,6 +265,29 @@
                 </p>
             </div>
         </div>
+    </template>
+
+    <!-- Single presentation item in list view -->
+    <template id="presentation_header_info">
+        <ul class="text-center text-muted list-inline">
+            <li t-if="track.speaker_ids" class="fa fa-user">
+                <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
+            </li>
+
+            <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
+
+            <li class="text-muted fa fa-map-marker" t-if="track.location_id">
+                <span t-field="track.location_id"/>
+            </li>
+
+            <li t-if="event.show_track_twitter_hashtags and track.type.attendable" class="text-muted fa fa-twitter">
+                <a class="twitter-share-button twitter-link"
+                   t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
+                   target="_blank"
+                   title="Tweet about this presentation">#<span t-esc="track.twitter_hashtag" />
+                </a>
+            </li>
+        </ul>
     </template>
 
 </odoo>

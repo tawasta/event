@@ -49,6 +49,14 @@
                 <li class="text-muted fa fa-map-marker" t-if="track.location_id">
                     <span t-field="track.location_id"/>
                 </li>
+
+                <li t-if="event.show_track_twitter_hashtags and track.type.attendable" class="text-muted fa fa-twitter">
+                    <a class="twitter-share-button twitter-link"
+                       t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
+                       target="_blank"
+                       title="Tweet about this presentation">#<span t-esc="track.twitter_hashtag" />
+                    </a>
+                </li>
             </ul>
 
             <ul class="list-group list-unstyled mt8 col-md-6 col-sm-12">
@@ -116,15 +124,7 @@
                 <h2 t-field="track.name" class="text-center"/>
                 <h3 t-field="event.name" class="text-center text-muted"/>
 
-                <ul class="text-center text-muted list-inline">
-                    <li t-if="track.speaker_ids" class="fa fa-user">
-                        <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
-                    </li>
-                    <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
-                    <li class="text-muted fa fa-map-marker" t-if="track.location_id">
-                        <span t-field="track.location_id"/>
-                    </li>
-                </ul>
+                <t t-call="website_event_track_advanced.presentation_header_info" />
 
                 <ul t-if="track.tag_ids" class="text-center text-muted list-inline">
                     <li t-foreach="track.tag_ids" t-as="tag_id">
