@@ -267,7 +267,7 @@
         </div>
     </template>
 
-    <!-- Single presentation item in list view -->
+    <!-- Presentation header info -->
     <template id="presentation_header_info">
         <ul class="text-center text-muted list-inline">
             <li t-if="track.speaker_ids" class="fa fa-user">
