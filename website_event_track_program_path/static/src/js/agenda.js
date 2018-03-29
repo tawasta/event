@@ -46,7 +46,8 @@ odoo.define('agenda-program', function (require) {
 
     $(function() {
         // Info box (guidance)
-        if(not $('#track-my-program-path').length || $('#track-my-program-path').is(":hidden")){
+        if(!$('#track-my-program-path').length || $('#track-my-program-path').is(":hidden")){
+
             toastr.options = {
               "closeButton": false,
               "debug": false,

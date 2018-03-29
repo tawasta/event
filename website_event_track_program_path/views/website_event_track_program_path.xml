@@ -45,7 +45,7 @@
         </xpath>
 
         <xpath expr="//script" position="after">
-            <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v102"></script>
+            <script type="text/javascript" src="/website_event_track_program_path/static/src/js/agenda.js?v103"></script>
         </xpath>
     </template>
 
