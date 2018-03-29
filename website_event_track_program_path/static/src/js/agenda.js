@@ -2,6 +2,8 @@ odoo.define('agenda-program', function (require) {
     var _t = require('web.core')._t;
     var ajax = require('web.ajax');
 
+    var toastr = require('website_utilities.notifications').toastr;
+
     $('div.event-track-program-path')
         .click(function() {
             // TODO: AJAX save
@@ -41,4 +43,33 @@ odoo.define('agenda-program', function (require) {
         .mouseenter(function() {
             $(this).tooltip();
         })
+
+    $(function() {
+        // Info box (guidance)
+        console.log($('#track-my-program-path').is(":visible"));
+        console.log($('#track-my-program-path').is(":hidden"));
+        if($('#track-my-program-path').is(":hidden")){
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-right",
+              "preventDuplicates": true,
+              "timeOut": "0",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+
+            var info_title = '<p>' + _t('Create your own program path') + '!</p>';
+            var info_msg = '<p>' + _t('Login to create your own program path by selecting presentations from the program by pressing the star symbol') + ' <span class="fa fa-star-o" />.</p>';
+            info_msg += '<p>' + _t('You can also share your program path with others.') + '</p>';
+            info_msg += '<p>' + _t('Nb! creating a program path will not mandate a participation for the selected presentations and also will not reserve a seat for you') + '.</p>';
+
+            toastr.info(info_msg, info_title);
+        }
+    });
+
 });

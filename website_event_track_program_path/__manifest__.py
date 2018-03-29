@@ -22,7 +22,7 @@
 {
     'name': 'Add customizable track program paths',
     'summary': 'Allows creating and saving program paths',
-    'version': '10.0.0.9.2',
+    'version': '10.0.1.0.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -36,8 +36,10 @@
     },
     'depends': [
         'website_event_track_advanced',
+        'website_utilities',
     ],
     'data': [
+        'data/website_utilities_data.xml',
         'security/ir.model.access.csv',
 
         'views/event_track_program_path_menu.xml',

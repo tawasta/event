@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 10:03+0000\n"
-"PO-Revision-Date: 2018-01-31 12:04+0200\n"
+"POT-Creation-Date: 2018-03-29 10:46+0000\n"
+"PO-Revision-Date: 2018-03-29 13:52+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,13 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_event_track_program_path.agenda_track_td_content
 msgid "Add to personal program"
 msgstr "Lisää omaan ohjelmapolkuun"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:66
+#, python-format
+msgid "Create your own program path"
+msgstr "Tee oma ITK-ohjelmapolku"
 
 #. module: website_event_track_program_path
 #: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_create_uid
@@ -39,7 +46,7 @@ msgstr "Näyttönimi"
 
 #. module: website_event_track_program_path
 #. openerp-web
-#: code:addons/website_event_track_program_path/static/src/js/agenda.js:23
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:25
 #, python-format
 msgid "Error while trying to save. Please reload the page!"
 msgstr "Virhe tallentaessa. Ole hyvä ja lataa sivu uudelleen!"
@@ -70,6 +77,13 @@ msgid "Last Updated on"
 msgstr "Viimeksi päivitetty"
 
 #. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:67
+#, python-format
+msgid "Login to create your own program path by selecting presentations from the program by pressing the star symbol"
+msgstr "Kirjaudu ITK-sivustolle ja tee ohjelmapolkusi valitsemalla ohjelmakartasta esityksiä painamalla tähti-symbolia"
+
+#. module: website_event_track_program_path
 #: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share
 msgid "My"
 msgstr "Minun"
@@ -85,13 +99,20 @@ msgid "Name"
 msgstr "Nimi"
 
 #. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:69
+#, python-format
+msgid "Nb! creating a program path will not mandate a participation for the selected presentations and also will not reserve a seat for you"
+msgstr "Huom. ohjelmapolun tekeminen ei edellytä osallistumista valitsemiisi esityksiin, eikä myöskään varaa paikkaa ohjelmapolussasi oleviin esityksiin"
+
+#. module: website_event_track_program_path
 #: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_user_id
 msgid "Owner"
 msgstr "Omistaja"
 
 #. module: website_event_track_program_path
 #. openerp-web
-#: code:addons/website_event_track_program_path/static/src/js/agenda.js:37
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:39
 #, python-format
 msgid "Please sign in before customizing your program"
 msgstr "Ole hyvä ja kirjaudu sisään ennen kuin muokkaat ohjelmaasi"
@@ -100,6 +121,11 @@ msgstr "Ole hyvä ja kirjaudu sisään ennen kuin muokkaat ohjelmaasi"
 #: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_track_ids
 msgid "Presentations"
 msgstr "Esitykset"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.event_track_program_path_tree
+msgid "Program path"
+msgstr "Program path"
 
 #. module: website_event_track_program_path
 #: model:ir.actions.act_window,name:website_event_track_program_path.event_track_program_path_action
@@ -132,6 +158,18 @@ msgstr "Jaa tämä ohjelmapolku Twitterissä"
 #: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share
 msgid "Share your program path:"
 msgstr "Jaa ohjelmapolkusi"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_url
+msgid "Url"
+msgstr "Verkko-osoite"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:68
+#, python-format
+msgid "You can also share your program path with others."
+msgstr " Voit myös jakaa ohjelmapolkusi muille."
 
 #. module: website_event_track_program_path
 #: model:ir.model,name:website_event_track_program_path.model_event_track_program_path
