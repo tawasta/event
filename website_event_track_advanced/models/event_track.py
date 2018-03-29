@@ -314,6 +314,7 @@ class EventTrack(models.Model):
 
             domain += [
                 # Same location
+                ('location_id', '!=', False),
                 ('location_id', '=', record.location_id.id),
                 # Starts before this ends
                 ('date', '<', record.date_end),
@@ -347,6 +348,7 @@ class EventTrack(models.Model):
 
             domain += [
                 # Same chairperson
+                ('chairperson_id', '!=', False),
                 ('chairperson_id', '=', record.chairperson_id.id),
                 # Starts before this ends
                 ('date', '<', record.date_end),
