@@ -24,9 +24,59 @@ class EventEvent(models.Model):
         help='Show Twitter hashtag in agenda',
     )
 
+    overlapping_location_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping locations',
+        compute='_compute_overlapping_location_track_ids',
+    )
+
+    overlapping_chairperson_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping chairpersons',
+        compute='_compute_overlapping_chairperson_track_ids',
+    )
+
+    overlapping_speaker_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping speakers',
+        compute='_compute_overlapping_speaker_track_ids',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
+    @api.depends('track_ids')
+    def _compute_overlapping_location_track_ids(self):
+        for record in self:
+            overlapping_tracks = list()
+
+            for track in record.track_ids:
+                overlapping_tracks += track.overlapping_location_track_ids.ids
+
+            print overlapping_tracks
+            record.overlapping_location_track_ids = overlapping_tracks
+
+    @api.depends('track_ids')
+    def _compute_overlapping_chairperson_track_ids(self):
+        for record in self:
+            overlapping_tracks = list()
+
+            for track in record.track_ids:
+                overlapping_tracks += track.overlapping_location_track_ids.ids
+
+            print overlapping_tracks
+            record.overlapping_chairperson_track_ids = overlapping_tracks
+
+    @api.depends('track_ids')
+    def _compute_overlapping_speaker_track_ids(self):
+        for record in self:
+            overlapping_tracks = list()
+
+            for track in record.track_ids:
+                overlapping_tracks += track.overlapping_location_track_ids.ids
+
+            print overlapping_tracks
+            record.overlapping_speaker_track_ids = overlapping_tracks
 
     # 5. Constraints and onchanges
 

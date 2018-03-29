@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-19 13:52+0000\n"
-"PO-Revision-Date: 2018-03-19 15:57+0200\n"
+"POT-Creation-Date: 2018-03-29 08:08+0000\n"
+"PO-Revision-Date: 2018-03-29 11:10+0300\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -529,6 +529,11 @@ msgid "Confirmed tracks"
 msgstr "Lähetetyt esitykset"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_form
+msgid "Conflicts"
+msgstr "Konfliktit"
+
+#. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_rating_report
 msgid "Contact organization, name"
 msgstr "Kontaktin organisaatio, nimi"
@@ -539,7 +544,7 @@ msgid "Content"
 msgstr "Sisältö"
 
 #. module: website_event_track_advanced
-#: code:addons/website_event_track_advanced/models/event_track.py:389
+#: code:addons/website_event_track_advanced/models/event_track.py:474
 #, python-format
 msgid "Content modified"
 msgstr "Sisältöä muokattu"
@@ -623,7 +628,7 @@ msgstr "Päättymispäivä"
 #: code:addons/website_event_track_advanced/static/src/js/agenda.js:112
 #, python-format
 msgid "Error while trying to move the presentation. Please reload the page!"
-msgstr "Virhe siirtäessä esitystä. Koita ladata sivu uudelleen!"
+msgstr "Virhe siirtäessä esitystä. Ole hyvä ja lataa sivu uudelleen!"
 
 #. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_event
@@ -644,7 +649,7 @@ msgstr "Tapahtuman esitys"
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_advanced_tree
 #: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_tree
 msgid "Event track"
-msgstr "Tapahtuman esitys"
+msgstr "Tapahtuman track"
 
 #. module: website_event_track_advanced
 #: selection:event.track,rating:0
@@ -889,9 +894,22 @@ msgid "Other, what?"
 msgstr "Muu, mikä?"
 
 #. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_overlapping_track_ids
-msgid "Overlapping tracks"
-msgstr "Päällekkäisiä esityksiä"
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event_overlapping_chairperson_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_overlapping_chairperson_track_ids
+msgid "Overlapping chairpersons"
+msgstr "Päällekkäiset puheenjohtajat"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event_overlapping_location_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_overlapping_location_track_ids
+msgid "Overlapping locations"
+msgstr "Päällekkäiset sijainnit"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event_overlapping_speaker_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_overlapping_speaker_track_ids
+msgid "Overlapping speakers"
+msgstr "Päällekkäiset esiintyjät"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
@@ -1348,7 +1366,9 @@ msgstr "Esitykset"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.agenda_track_td_content
-#: model:ir.ui.view,arch_db:website_event_track_advanced.track_view
+#: model:ir.ui.view,arch_db:website_event_track_advanced.poster_list_item
+#: model:ir.ui.view,arch_db:website_event_track_advanced.presentation_header_info
+#: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_list_item
 msgid "Tweet about this presentation"
 msgstr "Twiittaa esityksestä"
 

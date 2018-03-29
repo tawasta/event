@@ -184,10 +184,22 @@ class EventTrack(models.Model):
         copy=False,
     )
 
-    overlapping_track_ids = fields.Many2many(
+    overlapping_location_track_ids = fields.Many2many(
         comodel_name='event.track',
-        string='Overlapping tracks',
-        compute='compute_overlapping_track_ids',
+        string='Overlapping locations',
+        compute='_compute_overlapping_location_track_ids',
+    )
+
+    overlapping_chairperson_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping chairpersons',
+        compute='_compute_overlapping_chairperson_track_ids',
+    )
+
+    overlapping_speaker_track_ids = fields.Many2many(
+        comodel_name='event.track',
+        string='Overlapping speakers',
+        compute='_compute_overlapping_speaker_track_ids',
     )
 
     external_registration = fields.Char(
@@ -283,30 +295,103 @@ class EventTrack(models.Model):
                 record.date_end = end_date
 
     @api.depends('date', 'duration', 'location_id')
-    def compute_overlapping_track_ids(self):
-        # Search overlapping tracks in the same room
+    def _compute_overlapping_location_track_ids(self):
+        # Search overlapping tracks in the same location
 
-        track_model = self.env['event.track']
+        EventTrack = self.env['event.track']
         for record in self:
-            if not record.location_id or not record.date or not record.duration:
+            if not record.location_id \
+                    or not record.date \
+                    or not record.duration:
                 # If all the necessary information is not set, skip this
                 continue
 
             domain = list()
 
             if not isinstance(record.id, models.NewId):
-                domain.append(('id', '!=', record.id))  # Exclude the record itself
+                # Exclude the record itself
+                domain.append(('id', '!=', record.id))
 
             domain += [
-                ('location_id', '=', record.location_id.id),  # Same location
-                ('date', '<', record.date_end),  # Starts before this ends
-                ('date_end', '>', record.date),  # Ends after this starts
+                # Same location
+                ('location_id', '=', record.location_id.id),
+                # Starts before this ends
+                ('date', '<', record.date_end),
+                # Ends after this starts
+                ('date_end', '>', record.date),
             ]
 
-            overlapping_tracks = track_model.search(domain)
+            overlapping_tracks = EventTrack.search(domain)
 
             if overlapping_tracks:
-                record.overlapping_track_ids = overlapping_tracks.ids
+                record.overlapping_location_track_ids = \
+                    overlapping_tracks.ids
+
+    @api.depends('date', 'duration', 'chairperson_id')
+    def _compute_overlapping_chairperson_track_ids(self):
+        # Search overlapping tracks with same chairperson
+
+        EventTrack = self.env['event.track']
+        for record in self:
+            if not record.chairperson_id \
+                    or not record.date \
+                    or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+
+            domain = list()
+
+            if not isinstance(record.id, models.NewId):
+                # Exclude the record itself
+                domain.append(('id', '!=', record.id))
+
+            domain += [
+                # Same chairperson
+                ('chairperson_id', '=', record.chairperson_id.id),
+                # Starts before this ends
+                ('date', '<', record.date_end),
+                # Ends after this starts
+                ('date_end', '>', record.date),
+            ]
+
+            overlapping_tracks = EventTrack.search(domain)
+
+            if overlapping_tracks:
+                record.overlapping_chairperson_track_ids = \
+                    overlapping_tracks.ids
+
+    @api.depends('date', 'duration', 'speaker_ids')
+    def _compute_overlapping_speaker_track_ids(self):
+        # Search overlapping tracks with same speakers
+
+        EventTrack = self.env['event.track']
+        for record in self:
+            if not record.speaker_ids \
+                    or not record.date \
+                    or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+
+            domain = list()
+
+            if not isinstance(record.id, models.NewId):
+                # Exclude the record itself
+                domain.append(('id', '!=', record.id))
+
+            domain += [
+                # Same speaker
+                ('speaker_ids', 'in', record.speaker_ids.ids),
+                # Starts before this ends
+                ('date', '<', record.date_end),
+                # Ends after this starts
+                ('date_end', '>', record.date),
+            ]
+
+            overlapping_tracks = EventTrack.search(domain)
+
+            if overlapping_tracks:
+                record.overlapping_speaker_track_ids = \
+                    overlapping_tracks.ids
 
     @api.depends('type.twitter_hashtag')
     def compute_twitter_hashtag(self):
