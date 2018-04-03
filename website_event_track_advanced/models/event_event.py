@@ -48,35 +48,32 @@ class EventEvent(models.Model):
     @api.depends('track_ids')
     def _compute_overlapping_location_track_ids(self):
         for record in self:
-            overlapping_tracks = list()
+            overlapping = list()
 
             for track in record.track_ids:
-                overlapping_tracks += track.overlapping_location_track_ids.ids
+                overlapping += track.overlapping_location_track_ids.ids
 
-            print overlapping_tracks
-            record.overlapping_location_track_ids = overlapping_tracks
+            record.overlapping_location_track_ids = overlapping
 
     @api.depends('track_ids')
     def _compute_overlapping_chairperson_track_ids(self):
         for record in self:
-            overlapping_tracks = list()
+            overlapping = list()
 
             for track in record.track_ids:
-                overlapping_tracks += track.overlapping_location_track_ids.ids
+                overlapping += track.overlapping_chairperson_track_ids.ids
 
-            print overlapping_tracks
-            record.overlapping_chairperson_track_ids = overlapping_tracks
+            record.overlapping_chairperson_track_ids = overlapping
 
     @api.depends('track_ids')
     def _compute_overlapping_speaker_track_ids(self):
         for record in self:
-            overlapping_tracks = list()
+            overlapping = list()
 
             for track in record.track_ids:
-                overlapping_tracks += track.overlapping_location_track_ids.ids
+                overlapping += track.overlapping_speaker_track_ids.ids
 
-            print overlapping_tracks
-            record.overlapping_speaker_track_ids = overlapping_tracks
+            record.overlapping_speaker_track_ids = overlapping
 
     # 5. Constraints and onchanges
 
