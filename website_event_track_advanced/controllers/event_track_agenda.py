@@ -45,6 +45,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             domain_filter,
         )
 
+        # Don't show hidden locations
+        event_tracks = event_tracks.filtered(
+            lambda track:
+            not track.location_id or track.location_id.show_in_agenda
+        )
+
         if tag:
             searches.update(tag=tag.id)
             event_tracks = event_tracks.filtered(lambda track: tag in track.tag_ids)
@@ -97,7 +103,9 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         local_tz = pytz.timezone(event.date_tz or 'UTC')
         locations = {}  # { location: [track, start_date, end_date, rowspan]}
         dates = []  # [ (date, {}) ]
-        for location in request.env['event.track.location'].search([]):
+        for location in request.env['event.track.location'].search([
+            ('show_in_agenda', '=', True),
+        ]):
             locations.setdefault(location or False, [])
 
         forcetr = True

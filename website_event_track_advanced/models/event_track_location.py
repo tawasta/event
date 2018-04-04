@@ -10,3 +10,9 @@ class EventTrackLocation(models.Model):
     sequence = fields.Integer(
         string='Order',
     )
+
+    show_in_agenda = fields.Boolean(
+        string='Show in agenda',
+        help='Show in website agenda',
+        default=True,
+    )

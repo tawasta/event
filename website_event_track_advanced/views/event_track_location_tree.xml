@@ -10,6 +10,9 @@
                 <field name="name" position="before">
                     <field name="sequence" widget="handle" />
                 </field>
+				<field name="name" position="after">
+                    <field name="show_in_agenda" />
+				</field>
 
 			</field>
 		</record>
