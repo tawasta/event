@@ -296,8 +296,12 @@ class EventTrack(models.Model):
     @api.depends('location_id', 'type')
     def _compute_show_in_agenda(self):
         for record in self:
-            show = record.type.show_in_agenda \
-                   and record.location_id.show_in_agenda
+            location_show = record.location_id.show_in_agenda \
+                            or not record.location_id
+
+            type_show = record.type.show_in_agenda
+
+            show = location_show and type_show
 
             record.show_in_agenda = show
 
