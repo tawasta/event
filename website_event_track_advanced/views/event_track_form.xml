@@ -74,6 +74,8 @@
                         <field name="date_end"/>
                     </group>
                     <group>
+                        <label for="show_in_agenda" colspan="2" attrs="{'invisible':[('show_in_agenda', '=', True)]}" string="Will not be shown in agenda!" />
+                        <field name="show_in_agenda" invisible="1"/>
                         <field name="location_id"/>
                     </group>
                 </group>

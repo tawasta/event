@@ -184,6 +184,11 @@ class EventTrack(models.Model):
         copy=False,
     )
 
+    show_in_agenda = fields.Boolean(
+        string='Shown in agenda',
+        compute='_compute_show_in_agenda',
+    )
+
     overlapping_location_track_ids = fields.Many2many(
         comodel_name='event.track',
         string='Overlapping locations',
@@ -286,6 +291,15 @@ class EventTrack(models.Model):
     def compute_description_plain(self):
         for record in self:
             record.description_plain = BeautifulSoup(record.description, 'lxml').text
+
+    @api.multi
+    @api.depends('location_id', 'type')
+    def _compute_show_in_agenda(self):
+        for record in self:
+            show = record.type.show_in_agenda \
+                   and record.location_id.show_in_agenda
+
+            record.show_in_agenda = show
 
     @api.depends('date', 'duration')
     def compute_date_end(self):
