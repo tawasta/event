@@ -46,8 +46,15 @@ odoo.define('agenda-program', function (require) {
 
     $(function() {
         function showProgramPathInfo () {
+
+            if(!sessionStorage.getItem('show-program-path')){
+                sessionStorage.setItem('show-program-path', 'yes');
+            }
+
             // Info box (guidance)
-            if(!$('#track-my-program-path').length || $('#track-my-program-path').is(":hidden")){
+            if(sessionStorage.getItem('show-program-path') == 'yes' && (!$('#track-my-program-path').length || $('#track-my-program-path').is(":hidden"))){
+                // Not using 0/false here, as getItem() will see it as false
+                sessionStorage.setItem('show-program-path', 'no');
 
                 toastr.options = {
                   "closeButton": false,
@@ -57,6 +64,7 @@ odoo.define('agenda-program', function (require) {
                   "positionClass": "toast-top-right",
                   "preventDuplicates": true,
                   "timeOut": "0",
+                  "extendedTimeOut": "1000",
                   "showEasing": "swing",
                   "hideEasing": "linear",
                   "showMethod": "fadeIn",
