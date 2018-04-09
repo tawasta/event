@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+            id="report_event_track_signpost_report"
+            string="Track signpost"
+            model="event.track"
+            report_type="qweb-pdf"
+            file="website_event_track_advanced.event_track_signpost_report"
+            name="website_event_track_advanced.event_track_signpost_report"
+            paperformat="event.paperformat_euro_lowmargin"
+    />
+
+    <template id="website_event_track_advanced.event_track_signpost_report">
+
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <style type="text/css">
+
+                    </style>
+
+                    <div class="oe_structure"/>
+                    <h1 t-field="doc.name" />
+
+                    <h2 t-field="doc.organizer.name" />
+
+                    <h2 t-field="doc.location_id.name" />
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
