@@ -16,3 +16,9 @@ class EventTrackLocation(models.Model):
         help='Show in website agenda',
         default=True,
     )
+
+    track_ids = fields.One2many(
+        comodel_name='event.track',
+        inverse_name='location_id',
+        string='Tracks',
+    )

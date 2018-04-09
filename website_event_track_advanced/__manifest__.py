@@ -50,6 +50,7 @@
         'data/event_track_type.xml',
         'data/report_paperformat_data.xml',
 
+        'reports/event_track_location_schedule_report.xml',
         'reports/event_track_rating_comment_report.xml',
         'reports/event_track_rating_report.xml',
         'reports/event_track_report.xml',

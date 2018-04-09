@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+            id="report_event_track_location_schedule_report"
+            string="Location schedule"
+            model="event.track.location"
+            report_type="qweb-pdf"
+            file="website_event_track_advanced.event_track_location_schedule_report"
+            name="website_event_track_advanced.event_track_location_schedule_report"
+            paperformat="event.paperformat_euro_lowmargin"
+    />
+
+    <template id="website_event_track_advanced.event_track_location_schedule_report">
+
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <style type="text/css">
+                        table {
+                            border-collapse: collapse;
+                        }
+                        td {
+                            border: 1px dotted #555;
+                            padding: 2px 4px;
+                        }
+                    </style>
+
+                    <div class="oe_structure"/>
+                    <h1 t-field="doc.name" />
+
+                    <table name="track_schedule_table" class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Start time</th>
+                                <th>End time</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+
+                        <t t-foreach="doc.track_ids" t-as="track">
+                            <tbody>
+                                <tr>
+                                    <td><span t-field="track.date" t-field-options='{"format": "HH:mm"}' /></td>
+                                    <td><span t-field="track.date_end" t-field-options='{"format": "HH:mm"}' /></td>
+                                    <td><span t-field="track.name"/></td>
+                                </tr>
+                            </tbody>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
