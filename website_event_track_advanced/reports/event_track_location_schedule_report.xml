@@ -37,7 +37,7 @@
                         <t t-set="date" t-value="false" />
                         <tbody>
 
-                            <t t-foreach="doc.track_ids" t-as="track">
+                            <t t-foreach="doc.scheduled_track_ids" t-as="track">
                                 <t t-if="track.date" t-set="current" t-value="track.date[0:10]" />
 
                                 <t t-if="not date or current != date">

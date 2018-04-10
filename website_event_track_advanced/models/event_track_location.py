@@ -22,3 +22,10 @@ class EventTrackLocation(models.Model):
         inverse_name='location_id',
         string='Tracks',
     )
+
+    scheduled_track_ids = fields.One2many(
+        comodel_name='event.track',
+        inverse_name='location_id',
+        string='Scheduled tracks',
+        domain=[('date', '!=', False)],
+    )
