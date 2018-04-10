@@ -38,11 +38,11 @@
                         <tbody>
 
                             <t t-foreach="doc.track_ids" t-as="track">
-                                <t t-set="current" t-value="track.date[0:10]" />
+                                <t t-if="track.date" t-set="current" t-value="track.date[0:10]" />
 
                                 <t t-if="not date or current != date">
                                     <tr>
-                                        <t t-set="date" t-value="track.date[0:10]" />
+                                        <t t-if="track.date" t-set="date" t-value="track.date[0:10]" />
                                         <th colspan="2">
                                             <h2>Program <span t-field="track.date" t-field-options='{"format": "dd.MM.YYYY"}' /></h2>
                                         </th>
