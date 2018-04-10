@@ -20,9 +20,13 @@
                         table {
                             border-collapse: collapse;
                         }
+                        th {
+                            padding-top: 2em;
+                        }
                         td {
                             border: 1px dotted #555;
-                            padding: 2px 4px;
+                            padding: 1em 2em;
+                            white-space: nowrap;
                         }
                     </style>
 
@@ -31,24 +35,30 @@
 
                     <table name="track_schedule_table" class="table table-condensed">
                         <t t-set="date" t-value="false" />
-                        <t t-foreach="doc.track_ids" t-as="track">
-                            <tbody>
-                                <t t-set="current" t-value="track.date" />
-                                <tr t-if="not date">
-                                    <t t-set="date" t-value="track.date" />
-                                    <th colspan="3">
-                                        <span>Program</span> <span t-field="track.date" t-field-options='{"format": "dd.MM.YYYY"}' />
-                                    </th>
-                                </tr>
+                        <tbody>
 
-                                <tr>
-                                    <td colspan="2">
-                                        <span t-field="track.date" t-field-options='{"format": "HH:mm"}' /> - <span t-field="track.date_end" t-field-options='{"format": "HH:mm"}' />
-                                    </td>
-                                    <td><span t-field="track.name"/></td>
-                                </tr>
-                            </tbody>
-                        </t>
+                            <t t-foreach="doc.track_ids" t-as="track">
+                                <t t-set="current" t-value="track.date[0:10]" />
+
+                                <t t-if="not date or current != date">
+                                    <tr>
+                                        <t t-set="date" t-value="track.date[0:10]" />
+                                        <th colspan="2">
+                                            <h2>Program <span t-field="track.date" t-field-options='{"format": "dd.MM.YYYY"}' /></h2>
+                                        </th>
+                                    </tr>
+                                </t>
+
+                                <t t-if="track.type.attendable">
+                                    <tr>
+                                        <td>
+                                            <span t-field="track.date" t-field-options='{"format": "HH:mm"}' /> - <span t-field="track.date_end" t-field-options='{"format": "HH:mm"}' />
+                                        </td>
+                                        <td><span t-field="track.name"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
                     </table>
                 </div>
             </t>
