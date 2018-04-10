@@ -26,7 +26,10 @@ class EventEvent(models.Model):
         domain=[('type', 'in', ['normal', 'contract'])],
         help='Select this, if you want all ticket sales to go to a certain analytic account',
     )
-    event_logo = fields.Binary("Event logo")
+
+    event_logo = fields.Binary(
+        string='Event logo',
+    )
 
     # 3. Default methods
 

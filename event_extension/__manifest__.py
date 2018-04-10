@@ -22,13 +22,13 @@
 {
     'name': 'Event extension',
     'summary': 'Extends event functionality',
-    'version': '8.0.0.3.2',
+    'version': '10.0.1.0.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
     'license': 'AGPL-3',
     'application': False,
-    'installable': False,
+    'installable': True,
     'external_dependencies': {
         'python': [],
         'bin': [],

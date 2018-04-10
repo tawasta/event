@@ -20,12 +20,20 @@ class EventRegistration(models.Model):
     _inherit = 'event.registration'
 
     # 2. Fields declaration
-    invoice = fields.Many2one('account.invoice', "Invoice", compute='compute_account_invoice')
-    invoice_state = fields.Char('Invoice state', compute='compute_account_invoice')
+    invoice = fields.Many2one(
+        comodel_name='account.invoice',
+        string='Invoice',
+        compute='compute_account_invoice',
+    )
+
+    invoice_state = fields.Char(
+        string='Invoice state',
+        compute='compute_account_invoice',
+    )
 
     # 3. Default methods
 
-    # 4. Compute and search fields, in the same order that fields declaration
+    # 4. Compute and search fields
     @api.multi
     def compute_account_invoice(self):
 
