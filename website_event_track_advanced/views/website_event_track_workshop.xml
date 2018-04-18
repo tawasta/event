@@ -112,6 +112,18 @@
                     <t t-if="track.description">...</t>
                 </p>
             </div>
+
+            <div class="col-md-12" t-if="track.attachment_ids">
+                <t t-foreach="track.attachment_ids" t-as="attachment">
+                    <!-- File attachment and download -->
+                    <div class="col-xs-12 col-md-4 text-center">
+                        <a t-att-href="'/web/content/%s?download=1' % (attachment.id)">
+                            <div class="o_image attachment-image" t-att-data-mimetype="'%s' % (attachment.mimetype)" style="display:block;"></div>
+                            <t t-esc="attachment.name"/>
+                        </a>
+                    </div>
+                </t>
+            </div>
         </div>
     </template>
 
@@ -141,36 +153,29 @@
                 </div>
 
                 <section class="row mt32">
-                    <div class="col-md-8" id="workshop-view-column-left">
-                        <section>
-                            <div t-if="track.description" class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Description</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div t-field="track.description"/>
-                                </div>
-                            </div>
-                            <div t-if="track.workshop_goals" class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Goals</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div t-field="track.workshop_goals"/>
-                                </div>
-                            </div>
+                    <div class="col-md-8 mb32" id="left_column">
+                        <t t-call="website_event_track_advanced.track_form_description" />
 
-                            <div t-if="track.workshop_schedule" class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Schedule</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div t-field="track.workshop_schedule"/>
-                                </div>
+                        <div t-if="track.workshop_goals" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Goals</h4>
                             </div>
-                        </section>
+                            <div class="panel-body">
+                                <div t-field="track.workshop_goals"/>
+                            </div>
+                        </div>
+
+                        <div t-if="track.workshop_schedule" class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Schedule</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div t-field="track.workshop_schedule"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4" id="workshop-view-column-right">
+
+                    <div class="col-md-4" id="right_column">
                         <div class="panel panel-default" t-if="track.target_group">
                             <div class="panel-heading">
                                 <h4>Target group</h4>

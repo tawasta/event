@@ -53,6 +53,10 @@ class EventTrack(models.Model):
         string='Attachments',
     )
 
+    application_file = fields.Binary(
+        string='Application',
+    )
+
     description_plain = fields.Char(
         string='Plain description',
         compute='compute_description_plain',

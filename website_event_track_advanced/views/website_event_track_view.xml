@@ -55,28 +55,8 @@
                 </div>
 
                 <section class="row mt32">
-                    <div class="col-md-8 mb32">
-                        <section>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12 text-center" t-if="track.partner_name">
-                                        <small>
-                                            Proposed by
-                                            <span t-field="track.partner_name"/>
-                                        </small>
-                                    </div>
-                                    <div t-if="track.description"
-                                         class="col-md-12">
-                                        <div t-field="track.description"/>
-                                    </div>
-                                    <div t-if="track.partner_biography"
-                                         class="col-md-12">
-                                        <h3>About The Author</h3>
-                                        <div t-field="track.partner_biography"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                    <div class="col-md-8 mb32" id="left_column">
+                        <t t-call="website_event_track_advanced.track_form_description" />
                     </div>
 
                     <div class="col-md-4" id="right_column">
@@ -148,17 +128,6 @@
                                         <i><span t-field="speaker.function" /></i>
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default" t-if="False">
-                            <div class="panel-heading">
-                                <h4>Documents</h4>
-                            </div>
-                            <div class="panel-body">
-                                Put here the list of documents, like slides of
-                                the presentations. Remove the above t-if when
-                                it's implemented.
                             </div>
                         </div>
                     </div>
@@ -288,6 +257,43 @@
                 </a>
             </li>
         </ul>
+    </template>
+
+    <template id="track_form_description" >
+        <div class="panel panel-default" id="track-form-description">
+            <div class="panel-heading">
+                <h4>Description</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12 text-center" t-if="track.partner_name">
+                    <small>
+                        Proposed by
+                        <span t-field="track.partner_name"/>
+                    </small>
+                </div>
+                <div t-if="track.description" class="col-md-12">
+                    <div t-field="track.description"/>
+                </div>
+
+                <div t-if="track.partner_biography"
+                     class="col-md-12">
+                    <h3>About The Author</h3>
+                    <div t-field="track.partner_biography"/>
+                </div>
+
+                <div class="col-md-12" t-if="track.attachment_ids">
+                    <t t-foreach="track.attachment_ids" t-as="attachment">
+                        <!-- File attachment and download -->
+                        <div class="col-xs-12 col-md-4 text-center">
+                            <a t-att-href="'/web/content/%s?download=1' % (attachment.id)">
+                                <div class="o_image attachment-image" t-att-data-mimetype="'%s' % (attachment.mimetype)"></div>
+                                <t t-esc="attachment.name"/>
+                            </a>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
     </template>
 
 </odoo>

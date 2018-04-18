@@ -142,6 +142,9 @@
                 <notebook>
                     <page name="description" string="Content">
                         <group>
+                            <field name="application_file" />
+                        </group>
+                        <group>
                             <field name="description" nolabel="1"/>
                         </group>
                     </page>

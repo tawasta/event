@@ -25,6 +25,7 @@ Known issues / Roadmap
 ======================
 - This module is pretty massive. It should be broken down to smaller modules
 - Lots of redundancy in views and controllers
+- Fix the CFP attachment saving: save to application_file instead of attachments
 
 Credits
 =======
