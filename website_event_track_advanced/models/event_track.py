@@ -56,6 +56,9 @@ class EventTrack(models.Model):
     application_file = fields.Binary(
         string='Application',
     )
+    application_file_filename = fields.Char(
+        string='Application filename',
+    )
 
     description_plain = fields.Char(
         string='Plain description',

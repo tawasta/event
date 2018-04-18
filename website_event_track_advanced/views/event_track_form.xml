@@ -142,7 +142,8 @@
                 <notebook>
                     <page name="description" string="Content">
                         <group>
-                            <field name="application_file" />
+                            <field name="application_file_filename" invisible="1" />
+                            <field name="application_file" widget="binary" filename="application_file_filename"/>
                         </group>
                         <group>
                             <field name="description" nolabel="1"/>
