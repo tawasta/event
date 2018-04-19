@@ -27,6 +27,7 @@ Known issues / Roadmap
 - Lots of redundancy in views and controllers
 - Fix the CFP attachment saving: save to application_file instead of attachments
 - Rewrite the whole agenda view and controller (overly confusing logic)
+- Improve agenda view (mobile) usage
 
 Credits
 =======
