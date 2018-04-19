@@ -97,6 +97,14 @@
                   title="Move"/>
         </div>
 
+        <div class="pull-right">
+            <a t-if="track.attachment_ids"
+               class="fa fa-2x fa-download"
+               title="Downloadable presentation material available"
+               t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"
+            />
+        </div>
+
         <a name="event-track-link" t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
 
             <div style="height:100%;width:100%" class="event-track-content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
