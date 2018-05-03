@@ -98,7 +98,7 @@
         </div>
 
         <div class="pull-right">
-            <a t-if="track.attachment_ids"
+            <a t-if="track.attachment_ids or track.extra_materials_plain"
                class="fa fa-2x fa-download"
                title="Downloadable presentation material available"
                t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"

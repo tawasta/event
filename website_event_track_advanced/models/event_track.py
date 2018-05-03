@@ -225,6 +225,16 @@ class EventTrack(models.Model):
         copy=False,
     )
 
+    extra_materials = fields.Html(
+        string='Extra materials',
+        help='Extra materials (links etc.) that are shown in agenda',
+    )
+
+    extra_materials_plain = fields.Char(
+        string='Plain extra_materials',
+        compute='compute_extra_materials_plain',
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields
@@ -297,7 +307,21 @@ class EventTrack(models.Model):
     @api.depends('description')
     def compute_description_plain(self):
         for record in self:
-            record.description_plain = BeautifulSoup(record.description, 'lxml').text
+            if record.description:
+                record.description_plain = \
+                    BeautifulSoup(record.description, 'lxml').text
+            else:
+                record.description_plain = ''
+
+    @api.multi
+    @api.depends('extra_materials')
+    def compute_extra_materials_plain(self):
+        for record in self:
+            if record.extra_materials:
+                record.extra_materials_plain = \
+                    BeautifulSoup(record.extra_materials, 'lxml').text
+            else:
+                record.extra_materials_plain = ''
 
     @api.multi
     @api.depends('location_id', 'type')

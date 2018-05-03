@@ -292,6 +292,10 @@
                         </div>
                     </t>
                 </div>
+
+                <div t-if="track.extra_materials_plain" class="col-md-12 mt16">
+                    <div t-field="track.extra_materials"/>
+                </div>
             </div>
         </div>
     </template>

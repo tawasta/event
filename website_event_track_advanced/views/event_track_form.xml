@@ -134,6 +134,7 @@
 
                 <group name="extra" groups="event.group_event_manager">
                     <group colspan="2">
+                        <field name="extra_materials"/>
                         <field name="video_url"/>
                         <field name="external_registration"/>
                     </group>
