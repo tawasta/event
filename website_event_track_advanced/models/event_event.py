@@ -43,6 +43,14 @@ class EventEvent(models.Model):
     )
 
     # 3. Default methods
+    @api.multi
+    def name_get(self):
+        # Override the name get to use only the event name as display name
+
+        result = []
+        for event in self:
+            result.append((event.id, event.name))
+        return result
 
     # 4. Compute and search fields
     @api.depends('track_ids')
