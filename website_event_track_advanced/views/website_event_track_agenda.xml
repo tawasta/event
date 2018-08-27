@@ -191,7 +191,7 @@
     <!--Agenda date content -->
     <template id="agenda_day_content">
         <div class="agenda-day-content table-responsive">
-            <table id="agenda-table" class="table agenda-table table-bordered table-condensed">
+            <table id="agenda-table" class="table agenda-table table-bordered table-condensed table-responsive">
                 <thead class="agenda-table-header">
                     <tr class="agenda-locations-row">
                         <th class="active"/>

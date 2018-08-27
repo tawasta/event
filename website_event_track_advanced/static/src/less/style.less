@@ -156,8 +156,9 @@
 
 /* Agenda */
 .container-wide{
-    width: 96%;
+    width: 100%;
     margin: 0;
+    padding: 0;
 }
 
 .agenda-timeslot-time{
@@ -195,10 +196,6 @@
 }
 
 @media only screen and (max-width: 1400px) and (any-pointer: coarse) {
-    .agenda-day-content{
-        max-height: none;
-    }
-
     .container-wide{
         padding: 0;
     }
@@ -228,12 +225,6 @@
 
     .track-td-name{
         padding-top: 5px;
-    }
-}
-
-@media only screen and (max-width: 1500px) and (any-pointer: fine){
-    .agenda-day-content{
-        max-height: 80vh;
     }
 }
 
@@ -270,7 +261,7 @@
     }
     .agenda-timeslot-row .event_track{
         font-size: 0.8em;
-        max-width: 100px;
+        max-width: 120px;
     }
 }
 

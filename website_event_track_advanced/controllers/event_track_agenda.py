@@ -11,17 +11,18 @@ from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import AccessError
 
-from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
+from odoo.addons.website_event_track.controllers.main import \
+    WebsiteEventTrackController
+
 _logger = logging.getLogger(__name__)
 
 
 class WebsiteEventTrackController(WebsiteEventTrackController):
-
     # Overwrites the default agenda controller
     @http.route([
         '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/agenda''',
         '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/agenda/tag/<model("event.track.tag"):tag>'''
-        ],
+    ],
         type='http',
         auth='public',
         website=True)
@@ -30,7 +31,36 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         return request.render("website_event_track.agenda", values)
 
-    def get_event_agenda_values(self, event, tag=None, **post):
+    # Agenda controller for a date
+    @http.route([
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/<string:date>/agenda''',
+        '''/event/<model("event.event", "[('show_tracks','=',1)]"):event>/<string:date>/agenda/tag/<model("event.track.tag"):tag>'''
+    ],
+        type='http',
+        auth='public',
+        website=True)
+    def event_agenda_day(self, event, date=None, tag=None, **post):
+        date_start = None
+        date_end = None
+
+        # Make a date syntax check - this will not catch impossible dates
+        if date and re.match(r'^\d{4}-\d{2}-\d{2}$', date):
+            date_start = '%s %s' % (date, '00:00:00')
+            date_end = '%s %s' % (date, '23:59:59')
+
+        values = self.get_event_agenda_values(
+            event=event,
+            tag=tag,
+            date_start=date_start,
+            date_end=date_end,
+            **post
+        )
+
+        return request.render("website_event_track.agenda", values)
+
+    def get_event_agenda_values(self, event, tag=None, date_start=None,
+                                date_end=None, **post):
+
         days_tracks = collections.defaultdict(lambda: [])
 
         domain_filter = list()
@@ -40,6 +70,12 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         domain_filter.append(('date', '!=', False))
         domain_filter.append(('website_published', '=', True))
         domain_filter.append(('type.show_in_agenda', '=', True))
+
+        if date_start:
+            domain_filter.append(('date', '>=', date_start))
+
+        if date_end:
+            domain_filter.append(('date', '<=', date_end))
 
         event_tracks = event.track_ids.sudo().search(
             domain_filter,
@@ -53,7 +89,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         if tag:
             searches.update(tag=tag.id)
-            event_tracks = event_tracks.filtered(lambda track: tag in track.tag_ids)
+            event_tracks = event_tracks.filtered(
+                lambda track: tag in track.tag_ids)
 
         for track in event_tracks:
             if not track.date:
@@ -110,19 +147,24 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         forcetr = True
         for track in event_track_ids:
-            start_date = fields.Datetime.from_string(track.date).replace(tzinfo=pytz.utc).astimezone(local_tz)
-            end_date = start_date + datetime.timedelta(hours=(track.duration or 0.5))
+            start_date = fields.Datetime.from_string(track.date).replace(
+                tzinfo=pytz.utc).astimezone(local_tz)
+            end_date = start_date + datetime.timedelta(
+                hours=(track.duration or 0.5))
             location = track.location_id or False
             locations.setdefault(location, [])
 
             # New TR, align all events
-            if forcetr or (start_date>dates[-1][0]) or not location:
+            if forcetr or (start_date > dates[-1][0]) or not location:
                 dates.append((start_date, {}, bool(location), end_date))
                 for loc in locations.keys():
                     if locations[loc] and (locations[loc][-1][2] > start_date):
                         locations[loc][-1][3] += 1
-                    elif not locations[loc] or locations[loc][-1][2] <= start_date:
-                        locations[loc].append([False, locations[loc] and locations[loc][-1][2] or dates[0][0], start_date, 1])
+                    elif not locations[loc] or locations[loc][-1][
+                        2] <= start_date:
+                        locations[loc].append([False, locations[loc] and
+                                               locations[loc][-1][2] or
+                                               dates[0][0], start_date, 1])
                         dates[-1][1][loc] = locations[loc][-1]
                 forcetr = not bool(location)
 
