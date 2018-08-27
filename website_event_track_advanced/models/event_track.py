@@ -458,14 +458,19 @@ class EventTrack(models.Model):
     @api.model
     def create(self, values):
         values['description_original'] = values.get('description')
+        res = super(EventTrack, self).create(values)
 
-        return super(EventTrack, self).create(values)
+        self._calculate_breaks()
+
+        return res
 
     @api.multi
     def write(self, values):
         # Save a diff in messages when the description is changed
         if values.get('description'):
             self.create_diff(values)
+
+        self._calculate_breaks()
 
         '''
         # Force field access rights
@@ -531,3 +536,51 @@ class EventTrack(models.Model):
                 subject=subject,
                 body=body,
             )
+
+    def _calculate_breaks(self):
+        break_type = self.env.ref('event.event_track_type_break')
+        if not self or self.type == break_type:
+            return
+
+        track_model = self.env['event.track']
+
+        location_tracks = track_model.search([
+            '|',
+            ('location_id', '=', self.location_id.id),
+            ('location_id', '=', False),
+            ('event_id', '=', self.event_id.id),
+        ], order='date')
+
+        previous_track_end = False
+
+        dict_index = 0
+        for track in location_tracks:
+            if not previous_track_end or track.date == previous_track_end:
+                previous_track_end = track.date
+                continue
+
+            next_track = track_model.search([
+                '|',
+                ('location_id', '=', self.location_id.id),
+                ('location_id', '=', False),
+                ('event_id', '=', self.event_id.id),
+                ('date', '>', previous_track_end),
+            ], order='date', limit=1)
+
+            date_end = False
+            if next_track:
+                date_end = next_track.date
+
+            # Empty slot between tracks. Create a break
+            track_values = dict(
+                event_id=self.event_id.id,
+                location_id=self.location_id.id,
+                name='-',
+                date=previous_track_end,
+                duration=0.25,
+                type=break_type.id,
+                website_published=True,
+            )
+
+            previous_track_end = track.date_end
+            track_model.create(track_values)
