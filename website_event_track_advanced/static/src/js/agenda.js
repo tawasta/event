@@ -76,7 +76,6 @@ odoo.define('agenda', function (require) {
 
     // Starting to track an element
     $('.event_track').on('dragstart', function(ev) {
-        console.log('dragging');
         ev.originalEvent.dataTransfer.setData('text/html', null);
         ev.originalEvent.dataTransfer.setData('old_track', $(this).attr('name'));
     });
@@ -90,7 +89,6 @@ odoo.define('agenda', function (require) {
     $('.event_track').on('drop', function(ev) {
         // Don't run this if no access rights. Backend will check the access right,
         // but JS console will complain about session
-
         ev.preventDefault();
 
         var old_track = ev.originalEvent.dataTransfer.getData('old_track');

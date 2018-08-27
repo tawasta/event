@@ -537,50 +537,66 @@ class EventTrack(models.Model):
                 body=body,
             )
 
+    @api.depends('date', 'duration', 'location_id')
     def _calculate_breaks(self):
+        # Auto-generate and auto-archive breaks
+
         break_type = self.env.ref('event.event_track_type_break')
-        if not self or self.type == break_type:
-            return
 
-        track_model = self.env['event.track']
-
-        location_tracks = track_model.search([
-            '|',
-            ('location_id', '=', self.location_id.id),
-            ('location_id', '=', False),
-            ('event_id', '=', self.event_id.id),
-        ], order='date')
-
-        previous_track_end = False
-
-        dict_index = 0
-        for track in location_tracks:
-            if not previous_track_end or track.date == previous_track_end:
-                previous_track_end = track.date
+        for record in self:
+            if record.type == break_type:
                 continue
 
-            next_track = track_model.search([
+            track_model = record.env['event.track']
+
+            location_tracks = track_model.search([
                 '|',
-                ('location_id', '=', self.location_id.id),
+                ('location_id', '=', record.location_id.id),
                 ('location_id', '=', False),
-                ('event_id', '=', self.event_id.id),
-                ('date', '>', previous_track_end),
-            ], order='date', limit=1)
+                ('event_id', '=', record.event_id.id),
+            ], order='date')
 
-            date_end = False
-            if next_track:
-                date_end = next_track.date
+            previous_track_end = False
 
-            # Empty slot between tracks. Create a break
-            track_values = dict(
-                event_id=self.event_id.id,
-                location_id=self.location_id.id,
-                name='-',
-                date=previous_track_end,
-                duration=0.25,
-                type=break_type.id,
-                website_published=True,
-            )
+            dict_index = 0
+            for track in location_tracks:
+                if not previous_track_end or track.date == previous_track_end:
+                    previous_track_end = track.date
+                    continue
 
-            previous_track_end = track.date_end
-            track_model.create(track_values)
+                next_track = track_model.search([
+                    '|',
+                    ('location_id', '=', record.location_id.id),
+                    ('location_id', '=', False),
+                    ('event_id', '=', record.event_id.id),
+                    ('date', '>', previous_track_end),
+                ], order='date', limit=1)
+
+                date_end = False
+                duration=0
+
+                if next_track:
+                    date_end = next_track.date
+
+                    duration = dateutil.parser.parse(date_end) - \
+                               dateutil.parser.parse(previous_track_end)
+                    duration = duration.total_seconds() / 3600
+
+                # Empty slot between tracks. Create a break
+                track_values = dict(
+                    event_id=record.event_id.id,
+                    location_id=record.location_id.id,
+                    name='-',
+                    date=previous_track_end,
+                    duration=duration,
+                    type=break_type.id,
+                    website_published=True,
+                )
+
+                previous_track_end = track.date_end
+                track_model.create(track_values)
+
+            # Archive overlapping tracks
+            record.overlapping_location_track_ids.filtered(
+                lambda t: t.type == break_type
+            ).write({'active':False})
