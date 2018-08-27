@@ -248,11 +248,18 @@
                         </t>
                         <t t-if="not dt[2]">
                             <t t-set="track" t-value="dt[1][False][0]"/>
-                            <td t-att-colspan="len(locations)"
-                                t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
-                                t-attf-name="track_#{track.id}"
-                                t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
-                                <t t-call="website_event_track_advanced.agenda_track_td_content" />
+                            <t t-if="track">
+                                <td  t-att-colspan="len(locations)"
+                                    t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
+                                    t-attf-name="track_#{track.id}"
+                                    t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
+                                    <t t-call="website_event_track_advanced.agenda_track_td_content" />
+                                </td>
+                            </t>
+                            <td t-if="not track" t-att-colspan="len(locations)" class="event_track text-muted">
+                                <div class="track-td-name">
+                                    Break
+                                </div>
                             </td>
                         </t>
                     </tr>

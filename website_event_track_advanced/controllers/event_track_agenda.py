@@ -147,6 +147,45 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             location_key = locations_order[location]
             locations_sorted[location_key] = locations.get(location_key, False)
 
+        previous_slot_end = False
+        date_index = 0
+        adds = 0
+
+        # Set breaks for empty slots
+        for this_date in list(dates):
+            dates_count = len(dates)
+            next_date_start = dates[(date_index + 1) % dates_count][0]
+            this_slot_end = next_date_start if next_date_start < this_date[3] else this_date[3]
+
+            helper_index = 0
+            while previous_slot_end == this_slot_end:
+
+                helper_index += 1
+                next_date_start = dates[(date_index + 1 + helper_index) % dates_count][0]
+                this_slot_end = next_date_start
+
+            if previous_slot_end and previous_slot_end > this_slot_end:
+                print "here"
+                this_slot_end = this_date[0]
+
+            if not previous_slot_end or previous_slot_end == this_date[0]:
+                previous_slot_end = this_slot_end
+                date_index += 1
+                continue
+
+            # There is an empty slot. Set a date header for it
+            break_values = (
+                previous_slot_end,
+                {False: {False: False}},
+                False,
+                this_slot_end,
+            )
+            dates.insert(date_index+adds, break_values)
+
+            date_index += 1
+            adds += 1
+            previous_slot_end = this_slot_end
+
         return {
             'locations': locations_sorted,
             'dates': dates
