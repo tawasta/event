@@ -175,6 +175,57 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             dates[-1][1][location] = locations[location][-1]
 
+        '''
+        previous_slot_end = False
+        next_date_start = False
+        date_index = 0
+        adds = 0
+
+        # Set breaks for empty slots
+        for this_date in list(dates):
+            dates_count = len(dates)
+            this_slot_end = this_date[3]
+
+            if not previous_slot_end or previous_slot_end == this_date[0]:
+                previous_slot_end = this_slot_end
+                date_index += 1
+                continue
+
+            helper_index = 0
+            while previous_slot_end == this_slot_end:
+
+                helper_index += 1
+                next_date_start = dates[(date_index + helper_index) % dates_count][0]
+                this_slot_end = next_date_start
+
+            if previous_slot_end and previous_slot_end > this_slot_end:
+                this_slot_end = this_date[0]
+
+            break_times = dict()
+            for location in locations:
+                break_times.update({
+                    location: [
+                        False,
+                        previous_slot_end,
+                        next_date_start,
+                        1,
+                    ],
+                })
+
+            # There is an empty slot. Set a date header for it
+            break_values = (
+                previous_slot_end,
+                break_times,
+                True,
+                this_slot_end,
+            )
+            dates.insert(date_index+adds, break_values)
+
+            date_index += 1
+            adds += 1
+            previous_slot_end = this_slot_end
+        '''
+
         # Sort locations
         locations_order = collections.OrderedDict()
         locations_sorted = collections.OrderedDict()
@@ -188,45 +239,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         for location in sorted(locations_order):
             location_key = locations_order[location]
             locations_sorted[location_key] = locations.get(location_key, False)
-
-        previous_slot_end = False
-        date_index = 0
-        adds = 0
-
-        # Set breaks for empty slots
-        for this_date in list(dates):
-            dates_count = len(dates)
-            next_date_start = dates[(date_index + 1) % dates_count][0]
-            this_slot_end = next_date_start if next_date_start < this_date[3] else this_date[3]
-
-            helper_index = 0
-            while previous_slot_end == this_slot_end:
-
-                helper_index += 1
-                next_date_start = dates[(date_index + 1 + helper_index) % dates_count][0]
-                this_slot_end = next_date_start
-
-            if previous_slot_end and previous_slot_end > this_slot_end:
-                print "here"
-                this_slot_end = this_date[0]
-
-            if not previous_slot_end or previous_slot_end == this_date[0]:
-                previous_slot_end = this_slot_end
-                date_index += 1
-                continue
-
-            # There is an empty slot. Set a date header for it
-            break_values = (
-                previous_slot_end,
-                {False: {False: False}},
-                False,
-                this_slot_end,
-            )
-            dates.insert(date_index+adds, break_values)
-
-            date_index += 1
-            adds += 1
-            previous_slot_end = this_slot_end
 
         return {
             'locations': locations_sorted,
