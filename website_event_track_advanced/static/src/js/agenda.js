@@ -83,6 +83,12 @@ odoo.define('agenda', function (require) {
     // Preparing for drop
     $('.event_track').on('dragover', function(ev) {
         ev.preventDefault();
+        $(this).addClass('active');
+    });
+
+    $('.event_track').on('dragleave', function(ev) {
+        ev.preventDefault();
+        $(this).removeClass('active');
     });
 
     // Dropping the element
