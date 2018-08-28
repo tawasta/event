@@ -373,6 +373,12 @@ class EventTrack(models.Model):
 
             overlapping_tracks = EventTrack.search(domain)
 
+            # Archive overlapping breaks
+            break_type = self.env.ref('event.event_track_type_break')
+            overlapping_tracks.filtered(
+                lambda t: t.type == break_type
+            ).write({'active': False})
+
             if overlapping_tracks:
                 record.overlapping_location_track_ids = \
                     overlapping_tracks.ids
@@ -440,12 +446,6 @@ class EventTrack(models.Model):
 
             overlapping_tracks = EventTrack.search(domain)
 
-            # Archive overlapping breaks
-            break_type = self.env.ref('event.event_track_type_break')
-            overlapping_tracks.filtered(
-                lambda t: t.type == break_type
-            ).write({'active': False})
-
             if overlapping_tracks:
                 record.overlapping_speaker_track_ids = \
                     overlapping_tracks.ids
@@ -466,6 +466,11 @@ class EventTrack(models.Model):
         values['description_original'] = values.get('description')
         res = super(EventTrack, self).create(values)
 
+        depend_fields = ['date', 'duration', 'location_id']
+        if set(depend_fields).intersection(set(values)):
+            self._calculate_breaks()
+            self._compute_overlapping_location_track_ids()
+
         return res
 
     @api.multi
@@ -473,6 +478,7 @@ class EventTrack(models.Model):
         # Save a diff in messages when the description is changed
         if values.get('description'):
             self.create_diff(values)
+            self._compute_overlapping_location_track_ids()
 
         '''
         # Force field access rights
@@ -496,6 +502,10 @@ class EventTrack(models.Model):
                     self.message_subscribe([partner.id])
 
         res = super(EventTrack, self).write(values)
+
+        depend_fields = ['date', 'duration', 'location_id']
+        if set(depend_fields).intersection(set(values)):
+            self._calculate_breaks()
 
         return res
 
@@ -544,45 +554,44 @@ class EventTrack(models.Model):
         # Auto-generate and auto-archive breaks
 
         break_type = self.env.ref('event.event_track_type_break')
+        track_model = self.env['event.track']
 
         for record in self:
-            if record.type == break_type:
-                continue
 
-            track_model = record.env['event.track']
-
-            location_tracks = track_model.search([
+            domain_filter = [
                 '|',
                 ('location_id', '=', record.location_id.id),
                 ('location_id', '=', False),
                 ('event_id', '=', record.event_id.id),
-            ], order='date')
+                ('website_published', '=', True),
+                ('type.show_in_agenda', '=', True),
+                ('date', '!=', False),
+            ]
+
+            location_tracks = track_model.search(domain_filter, order='date')
 
             previous_track_end = False
 
-            dict_index = 0
+            breaks = dict()
             for track in location_tracks:
-                if not previous_track_end or track.date == previous_track_end:
-                    previous_track_end = track.date
+                if track.type == break_type:
                     continue
 
-                next_track = track_model.search([
-                    '|',
-                    ('location_id', '=', record.location_id.id),
-                    ('location_id', '=', False),
-                    ('event_id', '=', record.event_id.id),
-                    ('date', '>', previous_track_end),
-                ], order='date', limit=1)
+                if not previous_track_end or track.date == previous_track_end:
+                    # No break
+                    previous_track_end = track.date_end
+                    continue
 
-                date_end = False
-                duration=0
+                if previous_track_end[0:10] != track.date[0:10]:
+                    # Different days
+                    continue
 
-                if next_track:
-                    date_end = next_track.date
+                domain_filter.append(('date', '>', track.date))
+                domain_filter.append(('type.code', '!=', 'break'))
 
-                    duration = dateutil.parser.parse(date_end) - \
-                               dateutil.parser.parse(previous_track_end)
-                    duration = duration.total_seconds() / 3600
+                duration = abs(dateutil.parser.parse(track.date) -
+                               dateutil.parser.parse(previous_track_end))
+                duration = duration.total_seconds() / 3600
 
                 # Empty slot between tracks. Create a break
                 track_values = dict(
@@ -596,4 +605,6 @@ class EventTrack(models.Model):
                 )
 
                 previous_track_end = track.date_end
-                track_model.create(track_values)
+                new_track = track_model.create(track_values)
+
+            record._compute_overlapping_location_track_ids()

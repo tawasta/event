@@ -1,6 +1,7 @@
 odoo.define('agenda', function (require) {
     var _t = require('web.core')._t;
     var ajax = require('web.ajax');
+    var loadingScreen = require('website_utilities.loader').loadingScreen;
 
     // Make contains case insensitive
     // https://gist.github.com/jakebresnehan/2288330
@@ -113,6 +114,7 @@ odoo.define('agenda', function (require) {
         var action = "/event/track/move";
         var values = {'old_track_id': old_track, 'new_track_id': new_track};
 
+        loadingScreen()
         ajax.jsonRpc(action, 'call', values).then(function(data){
             if(data == 200){
                 // Success. Reload page to prevent sync problems
@@ -140,16 +142,19 @@ odoo.define('agenda', function (require) {
         var values = {'old_track_id': old_track};
         var action = "/event/track/unassign";
 
+        loadingScreen();
         ajax.jsonRpc(action, 'call', values).then(function(data){
             if(data == 200){
                 // Success. Reload page to prevent sync problems
                 location.reload();
             }
             else if(data == 500){
+                $.unblockUI();
                 return false;
             }
             else if(data == 403){
                 // Unexpected error
+                $.unblockUI();
                 alert(_t("Error while trying to move the presentation. Please reload the page!"));
             }
         });

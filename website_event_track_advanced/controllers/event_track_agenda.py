@@ -75,6 +75,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         unassigned_tracks = event.track_ids.sudo().search(
             unassigned_domain_filter,
+            limit=15,
         )
 
         if date_start:

@@ -121,6 +121,9 @@
             <div style="height:100%;width:100%" class="event-track-content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
                 <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                     <span t-esc="track and track.name"/>
+                    <t t-if="track and track.duration and track.duration > 0 and not track.type.attendable">
+                        <br/><span t-field="track.duration" t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                    </t>
                 </div>
 
                 <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
@@ -251,7 +254,7 @@
                                     </t>
                                     <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
                                         <div class="track-td-name">
-                                            Break
+                                            -
                                         </div>
                                     </td>
                                 </t>
@@ -269,7 +272,7 @@
                             </t>
                             <td t-if="not track" t-att-colspan="len(locations)" class="event_track text-muted">
                                 <div class="track-td-name">
-                                    Break
+                                    -
                                 </div>
                             </td>
                         </t>
@@ -294,6 +297,7 @@
                     </td>
 
                     <t t-foreach="unassigned_tracks" t-as="track">
+
                         <td class="event_track"
                             t-attf-name="track_#{track.id}"
                             draggable="true" >
@@ -302,6 +306,7 @@
                                     <span class="fa fa-arrows fa-2x track-program-move-icon"
                                           title="Move"/>
                                 </div>
+
                                 <div class="track-td-name">
                                     <span t-esc="track and track.name"/>
                                 </div>
