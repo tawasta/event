@@ -67,9 +67,15 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         searches = dict()
 
         domain_filter.append(('event_id', '=', event.id))
-        domain_filter.append(('date', '!=', False))
         domain_filter.append(('website_published', '=', True))
         domain_filter.append(('type.show_in_agenda', '=', True))
+
+        unassigned_domain_filter = domain_filter[:]
+        unassigned_domain_filter.append(('date', '=', False))
+
+        unassigned_tracks = event.track_ids.sudo().search(
+            unassigned_domain_filter,
+        )
 
         if date_start:
             domain_filter.append(('date', '>=', date_start))
@@ -77,20 +83,16 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         if date_end:
             domain_filter.append(('date', '<=', date_end))
 
+        domain_filter.append(('date', '!=', False))
+
         event_tracks = event.track_ids.sudo().search(
             domain_filter,
-        )
-
-        # Don't show hidden locations
-        event_tracks = event_tracks.filtered(
-            lambda track:
-            not track.location_id or track.location_id.show_in_agenda
         )
 
         if tag:
             searches.update(tag=tag.id)
             event_tracks = event_tracks.filtered(
-                lambda track: tag in track.tag_ids)
+                lambda t: tag in t.tag_ids)
 
         for track in event_tracks:
             if not track.date:
@@ -131,6 +133,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'dateparser': dateutil.parser,
             'user': request.env.user,
             'target_groups': target_groups,
+            'unassigned_tracks': unassigned_tracks,
         }
 
         return values
@@ -251,7 +254,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         auth='public',
         website=True)
     def event_track_move(self, **post):
-        # JSON-route moving tracks
+        # JSON-route for moving tracks
 
         # Check variables
         old_track_id = post.get('old_track_id', False)
@@ -273,17 +276,47 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             old_track = track_model.browse([int(old_track_id)])
             new_track = track_model.browse([int(new_track_id)])
 
-            # Store the variables
-            old_location = old_track.location_id
-            new_location = new_track.location_id
-            old_date = old_track.date
-            new_date = new_track.date
-
             # Swap the values
-            old_track.location_id = new_location.id
-            new_track.location_id = old_location.id
-            old_track.date = new_date
-            new_track.date = old_date
+            old_track.location_id, new_track.location_id = \
+                new_track.location_id.id, old_track.location_id.id
+            old_track.date, new_track.date = new_track.date, old_track.date
+
+            msg = 'Swapped %s and %s' % (old_track.name, new_track.name)
+            _logger.info(msg)
+
+            return 200
+        else:
+            _logger.warning('Unexpected error while trying to move a track')
+            return 500
+
+    @http.route(
+        ['/event/track/unassign'],
+        type='json',
+        auth='public',
+        website=True)
+    def event_track_unassign(self, **post):
+        # JSON-route for unassigning tracks
+
+        # Check variables
+        old_track_id = post.get('old_track_id', False)
+        track_model = request.env['event.track']
+
+        try:
+            track_model.check_access_rights('read')
+            track_model.check_access_rights('write')
+        except AccessError:
+            _logger.warning('Access error while trying to move a track')
+            return 401
+
+        if old_track_id:
+            # Strip non numeric characters
+            old_track_id = re.sub('[^0-9]', '', old_track_id)
+
+            old_track = track_model.browse([int(old_track_id)])
+            old_track.date = False
+
+            msg = 'Removed %s start date' % old_track
+            _logger.info(msg)
 
             return 200
         else:

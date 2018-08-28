@@ -440,6 +440,12 @@ class EventTrack(models.Model):
 
             overlapping_tracks = EventTrack.search(domain)
 
+            # Archive overlapping breaks
+            break_type = self.env.ref('event.event_track_type_break')
+            overlapping_tracks.filtered(
+                lambda t: t.type == break_type
+            ).write({'active': False})
+
             if overlapping_tracks:
                 record.overlapping_speaker_track_ids = \
                     overlapping_tracks.ids
@@ -460,8 +466,6 @@ class EventTrack(models.Model):
         values['description_original'] = values.get('description')
         res = super(EventTrack, self).create(values)
 
-        self._calculate_breaks()
-
         return res
 
     @api.multi
@@ -469,8 +473,6 @@ class EventTrack(models.Model):
         # Save a diff in messages when the description is changed
         if values.get('description'):
             self.create_diff(values)
-
-        self._calculate_breaks()
 
         '''
         # Force field access rights
@@ -537,7 +539,7 @@ class EventTrack(models.Model):
                 body=body,
             )
 
-    @api.depends('date', 'duration', 'location_id')
+    @api.depends('date', 'date_end', 'duration', 'location_id')
     def _calculate_breaks(self):
         # Auto-generate and auto-archive breaks
 
@@ -595,8 +597,3 @@ class EventTrack(models.Model):
 
                 previous_track_end = track.date_end
                 track_model.create(track_values)
-
-            # Archive overlapping tracks
-            record.overlapping_location_track_ids.filtered(
-                lambda t: t.type == break_type
-            ).write({'active':False})
