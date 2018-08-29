@@ -147,7 +147,7 @@
                             </span>
                             <select name="language" required="true" class="form-control"
                                     type="selection">
-                                <t t-foreach="languages" t-as="language">
+                                <t t-foreach="track_languages" t-as="language">
                                     <option t-attf-value="#{language.id}" t-att-selected="'selected' if track['language']['id'] == language['id'] else False">
                                         <t t-esc="language.name"/>
                                     </option>

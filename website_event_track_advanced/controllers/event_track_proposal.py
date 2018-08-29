@@ -39,13 +39,14 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             [('show_in_proposals', '=', True)],
             ['id', 'code', 'name', 'description'],
         )
-        languages = request.env['res.lang'].search([], order='id')
         track = request.env['event.track']
+        languages = request.env['res.lang'].search([], order='id')
 
         values = {
             'target_groups': target_groups,
             'types': types,
             'track': track,
+            'track_languages': languages,
         }
 
         return values
