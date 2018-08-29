@@ -95,11 +95,12 @@
 
     <!-- Agenda td content -->
     <template id="agenda_track_td_content">
-        <div class="event-track-program-move pull-right" t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
-            <span t-if="user.has_group('event.group_event_manager')"
-                  class="fa fa-arrows fa-2x track-program-move-icon"
-                  title="Move"/>
-        </div>
+        <t t-if="user.has_group('event.group_event_manager') and track.type.code != 'break'">
+            <div class="event-track-program-move pull-right" draggable="true">
+                <span class="fa fa-arrows fa-2x track-program-move-icon"
+                      title="Move"/>
+            </div>
+        </t>
 
         <div class="pull-right">
             <a t-if="track.attachment_ids or track.extra_materials_plain"

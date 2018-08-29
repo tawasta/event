@@ -373,12 +373,6 @@ class EventTrack(models.Model):
 
             overlapping_tracks = EventTrack.search(domain)
 
-            # Archive overlapping breaks
-            break_type = self.env.ref('event.event_track_type_break')
-            overlapping_tracks.filtered(
-                lambda t: t.type == break_type
-            ).write({'active': False})
-
             if overlapping_tracks:
                 record.overlapping_location_track_ids = \
                     overlapping_tracks.ids
@@ -466,10 +460,12 @@ class EventTrack(models.Model):
         values['description_original'] = values.get('description')
         res = super(EventTrack, self).create(values)
 
+        '''
         depend_fields = ['date', 'duration', 'location_id']
         if set(depend_fields).intersection(set(values)):
             self._calculate_breaks()
             self._compute_overlapping_location_track_ids()
+        '''
 
         return res
 
@@ -503,9 +499,11 @@ class EventTrack(models.Model):
 
         res = super(EventTrack, self).write(values)
 
+        '''
         depend_fields = ['date', 'duration', 'location_id']
         if set(depend_fields).intersection(set(values)):
             self._calculate_breaks()
+        '''
 
         return res
 
@@ -549,7 +547,7 @@ class EventTrack(models.Model):
                 body=body,
             )
 
-    @api.depends('date', 'date_end', 'duration', 'location_id')
+    @api.depends('date', 'duration', 'location_id')
     def _calculate_breaks(self):
         # Auto-generate and auto-archive breaks
 
@@ -557,7 +555,6 @@ class EventTrack(models.Model):
         track_model = self.env['event.track']
 
         for record in self:
-
             domain_filter = [
                 '|',
                 ('location_id', '=', record.location_id.id),
@@ -568,6 +565,24 @@ class EventTrack(models.Model):
                 ('date', '!=', False),
             ]
 
+            if record.date:
+                day_start = '%s 00:00:00' % record.date[0:10]
+                day_end = '%s 23:59:59' % record.date[0:10]
+
+                domain_filter.append(('date', '>=', day_start))
+                domain_filter.append(('date', '<=', day_end))
+
+            # Remove existing auto-generated breaks
+            # While a bit counter-intuitive, this is less resource intense
+            # than calculating overlapping breaks/tracks and shifting
+            # existing breaks
+            break_domain_filter = domain_filter[:]
+            break_domain_filter.append(('type.code', '=', 'break'))
+            break_domain_filter.append(('name', '=', '-'))
+            location_breaks = track_model.search(break_domain_filter)
+            location_breaks.unlink()
+
+            # Search tracks for this location
             location_tracks = track_model.search(domain_filter, order='date')
 
             previous_track_end = False
@@ -575,19 +590,17 @@ class EventTrack(models.Model):
             breaks = dict()
             for track in location_tracks:
                 if track.type == break_type:
+                    # Skip breaks
                     continue
 
                 if not previous_track_end or track.date == previous_track_end:
-                    # No break
+                    # No break (the next track starts immediately)
                     previous_track_end = track.date_end
                     continue
 
                 if previous_track_end[0:10] != track.date[0:10]:
-                    # Different days
+                    # Different days. No break here
                     continue
-
-                domain_filter.append(('date', '>', track.date))
-                domain_filter.append(('type.code', '!=', 'break'))
 
                 duration = abs(dateutil.parser.parse(track.date) -
                                dateutil.parser.parse(previous_track_end))
@@ -605,6 +618,4 @@ class EventTrack(models.Model):
                 )
 
                 previous_track_end = track.date_end
-                new_track = track_model.create(track_values)
-
-            record._compute_overlapping_location_track_ids()
+                track_model.create(track_values)

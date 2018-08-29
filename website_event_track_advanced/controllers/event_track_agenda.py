@@ -9,7 +9,7 @@ import logging
 
 from odoo import http, fields
 from odoo.http import request
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, MissingError
 
 from odoo.addons.website_event_track.controllers.main import \
     WebsiteEventTrackController
@@ -277,13 +277,25 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             old_track = track_model.browse([int(old_track_id)])
             new_track = track_model.browse([int(new_track_id)])
 
-            # Swap the values
+            # Swap the tracks
             old_track.location_id, new_track.location_id = \
                 new_track.location_id.id, old_track.location_id.id
             old_track.date, new_track.date = new_track.date, old_track.date
 
-            msg = 'Swapped %s and %s' % (old_track.name, new_track.name)
+            msg = "Swapped '%s' and '%s'" % (old_track.name, new_track.name)
             _logger.info(msg)
+
+            # Add breaks
+            if old_track:
+                old_track._calculate_breaks()
+
+            # Add breaks for other location
+            try:
+                if old_track.location_id != new_track.location_id:
+                    new_track._calculate_breaks()
+            except MissingError:
+                # Nothing to do here
+                pass
 
             return 200
         else:
@@ -306,7 +318,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             track_model.check_access_rights('read')
             track_model.check_access_rights('write')
         except AccessError:
-            _logger.warning('Access error while trying to move a track')
+            _logger.warning('Access error while trying to unassign a track')
             return 401
 
         if old_track_id:
@@ -316,10 +328,17 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             old_track = track_model.browse([int(old_track_id)])
             old_track.date = False
 
-            msg = 'Removed %s start date' % old_track
+            msg = "Removed '%s' start date" % old_track.name
             _logger.info(msg)
+
+            if old_track:
+                old_track._calculate_breaks()
+
+            # Remove unassigned breaks
+            if old_track and old_track.type.code == 'break':
+                old_track.unlink()
 
             return 200
         else:
-            _logger.warning('Unexpected error while trying to move a track')
+            _logger.warning('Unexpected error while trying to unassign a track')
             return 500

@@ -149,6 +149,7 @@ odoo.define('agenda', function (require) {
                 location.reload();
             }
             else if(data == 500){
+                console.log("Here we go!");
                 $.unblockUI();
                 return false;
             }
