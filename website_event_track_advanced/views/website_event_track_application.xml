@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="track-application-video-url-div">
                         <label for="video_url" class="control-label">Proposal in video format (link to e.g. YouTube or Vimeo)</label>
 
                         <div class="input-group">

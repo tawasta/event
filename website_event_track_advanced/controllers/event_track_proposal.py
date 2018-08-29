@@ -47,6 +47,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'types': types,
             'track': track,
             'track_languages': languages,
+            'user': request.env.user,
         }
 
         return values
