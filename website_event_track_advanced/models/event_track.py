@@ -200,8 +200,8 @@ class EventTrack(models.Model):
         comodel_name='event.track',
         string='Overlapping locations',
         compute='_compute_overlapping_location_track_ids',
-        store=True,
-        relation='event_track_location_overlapping_rel',
+        # store=True,
+        # relation='event_track_location_overlapping_rel',
     )
 
     # Disabled for now. These are causing problems with other overlapping ids
@@ -350,7 +350,7 @@ class EventTrack(models.Model):
                 end_date = dateutil.parser.parse(record.date) + timedelta(hours=record.duration)
                 record.date_end = end_date
 
-    @api.onchange('date', 'duration', 'location_id')
+    # @api.onchange('date', 'duration', 'location_id')
     def _compute_overlapping_location_track_ids(self):
         # Search overlapping tracks in the same location
 
@@ -388,7 +388,7 @@ class EventTrack(models.Model):
                 record.overlapping_location_track_ids = \
                     overlapping_tracks.ids
 
-    @api.onchange('date', 'duration', 'chairperson_id')
+    # @api.onchange('date', 'duration', 'chairperson_id')
     def _compute_overlapping_chairperson_track_ids(self):
         # Search overlapping tracks with same chairperson
 
@@ -422,7 +422,7 @@ class EventTrack(models.Model):
                 record.overlapping_chairperson_track_ids = \
                     overlapping_tracks.ids
 
-    @api.onchange('date', 'duration', 'speaker_ids')
+    # @api.onchange('date', 'duration', 'speaker_ids')
     def _compute_overlapping_speaker_track_ids(self):
         # Search overlapping tracks with same speakers
 
@@ -632,4 +632,4 @@ class EventTrack(models.Model):
                 track_model.create(track_values)
 
         # Recompute overlapping locations
-        self._compute_overlapping_location_track_ids()
+        # self._compute_overlapping_location_track_ids()
