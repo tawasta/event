@@ -200,18 +200,25 @@ class EventTrack(models.Model):
         comodel_name='event.track',
         string='Overlapping locations',
         compute='_compute_overlapping_location_track_ids',
+        store=True,
+        relation='event_track_location_overlapping_rel',
     )
 
+    # Disabled for now. These are causing problems with other overlapping ids
     overlapping_chairperson_track_ids = fields.Many2many(
         comodel_name='event.track',
         string='Overlapping chairpersons',
         compute='_compute_overlapping_chairperson_track_ids',
+        # store=True,
+        # relation='event_track_speaker_overlapping_rel',
     )
 
     overlapping_speaker_track_ids = fields.Many2many(
         comodel_name='event.track',
         string='Overlapping speakers',
         compute='_compute_overlapping_speaker_track_ids',
+        # store=True,
+        # relation='event_track_speaker_overlapping_rel',
     )
 
     external_registration = fields.Char(
@@ -343,7 +350,7 @@ class EventTrack(models.Model):
                 end_date = dateutil.parser.parse(record.date) + timedelta(hours=record.duration)
                 record.date_end = end_date
 
-    @api.depends('date', 'duration', 'location_id')
+    @api.onchange('date', 'duration', 'location_id')
     def _compute_overlapping_location_track_ids(self):
         # Search overlapping tracks in the same location
 
@@ -373,11 +380,15 @@ class EventTrack(models.Model):
 
             overlapping_tracks = EventTrack.search(domain)
 
+            overlapping_tracks = overlapping_tracks.filtered(
+                lambda t: t.id != self.id
+            )
+
             if overlapping_tracks:
                 record.overlapping_location_track_ids = \
                     overlapping_tracks.ids
 
-    @api.depends('date', 'duration', 'chairperson_id')
+    @api.onchange('date', 'duration', 'chairperson_id')
     def _compute_overlapping_chairperson_track_ids(self):
         # Search overlapping tracks with same chairperson
 
@@ -411,7 +422,7 @@ class EventTrack(models.Model):
                 record.overlapping_chairperson_track_ids = \
                     overlapping_tracks.ids
 
-    @api.depends('date', 'duration', 'speaker_ids')
+    @api.onchange('date', 'duration', 'speaker_ids')
     def _compute_overlapping_speaker_track_ids(self):
         # Search overlapping tracks with same speakers
 
@@ -463,8 +474,8 @@ class EventTrack(models.Model):
         '''
         depend_fields = ['date', 'duration', 'location_id']
         if set(depend_fields).intersection(set(values)):
-            self._calculate_breaks()
-            self._compute_overlapping_location_track_ids()
+            records = self.filtered(lambda t: t.type.code != 'break')
+            records._calculate_breaks()
         '''
 
         return res
@@ -474,7 +485,6 @@ class EventTrack(models.Model):
         # Save a diff in messages when the description is changed
         if values.get('description'):
             self.create_diff(values)
-            self._compute_overlapping_location_track_ids()
 
         '''
         # Force field access rights
@@ -502,7 +512,8 @@ class EventTrack(models.Model):
         '''
         depend_fields = ['date', 'duration', 'location_id']
         if set(depend_fields).intersection(set(values)):
-            self._calculate_breaks()
+            records = self.filtered(lambda t: t.type.code != 'break')
+            records._calculate_breaks()
         '''
 
         return res
@@ -547,9 +558,8 @@ class EventTrack(models.Model):
                 body=body,
             )
 
-    @api.depends('date', 'duration', 'location_id')
     def _calculate_breaks(self):
-        # Auto-generate and auto-archive breaks
+        # Auto-generate and auto-unlink breaks
 
         break_type = self.env.ref('event.event_track_type_break')
         track_model = self.env['event.track']
@@ -578,9 +588,10 @@ class EventTrack(models.Model):
             # existing breaks
             break_domain_filter = domain_filter[:]
             break_domain_filter.append(('type.code', '=', 'break'))
-            break_domain_filter.append(('name', '=', '-'))
+            break_domain_filter.append(('name', '=', ''))
             location_breaks = track_model.search(break_domain_filter)
-            location_breaks.unlink()
+            if location_breaks:
+                location_breaks.unlink()
 
             # Search tracks for this location
             location_tracks = track_model.search(domain_filter, order='date')
@@ -610,7 +621,7 @@ class EventTrack(models.Model):
                 track_values = dict(
                     event_id=record.event_id.id,
                     location_id=record.location_id.id,
-                    name='-',
+                    name='',
                     date=previous_track_end,
                     duration=duration,
                     type=break_type.id,
@@ -619,3 +630,6 @@ class EventTrack(models.Model):
 
                 previous_track_end = track.date_end
                 track_model.create(track_values)
+
+        # Recompute overlapping locations
+        self._compute_overlapping_location_track_ids()

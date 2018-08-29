@@ -103,7 +103,7 @@ odoo.define('agenda', function (require) {
     });
 
     // Dropping Presentation over Presentation
-    $('.event_track').on('drop', function(ev) {
+    $('.agenda-day-content .event_track').on('drop', function(ev) {
         // Don't run this if no access rights. Backend will check the access right,
         // but JS console will complain about session
         ev.preventDefault();
@@ -121,10 +121,12 @@ odoo.define('agenda', function (require) {
                 location.reload();
             }
             else if(data == 500){
-                return false;
+                $.unblockUI();
+                alert(_t("What you were trying to do is not implemented yet. Sorry!"));
             }
             else if(data == 403){
                 // Unexpected error
+                $.unblockUI();
                 alert(_t("Error while trying to move the presentation. Please reload the page!"));
             }
         });
@@ -149,14 +151,13 @@ odoo.define('agenda', function (require) {
                 location.reload();
             }
             else if(data == 500){
-                console.log("Here we go!");
                 $.unblockUI();
-                return false;
+                alert(_t("What you were trying to do is not implemented yet. Sorry!"));
             }
             else if(data == 403){
                 // Unexpected error
                 $.unblockUI();
-                alert(_t("Error while trying to move the presentation. Please reload the page!"));
+                alert(_t("Error while trying to unassign the presentation. Please reload the page!"));
             }
         });
     });
