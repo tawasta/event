@@ -488,13 +488,13 @@
 
         <div class="panel panel-warning" id="track-application-workshop-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Workshop</h3>
+                <h3 class="panel-title">Session</h3>
             </div>
 
             <div class="panel-body">
                 <p id="track-application-workshop-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    Workshop information and invoicing address.<br/>
+                    Session information and invoicing address.<br/>
                     The contract will be sent for the signee.
                 </p>
 
@@ -526,7 +526,7 @@
                 </div>
 
                 <div class="mt16" id="track-application-organization-invoice-div">
-                    <h4>Organization invoice address</h4>
+                    <h4 class="invoice-address-title">Organization invoice address</h4>
 
                     <div id="track-application-organizer-header-div"
                          class="track-application-organizer-input-row">
@@ -580,7 +580,7 @@
                     </div>
 
                     <div class="col-md-12" id="workshop-goals-div">
-                        <label for="workshop_goals" class="control-label">Workshop goals</label>
+                        <label for="workshop_goals" class="control-label">Session goals</label>
 
                         <span id="workshop_goals_word_counter" class="pull-right">Words
                             <span id="workshop_goals_word_count" />
@@ -589,18 +589,18 @@
                         <textarea class="form-control"
                                   id="workshop_goals"
                                   name="workshop_goals"
-                                  placeholder="Workshop goals"
+                                  placeholder="Session goals"
                                   rows="4"><t t-esc="track.workshop_goals" /></textarea>
                     </div>
 
                     <div class="col-md-12">
-                        <label for="workshop_schedule" class="control-label">Workshop program and schedule
+                        <label for="workshop_schedule" class="control-label">Session program and schedule
                         </label>
 
                         <textarea class="form-control"
                                   id="workshop_schedule"
                                   name="workshop_schedule"
-                                  placeholder="Workshop schedule"
+                                  placeholder="Session schedule"
                                   rows="4"><t t-esc="track.workshop_schedule" /></textarea>
                     </div>
                 </div>

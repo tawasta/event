@@ -32,10 +32,10 @@
                                         Presentation proposal
                                     </h3>
                                     <div id="track-application-section-alert" class="alert">
-                                        <div>You can save the presentation proposal as a draft or when it is completed.</div>
-                                        <div class="mt16">A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted.</div>
-                                        <div class="mt16">Only the contact person of the presentation can submit the completed proposal.</div>
-                                        <div class="mt16">The proposal can also be submitted as a video. In this case, please include a short description as well as a link to the video.</div>
+                                        <div class="track-application-section-alert-info-saving">You can save the presentation proposal as a draft or when it is completed.</div>
+                                        <div class="track-application-section-alert-info-reminder mt16">A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted.</div>
+                                        <div class="track-application-section-alert-info-permissions mt16">Only the contact person of the presentation can submit the completed proposal.</div>
+                                        <div class="track-application-section-alert-info-video mt16">The proposal can also be submitted as a video. In this case, please include a short description as well as a link to the video.</div>
                                     </div>
 
                                     <p class="alert text-primary">The required fields are marked with *</p>
