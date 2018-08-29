@@ -246,6 +246,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                     'organization': post.get('speaker_organization[%s]' % speaker_index),
                     'function': post.get('speaker_title[%s]' % speaker_index),
                     'returning_speaker': ('speaker_returning[%s]' % speaker_index) in post,
+                    'phone': ('speaker_phone[%s]' % speaker_index) in post,
                 })
 
         # Workshop

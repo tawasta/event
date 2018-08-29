@@ -113,7 +113,7 @@
                     </div>
 
                     <div id="track-application-application-info-content" class="col-md-12">
-                        <label for="track_content" class="control-label">Content of proposal</label>
+                        <label for="track_content" class="control-label">Content of presentation</label>
                         <span t-if="user and not user.has_group('event.group_track_reviewer')"
                               id="track_content_word_counter" class="pull-right">Words
                             <span id="track_content_word_count" />
@@ -139,7 +139,7 @@
 
 
                     <div class="col-md-4">
-                        <label for="language" class="control-label">Language of proposal</label>
+                        <label for="language" class="control-label">Language of presentation</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -172,7 +172,7 @@
                 <div id="track-application-attachment-info-div" class="hidden">
                     <p class="alert alert-info alert-dismissable" >
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                        The proposal text can be supplemented with an attachment file.
+                        The presentation text can be supplemented with an attachment file.
                     </p>
                 </div>
 
@@ -349,7 +349,7 @@
             <div class="panel-body">
                 <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
-                    List the details of all presenters
+                    <span class="alert-message">List the details of all presenters</span>
                 </p>
 
                 <div id="track-application-speakers-header-div"
@@ -359,7 +359,8 @@
                     <label for="speaker_last_name[0]">Last name</label>
                     <label for="speaker_organization[0]">Organization</label>
                     <label for="speaker_title[0]">Title</label>
-                    <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning presenter</label>
+                    <!-- <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning presenter</label>-->
+                    <label for="speaker_phone[0]">Phone</label>
                 </div>
 
                 <div id="track-application-speakers-input-div">
@@ -379,9 +380,13 @@
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
                                    required="true" type="text"/>
+                            <input placeholder="Phone" class="form-control" t-att-value="speaker.phone"
+                                   required="false" type="text"/>
+                            <!--
                             <input class="track-application-speaker-returning form-control"
                                    type="checkbox" t-att-checked="'checked' if speaker.returning_speaker else False"
                                    title="Returning speaker"/>
+                            -->
 
                             <button type="button" class="btn btn-remove-speaker" disabled="1">
                                 <i class="fa fa-trash"/>
@@ -401,8 +406,12 @@
                                required="true" class="form-control" type="text"/>
                         <input name="speaker_title[0]" placeholder="Title" class="form-control"
                                required="true" type="text"/>
+                        <input name="speaker_phone[0]" placeholder="Phone" class="form-control"
+                               required="false" type="text"/>
+                        <!--
                         <input name="speaker_returning[0]" class="form-control track-application-speaker-returning"
                                type="checkbox" title="Returning speaker"/>
+                               -->
 
                         <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
