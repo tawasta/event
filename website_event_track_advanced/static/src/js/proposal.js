@@ -6,18 +6,21 @@ odoo.define('proposal', function (require) {
         return confirm(_t("Are you sure? Any unsaved changes will be lost."));
     });
 
+    /*
     // Add file name to attachment input button
     $(':file').change(function() {
         var label = $(this).val().replace(/\\/g, '/').replace(/.*\//, '');
 
         $('#attachment-label').text("(" + label + ")");
     });
+    */
 
     // Remove attachment
     $('#btn-remove-attachment').click(function() {
-        $('#attachment-label').text('');
+        //$('#attachment-label').text('');
         $('#attachment-file').val('');
     });
+
 
     $('#attachment-file').bind('change', function(){
         if(!this.files[0]){

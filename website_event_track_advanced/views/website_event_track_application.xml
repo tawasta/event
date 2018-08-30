@@ -177,13 +177,19 @@
 
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div id="track-application-application-attachment-attachment-div" class="col-md-12">
+                        <label for="attachment_ids">Add attachments (optional)</label><br/>
+                        <input type="file" name="attachment_ids" id="attachment-file" multiple="true" />
+
+                        <!--
                         <label class="btn btn-default btn-file col-xs-10 col-sm-offset-1">
-                            Add attachment (optional) <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
+                            Add attachments (optional) <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" multiple="true" style="display: none;"/>
                             <span class="text-success" id="attachment-label"></span>
                         </label>
-                        <button type="button" id="btn-remove-attachment" class="btn">
+                        -->
+                        <button type="button" id="btn-remove-attachment" class="btn btn-default" title="Remove attachments">
                             <i class="fa fa-trash"/>
                         </button>
+
                     </div>
                 </div>
 
