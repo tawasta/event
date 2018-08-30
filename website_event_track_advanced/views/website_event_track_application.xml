@@ -81,7 +81,7 @@
                 <div class="form-group" id="track-application-application-info-div">
 
                     <div class="col-md-12">
-                        <label for="track_name" class="control-label">Proposal title</label>
+                        <label for="track_name" class="control-label">Presentation title</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="col-md-12" id="track-application-video-url-div">
-                        <label for="video_url" class="control-label">Proposal in video format (link to e.g. YouTube or Vimeo)</label>
+                        <label for="video_url" class="control-label">Presentation in video format (link to e.g. YouTube or Vimeo)</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -113,7 +113,7 @@
                     </div>
 
                     <div id="track-application-application-info-content" class="col-md-12">
-                        <label for="track_content" class="control-label">Content of presentation</label>
+                        <label for="track_content" class="control-label">Content of the presentation</label>
                         <span t-if="user and not user.has_group('event.group_track_reviewer')"
                               id="track_content_word_counter" class="pull-right">Words
                             <span id="track_content_word_count" />
@@ -139,7 +139,7 @@
 
 
                     <div class="col-md-4">
-                        <label for="language" class="control-label">Language of presentation</label>
+                        <label for="language" class="control-label">Language of the presentation</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">

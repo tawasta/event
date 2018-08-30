@@ -38,37 +38,37 @@
                 </page>
 
                 <page string="Conflicts">
-                <group name="overlapping_tracks" col="1">
-                    <field name="overlapping_location_track_ids"
-                           attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
-                        <tree>
-                            <field name="name"/>
-                            <field name="location_id"/>
-                            <field name="date"/>
-                            <field name="date_end"/>
-                            <field name="duration" widget="float_time"/>
-                        </tree>
-                    </field>
-                    <field name="overlapping_chairperson_track_ids"
-                           attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
-                        <tree>
-                            <field name="name"/>
-                            <field name="chairperson_id"/>
-                            <field name="date"/>
-                            <field name="date_end"/>
-                            <field name="duration" widget="float_time"/>
-                        </tree>
-                    </field>
-                    <field name="overlapping_speaker_track_ids"
-                           attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
-                        <tree>
-                            <field name="name"/>
-                            <field name="date"/>
-                            <field name="date_end"/>
-                            <field name="duration" widget="float_time"/>
-                        </tree>
-                    </field>
-                </group>
+                    <group name="overlapping_tracks" col="1">
+                        <field name="overlapping_location_track_ids"
+                               attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="location_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_chairperson_track_ids"
+                               attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="chairperson_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_speaker_track_ids"
+                               attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </group>
                 </page>
             </notebook>
 
