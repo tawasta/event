@@ -10,7 +10,7 @@
         <t t-call="website_event_track_advanced.event_track_application_speakers" />
         <t t-call="website_event_track_advanced.event_track_application_webinar" />
         <t t-call="website_event_track_advanced.event_track_application_workshop" />
-        <t t-call="website_event_track_advanced.event_track_application_extra_info" />
+        <!-- <t t-call="website_event_track_advanced.event_track_application_extra_info" /> -->
 
         <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v102"></script>
@@ -629,9 +629,11 @@
                     <div class="col-md-12">
                         <label for="extra_info" class="control-label">Extra info</label>
 
+                        <!--
                         <span id="extra_info_word_counter" class="pull-right">Words
                             <span id="extra_info_word_count" />
                         </span>
+                        -->
 
                         <textarea class="form-control"
                                   id="extra_info"
