@@ -42,12 +42,15 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         track = request.env['event.track']
         languages = request.env['res.lang'].search([], order='id')
 
+        durations = (x * 0.5 for x in range(1, 9))
+
         values = {
             'target_groups': target_groups,
             'types': types,
             'track': track,
             'track_languages': languages,
             'user': request.env.user,
+            'durations': durations,
         }
 
         return values
@@ -201,6 +204,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # Track
         track_values = {
             'name': post.get('track_name'),
+            'duration': post.get('duration'),
             'type': application_type,
             'event_id': event.id,
             'keywords': post.get('keywords'),

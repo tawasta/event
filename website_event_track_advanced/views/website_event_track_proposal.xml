@@ -53,12 +53,12 @@
                                         <t t-call="website_event_track_advanced.event_track_application"/>
 
 
-                                        <p class="alert alert-info alert-dismissable text-center">
+                                        <p class="alert alert-info alert-dismissable text-center" id="alert-info-save-as-draft">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             <span>By clicking <strong>"Save as draft"</strong> the proposal shall be saved and can be edited later.</span>
                                         </p>
 
-                                        <p class="alert alert-info alert-dismissable text-center">
+                                        <p class="alert alert-info alert-dismissable text-center" id="alert-info-save-and-send">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
                                             <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span><br />
                                             <span>Please note that a completed proposal can no longer be edited.</span>
