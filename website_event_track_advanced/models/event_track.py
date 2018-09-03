@@ -381,7 +381,7 @@ class EventTrack(models.Model):
             overlapping_tracks = EventTrack.search(domain)
 
             overlapping_tracks = overlapping_tracks.filtered(
-                lambda t: t.id != self.id
+                lambda t: t.id != record.id
             )
 
             if overlapping_tracks:
