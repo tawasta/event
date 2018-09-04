@@ -8,5 +8,5 @@ class EventTrack(models.Model):
     _inherit = 'event.track'
 
     image_presentation = fields.Binary(
-        string='Presentation as image',
+        string='Presentation image',
     )
