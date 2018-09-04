@@ -281,6 +281,11 @@
                     <div t-field="track.partner_biography"/>
                 </div>
 
+                <div t-if="track.image_presentation" class="col-md-12 mt16">
+                    <img t-if="track.image_presentation" class="track-image"
+                             t-att-src="'/web/image?model=event.track&amp;field=image_presentation&amp;id='+str(track.id)"/>
+                </div>
+
                 <div class="col-md-12" t-if="track.attachment_ids">
                     <t t-foreach="track.attachment_ids" t-as="attachment">
                         <!-- File attachment and download -->
