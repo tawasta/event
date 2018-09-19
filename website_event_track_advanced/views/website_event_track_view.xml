@@ -67,8 +67,13 @@
                             </div>
                             <div class="panel-body">
                                 <div t-if="track.date">
-                                    <strong>Date</strong><br/>
+                                    <strong>Starts</strong><br/>
                                     <span t-field="track.date"
+                                          t-options='{"hide_seconds":"True"}'/><br/>
+                                </div>
+                                <div t-if="track.date_end">
+                                    <strong>Ends</strong><br/>
+                                    <span t-field="track.date_end"
                                           t-options='{"hide_seconds":"True"}'/><br/>
                                 </div>
 

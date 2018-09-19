@@ -86,7 +86,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         domain_filter.append(('date', '!=', False))
 
-        event_tracks = event.track_ids.sudo().search(
+        event_tracks = event.track_ids.sudo().with_context(
+            tz=event.date_tz).search(
             domain_filter,
         )
 
