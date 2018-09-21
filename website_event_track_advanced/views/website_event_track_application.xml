@@ -16,7 +16,7 @@
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v102"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v101"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v100"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v100"></script>
+        <!--<script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v100"></script>-->
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v100"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js?v100"></script>
     </template>
@@ -81,7 +81,7 @@
                 <div class="form-group" id="track-application-application-info-div">
 
                     <div class="col-md-12">
-                        <label for="track_name" class="control-label">Proposal title</label>
+                        <label for="track_name" class="control-label">Presentation title</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="col-md-12" id="track-application-video-url-div">
-                        <label for="video_url" class="control-label">Proposal in video format (link to e.g. YouTube or Vimeo)</label>
+                        <label for="video_url" class="control-label">Presentation in video format (link to e.g. YouTube or Vimeo)</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -113,7 +113,7 @@
                     </div>
 
                     <div id="track-application-application-info-content" class="col-md-12">
-                        <label for="track_content" class="control-label">Content of presentation</label>
+                        <label for="track_content" class="control-label">Content of the presentation</label>
                         <span t-if="user and not user.has_group('event.group_track_reviewer')"
                               id="track_content_word_counter" class="pull-right">Words
                             <span id="track_content_word_count" />
@@ -137,9 +137,8 @@
                         </p>
                     </div>
 
-
                     <div class="col-md-4">
-                        <label for="language" class="control-label">Language of presentation</label>
+                        <label for="language" class="control-label">Language of the presentation</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -155,17 +154,42 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <label for="duration" class="control-label">Duration</label>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"/>
+                            </span>
+
+                            <select name="duration" required="true" class="form-control"
+                                    type="selection">
+                                <t t-foreach="durations" t-as="duration_item">
+                                    <option t-attf-value="#{duration_item}" t-att-selected="'selected' if track['duration'] == duration else False">
+                                        <t t-esc="duration_item"/> h
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group" id="track-application-application-attachment-div">
                     <div id="track-application-application-attachment-attachment-div" class="col-md-12">
+                        <label for="attachment_ids">Add attachments (optional)</label><br/>
+                        <input type="file" name="attachment_ids" id="attachment-file" multiple="true" />
+
+                        <!--
                         <label class="btn btn-default btn-file col-xs-10 col-sm-offset-1">
-                            Add attachment (optional) <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" style="display: none;"/>
+                            Add attachments (optional) <i class="fa fa-paperclip"/><input type="file" name="attachment_ids" id="attachment-file" multiple="true" style="display: none;"/>
                             <span class="text-success" id="attachment-label"></span>
                         </label>
-                        <button type="button" id="btn-remove-attachment" class="btn">
+                        -->
+                        <button type="button" id="btn-remove-attachment" class="btn btn-default" title="Remove attachments">
                             <i class="fa fa-trash"/>
                         </button>
+
                     </div>
                 </div>
 
@@ -312,6 +336,7 @@
                     <label for="contact_last_name">Last name</label>
                     <label for="contact_organization">Organization</label>
                     <label for="contact_title">Title</label>
+                    <label for="contact_phone">Phone</label>
                 </div>
 
                 <div id="track-application-contract-input-div">
@@ -326,6 +351,8 @@
                                class="form-control" required="true" type="text" t-att-value="track.partner_id.parent_id.name"/>
                         <input name="contact_title" placeholder="Title" class="form-control"
                                type="text" required="true" t-att-value="track.partner_id.function"/>
+                        <input name="contact_title" placeholder="Phone" class="form-control"
+                               type="text" t-att-value="track.partner_id.phone"/>
 
                         <button type="button" class="btn btn-remove-speaker" disabled="1">
                             <i class="fa fa-trash"/>
@@ -380,8 +407,7 @@
                                    required="true" class="form-control" type="text"/>
                             <input placeholder="Title" class="form-control" t-att-value="speaker.function"
                                    required="true" type="text"/>
-                            <input placeholder="Phone" class="form-control" t-att-value="speaker.phone"
-                                   required="false" type="text"/>
+                            <input placeholder="Phone" class="form-control" t-att-value="speaker.phone" type="text"/>
                             <!--
                             <input class="track-application-speaker-returning form-control"
                                    type="checkbox" t-att-checked="'checked' if speaker.returning_speaker else False"
@@ -407,7 +433,7 @@
                         <input name="speaker_title[0]" placeholder="Title" class="form-control"
                                required="true" type="text"/>
                         <input name="speaker_phone[0]" placeholder="Phone" class="form-control"
-                               required="false" type="text"/>
+                               type="text"/>
                         <!--
                         <input name="speaker_returning[0]" class="form-control track-application-speaker-returning"
                                type="checkbox" title="Returning speaker"/>
@@ -567,8 +593,7 @@
                     </div>
 
                     <div class="col-md-4" id="workshop-fee-div">
-                        <label for="workshop_fee" class="control-label">Participation fee
-                        </label>
+                        <label for="workshop_fee" class="control-label">Participation fee</label>
 
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -629,9 +654,11 @@
                     <div class="col-md-12">
                         <label for="extra_info" class="control-label">Extra info</label>
 
+                        <!--
                         <span id="extra_info_word_counter" class="pull-right">Words
                             <span id="extra_info_word_count" />
                         </span>
+                        -->
 
                         <textarea class="form-control"
                                   id="extra_info"

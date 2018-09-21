@@ -42,12 +42,15 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         track = request.env['event.track']
         languages = request.env['res.lang'].search([], order='id')
 
+        durations = (x * 0.5 for x in range(1, 9))
+
         values = {
             'target_groups': target_groups,
             'types': types,
             'track': track,
             'track_languages': languages,
             'user': request.env.user,
+            'durations': durations,
         }
 
         return values
@@ -124,19 +127,30 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 7. Create the track
         track = request.env['event.track'].sudo().create(values['track'])
 
-        # 8. Create an attachment
-        # TODO: could this be done in the track create?
-        # TODO: multiple attachments?
-        if post.get('attachment_ids', False):
-            attachment_values = {
-                'name': post['attachment_ids'].filename,
-                'datas': base64.encodestring(post['attachment_ids'].read()),
-                'datas_fname': post['attachment_ids'].filename,
-                'res_model': 'event.track',
-                'res_id': track.id,
-                'type': 'binary'
-            }
-            attachment = request.env['ir.attachment'].sudo().create(attachment_values)
+        # 8. Create attachments
+        if post.get('attachment_ids'):
+            # Multiple attachments can be selected,
+            # but **post only gives the first one.
+            # We have to iterate the httprequest to access all sent attachments
+            files_dict = dict(request.httprequest.files)
+
+            for attachment_file in files_dict['attachment_ids']:
+                attachment_file_value = attachment_file.value
+
+                attachment_name = attachment_file_value.filename
+                attachment_data = attachment_file_value.read()
+
+                # Create attachment
+                attachment_data = {
+                    'name': attachment_name,
+                    'datas_fname': attachment_name,
+                    'datas': base64.b64encode(str(attachment_data)),
+                    'description': 'Track attachment',
+                    'type': 'binary',
+                    'res_model': 'event.track',
+                    'res_id': track.id,
+                }
+                request.env['ir.attachment'].sudo().create(attachment_data)
 
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)
@@ -201,6 +215,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # Track
         track_values = {
             'name': post.get('track_name'),
+            'duration': post.get('duration'),
             'type': application_type,
             'event_id': event.id,
             'keywords': post.get('keywords'),
