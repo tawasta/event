@@ -18,6 +18,11 @@
                         type="action"
                         string="Assign reviewers"
                 />
+
+                <button name="action_generate_breaks"
+                        type="object"
+                        string="Generate breaks"
+                />
             </button>
 
             <field name="twitter_hashtag" position="after">

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
+import dateutil.parser
 
 # 2. Known third party imports:
 
@@ -88,5 +89,54 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
+    def action_generate_breaks(self):
+        break_type = self.env.ref('event.event_track_type_break')
+        track_model = self.env['event.track']
+
+        for record in self:
+            locations = record.track_ids.mapped('location_id')
+
+            for location_id in locations:
+                tracks = track_model.search([
+                    ('location_id', '=', location_id.id),
+                    ('event_id', '=', record.id)
+                ],
+                    order='date'
+                )
+
+                previous_track_end = False
+
+                for track in tracks:
+                    if track.type == break_type:
+                        # Skip breaks
+                        continue
+
+                    if not previous_track_end \
+                            or track.date == previous_track_end:
+                        # No break (the next track starts immediately)
+                        previous_track_end = track.date_end
+                        continue
+
+                    if previous_track_end[0:10] != track.date[0:10]:
+                        # Different days. No break here
+                        continue
+
+                    duration = abs(dateutil.parser.parse(track.date) -
+                                   dateutil.parser.parse(previous_track_end))
+                    duration = duration.total_seconds() / 3600
+
+                    # Empty slot between tracks. Create a break
+                    track_values = dict(
+                        event_id=record.id,
+                        location_id=location_id.id,
+                        name='',
+                        date=previous_track_end,
+                        duration=duration,
+                        type=break_type.id,
+                        website_published=True,
+                    )
+
+                    previous_track_end = track.date_end
+                    track_model.create(track_values)
 
     # 8. Business methods

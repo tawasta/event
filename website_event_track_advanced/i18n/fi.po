@@ -745,6 +745,11 @@ msgid "Free"
 msgstr "Vapaa"
 
 #. module: website_event_track_advanced
+#: model:ir.ui.view,arch_db:website_event_track_advanced.view_event_form
+msgid "Generate breaks"
+msgstr "Generate breaks"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_workshop_goals
 #: model:ir.ui.view,arch_db:website_event_track_advanced.workshop_view
 msgid "Goals"
