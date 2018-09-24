@@ -94,6 +94,13 @@ class EventEvent(models.Model):
         track_model = self.env['event.track']
 
         for record in self:
+            # Remove existing auto-generated breaks
+            # While a bit counter-intuitive, this is less resource intense
+            # than calculating overlapping breaks/tracks and shifting
+            # existing breaks
+            record.track_ids.filtered(
+                lambda t: t.type.code == 'break').unlink()
+
             locations = record.track_ids.mapped('location_id')
 
             for location_id in locations:
