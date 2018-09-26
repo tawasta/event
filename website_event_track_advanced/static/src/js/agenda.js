@@ -27,17 +27,22 @@ odoo.define('agenda', function (require) {
         }
     });
 
-    $('#target-groups-collapse .btn').click(function(ev) {
+    // Mute not selected target groups on click
+    $('#agenda-target-group-filter .btn').click(function(ev) {
         ev.preventDefault();
 
-        // Unmute all
-        $('.event-track-content').removeClass('text-muted');
+        // Mute all
+        $('.event-track-content').addClass('text-muted');
 
         var active = $(this).hasClass('btn-primary');
         var target_group = false;
 
         // De-select selected
-        $( "#target-groups-collapse .btn-primary" ).each(function( index ) {
+        $( "#agenda-target-group-filter .btn-primary" ).each(function( index ) {
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-default');
+        });
+        $("#agenda-tag-filter .btn-primary" ).each(function( index ) {
             $(this).removeClass('btn-primary');
             $(this).addClass('btn-default');
         });
@@ -48,10 +53,51 @@ odoo.define('agenda', function (require) {
             target_group = $(this).attr('value');
         }
 
-        // Mute not matching
         if (target_group) {
-            var tracks_not_matching = $(".track-td-targetgroup[name!='"+target_group+"']").closest('.event-track-content');
+            // Unmute matching
+            var tracks_not_matching = $(".track-td-targetgroup[name='"+target_group+"']").closest('.event-track-content');
             $(tracks_not_matching).addClass('text-muted');
+        }
+        else {
+            // Unmute all
+            $('.event-track-content').removeClass('text-muted');
+        }
+    });
+
+    // Mute not selected tags on click
+    $('#agenda-tag-filter .btn').click(function(ev) {
+        ev.preventDefault();
+
+        // Mute all
+        $('.event-track-content').addClass('text-muted');
+
+        var active = $(this).hasClass('btn-primary');
+        var tag = false;
+
+        // De-select selected
+        $("#agenda-tag-filter .btn-primary" ).each(function( index ) {
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-default');
+        });
+        $( "#agenda-target-group-filter .btn-primary" ).each(function( index ) {
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-default');
+        });
+
+        if(!active){
+            $(this).removeClass('btn-default');
+            $(this).addClass('btn-primary');
+            tag = $(this).attr('name');
+        }
+
+        if (tag) {
+            // Unmute matching
+            var tracks_not_matching = $(".track-td-tags[name*='"+tag+"']").closest('.event-track-content');
+            $(tracks_not_matching).removeClass('text-muted');
+        }
+        else {
+            // Unmute all
+            $('.event-track-content').removeClass('text-muted');
         }
     });
 

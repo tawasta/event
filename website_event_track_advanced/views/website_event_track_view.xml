@@ -67,8 +67,13 @@
                             </div>
                             <div class="panel-body">
                                 <div t-if="track.date">
-                                    <strong>Date</strong><br/>
+                                    <strong>Starts</strong><br/>
                                     <span t-field="track.date"
+                                          t-options='{"hide_seconds":"True"}'/><br/>
+                                </div>
+                                <div t-if="track.date_end">
+                                    <strong>Ends</strong><br/>
+                                    <span t-field="track.date_end"
                                           t-options='{"hide_seconds":"True"}'/><br/>
                                 </div>
 
@@ -122,11 +127,14 @@
                                 <div t-foreach="track.speaker_ids"
                                      t-as="speaker" class="">
 
-                                    <p>
-                                        <strong><span class="font-weight-bold" t-field="speaker.name" /></strong><br />
-                                        <span t-if="speaker.parent_id" t-field="speaker.parent_id.name" /><br />
-                                        <i><span t-field="speaker.function" /></i>
+                                    <p class="font-weight-bold" t-field="speaker.name" />
+                                    <p t-if="speaker.parent_id" class="text-muted" t-field="speaker.parent_id.name" />
+                                    <p t-if="speaker.function" class="text-muted" t-field="speaker.function" />
+                                    <p t-if="speaker.website" class="text-muted">
+                                        <a t-att-href="speaker.website" target="_blank"><span t-field="speaker.website" /></a>
                                     </p>
+
+                                    <hr t-if="not speaker_last" />
                                 </div>
                             </div>
                         </div>
