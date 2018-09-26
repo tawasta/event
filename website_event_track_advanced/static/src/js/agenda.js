@@ -209,7 +209,7 @@ odoo.define('agenda', function (require) {
     });
 
     // Sticky elements
-    $('.agenda-table').stickyTableHeaders({fixedOffset: $('header')});
+    $('.agenda-table').stickyTableHeaders();
 
     // Force sidescroll update
     var lastScrollLeft = 0;
