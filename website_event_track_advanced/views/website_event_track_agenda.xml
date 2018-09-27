@@ -222,7 +222,7 @@
 </div>
 <div class="wrapper2">
     <div class="div2"> -->
-        <div class="agenda-day-content table-responsive">
+        <div class="agenda-day-content table-responsive fs-whatwg">
             <table id="agenda-table" class="table agenda-table table-bordered table-condensed table-responsive">
                 <thead class="agenda-table-header">
                     <tr class="agenda-locations-row">
@@ -298,7 +298,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- <script type="text/javascript" src="/website_event_track_advanced/static/src/js/scrollbar.js?v106"></script> -->
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/floatingscroll.min.js?v106"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/scrollbar.js?v106"></script>
     </template>
 
     <!-- Agenda editor -->

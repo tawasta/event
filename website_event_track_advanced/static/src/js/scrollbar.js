@@ -1,7 +1,12 @@
-// 	odoo.define('website_event_track_advanced.agenda_day_content', function (require) {
-// 	"use strict";
+	odoo.define('website_event_track_advanced.agenda_day_content', function (require) {
+	"use strict";
 
-// 	var core = require('web.core');
+	var core = require('web.core');
+	$(function(){
+	$(".fs-whatwg").floatingScroll();
+
+	// Force scrollbar update programmatically
+    // $(".fs-whatwg").floatingScroll("update");
 
 // 	$(function(){
 // 		$(".wrapper1").scroll(function(){
@@ -16,4 +21,5 @@
 //             console.log("Entäs tänne?")
 //     });
 // });
-// });
+});
+});
