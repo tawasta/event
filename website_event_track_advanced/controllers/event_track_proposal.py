@@ -9,6 +9,7 @@ import logging
 # 3. Odoo imports (openerp):
 from odoo import http, fields
 from odoo.http import request
+from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
 
 # 4. Imports from Odoo modules (rarely, and only if necessary):
 from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
@@ -303,7 +304,11 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
                 partner_values['login'] = partner_values.get('email')
 
             user = request.env['res.users'].sudo()._signup_create_user(partner_values)
-            user.with_context({'create_user': True}).action_reset_password()
+
+            try:
+                user.with_context({'create_user': True}).action_reset_password()
+            except MailDeliveryException:
+                _logger.warn('Could not deliver mail to %s' % partner_values.get('email'))
 
         return user
 
