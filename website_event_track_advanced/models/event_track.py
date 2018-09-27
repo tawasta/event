@@ -459,9 +459,10 @@ class EventTrack(models.Model):
     def compute_twitter_hashtag(self):
         # TODO: allow user to decide the format
         for record in self:
-            hashtag = "%s%s" % (record.type.twitter_hashtag, record.id)
+            if record.type.twitter_hashtag:
+                hashtag = "%s%s" % (record.type.twitter_hashtag, record.id)
 
-            record.twitter_hashtag = hashtag
+                record.twitter_hashtag = hashtag
 
     # 5. Constraints and onchanges
 

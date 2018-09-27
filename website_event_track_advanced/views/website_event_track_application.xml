@@ -351,7 +351,7 @@
                                class="form-control" required="true" type="text" t-att-value="track.partner_id.parent_id.name"/>
                         <input name="contact_title" placeholder="Title" class="form-control"
                                type="text" required="true" t-att-value="track.partner_id.function"/>
-                        <input name="contact_title" placeholder="Phone" class="form-control"
+                        <input name="contact_phone" placeholder="Phone" class="form-control"
                                type="text" t-att-value="track.partner_id.phone"/>
 
                         <button type="button" class="btn btn-remove-speaker" disabled="1">
