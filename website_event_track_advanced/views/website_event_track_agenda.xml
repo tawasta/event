@@ -16,18 +16,18 @@
                     <div id="filter-tracks" class="row mt16">
                         <div id="filter-track-tags" class="col-sm-9 col-xs-12">
                             <a id="target-groups-collapse-button"
-                               class="btn btn-default text-muted"
-                               data-toggle="collapse"
-                               data-target="#target-groups-collapse">Show filters...</a>
+                             class="btn btn-default text-muted"
+                             data-toggle="collapse"
+                             data-target="#target-groups-collapse">Show filters...</a>
 
-                               <div id="target-groups-collapse" class="mt16 collapse">
+                             <div id="target-groups-collapse" class="mt16 collapse">
                                 <div class="row" id="agenda-target-group-filter">
                                     <t t-foreach="target_groups" t-as="target_group">
                                         <a t-attf-href="#"
-                                           class="btn btn-default mt8"
-                                           t-attf-value="target_group_#{target_group.id}"
-                                           t-attf-name="target_group_#{target_group.id}">
-                                           <small>
+                                         class="btn btn-default mt8"
+                                         t-attf-value="target_group_#{target_group.id}"
+                                         t-attf-name="target_group_#{target_group.id}">
+                                         <small>
                                             <span t-field="target_group.name"/>
                                         </small>
                                     </a>
@@ -37,10 +37,10 @@
                             <div class="row mt16" id="agenda-tag-filter">
                                 <t t-foreach="event.allowed_track_tag_ids" t-as="tag_id">
                                     <a t-attf-href="#"
-                                       class="btn btn-default mt8"
-                                       t-attf-value="tag_#{tag_id.id}"
-                                       t-attf-name="#{tag_id.name}">
-                                       <small>
+                                     class="btn btn-default mt8"
+                                     t-attf-value="tag_#{tag_id.id}"
+                                     t-attf-name="#{tag_id.name}">
+                                     <small>
                                         <span class="fa fa-tags" />
                                         <span t-field="tag_id.name"/> <!--(<t t-esc="tag_id.track_count_agenda" />)-->
                                     </small>
@@ -112,13 +112,13 @@
 
       <div class="pull-right">
         <a t-if="track.attachment_ids or track.extra_materials_plain"
-           class="fa fa-2x fa-download"
-           title="Downloadable presentation material available"
-           t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"
-           />
-       </div>
+         class="fa fa-2x fa-download"
+         title="Downloadable presentation material available"
+         t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"
+         />
+     </div>
 
-       <div class="pull-right" t-if="track.overlapping_location_track_ids">
+     <div class="pull-right" t-if="track.overlapping_location_track_ids">
 
         <span t-if="user.has_group('event.group_event_manager')"
           class="fa fa-exclamation-triangle fa-2x"
@@ -153,30 +153,30 @@
 
                 <!-- Chairperson -->
                 <div t-if="track.chairperson_id"
-                 t-attf-name="chairperson_#{track.chairperson_id.id}"
-                 class="track-td-chairperson mt8">
-                 <i  class="fa fa-gavel"/>
-                 <span t-esc="track.chairperson_id.name"/>
-             </div>
+                   t-attf-name="chairperson_#{track.chairperson_id.id}"
+                   class="track-td-chairperson mt8">
+                   <i  class="fa fa-gavel"/>
+                   <span t-esc="track.chairperson_id.name"/>
+               </div>
 
-             <!-- Target group -->
-             <div t-if="track.target_group"
-                 t-attf-name="target_group_#{track.target_group.id}"
-                 class="track-td-targetgroup mt8">
-                 <i  class="fa fa-dot-circle-o"/>
-                 <span t-esc="track.target_group.name"/>
-             </div>
+               <!-- Target group -->
+               <div t-if="track.target_group"
+                   t-attf-name="target_group_#{track.target_group.id}"
+                   class="track-td-targetgroup mt8">
+                   <i  class="fa fa-dot-circle-o"/>
+                   <span t-esc="track.target_group.name"/>
+               </div>
 
-             <!-- Track tags -->
-             <div name="track-td-tags"
-                 t-attf-name="tags_#{tags[track.id]}"
-                 class="track-td-tags mt8">
-                 <i t-if="tags[track.id]" class="fa fa-tag"/>
-                 <span t-esc="tags[track.id]"/>
-             </div>
+               <!-- Track tags -->
+               <div name="track-td-tags"
+                   t-attf-name="tags_#{tags[track.id]}"
+                   class="track-td-tags mt8">
+                   <i t-if="tags[track.id]" class="fa fa-tag"/>
+                   <span t-esc="tags[track.id]"/>
+               </div>
 
-             <!-- Twitter hashtag -->
-             <div t-if="event.show_track_twitter_hashtags" name="track-td-twitter" class="twitter-link track-td-twitter mt8" >
+               <!-- Twitter hashtag -->
+               <div t-if="event.show_track_twitter_hashtags" name="track-td-twitter" class="twitter-link track-td-twitter mt8" >
                 <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
             </div>
         </div>
@@ -185,11 +185,11 @@
 
 <div t-if="event.show_track_twitter_hashtags and track.type.attendable" class="event-track-content track-td-twitter">
     <a class="twitter-share-button twitter-link mt8"
-       t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
-       target="_blank"
-       title="Tweet about this presentation">
-       <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
-   </a>
+     t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
+     target="_blank"
+     title="Tweet about this presentation">
+     <i class="fa fa-twitter"/> #<span t-esc="track.twitter_hashtag" />
+ </a>
 </div>
 </template>
 
@@ -216,91 +216,89 @@
 
 <!-- Agenda date content -->
 <template id="agenda_day_content">
-    <div class="wrapper1">
+    <!-- <div class="wrapper1">
     <div class="div1">
     </div>
 </div>
 <div class="wrapper2">
-    <div class="div2">
-    <div class="agenda-day-content table-responsive">
-                <table id="agenda-table" class="table agenda-table table-bordered table-condensed table-responsive">
-                    <thead class="agenda-table-header">
-                        <tr class="agenda-locations-row">
-                            <th class="active"/>
-                            <th class="active agenda-timeslot-time-dummy"/>
-                            <t t-foreach="locations.keys()" t-as="location">
-                                <th t-if="location" class="active track-th-name agenda-location-header">
-                                    <span t-esc="location and location.name or 'Unknown'"/>
-                                </th>
-                            </t>
-                        </tr>
-                    </thead>
-                    <tbody class="agenda-table-body">
-                        <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
-                            <td class="active agenda-timeslot-time">
-                                <div class="agenda-timeslot-time-inner">
-                                    <t t-set="next_dt" t-value="dt" />
-                                    <t t-if="not dt_last">
-                                        <t t-set="next_dt" t-value="dates[dt_index + 1]" />
-                                    </t>
+    <div class="div2"> -->
+        <div class="agenda-day-content table-responsive">
+            <table id="agenda-table" class="table agenda-table table-bordered table-condensed table-responsive">
+                <thead class="agenda-table-header">
+                    <tr class="agenda-locations-row">
+                        <th class="active"/>
+                        <th class="active agenda-timeslot-time-dummy"/>
+                        <t t-foreach="locations.keys()" t-as="location">
+                            <th t-if="location" class="active track-th-name agenda-location-header">
+                                <span t-esc="location and location.name or 'Unknown'"/>
+                            </th>
+                        </t>
+                    </tr>
+                </thead>
+                <tbody class="agenda-table-body">
+                    <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
+                        <td class="active agenda-timeslot-time">
+                            <div class="agenda-timeslot-time-inner">
+                                <t t-set="next_dt" t-value="dt" />
+                                <t t-if="not dt_last">
+                                    <t t-set="next_dt" t-value="dates[dt_index + 1]" />
+                                </t>
 
-                                    <t t-if="not dt_last">
-                                        <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="next_dt[0].strftime('%H:%M')"/>
-                                    </t>
-                                    <t t-if="dt_last">
-                                        <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
-                                    </t>
-                                </div>
-                            </td>
-                            <td class="agenda-timeslot-time-dummy">
-                                <!-- A dummy field to help show timeslot times on small screens -->
-                                <div> </div>
-                            </td>
-                            <t t-if="dt[2]"> <!-- Not a multi location -->
-                                <t t-foreach="locations" t-as="location">
-                                    <t t-if="location and dt[1].get(location, False)">
-                                        <t t-set="track" t-value="dt[1][location][0]"/>
-                                        <t t-if="track">
-                                            <td t-att-rowspan="dt[1][location][3]"
-                                                t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}"
-                                                t-attf-name="track_#{track.id}"
-                                                t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
-                                                <t t-if="track">
-                                                    <t t-call="website_event_track_advanced.agenda_track_td_content" />
-                                                </t>
-                                            </td>
-                                        </t>
-                                        <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
-                                            <div class="track-td-name">
-                                                -
-                                            </div>
+                                <t t-if="not dt_last">
+                                    <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="next_dt[0].strftime('%H:%M')"/>
+                                </t>
+                                <t t-if="dt_last">
+                                    <span t-esc="dt[0].strftime('%H:%M')"/> - <span t-esc="dt[3].strftime('%H:%M')"/>
+                                </t>
+                            </div>
+                        </td>
+                        <td class="agenda-timeslot-time-dummy">
+                            <!-- A dummy field to help show timeslot times on small screens -->
+                            <div> </div>
+                        </td>
+                        <t t-if="dt[2]"> <!-- Not a multi location -->
+                            <t t-foreach="locations" t-as="location">
+                                <t t-if="location and dt[1].get(location, False)">
+                                    <t t-set="track" t-value="dt[1][location][0]"/>
+                                    <t t-if="track">
+                                        <td t-att-rowspan="dt[1][location][3]"
+                                            t-attf-class="event_color_#{track.color} #{track and 'event_track' or ''}"
+                                            t-attf-name="track_#{track.id}"
+                                            t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
+                                            <t t-if="track">
+                                                <t t-call="website_event_track_advanced.agenda_track_td_content" />
+                                            </t>
                                         </td>
                                     </t>
-                                </t>
-                            </t>
-                            <t t-if="not dt[2]">
-                                <t t-set="track" t-value="dt[1][False][0]"/>
-                                <t t-if="track">
-                                    <td  t-att-colspan="len(locations)"
-                                        t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
-                                        t-attf-name="track_#{track.id}"
-                                        t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
-                                        <t t-call="website_event_track_advanced.agenda_track_td_content" />
+                                    <td t-if="not track" t-att-rowspan="dt[1][location][3]" class="event_track text-muted">
+                                        <div class="track-td-name">
+                                            -
+                                        </div>
                                     </td>
                                 </t>
-                                <td t-if="not track" t-att-colspan="len(locations)" class="event_track text-muted">
-                                    <div class="track-td-name">
-                                        -
-                                    </div>
+                            </t>
+                        </t>
+                        <t t-if="not dt[2]">
+                            <t t-set="track" t-value="dt[1][False][0]"/>
+                            <t t-if="track">
+                                <td  t-att-colspan="len(locations)"
+                                    t-attf-class="text-center event_color_#{track.color} #{track and 'event_track' or ''}"
+                                    t-attf-name="track_#{track.id}"
+                                    t-att-draggable="'true' if user.has_group('event.group_event_manager') else 0">
+                                    <t t-call="website_event_track_advanced.agenda_track_td_content" />
                                 </td>
                             </t>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>'
-    </div>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/scrollbar.js?v106"></script>
+                            <td t-if="not track" t-att-colspan="len(locations)" class="event_track text-muted">
+                                <div class="track-td-name">
+                                    -
+                                </div>
+                            </td>
+                        </t>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <script type="text/javascript" src="/website_event_track_advanced/static/src/js/scrollbar.js?v106"></script> -->
     </template>
 
     <!-- Agenda editor -->
