@@ -1,0 +1,7 @@
+/* For small screens */
+@media only screen and (max-width: 1000px){
+    #track-application-organization-invoice-div label,
+    #track-application-organization-invoice-div .input-label{
+        display: none;
+    }
+}
