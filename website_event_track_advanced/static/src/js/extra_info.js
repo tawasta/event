@@ -2,6 +2,7 @@ $(function() {
 
     extra_info = CKEDITOR.replace('extra_info');
 
+    /*
     extra_info.on('instanceReady', function(){
         var word_limit = 300;
 
@@ -20,5 +21,6 @@ $(function() {
             wordCounter(event, extra_info.getData(), $('#extra_info_word_counter'), word_limit);
         }, 0);
     })
+    */
 
 });

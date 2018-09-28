@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Keynote request -->
+    <template id="event_track_application_keynote_request"
+              name="Website track keynote request"
+              inherit_id="website_event_track_advanced.event_track_application_extra_info">
+
+        <xpath expr="//div[@id='event-track-application-extra-info']" position="after">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Keynote speaker request</h3>
+                </div>
+
+                <div class="panel-body" id="track-application-extra-div">
+                    <p id="track-application-extra-alert-info" class="alert alert-info alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&#215;</a>
+                        <span>Who would you like to be invited as a keynote speaker?.</span><br/>
+                        <span>Please provide us with a name and contact info, and a brief explanation why this speaker.</span>
+                    </p>
+
+                    <div class="form-group" id="track-application-keynote-request-div">
+                        <div class="col-md-12">
+                            <label for="keynote_speaker_request" class="control-label">Keynote speaker</label>
+
+                            <textarea class="form-control"
+                                      id="keynote_speaker_request"
+                                      name="keynote_speaker_request"
+                                      placeholder="Keynote speaker..."
+                                      rows="4"><t t-esc="track.keynote_speaker_request" /></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>
