@@ -23,6 +23,7 @@ class EventTrackType(models.Model):
     code = fields.Char(
         copy=False,
         translate=False,
+        required=True,
     )
 
     name = fields.Char(translate=True)
@@ -67,11 +68,18 @@ class EventTrackType(models.Model):
     # 4. Compute and search fields
 
     # 5. Constraints and onchanges
+    _sql_constraints = [
+        ('code',
+         'unique(code)',
+         'Please use an unique code'),
+    ]
+
     @api.onchange('twitter_hashtag')
     def onchange_twitter_hashtag_sanitize(self):
         for record in self:
-            hashtag = re.sub('[^A-Za-z0-9_]', '', record.twitter_hashtag)
-            record.twitter_hashtag = hashtag
+            if record.twitter_hashtag:
+                hashtag = re.sub('[^A-Za-z0-9_]', '', record.twitter_hashtag)
+                record.twitter_hashtag = hashtag
 
     # 6. CRUD methods
 
