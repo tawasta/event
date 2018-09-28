@@ -19,7 +19,11 @@ class EventTrackType(models.Model):
     # 1. Private attributes
     _name = 'event.track.type'
 
+    _order='sequence, name'
+
     # 2. Fields declaration
+    sequence = fields.Integer()
+
     code = fields.Char(
         copy=False,
         translate=False,
