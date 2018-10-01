@@ -23,7 +23,7 @@ msgid ""
 "<span>Who would you like to be invited as a keynote speaker?.</span><br/>\n"
 "                        <span>Please provide us with a name and contact info, and a brief explanation why this speaker.</span>"
 msgstr ""
-"<span>Kenet haluaisit ITK-konferenssiin asiantuntija-/keynote-puheenvuoron pitäjäksi?</span><br/>\n"
+"<span>Kenet haluaisit konferenssiin asiantuntija-/keynote-tai invited puheenvuoron pitäjäksi</span><br/>\n"
 "                        <span>Kerro ehdokkaan yhteystiedot ja perustele lyhyesti, miksi juuri hänet pitäisi kutsua puhujaksi.</span>"
 
 #. module: website_event_track_advanced_keynote_request
@@ -34,7 +34,7 @@ msgstr "Tapahtuman esitys"
 #. module: website_event_track_advanced_keynote_request
 #: model:ir.ui.view,arch_db:website_event_track_advanced_keynote_request.event_track_application_keynote_request
 msgid "Keynote speaker"
-msgstr "Keynote speaker"
+msgstr "Keynote / invited speaker"
 
 #. module: website_event_track_advanced_keynote_request
 #: model:ir.ui.view,arch_db:website_event_track_advanced_keynote_request.event_track_application_keynote_request
@@ -44,7 +44,7 @@ msgstr "Keynote speaker -ehdotus"
 #. module: website_event_track_advanced_keynote_request
 #: model:ir.ui.view,arch_db:website_event_track_advanced_keynote_request.event_track_application_keynote_request
 msgid "Keynote speaker..."
-msgstr "Keynote speaker..."
+msgstr "Keynote / invited speaker..."
 
 #. module: website_event_track_advanced_keynote_request
 #: model:ir.model.fields,field_description:website_event_track_advanced_keynote_request.field_event_track_keynote_speaker_request
