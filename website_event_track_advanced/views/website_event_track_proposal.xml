@@ -63,7 +63,13 @@
                                             <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span><br />
                                             <span>Please note that a completed proposal can no longer be edited.</span>
                                         </p>
-
+                                        <div class="form-group">
+                                            <div class="col-xs-12 mt16">
+                                                <label for="privacy_acceptance">
+                                                    <input type="checkbox" name="privacy_acceptance" id="privacy_acceptance"/> I accept the privacy policy for this website.
+                                                </label>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <button type="submit"
                                                    name="track-save"
@@ -90,7 +96,7 @@
             </div>
             <div class="oe_structure"/>
         </t>
-
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/acceptance.js?v100"></script>
     </template>
 
 </odoo>
