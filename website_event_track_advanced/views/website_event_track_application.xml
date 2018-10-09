@@ -246,7 +246,7 @@
                 </p>
 
                 <div class="form-group" id="track-application-targetgroup-info-div">
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="track-application-targetgroup-info-div-left">
                         <label for="target_group" class="control-label">Target group</label>
 
                         <div class="input-group">
@@ -266,7 +266,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8" id="track-application-targetgroup-info-div-right">
                         <label for="target_group_info" class="control-label">Target group details</label>
 
                         <span id="target_group_info_word_counter" class="pull-right">Words
