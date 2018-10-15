@@ -137,7 +137,7 @@
                         </p>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 track-application-application-language">
                         <label for="language" class="control-label">Language of the presentation</label>
 
                         <div class="input-group">
@@ -155,7 +155,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 track-application-application-duration">
                         <label for="duration" class="control-label">Duration</label>
 
                         <div class="input-group">
@@ -246,7 +246,7 @@
                 </p>
 
                 <div class="form-group" id="track-application-targetgroup-info-div">
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="track-application-targetgroup-info-div-left">
                         <label for="target_group" class="control-label">Target group</label>
 
                         <div class="input-group">
@@ -266,7 +266,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8" id="track-application-targetgroup-info-div-right">
                         <label for="target_group_info" class="control-label">Target group details</label>
 
                         <span id="target_group_info_word_counter" class="pull-right">Words
@@ -296,7 +296,7 @@
                             Selecting too many keywords can make it harder to find the correct audience.
                         </p>
 
-                        <div class="row">
+                        <div class="row" id="track-application-targetgroup-tags-tags-div">
                             <label class="col-sm-4 col-xs-12" t-foreach="event.allowed_track_tag_ids"
                                    t-as="tag">
                                 <input type="checkbox" t-attf-name="tag_#{str(tag.id)}" t-att-checked="'checked' if tag.id in track.tag_ids.ids else False"/>

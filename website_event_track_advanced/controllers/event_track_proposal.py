@@ -195,13 +195,17 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         if post.get('keywords'):
             event_track_tag = request.env['event.track.tag']
-            keyword = post.get('keywords').strip()
-            tag = event_track_tag.search([('name', '=ilike', keyword)], limit=1)
+            keywords = post.get('keywords').strip()
 
-            if not tag:
-                tag = event_track_tag.sudo().create({'name': keyword})
+            for keyword in keywords.split(','):
+                tag = event_track_tag.search([
+                    ('name', '=ilike', keyword)
+                ], limit=1)
 
-            tags.append(tag.id)
+                if not tag:
+                    tag = event_track_tag.sudo().create({'name': keyword})
+
+                tags.append(tag.id)
 
         # Application type
         application_type = False
