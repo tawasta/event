@@ -211,8 +211,9 @@ class WebsiteEventTrack(website_account):
         website=True,
         methods=['GET'])
     def event_track_cancel(self, track, **post):
-
         track.state = 'cancel'
+
+        return request.redirect('/my/tracks/')
 
     # Refuse track
     @http.route(
@@ -235,7 +236,6 @@ class WebsiteEventTrack(website_account):
         website=True,
         methods=['GET'])
     def event_track_open(self, track, **post):
-
         track.state = 'draft'
 
         return request.redirect('/my/tracks/')
@@ -247,7 +247,7 @@ class WebsiteEventTrack(website_account):
         auth='user',
         website=True,
         methods=['GET'])
-    def event_track_open(self, track, **post):
+    def event_track_approve(self, track, **post):
 
         track.state = 'published'
 

@@ -112,7 +112,7 @@
                                 <button t-if="track.state in ['draft']"
                                         class="btn btn-danger"
                                         data-toggle="modal"
-                                        data-target="#track-confirm-action"
+                                        data-target="#track-confirm-action-cancel"
                                         data-action="cancel"
                                         t-attf-data-title="#{track.name}"
                                         t-attf-data-href="/my/tracks/cancel/#{track.id}">Cancel</button>
@@ -134,11 +134,11 @@
                                         t-attf-data-title="#{track.name}"
                                         t-attf-data-href="/my/tracks/refuse/#{track.id}">Reject</button>
 
-                                <!-- Re-open or reject an approved track -->
+                                <!-- Open a track -->
                                 <button t-if="track.state == 'cancel'"
                                         class="btn btn-info"
                                         data-toggle="modal"
-                                        data-target="#track-confirm-action"
+                                        data-target="#track-confirm-action-open"
                                         data-action="re-open"
                                         t-attf-data-title="#{track.name}"
                                         t-attf-data-href="/my/tracks/open/#{track.id}">Re-open</button>
@@ -180,6 +180,8 @@
         <t t-call="website_portal_track.confirm_dialog"/>
         <t t-call="website_portal_track.confirm_dialog_send"/>
         <t t-call="website_portal_track.confirm_dialog_approve"/>
+        <t t-call="website_portal_track.confirm_dialog_cancel"/>
+        <t t-call="website_portal_track.confirm_dialog_open"/>
         <script type="text/javascript" src="/website_portal_track/static/src/js/event_track_list.js?v100"></script>
     </template>
 
@@ -224,6 +226,27 @@
         </div>
     </template>
 
+    <!-- Cancel dialog template -->
+    <template id="confirm_dialog_cancel" name="Confirmation dialog for track cancel">
+        <div class="modal fade track-confirm-action" id="track-confirm-action-cancel" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Cancel</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                        <p>After canceling, the proposal will not be reviewed unless you re-open it.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-ok">Yes</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <!-- Approve dialog template -->
     <template id="confirm_dialog_approve" name="Confirmation dialog for track approve">
         <div class="modal fade track-confirm-action" id="track-confirm-action-approve" tabindex="-1" role="dialog">
@@ -235,6 +258,27 @@
                     <div class="modal-body">
                         <p>Are you sure you want to approve the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
                         <p>After approving, the proposal can not be edited.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-ok">Yes</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Open dialog template -->
+    <template id="confirm_dialog_open" name="Confirmation dialog for track open">
+        <div class="modal fade track-confirm-action" id="track-confirm-action-open" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Open</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to open the proposal "<strong><span class="modal-track-title" />"</strong>?</p>
+                        <p>After opening, the proposal can be edited and sent to review</p>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-success btn-ok">Yes</a>
