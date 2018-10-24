@@ -17,7 +17,7 @@
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v101"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v100"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v101"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v101"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js?v100"></script>
     </template>
 
@@ -87,7 +87,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-header"/>
                             </span>
-                            <input id="track-application-name-field" name="track_name" placeholder="Application title" t-att-value="track['name']"
+                            <input id="track-application-name-field" name="track_name" maxlength="100" placeholder="Application title" t-att-value="track['name']"
                                    class="form-control" required="true" type="text"/>
                         </div>
                     </div>
