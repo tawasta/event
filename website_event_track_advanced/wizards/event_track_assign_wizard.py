@@ -48,7 +48,7 @@ class EventTrackAssignWizard(models.TransientModel):
         res['track_ids'] = event.track_ids.search([
             ('event_id', '=', event.id),
             ('review_group', '=', False),
-            ('state', 'in', ['draft']),
+            ('state', 'in', ['confirmed']),
         ]).ids
 
         return res
