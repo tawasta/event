@@ -498,15 +498,17 @@ class EventTrack(models.Model):
 
         # Update followers
         if 'review_group' in values:
-            # Remove all old followers
-            for follower in self.review_group.reviewers:
-                self.message_unsubscribe([follower.id])
+            for record in self:
+                # Remove all old followers
+                for follower in record.review_group.reviewers:
+                    record.message_unsubscribe([follower.id])
 
-            if values.get('review_group'):
-                # Add new followers
-                review_group = self.env['event.track.review.group'].browse([values.get('review_group')])
-                for partner in review_group.reviewers:
-                    self.message_subscribe([partner.id])
+                if values.get('review_group'):
+                    # Add new followers
+                    review_group = record.env['event.track.review.group']\
+                        .browse([values.get('review_group')])
+                    for partner in review_group.reviewers:
+                        record.message_subscribe([partner.id])
 
         res = super(EventTrack, self).write(values)
 

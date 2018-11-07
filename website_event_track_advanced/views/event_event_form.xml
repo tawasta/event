@@ -14,11 +14,6 @@
         <field name="inherit_id" ref="event.view_event_form"/>
         <field name="arch" type="xml">
             <button name="button_cancel" position="after">
-                <button name="%(act_event_track_assign)d"
-                        type="action"
-                        string="Assign reviewers"
-                />
-
                 <button name="action_generate_breaks"
                         type="object"
                         string="Generate breaks"
