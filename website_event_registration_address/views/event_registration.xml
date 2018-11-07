@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_event_registration_form" model="ir.ui.view">
+        <field name="name">view.event.registration.form</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/group[@name='attendee']" position="after">
+                <group string="Address" name="address">
+                    <field name="street" placeholder="Street..."/>
+                    <field name="city" placeholder="City"/>
+                    <field name="zip" placeholder="ZIP"/>
+                    <field name="country_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

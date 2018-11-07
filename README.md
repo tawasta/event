@@ -11,6 +11,8 @@ Available addons
 [l10n_fi_website_event_track_advanced](l10n_fi_website_event_track_advanced/) | 10.0.0.3.7 | Finnish localization for advanced event tracks
 [website_event_extension](website_event_extension/) | 8.0.0.1.11 (unported) | Changes to Website Event app
 [website_event_register_extension](website_event_register_extension/) | 8.0.0.1.7 (unported) | Changes the form for free events
+[website_event_registration_address](website_event_registration_address/) | 10.0.1.0.0 | Address to attendees
+[website_event_registration_profession](website_event_registration_profession/) | 10.0.1.1.1 | Professions for event registrations
 [website_event_track_advanced](website_event_track_advanced/) | 10.0.1.1.37 | An advanced event tracks process
 [website_event_track_disable_translate](website_event_track_disable_translate/) | 10.0.1.0.0 | Disable translated fields from event tracks
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 10.0.1.0.0 | Allows sending mail to track contacts
