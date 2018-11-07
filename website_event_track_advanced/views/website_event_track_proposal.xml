@@ -95,8 +95,8 @@
 
             </div>
             <div class="oe_structure"/>
+            <script type="text/javascript" src="/website_event_track_advanced/static/src/js/acceptance.js?v100"></script>
         </t>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/acceptance.js?v100"></script>
     </template>
 
 </odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
+
+        <!-- Find professions and import select2 once (outside the loops) -->
+        <xpath expr="//form[@id='attendee_registration']" position="before">
+            <t t-set="professions" t-value="request.env['res.profession'].sudo().search([])"/>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+            <script type="text/javascript" src="/website_event_registration_profession/static/src/js/registration.js"></script>
+        </xpath>
+
+        <xpath expr="//t[@name='attendee_loop']/div[@class='row mb4']/div[@class='col-md-3']" position="after">
+            <div class="col-md-3">
+                <select class="form-control profession-select" t-attf-name="#{counter}-profession_id" required="true">
+                    <option></option>
+                    <t t-foreach="professions" t-as="prof">
+                        <option t-att-value="prof.id" t-esc="prof.name"/>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+    </template>
+</odoo>
