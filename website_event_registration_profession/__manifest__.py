@@ -22,7 +22,7 @@
 {
     'name': 'Professions for event registrations',
     'summary': 'Adds profession to event registrations',
-    'version': '10.0.1.1.0',
+    'version': '10.0.1.1.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
