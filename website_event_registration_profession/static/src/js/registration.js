@@ -5,7 +5,10 @@ odoo.define('website_event_registration_profession.registration', function (requ
 
     $(function() {
 
-        $('.profession-select').select2({
+
+    });
+    $(document).on('show.bs.modal', '#modal_attendees_registration', function() {
+        $('select.profession-select').select2({
             placeholder: _t("Select a profession")
         });
     });
