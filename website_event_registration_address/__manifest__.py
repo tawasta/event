@@ -22,7 +22,7 @@
 {
     'name': 'Address to attendees',
     'summary': 'Adds address to event registrations',
-    'version': '10.0.1.1.1',
+    'version': '10.0.1.1.2',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
