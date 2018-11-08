@@ -300,7 +300,7 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
     def _create_signup_user(self, partner_values):
         user = request.env['res.users'].sudo().search([
-            ('login', '=', partner_values.get('email'))
+            ('login', '=ilike', partner_values.get('email')),
         ])
 
         if not user:
