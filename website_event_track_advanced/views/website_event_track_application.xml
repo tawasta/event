@@ -14,11 +14,11 @@
 
         <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v102"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v101"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v100"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v101"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v103"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v101"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v102"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/webinar_info.js?v101"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js?v100"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/workshop.js?v101"></script>
     </template>
 
     <!-- Application type -->

@@ -1,25 +1,30 @@
 $(function() {
 
-    workshop_goals = CKEDITOR.replace('workshop_goals');
-    workshop_schedule = CKEDITOR.replace('workshop_schedule');
+    if($('#workshop_schedule').length){
+        workshop_schedule = CKEDITOR.replace('workshop_schedule');
+    }
 
-    workshop_goals.on('instanceReady', function(){
-        var word_limit = 200;
+    if($('#workshop_goals').length){
+        workshop_goals = CKEDITOR.replace('workshop_goals');
 
-        wordCounter(false, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
+        workshop_goals.on('instanceReady', function(){
+            var word_limit = 200;
 
-        this.on('key', function(event){
-            wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
+            wordCounter(false, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
+
+            this.on('key', function(event){
+                wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
+            });
         });
-    });
 
-    workshop_goals.on('paste', function(event) {
-        var word_limit = 200;
+        workshop_goals.on('paste', function(event) {
+            var word_limit = 200;
 
-        // The timeout is necessary so the content will have the pasted info before calculating words
-        setTimeout(function () {
-            wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
-        }, 0);
-    })
+            // The timeout is necessary so the content will have the pasted info before calculating words
+            setTimeout(function () {
+                wordCounter(event, workshop_goals.getData(), $('#workshop_goals_word_counter'), word_limit);
+            }, 0);
+        })
+    }
 
 });
