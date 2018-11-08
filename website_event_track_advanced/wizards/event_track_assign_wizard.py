@@ -20,27 +20,43 @@ class EventTrackAssignWizard(models.TransientModel):
     _name = 'event.track.assign.wizard'
 
     # 2. Fields declaration
+    assign_random = fields.Boolean(
+        string='Random assign',
+        help='Randomize review groups',
+        default=0,
+    )
+
     assign_equally = fields.Boolean(
         string='Assign equally',
         help='If un-checked, the assignation will use a "true" randomization. '
-        + 'You probably do not want to use this, as it will most likely cause an unequal assignation.',
+        'You probably do not want to use this, '
+        'as it will most likely cause an unequal assignation.',
         default=1,
     )
 
-    event_id = fields.Many2one(
-        comodel_name='event.event',
-        string='Event',
+    reassign_assigned = fields.Boolean(
+        string='Reassign assigned',
+        help='Assign the group even if the presentation already has '
+        'a review group',
+        default=1,
     )
-    track_ids = fields.One2many(
+
+    review_group = fields.Many2one(
+        comodel_name='event.track.review.group',
+        string='Review group',
+    )
+
+    track_ids = fields.Many2many(
         comodel_name='event.track',
-        inverse_name='event_id',
-    )
+        relation='assign_wizard_track',
+        default=lambda self: self.env.context.get('active_ids'))
 
     # 3. Default methods
     @api.model
     def default_get(self, fields):
         res = super(EventTrackAssignWizard, self).default_get(fields)
 
+        ''' Get all unassigned tracks as default
         active_id = self._context['active_id']
         event = self.env['event.event'].browse([active_id])
 
@@ -50,37 +66,55 @@ class EventTrackAssignWizard(models.TransientModel):
             ('review_group', '=', False),
             ('state', 'in', ['confirmed']),
         ]).ids
+        '''
 
         return res
 
     # 4. Compute and search fields
 
     # 5. Constraints and onchanges
-    @api.onchange('assign_equally')
-    def onchange_assign_equally_do_randomize(self):
-        self.randomize(self.assign_equally)
 
     # 6. CRUD methods
 
     # 7. Action methods
 
     def action_assign_tracks(self):
-        pass
+        track_ids = self._context.get('active_ids')
+        print track_ids
+
+        if not track_ids:
+            return
+
+        EventTrack = self.env['event.track']
+        track_ids = EventTrack.browse(track_ids)
+
+        if not self.reassign_assigned:
+            # Don't reassign unless told to
+            track_ids = track_ids.filtered(lambda r: r.review_group is False)
+            print track_ids
+
+        # Random assignation
+        if self.assign_random:
+            self.randomize(track_ids, self.assign_equally)
+            return True
+
+        # Assign for one group
+        track_ids.write(dict(review_group=self.review_group.id))
 
     # 8. Business methods
-    def randomize(self, equal=True):
+    def randomize(self, track_ids, equal=True):
         groups = self.env['event.track.review.group'].search([]).ids
 
         # Unequal assignation
         if not equal:
-            for track in self.track_ids:
+            for track in track_ids:
                 track.review_group = random.choice(groups)
             return True
 
         # Equal assignation
         random.shuffle(groups)
 
-        tracks = self.track_ids.ids
+        tracks = track_ids.ids
         random.shuffle(tracks)
 
         group_iterator = iter(groups)

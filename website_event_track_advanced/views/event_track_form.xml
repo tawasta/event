@@ -85,14 +85,14 @@
                     <field name="speaker_ids" nolabel="1"/>
                 </group>
 
-                <group name="reviewer" groups="event.group_track_reviewer">
+                <group name="reviewer" groups="event.group_event_manager">
                     <group>
                         <field name="review_group"
                                groups="event.group_event_user"
                                options="{'no_quick_create':True,'no_create_edit':True}"
                         />
                     </group>
-                    <group>
+                    <group groups="event.group_track_reviewer">
                         <label for="rating"/>
                         <span>
                             <field name="rating" widget="priority" nolabel="1"/>

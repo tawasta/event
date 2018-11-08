@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_profession_form" model="ir.ui.view" >
+        <field name="name">Res profession form</field>
+        <field name="model">res.profession</field>
+        <field name="inherit_id" ref="res_partner_profession.res_profession_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_partner_ids']" position="after">
+                <group name="group_event_registration_ids" string="Attendees">
+                    <field name="event_registration_ids" widget="many2many" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="event_id"/>
+                            <field name="state" invisible="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
