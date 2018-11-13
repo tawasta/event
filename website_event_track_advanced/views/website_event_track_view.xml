@@ -52,7 +52,7 @@
                 </ul>
 
                 <div class="row">
-                    <t t-if="not source or source == 'agenda'">
+                    <t t-if="source and source == 'agenda'">
                         <a class="btn btn-default pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
                         <span class="fa fa-chevron-left" /> Back to agenda</a>
                     </t>
