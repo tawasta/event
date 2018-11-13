@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tracks listing -->
+    <template id="tracks" inherit_id="website_event_track.tracks">
+        <xpath expr="//div[contains(@class, 'row')]/div[@class='col-sm-2']" position="replace" />
+
+        <xpath expr="//div[contains(@class, 'row')]/div[@class='col-sm-10']" position="attributes">
+            <attribute name="class">col-sm-12</attribute>
+        </xpath>
+
+    </template>
+
+</odoo>
