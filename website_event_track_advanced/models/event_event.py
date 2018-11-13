@@ -43,6 +43,11 @@ class EventEvent(models.Model):
         compute='_compute_overlapping_speaker_track_ids',
     )
 
+    event_over = fields.Boolean(
+        string='Event over',
+        compute='_compute_event_over',
+    )
+
     # 3. Default methods
     @api.multi
     def name_get(self):
@@ -83,6 +88,11 @@ class EventEvent(models.Model):
                 overlapping += track.overlapping_speaker_track_ids.ids
 
             record.overlapping_speaker_track_ids = overlapping
+
+    def _compute_event_over(self):
+        for record in self:
+            if record.date_end < fields.Datetime.now():
+                record.event_over = True
 
     # 5. Constraints and onchanges
 

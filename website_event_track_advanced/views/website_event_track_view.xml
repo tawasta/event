@@ -9,6 +9,8 @@
     <!-- Single track item -->
     <template id="website_event_track_advanced.track_view">
         <t t-call="website.layout">
+            <t t-set="source" t-value="request.params.get('source')" />
+
             <div id="wrap" class="js_event">
                 <div class="container">
                     <div class="row mt8">
@@ -50,8 +52,15 @@
                 </ul>
 
                 <div class="row">
-                    <a class="btn btn-link pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
+                    <t t-if="not source or source == 'agenda'">
+                        <a class="btn btn-default pull-left" t-attf-href="/event/#{ slug(event) }/agenda">
                         <span class="fa fa-chevron-left" /> Back to agenda</a>
+                    </t>
+                    <t t-else="">
+                        <a class="btn btn-default pull-left" t-attf-href="/event/#{ slug(event) }/track">
+                        <span class="fa fa-chevron-left" /> Back to presentations</a>
+                    </t>
+
                 </div>
 
                 <section class="row mt32">
@@ -61,7 +70,10 @@
 
                     <div class="col-md-4" id="right_column">
 
-                        <div class="panel panel-default">
+                        <div t-if="not track.event_id.event_over" class="panel panel-default">
+                            <span t-esc="track.event_id" />
+                            <span t-esc="track.event_id.date_end" />
+
                             <div class="panel-heading">
                                 <h4>Practical Info</h4>
                             </div>
@@ -247,17 +259,19 @@
     <!-- Presentation header info -->
     <template id="presentation_header_info">
         <ul class="text-center text-muted list-inline">
+            <t t-set="event_on" t-value="not track.event_id.event_over" />
+
             <li t-if="track.speaker_ids" class="fa fa-user">
                 <t t-esc="', '.join([speaker.name for speaker in track.speaker_ids])"></t>
             </li>
 
-            <li t-if="track.date" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
+            <li t-if="track.date and event_on" class="text-muted fa fa-calendar"> <span t-field="track.date" t-options='{"hide_seconds":"True"}'/></li>
 
-            <li class="text-muted fa fa-map-marker" t-if="track.location_id">
+            <li t-if="track.location_id and event_on" class="text-muted fa fa-map-marker">
                 <span t-field="track.location_id"/>
             </li>
 
-            <li t-if="event.show_track_twitter_hashtags and track.type.attendable" class="text-muted fa fa-twitter">
+            <li t-if="event.show_track_twitter_hashtags and track.type.attendable and event_on" class="text-muted fa fa-twitter">
                 <a class="twitter-share-button twitter-link"
                    t-attf-href="https://twitter.com/intent/tweet?hashtags=#{track.twitter_hashtag}"
                    target="_blank"

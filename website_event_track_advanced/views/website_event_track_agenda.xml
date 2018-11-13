@@ -114,7 +114,7 @@
         <a t-if="track.attachment_ids or track.extra_materials_plain"
          class="fa fa-2x fa-download"
          title="Downloadable presentation material available"
-         t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }"
+         t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }?source=agenda"
          />
      </div>
 
@@ -125,7 +125,7 @@
           title="This presentation is overlapping with another presentation"/>
       </div>
 
-      <a name="event-track-link" t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }">
+      <a name="event-track-link" t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }?source=agenda">
 
         <div style="height:100%;width:100%" class="event-track-content track-td-name" data-html="true" data-placement="bottom" data-toggle="tooltip">
             <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
