@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
+        <xpath expr="//t[@name='attendee_loop']/div[@class='row mb4']/div[@class='col-md-3']" position="after">
+            <div class="col-md-3">
+                <input class='form-control' type='text' t-attf-name="#{counter}-employer" placeholder="Employer" required="true"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
