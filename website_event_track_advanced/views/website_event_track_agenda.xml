@@ -6,89 +6,17 @@
         <t t-call="website_event_track_advanced.agenda" />
     </template>
 
-    <template id="website_event_track_advanced.agenda">
-        <t t-call="website_event.layout">
+<template id="website_event_track_advanced.agenda" name="Event agenda">
+    <t t-call="website_event.layout">
 
-            <section class="container">
-                <h1 class="text-center" t-field="event.name"/>
-                <div class="form-inline">
+        <section class="container">
+            <h1 class="text-center" t-field="event.name"/>
+            <div class="form-inline">
 
-                    <div id="filter-tracks" class="row mt16">
-                        <div id="filter-track-tags" class="col-sm-9 col-xs-12">
-                            <a id="target-groups-collapse-button"
-                               class="btn btn-default text-muted"
-                               data-toggle="collapse"
-                               data-target="#target-groups-collapse">Show
-                                filters...
-                            </a>
-
-                            <div id="target-groups-collapse"
-                                 class="mt16 collapse">
-                                <div class="row"
-                                     id="agenda-target-group-filter">
-                                    <t t-foreach="target_groups"
-                                       t-as="target_group">
-                                        <a t-attf-href="#"
-                                           class="btn btn-default mt8"
-                                           t-attf-value="target_group_#{target_group.id}"
-                                           t-attf-name="target_group_#{target_group.id}">
-                                            <small>
-                                                <span t-field="target_group.name"/>
-                                            </small>
-                                        </a>
-                                    </t>
-                                </div>
-
-                                <div class="row mt16" id="agenda-tag-filter">
-                                    <t t-foreach="event.allowed_track_tag_ids"
-                                       t-as="tag_id">
-                                        <a t-attf-href="#"
-                                           class="btn btn-default mt8"
-                                           t-attf-value="tag_#{tag_id.id}"
-                                           t-attf-name="#{tag_id.name}">
-                                            <small>
-                                                <span class="fa fa-tags"/>
-                                                <span t-field="tag_id.name"/> <!--(<t t-esc="tag_id.track_count_agenda" />)-->
-                                            </small>
-                                        </a>
-
-                                        <!--
-                                        <a t-attf-href="/event/#{ slug(event) }/agenda/tag/#{ slug(tag_id) }"
-                                           t-att-class="'btn btn-primary' if searches.get('tag') == tag_id.id else 'btn btn-default'"
-                                           t-attf-value="#{tag_id.name}"
-                                           t-attf-name="tag_#{tag_id.id}">
-                                            <small>
-
-                                                <span t-field="tag_id.name"/>
-                                            </small>
-                                        </a>
-                                    -->
-                                    </t>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div id="filter-tracks-search"
-                             class="col-sm-3 col-xs-12">
-                            <label class="hidden text-muted"
-                                   id="event-track-search-summary">
-                                <span id="event-track-found">0</span>
-                                Found
-                            </label>
-                            <input type="text" class="form-control"
-                                   placeholder="Filter presentations..."
-                                   id="event-track-search"/>
-
-                            <!--
-                            <br />
-                            <a id="tags-clear-button" t-attf-href="/event/#{slug(event)}/agenda" class="btn btn-default text-danger">
-                                <span class="fa fa-trash" />Clear filters
-                            </a>
-                        -->
-                        </div>
-                    </div>
+                <div id="filter-tracks" class="row mt16">
                 </div>
-            </section>
+            </div>
+        </section>
         <t t-set="dayslist" t-value="days.keys()"/>
         <t t-set="dayslist2" t-value="dayslist.sort()"/>
 
@@ -113,6 +41,89 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sticky-table-headers/0.1.24/js/jquery.stickytableheaders.min.js"></script>
     <script type="text/javascript" src="/website_event_track_advanced/static/src/js/agenda.js?v106"></script>
 </template>
+
+    <template id="website_event_track_advanced.agenda_filters"
+              inherit_id="website_event_track_advanced.agenda"
+              active="False"
+              customize_show="True"
+              name="Presentation filters">
+
+        <xpath expr="//div[@id='filter-tracks']" position="inside">
+            <div id="filter-track-tags" class="col-sm-9 col-xs-12">
+                <a id="target-groups-collapse-button"
+                   class="btn btn-default text-muted"
+                   data-toggle="collapse"
+                   data-target="#target-groups-collapse">Show
+                    filters...
+                </a>
+
+                <div id="target-groups-collapse"
+                     class="mt16 collapse">
+                    <div class="row"
+                         id="agenda-target-group-filter">
+                        <t t-foreach="target_groups"
+                           t-as="target_group">
+                            <a t-attf-href="#"
+                               class="btn btn-default mt8"
+                               t-attf-value="target_group_#{target_group.id}"
+                               t-attf-name="target_group_#{target_group.id}">
+                                <small>
+                                    <span t-field="target_group.name"/>
+                                </small>
+                            </a>
+                        </t>
+                    </div>
+
+                    <div class="row mt16" id="agenda-tag-filter">
+                        <t t-foreach="event.allowed_track_tag_ids"
+                           t-as="tag_id">
+                            <a t-attf-href="#"
+                               class="btn btn-default mt8"
+                               t-attf-value="tag_#{tag_id.id}"
+                               t-attf-name="#{tag_id.name}">
+                                <small>
+                                    <span class="fa fa-tags"/>
+                                    <span t-field="tag_id.name"/> <!--(<t t-esc="tag_id.track_count_agenda" />)-->
+                                </small>
+                            </a>
+
+                            <!--
+                            <a t-attf-href="/event/#{ slug(event) }/agenda/tag/#{ slug(tag_id) }"
+                               t-att-class="'btn btn-primary' if searches.get('tag') == tag_id.id else 'btn btn-default'"
+                               t-attf-value="#{tag_id.name}"
+                               t-attf-name="tag_#{tag_id.id}">
+                                <small>
+
+                                    <span t-field="tag_id.name"/>
+                                </small>
+                            </a>
+                        -->
+                        </t>
+                    </div>
+                </div>
+
+            </div>
+            <div id="filter-tracks-search"
+                 class="col-sm-3 col-xs-12">
+                <label class="hidden text-muted"
+                       id="event-track-search-summary">
+                    <span id="event-track-found">0</span>
+                    Found
+                </label>
+                <input type="text" class="form-control"
+                       placeholder="Filter presentations..."
+                       id="event-track-search"/>
+
+                <!--
+                <br />
+                <a id="tags-clear-button" t-attf-href="/event/#{slug(event)}/agenda" class="btn btn-default text-danger">
+                    <span class="fa fa-trash" />Clear filters
+                </a>
+            -->
+            </div>
+        </xpath>
+
+    </template>
 
 <!-- Agenda td content -->
 <template id="agenda_track_td_content">
