@@ -36,7 +36,7 @@
     </template>
 
     <template id="website_event_track_program_path.agenda" inherit_id="website_event_track_advanced.agenda">
-        <xpath expr="//a[@id='target-groups-collapse-button']" position="after">
+        <xpath expr="//div[@id='filter-tracks']" position="after">
             <t t-if="program">
                 <a id='track-my-program-path'
                    t-att-class="'btn btn-default' if program.track_ids else 'btn btn-default hidden'"
