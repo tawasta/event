@@ -10,41 +10,47 @@
         <t t-call="website_event.layout">
 
             <section class="container">
-                <h1 class="text-center" t-field="event.name" />
+                <h1 class="text-center" t-field="event.name"/>
                 <div class="form-inline">
 
                     <div id="filter-tracks" class="row mt16">
                         <div id="filter-track-tags" class="col-sm-9 col-xs-12">
                             <a id="target-groups-collapse-button"
-                             class="btn btn-default text-muted"
-                             data-toggle="collapse"
-                             data-target="#target-groups-collapse">Show filters...</a>
+                               class="btn btn-default text-muted"
+                               data-toggle="collapse"
+                               data-target="#target-groups-collapse">Show
+                                filters...
+                            </a>
 
-                             <div id="target-groups-collapse" class="mt16 collapse">
-                                <div class="row" id="agenda-target-group-filter">
-                                    <t t-foreach="target_groups" t-as="target_group">
+                            <div id="target-groups-collapse"
+                                 class="mt16 collapse">
+                                <div class="row"
+                                     id="agenda-target-group-filter">
+                                    <t t-foreach="target_groups"
+                                       t-as="target_group">
                                         <a t-attf-href="#"
-                                         class="btn btn-default mt8"
-                                         t-attf-value="target_group_#{target_group.id}"
-                                         t-attf-name="target_group_#{target_group.id}">
-                                         <small>
-                                            <span t-field="target_group.name"/>
-                                        </small>
-                                    </a>
-                                </t>
-                            </div>
+                                           class="btn btn-default mt8"
+                                           t-attf-value="target_group_#{target_group.id}"
+                                           t-attf-name="target_group_#{target_group.id}">
+                                            <small>
+                                                <span t-field="target_group.name"/>
+                                            </small>
+                                        </a>
+                                    </t>
+                                </div>
 
-                            <div class="row mt16" id="agenda-tag-filter">
-                                <t t-foreach="event.allowed_track_tag_ids" t-as="tag_id">
-                                    <a t-attf-href="#"
-                                     class="btn btn-default mt8"
-                                     t-attf-value="tag_#{tag_id.id}"
-                                     t-attf-name="#{tag_id.name}">
-                                     <small>
-                                        <span class="fa fa-tags" />
-                                        <span t-field="tag_id.name"/> <!--(<t t-esc="tag_id.track_count_agenda" />)-->
-                                    </small>
-                                </a>
+                                <div class="row mt16" id="agenda-tag-filter">
+                                    <t t-foreach="event.allowed_track_tag_ids"
+                                       t-as="tag_id">
+                                        <a t-attf-href="#"
+                                           class="btn btn-default mt8"
+                                           t-attf-value="tag_#{tag_id.id}"
+                                           t-attf-name="#{tag_id.name}">
+                                            <small>
+                                                <span class="fa fa-tags"/>
+                                                <span t-field="tag_id.name"/> <!--(<t t-esc="tag_id.track_count_agenda" />)-->
+                                            </small>
+                                        </a>
 
                                         <!--
                                         <a t-attf-href="/event/#{ slug(event) }/agenda/tag/#{ slug(tag_id) }"
@@ -57,14 +63,21 @@
                                             </small>
                                         </a>
                                     -->
-                                </t>
+                                    </t>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div id="filter-tracks-search" class="col-sm-3 col-xs-12">
-                        <label class="hidden text-muted" id="event-track-search-summary"><span id="event-track-found">0</span> Found </label>
-                        <input type="text" class="form-control" placeholder="Filter presentations..." id="event-track-search"/>
+                        </div>
+                        <div id="filter-tracks-search"
+                             class="col-sm-3 col-xs-12">
+                            <label class="hidden text-muted"
+                                   id="event-track-search-summary">
+                                <span id="event-track-found">0</span>
+                                Found
+                            </label>
+                            <input type="text" class="form-control"
+                                   placeholder="Filter presentations..."
+                                   id="event-track-search"/>
 
                             <!--
                             <br />
@@ -72,10 +85,10 @@
                                 <span class="fa fa-trash" />Clear filters
                             </a>
                         -->
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         <t t-set="dayslist" t-value="days.keys()"/>
         <t t-set="dayslist2" t-value="dayslist.sort()"/>
 
