@@ -33,9 +33,7 @@ class WebsiteEvent(http.Controller):
                     weight=weight,
                     html={
                         'data-keyword-id': tag.id,
-                        'class': 'keyword-clickable',
                     },
-                    link='?keyword-id=%s' % tag.id,
                 ))
 
             res['keywords'] = keywords

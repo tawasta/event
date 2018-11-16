@@ -209,6 +209,7 @@
                     <!-- Track tags -->
                     <div name="track-td-tags"
                          t-attf-name="tags_#{tags[track.id]}"
+                         t-att-data-track-ids="track.tag_ids.ids"
                          class="track-td-tags mt8">
                         <i t-if="tags[track.id]" class="fa fa-tag"/>
                         <span t-esc="tags[track.id]"/>
