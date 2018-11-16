@@ -25,7 +25,7 @@ odoo.define('website_event_agenda_tag_cloud.tag_cloud', function (require) {
                 return $(this).data('keyword-id');
             }).get();
 
-            if(active_keywords){
+            if(active_keywords.length === 0){
                 // Mute or unmute tracks
                 $('td.event_track').each(function(){
                     var tags = $(this).find('.track-td-tags').data('track-ids');
