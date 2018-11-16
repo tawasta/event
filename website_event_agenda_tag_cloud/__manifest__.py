@@ -22,7 +22,7 @@
 {
     'name': 'Website event track agenda word cloud',
     'summary': 'Add a word cloud filter to event agenda',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
