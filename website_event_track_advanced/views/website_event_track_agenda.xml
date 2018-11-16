@@ -169,7 +169,7 @@
 
                 <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
                 <div name="extra-info"
-                     t-if="track.type.attendable and track.speaker_ids"
+                     t-if="track.type.attendable"
                      class="extra-info" style="display:none;">
                     <!-- Time -->
                     <div t-if="track.date" class="track-td-time mt8">
@@ -185,7 +185,7 @@
                     </div>
 
                     <!-- Speakers -->
-                    <div name="track-td-speakers" class="track-td-speakers mt8">
+                    <div t-if="track.speaker_ids" name="track-td-speakers" class="track-td-speakers mt8">
                         <i t-if="speakers[track.id]" class="fa fa-comment"/>
                         <span t-esc="speakers[track.id]"/>
                     </div>
