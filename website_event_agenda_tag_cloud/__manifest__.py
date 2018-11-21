@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2017 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2018 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,9 +20,9 @@
 ##############################################################################
 
 {
-    'name': 'Add customizable track program paths',
-    'summary': 'Allows creating and saving program paths',
-    'version': '10.0.1.0.7',
+    'name': 'Website event track agenda word cloud',
+    'summary': 'Add a word cloud filter to event agenda',
+    'version': '10.0.1.0.2',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -36,16 +36,10 @@
     },
     'depends': [
         'website_event_track_advanced',
-        'website_utilities',
     ],
     'data': [
-        'data/website_utilities_data.xml',
-        'security/ir.model.access.csv',
-
-        'views/event_track_program_path_menu.xml',
-        'views/event_track_program_path_tree.xml',
-        'views/website_event_track_assets.xml',
-        'views/website_event_track_program_path.xml',
+        'views/website_event_track_agenda.xml',
+        'views/website_event_track_agenda_assets.xml',
     ],
     'demo': [
     ],
