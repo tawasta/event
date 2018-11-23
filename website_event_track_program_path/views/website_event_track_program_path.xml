@@ -39,7 +39,7 @@
         <xpath expr="//div[@id='filter-tracks']" position="after">
             <t t-if="program">
                 <a id='track-my-program-path'
-                   t-att-class="'btn btn-default' if program.track_ids else 'btn btn-default hidden'"
+                   t-att-class="'btn btn-default mt16' if program.track_ids else 'hidden'"
                    t-attf-href="/event/#{slug(event)}/program-path/#{slug(program)}">My program path</a>
             </t>
         </xpath>

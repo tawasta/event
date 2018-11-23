@@ -25,27 +25,32 @@ odoo.define('website_event_agenda_tag_cloud.tag_cloud', function (require) {
                 return $(this).data('keyword-id');
             }).get();
 
-            // Mute or unmute tracks
-            $('td.event_track').each(function(){
-                var tags = $(this).find('.track-td-tags').data('track-ids');
-                var match = false;
+            if(active_keywords.length != 0){
+                // Mute or unmute tracks
+                $('td.event_track').each(function(){
+                    var tags = $(this).find('.track-td-tags').data('track-ids');
+                    var match = false;
 
-                if(!tags){
-                    // No reason to match. Continue
-                    return;
-                }
-
-                // Check if any of the tags are in keywords
-                jQuery.each(tags, function( i, val) {
-                    if($.inArray(val, active_keywords) >= 0){
-                        match = true;
-                        // We have a match, break the inner loop
-                        return false;
+                    if(!tags){
+                        // No reason to match. Continue
+                        return;
                     }
-                });
 
-                $(this).toggleClass('muted', !match);
-            });
+                    // Check if any of the tags are in keywords
+                    jQuery.each(tags, function( i, val) {
+                        if($.inArray(val, active_keywords) >= 0){
+                            match = true;
+                            // We have a match, break the inner loop
+                            return false;
+                        }
+                    });
+
+                    $(this).toggleClass('muted', !match);
+                });
+            } else {
+                // Unmute all
+                $('td.event_track').removeClass('muted');
+            }
         });
     });
 
