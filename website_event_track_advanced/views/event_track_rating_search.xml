@@ -7,8 +7,12 @@
             <field name="arch" type="xml">
                 <search string="Search track ratings">
                     <group expand="0" string="Group By">
-                        <filter string="Track" name='groupby_track' context="{'group_by': 'event_track'}"/>
+                        <filter string="Presentation" name='groupby_track' context="{'group_by': 'event_track'}"/>
                     </group>
+                    <field name="event_id"/>
+                    <field name="event_track"/>
+                    <field name="rating"/>
+                    <field name="comment"/>
                 </search>
             </field>
         </record>

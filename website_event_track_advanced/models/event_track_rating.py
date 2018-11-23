@@ -7,9 +7,14 @@ class EventTrackRating(models.Model):
     _rec_name = 'rating'
     _order = 'event_track, rating'
 
+    event_id = fields.Many2one(
+        comodel_name='event.event',
+        string='Event',
+        related='event_track.event_id',
+    )
     event_track = fields.Many2one(
         comodel_name='event.track',
-        string='Event track',
+        string='Presentation',
     )
     rating = fields.Integer(
         string='Rating',
