@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_event_registration_form" model="ir.ui.view">
+        <field name="name">view.event.registration.form</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <group name="attendee" position="after">
+                <group string="Details" name="consent_details">
+                    <field name="consent_filled"/>
+                    <field name="token" groups="base.group_erp_manager"/>
+                </group>
+            </group>
+
+        </field>
+    </record> 
+</odoo>

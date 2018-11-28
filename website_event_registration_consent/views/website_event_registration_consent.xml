@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_consent" name="Registration consent">
+        <t t-call="website.layout">
+            <t t-set="title">Registration consent</t>
+            <div id="wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="text-center">
+                            <h1 id="page_header">Registration consent</h1>
+                        </div>
+                        <form id="registration_consent_form" class="col-md-10 col-md-offset-1">
+                            <div id="form_content">
+                                <!-- TODO add the form content to here in inherited template -->
+                            </div>
+                            <div class="col-xs-12 mt32 mb32">
+                                <button type="button" id="registration_consent_submit" 
+                                    class="btn btn-primary pull-right">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="registration_consent_thanks" name="Thank you for registration">
+        <t t-call="website.layout">
+            <t t-set="title">Thanks for registrating to event</t>
+            <div id="wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 mb32">
+                            <div class="heading">
+                                <h1 class="page-header">Thank you!</h1>
+                            </div>
+                            <div class="content">
+                                <p>Thank you for registrating to <t t-esc="name"/>!</p>
+                                <p>Click the button below to download your ticket to the event.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <a t-att-href="ticket_url" class="btn btn-primary">
+                                <i class="fa fa-download" aria-hidden="true"></i> Download ticket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

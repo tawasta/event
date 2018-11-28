@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_event_registration_ticket"
+        model="event.registration"
+        string="Registration Ticket"
+        report_type="qweb-pdf"
+        name="website_event_registration_consent.event_registration_ticket_template"
+        file="website_event_registration_consent.event_registration_ticket_template"
+        paperformat="event.paperformat_euro_lowmargin"/>
+
+</odoo>

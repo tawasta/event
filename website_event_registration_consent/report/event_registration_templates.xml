@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- 
+            Modifications to ticket nameplate.
+            TODO: Add noupdate="1" after finished
+         -->
+        <template id="event_registration_ticket_template">
+            <!-- Rewrite ticket template to add identifiers to customize it in customer specific modules -->
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div id="ticket" class="row">
+                            <!-- Front -->
+                            <div id="ticket_front" class="text-center" style="border-right:1px solid black;height:70mm;width:50%;float:left;margin-left:-2px;">
+                                <div class="row">
+                                    <div class="event-img">
+                                        <img t-att-src="'data:image/png;base64,%s' % o.event_id.image" alt="Logo" style="height:50px;width:auto;"/>
+                                    </div>
+                                    <div class="event-name" style="margin-bottom:16px;">
+                                        <span t-field="o.event_id.name" style="font-size:26px;line-height:26px;"/>
+                                    </div>
+                                    <div class="attendee-name">
+                                        <span t-field="o.name" style="font-size:24px;line-height:26px;"/>
+                                    </div>
+                                    <div class="ticket-type" style="margin-top:32px;">
+                                        <span t-field="o.event_ticket_id.name" style="font-size:24px;line-height:26px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Back -->
+                            <div id="ticket_back" class="text-center" style="height:70mm;width:50%;float:left;">
+                                <div class="row">
+                                    <div class="event-img">
+                                        <img t-att-src="'data:image/png;base64,%s' % o.event_id.image" alt="Logo" style="height:50px;width:auto;"/>
+                                    </div>
+                                    <div class="event-name" style="margin-bottom:16px;">
+                                        <span t-field="o.event_id.name" style="font-size:26px;line-height:26px;"/>
+                                    </div>
+                                    <div class="attendee-name">
+                                        <span t-field="o.name" style="font-size:24px;line-height:26px;"/>
+                                    </div>
+                                    <div class="ticket-type" style="margin-top:32px;">
+                                        <span t-field="o.event_ticket_id.name" style="font-size:24px;line-height:26px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ticket_cut" class="row" style="position:relative;">
+                            <i class="fa fa-cut" style="position:absolute;top:-7px;left:0px;"/>
+                        </div>
+                        <div id="ticket_info" class="col-xs-12" style="padding-top:32px;border-top:1px dashed black;margin-left:5px;">
+                            <!-- Add additional info to ticket here in inherited template -->
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    
+    </data>
+</odoo>
