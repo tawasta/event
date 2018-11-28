@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
+from uuid import uuid4
 
 # 2. Known third party imports:
 
