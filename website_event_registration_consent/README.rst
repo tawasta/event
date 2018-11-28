@@ -10,6 +10,8 @@ Adds token to users which is used to identify attendees.
 This is required so additional information (such as consent) can be
 asked from the attendee.
 
+This module also contains a basic tempalte for ticket (and report action).
+Use this template as a base for customer specific ticket modifications.
 
 Installation
 ============
