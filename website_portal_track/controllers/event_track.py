@@ -177,7 +177,7 @@ class WebsiteEventTrack(website_account):
             # Add workshop organization
             workshop_organizer = False
             if values.get('workshop_organizer'):
-                workshop_organizer = self._create_organization(values.get('workshop_organizer'))
+                workshop_organizer = WebsiteEventTrackController._create_organization(values.get('workshop_organizer'))
 
                 if workshop_organizer:
                     values['track']['organizer'] = workshop_organizer.id
