@@ -174,6 +174,22 @@ class WebsiteEventTrack(website_account):
 
             track_values['speaker_ids'] = speakers
 
+            # Add workshop organization
+            workshop_organizer = False
+            if values.get('workshop_organizer'):
+                workshop_organizer = self._create_organization(values.get('workshop_organizer'))
+
+                if workshop_organizer:
+                    values['track']['organizer'] = workshop_organizer.id
+
+            # Add organizer contact
+            if values.get('workshop_signee') and values.get('workshop_signee').get('name'):
+                if workshop_organizer:
+                    values['workshop_signee']['parent_id'] = workshop_organizer.id
+
+                signee = request.env['res.partner'].sudo().create(values['workshop_signee'])
+                values['track']['organizer_contact'] = signee.id
+
         track.write(track_values)
 
         if post.get('track-confirm') and post.get('track-confirm') != '':
