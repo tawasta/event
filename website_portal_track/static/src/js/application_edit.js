@@ -39,12 +39,14 @@ $(function() {
     });
 
     // Disable workshop inputs
+    /*
     $('#track-application-organization-signee-div').find('input').each(function() {
         $(this).prop('disabled', true);
     });
     $('#track-application-organization-invoice-div').find('input').each(function() {
         $(this).prop('disabled', true);
     });
+    */
 
     // Disable new speaker
     $('#track-application-speakers-input-row').prop('disabled', true);
