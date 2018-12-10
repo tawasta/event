@@ -6,6 +6,7 @@
             <field name="model">event.track.rating</field>
             <field name="arch" type="xml">
                 <search string="Search track ratings">
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]" />
                     <group expand="0" string="Group By">
                         <filter string="Presentation" name='groupby_track' context="{'group_by': 'event_track'}"/>
                     </group>
