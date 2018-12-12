@@ -1,0 +1,37 @@
+/* Agenda editor */
+.agenda-editor{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 3px solid rgba(0, 0, 0, 0.95);
+    background: rgba(255, 255, 255, 0.95);
+    max-height: 20%;
+}
+
+.agenda-editor{
+
+    .event_track:hover{
+        background-color: @brand-success;
+    }
+
+    .event-track-unassign {
+        background-color: @brand-warning;
+
+        &:hover{
+            background-color: @brand-warning;
+        }
+        &:active{
+            background-color: @brand-warning;
+        }
+    }
+
+    .track-program-move-icon:hover {
+        cursor: move;
+        color: @brand-primary;
+    }
+    .track-program-schedule-icon:hover {
+        cursor: pointer;
+        color: @brand-primary;
+    }
+}

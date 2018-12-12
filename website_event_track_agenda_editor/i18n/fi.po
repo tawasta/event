@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_track_program_path
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-29 10:46+0000\n"
+"PO-Revision-Date: 2018-09-04 15:20+0300\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fi\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.agenda_track_td_content
+msgid "Add to personal program"
+msgstr "Lisää omaan ohjelmapolkuun"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:66
+#, python-format
+msgid "Create your own program path"
+msgstr "Tee oma ITK-ohjelmapolku"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_create_uid
+msgid "Created by"
+msgstr "Luonut"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_create_date
+msgid "Created on"
+msgstr "Luotu"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:25
+#, python-format
+msgid "Error while trying to save. Please reload the page!"
+msgstr "Virhe tallentaessa. Ole hyvä ja lataa sivu uudelleen!"
+
+#. module: website_event_track_program_path
+#: model:ir.model,name:website_event_track_program_path.model_event_track
+msgid "Event Track"
+msgstr "Tapahtuman esitys"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path___last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_write_uid
+msgid "Last Updated by"
+msgstr "Viimeksi päivittänyt"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_write_date
+msgid "Last Updated on"
+msgstr "Viimeksi päivitetty"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:67
+#, python-format
+msgid "Login to create your own program path by selecting presentations from the program by pressing the star symbol"
+msgstr "Kirjaudu sivustolle ja tee ohjelmapolkusi valitsemalla ohjelmakartasta esityksiä painamalla tähti-symbolia"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share
+msgid "My"
+msgstr "Minun"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.agenda
+msgid "My program path"
+msgstr "Oma ohjelmapolku"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_name
+msgid "Name"
+msgstr "Nimi"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:69
+#, python-format
+msgid "Nb! creating a program path will not mandate a participation for the selected presentations and also will not reserve a seat for you"
+msgstr "Huom. ohjelmapolun tekeminen ei edellytä osallistumista valitsemiisi esityksiin, eikä myöskään varaa paikkaa ohjelmapolussasi oleviin esityksiin"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_user_id
+msgid "Owner"
+msgstr "Omistaja"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:39
+#, python-format
+msgid "Please sign in before customizing your program"
+msgstr "Ole hyvä ja kirjaudu sisään ennen kuin muokkaat ohjelmaasi"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_track_ids
+msgid "Presentations"
+msgstr "Esitykset"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.event_track_program_path_tree
+msgid "Program path"
+msgstr "Ohjelmapolku"
+
+#. module: website_event_track_program_path
+#: model:ir.actions.act_window,name:website_event_track_program_path.event_track_program_path_action
+#: model:ir.ui.menu,name:website_event_track_program_path.event_track_program_path_menu
+#: model:ir.ui.menu,name:website_event_track_program_path.menu_event_track_program
+msgid "Program paths"
+msgstr "Ohjelmapolut"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.agenda_track_td_content
+msgid "Remove from personal program"
+msgstr "Poista omasta ohjelmapolusta"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share_facebook
+msgid "Share this program path on Facebook"
+msgstr "Jaa tämä ohjelmapolku Facebookissa"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share_google
+msgid "Share this program path on Google+"
+msgstr "Jaa tämä ohjelmapolku Google+:ssa"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share_twitter
+msgid "Share this program path on Twitter"
+msgstr "Jaa tämä ohjelmapolku Twitterissä"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share
+msgid "Share your program path:"
+msgstr "Jaa ohjelmapolkusi"
+
+#. module: website_event_track_program_path
+#: model:ir.model.fields,field_description:website_event_track_program_path.field_event_track_program_path_url
+msgid "Url"
+msgstr "Verkko-osoite"
+
+#. module: website_event_track_program_path
+#. openerp-web
+#: code:addons/website_event_track_program_path/static/src/js/agenda.js:68
+#, python-format
+msgid "You can also share your program path with others."
+msgstr " Voit myös jakaa ohjelmapolkusi muille."
+
+#. module: website_event_track_program_path
+#: model:ir.model,name:website_event_track_program_path.model_event_track_program_path
+msgid "event.track.program.path"
+msgstr "event.track.program.path"
+
+#. module: website_event_track_program_path
+#: model:ir.ui.view,arch_db:website_event_track_program_path.program_path_share
+msgid "program path:"
+msgstr "ohjelmapolku:"
