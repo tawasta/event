@@ -33,10 +33,6 @@
 
                 <t t-call="website_event_track_advanced.agenda_day_content"/>
             </section>
-
-            <t t-if="user.has_group('event.group_event_manager')">
-                <t t-call="website_event_track_advanced.agenda_editor"/>
-            </t>
         </t>
 
         <script type="text/javascript"
@@ -364,48 +360,6 @@
                 src="/website_event_track_advanced/static/src/js/floatingscroll.min.js?v107"></script>
         <script type="text/javascript"
                 src="/website_event_track_advanced/static/src/js/scrollbar.js?v107"></script>
-    </template>
-
-    <!-- Agenda editor -->
-    <!--Agenda date content -->
-    <template id="agenda_editor">
-        <div class="agenda-editor">
-            <table id="agenda-editor-table"
-                   class="agenda-editor-table table-responsive table table-bordered table-condensed">
-                <tr>
-                    <td class="event_track event-track-unassign text-muted">
-                        <div class="event-track-program-unassign pull-right">
-                            <span class="fa fa-trash fa-2x track-program-unassign-icon"
-                                  title="Remove from schedule"/>
-                        </div>
-                        <div class="track-td-name">Drop here to remove from
-                            schedule
-                        </div>
-                    </td>
-
-                    <t t-foreach="unassigned_tracks" t-as="track">
-
-                        <td class="event_track"
-                            t-attf-name="track_#{track.id}"
-                            draggable="true">
-                            <div>
-                                <div class="event-track-program-move pull-right"
-                                     draggable="true">
-                                    <span class="fa fa-arrows fa-2x track-program-move-icon"
-                                          title="Move"/>
-                                </div>
-
-                                <div class="track-td-name">
-                                    <span t-esc="track and track.name"/>
-                                </div>
-                                <span t-esc="track.duration"
-                                      t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
-                            </div>
-                        </td>
-                    </t>
-                </tr>
-            </table>
-        </div>
     </template>
 
 </odoo>

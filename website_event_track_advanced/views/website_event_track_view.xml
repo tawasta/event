@@ -71,9 +71,6 @@
                     <div class="col-md-4" id="right_column">
 
                         <div t-if="not track.event_id.event_over" class="panel panel-default">
-                            <span t-esc="track.event_id" />
-                            <span t-esc="track.event_id.date_end" />
-
                             <div class="panel-heading">
                                 <h4>Practical Info</h4>
                             </div>
