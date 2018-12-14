@@ -11,7 +11,6 @@ from odoo.http import request
 from odoo.exceptions import AccessError
 
 # 4. Imports from Odoo modules:
-from odoo.addons.website_portal.controllers.main import website_account
 from odoo.addons.website_event_track_advanced.controllers.event_track_proposal import WebsiteEventTrackController
 
 # 5. Local imports in the relative form:
@@ -20,7 +19,7 @@ from odoo.addons.website_event_track_advanced.controllers.event_track_proposal i
 _logger = logging.getLogger(__name__)
 
 
-class WebsiteEventTrack(website_account):
+class WebsiteEventTrack(WebsiteEventTrackController):
 
     # Add track count to account main menu
     @http.route()
