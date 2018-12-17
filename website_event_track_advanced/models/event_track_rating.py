@@ -28,7 +28,12 @@ class EventTrackRating(models.Model):
         string='Comment',
     )
 
-    @api.depends('active')
-    def _compute_track_rating(self):
+    @api.multi
+    def write(self, values):
+        res = super(EventTrackRating, self).write(values)
+
         for record in self:
-            record.event_track._compute_rating_avg()
+            if 'active' in values:
+                record.event_track._compute_rating_avg()
+
+        return res
