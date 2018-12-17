@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class EventTrackRating(models.Model):
@@ -27,3 +27,8 @@ class EventTrackRating(models.Model):
     comment = fields.Char(
         string='Comment',
     )
+
+    @api.depends('active')
+    def _compute_track_rating(self):
+        for record in self:
+            record.event_track._compute_rating_avg()
