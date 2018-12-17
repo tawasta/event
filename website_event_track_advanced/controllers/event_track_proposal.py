@@ -277,6 +277,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'city': post.get('organizer_city'),
             'ref': post.get('organizer_reference'),
             'type': 'invoice',
+            'business_id': post.get('organizer_business_id'),
+            'edicode': post.get('organizer_edicode'),
         }
 
         name = "%s %s" % (post.get('signee_last_name'), post.get('signee_first_name'))
@@ -330,5 +332,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             # Organization doesn't exists. Create one
             organization_values['is_company'] = True
             organization = request.env['res.partner'].sudo().create(organization_values)
+        else:
+            # Organization exists. Update it
+            organization.write(organization_values)
 
         return organization
