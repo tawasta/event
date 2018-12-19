@@ -22,7 +22,7 @@
 {
     'name': 'Website event track state menuitems',
     'summary': 'Website event track state menuitems',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
@@ -35,7 +35,7 @@
         'bin': [],
     },
     'depends': [
-        'website_event_track',
+        'website_event_track_advanced',
     ],
     'data': [
         'views/event_track_menu.xml',
