@@ -36,6 +36,20 @@
         <field name="domain">[('state', '=', 'published'),('type.attendable', '=', True)]</field>
     </record>
 
+    <record id="action_event_track_refused" model="ir.actions.act_window">
+        <field name="name">Refused tracks</field>
+        <field name="res_model">event.track</field>
+        <field name="view_mode">tree,kanban,form,calendar,graph</field>
+        <field name="domain">[('state', '=', 'refused'),('type.attendable', '=', True)]</field>
+    </record>
+
+    <record id="action_event_track_cancel" model="ir.actions.act_window">
+        <field name="name">Cancelled tracks</field>
+        <field name="res_model">event.track</field>
+        <field name="view_mode">tree,kanban,form,calendar,graph</field>
+        <field name="domain">[('state', '=', 'cancel'),('type.attendable', '=', True)]</field>
+    </record>
+
     <menuitem id="menu_event_track_configuration"
               name="CFP configuration"
               sequence="20"
