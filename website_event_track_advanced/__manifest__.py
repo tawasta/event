@@ -46,7 +46,6 @@
         'website_event_track_disable_translate',
         'website_event_track_image',
         'website_event_track_mass_mailing',
-        'website_event_track_state_menuitems',
         'website_utilities',
     ],
     'data': [
