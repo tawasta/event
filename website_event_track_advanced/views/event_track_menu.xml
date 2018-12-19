@@ -110,4 +110,20 @@
             sequence="50"
             groups="event.group_event_manager"/>
 
+    <menuitem
+            id="menu_event_track_list_refused"
+            name="Refused"
+            action="action_event_track_refused"
+            parent="menu_event_track_list"
+            sequence="60"
+            groups="event.group_event_manager"/>
+
+    <menuitem
+            id="menu_event_track_list_cancel"
+            name="Cancelled"
+            action="action_event_track_cancel"
+            parent="menu_event_track_list"
+            sequence="70"
+            groups="event.group_event_manager"/>
+
 </odoo>
