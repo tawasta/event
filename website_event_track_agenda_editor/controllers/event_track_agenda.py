@@ -1,11 +1,14 @@
 import logging
 import re
+import pytz
+from datetime import datetime
 
 from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import AccessError, MissingError
 from odoo.addons.website_event_track_advanced.controllers.event_track_agenda \
     import WebsiteEventTrackController
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -124,8 +127,23 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
             return_url = '%s%s/agenda' % (return_url, track.event_id.id)
 
-            if post.get('date') and post.get('time'):
-                track.date = '%s %s:00' % (post.get('date'), post.get('time'))
+            if post.get('date'):
+                start_date = '%s:00' % post.get('date')
+
+                # Convert to UTC for saving
+                user_tz = request.env.user.tz or pytz.utc
+                local = pytz.timezone(user_tz)
+                native = datetime.strptime(
+                    start_date, DEFAULT_SERVER_DATETIME_FORMAT
+                )
+
+                local_dt = local.localize(native, is_dst=None)
+                utc_dt = local_dt.astimezone(pytz.utc)
+
+                utc_dt.strftime("%Y-%m-%d %H:%M:%S")
+
+                track.date = utc_dt.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+
 
             if post.get('location_id'):
                 track.location_id = int(post.get('location_id'))

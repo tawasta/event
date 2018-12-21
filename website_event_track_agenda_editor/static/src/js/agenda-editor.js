@@ -98,4 +98,18 @@ odoo.define('website_event_track_agenda_editor.agenda', function (require) {
             }
         });
     });
+
+    $(function (){
+        console.log("moi");
+        $('#track-date').datetimepicker({
+            icons: {
+                time: 'fa fa-clock-o',
+                date: 'fa fa-calendar',
+                up: 'fa fa-arrow-up',
+                down: 'fa fa-arrow-down',
+            },
+            format : 'YYYY-MM-DD HH:mm'
+        })
+    });
+
 });
