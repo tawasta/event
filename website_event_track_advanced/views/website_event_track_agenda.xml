@@ -148,80 +148,13 @@
                   title="This presentation is overlapping with another presentation"/>
         </div>
 
-        <a name="event-track-link"
-           t-attf-href="/event/#{ slug(event) }/track/#{ slug(track) }?source=agenda">
-
-            <div style="height:100%;width:100%"
-                 class="event-track-content track-td-name" data-html="true"
-                 data-placement="bottom" data-toggle="tooltip">
-                <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
-                    <span t-esc="track and track.name"/>
-                    <t t-if="track and track.duration and track.duration > 0 and not track.type.attendable">
-                        <br/>
-                        <span t-field="track.duration"
-                              t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
-                    </t>
-                </div>
-
-                <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
-                <div name="extra-info"
-                     t-if="track.type.attendable"
-                     class="extra-info" style="display:none;">
-                    <!-- Time -->
-                    <div t-if="track.date" class="track-td-time mt8">
-                        <span t-field="track.date"
-                              t-options='{"hide_seconds":"True"}'/>
-                        <br/>
-                        <span t-field="track.date_end"
-                              t-options='{"hide_seconds":"True"}'/>
-                        <br/>
-                        <i class="fa fa-clock-o"/>
-                        <span t-field="track.duration"
-                              t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
-                    </div>
-
-                    <!-- Speakers -->
-                    <div t-if="track.speaker_ids" name="track-td-speakers" class="track-td-speakers mt8">
-                        <i t-if="speakers[track.id]" class="fa fa-comment"/>
-                        <span t-esc="speakers[track.id]"/>
-                    </div>
-
-                    <!-- Chairperson -->
-                    <div t-if="track.chairperson_id"
-                         t-attf-name="chairperson_#{track.chairperson_id.id}"
-                         class="track-td-chairperson mt8">
-                        <i class="fa fa-gavel"/>
-                        <span t-esc="track.chairperson_id.name"/>
-                    </div>
-
-                    <!-- Target group -->
-                    <div t-if="track.target_group"
-                         t-attf-name="target_group_#{track.target_group.id}"
-                         class="track-td-targetgroup mt8">
-                        <i class="fa fa-dot-circle-o"/>
-                        <span t-esc="track.target_group.name"/>
-                    </div>
-
-                    <!-- Track tags -->
-                    <div name="track-td-tags"
-                         t-attf-name="tags_#{tags[track.id]}"
-                         t-att-data-track-ids="track.tag_ids.ids"
-                         class="track-td-tags mt8">
-                        <i t-if="tags[track.id]" class="fa fa-tag"/>
-                        <span t-esc="tags[track.id]"/>
-                    </div>
-
-                    <!-- Twitter hashtag -->
-                    <div t-if="event.show_track_twitter_hashtags"
-                         name="track-td-twitter"
-                         class="twitter-link track-td-twitter mt8">
-                        <i class="fa fa-twitter"/>
-                        #
-                        <span t-esc="track.twitter_hashtag"/>
-                    </div>
-                </div>
-            </div>
+        <a t-if="track.type.attendable" name="event-track-link"
+           t-att-href="'/event/' + slug(event) + '/track/' + slug(track) + '?source=agenda'">
+            <t t-call="website_event_track_advanced.agenda_track_td_link_content" />
         </a>
+        <t t-if="not track.type.attendable">
+            <t t-call="website_event_track_advanced.agenda_track_td_link_content" />
+        </t>
 
         <div t-if="event.show_track_twitter_hashtags and track.type.attendable"
              class="event-track-content track-td-twitter">
@@ -233,6 +166,80 @@
                 #
                 <span t-esc="track.twitter_hashtag"/>
             </a>
+        </div>
+    </template>
+
+    <!-- Agenda td link content -->
+    <template id="website_event_track_advanced.agenda_track_td_link_content">
+        <div style="height:100%;width:100%"
+             class="event-track-content track-td-name" data-html="true"
+             data-placement="bottom" data-toggle="tooltip">
+            <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
+                <span t-esc="track and track.name"/>
+                <t t-if="track and track.duration and track.duration > 0 and not track.type.attendable">
+                    <br/>
+                    <span t-field="track.duration"
+                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                </t>
+            </div>
+
+            <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
+            <div name="extra-info"
+                 t-if="track.type.attendable"
+                 class="extra-info" style="display:none;">
+                <!-- Time -->
+                <div t-if="track.date" class="track-td-time mt8">
+                    <span t-field="track.date"
+                          t-options='{"hide_seconds":"True"}'/>
+                    <br/>
+                    <span t-field="track.date_end"
+                          t-options='{"hide_seconds":"True"}'/>
+                    <br/>
+                    <i class="fa fa-clock-o"/>
+                    <span t-field="track.duration"
+                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
+                </div>
+
+                <!-- Speakers -->
+                <div t-if="track.speaker_ids" name="track-td-speakers" class="track-td-speakers mt8">
+                    <i t-if="speakers[track.id]" class="fa fa-comment"/>
+                    <span t-esc="speakers[track.id]"/>
+                </div>
+
+                <!-- Chairperson -->
+                <div t-if="track.chairperson_id"
+                     t-attf-name="chairperson_#{track.chairperson_id.id}"
+                     class="track-td-chairperson mt8">
+                    <i class="fa fa-gavel"/>
+                    <span t-esc="track.chairperson_id.name"/>
+                </div>
+
+                <!-- Target group -->
+                <div t-if="track.target_group"
+                     t-attf-name="target_group_#{track.target_group.id}"
+                     class="track-td-targetgroup mt8">
+                    <i class="fa fa-dot-circle-o"/>
+                    <span t-esc="track.target_group.name"/>
+                </div>
+
+                <!-- Track tags -->
+                <div name="track-td-tags"
+                     t-attf-name="tags_#{tags[track.id]}"
+                     t-att-data-track-ids="track.tag_ids.ids"
+                     class="track-td-tags mt8">
+                    <i t-if="tags[track.id]" class="fa fa-tag"/>
+                    <span t-esc="tags[track.id]"/>
+                </div>
+
+                <!-- Twitter hashtag -->
+                <div t-if="event.show_track_twitter_hashtags"
+                     name="track-td-twitter"
+                     class="twitter-link track-td-twitter mt8">
+                    <i class="fa fa-twitter"/>
+                    #
+                    <span t-esc="track.twitter_hashtag"/>
+                </div>
+            </div>
         </div>
     </template>
 
