@@ -7,6 +7,6 @@ class EventEvent(models.Model):
 
     event_introduction_track_id = fields.Many2one(
         comodel_name='event.track',
-        name='Event introduction',
+        string='Event introduction',
         help='Use this presentation as event introduction',
     )
