@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="event_description_full" name="Event description from track" inherit_id="website_event.event_description_full">
+        <xpath expr="//div[@itemprop='description']" position="after">
+            <t t-set="track" t-value="event.event_introduction_track_id" />
+            <t t-if="track" t-call="website_event_track_advanced.track_view_info"/>
+        </xpath>
+    </template>
+
+</odoo>
