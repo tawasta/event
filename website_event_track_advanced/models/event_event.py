@@ -136,6 +136,7 @@ class EventEvent(models.Model):
 
                     if previous_track_end[0:10] != track.date[0:10]:
                         # Different days. No break here
+                        previous_track_end = track.date_end
                         continue
 
                     duration = abs(dateutil.parser.parse(track.date) -
@@ -151,6 +152,7 @@ class EventEvent(models.Model):
                         duration=duration,
                         type=break_type.id,
                         website_published=True,
+                        color=1,
                     )
 
                     previous_track_end = track.date_end
