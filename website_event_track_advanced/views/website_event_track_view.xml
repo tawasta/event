@@ -63,97 +63,109 @@
 
                 </div>
 
-                <section class="row mt32">
-                    <div class="col-md-8 mb32" id="left_column">
-                        <t t-call="website_event_track_advanced.track_form_description" />
-                    </div>
-
-                    <div class="col-md-4" id="right_column">
-
-                        <div t-if="not track.event_id.event_over" class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Practical Info</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div t-if="track.date">
-                                    <strong>Starts</strong><br/>
-                                    <span t-field="track.date"
-                                          t-options='{"hide_seconds":"True"}'/><br/>
-                                </div>
-                                <div t-if="track.date_end">
-                                    <strong>Ends</strong><br/>
-                                    <span t-field="track.date_end"
-                                          t-options='{"hide_seconds":"True"}'/><br/>
-                                </div>
-
-                                <div t-if="track.duration">
-                                    <strong>Duration</strong><br/>
-                                    <span t-field="track.duration"
-                                          t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/><br/>
-                                </div>
-
-                                <div t-if="track.location_id">
-                                    <strong>Location</strong><br/>
-                                    <span t-field="track.location_id"/><br/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default" t-if="track.target_group or track.chairperson_id">
-                            <div class="panel-heading">
-                                <h4>Presentation Info</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div t-if="track.chairperson_id">
-                                    <p>
-                                        <strong>Chairperson</strong><br/>
-                                        <span t-field="track.chairperson_id" />
-                                    </p>
-                                </div>
-
-                                <div t-if="track.target_group">
-                                    <p>
-                                        <strong>Target group</strong><br/>
-                                        <span t-field="track.target_group" />
-                                    </p>
-                                </div>
-
-                                <div t-if="track.target_group_info and track.target_group">
-                                    <p>
-                                        <strong>Target group info</strong><br/>
-                                        <span t-field="track.target_group_info" />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default" t-if="track.speaker_ids">
-                            <div class="panel-heading">
-                                <h4>Presenters</h4>
-                            </div>
-
-                            <div class="panel-body">
-                                <div t-foreach="track.speaker_ids"
-                                     t-as="speaker" class="">
-
-                                    <p class="font-weight-bold" t-field="speaker.name" />
-                                    <p t-if="speaker.parent_id" class="text-muted" t-field="speaker.parent_id.name" />
-                                    <p t-if="speaker.function" class="text-muted" t-field="speaker.function" />
-                                    <p t-if="speaker.website" class="text-muted">
-                                        <a t-att-href="speaker.website" target="_blank"><span t-field="speaker.website" /></a>
-                                    </p>
-
-                                    <hr t-if="not speaker_last" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <t t-call="website_event_track_advanced.track_view_info" />
             </div>
         </t>
 
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_view.js?v100"></script>
     </template>
+
+   <template id="website_event_track_advanced.track_view_info">
+        <section class="row mt32">
+            <div class="col-md-8 mb32" id="left_column">
+                <t t-call="website_event_track_advanced.track_form_description" />
+            </div>
+
+            <div class="col-md-4" id="right_column">
+
+                <div t-if="track.date and not track.event_id.event_over" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Practical Info</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div t-if="track.date">
+                            <strong>Starts</strong><br/>
+                            <span t-field="track.date"
+                                  t-options='{"hide_seconds":"True"}'/><br/>
+                        </div>
+                        <div t-if="track.date_end">
+                            <strong>Ends</strong><br/>
+                            <span t-field="track.date_end"
+                                  t-options='{"hide_seconds":"True"}'/><br/>
+                        </div>
+
+                        <div t-if="track.duration">
+                            <strong>Duration</strong><br/>
+                            <span t-field="track.duration"
+                                  t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/><br/>
+                        </div>
+
+                        <div t-if="track.location_id">
+                            <strong>Location</strong><br/>
+                            <span t-field="track.location_id"/><br/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" t-if="track.target_group or track.chairperson_id">
+                    <div class="panel-heading">
+                        <h4>Presentation Info</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div t-if="track.chairperson_id">
+                            <p>
+                                <strong>Chairperson</strong><br/>
+                                <span t-field="track.chairperson_id" />
+                            </p>
+                        </div>
+
+                        <div t-if="track.target_group">
+                            <p>
+                                <strong>Target group</strong><br/>
+                                <span t-field="track.target_group" />
+                            </p>
+                        </div>
+
+                        <div t-if="track.target_group_info and track.target_group">
+                            <p>
+                                <strong>Target group info</strong><br/>
+                                <span t-field="track.target_group_info" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default" t-if="track.speaker_ids">
+                    <div class="panel-heading">
+                        <h4>Presenters</h4>
+                    </div>
+
+                    <div class="panel-body">
+                        <div t-foreach="track.speaker_ids"
+                             t-as="speaker" class="">
+
+                            <p class="font-weight-bold" t-field="speaker.name" />
+                            <p t-if="speaker.parent_id" class="text-muted" t-field="speaker.parent_id.name" />
+                            <p t-if="speaker.function" class="text-muted" t-field="speaker.function" />
+                            <p t-if="speaker.website" class="text-muted">
+                                <a t-att-href="speaker.website" target="_blank"><span t-field="speaker.website" /></a>
+                            </p>
+
+                            <hr t-if="not speaker_last" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div t-if="track.workshop_goals" class="col-xs-12">
+                <t t-call="website_event_track_advanced.track_form_goals_panel" />
+            </div>
+
+            <div t-if="track.workshop_schedule" class="col-xs-12">
+                <t t-call="website_event_track_advanced.track_form_schedule_panel" />
+            </div>
+        </section>
+   </template>
 
    <template id="presentation_list">
         <t t-call="website_event.event_details">
@@ -322,6 +334,36 @@
                 </div>
             </div>
         </div>
+    </template>
+
+    <template id="track_form_goals_panel">
+        <div t-if="track.workshop_goals" class="panel panel-default" id="track-form-goals">
+            <div class="panel-heading">
+                <h4>Goals</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div t-field="track.workshop_goals"/>
+                </div>
+
+            </div>
+        </div>
+
+    </template>
+
+    <template id="track_form_schedule_panel">
+        <div t-if="track.workshop_schedule" class="panel panel-default" id="track-form-schedule">
+            <div class="panel-heading">
+                <h4>Schedule</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div t-field="track.workshop_schedule"/>
+                </div>
+
+            </div>
+        </div>
+
     </template>
 
 </odoo>
