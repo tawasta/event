@@ -58,13 +58,6 @@
             groups="event.group_event_manager"/>
 
     <menuitem
-            id="menu_event_track_reviews"
-            name="Track reviews"
-            parent="event.event_main_menu"
-            sequence="12"
-            groups="event.group_event_manager"/>
-
-    <menuitem
             id="menu_event_track_list_all"
             name="All tracks"
             action="action_event_track_all"
