@@ -134,7 +134,8 @@ class EventEvent(models.Model):
                         previous_track_end = track.date_end
                         continue
 
-                    if previous_track_end[0:10] != track.date[0:10]:
+                    if previous_track_end and \
+                            previous_track_end[0:10] != track.date[0:10]:
                         # Different days. No break here
                         previous_track_end = track.date_end
                         continue
