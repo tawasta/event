@@ -38,10 +38,13 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         searches = {}
 
         posters = request.env['event.track'].sudo().with_context(
-            tz=event.date_tz).search([
-            ('type.code', '=', 'poster'),
-            ('website_published', '=', True),
-        ])
+            tz=event.date_tz).search(
+            [
+                ('type.code', '=', 'poster'),
+                ('website_published', '=', True),
+                ('event_id', '=', event.id),
+            ]
+        )
         posters = posters.sorted(key=attrgetter('date', 'name'))
 
         if tag:
