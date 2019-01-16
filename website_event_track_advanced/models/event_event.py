@@ -6,7 +6,7 @@ import dateutil.parser
 # 2. Known third party imports:
 
 # 3. Odoo imports:
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 # 4. Imports from Odoo modules:
 
@@ -159,5 +159,23 @@ class EventEvent(models.Model):
 
                     previous_track_end = track.date_end
                     track_model.create(track_values)
+
+    def week_days(self, weekday):
+        weekday=int(weekday)
+        weekdays = [
+            _("Sunday"),
+            _("Monday"),
+            _("Tuesday"),
+            _("Wednesday"),
+            _("Thursday"),
+            _("Friday"),
+            _("Saturday")
+
+            ]
+
+        print weekdays
+        
+
+        return weekdays[weekday]
 
     # 8. Business methods
