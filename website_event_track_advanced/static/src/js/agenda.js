@@ -133,19 +133,4 @@ odoo.define('agenda', function (require) {
     $('.print-event-program').click(function() {
         window.print();
      });
-
-    function getDays(dateString) {
-
-    var weekday = new Array(7);
-    weekday[0]=  _t("Sunday");
-    weekday[1] = _t("Monday");
-    weekday[2] = _t("Tuesday";)
-    weekday[3] = _t("Wednesday";)
-    weekday[4] = _t("Thursday";)
-    weekday[5] = _t("Friday";)
-    weekday[6] = _t("Saturday");
-
-    }
-
-    
 });
