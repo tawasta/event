@@ -337,9 +337,11 @@
                                     </t>
                                     <td t-if="not track"
                                         t-att-rowspan="dt[1][location][3]"
-                                        class="event_track text-muted">
+                                        class="event_track text-muted event_color_1">
                                         <div class="track-td-name">
-                                            -
+                                            <div class="text-muted">
+                                                <span class="track-td-name-empty">-</span>
+                                            </div>
                                         </div>
                                     </td>
                                 </t>
@@ -355,10 +357,13 @@
                                     <t t-call="website_event_track_advanced.agenda_track_td_content"/>
                                 </td>
                             </t>
-                            <td t-if="not track" t-att-colspan="len(locations)"
-                                class="event_track text-muted">
-                                <div class="track-td-name">
-                                    -
+                            <td t-if="not track"
+                                t-att-colspan="len(locations)"
+                                class="event_track text-muted event_color_1">
+                                <div class="track-td-name track-td-empty">
+                                    <div class="text-muted">
+                                        <span class="track-td-name-empty">-</span>
+                                    </div>
                                 </div>
                             </td>
                         </t>
