@@ -177,7 +177,6 @@
             <div t-attf-class="{{ 'text-muted' if not track.type.attendable else '' }}">
                 <span t-esc="track and track.name"/>
                 <t t-if="track and track.duration and track.duration > 0 and not track.type.attendable">
-                    <br/>
                     <span class="track-duration" t-field="track.duration"
                           t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
                 </t>
