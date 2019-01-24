@@ -115,9 +115,12 @@ class EventEvent(models.Model):
 
             for location_id in locations:
                 tracks = track_model.search([
+                    '|',
                     ('location_id', '=', location_id.id),
+                    ('location_id', '=', False),
                     ('event_id', '=', record.id),
                     ('date', '!=', False),
+                    ('website_published', '=', True),
                 ],
                     order='date'
                 )
