@@ -99,6 +99,13 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
+    def action_cron_generate_breaks(self):
+        # Search events that aren't over yet
+        events = self.search([('date_end', '>', fields.Datetime.now())])
+
+        for event in events:
+            event.action_generate_breaks()
+
     def action_generate_breaks(self):
         break_type = self.env.ref('event.event_track_type_break')
         track_model = self.env['event.track']
