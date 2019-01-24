@@ -178,7 +178,7 @@
                 <span t-esc="track and track.name"/>
                 <t t-if="track and track.duration and track.duration > 0 and not track.type.attendable">
                     <br/>
-                    <span t-field="track.duration"
+                    <span class="track-duration" t-field="track.duration"
                           t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
                 </t>
             </div>
@@ -196,7 +196,7 @@
                           t-options='{"hide_seconds":"True"}'/>
                     <br/>
                     <i class="fa fa-clock-o"/>
-                    <span t-field="track.duration"
+                    <span class="track-duration" t-field="track.duration"
                           t-options='{"widget": "duration", "unit": "hour", "round": "minute"}'/>
                 </div>
 
