@@ -304,13 +304,11 @@
                                 </t>
 
                                 <t t-if="not dt_last">
-                                    <span t-esc="dt[0].strftime('%H:%M')"/>
-                                    -
+                                    <span t-esc="dt[0].strftime('%H:%M')"/>-
                                     <span t-esc="next_dt[0].strftime('%H:%M')"/>
                                 </t>
                                 <t t-if="dt_last">
-                                    <span t-esc="dt[0].strftime('%H:%M')"/>
-                                    -
+                                    <span t-esc="dt[0].strftime('%H:%M')"/>-
                                     <span t-esc="dt[3].strftime('%H:%M')"/>
                                 </t>
                             </div>
