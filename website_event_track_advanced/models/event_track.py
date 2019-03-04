@@ -183,11 +183,6 @@ class EventTrack(models.Model):
         compute='_compute_speakers_string',
     )
 
-    speakers_orgranization = fields.Text(
-        string='Organization',
-        
-    )
-
     date_end = fields.Datetime(
         string='End date',
         compute='compute_date_end',
