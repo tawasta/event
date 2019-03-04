@@ -183,6 +183,11 @@ class EventTrack(models.Model):
         compute='_compute_speakers_string',
     )
 
+    speakers_orgranization = fields.Text(
+        string='Organization',
+        
+    )
+
     date_end = fields.Datetime(
         string='End date',
         compute='compute_date_end',
@@ -304,11 +309,14 @@ class EventTrack(models.Model):
         for record in self:
             speakers = ''
             for speaker in record.speaker_ids:
-                speakers += " %s," % speaker.name
+                speakers += " %s," % speaker.display_name
+
 
             speakers = speakers[1:-1]
 
             record.speakers_string = speakers
+
+
 
     @api.multi
     @api.depends('description')
