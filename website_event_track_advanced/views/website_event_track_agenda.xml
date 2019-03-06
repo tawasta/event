@@ -127,13 +127,13 @@
     <!-- Agenda td content -->
     <template id="agenda_track_td_content">
         <t t-if="user.has_group('event.group_event_manager') and track.type.code != 'break'">
-            <div class="event-track-program-move pull-right" draggable="true">
+            <div class="event-track-program-move pull-right" draggable="true" data-html2canvas-ignore="true">
                 <span class="fa fa-arrows fa-2x track-program-move-icon"
                       title="Move"/>
             </div>
         </t>
 
-        <div class="pull-right">
+        <div class="pull-right" data-html2canvas-ignore="true">
             <a t-if="track.attachment_ids or track.extra_materials_plain"
                class="fa fa-2x fa-download"
                title="Downloadable presentation material available"
@@ -141,7 +141,7 @@
             />
         </div>
 
-        <div class="pull-right" t-if="track.overlapping_location_track_ids">
+        <div class="pull-right" t-if="track.overlapping_location_track_ids" data-html2canvas-ignore="true">
 
             <span t-if="user.has_group('event.group_event_manager')"
                   class="fa fa-exclamation-triangle fa-2x"
@@ -259,13 +259,31 @@
                     talks
                 </small>
 
-                <span class="fa fa-chevron-down chevron-toggle"
-                      title="Show program" style="display: none;"/>
-                <span class="fa fa-chevron-up chevron-toggle"
-                      title="Hide program"/>
+                <button type="button"
+                        class="btn-link chevron-toggle collapse"
+                        style="margin-left: 5px;"
+                        title="Show program" >
+                    <span class="fa fa-chevron-down"
+                          title="Show program"/>
+                </button>
+
+                <button type="button"
+                        class="btn-link chevron-toggle"
+                        style="margin-left: 5px;"
+                        title="Hide program" >
+                    <span class="fa fa-chevron-up"
+                          title="Hide program"/>
+                </button>
+
             </span>
-            <span class="fa fa-print print-event-program"
-                  title="Print event program"/>
+
+            <button id="print-event-program"
+                    type="button"
+                    class="btn-link print-event-program"
+                    style="margin-left: 5px;"
+                    title="Print event program" >
+                <i class="fa fa-print" />
+            </button>
         </h3>
 
     </template>
