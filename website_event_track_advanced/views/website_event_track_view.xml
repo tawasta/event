@@ -35,7 +35,6 @@
             </div>
             <div class="container">
                 <div class="clearfix"/>
-                <h2 t-field="track.name" class="text-center"/>
 
                 <h3 t-field="event.name" class="text-center text-muted"/>
 
@@ -61,6 +60,11 @@
                         <span class="fa fa-chevron-left" /> Back to presentations</a>
                     </t>
 
+                </div>
+                <div class="panel panel-success mt16">
+                    <div class="panel-heading">
+                        <h4 t-field="track.name" class="text-center"/>
+                    </div>
                 </div>
 
                 <t t-call="website_event_track_advanced.track_view_info" />

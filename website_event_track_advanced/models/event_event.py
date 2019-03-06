@@ -48,6 +48,8 @@ class EventEvent(models.Model):
         compute='_compute_event_over',
     )
 
+    location_ids = fields.Many2many('event.track.location', string='Locations')
+
     # 3. Default methods
     @api.multi
     def name_get(self):

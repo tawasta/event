@@ -304,11 +304,14 @@ class EventTrack(models.Model):
         for record in self:
             speakers = ''
             for speaker in record.speaker_ids:
-                speakers += " %s," % speaker.name
+                speakers += " %s," % speaker.display_name
+
 
             speakers = speakers[1:-1]
 
             record.speakers_string = speakers
+
+
 
     @api.multi
     @api.depends('description')

@@ -52,8 +52,8 @@
                         </t>
                     </p>
                     <a t-if="doc.video_url" t-field="doc.video_url" t-att-href="doc.video_url"><span t-field="doc.video-url" /></a>
-                    <!--<p><span>Proposed:</span> <span t-field="doc.partner_string" /></p>-->
-                    <!--<p><span>Presenters:</span> <span t-field="doc.speakers_string" /></p>-->
+                    <p><span>Proposed:</span> <span t-field="doc.partner_string" /></p>
+                    <p><span>Presenters:</span> <span t-field="doc.speakers_string" /></p>
 
                     <div class="track-content">
                         <p t-field="doc.description" />

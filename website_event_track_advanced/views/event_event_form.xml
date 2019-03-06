@@ -24,6 +24,10 @@
                 <field name="show_track_twitter_hashtags" />
             </field>
 
+            <field name="show_track_twitter_hashtags" position="after">
+                <field name="location_ids" widget="many2many_tags" />
+            </field>
+
             <group name="main_field_group" position="after">
                 <group>
                     <field name="allowed_track_tag_ids" widget="many2many_tags"/>
