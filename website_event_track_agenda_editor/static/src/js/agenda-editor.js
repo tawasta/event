@@ -100,7 +100,6 @@ odoo.define('website_event_track_agenda_editor.agenda', function (require) {
     });
 
     $(function (){
-        console.log("moi");
         $('#track-date').datetimepicker({
             icons: {
                 time: 'fa fa-clock-o',
