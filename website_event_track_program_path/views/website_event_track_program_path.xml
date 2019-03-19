@@ -6,7 +6,8 @@
         <a name="event-track-link" position="before">
             <div t-if="track.type.attendable"
                  name="event-track-program-path"
-                 class="event-track-program-path pull-right">
+                 class="event-track-program-path pull-right"
+                 data-html2canvas-ignore="true">
 
                 <t t-if="not user_logged">
                     <span class="fa fa-star-o fa-2x track-program-path-icon-nologin"

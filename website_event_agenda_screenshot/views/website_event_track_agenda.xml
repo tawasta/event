@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Agenda tag cloud listing -->
+    <template id="agenda_day_heading"
+              inherit_id="website_event_track_advanced.agenda_day_heading"
+              active="True"
+              name="Agenda screenshot">
+
+        <xpath expr="//button[@id='print-event-program']" position="after">
+            <button t-if="user.has_group('event.group_event_manager')"
+                    id="screenshot-event-program"
+                    type="button"
+                    class="btn-link screenshot-event-program"
+                    style="margin-left: 5px;"
+                    title="Screenshot event program" >
+                <i class="fa fa-camera" />
+            </button>
+        </xpath>
+
+    </template>
+
+    <template id="agenda"
+              inherit_id="website_event_track_advanced.agenda"
+              active="True"
+              name="Agenda screenshot assets">
+        <xpath expr="//script" position="after">
+            <script src="/website_event_agenda_screenshot/static/src/js/html2canvas.min.js?v100"></script>
+            <script src="/website_event_agenda_screenshot/static/src/js/agenda.js?v100"></script>
+        </xpath>
+    </template>
+
+</odoo>
