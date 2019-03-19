@@ -329,6 +329,7 @@
                                     <span t-esc="dt[0].strftime('%H:%M')"/>-
                                     <span t-esc="dt[3].strftime('%H:%M')"/>
                                 </t>
+                                
                             </div>
                         </td>
                         <td class="agenda-timeslot-time-dummy">
