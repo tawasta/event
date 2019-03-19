@@ -9,7 +9,6 @@
 
         <xpath expr="//button[@id='print-event-program']" position="after">
             <button t-if="user.has_group('event.group_event_manager')"
-                    id="screenshot-event-program"
                     type="button"
                     class="btn-link screenshot-event-program"
                     style="margin-left: 5px;"
