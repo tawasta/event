@@ -313,17 +313,6 @@
                 </thead>
                 <tbody class="agenda-table-body">
                     <tr t-foreach="dates" t-as="dt" class="agenda-timeslot-row">
-                        <!-- <t t-esc="dt[0].strftime('%H:%M')"/> -->
-                        <t t-if="dt[0].strftime('%H:%M') == '13:15'">
-                                    <tr class="agenda-timeslot-row">
-                                        <td colspan="9" class="active agenda-timeslot-time text-center">Posterit Lasipihalla - tule ja tutustu! Esittelijät paikalla ainakin klo 13.15-14.00.</td>
-                                    </tr>
-                        </t>
-                        <t t-if="dt[0].strftime('%H:%M') == '11:15'">
-                                    <tr class="agenda-timeslot-row">
-                                        <td colspan="9" class="active agenda-timeslot-time text-center">Posterit Lasipihalla - tule ja tutustu! Esittelijät paikalla ainakin klo 11.15-12.00.</td>
-                                    </tr>
-                        </t>
                         <td class="active agenda-timeslot-time">
                             <div class="agenda-timeslot-time-inner">
                                 <t t-set="next_dt" t-value="dt"/>
