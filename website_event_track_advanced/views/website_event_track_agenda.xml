@@ -143,7 +143,7 @@
 
         <div class="pull-right" t-if="track.overlapping_location_track_ids" data-html2canvas-ignore="true">
 
-            <span t-if="user.has_group('event.group_event_manager')"
+            <span groups="event.group_event_manager"
                   class="fa fa-exclamation-triangle fa-2x"
                   title="This presentation is overlapping with another presentation"/>
         </div>
@@ -182,7 +182,7 @@
                 </t>
             </div>
 
-            <div t-if="user.has_group('base.group_no_one')">
+            <div groups="base.group_no_one">
                 <!-- Helper for admins -->
                 <br />
                 <t t-foreach="track.speaker_ids" t-as="speaker">
