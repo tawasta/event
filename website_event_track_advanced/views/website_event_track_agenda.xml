@@ -182,6 +182,14 @@
                 </t>
             </div>
 
+            <div t-if="user.has_group('base.group_no_one')">
+                <!-- Helper for admins -->
+                <br />
+                <t t-foreach="track.speaker_ids" t-as="speaker">
+                    <i t-if="speakers[track.id]" class="fa fa-comment"/> <span t-esc="speaker.display_name" /><br/>
+                </t>
+            </div>
+
             <!-- Anything inside this div (extra-info) is shown only as a tooltip -->
             <div name="extra-info"
                  t-if="track.type.attendable"
@@ -200,9 +208,12 @@
                 </div>
 
                 <!-- Speakers -->
+                <span t-esc="speaker_ids" />
                 <div t-if="track.speaker_ids" name="track-td-speakers" class="track-td-speakers mt8">
-                    <i t-if="speakers[track.id]" class="fa fa-comment"/>
-                    <span t-esc="speakers[track.id]"/>
+
+                    <t t-foreach="track.speaker_ids" t-as="speaker">
+                        <i t-if="speakers[track.id]" class="fa fa-comment"/> <span t-esc="speaker.display_name" /><br/>
+                    </t>
                 </div>
 
                 <!-- Chairperson -->
@@ -210,7 +221,7 @@
                      t-attf-name="chairperson_#{track.chairperson_id.id}"
                      class="track-td-chairperson mt8">
                     <i class="fa fa-gavel"/>
-                    <span t-esc="track.chairperson_id.name"/>
+                    <span t-field="track.chairperson_id"/>
                 </div>
 
                 <!-- Target group -->
