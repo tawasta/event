@@ -22,7 +22,7 @@
 {
     'name': 'Website Event Access to Portal Users',
     'summary': 'Access rights tweaks so that portal users can see events',
-    'version': '10.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Extra Rights',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

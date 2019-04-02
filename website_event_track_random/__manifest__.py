@@ -22,7 +22,7 @@
 {
     'name': 'Add randomization for tracks',
     'summary': 'Allows randomizing track properties',
-    'version': '10.0.1.0.0',
+    'version': '1.0.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

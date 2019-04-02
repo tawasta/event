@@ -22,7 +22,7 @@
 {
     'name': 'Keynote speaker request for advanced event tracks',
     'summary': 'Track proposer can suggest a keynote speaker',
-    'version': '10.0.0.3.7',
+    'version': '0.3.7',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

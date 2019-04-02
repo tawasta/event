@@ -22,7 +22,7 @@
 {
     'name': 'Website event agenda screenshot button',
     'summary': 'Add a functionality for getting a screenshot from the agenda',
-    'version': '10.0.1.1.1',
+    'version': '1.1.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

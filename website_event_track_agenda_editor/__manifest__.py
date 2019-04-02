@@ -22,7 +22,7 @@
 {
     'name': 'Event agenda website editor',
     'summary': 'Allows editing event agenda on frontend',
-    'version': '10.0.1.0.1',
+    'version': '1.0.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
