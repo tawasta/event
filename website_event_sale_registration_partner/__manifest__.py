@@ -22,7 +22,7 @@
 {
     'name': 'Partner fix to event sale on website',
     'summary': 'Fixes partner to event registration ',
-    'version': '1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

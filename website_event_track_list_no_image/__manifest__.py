@@ -22,7 +22,7 @@
 {
     'name': 'Website event track list no image',
     'summary': 'Remove user image from website event track listing',
-    'version': '1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',

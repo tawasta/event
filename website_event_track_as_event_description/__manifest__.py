@@ -22,7 +22,7 @@
 {
     'name': 'Website event track as event description',
     'summary': 'Show a track as event description',
-    'version': '1.0.1',
+    'version': '10.0.1.0.1',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
