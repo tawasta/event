@@ -4,11 +4,11 @@
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from openerp import api, fields, models, _
+# 3. Odoo imports:
+from odoo import api, models, _
 
 # 4. Imports from Odoo modules:
-from openerp.exceptions import Warning
+from odoo.exceptions import Warning
 
 # 5. Local imports in the relative form:
 
@@ -21,7 +21,8 @@ class Event(models.Model):
     _inherit = 'event.event'
 
     # 2. Fields declaration
-    # confirmable = fields.Boolean(string='Is event confirmable?', compute='compute_confirmable')
+    # confirmable = fields.Boolean(string='Is event confirmable?',
+    # compute='compute_confirmable')
 
     # 3. Default methods
 
