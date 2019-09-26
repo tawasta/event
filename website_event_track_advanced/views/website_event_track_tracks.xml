@@ -12,6 +12,10 @@
                position="attributes">
             <attribute name="t-if">track.location_id and not track.event_id.event_over</attribute>
         </xpath>
+
+        <xpath expr="//div[@class='col-sm-10']" position="attributes">
+            <attribute name="t-if">track.type.attendable == True</attribute>
+        </xpath>
     </template>
 
 </odoo>
