@@ -16,6 +16,7 @@
         <xpath expr="//div[@class='col-sm-10']" position="attributes">
             <attribute name="t-if">track.type.attendable == True</attribute>
         </xpath>
+
     </template>
 
 </odoo>
