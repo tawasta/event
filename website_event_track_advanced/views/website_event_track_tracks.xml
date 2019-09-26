@@ -13,7 +13,7 @@
             <attribute name="t-if">track.location_id and not track.event_id.event_over</attribute>
         </xpath>
         <xpath expr="//div[@class='row mb32']" position="attributes">
-            <attribute name="t-if">track.type.attendable == False</attribute>
+            <attribute name="t-if">track.type.attendable</attribute>
         </xpath>
 
     </template>
