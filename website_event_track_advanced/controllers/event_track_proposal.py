@@ -334,6 +334,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             organization = request.env['res.partner'].sudo().create(organization_values)
         else:
             # Organization exists. Update it
-            organization.write(organization_values)
+            organization.sudo().write(organization_values)
 
         return organization
