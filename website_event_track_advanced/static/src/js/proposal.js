@@ -148,8 +148,16 @@ odoo.define('proposal', function (require) {
             $('#track-application-workshop-div').find('input[required_disabled]').each(function() {
                 $(this).attr('required', true);
             });
+            $('#track-application-workshop-div').find('select[required_disabled]').each(function() {
+                $(this).attr('required', true);
+            });
         } else {
             $('#track-application-workshop-div').find('input[required]').each(function() {
+                $(this).removeAttr('required');
+                $(this).attr('required_disabled', true);
+            });
+
+            $('#track-application-workshop-div').find('select[required]').each(function() {
                 $(this).removeAttr('required');
                 $(this).attr('required_disabled', true);
             });
