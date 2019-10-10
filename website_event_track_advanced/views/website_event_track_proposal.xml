@@ -10,6 +10,7 @@
                 <section id="call-for-papers-header" name="call-for-papers-header">
                     <h1 class="text-center mb0">Call for Papers</h1>
                     <h2 class="text-center text-muted mb32" t-esc="event.name"></h2>
+                    <h4 class="text-center text-muted mb32" t-field="event.date_begin" t-field-options='{"format": "DD/MM/yyyy"}' ></h4>
                 </section>
 
                 <section name="call-for-papers-language" id="call-for-papers-language">
