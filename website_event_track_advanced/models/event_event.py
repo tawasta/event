@@ -54,6 +54,8 @@ class EventEvent(models.Model):
 
     target_group_ids = fields.Many2many('event.track.target.group', string='Target groups')
 
+    event_description = fields.Html(string='Event description')
+
     # 3. Default methods
     @api.multi
     def name_get(self):
