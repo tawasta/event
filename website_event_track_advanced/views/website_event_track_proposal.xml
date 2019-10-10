@@ -31,11 +31,7 @@
                                     <h3 class="page-header mt16">
                                         Presentation proposal
                                     </h3>
-                                    <div id="track-application-section-alert-custom" class="alert">
-                                        <t t-raw="event.event_description" />
-                                    </div>
                                     <div id="track-application-section-alert" class="alert">
-
                                         <div class="track-application-section-alert-info-saving">You can save the presentation proposal as a draft or when it is completed.</div>
                                         <div class="track-application-section-alert-info-reminder mt16">A reminder email is sent to the contact person of a draft proposal to ensure that the proposal is submitted.</div>
                                         <div class="track-application-section-alert-info-permissions mt16">Only the contact person of the presentation can submit the completed proposal.</div>

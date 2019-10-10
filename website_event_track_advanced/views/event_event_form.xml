@@ -35,9 +35,6 @@
             <field name="track_types_ids" position="after">
                 <field name="target_group_ids" widget="many2many_tags" />
             </field>
-            <field name="date_tz" position="after">
-                <field name="event_description" />
-            </field>
 
             <group name="main_field_group" position="after">
                 <group>
