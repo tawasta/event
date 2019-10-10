@@ -53,7 +53,7 @@ class EventEvent(models.Model):
     track_types_ids = fields.Many2many('event.track.type', string='Event track types')
 
     target_group_ids = fields.Many2many('event.track.target.group', string='Target groups')
-    event_description = fields.Html(string='Event description')
+    event_description = fields.Html(string='Event description', translate=True)
 
     # 3. Default methods
     @api.multi
