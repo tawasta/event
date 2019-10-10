@@ -38,7 +38,6 @@
             <field name="date_tz" position="after">
                 <field name="event_description" />
             </field>
-
             <group name="main_field_group" position="after">
                 <group>
                     <field name="allowed_track_tag_ids" widget="many2many_tags"/>
