@@ -31,6 +31,7 @@ class WebsiteEventTrack(website_account):
 
         EventTrack = request.env['event.track']
         track_count = EventTrack.search_count([
+            ('event_over', '=', False),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
             ('message_partner_ids', 'in', [partner.id]),
