@@ -19,10 +19,6 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     # 2. Fields declaration
-    event_over = fields.Boolean(
-        string='Event over',
-        related='event_id.event_over',
-    )
 
     # 3. Default methods
 
