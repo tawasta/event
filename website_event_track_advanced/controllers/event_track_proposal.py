@@ -35,19 +35,14 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         )
 
     def _get_event_track_proposal_values(self):
-        target_groups = request.env['event.track.target.group'].search([])
-        types = request.env['event.track.type'].search_read(
-            [('show_in_proposals', '=', True)],
-            ['id', 'code', 'name', 'description'],
-        )
+        #target_groups = request.env['event.track.target.group'].search([])
         track = request.env['event.track']
         languages = request.env['res.lang'].search([], order='id')
 
         durations = (x * 0.5 for x in range(1, 9))
 
         values = {
-            'target_groups': target_groups,
-            'types': types,
+            #'target_groups': target_groups,
             'track': track,
             'track_languages': languages,
             'user': request.env.user,
@@ -334,6 +329,6 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             organization = request.env['res.partner'].sudo().create(organization_values)
         else:
             # Organization exists. Update it
-            organization.write(organization_values)
+            organization.sudo().write(organization_values)
 
         return organization

@@ -13,7 +13,7 @@
         <t t-call="website_event_track_advanced.event_track_application_extra_info" />
 
         <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
-        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v102"></script>
+        <script type="text/javascript" src="/website_event_track_advanced/static/src/js/proposal.js?v103"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/track_content.js?v103"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/target_group_info.js?v101"></script>
         <script type="text/javascript" src="/website_event_track_advanced/static/src/js/extra_info.js?v102"></script>
@@ -39,7 +39,7 @@
                             <select name="application_type" id="application_type" required="true"
                                     class="form-control" type="selection">
                                 <option value=""></option>
-                                <t t-foreach="types" t-as="application_type">
+                                <t t-foreach="event.track_types_ids" t-as="application_type">
                                     <option t-attf-value="#{application_type['code']}"
                                             t-attf-description="#{application_type['description']}"
                                             t-att-selected="'selected' if track['type']['id'] == application_type['id'] else False" >
@@ -49,7 +49,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="col-md-8">
                         <label for="type_description" class="control-label">Description</label>
 
@@ -257,7 +256,7 @@
                                     type="selection">
                                 <option value=""></option>
 
-                                <t t-foreach="target_groups" t-as="group">
+                                <t t-foreach="event.target_group_ids" t-as="group">
                                     <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
                                         <t t-esc="group.name" />
                                     </option>

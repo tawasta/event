@@ -50,6 +50,11 @@ class EventEvent(models.Model):
 
     location_ids = fields.Many2many('event.track.location', string='Locations')
 
+    track_types_ids = fields.Many2many('event.track.type', string='Event track types')
+
+    target_group_ids = fields.Many2many('event.track.target.group', string='Target groups')
+    event_description = fields.Html(string='Event description', translate=True)
+
     # 3. Default methods
     @api.multi
     def name_get(self):

@@ -6,7 +6,7 @@
               inherit_id="website_event_track_advanced.event_track_application_extra_info">
 
         <xpath expr="//div[@id='event-track-application-extra-info']" position="after">
-            <div class="panel panel-warning">
+            <div class="panel panel-warning" id="keynote-speaker">
                 <div class="panel-heading">
                     <h3 class="panel-title">Keynote speaker request</h3>
                 </div>
