@@ -54,9 +54,11 @@ class WebsiteEventTrack(website_account):
         EventTrack = request.env['event.track']
 
         domain = [
+            ('event_over', '=', False),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
-            ('message_partner_ids', 'in', [partner.id]),        ]
+            ('message_partner_ids', 'in', [partner.id]),
+        ]
         archive_groups = self._get_archive_groups('event.track', domain)
 
         if date_begin and date_end:
