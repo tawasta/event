@@ -6,6 +6,7 @@
         <t t-call="website_event_track_advanced.agenda"/>
     </template>
 
+    <!-- Agenda main layout -->
     <template id="website_event_track_advanced.agenda" name="Event agenda">
         <t t-call="website_event.layout">
 
@@ -41,6 +42,7 @@
                 src="/website_event_track_advanced/static/src/js/agenda.js?v106"></script>
     </template>
 
+    <!-- Agenda filters/search -->
     <template id="website_event_track_advanced.agenda_filters"
               inherit_id="website_event_track_advanced.agenda"
               active="False"
@@ -264,7 +266,7 @@
                 <t t-set="parseday" t-value="dateparser.parse(day)"/>
                 <t t-esc="event.week_days(parseday.strftime('%w'))"/>
                 <t t-esc="parseday.strftime('%d.%m.%Y')"/>
-                
+
                 <small name="agenda-date-track-count">
                     <t t-esc="days_nbr[day]"/>
                     talks
@@ -340,7 +342,7 @@
                                     <span t-esc="dt[0].strftime('%H:%M')"/>-
                                     <span t-esc="dt[3].strftime('%H:%M')"/>
                                 </t>
-                                
+
                             </div>
                         </td>
                         <td class="agenda-timeslot-time-dummy">
