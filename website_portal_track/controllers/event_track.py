@@ -6,7 +6,7 @@ import logging
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import http, _
+from odoo import http, fields, _
 from odoo.http import request
 from odoo.exceptions import AccessError
 
@@ -31,7 +31,7 @@ class WebsiteEventTrack(website_account):
 
         EventTrack = request.env['event.track']
         track_count = EventTrack.search_count([
-            ('event_over', '=', False),
+            ('event_date_end', '<', fields.Datetime.now()),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
             ('message_partner_ids', 'in', [partner.id]),
@@ -55,7 +55,7 @@ class WebsiteEventTrack(website_account):
         EventTrack = request.env['event.track']
 
         domain = [
-            ('event_over', '=', False),
+            ('event_date_end', '<', fields.Datetime.now()),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
             ('message_partner_ids', 'in', [partner.id]),
