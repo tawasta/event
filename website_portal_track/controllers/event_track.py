@@ -31,7 +31,7 @@ class WebsiteEventTrack(website_account):
 
         EventTrack = request.env['event.track']
         track_count = EventTrack.search_count([
-            ('event_date_end', '<', fields.Datetime.now()),
+            ('event_date_end', '>', fields.Datetime.now()),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
             ('message_partner_ids', 'in', [partner.id]),
@@ -55,7 +55,7 @@ class WebsiteEventTrack(website_account):
         EventTrack = request.env['event.track']
 
         domain = [
-            ('event_date_end', '<', fields.Datetime.now()),
+            ('event_date_end', '>', fields.Datetime.now()),
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
             ('message_partner_ids', 'in', [partner.id]),
