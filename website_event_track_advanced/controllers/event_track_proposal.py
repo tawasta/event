@@ -151,14 +151,19 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)
 
-        # 10. Check if we want to confirm the track
+        # 10. Send mail to track proposer
+        email_template = track.env.ref(
+            'website_event_track_advanced.email_template_event_track_received')
+        email_template.send_mail(track.id)
+
+        # 11. Check if we want to confirm the track
         render_view = 'website_event_track_advanced.event_track_proposal_success_draft'
 
         if post.get('track-confirm') and post.get('track-confirm') != '':
             track.state = 'confirmed'
             render_view = 'website_event_track_advanced.event_track_proposal_success_confirmed'
 
-        # 11. Return
+        # 12. Return
         return request.render(
             render_view, {'track': track, 'event': event}
         )
