@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2017 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2017 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,9 +22,9 @@
 {
     'name': 'Advanced event tracks',
     'summary': 'An advanced event tracks process',
-    'version': '10.0.1.17.18',
+    'version': '10.0.1.18.0',
     'category': 'Events',
-    'website': 'http://www.tawasta.fi',
+    'website': 'https://tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
     'license': 'AGPL-3',
     'application': False,
@@ -50,6 +50,7 @@
     ],
     'data': [
         'data/email_template_event_track_announced.xml',
+        'data/email_template_event_track_received.xml',
         'data/email_template_event_track_refused.xml',
         'data/event_track_type.xml',
         'data/ir_cron.xml',

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <record id="email_template_event_track_refused" model="mail.template">
-        <field name="name">Event track mail - refused</field>
+    <record id="email_template_event_track_received" model="mail.template">
+        <field name="name">Event track mail - received</field>
         <field name="model_id" ref="website_event_track.model_event_track"/>
         <field name="auto_delete" eval="True"/>
         <field name="lang">${object.partner_id.lang}</field>
         <field name="email_from">${(object.event_id.organizer_id.email or object.event_id.user_id.email or '')|safe}</field>
         <field name="partner_to" >${object.partner_id.id}</field>
-        <field name="subject">${object.event_id.name} - your presentation was not selected to the programme</field>
+        <field name="subject">${object.event_id.name} - your presentation has been received</field>
         <field name="body_html"><![CDATA[
 <p>Dear ${object.partner_id.name},</p>
 <p>Thank you for your proposal <strong>${object.name}</strong>.</p>
 
-<p>Unfortunately your presentation <strong>"${object.name}"</strong> was not selected to the programme.</p>
+<p>Your proposal has been <strong>received</strong> to the ${object.event_id.name}</p>
+<p>The proposal can be edited in ${object.website_url}/my/tracks</p>
 
-<p>If you have any questions, please let us know.</p>]]></field>
+<p>Proposals that are left to "draft" stage will not be reviewed.</p>
+
+<p>Thank you for your proposal!</p>
+]]></field>
     </record>
-
 </odoo>
-
