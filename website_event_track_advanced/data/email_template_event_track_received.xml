@@ -10,11 +10,15 @@
         <field name="partner_to" >${object.partner_id.id}</field>
         <field name="subject">${object.event_id.name} - your presentation has been received</field>
         <field name="body_html"><![CDATA[
+% set website_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
 <p>Dear ${object.partner_id.name},</p>
 <p>Thank you for your proposal <strong>${object.name}</strong>.</p>
 
 <p>Your proposal has been <strong>received</strong> to the ${object.event_id.name}</p>
-<p>The proposal can be edited in ${object.website_url}/my/tracks</p>
+
+% if 'website_url':
+<p>The proposal can be edited in <a href="${website_url}/my/tracks" style="color:#875A7B;">My proposals</a></p>
+% endif
 
 <p>Proposals that are left to "draft" stage will not be reviewed.</p>
 
