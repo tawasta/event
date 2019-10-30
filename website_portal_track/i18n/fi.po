@@ -110,7 +110,7 @@ msgstr "Oletko varma että haluat lähettää esitysehdotuksen \"<strong><span c
 #: code:addons/website_portal_track/static/src/js/application_edit.js:6
 #, python-format
 msgid "Are you sure? Any unsaved changes will be lost."
-msgstr "Are you sure? Any unsaved changes will be lost."
+msgstr "Oletko varma? Kaikki tallentamattomat muutokset hävitetään."
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_cancel
@@ -152,7 +152,7 @@ msgstr "Tapahtuman esitys"
 #. module: website_portal_track
 #: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_date_end
 msgid "Event end date"
-msgstr "Event end date"
+msgstr "Tapahtuman lopetuspäivämäärä"
 
 #. module: website_portal_track
 #: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_over
@@ -162,7 +162,7 @@ msgstr "Tapahtuma ohi"
 #. module: website_portal_track
 #: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_date_begin
 msgid "Event start date"
-msgstr "Event start date"
+msgstr "Tapahtuman alkamispäivämäärä"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
@@ -181,7 +181,7 @@ msgstr "Esitystä ei ole hyväksytty"
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_open
 msgid "Open"
-msgstr "Open"
+msgstr "Auki"
 
 #. module: website_portal_track
 #: model:ir.model,name:website_portal_track.model_res_partner
@@ -249,7 +249,7 @@ msgstr "Olet lähettänyt esityksen. Esitys odottaa hyväksyntää arvioijilta."
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "State"
-msgstr "Osavaltio/Maakunta"
+msgstr "Tila"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_home_tracks
