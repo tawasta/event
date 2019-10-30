@@ -12,11 +12,11 @@
             <t t-if="tracks">
                 <div t-if="not user.has_group('event.group_track_reviewer')" class="container list-group" id="event-track-states-legend">
                     <div class="list-group-item row" id="event-track-states-legend-draft">
-                        <div class="col-sm-2"><span class="tag label label-info">Draft</span></div>
+                        <div class="col-sm-2"><span class="tag label label-info">Proposal</span></div>
                         <div class="col-sm-10">Created by you. Waiting for you to send this to review.</div>
                     </div>
                     <div class="list-group-item row" id="event-track-states-legend-confirmed">
-                        <div class="col-sm-2"><span class="tag label label-warning">Sent</span></div>
+                        <div class="col-sm-2"><span class="tag label label-warning">Confirmed</span></div>
                         <div class="col-sm-10">Sent by you. Waiting for an approval from reviewers.</div>
                     </div>
                     <div class="list-group-item row" id="event-track-states-legend-announced">
