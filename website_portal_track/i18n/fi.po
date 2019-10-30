@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* website_portal_track
+#   * website_portal_track
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-24 10:26+0000\n"
-"PO-Revision-Date: 2018-10-24 10:26+0000\n"
+"POT-Creation-Date: 2019-10-30 12:38+0000\n"
+"PO-Revision-Date: 2019-10-30 12:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,8 +27,8 @@ msgstr "<span class=\"tag label label-default\">Peruttu</span>"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "<span class=\"tag label label-info\">Draft</span>"
-msgstr "<span class=\"tag label label-info\">Luonnos</span>"
+msgid "<span class=\"tag label label-info\">Proposal</span>"
+msgstr "<span class=\"tag label label-info\">Ehdotus</span>"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -42,7 +42,7 @@ msgstr "<span class=\"tag label label-success\">Julkaistu</span>"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
-msgid "<span class=\"tag label label-warning\">Sent</span>"
+msgid "<span class=\"tag label label-warning\">Confirmed</span>"
 msgstr "<span class=\"tag label label-warning\">Lähetetty</span>"
 
 #. module: website_portal_track
@@ -107,17 +107,16 @@ msgstr "Oletko varma että haluat lähettää esitysehdotuksen \"<strong><span c
 
 #. module: website_portal_track
 #. openerp-web
-#: code:addons/mpg/event/website_portal_track/static/src/js/application_edit.js:6
 #: code:addons/website_portal_track/static/src/js/application_edit.js:6
 #, python-format
 msgid "Are you sure? Any unsaved changes will be lost."
-msgstr "Oletko varma? Kaikki tallentamattomat muutokset hävitetään."
+msgstr "Are you sure? Any unsaved changes will be lost."
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog_cancel
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Cancel"
-msgstr "Peru"
+msgstr "Peruuta"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
@@ -144,6 +143,26 @@ msgstr "Olet vahvistanut esityksen. Esitys on lisätty tapahtuman ohjelmaan"
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "Created by you. Waiting for you to send this to review."
 msgstr "Olet luonut esityksen. Odottaa että lähetät sen arvioitavaksi."
+
+#. module: website_portal_track
+#: model:ir.model,name:website_portal_track.model_event_track
+msgid "Event Track"
+msgstr "Tapahtuman esitys"
+
+#. module: website_portal_track
+#: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_date_end
+msgid "Event end date"
+msgstr "Event end date"
+
+#. module: website_portal_track
+#: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_over
+msgid "Event over"
+msgstr "Tapahtuma ohi"
+
+#. module: website_portal_track
+#: model:ir.model.fields,field_description:website_portal_track.field_event_track_event_date_begin
+msgid "Event start date"
+msgstr "Event start date"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.confirm_dialog
@@ -230,7 +249,7 @@ msgstr "Olet lähettänyt esityksen. Esitys odottaa hyväksyntää arvioijilta."
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_tracks
 msgid "State"
-msgstr "Tila"
+msgstr "Osavaltio/Maakunta"
 
 #. module: website_portal_track
 #: model:ir.ui.view,arch_db:website_portal_track.portal_my_home_tracks
