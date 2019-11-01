@@ -303,7 +303,7 @@
                             </label>
 
                             <label class="col-sm-4 col-xs-12">
-                                <input name="keywords" placeholder="Other, what?" class="form-control" type="text" t-att-value="track.keywords"/>
+                                <input name="keywords" placeholder="Other, what? Separate with commas, if more." class="form-control" type="text" t-att-value="track.keywords"/>
                             </label>
                         </div>
                     </div>

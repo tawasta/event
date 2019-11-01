@@ -919,8 +919,8 @@ msgstr "Alkuperäinen kuvaus"
 
 #. module: website_event_track_advanced
 #: model:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
-msgid "Other, what?"
-msgstr "Muu, mikä?"
+msgid "Other, what? Separate with commas, if more."
+msgstr "Muu, mikä? Erota pilkulla, jos useampi."
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event_overlapping_chairperson_track_ids
