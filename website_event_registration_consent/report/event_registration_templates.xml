@@ -36,7 +36,7 @@
                 <div class="top-row row" style="height: 30mm;">
                     <div id="event-img" class="event-img col-xs-12">
                         <img t-att-src="'data:image/png;base64,%s' % o.event_id.image"
-                             style="height:28mm;width:auto;"
+                             style="max-height:28mm;max-width:120mm;width:auto;"
                              alt="Logo"/>
                     </div>
                     <div id="event-name" class="event-name col-xs-12"
