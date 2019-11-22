@@ -35,6 +35,11 @@ class EventRegistration(models.Model):
         compute='compute_qr_string'
      )
 
+    ticket_download = fields.Boolean(
+        string='Ticket downloaded',
+        default=False,
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration

@@ -128,4 +128,6 @@ class WebsiteEventRegistrationController(http.Controller):
             ('Content-Length', len(pdf)),
             ('Content-Disposition', 'attachment; filename="%s.pdf"' % filename)
         ]
+
+        registration.ticket_download = True
         return request.make_response(pdf, headers=file_headers)
