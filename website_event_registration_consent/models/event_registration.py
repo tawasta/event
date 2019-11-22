@@ -30,10 +30,27 @@ class EventRegistration(models.Model):
         string='Random string to identify attendee',
         help='This field is used to identify attendee for ticket downloading',
     )
+    qr_string = fields.Char(
+        string="QR Code",
+        compute='compute_qr_string'
+     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.multi
+    def compute_qr_string(self):
+
+        for record in self:
+
+            name = record.name or ''
+            organisation = record.employer or ''
+            title = record.profession_id.name or ''
+            email = record.email or ''
+
+            record.qr_string = \
+                "BEGIN:VCARD;N:%s;TITLE:%s;ORG:%s;EMAIL:%s;END:VCARD" % \
+                (name, title, organisation, email)
 
     # 5. Constraints and onchanges
 
