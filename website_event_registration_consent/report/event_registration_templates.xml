@@ -13,37 +13,11 @@
                         <div id="ticket" class="row">
                             <!-- Front -->
                             <div id="ticket_front" class="text-center" style="border-right:1px solid black;height:70mm;width:50%;float:left;margin-left:-2px;">
-                                <div>
-                                    <div class="event-img">
-                                        <img t-att-src="'data:image/png;base64,%s' % o.event_id.image" alt="Logo" style="height:50px;width:auto;"/>
-                                    </div>
-                                    <div class="event-name" style="margin-bottom:16px;">
-                                        <span t-field="o.event_id.name" style="font-size:24px;line-height:24px;"/>
-                                    </div>
-                                    <div class="attendee-name">
-                                        <span t-field="o.name" style="font-size:28px;line-height:28px;font-weight:700;"/>
-                                    </div>
-                                    <div class="ticket-type" style="margin-top:32px;">
-                                        <span t-field="o.event_ticket_id.name" style="font-size:24px;line-height:26px;"/>
-                                    </div>
-                                </div>
+                                <t t-call="website_event_registration_consent.event_registration_ticket_template_content_front" />
                             </div>
                             <!-- Back -->
                             <div id="ticket_back" class="text-center" style="height:70mm;width:50%;float:left;">
-                                <div>
-                                    <div class="event-img">
-                                        <img t-att-src="'data:image/png;base64,%s' % o.event_id.image" alt="Logo" style="height:50px;width:auto;"/>
-                                    </div>
-                                    <div class="event-name" style="margin-bottom:16px;">
-                                        <span t-field="o.event_id.name" style="font-size:24px;line-height:24px;"/>
-                                    </div>
-                                    <div class="attendee-name">
-                                        <span t-field="o.name" style="font-size:28px;line-height:28px;font-weight:700;"/>
-                                    </div>
-                                    <div class="ticket-type" style="margin-top:32px;">
-                                        <span t-field="o.event_ticket_id.name" style="font-size:24px;line-height:26px;"/>
-                                    </div>
-                                </div>
+                                <t t-call="website_event_registration_consent.event_registration_ticket_template_content_back" />
                             </div>
                         </div>
                         <div id="ticket_cut" class="row" style="position:relative;">
@@ -56,6 +30,45 @@
                 </t>
             </t>
         </template>
-    
+
+        <template id="event_registration_ticket_template_content_front">
+            <div style="height: 70mm; overflow: hidden;">
+                <div class="top-row row" style="height: 30mm;">
+                    <div id="event-img" class="event-img col-xs-12">
+                        <img t-att-src="'data:image/png;base64,%s' % o.event_id.image"
+                             style="height:28mm;width:auto;"
+                             alt="Logo"/>
+                    </div>
+                    <div id="event-name" class="event-name col-xs-12"
+                         style="margin-bottom:16px;">
+                        <span t-field="o.event_id.name"
+                              style="font-size:24px;line-height:24px;"/>
+                    </div>
+                </div>
+                <div class="bottom-row row" style="height: 40mm;">
+                    <div class="left-col col-xs-9 mt8">
+                        <div id="attendee-name" class="attendee-name">
+                            <span t-field="o.name"
+                                  style="font-size:28px;line-height:28px;font-weight:700;"/>
+                        </div>
+                        <div class="ticket-type" style="margin-top:32px;">
+                            <span t-field="o.event_ticket_id.name"
+                                  style="font-size:24px;line-height:26px;"/>
+                        </div>
+                    </div>
+                    <div class="right-col col-xs-3">
+                        <div class="qr_container" alt="QR-code">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s&amp;width=%s' % ('QR', o.qr_string.replace(';','%0A'), 140, 140)"
+                                 style="display:block; margin: 0 auto; max-height: 35mm;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="event_registration_ticket_template_content_back">
+            <t t-call="website_event_registration_consent.event_registration_ticket_template_content_front" />
+        </template>
+
     </data>
 </odoo>
