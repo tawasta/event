@@ -9,6 +9,7 @@
                 <group string="Details" name="consent_details">
                     <field name="consent_filled"/>
                     <field name="token" groups="base.group_erp_manager"/>
+                    <field name="ticket_download" />
                 </group>
             </group>
 

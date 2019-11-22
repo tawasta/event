@@ -31,6 +31,11 @@ class EventRegistration(models.Model):
         help='This field is used to identify attendee for ticket downloading',
     )
 
+    ticket_download = fields.Boolean(
+        string='Ticket downloaded',
+        default=False,
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
