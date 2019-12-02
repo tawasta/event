@@ -34,11 +34,21 @@
         <template id="event_registration_ticket_template_content_front">
             <div style="height: 70mm; overflow: hidden;">
                 <div class="top-row row" style="height: 30mm;">
-                    <div id="event-img" class="event-img col-xs-12">
+                    <div class="left-col col-xs-4">
+                        <div class="qr_container" alt="QR-code">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;height=%s&amp;width=%s' % ('QR', o.qr_string.replace(';','%0A'), 140, 140)" style="display:block; margin: 0 auto; max-height: 28mm;"/>
+                        </div>
+                    </div>
+
+                    <div class="center-col col-xs-4">
+                    </div>
+
+                    <div class="right-col event-img col-xs-4" id="event-img">
                         <img t-att-src="'data:image/png;base64,%s' % o.event_id.image"
                              style="max-height:28mm;max-width:120mm;width:auto;"
                              alt="Logo"/>
                     </div>
+
                     <div id="event-name" class="event-name col-xs-12"
                          style="margin-bottom:16px;">
                         <span t-field="o.event_id.name"

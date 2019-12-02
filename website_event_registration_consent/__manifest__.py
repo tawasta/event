@@ -22,7 +22,7 @@
 {
     'name': 'Event Registration Consent',
     'summary': 'Adds event registration consent',
-    'version': '10.0.1.3.1',
+    'version': '10.0.1.3.2',
     'category': 'Events',
     'website': 'http://www.tawasta.fi',
     'author': 'Oy Tawasta Technologies Ltd.',
