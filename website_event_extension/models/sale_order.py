@@ -4,8 +4,8 @@
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from openerp import api, fields, models, _
+# 3. Odoo imports:
+from odoo import api, fields, models, _
 
 # 4. Imports from Odoo modules:
 
@@ -42,8 +42,8 @@ class SaleOrder(models.Model):
 
                 header += _(header_msg) or ""
 
-                header += ("\n " +
-                           line.event_ticket_id.name) if line.event_ticket_id.name else ""
+                header += ("\n " + line.event_ticket_id.name) \
+                    if line.event_ticket_id.name else ""
             record.new_header = header
             header = ""
 
@@ -61,7 +61,8 @@ class SaleOrder(models.Model):
                 if not event:
                     continue
 
-                if hasattr(event, 'analytic_account') and event.analytic_account:
+                if hasattr(event, 'analytic_account') \
+                        and event.analytic_account:
                     res.project_id = event.analytic_account.id
         return res
 
@@ -71,10 +72,14 @@ class SaleOrder(models.Model):
     @api.model
     def _cart_find_product_line(self, product_id=None, line_id=None, **kwargs):
         # DO NOT REMOVE THIS METHOD
-        # While it seems to do nothing, it will actually set the context for the method
+        # While it seems to do nothing,
+        # it will actually set the context for the method
         #
-        # We need to add "if not context: context = {}" to this function in website_event_sale,
+        # We need to add "if not context: context = {}"
+        # to this function in website_event_sale,
         # so it will work even when the method is called without context.
-        # The decorator will do it automatically, so we don't need to add anything manually.
+        # The decorator will do it automatically,
+        # so we don't need to add anything manually.
 
-        return super(SaleOrder, self)._cart_find_product_line(product_id=product_id, line_id=line_id, **kwargs)
+        return super(SaleOrder, self)._cart_find_product_line(
+            product_id=product_id, line_id=line_id, **kwargs)

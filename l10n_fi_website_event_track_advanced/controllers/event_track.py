@@ -4,7 +4,7 @@
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
+# 3. Odoo imports:
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_portal_track.controllers.event_track import WebsiteEventTrack

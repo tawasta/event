@@ -1,18 +1,18 @@
-# -*- coding: utf-8 -*-
 
 # 1. Standard library imports:
 import logging
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import http, _
+# 3. Odoo imports:
+from odoo import http
 from odoo.http import request
 from odoo.exceptions import AccessError
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_portal.controllers.main import website_account
-from odoo.addons.website_event_track_advanced.controllers.event_track_proposal import WebsiteEventTrackController
+from odoo.addons.website_event_track_advanced.controllers.\
+    event_track_proposal import WebsiteEventTrackController
 
 # 5. Local imports in the relative form:
 
@@ -56,11 +56,12 @@ class WebsiteEventTrack(website_account):
         domain = [
             '|',
             ('message_partner_ids', 'child_of', [partner.id]),
-            ('message_partner_ids', 'in', [partner.id]),        ]
+            ('message_partner_ids', 'in', [partner.id]), ]
         archive_groups = self._get_archive_groups('event.track', domain)
 
         if date_begin and date_end:
-            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+            domain += [('create_date', '>', date_begin),
+                       ('create_date', '<=', date_end)]
 
         track_count = EventTrack.search_count(domain)
 
@@ -72,7 +73,10 @@ class WebsiteEventTrack(website_account):
             step=self._items_per_page
         )
 
-        tracks = EventTrack.search(domain, limit=self._items_per_page, offset=pager['offset'])
+        tracks = EventTrack.search(
+            domain,
+            limit=self._items_per_page,
+            offset=pager['offset'])
 
         values.update({
             'date': date_begin,
@@ -85,7 +89,8 @@ class WebsiteEventTrack(website_account):
         return request.render("website_portal_track.portal_my_tracks", values)
 
     # Single track
-    @http.route(['/my/tracks/<int:track>'], type='http', auth='user', website=True)
+    @http.route(['/my/tracks/<int:track>'],
+                type='http', auth='user', website=True)
     def tracks_followup(self, track=None, **kw):
         track = request.env['event.track'].browse([track])
         try:
@@ -111,7 +116,8 @@ class WebsiteEventTrack(website_account):
         )
 
     def _get_event_track_proposal_values(self):
-        return WebsiteEventTrackController._get_event_track_proposal_values(WebsiteEventTrackController())
+        return WebsiteEventTrackController\
+            ._get_event_track_proposal_values(WebsiteEventTrackController())
 
     # Save track modifications
     @http.route(
@@ -150,24 +156,27 @@ class WebsiteEventTrack(website_account):
             speakers = list()
             for speaker in values.get('speakers', []):
                 # If user already exists, create a new partner
-                existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
+                existing_user = request.env['res.users']\
+                    .sudo().search([('login', '=', speaker.get('email'))])
 
                 # Get or create organization
                 if speaker.get('organization'):
-                    organization = WebsiteEventTrackController._create_organization(
-                        WebsiteEventTrackController(),
-                        {'name': speaker.get('organization')}
-                    )
+                    organization = WebsiteEventTrackController\
+                        ._create_organization(
+                            WebsiteEventTrackController(),
+                            {'name': speaker.get('organization')})
                     del speaker['organization']
                     speaker['parent_id'] = organization.id
 
                 if existing_user:
-                    new_speaker = request.env['res.partner'].sudo().create(speaker)
+                    new_speaker = request.env['res.partner']\
+                        .sudo().create(speaker)
 
                 if not existing_user:
-                    new_speaker = WebsiteEventTrackController._create_signup_user(
-                        WebsiteEventTrackController(), speaker
-                    ).partner_id
+                    new_speaker = WebsiteEventTrackController\
+                        ._create_signup_user(
+                            WebsiteEventTrackController(), speaker
+                        ).partner_id
 
                 speaker_ids.append(new_speaker.id)
                 speakers.append((4, new_speaker.id))
@@ -198,9 +207,10 @@ class WebsiteEventTrack(website_account):
                 # Create an einvoice operator if one doesn't exist
                 if not existing_operator:
                     operator_identifier = False
-                    if post.get(
-                            'organizer_einvoice_operator_identifier') and post.get(
-                            'organizer_einvoice_operator_identifier') != 'false':
+                    if post.get('organizer_einvoice_operator_identifier')\
+                            and post.get(
+                                'organizer_einvoice_operator_identifier')\
+                            != 'false':
                         operator_identifier = post.get(
                             'organizer_einvoice_operator_identifier')
 
@@ -216,20 +226,23 @@ class WebsiteEventTrack(website_account):
             # Add workshop organization
             workshop_organizer = False
             if values.get('workshop_organizer'):
-                workshop_organizer = WebsiteEventTrackController._create_organization(
-                    WebsiteEventTrackController(),
-                    values.get('workshop_organizer'),
-                )
+                workshop_organizer = WebsiteEventTrackController\
+                    ._create_organization(
+                        WebsiteEventTrackController(),
+                        values.get('workshop_organizer'), )
 
                 if workshop_organizer:
                     values['track']['organizer'] = workshop_organizer.id
 
             # Add organizer contact
-            if values.get('workshop_signee') and values.get('workshop_signee').get('name'):
+            if values.get('workshop_signee')\
+                    and values.get('workshop_signee').get('name'):
                 if workshop_organizer:
-                    values['workshop_signee']['parent_id'] = workshop_organizer.id
+                    values['workshop_signee']['parent_id'] = \
+                        workshop_organizer.id
 
-                signee = request.env['res.partner'].sudo().create(values['workshop_signee'])
+                signee = request.env['res.partner']\
+                    .sudo().create(values['workshop_signee'])
                 values['track']['organizer_contact'] = signee.id
 
         track.write(track_values)
@@ -242,11 +255,11 @@ class WebsiteEventTrack(website_account):
         return request.redirect('/my/tracks/')
 
     def _get_event_track_proposal_post_values(self, track, **post):
-        return WebsiteEventTrackController._get_event_track_proposal_post_values(
-            WebsiteEventTrackController(),
-            track.event_id,
-            **post
-        )
+        return WebsiteEventTrackController\
+            ._get_event_track_proposal_post_values(
+                WebsiteEventTrackController(),
+                track.event_id,
+                **post)
 
     # Confirm track
     @http.route(

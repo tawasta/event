@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
 # 1. Standard library imports:
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from openerp import api, fields, models
+# 3. Odoo imports:
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -15,7 +13,7 @@ from openerp import api, fields, models
 
 
 class EventEvent(models.Model):
-    
+
     # 1. Private attributes
     _inherit = 'event.event'
 
@@ -24,7 +22,8 @@ class EventEvent(models.Model):
         'account.analytic.account',
         'Analytic account',
         domain=[('type', 'in', ['normal', 'contract'])],
-        help='Select this, if you want all ticket sales to go to a certain analytic account',
+        help='Select this, if you want all ticket sales to go \
+        to a certain analytic account',
     )
 
     event_logo = fields.Binary(

@@ -1,18 +1,17 @@
-# -*- coding: utf-8 -*-
-
 # 1. Standard library imports:
 import base64
 import logging
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import http, fields
+# 3. Odoo imports:
+from odoo import http
 from odoo.http import request
 from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
 
 # 4. Imports from Odoo modules (rarely, and only if necessary):
-from odoo.addons.website_event_track.controllers.main import WebsiteEventTrackController
+from odoo.addons.website_event_track.controllers.main \
+    import WebsiteEventTrackController
 
 # 5. Local imports in the relative form:
 
@@ -79,7 +78,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
 
         # 3. Add contact to organization
         if values.get('contact_organization'):
-            organization = self._create_organization(values.get('contact_organization'))
+            organization = self._create_organization(
+                values.get('contact_organization'))
 
             # Add contact to the existing organization
             if partner:
@@ -89,16 +89,19 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         speakers = list()
         for speaker in values.get('speakers'):
             # If user already exists, create a new partner
-            existing_user = request.env['res.users'].sudo().search([('login', '=', speaker.get('email'))])
+            existing_user = request.env['res.users']\
+                .sudo().search([('login', '=', speaker.get('email'))])
 
             # Get or create organization
             if speaker.get('organization'):
-                organization = self._create_organization({'name': speaker.get('organization')})
+                organization = self._create_organization({
+                    'name': speaker.get('organization')})
                 del speaker['organization']
                 speaker['parent_id'] = organization.id
 
             if existing_user:
-                new_speaker = request.env['res.partner'].sudo().create(speaker)
+                new_speaker = request.env['res.partner']\
+                    .sudo().create(speaker)
                 followers.append(existing_user.partner_id.id)
 
             if not existing_user:
@@ -112,17 +115,20 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # 5. Add workshop organization
         workshop_organizer = False
         if values.get('workshop_organizer'):
-            workshop_organizer = self._create_organization(values.get('workshop_organizer'))
+            workshop_organizer = self._create_organization(
+                values.get('workshop_organizer'))
 
             if workshop_organizer:
                 values['track']['organizer'] = workshop_organizer.id
 
         # 6. Add organizer contact
-        if values.get('workshop_signee') and values.get('workshop_signee').get('name'):
+        if values.get('workshop_signee') \
+                and values.get('workshop_signee').get('name'):
             if workshop_organizer:
                 values['workshop_signee']['parent_id'] = workshop_organizer.id
 
-            signee = request.env['res.partner'].sudo().create(values['workshop_signee'])
+            signee = request.env['res.partner']\
+                .sudo().create(values['workshop_signee'])
             values['track']['organizer_contact'] = signee.id
 
         # 7. Create the track
@@ -157,11 +163,14 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         track.sudo().message_subscribe(partner_ids=followers)
 
         # 10. Check if we want to confirm the track
-        render_view = 'website_event_track_advanced.event_track_proposal_success_draft'
+        render_view = \
+            'website_event_track_advanced.event_track_proposal_success_draft'
 
         if post.get('track-confirm') and post.get('track-confirm') != '':
             track.state = 'confirmed'
-            render_view = 'website_event_track_advanced.event_track_proposal_success_confirmed'
+            render_view = \
+                'website_event_track_advanced.\
+                event_track_proposal_success_confirmed'
 
         # 11. Return
         return request.render(
@@ -176,7 +185,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         }
 
         # Contact
-        name = "%s %s" % (post.get('contact_last_name'), post.get('contact_first_name'))
+        name = "%s %s" % (post.get('contact_last_name'),
+                          post.get('contact_first_name'))
         contact_values = {
             'name': name,
             'login': post.get('contact_email'),
@@ -232,9 +242,10 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'webinar': post.get('webinar') not in ['0', 'false'],
             'webinar_info': post.get('webinar_info'),
 
-            'extra_info':post.get('extra_info'),
+            'extra_info': post.get('extra_info'),
 
-            'target_group': post.get('target_group') if post.get('target_group') != '' else False,
+            'target_group': post.get('target_group')
+            if post.get('target_group') != '' else False,
             'target_group_info': post.get('target_group_info'),
 
             'workshop_participants': post.get('workshop_participants'),
@@ -249,23 +260,26 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         # Speakers
         speaker_values = list()
         if post.get('speakers_input_index'):
-            for speaker_index in range(0, int(post.get('speakers_input_index'))+1):
+            for speaker_index \
+                    in range(0, int(post.get('speakers_input_index'))+1):
                 first_name = post.get('speaker_first_name[%s]' % speaker_index)
                 last_name = post.get('speaker_last_name[%s]' % speaker_index)
 
                 if not first_name or not last_name:
                     continue
 
-                name = "%s %s" % (last_name,first_name)
+                name = "%s %s" % (last_name, first_name)
 
                 speaker_values.append({
                     'name': name,
                     'email': post.get('speaker_email[%s]' % speaker_index),
                     'zip': post.get('speaker_zip[%s]' % speaker_index),
                     'city': post.get('speaker_city[%s]' % speaker_index),
-                    'organization': post.get('speaker_organization[%s]' % speaker_index),
+                    'organization':
+                    post.get('speaker_organization[%s]' % speaker_index),
                     'function': post.get('speaker_title[%s]' % speaker_index),
-                    'returning_speaker': ('speaker_returning[%s]' % speaker_index) in post,
+                    'returning_speaker':
+                    ('speaker_returning[%s]' % speaker_index) in post,
                     'phone': post.get('speaker_phone[%s]' % speaker_index),
                 })
 
@@ -281,7 +295,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             'edicode': post.get('organizer_edicode'),
         }
 
-        name = "%s %s" % (post.get('signee_last_name'), post.get('signee_first_name'))
+        name = "%s %s" % (post.get('signee_last_name'),
+                          post.get('signee_first_name'))
         name = name.strip()
         workshop_signee_values = {
             'name': name,
@@ -309,12 +324,15 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
             if not partner_values.get('login') and partner_values.get('email'):
                 partner_values['login'] = partner_values.get('email')
 
-            user = request.env['res.users'].sudo()._signup_create_user(partner_values)
+            user = request.env['res.users']\
+                .sudo()._signup_create_user(partner_values)
 
             try:
-                user.with_context({'create_user': True}).action_reset_password()
+                user.with_context({'create_user': True})\
+                    .action_reset_password()
             except MailDeliveryException:
-                _logger.warn('Could not deliver mail to %s' % partner_values.get('email'))
+                _logger.warn('Could not deliver mail to %s' %
+                             partner_values.get('email'))
 
         return user
 
@@ -331,7 +349,8 @@ class WebsiteEventTrackController(WebsiteEventTrackController):
         if not organization:
             # Organization doesn't exists. Create one
             organization_values['is_company'] = True
-            organization = request.env['res.partner'].sudo().create(organization_values)
+            organization = request.env['res.partner']\
+                .sudo().create(organization_values)
         else:
             # Organization exists. Update it
             organization.write(organization_values)

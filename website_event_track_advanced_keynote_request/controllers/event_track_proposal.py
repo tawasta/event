@@ -5,7 +5,7 @@ import logging
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
+# 3. Odoo imports:
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_event_track_advanced.controllers.event_track_proposal import WebsiteEventTrackController

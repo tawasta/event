@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
@@ -24,7 +23,7 @@
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
+# 3. Odoo imports:
 from odoo import http, _
 from odoo.http import request
 
@@ -72,7 +71,8 @@ class WebsiteEventRegistrationController(http.Controller):
             values.update(self._registration_consent_process(post))
             registration.write(values)
             return request.redirect('/event/registration/%s/ticket' % token)
-        return request.render('website_event_registration_consent.registration_consent')
+        return request.render(
+            'website_event_registration_consent.registration_consent')
 
     @http.route(
         ['/event/registration/<string:token>/ticket'],
@@ -116,7 +116,8 @@ class WebsiteEventRegistrationController(http.Controller):
         ], limit=1)
         if not registration:
             request.render("website.403")
-        report_name = 'website_event_registration_consent.event_registration_ticket_template'
+        report_name = 'website_event_registration_consent.\
+            event_registration_ticket_template'
         pdf = request.env['report'].sudo().get_pdf(
             [registration.id],
             report_name,

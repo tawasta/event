@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
 # 1. Standard library imports:
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from openerp import api, fields, models
+# 3. Odoo imports:
+from odoo import models
 
 # 4. Imports from Odoo modules:
 
@@ -23,8 +21,9 @@ class EventRegistration(models.Model):
     def _prepare_registration(self, event, post, user_id, partner=False):
 
         res = dict()
-        res = super(EventRegistration, self)._prepare_registration(event, post, user_id, partner=partner)
-        ticket = self.env['event.event.ticket'].search([('event_id', '=', event.id), ('price', '=', '0')]).id
+        res = super(EventRegistration, self)\
+            ._prepare_registration(event, post, user_id, partner=partner)
+        ticket = self.env['event.event.ticket']\
+            .search([('event_id', '=', event.id), ('price', '=', '0')]).id
         res['event_ticket_id'] = ticket
-        
         return res
