@@ -72,7 +72,6 @@
             <p>Share your program path: </p>
             <t t-call="website_event_track_program_path.program_path_share_twitter" />
             <t t-call="website_event_track_program_path.program_path_share_facebook" />
-            <t t-call="website_event_track_program_path.program_path_share_google" />
         </div>
     </template>
 
@@ -95,17 +94,6 @@
            title="Share this program path on Facebook">
             <i class="fa fa fa-facebook-square fa-2x" />
         </a>
-    </template>
-
-    <template id="program_path_share_google">
-
-        <a class="google-share-button"
-           t-att-href="'https://plus.google.com/share?url=' + share_url"
-           target="_blank"
-           title="Share this program path on Google+">
-            <i class="fa fa fa-google-plus-square fa-2x" />
-        </a>
-
     </template>
 
 </odoo>
