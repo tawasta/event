@@ -1,2 +1,0 @@
-import event_event
-import event_registration

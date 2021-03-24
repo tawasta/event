@@ -1,5 +1,0 @@
-import res_partner
-import event
-import event_event_ticket
-import event_registration
-import sale_order
