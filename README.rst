@@ -9,10 +9,20 @@ Event Management
 
 Addons
 ======
-addon | version | summary
---- | --- | ---
-[event_description](event_description/) | 14.0.1.0.0 | Adds event description field to backend
-[event_wating_list](event_waiting_list/) | 14.0.1.0.0 | Adds waiting list for events
+
+.. list-table:: Event Management
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - addon
+     - version
+     - summary
+   * - `event_description <event_description/>`_
+     - 14.0.1.0.0
+     - Adds event description field to backend
+   * - `event_wating_list <event_waiting_list/>`_
+     - 14.0.1.0.0
+     - Adds waiting list for events
 
 Configuration
 =============
