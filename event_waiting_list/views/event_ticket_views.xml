@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- EVENT.TICKET -->
+    <record id="event_event_ticket_view_tree_from_event_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.ticket.view.tree.from.event</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event"/>
+        <field name="arch" type="xml">
+            <field name="seats_unconfirmed" position="after">
+                <field name="seats_waiting" sum="Total" width="110px" string="Waiting"/>
+            </field>
+        </field>
+    </record>
+</odoo>

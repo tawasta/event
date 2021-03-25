@@ -33,5 +33,6 @@
     ],
     "data": [
         "views/event_views.xml",
+        "views/event_ticket_views.xml",
     ],
 }
