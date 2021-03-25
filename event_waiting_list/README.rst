@@ -13,7 +13,8 @@ Configuration
 
 Usage
 =====
-* When maximum attendees to an event is limited, this module allows to flag the event as using a Waiting List.
+* Enable waiting list for an event by toggling it on event view.
+* When maximum attendees to an event is reached, further registrations go to a waiting list.
 
 Known issues / Roadmap
 ======================

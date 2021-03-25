@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_waiting_list" model="ir.ui.view">
+        <field name="name">event.type.form</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form"/>
+        <field name="arch" type="xml">
+            <div name="event_type_attendees_auto_confirm" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_attendees_waiting_list">
+                    <div class="o_setting_left_pane">
+                        <field name="waiting_list"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="waiting_list"/>
+                        <div class="row">
+                            <div class="col-lg-8 mt16 text-muted">
+                                When registrations limit is reached add further registrations
+                                to a waiting list.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.form</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <field name="auto_confirm" position="after">
+                <field name="waiting_list"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_event_tree_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree"/>
+        <field name="arch" type="xml">
+            <field name="seats_unconfirmed" position="after">
+                <field name="seats_waiting" string="Waiting Seats" sum="Total" readonly="1" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_event_kanban_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.kanban</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_kanban"/>
+        <field name="arch" type="xml">
+            <field name="seats_unconfirmed" position="before">
+                <field name="seats_waiting"/>
+            </field>
+            <div t-if="total_seats > 0 and ! record.auto_confirm.raw_value" position="after">
+                <br/>
+                <a>
+                    <span class="pl-2"><t t-esc="seats_waiting"/>Seats Waiting</span>
+                </a>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_event_calendar_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.calendar</field>
+        <field name="model">event.event</field>
+        <field eval="2" name="priority"/>
+        <field name="inherit_id" ref="event.view_event_calendar"/>
+        <field name="arch" type="xml">
+            <field name="seats_unconfirmed" position="after">
+                <field name="seats_waiting"/>
+            </field>
+        </field>
+    </record>
+
+     <!-- EVENT.REGISTRATION VIEWS -->
+     <record id="view_event_registration_tree_waiting_list" model="ir.ui.view">
+         <field name="name">event.registration.tree</field>
+         <field name="model">event.registration</field>
+         <field name="inherit_id" ref="event.view_event_registration_tree"/>
+         <field name="arch" type="xml">
+             <button name="action_cancel" position="before">
+                 <button name="action_waiting" string="Move to Waiting List" states="draft" type="object" icon="fa-clock-o"/>
+             </button>
+             <button name="action_confirm" position="after">
+                 <button name="action_set_draft" string="Mark as Unconfirmed" states="wait" type="object" icon="fa-question"/>
+             </button>
+             <button name="action_cancel" position="attributes">
+                 <attribute name="states">draft,open,wait</attribute>
+             </button>
+             <button name="action_confirm" position="attributes">
+                 <attribute name="states">draft,wait</attribute>
+             </button>
+         </field>
+     </record>
+
+     <record id="view_event_registration_form_waiting_list" model="ir.ui.view">
+         <field name="name">event.registration.form</field>
+         <field name="model">event.registration</field>
+         <field name="inherit_id" ref="event.view_event_registration_form"/>
+         <field name="arch" type="xml">
+             <button name="action_cancel" position="before">
+                 <button name="action_waiting" string="Move to Waiting List" states="draft" type="object"/>
+             </button>
+
+             <button name="action_set_draft" position="attributes">
+                 <attribute name="states">cancel,done,wait</attribute>
+             </button>
+             <button name="action_cancel" position="attributes">
+                 <attribute name="states">draft,open,wait</attribute>
+             </button>
+             <button name="action_confirm" position="attributes">
+                 <attribute name="states">draft,wait</attribute>
+             </button>
+             <field name="state" position="attributes">
+                 <attribute name="statusbar_visible">draft,open,done,wait</attribute>
+             </field>
+         </field>
+     </record>
+
+     <record id="event_registration_view_kanban_waiting_list" model="ir.ui.view">
+         <field name="name">event.registration.kanban</field>
+         <field name="model">event.registration</field>
+         <field name="inherit_id" ref="event.event_registration_view_kanban"/>
+         <field name="arch" type="xml">
+             <xpath expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']" position="before">
+                 <a class="btn btn-md btn-primary" string="Set as Unconfirmed" name="action_set_draft" type="object" states="wait" role="button">
+                     <i class="fa fa-question" role="img" aria-label="Unconfirm button" title="Set as Unconfirmed"/>
+                 </a>
+             </xpath>
+
+             <xpath expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']" position="before">
+                 <a class="btn btn-primary d-flex justify-content-center align-items-center h-100 w-100"
+                    string="Set as Unconfirmed" name="action_confirm" type="object" states="wait" role="button">
+                     <i class="fa fa-question fa-3x" role="img" aria-label="Unconfirm button" title="Set as Unconfirmed"/>
+                 </a>
+             </xpath>
+         </field>
+     </record>
+
+     <record id="view_registration_search_waiting_list" model="ir.ui.view">
+         <field name="name">event.registration.search</field>
+         <field name="model">event.registration</field>
+         <field name="inherit_id" ref="event.view_registration_search"/>
+         <field name="arch" type="xml">
+             <filter name="unconfirmed" position="before">
+                 <filter string="Waiting" name="waiting" domain="[('state', '=', 'wait')]"/>
+             </filter>
+         </field>
+     </record>
+</odoo>
