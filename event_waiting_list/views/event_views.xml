@@ -58,8 +58,8 @@
             </field>
             <div t-if="total_seats > 0 and ! record.auto_confirm.raw_value" position="after">
                 <br/>
-                <a>
-                    <span class="pl-2"><t t-esc="seats_waiting"/>Seats Waiting</span>
+                <a name="%(event.act_event_registration_from_event)d" type="action" context="{'search_default_waiting': True}">
+                    <span><t t-esc="record.seats_waiting.raw_value"/> Waiting</span>
                 </a>
             </div>
         </field>

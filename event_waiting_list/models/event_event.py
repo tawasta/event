@@ -19,6 +19,7 @@
 ##############################################################################
 
 # 1. Standard library imports:
+import pytz
 
 # 2. Known third party imports:
 
@@ -112,7 +113,7 @@ class EventEvent(models.Model):
             if event.seats_max > 0:
                 event.seats_available = event.seats_max - (event.seats_reserved + event.seats_used)
 
-    @api.depends('event_type_id')
+    @api.depends('event_type_id', 'waiting_list')
     def _compute_waiting_list(self):
         """ Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
@@ -120,6 +121,26 @@ class EventEvent(models.Model):
         event type content itself should not trigger this method. """
         for event in self:
             event.waiting_list = event.event_type_id.waiting_list
+
+    @api.depends('date_tz', 'start_sale_date', 'date_end', 'seats_available', 'seats_limited', 'event_ticket_ids.sale_available')
+    def _compute_event_registrations_open(self):
+        """ Compute whether people may take registrations for this event
+          * event.date_end -> if event is done, registrations are not open anymore;
+          * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
+            is False if no ticket are defined, see _compute_start_sale_date);
+          * any ticket is available for sale (seats available) if any;
+          * seats are unlimited or seats are available;
+          * allow registrations to waiting list if enabled
+        """
+        for event in self:
+            event = event._set_tz_context()
+            current_datetime = fields.Datetime.context_timestamp(event, fields.Datetime.now())
+            date_end_tz = event.date_end.astimezone(pytz.timezone(event.date_tz or 'UTC')) if event.date_end else False
+            event.event_registrations_open = (event.start_sale_date <= current_datetime.date() if event.start_sale_date else True) and \
+                (date_end_tz >= current_datetime if date_end_tz else True) and \
+                (not event.seats_limited or event.seats_available if not event.waiting_list else True) and \
+                (not event.event_ticket_ids or any(ticket.sale_available for ticket in event.event_ticket_ids) if not event.waiting_list else True)
+
 
     # 5. Constraints and onchanges
 
