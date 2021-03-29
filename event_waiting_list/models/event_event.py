@@ -25,6 +25,7 @@ import pytz
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -141,8 +142,11 @@ class EventEvent(models.Model):
                 (not event.seats_limited or event.seats_available if not event.waiting_list else True) and \
                 (not event.event_ticket_ids or any(ticket.sale_available for ticket in event.event_ticket_ids) if not event.waiting_list else True)
 
-
     # 5. Constraints and onchanges
+    @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
+    def _check_seats_limit(self):
+        if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
+            raise ValidationError(_('No more available seats.'))
 
     # 6. CRUD methods
 

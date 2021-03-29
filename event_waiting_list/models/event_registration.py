@@ -23,7 +23,8 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -54,17 +55,41 @@ class EventRegistration(models.Model):
     # 5. Constraints and onchanges
     @api.constrains('event_id', 'state')
     def _check_seats_limit(self):
-        pass
+        for registration in self:
+            if (registration.event_id.seats_limited and registration.event_id.seats_max and registration.event_id.seats_available < (1 if registration.state == 'draft' else 0)) and not registration.event_id.waiting_list:
+                raise ValidationError(_('No more seats available for this event.'))
+
+    @api.constrains('event_ticket_id', 'state')
+    def _check_ticket_seats_limit(self):
+        for record in self:
+            if (record.event_ticket_id.seats_max and record.event_ticket_id.seats_available < 0) and not record.event_ticket_id.waiting_list:
+                raise ValidationError(_('No more available seats for this ticket'))
 
     # 6. CRUD methods
-    def _check_auto_confirmation(self):
-        if any(not registration.event_id.auto_confirm
-               for registration in self):
-            return False
-        return True
+    @api.model_create_multi
+    def create(self, vals_list):
+        registrations = super(EventRegistration, self).create(vals_list)
+        if registrations._check_waiting_list():
+            registrations.sudo().action_waiting()
+        if registrations._check_auto_confirmation():
+            if registrations._check_waiting_list():
+                registrations.sudo().action_waiting()
+            else:
+                registrations.sudo().action_confirm()
+
+        return registrations
 
     # 7. Action methods
     def action_waiting(self):
         self.write({'state': 'wait'})
+
+    def _check_waiting_list(self):
+        for registration in self:
+            print(registration.event_id.waiting_list)
+            print(registration.event_id.seats_available)
+            print(registration.event_id.seats_limited)
+            if registration.event_id.waiting_list and registration.event_id.seats_available < 1 and registration.event_id.seats_limited:
+                return True
+        return False
 
     # 8. Business methods
