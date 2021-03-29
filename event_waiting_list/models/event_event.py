@@ -43,7 +43,7 @@ class EventType(models.Model):
         string="Enable Waiting List",
         help="Enable waiting list when attendee limit is reached.",
         default=True,
-        store=True,
+        # store=True,
     )
 
     # 3. Default methods
@@ -68,7 +68,8 @@ class EventEvent(models.Model):
         string="Enable Waiting List",
         compute='_compute_waiting_list',
         help="Enable waiting list when attendee limit is reached.",
-        default=True,
+        readonly=False,
+        store=True,
     )
     seats_waiting = fields.Integer(
         string="Seats on waiting list",

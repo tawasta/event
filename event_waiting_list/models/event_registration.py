@@ -21,6 +21,7 @@
 # 1. Standard library imports:
 
 # 2. Known third party imports:
+from werkzeug import urls
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, api, _
@@ -48,9 +49,17 @@ class EventRegistration(models.Model):
                              string='Status', default='draft',
                              readonly=True, copy=False, tracking=True)
 
+    product_url = fields.Char("Public link", compute="_compute_product_url")
+
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    def _compute_product_url(self):
+        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+        for registration in self:
+            registration.product_url = urls.url_join(
+                base_url, "/web/login?redirect=/shop/payment/update/%s" % (registration.id)
+            )
 
     # 5. Constraints and onchanges
     @api.constrains('event_id', 'state')
