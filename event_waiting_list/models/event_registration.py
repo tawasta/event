@@ -88,15 +88,27 @@ class EventRegistration(models.Model):
 
         return registrations
 
+    def write(self, vals):
+        ret = super(EventRegistration, self).write(vals)
+
+        if vals.get('state') == 'open':
+            # auto-trigger after_sub (on subscribe) mail schedulers, if needed
+            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
+            onsubscribe_schedulers.sudo().execute()
+
+        if vals.get('state') == 'wait':
+            # auto-trigger after_wait (on subscribe to waiting list) mail schedulers, if needed
+            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_wait')
+            onsubscribe_schedulers.sudo().execute()
+
+        return ret
+
     # 7. Action methods
     def action_waiting(self):
         self.write({'state': 'wait'})
 
     def _check_waiting_list(self):
         for registration in self:
-            print(registration.event_id.waiting_list)
-            print(registration.event_id.seats_available)
-            print(registration.event_id.seats_limited)
             if registration.event_id.waiting_list and registration.event_id.seats_available < 1 and registration.event_id.seats_limited:
                 return True
         return False

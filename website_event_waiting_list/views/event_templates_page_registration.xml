@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_template_waiting_list" inherit_id="website_event.registration_template">
+        <xpath expr="//button[@type='submit'][@class='btn btn-primary o_wait_lazy_js btn-block a-submit']" position="replace">
+            <t t-if="event.waiting_list and event.seats_available &lt;= 0">
+                <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" disabled="" t-attf-id="#{event.id}">
+                    Register to Waiting List
+                </button>
+            </t>
+            <t t-else="">
+                <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" disabled="" t-attf-id="#{event.id}">
+                    Register
+                    <t t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2) and event.seats_available &gt; 0">
+                        (only <t t-esc="event.seats_available"/> available)
+                    </t>
+                </button>
+            </t>
+        </xpath>
+    </template>
+</odoo>
