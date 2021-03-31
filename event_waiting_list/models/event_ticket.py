@@ -40,9 +40,26 @@ class EventTicket(models.Model):
     # 2. Fields declaration
     seats_waiting = fields.Integer(string='Waiting Seats', compute='_compute_seats', store=True)
 
+    waiting_list = fields.Boolean(
+        string="Enable Waiting List",
+        compute='_compute_waiting_list',
+        help="Enable waiting list when attendee limit is reached.",
+        readonly=False,
+        store=True,
+    )
+
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends('event_id', 'waiting_list')
+    def _compute_waiting_list(self):
+        """ Update event configuration from its event type. Depends are set only
+        on event_type_id itself, not its sub fields. Purpose is to emulate an
+        onchange: if event type is changed, update event configuration. Changing
+        event type content itself should not trigger this method. """
+        for ticket in self:
+            ticket.waiting_list = ticket.event_id.waiting_list
+
     @api.depends('seats_max', 'registration_ids.state')
     def _compute_seats(self):
         """

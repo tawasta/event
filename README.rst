@@ -20,9 +20,12 @@ Addons
    * - `event_description <event_description/>`_
      - 14.0.1.0.0
      - Adds event description field to backend
-   * - `event_wating_list <event_waiting_list/>`_
+   * - `event_waiting_list <event_waiting_list/>`_
      - 14.0.1.0.0
      - Adds waiting list for events
+   * - `website_event_waiting_list <website_event_waiting_list/>`_
+     - 14.0.1.0.0
+     - Adds waiting list for website events
 
 Configuration
 =============
