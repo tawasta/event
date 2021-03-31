@@ -77,25 +77,25 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
     @api.model_create_multi
     def create(self, vals_list):
+        self = self.with_context(skip_confirm=True)
         registrations = super(EventRegistration, self).create(vals_list)
-        if registrations._check_waiting_list():
-            registrations.sudo().action_waiting()
-        if registrations._check_auto_confirmation():
+
+        if registrations._check_auto_confirmation_create():
             if registrations._check_waiting_list():
                 registrations.sudo().action_waiting()
             else:
                 registrations.sudo().action_confirm()
+        elif registrations._check_waiting_list():
+            registrations.sudo().action_waiting()
 
         return registrations
 
     def write(self, vals):
         ret = super(EventRegistration, self).write(vals)
-
         if vals.get('state') == 'open':
             # auto-trigger after_sub (on subscribe) mail schedulers, if needed
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
             onsubscribe_schedulers.sudo().execute()
-
         if vals.get('state') == 'wait':
             # auto-trigger after_wait (on subscribe to waiting list) mail schedulers, if needed
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_wait')
@@ -107,10 +107,27 @@ class EventRegistration(models.Model):
     def action_waiting(self):
         self.write({'state': 'wait'})
 
+    def action_confirm(self):
+        self.write({'state': 'open'})
+
     def _check_waiting_list(self):
-        for registration in self:
-            if registration.event_id.waiting_list and registration.event_id.seats_available < 1 and registration.event_id.seats_limited:
-                return True
-        return False
+        if any(not registration.event_id.waiting_list or
+               (registration.event_id.seats_available) for registration in self):
+            return False
+        return True
+
+    def _check_auto_confirmation(self):
+        res = super()._check_auto_confirmation()
+        # set res false when called from super to avoid confirm
+        if self._context.get("skip_confirm"):
+            res = False
+
+        return res
+
+    def _check_auto_confirmation_create(self):
+        if any(not registration.event_id.auto_confirm or
+               (not registration.event_id.seats_available and registration.event_id.seats_limited) for registration in self):
+            return False
+        return True
 
     # 8. Business methods
