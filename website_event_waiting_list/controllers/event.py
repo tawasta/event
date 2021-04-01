@@ -26,7 +26,7 @@ import werkzeug
 # 3. Odoo imports (openerp):
 from odoo import http
 from odoo.http import request
-from odoo.addons.website.event.controllers.main import WebsiteEventController
+from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 # 4. Imports from Odoo modules:
 
@@ -48,10 +48,13 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             ordered_seats = 0
             for ticket in tickets:
                 ordered_seats += ticket['quantity']
-            if event.seats_available < ordered_seats:
+            if not event.waiting_list and event.seats_available < ordered_seats:
                 availability_check = False
-            if event.waiting_list and not event.seats_available:
+            if event.waiting_list and event.seats_available <= 0:
                 waiting_list_check = True
-        if not tickets:
+        if not tickets and not waiting_list_check:
             return False
-        return request.env['ir.ui.view']._render_template("website_event.registration_attendee_details", {'tickets': tickets, 'event': event, 'availability_check': availability_check, 'waiting_list_check': waiting_list_check})
+        if waiting_list_check:
+            return request.env['ir.ui.view']._render_template("website_event_waiting_list.waiting_list_attendee_details", {'tickets': tickets, 'event': event, 'waiting_list_check': waiting_list_check})
+        else:
+            return request.env['ir.ui.view']._render_template("website_event.registration_attendee_details", {'tickets': tickets, 'event': event, 'availability_check': availability_check, 'waiting_list_check': waiting_list_check})

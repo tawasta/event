@@ -16,13 +16,16 @@ odoo.define('website_event_waiting_list.website_event', function (require) {
             ev.stopPropagation();
             var $form = $(ev.currentTarget).closest('form');
             var $button = $(ev.currentTarget).closest('[type="submit"]');
+            var waiting_list = false;
+            if ($($button).attr('name') == "waiting_list") {
+                waiting_list = true;
+            }
             var post = {};
             $('#registration_form table').siblings('.alert').remove();
             $('#registration_form select').each(function () {
                 post[$(this).attr('name')] = $(this).val();
             });
             var tickets_ordered = _.some(_.map(post, function (value, key) { return parseInt(value); }));
-            var waiting_list = true;
             if (!tickets_ordered && !waiting_list) {
                 $('<div class="alert alert-info"/>')
                     .text(_t('Please select at least one ticket.'))
