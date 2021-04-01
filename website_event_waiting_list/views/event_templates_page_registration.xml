@@ -5,25 +5,53 @@
     <!--         <attribute name="t-if">not ticket.is_expired and ticket.sale_available and ticket.seats_available</attribute> -->
     <!--     </xpath> -->
 
+        <!--     <attribute name="t-if">event.event_registrations_open and tickets.seats_available</attribute> -->
+        <!-- </xpath> -->
 
-        <xpath expr="//t[@t-if='event.event_registrations_open']" position="attributes">
-            <attribute name="t-if">event.event_registrations_open and tickets.seats_available</attribute>
-        </xpath>
-
+        <!-- Replace ticket selections -->
         <xpath expr="//select[@t-if='not ticket.is_expired and ticket.sale_available']" position="after">
-            <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
-                <i class="fa fa-ban mr-2"/>Sold Out
-            </span>
-            <select t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list"
-                    t-attf-name="nb_register-#{ticket.id}"
-                    class="custom-select">
-                <t t-foreach="range(0, 10)" t-as="nb">
-                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
-                </t>
-            </select>
+            <t t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list">
+                <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
+                    <i class="fa fa-ban mr-2"/>Sold Out
+                </span>
+                <select t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list"
+                        t-attf-name="nb_register-#{ticket.id}"
+                        class="custom-select">
+                    <t t-foreach="range(0, 10)" t-as="nb">
+                        <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                    </t>
+                </select>
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-if='event.event_registrations_open']" position="replace">
+             <t t-if="event.event_registrations_open">
+                 <t t-if="not tickets.sale_available and event.waiting_list">
+                     <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
+                         <i class="fa fa-ban mr-2"/>Sold Out
+                     </span>
+                     <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                         <t t-foreach="range(0, 10)" t-as="nb">
+                             <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                         </t>
+                     </select>
+                 </t>
+                 <t t-else="">
+                     <span class="text-dark font-weight-bold align-middle pr-2">Qty</span>
+                     <link itemprop="availability" content="http://schema.org/InStock"/>
+                     <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                         <t t-set="seats_max_ticket" t-value="(not tickets or not tickets.seats_limited or tickets.seats_available &gt; 9) and 10 or tickets.seats_available + 1"/>
+                         <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
+                         <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event) if tickets else seats_max_event"/>
+                         <t t-foreach="range(0, seats_max)" t-as="nb">
+                             <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                         </t>
+                     </select>
+                 </t>
+             </t>
         </xpath>
 
-        <xpath expr="//div[@class='col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2']" position ="replace">
+        <!-- Replace submit buttons -->
+        <xpath expr="//div[@class='col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2']" position="replace">
             <div class="col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2">
                 <t t-if="event.waiting_list and event.event_registrations_open and event.seats_available &lt;=0">
                     <button type="submit" name="waiting_list" class="btn btn-primary o_wait_lazy_js btn-block a-submit" t-attf-id="#{event.id}">
@@ -40,14 +68,12 @@
                 </t>
             </div>
         </xpath>
-
         <xpath expr="//div[@class='col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0']" position="replace">
             <div class="col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0">
                 <t t-if="event.waiting_list and event.event_registrations_open and event.seats_available &lt;=0">
                     <button type="submit" name="waiting_list" class="btn btn-primary o_wait_lazy_js btn-block a-submit" t-attf-id="#{event.id}">
                         Join the waiting list
                     </button>
-                    <t t-call="website_event_waiting_list.waiting_list_attendee_details"/>
                 </t>
                 <t t-else="">
                     <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" t-attf-id="#{event.id}">
@@ -106,5 +132,63 @@
                 </form>
             </div>
         </div>
+    </template>
+
+    <template id="waiting_list_complete" name="Waiting List Completed">
+        <t t-call="website_event.layout">
+            <div class="container my-5 o_wereg_confirmed">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h3>Joined waiting list!</h3>
+                        <span class="h4 text-muted" t-esc="event.name"/>
+                    </div>
+                </div>
+                <div class="row mb-3 o_wereg_confirmed_attendees">
+                    <div class="col-md-4 col-xs-12 mt-3" t-foreach="attendees" t-as="attendee">
+                        <div class="d-flex flex-column">
+                            <span class="font-weight-bold">
+                                <t t-if="attendee.name" t-esc="attendee.name"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-envelope mr-2   "></i>
+                                <t t-if="attendee.email" t-esc="attendee.email"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-phone mr-2"></i>
+                                <t t-if="attendee.phone" t-esc="attendee.phone"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-ticket mr-2"></i>
+                                <t t-if="attendee.event_ticket_id" t-esc="attendee.event_ticket_id.name"/>
+                                <t t-else="">N/A</t>
+                                (ref: <t t-esc="attendee.id"/>)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <p><b>Start</b> <span itemprop="startDate" t-esc="event.date_begin_located"/><br/> <b>End</b> <span itemprop="endDate" t-esc="event.date_end_located"/></p>
+                        <div class="mt-4">
+                            <h5 t-field="event.address_id" class="text-secondary font-weight-bold" t-options='{
+                                                                                                              "widget": "contact",
+                                                                                                              "fields": ["name"]
+                                                                                                              }'/>
+                            <a itemprop="location" t-att-href="event.google_map_link()" target="_BLANK" temprop="location" t-field="event.address_id" t-options='{
+                                                                                                                                                                 "widget": "contact",
+                                                                                                                                                                 "fields": ["address"]
+                                                                                                                                                                 }'/>
+                            <div itemprop="location" t-field="event.address_id" t-options='{
+                                                                                           "widget": "contact",
+                                                                                           "fields": ["phone", "mobile", "email"]
+                                                                                           }'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
     </template>
 </odoo>

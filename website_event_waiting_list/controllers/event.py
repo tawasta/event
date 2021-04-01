@@ -56,5 +56,18 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             return False
         if waiting_list_check:
             return request.env['ir.ui.view']._render_template("website_event_waiting_list.waiting_list_attendee_details", {'tickets': tickets, 'event': event, 'waiting_list_check': waiting_list_check})
-        else:
-            return request.env['ir.ui.view']._render_template("website_event.registration_attendee_details", {'tickets': tickets, 'event': event, 'availability_check': availability_check, 'waiting_list_check': waiting_list_check})
+        return request.env['ir.ui.view']._render_template("website_event.registration_attendee_details", {'tickets': tickets, 'event': event, 'availability_check': availability_check, 'waiting_list_check': waiting_list_check})
+
+    @http.route(['''/event/<model("event.event"):event>/registration/confirm'''], type='http', auth="public", methods=['POST'], website=True)
+    def registration_confirm(self, event, **post):
+        if not event.can_access_from_current_website():
+            raise werkzeug.exceptions.NotFound()
+
+        registrations = self._process_attendees_form(event, post)
+        attendees_sudo = self._create_attendees_from_registration_post(event, registrations)
+        for attendee in attendees_sudo:
+            if attendee.state == 'wait':
+                return request.render("website_event_waiting_list.waiting_list_complete",
+                                  self._get_registration_confirm_values(event, attendees_sudo))
+        return request.render("website_event.registration_complete",
+                                  self._get_registration_confirm_values(event, attendees_sudo))
