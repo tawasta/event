@@ -71,6 +71,11 @@ class EventType(models.Model):
                     'interval_unit': 'days',
                     'interval_type': 'before_event',
                     'template_id': self.env.ref('event.event_reminder').id,
+                }), (0, 0, {
+                    'notification_type': 'mail',
+                    'interval_unit': 'now',
+                    'interval_type': 'after_free_seat',
+                    'template_id': self.env.ref('event.event_waiting_registration').id,
                 })]
 
     # 5. Constraints and onchanges
@@ -174,5 +179,8 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
-
+    def mail_attendees(self, template_id, force_send=False, filter_func=lambda self: self.state not in ['cancel', 'wait']):
+        for event in self:
+            for attendee in event.registration_ids.filtered(filter_func):
+                self.env['mail.template'].browse(template_id).send_mail(attendee.id, force_send=force_send)
     # 8. Business methods

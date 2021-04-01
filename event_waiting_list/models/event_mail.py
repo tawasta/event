@@ -51,6 +51,7 @@ class EventTypeMail(models.Model):
     interval_type = fields.Selection([
         ('after_sub', 'After each registration'),
         ('after_wait', 'After registering to waiting list'),
+        ('after_free_seat', 'After a seat opens up send mail to waiting list'),
         ('before_event', 'Before the event'),
         ('after_event', 'After the event')],
         string='Trigger', default="before_event", required=True)
@@ -80,6 +81,7 @@ class EventMailScheduler(models.Model):
     interval_type = fields.Selection([
         ('after_sub', 'After each registration'),
         ('after_wait', 'After registering to waiting list'),
+        ('after_free_seat', 'After a seat opens up send mail to waiting list'),
         ('before_event', 'Before the event'),
         ('after_event', 'After the event')],
         string='Trigger', default="before_event", required=True)
@@ -90,9 +92,7 @@ class EventMailScheduler(models.Model):
     @api.depends('event_id.date_begin', 'interval_type', 'interval_unit', 'interval_nbr')
     def _compute_scheduled_date(self):
         for mail in self:
-            if mail.interval_type == 'after_sub':
-                date, sign = mail.event_id.create_date, 1
-            elif mail.interval_type == 'after_wait':
+            if mail.interval_type in ['after_sub', 'after_wait', 'after_free_seat']:
                 date, sign = mail.event_id.create_date, 1
             elif mail.interval_type == 'before_event':
                 date, sign = mail.event_id.date_begin, -1
@@ -109,7 +109,7 @@ class EventMailScheduler(models.Model):
     def execute(self):
         for mail in self:
             now = fields.Datetime.now()
-            if mail.interval_type == 'after_sub' or mail.interval_type == 'after_wait':
+            if mail.interval_type in ['after_sub', 'after_wait', 'after_free_seat']:
                 # update registration lines
                 lines = [
                     (0, 0, {'registration_id': registration.id})
@@ -122,7 +122,7 @@ class EventMailScheduler(models.Model):
             else:
                 # Do not send emails if the mailing was scheduled before the event but the event is over
                 if not mail.mail_sent and mail.scheduled_date <= now and mail.notification_type == 'mail' and \
-                        (mail.interval_type != 'before_event' or mail.event_id.date_end > now):
+                   (mail.interval_type != 'before_event' or mail.event_id.date_end > now):
                     mail.event_id.mail_attendees(mail.template_id.id)
                     mail.write({'mail_sent': True})
         return True
@@ -157,9 +157,11 @@ class EventMailRegistration(models.Model):
         for reg_mail in todo:
             if reg_mail.registration_id.state == 'wait' and reg_mail.scheduler_id.interval_type == 'after_wait':
                 reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
-                todo.write({'mail_sent': True})
             if reg_mail.registration_id.state == 'open' and reg_mail.scheduler_id.interval_type == 'after_sub':
                 reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
-                todo.write({'mail_sent': True})
+            if reg_mail.registration_id.state == 'wait' and reg_mail.scheduler_id.interval_type == 'after_free_seat':
+                reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
+
+            todo.write({'mail_sent': True})
 
     # 8. Business methods
