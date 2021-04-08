@@ -142,6 +142,7 @@ class EventEvent(models.Model):
             event.update(results.get(event._origin.id or event.id, base_vals))
             if event.seats_max > 0:
                 event.seats_available = event.seats_max - (event.seats_reserved + event.seats_used)
+
     @api.depends('event_type_id', 'waiting_list')
     def _compute_waiting_list(self):
         """ Update event configuration from its event type. Depends are set only

@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event"/>
         <field name="arch" type="xml">
             <field name="seats_unconfirmed" position="after">
-                <field name="seats_waiting" sum="Total" width="110px" string="Waiting"/>
+                <field name="seats_waiting" sum="Total" width="105px" string="Waiting"/>
             </field>
         </field>
     </record>

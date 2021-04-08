@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, api
+from odoo.osv import expression
 
 # 4. Imports from Odoo modules:
 
@@ -38,19 +39,49 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     # 2. Fields declaration
-    # waiting_list_registration_url = fields.Char(
-    #     compute='_compute_waiting_list_registration_url',
-    # )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    # @api.depends('waiting_list')
-    # def _compute_waiting_list_registration_url(self):
-    #     for event in self:
-    #         if event.waiting_list:
-    #             event.waiting_list_registration_url = \
-    #                 event.website_url + '/waiting-list-registration'
+    def _compute_is_participating(self):
+        """Heuristic
+          * public, no visitor: not participating as we have no information;
+          * public and visitor: check visitor is linked to a registration. As
+            visitors are merged on the top parent, current visitor check is
+            sufficient even for successive visits;
+          * logged, no visitor: check partner is linked to a registration. Do
+            not check the email as it is not really secure;
+          * logged as visitor: check partner or visitor are linked to a
+            registration;
+        """
+        current_visitor = self.env['website.visitor']._get_visitor_from_request(force_create=False)
+        if self.env.user._is_public() and not current_visitor:
+            events = self.env['event.event']
+        elif self.env.user._is_public():
+            events = self.env['event.registration'].sudo().search([
+                ('event_id', 'in', self.ids),
+                ('state', '!=', 'cancel'),
+                ('state', '!=', 'wait'),
+                ('visitor_id', '=', current_visitor.id),
+            ]).event_id
+        else:
+            if current_visitor:
+                domain = [
+                    '|',
+                    ('partner_id', '=', self.env.user.partner_id.id),
+                    ('visitor_id', '=', current_visitor.id)
+                ]
+            else:
+                domain = [('partner_id', '=', self.env.user.partner_id.id)]
+            events = self.env['event.registration'].sudo().search(
+                expression.AND([
+                    domain,
+                    ['&', ('event_id', 'in', self.ids), ('state', '!=', 'cancel'), ('state', '!=', 'wait')]
+                ])
+            ).event_id
+
+        for event in self:
+            event.is_participating = event in events
 
     # 5. Constraints and onchanges
 

@@ -119,6 +119,14 @@
              <field name="state" position="attributes">
                  <attribute name="statusbar_visible">draft,open,done,wait</attribute>
              </field>
+             <field name="event_ticket_id" position="attributes">
+                 <attribute name="domain">
+                     [
+                     ('event_id', '=', event_id),
+                     '|', ('seats_limited', '=', False), ('seats_available', '>', 0), ('waiting_list', '=', True)
+                     ]
+                 </attribute>
+             </field>
          </field>
      </record>
 
