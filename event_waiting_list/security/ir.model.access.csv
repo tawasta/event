@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_waiting_mail_list,access_waiting_mail_list,model_event_waiting_mail_list_wizard,event.group_event_manager,1,1,1,1

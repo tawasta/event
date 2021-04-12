@@ -30,10 +30,13 @@
     "installable": True,
     "depends": [
         "event",
+        "mass_mailing",
     ],
     "data": [
         "views/event_views.xml",
         "views/event_ticket_views.xml",
         "data/email_template_data.xml",
+        "wizard/waiting_mail_list_wizard.xml",
+        "security/ir.model.access.csv",
     ],
 }

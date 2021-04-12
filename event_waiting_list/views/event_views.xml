@@ -31,6 +31,16 @@
         <field name="model">event.event</field>
         <field name="inherit_id" ref="event.view_event_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']//button[1]" position="after">
+                <button name="%(event.act_event_registration_from_event)d"
+                        type="action"
+                        context="{'search_default_waiting': True}"
+                        class="oe_stat_button"
+                        icon="fa-users"
+                        help="Total Registrations for this Event">
+                    <field name="seats_waiting" widget="statinfo" string="Waiting"/>
+                </button>
+            </xpath>
             <field name="auto_confirm" position="after">
                 <field name="waiting_list"/>
             </field>

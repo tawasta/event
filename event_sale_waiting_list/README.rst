@@ -28,8 +28,8 @@ Contributors
 
 * Miika Nissi <miika.nissi@tawasta.fi>
 
-  Maintainer
-  ----------
+Maintainer
+----------
 
 .. image:: http://tawasta.fi/templates/tawastrap/images/logo.png
 :alt: Oy Tawasta OS Technologies Ltd.
