@@ -91,8 +91,9 @@ class EventRegistration(models.Model):
         return registrations
 
     def write(self, vals):
-        ret = super(EventRegistration, self).write(vals)
         if vals.get('state') == 'open':
+            if self.event_id.seats_available < 1:
+                raise ValidationError(_("No more available seats for this event."))
             # auto-trigger after_sub (on subscribe) mail schedulers, if needed
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
             onsubscribe_schedulers.sudo().execute()
@@ -100,15 +101,12 @@ class EventRegistration(models.Model):
             # auto-trigger after_wait (on subscribe to waiting list) mail schedulers, if needed
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_wait')
             onsubscribe_schedulers.sudo().execute()
-
+        ret = super(EventRegistration, self).write(vals)
         return ret
 
     # 7. Action methods
     def action_waiting(self):
         self.write({'state': 'wait'})
-
-    def action_confirm(self):
-        self.write({'state': 'open'})
 
     def _check_waiting_list(self):
         if any(not registration.event_id.waiting_list or

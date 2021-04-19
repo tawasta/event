@@ -96,9 +96,6 @@
              <button name="action_cancel" position="before">
                  <button name="action_waiting" string="Move to Waiting List" states="draft" type="object" icon="fa-clock-o"/>
              </button>
-             <button name="action_confirm" position="after">
-                 <button name="action_set_draft" string="Mark as Unconfirmed" states="wait" type="object" icon="fa-question"/>
-             </button>
              <button name="action_cancel" position="attributes">
                  <attribute name="states">draft,open,wait</attribute>
              </button>
@@ -118,7 +115,7 @@
              </button>
 
              <button name="action_set_draft" position="attributes">
-                 <attribute name="states">cancel,done,wait</attribute>
+                 <attribute name="states">cancel,done</attribute>
              </button>
              <button name="action_cancel" position="attributes">
                  <attribute name="states">draft,open,wait</attribute>
@@ -145,17 +142,12 @@
          <field name="model">event.registration</field>
          <field name="inherit_id" ref="event.event_registration_view_kanban"/>
          <field name="arch" type="xml">
-             <xpath expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']" position="before">
-                 <a class="btn btn-md btn-primary" string="Set as Unconfirmed" name="action_set_draft" type="object" states="wait" role="button">
-                     <i class="fa fa-question" role="img" aria-label="Unconfirm button" title="Set as Unconfirmed"/>
-                 </a>
+             <xpath expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']" position="attributes">
+                 <attribute name="states">draft,wait</attribute>
              </xpath>
 
-             <xpath expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']" position="before">
-                 <a class="btn btn-primary d-flex justify-content-center align-items-center h-100 w-100"
-                    string="Set as Unconfirmed" name="action_confirm" type="object" states="wait" role="button">
-                     <i class="fa fa-question fa-3x" role="img" aria-label="Unconfirm button" title="Set as Unconfirmed"/>
-                 </a>
+             <xpath expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']" position="attributes">
+                 <attribute name="states">draft,wait</attribute>
              </xpath>
          </field>
      </record>

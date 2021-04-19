@@ -41,12 +41,11 @@ class WaitingMailListWizard(models.TransientModel):
 
     # 2. Fields declaration
     mail_list_id = fields.Many2one(
-        comodel_name="mail.mass_mailing_list", string="Waiting Mailing List"
+        comodel_name="mailing.list", string="Waiting Mailing List"
     )
     registration_ids = fields.Many2many(
-        comodel_name="event.registrations",
-        relation="mail_list_wizard_batch",
-        default=lambda self: self.env.context.get("active_ids"),
+        comodel_name="event.registration",
+        # default=lambda self: self.env.context.get("active_ids"),
     )
 
     # 3. Default methods
@@ -59,14 +58,13 @@ class WaitingMailListWizard(models.TransientModel):
 
     # 7. Action methods
     def add_to_waiting_mail_list(self):
-        contact_obj = self.env["mail.mass_mailing.contact"]
-        registrations = self.registration_ids
-        waiting_registrations = registrations.mapped('state')
-        partners = waiting_registrations.mapped('partner_id')
+        contact_obj = self.env["mailing.contact"]
+        partners = self.registration_ids.mapped('partner_id')
         user_data = []
-        mail_list_contacts = self.mail_list_id.contact_ids.mapped("partner_id")
+        mail_list_contacts = self.mail_list_id.contact_ids
 
         for partner in partners:
+            print("hi")
             if partner.id not in mail_list_contacts.ids:
                 if partner.email not in user_data:
                     if not partner.email:
