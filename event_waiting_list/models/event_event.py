@@ -71,11 +71,6 @@ class EventType(models.Model):
                     'interval_unit': 'days',
                     'interval_type': 'before_event',
                     'template_id': self.env.ref('event.event_reminder').id,
-                }), (0, 0, {
-                    'notification_type': 'mail',
-                    'interval_unit': 'now',
-                    'interval_type': 'after_free_seat',
-                    'template_id': self.env.ref('event.event_waiting_registration').id,
                 })]
 
     # 5. Constraints and onchanges
@@ -172,8 +167,22 @@ class EventEvent(models.Model):
                 (not event.event_ticket_ids or any(ticket.sale_available for ticket in event.event_ticket_ids) if not event.waiting_list else True)
 
     # 5. Constraints and onchanges
+    # @api.constrains('seats_max', 'seats_available', 'seats_limited')
+    # def _check_seats_limit(self):
+    #     """
+    #     Raise validation error if no waiting list and seats are full
+    #     Or if seats are full and trying to confirm a registration
+    #     """
+    #     for event in self:
+    #         if event.seats_limited and event.seats_max and event.seats_available < 0:
+    #             if not event.waiting_list:
+    #                 raise ValidationError(_('No more available seats.'))
+    #             elif event.waiting_list and event.state not in ['draft', 'wait']:
+    #                 raise ValidationError(_('No more available seats.'))
+
     @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
     def _check_seats_limit(self):
+        """ Raise validation error if no waiting list and seats are full """
         if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
             raise ValidationError(_('No more available seats.'))
 
@@ -184,4 +193,5 @@ class EventEvent(models.Model):
         for event in self:
             for attendee in event.registration_ids.filtered(filter_func):
                 self.env['mail.template'].browse(template_id).send_mail(attendee.id, force_send=force_send)
+
     # 8. Business methods

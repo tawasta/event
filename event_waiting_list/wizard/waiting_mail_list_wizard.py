@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, _
+from odoo.http import request
 from odoo.exceptions import UserError
 
 # 4. Imports from Odoo modules:
@@ -40,13 +41,6 @@ class WaitingMailListWizard(models.TransientModel):
     _description = "Create mailing list for waiting list contacts"
 
     # 2. Fields declaration
-    mail_list_id = fields.Many2one(
-        comodel_name="mailing.list", string="Waiting Mailing List"
-    )
-    registration_ids = fields.Many2many(
-        comodel_name="event.registration",
-        # default=lambda self: self.env.context.get("active_ids"),
-    )
 
     # 3. Default methods
 
@@ -57,29 +51,27 @@ class WaitingMailListWizard(models.TransientModel):
     # 6. CRUD methods
 
     # 7. Action methods
-    def add_to_waiting_mail_list(self):
-        contact_obj = self.env["mailing.contact"]
-        partners = self.registration_ids.mapped('partner_id')
-        user_data = []
-        mail_list_contacts = self.mail_list_id.contact_ids
-
-        for partner in partners:
-            print("hi")
-            if partner.id not in mail_list_contacts.ids:
-                if partner.email not in user_data:
-                    if not partner.email:
-                        raise UserError(
-                            _("Partner '%s' has no email.") % partner.name
-                        )
-                    contact_vals = {
-                        "partner_id": partner.id,
-                        "list_ids": [[6, 0, [self.mail_list_id.id]]],
-                        "title_id": partner.title or False,
-                        "company_name": partner.company_id.name or False,
-                        "country_id": partner.country_id or False,
-                        "tag_ids": partner.category_id or False,
-                    }
-                    contact_obj.create(contact_vals)
-                    user_data.append(partner.email)
+    def send_confirmation_mail(self):
+        registration_ids = self.env['event.registration'].browse(self._context.get("active_ids"))
+        cur_app = request.env["event.registration"]
+        for registration in registration_ids:
+            msg_template = request.env.ref(
+                "event_waiting_list.event_waiting_registration"
+            )
+            values = {
+                "email_to": registration.email,
+                "email_from": registration.event_id.organizer_id.email_formatted,
+                # "body_html": body,
+                "subject": "We have available tickets for " + str(registration.event_id.name),
+            }
+            context = {
+                'name': registration.name,
+                'event': registration.event_id.name,
+                'confirm_url': registration.confirm_url,
+            }
+            msg_template.sudo().write(values)
+            msg_template.with_context(context).sudo().send_mail(
+                cur_app.id, force_send=True
+            )
 
     # 8. Business methods

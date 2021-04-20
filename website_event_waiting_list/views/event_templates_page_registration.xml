@@ -10,6 +10,10 @@
 
         <!-- Replace ticket selections -->
         <xpath expr="//select[@t-if='not ticket.is_expired and ticket.sale_available']" position="after">
+            <t t-esc="ticket.is_expired"/>
+            <t t-esc="ticket.sale_available"/>
+            <t t-esc="ticket.waiting_list"/>
+            <t t-esc="ticket.seats_available"/>
             <t t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list">
                 <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
                     <i class="fa fa-ban mr-2"/>Sold Out
@@ -23,9 +27,10 @@
                 </select>
             </t>
         </xpath>
+        <!-- Single ticket view -->
         <xpath expr="//t[@t-if='event.event_registrations_open']" position="replace">
-             <t t-if="event.event_registrations_open">
-                 <t t-if="not tickets.sale_available and event.waiting_list">
+            <t t-if="event.event_registrations_open">
+                 <t t-if="not tickets.sale_available and not tickets.is_expired and event.waiting_list">
                      <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
                          <i class="fa fa-ban mr-2"/>Sold Out
                      </span>
