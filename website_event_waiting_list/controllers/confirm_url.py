@@ -44,4 +44,5 @@ class WaitingConfirmController(Controller):
             'registration': registration,
             'seats_available': seats_available,
         }
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22")
         return request.render("website_event_waiting_list.confirm_waiting", render_values)

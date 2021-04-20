@@ -34,6 +34,7 @@
     ],
     "data": [
         "views/event_templates_page_registration.xml",
+        "views/event_templates_confirm_waiting_list.xml",
         "views/assets.xml",
     ],
 }

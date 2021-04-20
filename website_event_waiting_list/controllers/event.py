@@ -71,3 +71,15 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                                   self._get_registration_confirm_values(event, attendees_sudo))
         return request.render("website_event.registration_complete",
                                   self._get_registration_confirm_values(event, attendees_sudo))
+
+    @http.route(['/event/<model("event.event"):event>/waiting-list/confirm/<model("event.registration"):registration>'],
+                type='http', auth="public", website=True)
+    def confirm_url_template(self, event, registration, **kwargs):
+        seats_available = event.seats_available
+        render_values = {
+            'event': event,
+            'registration': registration,
+            'seats_available': seats_available,
+        }
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22")
+        return request.render("website_event_waiting_list.confirm_waiting", render_values)

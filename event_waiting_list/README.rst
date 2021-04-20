@@ -18,7 +18,7 @@ Usage
 
 Known issues / Roadmap
 ======================
-\-
+- website_event_sale module breaks waiting list logic.
 
 Credits
 =======
