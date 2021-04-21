@@ -5,7 +5,7 @@
     <field name="model">event.event</field>
 	<field name="inherit_id" ref="event.view_event_form"/>
     <field name="arch" type="xml">
-	  <field name="date_tz" position="after">
+	  <field name="tag_ids" position="after">
 		<field name="description"/>
 	  </field>
 	</field>
