@@ -48,6 +48,9 @@ odoo.define('website_event_waiting_list.website_event', function (require) {
                 });
             }
         },
+        // $('#confirm_waiting_modal').on('show.bs.modal', function(e) {
+
+        // })
     });
     return EventWaitingForm;
 });

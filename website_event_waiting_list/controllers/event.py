@@ -36,8 +36,13 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 
 class WebsiteEventControllerWaiting(WebsiteEventController):
+
     @http.route(['/event/<model("event.event"):event>/registration/new'], type='json', auth="public", methods=['POST'], website=True)
     def registration_new(self, event, **post):
+        """
+        Registration modal and
+        Waiting list modal
+        """
         if not event.can_access_from_current_website():
             raise werkzeug.exceptions.NotFound()
 
@@ -60,6 +65,10 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
 
     @http.route(['''/event/<model("event.event"):event>/registration/confirm'''], type='http', auth="public", methods=['POST'], website=True)
     def registration_confirm(self, event, **post):
+        """
+        Return registration confirmation after registering or
+        Return waiting list confirmation after joining waiting list
+        """
         if not event.can_access_from_current_website():
             raise werkzeug.exceptions.NotFound()
 
@@ -72,14 +81,27 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         return request.render("website_event.registration_complete",
                                   self._get_registration_confirm_values(event, attendees_sudo))
 
-    @http.route(['/event/<model("event.event"):event>/waiting-list/confirm/<model("event.registration"):registration>'],
+    @http.route([
+        '/event/<model("event.event"):event>/waiting-list/confirm/<model("event.registration"):registration>',
+    ],
                 type='http', auth="public", website=True)
-    def confirm_url_template(self, event, registration, **kwargs):
-        seats_available = event.seats_available
+    def confirm_url_template(self, event, registration, **post):
+        """
+        Return correct confirmation page depending on state
+        Confirm state changes on post
+        """
         render_values = {
             'event': event,
             'registration': registration,
-            'seats_available': seats_available,
         }
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22")
-        return request.render("website_event_waiting_list.confirm_waiting", render_values)
+        if post:
+            new_state = post.get("new_state")
+            cur_state = post.get("current_state")
+            if cur_state == "wait" and new_state == "open" and event.seats_available >= 1:
+                    registration.write({'state': 'open'})
+            if new_state == "cancel":
+                registration.write({'state': 'cancel'})
+
+        if registration.state in ['wait', 'cancel', 'open']:
+            return request.render("website_event_waiting_list.confirm_waiting", render_values)
+        return request.render("website.page_404")
