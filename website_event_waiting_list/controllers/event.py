@@ -82,26 +82,27 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                                   self._get_registration_confirm_values(event, attendees_sudo))
 
     @http.route([
-        '/event/<model("event.event"):event>/waiting-list/confirm/<model("event.registration"):registration>',
+        '/event/<model("event.event"):event>/waiting-list/confirm/<model("event.registration"):registration>/<string:code>',
     ],
                 type='http', auth="public", website=True)
-    def confirm_url_template(self, event, registration, **post):
+    def confirm_url_template(self, event, registration, code, **post):
         """
         Return correct confirmation page depending on state
         Confirm state changes on post
         """
-        render_values = {
-            'event': event,
-            'registration': registration,
-        }
-        if post:
-            new_state = post.get("new_state")
-            cur_state = post.get("current_state")
-            if cur_state == "wait" and new_state == "open" and event.seats_available >= 1:
+        if code == registration.access_token:
+            render_values = {
+                'event': event,
+                'registration': registration,
+            }
+            if post:
+                new_state = post.get("new_state")
+                cur_state = post.get("current_state")
+                if cur_state == "wait" and new_state == "open" and event.seats_available >= 1:
                     registration.write({'state': 'open'})
-            if new_state == "cancel":
-                registration.write({'state': 'cancel'})
+                if new_state == "cancel":
+                    registration.write({'state': 'cancel'})
 
-        if registration.state in ['wait', 'cancel', 'open']:
-            return request.render("website_event_waiting_list.confirm_waiting", render_values)
+            if registration.state in ['wait', 'cancel', 'open']:
+                return request.render("website_event_waiting_list.confirm_waiting", render_values)
         return request.render("website.page_404")

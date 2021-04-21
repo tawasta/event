@@ -19,6 +19,7 @@
 ##############################################################################
 
 # 1. Standard library imports:
+import uuid
 
 # 2. Known third party imports:
 from werkzeug import urls
@@ -49,6 +50,7 @@ class EventRegistration(models.Model):
                              string='Status', default='draft',
                              readonly=True, copy=False, tracking=True)
     confirm_url = fields.Char("Public link", compute="_compute_confirm_url")
+    access_token = fields.Char('Security Token', store=True, compute="_compute_access_token")
 
     # 3. Default methods
 
@@ -58,8 +60,12 @@ class EventRegistration(models.Model):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for registration in self:
             registration.confirm_url = urls.url_join(
-                base_url, "/event/%s/waiting-list/confirm/%s" % (registration.event_id.id, registration.id)
+                base_url, "/event/%s/waiting-list/confirm/%s/%s" % (registration.event_id.id, registration.id, registration.access_token)
             )
+
+    def _compute_access_token(self):
+        for registration in self:
+            registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
     @api.constrains('event_id', 'state')

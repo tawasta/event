@@ -159,6 +159,6 @@ class EventMailRegistration(models.Model):
             if reg_mail.registration_id.state == 'open' and reg_mail.scheduler_id.interval_type == 'after_sub':
                 reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
 
-            todo.write({'mail_sent': True})
+        todo.write({'mail_sent': True})
 
     # 8. Business methods

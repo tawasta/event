@@ -120,6 +120,7 @@
              <button name="action_cancel" position="attributes">
                  <attribute name="states">draft,open,wait</attribute>
              </button>
+
              <button name="action_confirm" position="attributes">
                  <attribute name="states">draft,wait</attribute>
              </button>
