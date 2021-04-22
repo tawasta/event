@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-21 10:58+0000\n"
-"PO-Revision-Date: 2021-04-21 10:58+0000\n"
+"POT-Creation-Date: 2021-04-22 12:52+0000\n"
+"PO-Revision-Date: 2021-04-22 12:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,17 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div>\n"
+"                    <strong>Hei ${ctx.get('name')}</strong>,<br/>\n"
+"                    Meillä on lisää lippuja tarjolla tapahtumaan: ${ctx.get('event')}.<br/>\n"
+"                    Voit vahvistaa paikkasi seuraavan linkin kautta: <a href=\"${ctx.get('confirm_url')}\"/><br/>\n"
+"                    <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"                        <a href=\"${ctx.get('confirm_url')}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                            Vahvista Paikkasi\n"
+"                        </a>\n"
+"                    </div>\n"
+"                </div>\n"
+"            "
 
 #. module: event_waiting_list
 #: model:mail.template,body_html:event_waiting_list.event_waiting
@@ -49,18 +60,32 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div>\n"
+"                    Hei ${object.name},<br/>\n"
+"                    Kiitos kiinnostuksestasi tapahtumaan.<br/>\n"
+"                    Tapahtuma: ${object.event_id.name}, on tällä hetkellä täynnä.<br/>\n"
+"                    Sinut on laitettu jonotuslistalle. Otamme teihin yhteyttä, jos paikkoja vapautuu.\n"
+"                    Jos teillä on jotain kysyttävää voitte ottaa meihin yhteyttä.\n"
+"                    <br/><br/>\n"
+"                    Kiitos,\n"
+"                    % if object.event_id.user_id.signature:\n"
+"                    <br/>\n"
+"                    ${object.event_id.user_id.signature | safe}\n"
+"                    % endif\n"
+"                </div>\n"
+"            "
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_mail__interval_type__after_sub
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_type_mail__interval_type__after_sub
 msgid "After each registration"
-msgstr "Jokaisen rekisteröitymisen jälkeen"
+msgstr "Jokaisen ilmoittautumisen jälkeen"
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_mail__interval_type__after_wait
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_type_mail__interval_type__after_wait
 msgid "After registering to waiting list"
-msgstr ""
+msgstr "Jokaisen jonotuslistaan liittymisen jälkeen"
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_mail__interval_type__after_event
@@ -82,7 +107,7 @@ msgstr "Ennen tapahtumaa"
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__cancel
@@ -126,14 +151,14 @@ msgstr "Näyttönimi"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event_ticket__waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type__waiting_list
 msgid "Enable Waiting List"
-msgstr ""
+msgstr "Ota jonotuslista käyttöön"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,help:event_waiting_list.field_event_event__waiting_list
 #: model:ir.model.fields,help:event_waiting_list.field_event_event_ticket__waiting_list
 #: model:ir.model.fields,help:event_waiting_list.field_event_type__waiting_list
 msgid "Enable waiting list when attendee limit is reached."
-msgstr ""
+msgstr "Ota jonotuslista käyttöön kun osallistujamäärä on täynnä."
 
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_event
@@ -153,7 +178,7 @@ msgstr "Tapahtuman rekisteröinti"
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_type
 msgid "Event Template"
-msgstr ""
+msgstr "Tapahtuman pohja"
 
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_event_ticket
@@ -197,25 +222,25 @@ msgstr ""
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_type_mail
 msgid "Mail Scheduling on Event Category"
-msgstr ""
+msgstr "Sähköpostien aikataulutus Tapahtuman Kategoriaan"
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_registration_form_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_registration_tree_waiting_list
 msgid "Move to Waiting List"
-msgstr ""
+msgstr "Siirrä jonotuslistalle"
 
 #. module: event_waiting_list
 #: code:addons/event_waiting_list/models/event_ticket.py:0
 #, python-format
 msgid "No more available seats for this ticket."
-msgstr ""
+msgstr "Vapaita paikkoja ei ole enää jäljellä tälle lipulle."
 
 #. module: event_waiting_list
 #: code:addons/event_waiting_list/models/event_event.py:0
 #, python-format
 msgid "No more available seats."
-msgstr ""
+msgstr "Vapaita paikkoja ei ole enää jäljellä."
 
 #. module: event_waiting_list
 #: code:addons/event_waiting_list/models/event_registration.py:0
@@ -224,38 +249,49 @@ msgstr ""
 #: code:addons/event_waiting_list/models/event_registration.py:0
 #, python-format
 msgid "No more seats available for this event."
-msgstr ""
+msgstr "Vapaita paikkoja ei ole enää jäljellä tähän tapahtumaan."
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__confirm_url
 msgid "Public link"
-msgstr ""
+msgstr "Julkinen linkki"
 
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_mail_registration
 msgid "Registration Mail Scheduler"
-msgstr "Rekisteröinnin sähköpostiajastus"
+msgstr "Ilmoittautumisten sähköpostiajastus"
+
+#. module: event_waiting_list
+#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__registration_ids
+#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
+msgid "Registrations"
+msgstr "Ilmoittautumiset"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event__seats_waiting
 msgid "Seats on waiting list"
-msgstr ""
+msgstr "Paikkoja jonotuslistalla"
+
+#. module: event_waiting_list
+#: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__access_token
+msgid "Security Token"
+msgstr "Suojaustunnus"
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
 msgid "Send"
-msgstr ""
+msgstr "Lähetä"
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
 msgid "Send confirmation mail"
-msgstr ""
+msgstr "Lähetä vahvistussähköposti"
 
 #. module: event_waiting_list
 #: model:ir.actions.act_window,name:event_waiting_list.action_waiting_mail_list_tree
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
 msgid "Send event confirmation mail"
-msgstr ""
+msgstr "Lähetä ilmoittautumisen vahvistussähköposti"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__state
@@ -266,18 +302,18 @@ msgstr "Tila"
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_event_ticket_view_tree_from_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_tree_waiting_list
 msgid "Total"
-msgstr ""
+msgstr "Yhteensä"
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_form_waiting_list
 msgid "Total Registrations for this Event"
-msgstr ""
+msgstr "Ilmoittautumisia yhteensä tälle tapahtumalle"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_mail__interval_type
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type_mail__interval_type
 msgid "Trigger"
-msgstr "Liipaisin"
+msgstr "Laukaisin"
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__draft
@@ -291,27 +327,22 @@ msgstr "Vahvistamaton"
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_kanban_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_registration_search_waiting_list
 msgid "Waiting"
-msgstr ""
+msgstr "Odottaa"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event_ticket__seats_waiting
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_tree_waiting_list
 msgid "Waiting Seats"
-msgstr ""
-
-#. module: event_waiting_list
-#: model:mail.template,subject:event_waiting_list.event_waiting_registration
-msgid "We have available tickets for Emacs Conference"
-msgstr ""
+msgstr "Jonotuslistan paikat"
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_type_form_waiting_list
 msgid ""
 "When registrations limit is reached add further registrations\n"
 "                                to a waiting list."
-msgstr ""
+msgstr "Kun ilmoittautumiset täyttyvät lisää uudet ilmoittautumiset jonotuslistalle."
 
 #. module: event_waiting_list
 #: model:mail.template,subject:event_waiting_list.event_waiting
 msgid "You're on a waiting list for ${object.event_id.name}"
-msgstr ""
+msgstr "Olet jonotuslistalla tapahtumaan ${object.event_id.name}"
