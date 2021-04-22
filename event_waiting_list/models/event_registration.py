@@ -60,7 +60,7 @@ class EventRegistration(models.Model):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for registration in self:
             registration.confirm_url = urls.url_join(
-                base_url, "/event/%s/waiting-list/confirm/%s/%s" % (registration.event_id.id, registration.id, registration.access_token)
+                base_url, "/event/%s/waiting-list/confirm/%s" % (registration.event_id.id, registration.access_token)
             )
 
     def _compute_access_token(self):
@@ -107,6 +107,9 @@ class EventRegistration(models.Model):
         self = self.with_context(skip_confirm=True)
         registrations = super(EventRegistration, self).create(vals_list)
         registrations = registrations.with_context(skip_confirm=False)
+        for registration in registrations:
+            if not registration.access_token:
+                registration.sudo().write({'access_token': str(uuid.uuid4())})
         if registrations._check_auto_confirmation():
             registrations.sudo().action_confirm()
         elif registrations._check_waiting_list():
@@ -115,6 +118,9 @@ class EventRegistration(models.Model):
 
     def write(self, vals):
         """ Auto-trigger mail schedulers on state writes """
+        print("WRITE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(vals)
+        print("######################################")
         ret = super(EventRegistration, self).write(vals)
         if vals.get('state') == 'open':
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')

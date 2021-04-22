@@ -41,6 +41,11 @@ class WaitingMailListWizard(models.TransientModel):
     _description = "Create mailing list for waiting list contacts"
 
     # 2. Fields declaration
+    registration_ids = fields.Many2many(
+        "event.registration",
+        default=lambda self: self.env['event.registration'].browse(self._context.get("active_ids")),
+        string="Registrations",
+    )
 
     # 3. Default methods
 
@@ -52,16 +57,16 @@ class WaitingMailListWizard(models.TransientModel):
 
     # 7. Action methods
     def send_confirmation_mail(self):
-        registration_ids = self.env['event.registration'].browse(self._context.get("active_ids"))
+        registration_ids = self.registration_ids
         cur_app = request.env["event.registration"]
         for registration in registration_ids:
+            print(registration.confirm_url)
             msg_template = request.env.ref(
                 "event_waiting_list.event_waiting_registration"
             )
             values = {
                 "email_to": registration.email,
                 "email_from": registration.event_id.organizer_id.email_formatted,
-                # "body_html": body,
                 "subject": "We have available tickets for " + str(registration.event_id.name),
             }
             context = {

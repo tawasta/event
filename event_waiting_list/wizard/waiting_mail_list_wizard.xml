@@ -14,6 +14,16 @@
         <field name="arch" type="xml">
             <form string="Send confirmation mail">
                 Send event confirmation mail
+                <group>
+                    <field name="registration_ids" nolabel="1" readonly="1">
+                        <tree string="Registrations">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="event_id" readonly="1"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </group>
                 <footer>
                     <button string="Send" name="send_confirmation_mail" type="object" class="oe_highlight"/>
                     <button string="Cancel" class="oe_link" special="cancel" />
