@@ -19,9 +19,9 @@
 ##############################################################################
 
 {
-    "name": "Event Sale Waiting List",
-    "summary": "Waiting List logic to Event Sale",
-    "version": "12.0.1.0.0",
+    "name": "Event Translations",
+    "summary": "Translations for Core Event Modules",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -29,8 +29,8 @@
     "application": False,
     "installable": True,
     "depends": [
-        "event_sale",
-        "event_waiting_list",
+        'event',
+        'website_event',
     ],
     "data": [],
 }

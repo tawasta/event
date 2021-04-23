@@ -171,7 +171,7 @@ msgstr "Viimeksi muokattu"
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
 msgid "N/A"
-msgstr " "
+msgstr "Ei saatavilla"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
