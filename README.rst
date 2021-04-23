@@ -20,6 +20,9 @@ Addons
    * - `event_description <event_description/>`_
      - 14.0.1.0.0
      - Adds event description field to backend
+   * - `event_translations <event_translations>`_
+     - 14.0.1.0.0
+     - Translations for Events core
    * - `event_waiting_list <event_waiting_list/>`_
      - 14.0.1.0.0
      - Adds waiting list for events

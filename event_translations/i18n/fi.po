@@ -1,0 +1,3260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event
+# 	* website_event
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-23 08:18+0000\n"
+"PO-Revision-Date: 2021-04-23 08:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_partner__event_count
+#: model:ir.model.fields,field_description:event.field_res_users__event_count
+msgid "# Events"
+msgstr "# Tapahtumaa"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registration_count
+msgid "# Registrations"
+msgstr "# Ilmoittautumiset"
+
+#. module: website_event
+#: model:mail.template,subject:event.event_reminder
+msgid "${object.event_id.name}: ${object.get_date_range_str()}"
+msgstr ""
+
+#. module: event
+#: code:addons/event/models/event_event.py:0
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (kopio)"
+
+#. module: website_event
+#: model:ir.actions.report,print_report_name:event.report_event_registration_badge
+msgid ""
+"'Registration Event - %s' % (object.name or 'Attendee').replace('/','')"
+msgstr ""
+"'Tapahtuman ilmoittautuminen - %s' % (object.name or "
+"'Osallistuja').replace('/','')"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_report_template_badge
+#: model_terms:ir.ui.view,arch_db:event.event_registration_report_template_badge
+msgid "( <i class=\"fa fa-clock-o\" aria-label=\"Period\" role=\"img\" title=\"Period\"/>"
+msgstr "( <i class=\"fa fa-clock-o\" aria-label=\"Period\" role=\"img\" title=\"Ajanjakso\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "(only"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "(ref:"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.snippet_options
+msgid ", .oe_country_events, .s_speaker_bio"
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "<b>Drag and Drop</b> this snippet below the event title."
+msgstr "<b>Raahaa ja pudota</b> tämä kappale tapahtuman otsikon alle."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "<b>Start</b>"
+msgstr "<b>Alkaa</b>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.country_events_list
+msgid "<b>View all</b>"
+msgstr "<b>Näytä kaikki</b>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid ""
+"<br/>\n"
+"                                            <span class=\"text-muted\">Air your tracks online through a Youtube integration</span>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid ""
+"<br/>\n"
+"                                            <span class=\"text-muted\">Share a quiz to your attendees once a track is over</span>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "<br/> <b>End</b>"
+msgstr "<br/> <b>Päättyy</b>"
+
+#. module: website_event
+#: model:mail.template,body_html:event.event_registration_mail_template_badge
+msgid ""
+"<div>\n"
+"    Dear ${object.name},<br/>\n"
+"    Thank you for your inquiry.<br/>\n"
+"    Here is your badge for the event ${object.event_id.name}.<br/>\n"
+"    If you have any questions, please let us know.\n"
+"    <br/><br/>\n"
+"    Thank you,\n"
+"    % if object.event_id.user_id.signature:\n"
+"        <br/>\n"
+"        ${object.event_id.user_id.signature | safe}\n"
+"    % endif\n"
+"</div>"
+msgstr ""
+"<div>\n"
+"    Hei ${object.name},<br/>\n"
+"    Kiitos tiedustelusta.<br/>\n"
+"    Tässä on sinun merkki tapahtumalle ${object.event_id.name}.<br/>\n"
+"    Jos teillä on jotain kysyttävää ottakaa meihin yhteyttä.\n"
+"    <br/><br/>\n"
+"    Kiitos,\n"
+"    % if object.event_id.user_id.signature:\n"
+"        <br/>\n"
+"        ${object.event_id.user_id.signature | safe}\n"
+"    % endif\n"
+"</div>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_quotes
+msgid ""
+"<em>Write here a quote from one of your attendees. It gives confidence in "
+"your events.</em>"
+msgstr ""
+"<em>Kirjoita tähän suositus edelliseltä osallistujalta. Se antaa luottamusta "
+"tapahtumiisi.</em>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.template_intro
+msgid ""
+"<font style=\"font-size: 62px;\" "
+"class=\"o_default_snippet_text\">Introduction</font>"
+msgstr ""
+"<font style=\"font-size: 62px;\" "
+"class=\"o_default_snippet_text\">Esittely</font>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_kanban
+msgid "<i class=\"fa fa-arrow-right o_event_fontsize_09\" title=\"End date\"/>"
+msgstr "<i class=\"fa fa-arrow-right o_event_fontsize_09\" title=\"Päättymispäivä\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "<i class=\"fa fa-ban mr-2\"/>Sold Out"
+msgstr "<i class=\"fa fa-ban mr-2\"/>Loppuunmyyty"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+msgid "<i class=\"fa fa-ban mr-2\"/>Unpublished"
+msgstr "<i class=\"fa fa-ban mr-2\"/>Julkaisematon"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid ""
+"<i class=\"fa fa-check fa-3x\" role=\"img\" aria-label=\"Confirm button\" "
+"title=\"Confirm Registration\"/>"
+msgstr ""
+"<i class=\"fa fa-check fa-3x\" role=\"img\" aria-label=\"Confirm button\" "
+"title=\"Vahvista Ilmoittautuminen\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_details
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+msgid "<i class=\"fa fa-check mr-2\"/>Registered"
+msgstr "<i class=\"fa fa-check mr-2\"/>Ilmoittautunut"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid ""
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Confirm button\" "
+"title=\"Confirm Registration\"/>"
+msgstr ""
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Confirm button\" "
+"title=\"Vahvista Ilmoittautuminen\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid ""
+"<i class=\"fa fa-facebook text-facebook\" aria-label=\"Facebook\" "
+"title=\"Facebook\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.country_events_list
+msgid "<i class=\"fa fa-flag mr-2\"/>Events:"
+msgstr "<i class=\"fa fa-flag mr-2\"/>Tapahtumat:"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "<i class=\"fa fa-fw fa-calendar\"/> Add to Google Calendar"
+msgstr "<i class=\"fa fa-fw fa-calendar\"/> Lisää Google Kalenteriin"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "<i class=\"fa fa-fw fa-calendar\"/> Add to iCal/Outlook"
+msgstr "<i class=\"fa fa-fw fa-calendar\"/> Lisää iCal/Outlookiin"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid "<i class=\"fa fa-github text-github\" aria-label=\"Github\" title=\"Github\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.country_events_list
+#: model_terms:ir.ui.view,arch_db:website_event.s_country_events
+msgid "<i class=\"fa fa-globe mr-2\"/>Upcoming Events"
+msgstr "<i class=\"fa fa-globe mr-2\"/>Tulevat tapahtumat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid ""
+"<i class=\"fa fa-instagram text-instagram\" aria-label=\"Instagram\" "
+"title=\"Instagram\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_kanban
+msgid "<i class=\"fa fa-level-up fa-rotate-90\" title=\"Confirmed\"/>"
+msgstr "<i class=\"fa fa-level-up fa-rotate-90\" title=\"Vahvistettu\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid ""
+"<i class=\"fa fa-linkedin text-linkedin\" aria-label=\"LinkedIn\" "
+"title=\"LinkedIn\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.layout
+msgid ""
+"<i class=\"fa fa-long-arrow-left text-primary mr-2\"/>\n"
+"                            <span>All Events</span>"
+msgstr ""
+"<i class=\"fa fa-long-arrow-left text-primary mr-2\"/>\n"
+"                            <span>Kaikki Tapahtumat</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
+"title=\"Arrow\"/>"
+msgstr ""
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
+"title=\"Nuoli\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_kanban
+msgid "<i class=\"fa fa-map-marker\" title=\"Location\"/>"
+msgstr "<i class=\"fa fa-map-marker\" title=\"Sijainti\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid ""
+"<i class=\"fa fa-pencil mr-2\" role=\"img\" aria-label=\"Edit\" title=\"Edit"
+" event registration in backend\"/><em>Configure Event Tickets</em>"
+msgstr ""
+"<i class=\"fa fa-pencil mr-2\" role=\"img\" aria-label=\"Edit\" title=\"Muokkaa"
+" tapahtuman ilmoittautumisia backendissä\"/><em>Muokkaa Tapahtuman Lippuja</em>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid "<i class=\"fa fa-twitter text-twitter\" aria-label=\"Twitter\" title=\"Twitter\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid ""
+"<i class=\"fa fa-user-plus fa-3x\" role=\"img\" aria-label=\"Attended "
+"button\" title=\"Confirm Attendance\"/>"
+msgstr ""
+"<i class=\"fa fa-user-plus fa-3x\" role=\"img\" aria-label=\"Attended "
+"button\" title=\"Vahvista Osallistuminen\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid ""
+"<i class=\"fa fa-user-plus\" role=\"img\" aria-label=\"Attended button\" "
+"title=\"Confirm Attendance\"/>"
+msgstr ""
+"<i class=\"fa fa-user-plus\" role=\"img\" aria-label=\"Attended button\" "
+"title=\"Vahvista Ilmoittautuminen\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid ""
+"<i class=\"fa fa-youtube-play text-youtube\" aria-label=\"Youtube\" "
+"title=\"Youtube\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_report_template_badge
+#: model_terms:ir.ui.view,arch_db:event.event_registration_report_template_badge
+msgid "<i>to</i>"
+msgstr "<i>-</i>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
+msgid ""
+"<span class=\"badge badge-secondary text-uppercase "
+"o_wevent_badge\">Speaker</span>"
+msgstr ""
+"<span class=\"badge badge-secondary text-uppercase "
+"o_wevent_badge\">Puhuja</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Tähän asetetut arvot ovat yrityskohtaisia."
+"\" groups=\"base.group_multi_company\"/>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_topbar
+msgid "<span class=\"navbar-brand h4 my-0 mr-auto\">Events</span>"
+msgstr "<span class=\"navbar-brand h4 my-0 mr-auto\">Tapahtumat</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.display_timer_widget
+msgid ""
+"<span class=\"o_countdown_remaining o_timer_days pr-1\">0</span><span "
+"class=\"o_countdown_metric pr-1\">days</span>"
+msgstr ""
+"<span class=\"o_countdown_remaining o_timer_days pr-1\">0</span><span "
+"class=\"o_countdown_metric pr-1\">päivää</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.display_timer_widget
+msgid ""
+"<span class=\"o_countdown_remaining o_timer_hours\">00</span><span "
+"class=\"o_countdown_metric\">:</span>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.display_timer_widget
+msgid ""
+"<span class=\"o_countdown_remaining o_timer_minutes\">00</span><span "
+"class=\"o_countdown_metric\">:</span>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.display_timer_widget
+msgid ""
+"<span class=\"o_countdown_remaining o_timer_seconds\">00</span><span "
+"class=\"o_countdown_metric\"/>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid ""
+"<span class=\"o_wevent_badge badge badge-success ml-3\">\n"
+"                            <i class=\"fa fa-check mr-2\"/>Registered\n"
+"                        </span>"
+msgstr ""
+"<span class=\"o_wevent_badge badge badge-success ml-3\">\n"
+"                            <i class=\"fa fa-check mr-2\"/>Ilmoittautunut\n"
+"                        </span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid ""
+"<span class=\"py-2\">Tickets</span>\n"
+"                        <span class=\"close d-none\">×</span>"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "<span class=\"text-dark font-weight-bold align-middle pr-2\">Qty</span>"
+msgstr "<span class=\"text-dark font-weight-bold align-middle pr-2\">Määrä</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid ""
+"<span class=\"text-muted\" states=\"done\">Attended</span>\n"
+"                                    <span class=\"text-muted\" states=\"cancel\">Canceled</span>"
+msgstr ""
+"<span class=\"text-muted\" states=\"done\">Osallistunut</span>\n"
+"                                    <span class=\"text-muted\" states=\"cancel\">Perunut</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid ""
+"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
+"                                    <i class=\"fa fa-ban mr-2\"/>Sold Out\n"
+"                                </span>"
+msgstr ""
+"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
+"                                    <i class=\"fa fa-ban mr-2\"/>Loppuunmyyty\n"
+"                                </span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_location
+msgid "<span>Online Events</span>"
+msgstr "<span>Verkkotapahtumat</span>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "<strong> You ordered more tickets than available seats</strong>"
+msgstr "<strong> Tilasit enemmän lippuja kuin paikkoja on vapaana</strong>"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event_ticket__description
+#: model:ir.model.fields,help:event.field_event_type_ticket__description
+msgid ""
+"A description of the ticket that you want to communicate to your customers."
+msgstr ""
+"Kuvaus lipusta, jonka haluat näyttää asiakkaillesi."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_photos
+msgid "A past event"
+msgstr "Mennyt tapahtuma"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_about_us
+msgid "About us"
+msgstr "Tietoa meistä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_needaction
+#: model:ir.model.fields,field_description:event.field_event_registration__message_needaction
+msgid "Action Needed"
+msgstr "Vaatii toimenpiteitä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__active
+msgid "Active"
+msgstr "Aktiivinen"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_ids
+msgid "Activities"
+msgstr "Toimenpiteet"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_exception_decoration
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Aktiviteettipoikkeuksen tyyli"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_state
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_state
+msgid "Activity State"
+msgstr "Toimenpiteen tila"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_type_icon
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Toimenpiteen ikoni"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__menu_register_cta
+#: model:ir.model.fields,field_description:website_event.field_event_type__menu_register_cta
+msgid "Add Register Button"
+msgstr "Lisää ilmoittautumisnappi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid "Add a description..."
+msgstr "Lisää kuvaus..."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid ""
+"Add a navigation menu to your event web pages with schedule, tracks, a track"
+" proposal form, etc."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.actions.act_window,help:event.action_event_view
+msgid "Add a new event"
+msgstr "Lisää uusi tapahtuma"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Add a note..."
+msgstr "Lisää muistiinpano..."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Add to Calendar"
+msgstr "Lisää Kalenteriin"
+
+#. module: website_event
+#: model:res.groups,name:event.group_event_manager
+msgid "Administrator"
+msgstr "Hallinnoija"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_track_exhibitor
+msgid "Advanced Sponsors"
+msgstr "Edistyneet Tukijat"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_type__after_sub
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_type__after_sub
+msgid "After each registration"
+msgstr "Jokaisen ilmoittautumisen jälkeen"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_type__after_event
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_type__after_event
+msgid "After the event"
+msgstr "Tapahtuman jälkeen"
+
+#. module: website_event
+#: code:addons/website_event/controllers/main.py:0
+#, python-format
+msgid "All Countries"
+msgstr "Kaikki maat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_location
+msgid "All countries"
+msgstr "Kaikki maat"
+
+#. module: website_event
+#: model:event.stage,name:event.event_stage_announced
+msgid "Announced"
+msgstr "Julkistettu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Archived"
+msgstr "Arkistoitu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.res_config_settings_view_form
+msgid "Ask questions to attendees when registering online"
+msgstr "Kysy kysymyksiä osallistujilta ilmoittautumisen yhteydessä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
+msgid ""
+"At just 13 years old, John DOE was already starting to develop his first "
+"business applications for customers. After mastering civil engineering, he "
+"founded TinyERP. This was the first phase of OpenERP which would later "
+"became Odoo, the most installed open-source business software worldwide."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_attachment_count
+#: model:ir.model.fields,field_description:event.field_event_registration__message_attachment_count
+msgid "Attachment Count"
+msgstr "Liitteiden määrä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Attendance"
+msgstr "Läsnäolo"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_registration__state__done
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Attended"
+msgstr "Osallistuttu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__date_closed
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Attended Date"
+msgstr "Osallistumispäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__registration_id
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Attendee"
+msgstr "Osallistuja"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__name
+#: model_terms:ir.ui.view,arch_db:event.event_event_report_template_badge
+msgid "Attendee Name"
+msgstr "Osallistujan nimi"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.act_event_registration_from_event
+#: model:ir.actions.act_window,name:event.action_registration
+#: model:ir.actions.act_window,name:event.event_registration_action
+#: model:ir.model.fields,field_description:event.field_event_event__registration_ids
+#: model:ir.ui.menu,name:event.menu_action_registration
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Attendees"
+msgstr "Osallistujat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_quotes
+msgid "Author"
+msgstr "Tekijä"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__auto_confirm
+msgid ""
+"Autoconfirm Registrations. Registrations will automatically be confirmed "
+"upon creation."
+msgstr ""
+"Ilmoittautujien automaattivahvistus. Ilmoittautujat vahvistetaan automaattisesti "
+"luonnin yhteydessä."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__auto_confirm
+msgid "Autoconfirmation"
+msgstr "Automaattivahvistus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__auto_confirm
+msgid "Automatically Confirm Registrations"
+msgstr "Vahvista ilmoittautumiset automaattisesti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__use_mail_schedule
+msgid "Automatically Send Emails"
+msgstr "Lähetä sähköpostia automaattisesti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_available
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_available
+msgid "Available Seats"
+msgstr "Saatavilla olevat paikat"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Awesome! Now, let's <b>save</b> your changes."
+msgstr "Mahtavaa! Seuraavaksi <b>tallennetaan</b> muutoksesi."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__badge_back
+msgid "Badge Back"
+msgstr "Nimilapun takapuoli"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__badge_front
+msgid "Badge Front"
+msgstr "Nimilapun etupuoli"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__badge_innerleft
+msgid "Badge Inner Left"
+msgstr "Nimilapun sisä-vasen"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__badge_innerright
+msgid "Badge Inner Right"
+msgstr "Nimilapun sisä-oikea"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_event_barcode
+msgid "Barcode"
+msgstr "Viivakoodi"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_type__before_event
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_type__before_event
+msgid "Before the event"
+msgstr "Ennen tapahtumaa"
+
+#. modules: event, website_event
+#: code:addons/event/models/event_stage.py:0
+#: model:event.event,legend_blocked:event.event_0
+#: model:event.stage,legend_blocked:event.event_stage_announced
+#: model:event.stage,legend_blocked:event.event_stage_booked
+#: model:event.stage,legend_blocked:event.event_stage_cancelled
+#: model:event.stage,legend_blocked:event.event_stage_done
+#: model:event.stage,legend_blocked:event.event_stage_new
+#: model:ir.model.fields.selection,name:event.selection__event_event__kanban_state__blocked
+#, python-format
+msgid "Blocked"
+msgstr "Estetty"
+
+#. module: website_event
+#: model:event.stage,name:event.event_stage_booked
+msgid "Booked"
+msgstr "Varattu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__partner_id
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid "Booked by"
+msgstr "Varaaja"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__utm_campaign_id
+msgid "Campaign"
+msgstr "Kampanja"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__can_publish
+msgid "Can Publish"
+msgstr "Voi julkaista"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_tree
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Cancel Registration"
+msgstr "Peruuta ilmoittautuminen"
+
+#. module: website_event
+#: model:event.stage,name:event.event_stage_cancelled
+#: model:ir.model.fields.selection,name:event.selection__event_registration__state__cancel
+msgid "Cancelled"
+msgstr "Peruttu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_tag__category_id
+msgid "Category"
+msgstr "Tuoteryhmä(t)"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_type_view_form
+msgid ""
+"Check this option to have menus for your event on the\n"
+"                                website: registrations, schedule, map, ..."
+msgstr ""
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Click <b>add</b> to create a new stage."
+msgstr "Klikkaa <b>lisää</b> luodaksesi uuden tilan"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Click <em>Continue</em> to create the event."
+msgstr "Klikkaa <em>Jatka</em> luodaksesi tapahtuman."
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Click here to add new content to your website."
+msgstr "Klikkaa tästä lisätäksesi uutta sisältöä verkkosivullesi."
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Click here to create a new event."
+msgstr "Klikkaa tästä luodaksesi uuden tapahtuman."
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Click here to customize your event further."
+msgstr "Klikkaa tästä muokataksesi tapahtumaa pidemmälle."
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Click to publish your event."
+msgstr "Klikkaa julkaistaksesi tapahtuman."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Close"
+msgstr "Sulje"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_tag__color
+msgid "Color Index"
+msgstr "Väri-indeksi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+msgid "Communication"
+msgstr "Viestintä"
+
+#. module: website_event
+#: code:addons/website_event/models/event_event.py:0
+#: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
+#, python-format
+msgid "Community"
+msgstr "Yhteisö"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Community Chat Rooms"
+msgstr "Yhteisön keskusteluhuoneet"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__community_menu
+#: model:ir.model.fields,field_description:website_event.field_event_type__community_menu
+#: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__community
+msgid "Community Menu"
+msgstr "Yhteisön valikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__company_id
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__company_id
+#: model:ir.model.fields,field_description:event.field_event_registration__company_id
+#: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
+msgid "Company"
+msgstr "Yritys"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "Compose Email"
+msgstr "Luo sähköposti"
+
+#. module: website_event
+#: model:event.type,name:event.event_type_data_conference
+msgid "Conference"
+msgstr "Konferenssi"
+
+#. module: website_event
+#: model:ir.model,name:event.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfiguraatioasetukset"
+
+#. module: website_event
+#: model:ir.ui.menu,name:event.menu_event_configuration
+msgid "Configuration"
+msgstr "Asetukset"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_tree
+msgid "Confirm"
+msgstr "Vahvista"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid "Confirm Attendance"
+msgstr "Vahvista osallistuminen"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_registration_view_kanban
+msgid "Confirm Registration"
+msgstr "Vahvista ilmoittautuminen"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_registration__state__open
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_tree_from_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_kanban
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Confirmed"
+msgstr "Vahvistettu"
+
+#. module: website_event
+#: model:ir.model,name:event.model_res_partner
+msgid "Contact"
+msgstr "Kontakti"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Continue"
+msgstr "Jatka"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__country_id
+msgid "Country"
+msgstr "Maa"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__cover_properties
+msgid "Cover Properties"
+msgstr "Etusivun ominaisuudet"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid ""
+"Create a name for your new event and click <em>\"Continue\"</em>. e.g: "
+"Technical Training"
+msgstr ""
+"Luo nimi tapahtumalle ja klikkaa <em>\"Jatka\"</em>. esim. Tekninen koulutus"
+
+#. module: website_event
+#: model_terms:ir.actions.act_window,help:event.act_event_registration_from_event
+#: model_terms:ir.actions.act_window,help:event.event_registration_action
+msgid "Create an Attendee"
+msgstr "Luo osallistuja"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__create_uid
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__create_uid
+#: model:ir.model.fields,field_description:event.field_event_mail__create_uid
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__create_uid
+#: model:ir.model.fields,field_description:event.field_event_registration__create_uid
+#: model:ir.model.fields,field_description:event.field_event_stage__create_uid
+#: model:ir.model.fields,field_description:event.field_event_tag__create_uid
+#: model:ir.model.fields,field_description:event.field_event_tag_category__create_uid
+#: model:ir.model.fields,field_description:event.field_event_type__create_uid
+#: model:ir.model.fields,field_description:event.field_event_type_mail__create_uid
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__create_uid
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__create_uid
+msgid "Created by"
+msgstr "Luonut"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__create_date
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__create_date
+#: model:ir.model.fields,field_description:event.field_event_mail__create_date
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__create_date
+#: model:ir.model.fields,field_description:event.field_event_registration__create_date
+#: model:ir.model.fields,field_description:event.field_event_stage__create_date
+#: model:ir.model.fields,field_description:event.field_event_tag__create_date
+#: model:ir.model.fields,field_description:event.field_event_tag_category__create_date
+#: model:ir.model.fields,field_description:event.field_event_type__create_date
+#: model:ir.model.fields,field_description:event.field_event_type_mail__create_date
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__create_date
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__create_date
+msgid "Created on"
+msgstr "Luotu"
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__website_menu
+msgid ""
+"Creates menus Introduction, Location and Register on the page of the event "
+"on the website."
+msgstr ""
+"Luo valikot Esittely, Sijainti ja Ilmoittaudu tapahtuman "
+"verkkosivulle"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "Customer"
+msgstr "Asiakas"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "Customer Email"
+msgstr "Asiakkaan sähköposti"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Date"
+msgstr "Päivämäärä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Date &amp; Time"
+msgstr "Päivä &amp; Aika"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_unit__days
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_unit__days
+msgid "Days"
+msgstr "Päivää"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event_ticket__seats_max
+#: model:ir.model.fields,help:event.field_event_type_ticket__seats_max
+msgid ""
+"Define the number of available tickets. If you have too many registrations "
+"you will not be able to sell tickets anymore. Set 0 to ignore this rule set "
+"as unlimited."
+msgstr ""
+"Määritä saatavilla olevien lippujen määrä. Jos sinulla on liikaa ilmoittautujia "
+"et voi enää myydä lisää lippuja. Aseta 0, jotta lippujen määrä on rajaton."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__description
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__description
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__description
+msgid "Description"
+msgstr "Kuvaus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_meet
+msgid "Discussion Rooms"
+msgstr "Keskusteluhuoneet"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__display_name
+#: model:ir.model.fields,field_description:event.field_event_mail__display_name
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__display_name
+#: model:ir.model.fields,field_description:event.field_event_stage__display_name
+#: model:ir.model.fields,field_description:event.field_event_tag__display_name
+#: model:ir.model.fields,field_description:event.field_event_tag_category__display_name
+#: model:ir.model.fields,field_description:event.field_event_type_mail__display_name
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__display_name
+#: model:ir.model.fields,field_description:event.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:event.field_res_partner__display_name
+#: model:ir.model.fields,field_description:website_event.field_event_event__display_name
+#: model:ir.model.fields,field_description:website_event.field_event_registration__display_name
+#: model:ir.model.fields,field_description:website_event.field_event_type__display_name
+#: model:ir.model.fields,field_description:website_event.field_website__display_name
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__display_name
+#: model:ir.model.fields,field_description:website_event.field_website_menu__display_name
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_type__website_menu
+msgid "Display a dedicated menu on Website"
+msgstr "Näytä oma valikko Verkkosivulla"
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__community_menu
+#: model:ir.model.fields,help:website_event.field_event_type__community_menu
+msgid "Display community tab on website"
+msgstr "Näytä yhteisövälilehti verkkosivulla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__sequence
+msgid "Display order"
+msgstr "Näyttöjärjestys"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Don't forget to click <b>save</b> when you're done."
+msgstr "Muista painaa <b>tallenna</b> kun olet valmis."
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_event__kanban_state__done
+msgid "Done"
+msgstr "Valmis"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Drag this block and drop it in your page."
+msgstr "Raahaa tämä lohko ja pudota sivustolle"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__email
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Email"
+msgstr "Sähköposti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__template_id
+#: model:ir.model.fields,field_description:event.field_event_type_mail__template_id
+msgid "Email Template"
+msgstr "Sähköpostin mallipohja"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "End -"
+msgstr "Päättyy -"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__date_end
+msgid "End Date"
+msgstr "Päättymispäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__date_end_located
+msgid "End Date Located"
+msgstr "Päättymispäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__pipe_end
+msgid "End Stage"
+msgstr "Päättymisvaihe"
+
+#. module: website_event
+#: model:event.stage,name:event.event_stage_done
+msgid "Ended"
+msgstr "Päättynyt"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_event_event
+#: model:ir.model.fields,field_description:event.field_event_event__name
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__event_id
+#: model:ir.model.fields,field_description:event.field_event_mail__event_id
+#: model:ir.model.fields,field_description:event.field_event_registration__event_id
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__event_id
+#: model_terms:ir.ui.view,arch_db:event.event_event_view_pivot
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_mail
+msgid "Event Automated Mailing"
+msgstr "Tapahtuman automatisoitu postitus"
+
+#. module: website_event
+#: model:ir.actions.report,name:event.report_event_event_badge
+msgid "Event Badge"
+msgstr "Nimilappu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__event_type_id
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__event_type_id
+#: model_terms:ir.ui.view,arch_db:event.event_tag_category_view_form
+#: model_terms:ir.ui.view,arch_db:event.event_tag_category_view_tree
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+msgid "Event Category"
+msgstr "Tapahtumaryhmä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_tag_view_form
+msgid "Event Category Tag"
+msgstr "Tapahtuman kategorian tunniste"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__community_menu_ids
+msgid "Event Community Menus"
+msgstr "Tapahtuman Yhteisövalikot"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__event_end_date
+msgid "Event End Date"
+msgstr "Tapahtuman päättymispäivä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Event Gamification"
+msgstr "Tapahtuman pelaaminen"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Event Information"
+msgstr "Tapahtuman tiedot"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.template_location
+msgid "Event Location"
+msgstr "Tapahtuman tila"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__event_logo
+msgid "Event Logo"
+msgstr "Tapahtuman logo"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_form
+msgid "Event Mail Scheduler"
+msgstr "Tapahtuman sähköpostiajastus"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_tree
+msgid "Event Mail Schedulers"
+msgstr "Tapahtuman sähköpostiajastukset"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__menu_id
+msgid "Event Menu"
+msgstr "Tapahtumavalikko"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/website_event.editor.js:0
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_form_view
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+#, python-format
+msgid "Event Name"
+msgstr "Tapahtuman nimi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_calendar
+msgid "Event Organization"
+msgstr "Tapahtuman organisaatio"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_event_registration
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_calendar
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Event Registration"
+msgstr "Tapahtuman ilmoittautuminen"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registration_ids
+msgid "Event Registrations"
+msgstr "Tapahtuman ilmoittautumiset"
+
+#. module: event
+#: code:addons/event/models/event_mail.py:0
+#, python-format
+msgid ""
+"Event Scheduler for:\n"
+"  - Event: %(event_name)s (%(event_id)s)\n"
+"  - Scheduled: %(date)s\n"
+"  - Template: %(template_name)s (%(template_id)s)\n"
+"\n"
+"Failed with error:\n"
+"  - %(error)s\n"
+"\n"
+"You receive this email because you are:\n"
+"  - the organizer of the event,\n"
+"  - or the responsible of the event,\n"
+"  - or the last writer of the template.\n"
+msgstr ""
+"Tapahtuman Ajastin:\n"
+"  - Tapahtuma: %(event_name)s (%(event_id)s)\n"
+"  - Aikataulu: %(date)s\n"
+"  - Mallipohja: %(template_name)s (%(template_id)s)\n"
+"\n"
+"Failed with error:\n"
+"  - %(error)s\n"
+"\n"
+"You receive this email because you are:\n"
+"  - the organizer of the event,\n"
+"  - or the responsible of the event,\n"
+"  - or the last writer of the template.\n"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/xml/customize_options.xml:0
+#, python-format
+msgid "Event Specific"
+msgstr "Tapahtumakohtainen"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_stage
+msgid "Event Stage"
+msgstr "Tapahtuman vaihe"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.event_stage_action
+#: model:ir.ui.menu,name:event.event_stage_menu
+msgid "Event Stages"
+msgstr "Tapahtuman vaiheet"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__event_begin_date
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Event Start Date"
+msgstr "Tapahtuman aloituspäivä"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/xml/customize_options.xml:0
+#, python-format
+msgid "Event Sub-menu"
+msgstr "Tapahtuman alivalikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__subtitle
+#: model_terms:ir.ui.view,arch_db:website_event.event_details
+msgid "Event Subtitle"
+msgstr "Tapahtuman alaotsikko"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_tag
+msgid "Event Tag"
+msgstr "Tapahtuman tunniste"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_tag_category
+msgid "Event Tag Category"
+msgstr "Tapahtuman tunnistekategoria"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.event_tag_category_action_tree
+#: model:ir.ui.menu,name:event.menu_event_category
+#: model_terms:ir.ui.view,arch_db:event.event_tag_view_tree
+msgid "Event Tags Categories"
+msgstr "Tapahtuman tunnistekategoriat"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_event_type
+#: model:ir.model.fields,field_description:event.field_event_type__name
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_tree
+msgid "Event Template"
+msgstr "Tapahtuman mallipohja"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_type_ticket
+#: model_terms:ir.ui.view,arch_db:event.event_type_ticket_view_form_from_type
+msgid "Event Template Ticket"
+msgstr "Tapahtuman mallipohjan lippu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_type_ticket_view_tree_from_type
+msgid "Event Template Tickets"
+msgstr "Tapahtuman mallipohjan liput"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.action_event_type
+#: model:ir.ui.menu,name:event.menu_event_type
+#: model_terms:ir.ui.view,arch_db:event.event_type_view_search
+msgid "Event Templates"
+msgstr "Tapahtuman mallipohjat"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_event_ticket
+#: model:ir.model.fields,field_description:event.field_event_event__event_ticket_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__event_ticket_id
+msgid "Event Ticket"
+msgstr "Tapahtuman lippu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_details
+msgid "Event Title"
+msgstr "Tapahtuman otsikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type_mail__event_type_id
+msgid "Event Type"
+msgstr "Tapahtumatyyppi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.404
+msgid "Event not found!"
+msgstr "Tapahtumaa ei löytynyt!"
+
+#. module: website_event
+#: model:mail.message.subtype,description:website_event.mt_event_published
+#: model:mail.message.subtype,name:website_event.mt_event_published
+msgid "Event published"
+msgstr "Tapahtuma julkaistu"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.event_registration_action_tree
+msgid "Event registrations"
+msgstr "Tapahtuman ilmoittautumiset"
+
+#. module: website_event
+#: model:mail.message.subtype,description:website_event.mt_event_unpublished
+#: model:mail.message.subtype,name:website_event.mt_event_unpublished
+msgid "Event unpublished"
+msgstr "Tapahtuma julkaisematon"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_form_view
+msgid "Event's Ticket"
+msgstr "Tapahtuman lippu"
+
+#. module: website_event
+#: model:ir.actions.server,name:event.event_mail_scheduler_ir_actions_server
+#: model:ir.cron,cron_name:event.event_mail_scheduler
+#: model:ir.cron,name:event.event_mail_scheduler
+msgid "Event: Mail Scheduler"
+msgstr "Tapahtuma: sähköpostien ajastus"
+
+#. module: website_event
+#: code:addons/website_event/models/website.py:0
+#: model:ir.actions.act_window,name:event.action_event_view
+#: model:ir.ui.menu,name:event.event_event_menu_pivot_report
+#: model:ir.ui.menu,name:event.event_main_menu
+#: model:ir.ui.menu,name:event.menu_event_event
+#: model:website.menu,name:website_event.menu_events
+#: model_terms:ir.ui.view,arch_db:event.event_event_view_graph
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:event.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_event_tree
+#, python-format
+msgid "Events"
+msgstr "Tapahtumat"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.event_event_action_pivot
+msgid "Events Analysis"
+msgstr "Tapahtumien analyysi"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.action_event_mail
+msgid "Events Mail Schedulers"
+msgstr "Tapahtumien sähköpostiajastukset"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_tree
+msgid "Events Stage"
+msgstr "Tapahtumien vaihe"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+msgid ""
+"Events and registrations will automatically be confirmed\n"
+"                                            upon creation, easing the flow for simple events."
+msgstr "Tapahtumat ja ilmoittautumiset vahvistetaan automaattisesti\n"
+"                                            luonnin yhteydessä helpottamaan tapahtumien sujuvuutta."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_type__auto_confirm
+msgid ""
+"Events and registrations will automatically be confirmed upon creation, "
+"easing the flow for simple events."
+msgstr ""
+"Tapahtumat ja ilmoittautumiset vahvistetaan automaattisesti luonnin yhteydessä, "
+"helpottamaan tapahtumien sujuvuutta."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_stage__pipe_end
+msgid ""
+"Events will automatically be moved into this stage when they are finished. "
+"The event moved into this stage will automatically be set as green."
+msgstr ""
+"Tapahtumat viedään automaattisesti tähän tilaan kun ne ovat valmiit. "
+"Tapahtuma, joka viedään tähän tilaan muuttuu automaattisesti vihreäksi."
+
+#. module: website_event
+#: model_terms:event.event,description:event.event_0
+#: model_terms:ir.ui.view,arch_db:event.event_default_descripton
+msgid ""
+"Every year we invite our community, partners and end-users to come and meet us! It's the ideal event to get together and present new features, roadmap of future versions, achievements of the software, workshops, training sessions, etc....\n"
+"            This event is also an opportunity to showcase our partners' case studies, methodology or developments. Be there and see directly from the source the features of the new version!"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Expected"
+msgstr "Odotettu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_tree
+msgid "Expected Attendees"
+msgstr "Odotetut osallistujat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_kanban
+msgid "Expected attendees"
+msgstr "Odotetut osallistujat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Expired"
+msgstr "Vanhentunut"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid ""
+"Find out what people see and say about this event, and join the "
+"conversation."
+msgstr ""
+"Näe mitä ihmiset sanovat tästä tapahtumasta, ja liity "
+"keskusteluun."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__fold
+msgid "Folded in Kanban"
+msgstr "Laskostettu Kanbanissa"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
+msgid "Follow Us"
+msgstr "Seuraa meitä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_follower_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__message_follower_ids
+msgid "Followers"
+msgstr "Seuraajat"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_channel_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seuraajat (kanavat)"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_partner_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seuraajat (kumppanit)"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.layout
+msgid "Following content will appear on all events."
+msgstr "Seuraava sisältö näkyy kaikilla tapahtumilla."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__activity_type_icon
+#: model:ir.model.fields,help:event.field_event_registration__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Font awesome ikoni esim.. fa-tasks"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__seats_max
+msgid ""
+"For each event you can define a maximum registration of seats(number of "
+"attendees), above this numbers the registrations are not accepted."
+msgstr ""
+"Voit määrittää jokaiselle tapahtumalle ilmoittautujiien maksimimäärän. "
+"Tapahtumaan ei voi ilmoittautua tätä enempää."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid ""
+"Foster interactions between attendees by creating virtual conference rooms"
+msgstr ""
+
+#. module: website_event
+#: model:event.stage,description:event.event_stage_new
+msgid "Freshly created"
+msgstr "Juuri luotu"
+
+#. module: website_event
+#: model:event.stage,description:event.event_stage_done
+msgid "Fully ended"
+msgstr "Täysin päättynyt"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Future Activities"
+msgstr "Tulevat toimenpiteet"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Get the direction"
+msgstr "Hanki reittiohjeet"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Google"
+msgstr ""
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Great! Now all you have to do is wait for your attendees to show up!"
+msgstr "Loistavaa! Nyt sinun pitää vain odottaa osallistujien saapumista paikalle!"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__legend_done
+msgid "Green Kanban Label"
+msgstr "Vihreä kanban otsikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__legend_normal
+msgid "Grey Kanban Label"
+msgstr "Harmaa kanban otsikko"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Group By"
+msgstr "Ryhmittely"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_unit__hours
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_unit__hours
+msgid "Hours"
+msgstr "Tunnit"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__id
+#: model:ir.model.fields,field_description:event.field_event_mail__id
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__id
+#: model:ir.model.fields,field_description:event.field_event_stage__id
+#: model:ir.model.fields,field_description:event.field_event_tag__id
+#: model:ir.model.fields,field_description:event.field_event_tag_category__id
+#: model:ir.model.fields,field_description:event.field_event_type_mail__id
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__id
+#: model:ir.model.fields,field_description:event.field_res_config_settings__id
+#: model:ir.model.fields,field_description:event.field_res_partner__id
+#: model:ir.model.fields,field_description:website_event.field_event_event__id
+#: model:ir.model.fields,field_description:website_event.field_event_registration__id
+#: model:ir.model.fields,field_description:website_event.field_event_type__id
+#: model:ir.model.fields,field_description:website_event.field_website__id
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__id
+#: model:ir.model.fields,field_description:website_event.field_website_menu__id
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_exception_icon
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_exception_icon
+msgid "Icon"
+msgstr "Kuvake"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__activity_exception_icon
+#: model:ir.model.fields,help:event.field_event_registration__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ikoni joka kertoo poikkeustoiminnosta."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__message_needaction
+#: model:ir.model.fields,help:event.field_event_event__message_unread
+#: model:ir.model.fields,help:event.field_event_registration__message_needaction
+#: model:ir.model.fields,help:event.field_event_registration__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Jos valittu, uudet viestit vaativat huomiotasi."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__message_has_error
+#: model:ir.model.fields,help:event.field_event_event__message_has_sms_error
+#: model:ir.model.fields,help:event.field_event_registration__message_has_error
+#: model:ir.model.fields,help:event.field_event_registration__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Jos valittu, joitakin viestejä ei ole toimitettu."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__start_sale_date
+msgid ""
+"If ticketing is used, contains the earliest starting sale date of tickets."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_unit__now
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_unit__now
+msgid "Immediately"
+msgstr "Välittömästi"
+
+#. modules: event, website_event
+#: code:addons/event/models/event_stage.py:0
+#: model:event.event,legend_normal:event.event_0
+#: model:event.stage,legend_normal:event.event_stage_announced
+#: model:event.stage,legend_normal:event.event_stage_booked
+#: model:event.stage,legend_normal:event.event_stage_cancelled
+#: model:event.stage,legend_normal:event.event_stage_done
+#: model:event.stage,legend_normal:event.event_stage_new
+#: model:ir.model.fields.selection,name:event.selection__event_event__kanban_state__normal
+#, python-format
+msgid "In Progress"
+msgstr "Käynnissä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__interval_nbr
+#: model:ir.model.fields,field_description:event.field_event_type_mail__interval_nbr
+msgid "Interval"
+msgstr "Aikaväli"
+
+#. module: website_event
+#: code:addons/website_event/models/event_event.py:0
+#, python-format
+msgid "Introduction"
+msgstr "Esittely"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "Invalid event / ticket choice"
+msgstr "Virheellinen tapahtuma / lippuvalinta"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__sale_available
+msgid "Is Available"
+msgstr "Saatavilla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__is_done
+msgid "Is Done"
+msgstr "Päättynyt"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__is_expired
+msgid "Is Expired"
+msgstr "Vanhentunut"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_is_follower
+#: model:ir.model.fields,field_description:event.field_event_registration__message_is_follower
+msgid "Is Follower"
+msgstr "On seuraaja"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__is_one_day
+msgid "Is One Day"
+msgstr "Yhdenpäivän"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__is_ongoing
+msgid "Is Ongoing"
+msgstr "Jatkuva"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__is_participating
+msgid "Is Participating"
+msgstr "Ilmoittauduttu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__is_published
+msgid "Is Published"
+msgstr "On julkaistu"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_type__seats_max
+msgid "It will select this default maximum value when you choose this event"
+msgstr ""
+"Valitsee oletuksena käytettävän maksimimäärän kun tämä tapahtuma valitaan"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
+msgid "John DOE"
+msgstr "Matti Meikäläinen"
+
+#. module: website_event
+#: model_terms:event.event,description:event.event_0
+#: model_terms:ir.ui.view,arch_db:event.event_default_descripton
+msgid "Join us for this 24 hours Event"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__legend_blocked
+msgid "Kanban Blocked Explanation"
+msgstr "Kanbanin Estetty-tilan selitysteksti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__legend_normal
+msgid "Kanban Ongoing Explanation"
+msgstr "Kanbanin Käynnissä-tilan selitysteksti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__kanban_state
+msgid "Kanban State"
+msgstr "Kanban-tila"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__kanban_state_label
+msgid "Kanban State Label"
+msgstr "Kanban tilan otsikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__legend_done
+msgid "Kanban Valid Explanation"
+msgstr "Kanbanin Valmis-tilan selitysteksti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket____last_update
+#: model:ir.model.fields,field_description:event.field_event_mail____last_update
+#: model:ir.model.fields,field_description:event.field_event_mail_registration____last_update
+#: model:ir.model.fields,field_description:event.field_event_stage____last_update
+#: model:ir.model.fields,field_description:event.field_event_tag____last_update
+#: model:ir.model.fields,field_description:event.field_event_tag_category____last_update
+#: model:ir.model.fields,field_description:event.field_event_type_mail____last_update
+#: model:ir.model.fields,field_description:event.field_event_type_ticket____last_update
+#: model:ir.model.fields,field_description:event.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:event.field_res_partner____last_update
+#: model:ir.model.fields,field_description:website_event.field_event_event____last_update
+#: model:ir.model.fields,field_description:website_event.field_event_registration____last_update
+#: model:ir.model.fields,field_description:website_event.field_event_type____last_update
+#: model:ir.model.fields,field_description:website_event.field_website____last_update
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu____last_update
+#: model:ir.model.fields,field_description:website_event.field_website_menu____last_update
+#: model:ir.model.fields,field_description:website_event.field_website_visitor____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__write_uid
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__write_uid
+#: model:ir.model.fields,field_description:event.field_event_mail__write_uid
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__write_uid
+#: model:ir.model.fields,field_description:event.field_event_registration__write_uid
+#: model:ir.model.fields,field_description:event.field_event_stage__write_uid
+#: model:ir.model.fields,field_description:event.field_event_tag__write_uid
+#: model:ir.model.fields,field_description:event.field_event_tag_category__write_uid
+#: model:ir.model.fields,field_description:event.field_event_type__write_uid
+#: model:ir.model.fields,field_description:event.field_event_type_mail__write_uid
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__write_uid
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__write_uid
+msgid "Last Updated by"
+msgstr "Viimeksi päivitetty"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__write_date
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__write_date
+#: model:ir.model.fields,field_description:event.field_event_mail__write_date
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__write_date
+#: model:ir.model.fields,field_description:event.field_event_registration__write_date
+#: model:ir.model.fields,field_description:event.field_event_stage__write_date
+#: model:ir.model.fields,field_description:event.field_event_tag__write_date
+#: model:ir.model.fields,field_description:event.field_event_tag_category__write_date
+#: model:ir.model.fields,field_description:event.field_event_type__write_date
+#: model:ir.model.fields,field_description:event.field_event_type_mail__write_date
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__write_date
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__write_date
+msgid "Last Updated on"
+msgstr "Viimeksi päivitetty"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Late Activities"
+msgstr "Myöhässä olevat toimenpiteet"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Let's create your first <b>event</b>."
+msgstr "Luodaan sinun ensimmäinen <b>tapahtuma</b>."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Limit Registrations"
+msgstr "Rajoita ilmoittautumiset"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__has_seats_limitation
+msgid "Limited Seats"
+msgstr "Rajattu määrä paikkoja"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Live Broadcast"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_track_live
+msgid "Live Mode"
+msgstr ""
+
+#. module: website_event
+#: code:addons/website_event/models/event_event.py:0
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+#, python-format
+msgid "Location"
+msgstr "Sijainti"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_report_template_badge
+#: model_terms:ir.ui.view,arch_db:event.event_registration_report_template_badge
+msgid "Logo"
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"Looking great! Let's now <b>publish</b> this page so that it becomes "
+"<b>visible</b> on your website!"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__notification_type__mail
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__notification_type__mail
+msgid "Mail"
+msgstr "Sähköposti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__mail_registration_ids
+msgid "Mail Registration"
+msgstr "Sähköposti-ilmoittautuminen"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__event_mail_ids
+#: model:ir.model.fields,field_description:event.field_event_type__event_type_mail_ids
+msgid "Mail Schedule"
+msgstr "Sähköpostin ajastus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__scheduler_id
+msgid "Mail Scheduler"
+msgstr "Sähköpostin ajastus"
+
+#. module: website_event
+#: model:ir.ui.menu,name:event.menu_event_mail_schedulers
+msgid "Mail Schedulers"
+msgstr "Sähköpostin ajastimet"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_type_mail
+msgid "Mail Scheduling on Event Category"
+msgstr "Sähköpostien aikataulutus Tapahtuman Kategoriaan"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__mail_sent
+msgid "Mail Sent"
+msgstr "Sähköposti lähetetty"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__mail_sent
+msgid "Mail Sent on Event"
+msgstr "Tapahtuman sähköposti lähetetty"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_main_attachment_id
+#: model:ir.model.fields,field_description:event.field_event_registration__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pääliite"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.website_visitor_view_search
+msgid "Main Contact"
+msgstr "Pääyhteystieto"
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_website_visitor__parent_id
+msgid "Main identity"
+msgstr "Pääidentiteetti"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Manage &amp; publish a schedule with tracks"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_tree
+msgid "Mark as Attending"
+msgstr "Merkkaa osallistuvaksi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Marketing"
+msgstr "Markkinointi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_tree_from_event
+msgid "Maximum"
+msgstr "Enimmäismäärä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_limited
+msgid "Maximum Attendees"
+msgstr "Osallistujia max"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_max
+msgid "Maximum Attendees Number"
+msgstr "Osallistujia max"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__seats_max
+msgid "Maximum Registrations"
+msgstr "Ilmoittautumisia enintään"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_max
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__seats_max
+#: model_terms:ir.ui.view,arch_db:event.view_event_tree
+msgid "Maximum Seats"
+msgstr "Paikkoja max"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__utm_medium_id
+msgid "Medium"
+msgstr "Media"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__menu_id
+msgid "Menu"
+msgstr "Valikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_event_menu__menu_type
+msgid "Menu Type"
+msgstr "Valikkotyyppi"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:website_event.website_event_menu_action
+msgid "Menus"
+msgstr "Valikot"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_has_error
+#: model:ir.model.fields,field_description:event.field_event_registration__message_has_error
+msgid "Message Delivery error"
+msgstr "Ongelma viestin toimituksessa"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__message_ids
+msgid "Messages"
+msgstr "Viestit"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__mobile
+msgid "Mobile"
+msgstr "Matkapuhelin"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_unit__months
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_unit__months
+msgid "Months"
+msgstr "Kuukaudet"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "My Events"
+msgstr "Omat tapahtumat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "N/A"
+msgstr "Ei saatavilla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__name
+#: model:ir.model.fields,field_description:event.field_event_tag__name
+#: model:ir.model.fields,field_description:event.field_event_tag_category__name
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__name
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Name"
+msgstr "Nimi"
+
+#. module: website_event
+#: model:event.stage,name:event.event_stage_new
+msgid "New"
+msgstr "Uusi"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/controllers/main.py:0
+#: code:addons/website_event/static/src/js/website_event.editor.js:0
+#, python-format
+msgid "New Event"
+msgstr "Uusi tapahtuma"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_date_deadline
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Seuraavan toimenpiteen eräpäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_summary
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_summary
+msgid "Next Activity Summary"
+msgstr "Seuraavan toimenpiteen kuvaus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_type_id
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_type_id
+msgid "Next Activity Type"
+msgstr "Seuraavan toimenpiteen tyyppi"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+msgid "No events found."
+msgstr "Tapahtumia ei löytynyt."
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "No more available seats for this ticket"
+msgstr "Tällä lipulla ei ole enää vapaita paikkoja"
+
+#. module: event
+#: code:addons/event/models/event_ticket.py:0
+#, python-format
+msgid "No more available seats for this ticket."
+msgstr "Tällä lipulla ei ole enää vapaita paikkoja."
+
+#. module: event
+#: code:addons/event/models/event_event.py:0
+#, python-format
+msgid "No more available seats."
+msgstr "Paikkoja ei ole enää vapaana."
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "No more seats available for this event."
+msgstr "Tälle tapahtumalle ei ole enää vapaita paikkoja."
+
+#. module: website_event
+#: model_terms:ir.actions.act_window,help:website_event.event_registration_action_from_visitor
+msgid "No registration linked to this visitor"
+msgstr "Tälle vieraalle ei ole ilmoittautumisia"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "None"
+msgstr "Ei mitään"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__note
+msgid "Note"
+msgstr "Muistiinpano"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Notes"
+msgstr "Muistiinpanot"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Now that your event is ready, click here to move it to another stage."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_needaction_counter
+#: model:ir.model.fields,field_description:event.field_event_registration__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Toimenpiteiden määrä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_expected
+msgid "Number of Expected Attendees"
+msgstr "Odotettujen osallistujien määrä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_used
+msgid "Number of Participants"
+msgstr "Osallistujien lukumäärä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_has_error_counter
+#: model:ir.model.fields,field_description:event.field_event_registration__message_has_error_counter
+msgid "Number of errors"
+msgstr "Virheiden määrä"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_res_partner__event_count
+#: model:ir.model.fields,help:event.field_res_users__event_count
+msgid "Number of events the partner has participated."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__message_needaction_counter
+#: model:ir.model.fields,help:event.field_event_registration__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Toimenpiteitä vaativien viestien määrä"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__message_has_error_counter
+#: model:ir.model.fields,help:event.field_event_registration__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Toimitusvirheellisten viestien määrä"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__message_unread_counter
+#: model:ir.model.fields,help:event.field_event_registration__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Lukemattomia viestejä"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/website_event.js:0
+#, python-format
+msgid "Once you click on save, your event is updated."
+msgstr "Kun klikkaat \"tallenna\", tapahtuma päivitetään."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Ongoing Events"
+msgstr "Meneillään olevat tapahtumat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Online Exhibitors"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_sale
+msgid "Online Ticketing"
+msgstr "Verkkolipunosto"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__organizer_id
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Organizer"
+msgstr "Järjestäjä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_photos
+msgid "Our Trainings"
+msgstr "Koulutuksemme"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__legend_blocked
+#: model:ir.model.fields,help:event.field_event_stage__legend_blocked
+msgid ""
+"Override the default value displayed for the blocked state for kanban "
+"selection."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__legend_done
+#: model:ir.model.fields,help:event.field_event_stage__legend_done
+msgid ""
+"Override the default value displayed for the done state for kanban "
+"selection."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__legend_normal
+#: model:ir.model.fields,help:event.field_event_stage__legend_normal
+msgid ""
+"Override the default value displayed for the normal state for kanban "
+"selection."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__parent_id
+msgid "Parent"
+msgstr "Ylätaso"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Participant"
+msgstr "Osallistuja"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Partner"
+msgstr "Kumppani"
+
+#. module: website_event
+#: code:addons/website_event/controllers/main.py:0
+#, python-format
+msgid "Past Events"
+msgstr "Menneet tapahtumat"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__phone
+msgid "Phone"
+msgstr "Puhelin"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Phone <small>(Optional)</small>"
+msgstr "Puhelin <small>(Valinnainen)</small>"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_photos
+msgid "Photos"
+msgstr "Kuvat"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/website_event.js:0
+#, python-format
+msgid "Please select at least one ticket."
+msgstr "Valitse ainakin yksi lippu."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
+msgid "Preview Badges"
+msgstr "Esikatsele nimilappuja"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.res_config_settings_view_form
+msgid "Questions"
+msgstr "Kysymykset"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_track_quiz
+msgid "Quiz on Tracks"
+msgstr ""
+
+#. modules: event, website_event
+#: code:addons/event/models/event_stage.py:0
+#: model:event.event,legend_done:event.event_0
+#: model:event.stage,legend_done:event.event_stage_announced
+#: model:event.stage,legend_done:event.event_stage_booked
+#: model:event.stage,legend_done:event.event_stage_cancelled
+#: model:event.stage,legend_done:event.event_stage_done
+#: model:event.stage,legend_done:event.event_stage_new
+#, python-format
+msgid "Ready for Next Stage"
+msgstr "Valmis seuraavaan vaiheeseen"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Ready to <b>organize events</b> in a few minutes? Let's get started!"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__legend_blocked
+msgid "Red Kanban Label"
+msgstr "Punainen kanban otsikko"
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/models/event_event.py:0
+#: code:addons/website_event/static/src/js/register_toaster_widget.js:0
+#: model_terms:ir.ui.view,arch_db:website_event.layout
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+#, python-format
+msgid "Register"
+msgstr "Ilmoittaudu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
+msgid "Register Button"
+msgstr "Ilmoittautumisnappi"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registered_ids
+msgid "Registered Events"
+msgstr "Ilmoittaudutut tapahtumat"
+
+#. modules: event, website_event
+#: code:addons/event/models/event_event.py:0
+#: code:addons/event/models/event_ticket.py:0
+#: code:addons/event/models/event_ticket.py:0
+#: code:addons/website_event/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_graph
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_pivot
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_tree
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+#, python-format
+msgid "Registration"
+msgstr "Ilmoittautuminen"
+
+#. module: website_event
+#: model:ir.actions.report,name:event.report_event_registration_badge
+msgid "Registration Badge"
+msgstr "Ilmoittautumisen nimilappu"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__date_open
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_tree
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Registration Date"
+msgstr "Ilmottautumispäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__end_sale_date
+msgid "Registration End"
+msgstr "Ilmoittautuminen päättyy"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Registration ID"
+msgstr "Ilmoittautumisen ID"
+
+#. module: website_event
+#: model:ir.model,name:event.model_event_mail_registration
+msgid "Registration Mail Scheduler"
+msgstr "Ilmoittatutumisen sähköpostiajastus"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_form
+msgid "Registration Mails"
+msgstr "Ilmoittautumissähköpostit"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__start_sale_date
+msgid "Registration Start"
+msgstr "Ilmoittautuminen alkaa"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_questions
+msgid "Registration Survey"
+msgstr "Ilmoittautumiskysely"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_complete
+msgid "Registration confirmed!"
+msgstr "Ilmoittautuminen vahvistettu!"
+
+#. module: event
+#: code:addons/event/models/event_ticket.py:0
+#, python-format
+msgid "Registration for %s"
+msgstr "Ilmoittautuminen tapahtumaan %s"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_form
+msgid "Registration mail"
+msgstr "Ilmoittautumissähköposti"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__event_registrations_open
+msgid "Registration open"
+msgstr "Ilmoittautuminen avoinna"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:website_event.event_registration_action_from_visitor
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__registration_ids
+#: model_terms:ir.ui.view,arch_db:website_event.website_visitor_view_form
+#: model_terms:ir.ui.view,arch_db:website_event.website_visitor_view_kanban
+msgid "Registrations"
+msgstr "Ilmoittautumiset"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Registrations Closed"
+msgstr "Ilmoittautumiset suljettu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Registrations are <b>closed</b>"
+msgstr "Ilmoittautumiset ovat <b>suljettu</b>"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__event_registrations_open
+msgid ""
+"Registrations are open if:\n"
+"- the event is not ended\n"
+"- there are seats available on event\n"
+"- the tickets are sellable (if ticketing is used)"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Registrations not yet open"
+msgstr "Ilmoittautumiset eivät ole vielä alkaneet"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__start_remaining
+msgid "Remaining before start"
+msgstr "Jäljellä ennen alkamista"
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__start_remaining
+msgid "Remaining time before event starts (minutes)"
+msgstr "Jäljellä oleva aika ennen tapahtuman alkamista (minuutteina)"
+
+#. module: website_event
+#: model:ir.ui.menu,name:event.menu_reporting_events
+msgid "Reporting"
+msgstr "Raportointi"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_reserved
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_reserved
+msgid "Reserved Seats"
+msgstr "Varatut paikat"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__user_id
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Responsible"
+msgstr "Vastuuhenkilö"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__activity_user_id
+#: model:ir.model.fields,field_description:event.field_event_registration__activity_user_id
+msgid "Responsible User"
+msgstr "Vastuuhenkilö"
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__website_id
+msgid "Restrict publishing to this website."
+msgstr "Rajoita julkaisu tälle verkkosivustolle."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.404
+msgid "Return to the event list."
+msgstr "Paluu tapahtumalistaukseen."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__is_seo_optimized
+msgid "SEO optimized"
+msgstr "Hakukoneoptimoitu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "SHARE"
+msgstr "JAA"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_has_sms_error
+#: model:ir.model.fields,field_description:event.field_event_registration__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Tekstiviestin toimitusvirhe"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Sales end on"
+msgstr "Myynnit päättyy"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Sales start on"
+msgstr "Myynnit alkaa"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Scan badges to confirm attendances"
+msgstr "Skannaa lippuja vahvistaaksesi kävijät"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Schedule & Tracks"
+msgstr "Aikataulu ja esitykset"
+
+#. module: website_event
+#: model_terms:ir.actions.act_window,help:event.action_event_view
+msgid ""
+"Schedule and organize your events efficiently:\n"
+"                track registrations and participations, automate the confirmation emails, sell tickets, etc."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__scheduled_date
+msgid "Scheduled Sent Mail"
+msgstr "Ajastetut lähetetyt sähköpostit"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail_registration__scheduled_date
+msgid "Scheduled Time"
+msgstr "Ajoitettu aika"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.layout
+msgid "Search an event ..."
+msgstr "Etsi tapahtumaa ..."
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_topbar
+msgid "Search an event..."
+msgstr "Etsi tapahtumaa..."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_limited
+#: model:ir.model.fields,field_description:event.field_event_type_ticket__seats_limited
+msgid "Seats Limit"
+msgstr "Paikkojen raja"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.country_events_list
+msgid "See all events from"
+msgstr "Näytä kaikki tapahtumat"
+
+#. module: website_event
+#: model:event.type,name:event.event_type_data_ticket
+msgid "Sell Online"
+msgstr "Myy verkossa"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Sell tickets on your website"
+msgstr "Myy lippuja verkkosivuilla"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Sell tickets with sales orders"
+msgstr "Myy lippuja myyntitilauksilla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__notification_type
+#: model:ir.model.fields,field_description:event.field_event_type_mail__notification_type
+msgid "Send"
+msgstr "Lähetä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Send by Email"
+msgstr "Lähetä sähköpostilla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__done
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_mail_tree
+msgid "Sent"
+msgstr "Lähetetty"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__seo_name
+msgid "Seo name"
+msgstr "Hakukoneoptimoitu nimi"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__sequence
+#: model:ir.model.fields,field_description:event.field_event_tag__sequence
+#: model:ir.model.fields,field_description:event.field_event_tag_category__sequence
+#: model:ir.model.fields,field_description:event.field_event_type__sequence
+msgid "Sequence"
+msgstr "Järjestys"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_registration_form
+msgid "Set To Unconfirmed"
+msgstr "Aseta vahvistamattomaksi"
+
+#. module: website_event
+#: model:ir.actions.act_window,name:event.action_event_configuration
+#: model:ir.ui.menu,name:event.menu_event_global_settings
+msgid "Settings"
+msgstr "Asetukset"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Show all records which has next action date is before today"
+msgstr "Näytä kaikki tietueet joissa on toimenpide myöhässä."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__event_registrations_sold_out
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Sold Out"
+msgstr "Loppuunmyyty"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.404
+msgid "Sorry, the requested event is not available anymore."
+msgstr "Valitettavasti tämä tapahtuma ei ole enää saatavilla."
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__utm_source_id
+msgid "Source"
+msgstr "Lähde"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__stage_id
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Stage"
+msgstr "Vaihe"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid "Stage Description and Tooltips"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__name
+msgid "Stage Name"
+msgstr "Vaiheen nimi"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_stage__description
+msgid "Stage description"
+msgstr "Vaiheen kuvaus"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "Start -"
+msgstr "Alkaa -"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__date_begin
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Start Date"
+msgstr "Alkupäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__date_begin_located
+msgid "Start Date Located"
+msgstr "Lokalisoitu alkupäivä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__start_today
+msgid "Start Today"
+msgstr "Alkaa tänään"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__start_sale_date
+msgid "Start sale date"
+msgstr "Myyntien aloituspäivämäärä"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_registration__state
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Status"
+msgstr "Tila"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__activity_state
+#: model:ir.model.fields,help:event.field_event_registration__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Tila aktiviteetin perusteella\n"
+"Myöhässä: Eräpäivä on menneisyydessä\n"
+"Tänään: Eräpäivä on tänään\n"
+"Suunniteltu: Tulevaisuudessa"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_tag__color
+msgid ""
+"Tag color. No color means no display in kanban or front-end, to distinguish "
+"internal tags from public categorization tags."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__tag_ids
+#: model:ir.model.fields,field_description:event.field_event_tag_category__tag_ids
+#: model:ir.model.fields,field_description:event.field_event_type__tag_ids
+#: model_terms:ir.ui.view,arch_db:event.event_tag_category_view_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+msgid "Tags"
+msgstr "Tunnisteet"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid "Task in progress. Click to block or set as done."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid "Task is blocked. Click to unblock or set as done."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__event_type_id
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Template"
+msgstr "Malli"
+
+#. module: event
+#: code:addons/event/models/event_event.py:0
+#, python-format
+msgid "The closing date cannot be earlier than the beginning date."
+msgstr "Sulkemispäivämäärä ei voi olla aloituspäivämäärää aikaisemmin."
+
+#. module: website_event
+#: model:event.stage,description:event.event_stage_cancelled
+msgid "The event has been cancelled"
+msgstr "Tapahtuma on peruttu"
+
+#. module: website_event
+#: model:event.stage,description:event.event_stage_announced
+msgid "The event has been publicly announced"
+msgstr "Tapahtuma on julkaistu"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__event_registrations_sold_out
+msgid ""
+"The event is sold out if no more seats are available on event. If ticketing "
+"is used and all tickets are sold out, the event will be sold out."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__website_url
+msgid "The full URL to access the document through the website."
+msgstr "Dokumentin URL-osoite verkkosivustolla."
+
+#. module: website_event
+#: model:event.stage,description:event.event_stage_booked
+msgid "The place has been reserved"
+msgstr "Paikka on varattu"
+
+#. module: event
+#: code:addons/event/models/event_ticket.py:0
+#, python-format
+msgid "The stop date cannot be earlier than the start date."
+msgstr "Lopetuspäivämäärä ei voi olla ennen aloituspäivämäärää."
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_mail__template_id
+#: model:ir.model.fields,help:event.field_event_type_mail__template_id
+msgid ""
+"This field contains the template of the mail that will be automatically sent"
+msgstr "Tämä kenttä kertoo sähköpostimallin, joka lähetetään automaattisesti"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "This is the <b>name</b> your guests will see when registering."
+msgstr ""
+
+#. module: website_event
+#: code:addons/website_event/controllers/main.py:0
+#, python-format
+msgid "This month"
+msgstr "Tässä kuussa"
+
+#. module: event
+#: code:addons/event/models/event_event.py:0
+#, python-format
+msgid "This operator is not supported"
+msgstr ""
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"This pipeline can be customized on the fly to fit your organizational needs."
+" For example, let's create a new stage."
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "This shortcut will bring you right back to the event form."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid "This step is done. Click to block or set in progress."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_form_from_event
+msgid "Ticket"
+msgstr "Lippu"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
+msgid "Ticket #"
+msgstr "Lippu #"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Ticket Sales starting on"
+msgstr "Lipunmyynti alkaa"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Ticket Type"
+msgstr "Lipputyyppi"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"Ticket types allow you to distinguish your attendees. Let's <b>create</b> a "
+"new one."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__use_ticket
+msgid "Ticketing"
+msgstr "Liputus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__event_type_ticket_ids
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_event_sale
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_tree_from_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Tickets"
+msgstr "Pääsyliput"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "Tickets for this Event are <b>Sold Out</b>"
+msgstr "Tämän tapahtuman liput ovat <b>Loppuunmyyty</b>"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__date_tz
+#: model:ir.model.fields,field_description:event.field_event_type__default_timezone
+msgid "Timezone"
+msgstr "Aikavyöhyke"
+
+#. module: website_event
+#: code:addons/website_event/controllers/main.py:0
+#, python-format
+msgid "Today"
+msgstr "Tänään"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Today Activities"
+msgstr "Tämän päivän toimenpiteet"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.layout
+msgid "Toggle navigation"
+msgstr "Kytke navigaatio päälle/pois"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_tree_from_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_tree
+msgid "Total"
+msgstr "Yhteensä"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "Total Registrations for this Event"
+msgstr "Ilmoittatumiset yhteensä tälle tapahtumalle"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_res_config_settings__module_website_event_track
+msgid "Tracks and Agenda"
+msgstr "Esitykset ja ohjelmakartta"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__interval_type
+#: model:ir.model.fields,field_description:event.field_event_type_mail__interval_type
+msgid "Trigger"
+msgstr "Laukaisin"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__activity_exception_decoration
+#: model:ir.model.fields,help:event.field_event_registration__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Poikkeusaktiviteetin tyyppi tietueella"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_registration__state__draft
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_tree_from_event
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Unconfirmed"
+msgstr "Vahvistamaton"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__seats_unconfirmed
+msgid "Unconfirmed Seat Reservations"
+msgstr "Vahvistamattomat paikkavaraukset"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_unconfirmed
+#: model_terms:ir.ui.view,arch_db:event.view_event_tree
+msgid "Unconfirmed Seats"
+msgstr "Vahvistamattomat paikat"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_mail__interval_unit
+#: model:ir.model.fields,field_description:event.field_event_type_mail__interval_unit
+msgid "Unit"
+msgstr "Yksikkö"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.country_events_list
+msgid "Unpublished"
+msgstr "Julkaisematon"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_unread
+#: model:ir.model.fields,field_description:event.field_event_registration__message_unread
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+#: model_terms:ir.ui.view,arch_db:event.view_registration_search
+msgid "Unread Messages"
+msgstr "Lukemattomat viestit"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__message_unread_counter
+#: model:ir.model.fields,field_description:event.field_event_registration__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Lukemattomien viestien laskuri"
+
+#. module: website_event
+#: code:addons/website_event/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:website_event.event_time
+#, python-format
+msgid "Upcoming Events"
+msgstr "Tulevat tapahtumat"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Upcoming events from today"
+msgstr "Tulevia tapahtumia tänään"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_search
+msgid "Upcoming/Running"
+msgstr "Tulossa/Meneillään"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.res_config_settings_view_form
+msgid "Upgrade Sponsors into Exhibitors with virtual conference booths"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_type__use_timezone
+msgid "Use Default Timezone"
+msgstr "Käytä oletusaikavyöhykettä"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Use the <b>breadcrumbs</b> to go back to your kanban overview."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.events_list
+msgid "Use the top button '<b>+ New</b>' to create an event."
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid "Use this <b>shortcut</b> to easily access your event web page."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_about_us
+msgid "Use this paragrah to write a short text about your events or company."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event_ticket__seats_used
+msgid "Used Seats"
+msgstr "Käytetyt paikat"
+
+#. module: website_event
+#: model:res.groups,name:event.group_event_user
+msgid "User"
+msgstr "Käyttäjä"
+
+#. module: event
+#: code:addons/event/models/event_event.py:0
+#, python-format
+msgid "Value should be True or False (not %s)"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__address_id
+msgid "Venue"
+msgstr "Tapahtumapaikka"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_type_form
+msgid "Visibility"
+msgstr "Näkyvyys"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_published
+msgid "Visible on current website"
+msgstr "Näkyy nykysellä verkkosivulla"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_registration__visitor_id
+msgid "Visitor"
+msgstr "Vierailija"
+
+#. module: event
+#: code:addons/event/models/event_mail.py:0
+#, python-format
+msgid "WARNING: Event Scheduler Error for event: %s"
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"Want to change your event configuration? Let's go back to the event form."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_website
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_id
+msgid "Website"
+msgstr "Verkkosivu"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_website_event_menu
+#: model_terms:ir.ui.view,arch_db:website_event.website_event_menu_view_form
+msgid "Website Event Menu"
+msgstr "Verkkosivun tapahtumavalikko"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.website_event_menu_view_search
+#: model_terms:ir.ui.view,arch_db:website_event.website_event_menu_view_tree
+msgid "Website Event Menus"
+msgstr "Verkkosivun tapahtumavalikot"
+
+#. module: website_event
+#: model:ir.actions.act_url,name:website_event.action_open_website
+msgid "Website Home"
+msgstr "Etusivu"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_website_menu
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_menu
+msgid "Website Menu"
+msgstr "Verkkosivun valikko"
+
+#. module: website_event
+#: model:ir.ui.menu,name:website_event.menu_website_event_menu
+msgid "Website Menus"
+msgstr "Verkkosivun valikot"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:event.field_event_event__website_message_ids
+#: model:ir.model.fields,field_description:event.field_event_registration__website_message_ids
+msgid "Website Messages"
+msgstr "Verkkosivun ilmoitukset"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
+msgid "Website Submenu"
+msgstr "Verkkosivun alivalikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_url
+msgid "Website URL"
+msgstr "Verkkosivuston osoite"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_website_visitor
+msgid "Website Visitor"
+msgstr "Verkkosivun vierailija"
+
+#. module: website_event
+#: model:ir.model.fields,help:event.field_event_event__website_message_ids
+#: model:ir.model.fields,help:event.field_event_registration__website_message_ids
+msgid "Website communication history"
+msgstr "Verkkosivun viestihistoria"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_meta_description
+msgid "Website meta description"
+msgstr "Verkkosivuston metakuvaus"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_meta_keywords
+msgid "Website meta keywords"
+msgstr "Verkkosivuston meta-avainsanat"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_meta_title
+msgid "Website meta title"
+msgstr "Verkkosivuston metaotsikko"
+
+#. module: website_event
+#: model:ir.model.fields,field_description:website_event.field_event_event__website_meta_og_img
+msgid "Website opengraph image"
+msgstr "Verkkosivun opengraph kuva"
+
+#. module: website_event
+#: model:ir.model.fields.selection,name:event.selection__event_mail__interval_unit__weeks
+#: model:ir.model.fields.selection,name:event.selection__event_type_mail__interval_unit__weeks
+msgid "Weeks"
+msgstr "Viikot"
+
+#. module: event
+#. openerp-web
+#: code:addons/event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"When will your event take place? <b>Select</b> the start and end dates "
+"<b>and click Apply</b>."
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__is_ongoing
+msgid "Whether event has begun"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__is_done
+msgid "Whether event is finished"
+msgstr ""
+
+#. module: website_event
+#: model:ir.model.fields,help:website_event.field_event_event__start_today
+msgid "Whether event is going to start today if still not ongoing"
+msgstr ""
+
+#. module: website_event
+#. openerp-web
+#: code:addons/website_event/static/src/js/tours/event_tour.js:0
+#, python-format
+msgid ""
+"With the Edit button, you can <b>customize</b> the web page visitors will "
+"see when registrating."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid ""
+"You can also add a description to help your coworkers understand the meaning"
+" and purpose of the stage."
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_stage_view_form
+msgid ""
+"You can define here labels that will be displayed for the state instead\n"
+"                            of the default labels in the kanban view."
+msgstr ""
+
+#. module: website_event
+#: model:mail.template,subject:event.event_registration_mail_template_badge
+msgid "Your badge for ${object.event_id.name}"
+msgstr "Nimilappusi ${object.event_id.name} -tapahtumaan"
+
+#. module: website_event
+#: model:mail.template,subject:event.event_subscription
+msgid "Your registration at ${object.event_id.name}"
+msgstr "Ilmoittautumisesi tilaisuuteen:  ${object.event_id.name}"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.registration_template
+msgid "available)"
+msgstr ""
+
+#. module: website_event
+#: model:mail.template,report_name:event.event_registration_mail_template_badge
+msgid "badge_of_${(object.event_id.name or '').replace('/','_')}"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "e.g. Conference for Architects"
+msgstr "esim. Verkkotapahtuma opettajille"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:website_event.event_description_full
+msgid "iCal/Outlook"
+msgstr ""
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "in %d days"
+msgstr "vielä %d päivää"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "next month"
+msgstr "ensi kuussa"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "next week"
+msgstr "ensi viikolla"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "on %(date)s"
+msgstr ""
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_kanban_from_event
+msgid "reserved +"
+msgstr "varattu +"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.view_event_form
+msgid "to"
+msgstr " "
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "today"
+msgstr "tänään"
+
+#. module: event
+#: code:addons/event/models/event_registration.py:0
+#, python-format
+msgid "tomorrow"
+msgstr "huomenna"
+
+#. module: website_event
+#: model_terms:ir.ui.view,arch_db:event.event_event_ticket_view_kanban_from_event
+msgid "unconfirmed"
+msgstr "vahvistamaton"

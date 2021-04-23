@@ -327,7 +327,7 @@ msgstr "Vahvistamaton"
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_kanban_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_registration_search_waiting_list
 msgid "Waiting"
-msgstr "Odottaa"
+msgstr "Jonottaa"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event_ticket__seats_waiting
