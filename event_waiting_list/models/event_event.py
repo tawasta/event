@@ -64,7 +64,7 @@ class EventType(models.Model):
                     'notification_type': 'mail',
                     'interval_unit': 'now',
                     'interval_type': 'after_wait',
-                    'template_id': self.env.ref('event.event_waiting').id,
+                    'template_id': self.env.ref('event_waiting_list.event_waiting').id,
                 }), (0, 0, {
                     'notification_type': 'mail',
                     'interval_nbr': 10,
