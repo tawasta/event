@@ -90,7 +90,6 @@ class EventMailScheduler(models.Model):
     @api.depends('event_id.date_begin', 'interval_type', 'interval_unit', 'interval_nbr')
     def _compute_scheduled_date(self):
         for mail in self:
-            print(mail)
             if mail.interval_type in ['after_sub', 'after_wait']:
                 date, sign = mail.event_id.create_date, 1
             elif mail.interval_type == 'before_event':
@@ -156,9 +155,9 @@ class EventMailRegistration(models.Model):
         for reg_mail in todo:
             if reg_mail.registration_id.state == 'wait' and reg_mail.scheduler_id.interval_type == 'after_wait':
                 reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
+                todo.write({'mail_sent': True})
             if reg_mail.registration_id.state == 'open' and reg_mail.scheduler_id.interval_type == 'after_sub':
                 reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
-
-        todo.write({'mail_sent': True})
+                todo.write({'mail_sent': True})
 
     # 8. Business methods
