@@ -41,6 +41,7 @@ class EventRegistration(models.Model):
     _inherit = 'event.registration'
 
     # 2. Fields declaration
+    waiting_list = fields.Boolean(related="event_id.waiting_list", store=True)
     state = fields.Selection([
         ('draft', 'Unconfirmed'),
         ('cancel', 'Cancelled'),
@@ -118,9 +119,6 @@ class EventRegistration(models.Model):
 
     def write(self, vals):
         """ Auto-trigger mail schedulers on state writes """
-        print("WRITE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(vals)
-        print("######################################")
         ret = super(EventRegistration, self).write(vals)
         if vals.get('state') == 'open':
             onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
@@ -132,6 +130,8 @@ class EventRegistration(models.Model):
 
     # 7. Action methods
     def action_waiting(self):
+        if not self.event_id.waiting_list:
+            raise ValidationError(_('Waiting list for this event is not enabled.'))
         self.write({'state': 'wait'})
 
     def _check_waiting_list(self):
