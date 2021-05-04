@@ -29,6 +29,9 @@ Addons
    * - `website_event_waiting_list <website_event_waiting_list/>`_
      - 14.0.1.0.0
      - Adds waiting list for website events
+   * - `website_event_waiting_list_questions <website_event_waiting_list/>`_
+     - 14.0.1.0.0
+     - Adds questions when joining waiting list
 
 Configuration
 =============
