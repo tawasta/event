@@ -19,9 +19,9 @@
 ##############################################################################
 
 {
-    "name": "Website Event Waiting List",
-    "summary": "Register to events using waiting list through website.",
-    "version": "12.0.1.0.0",
+    "name": "Website Event Waiting List Questions",
+    "summary": "Questions on Events when joining waiting list",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -29,12 +29,9 @@
     "application": False,
     "installable": True,
     "depends": [
-        "website_event",
-        "event_waiting_list",
+        "website_event_questions",
     ],
     "data": [
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_confirm_waiting_list.xml",
-        "views/assets.xml",
+        "views/event_templates.xml",
     ],
 }
