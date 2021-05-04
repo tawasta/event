@@ -107,15 +107,26 @@ class EventMailScheduler(models.Model):
     def execute(self):
         for mail in self:
             now = fields.Datetime.now()
-            if mail.interval_type in ['after_sub', 'after_wait']:
-                # update registration lines
+            if mail.interval_type == 'after_sub':
+                # update registration lines with open registrations
                 lines = [
                     (0, 0, {'registration_id': registration.id})
-                    for registration in (mail.event_id.registration_ids - mail.mapped('mail_registration_ids.registration_id'))
+                    for registration in (mail.event_id.registration_ids - mail.mapped('mail_registration_ids.registration_id')) if registration.state == "open"
                 ]
                 if lines:
                     mail.write({'mail_registration_ids': lines})
-                # execute scheduler on registrations
+                # execute scheduler on open registrations
+                mail.mail_registration_ids.execute()
+            elif mail.interval_type == 'after_wait':
+                # update registration lines with waiting list registrations
+                lines = [
+                    (0, 0, {'registration_id': registration.id})
+                    for registration in (mail.event_id.registration_ids - mail.mapped('mail_registration_ids.registration_id')) if registration.state == "wait"
+                ]
+                print(lines)
+                if lines:
+                    mail.write({'mail_registration_ids': lines})
+                # execute scheduler on waiting list registrations
                 mail.mail_registration_ids.execute()
             else:
                 # Do not send emails if the mailing was scheduled before the event but the event is over
@@ -153,11 +164,7 @@ class EventMailRegistration(models.Model):
             reg_mail.scheduler_id.notification_type == 'mail'
         )
         for reg_mail in todo:
-            if reg_mail.registration_id.state == 'wait' and reg_mail.scheduler_id.interval_type == 'after_wait':
-                reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
-                todo.write({'mail_sent': True})
-            if reg_mail.registration_id.state == 'open' and reg_mail.scheduler_id.interval_type == 'after_sub':
-                reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
-                todo.write({'mail_sent': True})
+            reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
+        todo.write({'mail_sent': True})
 
     # 8. Business methods
