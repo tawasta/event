@@ -92,7 +92,7 @@ class EventRegistration(models.Model):
             if registration.event_ticket_id.seats_max and registration.event_ticket_id.seats_available < 0:
                 if not registration.event_ticket_id.waiting_list:
                     raise ValidationError(_('No more seats available for this event.'))
-                elif registration.event.ticket_id.waiting_list and registration.state not in ['draft', 'wait']:
+                elif registration.event_ticket_id.waiting_list and registration.state not in ['draft', 'wait']:
                     raise ValidationError(_('No more seats available for this event.'))
 
     # 6. CRUD methods

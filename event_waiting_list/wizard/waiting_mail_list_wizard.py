@@ -25,7 +25,7 @@
 # 3. Odoo imports (openerp):
 from odoo import fields, models, _
 from odoo.http import request
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -60,7 +60,8 @@ class WaitingMailListWizard(models.TransientModel):
         registration_ids = self.registration_ids
         cur_app = request.env["event.registration"]
         for registration in registration_ids:
-            print(registration.confirm_url)
+            if registration.state != 'wait':
+                raise ValidationError(_('All selected registrations must be in the waiting list.'))
             msg_template = request.env.ref(
                 "event_waiting_list.event_waiting_registration"
             )
