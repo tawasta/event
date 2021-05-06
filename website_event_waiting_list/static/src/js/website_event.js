@@ -16,11 +16,12 @@ odoo.define('website_event_waiting_list.website_event', function (require) {
             ev.stopPropagation();
             var $form = $(ev.currentTarget).closest('form');
             var $button = $(ev.currentTarget).closest('[type="submit"]');
+            var post = {};
             var waiting_list = false;
             if ($($button).attr('name') == "waiting_list") {
                 waiting_list = true;
+                post['waiting_list'] = "True";
             }
-            var post = {};
             $('#registration_form table').siblings('.alert').remove();
             $('#registration_form select').each(function () {
                 post[$(this).attr('name')] = $(this).val();

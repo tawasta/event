@@ -24,9 +24,10 @@
 import werkzeug
 
 # 3. Odoo imports (openerp):
-from odoo import http
+from odoo import http, _
 from odoo.http import request
 from odoo.addons.website_event.controllers.main import WebsiteEventController
+from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -46,22 +47,41 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         if not event.can_access_from_current_website():
             raise werkzeug.exceptions.NotFound()
 
-        tickets = self._process_tickets_form(event, post)
+        warning_msg = ""
         availability_check = True
-        waiting_list_check = False
+        # waiting_check = True
+        # check if button pressed was waiting list button
+        waiting_list_button = False
+        for key, value in post.items():
+            if key == "waiting_list" and value == "True":
+                waiting_list_button = True
+
+        ticket_dicts = self._process_tickets_form(event, post)
         if event.seats_limited:
             ordered_seats = 0
-            for ticket in tickets:
-                ordered_seats += ticket['quantity']
-            if not event.waiting_list and event.seats_available < ordered_seats:
+            for ticket_dict in ticket_dicts:
+                if ticket_dict.get('ticket'):
+                    # return error message if trying to register for a ticket that is sold out
+                    # or trying to join a waiting list for a ticket that is not sold out
+                    # and event is not sold out
+                    for ticket in ticket_dict.get('ticket'):
+                        if waiting_list_button and ticket.seats_available > 0 and event.seats_available > 0:
+                            warning_msg = "You tried to join a waiting list for a ticket that has available seats"
+                            availability_check = False
+                        if not waiting_list_button and ticket.seats_available <= 0:
+                            warning_msg = "You tried to order a ticket that is sold out"
+                            availability_check = False
+                    ordered_seats += ticket_dict['quantity']
+            if event.seats_available < ordered_seats and not waiting_list_button:
+                if not warning_msg:
+                    warning_msg = "You tried to order more tickets than available seats"
                 availability_check = False
-            if event.waiting_list and event.seats_available <= 0:
-                waiting_list_check = True
-        if not tickets and not waiting_list_check:
+        if not ticket_dicts:
             return False
-        if waiting_list_check:
-            return request.env['ir.ui.view']._render_template("website_event_waiting_list.waiting_list_attendee_details", {'tickets': tickets, 'event': event, 'waiting_list_check': waiting_list_check})
-        return request.env['ir.ui.view']._render_template("website_event.registration_attendee_details", {'tickets': tickets, 'event': event, 'availability_check': availability_check, 'waiting_list_check': waiting_list_check})
+        if waiting_list_button:
+            return request.env['ir.ui.view']._render_template("website_event_waiting_list.waiting_list_attendee_details", {'tickets': ticket_dicts, 'event': event, 'availability_check': availability_check, 'warning_msg': warning_msg})
+        print(warning_msg)
+        return request.env['ir.ui.view']._render_template("website_event_waiting_list.registration_attendee_details", {'tickets': ticket_dicts, 'event': event, 'availability_check': availability_check, 'warning_msg': warning_msg})
 
     @http.route(['''/event/<model("event.event"):event>/registration/confirm'''], type='http', auth="public", methods=['POST'], website=True)
     def registration_confirm(self, event, **post):

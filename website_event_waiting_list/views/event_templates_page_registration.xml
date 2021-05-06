@@ -1,78 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="registration_template_waiting_list" inherit_id="website_event.registration_template">
-    <!--     <xpath expr="//select[@t-if='not ticket.is_expired and ticket.sale_available']" position="attributes"> -->
-    <!--         <attribute name="t-if">not ticket.is_expired and ticket.sale_available and ticket.seats_available</attribute> -->
-    <!--     </xpath> -->
+        <!-- Replace event registration to add waiting list -->
 
-        <!--     <attribute name="t-if">event.event_registrations_open and tickets.seats_available</attribute> -->
-        <!-- </xpath> -->
-
-        <!-- Replace ticket selections -->
-        <xpath expr="//select[@t-if='not ticket.is_expired and ticket.sale_available']" position="after">
-            <t t-esc="ticket.is_expired"/>
-            <t t-esc="ticket.sale_available"/>
-            <t t-esc="ticket.waiting_list"/>
-            <t t-esc="ticket.seats_available"/>
-            <t t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list">
-                <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
-                    <i class="fa fa-ban mr-2"/>Sold Out
-                </span>
-                <select t-if="not ticket.is_expired and not ticket.sale_available and ticket.waiting_list"
+        <!-- Multi ticket view -->
+        <xpath expr="//div[@class='w-auto ml-auto']" position="replace">
+            <t t-if="event.waiting_list">
+                <select t-if="not ticket.is_expired and ticket.sale_available and event.seats_available > 0"
                         t-attf-name="nb_register-#{ticket.id}"
                         class="custom-select">
-                    <t t-foreach="range(0, 10)" t-as="nb">
+                    <t t-set="seats_max_ticket" t-value="(not ticket.seats_limited or ticket.seats_available &gt; 9) and 10 or ticket.seats_available + 1"/>
+                    <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
+                    <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                    <t t-foreach="range(0, seats_max)" t-as="nb">
                         <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
                     </t>
                 </select>
+                <div t-else="" class="text-danger">
+                    <span t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;= 0">Sold Out</span>
+                    <select t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;= 0"
+                            t-attf-name="nb_register-#{ticket.id}"
+                            class="custom-select">
+                        <t t-foreach="range(0, 10)" t-as="nb">
+                            <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                        </t>
+                    </select>
+                    <span t-if="ticket.is_expired">Expired</span>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="w-auto ml-auto">
+                    <select t-if="not ticket.is_expired and ticket.sale_available"
+                            t-attf-name="nb_register-#{ticket.id}"
+                            class="custom-select">
+                        <t t-set="seats_max_ticket" t-value="(not ticket.seats_limited or ticket.seats_available &gt; 9) and 10 or ticket.seats_available + 1"/>
+                        <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
+                        <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
+                        <t t-foreach="range(0, seats_max)" t-as="nb">
+                            <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                        </t>
+                    </select>
+                    <div t-else="" class="text-danger">
+                        <span t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched()" >Sold Out</span>
+                        <span t-if="ticket.is_expired">Expired</span>
+                    </div>
+                </div>
             </t>
         </xpath>
-        <!-- Single ticket view -->
-        <xpath expr="//t[@t-if='event.event_registrations_open']" position="replace">
-            <t t-if="event.event_registrations_open">
-                 <t t-if="not tickets.sale_available and not tickets.is_expired and event.waiting_list">
-                     <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
-                         <i class="fa fa-ban mr-2"/>Sold Out
-                     </span>
-                     <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
-                         <t t-foreach="range(0, 10)" t-as="nb">
-                             <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
-                         </t>
-                     </select>
-                 </t>
-                 <t t-else="">
-                     <span class="text-dark font-weight-bold align-middle pr-2">Qty</span>
-                     <link itemprop="availability" content="http://schema.org/InStock"/>
-                     <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
-                         <t t-set="seats_max_ticket" t-value="(not tickets or not tickets.seats_limited or tickets.seats_available &gt; 9) and 10 or tickets.seats_available + 1"/>
-                         <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
-                         <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event) if tickets else seats_max_event"/>
-                         <t t-foreach="range(0, seats_max)" t-as="nb">
-                             <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
-                         </t>
-                     </select>
-                 </t>
-             </t>
-        </xpath>
-
-        <!-- Replace submit buttons -->
+        <!-- Replace multi ticket view submit button -->
         <xpath expr="//div[@class='col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2']" position="replace">
             <div class="col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2">
-                <t t-if="event.waiting_list and event.event_registrations_open and event.seats_available &lt;=0">
+                <t t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)">
                     <button type="submit" name="waiting_list" class="btn btn-primary o_wait_lazy_js btn-block a-submit" t-attf-id="#{event.id}">
                         Join the waiting list
                     </button>
                 </t>
-                <t t-else="">
-                    <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" disabled="" t-attf-id="#{event.id}">
-                        Register
-                        <t t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2) and event.seats_available &gt; 0">
-                            (only <t t-esc="event.seats_available"/> available)
-                        </t>
-                    </button>
-                </t>
+                <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" disabled="" t-attf-id="#{event.id}">
+                    Register
+                    <t t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)">
+                        (only <t t-esc="event.seats_available"/> available)
+                    </t>
+                </button>
             </div>
         </xpath>
+
+
+        <!-- Single ticket view -->
+        <xpath expr="//t[@t-if='event.event_registrations_open']" position="replace">
+            <t t-if="event.event_registrations_open">
+                <t t-if="tickets">
+                    <t t-if="not tickets.sale_available and not tickets.is_expired and event.waiting_list">
+                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
+                            <i class="fa fa-ban mr-2"/>Sold Out
+                        </span>
+                        <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                            <t t-foreach="range(0, 10)" t-as="nb">
+                                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                            </t>
+                        </select>
+                    </t>
+                    <t t-else="">
+                        <span class="text-dark font-weight-bold align-middle pr-2">Qty</span>
+                        <link itemprop="availability" content="http://schema.org/InStock"/>
+                        <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                            <t t-set="seats_max_ticket" t-value="(not tickets or not tickets.seats_limited or tickets.seats_available &gt; 9) and 10 or tickets.seats_available + 1"/>
+                            <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
+                            <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event) if tickets else seats_max_event"/>
+                            <t t-foreach="range(0, seats_max)" t-as="nb">
+                                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                            </t>
+                        </select>
+                    </t>
+                </t>
+                <t t-else="">
+                    <t t-if="event.event_registrations_sold_out and event.waiting_list">
+                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
+                            <i class="fa fa-ban mr-2"/>Sold Out
+                        </span>
+                        <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                            <t t-foreach="range(0, 10)" t-as="nb">
+                                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                            </t>
+                        </select>
+                    </t>
+                    <t t-else="">
+                        <span class="text-dark font-weight-bold align-middle pr-2">Qty</span>
+                        <link itemprop="availability" content="http://schema.org/InStock"/>
+                        <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                            <t t-set="seats_max_ticket" t-value="(not tickets or not tickets.seats_limited or tickets.seats_available &gt; 9) and 10 or tickets.seats_available + 1"/>
+                            <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
+                            <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event) if tickets else seats_max_event"/>
+                            <t t-foreach="range(0, seats_max)" t-as="nb">
+                                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                            </t>
+                        </select>
+                    </t>
+                </t>
+            </t>
+        </xpath>
+
+
         <xpath expr="//div[@class='col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0']" position="replace">
             <div class="col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0">
                 <t t-if="event.waiting_list and event.event_registrations_open and event.seats_available &lt;=0">
@@ -92,6 +139,16 @@
         </xpath>
     </template>
 
+    <!-- Modal to register for an event inherit -->
+    <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
+        <xpath expr="//t[@t-if='not availability_check']" position="replace">
+            <t t-if="not availability_check">
+                <div class="modal-body bg-light border-bottom">
+                    <strong><t t-esc="warning_msg"/></strong>
+                </div>
+            </t>
+        </xpath>
+    </template>
     <!-- Modal to join waiting list -->
     <template id="waiting_list_attendee_details" name="Waiting List Attendee Details">
         <div id="modal_attendees_waiting" class="modal fade" tabindex="-1" role="dialog">
@@ -105,7 +162,7 @@
                         </div>
                         <t t-set="counter_type" t-value="1"/>
                         <t t-set="counter" t-value="0"/>
-                        <t t-foreach="tickets" t-as="ticket">
+                        <t t-foreach="tickets" t-as="ticket" t-if="availability_check">
                             <t t-foreach="range(1, ticket['quantity'] + 1)" t-as="att_counter" name="attendee_loop">
                                 <t t-set="counter" t-value="counter + 1"/>
                                 <div class="modal-body bg-light border-bottom">
@@ -129,9 +186,14 @@
                             </t>
                             <t t-set="counter_type" t-value="counter_type + 1"/>
                         </t>
+                        <t t-if="not availability_check">
+                            <div class="modal-body bg-light border-bottom">
+                            <strong><t t-esc="warning_msg"/></strong>
+                        </div>
+                    </t>
                         <div class="modal-footer border-0 justify-content-between">
                             <button type="button" class="btn btn-secondary js_goto_event" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" t-if="waiting_list_check">Continue</button>
+                            <button type="submit" class="btn btn-primary" t-if="availability_check">Continue</button>
                         </div>
                     </div>
                 </form>
