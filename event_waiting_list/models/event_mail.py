@@ -123,7 +123,6 @@ class EventMailScheduler(models.Model):
                     (0, 0, {'registration_id': registration.id})
                     for registration in (mail.event_id.registration_ids - mail.mapped('mail_registration_ids.registration_id')) if registration.state == "wait"
                 ]
-                print(lines)
                 if lines:
                     mail.write({'mail_registration_ids': lines})
                 # execute scheduler on waiting list registrations
