@@ -151,6 +151,7 @@ class EventEvent(models.Model):
     def _compute_event_registrations_open(self):
         """ Compute whether people may take registrations for this event
           * event.date_end -> if event is done, registrations are not open anymore;
+          * event.
           * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
             is False if no ticket are defined, see _compute_start_sale_date);
           * any ticket is available for sale (seats available) if any;
@@ -167,30 +168,30 @@ class EventEvent(models.Model):
                 (not event.event_ticket_ids or any(ticket.sale_available for ticket in event.event_ticket_ids) if not event.waiting_list else True)
 
     # 5. Constraints and onchanges
-    @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
-    def _check_seats_limit(self):
-        """ Raise validation error if no waiting list and seats are full """
-        if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
-            raise ValidationError(_('No more available seats.'))
+    # @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
+    # def _check_seats_limit(self):
+    #     """ Raise validation error if no waiting list and seats are full """
+    #     if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
+    #         raise ValidationError(_('No more available seats.'))
 
-    @api.constrains('has_seats_limitation', 'seats_max', 'seats_expected', 'event_ticket_ids')
-    def _check_seats_max(self):
-        """
-        Raise validation error if maximum seats is less than reserved seats.
-        Or maximum seats for event and ticket do not match.
-        """
-        for event in self:
-            if event.seats_limited:
-                if event.seats_max < event.seats_expected:
-                    raise ValidationError(_('Maximum seats cannot be less than reserved seats.'))
-                if event.event_ticket_ids:
-                    ticket_max_seats = 0
-                    for ticket in event.event_ticket_ids:
-                        if ticket.seats_max < ticket.seats_unconfirmed + ticket.seats_reserved + ticket.seats_used:
-                            raise ValidationError(_('Ticket maximum seats cannot be less than ticket reserved seats.'))
-                        ticket_max_seats += ticket.seats_max
-                    if ticket_max_seats != event.seats_max:
-                        raise ValidationError(_('Maximum seats have to be equal to the maximum seats of tickets combined.'))
+    # @api.constrains('has_seats_limitation', 'seats_max', 'seats_expected', 'event_ticket_ids')
+    # def _check_seats_max(self):
+    #     """
+    #     Raise validation error if maximum seats is less than reserved seats.
+    #     Or maximum seats for event and ticket do not match.
+    #     """
+    #     for event in self:
+    #         if event.seats_limited:
+    #             if event.seats_max < event.seats_expected:
+    #                 raise ValidationError(_('Maximum seats cannot be less than reserved seats.'))
+    #             if event.event_ticket_ids:
+    #                 ticket_max_seats = 0
+    #                 for ticket in event.event_ticket_ids:
+    #                     if ticket.seats_max < ticket.seats_unconfirmed + ticket.seats_reserved + ticket.seats_used:
+    #                         raise ValidationError(_('Ticket maximum seats cannot be less than ticket reserved seats.'))
+    #                     ticket_max_seats += ticket.seats_max
+    #                 if ticket_max_seats != event.seats_max:
+    #                     raise ValidationError(_('Maximum seats have to be equal to the maximum seats of tickets combined.'))
 
     @api.constrains('seats_limited', 'waiting_list')
     def _check_waiting_list(self):

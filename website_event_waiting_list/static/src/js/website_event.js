@@ -10,23 +10,25 @@ odoo.define('website_event_waiting_list.website_event', function (require) {
     var EventWaitingForm = WebsiteEvent.include({
         /**
          * @override
+         * @param {Event} ev
          */
         on_click: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
             var $form = $(ev.currentTarget).closest('form');
             var $button = $(ev.currentTarget).closest('[type="submit"]');
-            var waiting_list = false;
-            if ($($button).attr('name') == "waiting_list") {
-                waiting_list = true;
-            }
             var post = {};
+            var waiting_list_button = false;
+            if ($($button).attr('name') == "waiting_list_button") {
+                waiting_list_button = true;
+                post['waiting_list_button'] = "True";
+            }
             $('#registration_form table').siblings('.alert').remove();
             $('#registration_form select').each(function () {
                 post[$(this).attr('name')] = $(this).val();
             });
             var tickets_ordered = _.some(_.map(post, function (value, key) { return parseInt(value); }));
-            if (!tickets_ordered && !waiting_list) {
+            if (!tickets_ordered) {
                 $('<div class="alert alert-info"/>')
                     .text(_t('Please select at least one ticket.'))
                     .insertAfter('#registration_form table');
@@ -48,9 +50,6 @@ odoo.define('website_event_waiting_list.website_event', function (require) {
                 });
             }
         },
-        // $('#confirm_waiting_modal').on('show.bs.modal', function(e) {
-
-        // })
     });
     return EventWaitingForm;
 });

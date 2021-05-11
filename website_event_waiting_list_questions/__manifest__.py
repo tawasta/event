@@ -30,6 +30,7 @@
     "installable": True,
     "depends": [
         "website_event_questions",
+        "website_event_waiting_list",
     ],
     "data": [
         "views/event_templates.xml",

@@ -3,7 +3,7 @@
     <!-- Confirm registration from waiting list views -->
     <template id="confirm_waiting" name="Confirm Waiting List">
         <t t-call="website_event.layout">
-            <t t-if="registration.state == 'wait' and event.seats_available >= 1">
+            <t t-if="registration.state == 'wait' and (event.seats_limited and event.seats_available >= 1 or not event.seats_limited) and (not ticket or not ticket.seats_max or ticket.seats_max and ticket.seats_available >= 1)">
                 <div class="container my-5 o_wereg_confirmed">
                     <div class="row mb-3">
                         <div class="col-12">
