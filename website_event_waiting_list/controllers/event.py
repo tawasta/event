@@ -156,6 +156,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                 render_values = {
                     'event': event,
                     'registration': registration,
+                    'ticket': registration.event_ticket_id,
                 }
                 if post:
                     new_state = post.get("new_state")
