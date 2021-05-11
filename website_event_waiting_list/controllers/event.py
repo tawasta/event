@@ -68,7 +68,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                         if not availability_check and waiting_list_check and ticket.seats_available > 0 and event.seats_available > 0:
                             warning_msg = "You tried to join a waiting list for a ticket that has available seats"
                             waiting_list_check = False
-                        if availability_check and not waiting_list_check and ticket.seats_available <= 0:
+                        if availability_check and not waiting_list_check and ticket.seats_max and ticket.seats_available <= 0:
                             warning_msg = "You tried to order a ticket that is sold out"
                             availability_check = False
                     ordered_seats += ticket_dict['quantity']
@@ -99,10 +99,10 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             for registration in registrations:
                 if ticket.id == registration['event_ticket_id']:
                     ticket_count += 1
-            if not waiting_list_check and ticket_count > ticket.seats_available:
-                return request.render("website.page_404")
-        if not waiting_list_check and len(registrations) > event.seats_available:
-            return request.render("website.page_404")
+            if not waiting_list_check and ticket.seats_max and ticket_count > ticket.seats_available:
+                return request.render("website_event_waiting_list.registration_fail", {'warning_msg': "You tried to order more tickets than tickets available.", 'event': event})
+        if not waiting_list_check and event.seats_limited and len(registrations) > event.seats_available:
+            return request.render("website_event_waiting_list.registration_fail", {'warning_msg': "You tried to order more tickets than available seats.", 'event': event})
 
         attendees_sudo = self._create_attendees_from_registration_post(event, registrations)
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 12:05+0000\n"
-"PO-Revision-Date: 2021-05-05 12:05+0000\n"
+"POT-Creation-Date: 2021-05-11 08:26+0000\n"
+"PO-Revision-Date: 2021-05-11 08:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgstr "Vahvistettu"
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__create_uid
 msgid "Created by"
-msgstr "Luoja"
+msgstr "Luonut"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__create_date
@@ -228,20 +228,6 @@ msgid "Mail Scheduling on Event Category"
 msgstr "Sähköpostien aikataulutus Tapahtuman Kategoriaan"
 
 #. module: event_waiting_list
-#: code:addons/event_waiting_list/models/event_event.py:0
-#, python-format
-msgid "Maximum seats cannot be less than reserved seats."
-msgstr "Paikkojen maksimimäärä ei voi olla vähemmän kuin jo varattujen paikkojen määrä."
-
-#. module: event_waiting_list
-#: code:addons/event_waiting_list/models/event_event.py:0
-#, python-format
-msgid ""
-"Maximum seats have to be equal to the maximum seats of tickets combined."
-msgstr ""
-"Paikkojen maksimimäärän pitää olla sama kuin lippujen paikkojen maksimimäärä yhteensä."
-
-#. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_registration_form_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.view_event_registration_tree_waiting_list
 msgid "Move to Waiting List"
@@ -254,19 +240,18 @@ msgid "No more available seats for this ticket."
 msgstr "Vapaita paikkoja ei ole enää jäljellä tälle lipulle."
 
 #. module: event_waiting_list
-#: code:addons/event_waiting_list/models/event_event.py:0
-#, python-format
-msgid "No more available seats."
-msgstr "Vapaita paikkoja ei ole enää jäljellä."
-
-#. module: event_waiting_list
-#: code:addons/event_waiting_list/models/event_registration.py:0
-#: code:addons/event_waiting_list/models/event_registration.py:0
 #: code:addons/event_waiting_list/models/event_registration.py:0
 #: code:addons/event_waiting_list/models/event_registration.py:0
 #, python-format
 msgid "No more seats available for this event."
 msgstr "Vapaita paikkoja ei ole enää jäljellä tähän tapahtumaan."
+
+#. module: event_waiting_list
+#: code:addons/event_waiting_list/models/event_registration.py:0
+#: code:addons/event_waiting_list/models/event_registration.py:0
+#, python-format
+msgid "No more seats available for this ticket."
+msgstr "Vapaita paikkoja ei ole enää jäljellä tälle lipulle."
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__confirm_url
@@ -314,12 +299,6 @@ msgstr "Lähetä ilmoittautumisen vahvistussähköposti"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__state
 msgid "Status"
 msgstr "Tila"
-
-#. module: event_waiting_list
-#: code:addons/event_waiting_list/models/event_event.py:0
-#, python-format
-msgid "Ticket maximum seats cannot be less than ticket reserved seats."
-msgstr "Lipun paikkojen maksimimäärä ei voi olla vähemmän kuin jo varattujen lipun paikkojen määrä."
 
 #. module: event_waiting_list
 #: model_terms:ir.ui.view,arch_db:event_waiting_list.event_event_ticket_view_tree_from_event_waiting_list
