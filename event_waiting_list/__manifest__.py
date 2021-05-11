@@ -21,7 +21,7 @@
 {
     "name": "Event Waiting List",
     "summary": "Register to Events through waiting list",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.2",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

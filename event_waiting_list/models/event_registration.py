@@ -79,7 +79,7 @@ class EventRegistration(models.Model):
             if registration.event_id.seats_limited and registration.event_id.seats_max and registration.event_id.seats_available < (1 if registration.state == 'draft' else 0):
                 if not registration.event_id.waiting_list:
                     raise ValidationError(_('No more seats available for this event.'))
-                elif registration.event_id.waiting_list and registration.state not in ['draft', 'wait']:
+                if registration.event_id.waiting_list and registration.state not in ['draft', 'wait']:
                     raise ValidationError(_('No more seats available for this event.'))
 
     @api.constrains('event_ticket_id', 'state')
@@ -91,9 +91,9 @@ class EventRegistration(models.Model):
         for registration in self:
             if registration.event_ticket_id.seats_max and registration.event_ticket_id.seats_available < 0:
                 if not registration.event_ticket_id.waiting_list:
-                    raise ValidationError(_('No more seats available for this event.'))
-                elif registration.event_ticket_id.waiting_list and registration.state not in ['draft', 'wait']:
-                    raise ValidationError(_('No more seats available for this event.'))
+                    raise ValidationError(_('No more seats available for this ticket.'))
+                if registration.event_ticket_id.waiting_list and registration.state not in ['draft', 'wait']:
+                    raise ValidationError(_('No more seats available for this ticket.'))
 
     # 6. CRUD methods
     @api.model_create_multi
@@ -136,7 +136,7 @@ class EventRegistration(models.Model):
 
     def _check_waiting_list(self):
         if any(not registration.event_id.waiting_list or
-               (registration.event_id.seats_available >= 1) for registration in self):
+               (registration.event_id.seats_available >= 1 and registration.event_ticket_id.seats_available >= 1) for registration in self):
             return False
         return True
 
@@ -144,7 +144,7 @@ class EventRegistration(models.Model):
         if self._context.get("skip_confirm"):
             return False
         if any(not registration.event_id.auto_confirm or
-               (registration.event_id.seats_available <= 0 and registration.event_id.seats_limited) for registration in self):
+               (registration.event_id.seats_available <= 0 and registration.event_id.seats_limited or registration.event_ticket_id.seats_available <= 0 and registration.event_ticket_id.seats_limited) for registration in self):
             return False
         return True
 

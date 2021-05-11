@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 13:08+0000\n"
-"PO-Revision-Date: 2021-04-22 13:08+0000\n"
+"POT-Creation-Date: 2021-05-11 08:29+0000\n"
+"PO-Revision-Date: 2021-05-11 08:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,23 +18,20 @@ msgstr ""
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
 msgid "(only"
-msgstr ""
+msgstr "(vain"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
 msgid "(ref:"
-msgstr ""
+msgstr "(viite:"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
 msgid "<b>Start</b>"
 msgstr "<b>Alkaa</b>"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
 msgid "<br/> <b>End</b>"
 msgstr "<br/> <b>Loppuu</b>"
 
@@ -61,7 +58,7 @@ msgstr "<i class=\"fa fa-fw fa-check\"/> Vahvista ilmoittautuminen"
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
 msgid "<span aria-label=\"Close\">&amp;times;</span>"
-msgstr ""
+msgstr "<span aria-label=\"Sulje\">&amp;times;</span>"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
@@ -72,23 +69,12 @@ msgstr "<span class=\"text-dark font-weight-bold align-middle pr-2\">Määrä</s
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
 msgid ""
 "<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
-"                         <i class=\"fa fa-ban mr-2\"/>Sold Out\n"
-"                     </span>"
+"                            <i class=\"fa fa-ban mr-2\"/>Sold Out\n"
+"                        </span>"
 msgstr ""
 "<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
 "                         <i class=\"fa fa-ban mr-2\"/>Loppuunmyyty\n"
 "                     </span>"
-
-#. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
-msgid ""
-"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
-"                    <i class=\"fa fa-ban mr-2\"/>Sold Out\n"
-"                </span>"
-msgstr ""
-"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class=\"text-danger\">\n"
-"                    <i class=\"fa fa-ban mr-2\"/>Loppuunmyyty\n"
-"                </span>"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
@@ -96,13 +82,17 @@ msgid "Are you sure?"
 msgstr "Oletko varma?"
 
 #. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_attendee_details
+msgid "Attendees"
+msgstr "Osallistujat"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_attendee_details
 msgid "Attendees for waiting list"
-msgstr "Jonotuslistaan ilmoittautujat"
+msgstr "Osallistujat jonotuslistaan"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -113,7 +103,6 @@ msgstr "Peruuta ilmoittautuminen"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
 msgid "Close"
 msgstr "Sulje"
 
@@ -128,7 +117,7 @@ msgid "Confirm registration to"
 msgstr "Vahvista ilmoittautuminen"
 
 #. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_attendee_details
 msgid "Continue"
 msgstr "Jatka"
 
@@ -138,14 +127,14 @@ msgid "Display Name"
 msgstr "Näyttönimi"
 
 #. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
-msgid "Email"
-msgstr "Sähköposti"
-
-#. module: website_event_waiting_list
 #: model:ir.model,name:website_event_waiting_list.model_event_event
 msgid "Event"
 msgstr "Tapahtuma"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "Expired"
+msgstr "Vanhentunut"
 
 #. module: website_event_waiting_list
 #: model:ir.model.fields,field_description:website_event_waiting_list.field_event_event__id
@@ -158,7 +147,7 @@ msgid "Join the waiting list"
 msgstr "Liity jonotuslistaan"
 
 #. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete
 msgid "Joined waiting list!"
 msgstr "Liityit jonotuslistaan!"
 
@@ -169,19 +158,8 @@ msgstr "Viimeksi muokattu"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_complete
 msgid "N/A"
 msgstr "Ei saatavilla"
-
-#. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
-msgid "Name"
-msgstr "Nimi"
-
-#. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
-msgid "Phone <small>(Optional)</small>"
-msgstr "Puhelin <small>(Valinnainen)</small>"
 
 #. module: website_event_waiting_list
 #. openerp-web
@@ -197,8 +175,14 @@ msgstr "Ilmoittaudu"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete
 msgid "Registration confirmed!"
 msgstr "Ilmoittautuminen vahvistettu!"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_fail
+msgid "Registration failed!"
+msgstr "Ilmoittautuminen epäonnistui!"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
@@ -211,9 +195,9 @@ msgid "Registrations for"
 msgstr "Ilmoittautumiset tapahtumaan"
 
 #. module: website_event_waiting_list
-#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.waiting_list_attendee_details
-msgid "Ticket #"
-msgstr "Lippu #"
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "Sold Out"
+msgstr "Loppuunmyyty"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
@@ -226,6 +210,11 @@ msgid "You are about to <strong>confirm</strong> your registration"
 msgstr "Olet <strong>vahvistamassa</strong> ilmoittautumisesi"
 
 #. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete
+msgid "You will be contacted if the event has more seats available."
+msgstr "Olemme sinuun yhteydessä, jos tapahtumaan on enemmän paikkoja saatavilla."
+
+#. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
 msgid "are fully booked!"
 msgstr "ovat loppuunmyyty!"
@@ -233,7 +222,7 @@ msgstr "ovat loppuunmyyty!"
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
 msgid "available)"
-msgstr ""
+msgstr "saatavilla)"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting

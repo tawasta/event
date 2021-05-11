@@ -60,8 +60,8 @@ class WaitingMailListWizard(models.TransientModel):
         registration_ids = self.registration_ids
         cur_app = request.env["event.registration"]
         for registration in registration_ids:
-            if registration.state != 'wait':
-                raise ValidationError(_('All selected registrations must be in the waiting list.'))
+            if registration.state != 'wait' or registration.event_id.seats_limited and (registration.event_id.seats_available < 1 or registration.event_ticket_id.seats_max and registration.event_ticket_id.seats_available < 1):
+                raise ValidationError(_('All selected registrations must be in the waiting list and the Event/Ticket needs to have available seats.'))
             msg_template = request.env.ref(
                 "event_waiting_list.event_waiting_registration"
             )
