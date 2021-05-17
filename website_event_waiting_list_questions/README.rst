@@ -5,7 +5,7 @@
 ====================================
 Website Event Waiting List Questions
 ====================================
-* Questions on eEvents when joining waiting list.
+* Questions on Events when joining waiting list.
 
 Configuration
 =============

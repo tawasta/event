@@ -24,10 +24,10 @@ Addons
      - 14.0.1.0.0
      - Translations for Events core
    * - `event_waiting_list <event_waiting_list/>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.2
      - Adds waiting list for events
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.2
      - Adds waiting list for website events
    * - `website_event_waiting_list_questions <website_event_waiting_list/>`_
      - 14.0.1.0.0

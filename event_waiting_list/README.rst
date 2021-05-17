@@ -15,10 +15,11 @@ Usage
 =====
 * Enable waiting list for an event by toggling it on event view.
 * When maximum attendees to an event is reached, further registrations go to a waiting list.
+* If tickets are used and ticket is sold out, registrations go to waiting list.
 
 Known issues / Roadmap
 ======================
-- website_event_sale module breaks waiting list logic.
+- No support for website_event_sale yet 
 
 Credits
 =======
