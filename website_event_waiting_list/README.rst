@@ -14,7 +14,7 @@ Configuration
 
 Usage
 =====
-\-
+* Enable waiting list for an event by toggling it and set maximum seats.
 
 Known issues / Roadmap
 ======================
