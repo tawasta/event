@@ -38,20 +38,28 @@ from odoo.exceptions import ValidationError
 class EventRegistration(models.Model):
 
     # 1. Private attributes
-    _inherit = 'event.registration'
+    _inherit = "event.registration"
 
     # 2. Fields declaration
     waiting_list = fields.Boolean(related="event_id.waiting_list", store=True)
-    state = fields.Selection([
-        ('draft', 'Unconfirmed'),
-        ('cancel', 'Cancelled'),
-        ('wait', 'Waiting'),
-        ('open', 'Confirmed'),
-        ('done', 'Attended')],
-                             string='Status', default='draft',
-                             readonly=True, copy=False, tracking=True)
+    state = fields.Selection(
+        [
+            ("draft", "Unconfirmed"),
+            ("cancel", "Cancelled"),
+            ("wait", "Waiting"),
+            ("open", "Confirmed"),
+            ("done", "Attended"),
+        ],
+        string="Status",
+        default="draft",
+        readonly=True,
+        copy=False,
+        tracking=True,
+    )
     confirm_url = fields.Char("Public link", compute="_compute_confirm_url")
-    access_token = fields.Char('Security Token', store=True, compute="_compute_access_token")
+    access_token = fields.Char(
+        "Security Token", store=True, compute="_compute_access_token"
+    )
 
     # 3. Default methods
 
@@ -61,7 +69,9 @@ class EventRegistration(models.Model):
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for registration in self:
             registration.confirm_url = urls.url_join(
-                base_url, "/event/%s/waiting-list/confirm/%s" % (registration.event_id.id, registration.access_token)
+                base_url,
+                "/event/%s/waiting-list/confirm/%s"
+                % (registration.event_id.id, registration.access_token),
             )
 
     def _compute_access_token(self):
@@ -69,31 +79,45 @@ class EventRegistration(models.Model):
             registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
-    @api.constrains('event_id', 'state')
+    @api.constrains("event_id", "state")
     def _check_seats_limit(self):
         """
         Raise validation error if no waiting list and seats are full
         Or if seats are full and trying to confirm a registration
         """
         for registration in self:
-            if registration.event_id.seats_limited and registration.event_id.seats_max and registration.event_id.seats_available < (1 if registration.state == 'draft' else 0):
+            if (
+                registration.event_id.seats_limited
+                and registration.event_id.seats_max
+                and registration.event_id.seats_available
+                < (1 if registration.state == "draft" else 0)
+            ):
                 if not registration.event_id.waiting_list:
-                    raise ValidationError(_('No more seats available for this event.'))
-                if registration.event_id.waiting_list and registration.state not in ['draft', 'wait']:
-                    raise ValidationError(_('No more seats available for this event.'))
+                    raise ValidationError(_("No more seats available for this event."))
+                if registration.event_id.waiting_list and registration.state not in [
+                    "draft",
+                    "wait",
+                ]:
+                    raise ValidationError(_("No more seats available for this event."))
 
-    @api.constrains('event_ticket_id', 'state')
+    @api.constrains("event_ticket_id", "state")
     def _check_ticket_seats_limit(self):
         """
         Raise validation error if no waiting list and seats are full
         Or if seats are full and trying to confirm a registration
         """
         for registration in self:
-            if registration.event_ticket_id.seats_max and registration.event_ticket_id.seats_available < 0:
+            if (
+                registration.event_ticket_id.seats_max
+                and registration.event_ticket_id.seats_available < 0
+            ):
                 if not registration.event_ticket_id.waiting_list:
-                    raise ValidationError(_('No more seats available for this ticket.'))
-                if registration.event_ticket_id.waiting_list and registration.state not in ['draft', 'wait']:
-                    raise ValidationError(_('No more seats available for this ticket.'))
+                    raise ValidationError(_("No more seats available for this ticket."))
+                if (
+                    registration.event_ticket_id.waiting_list
+                    and registration.state not in ["draft", "wait"]
+                ):
+                    raise ValidationError(_("No more seats available for this ticket."))
 
     # 6. CRUD methods
     @api.model_create_multi
@@ -110,7 +134,7 @@ class EventRegistration(models.Model):
         registrations = registrations.with_context(skip_confirm=False)
         for registration in registrations:
             if not registration.access_token:
-                registration.sudo().write({'access_token': str(uuid.uuid4())})
+                registration.sudo().write({"access_token": str(uuid.uuid4())})
         if registrations._check_auto_confirmation():
             registrations.sudo().action_confirm()
         elif registrations._check_waiting_list():
@@ -120,31 +144,57 @@ class EventRegistration(models.Model):
     def write(self, vals):
         """ Auto-trigger mail schedulers on state writes """
         ret = super(EventRegistration, self).write(vals)
-        if vals.get('state') == 'open':
-            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
+        print("####################################################")
+        print(vals)
+        if vals.get("state") == "cancel":
+            print("Cancel email scheduler")
+            onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
+                lambda s: s.interval_type == "after_seats_available"
+            )
             onsubscribe_schedulers.sudo().execute()
-        if vals.get('state') == 'wait':
-            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_wait')
+        if vals.get("state") == "open":
+            onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
+                lambda s: s.interval_type == "after_sub"
+            )
+            onsubscribe_schedulers.sudo().execute()
+        if vals.get("state") == "wait":
+            onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
+                lambda s: s.interval_type == "after_wait"
+            )
             onsubscribe_schedulers.sudo().execute()
         return ret
 
     # 7. Action methods
     def action_waiting(self):
         if not self.event_id.waiting_list:
-            raise ValidationError(_('Waiting list for this event is not enabled.'))
-        self.write({'state': 'wait'})
+            raise ValidationError(_("Waiting list for this event is not enabled."))
+        self.write({"state": "wait"})
 
     def _check_waiting_list(self):
-        if any(not registration.event_id.waiting_list or
-               (registration.event_id.seats_available >= 1 and registration.event_ticket_id.seats_available >= 1) for registration in self):
+        if any(
+            not registration.event_id.waiting_list
+            or (
+                registration.event_id.seats_available >= 1
+                and registration.event_ticket_id.seats_available >= 1
+            )
+            for registration in self
+        ):
             return False
         return True
 
     def _check_auto_confirmation(self):
         if self._context.get("skip_confirm"):
             return False
-        if any(not registration.event_id.auto_confirm or
-               (registration.event_id.seats_available <= 0 and registration.event_id.seats_limited or registration.event_ticket_id.seats_available <= 0 and registration.event_ticket_id.seats_limited) for registration in self):
+        if any(
+            not registration.event_id.auto_confirm
+            or (
+                registration.event_id.seats_available <= 0
+                and registration.event_id.seats_limited
+                or registration.event_ticket_id.seats_available <= 0
+                and registration.event_ticket_id.seats_limited
+            )
+            for registration in self
+        ):
             return False
         return True
 
