@@ -24,8 +24,7 @@ import pytz
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api, _
-from odoo.exceptions import ValidationError
+from odoo import fields, models, api
 
 # 4. Imports from Odoo modules:
 
@@ -43,7 +42,6 @@ class EventType(models.Model):
         string="Enable Waiting List",
         help="Enable waiting list when attendee limit is reached.",
         default=True,
-        # store=True,
     )
 
     # 3. Default methods
@@ -97,7 +95,7 @@ class EventType(models.Model):
                             "interval_unit": "now",
                             "interval_type": "after_seats_available",
                             "template_id": self.env.ref(
-                                "event_waiting_list.event_waiting"
+                                "event_waiting_list.event_confirm_waiting_registration"
                             ).id,
                         },
                     ),
@@ -166,13 +164,31 @@ class EventEvent(models.Model):
             for event_id, state, num in res:
                 results[event_id][state_field[state]] += num
 
-        # compute seats_available
+        # compute seats_available and send automatic mail to waiting list
+        # if waiting list enabled and more seats become available
         for event in self:
             event.update(results.get(event._origin.id or event.id, base_vals))
             if event.seats_max > 0:
                 event.seats_available = event.seats_max - (
                     event.seats_reserved + event.seats_used
                 )
+                now = fields.Datetime.now()
+                # write "after_seats_available" mail as not sent
+                # if seats become unavailable
+                todo = self.mapped("event_mail_ids.mail_registration_ids").filtered(
+                    lambda reg_mail: reg_mail.mail_sent
+                    and reg_mail.registration_id.state == "wait"
+                    and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
+                    and reg_mail.scheduler_id.notification_type == "mail"
+                    and reg_mail.scheduler_id.interval_type == "after_seats_available"
+                    and not reg_mail.registration_id.waiting_list_to_confirm
+                )
+                todo.write({"mail_sent": False})
+                # send "after_seats_available" mail to waiting_list
+                onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
+                    lambda s: s.interval_type == "after_seats_available"
+                )
+                onsubscribe_schedulers.sudo().execute()
 
     @api.depends("event_type_id", "waiting_list")
     def _compute_waiting_list(self):
@@ -232,31 +248,6 @@ class EventEvent(models.Model):
             )
 
     # 5. Constraints and onchanges
-    # @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
-    # def _check_seats_limit(self):
-    #     """ Raise validation error if no waiting list and seats are full """
-    #     if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
-    #         raise ValidationError(_('No more available seats.'))
-
-    # @api.constrains('has_seats_limitation', 'seats_max', 'seats_expected', 'event_ticket_ids')
-    # def _check_seats_max(self):
-    #     """
-    #     Raise validation error if maximum seats is less than reserved seats.
-    #     Or maximum seats for event and ticket do not match.
-    #     """
-    #     for event in self:
-    #         if event.seats_limited:
-    #             if event.seats_max < event.seats_expected:
-    #                 raise ValidationError(_('Maximum seats cannot be less than reserved seats.'))
-    #             if event.event_ticket_ids:
-    #                 ticket_max_seats = 0
-    #                 for ticket in event.event_ticket_ids:
-    #                     if ticket.seats_max < ticket.seats_unconfirmed + ticket.seats_reserved + ticket.seats_used:
-    #                         raise ValidationError(_('Ticket maximum seats cannot be less than ticket reserved seats.'))
-    #                     ticket_max_seats += ticket.seats_max
-    #                 if ticket_max_seats != event.seats_max:
-    #                     raise ValidationError(_('Maximum seats have to be equal to the maximum seats of tickets combined.'))
-
     @api.constrains("seats_limited", "waiting_list")
     def _check_waiting_list(self):
         """ Turn off waiting list if seats are not limited """

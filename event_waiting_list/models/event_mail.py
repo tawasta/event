@@ -136,7 +136,6 @@ class EventMailScheduler(models.Model):
     def execute(self):
         for mail in self:
             now = fields.Datetime.now()
-            print(mail.interval_type)
             if mail.interval_type in [
                 "after_sub",
                 "after_wait",
@@ -158,17 +157,11 @@ class EventMailScheduler(models.Model):
                     )
                     or (
                         mail.interval_type == "after_seats_available"
-                        and registration.state == "wait"
-                        and registration.event_id.seats_available >= 1
-                        and (
-                            not registration.event_ticket_id
-                            or registration.event_ticket_id.seats_available >= 1
-                        )
+                        and registration.waiting_list_to_confirm
                     )
                 ]
                 if lines:
                     mail.write({"mail_registration_ids": lines})
-                    print(lines)
                 # execute scheduler on open registrations
                 mail.mail_registration_ids.execute()
 
@@ -216,7 +209,6 @@ class EventMailRegistration(models.Model):
             and reg_mail.scheduler_id.notification_type == "mail"
         )
         for reg_mail in todo:
-            print(reg_mail)
             reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
         todo.write({"mail_sent": True})
 
