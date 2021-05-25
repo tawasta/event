@@ -9,20 +9,104 @@
             <field name="email_from">${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
             <field name="email_to">${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
             <field name="body_html" type="html">
-                <div>
-                    Dear ${object.name},<br/>
-                    Thank you for your inquiry.<br/>
-                    The event: ${object.event_id.name}, is currently sold out.<br/>
-                    You have been placed on a waiting list. We will contact you if any tickets are available.
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">Your registration to waiting list</span>
+                                                        <br/>
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                        ${object.name}
+                    </span>
+                                                    </td>
+                                                    <td valign="middle" align="right">
+                    % if is_online
+                    <a href="${object.event_id.website_url}" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                        View Event
+                    </a>
+                    % else
+                    <img src="${'/logo.png?company=%s' % object.company_id.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${'%s' % object.company_id.name}"/>
+                    % endif
+                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- EVENT WAITING DESCRIPTION -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 14px;">
+                                                        <div>
+                                                                Hello ${object.name or ''},<br/><br/>
+                    Thank you for your interest in our event.<br/>
+                    % if object.event_ticket_id:
+                        The ticket <i>${object.event_ticket_id.name}</i> for event <i>${object.event_id.name}</i>, is currently sold out.<br/>
+                    % else
+                    The event <i>${object.event_id.name}</i>, is currently sold out.<br/>
+                    % endif
+                        You have been placed on a waiting list. We will contact you if any tickets are available.<br/>
+                        <br/>
+                    To cancel your position in the waiting list follow the link below:
+                    <a href="${object.confirm_url}"/><br/>
+                        <div style="margin: 16px 0px 16px 0px;"><a href="${object.confirm_url}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                            Cancel here
+                        </a></div>
+                <br/>
                     If you have any questions, please let us know.
                     <br/><br/>
                     Thank you,
-                    % if object.event_id.user_id.signature:
                     <br/>
-                    ${object.event_id.user_id.signature | safe}
+                    % if object.event_id.organizer_id.name:
+                    ${object.event_id.organizer_id.name}
+                    % else
+                    The ${object.event_id.name} Team
                     % endif
-                </div>
+            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FOOTER BY -->
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+    % if object.company_id
+    <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"><tr><td style="text-align: center; font-size: 14px;">
+        Sent by <a target="_blank" href="${object.company_id.website}" style="color: #875A7B;">${object.company_id.name}</a>
+        % if is_online:
+        <br/>
+        Discover <a href="/event" style="text-decoration:none;color:#717188;">all our events</a>.
+        % endif
+      </td></tr></table>
+    % endif
+</td>
+                    </tr>
+                </table>
             </field>
+            <field name="lang">${object.partner_id.lang}</field>
         </record>
         <!-- Email when placed on a waiting list -->
         <record id="event_confirm_waiting_registration" model="mail.template">
@@ -32,10 +116,55 @@
             <field name="email_from">${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
             <field name="email_to">${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
             <field name="body_html" type="html">
-                <div>
-                    Dear ${object.name},<br/>
-                    We have more seats available for: ${object.event_id.name}.<br/>
-                    Claim your spot quickly as we give seats on a first come first serve basis.<br/>
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">Your registration to waiting list</span>
+                                                        <br/>
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                        ${object.name}
+                    </span>
+                                                    </td>
+                                                    <td valign="middle" align="right">
+                    % if is_online
+                    <a href="${object.event_id.website_url}" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                        View Event
+                    </a>
+                    % else
+                    <img src="${'/logo.png?company=%s' % object.company_id.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${'%s' % object.company_id.name}"/>
+                    % endif
+                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- EVENT WAITING DESCRIPTION -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 14px;">
+                                                        <div>
+                                                                Hello ${object.name},<br/><br/>
+                    % if object.event_ticket_id:
+                    We have more seats available for the ticket <i>${object.event_ticket_id.name}</i> for the event <i>${object.event_id.name}</i>.<br/>
+                    % else
+                    We have more seats available for the event <i>${object.event_id.name}</i>.<br/>
+                    % endif
+                        Claim your spot quickly as we give seats on a first come first serve basis.<br/><br/>
                     Claim or cancel here: 
                     <a href="${object.confirm_url}"/><br/>
                         <div style="margin: 16px 0px 16px 0px;"><a href="${object.confirm_url}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
@@ -43,11 +172,42 @@
                         </a></div>
                     <br/><br/>
                     Thank you,
-                    % if object.event_id.user_id.signature:
                     <br/>
-                    ${object.event_id.user_id.signature | safe}
+                    % if object.event_id.organizer_id.name:
+                    ${object.event_id.organizer_id.name}
+                    % else
+                    The ${object.event_id.name} Team
                     % endif
                 </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FOOTER BY -->
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+    % if object.company_id
+    <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"><tr><td style="text-align: center; font-size: 14px;">
+        Sent by <a target="_blank" href="${object.company_id.website}" style="color: #875A7B;">${object.company_id.name}</a>
+        % if 'website_url' in object.event_id and object.event_id.website_url:
+        <br/>
+        Discover <a href="/event" style="text-decoration:none;color:#717188;">all our events</a>.
+        % endif
+      </td></tr></table>
+    % endif
+</td>
+                    </tr>
+                </table>
             </field>
         </record>
     </data>
