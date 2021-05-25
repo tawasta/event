@@ -203,12 +203,23 @@ class EventMailRegistration(models.Model):
     def execute(self):
         now = fields.Datetime.now()
         todo = self.filtered(
-            lambda reg_mail: not reg_mail.mail_sent
-            and reg_mail.registration_id.state in ["open", "done", "wait"]
-            and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
-            and reg_mail.scheduler_id.notification_type == "mail"
+            lambda reg_mail: (
+                not reg_mail.mail_sent
+                and reg_mail.registration_id.state in ["open", "done", "wait"]
+                and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
+                and reg_mail.scheduler_id.notification_type == "mail"
+                and reg_mail.scheduler_id.interval_type != "after_seats_available"
+            )
+            or (
+                reg_mail.scheduler_id.interval_type == "after_seats_available"
+                and reg_mail.registration_id.waiting_list_to_confirm
+                and not reg_mail.mail_sent
+                and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
+                and reg_mail.scheduler_id.notification_type == "mail"
+            )
         )
         for reg_mail in todo:
+            print("mail", reg_mail.registration_id.name)
             reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
         todo.write({"mail_sent": True})
 

@@ -172,19 +172,20 @@ class EventEvent(models.Model):
                 event.seats_available = event.seats_max - (
                     event.seats_reserved + event.seats_used
                 )
-                now = fields.Datetime.now()
                 # write "after_seats_available" mail as not sent
                 # if seats become unavailable
                 todo = self.mapped("event_mail_ids.mail_registration_ids").filtered(
                     lambda reg_mail: reg_mail.mail_sent
                     and reg_mail.registration_id.state == "wait"
-                    and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
                     and reg_mail.scheduler_id.notification_type == "mail"
                     and reg_mail.scheduler_id.interval_type == "after_seats_available"
+                    and reg_mail.mail_sent
                     and not reg_mail.registration_id.waiting_list_to_confirm
                 )
                 todo.write({"mail_sent": False})
-                # send "after_seats_available" mail to waiting_list
+
+                # try to send "after_seats_available" mail to waiting_list
+                # validation is done once more in execute
                 onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
                     lambda s: s.interval_type == "after_seats_available"
                 )
