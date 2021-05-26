@@ -49,18 +49,13 @@ class EventRegistration(models.Model):
         compute="_compute_available_to_confirm",
     )
     state = fields.Selection(
-        [
+        selection_add=[
             ("draft", "Unconfirmed"),
             ("cancel", "Cancelled"),
             ("wait", "Waiting"),
             ("open", "Confirmed"),
             ("done", "Attended"),
-        ],
-        string="Status",
-        default="draft",
-        readonly=True,
-        copy=False,
-        tracking=True,
+        ]
     )
     confirm_url = fields.Char("Public link", compute="_compute_confirm_url")
     access_token = fields.Char(

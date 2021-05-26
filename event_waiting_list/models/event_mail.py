@@ -50,19 +50,14 @@ class EventTypeMail(models.Model):
 
     # 2. Fields declaration
     interval_type = fields.Selection(
-        [
-            ("after_sub", "After each registration"),
+        selection_add=[
             ("after_wait", "After registering to waiting list"),
             (
                 "after_seats_available",
                 "After more seats are available send to waiting list registrations",
             ),
-            ("before_event", "Before the event"),
-            ("after_event", "After the event"),
         ],
-        string="Trigger",
-        default="before_event",
-        required=True,
+        ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},
     )
 
     # 3. Default methods
@@ -88,19 +83,14 @@ class EventMailScheduler(models.Model):
 
     # 2. Fields declaration
     interval_type = fields.Selection(
-        [
-            ("after_sub", "After each registration"),
+        selection_add=[
             ("after_wait", "After registering to waiting list"),
             (
                 "after_seats_available",
                 "After more seats are available send to waiting list registrations",
             ),
-            ("before_event", "Before the event"),
-            ("after_event", "After the event"),
         ],
-        string="Trigger",
-        default="before_event",
-        required=True,
+        ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},
     )
 
     # 3. Default methods
