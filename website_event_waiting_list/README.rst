@@ -6,7 +6,7 @@
 Website Event Waiting List
 ==========================
 * This module extends the functionality of event_waiting_list to support registration through the website.
-* Ability to cancel and confirm registration from waiting list
+* Adds ability to cancel registrations and confirm registration from waiting list.
 
 Configuration
 =============
@@ -14,7 +14,7 @@ Configuration
 
 Usage
 =====
-* Enable waiting list for an event by toggling it and set maximum seats.
+\-
 
 Known issues / Roadmap
 ======================

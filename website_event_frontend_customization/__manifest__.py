@@ -19,19 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Website Event Waiting List",
-    "summary": "Register to events using waiting list through website.",
-    "version": "14.0.1.0.3",
+    "name": "Website Event Frontend Customization",
+    "summary": "Customization options to Website Event Frontends",
+    "version": "14.0.1.0.0",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://gitlab.com/tawasta/odoo/event/",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event", "event_waiting_list"],
-    "data": [
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_page_waiting_list.xml",
-        "views/assets.xml",
-    ],
+    "depends": ["website_event"],
+    "data": ["views/event_templates_page_registration.xml"],
 }

@@ -43,7 +43,9 @@ class WaitingMailListWizard(models.TransientModel):
     # 2. Fields declaration
     registration_ids = fields.Many2many(
         "event.registration",
-        default=lambda self: self.env['event.registration'].browse(self._context.get("active_ids")),
+        default=lambda self: self.env["event.registration"].browse(
+            self._context.get("active_ids")
+        ),
         string="Registrations",
     )
 
@@ -58,26 +60,16 @@ class WaitingMailListWizard(models.TransientModel):
     # 7. Action methods
     def send_confirmation_mail(self):
         registration_ids = self.registration_ids
-        cur_app = request.env["event.registration"]
         for registration in registration_ids:
-            if registration.state != 'wait' or registration.event_id.seats_limited and (registration.event_id.seats_available < 1 or registration.event_ticket_id.seats_max and registration.event_ticket_id.seats_available < 1):
-                raise ValidationError(_('All selected registrations must be in the waiting list and the Event/Ticket needs to have available seats.'))
+            if not registration.waiting_list_to_confirm:
+                raise ValidationError(
+                    _(
+                        "All selected registrations must be in the waiting list and the Event/Ticket needs to have available seats."
+                    )
+                )
             msg_template = request.env.ref(
-                "event_waiting_list.event_waiting_registration"
+                "event_waiting_list.event_confirm_waiting_registration"
             )
-            values = {
-                "email_to": registration.email,
-                "email_from": registration.event_id.organizer_id.email_formatted,
-                "subject": "We have available tickets for " + str(registration.event_id.name),
-            }
-            context = {
-                'name': registration.name,
-                'event': registration.event_id.name,
-                'confirm_url': registration.confirm_url,
-            }
-            msg_template.sudo().write(values)
-            msg_template.with_context(context).sudo().send_mail(
-                cur_app.id, force_send=True
-            )
+            msg_template.send_mail(registration.id)
 
     # 8. Business methods

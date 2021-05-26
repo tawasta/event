@@ -2,13 +2,10 @@
 <odoo>
     <template id="registration_template_waiting_list" inherit_id="website_event.registration_template">
         <!-- Replace event registration to add waiting list -->
-
         <!-- Multi ticket view -->
         <xpath expr="//div[@class='w-auto ml-auto']" position="replace">
             <t t-if="event.waiting_list">
-                <select t-if="not ticket.is_expired and ticket.sale_available and event.seats_available > 0"
-                        t-attf-name="nb_register-#{ticket.id}"
-                        class="custom-select">
+                <select t-if="not ticket.is_expired and ticket.sale_available and event.seats_available &gt; 0" t-attf-name="nb_register-#{ticket.id}" class="custom-select">
                     <t t-set="seats_max_ticket" t-value="(not ticket.seats_limited or ticket.seats_available &gt; 9) and 10 or ticket.seats_available + 1"/>
                     <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
                     <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
@@ -18,9 +15,7 @@
                 </select>
                 <div t-else="" class="text-danger">
                     <span t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;= 0">Sold Out</span>
-                    <select t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;= 0"
-                            t-attf-name="nb_register-#{ticket.id}"
-                            class="custom-select">
+                    <select t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;= 0" t-attf-name="nb_register-#{ticket.id}" class="custom-select">
                         <t t-foreach="range(0, 10)" t-as="nb">
                             <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
                         </t>
@@ -30,9 +25,7 @@
             </t>
             <t t-else="">
                 <div class="w-auto ml-auto">
-                    <select t-if="not ticket.is_expired and ticket.sale_available"
-                            t-attf-name="nb_register-#{ticket.id}"
-                            class="custom-select">
+                    <select t-if="not ticket.is_expired and ticket.sale_available" t-attf-name="nb_register-#{ticket.id}" class="custom-select">
                         <t t-set="seats_max_ticket" t-value="(not ticket.seats_limited or ticket.seats_available &gt; 9) and 10 or ticket.seats_available + 1"/>
                         <t t-set="seats_max_event" t-value="(not event.seats_limited or event.seats_available &gt; 9) and 10 or event.seats_available + 1"/>
                         <t t-set="seats_max" t-value="min(seats_max_ticket, seats_max_event)"/>
@@ -41,7 +34,7 @@
                         </t>
                     </select>
                     <div t-else="" class="text-danger">
-                        <span t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched()" >Sold Out</span>
+                        <span t-if="not ticket.sale_available and not ticket.is_expired and ticket.is_launched()">Sold Out</span>
                         <span t-if="ticket.is_expired">Expired</span>
                     </div>
                 </div>
@@ -70,14 +63,12 @@
                 </t>
             </div>
         </xpath>
-
         <!-- Single ticket view -->
         <xpath expr="//t[@t-if='event.event_registrations_open']" position="replace">
             <t t-if="event.event_registrations_open">
                 <t t-if="tickets">
                     <t t-if="not tickets.sale_available and not tickets.is_expired and event.waiting_list or event.waiting_list and event.seats_available &lt;= 0">
-                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
-                            <i class="fa fa-ban mr-2"/>Sold Out
+                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger"><i class="fa fa-ban mr-2"/>Sold Out
                         </span>
                         <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
                             <t t-foreach="range(0, 10)" t-as="nb">
@@ -100,8 +91,7 @@
                 </t>
                 <t t-else="">
                     <t t-if="event.event_registrations_sold_out and event.waiting_list">
-                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger">
-                            <i class="fa fa-ban mr-2"/>Sold Out
+                        <span itemprop="availability" content="http://schema.org/SoldOut" class="text-danger"><i class="fa fa-ban mr-2"/>Sold Out
                         </span>
                         <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
                             <t t-foreach="range(0, 10)" t-as="nb">
@@ -143,7 +133,6 @@
             </div>
         </xpath>
     </template>
-
     <!-- Modal to register for an event inherit to add waiting list -->
     <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
         <xpath expr="//h4[@class='modal-title']" position="replace">
@@ -160,7 +149,9 @@
         <xpath expr="//t[@t-if='not availability_check']" position="replace">
             <t t-if="not availability_check or not waiting_list_check">
                 <div class="modal-body bg-light border-bottom">
-                    <strong><t t-esc="warning_msg"/></strong>
+                    <strong>
+                        <t t-esc="warning_msg"/>
+                    </strong>
                 </div>
             </t>
         </xpath>
@@ -169,7 +160,6 @@
             <button type="submit" class="btn btn-primary" t-if="availability_check or waiting_list_check">Continue</button>
         </xpath>
     </template>
-
     <!-- Confirmation page add waiting list -->
     <template id="registration_complete" inherit_id="website_event.registration_complete">
         <xpath expr="//div[@class='col-12']" position="replace">
@@ -187,7 +177,6 @@
             </div>
         </xpath>
     </template>
-
     <!-- Redirect if registration fails -->
     <template id="registration_fail" name="Registration Fail">
         <t t-call="website_event.layout">
@@ -196,7 +185,9 @@
                     <div class="col-12">
                         <h3>Registration failed!</h3>
                         <span class="h4 text-muted" t-esc="event.name"/>
-                        <p class="py-2"><t t-esc="warning_msg"/></p>
+                        <p class="py-2">
+                            <t t-esc="warning_msg"/>
+                        </p>
                     </div>
                 </div>
             </div>
