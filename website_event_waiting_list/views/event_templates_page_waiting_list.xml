@@ -19,7 +19,7 @@
                         </t>
                         <t t-else="">
                             <h3>You are in a waiting list for event <t t-esc="event.name"/>.</h3>
-                            <p class="py-2">Cancel your registration here:</p>
+                            <p class="py-2">There are currently no seats available. If you wish to cancel your registration, click here:</p>
                         </t>
                     </div>
                 </div>
