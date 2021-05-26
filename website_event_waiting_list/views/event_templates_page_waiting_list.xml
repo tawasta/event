@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Confirm registration from waiting list views -->
+    <template id="confirm_waiting" name="Confirm Waiting List">
+        <t t-call="website_event.layout">
+            <div class="container my-5 o_wereg_confirmed">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <t t-if="registration.waiting_list_to_confirm">
+                            <h3>You are in a waiting list for event <t t-esc="event.name"/>.</h3>
+                            <p class="py-2">Confirm or cancel your registration here:</p>
+                        </t>
+                        <t t-elif="registration.state == 'cancel'">
+                            <h3>Your registration to <t t-esc="event.name"/> has been cancelled</h3>
+                        </t>
+                        <t t-elif="registration.state in ['open', 'done', 'draft']">
+                            <h3>You are registered to <t t-esc="event.name"/>.</h3>
+                            <p class="py-2">Cancel your registration here:</p>
+                        </t>
+                        <t t-else="">
+                            <h3>You are in a waiting list for event <t t-esc="event.name"/>.</h3>
+                            <p class="py-2">Cancel your registration here:</p>
+                        </t>
+                    </div>
+                </div>
+                <div class="mt-4 d-flex flex-column flex-md-row">
+                    <!-- Buttons trigger modals -->
+                    <t t-if="registration.waiting_list_to_confirm">
+                        <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0" data-toggle="modal" data-target="#confirm_waiting_modal"><i class="fa fa-fw fa-check"/> Confirm registration
+                            </button>
+                    </t>
+                    <t t-if="registration.state != 'cancel'">
+                        <button type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0" data-toggle="modal" data-target="#cancel_waiting_modal"><i class="fa fa-fw fa-check"/> Cancel registration
+                            </button>
+                    </t>
+                </div>
+                <div class="row mb-3 o_wereg_confirmed_attendees">
+                    <div class="col-md-4 col-xs-12 mt-3">
+                        <div class="d-flex flex-column">
+                            <span class="font-weight-bold">
+                                <t t-if="registration.name" t-esc="registration.name"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-envelope mr-2   "/>
+                                <t t-if="registration.email" t-esc="registration.email"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-phone mr-2"/>
+                                <t t-if="registration.phone" t-esc="registration.phone"/>
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span><i class="fa fa-ticket mr-2"/><t t-if="registration.event_ticket_id" t-esc="registration.event_ticket_id.name"/><t t-else="">N/A</t>
+                                    (ref: <t t-esc="registration.id"/>)
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <p>
+                            <b>Start</b>
+                            <span itemprop="startDate" t-esc="event.date_begin_located"/>
+                            <br/>
+                            <b>End</b>
+                            <span itemprop="endDate" t-esc="event.date_end_located"/>
+                        </p>
+                        <div class="mt-4">
+                            <h5 t-field="event.address_id" class="text-secondary font-weight-bold" t-options="{                                                                                                                   &quot;widget&quot;: &quot;contact&quot;,                                                                                                                   &quot;fields&quot;: [&quot;name&quot;]                                                                                                                   }"/>
+                            <a itemprop="location" t-att-href="event.google_map_link()" target="_BLANK" temprop="location" t-field="event.address_id" t-options="{                                                                                                                                                                      &quot;widget&quot;: &quot;contact&quot;,                                                                                                                                                                      &quot;fields&quot;: [&quot;address&quot;]                                                                                                                                                                      }"/>
+                            <div itemprop="location" t-field="event.address_id" t-options="{                                                                                                &quot;widget&quot;: &quot;contact&quot;,                                                                                                &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]                                                                                                }"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="confirm_waiting_modal" tabindex="-1" role="dialog" aria-labelledby="confirm_waiting_modal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form id="confirm-waiting-modal" t-attf-action="{{request.httprequest.path}}" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="modal-header">
+                                    <h4 class="modal-title hidden" id="delete_language_title">Confirm registration</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-label="Close">&amp;times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <p>You are about to <strong>confirm</strong> your registration</p>
+                                            <p>Are you sure?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button id="confirm-waiting" class="btn btn-primary" type="submit">Confirm registration</button>
+                                </div>
+                                <input type="hidden" name="new_state" t-attf-value="open"/>
+                                <input type="hidden" name="current_state" t-attf-value="{{registration.state}}"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="cancel_waiting_modal" tabindex="-1" role="dialog" aria-labelledby="cancel_waiting_modal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form id="cancel-waiting-modal" t-attf-action="{{request.httprequest.path}}" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <div class="modal-header">
+                                    <h4 class="modal-title hidden" id="delete_language_title">Cancel registration</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-label="Close">&amp;times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <p>You are about to <strong>cancel</strong> your registration</p>
+                                            <p>Are you sure?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button id="cancel-waiting" class="btn btn-primary" type="submit">Cancel registration</button>
+                                </div>
+                                <input type="hidden" name="new_state" t-attf-value="cancel"/>
+                                <input type="hidden" name="current_state" t-attf-value="{{registration.state}}"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -27,15 +27,18 @@ Addons
      - 14.0.1.0.2
      - Adds waiting list for events
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.0.2
+     - 14.0.1.0.3
      - Adds waiting list for website events
    * - `website_event_waiting_list_questions <website_event_waiting_list/>`_
      - 14.0.1.0.0
      - Adds questions when joining waiting list
+   * - `website_event_frontend_customization <website_event_frontend_customization>`_
+     - 14.0.1.0.0
+     - Frontend customizations under "Customize" menu
 
 Configuration
 =============
-Install modules
+- Module specific instructions in modules README
 
 Usage
 =====

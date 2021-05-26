@@ -54,31 +54,52 @@ class EventEvent(models.Model):
           * logged as visitor: check partner or visitor are linked to a
             registration;
         """
-        current_visitor = self.env['website.visitor']._get_visitor_from_request(force_create=False)
+        current_visitor = self.env["website.visitor"]._get_visitor_from_request(
+            force_create=False
+        )
         if self.env.user._is_public() and not current_visitor:
-            events = self.env['event.event']
+            events = self.env["event.event"]
         elif self.env.user._is_public():
-            events = self.env['event.registration'].sudo().search([
-                ('event_id', 'in', self.ids),
-                ('state', '!=', 'cancel'),
-                ('state', '!=', 'wait'),
-                ('visitor_id', '=', current_visitor.id),
-            ]).event_id
+            events = (
+                self.env["event.registration"]
+                .sudo()
+                .search(
+                    [
+                        ("event_id", "in", self.ids),
+                        ("state", "!=", "cancel"),
+                        ("state", "!=", "wait"),
+                        ("visitor_id", "=", current_visitor.id),
+                    ]
+                )
+                .event_id
+            )
         else:
             if current_visitor:
                 domain = [
-                    '|',
-                    ('partner_id', '=', self.env.user.partner_id.id),
-                    ('visitor_id', '=', current_visitor.id)
+                    "|",
+                    ("partner_id", "=", self.env.user.partner_id.id),
+                    ("visitor_id", "=", current_visitor.id),
                 ]
             else:
-                domain = [('partner_id', '=', self.env.user.partner_id.id)]
-            events = self.env['event.registration'].sudo().search(
-                expression.AND([
-                    domain,
-                    ['&', ('event_id', 'in', self.ids), ('state', '!=', 'cancel'), ('state', '!=', 'wait')]
-                ])
-            ).event_id
+                domain = [("partner_id", "=", self.env.user.partner_id.id)]
+            events = (
+                self.env["event.registration"]
+                .sudo()
+                .search(
+                    expression.AND(
+                        [
+                            domain,
+                            [
+                                "&",
+                                ("event_id", "in", self.ids),
+                                ("state", "!=", "cancel"),
+                                ("state", "!=", "wait"),
+                            ],
+                        ]
+                    )
+                )
+                .event_id
+            )
 
         for event in self:
             event.is_participating = event in events
