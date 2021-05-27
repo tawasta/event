@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Event seats -->
+    <template id="show_seats" inherit_id="website_event.event_description_full" active="False" customize_show="True" name="Show event seats">
+        <xpath expr="//div[@class='col-lg-4 bg-light shadow-sm d-print-none']//div[@class='o_wevent_sidebar_block'][1]" position="before">
+            <div id="show_seats" class="o_wevent_sidebar_block">
+                <h6 class="o_wevent_sidebar_title">Current seats</h6>
+                <p class="mb-2">Seats available: <t t-esc="event.seats_available"/></p>
+                <p class="mb-2">Seats expected: <t t-esc="event.seats_expected"/></p>
+            </div>
+        </xpath>
+    </template>
+</odoo>

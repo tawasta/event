@@ -21,17 +21,14 @@
 {
     "name": "Event Waiting List",
     "summary": "Register to Events through waiting list",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "event",
-        "mass_mailing",
-    ],
+    "depends": ["event", "mass_mailing"],
     "data": [
         "views/event_views.xml",
         "views/event_ticket_views.xml",

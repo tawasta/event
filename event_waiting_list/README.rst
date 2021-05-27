@@ -6,6 +6,7 @@
 Event Waiting List
 ==================
 * This module extends the functionality of events to support registration of attendees through a waiting list.
+* Adds a personal cancellation/confirm link to registration emails.
 
 Configuration
 =============
@@ -19,7 +20,7 @@ Usage
 
 Known issues / Roadmap
 ======================
-- No support for website_event_sale yet 
+- No support for website_event_sale yet
 
 Credits
 =======

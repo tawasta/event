@@ -24,8 +24,7 @@ import pytz
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api, _
-from odoo.exceptions import ValidationError
+from odoo import fields, models, api
 
 # 4. Imports from Odoo modules:
 
@@ -36,42 +35,71 @@ from odoo.exceptions import ValidationError
 
 class EventType(models.Model):
     # 1. Private attributes
-    _inherit = 'event.type'
+    _inherit = "event.type"
 
     # 2. Fields declaration
     waiting_list = fields.Boolean(
         string="Enable Waiting List",
         help="Enable waiting list when attendee limit is reached.",
         default=True,
-        # store=True,
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends('use_mail_schedule')
+    @api.depends("use_mail_schedule")
     def _compute_event_type_mail_ids(self):
         for template in self:
             if not template.use_mail_schedule:
                 template.event_type_mail_ids = [(5, 0)]
             elif not template.event_type_mail_ids:
-                template.event_type_mail_ids = [(0, 0, {
-                    'notification_type': 'mail',
-                    'interval_unit': 'now',
-                    'interval_type': 'after_sub',
-                    'template_id': self.env.ref('event.event_subscription').id,
-                }), (0, 0, {
-                    'notification_type': 'mail',
-                    'interval_unit': 'now',
-                    'interval_type': 'after_wait',
-                    'template_id': self.env.ref('event_waiting_list.event_waiting').id,
-                }), (0, 0, {
-                    'notification_type': 'mail',
-                    'interval_nbr': 10,
-                    'interval_unit': 'days',
-                    'interval_type': 'before_event',
-                    'template_id': self.env.ref('event.event_reminder').id,
-                })]
+                template.event_type_mail_ids = [
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_unit": "now",
+                            "interval_type": "after_sub",
+                            "template_id": self.env.ref("event.event_subscription").id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_unit": "now",
+                            "interval_type": "after_wait",
+                            "template_id": self.env.ref(
+                                "event_waiting_list.event_waiting"
+                            ).id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_nbr": 10,
+                            "interval_unit": "days",
+                            "interval_type": "before_event",
+                            "template_id": self.env.ref("event.event_reminder").id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_unit": "now",
+                            "interval_type": "after_seats_available",
+                            "template_id": self.env.ref(
+                                "event_waiting_list.event_confirm_waiting_registration"
+                            ).id,
+                        },
+                    ),
+                ]
 
     # 5. Constraints and onchanges
 
@@ -84,25 +112,27 @@ class EventType(models.Model):
 
 class EventEvent(models.Model):
     # 1. Private attributes
-    _inherit = 'event.event'
+    _inherit = "event.event"
 
     # 2. Fields declaration
     waiting_list = fields.Boolean(
         string="Enable Waiting List",
-        compute='_compute_waiting_list',
+        compute="_compute_waiting_list",
         help="Enable waiting list when attendee limit is reached.",
         readonly=False,
         store=True,
     )
     seats_waiting = fields.Integer(
         string="Seats on waiting list",
-        store=True, readonly=True, compute='_compute_seats'
+        store=True,
+        readonly=True,
+        compute="_compute_seats",
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends('seats_max', 'registration_ids.state')
+    @api.depends("seats_max", "registration_ids.state")
     def _compute_seats(self):
         """
         Determine reserved, available, reserved but unconfirmed,
@@ -110,13 +140,15 @@ class EventEvent(models.Model):
         """
         # initialize fields to 0
         for event in self:
-            event.seats_unconfirmed = event.seats_reserved = event.seats_used = event.seats_available = event.seats_waiting = 0
+            event.seats_unconfirmed = (
+                event.seats_reserved
+            ) = event.seats_used = event.seats_available = event.seats_waiting = 0
         # aggregate registrations by event and by state
         state_field = {
-            'draft': 'seats_unconfirmed',
-            'open': 'seats_reserved',
-            'done': 'seats_used',
-            'wait': 'seats_waiting',
+            "draft": "seats_unconfirmed",
+            "open": "seats_reserved",
+            "done": "seats_used",
+            "wait": "seats_waiting",
         }
         base_vals = dict((fname, 0) for fname in state_field.values())
         results = dict((event_id, dict(base_vals)) for event_id in self.ids)
@@ -126,19 +158,40 @@ class EventEvent(models.Model):
                         WHERE event_id IN %s AND state IN ('draft', 'open', 'done', 'wait')
                         GROUP BY event_id, state
                         """
-            self.env['event.registration'].flush(['event_id', 'state'])
+            self.env["event.registration"].flush(["event_id", "state"])
             self._cr.execute(query, (tuple(self.ids),))
             res = self._cr.fetchall()
             for event_id, state, num in res:
                 results[event_id][state_field[state]] += num
 
-        # compute seats_available
+        # compute seats_available and send automatic mail to waiting list
+        # if waiting list enabled and more seats become available
         for event in self:
             event.update(results.get(event._origin.id or event.id, base_vals))
             if event.seats_max > 0:
-                event.seats_available = event.seats_max - (event.seats_reserved + event.seats_used)
+                event.seats_available = event.seats_max - (
+                    event.seats_reserved + event.seats_used
+                )
+                # write "after_seats_available" mail as not sent
+                # if seats become unavailable
+                todo = self.mapped("event_mail_ids.mail_registration_ids").filtered(
+                    lambda reg_mail: reg_mail.mail_sent
+                    and reg_mail.registration_id.state == "wait"
+                    and reg_mail.scheduler_id.notification_type == "mail"
+                    and reg_mail.scheduler_id.interval_type == "after_seats_available"
+                    and reg_mail.mail_sent
+                    and not reg_mail.registration_id.waiting_list_to_confirm
+                )
+                todo.write({"mail_sent": False})
 
-    @api.depends('event_type_id', 'waiting_list')
+                # try to send "after_seats_available" mail to waiting_list
+                # validation is done once more in execute
+                onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
+                    lambda s: s.interval_type == "after_seats_available"
+                )
+                onsubscribe_schedulers.sudo().execute()
+
+    @api.depends("event_type_id", "waiting_list")
     def _compute_waiting_list(self):
         """ Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
@@ -147,7 +200,14 @@ class EventEvent(models.Model):
         for event in self:
             event.waiting_list = event.event_type_id.waiting_list
 
-    @api.depends('date_tz', 'start_sale_date', 'date_end', 'seats_available', 'seats_limited', 'event_ticket_ids.sale_available')
+    @api.depends(
+        "date_tz",
+        "start_sale_date",
+        "date_end",
+        "seats_available",
+        "seats_limited",
+        "event_ticket_ids.sale_available",
+    )
     def _compute_event_registrations_open(self):
         """ Compute whether people may take registrations for this event
           * event.date_end -> if event is done, registrations are not open anymore;
@@ -160,40 +220,36 @@ class EventEvent(models.Model):
         """
         for event in self:
             event = event._set_tz_context()
-            current_datetime = fields.Datetime.context_timestamp(event, fields.Datetime.now())
-            date_end_tz = event.date_end.astimezone(pytz.timezone(event.date_tz or 'UTC')) if event.date_end else False
-            event.event_registrations_open = (event.start_sale_date <= current_datetime.date() if event.start_sale_date else True) and \
-                (date_end_tz >= current_datetime if date_end_tz else True) and \
-                (not event.seats_limited or event.seats_available if not event.waiting_list else True) and \
-                (not event.event_ticket_ids or any(ticket.sale_available for ticket in event.event_ticket_ids) if not event.waiting_list else True)
+            current_datetime = fields.Datetime.context_timestamp(
+                event, fields.Datetime.now()
+            )
+            date_end_tz = (
+                event.date_end.astimezone(pytz.timezone(event.date_tz or "UTC"))
+                if event.date_end
+                else False
+            )
+            event.event_registrations_open = (
+                (
+                    event.start_sale_date <= current_datetime.date()
+                    if event.start_sale_date
+                    else True
+                )
+                and (date_end_tz >= current_datetime if date_end_tz else True)
+                and (
+                    not event.seats_limited or event.seats_available
+                    if not event.waiting_list
+                    else True
+                )
+                and (
+                    not event.event_ticket_ids
+                    or any(ticket.sale_available for ticket in event.event_ticket_ids)
+                    if not event.waiting_list
+                    else True
+                )
+            )
 
     # 5. Constraints and onchanges
-    # @api.constrains('seats_max', 'seats_available', 'seats_limited', 'waiting_list')
-    # def _check_seats_limit(self):
-    #     """ Raise validation error if no waiting list and seats are full """
-    #     if any(not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < 0 for event in self):
-    #         raise ValidationError(_('No more available seats.'))
-
-    # @api.constrains('has_seats_limitation', 'seats_max', 'seats_expected', 'event_ticket_ids')
-    # def _check_seats_max(self):
-    #     """
-    #     Raise validation error if maximum seats is less than reserved seats.
-    #     Or maximum seats for event and ticket do not match.
-    #     """
-    #     for event in self:
-    #         if event.seats_limited:
-    #             if event.seats_max < event.seats_expected:
-    #                 raise ValidationError(_('Maximum seats cannot be less than reserved seats.'))
-    #             if event.event_ticket_ids:
-    #                 ticket_max_seats = 0
-    #                 for ticket in event.event_ticket_ids:
-    #                     if ticket.seats_max < ticket.seats_unconfirmed + ticket.seats_reserved + ticket.seats_used:
-    #                         raise ValidationError(_('Ticket maximum seats cannot be less than ticket reserved seats.'))
-    #                     ticket_max_seats += ticket.seats_max
-    #                 if ticket_max_seats != event.seats_max:
-    #                     raise ValidationError(_('Maximum seats have to be equal to the maximum seats of tickets combined.'))
-
-    @api.constrains('seats_limited', 'waiting_list')
+    @api.constrains("seats_limited", "waiting_list")
     def _check_waiting_list(self):
         """ Turn off waiting list if seats are not limited """
         for event in self:
@@ -203,9 +259,16 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
-    def mail_attendees(self, template_id, force_send=False, filter_func=lambda self: self.state not in ['cancel', 'wait']):
+    def mail_attendees(
+        self,
+        template_id,
+        force_send=False,
+        filter_func=lambda self: self.state not in ["cancel", "wait"],
+    ):
         for event in self:
             for attendee in event.registration_ids.filtered(filter_func):
-                self.env['mail.template'].browse(template_id).send_mail(attendee.id, force_send=force_send)
+                self.env["mail.template"].browse(template_id).send_mail(
+                    attendee.id, force_send=force_send
+                )
 
     # 8. Business methods
