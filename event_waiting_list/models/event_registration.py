@@ -20,6 +20,8 @@
 
 # 1. Standard library imports:
 import uuid
+from datetime import datetime
+import pytz
 
 # 2. Known third party imports:
 from werkzeug import urls
@@ -205,6 +207,22 @@ class EventRegistration(models.Model):
         return ret
 
     # 7. Action methods
+    def action_cancel(self):
+        if datetime.now(
+            tz=pytz.timezone(self.event_id.date_tz or "UTC")
+        ) > self.event_id.cancel_before_date.astimezone(
+            pytz.timezone(self.event_id.date_tz or "UTC")
+        ):
+            raise ValidationError(
+                _(
+                    "Can not cancel registration after %s"
+                    % self.event_id.cancel_before_date.astimezone(
+                        pytz.timezone(self.event_id.date_tz or "UTC")
+                    )
+                )
+            )
+        self.write({"state": "cancel"})
+
     def action_waiting(self):
         if not self.event_id.waiting_list:
             raise ValidationError(_("Waiting list for this event is not enabled."))
