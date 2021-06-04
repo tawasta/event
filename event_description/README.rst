@@ -6,6 +6,7 @@
 Event Description
 =================
 * Adds description field to event form.
+* Adds boolean toggle for website_published field to event form.
 
 Configuration
 =============
