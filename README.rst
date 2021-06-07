@@ -38,6 +38,9 @@ Addons
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.4
      - Frontend customizations under "Customize" menu
+   * - `website_event_publish_event <website_event_publish_event>`_
+     - 14.0.1.0.0
+     - Publish event on website to backend and wizard
 
 Configuration
 =============
