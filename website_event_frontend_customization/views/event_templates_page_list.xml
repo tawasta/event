@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="events_list_start_sale_date" inherit_id="website_event.events_list" active="True" customize_show="True" name="Show start sale date">
+        <xpath expr="//t[@t-if='event.start_sale_date and event.start_sale_date &gt; datetime.date.today()']" position="replace">
+            <t t-if="event.start_sale_date and event.start_sale_date &gt; datetime.date.today()">
+                Registrations start on <t t-esc="event.start_sale_date"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="events_list_location" inherit_id="website_event.events_list" active="True" customize_show="True" name="Show location name and city">
+        <xpath expr="//div[@itemprop='location']" position="replace">
+            <div itemprop="location">
+                <span><t t-esc="event.address_id.name"/>, <t t-esc="event.address_id.city"/></span>
+            </div>
+        </xpath>
+    </template>
+</odoo>

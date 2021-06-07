@@ -8,10 +8,6 @@
             <xpath expr="//notebook" position="before">
                 <field name="description"/>
             </xpath>
-            <xpath expr="//div[@name='button_box']//button[1]" position="before">
-                <label for="website_published" string="Published"/>
-                <field name="website_published" nolabel="1" widget="boolean_toggle"/>
-            </xpath>
         </field>
     </record>
 </odoo>

@@ -2,10 +2,11 @@
 :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
 :alt: License: AGPL-3
 
-=================
-Event Description
-=================
-* Adds description field to event form.
+===========================
+Website Event Publish Event
+===========================
+* Adds boolean toggle for website_published field to event form.
+* Adds a wizard to publish multiple events at a time.
 
 Configuration
 =============
@@ -13,7 +14,7 @@ Configuration
 
 Usage
 =====
-\-
+- Select events from listview > press action button > publish events on website
 
 Known issues / Roadmap
 ======================

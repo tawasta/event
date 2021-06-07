@@ -19,18 +19,19 @@
 ##############################################################################
 
 {
-    "name": "Website Event Frontend Customization",
-    "summary": "Customization options to Website Event Frontends",
-    "version": "14.0.1.0.4",
+    "name": "Website Event Publish Event",
+    "summary": "Add website_published fields to event form and a publish wizard.",
+    "version": "14.0.1.0.0",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event/",
+    "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": ["website_event"],
     "data": [
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_page_list.xml",
+        "views/event_views.xml",
+        "wizard/publish_event_wizard.xml",
+        "security/ir.model.access.csv",
     ],
 }
