@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 10:20+0000\n"
-"PO-Revision-Date: 2021-05-31 10:20+0000\n"
+"POT-Creation-Date: 2021-06-07 08:21+0000\n"
+"PO-Revision-Date: 2021-06-07 08:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,8 +70,8 @@ msgid ""
 "                        You have been placed on a waiting list. We will contact you if any tickets are available.<br/>\n"
 "                        <br/>\n"
 "                    To cancel your position in the waiting list follow the link below:\n"
-"                    <a href=\"${object.confirm_url}\"/><br/>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.confirm_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                    <a href=\"${object.manage_url}\"/><br/>\n"
+"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.manage_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Cancel here\n"
 "                        </a></div>\n"
 "                <br/>\n"
@@ -161,15 +161,15 @@ msgstr ""
 "                                                                Hei ${object.name or ''},<br/><br/>\n"
 "                    Kiitos kiinnostuksestasi tapahtumaamme.<br/>\n"
 "                    % if object.event_ticket_id:\n"
-"                        Lippu <i>${object.event_ticket_id.name}</i> tapahtumalle <i>${object.event_id.name}</i> on tällä hetkellä loppuunmyyty.<br/>\n"
+"                    Lippu <i>${object.event_ticket_id.name}</i> tapahtumalle <i>${object.event_id.name}</i> on tällä hetkellä loppuunmyyty.<br/>\n"
 "                    % else\n"
 "                    Tapahtuma <i>${object.event_id.name}</i> on tällä hetkellä loppuunmyyty.<br/>\n"
 "                    % endif\n"
 "                        Sinut on laitettu jonotuslistalle. Otamme sinuun yhteyttä, jos lippuja tulee saataville.<br/>\n"
 "                        <br/>\n"
 "                    Peruuttaaksesi paikkasi jonotuslistalla, paina allaolevaa linkkiä:\n"
-"                    <a href=\"${object.confirm_url}\"/><br/>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.confirm_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                    <a href=\"${object.manage_url}\"/><br/>\n"
+"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.manage_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Peruuta tästä\n"
 "                        </a></div>\n"
 "                <br/>\n"
@@ -267,8 +267,8 @@ msgid ""
 "                    % endif\n"
 "                        Claim your spot quickly as we give seats on a first come first serve basis.<br/><br/>\n"
 "                    Claim or cancel here: \n"
-"                    <a href=\"${object.confirm_url}\"/><br/>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.confirm_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                    <a href=\"${object.manage_url}\"/><br/>\n"
+"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.manage_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Claim your spot\n"
 "                        </a></div>\n"
 "                    <br/><br/>\n"
@@ -322,7 +322,7 @@ msgstr ""
 "                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
 "                                                <tr>\n"
 "                                                    <td valign=\"middle\">\n"
-"                                                        <span style=\"font-size: 10px;\">Your registration to waiting list</span>\n"
+"                                                        <span style=\"font-size: 10px;\">Ilmoittautumisesi jonotuslistaan</span>\n"
 "                                                        <br/>\n"
 "                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
 "                        ${object.name}\n"
@@ -360,9 +360,9 @@ msgstr ""
 "                    Meillä on lisää paikkoja saatavilla tapahtumaan <i>${object.event_id.name}</i>.<br/>\n"
 "                    % endif\n"
 "                        Vahvista paikkasi nopeasti, sillä paikkoja on jäljellä vain nopeimmille.<br/><br/>\n"
-"                    Vahvista tai peru paikkasi tästä: \n"
-"                    <a href=\"${object.confirm_url}\"/><br/>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.confirm_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                    Vahvista tai peruuta paikkasi tästä: \n"
+"                    <a href=\"${object.manage_url}\"/><br/>\n"
+"                        <div style=\"margin: 16px 0px 16px 0px;\"><a href=\"${object.manage_url}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                            Vahvista paikkasi\n"
 "                        </a></div>\n"
 "                    <br/><br/>\n"
@@ -418,49 +418,9 @@ msgid "After registering to waiting list"
 msgstr "Jokaisen jonotuslistaan liittymisen jälkeen"
 
 #. module: event_waiting_list
-#: code:addons/event_waiting_list/wizard/waiting_mail_list_wizard.py:0
-#, python-format
-msgid ""
-"All selected registrations must be in the waiting list and the Event/Ticket "
-"needs to have available seats."
-msgstr ""
-"Kaikki valitut ilmoittautumiset pitää olla jonotuslistalla, ja tapahtumalla "
-"sekä lipulla pitää olla vapaita paikkoja."
-
-#. module: event_waiting_list
-#: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__done
-msgid "Attended"
-msgstr "Osallistuttu"
-
-#. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__waiting_list_to_confirm
 msgid "Available to confirm from waiting list"
 msgstr "Vahvistettavissa jonotuslistalta"
-
-#. module: event_waiting_list
-#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
-msgid "Cancel"
-msgstr "Peruuta"
-
-#. module: event_waiting_list
-#: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__cancel
-msgid "Cancelled"
-msgstr "Peruttu"
-
-#. module: event_waiting_list
-#: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__open
-msgid "Confirmed"
-msgstr "Vahvistettu"
-
-#. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__create_uid
-msgid "Created by"
-msgstr "Luoja"
-
-#. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__create_date
-msgid "Created on"
-msgstr "Luotu"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event__display_name
@@ -470,7 +430,6 @@ msgstr "Luotu"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__display_name
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type__display_name
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type_mail__display_name
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__display_name
 msgid "Display Name"
 msgstr "Näyttönimi"
 
@@ -523,7 +482,6 @@ msgstr "Tapahtuman lippu"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__id
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type__id
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type_mail__id
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__id
 msgid "ID"
 msgstr "Tunniste (ID)"
 
@@ -535,19 +493,8 @@ msgstr "Tunniste (ID)"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration____last_update
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type____last_update
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_type_mail____last_update
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard____last_update
 msgid "Last Modified on"
 msgstr "Viimeksi muokattu"
-
-#. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__write_uid
-msgid "Last Updated by"
-msgstr "Viimeisin päivittäjä"
-
-#. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__write_date
-msgid "Last Updated on"
-msgstr "Viimeksi päivitetty"
 
 #. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_type_mail
@@ -581,46 +528,14 @@ msgid "No more seats available for this ticket."
 msgstr "Vapaita paikkoja ei ole enää jäljellä tälle lipulle."
 
 #. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__confirm_url
-msgid "Public link"
-msgstr "Julkinen linkki"
-
-#. module: event_waiting_list
 #: model:ir.model,name:event_waiting_list.model_event_mail_registration
 msgid "Registration Mail Scheduler"
 msgstr "Ilmoittautumisen sähköpostiajastus"
 
 #. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_waiting_mail_list_wizard__registration_ids
-#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
-msgid "Registrations"
-msgstr "Ilmoittautumiset"
-
-#. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_event__seats_waiting
 msgid "Seats on waiting list"
 msgstr "Paikkoja jonotuslistalla"
-
-#. module: event_waiting_list
-#: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__access_token
-msgid "Security Token"
-msgstr "Suojaustunnus"
-
-#. module: event_waiting_list
-#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
-msgid "Send"
-msgstr "Lähetä"
-
-#. module: event_waiting_list
-#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
-msgid "Send confirmation mail"
-msgstr "Lähetä vahvistussähköposti"
-
-#. module: event_waiting_list
-#: model:ir.actions.act_window,name:event_waiting_list.action_waiting_mail_list_tree
-#: model_terms:ir.ui.view,arch_db:event_waiting_list.event_mail_list_wizard_form
-msgid "Send event confirmation mail"
-msgstr "Lähetä ilmoittautumisen vahvistussähköposti"
 
 #. module: event_waiting_list
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_registration__state
@@ -647,11 +562,6 @@ msgstr "Laukaisin"
 #: model:ir.model.fields,field_description:event_waiting_list.field_event_mail__interval_type
 msgid "Trigger "
 msgstr "Laukaisin "
-
-#. module: event_waiting_list
-#: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__draft
-msgid "Unconfirmed"
-msgstr "Vahvistamaton"
 
 #. module: event_waiting_list
 #: model:ir.model.fields.selection,name:event_waiting_list.selection__event_registration__state__wait

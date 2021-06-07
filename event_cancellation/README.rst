@@ -2,11 +2,11 @@
 :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
 :alt: License: AGPL-3
 
-==========================
-Website Event Waiting List
-==========================
-* Extends event_waiting_list to frontend.
-* Extends website_event_cancellation to allow cancellation/confirmation of registrations through a url link.
+==================
+Event Cancellation
+==================
+* Adds personal cancellation link to registrations.
+* Adds "cancel before" field to events: can't cancel registrations after this date.
 
 Configuration
 =============

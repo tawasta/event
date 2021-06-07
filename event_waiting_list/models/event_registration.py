@@ -19,9 +19,6 @@
 ##############################################################################
 
 # 1. Standard library imports:
-import uuid
-from datetime import datetime
-import pytz
 
 # 2. Known third party imports:
 from werkzeug import urls
@@ -50,19 +47,7 @@ class EventRegistration(models.Model):
         compute_sudo=True,
         compute="_compute_available_to_confirm",
     )
-    state = fields.Selection(
-        selection_add=[
-            ("draft", "Unconfirmed"),
-            ("cancel", "Cancelled"),
-            ("wait", "Waiting"),
-            ("open", "Confirmed"),
-            ("done", "Attended"),
-        ]
-    )
-    confirm_url = fields.Char("Public link", compute="_compute_confirm_url")
-    access_token = fields.Char(
-        "Security Token", store=True, compute="_compute_access_token"
-    )
+    state = fields.Selection(selection_add=[("wait", "Waiting")])
 
     # 3. Default methods
 
@@ -118,10 +103,6 @@ class EventRegistration(models.Model):
                 "/event/%s/waiting-list/confirm/%s"
                 % (registration.event_id.id, registration.access_token),
             )
-
-    def _compute_access_token(self):
-        for registration in self:
-            registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
     @api.constrains("event_id", "state")
@@ -179,9 +160,9 @@ class EventRegistration(models.Model):
         3. Add registration as draft otherwise
         """
         # pass context to skip auto_confirm on super method
-        self = self.with_context(skip_confirm=True)
+        self = self.with_context(skip_confirm_wait=True)
         registrations = super(EventRegistration, self).create(vals_list)
-        registrations = registrations.with_context(skip_confirm=False)
+        registrations = registrations.with_context(skip_confirm_wait=False)
         for registration in registrations:
             if not registration.access_token:
                 registration.sudo().write({"access_token": str(uuid.uuid4())})
@@ -207,22 +188,6 @@ class EventRegistration(models.Model):
         return ret
 
     # 7. Action methods
-    def action_cancel(self):
-        if datetime.now(
-            tz=pytz.timezone(self.event_id.date_tz or "UTC")
-        ) > self.event_id.cancel_before_date.astimezone(
-            pytz.timezone(self.event_id.date_tz or "UTC")
-        ):
-            raise ValidationError(
-                _(
-                    "Can not cancel registration after %s"
-                    % self.event_id.cancel_before_date.astimezone(
-                        pytz.timezone(self.event_id.date_tz or "UTC")
-                    )
-                )
-            )
-        self.write({"state": "cancel"})
-
     def action_waiting(self):
         if not self.event_id.waiting_list:
             raise ValidationError(_("Waiting list for this event is not enabled."))
@@ -241,7 +206,7 @@ class EventRegistration(models.Model):
         return True
 
     def _check_auto_confirmation(self):
-        if self._context.get("skip_confirm"):
+        if self._context.get("skip_confirm") or self._context.get("skip_confirm_wait"):
             return False
         if any(
             not registration.event_id.auto_confirm

@@ -20,26 +20,18 @@
 
 # 1. Standard library imports:
 import pytz
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, api
+from odoo.osv import expression
 
 # 4. Imports from Odoo modules:
 
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
-
-
-_INTERVALS = {
-    "hours": lambda interval: relativedelta(hours=interval),
-    "days": lambda interval: relativedelta(days=interval),
-    "weeks": lambda interval: relativedelta(days=7 * interval),
-}
 
 
 class EventType(models.Model):
@@ -51,12 +43,6 @@ class EventType(models.Model):
         string="Enable Waiting List",
         help="Enable waiting list when attendee limit is reached.",
         default=True,
-    )
-    cancel_interval_nbr = fields.Integer("Interval", default=1)
-    cancel_interval_unit = fields.Selection(
-        [("hours", "Hours"), ("days", "Days"), ("weeks", "Weeks")],
-        string="Unit",
-        default="hours",
     )
 
     # 3. Default methods
@@ -76,7 +62,22 @@ class EventType(models.Model):
                             "notification_type": "mail",
                             "interval_unit": "now",
                             "interval_type": "after_sub",
-                            "template_id": self.env.ref("event.event_subscription").id,
+                            "template_id": self.env.ref(
+                                "event_cancellation.event_subscription_with_cancel"
+                            ).id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_nbr": 10,
+                            "interval_unit": "days",
+                            "interval_type": "before_event",
+                            "template_id": self.env.ref(
+                                "event_cancellation.event_reminder_with_cancel"
+                            ).id,
                         },
                     ),
                     (
@@ -89,17 +90,6 @@ class EventType(models.Model):
                             "template_id": self.env.ref(
                                 "event_waiting_list.event_waiting"
                             ).id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_nbr": 10,
-                            "interval_unit": "days",
-                            "interval_type": "before_event",
-                            "template_id": self.env.ref("event.event_reminder").id,
                         },
                     ),
                     (
@@ -143,58 +133,9 @@ class EventEvent(models.Model):
         readonly=True,
         compute="_compute_seats",
     )
-    cancel_interval_nbr = fields.Integer(
-        string="Interval",
-        compute="_compute_cancel_interval_nbr",
-        required=True,
-        readonly=False,
-        store=True,
-    )
-    cancel_interval_unit = fields.Selection(
-        [("hours", "Hours"), ("days", "Days"), ("weeks", "Weeks")],
-        string="Unit",
-        required=True,
-        compute="_compute_cancel_interval_unit",
-        readonly=False,
-        store=True,
-    )
-    cancel_before_date = fields.Datetime(
-        "Cancel before date", compute="_compute_before_date", store=True
-    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("event_type_id")
-    def _compute_cancel_interval_nbr(self):
-        for event in self:
-            if not event.event_type_id:
-                event.cancel_interval_nbr = event.cancel_interval_nbr or 0
-            else:
-                event.cancel_interval_nbr = event.event_type_id.cancel_interval_nbr or 0
-
-    @api.depends("event_type_id")
-    def _compute_cancel_interval_unit(self):
-        for event in self:
-            if not event.event_type_id:
-                event.cancel_interval_unit = event.cancel_interval_unit or "days"
-            else:
-                event.cancel_interval_unit = (
-                    event.event_type_id.cancel_interval_unit or "days"
-                )
-
-    @api.depends("cancel_interval_unit", "cancel_interval_nbr")
-    def _compute_before_date(self):
-        for event in self:
-            date, sign = event.date_begin, -1
-            event.cancel_before_date = (
-                date
-                + _INTERVALS[event.cancel_interval_unit](
-                    sign * event.cancel_interval_nbr
-                )
-                if date
-                else False
-            )
-
     @api.depends("seats_max", "registration_ids.state")
     def _compute_seats(self):
         """

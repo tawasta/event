@@ -21,7 +21,7 @@
 {
     "name": "Event Description",
     "summary": "Add description and website_published fields to event form.",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.4",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

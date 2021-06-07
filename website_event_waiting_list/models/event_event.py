@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api
+from odoo import models
 from odoo.osv import expression
 
 # 4. Imports from Odoo modules:
@@ -34,7 +34,6 @@ from odoo.osv import expression
 
 
 class EventEvent(models.Model):
-
     # 1. Private attributes
     _inherit = "event.event"
 

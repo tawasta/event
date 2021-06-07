@@ -3,10 +3,10 @@
 :alt: License: AGPL-3
 
 ==========================
-Website Event Waiting List
+Website Event Cancellation
 ==========================
-* Extends event_waiting_list to frontend.
-* Extends website_event_cancellation to allow cancellation/confirmation of registrations through a url link.
+* Adds ability to cancel registrations through website.
+* Adds cancellation link to email templates.
 
 Configuration
 =============

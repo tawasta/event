@@ -22,19 +22,6 @@
                     </div>
                 </div>
             </div>
-            <div name="event_type_location" position="inside">
-                <div class="col-12 col-lg-6 o_setting_box" name="event_type_attendees_cancel_before">
-                    <div class="o_setting_right_pane">
-                        <label for="cancel_interval_nbr" string="Cancel attendance before"/>
-                        <div class="col-lg-8 mt16">
-                            <div class="row">
-                                <field name="cancel_interval_nbr" nolabel="1" class="oe_inline"/>
-                                <field name="cancel_interval_unit" nolabel="1" class="oe_inline"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </field>
     </record>
     <!-- EVENT.EVENT VIEWS -->
@@ -50,13 +37,6 @@
             </xpath>
             <field name="auto_confirm" position="after">
                 <field name="waiting_list"/>
-            </field>
-            <field name="date_tz" position="before">
-                <label for="cancel_interval_nbr" string="Cancel attendance before"/>
-                <div class="o_row">
-                    <field name="cancel_interval_nbr" nolabel="1" class="oe_inline"/>
-                    <field name="cancel_interval_unit" nolabel="1" class="oe_inline"/>
-                </div>
             </field>
         </field>
     </record>

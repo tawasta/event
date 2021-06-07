@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Event Waiting List",
-    "summary": "Register to Events through waiting list",
+    "name": "Event Cancellation",
+    "summary": "Cancel event registration through website.",
     "version": "14.0.1.0.4",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,10 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "event_cancellation"],
-    "data": [
-        "views/event_views.xml",
-        "views/event_ticket_views.xml",
-        "data/email_template_data.xml",
-    ],
+    "depends": ["event"],
+    "data": ["views/event_views.xml", "data/email_template_data.xml"],
 }
