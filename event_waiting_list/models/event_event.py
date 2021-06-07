@@ -25,6 +25,7 @@ import pytz
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models, api
+from odoo.osv import expression
 
 # 4. Imports from Odoo modules:
 
@@ -61,7 +62,22 @@ class EventType(models.Model):
                             "notification_type": "mail",
                             "interval_unit": "now",
                             "interval_type": "after_sub",
-                            "template_id": self.env.ref("event.event_subscription").id,
+                            "template_id": self.env.ref(
+                                "event_cancellation.event_subscription_with_cancel"
+                            ).id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "notification_type": "mail",
+                            "interval_nbr": 10,
+                            "interval_unit": "days",
+                            "interval_type": "before_event",
+                            "template_id": self.env.ref(
+                                "event_cancellation.event_reminder_with_cancel"
+                            ).id,
                         },
                     ),
                     (
@@ -74,17 +90,6 @@ class EventType(models.Model):
                             "template_id": self.env.ref(
                                 "event_waiting_list.event_waiting"
                             ).id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_nbr": 10,
-                            "interval_unit": "days",
-                            "interval_type": "before_event",
-                            "template_id": self.env.ref("event.event_reminder").id,
                         },
                     ),
                     (
@@ -128,7 +133,6 @@ class EventEvent(models.Model):
         readonly=True,
         compute="_compute_seats",
     )
-
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
