@@ -10,7 +10,7 @@
     <template id="events_list_location" inherit_id="website_event.events_list" active="True" customize_show="True" name="Show location name and city">
         <xpath expr="//div[@itemprop='location']" position="replace">
             <div itemprop="location">
-                <span><t t-esc="event.address_id.name"/>, <t t-esc="event.address_id.city"/></span>
+                <span><t t-esc="event.sudo().address_id.name"/>, <t t-esc="event.sudo().address_id.city"/></span>
             </div>
         </xpath>
     </template>
