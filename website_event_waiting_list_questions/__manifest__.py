@@ -21,18 +21,13 @@
 {
     "name": "Website Event Waiting List Questions",
     "summary": "Questions on Events when joining waiting list",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.4",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event_questions",
-        "website_event_waiting_list",
-    ],
-    "data": [
-        "views/event_templates.xml",
-    ],
+    "depends": ["website_event_questions", "website_event_waiting_list"],
+    "data": ["views/event_templates.xml"],
 }

@@ -26,7 +26,9 @@ import werkzeug
 # 3. Odoo imports (openerp):
 from odoo import http, fields, _
 from odoo.http import request
-from odoo.addons.website_event.controllers.main import WebsiteEventController
+from odoo.addons.website_event_cancellation.controllers.event import (
+    WebsiteEventController,
+)
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
@@ -211,7 +213,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         return list(registrations.values())
 
     @http.route(
-        ['/event/<model("event.event"):event>/waiting-list/confirm/<string:code>'],
+        ['/event/<model("event.event"):event>/registration/manage/<string:code>'],
         type="http",
         auth="public",
         website=True,

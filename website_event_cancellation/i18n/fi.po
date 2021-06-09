@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_cancellation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-07 08:13+0000\n"
+"PO-Revision-Date: 2021-06-07 08:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "(ref:"
+msgstr "(viite:"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<b>Start</b>"
+msgstr "<b>Alkaa</b>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid ""
+"<br/>\n"
+"                            <b>End</b>"
+msgstr ""
+"<br/>\n"
+"                            <b>Loppuu</b>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<i class=\"fa fa-fw fa-check\"/> Cancel registration"
+msgstr "<i class=\"fa fa-fw fa-check\"/> Peruuta ilmoittautuminen"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<span aria-label=\"Close\">&amp;times;</span>"
+msgstr "<span aria-label=\"Sulje\">&amp;times;</span>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Cancel registration"
+msgstr "Peruuta ilmoittautuminen"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Cancel your registration here:"
+msgstr "Peruuta ilmoittautumisesi tästä:"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Close"
+msgstr "Sulje"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "N/A"
+msgstr "Ei saatavilla"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "You are about to <strong>cancel</strong> your registration"
+msgstr "Olet <strong>peruuttamassa</strong> ilmoittautumisesi"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "You are registered to"
+msgstr "Olet ilmoittautunut tapahtumaan"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Your registration to"
+msgstr "Ilmoittautumisesi tapahtumaan"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "has been cancelled"
+msgstr "on peruttu"

@@ -37,7 +37,7 @@ from odoo.exceptions import ValidationError
 class WaitingMailListWizard(models.TransientModel):
 
     # 1. Private attributes
-    _name = "event.waiting.mail.list.wizard"
+    _name = "website.event.waiting.mail.list.wizard"
     _description = "Create mailing list for waiting list contacts"
 
     # 2. Fields declaration

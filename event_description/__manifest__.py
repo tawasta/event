@@ -21,15 +21,13 @@
 {
     "name": "Event Description",
     "summary": "Add description field to event form.",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.4",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "event",
-    ],
+    "depends": ["event"],
     "data": ["views/event_views.xml"],
 }
