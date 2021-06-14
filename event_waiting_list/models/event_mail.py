@@ -208,8 +208,6 @@ class EventMailRegistration(models.Model):
             )
         )
         for reg_mail in todo:
-            print("MAIL SENT")
-            print(reg_mail, reg_mail.scheduler_id.interval_type)
             reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
         todo.write({"mail_sent": True})
 

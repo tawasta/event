@@ -242,32 +242,30 @@ class EventEvent(models.Model):
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
 
-    # 6. CRUD methods
-    def write(self, vals):
-        res = super(EventEvent, self).write(vals)
+    @api.constrains("seats_available", "waiting_list")
+    def _mail_to_waiting_list_confirmation(self):
         for event in self:
-            # if seats are available, execute onsubscribe_schedulers
-            if event.seats_available:
-                print("SEATS AVAILABLE")
-                onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
-                    lambda s: s.interval_type == "after_seats_available"
+            if event.waiting_list:
+                # if seats are available, execute onsubscribe_schedulers
+                if event.seats_available:
+                    onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
+                        lambda s: s.interval_type == "after_seats_available"
+                    )
+                    onsubscribe_schedulers.sudo().execute()
+                # write "after_seats_available" mail as not sent
+                # if seats become unavailable and mail was previously sent
+                registrations_to_not_sent = self.mapped(
+                    "event_mail_ids.mail_registration_ids"
+                ).filtered(
+                    lambda reg_mail: reg_mail.mail_sent
+                    and reg_mail.registration_id.state == "wait"
+                    and reg_mail.scheduler_id.notification_type == "mail"
+                    and reg_mail.scheduler_id.interval_type == "after_seats_available"
+                    and not reg_mail.registration_id.waiting_list_to_confirm
                 )
-                onsubscribe_schedulers.sudo().execute()
-            # write "after_seats_available" mail as not sent
-            # if seats become unavailable and mail was previously sent
-            print("WRITE NOT SENT")
-            registrations_to_not_sent = self.mapped(
-                "event_mail_ids.mail_registration_ids"
-            ).filtered(
-                lambda reg_mail: reg_mail.mail_sent
-                and reg_mail.registration_id.state == "wait"
-                and reg_mail.scheduler_id.notification_type == "mail"
-                and reg_mail.scheduler_id.interval_type == "after_seats_available"
-                and not reg_mail.registration_id.waiting_list_to_confirm
-            )
-            print(registrations_to_not_sent)
-            registrations_to_not_sent.write({"mail_sent": False})
-        return res
+                registrations_to_not_sent.write({"mail_sent": False})
+
+    # 6. CRUD methods
 
     # 7. Action methods
     def mail_attendees(
