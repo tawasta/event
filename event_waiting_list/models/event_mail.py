@@ -198,14 +198,13 @@ class EventMailRegistration(models.Model):
                 and reg_mail.registration_id.state in ["open", "done", "wait"]
                 and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
                 and reg_mail.scheduler_id.notification_type == "mail"
-                and reg_mail.scheduler_id.interval_type != "after_seats_available"
-            )
-            or (
-                reg_mail.scheduler_id.interval_type == "after_seats_available"
-                and reg_mail.registration_id.waiting_list_to_confirm
-                and not reg_mail.mail_sent
-                and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
-                and reg_mail.scheduler_id.notification_type == "mail"
+                and (
+                    (reg_mail.scheduler_id.interval_type != "after_seats_available")
+                    or (
+                        reg_mail.scheduler_id.interval_type == "after_seats_available"
+                        and reg_mail.registration_id.waiting_list_to_confirm
+                    )
+                )
             )
         )
         for reg_mail in todo:
