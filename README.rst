@@ -17,34 +17,40 @@ Addons
    * - addon
      - version
      - summary
-   * - `event_description <event_description/>`_
-     - 14.0.1.0.4
-     - Adds event description field to backend
+   * - `event_auditlog_rules <event_auditlog_rules/>`_
+     - 14.0.1.0.0
+     - Adds audit log rules for events
    * - `event_cancellation <event_cancellation>`_
      - 14.0.1.0.4
      - Cancel registrations
+   * - `event_description <event_description/>`_
+     - 14.0.1.0.4
+     - Adds event description field to backend
+   * - `event_remove_translatable_fields <event_remove_translatable_fields>`_
+     - 14.0.1.0.0
+     - Remove translate fields from events
    * - `event_waiting_list <event_waiting_list/>`_
      - 14.0.1.0.4
      - Adds waiting list for events
    * - `website_event_cancellation <website_event_cancellation/>`_
      - 14.0.1.0.4
      - Frontend views to cancel registrations
-   * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.0.4
-     - Adds waiting list for frontend
-   * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
-     - 14.0.1.0.4
-     - Adds questions when joining waiting list
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.4
      - Frontend customizations under "Customize" menu
    * - `website_event_publish_event <website_event_publish_event>`_
      - 14.0.1.0.0
      - Publish event on website to backend and wizard
+   * - `website_event_waiting_list <website_event_waiting_list/>`_
+     - 14.0.1.0.4
+     - Adds waiting list for frontend
+   * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
+     - 14.0.1.0.4
+     - Adds questions when joining waiting list
 
 Configuration
 =============
-- Module specific instructions in modules README
+- Module specific instructions in modules README.rst
 
 Usage
 =====
