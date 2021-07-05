@@ -18,25 +18,25 @@ odoo.define("website_event_waiting_list.website_event", function (require) {
             var $form = $(ev.currentTarget).closest("form");
             var $button = $(ev.currentTarget).closest('[type="submit"]');
             var post = {};
-            var waiting_list_button = false;
-            if ($($button).attr("name") == "waiting_list_button") {
-                waiting_list_button = true;
-                post["waiting_list_button"] = "True";
+            if ($($button).attr("name") === "waiting_list_button") {
+                post.waiting_list_button = "True";
             }
             $("#registration_form table").siblings(".alert").remove();
             $("#registration_form select").each(function () {
                 post[$(this).attr("name")] = $(this).val();
             });
             var tickets_ordered = _.some(
-                _.map(post, function (value, key) {
-                    return parseInt(value);
+                _.map(post, function (value) {
+                    return parseInt(value, 10);
                 })
             );
             if (!tickets_ordered) {
                 $('<div class="alert alert-info"/>')
                     .text(_t("Please select at least one ticket."))
                     .insertAfter("#registration_form table");
-                return new Promise(function () {});
+                return new Promise(function () {
+                    return undefined;
+                });
             } else {
                 $button.attr("disabled", true);
                 return ajax
@@ -44,7 +44,7 @@ odoo.define("website_event_waiting_list.website_event", function (require) {
                     .then(function (modal) {
                         var $modal = $(modal);
                         $modal.modal({backdrop: "static", keyboard: false});
-                        $modal.find(".modal-body > div").removeClass("container"); // retrocompatibility - REMOVE ME in master / saas-19
+                        $modal.find(".modal-body > div").removeClass("container");
                         $modal.appendTo("body").modal();
                         $modal.on("click", ".js_goto_event", function () {
                             $modal.modal("hide");
