@@ -29,7 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["website_event", "event_cancellation"],
-    "data": [
-        "views/event_templates_page_cancellation.xml",
-    ],
+    "data": ["views/event_templates_page_cancellation.xml"],
 }

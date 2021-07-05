@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
@@ -84,7 +84,8 @@ class EventTicket(models.Model):
             }
             query = """ SELECT event_ticket_id, state, count(event_id)
                         FROM event_registration
-                        WHERE event_ticket_id IN %s AND state IN ('draft', 'open', 'done', 'wait')
+                        WHERE event_ticket_id IN %s AND state IN
+                        ('draft', 'open', 'done', 'wait')
                         GROUP BY event_ticket_id, state
                     """
             self.env["event.registration"].flush(
@@ -104,11 +105,9 @@ class EventTicket(models.Model):
     # 5. Constraints and onchanges
     @api.constrains("seats_available", "seats_max")
     def _constrains_seats_available(self):
-        if any(
-            not record.waiting_list and record.seats_max and record.seats_available < 0
-            for record in self
-        ):
-            raise ValidationError(_("No more available seats for this ticket."))
+        for ticket in self:
+            if ticket.seats_max and ticket.seats_available < 0:
+                raise ValidationError(_("No more available seats for this ticket."))
 
     # 6. CRUD methods
 
