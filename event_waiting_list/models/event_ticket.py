@@ -104,11 +104,9 @@ class EventTicket(models.Model):
     # 5. Constraints and onchanges
     @api.constrains("seats_available", "seats_max")
     def _constrains_seats_available(self):
-        if any(
-            not record.waiting_list and record.seats_max and record.seats_available < 0
-            for record in self
-        ):
-            raise ValidationError(_("No more available seats for this ticket."))
+        for ticket in self:
+            if ticket.seats_max and ticket.seats_available < 0:
+                raise ValidationError(_("No more available seats for this ticket."))
 
     # 6. CRUD methods
 
