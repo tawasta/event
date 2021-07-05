@@ -21,11 +21,11 @@
 # 1. Standard library imports:
 import pytz
 
+# 3. Odoo imports (openerp):
+from odoo import api, fields, models
+
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import fields, models, api
-from odoo.osv import expression
 
 # 4. Imports from Odoo modules:
 
@@ -154,8 +154,8 @@ class EventEvent(models.Model):
             "done": "seats_used",
             "wait": "seats_waiting",
         }
-        base_vals = dict((fname, 0) for fname in state_field.values())
-        results = dict((event_id, dict(base_vals)) for event_id in self.ids)
+        base_vals = {fname: 0 for fname in state_field.values()}
+        results = {event_id: dict(base_vals) for event_id in self.ids}
         if self.ids:
             query = """ SELECT event_id, state, count(event_id)
                         FROM event_registration

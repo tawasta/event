@@ -18,15 +18,17 @@
 #
 ##############################################################################
 
+from datetime import datetime
+
 # 1. Standard library imports:
 import pytz
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+# 3. Odoo imports (openerp):
+from odoo import api, fields, models
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import fields, api, models
 
 # 4. Imports from Odoo modules:
 

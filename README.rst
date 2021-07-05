@@ -32,6 +32,9 @@ Addons
    * - `event_waiting_list <event_waiting_list/>`_
      - 14.0.1.0.4
      - Adds waiting list for events
+   * - `website_event_banner_image <website_event_banner_image/>`_
+     - 14.0.1.0.0
+     - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
      - 14.0.1.0.4
      - Frontend views to cancel registrations

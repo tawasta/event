@@ -20,14 +20,13 @@
 
 # 1. Standard library imports:
 import uuid
-from datetime import datetime
-import pytz
 
 # 2. Known third party imports:
+import pytz
 from werkzeug import urls
 
 # 3. Odoo imports (openerp):
-from odoo import fields, api, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:

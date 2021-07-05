@@ -28,10 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "event_waiting_list",
-        "event_sale",
-    ],
+    "depends": ["event_waiting_list", "event_sale"],
     "data": [],
 }
-
