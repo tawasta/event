@@ -165,7 +165,7 @@
                     We have more seats available for the event <i>${object.event_id.name}</i>.<br/>
                     % endif
                         Claim your spot quickly as we give seats on a first come first serve basis.<br/><br/>
-                    Claim or cancel here: 
+                    Claim or cancel here:
                     <a href="${object.manage_url}"/><br/>
                         <div style="margin: 16px 0px 16px 0px;"><a href="${object.manage_url}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
                             Claim your spot

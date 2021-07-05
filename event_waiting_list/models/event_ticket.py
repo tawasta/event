@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
@@ -84,7 +84,8 @@ class EventTicket(models.Model):
             }
             query = """ SELECT event_ticket_id, state, count(event_id)
                         FROM event_registration
-                        WHERE event_ticket_id IN %s AND state IN ('draft', 'open', 'done', 'wait')
+                        WHERE event_ticket_id IN %s AND state IN
+                        ('draft', 'open', 'done', 'wait')
                         GROUP BY event_ticket_id, state
                     """
             self.env["event.registration"].flush(

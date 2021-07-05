@@ -24,12 +24,12 @@
 import werkzeug
 
 # 3. Odoo imports (openerp):
-from odoo import http, fields, _
+from odoo import fields, http
 from odoo.http import request
+
 from odoo.addons.website_event_cancellation.controllers.event import (
     WebsiteEventController,
 )
-from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -84,7 +84,10 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                         )
                         and event.seats_available > 0
                     ):
-                        warning_msg = "You tried to join a waiting list for a ticket that has available seats"
+                        warning_msg = (
+                            "You tried to join a waiting list for "
+                            "a ticket that has available seats"
+                        )
                         waiting_list_check = False
                     elif (
                         availability_check
@@ -149,7 +152,8 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                 return request.render(
                     "website_event_waiting_list.registration_fail",
                     {
-                        "warning_msg": "You tried to order more tickets than tickets available.",
+                        "warning_msg": "You tried to order more tickets than "
+                        "tickets available.",
                         "event": event,
                     },
                 )

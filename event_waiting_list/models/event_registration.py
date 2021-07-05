@@ -24,7 +24,7 @@
 from werkzeug import urls
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
@@ -163,9 +163,6 @@ class EventRegistration(models.Model):
         self = self.with_context(skip_confirm_wait=True)
         registrations = super(EventRegistration, self).create(vals_list)
         registrations = registrations.with_context(skip_confirm_wait=False)
-        for registration in registrations:
-            if not registration.access_token:
-                registration.sudo().write({"access_token": str(uuid.uuid4())})
         if registrations._check_auto_confirmation():
             registrations.sudo().action_confirm()
         elif registrations._check_waiting_list():
