@@ -109,7 +109,8 @@ class WebsiteEventSaleWaitingListController(WebsiteEventSaleController):
             event, registrations, waiting_list_check
         )
 
-        # we have at least one registration linked to a ticket and not in a waiting list -> sale mode activate
+        # we have at least one registration linked to a ticket
+        # and not in a waiting list -> sale mode activate
         if (
             any(info["event_ticket_id"] for info in registrations)
             and not waiting_list_check
