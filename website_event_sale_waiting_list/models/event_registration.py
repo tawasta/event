@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,22 +18,37 @@
 #
 ##############################################################################
 
-{
-    "name": "Website Event Waiting List",
-    "summary": "Enable waiting list to frontend.",
-    "version": "14.0.1.0.4",
-    "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": ["website_event", "website_event_cancellation", "event_waiting_list"],
-    "data": [
-        "security/ir.model.access.csv",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_page_waiting_list.xml",
-        "views/assets.xml",
-        "wizard/waiting_mail_list_wizard.xml",
-    ],
-}
+# 1. Standard library imports:
+
+# 2. Known third party imports:
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class EventRegistration(models.Model):
+    # 1. Private attributes
+    _inherit = "event.registration"
+
+    # 2. Fields declaration
+    confirmed_from_waiting_list = fields.Boolean(
+        "Confirmed from waiting list", readonly=True, store=True
+    )
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods
