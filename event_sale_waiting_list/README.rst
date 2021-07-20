@@ -5,7 +5,6 @@
 =======================
 Event Sale Waiting List
 =======================
-
 * Adds waiting list functionality to Event Sale.
 
 Configuration

@@ -160,12 +160,16 @@ class EventRegistration(models.Model):
         3. Add registration as draft otherwise
         """
         # pass context to skip auto_confirm on super method
+        print("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
         self = self.with_context(skip_confirm_wait=True)
         registrations = super(EventRegistration, self).create(vals_list)
         registrations = registrations.with_context(skip_confirm_wait=False)
+        print(registrations)
         if registrations._check_auto_confirmation():
+            print("AUTOCONFIRM")
             registrations.sudo().action_confirm()
         elif registrations._check_waiting_list():
+            print("WAITING LIST")
             registrations.sudo().action_waiting()
         return registrations
 
@@ -191,16 +195,17 @@ class EventRegistration(models.Model):
         self.write({"state": "wait"})
 
     def _check_waiting_list(self):
-        if any(
-            not registration.event_id.waiting_list
-            or (
-                registration.event_id.seats_available >= 1
-                and registration.event_ticket_id.seats_available >= 1
-            )
-            for registration in self
-        ):
-            return False
-        return True
+        for registration in self:
+            if (not registration.event_id.waiting_list) or (
+                registration.event_id.seats_limited
+                and registration.event_id.seats_available > 0
+                and (
+                    not registration.event_ticket_id.seats_limited
+                    or registration.event_ticket_id.seats_available > 0
+                )
+            ):
+                return False
+            return True
 
     def _check_auto_confirmation(self):
         if self._context.get("skip_confirm") or self._context.get("skip_confirm_wait"):
