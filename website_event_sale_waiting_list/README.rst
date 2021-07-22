@@ -5,7 +5,7 @@
 ===============================
 Website Event Sale Waiting List
 ===============================
-* Adds waiting list functionality to Event Sale.
+* Adds waiting list functionality to Website Event Sale.
 * Joining waiting list does not require payment - confirmation link from email redirects to payment.
 
 Configuration

@@ -20,35 +20,38 @@ Addons
    * - `event_auditlog_rules <event_auditlog_rules/>`_
      - 14.0.1.0.0
      - Adds audit log rules for events
-   * - `event_cancellation <event_cancellation>`_
-     - 14.0.1.0.4
-     - Cancel registrations
    * - `event_description <event_description/>`_
      - 14.0.1.0.4
      - Adds event description field to backend
    * - `event_remove_translatable_fields <event_remove_translatable_fields>`_
      - 14.0.1.0.0
      - Remove translate fields from events
-   * - `event_waiting_list <event_waiting_list/>`_
-     - 14.0.1.0.4
-     - Adds waiting list for events
+   * - `event_user_is_organizer <event_user_is_organizer>`_
+     - 14.0.1.0.0
+     - Auto change Event organizer to user
    * - `website_event_banner_image <website_event_banner_image/>`_
      - 14.0.1.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
-     - 14.0.1.0.4
-     - Frontend views to cancel registrations
+     - 14.0.1.1.0
+     - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.4
      - Frontend customizations under "Customize" menu
    * - `website_event_publish_event <website_event_publish_event>`_
      - 14.0.1.0.0
-     - Publish event on website to backend and wizard
+     - Publish event to website from backend and wizard
+   * - `website_event_sale_promotion <website_event_sale_promotion>`_
+     - 14.0.1.0.0
+     - Sell tickets which contain multiple seats
+   * - `website_event_sale_waiting_list <website_event_sale_promotion>`_
+     - 14.0.1.0.0
+     - Sell tickets with waiting list
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.0.4
-     - Adds waiting list for frontend
+     - 14.0.1.1.0
+     - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
-     - 14.0.1.0.4
+     - 14.0.1.1.0
      - Adds questions when joining waiting list
 
 Configuration

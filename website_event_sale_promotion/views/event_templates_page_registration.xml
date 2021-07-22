@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_template_promotion" inherit_id="website_event.registration_template">
+        <xpath expr="//select[@class='custom-select']//t[@t-as='nb']" position="replace">
+            <t t-if="ticket.seats_to_sell &gt; 1">
+                <option selected="selected">0</option>
+                <option>2</option>
+            </t>
+            <t t-else="">
+                <t t-foreach="range(0, seats_max)" t-as="nb">
+                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                </t>
+            </t>
+        </xpath>
+        <xpath expr="//select[@class='w-auto custom-select']//t[@t-as='nb']" position="replace">
+            <t t-if="tickets.seats_to_sell &gt; 1">
+                <option>0</option>
+                <option selected="selected">2</option>
+            </t>
+            <t t-else="">
+                <t t-foreach="range(0, seats_max)" t-as="nb">
+                    <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

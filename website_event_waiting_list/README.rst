@@ -5,8 +5,8 @@
 ==========================
 Website Event Waiting List
 ==========================
-* Extends event_waiting_list to frontend.
-* Extends website_event_cancellation to allow cancellation/confirmation of registrations through a url link.
+* This module adds a waiting list functionality to Events.
+* Extends website_event_cancellation to allow cancellation/confirmation of registrations through a url link sent by email.
 
 Configuration
 =============
@@ -14,7 +14,10 @@ Configuration
 
 Usage
 =====
-\-
+* Enable waiting list for an event by toggling it on event view.
+* When maximum attendees to an event is reached, further registrations go to a waiting list.
+* If tickets are used and ticket is sold out, registrations go to waiting list.
+* You can attach an email scheduler to an Event to send automatic emails to waiting list when more seats are available
 
 Known issues / Roadmap
 ======================

@@ -23,8 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, models
-from odoo.tools import float_is_zero
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -33,34 +32,22 @@ from odoo.tools import float_is_zero
 # 6. Unknown third party imports:
 
 
-class EventRegistration(models.Model):
+class EventTemplateTicket(models.Model):
     # 1. Private attributes
-    _inherit = "event.registration"
+    _inherit = "event.type.ticket"
 
     # 2. Fields declaration
+    seats_to_sell = fields.Integer(
+        string="Number of seats to sell per ticket purchase",
+        help="Define the number of seats sold per ticket purchase. For example "
+        "setting this to 2 would always give two seats per purchase.",
+        default=1,
+        required=True,
+    )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends(
-        "is_paid", "sale_order_id.currency_id", "sale_order_line_id.price_total"
-    )
-    def _compute_payment_status(self):
-        for record in self:
-            ticket = record.event_ticket_id
-            so = record.sale_order_id
-            so_line = record.sale_order_line_id
-            if not so or float_is_zero(
-                so_line.price_total, precision_digits=so.currency_id.rounding
-            ):
-                if not ticket or float_is_zero(ticket.price):
-                    record.payment_status = "free"
-                record.payment_status = "to_pay"
-
-            elif record.is_paid:
-                record.payment_status = "paid"
-            else:
-                record.payment_status = "to_pay"
 
     # 5. Constraints and onchanges
 

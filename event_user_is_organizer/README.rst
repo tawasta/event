@@ -5,8 +5,7 @@
 =============================
 Event user is event organizer
 =============================
-
-Auto-change organizer when changing the event user
+* Auto-change organizer when changing the event user
 
 Configuration
 =============

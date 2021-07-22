@@ -2,10 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=======================
-Event Sale Waiting List
-=======================
-* Adds waiting list functionality to Event Sale.
+============================
+Website Event Sale Promotion
+============================
+* Allows selling tickets as promotions. For example two tickets for the price of one.
 
 Configuration
 =============
@@ -13,7 +13,7 @@ Configuration
 
 Usage
 =====
-\-
+- Add a ticket for an Event with a minimum quantity of 2. This forces the purchase of 2 registrations for the ticket.
 
 Known issues / Roadmap
 ======================

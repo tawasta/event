@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="event_type_ticket_view_tree_from_type_promotion" model="ir.ui.view">
+        <field name="name">event.type.ticket.view.tree.from.type.promotion</field>
+        <field name="model">event.type.ticket</field>
+        <field name="inherit_id" ref="event.event_type_ticket_view_tree_from_type"/>
+        <field name="arch" type="xml">
+            <field name="description" position="after">
+                <field name="seats_to_sell"/>
+            </field>
+        </field>
+    </record>
+    <record id="event_type_ticket_view_form_from_type_promotion" model="ir.ui.view">
+        <field name="name">event.type.ticket.view.form.from.type.promotion</field>
+        <field name="model">event.type.ticket</field>
+        <field name="inherit_id" ref="event.event_type_ticket_view_form_from_type"/>
+        <field name="arch" type="xml">
+            <field name="description" position="after">
+                <field name="seats_to_sell"/>
+            </field>
+        </field>
+    </record>
+    <record id="event_event_ticket_view_tree_from_event_promotion" model="ir.ui.view">
+        <field name="name">event.event.ticket.view.tree.from.event.promotion</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event"/>
+        <field name="arch" type="xml">
+            <field name="end_sale_date" position="after">
+                <field name="seats_to_sell"/>
+            </field>
+        </field>
+    </record>
+    <record id="event_event_ticket_view_form_from_event_promotion" model="ir.ui.view">
+        <field name="name">event.event.ticket.view.form.from.event.promotion</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_form_from_event"/>
+        <field name="arch" type="xml">
+            <field name="seats_max" position="before">
+                <field name="seats_to_sell"/>
+            </field>
+        </field>
+    </record>
+    <record id="event_event_ticket_form_view_promotion" model="ir.ui.view">
+        <field name="name">event.event.ticket.form.view.promotion</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_form_view"/>
+        <field name="arch" type="xml">
+            <field name="seats_max" position="before">
+                <field name="seats_to_sell"/>
+            </field>
+        </field>
+    </record>
+</odoo>
