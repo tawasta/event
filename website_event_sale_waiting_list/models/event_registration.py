@@ -56,10 +56,10 @@ class EventRegistration(models.Model):
             if not so or float_is_zero(
                 so_line.price_total, precision_digits=so.currency_id.rounding
             ):
-                if not ticket or float_is_zero(ticket.price):
+                if not ticket or float_is_zero(ticket.price, precision_digits=2):
                     record.payment_status = "free"
-                record.payment_status = "to_pay"
-
+                else:
+                    record.payment_status = "to_pay"
             elif record.is_paid:
                 record.payment_status = "paid"
             else:
