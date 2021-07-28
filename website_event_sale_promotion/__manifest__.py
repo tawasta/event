@@ -29,8 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["website_event_sale"],
-    "data": [
-        "views/event_ticket_views.xml",
-        "views/event_templates_page_registration.xml",
-    ],
+    "data": [],
 }

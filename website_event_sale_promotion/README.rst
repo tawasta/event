@@ -5,7 +5,7 @@
 ============================
 Website Event Sale Promotion
 ============================
-* Allows selling tickets as promotions. For example two tickets for the price of one.
+* Allows selling tickets as promotions
 
 Configuration
 =============
@@ -13,7 +13,7 @@ Configuration
 
 Usage
 =====
-- Add a ticket for an Event with a minimum quantity of 2. This forces the purchase of 2 registrations for the ticket.
+\-
 
 Known issues / Roadmap
 ======================
