@@ -19,19 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Event Waiting List",
-    "summary": "Register to Events through waiting list",
-    "version": "14.0.1.0.4",
+    "name": "Website Event Sale Promotion",
+    "summary": "Sell event tickets as promotions",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "event_cancellation"],
-    "data": [
-        "views/event_views.xml",
-        "views/event_ticket_views.xml",
-        "data/email_template_data.xml",
-    ],
+    "depends": ["website_event_sale"],
+    "data": [],
 }

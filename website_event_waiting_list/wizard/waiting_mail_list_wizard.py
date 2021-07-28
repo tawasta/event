@@ -69,7 +69,7 @@ class WaitingMailListWizard(models.TransientModel):
                     )
                 )
             msg_template = request.env.ref(
-                "event_waiting_list.event_confirm_waiting_registration"
+                "website_event_waiting_list.event_confirm_waiting_registration"
             )
             msg_template.send_mail(registration.id)
 

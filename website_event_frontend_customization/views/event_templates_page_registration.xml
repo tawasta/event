@@ -12,7 +12,7 @@
     </template>
     <template id="hide_tickets_not_for_sale" inherit_id="website_event.registration_template" active="False" customize_show="True" name="Hide tickets not for sale">
         <xpath expr="//div[@id='o_wevent_tickets_collapse']//div" position="attributes">
-            <attribute name="t-att-class">'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.sale_available else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
+            <attribute name="t-att-class">'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
         </xpath>
     </template>
 </odoo>

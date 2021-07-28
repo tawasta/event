@@ -27,8 +27,8 @@
         </field>
     </record>
     <!-- EVENT.EVENT VIEWS -->
-    <record id="view_event_form_waiting_list" model="ir.ui.view">
-        <field name="name">event.event.form</field>
+    <record id="view_event_form_cancel" model="ir.ui.view">
+        <field name="name">event.event.form.cancel</field>
         <field name="model">event.event</field>
         <field name="inherit_id" ref="event.view_event_form"/>
         <field name="arch" type="xml">
