@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-22 14:38+0000\n"
-"PO-Revision-Date: 2021-07-22 14:38+0000\n"
+"POT-Creation-Date: 2021-07-29 11:35+0000\n"
+"PO-Revision-Date: 2021-07-29 11:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -120,10 +120,6 @@ msgid ""
 "    % if object.company_id\n"
 "    <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\"><tr><td style=\"text-align: center; font-size: 14px;\">\n"
 "        Sent by <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
-"        % if is_online:\n"
-"        <br/>\n"
-"        Discover <a href=\"/event\" style=\"text-decoration:none;color:#717188;\">all our events</a>.\n"
-"        % endif\n"
 "      </td></tr></table>\n"
 "    % endif\n"
 "</td>\n"
@@ -217,11 +213,7 @@ msgstr ""
 "                        <td align=\"center\" style=\"min-width: 590px;\">\n"
 "    % if object.company_id\n"
 "    <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\"><tr><td style=\"text-align: center; font-size: 14px;\">\n"
-"        Sent by <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
-"        % if is_online:\n"
-"        <br/>\n"
-"        Tutustu <a href=\"/event\" style=\"text-decoration:none;color:#717188;\">kaikkiin tapahtumiimme</a>.\n"
-"        % endif\n"
+"        Lähettäjä <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
 "      </td></tr></table>\n"
 "    % endif\n"
 "</td>\n"
@@ -315,10 +307,6 @@ msgid ""
 "    % if object.company_id\n"
 "    <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\"><tr><td style=\"text-align: center; font-size: 14px;\">\n"
 "        Sent by <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
-"        % if 'website_url' in object.event_id and object.event_id.website_url:\n"
-"        <br/>\n"
-"        Discover <a href=\"/event\" style=\"text-decoration:none;color:#717188;\">all our events</a>.\n"
-"        % endif\n"
 "      </td></tr></table>\n"
 "    % endif\n"
 "</td>\n"
@@ -408,11 +396,7 @@ msgstr ""
 "                        <td align=\"center\" style=\"min-width: 590px;\">\n"
 "    % if object.company_id\n"
 "    <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\"><tr><td style=\"text-align: center; font-size: 14px;\">\n"
-"        Sent by <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
-"        % if 'website_url' in object.event_id and object.event_id.website_url:\n"
-"        <br/>\n"
-"        Tutustu <a href=\"/event\" style=\"text-decoration:none;color:#717188;\">kaikkiin tapahtumiimme</a>.\n"
-"        % endif\n"
+"        Lähettäjä <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">${object.company_id.name}</a>\n"
 "      </td></tr></table>\n"
 "    % endif\n"
 "</td>\n"
@@ -466,7 +450,7 @@ msgstr "Vahvistettavissa jonotuslistalta"
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.website_event_mail_list_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.confirm_waiting
@@ -544,7 +528,7 @@ msgstr "Tapahtuman automatisoitu postitus"
 #. module: website_event_waiting_list
 #: model:ir.model,name:website_event_waiting_list.model_event_registration
 msgid "Event Registration"
-msgstr "Tapahtuman rekisteröinti"
+msgstr "Tapahtuman ilmoittautuminen"
 
 #. module: website_event_waiting_list
 #: model:ir.model,name:website_event_waiting_list.model_event_type
@@ -622,7 +606,7 @@ msgstr "Vapaita paikkoja ei ole enää jäljellä tälle lipulle."
 #: code:addons/website_event_waiting_list/models/event_registration.py:0
 #, python-format
 msgid "No more seats available for this event."
-msgstr "Vapaita paikkoja ei ole enää jäljellä tähän tapahtumaan."
+msgstr "Vapaita paikkoja ei ole enää tälle tapahtumalle."
 
 #. module: website_event_waiting_list
 #: code:addons/website_event_waiting_list/models/event_registration.py:0
@@ -646,7 +630,7 @@ msgstr "Ilmoittaudu"
 #. module: website_event_waiting_list
 #: model:ir.model,name:website_event_waiting_list.model_event_mail_registration
 msgid "Registration Mail Scheduler"
-msgstr "Rekisteröinnin sähköpostiajastus"
+msgstr "Ilmoittautumisen sähköpostiajastus"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete
@@ -754,7 +738,8 @@ msgstr "Jonotuslista tälle tapahtumalle ei ole päällä."
 #. module: website_event_waiting_list
 #: model:mail.template,subject:website_event_waiting_list.event_confirm_waiting_registration
 msgid "We have more tickets available for ${object.event_id.name}"
-msgstr "Meillä on lisää lippuja saatavilla tapahtumaan ${object.event_id.name}"
+msgstr ""
+"Meillä on lisää lippuja saatavilla tapahtumaan ${object.event_id.name}"
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_type_form_waiting_list
