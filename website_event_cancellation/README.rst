@@ -5,8 +5,9 @@
 ==========================
 Website Event Cancellation
 ==========================
-* Adds ability to cancel registrations through website.
 * Adds cancellation link to email templates.
+* Adds ability to cancel registrations through website by following a link in email.
+* Adds "cancel before" field to events: can't cancel registrations after this date.
 
 Configuration
 =============
