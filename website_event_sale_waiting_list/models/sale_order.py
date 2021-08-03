@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import models
 
 # 4. Imports from Odoo modules:
 
@@ -32,24 +32,39 @@ from odoo import api, fields, models
 # 6. Unknown third party imports:
 
 
-class EventEvent(models.Model):
+class SaleOrderLine(models.Model):
     # 1. Private attributes
-    _inherit = "event.event"
+    _inherit = "sale.order.line"
 
     # 2. Fields declaration
-    organizer_id = fields.Many2one(default=lambda self: self.env.user.partner_id)
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
 
     # 5. Constraints and onchanges
-    @api.onchange("user_id")
-    def onchange_user_id_update_organizer_id(self):
-        for record in self:
-            record.organizer_id = record.user_id.partner_id.id
 
     # 6. CRUD methods
+
+    def _unlink_associated_registrations(self):
+        # Do not unlink registration confirmed through waiting list
+        # instead move it back to waiting list and remove sale_order
+        registrations = self.env["event.registration"].search(
+            [
+                ("sale_order_line_id", "in", self.ids),
+                ("confirmed_from_waiting_list", "=", True),
+            ]
+        )
+        for registration in registrations:
+            registration.sudo().write(
+                {"sale_order_id": False, "sale_order_line_id": False, "state": "wait"}
+            )
+        self.env["event.registration"].search(
+            [
+                ("sale_order_line_id", "in", self.ids),
+                ("confirmed_from_waiting_list", "=", False),
+            ]
+        ).unlink()
 
     # 7. Action methods
 

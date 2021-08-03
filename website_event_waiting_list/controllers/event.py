@@ -56,12 +56,9 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
 
         warning_msg = ""
         availability_check = True
-        waiting_list_check = False
-        # check if button pressed was waiting list button
-        for key, value in post.items():
-            if key == "waiting_list_button" and value == "True":
-                waiting_list_check = True
-                availability_check = False
+        waiting_list_check = post.get("waiting_list_button")
+        if waiting_list_check:
+            availability_check = False
 
         tickets = self._process_tickets_form(event, post)
         ordered_seats = 0
@@ -131,10 +128,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             raise werkzeug.exceptions.NotFound()
 
         registrations = self._process_attendees_form(event, post)
-        waiting_list_check = False
-        for key, value in post.items():
-            if key == "waiting_list_check" and value == "True":
-                waiting_list_check = True
+        waiting_list_check = post.get("waiting_list_check")
 
         # If post was not for waiting_list and trying to register more seats than available
         # Or trying to register more seats for a ticket than available
