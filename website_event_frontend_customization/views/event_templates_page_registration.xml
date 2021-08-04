@@ -5,7 +5,9 @@
         <xpath expr="//div[@class='col-lg-4 bg-light shadow-sm d-print-none']//div[@class='o_wevent_sidebar_block'][1]" position="before">
             <div id="show_seats" class="o_wevent_sidebar_block">
                 <h6 class="o_wevent_sidebar_title">Current seats</h6>
-                <p class="mb-2">Seats available: <t t-esc="event.seats_available"/></p>
+                <t t-if="event.seats_limited">
+                    <p class="mb-2">Seats available: <t t-esc="event.seats_available"/></p>
+                </t>
                 <p class="mb-2">Seats expected: <t t-esc="event.seats_expected"/></p>
             </div>
         </xpath>
