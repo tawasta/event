@@ -17,4 +17,9 @@
             <attribute name="t-att-class">'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
         </xpath>
     </template>
+    <template id="hide_share_box" inherit_id="website_event.event_description_full" active="False" customize_show="True" name="Hide share box">
+        <xpath expr="//div[@class='o_wevent_sidebar_block'][last()]" position="attributes">
+            <attribute name="class">o_wevent_sidebar_block d-none</attribute>
+        </xpath>
+    </template>
 </odoo>
