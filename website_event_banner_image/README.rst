@@ -5,7 +5,7 @@
 ==========================
 Website Event Banner Image
 ==========================
-* Ability to add banner image from backend.
+* Ability to add a banner image from backend to an event or event type.
 
 Configuration
 =============
@@ -17,7 +17,8 @@ Usage
 
 Known issues / Roadmap
 ======================
-\-
+- Each image has to be uploaded from users computer (similar to product images).
+- No optimization for handling multiples of the same image. Each image is uploaded and handled as a new image.
 
 Credits
 =======
