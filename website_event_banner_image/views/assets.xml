@@ -3,7 +3,7 @@
     <data>
         <template id="assets_backend" name="mail assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <link rel="stylesheet" type="text/scss" href="website_event_banner_image/static/src/scss/event_banner_image.scss"/>
+                <link rel="stylesheet" type="text/scss" href="/website_event_banner_image/static/src/scss/event_banner_image.scss"/>
             </xpath>
         </template>
     </data>
