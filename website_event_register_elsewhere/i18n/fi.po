@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_register_elsewhere
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-10 12:25+0000\n"
+"PO-Revision-Date: 2021-08-10 12:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_register_elsewhere
+#: model_terms:ir.ui.view,arch_db:website_event_register_elsewhere.registration_template_registration_elsewhere
+msgid "<span>Registration</span>"
+msgstr "<span>Ilmoittautuminen</span>"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event__display_name
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model,name:website_event_register_elsewhere.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model,name:website_event_register_elsewhere.model_event_type
+msgid "Event Template"
+msgstr "Tapahtuman mallipohja"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event__id
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event____last_update
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: website_event_register_elsewhere
+#: model_terms:ir.ui.view,arch_db:website_event_register_elsewhere.registration_template_registration_elsewhere
+msgid "Register"
+msgstr "Ilmoittaudu"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event__registration_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__registration_elsewhere
+msgid "Registration Elsewhere"
+msgstr "Ilmoittautuminen muualla"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event__registration_link
+#: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__registration_link
+msgid "Registration Link"
+msgstr "Ilmoittautumislinkki"
