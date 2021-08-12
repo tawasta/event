@@ -21,7 +21,7 @@
 {
     "name": "Event Sale Autoconfirmation",
     "summary": "Autoconfirm registrations even if not paid",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
