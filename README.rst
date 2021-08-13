@@ -20,9 +20,15 @@ Addons
    * - `event_auditlog_rules <event_auditlog_rules/>`_
      - 14.0.1.0.0
      - Adds audit log rules for events
+   * - `event_batch <event_batch/>`_
+     - 14.0.1.0.0
+     - Event Batch
    * - `event_description <event_description/>`_
      - 14.0.1.0.4
      - Adds event description field to backend
+   * - `event_disable_quick_create_mail_template <event_disable_quick_create_mail_template/>`_
+     - 14.0.1.0.1
+     - Disable quick create mail template from Event
    * - `event_remove_translatable_fields <event_remove_translatable_fields>`_
      - 14.0.1.0.0
      - Remove translate fields from events
@@ -30,17 +36,23 @@ Addons
      - 14.0.1.0.0
      - Auto change Event organizer to user
    * - `website_event_banner_image <website_event_banner_image/>`_
-     - 14.0.1.0.0
+     - 14.0.2.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
      - 14.0.1.1.0
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
-     - 14.0.1.0.4
+     - 14.0.1.0.6
      - Frontend customizations under "Customize" menu
-   * - `website_event_publish_event <website_event_publish_event>`_
+   * - `website_event_online_event <website_event_online_event/>`_
+     - 14.0.1.0.0
+     - Define events as online events and add video conference link
+   * - `website_event_publish_event <website_event_publish_event/>`_
      - 14.0.1.0.0
      - Publish event to website from backend and wizard
+   * - `website_event_register_elsewhere <website_event_register_elsewhere/>`_
+     - 14.0.1.0.0
+     - Ability to redirect registration link to another website
    * - `website_event_sale_promotion <website_event_sale_promotion>`_
      - 14.0.1.0.0
      - Sell tickets which contain multiple seats
