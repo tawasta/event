@@ -45,12 +45,6 @@ class EventRegistration(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
-    @api.model
-    def create(self, vals):
-        registration = super(EventRegistration, self).create(vals)
-        if registration._check_auto_confirmation():
-            registration.sudo().confirm_registration()
-        return registration
 
     # 7. Action methods
 
