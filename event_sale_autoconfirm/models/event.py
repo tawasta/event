@@ -54,9 +54,7 @@ class EventRegistration(models.Model):
         """
         Override to remove check for draft orders
         """
-        print("CHECK AUTO CONFIRM")
         if self._context.get("registration_force_draft"):
-            print("FALSE CONTEXT")
             return False
         if any(
             registration.event_id.state != "confirm"
@@ -67,7 +65,5 @@ class EventRegistration(models.Model):
             )
             for registration in self
         ):
-            print("FALSE")
             return False
-        print("TRUE")
         return True
