@@ -45,7 +45,7 @@ Addons
      - 14.0.1.0.6
      - Frontend customizations under "Customize" menu
    * - `website_event_online_event <website_event_online_event/>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.1
      - Define events as online events and add video conference link
    * - `website_event_publish_event <website_event_publish_event/>`_
      - 14.0.1.0.0
