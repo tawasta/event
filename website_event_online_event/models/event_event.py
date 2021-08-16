@@ -19,17 +19,31 @@
 ##############################################################################
 
 # 1. Standard library imports:
+import logging
+
+import pytz
+
+# 3. Odoo imports (openerp):
+from odoo import _, api, fields, models
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import api, fields, models
 
 # 4. Imports from Odoo modules:
 
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
+_logger = logging.getLogger(__name__)
+
+try:
+    import vobject
+except ImportError:
+    _logger.warning(
+        "`vobject` Python module not found, iCal file generation disabled. "
+        "Consider installing this module if you want to generate iCal files"
+    )
+    vobject = None
 
 
 class EventType(models.Model):
@@ -90,5 +104,39 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
+    def _get_ics_file(self):
+        """ Returns iCalendar file for the event invitation.
+            :returns a dict of .ics file content for each event
+        """
+        result = {}
+        if not vobject:
+            return result
+
+        for event in self:
+            cal = vobject.iCalendar()
+            cal_event = cal.add("vevent")
+
+            cal_event.add("created").value = fields.Datetime.now().replace(
+                tzinfo=pytz.timezone("UTC")
+            )
+            cal_event.add("dtstart").value = fields.Datetime.from_string(
+                event.date_begin
+            ).replace(tzinfo=pytz.timezone("UTC"))
+            cal_event.add("dtend").value = fields.Datetime.from_string(
+                event.date_end
+            ).replace(tzinfo=pytz.timezone("UTC"))
+            cal_event.add("summary").value = event.name
+            if event.address_id:
+                cal_event.add(
+                    "location"
+                ).value = event.sudo().address_id.contact_address
+            if event.is_online_event and event.video_conference_link:
+                video_link = _(
+                    "Join the video conference: %s", event.sudo().video_conference_link
+                )
+                cal_event.add("description").value = video_link
+
+            result[event.id] = cal.serialize().encode("utf-8")
+        return result
 
     # 8. Business methods
