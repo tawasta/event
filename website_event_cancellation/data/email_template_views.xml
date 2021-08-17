@@ -91,11 +91,15 @@
     </template>
     <template id="view_email_template_event_cancellation">
         <div>
-        If you wish to cancel your registration, follow the link below:
-        <a t-att-href="object.manage_url"/><br/>
-            <div style="margin: 16px 0px 16px 0px;"><a t-att-href="object.manage_url" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
-            Cancel here
-        </a></div></div>
+            <t t-esc="link_message"/>
+            <a t-att-href="object.manage_url"/>
+            <br/>
+            <div style="margin: 16px 0px 16px 0px;">
+                <a t-att-href="object.manage_url" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                    <t t-esc="button_message"/>
+                </a>
+            </div>
+        </div>
     </template>
     <template id="view_email_template_event_details">
         <tr>
@@ -233,13 +237,18 @@
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
-                                    Hello <t t-esc="object.name or ''"/>,<br/>
+                                        Hello <t t-esc="object.name or ''"/>,<br/><br/>
                                     We are happy to confirm your registration to the event
                                     <t t-if="object.event_id.is_published"><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></t>
                                     <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>
                                     for attendee <t t-esc="object.name"/>.
                                 </div>
-                                <t t-call="website_event_cancellation.view_email_template_event_cancellation"/>
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                    <t t-set="link_message">
+                                        If you wish to cancel your registration, follow the link below:
+                                    </t>
+                                    <t t-set="button_message">Cancel registration</t>
+                                </t>
                                 <t t-call="website_event_cancellation.view_email_template_event_calendar"/>
                                 <div>
                                     See you soon,<br/>
@@ -274,13 +283,18 @@
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
-                                    Hello <t t-esc="object.name or ''"/>,<br/>
+                                    Hello <t t-esc="object.name or ''"/>,<br/><br/>
                                     We are excited to remind you that the event
                                     <t t-if="object.event_id.is_published"><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></t>
                                     <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>
                                         is starting <strong><t t-esc="object.get_date_range_str()"/></strong>.
                                 </div>
-                                <t t-call="website_event_cancellation.view_email_template_event_cancellation"/>
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                    <t t-set="link_message">
+                                        If you wish to cancel your registration, follow the link below:
+                                    </t>
+                                    <t t-set="button_message">Cancel registration</t>
+                                </t>
                                 <t t-call="website_event_cancellation.view_email_template_event_calendar"/>
                                 <div>
                                     See you soon,<br/>

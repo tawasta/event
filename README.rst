@@ -60,7 +60,7 @@ Addons
      - 14.0.1.0.0
      - Sell tickets with waiting list
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.1.0
+     - 14.0.1.2.0
      - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0
