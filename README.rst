@@ -39,13 +39,13 @@ Addons
      - 14.0.2.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
-     - 14.0.1.1.0
+     - 14.0.1.2.0
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.6
      - Frontend customizations under "Customize" menu
    * - `website_event_online_event <website_event_online_event/>`_
-     - 14.0.1.0.1
+     - 14.0.1.2.0
      - Define events as online events and add video conference link
    * - `website_event_publish_event <website_event_publish_event/>`_
      - 14.0.1.0.0
@@ -60,7 +60,7 @@ Addons
      - 14.0.1.0.0
      - Sell tickets with waiting list
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.1.0
+     - 14.0.1.2.0
      - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0

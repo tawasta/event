@@ -11,8 +11,8 @@ class EventRegistration(models.Model):
             if registration.event_id.batch_id:
                 vals = {
                     "partner_id": registration.partner_id.id,
-                    "first_name": "Etunimi",
-                    "last_name": "Sukunimi",
+                    "first_name": registration.partner_id.firstname,
+                    "last_name": registration.partner_id.lastname,
                     "email": registration.partner_id.email,
                     "mobile": registration.partner_id.phone,
                     "birth_date": "1995-01-01",

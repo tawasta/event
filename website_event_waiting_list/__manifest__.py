@@ -21,7 +21,7 @@
 {
     "name": "Website Event Waiting List",
     "summary": "Adds a waiting list functionality to Events.",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -33,6 +33,7 @@
         "wizard/waiting_mail_list_wizard.xml",
         "security/ir.model.access.csv",
         "data/email_template_data.xml",
+        "data/email_template_views.xml",
         "views/assets.xml",
         "views/event_views.xml",
         "views/event_ticket_views.xml",

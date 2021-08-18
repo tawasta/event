@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="view_email_template_waiting_list">
+        <t t-call="website_event_cancellation.view_email_template_event_base">
+            <t t-set="email_heading">Your registration to waiting list</t>
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        <tr>
+                            <td valign="top" style="font-size: 14px;">
+                                <div>
+                                    Hello <t t-esc="object.name or ''"/>,<br/><br/>
+                                    Thank you for your interest in our event.<br/>
+                                    <t t-if="object.event_ticket_id">
+                                        The ticket <strong><t t-esc="object.event_ticket_id.name"/></strong> for event
+                                        <t t-if="object.event_id.is_published"><strong><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></strong></t>
+                                        <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>,
+                                        is currently sold out.<br/>
+                                    </t>
+                                    <t t-else="">
+                                        The event
+                                        <t t-if="object.event_id.is_published"><strong><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></strong></t>
+                                        <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>,
+                                        is currently sold out.<br/>
+                                    </t>
+                                        You have been placed on a waiting list. We will contact you if any seats become available.<br/><br/>
+                                </div>
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                    <t t-set="link_message">To cancel your position in the waiting list follow the link below:</t>
+                                    <t t-set="button_message">Cancel registration</t>
+                                </t>
+                                <div>
+                                    Thank you,<br/>
+                                    <span style="color: #454748;">
+                                        -- <br/>
+                                        <t t-if="object.event_id.organizer_id"><t t-esc="object.event_id.organizer_id.name"/></t>
+                                        <t t-else="">
+                                            The <t t-esc="object.event_id.name"/> Team
+                                        </t>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </t>
+    </template>
+    <template id="view_email_template_confirm_waiting_list">
+        <t t-call="website_event_cancellation.view_email_template_event_base">
+            <t t-set="email_heading">Your registration to waiting list</t>
+            <tr>
+                <td align="center" style="min-width: 590px;">
+                    <table width="590" border="0" cellpadding="0" cellspacing="0" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        <tr>
+                            <td valign="top" style="font-size: 14px;">
+                                <div>
+                                    Hello <t t-esc="object.name or ''"/>,<br/><br/>
+                                    <t t-if="object.event_ticket_id">
+                                        We have more seats available for the ticket <strong><t t-esc="object.event_ticket_id.name"/></strong> for the event
+                                        <t t-if="object.event_id.is_published"><strong><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></strong></t>
+                                        <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>.<br/>
+                                    </t>
+                                    <t t-else="">
+                                        We have more seats available for the event
+                                        <t t-if="object.event_id.is_published"><strong><a t-att-href="object.event_id.website_url" style="color:#875A7B;text-decoration:none;"><t t-esc="object.event_id.name"/></a></strong></t>
+                                        <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>.<br/>
+                                    </t>
+                                        Claim your seat quickly as we give seats on a first come first serve basis.<br/><br/>
+                                </div>
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                    <t t-set="link_message">Claim or cancel your seat from the link below:</t>
+                                    <t t-set="button_message">Claim or cancel registration</t>
+                                </t>
+                                <div>
+                                    Thank you,<br/>
+                                    <span style="color: #454748;">
+                                        -- <br/>
+                                        <t t-if="object.event_id.organizer_id"><t t-esc="object.event_id.organizer_id.name"/></t>
+                                        <t t-else="">
+                                            The <t t-esc="object.event_id.name"/> Team
+                                        </t>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </t>
+    </template>
+</odoo>
