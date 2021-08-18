@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="view_email_template_event_online_event">
+        <t t-if="object.event_id.is_online_event">
+            <div>
+                This event is held online.
+                <t t-if="object.event_id.video_conference_link">
+                    Once the event starts, join the video conference link below:
+                        <a t-att-href="object.event_id.video_conference_link"/><br/>
+                        <div style="margin: 16px 0px 16px 0px;"><a t-att-href="object.event_id.video_conference_link" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                Join the video conference here
+                        </a></div>
+                </t>
+            </div>
+        </t>
+    </template>
+    <template id="view_email_template_subscription_with_cancel_online_event" inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel">
+        <xpath expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']" position="before">
+            <t t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
+                <t t-set="details">Join the video conference: <t t-esc="object.event_id.video_conference_link"/></t>
+            </t>
+            <t t-call="website_event_online_event.view_email_template_event_online_event"/>
+        </xpath>
+    </template>
+    <template id="view_email_template_reminder_with_cancel_online_event" inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel">
+        <xpath expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']" position="before">
+            <t t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
+                <t t-set="details">Join the video conference: <t t-esc="object.event_id.video_conference_link"/></t>
+            </t>
+            <t t-call="website_event_online_event.view_email_template_event_online_event"/>
+        </xpath>
+    </template>
+</odoo>

@@ -26,6 +26,7 @@ from dateutil.relativedelta import relativedelta
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+from odoo.tools import format_datetime
 
 # 2. Known third party imports:
 
@@ -98,10 +99,72 @@ class EventEvent(models.Model):
         readonly=True,
         store=True,
     )
+    date_begin_calendar_utc = fields.Char(
+        string="Start Date Calendar UTC", compute="_compute_date_begin_calendar_utc"
+    )
+    date_end_calendar_utc = fields.Char(
+        string="End Date Calendar UTC", compute="_compute_date_end_calendar_utc"
+    )
+    date_begin_calendar_locale = fields.Char(
+        string="Start Date Calendar Locale",
+        compute="_compute_date_begin_calendar_locale",
+    )
+    date_end_calendar_locale = fields.Char(
+        string="End Date Calendar Locale", compute="_compute_date_end_calendar_locale"
+    )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("date_tz", "date_begin")
+    def _compute_date_begin_calendar_utc(self):
+        for event in self:
+            if event.date_begin:
+                event.date_begin_calendar_utc = format_datetime(
+                    self.env,
+                    event.date_begin,
+                    tz="UTC",
+                    dt_format="yyyyMMdd'T'HHmmss'Z'",
+                )
+            else:
+                event.date_begin_calendar_utc = False
+
+    @api.depends("date_tz", "date_end")
+    def _compute_date_end_calendar_utc(self):
+        for event in self:
+            if event.date_end:
+                event.date_end_calendar_utc = format_datetime(
+                    self.env, event.date_end, tz="UTC", dt_format="yyyyMMdd'T'HHmmss'Z'"
+                )
+            else:
+                event.date_end_calendar_utc = False
+
+    @api.depends("date_tz", "date_begin")
+    def _compute_date_begin_calendar_locale(self):
+        for event in self:
+            if event.date_begin:
+                event.date_begin_calendar_locale = format_datetime(
+                    self.env,
+                    event.date_begin,
+                    tz=self._context.get("tz"),
+                    dt_format="yyyyMMdd'T'HHmmss'Z'",
+                )
+            else:
+                event.date_begin_calendar_locale = False
+
+    @api.depends("date_tz", "date_end")
+    def _compute_date_end_calendar_locale(self):
+        for event in self:
+            if event.date_end:
+                event.date_end_calendar_locale = format_datetime(
+                    self.env,
+                    event.date_end,
+                    tz=self._context.get("tz"),
+                    dt_format="yyyyMMdd'T'HHmmss'Z'",
+                )
+            else:
+                event.date_end_calendar_locale = False
+
     @api.depends("cancel_before_date", "date_end", "date_tz")
     def _compute_able_to_cancel(self):
         for event in self:
