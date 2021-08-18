@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-17 12:43+0000\n"
-"PO-Revision-Date: 2021-08-17 12:43+0000\n"
+"POT-Creation-Date: 2021-08-18 07:51+0000\n"
+"PO-Revision-Date: 2021-08-18 07:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,31 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: website_event_cancellation
-#: model:mail.template,subject:website_event_cancellation.event_reminder_with_cancel
-msgid "${object.event_id.name}: ${object.get_date_range_str()}"
-msgstr ""
-
-#. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
 msgid "(ref:"
 msgstr "(viite:"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
 msgid ""
-",<br/>\n"
+",<br/><br/>\n"
 "                                    We are excited to remind you that the event"
 msgstr ""
-",<br/>\n"
+",<br/><br/>\n"
 "                                    Muistutamme teitä, että tapahtuma"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid ""
-",<br/>\n"
+",<br/><br/>\n"
 "                                    We are happy to confirm your registration to the event"
 msgstr ""
-",<br/>\n"
+",<br/><br/>\n"
 "                                    Vahvistamme ilmoittautumisesi tapahtumaan"
 
 #. module: website_event_cancellation
@@ -148,12 +143,9 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_cancellation
-msgid "Cancel here"
-msgstr "Peruuta tästä"
-
-#. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_event_form_cancel
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_event_type_form_cancel
 msgid "Cancel registration"
@@ -223,8 +215,8 @@ msgid "Google Maps"
 msgstr ""
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "Hello"
 msgstr "Hei"
 
@@ -242,7 +234,8 @@ msgid "ID"
 msgstr "Tunniste (ID)"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "If you wish to cancel your registration, follow the link below:"
 msgstr "Jos haluat peruuttaa ilmoittautumisesi, klikkaa alla olevaa linkkiä:"
 
@@ -290,8 +283,8 @@ msgid "Security Token"
 msgstr "Suojaustunnus"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "See you soon,<br/>"
 msgstr "Nähdään pian,<br/>"
 
@@ -311,16 +304,16 @@ msgid "Start Date Calendar UTC"
 msgstr "Aloituspäivä Kalenteri UTC"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "Team"
 msgstr "Tiimi"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "The"
-msgstr ""
+msgstr "Tapahtuman"
 
 #. module: website_event_cancellation
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__cancel_interval_unit
@@ -355,15 +348,10 @@ msgid "You are registered to"
 msgstr "Olet ilmoittautunut tapahtumaan"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "Your registration"
 msgstr "Ilmoittautumisesi"
-
-#. module: website_event_cancellation
-#: model:mail.template,subject:website_event_cancellation.event_subscription_with_cancel
-msgid "Your registration at ${object.event_id.name}"
-msgstr "Ilmoittautumisesi tapahtumaan ${object.event_id.name}"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
@@ -376,7 +364,7 @@ msgid "all our events"
 msgstr "kaikkiin tapahtumiimme"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_subscription_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "for attendee"
 msgstr "osallistujalle"
 
@@ -391,6 +379,6 @@ msgid "iCal/Outlook"
 msgstr ""
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
 msgid "is starting"
 msgstr "on alkamassa"

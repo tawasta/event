@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="view_email_template_event_base">
+        <t t-set="details" t-value=""/>
         <!-- Complete location information depending on available information -->
         <t t-if="object.event_id.address_id">
             <t t-set="location" t-value=""/>
@@ -220,15 +221,15 @@
         <div>
             <br/>
             <strong>Add this event to your calendar</strong>
-            <a t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=#{object.event_id.name}&amp;dates=#{object.event_id.date_begin_calendar_utc}/#{object.event_id.date_end_calendar_utc}&amp;location=#{location}" style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;" target="new"><img src="/web_editor/font_to_img/61525/rgb(135,90,123)/16" style="vertical-align:middle;" height="16" alt=""/> Google</a>
+            <a t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=#{object.event_id.name}&amp;dates=#{object.event_id.date_begin_calendar_utc}/#{object.event_id.date_end_calendar_utc}&amp;location=#{location}&amp;details=#{details}" style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;" target="new"><img src="/web_editor/font_to_img/61525/rgb(135,90,123)/16" style="vertical-align:middle;" height="16" alt=""/> Google</a>
             <a t-attf-href="/event/#{slug(object.event_id)}/ics" style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"><img src="/web_editor/font_to_img/61525/rgb(135,90,123)/16" style="vertical-align:middle;" height="16" alt=""/> iCal/Outlook</a>
-            <a t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title=#{object.event_id.name}&amp;in_loc=#{location}&amp;st=#{object.event_id.date_begin_calendar_locale}&amp;et=#{object.event_id.date_end_calendar_locale}" style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;" target="new"><img src="/web_editor/font_to_img/61525/rgb(135,90,123)/16" style="vertical-align:middle;" height="16" alt=""/> Yahoo
+            <a t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title=#{object.event_id.name}&amp;in_loc=#{location}&amp;st=#{object.event_id.date_begin_calendar_locale}&amp;et=#{object.event_id.date_end_calendar_locale}&amp;desc=#{details}" style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;" target="new"><img src="/web_editor/font_to_img/61525/rgb(135,90,123)/16" style="vertical-align:middle;" height="16" alt=""/> Yahoo
                         </a>
             <br/>
             <br/>
         </div>
     </template>
-    <template id="view_email_subscription_with_cancel">
+    <template id="view_email_template_subscription_with_cancel">
         <t t-call="website_event_cancellation.view_email_template_event_base">
             <t t-set="email_heading">Your registration</t>
             <tr>
@@ -274,7 +275,7 @@
             <t t-call="website_event_cancellation.view_email_template_event_details"/>
         </t>
     </template>
-    <template id="view_email_reminder_with_cancel">
+    <template id="view_email_template_reminder_with_cancel">
         <t t-call="website_event_cancellation.view_email_template_event_base">
             <t t-set="email_heading">Your registration</t>
             <tr>
