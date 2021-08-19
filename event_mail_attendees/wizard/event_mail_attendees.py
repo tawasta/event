@@ -80,12 +80,18 @@ class EventMailAttendeesWizard(models.TransientModel):
             else:
                 msg.body = False
 
-    @api.depends("template_id")
+    @api.depends("template_id", "event_id")
     def _compute_attendees(self):
         for msg in self:
             if msg.template_id:
                 msg.recipients = msg.event_id.registration_ids.search(
-                    ["|", ("state", "=", "open"), ("state", "=", "done")]
+                    [
+                        "&",
+                        ("event_id.id", "=", msg.event_id.id),
+                        "|",
+                        ("state", "=", "open"),
+                        ("state", "=", "done"),
+                    ]
                 )
             else:
                 msg.recipients = False

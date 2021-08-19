@@ -20,7 +20,7 @@
 
 {
     "name": "Event Mail Attendees",
-    "summary": "Wizzard to mail Attendees without mass mail",
+    "summary": "Wizard to mail Attendees without mass mail",
     "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
