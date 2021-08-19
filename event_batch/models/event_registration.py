@@ -6,6 +6,21 @@ class EventRegistration(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        for values in vals_list:
+            Partner = self.env["res.partner"]
+            visitor = self.env["website.visitor"].sudo().search([
+                ('id', '=', values.get("visitor_id"))
+            ])
+            is_partner = Partner.search([("email", "=ilike", visitor.email)], limit=1)
+            if not is_partner:
+                partner_vals = {
+                    'name': visitor.display_name,
+                    'email': visitor.email,
+                    'phone': visitor.mobile,
+                }
+                new_partner = Partner.sudo().create(partner_vals)
+                values["partner_id"] = new_partner.id
+
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
             if registration.event_id.batch_id:
@@ -30,7 +45,7 @@ class EventRegistration(models.Model):
                     create_student = self.env["op.student"].sudo().create(vals)
                     student_batch_vals.update({"student_id": create_student.id})
 
-                create_student_batch = (
-                    self.env["op.batch.students"].sudo().create(student_batch_vals)
-                )
+                    create_student_batch = (
+                        self.env["op.batch.students"].sudo().create(student_batch_vals)
+                    )
         return registrations
