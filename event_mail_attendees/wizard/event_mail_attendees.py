@@ -129,9 +129,6 @@ class EventMailAttendeesWizard(models.TransientModel):
                 body=self.body,
                 notify_by_email=False,
                 attachment_ids=self.attachment_ids.ids,
-                subtype_id=self.env.ref(
-                    "event_mail_attendees.mt_mail_event_attendees"
-                ).id,
             )
 
         self.event_id.sudo().message_post(
