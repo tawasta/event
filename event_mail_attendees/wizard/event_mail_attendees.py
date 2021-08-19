@@ -124,6 +124,15 @@ class EventMailAttendeesWizard(models.TransientModel):
             msg_template.sudo().send_mail(
                 recipient.id, email_values=mail_values, force_send=True
             )
+            recipient.message_post(
+                subject=self.subject,
+                body=self.body,
+                notify_by_email=False,
+                attachment_ids=self.attachment_ids.ids,
+                subtype_id=self.env.ref(
+                    "event_mail_attendees.mt_mail_event_attendees"
+                ).id,
+            )
 
         self.event_id.message_post(
             subject=self.subject,
