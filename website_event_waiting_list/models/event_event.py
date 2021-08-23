@@ -63,9 +63,7 @@ class EventType(models.Model):
                             "notification_type": "mail",
                             "interval_unit": "now",
                             "interval_type": "after_sub",
-                            "template_id": self.env.ref(
-                                "website_event_cancellation.event_subscription_with_cancel"
-                            ).id,
+                            "template_id": self.env.ref("event.event_subscription").id,
                         },
                     ),
                     (
@@ -76,9 +74,7 @@ class EventType(models.Model):
                             "interval_nbr": 10,
                             "interval_unit": "days",
                             "interval_type": "before_event",
-                            "template_id": self.env.ref(
-                                "website_event_cancellation.event_reminder_with_cancel"
-                            ).id,
+                            "template_id": self.env.ref("event.event_reminder").id,
                         },
                     ),
                     (
