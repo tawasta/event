@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Event mail attendees template -->
+        <record id="event_mail_template_mail_attendees" model="mail.template">
+            <field name="name">Event: Empty Mail Template</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="use_default_to" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="subject"/>
+            <field name="body_html"/>
+        </record>
+    </data>
+</odoo>
