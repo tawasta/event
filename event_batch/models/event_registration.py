@@ -8,15 +8,12 @@ class EventRegistration(models.Model):
     def create(self, vals_list):
         for values in vals_list:
             Partner = self.env["res.partner"]
-            visitor = self.env["website.visitor"].sudo().search([
-                ('id', '=', values.get("visitor_id"))
-            ])
-            is_partner = Partner.search([("email", "=ilike", visitor.email)], limit=1)
+            is_partner = Partner.search([("email", "=ilike", values.get("email"))], limit=1)
             if not is_partner:
                 partner_vals = {
-                    'name': visitor.display_name,
-                    'email': visitor.email,
-                    'phone': visitor.mobile,
+                    'name': values.get("name"),
+                    'email': values.get("email"),
+                    'phone': values.get("phone"),
                 }
                 new_partner = Partner.sudo().create(partner_vals)
                 values["partner_id"] = new_partner.id
