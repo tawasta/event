@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-10 12:25+0000\n"
-"PO-Revision-Date: 2021-08-10 12:25+0000\n"
+"POT-Creation-Date: 2021-08-26 09:03+0000\n"
+"PO-Revision-Date: 2021-08-26 09:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,6 +25,12 @@ msgstr "<span>Ilmoittautuminen</span>"
 #: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__display_name
 msgid "Display Name"
 msgstr "Näyttönimi"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,help:website_event_register_elsewhere.field_event_event__registration_link
+#: model:ir.model.fields,help:website_event_register_elsewhere.field_event_type__registration_link
+msgid "Enter the URL address of an external registration link."
+msgstr "Anna URL-osoite ulkopuoliseen ilmoittautumislinkkiin. "
 
 #. module: website_event_register_elsewhere
 #: model:ir.model,name:website_event_register_elsewhere.model_event_event
@@ -62,5 +68,15 @@ msgstr "Ilmoittautuminen muualla"
 #. module: website_event_register_elsewhere
 #: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_event__registration_link
 #: model:ir.model.fields,field_description:website_event_register_elsewhere.field_event_type__registration_link
-msgid "Registration Link"
-msgstr "Ilmoittautumislinkki"
+msgid "Registration Link (URL)"
+msgstr "Ilmoittautumislinkki (URL)"
+
+#. module: website_event_register_elsewhere
+#: model:ir.model.fields,help:website_event_register_elsewhere.field_event_event__registration_elsewhere
+#: model:ir.model.fields,help:website_event_register_elsewhere.field_event_type__registration_elsewhere
+msgid ""
+"Selecting this option disables registration through the system and redirects"
+" registrations to an external link."
+msgstr ""
+"Tämän vaihtoehdon valitseminen poistaa järjestelmän sisäisen ilmoittautumisen"
+" käytöstä ja uudelleenohjaa ilmoittautumiset ulkopuoliseen ilmoittautumislinkkiin."

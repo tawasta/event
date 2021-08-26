@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Confirm registration from waiting list views -->
-    <template id="confirm_waiting" inherit_id="website_event_cancellation.cancel_registration">
+    <template id="confirm_waiting" inherit_id="website_event_cancellation.cancel_registration" name="Manage Registration">
         <xpath expr="//div[@name='title-div']" position="inside">
             <t t-if="registration.waiting_list_to_confirm">
                 <h3>You are in a waiting list for event <t t-esc="event.name"/>.</h3>

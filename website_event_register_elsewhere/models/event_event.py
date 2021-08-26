@@ -38,9 +38,18 @@ class EventType(models.Model):
 
     # 2. Fields declaration
     registration_elsewhere = fields.Boolean(
-        "Registration Elsewhere", readonly=False, store=True
+        "Registration Elsewhere",
+        help="Selecting this option disables registration through the system "
+        "and redirects registrations to an external link.",
+        readonly=False,
+        store=True,
     )
-    registration_link = fields.Char("Registration Link", readonly=False, store=True)
+    registration_link = fields.Char(
+        "Registration Link (URL)",
+        help="Enter the URL address of an external registration link.",
+        readonly=False,
+        store=True,
+    )
 
     # 3. Default methods
 
@@ -62,12 +71,15 @@ class EventEvent(models.Model):
     # 2. Fields declaration
     registration_elsewhere = fields.Boolean(
         "Registration Elsewhere",
+        help="Selecting this option disables registration through the system "
+        "and redirects registrations to an external link.",
         readonly=False,
         store=True,
         compute="_compute_registration_elsewhere",
     )
     registration_link = fields.Char(
-        "Registration Link",
+        "Registration Link (URL)",
+        help="Enter the URL address of an external registration link.",
         readonly=False,
         store=True,
         compute="_compute_registration_link",
