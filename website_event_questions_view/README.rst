@@ -3,9 +3,9 @@
    :alt: License: AGPL-3
 
 ============================
-Event Template No Duplicates
+Website Event Questions View
 ============================
-* Choosing an event template won't create duplicate emails and questions.
+* Creates a view to see event question answers.
 
 Configuration
 =============

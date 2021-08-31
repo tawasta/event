@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_disable_template" model="ir.ui.view">
+        <field name="name">event.event.form.disable.template</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <field name="event_type_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('id', '!=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
