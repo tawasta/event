@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Event Template No Duplicates",
-    "summary": "Adding a template to an event won't create duplicate emails and questions",
+    "name": "Event Template Disable After Create",
+    "summary": "Disable changing template after creation",
     "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -29,5 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["event"],
-    "data": [],
+    "data": ["views/event_views.xml"],
 }
