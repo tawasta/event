@@ -16,7 +16,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']//button[1]" position="before">
                 <field name="has_answers" invisible="1"/>
-                <button name="%(website_event_questions_view.act_event_question_answers_from_event)d" type="action" class="oe_stat_button" icon="fa-question-circle" help="Question answers for this Event" attrs="{'invisible': [('has_answers', '!=', True)]}">
+                <button name="%(website_event_questions_view.act_event_question_answers_from_event)d" id="question_answers_button" type="action" class="oe_stat_button" icon="fa-question-circle" help="Question answers for this Event" attrs="{'invisible': [('has_answers', '!=', True)]}">
                     <field name="answer_count" widget="statinfo" string="Answers"/>
                 </button>
             </xpath>
