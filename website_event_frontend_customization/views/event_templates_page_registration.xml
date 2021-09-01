@@ -12,6 +12,7 @@
             </div>
         </xpath>
     </template>
+    <!-- Event tickets -->
     <template id="hide_tickets_not_for_sale" inherit_id="website_event.registration_template" active="False" customize_show="True" name="Hide tickets not for sale">
         <xpath expr="//div[@id='o_wevent_tickets_collapse']//div" position="attributes">
             <attribute name="t-att-class">'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
@@ -20,6 +21,16 @@
     <template id="hide_share_box" inherit_id="website_event.event_description_full" active="False" customize_show="True" name="Hide share box">
         <xpath expr="//div[@class='o_wevent_sidebar_block'][last()]" position="attributes">
             <attribute name="class">o_wevent_sidebar_block d-none</attribute>
+        </xpath>
+    </template>
+    <!-- Event confirmation -->
+    <template id="hide_ticket_ref" inherit_id="website_event.registration_complete" active="True" customize_show="True" name="Hide ticket reference">
+        <xpath expr="//div[@class='d-flex flex-column']//span[last()]" position="replace">
+            <span>
+                <i class="fa fa-ticket mr-2"/>
+                <t t-if="attendee.event_ticket_id" t-esc="attendee.event_ticket_id.name"/>
+                <t t-else="">N/A</t>
+            </span>
         </xpath>
     </template>
 </odoo>
