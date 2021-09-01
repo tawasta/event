@@ -31,7 +31,7 @@
     "data": [
         "views/event_views.xml",
         "views/event_templates_page_cancellation.xml",
-        "data/email_template_data.xml",
         "data/email_template_views.xml",
+        "data/email_template_data.xml",
     ],
 }
