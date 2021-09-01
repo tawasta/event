@@ -57,7 +57,7 @@ Addons
      - 14.0.1.0.0
      - Publish event to website from backend and wizard
    * - `website_event_questions_view <website_event_questions_view/>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.1
      - Button to see event question breakdown
    * - `website_event_register_elsewhere <website_event_register_elsewhere/>`_
      - 14.0.1.0.0
