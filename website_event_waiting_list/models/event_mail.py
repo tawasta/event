@@ -156,7 +156,11 @@ class EventMailScheduler(models.Model):
     def execute(self):
         for mail in self:
             now = fields.Datetime.now()
-            if mail.interval_type in ["after_sub", "after_wait"]:
+            if mail.interval_type in [
+                "after_sub",
+                "after_wait",
+                "after_seats_available",
+            ]:
                 # update registration lines
                 lines = [
                     (0, 0, {"registration_id": registration.id})
@@ -171,6 +175,11 @@ class EventMailScheduler(models.Model):
                     or (
                         mail.interval_type == "after_wait"
                         and registration.state == "wait"
+                    )
+                    or (
+                        mail.interval_type == "after_seats_available"
+                        and registration.state == "wait"
+                        and registration.waiting_list_to_confirm
                     )
                 ]
                 if lines:
