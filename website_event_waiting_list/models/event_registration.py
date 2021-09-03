@@ -52,6 +52,7 @@ class EventRegistration(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("event_id.seats_available")
     def _compute_available_to_confirm(self):
         """
         Compute all cases where registration from waiting list is able

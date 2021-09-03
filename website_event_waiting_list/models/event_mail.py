@@ -119,6 +119,20 @@ class EventMailScheduler(models.Model):
                 else False
             )
 
+    @api.depends(
+        "mail_sent",
+        "interval_type",
+        "event_id.registration_ids",
+        "mail_registration_ids",
+        "mail_registration_ids.mail_sent",
+    )
+    def _compute_done(self):
+        for mail in self:
+            if mail.interval_type in ["before_event", "after_event"]:
+                mail.done = mail.mail_sent
+            elif len(mail.mail_registration_ids) > 0:
+                mail.done = all(mail.mail_sent for mail in mail.mail_registration_ids)
+
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
@@ -132,6 +146,7 @@ class EventMailScheduler(models.Model):
                 "after_wait",
                 "after_seats_available",
             ]:
+                # update registration lines
                 lines = [
                     (0, 0, {"registration_id": registration.id})
                     for registration in (
@@ -148,14 +163,14 @@ class EventMailScheduler(models.Model):
                     )
                     or (
                         mail.interval_type == "after_seats_available"
+                        and registration.state == "wait"
                         and registration.waiting_list_to_confirm
                     )
                 ]
                 if lines:
                     mail.write({"mail_registration_ids": lines})
-                # execute scheduler on open registrations
+                # execute scheduler on registrations
                 mail.mail_registration_ids.execute()
-
             else:
                 # Do not send emails if the mailing was scheduled
                 # before the event but the event is over
@@ -203,6 +218,7 @@ class EventMailRegistration(models.Model):
                     (reg_mail.scheduler_id.interval_type != "after_seats_available")
                     or (
                         reg_mail.scheduler_id.interval_type == "after_seats_available"
+                        and reg_mail.registration_id.state == "wait"
                         and reg_mail.registration_id.waiting_list_to_confirm
                     )
                 )
