@@ -130,23 +130,8 @@ class EventMailScheduler(models.Model):
         for mail in self:
             if mail.interval_type in ["before_event", "after_event"]:
                 mail.done = mail.mail_sent
-            elif mail.interval_type == "after_sub":
-                mail.done = len(mail.mail_registration_ids) == len(
-                    mail.event_id.registration_ids.filtered(
-                        lambda r: r.state in ["open", "done"]
-                    )
-                ) and all(mail.mail_sent for mail in mail.mail_registration_ids)
-
-            elif mail.interval_type == "after_wait":
-                mail.done = len(mail.mail_registration_ids) == len(
-                    mail.event_id.registration_ids.filtered(lambda r: r.state == "wait")
-                ) and all(mail.mail_sent for mail in mail.mail_registration_ids)
-            elif mail.interval_type == "after_seats_available":
-                mail.done = len(mail.mail_registration_ids) == len(
-                    mail.event_id.registration_ids.filtered(
-                        lambda r: r.waiting_list_to_confirm
-                    )
-                ) and all(mail.mail_sent for mail in mail.mail_registration_ids)
+            elif len(mail.mail_registration_ids) > 0:
+                mail.done = all(mail.mail_sent for mail in mail.mail_registration_ids)
 
     # 5. Constraints and onchanges
 

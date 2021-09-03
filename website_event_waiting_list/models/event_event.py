@@ -240,7 +240,7 @@ class EventEvent(models.Model):
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
 
-    @api.constrains("seats_available", "waiting_list")
+    @api.constrains("seats_available", "waiting_list", "registration_ids.state")
     def _mail_to_waiting_list_confirmation(self):
         for event in self:
             if event.waiting_list:
