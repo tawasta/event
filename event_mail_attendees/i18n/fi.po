@@ -60,7 +60,7 @@ msgstr "Näyttönimi"
 #: model:ir.model,name:event_mail_attendees.model_event_event
 #: model:ir.model.fields,field_description:event_mail_attendees.field_event_mail_attendees_wizard__event_id
 msgid "Event"
-msgstr "Tilaisuus"
+msgstr "Tapahtuma"
 
 #. module: event_mail_attendees
 #: model:mail.message.subtype,name:event_mail_attendees.mt_mail_event_attendees

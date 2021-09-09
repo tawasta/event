@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="events_list_datetime" inherit_id="website_event.events_list" name="Events list">
+        <xpath expr="//t[@t-if='event.start_sale_date and event.start_sale_date &gt; datetime.date.today()']" position="attributes">
+            <attribute name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now()</attribute>
+        </xpath>
+    </template>
+</odoo>
