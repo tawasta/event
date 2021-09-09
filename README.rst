@@ -48,7 +48,7 @@ Addons
      - 14.0.1.2.0
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
-     - 14.0.1.0.6
+     - 14.0.1.0.7
      - Frontend customizations under "Customize" menu
    * - `website_event_online_event <website_event_online_event/>`_
      - 14.0.1.2.0
@@ -68,8 +68,11 @@ Addons
    * - `website_event_sale_waiting_list <website_event_sale_promotion>`_
      - 14.0.1.0.0
      - Sell tickets with waiting list
+   * - `website_event_ticket_datetime <website_event_ticket_datetime>`_
+     - 14.0.1.0.0
+     - Ticket start/end date with datetime accuracy
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.2.2
+     - 14.0.1.2.3
      - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0

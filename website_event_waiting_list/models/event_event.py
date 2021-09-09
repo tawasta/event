@@ -214,7 +214,7 @@ class EventEvent(models.Model):
             )
             event.event_registrations_open = (
                 (
-                    event.start_sale_date <= current_datetime.date()
+                    event.start_sale_date <= current_datetime.now()
                     if event.start_sale_date
                     else True
                 )
