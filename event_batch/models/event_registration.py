@@ -32,6 +32,7 @@ class EventRegistration(models.Model):
                 student_batch_vals = {
                     "batch_id": registration.event_ticket_id.batch_id.id,
                     "event_id": registration.event_id.id,
+                    "certificate_date": registration.event_id.date_end.date(),
                 }
                 is_student = self.env["op.student"].sudo().search([
                     ('partner_id', '=', registration.partner_id.id)
