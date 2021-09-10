@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,19 +18,40 @@
 #
 ##############################################################################
 
-{
-    "name": "Website Event Sale Promotion",
-    "summary": "Sell event tickets as promotions",
-    "version": "14.0.1.0.0",
-    "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": ["website_event_sale_waiting_list"],
-    "data": [
-        "views/event_ticket_views.xml",
-        "views/event_templates_page_registration.xml",
-    ],
-}
+# 1. Standard library imports:
+
+# 2. Known third party imports:
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class EventTemplateTicket(models.Model):
+    # 1. Private attributes
+    _inherit = "event.type.ticket"
+
+    # 2. Fields declaration
+    seats_to_sell = fields.Integer(
+        string="Number of seats to sell",
+        help="Define the number of seats to sell per order. "
+        "Set to 2 to sell either 2,4,6 or 8 seats per order",
+        default=1,
+    )
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods
