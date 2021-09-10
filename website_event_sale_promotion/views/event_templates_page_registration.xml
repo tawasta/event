@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="registration_template_sale_promotion" inherit_id="website_event.registration_template">
+        <xpath expr="//div[@class='w-auto ml-auto']//select//t//option[@t-esc='nb']" position="replace">
+            <t t-if="ticket and ticket.seats_to_sell and ticket.seats_to_sell &gt; 1">
+                <t t-if="(nb / ticket.seats_to_sell).is_integer()">
+                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                </t>
+            </t>
+            <t t-else="">
+                <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='ml-auto o_wevent_nowrap']//t//select//t//option[@t-esc='nb']" position="replace">
+            <t t-if="tickets and tickets.seats_to_sell and tickets.seats_to_sell &gt; 1">
+                <t t-if="(nb / tickets.seats_to_sell).is_integer()">
+                    <option t-esc="nb" t-att-selected="nb == tickets.seats_to_sell and 'selected'"/>
+                </t>
+            </t>
+            <t t-else="">
+                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="registration_template_waiting_list_sale_promotion" inherit_id="website_event_waiting_list.registration_template_waiting_list">
+        <xpath expr="//option[@class='waiting_list_option_multi']" position="replace">
+            <t t-if="ticket and ticket.seats_to_sell and ticket.seats_to_sell &gt; 1">
+                <t t-if="(nb / ticket.seats_to_sell).is_integer()">
+                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                </t>
+            </t>
+            <t t-else="">
+                <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+            </t>
+        </xpath>
+        <xpath expr="//option[@class='waiting_list_option_single']" position="replace">
+            <t t-if="tickets and tickets.seats_to_sell and tickets.seats_to_sell &gt; 1">
+                <t t-if="(nb / tickets.seats_to_sell).is_integer()">
+                    <option t-esc="nb" t-att-selected="nb == tickets.seats_to_sell and 'selected'"/>
+                </t>
+            </t>
+            <t t-else="">
+                <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

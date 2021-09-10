@@ -4,14 +4,16 @@
         <!-- Multi ticket view -->
         <xpath expr="//div[@class='w-auto ml-auto']//select" position="attributes">
             <attribute name="t-if">(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
+            <attribute name="id">seats_available_check_select</attribute>
         </xpath>
         <xpath expr="//div[@class='w-auto ml-auto']//div[@class='text-danger']//span[1]" position="attributes">
             <attribute name="t-if">not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;=0</attribute>
+            <attribute name="id">ticket_available_check_span</attribute>
         </xpath>
         <xpath expr="//div[@class='w-auto ml-auto']//div[@class='text-danger']//span[1]" position="after">
-            <select t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched and ((not event.seats_limited or event.seats_available &lt;=0) or (not ticket.seats_limited or ticket.seats_available &lt;=0))" t-attf-name="nb_register-#{ticket.id}" class="custom-select">
+            <select t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched and ((not event.seats_limited or event.seats_available &lt;=0) or (not ticket.seats_limited or ticket.seats_available &lt;=0))" t-attf-name="nb_register-#{ticket.id}" class="custom-select waiting_list_select_multi">
                 <t t-foreach="range(0, 10)" t-as="nb">
-                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"/>
+                    <option t-esc="nb" t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'" class="waiting_list_option_multi"/>
                 </t>
             </select>
         </xpath>
@@ -41,9 +43,9 @@
         </xpath>
         <xpath expr="//div[@class='ml-auto o_wevent_nowrap']//t[@t-else='']//span" position="after">
             <t t-if="event.waiting_list">
-                <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select">
+                <select t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)" class="w-auto custom-select waiting_list_select_single">
                     <t t-foreach="range(0, 10)" t-as="nb">
-                        <option t-esc="nb" t-att-selected="nb == 1 and 'selected'"/>
+                        <option t-esc="nb" t-att-selected="nb == 1 and 'selected'" class="waiting_list_option_single"/>
                     </t>
                 </select>
             </t>
