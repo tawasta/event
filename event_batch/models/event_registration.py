@@ -20,7 +20,7 @@ class EventRegistration(models.Model):
 
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
-            if registration.event_ticket_id.batch_id:
+            if registration.event_ticket_id.product_id.batch_id:
                 vals = {
                     "partner_id": registration.partner_id.id,
                     "first_name": registration.partner_id.firstname,
@@ -30,9 +30,8 @@ class EventRegistration(models.Model):
                     "birth_date": "1995-01-01",
                 }
                 student_batch_vals = {
-                    "batch_id": registration.event_ticket_id.batch_id.id,
+                    "batch_id": registration.event_ticket_id.product_id.batch_id.id,
                     "event_id": registration.event_id.id,
-                    "certificate_date": registration.event_id.date_end.date(),
                 }
                 is_student = self.env["op.student"].sudo().search([
                     ('partner_id', '=', registration.partner_id.id)
