@@ -29,10 +29,8 @@ class EventRegistration(models.Model):
                     "mobile": registration.partner_id.phone,
                     "birth_date": "1995-01-01",
                 }
-                student_batch_vals = {
-                    "batch_id": registration.event_ticket_id.product_id.batch_id.id,
-                    "event_id": registration.event_id.id,
-                }
+                student_batch_vals = self.student_batch_values_preprocess(registration)
+
                 is_student = self.env["op.student"].sudo().search([
                     ('partner_id', '=', registration.partner_id.id)
                 ])
@@ -46,3 +44,11 @@ class EventRegistration(models.Model):
                         self.env["op.batch.students"].sudo().create(student_batch_vals)
                     )
         return registrations
+
+    def student_batch_values_preprocess(self, registration):
+        values = {
+            "batch_id": registration.event_ticket_id.product_id.batch_id.id,
+            "event_id": registration.event_id.id,
+        }
+
+        return values
