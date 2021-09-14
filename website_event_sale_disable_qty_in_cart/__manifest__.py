@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Website Event Sale Promotion",
-    "summary": "Sell event tickets as promotions",
+    "name": "Website Event Sale Disable Qty in Cart",
+    "summary": "Disable changing Event Registration qty in cart",
     "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,9 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_sale_waiting_list"],
-    "data": [
-        "views/event_ticket_views.xml",
-        "views/event_templates_page_registration.xml",
-    ],
+    "depends": ["website_event_sale"],
+    "data": ["views/website_sale_templates.xml"],
 }

@@ -62,9 +62,9 @@ Addons
    * - `website_event_register_elsewhere <website_event_register_elsewhere/>`_
      - 14.0.1.0.0
      - Ability to redirect registration link to another website
-   * - `website_event_sale_promotion <website_event_sale_promotion>`_
+   * - `website_event_sale_disable_qty_in_cart <website_event_sale_disabled_qty_in_cart>`_
      - 14.0.1.0.0
-     - Sell tickets which contain multiple seats
+     - Disable removing or adding Event Registration products in cart
    * - `website_event_sale_waiting_list <website_event_sale_promotion>`_
      - 14.0.1.0.0
      - Sell tickets with waiting list
