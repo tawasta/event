@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-18 07:51+0000\n"
-"PO-Revision-Date: 2021-08-18 07:51+0000\n"
+"POT-Creation-Date: 2021-09-14 10:38+0000\n"
+"PO-Revision-Date: 2021-09-14 10:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -130,12 +130,6 @@ msgstr "Peruminen mahdollista"
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
 msgid "Are you sure?"
 msgstr "Oletko varma?"
-
-#. module: website_event_cancellation
-#: code:addons/website_event_cancellation/models/event_registrations.py:0
-#, python-format
-msgid "Can not cancel registration after %s"
-msgstr "Ilmoittautumista ei voida peruuttaa %s jälkeen"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
@@ -276,6 +270,11 @@ msgstr "Ota yhteyttä järjestäjään:"
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_registration__manage_url
 msgid "Public link"
 msgstr "Julkinen linkki"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Registration can not be cancelled after"
+msgstr "Ilmoittautumisen peruminen sulkeutui"
 
 #. module: website_event_cancellation
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_registration__access_token

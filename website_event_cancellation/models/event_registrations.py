@@ -22,12 +22,10 @@
 import uuid
 
 # 2. Known third party imports:
-import pytz
 from werkzeug import urls
 
 # 3. Odoo imports (openerp):
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import api, fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -83,18 +81,6 @@ class EventRegistration(models.Model):
         return registrations
 
     # 7. Action methods
-    def action_cancel(self):
-        if not self.event_id.able_to_cancel:
-            raise ValidationError(
-                _(
-                    "Can not cancel registration after %s"
-                    % self.event_id.cancel_before_date.astimezone(
-                        pytz.timezone(self.event_id.date_tz or "UTC")
-                    )
-                )
-            )
-        self.write({"state": "cancel"})
-
     def _check_auto_confirmation(self):
         if self._context.get("skip_confirm"):
             return False

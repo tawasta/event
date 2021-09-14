@@ -165,7 +165,7 @@ class EventEvent(models.Model):
             else:
                 event.date_end_calendar_locale = False
 
-    @api.depends("cancel_before_date", "date_end", "date_tz")
+    @api.depends("cancel_before_date", "date_end", "date_tz", "date_begin")
     def _compute_able_to_cancel(self):
         for event in self:
             if datetime.now(
@@ -195,7 +195,13 @@ class EventEvent(models.Model):
                     event.event_type_id.cancel_interval_unit or "days"
                 )
 
-    @api.depends("cancel_interval_unit", "cancel_interval_nbr")
+    @api.depends(
+        "cancel_interval_unit",
+        "cancel_interval_nbr",
+        "date_end",
+        "date_begin",
+        "able_to_cancel",
+    )
     def _compute_before_date(self):
         for event in self:
             date, sign = event.date_begin, -1

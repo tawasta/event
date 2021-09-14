@@ -45,7 +45,7 @@ Addons
      - 14.0.2.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
-     - 14.0.1.2.0
+     - 14.0.1.2.1
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.7
