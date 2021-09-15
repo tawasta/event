@@ -45,7 +45,7 @@ Addons
      - 14.0.2.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
-     - 14.0.1.2.1
+     - 14.0.1.2.2
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
      - 14.0.1.0.7
@@ -72,7 +72,7 @@ Addons
      - 14.0.1.0.0
      - Ticket start/end date with datetime accuracy
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.2.3
+     - 14.0.1.2.4
      - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0
