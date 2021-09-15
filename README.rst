@@ -30,7 +30,7 @@ Addons
      - 14.0.1.0.1
      - Disable quick create mail template from Event
    * - `event_mail_attendees <event_mail_attendees>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.1
      - Mail attendees without mass mailing
    * - `event_remove_translatable_fields <event_remove_translatable_fields>`_
      - 14.0.1.0.0
