@@ -8,7 +8,7 @@
             <value eval="{'noupdate': False}"/>
         </function>
         <record id="event.event_subscription" model="mail.template">
-            <field name="name">Event: Registration with Cancel</field>
+            <field name="name">Event: Registration Confirmation Mail</field>
             <field name="body_type">qweb</field>
             <field name="body_view_id" ref="website_event_cancellation.view_email_template_subscription_with_cancel"/>
             <field name="model_id" ref="website_event_cancellation.model_event_registration"/>
@@ -24,7 +24,7 @@
             <value eval="{'noupdate': False}"/>
         </function>
         <record id="event.event_reminder" model="mail.template">
-            <field name="name">Event: Reminder with Cancel</field>
+            <field name="name">Event: Reminder Mail</field>
             <field name="body_type">qweb</field>
             <field name="body_view_id" ref="website_event_cancellation.view_email_template_reminder_with_cancel"/>
             <field name="model_id" ref="website_event_cancellation.model_event_registration"/>
