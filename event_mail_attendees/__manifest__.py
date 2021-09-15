@@ -21,14 +21,14 @@
 {
     "name": "Event Mail Attendees",
     "summary": "Wizard to mail Attendees without mass mail",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "mail"],
+    "depends": ["event", "mail", "mail_template_name_translatable"],
     "data": [
         "data/mail_data.xml",
         "data/mail_template_data.xml",
