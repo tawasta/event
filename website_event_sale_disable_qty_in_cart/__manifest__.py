@@ -19,21 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Event Mail Attendees",
-    "summary": "Wizard to mail Attendees without mass mail",
-    "version": "14.0.1.0.1",
+    "name": "Website Event Sale Disable Qty in Cart",
+    "summary": "Disable changing Event Registration qty in cart",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "mail", "mail_template_name_translatable"],
-    "data": [
-        "data/mail_data.xml",
-        "data/mail_template_data.xml",
-        "wizard/event_mail_attendees.xml",
-        "views/event_views.xml",
-        "security/ir.model.access.csv",
-    ],
+    "depends": ["website_event_sale"],
+    "data": ["views/website_sale_templates.xml"],
 }

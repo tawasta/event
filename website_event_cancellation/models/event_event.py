@@ -165,7 +165,7 @@ class EventEvent(models.Model):
             else:
                 event.date_end_calendar_locale = False
 
-    @api.depends("cancel_before_date", "date_end", "date_tz")
+    @api.depends("cancel_before_date", "date_end", "date_tz", "date_begin")
     def _compute_able_to_cancel(self):
         for event in self:
             if datetime.now(
@@ -195,7 +195,13 @@ class EventEvent(models.Model):
                     event.event_type_id.cancel_interval_unit or "days"
                 )
 
-    @api.depends("cancel_interval_unit", "cancel_interval_nbr")
+    @api.depends(
+        "cancel_interval_unit",
+        "cancel_interval_nbr",
+        "date_end",
+        "date_begin",
+        "able_to_cancel",
+    )
     def _compute_before_date(self):
         for event in self:
             date, sign = event.date_begin, -1
@@ -207,6 +213,23 @@ class EventEvent(models.Model):
                 if date
                 else False
             )
+
+    @api.depends(
+        "date_tz",
+        "start_sale_date",
+        "date_end",
+        "seats_available",
+        "seats_limited",
+        "event_ticket_ids.sale_available",
+        "stage_id",
+    )
+    def _compute_event_registrations_open(self):
+        """ If Event stage is cancelled close registrations """
+        for event in self:
+            res = super(EventEvent, self)._compute_event_registrations_open()
+            if event.stage_id.cancel:
+                event.event_registrations_open = False
+            return res
 
     # 5. Constraints and onchanges
 

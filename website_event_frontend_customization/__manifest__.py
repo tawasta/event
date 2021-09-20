@@ -21,14 +21,14 @@
 {
     "name": "Website Event Frontend Customization",
     "summary": "Customization options to Website Event Frontends",
-    "version": "14.0.1.0.6",
+    "version": "14.0.1.0.8",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event/",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event"],
+    "depends": ["website_event", "website_event_ticket_datetime"],
     "data": [
         "views/event_templates_page_registration.xml",
         "views/event_templates_page_list.xml",

@@ -19,19 +19,29 @@
 ##############################################################################
 {
     "name": "Website Event Cancellation",
-    "summary": "Cancel event registration through website.",
-    "version": "14.0.1.2.0",
+    "summary": "Cancel events and event registrations through website.",
+    "version": "14.0.1.3.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event", "email_template_qweb"],
+    "depends": [
+        "mail_template_name_translatable",
+        "website_event",
+        "website_event_ticket_datetime",
+        "website_event_frontend_customization",
+        "email_template_qweb",
+    ],
     "data": [
         "views/event_views.xml",
+        "views/event_stage_views.xml",
         "views/event_templates_page_cancellation.xml",
+        "views/event_templates_page_registration.xml",
+        "views/event_templates_list.xml",
         "data/email_template_views.xml",
         "data/email_template_data.xml",
+        "data/event_data.xml",
     ],
 }

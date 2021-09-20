@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="registration_template_cancel" inherit_id="website_event.registration_template">
+        <xpath expr="//div[@class='col-md-8']//em[@t-else='']" position="before">
+            <em t-elif="event.stage_id.cancel">Event is <b>cancelled</b></em>
+        </xpath>
+        <xpath expr="//div[@class='col-md-8']//em[@t-if='event.event_registrations_sold_out']" position="attributes">
+            <attribute name="t-if">event.event_registrations_sold_out and not event.stage_id.cancel</attribute>
+        </xpath>
+    </template>
+</odoo>

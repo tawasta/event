@@ -182,6 +182,7 @@ class EventMailScheduler(models.Model):
                         mail.interval_type != "before_event"
                         or mail.event_id.date_end > now
                     )
+                    and not mail.event_id.stage_id.cancel
                 ):
                     mail.event_id.mail_attendees(mail.template_id.id)
                     mail.write({"mail_sent": True})
@@ -222,10 +223,13 @@ class EventMailRegistration(models.Model):
                         and reg_mail.registration_id.waiting_list_to_confirm
                     )
                 )
+                and not reg_mail.registration_id.event_id.stage_id.cancel
             )
         )
         for reg_mail in todo:
-            reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
+            reg_mail.scheduler_id.template_id.send_mail(
+                reg_mail.registration_id.id, force_send=True
+            )
         todo.write({"mail_sent": True})
 
     # 8. Business methods

@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-19 10:37+0000\n"
-"PO-Revision-Date: 2021-08-19 10:37+0000\n"
+"POT-Creation-Date: 2021-09-15 12:55+0000\n"
+"PO-Revision-Date: 2021-09-15 12:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: event_mail_attendees
+#: model:mail.message.subtype,description:event_mail_attendees.mt_mail_event_attendees
+msgid "- Message sent to Event Attendees"
+msgstr "- Viesti lähetetty tapahtuman osallistujille"
 
 #. module: event_mail_attendees
 #: model_terms:ir.ui.view,arch_db:event_mail_attendees.event_mail_attendees_view_form
@@ -60,7 +65,7 @@ msgstr "Näyttönimi"
 #: model:ir.model,name:event_mail_attendees.model_event_event
 #: model:ir.model.fields,field_description:event_mail_attendees.field_event_mail_attendees_wizard__event_id
 msgid "Event"
-msgstr "Tilaisuus"
+msgstr "Tapahtuma"
 
 #. module: event_mail_attendees
 #: model:mail.message.subtype,name:event_mail_attendees.mt_mail_event_attendees
@@ -71,6 +76,11 @@ msgstr "Tapahtuman osallistuja"
 #: model:ir.model,name:event_mail_attendees.model_event_mail_attendees_wizard
 msgid "Event Mail Attendees Wizard"
 msgstr ""
+
+#. module: event_mail_attendees
+#: model:mail.template,name:event_mail_attendees.event_mail_template_mail_attendees
+msgid "Event: Empty Mail Template"
+msgstr "Tapahtuman tyhjä viestipohja"
 
 #. module: event_mail_attendees
 #: model:ir.model.fields,field_description:event_mail_attendees.field_event_event__id
@@ -98,11 +108,6 @@ msgstr "Viimeksi päivitetty"
 #: model_terms:ir.ui.view,arch_db:event_mail_attendees.event_mail_attendees_view_form
 msgid "Message Email"
 msgstr ""
-
-#. module: event_mail_attendees
-#: model:mail.message.subtype,description:event_mail_attendees.mt_mail_event_attendees
-msgid "- Message sent to Event Attendees"
-msgstr "- Viesti lähetetty tapahtuman osallistujille"
 
 #. module: event_mail_attendees
 #: model:ir.model.fields,field_description:event_mail_attendees.field_event_mail_attendees_wizard__recipients

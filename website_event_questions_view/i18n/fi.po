@@ -59,7 +59,7 @@ msgstr "Kysymys"
 #. module: website_event_questions_view
 #: model_terms:ir.ui.view,arch_db:website_event_questions_view.event_event_view_form_questions_list
 msgid "Question answers for this Event"
-msgstr "Kysymysten vastaukset tähän tilaisuuteen"
+msgstr "Kysymysten vastaukset tähän tapahtumaan"
 
 #. module: website_event_questions_view
 #: model_terms:ir.ui.view,arch_db:website_event_questions_view.event_registration_answer_view_search_inherit

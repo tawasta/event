@@ -30,7 +30,7 @@ Addons
      - 14.0.1.0.1
      - Disable quick create mail template from Event
    * - `event_mail_attendees <event_mail_attendees>`_
-     - 14.0.1.0.0
+     - 14.0.1.0.1
      - Mail attendees without mass mailing
    * - `event_remove_translatable_fields <event_remove_translatable_fields>`_
      - 14.0.1.0.0
@@ -45,10 +45,10 @@ Addons
      - 14.0.2.0.0
      - Ability to add banner image for events from backend
    * - `website_event_cancellation <website_event_cancellation/>`_
-     - 14.0.1.2.0
+     - 14.0.1.3.0
      - Cancel registrations through a URL link sent in email
    * - `website_event_frontend_customization <website_event_frontend_customization>`_
-     - 14.0.1.0.6
+     - 14.0.1.0.8
      - Frontend customizations under "Customize" menu
    * - `website_event_online_event <website_event_online_event/>`_
      - 14.0.1.2.0
@@ -62,14 +62,17 @@ Addons
    * - `website_event_register_elsewhere <website_event_register_elsewhere/>`_
      - 14.0.1.0.0
      - Ability to redirect registration link to another website
-   * - `website_event_sale_promotion <website_event_sale_promotion>`_
+   * - `website_event_sale_disable_qty_in_cart <website_event_sale_disabled_qty_in_cart>`_
      - 14.0.1.0.0
-     - Sell tickets which contain multiple seats
+     - Disable removing or adding Event Registration products in cart
    * - `website_event_sale_waiting_list <website_event_sale_promotion>`_
      - 14.0.1.0.0
      - Sell tickets with waiting list
+   * - `website_event_ticket_datetime <website_event_ticket_datetime>`_
+     - 14.0.1.0.1
+     - Ticket start/end date with datetime accuracy
    * - `website_event_waiting_list <website_event_waiting_list/>`_
-     - 14.0.1.2.2
+     - 14.0.1.3.0
      - Adds waiting list functionality for Events
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0
