@@ -214,6 +214,23 @@ class EventEvent(models.Model):
                 else False
             )
 
+    @api.depends(
+        "date_tz",
+        "start_sale_date",
+        "date_end",
+        "seats_available",
+        "seats_limited",
+        "event_ticket_ids.sale_available",
+        "stage_id",
+    )
+    def _compute_event_registrations_open(self):
+        """ If Event stage is cancelled close registrations """
+        for event in self:
+            res = super(EventEvent, self)._compute_event_registrations_open()
+            if event.stage_id.cancel:
+                event.event_registrations_open = False
+            return res
+
     # 5. Constraints and onchanges
 
     # 6. CRUD methods

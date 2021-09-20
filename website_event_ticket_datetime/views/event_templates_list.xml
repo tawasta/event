@@ -3,6 +3,7 @@
     <template id="events_list_datetime" inherit_id="website_event.events_list" name="Events list">
         <xpath expr="//t[@t-if='event.start_sale_date and event.start_sale_date &gt; datetime.date.today()']" position="attributes">
             <attribute name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now()</attribute>
+            <attribute name="class">datetime-sale</attribute>
         </xpath>
     </template>
 </odoo>
