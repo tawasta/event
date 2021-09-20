@@ -33,4 +33,9 @@
             </span>
         </xpath>
     </template>
+    <template id="hide_calender_button" inherit_id="website_event.event_description_full" active="True" customize_show="True" name="Hide Calender button">
+        <xpath expr="//div[@class='o_wevent_sidebar_block']//div[@class='dropdown']" position="attributes">
+            <attribute name="class">dropdown d-none</attribute>
+        </xpath>
+    </template>
 </odoo>
