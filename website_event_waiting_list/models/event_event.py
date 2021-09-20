@@ -191,6 +191,7 @@ class EventEvent(models.Model):
         "seats_available",
         "seats_limited",
         "event_ticket_ids.sale_available",
+        "stage_id",
     )
     def _compute_event_registrations_open(self):
         """ Compute whether people may take registrations for this event
@@ -214,7 +215,7 @@ class EventEvent(models.Model):
             )
             event.event_registrations_open = (
                 (
-                    event.start_sale_date <= current_datetime.now()
+                    event.start_sale_date <= current_datetime.date()
                     if event.start_sale_date
                     else True
                 )
@@ -228,8 +229,10 @@ class EventEvent(models.Model):
                     not event.event_ticket_ids
                     or any(ticket.sale_available for ticket in event.event_ticket_ids)
                     if not event.waiting_list
+                    or all(ticket.is_expired for ticket in event.event_ticket_ids)
                     else True
                 )
+                and not event.stage_id.cancel
             )
 
     # 5. Constraints and onchanges
