@@ -20,7 +20,7 @@
 {
     "name": "Website Event Cancellation",
     "summary": "Cancel events and event registrations through website.",
-    "version": "14.0.1.3.0",
+    "version": "14.0.1.3.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
