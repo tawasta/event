@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="registration_template_waiting_list" inherit_id="website_event.registration_template">
+    <template id="registration_template_waiting_list" inherit_id="website_event.registration_template" name="Registration">
         <!-- Multi ticket view -->
         <xpath expr="//div[@class='w-auto ml-auto']//select" position="attributes">
             <attribute name="t-if">(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
@@ -95,7 +95,7 @@
         </xpath>
     </template>
     <!-- Confirmation page add waiting list -->
-    <template id="registration_complete" inherit_id="website_event.registration_complete">
+    <template id="registration_complete" inherit_id="website_event.registration_complete" name="Registration">
         <xpath expr="//div[@class='col-12']" position="replace">
             <div class="col-12">
                 <t t-if="attendees[0].state == 'wait'">
@@ -109,6 +109,9 @@
                     <p class="py-2">You will be contacted if the event has more seats available.</p>
                 </t>
             </div>
+        </xpath>
+        <xpath expr="//div[@id='add_to_calendar']" position="attributes">
+            <attribute name="t-if">attendees[0].state != "wait"</attribute>
         </xpath>
     </template>
     <!-- Redirect if registration fails -->

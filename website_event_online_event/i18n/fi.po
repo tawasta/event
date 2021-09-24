@@ -6,14 +6,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-18 08:17+0000\n"
-"PO-Revision-Date: 2021-08-18 08:17+0000\n"
+"POT-Creation-Date: 2021-09-24 11:47+0000\n"
+"PO-Revision-Date: 2021-09-24 11:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.view_event_kanban_online_event
+msgid ""
+"<i class=\"fa fa-map-marker\" title=\"Location\"/>\n"
+"                    <span class=\"o_text_overflow o_event_kanban_location\">Online</span>"
+msgstr ""
+"<i class=\"fa fa-map-marker\" title=\"Sijainti\"/>\n"
+"                    <span class=\"o_text_overflow o_event_kanban_location\">Verkossa</span>"
+
+#. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.events_list_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_event_details_online_event
+msgid "<span>Online</span>"
+msgstr "<span>Verkossa</span>"
 
 #. module: website_event_online_event
 #: model:ir.model.fields,field_description:website_event_online_event.field_event_event__display_name
@@ -51,6 +66,12 @@ msgstr "Liity verkkokokoukseen:"
 #. module: website_event_online_event
 #: code:addons/website_event_online_event/models/event_event.py:0
 #, python-format
+msgid "Join the video conference: "
+msgstr "Liity verkkokokoukseen: "
+
+#. module: website_event_online_event
+#: code:addons/website_event_online_event/models/event_event.py:0
+#, python-format
 msgid "Join the video conference: %s"
 msgstr "Liity verkkokokoukseen: %s"
 
@@ -61,9 +82,25 @@ msgid "Last Modified on"
 msgstr "Viimeksi muokattu"
 
 #. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.event_description_full_online_event
+msgid "Location"
+msgstr "Sijainti"
+
+#. module: website_event_online_event
 #: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_event_online_event
 msgid "Once the event starts, join the video conference link below:"
 msgstr "Kun tapahtuma alkaa, liity verkkokokoukseen alla olevasta linkistä:"
+
+#. module: website_event_online_event
+#: code:addons/website_event_online_event/models/event_event.py:0
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.cancel_registration
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.event_description_full_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.registration_complete_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_reminder_with_cancel_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_subscription_with_cancel_online_event
+#, python-format
+msgid "Online"
+msgstr "Verkossa"
 
 #. module: website_event_online_event
 #: model:ir.model.fields,field_description:website_event_online_event.field_event_event__is_online_event

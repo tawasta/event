@@ -18,6 +18,7 @@
         <xpath expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']" position="before">
             <t t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
                 <t t-set="details">Join the video conference: <t t-esc="object.event_id.video_conference_link"/></t>
+                <t t-set="location">Online</t>
             </t>
             <t t-call="website_event_online_event.view_email_template_event_online_event"/>
         </xpath>
@@ -26,8 +27,21 @@
         <xpath expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']" position="before">
             <t t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
                 <t t-set="details">Join the video conference: <t t-esc="object.event_id.video_conference_link"/></t>
+                <t t-set="location">Online</t>
             </t>
             <t t-call="website_event_online_event.view_email_template_event_online_event"/>
+        </xpath>
+    </template>
+    <template id="view_email_template_event_details_online_event" inherit_id="website_event_cancellation.view_email_template_event_details">
+        <xpath expr="//td[@id='event-address-td']" position="attributes">
+            <attribute name="t-if">not object.event_id.is_online_event</attribute>
+        </xpath>
+        <xpath expr="//td[@id='event-address-td']" position="after">
+            <td t-if="object.event_id.is_online_event" id="event-address-online-td" style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;">
+                <div>
+                    <span>Online</span>
+                </div>
+            </td>
         </xpath>
     </template>
 </odoo>
