@@ -41,7 +41,7 @@
                     <th>Event date</th>
                     <th>Registration Date</th>
                     <th>Event Ticket</th>
-                    <th>Visitor</th>
+                    <th>Advertiser</th>
                     <th>State</th>
                 </tr>
             </thead>
@@ -63,7 +63,7 @@
                             <span t-field="re.event_ticket_id.name"/>
                         </td>
                         <td>
-                            <span t-field="re.visitor_id.partner_id.name"/>
+                            <span t-field="re.visitor_id.sudo().partner_id.name"/>
                         </td>
                         <td>
                             <t t-if="re.state == 'open'">
@@ -80,11 +80,13 @@
                             </t>
                         </td>
                         <t t-if="re.state not in ('cancel', 'done')">
-                            <td>
-                                <button type="button" class="btn btn-secondary btn-sm" t-att-data-registration-id="re.id" data-toggle="modal" data-target="#cancelModal">
-                                    Cancel registration
-                                </button>
-                            </td>
+                            <t t-if="re.event_id.able_to_cancel">
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-sm" t-att-data-registration-id="re.id" data-toggle="modal" data-target="#cancelModal">
+                                        Cancel registration
+                                    </button>
+                                </td>
+                            </t>
                         </t>
                     </tr>
                 </t>
