@@ -1,4 +1,5 @@
 from odoo import http
+import json
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.http import request
 
@@ -33,3 +34,21 @@ class PortalCertificate(CustomerPortal):
         return request.render(
             "website_my_events.portal_my_events", values
         )
+
+    @http.route(
+        ["/registration/cancel/<int:registration_id>"],
+        type="http",
+        auth="user",
+        website=True,
+        csrf=False,
+    )
+    def cancel_registration(self, registration_id=None, **post):
+        registration = (
+            request.env["event.registration"]
+            .sudo()
+            .search([("id", "=", registration_id)])
+        )
+        registration.sudo().action_cancel()
+        values = {
+        }
+        return json.dumps(values)

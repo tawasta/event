@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Registration js">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/website_my_events/static/src/js/registration.js"></script>
+        </xpath>
+    </template>
     <template id="portal_my_home_menu_events" name="Portal layout : event menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'event'" t-attf-class="breadcrumb-item #{'active ' if not event else ''}">
@@ -36,6 +41,7 @@
                     <th>Event date</th>
                     <th>Registration Date</th>
                     <th>Event Ticket</th>
+                    <th>State</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,9 +61,55 @@
                         <td>
                             <span t-field="re.event_ticket_id.name"/>
                         </td>
+                        <td>
+                            <t t-if="re.state == 'open'">
+                                <span class="badge badge-pill badge-info">Confirmed</span>
+                            </t>
+                            <t t-if="re.state == 'draft'">
+                                <span class="badge badge-pill badge-info">Unconfirmed</span>
+                            </t>
+                            <t t-if="re.state == 'done'">
+                                <span class="badge badge-pill badge-success">Attended</span>
+                            </t>
+                            <t t-if="re.state == 'cancel'">
+                                <span class="badge badge-pill badge-warning">Cancelled</span>
+                            </t>
+                        </td>
+                        <t t-if="re.state not in ('cancel', 'done')">
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm" t-att-data-registration-id="re.id" data-toggle="modal" data-target="#cancelModal">
+                                    Cancel registration
+                                </button>
+                            </td>
+                        </t>
                     </tr>
                 </t>
             </tbody>
+            <div id="cancelModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="cancel_registration_title">Cancel a registration</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-label="Close">&amp;times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="col-md-12">
+                                    <p>You are about to <strong>cancel</strong> <span id="cancel_registration_object">a registration</span>.</p>
+                                    <p>Are you sure you want to continue?</p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="cancel_registration_id" name="cancel_registration_id" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </t>
       </t>
     </template>
