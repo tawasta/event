@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="event_description_full_online_event" inherit_id="website_event.event_description_full" name="Event Description">
+        <xpath expr="//div[@t-if='event.address_id']" position="after">
+            <div t-if="event.is_online_event" class="o_wevent_sidebar_block">
+                <h6 class="o_wevent_sidebar_title">Location</h6>
+                <h4>Online</h4>
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-if='event.address_id']" position="attributes">
+            <attribute name="t-if">event.address_id and not event.is_online_event</attribute>
+        </xpath>
+    </template>
+    <template id="registration_complete_online_event" inherit_id="website_event.registration_complete" name="Registration Completed">
+        <xpath expr="//div[@class='mt-4']" position="after">
+            <div t-if="event.is_online_event" class="mt-4 online-event">
+                <h5 class="text-secondary font-weight-bold">Online</h5>
+            </div>
+        </xpath>
+        <xpath expr="//div[@class='mt-4']" position="attributes">
+            <attribute name="t-if">not event.is_online_event</attribute>
+        </xpath>
+    </template>
+</odoo>

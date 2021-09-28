@@ -128,7 +128,7 @@
                                             <img src="/web_editor/font_to_img/61505/rgb(81,81,102)/34" style="padding:4px;max-width:inherit;" height="34" alt=""/>
                                         </t>
                                     </td>
-                                    <td style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;">
+                                    <td id="event-address-td" style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;">
                                         <t t-if="object.event_id.address_id.name">
                                             <div>
                                                 <t t-esc="object.event_id.address_id.name"/>

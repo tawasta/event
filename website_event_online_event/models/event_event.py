@@ -22,6 +22,7 @@
 import logging
 
 import pytz
+import werkzeug.urls
 
 # 3. Odoo imports (openerp):
 from odoo import _, api, fields, models
@@ -34,7 +35,9 @@ from odoo import _, api, fields, models
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
+
 _logger = logging.getLogger(__name__)
+GOOGLE_CALENDAR_URL = "https://www.google.com/calendar/render?"
 
 try:
     import vobject
@@ -126,10 +129,12 @@ class EventEvent(models.Model):
                 event.date_end
             ).replace(tzinfo=pytz.timezone("UTC"))
             cal_event.add("summary").value = event.name
-            if event.address_id:
+            if event.address_id and not event.is_online_event:
                 cal_event.add(
                     "location"
                 ).value = event.sudo().address_id.contact_address
+            elif event.is_online_event:
+                cal_event.add("location").value = "Online"
             if event.is_online_event and event.video_conference_link:
                 video_link = _(
                     "Join the video conference: %s", event.sudo().video_conference_link
@@ -138,5 +143,30 @@ class EventEvent(models.Model):
 
             result[event.id] = cal.serialize().encode("utf-8")
         return result
+
+    def _get_event_resource_urls(self):
+        url_date_start = self.date_begin.strftime("%Y%m%dT%H%M%SZ")
+        url_date_stop = self.date_end.strftime("%Y%m%dT%H%M%SZ")
+        params = {
+            "action": "TEMPLATE",
+            "text": self.name,
+            "dates": url_date_start + "/" + url_date_stop,
+            "details": self.name,
+        }
+        if self.address_id and not self.is_online_event:
+            params.update(
+                location=self.sudo().address_id.contact_address.replace("\n", " ")
+            )
+        elif self.is_online_event:
+            params.update(location=_("Online"))
+        if self.is_online_event and self.video_conference_link:
+            params.update(
+                details=_("Join the video conference: ")
+                + self.sudo().video_conference_link
+            )
+        encoded_params = werkzeug.urls.url_encode(params)
+        google_url = GOOGLE_CALENDAR_URL + encoded_params
+        iCal_url = "/event/%d/ics?%s" % (self.id, encoded_params)
+        return {"google_url": google_url, "iCal_url": iCal_url}
 
     # 8. Business methods

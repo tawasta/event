@@ -21,13 +21,19 @@
 {
     "name": "Website Event Online Event",
     "summary": "Module to manage online Events. Includes a video conference link.",
-    "version": "14.0.1.2.0",
+    "version": "14.0.1.3.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_cancellation"],
-    "data": ["views/event_views.xml", "data/email_template_views.xml"],
+    "depends": ["website_event_cancellation", "website_event_frontend_customization"],
+    "data": [
+        "views/event_views.xml",
+        "data/email_template_views.xml",
+        "views/event_templates_page_registration.xml",
+        "views/event_templates_list.xml",
+        "views/event_templates_page_cancellation.xml",
+    ],
 }
