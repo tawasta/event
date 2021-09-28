@@ -41,6 +41,7 @@
                     <th>Event date</th>
                     <th>Registration Date</th>
                     <th>Event Ticket</th>
+                    <th>Visitor</th>
                     <th>State</th>
                 </tr>
             </thead>
@@ -60,6 +61,9 @@
                         </td>
                         <td>
                             <span t-field="re.event_ticket_id.name"/>
+                        </td>
+                        <td>
+                            <span t-field="re.visitor_id.partner_id.name"/>
                         </td>
                         <td>
                             <t t-if="re.state == 'open'">
