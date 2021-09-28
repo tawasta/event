@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="portal_my_home_menu_events" name="Portal layout : event menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'event'" t-attf-class="breadcrumb-item #{'active ' if not event else ''}">
+                <a t-if="event" t-attf-href="/my/events?{{ keep_query() }}">Events</a>
+                <t t-else="">Events</t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_events" name="Show events" inherit_id="portal.portal_my_home" customize_show="True" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Events</t>
+                <t t-set="url" t-value="'/my/events'"/>
+                <t t-set="placeholder_count" t-value="'event_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_events" name="My events">
+      <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">events</t>
+        </t>
+        <t t-if="not registrations">
+            <p>There are currently no registrations for your account.</p>
+        </t>
+        <t t-if="registrations" t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th>Event</th>
+                    <th>Registration Date</th>
+                    <th>Event Ticket</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="registrations" t-as="re">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/event/{{re.event_id.id}}/register" t-att-title="re.event_id.name">
+                                <t t-esc="re.event_id.name" t-if="re.event_id.name != '/'"/>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="re.date_open"/>
+                        </td>
+                        <td>
+                            <span t-field="re.event_ticket_id.name"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+      </t>
+    </template>
+
+</odoo>
