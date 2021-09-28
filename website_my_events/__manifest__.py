@@ -29,7 +29,7 @@
     "application": False,
     "installable": True,
     "external_dependencies": {"python": [], "bin": []},
-    "depends": ["event"],
+    "depends": ["event", "website_event_cancellation"],
     "data": ["security/ir.model.access.csv", "views/event_portal_templates.xml"],
     "demo": [],
 }
