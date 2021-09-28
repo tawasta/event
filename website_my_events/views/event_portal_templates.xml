@@ -33,6 +33,7 @@
             <thead>
                 <tr class="active">
                     <th>Event</th>
+                    <th>Event date</th>
                     <th>Registration Date</th>
                     <th>Event Ticket</th>
                 </tr>
@@ -44,6 +45,9 @@
                             <a t-attf-href="/event/{{re.event_id.id}}/register" t-att-title="re.event_id.name">
                                 <t t-esc="re.event_id.name" t-if="re.event_id.name != '/'"/>
                             </a>
+                        </td>
+                        <td>
+                            <span t-field="re.event_id.date_begin"/> - <span t-field="re.event_id.date_end"/>
                         </td>
                         <td>
                             <span t-field="re.date_open"/>
