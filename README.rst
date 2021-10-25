@@ -77,6 +77,9 @@ Addons
    * - `website_event_waiting_list_questions <website_event_waiting_list_questions/>`_
      - 14.0.1.1.0
      - Adds questions when joining waiting list
+   * - `website_my_events <website_my_events/>`_
+     - 14.0.1.1.0
+     - Add events to portal and cancel them
 
 Configuration
 =============
@@ -97,6 +100,7 @@ Contributors
 ------------
 
 * Miika Nissi <miika.nissi@tawasta.fi>
+* Valtteri Lattu <valtteri.lattu@tawasta.fi>
 
 Maintainer
 ----------
