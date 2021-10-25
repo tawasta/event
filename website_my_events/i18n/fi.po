@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_my_events
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-25 17:00+0000\n"
+"PO-Revision-Date: 2021-10-25 17:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "<span aria-label=\"Close\">&amp;times;</span>"
+msgstr ""
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "<span class=\"badge badge-pill badge-info\">Confirmed</span>"
+msgstr "<span class=\"badge badge-pill badge-info\">Vahvistettu</span>"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "<span class=\"badge badge-pill badge-info\">Unconfirmed</span>"
+msgstr "<span class=\"badge badge-pill badge-info\">Vahvistamaton</span>"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "<span class=\"badge badge-pill badge-success\">Attended</span>"
+msgstr "<span class=\"badge badge-pill badge-success\">Osallistuttu</span>"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "<span class=\"badge badge-pill badge-warning\">Cancelled</span>"
+msgstr "<span class=\"badge badge-pill badge-warning\">Peruutettu</span>"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Booker"
+msgstr "Varaaja"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Are you sure you want to continue?"
+msgstr "Halutatko varmasti jatkaa?"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Cancel a registration"
+msgstr "Peruuta ilmoittautuminen"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Cancel registration"
+msgstr "Peruuta ilmoittautuminen"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Close"
+msgstr "Sulje"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Delete"
+msgstr "Poista"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Event Ticket"
+msgstr "Tapahtumalippu"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Event date"
+msgstr "Tapahtumapäivämäärä"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_home_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_home_menu_events
+msgid "Events"
+msgstr "Tapahtumat"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "Registration Date"
+msgstr "Ilmoittautumispäivämäärä"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "State"
+msgstr "Tila"
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "There are currently no registrations for your account."
+msgstr "Tililläsi ei ole tällä hetkellä ilmoittautumisia."
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid ""
+"You are about to <strong>cancel</strong> <span "
+"id=\"cancel_registration_object\">a registration</span>."
+msgstr ""
+"Olet <strong>peruuttamassa</strong> <span "
+"id=\"cancel_registration_object\">ilmoittautumista</span>."
+
+#. module: website_my_events
+#: model_terms:ir.ui.view,arch_db:website_my_events.portal_my_events
+msgid "events"
+msgstr "tapahtumat"

@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2018 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,17 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Website my events",
-    "summary": "Website my events",
-    "version": "14.0.0.1.0",
-    "category": "Specific Industry Applications",
-    "website": "http://www.tawasta.fi",
-    "author": "Oy Tawasta Technologies Ltd.",
+    "name": "Website My Events",
+    "summary": "My events in website portal",
+    "version": "14.0.1.1.0",
+    "category": "Events",
+    "website": "https://gitlab.com/tawasta/odoo/event",
+    "author": "Tawasta Oy",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "external_dependencies": {"python": [], "bin": []},
-    "depends": ["event", "website_event_cancellation", "website_event"],
+    "depends": ["portal", "event", "website_event_cancellation"],
     "data": ["security/ir.model.access.csv", "views/event_portal_templates.xml"],
-    "demo": [],
 }

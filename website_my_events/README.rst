@@ -3,12 +3,10 @@
    :alt: License: AGPL-3
 
 =================
-Website my events
+Website My Events
 =================
-
 * Add the events button to the my account view, which allows the user to view their own registrations
-* Also allows you to cancel your registration 
-
+* Also allows you to cancel your registration
 
 Configuration
 =============
@@ -29,6 +27,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Miika Nissi <miika.nissi@tawasta.fi>
 
 Maintainer
 ----------

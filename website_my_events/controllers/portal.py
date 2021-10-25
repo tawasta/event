@@ -1,16 +1,18 @@
-from odoo import http
 import json
-from odoo.addons.portal.controllers.portal import CustomerPortal
+
+from odoo import http
 from odoo.http import request
+
+from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
 class PortalCertificate(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if "event_count" in counters:
-            values['event_count'] = request.env['event.registration'].search_count([
-                ('partner_id', '=', request.env.user.partner_id.id)
-            ])
+            values["event_count"] = request.env["event.registration"].search_count(
+                [("partner_id", "=", request.env.user.partner_id.id)]
+            )
 
         return values
 
@@ -19,9 +21,7 @@ class PortalCertificate(CustomerPortal):
         values = self._prepare_portal_layout_values()
 
         registrations = request.env["event.registration"].search(
-            [
-                ('partner_id', '=', request.env.user.partner_id.id)
-            ]
+            [("partner_id", "=", request.env.user.partner_id.id)]
         )
 
         values.update(
@@ -31,9 +31,7 @@ class PortalCertificate(CustomerPortal):
                 "default_url": "/my/events",
             }
         )
-        return request.render(
-            "website_my_events.portal_my_events", values
-        )
+        return request.render("website_my_events.portal_my_events", values)
 
     @http.route(
         ["/registration/cancel/<int:registration_id>"],
@@ -49,6 +47,5 @@ class PortalCertificate(CustomerPortal):
             .search([("id", "=", registration_id)])
         )
         registration.sudo().action_cancel()
-        values = {
-        }
+        values = {}
         return json.dumps(values)
