@@ -6,9 +6,11 @@ class EventRegistration(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        print(vals_list)
         for values in vals_list:
             Partner = self.env["res.partner"]
             is_partner = Partner.search([("email", "=ilike", values.get("email"))], limit=1)
+            print(is_partner)
             if not is_partner:
                 partner_vals = {
                     'name': values.get("name"),
@@ -17,6 +19,8 @@ class EventRegistration(models.Model):
                 }
                 new_partner = Partner.sudo().create(partner_vals)
                 values["partner_id"] = new_partner.id
+            else:
+                values["partner_id"] = is_partner.id
 
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
