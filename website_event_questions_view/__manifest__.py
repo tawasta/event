@@ -21,7 +21,7 @@
 {
     "name": "Website Event Questions View",
     "summary": "Adds a view to see event question answers",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event/",
     "author": "Tawasta",
@@ -29,5 +29,9 @@
     "application": False,
     "installable": True,
     "depends": ["website_event_questions"],
-    "data": ["views/event_views.xml", "views/event_question_views.xml"],
+    "data": [
+        "views/event_views.xml",
+        "views/event_question_views.xml",
+        "views/event_registration_answer_views.xml",
+    ],
 }

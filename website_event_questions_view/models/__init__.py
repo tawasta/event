@@ -1,1 +1,1 @@
-from . import event_event
+from . import event_event, event_registration
