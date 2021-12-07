@@ -6,25 +6,26 @@ class EventRegistration(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        print(vals_list)
         for values in vals_list:
             Partner = self.env["res.partner"]
-            is_partner = Partner.search([("email", "=ilike", values.get("email"))], limit=1)
-            print(is_partner)
+            is_partner = Partner.search(
+                [("email", "=ilike", values.get("email"))], limit=1
+            )
             if not is_partner:
                 partner_vals = {
-                    'name': values.get("name"),
-                    'email': values.get("email"),
-                    'phone': values.get("phone"),
+                    "name": values.get("name"),
+                    "email": values.get("email"),
+                    "phone": values.get("phone"),
                 }
                 new_partner = Partner.sudo().create(partner_vals)
                 values["partner_id"] = new_partner.id
             else:
                 values["partner_id"] = is_partner.id
-
         registrations = super(EventRegistration, self).create(vals_list)
+        print(registrations)
         for registration in registrations:
             if registration.event_ticket_id.product_id.batch_id:
+                print("=======BATCH KIINNITYS======")
                 vals = {
                     "partner_id": registration.partner_id.id,
                     "first_name": registration.partner_id.firstname,
@@ -33,11 +34,13 @@ class EventRegistration(models.Model):
                     "mobile": registration.partner_id.phone,
                     "birth_date": "1995-01-01",
                 }
+                print(vals)
                 student_batch_vals = self.student_batch_values_preprocess(registration)
 
                 is_student = self.env["op.student"].sudo().search([
                     ('partner_id', '=', registration.partner_id.id)
                 ])
+                print(is_student)
                 if is_student:
                     student_batch_vals.update({"student_id": is_student.id})
                 else:
