@@ -6,7 +6,7 @@
             <field name="name">Event: Empty Mail Template</field>
             <field name="model_id" ref="event.model_event_registration"/>
             <field name="use_default_to" eval="True"/>
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.partner_id.lang or object.visitor_id.lang_id}</field>
             <field name="auto_delete" eval="True"/>
             <field name="subject"/>
             <field name="body_html"/>
