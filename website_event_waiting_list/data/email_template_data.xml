@@ -10,7 +10,7 @@
             <field name="subject">You're on a waiting list for ${object.event_id.name}</field>
             <field name="email_from">${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
             <field name="email_to">${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.partner_id.lang or object.visitor_id.lang_id}</field>
         </record>
         <!-- Email when open seats on an event -->
         <record id="event_confirm_waiting_registration" model="mail.template">
@@ -21,7 +21,7 @@
             <field name="subject">We have more tickets available for ${object.event_id.name}</field>
             <field name="email_from">${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
             <field name="email_to">${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.partner_id.lang or object.visitor_id.lang_id}</field>
         </record>
     </data>
 </odoo>

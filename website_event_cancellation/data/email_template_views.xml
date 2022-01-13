@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="view_email_template_event_base">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <t t-set="details" t-value=""/>
         <!-- Complete location information depending on available information -->
         <t t-if="object.event_id.address_id">
@@ -91,6 +92,7 @@
         </body>
     </template>
     <template id="view_email_template_event_cancellation">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <div>
             <t t-esc="link_message"/>
             <a t-att-href="object.manage_url"/>
@@ -218,6 +220,7 @@
         </tr>
     </template>
     <template id="view_email_template_event_calendar">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <div>
             <br/>
             <strong>Add this event to your calendar</strong>
@@ -230,6 +233,7 @@
         </div>
     </template>
     <template id="view_email_template_subscription_with_cancel">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <t t-call="website_event_cancellation.view_email_template_event_base">
             <t t-set="email_heading">Your registration</t>
             <tr>
@@ -276,6 +280,7 @@
         </t>
     </template>
     <template id="view_email_template_reminder_with_cancel">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <t t-call="website_event_cancellation.view_email_template_event_base">
             <t t-set="email_heading">Your registration</t>
             <tr>
