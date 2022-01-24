@@ -34,6 +34,7 @@
         "data/mail_template_data.xml",
         "wizard/event_mail_attendees.xml",
         "views/event_views.xml",
+        "views/res_config_settings.xml",
         "security/ir.model.access.csv",
     ],
 }
