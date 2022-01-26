@@ -115,8 +115,11 @@ class EventMailAttendeesWizard(models.TransientModel):
         mail_values = []
         for recipient in self.recipients:
             msg_template = self.template_id
+            email_from_value = self.env["ir.config_parameter"].get_param(
+                "event_sender_address"
+            )
             mail_values = {
-                "email_from": self.env.user.email_formatted,
+                "email_from": email_from_value or self.env.user.email_formatted,
                 "subject": self.subject,
                 "body_html": self.body,
                 "email_to": recipient.email,
