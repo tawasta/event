@@ -40,7 +40,7 @@ class EventMailAttendeesWizard(models.TransientModel):
 
     # 2. Fields declaration
     subject = fields.Char(
-        "Subject", compute="_compute_subject", readonly=False, store=True
+        "Subject", compute="_compute_subject", readonly=False, store=True, required=True
     )
     body = fields.Html(
         "Contents",
@@ -48,6 +48,7 @@ class EventMailAttendeesWizard(models.TransientModel):
         compute="_compute_body",
         readonly=False,
         store=True,
+        required=True,
     )
     attachment_ids = fields.Many2many("ir.attachment", string="Attachments")
     template_id = fields.Many2one(

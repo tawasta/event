@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
+    <template id="email_template_subscription_with_cancel">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
+        <t t-call="website_event_cancellation.view_email_template_subscription_with_cancel" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
+    </template>
+    <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
+    <template id="email_template_reminder_with_cancel">
+        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
+        <t t-call="website_event_cancellation.view_email_template_reminder_with_cancel" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
+    </template>
     <template id="view_email_template_event_base">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
         <t t-set="details" t-value=""/>
@@ -234,7 +244,7 @@
     </template>
     <template id="view_email_template_subscription_with_cancel">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
-        <t t-call="website_event_cancellation.view_email_template_event_base">
+        <t t-call="website_event_cancellation.view_email_template_event_base" t-lang="object.partner_id.lang or object.visitor_id.lang_id">
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -248,13 +258,13 @@
                                     <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>
                                     for attendee <t t-esc="object.name"/>.
                                 </div>
-                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation" t-lang="object.partner_id.lang or object.visitor_id.lang_id">
                                     <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
                                     </t>
                                     <t t-set="button_message">Cancel registration</t>
                                 </t>
-                                <t t-call="website_event_cancellation.view_email_template_event_calendar"/>
+                                <t t-call="website_event_cancellation.view_email_template_event_calendar" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
                                 <div>
                                     See you soon,<br/>
                                     <span style="color: #454748;">
@@ -276,12 +286,12 @@
                 </td>
             </tr>
             <!-- DETAILS -->
-            <t t-call="website_event_cancellation.view_email_template_event_details"/>
+            <t t-call="website_event_cancellation.view_email_template_event_details" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
         </t>
     </template>
     <template id="view_email_template_reminder_with_cancel">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id"/>
-        <t t-call="website_event_cancellation.view_email_template_event_base">
+        <t t-call="website_event_cancellation.view_email_template_event_base" t-lang="object.partner_id.lang or object.visitor_id.lang_id">
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -295,13 +305,13 @@
                                     <t t-else=""><strong><t t-esc="object.event_id.name"/></strong></t>
                                         is starting <strong><t t-esc="object.get_date_range_str()"/></strong>.
                                 </div>
-                                <t t-call="website_event_cancellation.view_email_template_event_cancellation">
+                                <t t-call="website_event_cancellation.view_email_template_event_cancellation" t-lang="object.partner_id.lang or object.visitor_id.lang_id">
                                     <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
                                     </t>
                                     <t t-set="button_message">Cancel registration</t>
                                 </t>
-                                <t t-call="website_event_cancellation.view_email_template_event_calendar"/>
+                                <t t-call="website_event_cancellation.view_email_template_event_calendar" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
                                 <div>
                                     See you soon,<br/>
                                     <span style="color: #454748;">
@@ -323,7 +333,7 @@
                 </td>
             </tr>
             <!-- DETAILS -->
-            <t t-call="website_event_cancellation.view_email_template_event_details"/>
+            <t t-call="website_event_cancellation.view_email_template_event_details" t-lang="object.partner_id.lang or object.visitor_id.lang_id"/>
         </t>
     </template>
 </odoo>
