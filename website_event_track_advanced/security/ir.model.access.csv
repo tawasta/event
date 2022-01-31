@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+event_track_rating_user,event_track_rating_user,model_event_track_rating,event.group_event_user,1,0,0,0
+event_track_rating_manager,event_track_rating_manager,model_event_track_rating,event.group_event_manager,1,1,1,1
+event_track_rating_grade_manager,event_track_grade_rating_manager,model_event_track_rating_grade,event.group_event_manager,1,1,1,1
