@@ -101,6 +101,9 @@
                 <t t-if="attendees[0].state == 'wait'">
                     <h3>Joined waiting list!</h3>
                 </t>
+                <t t-elif="attendees[0].state == 'draft'">
+                    <h3>Registration received!</h3>
+                </t>
                 <t t-else="">
                     <h3>Registration confirmed!</h3>
                 </t>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 07:49+0000\n"
-"PO-Revision-Date: 2021-09-15 07:49+0000\n"
+"POT-Creation-Date: 2022-02-03 17:28+0000\n"
+"PO-Revision-Date: 2022-02-03 17:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -689,7 +689,7 @@ msgstr "Ok"
 #: code:addons/website_event_waiting_list/static/src/js/website_event.js:0
 #, python-format
 msgid "Please select at least one ticket."
-msgstr ""
+msgstr "Valitse ainakin yksi lippu."
 
 #. module: website_event_waiting_list
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
@@ -710,6 +710,11 @@ msgstr "Ilmoittautuminen vahvistettu!"
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_fail
 msgid "Registration failed!"
 msgstr "Ilmoittautuminen epäonnistui!"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete
+msgid "Registration received!"
+msgstr "Ilmoittautuminen vastaanotettu!"
 
 #. module: website_event_waiting_list
 #: model:ir.model.fields,field_description:website_event_waiting_list.field_website_event_waiting_mail_list_message__registration_ids
