@@ -94,7 +94,7 @@
         </field>
     </record>
     <record id="event_track_rating_grade_action" model="ir.actions.act_window">
-        <field name="name">event.track.rating.grade.action</field>
+        <field name="name">Track Rating Grades</field>
         <field name="res_model">event.track.rating.grade</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form</field>

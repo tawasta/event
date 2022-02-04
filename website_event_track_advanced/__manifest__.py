@@ -33,5 +33,6 @@
         "security/ir.model.access.csv",
         "views/event_track_rating_views.xml",
         "views/event_menus.xml",
+        "views/event_track_views.xml",
     ],
 }

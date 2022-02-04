@@ -46,6 +46,23 @@ class EventTrack(models.Model):
         store=True,
         copy=False,
     )
+    grade_id = fields.Many2one(
+        "event.track.rating.grade",
+        index=True,
+        store=False,
+        string="Rating",
+        compute="_compute_user_rating",
+        inverse="_inverse_user_rating",
+    )
+    rating_comment = fields.Char(
+        string="Verbal Rating",
+        store=False,
+        compute="_compute_user_rating",
+        inverse="_inverse_user_rating",
+    )
+    review_group = fields.Many2one(
+        comodel_name="event.track.review.group", string="Review Group"
+    )
 
     # 3. Default methods
 
@@ -61,8 +78,35 @@ class EventTrack(models.Model):
             ratings_sum = 0
             for rating in rec.ratings:
                 ratings_sum += rating.grade_id.grade
-
             rec.rating_avg = float(ratings_sum) / float(rec.ratings_count)
+
+    def _compute_user_rating(self):
+        for rec in self:
+            existing_rating = rec.ratings.search(
+                [("create_uid", "=", rec.env.uid), ("event_track_id", "=", rec.id)]
+            )
+            if existing_rating:
+                rec.grade_id = existing_rating.grade_id
+                rec.rating_comment = existing_rating.comment
+
+    def _inverse_user_rating(self):
+        for rec in self:
+            existing_rating = rec.ratings.search(
+                [("create_uid", "=", rec.env.uid), ("event_track_id", "=", rec.id)]
+            )
+            if existing_rating:
+                if rec.grade_id:
+                    existing_rating.grade_id = rec.grade_id
+                if rec.rating_comment:
+                    existing_rating.comment = rec.rating_comment
+            else:
+                rec.ratings.create(
+                    {
+                        "event_track": rec.id,
+                        "grade_id": rec.grade_id,
+                        "rating_comment": rec.rating_comment,
+                    }
+                )
 
     # 5. Constraints and onchanges
 
