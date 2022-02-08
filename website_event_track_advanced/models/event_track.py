@@ -82,29 +82,54 @@ class EventTrack(models.Model):
 
     def _compute_user_rating(self):
         for rec in self:
-            existing_rating = rec.ratings.search(
-                [("create_uid", "=", rec.env.uid), ("event_track_id", "=", rec.id)]
+            print("###################")
+            print("###################")
+            print("###################")
+            all_rev = self.env["event.track.reviewer"].search([])
+            print(all_rev)
+            reviewer = self.env["event.track.reviewer"].search(
+                [("user_id", "=", rec.env.user.id)]
             )
-            if existing_rating:
-                rec.grade_id = existing_rating.grade_id
-                rec.rating_comment = existing_rating.comment
+            if reviewer:
+                existing_rating = rec.ratings.search(
+                    [("reviewer_id", "=", reviewer.id), ("event_track_id", "=", rec.id)]
+                )
+                if existing_rating:
+                    rec.grade_id = existing_rating.grade_id
+                    rec.rating_comment = existing_rating.comment
 
     def _inverse_user_rating(self):
         for rec in self:
-            existing_rating = rec.ratings.search(
-                [("create_uid", "=", rec.env.uid), ("event_track_id", "=", rec.id)]
+            reviewer = self.env["event.track.reviewer"].search(
+                [("user_id", "=", rec.env.user.id)]
             )
+            if not reviewer:
+                reviewer = self.env["event.track.reviewer"].create(
+                    {"user_id": rec.env.user.id}
+                )
+            print("@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@")
+            print("@@@@@@@@@@@@@@@@@@@")
+            print(reviewer)
+            existing_rating = rec.ratings.search(
+                [("reviewer_id", "=", reviewer.id), ("event_track_id", "=", rec.id)]
+            )
+            print(existing_rating)
             if existing_rating:
                 if rec.grade_id:
                     existing_rating.grade_id = rec.grade_id
                 if rec.rating_comment:
                     existing_rating.comment = rec.rating_comment
             else:
+                print(rec.grade_id)
                 rec.ratings.create(
                     {
-                        "event_track": rec.id,
-                        "grade_id": rec.grade_id,
-                        "rating_comment": rec.rating_comment,
+                        "event_track_id": rec.id,
+                        "reviewer_id": reviewer.id,
+                        "grade_id": rec.grade_id.id,
+                        "comment": rec.rating_comment,
                     }
                 )
 

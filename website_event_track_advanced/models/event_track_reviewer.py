@@ -23,9 +23,10 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 # 4. Imports from Odoo modules:
+from odoo.exceptions import ValidationError
 
 # 5. Local imports in the relative form:
 
@@ -36,12 +37,11 @@ class EventTrackReviewer(models.Model):
     # 1. Private attributes
     _name = "event.track.reviewer"
     _description = "Event Track Reviewer"
-    _order = "name"
+    _order = "user_id"
+    _rec_name = "user_id"
 
     # 2. Fields declaration
-    active = fields.Boolean(default=True)
-    name = fields.Many2one("res.partner", "Name", required=True)
-    user_id = fields.Many2one("res.users", string="User", store=True)
+    user_id = fields.Many2one("res.users", string="User", store=True, required=True)
     review_group_ids = fields.Many2many(
         comodel_name="event.track.review.group", string="Review groups"
     )
@@ -58,20 +58,20 @@ class EventTrackReviewer(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    def compute_ratings_todo(self):
+    def _compute_ratings_todo_count(self):
         for record in self:
             record.ratings_todo_count = self.env["event.track"].search_count(
                 [("message_partner_ids", "=", record.id)]
             )
 
-    def compute_ratings_done(self):
+    def _compute_ratings_done_count(self):
         for record in self:
             if record.user_id:
                 record.ratings_done_count = self.env["event.track.rating"].search_count(
-                    [("create_uid", "=", record.user_id.id)]
+                    [("reviewer_id", "=", record.user_id.id)]
                 )
 
-    def compute_ratings_percent(self):
+    def _compute_ratings_done_percent(self):
         for record in self:
             if record.ratings_todo_count:
                 record.ratings_done_percent = (
@@ -79,18 +79,22 @@ class EventTrackReviewer(models.Model):
                     / float(record.ratings_todo_count)
                     * 100
                 )
+            else:
+                record.ratings_done_percent = 100
 
     # 5. Constraints and onchanges
-    @api.onchange("name")
-    def _onchange_name(self):
-        self.user_id = self.name.user_id and self.name.user_id.id or False
+    @api.constrains("user_id")
+    def _ensure_no_duplicate_user(self):
+        for record in self:
+            existing_reviewer = self.env["event.track.reviewer"].search(
+                [["user_id", "=", record.user_id.id], ["id", "!=", record.id]]
+            )
+            if existing_reviewer:
+                raise ValidationError(
+                    _("Reviewer for user %s already exists.", record.user_id.name)
+                )
 
     # 6. CRUD methods
-    def unlink(self):
-        for record in self:
-            if record.name.user_id:
-                record.user_id.child_ids = [(6, 0, [])]
-            return super(EventTrackReviewer, self).unlink()
 
     # 7. Action methods
 

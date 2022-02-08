@@ -30,9 +30,12 @@
     "installable": True,
     "depends": ["website_event_track"],
     "data": [
+        "data/event_track_rating_grade_data.xml",
         "security/ir.model.access.csv",
         "views/event_track_rating_views.xml",
-        "views/event_menus.xml",
         "views/event_track_views.xml",
+        "views/event_track_reviewer_views.xml",
+        "views/event_track_review_group_views.xml",
+        "views/event_menus.xml",
     ],
 }
