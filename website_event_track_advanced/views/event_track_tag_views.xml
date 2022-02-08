@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_event_track_tag_form_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.tag.form.advanced</field>
+        <field name="model">event.track.tag</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_tag_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="tracks"/>
+                <field name="track_count"/>
+            </field>
+        </field>
+    </record>
+</odoo>

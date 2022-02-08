@@ -23,9 +23,9 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
-
+from odoo import api, fields, models
 # 4. Imports from Odoo modules:
+from odoo.tools import html2plaintext
 
 # 5. Local imports in the relative form:
 
@@ -37,6 +37,29 @@ class EventTrack(models.Model):
     _inherit = "event.track"
 
     # 2. Fields declaration
+    partner_id = fields.Many2one(string="Contact")
+    chairperson_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Chairperson",
+        domain=[("is_company", "=", False)],
+    )
+    organizer = fields.Many2one(comodel_name="res.partner", string="Organizer")
+    organizer_contact = fields.Many2one(
+        comodel_name="res.partner", string="Organizer contact"
+    )
+    attachment_ids = fields.One2many(
+        comodel_name="ir.attachment",
+        inverse_name="res_id",
+        domain=[("res_model", "=", "event.track")],
+        string="Attachments",
+    )
+    application_file = fields.Binary(string="Application File")
+    application_file_filename = fields.Char(string="Application filename")
+    description_plain = fields.Text(
+        string="Plain description", compute="_compute_description_plain"
+    )
+    description_original = fields.Html(string="Original description", readonly=True)
+
     ratings = fields.One2many("event.track.rating", "event_track_id", string="Ratings")
     ratings_count = fields.Integer("Ratings Count", compute="_compute_ratings_count")
     rating_avg = fields.Float(
@@ -60,13 +83,125 @@ class EventTrack(models.Model):
         compute="_compute_user_rating",
         inverse="_inverse_user_rating",
     )
+
     review_group = fields.Many2one(
         comodel_name="event.track.review.group", string="Review Group"
     )
+    reviewers = fields.Many2many(
+        comodel_name="event.track.reviewer",
+        string="Reviewers",
+        compute="_compute_reviewers",
+    )
+    is_reviewer = fields.Boolean(
+        "Is reviewer",
+        compute="_compute_is_reviewer",
+        help="Helper field to check if current user is a reviewer.",
+    )
 
+    type = fields.Many2one(
+        comodel_name="event.track.type", inverse_name="event_track", string="Type"
+    )
+    show_in_agenda = fields.Boolean(
+        string="Shown in agenda", compute="_compute_show_in_agenda"
+    )
+
+    target_group = fields.Many2one(
+        comodel_name="event.track.target.group",
+        relation="event_track",
+        string="Target group",
+    )
+    target_group_info = fields.Html(string="Target group info")
+
+    language = fields.Many2one(comodel_name="res.lang", string="Language")
+    keywords = fields.Text(string="Keywords", help="Text keywords")
+    extra_info = fields.Html(string="Extra info")
+    video_url = fields.Char(string="Track as a video (link to e.g. Youtube or Vimeo)")
+    webinar = fields.Boolean(string="Pre-event webinar")
+    webinar_info = fields.Html(string="Pre-event webinar info")
+    workshop_goals = fields.Html(string="Goals")
+    workshop_schedule = fields.Html(string="Schedule")
+    workshop_participants = fields.Integer(string="Max participants")
+    workshop_fee = fields.Text(
+        string="Workshop participation fee", help="Leave empty for free workshops"
+    )
+    partner_string = fields.Text(string="Partner", compute="_compute_partner_string")
+    speakers_string = fields.Text(string="Speakers", compute="_compute_speakers_string")
+
+    external_registration = fields.Char(string="External registration link")
+    twitter_hashtag = fields.Char(
+        string="Twitter hashtag",
+        compute="_compute_twitter_hashtag",
+        store=True,
+        copy=False,
+    )
+    extra_materials = fields.Html(
+        string="Extra materials",
+        help="Extra materials (links etc.) that are shown in agenda",
+    )
+    extra_materials_plain = fields.Char(
+        string="Plain extra_materials", compute="_compute_extra_materials_plain"
+    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    def _compute_description_plain(self):
+        for record in self:
+            if record.description:
+                record.description_plain = html2plaintext(record.description)
+            else:
+                record.description_plain = ""
+
+    def _compute_show_in_agenda(self):
+        for record in self:
+            location_show = record.location_id.show_in_agenda or False
+            type_show = record.type.show_in_agenda or False
+            record.show_in_agenda = location_show and type_show
+
+    def _compute_partner_string(self):
+        for record in self:
+            record.partner_string = record.partner_id.name
+
+    def _compute_speakers_string(self):
+        for record in self:
+            speakers = ""
+            for speaker in record.speaker_ids:
+                speakers += " %s," % speaker.display_name
+            speakers = speakers[1:-1]
+            record.speakers_string = speakers
+
+    @api.depends("type.twitter_hashtag")
+    def compute_twitter_hashtag(self):
+        for record in self:
+            if record.type.twitter_hashtag:
+                hashtag = "{}{}".format(record.type.twitter_hashtag, record.id)
+                record.twitter_hashtag = hashtag
+
+    @api.depends("extra_materials")
+    def compute_extra_materials_plain(self):
+        for record in self:
+            if record.extra_materials:
+                record.extra_materials_plain = html2plaintext(record.extra_materials)
+            else:
+                record.extra_materials_plain = ""
+
+    @api.depends("review_group")
+    def _compute_reviewers(self):
+        for rec in self:
+            if rec.review_group:
+                rec.reviewers = self.env["event.track.reviewer"].search(
+                    [("review_group_ids", "=", rec.review_group.id)]
+                )
+            else:
+                rec.reviewers = False
+
+    def _compute_is_reviewer(self):
+        for rec in self:
+            rec.is_reviewer = False
+            for reviewer in rec.reviewers:
+                if self.env.user == reviewer.user_id:
+                    rec.is_reviewer = True
+                    return
+
     def _compute_ratings_count(self):
         for rec in self:
             rec.ratings_count = len(rec.ratings)
@@ -82,11 +217,6 @@ class EventTrack(models.Model):
 
     def _compute_user_rating(self):
         for rec in self:
-            print("###################")
-            print("###################")
-            print("###################")
-            all_rev = self.env["event.track.reviewer"].search([])
-            print(all_rev)
             reviewer = self.env["event.track.reviewer"].search(
                 [("user_id", "=", rec.env.user.id)]
             )
@@ -107,23 +237,15 @@ class EventTrack(models.Model):
                 reviewer = self.env["event.track.reviewer"].create(
                     {"user_id": rec.env.user.id}
                 )
-            print("@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@")
-            print("@@@@@@@@@@@@@@@@@@@")
-            print(reviewer)
             existing_rating = rec.ratings.search(
                 [("reviewer_id", "=", reviewer.id), ("event_track_id", "=", rec.id)]
             )
-            print(existing_rating)
             if existing_rating:
                 if rec.grade_id:
                     existing_rating.grade_id = rec.grade_id
                 if rec.rating_comment:
                     existing_rating.comment = rec.rating_comment
             else:
-                print(rec.grade_id)
                 rec.ratings.create(
                     {
                         "event_track_id": rec.id,

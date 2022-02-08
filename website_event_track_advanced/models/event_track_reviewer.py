@@ -24,7 +24,6 @@
 
 # 3. Odoo imports (openerp):
 from odoo import _, api, fields, models
-
 # 4. Imports from Odoo modules:
 from odoo.exceptions import ValidationError
 
@@ -42,6 +41,8 @@ class EventTrackReviewer(models.Model):
 
     # 2. Fields declaration
     user_id = fields.Many2one("res.users", string="User", store=True, required=True)
+    email = fields.Char("Email", related="user_id.email")
+    phone = fields.Char("Phone", related="user_id.phone")
     review_group_ids = fields.Many2many(
         comodel_name="event.track.review.group", string="Review groups"
     )

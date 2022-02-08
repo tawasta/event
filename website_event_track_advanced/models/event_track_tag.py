@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import api, fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -32,25 +32,38 @@ from odoo import fields, models
 # 6. Unknown third party imports:
 
 
-class EventTrackReviewGroup(models.Model):
+class TrackTag(models.Model):
     # 1. Private attributes
-    _name = "event.track.review.group"
-    _description = "Event Track Reviewer Group"
-    _order = "name"
+    _inherit = "event.track.tag"
 
     # 2. Fields declaration
-    active = fields.Boolean(default=True)
-    name = fields.Char("Name", required=True)
-    reviewers = fields.Many2many(
-        comodel_name="event.track.reviewer", string="Reviewers"
+    name = fields.Char(translate=True)
+    track_count = fields.Integer(
+        string="Track count", compute="_compute_track_count", store=True
     )
-    event_tracks = fields.One2many(
-        comodel_name="event.track", inverse_name="review_group", string="Event Tracks"
+    track_count_agenda = fields.Integer(
+        string="Track count in agenda",
+        compute="_compute_track_count_agenda",
+        store=True,
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("track_ids")
+    def _compute_track_count(self):
+        for record in self:
+            record.track_count = len(record.track_ids)
+
+    @api.depends("track_ids")
+    def _compute_track_count_agenda(self):
+        for record in self:
+            published_tracks = (
+                record.track_ids.filtered("website_published")
+                .filtered("type.show_in_agenda")
+                .filtered(lambda t: t.date is not False)
+            )
+            record.track_count_agenda = len(published_tracks)
 
     # 5. Constraints and onchanges
 

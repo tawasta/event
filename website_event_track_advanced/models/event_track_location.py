@@ -32,20 +32,27 @@ from odoo import fields, models
 # 6. Unknown third party imports:
 
 
-class EventTrackReviewGroup(models.Model):
+class TrackLocation(models.Model):
     # 1. Private attributes
-    _name = "event.track.review.group"
-    _description = "Event Track Reviewer Group"
-    _order = "name"
+    _inherit = "event.track.location"
+    _order = "sequence"
+
+    def _default_sequence(self):
+        return (self.search([], order="sequence desc", limit=1).sequence or 0) + 1
 
     # 2. Fields declaration
-    active = fields.Boolean(default=True)
-    name = fields.Char("Name", required=True)
-    reviewers = fields.Many2many(
-        comodel_name="event.track.reviewer", string="Reviewers"
+    sequence = fields.Integer(string="Sequence", default=_default_sequence)
+    show_in_agenda = fields.Boolean(
+        string="Show in agenda", help="Show in website agenda", default=True
     )
-    event_tracks = fields.One2many(
-        comodel_name="event.track", inverse_name="review_group", string="Event Tracks"
+    track_ids = fields.One2many(
+        comodel_name="event.track", inverse_name="location_id", string="Tracks"
+    )
+    scheduled_track_ids = fields.One2many(
+        comodel_name="event.track",
+        inverse_name="location_id",
+        string="Scheduled tracks",
+        domain=[("date", "!=", False)],
     )
 
     # 3. Default methods

@@ -15,7 +15,13 @@
                     </div>
                     <group>
                         <field name="name"/>
-                        <field name="reviewers"/>
+                        <field name="reviewers">
+                            <tree>
+                                <field name="user_id"/>
+                                <field name="email" optional="show"/>
+                                <field name="phone" optional="show"/>
+                            </tree>
+                        </field>
                         <field name="event_tracks"/>
                     </group>
                 </sheet>

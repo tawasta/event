@@ -17,7 +17,7 @@
                     <group>
                         <field name="event_track_id" attrs="{'readonly':[('id','!=', False)]}"/>
                         <field name="event_id"/>
-                        <field name="create_uid" readonly="1"/>
+                        <field name="reviewer_id" readonly="1"/>
                         <field name="create_date" readonly="1"/>
                         <field name="grade_id"/>
                         <field name="comment"/>
@@ -32,9 +32,9 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Event Track">
-                <field name="event_id"/>
+                <field name="event_id" optional="show"/>
                 <field name="event_track_id"/>
-                <field name="create_uid" optional="show"/>
+                <field name="reviewer_id"/>
                 <field name="create_date" optional="show"/>
                 <field name="grade_id" optional="show"/>
                 <field name="comment" optional="show"/>

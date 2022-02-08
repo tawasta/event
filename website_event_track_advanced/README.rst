@@ -8,7 +8,10 @@ Website Event Track Advanced
 Advanced features for Event Track
 
 Features:
-   - Ability to give Event Tracks ratings
+   - Create Review Groups and link them to tracks
+   - Create Track Rating Grades
+   - Ability to give Event Tracks ratings (Rating Grades) based on review groups
+   - Reviewers are users who belong to review groups and are able to rate certain tracks
 
 Configuration
 =============
