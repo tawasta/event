@@ -36,7 +36,7 @@ class TrackRating(models.Model):
     # 1. Private attributes
     _name = "event.track.rating"
     _description = "Event Track Rating"
-    _order = "event_track_id, grade_id"
+    _order = "event_track, grade_id"
     _rec_name = "grade_id"
 
     # 2. Fields declaration
@@ -44,7 +44,7 @@ class TrackRating(models.Model):
     event_id = fields.Many2one(
         "event.event", "Event", compute="_compute_event_id", readonly=True
     )
-    event_track_id = fields.Many2one("event.track", "Event Track", required=True)
+    event_track = fields.Many2one("event.track", "Event Track", required=True)
     reviewer_id = fields.Many2one("event.track.reviewer", "Reviewer", required=True)
     grade_id = fields.Many2one(
         comodel_name="event.track.rating.grade", string="Track grade"
@@ -56,8 +56,8 @@ class TrackRating(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     def _compute_event_id(self):
         for rating in self:
-            if rating.event_track_id:
-                rating.event_id = rating.event_track_id.event_id
+            if rating.event_track:
+                rating.event_id = rating.event_track.event_id
 
     # 5. Constraints and onchanges
 

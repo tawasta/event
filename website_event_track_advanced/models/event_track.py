@@ -61,7 +61,7 @@ class EventTrack(models.Model):
     )
     description_original = fields.Html(string="Original description", readonly=True)
 
-    ratings = fields.One2many("event.track.rating", "event_track_id", string="Ratings")
+    ratings = fields.One2many("event.track.rating", "event_track", string="Ratings")
     ratings_count = fields.Integer("Ratings Count", compute="_compute_ratings_count")
     rating_avg = fields.Float(
         "Average rating",
@@ -85,6 +85,17 @@ class EventTrack(models.Model):
         inverse="_inverse_user_rating",
     )
 
+    type = fields.Many2one(
+        comodel_name="event.track.type", inverse_name="event_track", string="Type"
+    )
+
+    target_group = fields.Many2one(
+        comodel_name="event.track.target.group",
+        relation="event_track",
+        string="Target group",
+    )
+    target_group_info = fields.Html(string="Target group info")
+
     review_group = fields.Many2one(
         comodel_name="event.track.review.group", string="Review Group"
     )
@@ -99,19 +110,9 @@ class EventTrack(models.Model):
         help="Helper field to check if current user is a reviewer.",
     )
 
-    type = fields.Many2one(
-        comodel_name="event.track.type", inverse_name="event_track", string="Type"
-    )
     show_in_agenda = fields.Boolean(
         string="Shown in agenda", compute="_compute_show_in_agenda"
     )
-
-    target_group = fields.Many2one(
-        comodel_name="event.track.target.group",
-        relation="event_track",
-        string="Target group",
-    )
-    target_group_info = fields.Html(string="Target group info")
 
     language = fields.Many2one(comodel_name="res.lang", string="Language")
     keywords = fields.Text(string="Keywords", help="Text keywords")
@@ -141,6 +142,24 @@ class EventTrack(models.Model):
     )
     extra_materials_plain = fields.Char(
         string="Plain extra_materials", compute="_compute_extra_materials_plain"
+    )
+
+    overlapping_location_track_ids = fields.Many2many(
+        comodel_name="event.track",
+        string="Overlapping locations",
+        compute="_compute_overlapping_location_track_ids",
+    )
+
+    overlapping_chairperson_track_ids = fields.Many2many(
+        comodel_name="event.track",
+        string="Overlapping chairpersons",
+        compute="_compute_overlapping_chairperson_track_ids",
+    )
+
+    overlapping_speaker_track_ids = fields.Many2many(
+        comodel_name="event.track",
+        string="Overlapping speakers",
+        compute="_compute_overlapping_speaker_track_ids",
     )
     # 3. Default methods
 
@@ -223,7 +242,7 @@ class EventTrack(models.Model):
             )
             if reviewer:
                 existing_rating = rec.ratings.search(
-                    [("reviewer_id", "=", reviewer.id), ("event_track_id", "=", rec.id)]
+                    [("reviewer_id", "=", reviewer.id), ("event_track", "=", rec.id)]
                 )
                 if existing_rating:
                     rec.grade_id = existing_rating.grade_id
@@ -239,7 +258,7 @@ class EventTrack(models.Model):
                     {"user_id": rec.env.user.id}
                 )
             existing_rating = rec.ratings.search(
-                [("reviewer_id", "=", reviewer.id), ("event_track_id", "=", rec.id)]
+                [("reviewer_id", "=", reviewer.id), ("event_track", "=", rec.id)]
             )
             if existing_rating:
                 if rec.grade_id:
@@ -249,12 +268,84 @@ class EventTrack(models.Model):
             else:
                 rec.ratings.create(
                     {
-                        "event_track_id": rec.id,
+                        "event_track": rec.id,
                         "reviewer_id": reviewer.id,
                         "grade_id": rec.grade_id.id,
                         "comment": rec.rating_comment,
                     }
                 )
+
+    def _compute_overlapping_location_track_ids(self):
+        # Search overlapping tracks in the same location
+        EventTrack = self.env["event.track"]
+        for record in self:
+            if not record.location_id or not record.date or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+            domain = list()
+            if not isinstance(record.id, models.NewId):
+                # Exclude the record itself
+                domain.append(("id", "!=", record.id))
+            domain += [
+                # Same location
+                ("location_id", "!=", False),
+                ("location_id", "=", record.location_id.id),
+                # Starts before this ends
+                ("date", "<", record.date_end),
+                # Ends after this starts
+                ("date_end", ">", record.date),
+            ]
+            overlapping_tracks = EventTrack.search(domain)
+            overlapping_tracks = overlapping_tracks.filtered(
+                lambda t: t.id != record.id
+            )
+            if overlapping_tracks:
+                record.overlapping_location_track_ids = overlapping_tracks.ids
+
+    def _compute_overlapping_chairperson_track_ids(self):
+        EventTrack = self.env["event.track"]
+        for record in self:
+            if not record.chairperson_id or not record.date or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+            domain = list()
+            if not isinstance(record.id, models.NewId):
+                # Exclude the record itself
+                domain.append(("id", "!=", record.id))
+            domain += [
+                # Same chairperson
+                ("chairperson_id", "!=", False),
+                ("chairperson_id", "=", record.chairperson_id.id),
+                # Starts before this ends
+                ("date", "<", record.date_end),
+                # Ends after this starts
+                ("date_end", ">", record.date),
+            ]
+            overlapping_tracks = EventTrack.search(domain)
+            if overlapping_tracks:
+                record.overlapping_chairperson_track_ids = overlapping_tracks.ids
+
+    def _compute_overlapping_speaker_track_ids(self):
+        EventTrack = self.env["event.track"]
+        for record in self:
+            if not record.speaker_ids or not record.date or not record.duration:
+                # If all the necessary information is not set, skip this
+                continue
+            domain = list()
+            if not isinstance(record.id, models.NewId):
+                # Exclude the record itself
+                domain.append(("id", "!=", record.id))
+            domain += [
+                # Same speaker
+                ("speaker_ids", "in", record.speaker_ids.ids),
+                # Starts before this ends
+                ("date", "<", record.date_end),
+                # Ends after this starts
+                ("date_end", ">", record.date),
+            ]
+            overlapping_tracks = EventTrack.search(domain)
+            if overlapping_tracks:
+                record.overlapping_speaker_track_ids = overlapping_tracks.ids
 
     # 5. Constraints and onchanges
 

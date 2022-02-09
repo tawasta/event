@@ -32,6 +32,8 @@
     "data": [
         "data/event_track_rating_grade_data.xml",
         "security/ir.model.access.csv",
+        "security/event_track_security.xml",
+        "wizards/event_track_assign_wizard.xml",
         "views/event_track_rating_views.xml",
         "views/event_track_views.xml",
         "views/event_track_reviewer_views.xml",

@@ -17,7 +17,8 @@ Usage
 
 Known issues / Roadmap
 ======================
-\-
+Migration changes 10.0 -> 14.0:
+   - presentation_image field changed to Image field from Binary
 
 Credits
 =======

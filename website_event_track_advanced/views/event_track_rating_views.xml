@@ -15,7 +15,7 @@
                         </button>
                     </div>
                     <group>
-                        <field name="event_track_id" attrs="{'readonly':[('id','!=', False)]}"/>
+                        <field name="event_track" attrs="{'readonly':[('id','!=', False)]}"/>
                         <field name="event_id"/>
                         <field name="reviewer_id" readonly="1"/>
                         <field name="create_date" readonly="1"/>
@@ -33,7 +33,7 @@
         <field name="arch" type="xml">
             <tree string="Event Track">
                 <field name="event_id" optional="show"/>
-                <field name="event_track_id"/>
+                <field name="event_track"/>
                 <field name="reviewer_id"/>
                 <field name="create_date" optional="show"/>
                 <field name="grade_id" optional="show"/>
@@ -49,10 +49,10 @@
             <search string="Search track ratings">
                 <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Event Track" name="groupby_track" context="{'group_by': 'event_track_id'}"/>
+                    <filter string="Event Track" name="groupby_track" context="{'group_by': 'event_track'}"/>
                 </group>
                 <field name="event_id"/>
-                <field name="event_track_id"/>
+                <field name="event_track"/>
                 <field name="grade_id"/>
                 <field name="comment"/>
             </search>
