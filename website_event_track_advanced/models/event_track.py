@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+
 # 4. Imports from Odoo modules:
 from odoo.tools import html2plaintext
 
@@ -170,14 +171,14 @@ class EventTrack(models.Model):
             record.speakers_string = speakers
 
     @api.depends("type.twitter_hashtag")
-    def compute_twitter_hashtag(self):
+    def _compute_twitter_hashtag(self):
         for record in self:
             if record.type.twitter_hashtag:
                 hashtag = "{}{}".format(record.type.twitter_hashtag, record.id)
                 record.twitter_hashtag = hashtag
 
     @api.depends("extra_materials")
-    def compute_extra_materials_plain(self):
+    def _compute_extra_materials_plain(self):
         for record in self:
             if record.extra_materials:
                 record.extra_materials_plain = html2plaintext(record.extra_materials)
