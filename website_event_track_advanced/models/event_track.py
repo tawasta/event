@@ -39,6 +39,7 @@ class EventTrack(models.Model):
 
     # 2. Fields declaration
     partner_id = fields.Many2one(string="Contact")
+    speaker_ids = fields.Many2many("res.partner", string="Speakers")
     chairperson_id = fields.Many2one(
         comodel_name="res.partner",
         string="Chairperson",
@@ -175,11 +176,12 @@ class EventTrack(models.Model):
         for record in self:
             location_show = record.location_id.show_in_agenda or False
             type_show = record.type.show_in_agenda or False
-            record.show_in_agenda = location_show and type_show
+            show_in_agenda = location_show and type_show
+            record.show_in_agenda = show_in_agenda or False
 
     def _compute_partner_string(self):
         for record in self:
-            record.partner_string = record.partner_id.name
+            record.partner_string = record.partner_id.name or False
 
     def _compute_speakers_string(self):
         for record in self:
@@ -187,14 +189,15 @@ class EventTrack(models.Model):
             for speaker in record.speaker_ids:
                 speakers += " %s," % speaker.display_name
             speakers = speakers[1:-1]
-            record.speakers_string = speakers
+            record.speakers_string = speakers or False
 
     @api.depends("type.twitter_hashtag")
     def _compute_twitter_hashtag(self):
         for record in self:
+            hashtag = ""
             if record.type.twitter_hashtag:
                 hashtag = "{}{}".format(record.type.twitter_hashtag, record.id)
-                record.twitter_hashtag = hashtag
+            record.twitter_hashtag = hashtag or False
 
     @api.depends("extra_materials")
     def _compute_extra_materials_plain(self):
@@ -224,7 +227,7 @@ class EventTrack(models.Model):
 
     def _compute_ratings_count(self):
         for rec in self:
-            rec.ratings_count = len(rec.ratings)
+            rec.ratings_count = len(rec.ratings) or 0
 
     def _compute_rating_avg(self):
         for rec in self:
@@ -233,7 +236,8 @@ class EventTrack(models.Model):
             ratings_sum = 0
             for rating in rec.ratings:
                 ratings_sum += rating.grade_id.grade
-            rec.rating_avg = float(ratings_sum) / float(rec.ratings_count)
+            rating_avg = float(ratings_sum) / float(rec.ratings_count)
+            rec.rating_avg = rating_avg or 0
 
     def _compute_user_rating(self):
         for rec in self:
@@ -247,6 +251,9 @@ class EventTrack(models.Model):
                 if existing_rating:
                     rec.grade_id = existing_rating.grade_id
                     rec.rating_comment = existing_rating.comment
+            else:
+                rec.grade_id = False
+                rec.rating_comment = False
 
     def _inverse_user_rating(self):
         for rec in self:
@@ -281,6 +288,7 @@ class EventTrack(models.Model):
         for record in self:
             if not record.location_id or not record.date or not record.duration:
                 # If all the necessary information is not set, skip this
+                record.overlapping_location_track_ids = False
                 continue
             domain = list()
             if not isinstance(record.id, models.NewId):
@@ -301,12 +309,15 @@ class EventTrack(models.Model):
             )
             if overlapping_tracks:
                 record.overlapping_location_track_ids = overlapping_tracks.ids
+            else:
+                record.overlapping_location_track_ids = False
 
     def _compute_overlapping_chairperson_track_ids(self):
         EventTrack = self.env["event.track"]
         for record in self:
             if not record.chairperson_id or not record.date or not record.duration:
                 # If all the necessary information is not set, skip this
+                record.overlapping_chairperson_track_ids = False
                 continue
             domain = list()
             if not isinstance(record.id, models.NewId):
@@ -324,12 +335,15 @@ class EventTrack(models.Model):
             overlapping_tracks = EventTrack.search(domain)
             if overlapping_tracks:
                 record.overlapping_chairperson_track_ids = overlapping_tracks.ids
+            else:
+                record.overlapping_chairperson_track_ids = False
 
     def _compute_overlapping_speaker_track_ids(self):
         EventTrack = self.env["event.track"]
         for record in self:
             if not record.speaker_ids or not record.date or not record.duration:
                 # If all the necessary information is not set, skip this
+                record.overlapping_speaker_track_ids = False
                 continue
             domain = list()
             if not isinstance(record.id, models.NewId):
@@ -346,6 +360,8 @@ class EventTrack(models.Model):
             overlapping_tracks = EventTrack.search(domain)
             if overlapping_tracks:
                 record.overlapping_speaker_track_ids = overlapping_tracks.ids
+            else:
+                record.overlapping_speaker_track_ids = False
 
     # 5. Constraints and onchanges
 
