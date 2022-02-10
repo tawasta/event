@@ -5,6 +5,24 @@
         <field name="model">event.track</field>
         <field name="inherit_id" ref="website_event_track.view_event_track_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="partner_id"/>
+            </xpath>
+            <xpath expr="//page[@name='speakers']" position="replace">
+                <page string="Speakers" name="speakers">
+                    <group>
+                        <field name="speaker_ids" nolabel="1" options="{'no_quick_create':True,'no_create_edit':True}">
+                            <tree name="speakers" string="Speakers">
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                                <field name="city" optional="hide"/>
+                                <field name="country_id" optional="hide"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
             <xpath expr="//sheet/group[last()]" position="after">
                 <group name="dates">
                     <group>

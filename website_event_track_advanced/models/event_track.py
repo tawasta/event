@@ -366,6 +366,13 @@ class EventTrack(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
+    def write(self, vals):
+        res = super(EventTrack, self).write(vals)
+        if vals.get("speaker_ids"):
+            # TODO: Get ids correctly
+            for speaker in vals.get("speaker_ids")[0][2]:
+                self.message_subscribe([speaker])
+        return res
 
     # 7. Action methods
 

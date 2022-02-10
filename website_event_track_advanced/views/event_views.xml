@@ -7,8 +7,62 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-    <record id="view_event_form" model="ir.ui.view">
-        <field name="name">view_event_form_call_for_papers</field>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_track" model="ir.ui.view">
+        <field name="name">event.type.form.track</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='event_type_visibility_tags']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_types">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="track_types_ids" string="Track Types"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="track_types_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_target_groups">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="target_group_ids" string="Track Target Groups"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="target_group_ids" widget="many2many_tags" options="{ 'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_twitter_hashtags">
+                    <div class="o_setting_left_pane">
+                        <field name="show_track_twitter_hashtags"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="show_track_twitter_hashtags"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='use_timezone']//..//.." position="after">
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_location_ids">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="location_ids" string="Track Locations"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="location_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_track" model="ir.ui.view">
+        <field name="name">view.event.form.track</field>
         <field name="model">event.event</field>
         <field name="inherit_id" ref="event.view_event_form"/>
         <field name="arch" type="xml">
