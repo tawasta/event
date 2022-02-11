@@ -19,41 +19,44 @@
 ##############################################################################
 
 # 1. Standard library imports:
+from werkzeug.exceptions import NotFound
+
+# 3. Odoo imports (openerp):
+from odoo import http
+from odoo.http import request
+
+# 4. Imports from Odoo modules:
+from odoo.addons.website_event_track.controllers.event_track import EventTrackController
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import fields, models
-
-# 4. Imports from Odoo modules:
 
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
 
 
-class EventTrackTargetGroup(models.Model):
-    # 1. Private attributes
-    _name = "event.track.target.group"
-    _description = "Event Track Target Group"
-    _order = "name"
-
-    # 2. Fields declaration
-    name = fields.Char("Name", translate=True)
-    description = fields.Html("Description", translate=True)
-    active = fields.Boolean(default=True)
-    event_tracks = fields.One2many(
-        comodel_name="event.track", inverse_name="target_group", string="Event Tracks"
+class EventTrackControllerAdvanced(EventTrackController):
+    @http.route(
+        ["""/event/<model("event.event"):event>/track_proposal"""],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
     )
+    def event_track_proposal(self, event, **post):
+        if not event.can_access_from_current_website():
+            raise NotFound()
 
-    # 3. Default methods
+        values = self._get_event_track_proposal_values(event)
+        return request.render("website_event_track.event_track_proposal", values)
 
-    # 4. Compute and search fields, in the same order that fields declaration
+    def _get_event_track_proposal_values(self, event):
+        user_id = request.env.user
+        values = {"error": {}, "error_message": []}
+        tracks = request.env["event.track"].search(
+            [["user_id", "=", user_id.id], ["event_id", "=", event.id]]
+        )
+        values.update({"tracks": tracks, "event": event})
 
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods
+        return values

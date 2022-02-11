@@ -40,8 +40,10 @@
         "views/event_track_review_group_views.xml",
         "views/event_track_location_views.xml",
         "views/event_track_type_views.xml",
+        "views/event_track_tag_views.xml",
         "views/event_track_target_group_views.xml",
         "views/event_views.xml",
         "views/event_menus.xml",
+        "views/event_track_templates_proposal.xml",
     ],
 }

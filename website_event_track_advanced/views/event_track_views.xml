@@ -7,6 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="partner_id"/>
+                <field name="chairperson_id"/>
+                <field name="organizer"/>
+                <field name="organizer_contact"/>
             </xpath>
             <xpath expr="//page[@name='speakers']" position="replace">
                 <page string="Speakers" name="speakers">
@@ -62,6 +65,13 @@
                         <field name="description_original" nolabel="1"/>
                     </group>
                 </page>
+                <page name="extra_info" string="Extra info" groups="event.group_event_manager">
+                    <group colspan="2">
+                        <field name="extra_materials"/>
+                        <field name="video_url"/>
+                        <field name="external_registration"/>
+                    </group>
+                </page>
                 <page name="target_group" string="Target Group" groups="event.group_event_manager">
                     <group name="portal">
                         <group>
@@ -77,6 +87,51 @@
                 <page string="Ratings" name="ratings" groups="event.group_event_manager">
                     <field name="ratings" readonly="1"/>
                 </page>
+                <page name="webinar" string="Webinar">
+                    <group>
+                        <field name="webinar"/>
+                        <field name="webinar_info" attrs="{'readonly': [('webinar', '=', False)]}"/>
+                    </group>
+                </page>
+                <page name="workshop" string="Workshop">
+                    <!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
+                    <group cols="1">
+                        <field name="workshop_participants" nolabel="0"/>
+                        <field name="workshop_fee" nolabel="0"/>
+                        <field name="workshop_goals" nolabel="0"/>
+                        <field name="workshop_schedule" nolabel="0"/>
+                    </group>
+                </page>
+                <page name="overlap" string="Overlapping presentations">
+                    <group name="overlapping_tracks" col="1">
+                        <field name="overlapping_location_track_ids" attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="location_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_chairperson_track_ids" attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="chairperson_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_speaker_track_ids" attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
             </xpath>
             <xpath expr="//page[@name='description']//field[@name='description']" position="before">
                 <group>
@@ -84,6 +139,78 @@
                     <field name="application_file" widget="binary" filename="application_file_filename"/>
                 </group>
             </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_kanban_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.kanban.advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="type"/>
+                <field name="date"/>
+                <field name="partner_string"/>
+                <field name="speakers_string"/>
+                <field name="duration"/>
+                <field name="location_id"/>
+            </xpath>
+            <xpath expr="//div[@class='o_kanban_record_body']" position="inside">
+                <strong>
+                    <field name="type"/>
+                </strong>
+                <p>
+                    <strong>Contact:</strong>
+                    <field name="partner_string"/>
+                </p>
+                <p>
+                    <strong>Presenters:</strong>
+                    <field name="speakers_string"/>
+                </p>
+                <div class="oe_kanban_body_left">
+                    <p>
+                        Rating: <field name="rating_avg"/>
+                    </p>
+                </div>
+                <div class="oe_kanban_body_right">
+                    <field name="location_id"/>
+                    <br/>
+                    <field name="date" widget="datetime"/>
+                    <br/>
+                    <t t-if="record.duration.raw_value"><field name="duration" widget="float_time"/> hours</t>
+                </div>
+                <div class="oe_clear"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_search_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.search.advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="type"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Contact" name="contact" context="{'group_by': 'partner_id'}"/>
+                <filter string="Type" name="type" context="{'group_by': 'type'}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_tree" model="ir.ui.view">
+        <field name="name">view_event_track_tree_advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_phone" position="after">
+                <field name="speaker_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+            <field name="event_id" position="after">
+                <field name="date" optional="show"/>
+                <field name="location_id" optional="show"/>
+                <field name="review_group" optional="show"/>
+                <field name="ratings_count" optional="show"/>
+                <field name="rating_avg" optional="show"/>
+            </field>
         </field>
     </record>
 </odoo>

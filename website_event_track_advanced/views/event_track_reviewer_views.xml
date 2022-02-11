@@ -10,7 +10,7 @@
                 <sheet string="Track Reviewer">
                     <group>
                         <field name="user_id"/>
-                        <field name="review_group_ids"/>
+                        <field name="review_group_ids" widget="many2many_tags"/>
                         <field name="ratings_done_count"/>
                         <field name="ratings_todo_count"/>
                         <field name="ratings_done_percent"/>
@@ -38,7 +38,7 @@
                 <field name="user_id"/>
                 <field name="email" optional="hide"/>
                 <field name="phone" optional="hide"/>
-                <field name="review_group_ids" optional="show"/>
+                <field name="review_group_ids" widget="many2many_tags" optional="show"/>
                 <field name="ratings_done_count" optional="show"/>
                 <field name="ratings_todo_count" optional="show"/>
                 <field name="ratings_done_percent" optional="show"/>

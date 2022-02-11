@@ -34,6 +34,8 @@
         <field name="arch" type="xml">
             <search string="Search Track Review Groups">
                 <field name="name"/>
+                <field name="reviewers"/>
+                <field name="event_tracks"/>
             </search>
         </field>
     </record>
@@ -44,8 +46,8 @@
         <field name="arch" type="xml">
             <tree string="Track Review Groups">
                 <field name="name"/>
-                <field name="reviewers" optional="show"/>
-                <field name="event_tracks" optional="show"/>
+                <field name="reviewers" widget="many2many_tags" optional="show"/>
+                <field name="event_tracks" widget="many2many_tags" optional="show"/>
             </tree>
         </field>
     </record>

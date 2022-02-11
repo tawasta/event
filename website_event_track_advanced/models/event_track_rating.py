@@ -75,6 +75,7 @@ class TrackRatingGrade(models.Model):
     _name = "event.track.rating.grade"
     _description = "Event Track Rating Grade"
     _rec_name = "grade"
+    _order = "grade"
 
     # 2. Fields declaration
     grade = fields.Integer(string="Grade", required=True)

@@ -5,9 +5,20 @@
         <field name="model">event.track.tag</field>
         <field name="inherit_id" ref="website_event_track.view_event_track_tag_form"/>
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="tracks"/>
-                <field name="track_count"/>
+            <field name="category_id" position="after">
+                <field name="track_ids" widget="many2many_tags" readonly="1"/>
+                <field name="track_count" readonly="1"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_event_track_tag_tree_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.tag.tree.advanced</field>
+        <field name="model">event.track.tag</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_tag_tree"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="track_ids" widget="many2many_tags" readonly="1" optional="show"/>
+                <field name="track_count" readonly="1" optional="show"/>
             </field>
         </field>
     </record>

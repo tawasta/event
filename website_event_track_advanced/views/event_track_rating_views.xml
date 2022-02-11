@@ -46,7 +46,7 @@
         <field name="name">event.track.rating.search</field>
         <field name="model">event.track.rating</field>
         <field name="arch" type="xml">
-            <search string="Search track ratings">
+            <search string="Search Track Ratings">
                 <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Event Track" name="groupby_track" context="{'group_by': 'event_track'}"/>
@@ -66,6 +66,16 @@
         <field name="context">{'search_default_groupby_event':1, 'search_default_groupby_track':1}</field>
     </record>
     <!-- Track Rating Grade Views -->
+    <record id="view_event_track_rating_grade_search" model="ir.ui.view">
+        <field name="name">event.track.rating.grade.search</field>
+        <field name="model">event.track.rating.grade</field>
+        <field name="arch" type="xml">
+            <search string="Search Track Rating Grades">
+                <field name="grade"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
     <record id="view_event_track_rating_grade_form" model="ir.ui.view">
         <field name="name">Track Rating Grades</field>
         <field name="model">event.track.rating.grade</field>
