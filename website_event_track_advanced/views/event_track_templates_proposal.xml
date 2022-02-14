@@ -18,48 +18,96 @@
                             </p>
                         </t>
                     </section>
-                    <t t-foreach="tracks" t-as="track">
-                        <t t-call="website_event_track_advanced.event_track_application"/>
-                    </t>
+                    <div class="row">
+                        <t t-foreach="tracks" t-as="track">
+                            <t t-call="website_event_track_advanced.event_track_proposal_template"/>
+                        </t>
+                    </div>
                     <t t-set="track" t-value="request.env['event.track']"/>
-                    <t t-call="website_event_track_advanced.event_track_application"/>
+                    <t t-call="website_event_track_advanced.event_track_proposal_template_new"/>
                 </div>
             </div>
         </xpath>
     </template>
-    <!-- Application -->
-    <template name="Event Track Application" id="event_track_application">
-        <section id="forms" class="mb-5" t-if="event.website_track_proposal">
-            <form id="track-application-form" class="mt32 js_website_submit_form" t-attf-action="/event/#{event.id}/track_proposal/post" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
-                <!-- <t t-call="website_event_track_advanced.event_track_application_type"/> -->
-                <t t-call="website_event_track_advanced.event_track_application_info"/>
-                <!-- <t t-call="website_event_track_advanced.event_track_application_targetgroup_info"/> -->
-                <!-- <t t-call="website_event_track_advanced.event_track_application_contact_info"/> -->
-                <!-- <t t-call="website_event_track_advanced.event_track_application_speakers"/> -->
-                <!-- <t t-call="website_event_track_advanced.event_track_application_webinar"/> -->
-                <!-- <t t-call="website_event_track_advanced.event_track_application_workshop"/> -->
-                <!-- <t t-call="website_event_track_advanced.event_track_application_extra_info"/> -->
-                <p class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <i class="fa fa-info-circle"/>
-                    <span>By clicking <strong>"Save as draft"</strong> the proposal shall be saved and can be edited later.</span>
-                </p>
-                <p class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <i class="fa fa-info-circle"/>
-                    <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span>
-                    <br/>
-                    <span>Please note that a completed proposal can no longer be edited.</span>
-                </p>
-                <div class="form-group o_form_buttons">
-                    <div class="button-group">
-                        <button type="submit" name="track-save" value="track-save" id="application-submit-button" class="btn btn-secondary">Save as draft</button>
-                        <button t-if="not track or track.stage_id in ['draft', '']" type="submit" name="track-confirm" value="track-confirm" id="application-submit-button-send" class="btn btn-primary">Save and submit</button>
+    <template id="event_track_proposal_template_new" name="Event Track New Application">
+        <div>
+            <form id="track_proposal" class="mb-5" t-attf-action="/event/#{slug(event)}/track_proposal/form" method="post" itemscope="itemscope" itemprop="offers" itemtype="http://schema.org/AggregateOffer">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="track_id" t-att-value="track.id"/>
+                <button type="submit" class="btn btn-primary o_wait_lazy_js btn-block a-submit" t-attf-id="#{track.id}">
+                            New Proposal
+                        </button>
+            </form>
+        </div>
+    </template>
+    <template id="event_track_proposal_template" name="Event Track Application">
+        <div class="col-xl-6">
+            <form id="track_proposal" class="mb-5" t-attf-action="/event/#{slug(event)}/track_proposal/form" method="post" itemscope="itemscope" itemprop="offers" itemtype="http://schema.org/AggregateOffer">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="track_id" t-att-value="track.id"/>
+                <div t-attf-class="card border border-primary">
+                    <div class="card-body" style="min-height: 130px;">
+                        <button type="submit" class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js" role="button" title="Edit this proposal" aria-label="Edit this proposal" t-attf-id="#{track.id}">
+                            <i class="fa fa-edit"/>
+                        </button>
+                        <div class="mb-0">
+                            <div>
+                                <span>
+                                    <t t-esc="track.name"/>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
-        </section>
+        </div>
+    </template>
+    <!-- Application -->
+    <template name="Event Track Application" id="event_track_application">
+        <div id="modal_event_track_application" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <form id="track-application-form" class="mt32 js_website_submit_form" t-attf-action="/event/#{event.id}/track_proposal/post" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token(time_limit=False)"/>
+                    <div class="modal-content">
+                        <div class="modal-header align-items-center">
+                            <h4 class="modal-title">Proposal</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span>×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body bg-light border-bottom">
+                            <t t-call="website_event_track_advanced.event_track_application_type"/>
+                            <t t-call="website_event_track_advanced.event_track_application_info"/>
+                            <t t-call="website_event_track_advanced.event_track_application_targetgroup_info"/>
+                            <!-- <t t-call="website_event_track_advanced.event_track_application_contact_info"/> -->
+                            <!-- <t t-call="website_event_track_advanced.event_track_application_speakers"/> -->
+                            <!-- <t t-call="website_event_track_advanced.event_track_application_webinar"/> -->
+                            <!-- <t t-call="website_event_track_advanced.event_track_application_workshop"/> -->
+                            <!-- <t t-call="website_event_track_advanced.event_track_application_extra_info"/> -->
+                        </div>
+                        <div class="modal-body bg-light border-bottom">
+                            <p class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <i class="fa fa-info-circle"/>
+                                <span>By clicking <strong>"Save as draft"</strong> the proposal shall be saved and can be edited later.</span>
+                            </p>
+                            <p class="alert alert-info alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <i class="fa fa-info-circle"/>
+                                <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span>
+                                <br/>
+                                <span>Please note that a completed proposal can no longer be edited.</span>
+                            </p>
+                        </div>
+                        <div class="modal-footer border-0 justify-content-between">
+                            <button type="button" class="btn btn-secondary js_goto_event" data-dismiss="modal">Cancel</button>
+                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-save" value="track-save" id="application-submit-button" class="btn btn-primary">Save as draft</button>
+                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-confirm" value="track-confirm" id="application-submit-button-send" class="btn btn-primary">Save and submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </template>
     <!-- Application type -->
     <template id="event_track_application_type">
@@ -68,24 +116,19 @@
                 <h3 class="panel-title">Application type</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group" id="track-application-application-type-div">
-                    <div class="col-md-4">
-                        <label for="application_type" class="control-label">Application type</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-ellipsis-h"/>
-                            </span>
-                            <select name="application_type" id="application_type" required="true" class="form-control" type="selection">
-                                <option value=""/>
-                                <t t-foreach="event.track_types_ids" t-as="application_type">
-                                    <option t-attf-value="#{application_type['code']}" t-attf-description="#{application_type['description']}" t-att-selected="'selected' if track['type']['id'] == application_type['id'] else False">
-                                        <t t-esc="application_type['name']"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
+                <div class="row" id="track-application-application-type-div">
+                    <div t-attf-class="form-group col-xl-6">
+                        <label class="col-form-label" for="type">Application type</label>
+                        <select name="type" t-attf-class="form-control" required="This field is required">
+                            <option value="">select...</option>
+                            <t t-foreach="event.track_types_ids or []" t-as="application_type">
+                                <option t-att-value="application_type.id" style="display:none;" t-att-selected="application_type.id == track.type.id" t-att-data-description="application_type.description">
+                                    <t t-esc="application_type.name"/>
+                                </option>
+                            </t>
+                        </select>
                     </div>
-                    <div class="col-md-8">
+                    <div class="form-group col-xl-6">
                         <label for="type_description" class="control-label">Description</label>
                         <span id="application_type_description" name="type_description"/>
                     </div>
@@ -107,26 +150,36 @@
                     Avoid using identifiable information (name, organisation, project).
                 </p>
                 <div class="row" id="track-application-application-info-div">
-                    <div class="col-lg-12">
-                        <div t-if="error_message" class="alert alert-danger" role="alert">
-                            <t t-foreach="error_message" t-as="err">
-                                <t t-esc="err"/>
-                                <br/>
-                            </t>
-                        </div>
-                    </div>
-                    <div class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                    <div class="form-group col-xl-6">
                         <label for="name" class="col-form-label">Presentation title</label>
-                        <input name="name" maxlength="100" placeholder="Application Title" t-att-value="track.name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" type="text"/>
+                        <input name="name" maxlength="100" placeholder="Application Title" t-att-value="track.name" required="This field is required" t-attf-class="form-control" type="text"/>
                     </div>
-                    <div class="form-group #{error.get('video_url') and 'o_has_error' or ''} col-xl-6">
+                    <div class="form-group col-xl-6">
                         <label for="video_url" class="col-form-label label-optional">Presentation in video format (link to e.g. YouTube)</label>
-                        <input name="video_url" placeholder="https://www.youtube.com, ..." t-att-value="track.video_url" t-attf-class="form-control #{error.get('video_url') and 'is-invalid' or ''}" type="text"/>
+                        <input name="video_url" placeholder="https://www.youtube.com, ..." t-att-value="track.video_url" t-attf-class="form-control" type="text"/>
                     </div>
-                    <div class="form-group #{error.get('track_content') and 'o_has_error' or ''} col-xl-12">
+                    <div class="form-group col-xl-12">
                         <label for="description" class="col-form-label">Content of the presentation</label>
                         <br/>
-                        <textarea name="description" placeholder="Application content..." t-att-value="track.description" attf-class="form-control #{error.get('track_content') and 'is-invalid' or ''}" rows="8" style="width: 100%; max-width: 100%;"/>
+                        <textarea name="description" placeholder="Application content..." t-att-value="track.description" attf-class="form-control" required="This field is required" rows="8" style="width: 100%; max-width: 100%;"/>
+                    </div>
+                    <div t-attf-class="form-group col-xl-6">
+                        <label class="col-form-label" for="language">Language of the presentation</label>
+                        <select name="language" t-attf-class="form-control" required="This field is required">
+                            <option value="">select...</option>
+                            <t t-foreach="track_languages or []" t-as="language">
+                                <option t-att-value="language.id" style="display:none;" t-att-selected="language.id == track.language.id">
+                                    <t t-esc="language.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div t-attf-class="form-group col-xl-6">
+                        <label class="col-form-label label-optional" for="attachment_ids">Add attachments (optional)</label>
+                        <input type="file" name="attachment_ids" t-att-value="track.attachment_ids" attf-class="form-control" multiple="true"/>
+                        <button type="button" id="btn-remove-attachment" class="btn btn-default" title="Remove attachments">
+                            <i class="fa fa-trash"/>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -145,305 +198,22 @@
                     <br/>
                     <span>You can enter specifications of your presentation’s target group in the target group details.</span>
                 </p>
-                <div class="form-group" id="track-application-targetgroup-info-div">
-                    <div class="col-md-4" id="track-application-targetgroup-info-div-left">
-                        <label for="target_group" class="control-label">Target group</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-bullseye"/>
-                            </span>
-                            <select id="target_group_select" name="target_group" required="true" class="form-control" type="selection">
-                                <option value=""/>
-                                <t t-foreach="event.target_group_ids" t-as="group">
-                                    <option t-attf-value="#{group.id}" t-att-selected="'selected' if track['target_group']['id'] == group['id'] else False">
-                                        <t t-esc="group.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
+                <div class="row" id="track-application-targetgroup-info-div">
+                    <div t-attf-class="form-group col-xl-6">
+                        <label class="col-form-label" for="target_group">Target group</label>
+                        <select name="target_group" t-attf-class="form-control" required="This field is required">
+                            <option value="">select...</option>
+                            <t t-foreach="event.target_group_ids or []" t-as="target_group">
+                                <option t-att-value="target_group.id" style="display:none;" t-att-selected="target_group.id == track.target_group.id">
+                                    <t t-esc="target_group.name"/>
+                                </option>
+                            </t>
+                        </select>
                     </div>
-                    <div class="col-md-8" id="track-application-targetgroup-info-div-right">
-                        <label for="target_group_info" class="control-label">Target group details</label>
-                        <span id="target_group_info_word_counter" class="pull-right">Words
-                            <span id="target_group_info_word_count"/>
-                        </span>
-                        <textarea name="target_group_info" id="target_group_info" class="form-control" placeholder="Target group info..." rows="4">
-                            <t t-esc="track['target_group_info']"/>
-                        </textarea>
-                    </div>
-                </div>
-                <div class="form-group" t-if="len(event.allowed_track_tag_ids)" id="track-application-targetgroup-tags-div">
-                    <div class="col-md-12">
-                        <label class="control-label required-label">Keywords</label>
-                        <p id="track-application-targetgroup-tags-alert-info" class="alert alert-info alert-dismissable mt8"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            Choose approx. 3 words from the list that best describe your presentation.
-                        </p>
-                        <p id="track-application-targetgroup-tags-alert-warning" class="alert alert-warning alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                            Selecting too many keywords can make it harder to find the correct audience.
-                        </p>
-                        <div class="row" id="track-application-targetgroup-tags-tags-div">
-                            <label class="col-sm-4 col-xs-12" t-foreach="event.allowed_track_tag_ids" t-as="tag">
-                                <input type="checkbox" t-attf-name="tag_#{str(tag.id)}" t-att-checked="'checked' if tag.id in track.tag_ids.ids else False"/>
-                                <t t-esc="tag.name"/>
-                            </label>
-                            <label class="col-sm-4 col-xs-12">
-                                <input name="keywords" placeholder="Other, what? Separate with commas, if more." class="form-control" type="text" t-att-value="track.keywords"/>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- Contact info -->
-    <template id="event_track_application_contact_info">
-        <div class="panel panel-primary" id="track-application-contact-div">
-            <div class="panel-heading">
-                <h3 class="panel-title">Presentation’s contact person</h3>
-            </div>
-            <div class="panel-body">
-                <p id="track-application-contact-alert-info" class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    Please fill the contact persons information here.
-                </p>
-                <div id="track-application-contact-header-div" class="track-application-contact-input-row">
-                    <label for="contact_email">Email</label>
-                    <label for="contact_first_name">First name</label>
-                    <label for="contact_last_name">Last name</label>
-                    <label for="contact_organization">Organization</label>
-                    <label for="contact_title">Title</label>
-                    <label for="contact_phone">Phone</label>
-                </div>
-                <div id="track-application-contract-input-div">
-                    <div class="track-application-contact-input-row">
-                        <input name="contact_email" placeholder="Email" class="form-control" required="true" type="email" t-att-value="track.partner_id.email"/>
-                        <input name="contact_first_name" placeholder="First name" class="form-control" required="true" type="text" t-att-value="track.partner_id.firstname"/>
-                        <input name="contact_last_name" placeholder="Last name" class="form-control" required="true" type="text" t-att-value="track.partner_id.lastname"/>
-                        <input name="contact_organization" placeholder="Organization" class="form-control" required="true" type="text" t-att-value="track.partner_id.parent_id.name"/>
-                        <input name="contact_title" placeholder="Title" class="form-control" type="text" required="true" t-att-value="track.partner_id.function"/>
-                        <input name="contact_phone" placeholder="Phone" class="form-control" type="text" t-att-value="track.partner_id.phone"/>
-                        <button type="button" class="btn btn-remove-speaker" disabled="1">
-                            <i class="fa fa-trash"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- Speakers -->
-    <template id="event_track_application_speakers">
-        <div class="panel panel-primary" id="track-application-speakers-div">
-            <div class="panel-heading">
-                <h3 class="panel-title">Presenters</h3>
-            </div>
-            <div class="panel-body">
-                <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <span class="alert-message">List the details of all presenters</span>
-                </p>
-                <div id="track-application-speakers-header-div" class="track-application-speaker-input-row">
-                    <label for="speaker_email[0]">Email</label>
-                    <label for="speaker_first_name[0]">First name</label>
-                    <label for="speaker_last_name[0]">Last name</label>
-                    <label for="speaker_organization[0]">Organization</label>
-                    <label for="speaker_title[0]">Title</label>
-                    <!-- <label for="speaker_returning[0]" class="track-application-speaker-returning">Returning presenter</label>-->
-                    <label for="speaker_phone[0]">Phone</label>
-                </div>
-                <div id="track-application-speakers-input-div">
-                    <input id="track-application-speaker-input-index" name="speakers_input_index" value="0" class="hidden"/>
-                    <!-- Existing speakers -->
-                    <t t-foreach="track.speaker_ids" t-as="speaker">
-                        <div class="track-application-speaker-input-row">
-                            <input class="form-control track-application-speaker-input-email" t-att-value="speaker.email" required="true" type="email"/>
-                            <input t-att-value="speaker.firstname" class="form-control track-application-speaker-input-firstname" required="true" type="text"/>
-                            <input placeholder="Last name" t-att-value="speaker.lastname" class="form-control track-application-speaker-input-lastname" required="true" type="text"/>
-                            <input placeholder="Organization" t-att-value="speaker.parent_id.name" required="true" class="form-control track-application-speaker-input-organization" type="text"/>
-                            <input placeholder="Title" class="form-control track-application-speaker-input-title" t-att-value="speaker.function" required="true" type="text"/>
-                            <input placeholder="Phone" class="form-control track-application-speaker-input-phone" t-att-value="speaker.phone" type="text"/>
-                            <!--
-                            <input class="track-application-speaker-returning form-control"
-                                   type="checkbox" t-att-checked="'checked' if speaker.returning_speaker else False"
-                                   title="Returning speaker"/>
-                            -->
-                            <button type="button" class="btn btn-remove-speaker" disabled="1">
-                                <i class="fa fa-trash"/>
-                            </button>
-                        </div>
-                    </t>
-                    <div id="track-application-speakers-input-row" class="track-application-speaker-input-row">
-                        <input name="speaker_email[0]" placeholder="Email" class="form-control track-application-speaker-input-email" required="true" type="email"/>
-                        <input name="speaker_first_name[0]" placeholder="First name" class="form-control track-application-speaker-input-firstname" required="true" type="text"/>
-                        <input name="speaker_last_name[0]" placeholder="Last name" class="form-control track-application-speaker-input-lastname" required="true" type="text"/>
-                        <input name="speaker_organization[0]" placeholder="Organization" required="true" class="form-control track-application-speaker-input-organization" type="text"/>
-                        <input name="speaker_title[0]" placeholder="Title" class="form-control track-application-speaker-input-title" required="true" type="text"/>
-                        <input name="speaker_phone[0]" placeholder="Phone" class="form-control track-application-speaker-input-phone" type="text"/>
-                        <!--
-                        <input name="speaker_returning[0]" class="form-control track-application-speaker-returning"
-                               type="checkbox" title="Returning speaker"/>
-                               -->
-                        <button type="button" class="btn btn-remove-speaker" disabled="1">
-                            <i class="fa fa-trash"/>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-default col-xs-10 col-xs-offset-1 mt8" id="add_speaker">Add presenter <i class="fa fa-user"/>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- Webinar info -->
-    <template id="event_track_application_webinar">
-        <div class="panel panel-warning" id="track-application-webinar-div">
-            <div class="panel-heading">
-                <h3 class="panel-title">Webinar details</h3>
-            </div>
-            <div class="panel-body">
-                <p id="track-application-webinar-alert-info" class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <span>You can fill this if you want to hold a webinar before the actual event.</span>
-                </p>
-                <div class="form-group" id="track-application-webinar-div">
-                    <div class="col-md-4">
-                        <label for="webinar" class="control-label">I would like to hold a webinar</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-microphone"/>
-                            </span>
-                            <!-- This checkbox is presented as a selection for uniformitys sake -->
-                            <select id="track-application-webinar-selection-field" name="webinar" class="form-control" type="selection">
-                                <option value="0" t-att-selected="'selected' if track['webinar'] == False else False">No</option>
-                                <option value="1" t-att-selected="'selected' if track['webinar'] == True else False">Yes</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <label for="webinar_info" class="control-label">Webinar details</label>
-                        <span id="webinar_info_word_counter" class="pull-right">Words
-                            <span id="webinar_info_word_count"/>
-                        </span>
-                        <textarea class="form-control" id="webinar_info" name="webinar_info" placeholder="Webinar info..." rows="4">
-                            <t t-esc="track.webinar_info"/>
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- / Webinar info -->
-    <!-- Workshop info -->
-    <template id="event_track_application_workshop">
-        <div class="panel panel-warning" id="track-application-workshop-div">
-            <div class="panel-heading">
-                <h3 class="panel-title">Session</h3>
-            </div>
-            <div class="panel-body">
-                <p id="track-application-workshop-alert-info" class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    Session information and invoicing address.<br/>
-                    The contract will be sent for the signee.
-                </p>
-                <h4>
-                    Contract signee
-                </h4>
-                <div id="track-application-organization-signee-div">
-                    <div id="track-application-signee-header-div" class="track-application-signee-input-row">
-                        <label for="signee_email">Email</label>
-                        <label for="signee_first_name">First name</label>
-                        <label for="signee_last_name">Last name</label>
-                        <label for="signee_title">Title</label>
-                    </div>
-                    <div id="track-application-signee-input-div">
-                        <div class="track-application-signee-input-row">
-                            <input name="signee_email" placeholder="Email" class="form-control" required="true" type="email" t-att-value="track.organizer_contact.email"/>
-                            <input name="signee_first_name" placeholder="First name" class="form-control" required="true" type="text" t-att-value="track.organizer_contact.firstname"/>
-                            <input name="signee_last_name" placeholder="Last name" class="form-control" required="true" type="text" t-att-value="track.organizer_contact.lastname"/>
-                            <input name="signee_title" placeholder="Title" class="form-control" type="text" t-att-value="track.organizer_contact.function"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt16" id="track-application-organization-invoice-div">
-                    <h4 class="invoice-address-title">Organization invoice address</h4>
-                    <div id="track-application-organizer-header-div" class="track-application-organizer-input-row">
-                        <label for="organizer_organization">Organization</label>
-                        <label for="organizer_street">Street</label>
-                        <label for="organizer_zip">Zip</label>
-                        <label for="organizer_city">City</label>
-                        <label for="organizer_reference">Your reference</label>
-                    </div>
-                    <div id="track-application-organizer-input-div" class="track-application-organizer-input-row">
-                        <input name="organizer_organization" placeholder="Organization" class="form-control" type="text" required="true" t-att-value="track.organizer.name"/>
-                        <input name="organizer_street" placeholder="Street" class="form-control" type="text" required="true" t-att-value="track.organizer.street"/>
-                        <input name="organizer_zip" placeholder="Zip" class="form-control" type="text" required="true" t-att-value="track.organizer.zip"/>
-                        <input name="organizer_city" placeholder="City" class="form-control" type="text" required="true" t-att-value="track.organizer.city"/>
-                        <input name="organizer_reference" placeholder="Your reference" class="form-control" type="text" t-att-value="track.organizer.ref"/>
-                    </div>
-                </div>
-                <div class="form-group mt16" id="track-application-workshop-div">
-                    <div class="col-md-4" id="workshop-participants-div">
-                        <label for="workshop_participants" class="control-label">Max participants
-                        </label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-users"/>
-                            </span>
-                            <input id="workshop_participants" name="workshop_participants" placeholder="E.g. 20" class="form-control" required="true" t-att-value="track.workshop_participants"/>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="workshop-fee-div">
-                        <label for="workshop_fee" class="control-label">Participation fee</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-users"/>
-                            </span>
-                            <input id="workshop_fee" name="workshop_fee" placeholder="Leave empty if free" class="form-control" t-att-value="track.workshop_fee"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12" id="workshop-goals-div">
-                        <label for="workshop_goals" class="control-label">Session goals</label>
-                        <span id="workshop_goals_word_counter" class="pull-right">Words
-                            <span id="workshop_goals_word_count"/>
-                        </span>
-                        <textarea class="form-control" id="workshop_goals" name="workshop_goals" placeholder="Session goals" rows="4">
-                            <t t-esc="track.workshop_goals"/>
-                        </textarea>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="workshop_schedule" class="control-label">Session program and schedule
-                        </label>
-                        <textarea class="form-control" id="workshop_schedule" name="workshop_schedule" placeholder="Session schedule" rows="4">
-                            <t t-esc="track.workshop_schedule"/>
-                        </textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-    <!-- / Workshop info -->
-    <!-- Extra info -->
-    <template id="event_track_application_extra_info">
-        <div id="event-track-application-extra-info" class="panel panel-warning">
-            <div class="panel-heading">
-                <h3 class="panel-title">Additional details</h3>
-            </div>
-            <div class="panel-body" id="track-application-extra-div">
-                <p id="track-application-extra-alert-info" class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <span>Please enter any special arrangements you wish for your presentation in the additional details section.</span>
-                    <br/>
-                    <span>For example, any wishes for presentation technology, premises, furniture, presentation time, etc.</span>
-                </p>
-                <div class="form-group" id="track-application-extra-info-div">
-                    <div class="col-md-12">
-                        <label for="extra_info" class="control-label">Extra info</label>
-                        <!--
-                        <span id="extra_info_word_counter" class="pull-right">Words
-                            <span id="extra_info_word_count" />
-                        </span>
-                        -->
-                        <textarea class="form-control" id="extra_info" name="extra_info" placeholder="Extra info..." rows="4">
-                            <t t-esc="track.extra_info"/>
-                        </textarea>
+                    <div class="form-group col-xl-12">
+                        <label for="target_group_info" class="col-form-label label-optional">Target group details</label>
+                        <br/>
+                        <textarea name="target_group_info" placeholder="Target group info..." t-att-value="track.target_group_info" attf-class="form-control" rows="8" style="width: 100%; max-width: 100%;"/>
                     </div>
                 </div>
             </div>
