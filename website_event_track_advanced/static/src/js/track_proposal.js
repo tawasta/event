@@ -1,7 +1,9 @@
 odoo.define("website_event_track_advanced.track_proposal", function (require) {
     var ajax = require("web.ajax");
+    var core = require("web.core");
     var Widget = require("web.Widget");
     var publicWidget = require("web.public.widget");
+    var _t = core._t;
 
     // Catch registration form event, because of JS for attendee details
     var TrackProposalForm = Widget.extend({
@@ -47,9 +49,41 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $modal.modal("hide");
                         $button.prop("disabled", false);
                     });
-                    $modal.on("click", ".close", function () {
+                    // Show warning on modal close
+                    $modal.on("click", ".closefirstmodal", function () {
                         $button.prop("disabled", false);
+                        $("#modal_event_track_warning").modal("show");
                     });
+                    // Hide both modals on warning confirm
+                    $modal.on("click", ".confirmclosed", function () {
+                        $button.prop("disabled", false);
+                        $("#modal_event_track_warning").modal("hide");
+                        $("#modal_event_track_application").modal("hide");
+                    });
+                    // Hide warning modal on warning cancel
+                    $modal.on("click", ".cancelclosed", function () {
+                        $button.prop("disabled", false);
+                        $("#modal_event_track_warning").modal("hide");
+                    });
+                    // Remove proposal form modal once it's hidden
+                    $modal.on("hidden.bs.modal", function (e) {
+                        // Fixes scrolling if another modal remains open
+                        if ($(".modal.show").length > 0) {
+                            $("body").addClass("modal-open");
+                        }
+                        if (this === e.target) {
+                            this.remove();
+                        }
+                    });
+                    // Show reload confirmation if modal is open
+                    window.onbeforeunload = function (e) {
+                        if ($modal.hasClass("show")) {
+                            e.preventDefault();
+                            return _t(
+                                "Unsaved changes will be lost if you leave the page, are you sure?"
+                            );
+                        }
+                    };
                 });
         },
     });
@@ -69,6 +103,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
          * @override
          */
         destroy: function () {
+            console.log("destroy");
             this.instance.setElement(null);
             this._super.apply(this, arguments);
             this.instance.setElement(this.$el);

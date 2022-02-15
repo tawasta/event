@@ -28,7 +28,11 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_track"],
+    "depends": [
+        "website_event_track",
+        "website_event_track_manager_proposal",
+        "partner_firstname",
+    ],
     "data": [
         "data/event_track_rating_grade_data.xml",
         "data/event_track_stage_data.xml",
