@@ -25,7 +25,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
         //--------------------------------------------------------------------------
         // Handlers
         //--------------------------------------------------------------------------
-
         /**
          * @private
          * @param {Event} ev
@@ -38,6 +37,17 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
             var post = {};
             post.track_id = $button[0].id;
             $button.attr("disabled", true);
+            function toggleDisabled(target) {
+                var toggle_target = $(target).data("toggle");
+                if (toggle_target) {
+                    var obj = $("#" + toggle_target);
+                    if (target.checked) {
+                        obj.removeAttr("disabled");
+                    } else {
+                        obj.attr("disabled", "disabled");
+                    }
+                }
+            }
             return ajax
                 .jsonRpc($form.attr("action"), "call", post)
                 .then(function (modal) {
@@ -49,6 +59,39 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $modal.modal("hide");
                         $button.prop("disabled", false);
                     });
+                    // Remove attachment with button
+                    $("#btn-remove-attachment").click(function () {
+                        $("#attachment_ids").val("");
+                    });
+                    // Validate attachment size
+                    $("#attachment_ids").bind("change", function () {
+                        if (!this.files[0]) {
+                            return true;
+                        }
+                        var attachment_size = this.files[0].size;
+                        var max_size = 30 * 1024 * 1024;
+                        if (attachment_size > max_size) {
+                            $("#attachment-label").text("");
+                            $("#attachment-file").val("");
+                            // Show the error div
+                            $("#track-application-attachment-error-div").removeClass(
+                                "hidden"
+                            );
+                        } else {
+                            // Hide the error div
+                            $("#track-application-attachment-error-div").addClass(
+                                "hidden"
+                            );
+                        }
+                    });
+                    // Toggle disabled with checkbox
+                    $("input:checkbox")
+                        .each(function () {
+                            toggleDisabled(this);
+                        })
+                        .on("input", function () {
+                            toggleDisabled(this);
+                        });
                     // Show warning on modal close
                     $modal.on("click", ".closefirstmodal", function () {
                         $button.prop("disabled", false);
@@ -84,6 +127,21 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             );
                         }
                     };
+                    // enable tooltips with no delay
+                    $(document).ready(function () {
+                        $("body").tooltip({
+                            selector: "[data-toggle=tooltip]",
+                            delay: {show: 0, hide: 0},
+                        });
+                    });
+                    $modal.on("click", ".application-submit", function (event) {
+                        var form = document.getElementById("track-application-form");
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    });
                 });
         },
     });

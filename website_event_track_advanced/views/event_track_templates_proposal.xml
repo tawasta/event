@@ -101,28 +101,28 @@
                             <t t-call="website_event_track_advanced.event_track_application_targetgroup_info"/>
                             <t t-call="website_event_track_advanced.event_track_application_contact_info"/>
                             <t t-call="website_event_track_advanced.event_track_application_speakers"/>
-                            <!-- <t t-call="website_event_track_advanced.event_track_application_webinar"/> -->
-                            <!-- <t t-call="website_event_track_advanced.event_track_application_workshop"/> -->
-                            <!-- <t t-call="website_event_track_advanced.event_track_application_extra_info"/> -->
+                            <t t-call="website_event_track_advanced.event_track_application_webinar"/>
+                            <t t-call="website_event_track_advanced.event_track_application_workshop"/>
+                            <t t-call="website_event_track_advanced.event_track_application_extra_info"/>
                         </div>
                         <div class="modal-body bg-light border-bottom">
                             <p class="alert alert-info alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                                 <i class="fa fa-info-circle"/>
-                                <span>By clicking <strong>"Save as draft"</strong> the proposal shall be saved and can be edited later.</span>
+                                <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later.</span>
                             </p>
                             <p class="alert alert-info alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                                 <i class="fa fa-info-circle"/>
-                                <span>By clicking <strong>"Save and submit"</strong> the proposal shall be saved and submitted for review.</span>
+                                <span>By clicking <strong>"Save and Submit"</strong> the proposal shall be saved and submitted for review.</span>
                                 <br/>
                                 <span>Please note that a completed proposal can no longer be edited.</span>
                             </p>
                         </div>
                         <div class="modal-footer border-0 justify-content-between">
                             <button type="button" class="btn btn-secondary closefirstmodal">Cancel</button>
-                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-save" value="track-save" id="application-submit-button" class="btn btn-primary">Save as draft</button>
-                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-confirm" value="track-confirm" id="application-submit-button-send" class="btn btn-primary">Save and submit</button>
+                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-save" value="track-save" id="application-submit-button" class="btn btn-primary application-submit" data-toggle="tooltip" data-position="top" title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later.">Save as Draft</button>
+                            <button t-if="not track or track.stage_id.is_editable" type="submit" name="track-confirm" value="track-confirm" id="application-submit-button-send" class="btn btn-primary application-submit" data-toggle="tooltip" data-position="top" title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited.">Save and Submit</button>
                         </div>
                     </div>
                 </form>
@@ -134,20 +134,21 @@
     <template id="event_track_application_type">
         <div class="panel panel-primary" id="track-application-type-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Application type</h3>
+                <h3 class="panel-title">Application Type</h3>
             </div>
             <div class="panel-body">
                 <div class="row" id="track-application-application-type-div">
                     <div class="form-group col-xl-6">
-                        <label class="col-form-label" for="type">Application type</label>
-                        <select name="type" class="form-control" required="This field is required">
-                            <option value="">select...</option>
+                        <label class="col-form-label" for="type">Application Type</label>
+                        <select name="type" class="form-control" required="This field is required" data-error-msg="Please choose">
+                            <option value="">Select...</option>
                             <t t-foreach="event.track_types_ids or []" t-as="application_type">
                                 <option t-att-value="application_type.id" t-att-selected="application_type.id == track.type.id" t-att-data-description="application_type.description">
                                     <t t-esc="application_type.name"/>
                                 </option>
                             </t>
                         </select>
+                        <div class="invalid-feedback">Please choose an application type.</div>
                     </div>
                     <div class="form-group col-xl-6">
                         <label for="type_description" class="control-label">Description</label>
@@ -161,7 +162,7 @@
     <template id="event_track_application_info">
         <div class="panel panel-primary" id="track-application-application-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Application info</h3>
+                <h3 class="panel-title">Application Info</h3>
             </div>
             <div class="panel-body">
                 <p id="track-application-application-alert-info" class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -172,22 +173,21 @@
                 </p>
                 <div class="row" id="track-application-application-info-div">
                     <div class="form-group col-xl-6">
-                        <label for="name" class="col-form-label">Presentation title</label>
+                        <label for="name" class="col-form-label">Presentation Title</label>
                         <input name="name" maxlength="100" placeholder="Application Title" t-att-value="track.name" required="This field is required" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-6">
                         <label for="video_url" class="col-form-label label-optional">Presentation in video format (link to e.g. YouTube)</label>
-                        <input name="video_url" placeholder="https://www.youtube.com, ..." t-att-value="track.video_url" class="form-control" type="text"/>
+                        <input name="video_url" placeholder="https://www.youtube.com/..." t-att-value="track.video_url" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-12">
-                        <label for="description" class="col-form-label">Content of the presentation</label>
-                        <br/>
-                        <textarea name="description" placeholder="Application content..." t-att-value="track.description" class="form-control" required="This field is required" rows="8" style="width: 100%; max-width: 100%;"/>
+                        <label for="description" class="col-form-label">Content of the Presentation</label>
+                        <textarea name="description" placeholder="Application Content..." t-att-value="track.description" class="form-control" required="This field is required" rows="6"/>
                     </div>
                     <div class="form-group col-xl-6">
-                        <label class="col-form-label" for="language">Language of the presentation</label>
+                        <label class="col-form-label" for="language">Language of the Presentation</label>
                         <select name="language" t-attf-class="form-control" required="This field is required">
-                            <option value="">select...</option>
+                            <option value="">Select...</option>
                             <t t-foreach="track_languages or []" t-as="language">
                                 <option t-att-value="language.id" t-att-selected="language.id == track.language.id">
                                     <t t-esc="language.name"/>
@@ -196,11 +196,11 @@
                         </select>
                     </div>
                     <div class="form-group col-xl-6">
-                        <label class="col-form-label label-optional" for="attachment_ids">Add attachments (optional)</label>
-                        <input type="file" name="attachment_ids" t-att-value="track.attachment_ids" class="form-control-file" multiple="true"/>
-                        <button type="button" id="btn-remove-attachment" class="btn btn-default" title="Remove attachments">
+                        <label class="col-form-label label-optional" for="attachment_ids">Add Attachments (optional)</label>
+                        <button type="button" id="btn-remove-attachment" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Remove Attachments">
                             <i class="fa fa-trash"/>
                         </button>
+                        <input type="file" id="attachment_ids" name="attachment_ids" t-att-value="track.attachment_ids" class="form-control-file" multiple="true"/>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@
     <template id="event_track_application_targetgroup_info">
         <div class="panel panel-primary" id="track-application-targetgroup-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Target group details</h3>
+                <h3 class="panel-title">Target Group Details</h3>
             </div>
             <div class="panel-body">
                 <p id="track-application-targetgroup-alert-info" class="alert alert-info alert-dismissable">
@@ -221,9 +221,9 @@
                 </p>
                 <div class="row" id="track-application-targetgroup-info-div">
                     <div class="form-group col-xl-12">
-                        <label class="col-form-label" for="target_group">Target group</label>
+                        <label class="col-form-label" for="target_group">Target Group</label>
                         <select name="target_group" class="form-control" required="This field is required">
-                            <option value="">select...</option>
+                            <option value="">Select...</option>
                             <t t-foreach="event.target_group_ids or []" t-as="target_group">
                                 <option t-att-value="target_group.id" t-att-selected="target_group.id == track.target_group.id">
                                     <t t-esc="target_group.name"/>
@@ -232,9 +232,9 @@
                         </select>
                     </div>
                     <div class="form-group col-xl-12">
-                        <label for="target_group_info" class="col-form-label label-optional">Target group details</label>
+                        <label for="target_group_info" class="col-form-label label-optional">Target Group Details</label>
                         <br/>
-                        <textarea name="target_group_info" placeholder="Target group info..." t-att-value="track.target_group_info" class="form-control" rows="8"/>
+                        <textarea name="target_group_info" placeholder="Target Group Info..." t-att-value="track.target_group_info" class="form-control" rows="6"/>
                     </div>
                 </div>
             </div>
@@ -243,7 +243,7 @@
     <template id="website_event_track_advanced.event_track_application_contact_info">
         <div class="panel panel-primary" id="track-application-contact-div">
             <div class="panel-heading">
-                <h3 class="panel-title">Presentation’s contact person</h3>
+                <h3 class="panel-title">Presentation’s Contact Person</h3>
             </div>
             <div class="panel-body">
                 <p id="track-application-contact-alert-info" class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -292,7 +292,7 @@
                 <t t-foreach="track.speaker_ids" t-as="speaker">
                     <div class="track-application-speakers-div-row-container">
                         <span class="text-muted">Speaker #<t t-esc="speaker_count + 1"/></span>
-                        <button type="button" class="btn btn-remove-speaker" disabled="1">
+                        <button type="button" class="btn btn-default btn-remove-speaker" disabled="1" data-toggle="tooltip" data-placement="right" title="Remove speaker">
                             <i class="fa fa-trash"/>
                         </button>
                         <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
@@ -357,8 +357,135 @@
                     </div>
                 </t>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" id="add_speaker">Add presenter <i class="fa fa-user"/>
+                    <button type="button" class="btn btn-primary" id="add_speaker">Add Presenter <i class="fa fa-user"/>
                     </button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="event_track_application_webinar">
+        <div class="panel panel-warning" id="track-application-webinar-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Webinar Details</h3>
+            </div>
+            <div class="panel-body">
+                <p id="track-application-webinar-alert-info" class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <span>You can fill this if you want to hold a webinar before the actual event.</span>
+                </p>
+                <div class="row" id="track-application-webinar-row-div">
+                    <div class="form-group col-xl-12">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="webinar" t-att-value="track.webinar" data-toggle="webinar_info"/>
+                            <label for="webinar" class="form-check-label label-optional">I would like to hold a webinar</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label for="webinar_info" class="col-form-label label-optional">Webinar details</label>
+                        <textarea class="form-control" id="webinar_info" name="webinar_info" placeholder="Webinar info..." rows="6" t-att-value="track.webinar_info" disabled="1"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="event_track_application_workshop">
+        <div class="panel panel-warning" id="track-application-workshop-div">
+            <div class="panel-heading">
+                <h3 class="panel-title">Session</h3>
+            </div>
+            <div class="panel-body">
+                <p id="track-application-workshop-alert-info" class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    Session information and invoicing address.<br/>
+                    The contract will be sent for the signee.
+                </p>
+                <div class="row" id="track-application-workshop-row-div">
+                    <div class="form-group col-xl-6">
+                        <label class="col-form-label label-optional" for="workshop_participants">Max Participants</label>
+                        <input type="number" name="workshop_participants" class="form-control" placeholder="0" t-att-value="track.workshop_participants"/>
+                    </div>
+                    <div class="form-group col-xl-6">
+                        <label class="col-form-label label-optional" for="workshop_fee">Participation Fee</label>
+                        <input type="number" name="workshop_fee" class="form-control" placeholder="0" t-att-value="track.workshop_fee"/>
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label for="workshop_goals" class="col-form-label">Session Goals</label>
+                        <textarea name="workshop_goals" placeholder="Session Goals..." t-att-value="track.workshop_goals" class="form-control" required="This field is required" rows="6"/>
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label for="workshop_schedule" class="col-form-label">Session Program and Schedule</label>
+                        <textarea name="workshop_schedule" placeholder="Session Schedule..." t-att-value="track.workshop_schedule" class="form-control" required="This field is required" rows="6"/>
+                    </div>
+                </div>
+                <h5>Contract Signee</h5>
+                <div id="track-application-organization-signee-row-div" class="row">
+                    <div class="form-group col-xl-4">
+                        <label for="signee_first_name" class="col-form-label">First Name</label>
+                        <input name="signee_first_name" placeholder="First Name" t-att-value="track.organizer_contact.firstname" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="signee_last_name" class="col-form-label">Last Name</label>
+                        <input name="signee_last_name" placeholder="Last Name" t-att-value="track.organizer_contact.lastname" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="signee_email" class="col-form-label">Email</label>
+                        <input name="signee_email" placeholder="Email" t-att-value="track.organizer_contact.email" required="This field is required" class="form-control" type="email"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="signee_phone" class="col-form-label label-optional">Phone</label>
+                        <input name="signee_phone" placeholder="Phone" t-att-value="track.organizer_contact.phone" class="form-control" type="tel"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="signee_organization" class="col-form-label label-optional">Organization</label>
+                        <input name="signee_organization" placeholder="Organization" t-att-value="track.organizer_contact.parent_id.name" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="signee_title" class="col-form-label">Title</label>
+                        <input name="signee_title" placeholder="Title" t-att-value="track.organizer_contact.function" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                </div>
+                <h5>Organization invoice address</h5>
+                <div class="row" id="track-application-organization-invoice-row-div">
+                    <div class="form-group col-xl-4">
+                        <label for="organizer_organization" class="col-form-label">Organization</label>
+                        <input name="organizar_organization" placeholder="Organization" t-att-value="track.organizer.name" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="organizer_street" class="col-form-label">Street</label>
+                        <input name="organizar_street" placeholder="Street" t-att-value="track.organizer.street" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="organizer_zip" class="col-form-label">Zip</label>
+                        <input name="organizar_zip" placeholder="Zip" t-att-value="track.organizer.zip" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="organizer_city" class="col-form-label">City</label>
+                        <input name="organizar_city" placeholder="City" t-att-value="track.organizer.city" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <label for="organizer_reference" class="col-form-label">Your Reference</label>
+                        <input name="organizar_reference" placeholder="Your Reference" t-att-value="track.organizer.ref" required="This field is required" class="form-control" type="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="website_event_track_advanced.event_track_application_extra_info">
+        <div id="event-track-application-extra-info" class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Additional details</h3>
+            </div>
+            <div class="panel-body" id="track-application-extra-div">
+                <p id="track-application-extra-alert-info" class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <span>Please enter any special arrangements you wish for your presentation in the additional details section.</span>
+                    <br/>
+                    <span>For example, any wishes for presentation technology, premises, furniture, presentation time, etc.</span>
+                </p>
+                <div class="row" id="track-application-extra-info-row-div">
+                    <div class="form-group col-xl-12">
+                        <label for="extra_info" class="col-form-label label-optional">Extra Info</label>
+                        <textarea name="extra_info" placeholder="Extra Info..." t-att-value="track.extra_info" class="form-control" required="This field is required" rows="6"/>
+                    </div>
                 </div>
             </div>
         </div>
