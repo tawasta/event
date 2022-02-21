@@ -4,7 +4,7 @@
         <field name="name">view.event.track.type.tree</field>
         <field name="model">event.track.type</field>
         <field name="arch" type="xml">
-            <tree string="Track types" editable="top">
+            <tree string="Track Types">
                 <field name="sequence" widget="handle"/>
                 <field name="code"/>
                 <field name="name"/>
@@ -12,6 +12,29 @@
                 <field name="show_in_agenda" optional="show"/>
                 <field name="attendable" optional="show"/>
             </tree>
+        </field>
+    </record>
+    <record id="view_event_track_type_form" model="ir.ui.view">
+        <field name="name">view.event.track.type.form</field>
+        <field name="model">event.track.type</field>
+        <field name="arch" type="xml">
+            <form string="Track Type">
+                <header/>
+                <sheet string="Track Type">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="show_in_proposals" optional="show"/>
+                        <field name="show_in_agenda" optional="show"/>
+                        <field name="attendable" optional="show"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
     <record id="event_track_type_action" model="ir.actions.act_window">

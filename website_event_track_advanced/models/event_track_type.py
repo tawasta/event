@@ -47,7 +47,7 @@ class EventTrackType(models.Model):
     sequence = fields.Integer(string="Sequence", default=_default_sequence)
     code = fields.Char(copy=False, translate=False, required=True)
     name = fields.Char(translate=True, required=True)
-    description = fields.Html(translate=True)
+    description = fields.Text(translate=True)
     active = fields.Boolean(default=True)
     event_tracks = fields.One2many(
         comodel_name="event.track", inverse_name="type", string="Event Track"

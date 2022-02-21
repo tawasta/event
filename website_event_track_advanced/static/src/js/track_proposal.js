@@ -63,27 +63,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                     $("#btn-remove-attachment").click(function () {
                         $("#attachment_ids").val("");
                     });
-                    // Validate attachment size
-                    $("#attachment_ids").bind("change", function () {
-                        if (!this.files[0]) {
-                            return true;
-                        }
-                        var attachment_size = this.files[0].size;
-                        var max_size = 30 * 1024 * 1024;
-                        if (attachment_size > max_size) {
-                            $("#attachment-label").text("");
-                            $("#attachment-file").val("");
-                            // Show the error div
-                            $("#track-application-attachment-error-div").removeClass(
-                                "hidden"
-                            );
-                        } else {
-                            // Hide the error div
-                            $("#track-application-attachment-error-div").addClass(
-                                "hidden"
-                            );
-                        }
-                    });
                     // Toggle disabled with checkbox
                     $("input:checkbox")
                         .each(function () {
@@ -118,6 +97,67 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             this.remove();
                         }
                     });
+                    // Add speaker (contact) row(s)
+                    $("#add_speaker").click(function () {
+                        var speaker_count =
+                            Number($("#track-application-speaker-input-index").val()) +
+                            1;
+                        $("#track-application-speaker-input-index").val(speaker_count);
+                        console.log($("#track-application-speaker-input-index").val());
+                        // Clone the last row
+                        var row = $(
+                            ".track-application-speakers-div-row-container:last"
+                        )
+                            .clone()
+                            .appendTo(".track-application-speakers-div-container");
+                        row.removeAttr("id");
+                        row.find("button").removeAttr("disabled");
+                        // Clear the values
+                        row.find("input").val("");
+                        // Add a unique id for div
+                        row.prop("id", speaker_count);
+                        // Add a unique name
+                        row.find("input").each(function () {
+                            var property_value = $(this).prop("name");
+                            var index_name =
+                                property_value.substring(0, property_value.length - 3) +
+                                "[" +
+                                speaker_count +
+                                "]";
+                            $(this).prop("name", index_name);
+                        });
+                        // Add a unique label
+                        row.find("label").each(function () {
+                            var property_value = $(this).prop("for");
+                            var index_name =
+                                property_value.substring(0, property_value.length - 3) +
+                                "[" +
+                                speaker_count +
+                                "]";
+                            $(this).prop("for", index_name);
+                        });
+                        // Add a unique span text
+                        row.find(".presenter-span").text("Presenter #" + speaker_count);
+                    });
+
+                    // Remove speaker rows
+                    $(document).on("click", ".btn-remove-speaker", function () {
+                        var confirm_message = _t(
+                            "Are you sure you want to delete this speaker?"
+                        );
+
+                        if (window.confirm(confirm_message)) {
+                            $(this).parent().remove();
+                            var speaker_count =
+                                Number(
+                                    $("#track-application-speaker-input-index").val()
+                                ) - 1;
+                            $("#track-application-speaker-input-index").val(
+                                speaker_count
+                            );
+                        }
+                    });
+
                     // Show reload confirmation if modal is open
                     window.onbeforeunload = function (e) {
                         if ($modal.hasClass("show")) {
@@ -127,7 +167,13 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             );
                         }
                     };
-                    // enable tooltips with no delay
+                    $("#type").change(function () {
+                        $("#application_type_description").text(
+                            $("#type option:selected").attr("data-description") || ""
+                        );
+                    });
+
+                    // Enable tooltips with no delay
                     $(document).ready(function () {
                         $("body").tooltip({
                             selector: "[data-toggle=tooltip]",

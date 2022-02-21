@@ -140,7 +140,7 @@
                 <div class="row" id="track-application-application-type-div">
                     <div class="form-group col-xl-6">
                         <label class="col-form-label" for="type">Application Type</label>
-                        <select name="type" class="form-control" required="This field is required" data-error-msg="Please choose">
+                        <select name="type" id="type" class="form-control" required="This field is required" data-error-msg="Please choose">
                             <option value="">Select...</option>
                             <t t-foreach="event.track_types_ids or []" t-as="application_type">
                                 <option t-att-value="application_type.id" t-att-selected="application_type.id == track.type.id" t-att-data-description="application_type.description">
@@ -152,7 +152,9 @@
                     </div>
                     <div class="form-group col-xl-6">
                         <label for="type_description" class="control-label">Description</label>
-                        <span id="application_type_description" name="type_description"/>
+                        <p id="application_type_description" name="type_description">
+                            <t t-esc="track.type.description"/>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -182,7 +184,9 @@
                     </div>
                     <div class="form-group col-xl-12">
                         <label for="description" class="col-form-label">Content of the Presentation</label>
-                        <textarea name="description" placeholder="Application Content..." t-att-value="track.description" class="form-control" required="This field is required" rows="6"/>
+                        <textarea name="description" placeholder="Application Content..." class="form-control" required="This field is required" rows="6">
+                            <t t-esc="track.description"/>
+                        </textarea>
                     </div>
                     <div class="form-group col-xl-6">
                         <label class="col-form-label" for="language">Language of the Presentation</label>
@@ -234,7 +238,9 @@
                     <div class="form-group col-xl-12">
                         <label for="target_group_info" class="col-form-label label-optional">Target Group Details</label>
                         <br/>
-                        <textarea name="target_group_info" placeholder="Target Group Info..." t-att-value="track.target_group_info" class="form-control" rows="6"/>
+                        <textarea name="target_group_info" placeholder="Target Group Info..." class="form-control" rows="6">
+                            <t t-esc="track.target_group_info"/>
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -251,12 +257,12 @@
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">
-                        <label for="contact_first_name" class="col-form-label">First Name</label>
-                        <input name="contact_first_name" placeholder="First Name" t-att-value="track.partner_id.firstname" required="This field is required" class="form-control" type="text"/>
+                        <label for="contact_firstname" class="col-form-label">First Name</label>
+                        <input name="contact_firstname" placeholder="First Name" t-att-value="track.partner_id.firstname" required="This field is required" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-4">
-                        <label for="contact_last_name" class="col-form-label">Last Name</label>
-                        <input name="contact_last_name" placeholder="Last Name" t-att-value="track.partner_id.lastname" required="This field is required" class="form-control" type="text"/>
+                        <label for="contact_lastname" class="col-form-label">Last Name</label>
+                        <input name="contact_lastname" placeholder="Last Name" t-att-value="track.partner_id.lastname" required="This field is required" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="contact_email" class="col-form-label">Email</label>
@@ -289,73 +295,83 @@
                     <span class="alert-message">List the details of all presenters</span>
                 </p>
                 <t t-set="speaker_count" t-value="0"/>
-                <t t-foreach="track.speaker_ids" t-as="speaker">
-                    <div class="track-application-speakers-div-row-container">
-                        <span class="text-muted">Speaker #<t t-esc="speaker_count + 1"/></span>
-                        <button type="button" class="btn btn-default btn-remove-speaker" disabled="1" data-toggle="tooltip" data-placement="right" title="Remove speaker">
-                            <i class="fa fa-trash"/>
-                        </button>
-                        <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
-                                <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" t-att-value="speaker.firstname" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
-                                <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" t-att-value="speaker.lastname" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
-                                <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" t-att-value="speaker.email" required="This field is required" class="form-control" type="email"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
-                                <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" t-att-value="speaker.phone" class="form-control" type="tel"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
-                                <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" t-att-value="speaker.parent_id.name" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
-                                <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" t-att-value="speaker.function" required="This field is required" class="form-control" type="text"/>
+                <div class="track-application-speakers-div-container">
+                    <t t-foreach="track.speaker_ids" t-as="speaker">
+                        <t t-set="speaker_count" t-value="speaker_count + 1"/>
+                        <div class="track-application-speakers-div-row-container" t-att-id="speaker_count">
+                            <span class="text-muted presenter-span">Presenter #<t t-esc="speaker_count"/></span>
+                            <t t-if="speaker_count &gt; 1">
+                                <button type="button" class="btn btn-default btn-remove-speaker" data-toggle="tooltip" data-placement="right" title="Remove speaker">
+                                    <i class="fa fa-trash"/>
+                                </button>
+                            </t>
+                            <t t-else="">
+                                <button type="button" class="btn btn-default btn-remove-speaker" disabled="1" data-toggle="tooltip" data-placement="right" title="Remove speaker">
+                                    <i class="fa fa-trash"/>
+                                </button>
+                            </t>
+                            <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
+                                    <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" t-att-value="speaker.firstname" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
+                                    <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" t-att-value="speaker.lastname" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
+                                    <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" t-att-value="speaker.email" required="This field is required" class="form-control" type="email"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
+                                    <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" t-att-value="speaker.phone" class="form-control" type="tel"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
+                                    <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" t-att-value="speaker.parent_id.name" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
+                                    <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" t-att-value="speaker.function" required="This field is required" class="form-control" type="text"/>
+                                </div>
                             </div>
                         </div>
+                    </t>
+                    <t t-if="speaker_count == 0">
                         <t t-set="speaker_count" t-value="speaker_count + 1"/>
-                    </div>
-                </t>
-                <t t-if="speaker_count == 0">
-                    <div class="track-application-speakers-div-row-container">
-                        <span class="text-muted">Speaker #<t t-esc="speaker_count + 1"/>:</span>
-                        <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
-                                <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
-                                <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
-                                <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" required="This field is required" class="form-control" type="email"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
-                                <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" class="form-control" type="tel"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
-                                <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" required="This field is required" class="form-control" type="text"/>
-                            </div>
-                            <div class="form-group col-xl-4">
-                                <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
-                                <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" required="This field is required" class="form-control" type="text"/>
+                        <div class="track-application-speakers-div-row-container" t-att-id="speaker_count">
+                            <span class="text-muted presenter-span">Presenter #<t t-esc="speaker_count"/>:</span>
+                            <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
+                                    <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
+                                    <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
+                                    <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" required="This field is required" class="form-control" type="email"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
+                                    <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" class="form-control" type="tel"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
+                                    <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" required="This field is required" class="form-control" type="text"/>
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
+                                    <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" required="This field is required" class="form-control" type="text"/>
+                                </div>
                             </div>
                         </div>
-                        <t t-set="speaker_count" t-value="speaker_count + 1"/>
-                    </div>
-                </t>
+                    </t>
+                </div>
+                <input id="track-application-speaker-input-index" name="speakers_input_index" t-att-value="speaker_count" class="d-none"/>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary" id="add_speaker">Add Presenter <i class="fa fa-user"/>
                     </button>
@@ -382,7 +398,9 @@
                     </div>
                     <div class="form-group col-xl-12">
                         <label for="webinar_info" class="col-form-label label-optional">Webinar details</label>
-                        <textarea class="form-control" id="webinar_info" name="webinar_info" placeholder="Webinar info..." rows="6" t-att-value="track.webinar_info" disabled="1"/>
+                        <textarea class="form-control" id="webinar_info" name="webinar_info" placeholder="Webinar info..." rows="6" disabled="1">
+                            <t t-esc="track.webinar_info"/>
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -409,22 +427,26 @@
                     </div>
                     <div class="form-group col-xl-12">
                         <label for="workshop_goals" class="col-form-label">Session Goals</label>
-                        <textarea name="workshop_goals" placeholder="Session Goals..." t-att-value="track.workshop_goals" class="form-control" required="This field is required" rows="6"/>
+                        <textarea name="workshop_goals" placeholder="Session Goals..." class="form-control" required="This field is required" rows="6">
+                            <t t-esc="track.workshop_goals"/>
+                        </textarea>
                     </div>
                     <div class="form-group col-xl-12">
                         <label for="workshop_schedule" class="col-form-label">Session Program and Schedule</label>
-                        <textarea name="workshop_schedule" placeholder="Session Schedule..." t-att-value="track.workshop_schedule" class="form-control" required="This field is required" rows="6"/>
+                        <textarea name="workshop_schedule" placeholder="Session Schedule..." class="form-control" required="This field is required" rows="6">
+                            <t t-esc="track.workshop_schedule"/>
+                        </textarea>
                     </div>
                 </div>
                 <h5>Contract Signee</h5>
                 <div id="track-application-organization-signee-row-div" class="row">
                     <div class="form-group col-xl-4">
-                        <label for="signee_first_name" class="col-form-label">First Name</label>
-                        <input name="signee_first_name" placeholder="First Name" t-att-value="track.organizer_contact.firstname" required="This field is required" class="form-control" type="text"/>
+                        <label for="signee_firstname" class="col-form-label">First Name</label>
+                        <input name="signee_firstname" placeholder="First Name" t-att-value="track.organizer_contact.firstname" required="This field is required" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-4">
-                        <label for="signee_last_name" class="col-form-label">Last Name</label>
-                        <input name="signee_last_name" placeholder="Last Name" t-att-value="track.organizer_contact.lastname" required="This field is required" class="form-control" type="text"/>
+                        <label for="signee_lastname" class="col-form-label">Last Name</label>
+                        <input name="signee_lastname" placeholder="Last Name" t-att-value="track.organizer_contact.lastname" required="This field is required" class="form-control" type="text"/>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_email" class="col-form-label">Email</label>
@@ -484,7 +506,8 @@
                 <div class="row" id="track-application-extra-info-row-div">
                     <div class="form-group col-xl-12">
                         <label for="extra_info" class="col-form-label label-optional">Extra Info</label>
-                        <textarea name="extra_info" placeholder="Extra Info..." t-att-value="track.extra_info" class="form-control" required="This field is required" rows="6"/>
+                        <textarea name="extra_info" placeholder="Extra Info..." class="form-control" rows="6"><t t-esc="track.extra_info"/>"
+                        </textarea>
                     </div>
                 </div>
             </div>
