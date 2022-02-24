@@ -51,6 +51,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
             return ajax
                 .jsonRpc($form.attr("action"), "call", post)
                 .then(function (modal) {
+                    var submitted = false;
                     var $modal = $(modal);
                     $modal.modal({backdrop: "static", keyboard: false});
                     $modal.find(".modal-body > div").removeClass("container");
@@ -160,7 +161,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
 
                     // Show reload confirmation if modal is open
                     window.onbeforeunload = function (e) {
-                        if ($modal.hasClass("show")) {
+                        if ($modal.hasClass("show") && !submitted) {
                             e.preventDefault();
                             return _t(
                                 "Unsaved changes will be lost if you leave the page, are you sure?"
@@ -171,6 +172,49 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $("#application_type_description").text(
                             $("#type option:selected").attr("data-description") || ""
                         );
+                        var workshop = $("#type option:selected").attr("data-workshop");
+                        console.log(workshop);
+                        if (!workshop) {
+                            $("#track-application-workshop-div").addClass("d-none");
+                            $("#track-application-workshop-div")
+                                .find("input[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("select[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("textarea[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
+                        } else {
+                            $("#track-application-workshop-div").removeClass("d-none");
+                            $("#track-application-workshop-div")
+                                .find("input[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("select[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("textarea[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", true);
+                                });
+                        }
                     });
 
                     // Enable tooltips with no delay
@@ -185,6 +229,8 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
+                        } else {
+                            submitted = true;
                         }
                         form.classList.add("was-validated");
                     });

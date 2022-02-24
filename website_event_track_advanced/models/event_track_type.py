@@ -67,6 +67,9 @@ class EventTrackType(models.Model):
     twitter_hashtag = fields.Char(
         string="Twitter hashtag", help="Twitter hashtag for tracks"
     )
+    workshop = fields.Boolean(
+        string="Workshop", help="Tracks in this Type can hold workshops", default=False
+    )
 
     # 3. Default methods
 

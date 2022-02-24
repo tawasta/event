@@ -179,12 +179,13 @@
                 expr="//page[@name='description']//field[@name='description']"
                 position="before">
                 <group>
-                    <field name="application_file_filename" invisible="1" />
-                    <field
-                        name="application_file"
-                        widget="binary"
-                        filename="application_file_filename"
-                    />
+                    <field name="attachment_ids" widget="many2many">
+                        <tree string="Attachments">
+                            <field name="name" />
+                            <field name="type" />
+                            <field name="file_size" />
+                        </tree>
+                    </field>
                 </group>
             </xpath>
         </field>

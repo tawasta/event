@@ -33,6 +33,15 @@ Migration changes 10.0 -> 14.0:
    - event.track.review.group reviewers from res.partner to event.track.reviewers
    - event.track.tag tracks field deprecated, use track_ids instead
 
+TODO:
+   - WYSIWYG editor to form
+   - Validate file size
+   - Split into smaller modules
+   - Emails
+   - Workshop
+   - Portal proposals
+   - Translations
+
 Credits
 =======
 

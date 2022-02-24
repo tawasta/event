@@ -267,6 +267,7 @@
                                 <option
                                     t-att-value="application_type.id"
                                     t-att-selected="application_type.id == track.type.id"
+                                    t-att-data-workshop="application_type.workshop"
                                     t-att-data-description="application_type.description">
                                     <t t-esc="application_type.name" />
                                 </option>
@@ -836,7 +837,9 @@
         </div>
     </template>
     <template id="event_track_application_workshop">
-        <div class="panel panel-warning" id="track-application-workshop-div">
+        <div
+            t-attf-class="panel panel-warning #{'d-none' if not track.type.workshop else ''}"
+            id="track-application-workshop-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Session</h3>
             </div>
@@ -880,25 +883,52 @@
                         <label
                             for="workshop_goals"
                             class="col-form-label">Session Goals</label>
-                        <textarea
-                            type="text"
-                            name="workshop_goals"
-                            placeholder="Session Goals..."
-                            class="form-control"
-                            required="This field is required"
-                            rows="6"><t t-esc="track.workshop_goals" /></textarea>
+                        <t t-if="track.type and track.type.workshop">
+                            <textarea
+                                type="text"
+                                name="workshop_goals"
+                                placeholder="Session Goals..."
+                                class="form-control"
+                                required="This field is required"
+                                rows="6"><t t-esc="track.workshop_goals" /></textarea>
+
+                        </t>
+                        <t t-else="">
+                            <textarea
+                                type="text"
+                                name="workshop_goals"
+                                placeholder="Session Goals..."
+                                class="form-control"
+                                required-disabled="True"
+                                rows="6"><t t-esc="track.workshop_goals" /></textarea>
+                        </t>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
                             for="workshop_schedule"
                             class="col-form-label">Session Program and Schedule</label>
-                        <textarea
-                            type="text"
-                            name="workshop_schedule"
-                            placeholder="Session Schedule..."
-                            class="form-control"
-                            required="This field is required"
-                            rows="6"><t t-esc="track.workshop_schedule" /></textarea>
+                        <t t-if="track.type and track.type.workshop">
+                            <textarea
+                                type="text"
+                                name="workshop_schedule"
+                                placeholder="Session Schedule..."
+                                class="form-control"
+                                required="This field is required"
+                                rows="6"><t
+                                    t-esc="track.workshop_schedule"
+                                /></textarea>
+                        </t>
+                        <t t-else="">
+                            <textarea
+                                type="text"
+                                name="workshop_schedule"
+                                placeholder="Session Schedule..."
+                                required-disabled="True"
+                                class="form-control"
+                                rows="6"><t
+                                    t-esc="track.workshop_schedule"
+                                /></textarea>
+                        </t>
                     </div>
                 </div>
                 <h5>Contract Signee</h5>
@@ -907,38 +937,74 @@
                         <label
                             for="signee_firstname"
                             class="col-form-label">First Name</label>
-                        <input
-                            name="signee_firstname"
-                            placeholder="First Name"
-                            t-att-value="track.organizer_contact.firstname"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_firstname"
+                                placeholder="First Name"
+                                t-att-value="track.organizer_contact.firstname"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_firstname"
+                                placeholder="First Name"
+                                t-att-value="track.organizer_contact.firstname"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="signee_lastname"
                             class="col-form-label">Last Name</label>
-                        <input
-                            name="signee_lastname"
-                            placeholder="Last Name"
-                            t-att-value="track.organizer_contact.lastname"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_lastname"
+                                placeholder="Last Name"
+                                t-att-value="track.organizer_contact.lastname"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_lastname"
+                                placeholder="Last Name"
+                                t-att-value="track.organizer_contact.lastname"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_email" class="col-form-label">Email</label>
-                        <input
-                            name="signee_email"
-                            placeholder="Email"
-                            t-att-value="track.organizer_contact.email"
-                            required="This field is required"
-                            class="form-control"
-                            type="email"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_email"
+                                placeholder="Email"
+                                t-att-value="track.organizer_contact.email"
+                                required="This field is required"
+                                class="form-control"
+                                type="email"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_email"
+                                placeholder="Email"
+                                t-att-value="track.organizer_contact.email"
+                                required-disabled="True"
+                                class="form-control"
+                                type="email"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label
@@ -966,14 +1032,26 @@
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_title" class="col-form-label">Title</label>
-                        <input
-                            name="signee_title"
-                            placeholder="Title"
-                            t-att-value="track.organizer_contact.function"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_title"
+                                placeholder="Title"
+                                t-att-value="track.organizer_contact.function"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_title"
+                                placeholder="Title"
+                                t-att-value="track.organizer_contact.function"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                 </div>
                 <h5>Organization invoice address</h5>
@@ -982,62 +1060,122 @@
                         <label
                             for="organizer_organization"
                             class="col-form-label">Organization</label>
-                        <input
-                            name="organizar_organization"
-                            placeholder="Organization"
-                            t-att-value="track.organizer.name"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="organizar_organization"
+                                placeholder="Organization"
+                                t-att-value="track.organizer.name"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="organizar_organization"
+                                placeholder="Organization"
+                                t-att-value="track.organizer.name"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="organizer_street"
                             class="col-form-label">Street</label>
-                        <input
-                            name="organizar_street"
-                            placeholder="Street"
-                            t-att-value="track.organizer.street"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="organizar_street"
+                                placeholder="Street"
+                                t-att-value="track.organizer.street"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="organizar_street"
+                                placeholder="Street"
+                                t-att-value="track.organizer.street"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_zip" class="col-form-label">Zip</label>
-                        <input
-                            name="organizar_zip"
-                            placeholder="Zip"
-                            t-att-value="track.organizer.zip"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="organizar_zip"
+                                placeholder="Zip"
+                                t-att-value="track.organizer.zip"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="organizar_zip"
+                                placeholder="Zip"
+                                t-att-value="track.organizer.zip"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_city" class="col-form-label">City</label>
-                        <input
-                            name="organizar_city"
-                            placeholder="City"
-                            t-att-value="track.organizer.city"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="organizar_city"
+                                placeholder="City"
+                                t-att-value="track.organizer.city"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="organizar_city"
+                                placeholder="City"
+                                t-att-value="track.organizer.city"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="organizer_reference"
                             class="col-form-label">Your Reference</label>
-                        <input
-                            name="organizar_reference"
-                            placeholder="Your Reference"
-                            t-att-value="track.organizer.ref"
-                            required="This field is required"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="organizar_reference"
+                                placeholder="Your Reference"
+                                t-att-value="track.organizer.ref"
+                                required="This field is required"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="organizar_reference"
+                                placeholder="Your Reference"
+                                t-att-value="track.organizer.ref"
+                                required-disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                 </div>
             </div>

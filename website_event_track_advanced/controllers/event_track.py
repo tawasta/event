@@ -384,19 +384,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             # Multiple attachments can be selected,
             # but **post only gives the first one.
             # We have to iterate the httprequest to access all sent attachments
-            files_dict = dict(request.httprequest.files)
-
-            for attachment_file in files_dict["attachment_ids"]:
-                attachment_file_value = attachment_file.value
-
-                attachment_name = attachment_file_value.filename
-                attachment_data = attachment_file_value.read()
-
+            files_dict = request.httprequest.files.getlist("attachment_ids")
+            for attachment in files_dict:
+                attachment_file = attachment.read()
                 # Create attachment
                 attachment_data = {
-                    "name": attachment_name,
-                    "datas_fname": attachment_name,
-                    "datas": base64.b64encode(str(attachment_data)),
+                    "name": attachment.filename,
+                    "store_fname": attachment.filename,
+                    "datas": base64.b64encode(attachment_file),
                     "description": "Track attachment",
                     "type": "binary",
                     "res_model": "event.track",
@@ -413,4 +408,9 @@ class EventTrackControllerAdvanced(EventTrackController):
         )
         email_template.send_mail(track.id)
 
+        # 11. Check if we want to confirm the track
+        if post.get("track-confirm") and post.get("track-confirm") != "":
+            track.state = "confirmed"
+
+        # 12. Return
         return request.redirect("/event/%s/track_proposal" % event.id)
