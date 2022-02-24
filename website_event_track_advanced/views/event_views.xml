@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="act_event_track_assign">
+        <field name="name">Assign Reviewers</field>
+        <field name="res_model">event.track.assign.wizard</field>
+        <field name="binding_model_id" ref="event.model_event_event"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_track" model="ir.ui.view">
+        <field name="name">event.type.form.track</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='event_type_visibility_tags']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_types">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="track_types_ids" string="Track Types"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="track_types_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_target_groups">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="target_group_ids" string="Track Target Groups"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="target_group_ids" widget="many2many_tags" options="{ 'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_track_twitter_hashtags">
+                    <div class="o_setting_left_pane">
+                        <field name="show_track_twitter_hashtags"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="show_track_twitter_hashtags"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='use_timezone']//..//.." position="after">
+                <div class="col-12 col-lg-6 o_setting_box" name="event_type_location_ids">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label for="location_ids" string="Track Locations"/>
+                        <div class="row">
+                            <div class="col-12 mt16">
+                                <field name="location_ids" widget="many2many_tags" options="{'no_quick_create': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_track" model="ir.ui.view">
+        <field name="name">view.event.form.track</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <header position="after">
+                <button name="action_generate_breaks" type="object" string="Generate Breaks"/>
+            </header>
+            <field name="tag_ids" position="after">
+                <field name="track_types_ids" widget="many2many_tags"/>
+                <field name="target_group_ids" widget="many2many_tags"/>
+                <field name="show_track_twitter_hashtags"/>
+                <field name="allowed_track_tag_ids" widget="many2many_tags"/>
+            </field>
+            <field name="address_id" position="after">
+                <field name="location_ids" widget="many2many_tags"/>
+            </field>
+            <notebook position="inside">
+                <page string="Tracks">
+                    <field name="track_ids" context="{'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"/>
+                </page>
+                <page string="Conflicts">
+                    <group name="overlapping_tracks" col="1">
+                        <field name="overlapping_location_track_ids" attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="location_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_chairperson_track_ids" attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="chairperson_id"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                        <field name="overlapping_speaker_track_ids" attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="date_end"/>
+                                <field name="duration" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

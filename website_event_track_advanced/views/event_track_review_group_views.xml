@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_event_track_review_group_form" model="ir.ui.view">
+        <field name="name">event.track.review.group.form</field>
+        <field name="model">event.track.review.group</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Track Review Group">
+                <header/>
+                <sheet string="Track Review Group">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="reviewers">
+                            <tree>
+                                <field name="user_id"/>
+                                <field name="email" optional="show"/>
+                                <field name="phone" optional="show"/>
+                            </tree>
+                        </field>
+                        <field name="event_tracks"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_event_track_review_group_search" model="ir.ui.view">
+        <field name="name">event.track.review.group.search</field>
+        <field name="model">event.track.review.group</field>
+        <field name="arch" type="xml">
+            <search string="Search Track Review Groups">
+                <field name="name"/>
+                <field name="reviewers"/>
+                <field name="event_tracks"/>
+            </search>
+        </field>
+    </record>
+    <record id="view_event_track_review_group_tree" model="ir.ui.view">
+        <field name="name">view.event.track.review.group.tree</field>
+        <field name="model">event.track.review.group</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Track Review Groups">
+                <field name="name"/>
+                <field name="reviewers" widget="many2many_tags" optional="show"/>
+                <field name="event_tracks" widget="many2many_tags" optional="show"/>
+            </tree>
+        </field>
+    </record>
+    <record id="event_track_review_group_action" model="ir.actions.act_window">
+        <field name="name">Track Review Groups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">event.track.review.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
