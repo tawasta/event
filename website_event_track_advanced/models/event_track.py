@@ -60,7 +60,6 @@ class EventTrack(models.Model):
     description_plain = fields.Text(
         string="Plain description", compute="_compute_description_plain"
     )
-    description_original = fields.Html(string="Original description", readonly=True)
 
     ratings = fields.One2many("event.track.rating", "event_track", string="Ratings")
     ratings_count = fields.Integer("Ratings Count", compute="_compute_ratings_count")
@@ -141,7 +140,7 @@ class EventTrack(models.Model):
         string="Extra materials",
         help="Extra materials (links etc.) that are shown in agenda",
     )
-    extra_materials_plain = fields.Char(
+    extra_materials_plain = fields.Text(
         string="Plain extra_materials", compute="_compute_extra_materials_plain"
     )
 
@@ -165,6 +164,7 @@ class EventTrack(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("description")
     def _compute_description_plain(self):
         for record in self:
             if record.description:
