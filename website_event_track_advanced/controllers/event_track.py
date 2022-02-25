@@ -20,6 +20,7 @@
 # 1. Standard library imports:
 import base64
 import logging
+import sys
 
 # 2. Known third party imports:
 from psycopg2.errors import InvalidTextRepresentation
@@ -173,8 +174,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             "city": post.get("organizer_city"),
             "ref": post.get("organizer_reference"),
             "type": "invoice",
-            "business_id": post.get("organizer_business_id"),
-            "edicode": post.get("organizer_edicode"),
         }
         workshop_signee_organization_values = {
             "name": post.get("signee_organization"),
@@ -388,17 +387,27 @@ class EventTrackControllerAdvanced(EventTrackController):
             files_dict = request.httprequest.files.getlist("attachment_ids")
             for attachment in files_dict:
                 attachment_file = attachment.read()
-                # Create attachment
-                attachment_data = {
-                    "name": attachment.filename,
-                    "store_fname": attachment.filename,
-                    "datas": base64.b64encode(attachment_file),
-                    "description": "Track attachment",
-                    "type": "binary",
-                    "res_model": "event.track",
-                    "res_id": track.id,
-                }
-                request.env["ir.attachment"].sudo().create(attachment_data)
+                attachment_size = sys.getsizeof(attachment_file)
+                max_size = 30 * 1024 * 1024
+                if attachment_size > max_size:
+                    _logger.warning(
+                        _(
+                            "File %s is too large. Skipping..."
+                            % attachment_file.filename
+                        )
+                    )
+                else:
+                    # Create attachment
+                    attachment_data = {
+                        "name": attachment.filename,
+                        "store_fname": attachment.filename,
+                        "datas": base64.b64encode(attachment_file),
+                        "description": "Track attachment",
+                        "type": "binary",
+                        "res_model": "event.track",
+                        "res_id": track.id,
+                    }
+                    request.env["ir.attachment"].sudo().create(attachment_data)
 
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)

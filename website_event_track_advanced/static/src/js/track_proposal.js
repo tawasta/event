@@ -114,6 +114,19 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         }
                     });
 
+                    // Validate file size
+                    $("#attachment_ids").bind("change", function () {
+                        if (!this.files[0]) {
+                            return true;
+                        }
+                        var attachment_size = this.files[0].size;
+                        var max_size = 30 * 1024 * 1024;
+                        if (attachment_size > max_size) {
+                            $("#attachment_ids").text("");
+                            $("#attachment_ids").val("");
+                        }
+                    });
+
                     // Add speaker (contact) row(s)
                     $("#add_speaker").click(function () {
                         var speaker_count =
@@ -298,6 +311,8 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             delay: {show: 0, hide: 0},
                         });
                     });
+
+                    // Submit form and validate
                     $modal.on("click", ".application-submit", function (event) {
                         var form = document.getElementById("track-application-form");
                         if (form.checkValidity() === false) {
