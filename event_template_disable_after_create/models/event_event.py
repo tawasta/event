@@ -43,7 +43,7 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_event_mail_ids(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
         event type content itself should not trigger this method.

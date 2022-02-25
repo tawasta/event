@@ -95,10 +95,10 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_is_online_event(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             event.is_online_event = event.event_type_id.is_online_event
 
@@ -108,8 +108,8 @@ class EventEvent(models.Model):
 
     # 7. Action methods
     def _get_ics_file(self):
-        """ Returns iCalendar file for the event invitation.
-            :returns a dict of .ics file content for each event
+        """Returns iCalendar file for the event invitation.
+        :returns a dict of .ics file content for each event
         """
         result = {}
         if not vobject:

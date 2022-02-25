@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_event_track_type_tree" model="ir.ui.view">
         <field name="name">view.event.track.type.tree</field>
         <field name="model">event.track.type</field>
         <field name="arch" type="xml">
             <tree string="Track Types">
-                <field name="sequence" widget="handle"/>
-                <field name="code"/>
-                <field name="name"/>
-                <field name="show_in_proposals" optional="show"/>
-                <field name="show_in_agenda" optional="show"/>
-                <field name="workshop" optional="show"/>
-                <field name="attendable" optional="show"/>
+                <field name="sequence" widget="handle" />
+                <field name="code" />
+                <field name="name" />
+                <field name="show_in_proposals" optional="show" />
+                <field name="show_in_agenda" optional="show" />
+                <field name="workshop" optional="show" />
+                <field name="attendable" optional="show" />
             </tree>
         </field>
     </record>
@@ -20,20 +20,20 @@
         <field name="model">event.track.type</field>
         <field name="arch" type="xml">
             <form string="Track Type">
-                <header/>
+                <header />
                 <sheet string="Track Type">
                     <group>
-                        <field name="code"/>
-                        <field name="name"/>
+                        <field name="code" />
+                        <field name="name" />
                     </group>
                     <group>
-                        <field name="show_in_proposals"/>
-                        <field name="show_in_agenda"/>
-                        <field name="workshop"/>
-                        <field name="attendable"/>
+                        <field name="show_in_proposals" />
+                        <field name="show_in_agenda" />
+                        <field name="workshop" />
+                        <field name="attendable" />
                     </group>
                     <group>
-                        <field name="description"/>
+                        <field name="description" />
                     </group>
                 </sheet>
             </form>

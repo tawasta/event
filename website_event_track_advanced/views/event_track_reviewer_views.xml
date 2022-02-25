@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_event_track_reviewer_form" model="ir.ui.view">
         <field name="name">event.track.reviewer.form</field>
@@ -6,14 +6,14 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Track Reviewer">
-                <header/>
+                <header />
                 <sheet string="Track Reviewer">
                     <group>
-                        <field name="user_id"/>
-                        <field name="review_group_ids" widget="many2many_tags"/>
-                        <field name="ratings_done_count"/>
-                        <field name="ratings_todo_count"/>
-                        <field name="ratings_done_percent"/>
+                        <field name="user_id" />
+                        <field name="review_group_ids" widget="many2many_tags" />
+                        <field name="ratings_done_count" />
+                        <field name="ratings_todo_count" />
+                        <field name="ratings_done_percent" />
                     </group>
                 </sheet>
             </form>
@@ -24,8 +24,8 @@
         <field name="model">event.track.reviewer</field>
         <field name="arch" type="xml">
             <search string="Search Track Reviewers">
-                <field name="user_id"/>
-                <field name="review_group_ids"/>
+                <field name="user_id" />
+                <field name="review_group_ids" />
             </search>
         </field>
     </record>
@@ -35,13 +35,17 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Track Reviewers">
-                <field name="user_id"/>
-                <field name="email" optional="hide"/>
-                <field name="phone" optional="hide"/>
-                <field name="review_group_ids" widget="many2many_tags" optional="show"/>
-                <field name="ratings_done_count" optional="show"/>
-                <field name="ratings_todo_count" optional="show"/>
-                <field name="ratings_done_percent" optional="show"/>
+                <field name="user_id" />
+                <field name="email" optional="hide" />
+                <field name="phone" optional="hide" />
+                <field
+                    name="review_group_ids"
+                    widget="many2many_tags"
+                    optional="show"
+                />
+                <field name="ratings_done_count" optional="show" />
+                <field name="ratings_todo_count" optional="show" />
+                <field name="ratings_done_percent" optional="show" />
             </tree>
         </field>
     </record>
@@ -51,6 +55,9 @@
         <field name="res_model">event.track.reviewer</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
-        <field name="view_id" ref="website_event_track_advanced.view_event_track_reviewer_tree"/>
+        <field
+            name="view_id"
+            ref="website_event_track_advanced.view_event_track_reviewer_tree"
+        />
     </record>
 </odoo>

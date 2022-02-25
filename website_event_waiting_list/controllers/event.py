@@ -174,7 +174,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         )
 
     def _process_attendees_form(self, event, form_details):
-        """ Process data posted from the attendee details form.
+        """Process data posted from the attendee details form.
         :param form_details: posted data from frontend registration form, like
             {'1-name': 'r', '1-email': 'r@r.com', '1-phone': '', '1-event_ticket_id': '1'}
         """

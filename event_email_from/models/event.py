@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import models, fields
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -37,14 +37,14 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     # 2. Fields declaration
-    sender_email = fields.Char(string="sender email", compute='_compute_sender_email')
+    sender_email = fields.Char(string="sender email", compute="_compute_sender_email")
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
 
     def _compute_sender_email(self):
-        value = self.env['ir.config_parameter'].sudo().get_param('event_sender_address')
+        value = self.env["ir.config_parameter"].sudo().get_param("event_sender_address")
         for record in self:
             record.sender_email = value
 

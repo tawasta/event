@@ -1,11 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <menuitem id="menu_event_track_reviews" name="Track Reviews" parent="event.event_main_menu" sequence="12" groups="event.group_event_manager"/>
-    <menuitem id="menu_event_track_configuration" name="CFP Configuration" sequence="20" parent="event.menu_event_configuration" groups="event.group_event_manager"/>
-    <menuitem id="event_track_rating_menu" name="Track Ratings" action="event_track_rating_action" sequence="10" parent="website_event_track_advanced.menu_event_track_reviews" groups="event.group_event_manager"/>
-    <menuitem id="event_track_rating_grade_menu" name="Track Rating Grades" action="event_track_rating_grade_action" sequence="30" parent="website_event_track_advanced.menu_event_track_configuration" groups="event.group_event_manager"/>
-    <menuitem id="event_track_reviewers_menu" name="Track Reviewers" action="event_track_reviewers_action" sequence="5" parent="website_event_track_advanced.menu_event_track_reviews" groups="event.group_event_manager"/>
-    <menuitem id="event_track_review_group_menu" name="Track Review Groups" action="event_track_review_group_action" sequence="20" parent="website_event_track_advanced.menu_event_track_configuration" groups="event.group_event_manager"/>
-    <menuitem id="event_track_type_menu" name="Track Types" action="event_track_type_action" sequence="40" parent="website_event_track_advanced.menu_event_track_configuration" groups="event.group_event_manager"/>
-    <menuitem id="event_track_target_group_menu" name="Track Target Groups" action="event_track_target_group_action" sequence="30" parent="website_event_track_advanced.menu_event_track_configuration" groups="event.group_event_manager"/>
+    <menuitem
+        id="menu_event_track_reviews"
+        name="Track Reviews"
+        parent="event.event_main_menu"
+        sequence="12"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="menu_event_track_configuration"
+        name="CFP Configuration"
+        sequence="20"
+        parent="event.menu_event_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_rating_menu"
+        name="Track Ratings"
+        action="event_track_rating_action"
+        sequence="10"
+        parent="website_event_track_advanced.menu_event_track_reviews"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_rating_grade_menu"
+        name="Track Rating Grades"
+        action="event_track_rating_grade_action"
+        sequence="30"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_reviewers_menu"
+        name="Track Reviewers"
+        action="event_track_reviewers_action"
+        sequence="5"
+        parent="website_event_track_advanced.menu_event_track_reviews"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_review_group_menu"
+        name="Track Review Groups"
+        action="event_track_review_group_action"
+        sequence="20"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_type_menu"
+        name="Track Types"
+        action="event_track_type_action"
+        sequence="40"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
+        id="event_track_target_group_menu"
+        name="Track Target Groups"
+        action="event_track_target_group_action"
+        sequence="30"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
 </odoo>

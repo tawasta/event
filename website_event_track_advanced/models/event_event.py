@@ -91,10 +91,10 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_show_track_twitter_hashtags(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if not event.event_type_id:
                 event.show_track_twitter_hashtags = (
@@ -107,10 +107,10 @@ class EventEvent(models.Model):
 
     @api.depends("event_type_id")
     def _compute_location_ids(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if not event.event_type_id:
                 event.location_ids = event.location_ids or False
@@ -119,10 +119,10 @@ class EventEvent(models.Model):
 
     @api.depends("event_type_id")
     def _compute_track_types_ids(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if not event.event_type_id:
                 event.track_types_ids = event.track_types_ids or False
@@ -131,10 +131,10 @@ class EventEvent(models.Model):
 
     @api.depends("event_type_id")
     def _compute_target_group_ids(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if not event.event_type_id:
                 event.target_group_ids = event.target_group_ids or False

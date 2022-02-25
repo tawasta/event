@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
     <record model="ir.actions.act_window" id="action_waiting_mail_list_tree">
         <field name="name">Send event confirmation mail</field>
         <field name="res_model">website.event.waiting.mail.list.wizard</field>
-        <field name="binding_model_id" ref="event.model_event_registration"/>
+        <field name="binding_model_id" ref="event.model_event_registration" />
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
@@ -17,15 +17,20 @@
                 <group>
                     <field name="registration_ids" nolabel="1" readonly="1">
                         <tree string="Registrations">
-                            <field name="name"/>
-                            <field name="email"/>
-                            <field name="event_id" readonly="1"/>
-                            <field name="state"/>
+                            <field name="name" />
+                            <field name="email" />
+                            <field name="event_id" readonly="1" />
+                            <field name="state" />
                         </tree>
                     </field>
                 </group>
                 <footer>
-                    <button string="Send" name="send_confirmation_mail" type="object" class="oe_highlight"/>
+                    <button
+                        string="Send"
+                        name="send_confirmation_mail"
+                        type="object"
+                        class="oe_highlight"
+                    />
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>

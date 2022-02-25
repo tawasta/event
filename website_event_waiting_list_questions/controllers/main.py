@@ -7,11 +7,11 @@ from odoo.addons.website_event_waiting_list.controllers.event import (
 
 class WebsiteEvent(WebsiteEventController):
     def _process_attendees_form(self, event, form_details):
-        """ Process data posted from the attendee details form.
+        """Process data posted from the attendee details form.
         Extracts question answers:
         - For both questions asked 'once_per_order' and questions asked to every attendee
         - For questions of type 'simple_choice', extracting the suggested answer id
-        - For questions of type 'text_box', extracting the text answer of the attendee. """
+        - For questions of type 'text_box', extracting the text answer of the attendee."""
         registrations = super(WebsiteEvent, self)._process_attendees_form(
             event, form_details
         )

@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="cancel_registration" inherit_id="website_event_cancellation.cancel_registration" name="Cancel Registration">
+    <template
+        id="cancel_registration"
+        inherit_id="website_event_cancellation.cancel_registration"
+        name="Cancel Registration">
         <xpath expr="//div[@class='mt-4']" position="after">
             <div t-if="event.is_online_event" class="mt-4 online-event">
                 <h5 class="text-secondary font-weight-bold">Online</h5>

@@ -90,10 +90,10 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_registration_elsewhere(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if (
                 event.event_type_id.registration_elsewhere
@@ -107,10 +107,10 @@ class EventEvent(models.Model):
 
     @api.depends("event_type_id")
     def _compute_registration_link(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             if not event.event_type_id:
                 event.registration_link = event.registration_link or None

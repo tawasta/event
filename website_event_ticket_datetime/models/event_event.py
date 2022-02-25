@@ -57,12 +57,12 @@ class EventEvent(models.Model):
         "event_ticket_ids.sale_available",
     )
     def _compute_event_registrations_open(self):
-        """ Compute whether people may take registrations for this event
-          * event.date_end -> if event is done, registrations are not open anymore;
-          * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
-            is False if no ticket are defined, see _compute_start_sale_date);
-          * any ticket is available for sale (seats available) if any;
-          * seats are unlimited or seats are available;
+        """Compute whether people may take registrations for this event
+        * event.date_end -> if event is done, registrations are not open anymore;
+        * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
+          is False if no ticket are defined, see _compute_start_sale_date);
+        * any ticket is available for sale (seats available) if any;
+        * seats are unlimited or seats are available;
         """
         for event in self:
             event = event._set_tz_context()
