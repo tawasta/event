@@ -348,7 +348,7 @@
                             type="text"
                             name="description"
                             placeholder="Application Content..."
-                            class="form-control"
+                            class="form-control o_wysiwyg_loader"
                             required="This field is required"
                             rows="6"><t t-esc="track.description" /></textarea>
                     </div>
@@ -445,7 +445,7 @@
                             type="text"
                             name="target_group_info"
                             placeholder="Target Group Info..."
-                            class="form-control"
+                            class="form-control o_wysiwyg_loader"
                             rows="6"><t t-esc="track.target_group_info" /></textarea>
                     </div>
                 </div>
@@ -825,7 +825,7 @@
                             class="col-form-label label-optional">Webinar details</label>
                         <textarea
                             type="text"
-                            class="form-control"
+                            class="form-control o_wysiwyg_loader"
                             id="webinar_info"
                             name="webinar_info"
                             placeholder="Webinar info..."
@@ -888,7 +888,7 @@
                                 type="text"
                                 name="workshop_goals"
                                 placeholder="Session Goals..."
-                                class="form-control"
+                                class="form-control o_wysiwyg_loader"
                                 required="This field is required"
                                 rows="6"><t t-esc="track.workshop_goals" /></textarea>
 
@@ -898,7 +898,7 @@
                                 type="text"
                                 name="workshop_goals"
                                 placeholder="Session Goals..."
-                                class="form-control"
+                                class="form-control o_wysiwyg_loader"
                                 required-disabled="True"
                                 rows="6"><t t-esc="track.workshop_goals" /></textarea>
                         </t>
@@ -912,7 +912,7 @@
                                 type="text"
                                 name="workshop_schedule"
                                 placeholder="Session Schedule..."
-                                class="form-control"
+                                class="form-control o_wysiwyg_loader"
                                 required="This field is required"
                                 rows="6"><t
                                     t-esc="track.workshop_schedule"
@@ -924,7 +924,7 @@
                                 name="workshop_schedule"
                                 placeholder="Session Schedule..."
                                 required-disabled="True"
-                                class="form-control"
+                                class="form-control o_wysiwyg_loader"
                                 rows="6"><t
                                     t-esc="track.workshop_schedule"
                                 /></textarea>
@@ -1208,7 +1208,7 @@
                             type="text"
                             name="extra_info"
                             placeholder="Extra Info..."
-                            class="form-control"
+                            class="form-control o_wysiwyg_loader"
                             rows="6"><t t-esc="track.extra_info" /></textarea>
                     </div>
                 </div>

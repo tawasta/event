@@ -129,7 +129,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "event_id": event.id,
             "description": post.get("description"),
             "video_url": post.get("video_url"),
-            "webinar": post.get("webinar") not in ["0", "false"],
+            "webinar": post.get("webinar"),
             "webinar_info": post.get("webinar_info"),
             "extra_info": post.get("extra_info"),
             "target_group": target_group,
@@ -276,7 +276,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                 speakers.append(new_speaker.id)
             else:
                 new_speaker_user = self._create_signup_user(speaker)
-                new_speaker = new_speaker_user.partner_id or False
+                if new_speaker_user:
+                    new_speaker = new_speaker_user.partner_id
             if new_speaker:
                 speakers.append(new_speaker.id)
                 followers.append(new_speaker.id)
