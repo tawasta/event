@@ -65,7 +65,7 @@ class EventTrackAssignWizard(models.TransientModel):
 
     # 3. Default methods
     def default_get(self, fields):
-        """ Get all unassigned tracks as default
+        """Get all unassigned tracks as default
         active_id = self._context['active_id']
         event = self.env['event.event'].browse([active_id])
 

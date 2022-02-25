@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="event_registration_answer_view_tree_inherit" model="ir.ui.view">
         <field name="name">event.registration.answer.view.tree</field>
         <field name="model">event.registration.answer</field>
-        <field name="inherit_id" ref="website_event_questions.event_registration_answer_view_tree"/>
+        <field
+            name="inherit_id"
+            ref="website_event_questions.event_registration_answer_view_tree"
+        />
         <field name="arch" type="xml">
             <field name="registration_id" position="after">
-                <field name="name" optional="show"/>
-                <field name="email" optional="show"/>
-                <field name="phone" optional="show"/>
+                <field name="name" optional="show" />
+                <field name="email" optional="show" />
+                <field name="phone" optional="show" />
             </field>
             <field name="registration_id" position="attributes">
                 <attribute name="optional">hide</attribute>

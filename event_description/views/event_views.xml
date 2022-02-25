@@ -1,12 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
     <record id="view_event_form_description" model="ir.ui.view">
         <field name="name">event.event.form.description</field>
         <field name="model">event.event</field>
-        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="before">
-                <field name="description"/>
+                <field name="description" />
             </xpath>
         </field>
     </record>

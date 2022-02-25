@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="events_list_private_event" inherit_id="website_event.events_list">
         <xpath expr="//t[@t-if='not event_ids']" position="before">
-            <t t-set="event_ids" t-value="event_ids.sudo().filtered(lambda r: r.is_private_event == False)"/>
+            <t
+                t-set="event_ids"
+                t-value="event_ids.sudo().filtered(lambda r: r.is_private_event == False)"
+            />
         </xpath>
     </template>
 </odoo>

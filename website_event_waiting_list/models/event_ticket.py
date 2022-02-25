@@ -56,10 +56,10 @@ class EventTicket(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_id", "waiting_list")
     def _compute_waiting_list(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for ticket in self:
             ticket.waiting_list = ticket.event_id.waiting_list
 

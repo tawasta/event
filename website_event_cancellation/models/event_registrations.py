@@ -49,7 +49,7 @@ class EventRegistration(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_id", "access_token")
     def _compute_manage_url(self):
-        """ Url to cancel registration """
+        """Url to cancel registration"""
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for registration in self:
             registration.manage_url = urls.url_join(

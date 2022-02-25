@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="events_list_online_event" inherit_id="website_event.events_list">
         <xpath expr="//div[@itemprop='location']" position="attributes">
@@ -10,7 +10,9 @@
             </div>
         </xpath>
     </template>
-    <template id="events_list_location_online_event" inherit_id="website_event_frontend_customization.events_list_location">
+    <template
+        id="events_list_location_online_event"
+        inherit_id="website_event_frontend_customization.events_list_location">
         <xpath expr="//div[@itemprop='location']" position="attributes">
             <attribute name="t-if">not event.is_online_event</attribute>
         </xpath>
