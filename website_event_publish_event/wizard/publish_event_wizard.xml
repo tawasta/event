@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
     <record model="ir.actions.act_window" id="action_publish_event_tree">
         <field name="name">Publish events on website</field>
         <field name="res_model">website.event.publish.event.wizard</field>
-        <field name="binding_model_id" ref="event.model_event_event"/>
+        <field name="binding_model_id" ref="event.model_event_event" />
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
@@ -13,8 +13,20 @@
         <field name="arch" type="xml">
             <form string="Publish events on website">
                 Publish events on website
-                <group><field name="event_ids" nolabel="1" readonly="1"><tree string="Events"><field name="name"/><field name="website_published"/></tree></field></group>
-                <footer><button string="Confirm" name="publish_event_on_website" type="object" class="oe_highlight"/><button string="Cancel" class="oe_link" special="cancel"/></footer>
+                <group><field name="event_ids" nolabel="1" readonly="1"><tree
+                            string="Events"><field name="name" /><field
+                                name="website_published"
+                            /></tree></field></group>
+                <footer><button
+                        string="Confirm"
+                        name="publish_event_on_website"
+                        type="object"
+                        class="oe_highlight"
+                    /><button
+                        string="Cancel"
+                        class="oe_link"
+                        special="cancel"
+                    /></footer>
             </form>
         </field>
     </record>

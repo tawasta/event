@@ -4,6 +4,8 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
     var Widget = require("web.Widget");
     var publicWidget = require("web.public.widget");
     var _t = core._t;
+    var weDefaultOptions = require("web_editor.wysiwyg.default_options");
+    var wysiwygLoader = require("web_editor.loader");
 
     // Catch registration form event, because of JS for attendee details
     var TrackProposalForm = Widget.extend({
@@ -30,6 +32,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
          * @param {Event} ev
          */
         on_click: function (ev) {
+            var self = this;
             ev.preventDefault();
             ev.stopPropagation();
             var $form = $(ev.currentTarget).closest("form");
@@ -43,8 +46,14 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                     var obj = $("#" + toggle_target);
                     if (target.checked) {
                         obj.removeAttr("disabled");
+                        obj.siblings()
+                            .find(".note-editable")
+                            .attr("contenteditable", "true");
                     } else {
                         obj.attr("disabled", "disabled");
+                        obj.siblings()
+                            .find(".note-editable")
+                            .attr("contenteditable", "false");
                     }
                 }
             }
@@ -60,10 +69,12 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $modal.modal("hide");
                         $button.prop("disabled", false);
                     });
+
                     // Remove attachment with button
                     $("#btn-remove-attachment").click(function () {
                         $("#attachment_ids").val("");
                     });
+
                     // Toggle disabled with checkbox
                     $("input:checkbox")
                         .each(function () {
@@ -72,22 +83,26 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         .on("input", function () {
                             toggleDisabled(this);
                         });
+
                     // Show warning on modal close
                     $modal.on("click", ".closefirstmodal", function () {
                         $button.prop("disabled", false);
                         $("#modal_event_track_warning").modal("show");
                     });
+
                     // Hide both modals on warning confirm
                     $modal.on("click", ".confirmclosed", function () {
                         $button.prop("disabled", false);
                         $("#modal_event_track_warning").modal("hide");
                         $("#modal_event_track_application").modal("hide");
                     });
+
                     // Hide warning modal on warning cancel
                     $modal.on("click", ".cancelclosed", function () {
                         $button.prop("disabled", false);
                         $("#modal_event_track_warning").modal("hide");
                     });
+
                     // Remove proposal form modal once it's hidden
                     $modal.on("hidden.bs.modal", function (e) {
                         // Fixes scrolling if another modal remains open
@@ -98,13 +113,26 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             this.remove();
                         }
                     });
+
+                    // Validate file size
+                    $("#attachment_ids").bind("change", function () {
+                        if (!this.files[0]) {
+                            return true;
+                        }
+                        var attachment_size = this.files[0].size;
+                        var max_size = 30 * 1024 * 1024;
+                        if (attachment_size > max_size) {
+                            $("#attachment_ids").text("");
+                            $("#attachment_ids").val("");
+                        }
+                    });
+
                     // Add speaker (contact) row(s)
                     $("#add_speaker").click(function () {
                         var speaker_count =
                             Number($("#track-application-speaker-input-index").val()) +
                             1;
                         $("#track-application-speaker-input-index").val(speaker_count);
-                        console.log($("#track-application-speaker-input-index").val());
                         // Clone the last row
                         var row = $(
                             ".track-application-speakers-div-row-container:last"
@@ -159,7 +187,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         }
                     });
 
-                    // Show reload confirmation if modal is open
+                    // Show reload confirmation if modal is open and not submitted
                     window.onbeforeunload = function (e) {
                         if ($modal.hasClass("show") && !submitted) {
                             e.preventDefault();
@@ -168,33 +196,14 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             );
                         }
                     };
+
+                    // Display workshop questions depending on type
                     $("#type").change(function () {
                         $("#application_type_description").text(
                             $("#type option:selected").attr("data-description") || ""
                         );
                         var workshop = $("#type option:selected").attr("data-workshop");
-                        console.log(workshop);
-                        if (!workshop) {
-                            $("#track-application-workshop-div").addClass("d-none");
-                            $("#track-application-workshop-div")
-                                .find("input[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
-                                });
-                            $("#track-application-workshop-div")
-                                .find("select[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
-                                });
-                            $("#track-application-workshop-div")
-                                .find("textarea[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
-                                });
-                        } else {
+                        if (workshop) {
                             $("#track-application-workshop-div").removeClass("d-none");
                             $("#track-application-workshop-div")
                                 .find("input[required-disabled]")
@@ -214,8 +223,86 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                     $(this).removeAttr("required-disabled");
                                     $(this).attr("required", true);
                                 });
+                        } else {
+                            $("#track-application-workshop-div").addClass("d-none");
+                            $("#track-application-workshop-div")
+                                .find("input[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("select[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("textarea[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", true);
+                                });
                         }
                     });
+
+                    // Enable wysiwyg editor for textareas
+                    $("#track-application-form")
+                        .find("textarea.o_wysiwyg_loader")
+                        .each(function () {
+                            var $textarea = $(this);
+                            var $textareaForm = $textarea.closest("form");
+                            // Warning: Do not activate any option that adds inline style.
+                            // Because the style is deleted after save.
+                            var toolbar = [
+                                ["style", ["style"]],
+                                ["font", ["bold", "italic", "underline", "clear"]],
+                                ["para", ["ul", "ol", "paragraph"]],
+                                ["table", ["table"]],
+                            ];
+                            toolbar.push(["history", ["undo", "redo"]]);
+
+                            var options = {
+                                height: 200,
+                                minHeight: 80,
+                                toolbar: toolbar,
+                                styleWithSpan: false,
+                                styleTags: _.without(
+                                    weDefaultOptions.styleTags,
+                                    "h1",
+                                    "h2",
+                                    "h3"
+                                ),
+                                recordInfo: {
+                                    res_model: "event.track",
+                                },
+                                disableFullMediaDialog: true,
+                                disableResizeImage: true,
+                            };
+                            wysiwygLoader
+                                .load(self, $textarea[0], options)
+                                .then((wysiwyg) => {
+                                    $textareaForm
+                                        .find(".note-editable")
+                                        .find("img.float-left")
+                                        .removeClass("float-left");
+                                    $textareaForm
+                                        .find(".note-editable")
+                                        .find("img.o_we_selected_image")
+                                        .removeClass("o_we_selected_image");
+                                    $textareaForm.on(
+                                        "click",
+                                        "button, .application-submit",
+                                        () => {
+                                            $textareaForm
+                                                .find(".note-editable")
+                                                .find("img.o_we_selected_image")
+                                                .removeClass("o_we_selected_image");
+                                            wysiwyg.save();
+                                        }
+                                    );
+                                });
+                        });
 
                     // Enable tooltips with no delay
                     $(document).ready(function () {
@@ -224,6 +311,8 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             delay: {show: 0, hide: 0},
                         });
                     });
+
+                    // Submit form and validate
                     $modal.on("click", ".application-submit", function (event) {
                         var form = document.getElementById("track-application-form");
                         if (form.checkValidity() === false) {
@@ -253,7 +342,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
          * @override
          */
         destroy: function () {
-            console.log("destroy");
             this.instance.setElement(null);
             this._super.apply(this, arguments);
             this.instance.setElement(this.$el);

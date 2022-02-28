@@ -2,7 +2,7 @@ from odoo import api, models
 
 
 class EventRegistration(models.Model):
-    _inherit = 'event.registration'
+    _inherit = "event.registration"
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -33,18 +33,18 @@ class EventRegistration(models.Model):
                 }
                 student_batch_vals = self.student_batch_values_preprocess(registration)
 
-                is_student = self.env["op.student"].sudo().search([
-                    ('partner_id', '=', registration.partner_id.id)
-                ])
+                is_student = (
+                    self.env["op.student"]
+                    .sudo()
+                    .search([("partner_id", "=", registration.partner_id.id)])
+                )
                 if is_student:
                     student_batch_vals.update({"student_id": is_student.id})
                 else:
                     create_student = self.env["op.student"].sudo().create(vals)
                     student_batch_vals.update({"student_id": create_student.id})
 
-                    create_student_batch = (
-                        self.env["op.batch.students"].sudo().create(student_batch_vals)
-                    )
+                    self.env["op.batch.students"].sudo().create(student_batch_vals)
         return registrations
 
     def student_batch_values_preprocess(self, registration):

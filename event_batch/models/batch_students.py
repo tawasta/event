@@ -1,8 +1,7 @@
 # 1. Standard library imports:
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import fields
-from odoo import models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 

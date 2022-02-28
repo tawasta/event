@@ -79,7 +79,7 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_banner_image(self):
-        """ Set banner image from event type. """
+        """Set banner image from event type."""
         for event in self:
             if not event.event_type_id:
                 event.banner_image = event.banner_image or None

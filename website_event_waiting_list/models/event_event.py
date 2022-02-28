@@ -177,10 +177,10 @@ class EventEvent(models.Model):
 
     @api.depends("event_type_id", "waiting_list")
     def _compute_waiting_list(self):
-        """ Update event configuration from its event type. Depends are set only
+        """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method. """
+        event type content itself should not trigger this method."""
         for event in self:
             event.waiting_list = event.event_type_id.waiting_list
 
@@ -194,14 +194,14 @@ class EventEvent(models.Model):
         "stage_id",
     )
     def _compute_event_registrations_open(self):
-        """ Compute whether people may take registrations for this event
-          * event.date_end -> if event is done, registrations are not open anymore;
-          * event.
-          * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
-            is False if no ticket are defined, see _compute_start_sale_date);
-          * any ticket is available for sale (seats available) if any;
-          * seats are unlimited or seats are available;
-          * allow registrations to waiting list if enabled
+        """Compute whether people may take registrations for this event
+        * event.date_end -> if event is done, registrations are not open anymore;
+        * event.
+        * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
+          is False if no ticket are defined, see _compute_start_sale_date);
+        * any ticket is available for sale (seats available) if any;
+        * seats are unlimited or seats are available;
+        * allow registrations to waiting list if enabled
         """
         for event in self:
             event = event._set_tz_context()
@@ -238,7 +238,7 @@ class EventEvent(models.Model):
     # 5. Constraints and onchanges
     @api.constrains("seats_limited", "waiting_list")
     def _check_waiting_list(self):
-        """ Turn off waiting list if seats are not limited """
+        """Turn off waiting list if seats are not limited"""
         for event in self:
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
@@ -268,14 +268,14 @@ class EventEvent(models.Model):
 
     def _compute_is_participating(self):
         """Heuristic
-          * public, no visitor: not participating as we have no information;
-          * public and visitor: check visitor is linked to a registration. As
-            visitors are merged on the top parent, current visitor check is
-            sufficient even for successive visits;
-          * logged, no visitor: check partner is linked to a registration. Do
-            not check the email as it is not really secure;
-          * logged as visitor: check partner or visitor are linked to a
-            registration;
+        * public, no visitor: not participating as we have no information;
+        * public and visitor: check visitor is linked to a registration. As
+          visitors are merged on the top parent, current visitor check is
+          sufficient even for successive visits;
+        * logged, no visitor: check partner is linked to a registration. Do
+          not check the email as it is not really secure;
+        * logged as visitor: check partner or visitor are linked to a
+          registration;
         """
         current_visitor = self.env["website.visitor"]._get_visitor_from_request(
             force_create=False

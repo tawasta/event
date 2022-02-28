@@ -1,23 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="events_list_cancel" inherit_id="website_event.events_list">
-        <xpath expr="//span[@t-if='not event.event_registrations_open']//t[@t-elif='event.event_registrations_sold_out']" position="after">
+        <xpath
+            expr="//span[@t-if='not event.event_registrations_open']//t[@t-elif='event.event_registrations_sold_out']"
+            position="after">
             <t t-elif="event.sudo().stage_id.cancel">
                 Event Cancelled
             </t>
         </xpath>
-        <xpath expr="//span[@t-if='not event.event_registrations_open']//t[@t-elif='event.event_registrations_sold_out']" position="attributes">
-            <attribute name="t-elif">event.event_registrations_sold_out and not event.sudo().stage_id.cancel</attribute>
+        <xpath
+            expr="//span[@t-if='not event.event_registrations_open']//t[@t-elif='event.event_registrations_sold_out']"
+            position="attributes">
+            <attribute
+                name="t-elif">event.event_registrations_sold_out and not event.sudo().stage_id.cancel</attribute>
         </xpath>
     </template>
-    <template id="events_list_datetime_cancel" inherit_id="website_event_ticket_datetime.events_list_datetime">
+    <template
+        id="events_list_datetime_cancel"
+        inherit_id="website_event_ticket_datetime.events_list_datetime">
         <xpath expr="//t[@class='datetime-sale']" position="attributes">
-            <attribute name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
+            <attribute
+                name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
         </xpath>
     </template>
-    <template id="events_list_start_sale_date_cancel" inherit_id="website_event_frontend_customization.events_list_start_sale_date">
+    <template
+        id="events_list_start_sale_date_cancel"
+        inherit_id="website_event_frontend_customization.events_list_start_sale_date">
         <xpath expr="//t[@class='datetime-sale']" position="attributes">
-            <attribute name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
+            <attribute
+                name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
         </xpath>
     </template>
 </odoo>

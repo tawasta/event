@@ -34,12 +34,10 @@ Migration changes 10.0 -> 14.0:
    - event.track.tag tracks field deprecated, use track_ids instead
 
 TODO:
-   - WYSIWYG editor to form
-   - Validate file size
    - Split into smaller modules
    - Emails
-   - Workshop
-   - Portal proposals
+   - Workshop (seperate module)
+   - Portal proposals (seperate module)
    - Translations
 
 Credits

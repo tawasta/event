@@ -96,7 +96,7 @@ class EventRegistration(models.Model):
                 registration.waiting_list_to_confirm = False
 
     def _compute_confirm_url(self):
-        """ Url to confirm registration (move state from wait -> open) """
+        """Url to confirm registration (move state from wait -> open)"""
         base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         for registration in self:
             registration.confirm_url = urls.url_join(
@@ -171,7 +171,7 @@ class EventRegistration(models.Model):
         return registrations
 
     def write(self, vals):
-        """ Auto-trigger mail schedulers on state writes """
+        """Auto-trigger mail schedulers on state writes"""
         ret = super(EventRegistration, self).write(vals)
         if vals.get("state") == "open":
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(

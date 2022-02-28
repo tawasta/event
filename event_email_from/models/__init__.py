@@ -1,2 +1,1 @@
-from . import event
-from . import res_config_settings
+from . import event, res_config_settings
