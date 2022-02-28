@@ -153,6 +153,10 @@
                         t-att-value="request.csrf_token(time_limit=False)"
                     />
                     <input type="hidden" name="track_id" t-att-value="track.id" />
+                    <t
+                        t-set="editable"
+                        t-value="editable or request.env.user.has_group('event.group_event_manager')"
+                    />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
                             <h4 class="modal-title">Proposal</h4>

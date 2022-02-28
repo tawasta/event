@@ -54,13 +54,23 @@ class EventTrackControllerAdvanced(EventTrackController):
         return values
 
     def _get_event_track_proposal_form_values(self, event, **post):
+        user_id = request.env.user
         track_id = post.get("track_id")
+        editable = False
         if track_id:
             track = request.env["event.track"].search([["id", "=", track_id]])
+            if track:
+                editable = user_id == track.user_id.id and track.stage_id.is_editable
         else:
             track = request.env["event.track"]
+            editable = True
         track_languages = request.env["res.lang"].search([], order="id")
-        values = {"track": track, "track_languages": track_languages, "event": event}
+        values = {
+            "track": track,
+            "track_languages": track_languages,
+            "event": event,
+            "editable": editable,
+        }
         return values
 
     def _get_record(self, model, record_id):
@@ -126,14 +136,14 @@ class EventTrackControllerAdvanced(EventTrackController):
         track_id = self._get_record("event.track", post.get("track_id"))
         track_values = {
             "name": post.get("name"),
-            "type": application_type,
+            "type": application_type.id,
             "event_id": event.id,
             "description": post.get("description"),
             "video_url": post.get("video_url"),
             "webinar": post.get("webinar"),
             "webinar_info": post.get("webinar_info"),
             "extra_info": post.get("extra_info"),
-            "target_group": target_group,
+            "target_group": target_group.id,
             "target_group_info": post.get("target_group_info"),
             "workshop_participants": post.get("workshop_participants"),
             "workshop_goals": post.get("workshop_goals"),
