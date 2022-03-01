@@ -375,5 +375,21 @@ class EventTrack(models.Model):
         return res
 
     # 7. Action methods
+    def _track_template(self, changes):
+        res = super(EventTrack, self)._track_template(changes)
+        track = self[0]
+        if "stage_id" in changes and track.stage_id.mail_template_id:
+            res["stage_id"] = (
+                track.stage_id.mail_template_id,
+                {
+                    "composition_mode": "comment",
+                    "auto_delete_message": True,
+                    "subtype_id": self.env["ir.model.data"].xmlid_to_res_id(
+                        "mail.mt_comment"
+                    ),
+                    "email_layout_xmlid": "mail.mail_notification_light",
+                },
+            )
+        return res
 
     # 8. Business methods

@@ -20,6 +20,7 @@
 # 1. Standard library imports:
 import base64
 import logging
+import re
 import sys
 
 # 2. Known third party imports:
@@ -46,21 +47,27 @@ _logger = logging.getLogger(__name__)
 
 class EventTrackControllerAdvanced(EventTrackController):
     def _get_event_track_proposal_values(self, event):
-        user_id = request.env.user
-        tracks = request.env["event.track"].search(
-            [["user_id", "=", user_id.id], ["event_id", "=", event.id]]
+        partner_id = request.env.user.partner_id
+        tracks = (
+            request.env["event.track"]
+            .sudo()
+            .search([["partner_id", "=", partner_id.id], ["event_id", "=", event.id]])
         )
         values = {"tracks": tracks, "event": event}
         return values
 
     def _get_event_track_proposal_form_values(self, event, **post):
-        user_id = request.env.user
+        partner_id = request.env.user.partner_id
         track_id = post.get("track_id")
         editable = False
         if track_id:
-            track = request.env["event.track"].search([["id", "=", track_id]])
+            track = request.env["event.track"].sudo().search([["id", "=", track_id]])
             if track:
-                editable = user_id == track.user_id.id and track.stage_id.is_editable
+                editable = (
+                    True
+                    if partner_id == track.partner_id and track.stage_id.is_editable
+                    else False
+                )
         else:
             track = request.env["event.track"]
             editable = True
@@ -77,7 +84,9 @@ class EventTrackControllerAdvanced(EventTrackController):
         record_value = False
         if record_id:
             try:
-                record = request.env[model].search([("id", "=", record_id)], limit=1)
+                record = (
+                    request.env[model].sudo().search([("id", "=", record_id)], limit=1)
+                )
                 if record:
                     record_value = record
             except InvalidTextRepresentation:
@@ -107,6 +116,13 @@ class EventTrackControllerAdvanced(EventTrackController):
             return " ".join(p for p in (lastname, firstname) if p)
 
     def _get_event_track_proposal_post_values(self, event, **post):
+        """Organize and validate post values
+
+        :param dict post: post values from form
+        :param event.event event: event for this event.track
+        :return dict values: sorted post values
+        """
+        values = {}
         # Contact
         contact_values = {
             "lastname": post.get("contact_lastname"),
@@ -132,12 +148,34 @@ class EventTrackControllerAdvanced(EventTrackController):
             "event.track.target.group", post.get("target_group")
         )
 
+        # Tags/Keywords
+        tags = []
+        keywords = ""
+        if post.get("keywords"):
+            event_track_tag = request.env["event.track.tag"]
+            pattern = "[^-,A-Za-z0-9äåöÄÖÅ ]+"
+            keywords = re.sub(pattern, "", post.get("keywords"))
+            for keyword in keywords.split(","):
+                try:
+                    tag = event_track_tag.search([("name", "=ilike", keyword)], limit=1)
+                    if not tag:
+                        tag = event_track_tag.sudo().create({"name": keyword})
+                    tags.append(tag.id)
+                except Exception:
+                    _logger.warning(
+                        _(
+                            "Error occured during Event Track Tag creation for keyword: %s."
+                            % keyword
+                        )
+                    )
+
         # Track
         track_id = self._get_record("event.track", post.get("track_id"))
         track_values = {
             "name": post.get("name"),
             "type": application_type.id,
             "event_id": event.id,
+            "user_id": False,
             "description": post.get("description"),
             "video_url": post.get("video_url"),
             "webinar": post.get("webinar"),
@@ -145,10 +183,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             "extra_info": post.get("extra_info"),
             "target_group": target_group.id,
             "target_group_info": post.get("target_group_info"),
-            "workshop_participants": post.get("workshop_participants"),
-            "workshop_goals": post.get("workshop_goals"),
-            "workshop_schedule": post.get("workshop_schedule"),
-            "workshop_fee": post.get("workshop_fee"),
+            "keywords": keywords,
+            "tag_ids": [(6, 0, tags)],
         }
 
         # Language
@@ -177,42 +213,60 @@ class EventTrackControllerAdvanced(EventTrackController):
                 )
 
         # Workshop
-        workshop_organizer_values = {
-            "name": post.get("organizer_organization"),
-            "street": post.get("organizer_street"),
-            "zip": post.get("organizer_zip"),
-            "city": post.get("organizer_city"),
-            "ref": post.get("organizer_reference"),
-            "type": "invoice",
-        }
-        workshop_signee_organization_values = {
-            "name": post.get("signee_organization"),
-            "type": "invoice",
-        }
-        workshop_signee_values = {
-            "lastname": post.get("signee_lastname"),
-            "firstname": post.get("signee_firstname"),
-            "name": self._get_name(
-                post.get("signee_lastname"), post.get("signee_firstname")
-            ),
-            "email": post.get("signee_email"),
-            "phone": post.get("signee_phone"),
-            "function": post.get("signee_title"),
-        }
+        if post.get("is_workshop") and post.get("is_workshop") == "true":
+            track_values["workshop_participants"] = post.get("workshop_participants")
+            track_values["workshop_goals"] = post.get("workshop_goals")
+            track_values["workshop_schedule"] = post.get("workshop_schedule")
+            track_values["workshop_fee"] = post.get("workshop_fee")
 
-        values = {
-            "contact_organization": contact_organization_values,
-            "contact": contact_values,
-            "track_id": track_id,
-            "track": track_values,
-            "speakers": speaker_values,
-            "workshop_organizer": workshop_organizer_values,
-            "workshop_signee": workshop_signee_values,
-            "workshop_signee_organization": workshop_signee_organization_values,
-        }
+            workshop_organizer_values = {
+                "name": post.get("organizer_organization"),
+                "street": post.get("organizer_street"),
+                "zip": post.get("organizer_zip"),
+                "city": post.get("organizer_city"),
+                "ref": post.get("organizer_reference"),
+                "type": "invoice",
+            }
+            workshop_signee_values = {
+                "lastname": post.get("signee_lastname"),
+                "firstname": post.get("signee_firstname"),
+                "name": self._get_name(
+                    post.get("signee_lastname"), post.get("signee_firstname")
+                ),
+                "email": post.get("signee_email"),
+                "phone": post.get("signee_phone"),
+                "function": post.get("signee_title"),
+            }
+            values.update(
+                {
+                    "workshop_organizer": workshop_organizer_values,
+                    "workshop_signee": workshop_signee_values,
+                }
+            )
+        track_confirm = (
+            True
+            if post.get("track-confirm") and post.get("track-confirm") != ""
+            else False
+        )
+        values.update(
+            {
+                "contact_organization": contact_organization_values,
+                "contact": contact_values,
+                "track_id": track_id,
+                "track": track_values,
+                "speakers": speaker_values,
+                "track_confirm": track_confirm,
+            }
+        )
+
         return values
 
     def _create_signup_user(self, partner_values):
+        """Find existing user by email and update it or create a new user
+
+        :param dict partner_values: dictionary of values for partner
+        :return res.users user: new or existing user
+        """
         user = (
             request.env["res.users"]
             .sudo()
@@ -240,56 +294,60 @@ class EventTrackControllerAdvanced(EventTrackController):
             except SignupError:
                 _logger.warning(_("Signup is not allowed for uninvited users"))
                 return False
+        else:
+            user.sudo().write(partner_values)
 
         return user
 
     def _create_organization(self, organization_values):
+        """Find existing user organization partner by name and update it
+        or create a new organization partner
+
+        :param dict organization_values: dictionary of values for organization partner
+        :return res.partner organization: new or existing organization partner
+        """
         organization_name = organization_values.get("name")
         if not organization_name or organization_name == "":
             _logger.warning(_("Could not create organization (missing name)"))
             return False
 
-        organization = request.env["res.partner"].search(
-            [("name", "=ilike", organization_name)], limit=1
+        organization = (
+            request.env["res.partner"]
+            .sudo()
+            .search([("name", "=ilike", organization_name)], limit=1)
         )
 
-        # Organization doesn't exists. Create one
         if not organization:
             organization_values["is_company"] = True
             organization = request.env["res.partner"].sudo().create(organization_values)
-        # Organization exists. Update it
         else:
             organization.sudo().write(organization_values)
 
         return organization
 
     def _create_speakers(self, speaker_values, followers):
+        """Create or update each speaker and add them as followers and speakers
+
+        :param dict speaker_values: dictionary of values for multiple speaker partners
+        :param list followers: list of followers for event.track record
+        :return list speakers: list of speaker partner ids
+        :return list followers: list of followers for event.track record
+        """
         speakers = list()
         for speaker in speaker_values:
-            existing_user = (
-                request.env["res.users"]
-                .sudo()
-                .search([("login", "=", speaker.get("email"))])
-            )
-            # Get or create organization
+            # Create or get existing organization
             if speaker.get("organization"):
                 organization = self._create_organization(
                     {"name": speaker.get("organization")}
                 )
                 del speaker["organization"]
-                speaker["parent_id"] = organization.id
-            # If user already exists, create a new partner
-            if existing_user:
-                new_speaker = request.env["res.partner"].sudo().create(speaker)
-                followers.append(new_speaker.id)
-                speakers.append(new_speaker.id)
-            else:
-                new_speaker_user = self._create_signup_user(speaker)
-                if new_speaker_user:
-                    new_speaker = new_speaker_user.partner_id
-            if new_speaker:
-                speakers.append(new_speaker.id)
-                followers.append(new_speaker.id)
+                if organization:
+                    speaker["parent_id"] = organization.id
+            # Create or get existing speaker user
+            speaker_user = self._create_signup_user(speaker)
+            if speaker_user:
+                followers.append(speaker_user.partner_id.id)
+                speakers.append(speaker_user.partner_id.id)
         return speakers, followers
 
     @http.route(
@@ -422,15 +480,15 @@ class EventTrackControllerAdvanced(EventTrackController):
         # 9. Subscribe followers
         track.sudo().message_subscribe(partner_ids=followers)
 
-        # 10. Send mail to track proposer
-        email_template = track.env.ref(
-            "website_event_track_advanced.email_template_event_track_received"
-        )
-        email_template.send_mail(track.id)
-
         # 11. Check if we want to confirm the track
-        if post.get("track-confirm") and post.get("track-confirm") != "":
-            track.state = "confirmed"
+        if values.get("track_confirm"):
+            first_done_stage = (
+                request.env["event.track.stage"]
+                .sudo()
+                .search([("is_done", "=", True)], order="sequence")
+            )
+            if first_done_stage:
+                track.sudo().write({"stage_id": first_done_stage[0].id})
 
         # 12. Return
         return request.redirect("/event/%s/track_proposal" % event.id)

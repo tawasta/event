@@ -222,8 +222,8 @@
                             <button
                                 t-if="not track or track.stage_id.is_editable"
                                 type="submit"
-                                name="track-save"
-                                value="track-save"
+                                name="track-draft"
+                                value="track-draft"
                                 id="application-submit-button"
                                 class="btn btn-primary application-submit"
                                 data-toggle="tooltip"
@@ -430,7 +430,7 @@
                             required="This field is required">
                             <option value="">Select...</option>
                             <t
-                                t-foreach="event.target_group_ids or []"
+                                t-foreach="event.sudo().target_group_ids or []"
                                 t-as="target_group">
                                 <option
                                     t-att-value="target_group.id"
@@ -451,6 +451,29 @@
                             placeholder="Target Group Info..."
                             class="form-control o_wysiwyg_loader"
                             rows="6"><t t-esc="track.target_group_info" /></textarea>
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label
+                            for="keywords"
+                            class="col-form-label label-optional">Keywords</label>
+                        <p
+                            id="track-application-keyword-alert-info"
+                            class="alert alert-info alert-dismissable">
+                            <a
+                                href="#"
+                                class="close"
+                                data-dismiss="alert"
+                                aria-label="close">×</a>
+                            <span>Please enter three keywords separated by commas.</span>
+                        </p>
+                        <input
+                            name="keywords"
+                            maxlength="100"
+                            placeholder="Separate keywords with commas..."
+                            t-att-value="track.keywords"
+                            class="form-control"
+                            type="text"
+                        />
                     </div>
                 </div>
             </div>
@@ -687,7 +710,16 @@
                             t-att-id="speaker_count">
                             <span class="text-muted presenter-span">Presenter #<t
                                     t-esc="speaker_count"
-                                />:</span>
+                                /></span>
+                            <button
+                                type="button"
+                                class="btn btn-default btn-remove-speaker"
+                                disabled="1"
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="Remove speaker">
+                                <i class="fa fa-trash" />
+                            </button>
                             <div
                                 t-attf-id="track-application-speakers-row-div-#{speaker_count}"
                                 class="row">
@@ -859,29 +891,59 @@
                     The contract will be sent for the signee.
                 </p>
                 <div class="row" id="track-application-workshop-row-div">
+                    <input
+                        type="hidden"
+                        name="is_workshop"
+                        id="is_workshop"
+                        t-attf-value="#{'true' if track.type.workshop else 'false'}"
+                    />
                     <div class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
                             for="workshop_participants">Max Participants</label>
-                        <input
-                            type="number"
-                            name="workshop_participants"
-                            class="form-control"
-                            placeholder="0"
-                            t-att-value="track.workshop_participants"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                type="number"
+                                name="workshop_participants"
+                                class="form-control"
+                                placeholder="0"
+                                t-att-value="track.workshop_participants"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                type="number"
+                                name="workshop_participants"
+                                class="form-control"
+                                placeholder="0"
+                                disabled="True"
+                                t-att-value="track.workshop_participants"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
                             for="workshop_fee">Participation Fee</label>
-                        <input
-                            type="number"
-                            name="workshop_fee"
-                            class="form-control"
-                            placeholder="0"
-                            t-att-value="track.workshop_fee"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                type="number"
+                                name="workshop_fee"
+                                class="form-control"
+                                placeholder="0"
+                                t-att-value="track.workshop_fee"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                type="number"
+                                name="workshop_fee"
+                                class="form-control"
+                                placeholder="0"
+                                disabled="True"
+                                t-att-value="track.workshop_fee"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
@@ -904,6 +966,7 @@
                                 placeholder="Session Goals..."
                                 class="form-control o_wysiwyg_loader"
                                 required-disabled="True"
+                                disabled="True"
                                 rows="6"><t t-esc="track.workshop_goals" /></textarea>
                         </t>
                     </div>
@@ -928,6 +991,7 @@
                                 name="workshop_schedule"
                                 placeholder="Session Schedule..."
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control o_wysiwyg_loader"
                                 rows="6"><t
                                     t-esc="track.workshop_schedule"
@@ -957,6 +1021,7 @@
                                 placeholder="First Name"
                                 t-att-value="track.organizer_contact.firstname"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -982,6 +1047,7 @@
                                 placeholder="Last Name"
                                 t-att-value="track.organizer_contact.lastname"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1005,6 +1071,7 @@
                                 placeholder="Email"
                                 t-att-value="track.organizer_contact.email"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="email"
                             />
@@ -1014,25 +1081,50 @@
                         <label
                             for="signee_phone"
                             class="col-form-label label-optional">Phone</label>
-                        <input
-                            name="signee_phone"
-                            placeholder="Phone"
-                            t-att-value="track.organizer_contact.phone"
-                            class="form-control"
-                            type="tel"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_phone"
+                                placeholder="Phone"
+                                t-att-value="track.organizer_contact.phone"
+                                class="form-control"
+                                type="tel"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_phone"
+                                placeholder="Phone"
+                                t-att-value="track.organizer_contact.phone"
+                                class="form-control"
+                                disabled="True"
+                                type="tel"
+                            />
+
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="signee_organization"
                             class="col-form-label label-optional">Organization</label>
-                        <input
-                            name="signee_organization"
-                            placeholder="Organization"
-                            t-att-value="track.organizer_contact.parent_id.name"
-                            class="form-control"
-                            type="text"
-                        />
+                        <t t-if="track.type and track.type.workshop">
+                            <input
+                                name="signee_organization"
+                                placeholder="Organization"
+                                t-att-value="track.organizer_contact.parent_id.name"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
+                        <t t-else="">
+                            <input
+                                name="signee_organization"
+                                placeholder="Organization"
+                                t-att-value="track.organizer_contact.parent_id.name"
+                                disabled="True"
+                                class="form-control"
+                                type="text"
+                            />
+                        </t>
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_title" class="col-form-label">Title</label>
@@ -1052,6 +1144,7 @@
                                 placeholder="Title"
                                 t-att-value="track.organizer_contact.function"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1080,6 +1173,7 @@
                                 placeholder="Organization"
                                 t-att-value="track.organizer.name"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1105,6 +1199,7 @@
                                 placeholder="Street"
                                 t-att-value="track.organizer.street"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1128,6 +1223,7 @@
                                 placeholder="Zip"
                                 t-att-value="track.organizer.zip"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1151,6 +1247,7 @@
                                 placeholder="City"
                                 t-att-value="track.organizer.city"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
@@ -1176,6 +1273,7 @@
                                 placeholder="Your Reference"
                                 t-att-value="track.organizer.ref"
                                 required-disabled="True"
+                                disabled="True"
                                 class="form-control"
                                 type="text"
                             />
