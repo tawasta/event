@@ -12,5 +12,16 @@
         <record id="website_event_track.event_track_stage0" model="event.track.stage">
             <field name="is_editable" eval="True" />
         </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                    eval="[('module', '=', 'website_event_track'), ('name', '=', 'event_track_stage1')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="website_event_track.event_track_stage1" model="event.track.stage">
+            <field name="is_submitted" eval="True" />
+        </record>
     </data>
 </odoo>

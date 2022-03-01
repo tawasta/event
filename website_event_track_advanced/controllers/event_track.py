@@ -482,13 +482,13 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # 11. Check if we want to confirm the track
         if values.get("track_confirm"):
-            first_done_stage = (
+            first_submitted_stage = (
                 request.env["event.track.stage"]
                 .sudo()
-                .search([("is_done", "=", True)], order="sequence")
+                .search([("is_submitted", "=", True)], order="sequence")
             )
-            if first_done_stage:
-                track.sudo().write({"stage_id": first_done_stage[0].id})
+            if first_submitted_stage:
+                track.sudo().write({"stage_id": first_submitted_stage[0].id})
 
         # 12. Return
         return request.redirect("/event/%s/track_proposal" % event.id)
