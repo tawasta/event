@@ -132,6 +132,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         var speaker_count =
                             Number($("#track-application-speaker-input-index").val()) +
                             1;
+                        console.log("speaker_count", speaker_count);
                         $("#track-application-speaker-input-index").val(speaker_count);
                         // Clone the last row
                         var row = $(
@@ -170,7 +171,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                     });
 
                     // Remove speaker rows
-                    $(document).on("click", ".btn-remove-speaker", function () {
+                    $modal.on("click", ".btn-remove-speaker", function () {
                         var confirm_message = _t(
                             "Are you sure you want to delete this speaker?"
                         );
@@ -203,13 +204,29 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             $("#type option:selected").attr("data-description") || ""
                         );
                         var workshop = $("#type option:selected").attr("data-workshop");
+                        // Enable workshop inputs
                         if (workshop) {
                             $("#track-application-workshop-div").removeClass("d-none");
+                            $("#track-application-workshop-div")
+                                .find("input#is_workshop")
+                                .each(function () {
+                                    $(this).attr("value", "true");
+                                });
+                            $("#track-application-workshop-div")
+                                .find("input[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                });
                             $("#track-application-workshop-div")
                                 .find("input[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
                                     $(this).attr("required", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("select[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
                                 });
                             $("#track-application-workshop-div")
                                 .find("select[required-disabled]")
@@ -218,18 +235,47 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                     $(this).attr("required", true);
                                 });
                             $("#track-application-workshop-div")
+                                .find("textarea[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "true");
+                                });
+                            $("#track-application-workshop-div")
                                 .find("textarea[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
                                     $(this).attr("required", true);
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "true");
                                 });
+                            // Disable workshop inputs
                         } else {
                             $("#track-application-workshop-div").addClass("d-none");
+                            $("#track-application-workshop-div")
+                                .find("input#is_workshop")
+                                .each(function () {
+                                    $(this).attr("value", "false");
+                                });
+                            $("#track-application-workshop-div")
+                                .find("input")
+                                .each(function () {
+                                    $(this).attr("disabled", true);
+                                });
                             $("#track-application-workshop-div")
                                 .find("input[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
                                     $(this).attr("required-disabled", true);
+                                });
+                            $("#track-application-workshop-div")
+                                .find("select")
+                                .each(function () {
+                                    $(this).attr("disabled", true);
                                 });
                             $("#track-application-workshop-div")
                                 .find("select[required]")
@@ -238,10 +284,23 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                     $(this).attr("required-disabled", true);
                                 });
                             $("#track-application-workshop-div")
+                                .find("textarea")
+                                .each(function () {
+                                    $(this).attr("disabled", true);
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "false");
+                                });
+                            $("#track-application-workshop-div")
                                 .find("textarea[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
                                     $(this).attr("required-disabled", true);
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "false");
                                 });
                         }
                     });
@@ -320,6 +379,11 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             event.stopPropagation();
                         } else {
                             submitted = true;
+                            var input = document.createElement("input");
+                            input.setAttribute("name", $(this).val());
+                            input.setAttribute("value", $(this).val());
+                            input.setAttribute("type", "hidden");
+                            form.appendChild(input);
                         }
                         form.classList.add("was-validated");
                     });
