@@ -101,7 +101,7 @@
     <!-- Warning modal -->
     <template name="Event Track Warning" id="event_track_warning">
         <div
-            id="modal_event_track_warning"
+            t-att-id="modal_id if modal_id else 'modal_event_track_warning'"
             class="modal fade"
             tabindex="-1"
             role="dialog"
@@ -109,29 +109,49 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header align-items-center">
-                        <h4 class="modal-title">Close Proposal</h4>
+                        <h4 class="modal-title"><t t-esc="modal_title" /></h4>
                         <button
                             type="button"
-                            class="close cancelclosed"
+                            t-attf-class="close warning-cancel-#{modal_id}"
                             aria-label="Close">
                             <span>×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <strong>Unsaved changes will be lost if you leave the page, are you sure?</strong>
+                        <strong><t t-esc="modal_text" /></strong>
                     </div>
                     <div class="modal-footer border-0 justify-content-between">
                         <button
                             type="button"
-                            class="btn btn-secondary cancelclosed">Cancel</button>
+                            t-attf-class="btn btn-secondary warning-cancel-#{modal_id}">Cancel</button>
                         <button
                             type="button"
                             name="warning-confirm"
-                            class="btn btn-primary confirmclosed">Confirm</button>
+                            t-attf-class="btn btn-primary warning-confirm-#{modal_id}">Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
+    </template>
+    <!-- Close modal warning -->
+    <template
+        name="Event Track Warning Close Modal"
+        id="event_track_warning_close_modal">
+        <t t-call="website_event_track_advanced.event_track_warning">
+            <t t-set="modal_id">modal_event_track_warning_close_modal</t>
+            <t t-set="modal_title">Close Proposal</t>
+            <t
+                t-set="modal_text">Unsaved changes will be lost if you leave the page, are you sure?</t>
+        </t>
+    </template>
+    <template
+        name="Event Track Warning Remove Presenter"
+        id="event_track_warning_remove_presenter">
+        <t t-call="website_event_track_advanced.event_track_warning">
+            <t t-set="modal_id">modal_event_track_warning_remove_presenter</t>
+            <t t-set="modal_title">Remove Presenter</t>
+            <t t-set="modal_text">Remove this presenter, are you sure?</t>
+        </t>
     </template>
     <!-- Application -->
     <template name="Event Track Application" id="event_track_application">
@@ -153,16 +173,12 @@
                         t-att-value="request.csrf_token(time_limit=False)"
                     />
                     <input type="hidden" name="track_id" t-att-value="track.id" />
-                    <t
-                        t-set="editable"
-                        t-value="editable or request.env.user.has_group('event.group_event_manager')"
-                    />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
                             <h4 class="modal-title">Proposal</h4>
                             <button
                                 type="button"
-                                class="close closefirstmodal"
+                                class="close warning-close-modal"
                                 aria-label="Close">
                                 <span>×</span>
                             </button>
@@ -218,9 +234,8 @@
                         <div class="modal-footer border-0 justify-content-between">
                             <button
                                 type="button"
-                                class="btn btn-secondary closefirstmodal">Cancel</button>
+                                class="btn btn-secondary warning-close-modal">Cancel</button>
                             <button
-                                t-if="not track or track.stage_id.is_editable"
                                 type="submit"
                                 name="track-draft"
                                 value="track-draft"
@@ -228,9 +243,9 @@
                                 class="btn btn-primary application-submit"
                                 data-toggle="tooltip"
                                 data-position="top"
+                                t-att-disabled="None if editable else 'disabled'"
                                 title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later.">Save as Draft</button>
                             <button
-                                t-if="not track or track.stage_id.is_editable"
                                 type="submit"
                                 name="track-confirm"
                                 value="track-confirm"
@@ -238,12 +253,16 @@
                                 class="btn btn-primary application-submit"
                                 data-toggle="tooltip"
                                 data-position="top"
+                                t-att-disabled="None if editable else 'disabled'"
                                 title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited.">Save and Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <t t-call="website_event_track_advanced.event_track_warning" />
+            <t t-call="website_event_track_advanced.event_track_warning_close_modal" />
+            <t
+                t-call="website_event_track_advanced.event_track_warning_remove_presenter"
+            />
         </div>
     </template>
     <!-- Application type -->
@@ -262,8 +281,9 @@
                             name="type"
                             id="type"
                             class="form-control"
-                            required="This field is required"
-                            data-error-msg="Please choose">
+                            t-att-required="None if not editable else 'required'"
+                            data-error-msg="Please choose"
+                            t-att-disabled="None if editable else 'disabled'">
                             <option value="">Select...</option>
                             <t
                                 t-foreach="event.track_types_ids or []"
@@ -327,9 +347,10 @@
                             maxlength="100"
                             placeholder="Application Title"
                             t-att-value="track.name"
-                            required="This field is required"
+                            t-att-required="None if not editable else 'required'"
                             class="form-control"
                             type="text"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-6">
@@ -342,6 +363,7 @@
                             t-att-value="track.video_url"
                             class="form-control"
                             type="text"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-12">
@@ -353,7 +375,8 @@
                             name="description"
                             placeholder="Application Content..."
                             class="form-control o_wysiwyg_loader"
-                            required="This field is required"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                             rows="6"><t t-esc="track.description" /></textarea>
                     </div>
                     <div class="form-group col-xl-6">
@@ -363,7 +386,8 @@
                         <select
                             name="language"
                             t-attf-class="form-control"
-                            required="This field is required">
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'">
                             <option value="">Select...</option>
                             <t t-foreach="track_languages or []" t-as="language">
                                 <option
@@ -384,7 +408,8 @@
                             class="btn btn-default"
                             data-toggle="tooltip"
                             data-placement="right"
-                            title="Remove Attachments">
+                            title="Remove Attachments"
+                            t-att-disabled="None if editable else 'disabled'">
                             <i class="fa fa-trash" />
                         </button>
                         <input
@@ -394,6 +419,7 @@
                             t-att-value="track.attachment_ids"
                             class="form-control-file"
                             multiple="true"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                 </div>
@@ -427,7 +453,8 @@
                         <select
                             name="target_group"
                             class="form-control"
-                            required="This field is required">
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'">
                             <option value="">Select...</option>
                             <t
                                 t-foreach="event.sudo().target_group_ids or []"
@@ -450,6 +477,7 @@
                             name="target_group_info"
                             placeholder="Target Group Info..."
                             class="form-control o_wysiwyg_loader"
+                            t-att-disabled="None if editable else 'disabled'"
                             rows="6"><t t-esc="track.target_group_info" /></textarea>
                     </div>
                     <div class="form-group col-xl-12">
@@ -473,6 +501,7 @@
                             t-att-value="track.keywords"
                             class="form-control"
                             type="text"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                 </div>
@@ -503,9 +532,10 @@
                             name="contact_firstname"
                             placeholder="First Name"
                             t-att-value="track.partner_id.firstname"
-                            required="This field is required"
                             class="form-control"
                             type="text"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -516,9 +546,10 @@
                             name="contact_lastname"
                             placeholder="Last Name"
                             t-att-value="track.partner_id.lastname"
-                            required="This field is required"
                             class="form-control"
                             type="text"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -527,9 +558,10 @@
                             name="contact_email"
                             placeholder="Email"
                             t-att-value="track.partner_id.email"
-                            required="This field is required"
                             class="form-control"
                             type="email"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -542,6 +574,7 @@
                             t-att-value="track.partner_id.phone"
                             class="form-control"
                             type="tel"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -552,9 +585,10 @@
                             name="contact_organization"
                             placeholder="Organization"
                             t-att-value="track.partner_id.parent_id.name"
-                            required="This field is required"
                             class="form-control"
                             type="text"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -563,9 +597,10 @@
                             name="contact_title"
                             placeholder="Title"
                             t-att-value="track.partner_id.function"
-                            required="This field is required"
                             class="form-control"
                             type="text"
+                            t-att-required="None if not editable else 'required'"
+                            t-att-disabled="None if editable else 'disabled'"
                         />
                     </div>
                 </div>
@@ -591,6 +626,7 @@
                 </p>
                 <t t-set="speaker_count" t-value="0" />
                 <div class="track-application-speakers-div-container">
+                    <!-- Add existing speakers to form -->
                     <t t-foreach="track.speaker_ids" t-as="speaker">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
                         <div
@@ -599,27 +635,15 @@
                             <span class="text-muted presenter-span">Presenter #<t
                                     t-esc="speaker_count"
                                 /></span>
-                            <t t-if="speaker_count &gt; 1">
-                                <button
-                                    type="button"
-                                    class="btn btn-default btn-remove-speaker"
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="Remove speaker">
+                            <button
+                                type="button"
+                                class="btn btn-default btn-remove-speaker"
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="Remove speaker"
+                                t-att-disabled="None if editable and speaker_count &gt; 1 else 'disabled'">
                                     <i class="fa fa-trash" />
-                                </button>
-                            </t>
-                            <t t-else="">
-                                <button
-                                    type="button"
-                                    class="btn btn-default btn-remove-speaker"
-                                    disabled="1"
-                                    data-toggle="tooltip"
-                                    data-placement="right"
-                                    title="Remove speaker">
-                                    <i class="fa fa-trash" />
-                                </button>
-                            </t>
+                            </button>
                             <div
                                 t-attf-id="track-application-speakers-row-div-#{speaker_count}"
                                 class="row">
@@ -631,9 +655,10 @@
                                         t-attf-name="speaker_firstname[#{speaker_count}]"
                                         placeholder="First Name"
                                         t-att-value="speaker.firstname"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -644,9 +669,10 @@
                                         t-attf-name="speaker_lastname[#{speaker_count}]"
                                         placeholder="Last Name"
                                         t-att-value="speaker.lastname"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -657,9 +683,10 @@
                                         t-attf-name="speaker_email[#{speaker_count}]"
                                         placeholder="Email"
                                         t-att-value="speaker.email"
-                                        required="This field is required"
                                         class="form-control"
                                         type="email"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -672,6 +699,7 @@
                                         t-att-value="speaker.phone"
                                         class="form-control"
                                         type="tel"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -682,9 +710,10 @@
                                         t-attf-name="speaker_organization[#{speaker_count}]"
                                         placeholder="Organization"
                                         t-att-value="speaker.parent_id.name"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -695,14 +724,16 @@
                                         t-attf-name="speaker_title[#{speaker_count}]"
                                         placeholder="Title"
                                         t-att-value="speaker.function"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                             </div>
                         </div>
                     </t>
+                    <!-- If no existing speakers, add a single empty speaker -->
                     <t t-if="speaker_count == 0">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
                         <div
@@ -714,7 +745,7 @@
                             <button
                                 type="button"
                                 class="btn btn-default btn-remove-speaker"
-                                disabled="1"
+                                disabled="disabled"
                                 data-toggle="tooltip"
                                 data-placement="right"
                                 title="Remove speaker">
@@ -730,9 +761,10 @@
                                     <input
                                         t-attf-name="speaker_firstname[#{speaker_count}]"
                                         placeholder="First Name"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -742,9 +774,10 @@
                                     <input
                                         t-attf-name="speaker_lastname[#{speaker_count}]"
                                         placeholder="Last Name"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -754,9 +787,10 @@
                                     <input
                                         t-attf-name="speaker_email[#{speaker_count}]"
                                         placeholder="Email"
-                                        required="This field is required"
                                         class="form-control"
                                         type="email"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -768,6 +802,7 @@
                                         placeholder="Phone"
                                         class="form-control"
                                         type="tel"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -777,9 +812,10 @@
                                     <input
                                         t-attf-name="speaker_organization[#{speaker_count}]"
                                         placeholder="Organization"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                                 <div class="form-group col-xl-4">
@@ -789,9 +825,10 @@
                                     <input
                                         t-attf-name="speaker_title[#{speaker_count}]"
                                         placeholder="Title"
-                                        required="This field is required"
                                         class="form-control"
                                         type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                        t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
                             </div>
@@ -803,11 +840,13 @@
                     name="speakers_input_index"
                     t-att-value="speaker_count"
                     class="d-none"
+                    type="hidden"
                 />
                 <div class="form-group">
                     <button
                         type="button"
                         class="btn btn-primary"
+                        t-att-disabled="None if editable else 'disabled'"
                         id="add_speaker">Add Presenter <i class="fa fa-user" />
                     </button>
                 </div>
@@ -833,23 +872,14 @@
                 <div class="row" id="track-application-webinar-row-div">
                     <div class="form-group col-xl-12">
                         <div class="form-check">
-                            <t t-if="track.webinar">
                             <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="webinar"
-                                    data-toggle="webinar_info"
-                                    checked="1"
-                                />
-                            </t>
-                            <t t-else="">
-                            <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="webinar"
-                                    data-toggle="webinar_info"
-                                />
-                            </t>
+                                type="checkbox"
+                                class="form-check-input"
+                                name="webinar"
+                                data-toggle="webinar_info"
+                                t-att-checked="None if not track.webinar else 'checked'"
+                                t-att-disabled="None if editable else 'disabled'"
+                            />
                             <label
                                 for="webinar"
                                 class="form-check-label label-optional">I would like to hold a webinar</label>
@@ -866,7 +896,9 @@
                             name="webinar_info"
                             placeholder="Webinar info..."
                             rows="6"
-                            disabled="1"><t t-esc="track.webinar_info" /></textarea>
+                            t-att-disabled="None if editable and track.webinar else 'disabled'"><t
+                                t-esc="track.webinar_info"
+                            /></textarea>
                     </div>
                 </div>
             </div>
@@ -901,102 +933,55 @@
                         <label
                             class="col-form-label label-optional"
                             for="workshop_participants">Max Participants</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                type="number"
-                                name="workshop_participants"
-                                class="form-control"
-                                placeholder="0"
-                                t-att-value="track.workshop_participants"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                type="number"
-                                name="workshop_participants"
-                                class="form-control"
-                                placeholder="0"
-                                disabled="True"
-                                t-att-value="track.workshop_participants"
-                            />
-                        </t>
+                        <input
+                            type="number"
+                            name="workshop_participants"
+                            class="form-control"
+                            placeholder="0"
+                            t-att-value="track.workshop_participants"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
                             for="workshop_fee">Participation Fee</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                type="number"
-                                name="workshop_fee"
-                                class="form-control"
-                                placeholder="0"
-                                t-att-value="track.workshop_fee"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                type="number"
-                                name="workshop_fee"
-                                class="form-control"
-                                placeholder="0"
-                                disabled="True"
-                                t-att-value="track.workshop_fee"
-                            />
-                        </t>
+                        <input
+                            type="number"
+                            name="workshop_fee"
+                            class="form-control"
+                            placeholder="0"
+                            t-att-value="track.workshop_fee"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-12">
                         <label
                             for="workshop_goals"
                             class="col-form-label">Session Goals</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <textarea
-                                type="text"
-                                name="workshop_goals"
-                                placeholder="Session Goals..."
-                                class="form-control o_wysiwyg_loader"
-                                required="This field is required"
-                                rows="6"><t t-esc="track.workshop_goals" /></textarea>
-
-                        </t>
-                        <t t-else="">
-                            <textarea
-                                type="text"
-                                name="workshop_goals"
-                                placeholder="Session Goals..."
-                                class="form-control o_wysiwyg_loader"
-                                required-disabled="True"
-                                disabled="True"
-                                rows="6"><t t-esc="track.workshop_goals" /></textarea>
-                        </t>
+                        <textarea
+                            type="text"
+                            name="workshop_goals"
+                            placeholder="Session Goals..."
+                            class="form-control o_wysiwyg_loader"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                            rows="6"><t t-esc="track.workshop_goals" /></textarea>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
                             for="workshop_schedule"
                             class="col-form-label">Session Program and Schedule</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <textarea
-                                type="text"
-                                name="workshop_schedule"
-                                placeholder="Session Schedule..."
-                                class="form-control o_wysiwyg_loader"
-                                required="This field is required"
-                                rows="6"><t
-                                    t-esc="track.workshop_schedule"
-                                /></textarea>
-                        </t>
-                        <t t-else="">
-                            <textarea
-                                type="text"
-                                name="workshop_schedule"
-                                placeholder="Session Schedule..."
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control o_wysiwyg_loader"
-                                rows="6"><t
-                                    t-esc="track.workshop_schedule"
-                                /></textarea>
-                        </t>
+                        <textarea
+                            type="text"
+                            name="workshop_schedule"
+                            placeholder="Session Schedule..."
+                            class="form-control o_wysiwyg_loader"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                            rows="6"><t t-esc="track.workshop_schedule" /></textarea>
                     </div>
                 </div>
                 <h5>Contract Signee</h5>
@@ -1005,150 +990,83 @@
                         <label
                             for="signee_firstname"
                             class="col-form-label">First Name</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_firstname"
-                                placeholder="First Name"
-                                t-att-value="track.organizer_contact.firstname"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_firstname"
-                                placeholder="First Name"
-                                t-att-value="track.organizer_contact.firstname"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="signee_firstname"
+                            placeholder="First Name"
+                            t-att-value="track.organizer_contact.firstname"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                            class="form-control"
+                            type="text"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="signee_lastname"
                             class="col-form-label">Last Name</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_lastname"
-                                placeholder="Last Name"
-                                t-att-value="track.organizer_contact.lastname"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_lastname"
-                                placeholder="Last Name"
-                                t-att-value="track.organizer_contact.lastname"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="signee_lastname"
+                            placeholder="Last Name"
+                            t-att-value="track.organizer_contact.lastname"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_email" class="col-form-label">Email</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_email"
-                                placeholder="Email"
-                                t-att-value="track.organizer_contact.email"
-                                required="This field is required"
-                                class="form-control"
-                                type="email"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_email"
-                                placeholder="Email"
-                                t-att-value="track.organizer_contact.email"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="email"
-                            />
-                        </t>
+                        <input
+                            name="signee_email"
+                            placeholder="Email"
+                            t-att-value="track.organizer_contact.email"
+                            class="form-control"
+                            type="email"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="signee_phone"
                             class="col-form-label label-optional">Phone</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_phone"
-                                placeholder="Phone"
-                                t-att-value="track.organizer_contact.phone"
-                                class="form-control"
-                                type="tel"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_phone"
-                                placeholder="Phone"
-                                t-att-value="track.organizer_contact.phone"
-                                class="form-control"
-                                disabled="True"
-                                type="tel"
-                            />
-
-                        </t>
+                        <input
+                            name="signee_phone"
+                            placeholder="Phone"
+                            t-att-value="track.organizer_contact.phone"
+                            class="form-control"
+                            type="tel"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="signee_organization"
                             class="col-form-label label-optional">Organization</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer_contact.parent_id.name"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer_contact.parent_id.name"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="signee_organization"
+                            placeholder="Organization"
+                            t-att-value="track.organizer_contact.parent_id.name"
+                            class="form-control"
+                            type="text"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_title" class="col-form-label">Title</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="signee_title"
-                                placeholder="Title"
-                                t-att-value="track.organizer_contact.function"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="signee_title"
-                                placeholder="Title"
-                                t-att-value="track.organizer_contact.function"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="signee_title"
+                            placeholder="Title"
+                            t-att-value="track.organizer_contact.function"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                 </div>
                 <h5>Organization invoice address</h5>
@@ -1157,127 +1075,72 @@
                         <label
                             for="organizer_organization"
                             class="col-form-label">Organization</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="organizer_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer.name"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="organizer_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer.name"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="organizer_organization"
+                            placeholder="Organization"
+                            t-att-value="track.organizer.name"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="organizer_street"
                             class="col-form-label">Street</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="organizer_street"
-                                placeholder="Street"
-                                t-att-value="track.organizer.street"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="organizer_street"
-                                placeholder="Street"
-                                t-att-value="track.organizer.street"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="organizer_street"
+                            placeholder="Street"
+                            t-att-value="track.organizer.street"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_zip" class="col-form-label">Zip</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="organizer_zip"
-                                placeholder="Zip"
-                                t-att-value="track.organizer.zip"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="organizer_zip"
-                                placeholder="Zip"
-                                t-att-value="track.organizer.zip"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="organizer_zip"
+                            placeholder="Zip"
+                            t-att-value="track.organizer.zip"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_city" class="col-form-label">City</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="organizer_city"
-                                placeholder="City"
-                                t-att-value="track.organizer.city"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="organizer_city"
-                                placeholder="City"
-                                t-att-value="track.organizer.city"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="organizer_city"
+                            placeholder="City"
+                            t-att-value="track.organizer.city"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
                             for="organizer_reference"
                             class="col-form-label">Your Reference</label>
-                        <t t-if="track.type and track.type.workshop">
-                            <input
-                                name="organizer_reference"
-                                placeholder="Your Reference"
-                                t-att-value="track.organizer.ref"
-                                required="This field is required"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
-                        <t t-else="">
-                            <input
-                                name="organizer_reference"
-                                placeholder="Your Reference"
-                                t-att-value="track.organizer.ref"
-                                required-disabled="True"
-                                disabled="True"
-                                class="form-control"
-                                type="text"
-                            />
-                        </t>
+                        <input
+                            name="organizer_reference"
+                            placeholder="Your Reference"
+                            t-att-value="track.organizer.ref"
+                            class="form-control"
+                            type="text"
+                            t-att-required="None if not track.type.workshop or not editable else 'required'"
+                            t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                            t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                        />
                     </div>
                 </div>
             </div>
@@ -1311,6 +1174,7 @@
                             name="extra_info"
                             placeholder="Extra Info..."
                             class="form-control o_wysiwyg_loader"
+                            t-att-disabled="None if editable else 'disabled'"
                             rows="6"><t t-esc="track.extra_info" /></textarea>
                     </div>
                 </div>
