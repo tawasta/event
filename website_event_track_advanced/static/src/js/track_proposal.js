@@ -85,23 +85,71 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         });
 
                     // Show warning on modal close
-                    $modal.on("click", ".closefirstmodal", function () {
+                    $modal.on("click", ".warning-close-modal", function () {
                         $button.prop("disabled", false);
-                        $("#modal_event_track_warning").modal("show");
+                        $("#modal_event_track_warning_close_modal").modal("show");
                     });
 
                     // Hide both modals on warning confirm
-                    $modal.on("click", ".confirmclosed", function () {
-                        $button.prop("disabled", false);
-                        $("#modal_event_track_warning").modal("hide");
-                        $("#modal_event_track_application").modal("hide");
-                    });
+                    $modal.on(
+                        "click",
+                        ".warning-confirm-modal_event_track_warning_close_modal",
+                        function () {
+                            $button.prop("disabled", false);
+                            $("#modal_event_track_warning_close_modal").modal("hide");
+                            $("#modal_event_track_application").modal("hide");
+                        }
+                    );
 
                     // Hide warning modal on warning cancel
-                    $modal.on("click", ".cancelclosed", function () {
-                        $button.prop("disabled", false);
-                        $("#modal_event_track_warning").modal("hide");
+                    $modal.on(
+                        "click",
+                        ".warning-cancel-modal_event_track_warning_close_modal",
+                        function () {
+                            $button.prop("disabled", false);
+                            $("#modal_event_track_warning_close_modal").modal("hide");
+                        }
+                    );
+
+                    // Show remove speaker warning modal
+                    $modal.on("click", ".btn-remove-speaker", function () {
+                        $("#modal_event_track_warning_remove_presenter").modal("show");
+                        $("#modal_event_track_warning_remove_presenter").val(
+                            $(this).parent()
+                        );
                     });
+                    // Hide warning modal and remove presenter on warning confirm
+                    $modal.on(
+                        "click",
+                        ".warning-confirm-modal_event_track_warning_remove_presenter",
+                        function () {
+                            $("#modal_event_track_warning_remove_presenter").modal(
+                                "hide"
+                            );
+                            var presenter = $(
+                                "#modal_event_track_warning_remove_presenter"
+                            ).val();
+                            presenter.remove();
+                            var speaker_count =
+                                Number(
+                                    $("#track-application-speaker-input-index").val()
+                                ) - 1;
+                            $("#track-application-speaker-input-index").val(
+                                speaker_count
+                            );
+                        }
+                    );
+                    // Hide warning modal on warning cancel
+                    $modal.on(
+                        "click",
+                        ".warning-cancel-modal_event_track_warning_remove_presenter",
+                        function () {
+                            $button.prop("disabled", false);
+                            $("#modal_event_track_warning_remove_presenter").modal(
+                                "hide"
+                            );
+                        }
+                    );
 
                     // Remove proposal form modal once it's hidden
                     $modal.on("hidden.bs.modal", function (e) {
@@ -170,24 +218,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         row.find(".presenter-span").text("Presenter #" + speaker_count);
                     });
 
-                    // Remove speaker rows
-                    $modal.on("click", ".btn-remove-speaker", function () {
-                        var confirm_message = _t(
-                            "Are you sure you want to delete this speaker?"
-                        );
-
-                        if (window.confirm(confirm_message)) {
-                            $(this).parent().remove();
-                            var speaker_count =
-                                Number(
-                                    $("#track-application-speaker-input-index").val()
-                                ) - 1;
-                            $("#track-application-speaker-input-index").val(
-                                speaker_count
-                            );
-                        }
-                    });
-
                     // Show reload confirmation if modal is open and not submitted
                     window.onbeforeunload = function (e) {
                         if ($modal.hasClass("show") && !submitted) {
@@ -221,7 +251,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 .find("input[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", true);
+                                    $(this).attr("required", "required");
                                 });
                             $("#track-application-workshop-div")
                                 .find("select[disabled]")
@@ -232,7 +262,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 .find("select[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", true);
+                                    $(this).attr("required", "required");
                                 });
                             $("#track-application-workshop-div")
                                 .find("textarea[disabled]")
@@ -247,7 +277,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 .find("textarea[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", true);
+                                    $(this).attr("required", "required");
                                     $(this)
                                         .siblings()
                                         .find(".note-editable")
@@ -264,29 +294,29 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             $("#track-application-workshop-div")
                                 .find("input")
                                 .each(function () {
-                                    $(this).attr("disabled", true);
+                                    $(this).attr("disabled", "disabled");
                                 });
                             $("#track-application-workshop-div")
                                 .find("input[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
+                                    $(this).attr("required-disabled", "disabled");
                                 });
                             $("#track-application-workshop-div")
                                 .find("select")
                                 .each(function () {
-                                    $(this).attr("disabled", true);
+                                    $(this).attr("disabled", "disabled");
                                 });
                             $("#track-application-workshop-div")
                                 .find("select[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
+                                    $(this).attr("required-disabled", "disabled");
                                 });
                             $("#track-application-workshop-div")
                                 .find("textarea")
                                 .each(function () {
-                                    $(this).attr("disabled", true);
+                                    $(this).attr("disabled", "disabled");
                                     $(this)
                                         .siblings()
                                         .find(".note-editable")
@@ -296,7 +326,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 .find("textarea[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", true);
+                                    $(this).attr("required-disabled", "disabled");
                                     $(this)
                                         .siblings()
                                         .find(".note-editable")

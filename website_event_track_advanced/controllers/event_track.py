@@ -53,7 +53,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             .sudo()
             .search([["partner_id", "=", partner_id.id], ["event_id", "=", event.id]])
         )
-        values = {"tracks": tracks, "event": event}
+        values = {"tracks": tracks, "event": event, "main_object": event}
         return values
 
     def _get_event_track_proposal_form_values(self, event, **post):
@@ -76,6 +76,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "track": track,
             "track_languages": track_languages,
             "event": event,
+            "main_object": event,
             "editable": editable,
         }
         return values
