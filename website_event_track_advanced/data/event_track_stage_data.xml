@@ -11,6 +11,7 @@
         </function>
         <record id="website_event_track.event_track_stage0" model="event.track.stage">
             <field name="is_editable" eval="True" />
+            <field name="mail_template_id" ref="mail_template_data_track_draft" />
         </record>
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
