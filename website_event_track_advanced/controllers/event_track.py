@@ -249,6 +249,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             if post.get("track-confirm") and post.get("track-confirm") != ""
             else False
         )
+        track_draft = (
+            True if post.get("track-draft") and post.get("track-draft") != "" else False
+        )
         values.update(
             {
                 "contact_organization": contact_organization_values,
@@ -257,6 +260,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "track": track_values,
                 "speakers": speaker_values,
                 "track_confirm": track_confirm,
+                "track_draft": track_draft,
             }
         )
 
@@ -351,6 +355,32 @@ class EventTrackControllerAdvanced(EventTrackController):
                 speakers.append(speaker_user.partner_id.id)
         return speakers, followers
 
+    def _create_attachments(self, track):
+        # Multiple attachments can be selected,
+        # but **post only gives the first one.
+        # We have to iterate the httprequest to access all sent attachments
+        files_dict = request.httprequest.files.getlist("attachment_ids")
+        for attachment in files_dict:
+            attachment_file = attachment.read()
+            attachment_size = sys.getsizeof(attachment_file)
+            max_size = 30 * 1024 * 1024
+            if attachment_size > max_size:
+                _logger.warning(
+                    _("File %s is too large. Skipping..." % attachment_file.filename)
+                )
+            else:
+                # Create attachment
+                attachment_data = {
+                    "name": attachment.filename,
+                    "store_fname": attachment.filename,
+                    "datas": base64.b64encode(attachment_file),
+                    "description": "Track attachment",
+                    "type": "binary",
+                    "res_model": "event.track",
+                    "res_id": track.id,
+                }
+                request.env["ir.attachment"].sudo().create(attachment_data)
+
     @http.route(
         ["""/event/<model("event.event"):event>/track_proposal"""],
         type="http",
@@ -362,9 +392,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         if not event.can_access_from_current_website():
             raise NotFound()
 
-        print(post)
         values = self._get_event_track_proposal_values(event)
-        print(values)
         return request.render(
             "website_event_track_advanced.event_track_proposal_advanced", values
         )
@@ -422,7 +450,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         # 3. Add contact to organization
         if values.get("contact_organization"):
             organization = self._create_organization(values.get("contact_organization"))
-
             # Add contact to the existing organization
             if partner and partner != organization:
                 partner.parent_id = organization.id
@@ -449,47 +476,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             signee = request.env["res.partner"].sudo().create(values["workshop_signee"])
             values["track"]["organizer_contact"] = signee.id
 
-        # 7. Create/Write the track
-        if values.get("track_id"):
-            track = values.get("track_id")
-            track.sudo().write(values["track"])
-        else:
-            track = request.env["event.track"].sudo().create(values["track"])
-
-        # 8. Create attachments
-        if post.get("attachment_ids"):
-            # Multiple attachments can be selected,
-            # but **post only gives the first one.
-            # We have to iterate the httprequest to access all sent attachments
-            files_dict = request.httprequest.files.getlist("attachment_ids")
-            for attachment in files_dict:
-                attachment_file = attachment.read()
-                attachment_size = sys.getsizeof(attachment_file)
-                max_size = 30 * 1024 * 1024
-                if attachment_size > max_size:
-                    _logger.warning(
-                        _(
-                            "File %s is too large. Skipping..."
-                            % attachment_file.filename
-                        )
-                    )
-                else:
-                    # Create attachment
-                    attachment_data = {
-                        "name": attachment.filename,
-                        "store_fname": attachment.filename,
-                        "datas": base64.b64encode(attachment_file),
-                        "description": "Track attachment",
-                        "type": "binary",
-                        "res_model": "event.track",
-                        "res_id": track.id,
-                    }
-                    request.env["ir.attachment"].sudo().create(attachment_data)
-
-        # 9. Subscribe followers
-        track.sudo().message_subscribe(partner_ids=followers)
-
-        # 11. Check if we want to confirm the track
+        # 7. Check if we want to confirm the track
         if values.get("track_confirm"):
             first_submitted_stage = (
                 request.env["event.track.stage"]
@@ -497,10 +484,28 @@ class EventTrackControllerAdvanced(EventTrackController):
                 .search([("is_submitted", "=", True)], order="sequence")
             )
             if first_submitted_stage:
-                track.sudo().write({"stage_id": first_submitted_stage[0].id})
+                values["track"]["stage_id"] = first_submitted_stage[0].id
 
-        # 12. Return
-        # return request.redirect("/event/%s/track_proposal" % event.id)
+        # 8. Create/Write the track
+        create_track = False
+        if values.get("track_id"):
+            track = values.get("track_id")
+            track.sudo().write(values["track"])
+        else:
+            create_track = True
+            track = request.env["event.track"].sudo().create(values["track"])
+
+        # 9. Subscribe followers
+        track.sudo().message_subscribe(partner_ids=followers)
+        # If track is created, manually trigger change to send mail to new followers
+        if create_track:
+            track.sudo()._message_track_post_template(changes="{'stage_id'}")
+
+        # 9. Create attachments
+        if post.get("attachment_ids"):
+            self._create_attachments(track)
+
+        # 11. Return
         return_vals = self._get_event_track_proposal_values(event)
         return_vals.update({"submitted": True})
         return request.render(
