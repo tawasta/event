@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="portal_my_home_menu_tracks"
+        name="Portal layout : track menu entries"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'track'"
+                t-attf-class="breadcrumb-item #{'active ' if not track else ''}">
+                <a t-if="track" t-attf-href="/my/tracks?{{ keep_query() }}">Tracks</a>
+                <t t-else="">Tracks</t>
+            </li>
+        </xpath>
+    </template>
+    <template
+        id="portal_my_home_tracks"
+        name="Show Tracks"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Tracks</t>
+                <t t-set="url" t-value="'/my/tracks'" />
+                <t t-set="placeholder_count" t-value="'track_count'" />
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_my_tracks" name="My Tracks">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Tracks</t>
+            </t>
+            <t t-call="website_event_track_advanced.event_track_portal_proposal" />
+        </t>
+    </template>
+
+    <template id="event_track_portal_proposal" name="Event Track Portal Proposal">
+        <div class="row">
+            <t t-foreach="tracks" t-as="track">
+                <t t-set="event" t-value="track.event_id" />
+                <t
+                    t-call="website_event_track_advanced.event_track_proposal_template"
+                />
+            </t>
+        </div>
+    </template>
+</odoo>

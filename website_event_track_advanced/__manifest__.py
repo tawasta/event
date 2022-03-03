@@ -29,6 +29,7 @@
     "application": False,
     "installable": True,
     "depends": [
+        "portal",
         "website_event_track",
         "website_event_track_manager_proposal",
         "partner_firstname",
@@ -54,5 +55,6 @@
         "views/event_views.xml",
         "views/event_menus.xml",
         "views/event_track_templates_proposal.xml",
+        "views/portal_templates.xml",
     ],
 }
