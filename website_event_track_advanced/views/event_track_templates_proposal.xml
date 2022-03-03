@@ -175,7 +175,9 @@
                     <input type="hidden" name="track_id" t-att-value="track.id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
+                            <t t-if="editable">
                             <h4 class="modal-title">Proposal</h4>
+                            </t>
                             <button
                                 type="button"
                                 class="close warning-close-modal"
@@ -218,6 +220,7 @@
                                     aria-label="close">×</a>
                                 <i class="fa fa-info-circle" />
                                 <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later.</span>
+                                <t t-esc="editable" />
                             </p>
                             <p class="alert alert-info alert-dismissable">
                                 <a

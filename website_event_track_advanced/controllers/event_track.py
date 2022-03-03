@@ -363,7 +363,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             raise NotFound()
 
         values = self._get_event_track_proposal_values(event)
-        return request.render("website_event_track.event_track_proposal", values)
+        print(values)
+        return request.render(
+            "website_event_track_advanced.event_track_proposal_advanced", values
+        )
 
     @http.route(
         ["""/event/<model("event.event"):event>/track_proposal/form"""],
@@ -379,8 +382,12 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         values = self._get_event_track_proposal_form_values(event, **post)
 
-        return request.env["ir.ui.view"]._render_template(
-            "website_event_track_advanced.event_track_application", values
+        return (
+            request.env["ir.ui.view"]
+            .sudo()
+            ._render_template(
+                "website_event_track_advanced.event_track_application", values
+            )
         )
 
     @http.route(
