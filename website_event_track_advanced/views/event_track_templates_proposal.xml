@@ -4,7 +4,7 @@
         id="event_track_proposal_advanced"
         inherit_id="website_event_track.event_track_proposal">
         <xpath expr="//div[@t-if='not track']" position="replace">
-            <div t-if="not track_submitted">
+            <div t-if="not submitted">
                 <div
                     t-if="event.website_track_proposal or request.env.user.has_group('event.group_event_manager')">
                     <section class="mt-5">
@@ -76,7 +76,30 @@
                 />
                 <input type="hidden" name="track_id" t-att-value="track.id" />
                 <div t-attf-class="card border border-primary">
-                    <div class="card-body" style="min-height: 130px;">
+                    <h4 class="card-header">
+                        <t t-esc="track.name" />
+                        <td class="td-submit">
+                            <t t-set="track_state">badge-default</t>
+                            <t t-if="track.stage_id.is_editable">
+                                <t t-set="track_state">badge-info</t>
+                            </t>
+                            <t t-if="track.stage_id.is_submitted">
+                                <t t-set="track_state">badge-warning</t>
+                            </t>
+                            <t t-if="track.stage_id.is_accepted">
+                                <t t-set="track_state">badge-primary</t>
+                            </t>
+                            <t t-if="track.stage_id.is_done">
+                                <t t-set="track_state">badge-success</t>
+                            </t>
+                            <t t-if="track.stage_id.is_cancel">
+                                <t t-set="track_state">badge-danger</t>
+                            </t>
+                            <span
+                                t-field="track.stage_id"
+                                t-attf-class="badge {{track_state}}"
+                            />
+                        </td>
                         <button
                             type="submit"
                             class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
@@ -86,13 +109,21 @@
                             t-attf-id="#{track.id}">
                             <i class="fa fa-edit" />
                         </button>
-                        <div class="mb-0">
-                            <div>
-                                <span>
-                                    <t t-esc="track.name" />
-                                </span>
-                            </div>
-                        </div>
+                    </h4>
+                    <div class="card-body">
+                        <div
+                            t-field="track.partner_id"
+                            t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
+                        />
+                    </div>
+                    <div class="card-footer">
+                        <button
+                            type="submit"
+                            class="btn btn-link a-submit p-0 no-decoration o_wait_lazy_js"
+                            role="button"
+                            title="Edit this proposal"
+                            aria-label="Edit this proposal"
+                            t-attf-id="#{track.id}">Edit this proposal</button>
                     </div>
                 </div>
             </form>

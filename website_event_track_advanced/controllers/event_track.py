@@ -362,6 +362,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         if not event.can_access_from_current_website():
             raise NotFound()
 
+        print(post)
         values = self._get_event_track_proposal_values(event)
         print(values)
         return request.render(
@@ -499,4 +500,9 @@ class EventTrackControllerAdvanced(EventTrackController):
                 track.sudo().write({"stage_id": first_submitted_stage[0].id})
 
         # 12. Return
-        return request.redirect("/event/%s/track_proposal" % event.id)
+        # return request.redirect("/event/%s/track_proposal" % event.id)
+        return_vals = self._get_event_track_proposal_values(event)
+        return_vals.update({"submitted": True})
+        return request.render(
+            "website_event_track_advanced.event_track_proposal_advanced", return_vals
+        )
