@@ -34,7 +34,96 @@
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Tracks</t>
             </t>
-            <t t-call="website_event_track_advanced.event_track_portal_proposal" />
+            <t t-if="not tracks">
+                <p>There are currently no tracks for your account.</p>
+            </t>
+            <t t-if="tracks" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Track</th>
+                        <th>Event</th>
+                        <th>Event date</th>
+                        <th>Contact Person</th>
+                        <th>Stage</th>
+                        <th />
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="tracks" t-as="track">
+                        <t t-set="event" t-value="track.event_id" />
+                        <tr>
+                            <td>
+                                <span t-field="track.name" />
+                            </td>
+                            <td>
+                                <a
+                                    t-attf-href="/event/{{event.id}}/register"
+                                    t-att-title="event.name">
+                                    <t t-esc="event.name" t-if="event.name != '/'" />
+                                </a>
+                            </td>
+                            <td>
+                               <span t-field="event.date_begin" /> - <span
+                                    t-field="event.date_end"
+                                />
+                            </td>
+                            <td>
+                                <span t-field="track.partner_id.name" />
+                            </td>
+                            <td>
+                                <t t-set="track_state">badge-default</t>
+                                <t t-if="track.stage_id.is_editable">
+                                    <t t-set="track_state">badge-info</t>
+                                </t>
+                                <t t-if="track.stage_id.is_submitted">
+                                    <t t-set="track_state">badge-warning</t>
+                                </t>
+                                <t t-if="track.stage_id.is_accepted">
+                                    <t t-set="track_state">badge-primary</t>
+                                </t>
+                                <t t-if="track.stage_id.is_done">
+                                    <t t-set="track_state">badge-success</t>
+                                </t>
+                                <t t-if="track.stage_id.is_cancel">
+                                    <t t-set="track_state">badge-danger</t>
+                                </t>
+                                <span
+                                    t-field="track.stage_id"
+                                    t-attf-class="badge badge-pill {{track_state}}"
+                                />
+                            </td>
+                            <td>
+                                <form
+                                    id="track_proposal"
+                                    t-attf-action="/event/#{slug(event)}/track_proposal/form"
+                                    method="post"
+                                    itemscope="itemscope"
+                                    itemprop="offers"
+                                    itemtype="http://schema.org/AggregateOffer">
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        t-att-value="request.csrf_token()"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="track_id"
+                                        t-att-value="track.id"
+                                    />
+                                    <button
+                                        type="submit"
+                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
+                                        role="button"
+                                        title="Edit this proposal"
+                                        aria-label="Edit this proposal"
+                                        t-attf-id="#{track.id}">View/Edit</button>
+                                </form>
+                            </td>
+                         </tr>
+
+                    </t>
+                </tbody>
+            </t>
         </t>
     </template>
 

@@ -57,6 +57,7 @@
                         <th>Event Ticket</th>
                         <th>Booker</th>
                         <th>State</th>
+                        <th />
                     </tr>
                 </thead>
                 <tbody>
