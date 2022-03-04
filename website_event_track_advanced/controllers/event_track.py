@@ -78,6 +78,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "event": event,
             "main_object": event,
             "editable": editable,
+            "partner": partner_id,
         }
         return values
 
@@ -281,8 +282,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         :param dict partner_values: dictionary of values for partner
         :return res.users user: new or existing user
         """
-        print("CREATE USER")
-        print(partner_values)
         user = (
             request.env["res.users"]
             .sudo()
@@ -386,9 +385,11 @@ class EventTrackControllerAdvanced(EventTrackController):
         return speakers, followers
 
     def _create_attachments(self, track):
-        # Multiple attachments can be selected,
-        # but **post only gives the first one.
-        # We have to iterate the httprequest to access all sent attachments
+        """Multiple attachments can be selected, but **post only gives the first one.
+        We have to iterate the httprequest to access all sent attachments
+
+        :param event.track track: track to save attachment to
+        """
         files_dict = request.httprequest.files.getlist("attachment_ids")
         for attachment in files_dict:
             attachment_file = attachment.read()
@@ -531,7 +532,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         if create_track:
             track.sudo()._message_track_post_template(changes="{'stage_id'}")
 
-        # 9. Create attachments
+        # 10. Create attachments
         if post.get("attachment_ids"):
             self._create_attachments(track)
 

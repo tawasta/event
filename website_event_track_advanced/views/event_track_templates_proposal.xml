@@ -203,6 +203,12 @@
                         name="csrf_token"
                         t-att-value="request.csrf_token(time_limit=False)"
                     />
+                    <input
+                        type="hidden"
+                        id="editable"
+                        name="editable"
+                        t-att-value="editable"
+                    />
                     <input type="hidden" name="track_id" t-att-value="track.id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
@@ -572,7 +578,7 @@
                         <input
                             name="contact_firstname"
                             placeholder="First Name"
-                            t-att-value="track.partner_id.firstname"
+                            t-att-value="track.partner_id.firstname or partner.firstname"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -586,7 +592,7 @@
                         <input
                             name="contact_lastname"
                             placeholder="Last Name"
-                            t-att-value="track.partner_id.lastname"
+                            t-att-value="track.partner_id.lastname or partner.lastname"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -598,7 +604,7 @@
                         <input
                             name="contact_email"
                             placeholder="Email"
-                            t-att-value="track.partner_id.email"
+                            t-att-value="track.partner_id.email or partner.email"
                             class="form-control"
                             type="email"
                             t-att-required="None if not editable else 'required'"
@@ -613,7 +619,7 @@
                         <input
                             name="contact_phone"
                             placeholder="Phone"
-                            t-att-value="track.partner_id.phone"
+                            t-att-value="track.partner_id.phone or partner.phone"
                             class="form-control"
                             type="tel"
                             t-att-disabled="None if editable else 'disabled'"
@@ -626,7 +632,7 @@
                         <input
                             name="contact_organization"
                             placeholder="Organization"
-                            t-att-value="track.partner_id.parent_id.name"
+                            t-att-value="track.partner_id.parent_id.name or partner.parent_id.name"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -638,7 +644,7 @@
                         <input
                             name="contact_title"
                             placeholder="Title"
-                            t-att-value="track.partner_id.function"
+                            t-att-value="track.partner_id.function or partner.function"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
