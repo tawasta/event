@@ -78,6 +78,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "event": event,
             "main_object": event,
             "editable": editable,
+            "partner": partner_id,
         }
         return values
 
@@ -126,6 +127,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         values = {}
         # Contact
         contact_values = {
+            "id": post.get("contact_id"),
             "lastname": post.get("contact_lastname"),
             "firstname": post.get("contact_firstname"),
             "name": self._get_name(
@@ -135,10 +137,12 @@ class EventTrackControllerAdvanced(EventTrackController):
             "email": post.get("contact_email"),
             "phone": post.get("contact_phone"),
             "function": post.get("contact_title"),
+            "company_type": "person",
         }
         contact_organization_values = {
             "name": post.get("contact_organization"),
             "type": "invoice",
+            "company_type": "company",
         }
 
         # Application type
@@ -198,6 +202,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             for speaker_index in range(1, int(post.get("speakers_input_index")) + 1):
                 speaker_values.append(
                     {
+                        "id": post.get("speaker_id[%s]" % speaker_index),
                         "lastname": post.get("speaker_lastname[%s]" % speaker_index),
                         "firstname": post.get("speaker_firstname[%s]" % speaker_index),
                         "name": self._get_name(
@@ -210,6 +215,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                         ),
                         "function": post.get("speaker_title[%s]" % speaker_index),
                         "phone": post.get("speaker_phone[%s]" % speaker_index),
+                        "company_type": "person",
                     }
                 )
 
@@ -227,8 +233,10 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "city": post.get("organizer_city"),
                 "ref": post.get("organizer_reference"),
                 "type": "invoice",
+                "company_type": "company",
             }
             workshop_signee_values = {
+                "id": post.get("signee_id"),
                 "lastname": post.get("signee_lastname"),
                 "firstname": post.get("signee_firstname"),
                 "name": self._get_name(
@@ -237,6 +245,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "email": post.get("signee_email"),
                 "phone": post.get("signee_phone"),
                 "function": post.get("signee_title"),
+                "company_type": "person",
             }
             values.update(
                 {
@@ -267,7 +276,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         return values
 
     def _create_signup_user(self, partner_values):
-        """Find existing user by email and update it or create a new user
+        """Find existing user by email. Update user if it is done by the user.
+        If no user exists. Create a new user. Otherwise return existing user.
 
         :param dict partner_values: dictionary of values for partner
         :return res.users user: new or existing user
@@ -277,30 +287,28 @@ class EventTrackControllerAdvanced(EventTrackController):
             .sudo()
             .search([("login", "=ilike", partner_values.get("email"))])
         )
-
-        if not user:
+        # Only write values to user if it is done by the user.
+        if user.id == request.env.user.id:
+            user.sudo().write(partner_values)
+            _logger.info(_("Updated user values for %s." % user))
+        # If no user exists. Create a new user.
+        elif not user:
             if not partner_values.get("login") and partner_values.get("email"):
                 partner_values["login"] = partner_values.get("email")
-
             try:
                 user = (
                     request.env["res.users"].sudo()._signup_create_user(partner_values)
                 )
+                _logger.info(_("Created a new user %s." % user))
             except SignupError:
                 _logger.warning(_("Signup is not allowed for uninvited users."))
                 return False
-
             try:
                 user.with_context({"create_user": True}).action_reset_password()
             except MailDeliveryException:
                 _logger.warning(
                     _("Could not deliver mail to %s" % partner_values.get("email"))
                 )
-            except SignupError:
-                _logger.warning(_("Signup is not allowed for uninvited users"))
-                return False
-        else:
-            user.sudo().write(partner_values)
 
         return user
 
@@ -325,10 +333,41 @@ class EventTrackControllerAdvanced(EventTrackController):
         if not organization:
             organization_values["is_company"] = True
             organization = request.env["res.partner"].sudo().create(organization_values)
+            _logger.info(_("Created a new organization %s." % organization))
         else:
             organization.sudo().write(organization_values)
+            _logger.info(_("Updated organization values for %s." % organization))
 
         return organization
+
+    def _create_partner(self, partner_values):
+        """Create or update partner
+
+        :param dict partner_values: dictionary of values for partner
+        :return res.partner partner: new or existing partner
+        """
+        existing_partner = (
+            request.env["res.partner"]
+            .sudo()
+            .search([("id", "=", partner_values.get("id"))])
+        )
+        # Create or get existing organization
+        if partner_values.get("organization"):
+            organization = self._create_organization(
+                {"name": partner_values.get("organization")}
+            )
+            del partner_values["organization"]
+            if organization:
+                partner_values["parent_id"] = organization.id
+        if existing_partner:
+            existing_partner.sudo().write(partner_values)
+            partner = existing_partner
+            _logger.info(_("Updated partner values for %s." % existing_partner))
+        else:
+            partner = request.env["res.partner"].sudo().create(partner_values)
+            _logger.info(_("Created a new partner %s." % partner))
+
+        return partner
 
     def _create_speakers(self, speaker_values, followers):
         """Create or update each speaker and add them as followers and speakers
@@ -340,25 +379,17 @@ class EventTrackControllerAdvanced(EventTrackController):
         """
         speakers = list()
         for speaker in speaker_values:
-            # Create or get existing organization
-            if speaker.get("organization"):
-                organization = self._create_organization(
-                    {"name": speaker.get("organization")}
-                )
-                del speaker["organization"]
-                if organization:
-                    speaker["parent_id"] = organization.id
-            # Create or get existing speaker user
-            speaker_user = self._create_signup_user(speaker)
-            if speaker_user:
-                followers.append(speaker_user.partner_id.id)
-                speakers.append(speaker_user.partner_id.id)
+            partner = self._create_partner(speaker)
+            followers.append(partner.id)
+            speakers.append(partner.id)
         return speakers, followers
 
     def _create_attachments(self, track):
-        # Multiple attachments can be selected,
-        # but **post only gives the first one.
-        # We have to iterate the httprequest to access all sent attachments
+        """Multiple attachments can be selected, but **post only gives the first one.
+        We have to iterate the httprequest to access all sent attachments
+
+        :param event.track track: track to save attachment to
+        """
         files_dict = request.httprequest.files.getlist("attachment_ids")
         for attachment in files_dict:
             attachment_file = attachment.read()
@@ -473,7 +504,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             if workshop_organizer:
                 values["workshop_signee"]["parent_id"] = workshop_organizer.id
 
-            signee = request.env["res.partner"].sudo().create(values["workshop_signee"])
+            signee = self._create_partner(values["workshop_signee"])
             values["track"]["organizer_contact"] = signee.id
 
         # 7. Check if we want to confirm the track
@@ -501,7 +532,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         if create_track:
             track.sudo()._message_track_post_template(changes="{'stage_id'}")
 
-        # 9. Create attachments
+        # 10. Create attachments
         if post.get("attachment_ids"):
             self._create_attachments(track)
 

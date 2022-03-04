@@ -1,0 +1,2226 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_track_advanced
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-04 17:07+0000\n"
+"PO-Revision-Date: 2022-03-04 17:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_track_advanced
+#: model:mail.template,subject:website_event_track_advanced.mail_template_data_track_draft
+msgid ""
+"\n"
+"                ${object.event_id.name} - Your presentation has been received\n"
+"            "
+msgstr ""
+"\n"
+"                ${object.event_id.name} - Esityksesi on vastaanotettu\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model:mail.template,subject:website_event_track_advanced.mail_template_data_track_refused
+msgid ""
+"\n"
+"                ${object.event_id.name} - Your presentation was not selected to the programme\n"
+"            "
+msgstr ""
+"\n"
+"                ${object.event_id.name} - Esitystäsi ei valittu tapahtuman ohjelmaan\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model:mail.template,subject:website_event_track_advanced.mail_template_data_track_announced
+msgid ""
+"\n"
+"                ${object.event_id.name} - Your presentation was selected to the programme\n"
+"            "
+msgstr ""
+"\n"
+"                ${object.event_id.name} - Esityksesi valittiin tapahtuman ohjelmaan\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                <span>By clicking <strong>\"Save and Submit\"</strong> the proposal shall be saved and submitted for review.</span>\n"
+"                                <br/>\n"
+"                                <span>Please note that a completed proposal can no longer be edited.</span>"
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                <span>Klikkaamalla <strong>\"Tallenna ja lähetä\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi.</span>\n"
+"                                <br/>\n"
+"                                <span>Huomioi, että valmista ehdotusta ei voi enää muokata.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later.</span>"
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                <span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tallennetaan myöhempää muokkaamista varten.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "<span class=\"alert-message\">List the details of all presenters</span>"
+msgstr "<span class=\"alert-message\">Listaa kaikkien esittäjien tiedot</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid ""
+"<span>Please enter any special arrangements you wish for your presentation in the additional details section.</span>\n"
+"                    <br/>\n"
+"                    <span>For example, any wishes for presentation technology, premises, furniture, presentation time, etc.</span>"
+msgstr ""
+"<span>Ole hyvä ja täytä lisätietoihin toiveesi esityksen erityisjärjestelyistä.</span>\n"
+"                    <br/>\n"
+"                    <span>Esimerkiksi toiveet esitystekniikkaan, tiloihin, kalustukseen, esityksen ajankohtaan tms. liittyen.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "<span>Please enter three keywords separated by commas.</span>"
+msgstr "<span>Ole hyvä ja syötä kolme avainsanaa pilkulla erotettuna.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid ""
+"<span>Select your presentation’s primary target group.</span>\n"
+"                    <br/>\n"
+"                    <span>You can enter specifications of your presentation’s target group in the target group details.</span>"
+msgstr ""
+"<span>Valitse esityksesi ensisijainen kohderyhmä, vaikka esityksesi sopisikin useammalle eri kohderyhmälle.</span>\n"
+"                    <br/>\n"
+"                    <span>Voit kirjoittaa kohderyhmän tietoihin tarkennuksia esityksen kohderyhmästä.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid ""
+"<span>You can fill this if you want to hold a webinar before the actual "
+"event.</span>"
+msgstr ""
+"<span>Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista "
+"tapahtumaa.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
+msgid "<strong>Contact:</strong>"
+msgstr "<strong>Kontakti:</strong>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
+msgid "<strong>Presenters:</strong>"
+msgstr "<strong>Esiintyjät:</strong>"
+
+#. module: website_event_track_advanced
+#: model:mail.template,body_html:website_event_track_advanced.mail_template_data_track_draft
+msgid ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Your proposal\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            View Proposal\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Dear ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            % if 'website_url':\n"
+"                                                            <p>\n"
+"                                                                The proposal can be edited in\n"
+"                                                                <a href=\"${website_url}/my/tracks\" style=\"color:#875A7B;\">My Proposals</a>.\n"
+"                                                            </p>\n"
+"                                                            % endif\n"
+"                                                            <p>\n"
+"                                                                Proposals that are left to \"Draft\" stage will not be reviewed.\n"
+"                                                            </p>\n"
+"\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Thank you,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                The ${object.event_id.name} Team\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Sent by\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+msgstr ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Esitysehdotuksesi\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            Näytä ehdotuksesi\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Hyvä ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Kiitos esitysehdotuksestasi <strong>${object.name}</strong> tapahtumaan ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            % if 'website_url':\n"
+"                                                            <p>\n"
+"                                                                Voit muokata ehdotustasi\n"
+"                                                                <a href=\"${website_url}/my/tracks\" style=\"color:#875A7B;\">Minun Ehdotuksista</a>.\n"
+"                                                            </p>\n"
+"                                                            % endif\n"
+"                                                            <p>\n"
+"                                                                Esitysehdotukset, jotka jäävät tilaan \"Ehdotus\" jätetään arvioimatta.\n"
+"                                                            </p>\n"
+"\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Kiitos,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                Tapahtuman ${object.event_id.name} tiimi\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Lähettäjä\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model:mail.template,body_html:website_event_track_advanced.mail_template_data_track_refused
+msgid ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Your proposal\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            View Proposal\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Dear ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                Unfortunately your proposal <strong>${object.name}</strong> was not selected to the ${object.event_id.name} programme.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <p>\n"
+"                                                                If you have any questions, please let us know.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Thank you,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                The ${object.event_id.name} Team\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Sent by\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+msgstr ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Esitysehdotuksesi\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            Näytä ehdotus\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Hyvä ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Kiitos esitysehdotuksestasi <strong>${object.name}</strong> tapahtumaan ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                Ikivä kyllä esitysehdotustasi <strong>${object.name}</strong> ei valittu tapahtuman ${object.event_id.name} ohjelmaan.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <p>\n"
+"                                                                Jos sinulla on kysyttävää aiheesta, ota meihin yhteyttä.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Kiitos,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                Tapahtuman ${object.event_id.name} Tiimi\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Lähettäjä\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model:mail.template,body_html:website_event_track_advanced.mail_template_data_track_announced
+msgid ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Your proposal\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            View Proposal\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Dear ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                Your proposal has been <strong>approved</strong> to the ${object.event_id.name} programme. Congratulations!\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                The proposal had an average rating of <strong>${object.rating_avg}</strong> with scale of 1-5.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <p>Please take care of these:</p>\n"
+"                                                            <ul>\n"
+"                                                                <li>Check and edit your presentation contents. The final contents will be used in conference handbill and publications.</li>\n"
+"                                                                <li>Confirm the presentation after you have done all the necessary edits.</li>\n"
+"                                                                <li>Unconfirmed presentations will be left out from conference programme.</li>\n"
+"                                                            </ul>\n"
+"                                                            % if 'website_url':\n"
+"                                                            <br/>\n"
+"                                                            <p>\n"
+"                                                                The proposal can be edited in\n"
+"                                                                <a href=\"${website_url}/my/tracks\" style=\"color:#875A7B;\">My Proposals</a>.\n"
+"                                                            </p>\n"
+"                                                            % endif\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Welcome to the conference,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                The ${object.event_id.name} Team\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Sent by\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+msgstr ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"                    <tr>\n"
+"                        <td align=\"center\">\n"
+"                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')\n"
+"                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"                                <tbody>\n"
+"                                    <!-- HEADER -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"middle\">\n"
+"                                                        <span style=\"font-size: 10px;\">\n"
+"                                                            Esitysehdotuksesi\n"
+"                                                        </span>\n"
+"                                                        <br/>\n"
+"                                                        <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                                                            ${object.name}\n"
+"                                                        </span>\n"
+"                                                    </td>\n"
+"                                                    <td valign=\"middle\" align=\"right\">\n"
+"                                                        % if website_url\n"
+"                                                        <a href=\"${website_url}/my/tracks\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\">\n"
+"                                                            Näytä ehdotus\n"
+"                                                        </a>\n"
+"                                                        % else\n"
+"                                                        <img src=\"${'/logo.png?company=%s' % object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${'%s' % object.company_id.name}\"/>\n"
+"                                                        % endif\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td colspan=\"2\" style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                    <!-- CONTENT -->\n"
+"                                    <tr>\n"
+"                                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"                                                <tr>\n"
+"                                                    <td valign=\"top\" style=\"font-size: 14px;\">\n"
+"                                                        <div>\n"
+"                                                            <p>\n"
+"                                                                Hyvä ${object.partner_id.name},\n"
+"                                                            </p><br/>\n"
+"                                                            <p>\n"
+"                                                                Kiitos esitysehdotuksestasi <strong>${object.name}</strong> tapahtumaan ${object.event_id.name}.\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                Ehdotuksesi on <strong>hyväksytty</strong> tapahtuman ${object.event_id.name} ohjelmaan. Onnittelut!\n"
+"                                                            </p>\n"
+"                                                            <p>\n"
+"                                                                Ehdotuksesi arvioinnin keskiarvo oli <strong>${object.rating_avg}</strong> asteikolla 1-5.\n"
+"                                                            </p>\n"
+"                                                            <br/>\n"
+"                                                            <p>Huolehdi näistä:</p>\n"
+"                                                            <ul>\n"
+"                                                                <li>Tarkasta ja muokkaa esityksen sisältö. Lopullista sisältöä voidaan käyttää tapahtuman käsiohjelmassa ja julkaisuissa.</li>\n"
+"                                                                <li>Vahvista esitys kun olet tehnyt tarvittavat muutokset.</li>\n"
+"                                                                <li>Vahvistamattomat esitykset jätetään pois tapahtuman ohjelmasta.</li>\n"
+"                                                            </ul>\n"
+"                                                            % if 'website_url':\n"
+"                                                            <br/>\n"
+"                                                            <p>\n"
+"                                                                Voit muokata ehdotustasi\n"
+"                                                                <a href=\"${website_url}/my/tracks\" style=\"color:#875A7B;\">Minun Ehdotuksista</a>.\n"
+"                                                            </p>\n"
+"                                                            % endif\n"
+"                                                            <br/>\n"
+"                                                            <div>\n"
+"                                                                Tervetuloa tapahtumaan,<br/>\n"
+"                                                                <span style=\"color: #454748;\">\n"
+"                                                                -- <br/>\n"
+"                                                                Tapahtuman ${object.event_id.name} tiimi\n"
+"                                                                </span>\n"
+"                                                            </div>\n"
+"                                                        </div>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                                <tr>\n"
+"                                                    <td style=\"text-align:center;\">\n"
+"                                                        <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                                                    </td>\n"
+"                                                </tr>\n"
+"                                            </table>\n"
+"                                        </td>\n"
+"                                    </tr>\n"
+"                                </tbody>\n"
+"                            </table>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    <tr>\n"
+"                        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"                            % if object.company_id\n"
+"                            <table width=\"590\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
+"                                <tr>\n"
+"                                    <td style=\"text-align: center; font-size: 14px;\">\n"
+"                                        Lähettäjä\n"
+"                                        <a target=\"_blank\" href=\"${object.company_id.website}\" style=\"color: #875A7B;\">\n"
+"                                            ${object.company_id.name}\n"
+"                                        </a>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                            % endif\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </table>\n"
+"            "
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__active
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__active
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__active
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__active
+msgid "Active"
+msgstr "Aktiivinen"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Add Attachments (optional)"
+msgstr "Lisää liitteitä (valinnainen)"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Add Presenter <i class=\"fa fa-user\"/>"
+msgstr "Lisää esiintyjä <i class=\"fa fa-user\"/>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid "Additional details"
+msgstr "Lisätiedot"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_advanced
+msgid "Application"
+msgstr "Ehdotus"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application Content..."
+msgstr "Ehdotuksen sisältö..."
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__application_file
+msgid "Application File"
+msgstr "Ehdotuksen tiedosto"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application Info"
+msgstr "Ehdotuksen tiedot"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Application Title"
+msgstr "Ehdotuksen otsikko"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
+msgid "Application Type"
+msgstr "Ehdotuksen tyyppi"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__application_file_filename
+msgid "Application filename"
+msgstr "Ehdotuksen tiedostonnimi"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_advanced
+msgid "Applications"
+msgstr "Ehdotukset"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
+msgid "Archived"
+msgstr "Arkistoitu"
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.act_event_track_assign
+#: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_assign
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
+msgid "Assign Reviewers"
+msgstr "Määritä arvioijat"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__assign_equally
+msgid "Assign equally"
+msgstr "Määritä tasapuolisesti"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_assign_wizard__reassign_assigned
+msgid "Assign the group even if the presentation already has a review group"
+msgstr "Määritä ryhmä vaikka esityksellä olisi jo arviointiryhmä"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
+msgid "Assign tracks"
+msgstr "Määritä esitykset"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__attachment_ids
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Attachments"
+msgstr "Liitteet"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__attendable
+msgid "Attendable"
+msgstr "Osallistuttava"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__rating_avg
+msgid "Average rating"
+msgstr "Keskiarvo"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Avoid using identifiable information (name, organisation, project)."
+msgstr "Vältä käyttämästä tunnistetietoja (nimi, organisaatio, projekti)."
+
+#. module: website_event_track_advanced
+#: model:event.track.type,name:website_event_track_advanced.event_track_type_break
+msgid "Break"
+msgstr "Tauko"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"By clicking \"Save and Submit\" the proposal shall be saved and submitted "
+"for review. Please note that a completed proposal can no longer be edited."
+msgstr ""
+"Klikkaamalla \"Tallenna ja Lähetä\" ehdotus tallennetaan ja lähetetään "
+"arvioitavaksi. Huomioi että valmista ehdotusta ei voi enää muokata."
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"By clicking \"Save as Draft\" the proposal shall be saved and can be edited "
+"later."
+msgstr ""
+"Klikkaamalla \"Tallenna luonnoksena\" ehdotus tallennetaan myöhempää muokkaamista "
+"varten."
+
+#. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_configuration
+msgid "CFP Configuration"
+msgstr "CFP Asetukset"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__chairperson_id
+msgid "Chairperson"
+msgstr "Puheenjohtaja"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "City"
+msgstr "Kaupunki"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning
+msgid "Close"
+msgstr "Sulje"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_close_modal
+msgid "Close Proposal"
+msgstr "Sulje ehdotus"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__code
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__code
+msgid "Code"
+msgstr "Koodi"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__comment
+msgid "Comment"
+msgstr "Kommentti"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning
+msgid "Confirm"
+msgstr "Vahvista"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
+msgid "Conflicts"
+msgstr "Konfliktit"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__partner_id
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_search_advanced
+msgid "Contact"
+msgstr "Kontakti"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Contact Person"
+msgstr "Yhteyshenkilö"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Content of the Presentation"
+msgstr "Esityksen sisältö"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Contract Signee"
+msgstr "Sopimuksen allekirjoittaja"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Could not create organization (missing name)"
+msgstr "Organisaatiota ei voitu luoda (puuttuva nimi)"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Could not deliver mail to %s"
+msgstr "Sähköpostia ei voitu toimittaa käyttäjälle %s"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Created a new organization %s."
+msgstr "Uusi organisaatio %s luotu."
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Created a new partner %s."
+msgstr "Uusi kumppani %s luotu."
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Created a new user %s."
+msgstr "Uusi käyttäjä luotu %s."
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__create_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__create_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__description
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__description
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
+msgid "Description"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Edit this proposal"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__email
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Email"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Error occured during Event Track Tag creation for keyword: %s."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_event
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__event_id
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_type
+msgid "Event Template"
+msgstr "Tapahtuman mallipohja"
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__event_track
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__event_tracks
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_grade_tree
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_tree
+msgid "Event Track"
+msgstr "Tapahtuman esitys"
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_location
+msgid "Event Track Location"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_rating
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_form
+msgid "Event Track Rating"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_rating_grade
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_grade_form
+msgid "Event Track Rating Grade"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_reviewer
+msgid "Event Track Reviewer"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_review_group
+msgid "Event Track Reviewer Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_stage
+msgid "Event Track Stage"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_tag
+msgid "Event Track Tag"
+msgstr "Tapahtuman esityksen tunniste"
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_target_group
+msgid "Event Track Target Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_type
+msgid "Event Track Type"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__track_types_ids
+msgid "Event Track Types"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__event_tracks
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__event_tracks
+msgid "Event Tracks"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Event date"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__event_over
+msgid "Event over"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__track_types_ids
+msgid "Event track types"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__external_registration
+msgid "External registration link"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid "Extra Info"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+msgid "Extra Info..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Extra info"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_materials
+msgid "Extra materials"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track__extra_materials
+msgid "Extra materials (links etc.) that are shown in agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "File %s is too large. Skipping..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_advanced
+msgid "Fill this form to propose your talk."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "First Name"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Friday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
+msgid "Generate Breaks"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_goals
+msgid "Goals"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__grade
+msgid "Grade"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
+msgid "Group By"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track__is_reviewer
+msgid "Helper field to check if current user is a reviewer."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_stage__is_null
+msgid "Helper field to trigger stage change."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "I would like to hold a webinar"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__attendable
+msgid ""
+"If the presentation type can be attended. Unattendable types will be muted "
+"in the agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_assign_wizard__assign_equally
+msgid ""
+"If un-checked, the assignation will use a \"true\" randomization. You "
+"probably do not want to use this, as it will most likely cause an unequal "
+"assignation."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Integer expected for search: '%s'}"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__is_reviewer
+msgid "Is reviewer"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__keywords
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Keywords"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__language
+msgid "Language"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Language of the Presentation"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Last Name"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__write_uid
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__write_date
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track__workshop_fee
+msgid "Leave empty for free workshops"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__location_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__location_ids
+msgid "Locations"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_advanced
+msgid "Manage existing proposals or propose a new talk"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Max Participants"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_participants
+msgid "Max participants"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Monday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__name
+msgid "Name"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template_new
+msgid "New Proposal"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Organization"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Organization invoice address"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__organizer
+msgid "Organizer"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__organizer_contact
+msgid "Organizer contact"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__overlapping_chairperson_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__overlapping_chairperson_track_ids
+msgid "Overlapping chairpersons"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__overlapping_location_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__overlapping_location_track_ids
+msgid "Overlapping locations"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Overlapping presentations"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__overlapping_speaker_track_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__overlapping_speaker_track_ids
+msgid "Overlapping speakers"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Participation Fee"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__partner_string
+msgid "Partner"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__phone
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Phone"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__description_plain
+msgid "Plain description"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_materials_plain
+msgid "Plain extra_materials"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
+msgid "Please choose an application type."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+msgid "Please fill the contact persons information here."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.constraint,message:website_event_track_advanced.constraint_event_track_type_code
+msgid "Please use an unique code"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Posted values: %s"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__webinar
+msgid "Pre-event webinar"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__webinar_info
+msgid "Pre-event webinar info"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Presentation Title"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Presentation in video format (link to e.g. YouTube)"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+msgid "Presentation’s Contact Person"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Presenter #"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Presenters"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid "Proposal"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__is_editable
+msgid "Proposal is editable"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__is_null
+msgid "Proposal is null"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__is_submitted
+msgid "Proposal is submitted"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__assign_random
+msgid "Random assign"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_assign_wizard__assign_random
+msgid "Randomize review groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__ratings_done_percent
+msgid "Rated %"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__grade_id
+msgid "Rating"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
+msgid "Rating:"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__ratings
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Ratings"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__ratings_count
+msgid "Ratings Count"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__ratings_done_count
+msgid "Ratings done"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__ratings_todo_count
+msgid "Ratings to do"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__reassign_assigned
+msgid "Reassign assigned"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "Remove Attachments"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_remove_presenter
+msgid "Remove Presenter"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+msgid "Remove speaker"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_remove_presenter
+msgid "Remove this presenter, are you sure?"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__review_group
+msgid "Review Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__review_group
+msgid "Review group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__review_group_ids
+msgid "Review groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__reviewer_id
+msgid "Reviewer"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_track_reviewer.py:0
+#, python-format
+msgid "Reviewer for user %s already exists."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__reviewers
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__reviewers
+msgid "Reviewers"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Saturday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid "Save and Submit"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid "Save as Draft"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_schedule
+msgid "Schedule"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__scheduled_track_ids
+msgid "Scheduled tracks"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_grade_search
+msgid "Search Track Rating Grades"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_rating_search
+msgid "Search Track Ratings"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_review_group_search
+msgid "Search Track Review Groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_reviewer_search
+msgid "Search Track Reviewers"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
+msgid "Select..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Separate keywords with commas..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__sequence
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Session"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Session Goals"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Session Goals..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Session Program and Schedule"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Session Schedule..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid ""
+"Session information and invoicing address.<br/>\n"
+"                    The contract will be sent for the signee."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__show_track_twitter_hashtags
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__show_track_twitter_hashtags
+msgid "Show Twitter hashtag"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_event__show_track_twitter_hashtags
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_type__show_track_twitter_hashtags
+msgid "Show Twitter hashtag in agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__show_in_agenda
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_agenda
+msgid "Show in agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_proposals
+msgid "Show in proposals"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__show_in_proposals
+msgid "Show in proposals form"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_location__show_in_agenda
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__show_in_agenda
+msgid "Show in website agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__show_in_agenda
+msgid "Shown in agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Signup is not allowed for uninvited users."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__speaker_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__speakers_string
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Speakers"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Stage"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Street"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Sunday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__name
+msgid "Tag Name"
+msgstr "Tunnisteen nimi"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Target Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Target Group Details"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Target Group Info..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__target_group_ids
+msgid "Target Groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group
+msgid "Target group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group_info
+msgid "Target group info"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__target_group_ids
+msgid "Target groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track__keywords
+msgid "Text keywords"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "There are currently no tracks for your account."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "This part of the application is disclosed to the reviewers."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_stage__is_editable
+msgid "This proposal can be edited by the contact person."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_stage__is_submitted
+msgid "This proposal is submitted."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Thursday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Title"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__track_ids
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Track"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_type_form_track
+msgid "Track Locations"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_rating_grade_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_rating_grade_menu
+msgid "Track Rating Grades"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_rating_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_rating_menu
+msgid "Track Ratings"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_review_group_form
+msgid "Track Review Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_review_group_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_review_group_menu
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_review_group_tree
+msgid "Track Review Groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_reviewer_form
+msgid "Track Reviewer"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_reviewers_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_reviewers_menu
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_reviewer_tree
+msgid "Track Reviewers"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_reviews
+msgid "Track Reviews"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_target_group_form
+msgid "Track Target Group"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_target_group_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_target_group_menu
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_target_group_form
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_target_group_tree
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_type_form_track
+msgid "Track Target Groups"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_type_form
+msgid "Track Type"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.act_window,name:website_event_track_advanced.event_track_type_action
+#: model:ir.ui.menu,name:website_event_track_advanced.event_track_type_menu
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_type_tree
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_type_form_track
+msgid "Track Types"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__video_url
+msgid "Track as a video (link to e.g. Youtube or Vimeo)"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__track_count
+msgid "Track count"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__track_count_agenda
+msgid "Track count in agenda"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__grade_id
+msgid "Track grade"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:mail.template,name:website_event_track_advanced.mail_template_data_track_announced
+msgid "Track: Announced"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:mail.template,name:website_event_track_advanced.mail_template_data_track_draft
+msgid "Track: Draft"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:mail.template,name:website_event_track_advanced.mail_template_data_track_refused
+msgid "Track: Refused"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__track_ids
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_home_menu_tracks
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_home_tracks
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
+msgid "Tracks"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__workshop
+msgid "Tracks in this Type can hold workshops"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Tuesday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__twitter_hashtag
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__twitter_hashtag
+msgid "Twitter hashtag"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__twitter_hashtag
+msgid "Twitter hashtag for tracks"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__type
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_search_advanced
+msgid "Type"
+msgstr ""
+
+#. module: website_event_track_advanced
+#. openerp-web
+#: code:addons/website_event_track_advanced/static/src/js/track_proposal.js:0
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_close_modal
+#, python-format
+msgid "Unsaved changes will be lost if you leave the page, are you sure?"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Updated organization values for %s."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Updated partner values for %s."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Updated user values for %s."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/controllers/event_track.py:0
+#, python-format
+msgid "Used values: %s"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__user_id
+msgid "User"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__rating_comment
+msgid "Verbal Rating"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "View/Edit"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Webinar"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Webinar Details"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Webinar details"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+msgid "Webinar info..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Wednesday"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Will not be shown in agenda!"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__workshop
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+msgid "Workshop"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_fee
+msgid "Workshop participation fee"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Your Reference"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Zip"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-danger"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-default"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-info"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-primary"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-success"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_template
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "badge-warning"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "close"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_assign_wizard
+msgid "event.track.assign.wizard"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
+msgid "hours"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "https://www.youtube.com/..."
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_close_modal
+msgid "modal_event_track_warning_close_modal"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning_remove_presenter
+msgid "modal_event_track_warning_remove_presenter"
+msgstr ""
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
+msgid "or"
+msgstr ""
