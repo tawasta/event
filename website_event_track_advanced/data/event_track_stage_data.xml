@@ -24,5 +24,27 @@
         <record id="website_event_track.event_track_stage1" model="event.track.stage">
             <field name="is_submitted" eval="True" />
         </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                    eval="[('module', '=', 'website_event_track'), ('name', '=', 'event_track_stage2')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="website_event_track.event_track_stage2" model="event.track.stage">
+            <field name="mail_template_id" ref="mail_template_data_track_announced" />
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                    eval="[('module', '=', 'website_event_track'), ('name', '=', 'event_track_stage4')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="website_event_track.event_track_stage4" model="event.track.stage">
+            <field name="mail_template_id" ref="mail_template_data_track_refused" />
+        </record>
     </data>
 </odoo>

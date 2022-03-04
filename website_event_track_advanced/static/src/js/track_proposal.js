@@ -84,10 +84,14 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             toggleDisabled(this);
                         });
 
-                    // Show warning on modal close
+                    // Show warning on modal close if editable
                     $modal.on("click", ".warning-close-modal", function () {
-                        $button.prop("disabled", false);
-                        $("#modal_event_track_warning_close_modal").modal("show");
+                        if ($("input#editable").val()) {
+                            $("#modal_event_track_warning_close_modal").modal("show");
+                        } else {
+                            $button.prop("disabled", false);
+                            $("#modal_event_track_application").modal("hide");
+                        }
                     });
 
                     // Hide both modals on warning confirm
@@ -106,7 +110,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         "click",
                         ".warning-cancel-modal_event_track_warning_close_modal",
                         function () {
-                            $button.prop("disabled", false);
                             $("#modal_event_track_warning_close_modal").modal("hide");
                         }
                     );
@@ -144,7 +147,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         "click",
                         ".warning-cancel-modal_event_track_warning_remove_presenter",
                         function () {
-                            $button.prop("disabled", false);
                             $("#modal_event_track_warning_remove_presenter").modal(
                                 "hide"
                             );
@@ -180,7 +182,6 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         var speaker_count =
                             Number($("#track-application-speaker-input-index").val()) +
                             1;
-                        console.log("speaker_count", speaker_count);
                         $("#track-application-speaker-input-index").val(speaker_count);
                         // Clone the last row
                         var row = $(
@@ -220,7 +221,11 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
 
                     // Show reload confirmation if modal is open and not submitted
                     window.onbeforeunload = function (e) {
-                        if ($modal.hasClass("show") && !submitted) {
+                        if (
+                            $modal.hasClass("show") &&
+                            !submitted &&
+                            $("input#editable").val()
+                        ) {
                             e.preventDefault();
                             return _t(
                                 "Unsaved changes will be lost if you leave the page, are you sure?"

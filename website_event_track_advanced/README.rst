@@ -12,6 +12,7 @@ Features:
    - Create Track Rating Grades
    - Ability to give Event Tracks ratings (Rating Grades) based on review groups
    - Reviewers are users who belong to review groups and are able to rate certain tracks
+   - Advanced Track Proposal Form.
 
 Configuration
 =============
@@ -34,10 +35,7 @@ Migration changes 10.0 -> 14.0:
    - event.track.tag tracks field deprecated, use track_ids instead
 
 TODO:
-   - Split into smaller modules
    - Emails
-   - Workshop (seperate module)
-   - Portal proposals (seperate module)
    - Translations
 
 Credits

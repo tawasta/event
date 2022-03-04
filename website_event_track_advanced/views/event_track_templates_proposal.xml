@@ -203,6 +203,12 @@
                         name="csrf_token"
                         t-att-value="request.csrf_token(time_limit=False)"
                     />
+                    <input
+                        type="hidden"
+                        id="editable"
+                        name="editable"
+                        t-att-value="editable"
+                    />
                     <input type="hidden" name="track_id" t-att-value="track.id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
@@ -542,6 +548,7 @@
             </div>
         </div>
     </template>
+    <!-- Contact info -->
     <template id="website_event_track_advanced.event_track_application_contact_info">
         <div class="panel panel-primary" id="track-application-contact-div">
             <div class="panel-heading">
@@ -559,13 +566,19 @@
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">
+                        <input
+                            t-attf-name="contact_id"
+                            t-att-value="track.partner_id.id"
+                            class="d-none"
+                            type="hidden"
+                        />
                         <label
                             for="contact_firstname"
                             class="col-form-label">First Name</label>
                         <input
                             name="contact_firstname"
                             placeholder="First Name"
-                            t-att-value="track.partner_id.firstname"
+                            t-att-value="track.partner_id.firstname or partner.firstname"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -579,7 +592,7 @@
                         <input
                             name="contact_lastname"
                             placeholder="Last Name"
-                            t-att-value="track.partner_id.lastname"
+                            t-att-value="track.partner_id.lastname or partner.lastname"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -591,11 +604,12 @@
                         <input
                             name="contact_email"
                             placeholder="Email"
-                            t-att-value="track.partner_id.email"
+                            t-att-value="track.partner_id.email or partner.email"
                             class="form-control"
                             type="email"
                             t-att-required="None if not editable else 'required'"
                             t-att-disabled="None if editable else 'disabled'"
+                            t-att-readonly="None if not track.partner_id.email else 'readonly'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -605,7 +619,7 @@
                         <input
                             name="contact_phone"
                             placeholder="Phone"
-                            t-att-value="track.partner_id.phone"
+                            t-att-value="track.partner_id.phone or partner.phone"
                             class="form-control"
                             type="tel"
                             t-att-disabled="None if editable else 'disabled'"
@@ -618,7 +632,7 @@
                         <input
                             name="contact_organization"
                             placeholder="Organization"
-                            t-att-value="track.partner_id.parent_id.name"
+                            t-att-value="track.partner_id.parent_id.name or partner.parent_id.name"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -630,7 +644,7 @@
                         <input
                             name="contact_title"
                             placeholder="Title"
-                            t-att-value="track.partner_id.function"
+                            t-att-value="track.partner_id.function or partner.function"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -663,6 +677,12 @@
                     <!-- Add existing speakers to form -->
                     <t t-foreach="track.speaker_ids" t-as="speaker">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
+                        <input
+                            t-attf-name="speaker_id[#{speaker_count}]"
+                            t-att-value="speaker.id"
+                            class="d-none"
+                            type="hidden"
+                        />
                         <div
                             class="track-application-speakers-div-row-container"
                             t-att-id="speaker_count">
