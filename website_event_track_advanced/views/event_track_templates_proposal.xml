@@ -542,6 +542,7 @@
             </div>
         </div>
     </template>
+    <!-- Contact info -->
     <template id="website_event_track_advanced.event_track_application_contact_info">
         <div class="panel panel-primary" id="track-application-contact-div">
             <div class="panel-heading">
@@ -559,6 +560,12 @@
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">
+                        <input
+                            t-attf-name="contact_id"
+                            t-att-value="track.partner_id.id"
+                            class="d-none"
+                            type="hidden"
+                        />
                         <label
                             for="contact_firstname"
                             class="col-form-label">First Name</label>
@@ -596,6 +603,7 @@
                             type="email"
                             t-att-required="None if not editable else 'required'"
                             t-att-disabled="None if editable else 'disabled'"
+                            t-att-readonly="None if not track.partner_id.email else 'readonly'"
                         />
                     </div>
                     <div class="form-group col-xl-4">
@@ -663,6 +671,12 @@
                     <!-- Add existing speakers to form -->
                     <t t-foreach="track.speaker_ids" t-as="speaker">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
+                        <input
+                            t-attf-name="speaker_id[#{speaker_count}]"
+                            t-att-value="speaker.id"
+                            class="d-none"
+                            type="hidden"
+                        />
                         <div
                             class="track-application-speakers-div-row-container"
                             t-att-id="speaker_count">
