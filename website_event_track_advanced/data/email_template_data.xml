@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
         <record id="mail_template_data_track_draft" model="mail.template">
             <field name="name">Track: Draft</field>
             <field name="model_id" ref="website_event_track.model_event_track" />
@@ -8,7 +8,7 @@
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
             <field name="subject">
-                ${object.event_id.name} - your presentation has been received
+                ${object.event_id.name} - Your presentation has been received
             </field>
             <field name="body_html" type="html">
                 <table
@@ -107,6 +107,332 @@
                                                                 Proposals that are left to "Draft" stage will not be reviewed.
                                                             </p>
 
+                                                            <br />
+                                                            <div>
+                                                                Thank you,<br />
+                                                                <span
+                                                                    style="color: #454748;">
+                                                                -- <br />
+                                                                The ${object.event_id.name} Team
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr
+                                                            width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+                            % if object.company_id
+                            <table
+                                width="590"
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                <tr>
+                                    <td style="text-align: center; font-size: 14px;">
+                                        Sent by
+                                        <a
+                                            target="_blank"
+                                            href="${object.company_id.website}"
+                                            style="color: #875A7B;">
+                                            ${object.company_id.name}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            % endif
+                        </td>
+                    </tr>
+                </table>
+            </field>
+        </record>
+        <record id="mail_template_data_track_announced" model="mail.template">
+            <field name="name">Track: Announced</field>
+            <field name="model_id" ref="website_event_track.model_event_track" />
+            <field name="use_default_to" eval="True" />
+            <field name="auto_delete" eval="True" />
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="subject">
+                ${object.event_id.name} - Your presentation was selected to the programme
+            </field>
+            <field name="body_html" type="html">
+                <table
+                    border="0"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                            <table
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="590"
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">
+                                                            Your proposal
+                                                        </span>
+                                                        <br />
+                                                        <span
+                                                            style="font-size: 20px; font-weight: bold;">
+                                                            ${object.name}
+                                                        </span>
+                                                    </td>
+                                                    <td valign="middle" align="right">
+                                                        % if website_url
+                                                        <a
+                                                            href="${website_url}/my/tracks"
+                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                            View Proposal
+                                                        </a>
+                                                        % else
+                                                        <img
+                                                            src="${'/logo.png?company=%s' % object.company_id.id}"
+                                                            style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                            alt="${'%s' % object.company_id.name}"
+                                                        />
+                                                        % endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        colspan="2"
+                                                        style="text-align:center;">
+                                                        <hr
+                                                            width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td
+                                                        valign="top"
+                                                        style="font-size: 14px;">
+                                                        <div>
+                                                            <p>
+                                                                Dear ${object.partner_id.name},
+                                                            </p><br />
+                                                            <p>
+                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.
+                                                            </p>
+                                                            <p>
+                                                                Your proposal has been <strong>approved</strong> to the ${object.event_id.name} programme. Congratulations!
+                                                            </p>
+                                                            <p>
+                                                                The proposal had an average rating of <strong>${object.rating_avg}</strong> with scale of 1-5.
+                                                            </p>
+                                                            <br />
+                                                            <p>Please take care of these:</p>
+                                                            <ul>
+                                                                <li>Check and edit your presentation contents. The final contents will be used in conference handbill and publications.</li>
+                                                                <li>Confirm the presentation after you have done all the necessary edits.</li>
+                                                                <li>Unconfirmed presentations will be left out from conference programme.</li>
+                                                            </ul>
+                                                            % if 'website_url':
+                                                            <br />
+                                                            <p>
+                                                                The proposal can be edited in
+                                                                <a
+                                                                    href="${website_url}/my/tracks"
+                                                                    style="color:#875A7B;">My Proposals</a>.
+                                                            </p>
+                                                            % endif
+                                                            <br />
+                                                            <div>
+                                                                Welcome to the conference,<br
+                                                                />
+                                                                <span
+                                                                    style="color: #454748;">
+                                                                -- <br />
+                                                                The ${object.event_id.name} Team
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr
+                                                            width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+                            % if object.company_id
+                            <table
+                                width="590"
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                <tr>
+                                    <td style="text-align: center; font-size: 14px;">
+                                        Sent by
+                                        <a
+                                            target="_blank"
+                                            href="${object.company_id.website}"
+                                            style="color: #875A7B;">
+                                            ${object.company_id.name}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            % endif
+                        </td>
+                    </tr>
+                </table>
+            </field>
+        </record>
+        <record id="mail_template_data_track_refused" model="mail.template">
+            <field name="name">Track: Refused</field>
+            <field name="model_id" ref="website_event_track.model_event_track" />
+            <field name="use_default_to" eval="True" />
+            <field name="auto_delete" eval="True" />
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="subject">
+                ${object.event_id.name} - Your presentation was not selected to the programme
+            </field>
+            <field name="body_html" type="html">
+                <table
+                    border="0"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                            <table
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="590"
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 10px;">
+                                                            Your proposal
+                                                        </span>
+                                                        <br />
+                                                        <span
+                                                            style="font-size: 20px; font-weight: bold;">
+                                                            ${object.name}
+                                                        </span>
+                                                    </td>
+                                                    <td valign="middle" align="right">
+                                                        % if website_url
+                                                        <a
+                                                            href="${website_url}/my/tracks"
+                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                            View Proposal
+                                                        </a>
+                                                        % else
+                                                        <img
+                                                            src="${'/logo.png?company=%s' % object.company_id.id}"
+                                                            style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                            alt="${'%s' % object.company_id.name}"
+                                                        />
+                                                        % endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        colspan="2"
+                                                        style="text-align:center;">
+                                                        <hr
+                                                            width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td
+                                                        valign="top"
+                                                        style="font-size: 14px;">
+                                                        <div>
+                                                            <p>
+                                                                Dear ${object.partner_id.name},
+                                                            </p><br />
+                                                            <p>
+                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.
+                                                            </p>
+                                                            <p>
+                                                                Unfortunately your proposal <strong>${object.name}</strong> was not selected to the ${object.event_id.name} programme.
+                                                            </p>
+                                                            <br />
+                                                            <p>
+                                                                If you have any questions, please let us know.
+                                                            </p>
                                                             <br />
                                                             <div>
                                                                 Thank you,<br />
