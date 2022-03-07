@@ -5,8 +5,7 @@
 ===========
 Event Batch
 ===========
-
-*
+Ability to add batch for event registration product to create student batches from registrations.
 
 Configuration
 =============
@@ -26,6 +25,7 @@ Credits
 Contributors
 ------------
 
+* Miika Nissi <miika.nissi@tawasta.fi>
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
 
 Maintainer
