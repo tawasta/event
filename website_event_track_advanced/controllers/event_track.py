@@ -92,7 +92,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 if record:
                     record_value = record
             except InvalidTextRepresentation:
-                _logger.warning(_("Integer expected for search: '%s'}" % record_id))
+                _logger.warning(_("Integer expected for search: '%s'" % record_id))
         return record_value
 
     def _names_order_default(self):
