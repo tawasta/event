@@ -7,6 +7,8 @@
             <field name="use_default_to" eval="True" />
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
+            <field
+                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation has been received
             </field>
@@ -167,6 +169,8 @@
             <field name="use_default_to" eval="True" />
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
+            <field
+                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation was selected to the programme
             </field>
@@ -338,6 +342,8 @@
             <field name="use_default_to" eval="True" />
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
+            <field
+                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation was not selected to the programme
             </field>

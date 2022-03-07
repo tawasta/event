@@ -44,9 +44,6 @@ class TrackStage(models.Model):
     is_submitted = fields.Boolean(
         string="Proposal is submitted", help="This proposal is submitted."
     )
-    is_null = fields.Boolean(
-        string="Proposal is null", help="Helper field to trigger stage change."
-    )
 
     # 3. Default methods
 
