@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="event_track_application"
+        inherit_id="website_event_track_advanced.event_track_application"
+        name="Event Track Application privacy values"
+        customize_show="False"
+        active="True"
+    >
+
+        <xpath expr="(//div[@class='modal-footer border-0 justify-content-between'])" position="before">
+            <div class="modal-body bg-light border-bottom">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <t t-if="event.privacy_ids">
+                            <t t-foreach="event.privacy_ids" t-as="p">
+                                <div class="form-group col-md-6">
+                                    <input type="checkbox" t-attf-name="privacy_#{str(p.id)}"/>
+                                    <t t-esc="p.sudo().name"/>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

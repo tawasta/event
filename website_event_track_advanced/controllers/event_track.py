@@ -539,6 +539,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         # 11. Return
         return_vals = self._get_event_track_proposal_values(event)
         return_vals.update({"submitted": True})
+        return_vals.update({"track": track})
         return request.render(
             "website_event_track_advanced.event_track_proposal_advanced", return_vals
         )
