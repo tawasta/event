@@ -2,7 +2,6 @@ odoo.define('website_event_track_privacies.event_track_application', function (r
 
     $(function() {
         if ($(".privacy_acceptance")[0]){
-            console.log("=====LOYTYY======");
             function toggleSubmit(val) {
                 $('#application-submit-button').prop('disabled', val);
                 $('#application-submit-button-send').prop('disabled', val);
