@@ -17,13 +17,13 @@
                                 <t t-if="p.is_required">
                                     <div class="form-group col-md-6" style="display: block ruby;">
                                         <input type="checkbox" class="privacy_acceptance" t-attf-name="privacy_#{str(p.id)}" required="1"/>
-                                        <t t-raw="p.sudo().name"/>
+                                        <t t-esc="p.sudo().name"/> <t t-if="p.link"><t t-raw="p.link"/></t>
                                     </div>
                                 </t>
                                 <t t-else="">
                                     <div class="form-group col-md-6" style="display: block ruby;">
                                         <input type="checkbox" t-attf-name="privacy_#{str(p.id)}"/>
-                                        <t t-raw="p.sudo().name"/>
+                                        <t t-esc="p.sudo().name"/> <t t-if="p.link"><t t-raw="p.link"/></t>
                                     </div>
                                 </t>
                             </t>

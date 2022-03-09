@@ -4,12 +4,6 @@ from odoo import models, fields
 class PrivacyActivity(models.Model):
     _inherit = "privacy.activity"
 
-    name = fields.Html(
-        index=True,
-        required=True,
-        translate=True,
-    )
-
     show_in_event = fields.Boolean(
         default=False,
         string="Show in event",
@@ -20,4 +14,8 @@ class PrivacyActivity(models.Model):
         default=False,
         string="Is required",
         readonly=False
+    )
+
+    link = fields.Html(
+        string="Link"
     )

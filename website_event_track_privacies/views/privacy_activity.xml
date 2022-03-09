@@ -8,6 +8,7 @@
             <field name="controller_id" position="after">
                 <field name="show_in_event"/>
                 <field name="is_required" />
+                <field name="link" />
             </field>
         </field>
     </record>
