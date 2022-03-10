@@ -35,10 +35,10 @@
         "partner_firstname",
     ],
     "data": [
+        "data/email_template_data.xml",
         "data/event_track_rating_grade_data.xml",
         "data/event_track_stage_data.xml",
         "data/event_track_type_data.xml",
-        "data/email_template_data.xml",
         "security/ir.model.access.csv",
         "security/event_track_security.xml",
         "wizards/event_track_assign_wizard.xml",
