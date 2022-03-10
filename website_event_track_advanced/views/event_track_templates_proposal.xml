@@ -307,7 +307,6 @@
                                     aria-label="close">×</a>
                                 <i class="fa fa-info-circle" />
                                 <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
-                                <t t-esc="editable" />
                             </p>
                             <p class="alert alert-info alert-dismissable">
                                 <a
