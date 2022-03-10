@@ -287,12 +287,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             .sudo()
             .search([("login", "=ilike", partner_values.get("email"))])
         )
+        user_exists = True
         # Only write values to user if it is done by the user.
         if user.id == request.env.user.id:
             user.sudo().write(partner_values)
             _logger.info(_("Updated user values for %s." % user))
         # If no user exists. Create a new user.
         elif not user:
+            user_exists = False
             if not partner_values.get("login") and partner_values.get("email"):
                 partner_values["login"] = partner_values.get("email")
             try:
@@ -310,7 +312,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     _("Could not deliver mail to %s" % partner_values.get("email"))
                 )
 
-        return user
+        return user, user_exists
 
     def _create_organization(self, organization_values):
         """Find existing user organization partner by name and update it
@@ -471,8 +473,9 @@ class EventTrackControllerAdvanced(EventTrackController):
         # 2. Create user and contact (partner)
         user = False
         partner = False
+        user_exists = False
         if values.get("contact"):
-            user = self._create_signup_user(values.get("contact"))
+            user, user_exists = self._create_signup_user(values.get("contact"))
             if user:
                 partner = user.partner_id
                 followers.append(partner.id)
@@ -540,6 +543,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         return_vals = self._get_event_track_proposal_values(event)
         return_vals.update({"submitted": True})
         return_vals.update({"track": track})
+        return_vals.update({"user_exists": user_exists})
         return request.render(
             "website_event_track_advanced.event_track_proposal_advanced", return_vals
         )
