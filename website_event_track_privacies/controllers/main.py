@@ -20,25 +20,26 @@ class EventTrackControllerAdvancedPrivacy(EventTrackControllerAdvanced):
             if post.get("privacy_" + str(privacy.id)):
                 privacy_ids.append(privacy.id)
 
-        for pr in event.privacy_ids:
-            accepted = pr.id in privacy_ids
-            privacy_values = {
-                "partner_id": partner.id,
-                "activity_id": pr.id,
-                "accepted": accepted,
-                "state": "answered",
-            }
-            already_privacy_record = (
-                request.env["privacy.consent"]
-                .sudo()
-                .search(
-                    [
-                        ("partner_id", "=", partner.id,),
-                        ("activity_id", "=", pr.id),
-                    ]
+        if privacy_ids:
+            for pr in event.privacy_ids:
+                accepted = pr.id in privacy_ids
+                privacy_values = {
+                    "partner_id": partner.id,
+                    "activity_id": pr.id,
+                    "accepted": accepted,
+                    "state": "answered",
+                }
+                already_privacy_record = (
+                    request.env["privacy.consent"]
+                    .sudo()
+                    .search(
+                        [
+                            ("partner_id", "=", partner.id,),
+                            ("activity_id", "=", pr.id),
+                        ]
+                    )
                 )
-            )
-            if already_privacy_record:
-                already_privacy_record.sudo().write({"accepted": accepted})
-            else:
-                request.env["privacy.consent"].sudo().create(privacy_values)
+                if already_privacy_record:
+                    already_privacy_record.sudo().write({"accepted": accepted})
+                else:
+                    request.env["privacy.consent"].sudo().create(privacy_values)
