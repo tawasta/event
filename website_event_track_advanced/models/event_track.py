@@ -387,7 +387,6 @@ class EventTrack(models.Model):
                     "subtype_id": self.env["ir.model.data"].xmlid_to_res_id(
                         "mail.mt_comment"
                     ),
-                    "email_layout_xmlid": "mail.mail_notification_light",
                 },
             )
         return res
