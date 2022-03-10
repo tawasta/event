@@ -306,7 +306,7 @@
                                     data-dismiss="alert"
                                     aria-label="close">×</a>
                                 <i class="fa fa-info-circle" />
-                                <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later.</span>
+                                <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
                                 <t t-esc="editable" />
                             </p>
                             <p class="alert alert-info alert-dismissable">
@@ -334,7 +334,7 @@
                                 data-toggle="tooltip"
                                 data-position="top"
                                 t-att-disabled="None if editable else 'disabled'"
-                                title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later.">Save as Draft</button>
+                                title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later by the contact person.">Save as Draft</button>
                             <button
                                 type="submit"
                                 name="track-confirm"
@@ -613,6 +613,15 @@
                         data-dismiss="alert"
                         aria-label="close">×</a>
                     Please fill the contact persons information here.
+                </p>
+                <p
+                    id="track-application-contact-alert-warning"
+                    class="alert alert-warning alert-dismissable"><a
+                        href="#"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="close">×</a>
+                    An account for the contact person will be created upon form submission.
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">

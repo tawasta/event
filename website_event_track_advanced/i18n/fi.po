@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-09 17:54+0000\n"
-"PO-Revision-Date: 2022-03-09 17:54+0000\n"
+"POT-Creation-Date: 2022-03-10 14:22+0000\n"
+"PO-Revision-Date: 2022-03-10 14:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,8 +54,8 @@ msgid ""
 ". You should receive an email shortly to finish seting up your account. "
 "After setting up your account, you can go to"
 msgstr ""
-". Sinun pitäisi pian saada sähköpostiviesti viimeistelläksesi tilin perustamisen. "
-"Kun olet määrittänyt tilisi, voit mennä"
+". Sinun pitäisi pian saada sähköpostiviesti viimeistelläksesi tilin "
+"perustamisen. Kun olet määrittänyt tilisi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
@@ -74,10 +74,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
 "<i class=\"fa fa-info-circle\"/>\n"
-"                                <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later.</span>"
+"                                <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later by the contact person.</span>"
 msgstr ""
 "<i class=\"fa fa-info-circle\"/>\n"
-"                                <span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tallennetaan myöhempää muokkaamista varten.</span>"
+"                                <span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tallennetaan ja yhteyshenkilö voi myöhemmin muokata sitä.</span>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
@@ -795,6 +795,13 @@ msgid "Additional details"
 msgstr "Lisätiedot"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
+msgid ""
+"An account for the contact person will be created upon form submission."
+msgstr ""
+"Yhteyshenkilölle luodaan käyttäjätili lomakkeen lähettämisen yhteydessä."
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "An account for the username"
 msgstr "Käyttäjätili tunnukselle"
@@ -910,10 +917,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
 "By clicking \"Save as Draft\" the proposal shall be saved and can be edited "
-"later."
+"later by the contact person."
 msgstr ""
-"Klikkaamalla \"Tallenna luonnoksena\" ehdotus tallennetaan myöhempää "
-"muokkaamista varten."
+"Klikkaamalla \"Tallenna luonnoksena\" ehdotus tallennetaan ja yhteyshenkilö "
+"voi myöhemmin muokata sitä."
 
 #. module: website_event_track_advanced
 #: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_configuration
@@ -2174,8 +2181,8 @@ msgid ""
 "Your proposal is saved as a draft and will not be reviewed until it is "
 "submitted."
 msgstr ""
-"Ehdotuksenne on tallennettu luonnoksena, eikä sitä arvioida ennen kuin se "
-"on lähetetty."
+"Ehdotuksenne on tallennettu luonnoksena, eikä sitä arvioida ennen kuin se on"
+" lähetetty."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
@@ -2238,7 +2245,8 @@ msgstr ""
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
-msgstr "on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+msgstr ""
+"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -2281,7 +2289,9 @@ msgstr "muokataksesi ja lähettääksesi esitysehdotuksenne."
 msgid ""
 "to edit and submit your proposal. If you have forgotten your password, "
 "please click"
-msgstr "muokataksesi ja lähettääksesi esitysehdotuksenne. Jos olette unohtaneet salasananne, olkaa hyvä ja painakaa"
+msgstr ""
+"muokataksesi ja lähettääksesi esitysehdotuksenne. Jos olette unohtaneet "
+"salasananne, olkaa hyvä ja painakaa"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -2292,4 +2302,6 @@ msgstr "tarkastellaksesi esitysehdotustanne."
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid ""
 "to view your proposal. If you have forgotten your password, please click"
-msgstr "tarkastellaksesi esitysehdotustanne. Jos olette unohtaneet salasananne, olkaa hyvä ja painakaa"
+msgstr ""
+"tarkastellaksesi esitysehdotustanne. Jos olette unohtaneet salasananne, "
+"olkaa hyvä ja painakaa"
