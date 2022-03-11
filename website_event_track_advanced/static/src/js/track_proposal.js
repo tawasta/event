@@ -70,6 +70,10 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $button.prop("disabled", false);
                     });
 
+                    console.log(post);
+                    $(".tags-select").select2({
+                        maximumSelectionSize: 3,
+                    });
                     // Remove attachment with button
                     $("#btn-remove-attachment").click(function () {
                         $("#attachment_ids").val("");
