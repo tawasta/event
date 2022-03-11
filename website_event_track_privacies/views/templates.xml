@@ -3,12 +3,10 @@
     <template
         id="event_track_application"
         inherit_id="website_event_track_advanced.event_track_application"
-        name="Event Track Application privacy values"
-        customize_show="False"
-        active="True"
-    >
-
-        <xpath expr="(//div[@class='modal-footer border-0 justify-content-between'])" position="before">
+        name="Event Track Application privacy values">
+        <xpath
+            expr="(//div[@class='modal-footer border-0 justify-content-between'])"
+            position="before">
             <t t-if="not track">
                 <div class="modal-body bg-light border-bottom">
                     <div class="row">
@@ -16,15 +14,33 @@
                             <t t-if="event.privacy_ids">
                                 <t t-foreach="event.privacy_ids" t-as="p">
                                     <t t-if="p.is_required">
-                                        <div class="form-group col-md-6" style="display: block ruby;">
-                                            <input type="checkbox" class="privacy_acceptance" t-attf-name="privacy_#{str(p.id)}" required="1"/>
-                                            <label class="col-form-label" t-field="p.sudo().name"/> <t t-if="p.link"><t t-raw="p.link"/></t>
+                                        <div
+                                            class="form-group col-md-6"
+                                            style="display: block ruby;">
+                                            <input
+                                                type="checkbox"
+                                                class="privacy_acceptance"
+                                                t-attf-name="privacy_#{str(p.id)}"
+                                                required="1"
+                                            />
+                                            <label
+                                                class="col-form-label"
+                                                t-field="p.sudo().name"
+                                            /> <t t-if="p.link"><t t-raw="p.link" /></t>
                                         </div>
                                     </t>
                                     <t t-else="">
-                                        <div class="form-group col-md-6" style="display: block ruby;">
-                                            <input type="checkbox" t-attf-name="privacy_#{str(p.id)}"/>
-                                            <label class="col-form-label label-optional" t-field="p.sudo().name"/> <t t-if="p.link"><t t-raw="p.link"/></t>
+                                        <div
+                                            class="form-group col-md-6"
+                                            style="display: block ruby;">
+                                            <input
+                                                type="checkbox"
+                                                t-attf-name="privacy_#{str(p.id)}"
+                                            />
+                                            <label
+                                                class="col-form-label label-optional"
+                                                t-field="p.sudo().name"
+                                            /> <t t-if="p.link"><t t-raw="p.link" /></t>
                                         </div>
                                     </t>
                                 </t>
@@ -33,10 +49,10 @@
                     </div>
                 </div>
             </t>
-            <script
-                type="text/javascript"
-                src="/website_event_track_privacies/static/src/js/main.js"
-            />
+            <!-- <script -->
+            <!--     type="text/javascript" -->
+            <!--     src="/website_event_track_privacies/static/src/js/main.js" -->
+            <!-- /> -->
         </xpath>
     </template>
 </odoo>

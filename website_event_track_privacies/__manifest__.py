@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
@@ -20,31 +19,20 @@
 ##############################################################################
 
 {
-    'name': 'Website event track privacy values',
-    'summary': "Website event track privacy values",
-    'version': '14.0.1.0.0',
-    'category': 'Event',
-    'website': 'http://www.tawasta.fi',
-    'author': 'Oy Tawasta Technologies Ltd.',
-    'license': 'AGPL-3',
-    'application': False,
-    'installable': True,
-    'external_dependencies': {
-        'python': [],
-        'bin': [],
-    },
-    'depends': [
-        'website_event_track_advanced',
-        'event',
-        'privacy',
-        'privacy_consent',
-    ],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/event_view.xml',
-        'views/privacy_activity.xml',
+    "name": "Website event track privacy values",
+    "summary": "Website event track privacy values",
+    "version": "14.0.1.0.1",
+    "category": "Event",
+    "website": "https://gitlab.com/tawasta/odoo/event/",
+    "author": "Tawasta",
+    "license": "AGPL-3",
+    "application": False,
+    "installable": True,
+    "depends": ["website_event_track_advanced", "event", "privacy", "privacy_consent"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/event_view.xml",
+        "views/privacy_activity.xml",
         "views/templates.xml",
-    ],
-    'demo': [
     ],
 }
