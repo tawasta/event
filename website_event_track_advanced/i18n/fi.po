@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-11 19:03+0000\n"
-"PO-Revision-Date: 2022-03-11 19:03+0000\n"
+"POT-Creation-Date: 2022-03-14 10:22+0000\n"
+"PO-Revision-Date: 2022-03-14 10:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1950,7 +1950,7 @@ msgstr "Torstai"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Title"
-msgstr "Otsikko"
+msgstr "Titteli"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__track_ids
@@ -2274,7 +2274,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
 msgstr ""
-"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+"on olemassa järjestelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
