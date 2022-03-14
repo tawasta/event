@@ -416,16 +416,18 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             event.preventDefault();
                             event.stopPropagation();
                             var errorElements = document.querySelectorAll(
-                                ".form-control:invalid"
+                                ".form-control:invalid, .form-check-input:invalid"
                             );
-                            var scrollLocation = $(errorElements[0]).offset().top;
-                            var scrollInside = $modal.scrollTop();
-                            $modal.animate(
-                                {
-                                    scrollTop: scrollInside + scrollLocation,
-                                },
-                                500
-                            );
+                            if (errorElements) {
+                                var scrollLocation = $(errorElements[0]).offset().top;
+                                var scrollInside = $modal.scrollTop();
+                                $modal.animate(
+                                    {
+                                        scrollTop: scrollInside + scrollLocation,
+                                    },
+                                    500
+                                );
+                            }
                         } else {
                             submitted = true;
                             var input = document.createElement("input");
