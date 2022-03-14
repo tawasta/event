@@ -371,7 +371,6 @@
                             id="type"
                             class="form-control"
                             t-att-required="None if not editable else 'required'"
-                            data-error-msg="Please choose"
                             t-att-disabled="None if editable else 'disabled'">
                             <option value="">Select...</option>
                             <t
@@ -441,6 +440,8 @@
                             type="text"
                             t-att-disabled="None if editable else 'disabled'"
                         />
+                        <div
+                            class="invalid-feedback">Please enter a presentation title.</div>
                     </div>
                     <div class="form-group col-xl-6">
                         <label
@@ -467,6 +468,8 @@
                             t-att-required="None if not editable else 'required'"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"><t t-esc="track.description" /></textarea>
+                        <div
+                            class="invalid-feedback">Please enter presentation content.</div>
                     </div>
                     <div class="form-group col-xl-6">
                         <label
@@ -486,6 +489,8 @@
                                 </option>
                             </t>
                         </select>
+                        <div
+                            class="invalid-feedback">Please select a presentation language.</div>
                     </div>
                     <div class="form-group col-xl-6">
                         <label
@@ -555,6 +560,8 @@
                                 </option>
                             </t>
                         </select>
+                        <div
+                            class="invalid-feedback">Please select a presentation target group.</div>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
@@ -571,27 +578,34 @@
                     </div>
                     <div class="form-group col-xl-12">
                         <label
-                            for="keywords"
-                            class="col-form-label label-optional">Keywords</label>
+                            for="tags"
+                            class="col-form-label label-optional">Tags</label>
                         <p
-                            id="track-application-keyword-alert-info"
+                            id="track-application-tag-alert-info"
                             class="alert alert-info alert-dismissable">
                             <a
                                 href="#"
                                 class="close"
                                 data-dismiss="alert"
                                 aria-label="close">×</a>
-                            <span>Please enter three keywords separated by commas.</span>
+                            <span>Please select up to three tags.</span>
                         </p>
-                        <input
-                            name="keywords"
-                            maxlength="100"
-                            placeholder="Separate keywords with commas..."
-                            t-att-value="track.keywords"
-                            class="form-control"
-                            type="text"
-                            t-att-disabled="None if editable else 'disabled'"
-                        />
+                        <select
+                            name="tags"
+                            id="tags"
+                            placeholder="Tags..."
+                            multiple="multiple"
+                            class="form-control tags-select"
+                            autocomplete="off"
+                            t-att-disabled="None if editable else 'disabled'">
+                            <t t-foreach="event.allowed_track_tag_ids or []" t-as="tag">
+                                <option
+                                    t-att-value="tag.id"
+                                    t-att-selected="tag.id in track.tag_ids.ids"><t
+                                        t-esc="tag.name"
+                                    /></option>
+                            </t>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -1080,6 +1094,7 @@
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
                             rows="6"><t t-esc="track.workshop_goals" /></textarea>
+                        <div class="invalid-feedback">Please enter session goals.</div>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
@@ -1094,6 +1109,8 @@
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
                             rows="6"><t t-esc="track.workshop_schedule" /></textarea>
+                        <div
+                            class="invalid-feedback">Please enter session program and schedule.</div>
                     </div>
                 </div>
                 <h5>Contract Signee</h5>

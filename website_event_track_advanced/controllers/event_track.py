@@ -20,7 +20,6 @@
 # 1. Standard library imports:
 import base64
 import logging
-import re
 import sys
 
 # 2. Known third party imports:
@@ -154,25 +153,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         )
 
         # Tags/Keywords
-        tags = []
-        keywords = ""
-        if post.get("keywords"):
-            event_track_tag = request.env["event.track.tag"]
-            pattern = "[^-,A-Za-z0-9äåöÄÖÅ ]+"
-            keywords = re.sub(pattern, "", post.get("keywords"))
-            for keyword in keywords.split(","):
-                try:
-                    tag = event_track_tag.search([("name", "=ilike", keyword)], limit=1)
-                    if not tag:
-                        tag = event_track_tag.sudo().create({"name": keyword})
-                    tags.append(tag.id)
-                except Exception:
-                    _logger.warning(
-                        _(
-                            "Error occured during Event Track Tag creation for keyword: %s."
-                            % keyword
-                        )
-                    )
+        tags = list(map(int, request.httprequest.form.getlist("tags")))
 
         # Track
         track_id = self._get_record("event.track", post.get("track_id"))
@@ -188,7 +169,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             "extra_info": post.get("extra_info"),
             "target_group": target_group.id,
             "target_group_info": post.get("target_group_info"),
-            "keywords": keywords,
             "tag_ids": [(6, 0, tags)],
         }
 
@@ -443,7 +423,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             raise NotFound()
 
         values = self._get_event_track_proposal_form_values(event, **post)
-
         return (
             request.env["ir.ui.view"]
             .sudo()

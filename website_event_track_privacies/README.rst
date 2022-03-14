@@ -5,8 +5,7 @@
 ==================================
 Website event track privacy values
 ==================================
-
-Website event track
+Adds privacy to website event track advanced
 
 Configuration
 =============
@@ -27,6 +26,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Miika Nissi <miika.nissi@tawasta.fi>
 
 Maintainer
 ----------
