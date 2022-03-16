@@ -91,8 +91,8 @@
         <field name="model">event.track.rating.grade</field>
         <field name="arch" type="xml">
             <search string="Search Track Rating Grades">
+                <field name="name" />
                 <field name="grade" />
-                <field name="code" />
             </search>
         </field>
     </record>
@@ -105,8 +105,8 @@
                 <header />
                 <sheet string="Event Track Rating Grade">
                     <group>
+                        <field name="name" />
                         <field name="grade" />
-                        <field name="code" />
                     </group>
                 </sheet>
             </form>
@@ -118,8 +118,8 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Event Track">
+                <field name="name" />
                 <field name="grade" />
-                <field name="code" optional="show" />
             </tree>
         </field>
     </record>

@@ -86,16 +86,17 @@
         <field name="model">event.event</field>
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
-            <header position="after">
+            <button name="action_open_badge_editor" position="after">
                 <button
                     name="action_generate_breaks"
                     type="object"
                     string="Generate Breaks"
                 />
-            </header>
+            </button>
             <field name="tag_ids" position="after">
                 <field name="track_types_ids" widget="many2many_tags" />
                 <field name="target_group_ids" widget="many2many_tags" />
+                <field name="rating_grade_ids" widget="many2many_tags" />
                 <field name="show_track_twitter_hashtags" />
                 <field name="allowed_track_tag_ids" widget="many2many_tags" />
             </field>

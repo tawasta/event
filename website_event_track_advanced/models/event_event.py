@@ -63,12 +63,16 @@ class EventEvent(models.Model):
     )
     target_group_ids = fields.Many2many(
         "event.track.target.group",
-        string="Target groups",
+        string="Target Groups",
         compute="_compute_target_group_ids",
         store=True,
         readonly=False,
     )
-
+    rating_grade_ids = fields.Many2many(
+        "event.track.rating.grade",
+        relation="event_rating_grades_rel",
+        string="Rating Grades",
+    )
     overlapping_location_track_ids = fields.Many2many(
         comodel_name="event.track",
         string="Overlapping locations",
@@ -182,7 +186,7 @@ class EventEvent(models.Model):
             event.action_generate_breaks()
 
     def action_generate_breaks(self):
-        break_type = self.env.ref("event.event_track_type_break")
+        break_type = self.env.ref("website_event_track_advanced.event_track_type_break")
         track_model = self.env["event.track"]
         for record in self:
             # Remove existing auto-generated breaks

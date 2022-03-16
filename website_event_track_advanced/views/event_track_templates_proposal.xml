@@ -286,20 +286,163 @@
                             <t
                                 t-call="website_event_track_advanced.event_track_application_targetgroup_info"
                             />
+                            <t t-if="not review">
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_contact_info"
+                                />
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_speakers"
+                                />
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_webinar"
+                                />
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_workshop"
+                                />
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_extra_info"
+                                />
+                            </t>
+                            <t t-if="review">
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_review"
+                                />
+                            </t>
+                        </div>
+                        <t t-if="not review">
+                            <div class="modal-body bg-light border-bottom">
+                                <p class="alert alert-info alert-dismissable">
+                                    <a
+                                        href="#"
+                                        class="close"
+                                        data-dismiss="alert"
+                                        aria-label="close">×</a>
+                                    <i class="fa fa-info-circle" />
+                                    <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
+                                </p>
+                                <p class="alert alert-info alert-dismissable">
+                                    <a
+                                        href="#"
+                                        class="close"
+                                        data-dismiss="alert"
+                                        aria-label="close">×</a>
+                                    <i class="fa fa-info-circle" />
+                                    <span>By clicking <strong>"Save and Submit"</strong> the proposal shall be saved and submitted for review.</span>
+                                    <br />
+                                    <span>Please note that a completed proposal can no longer be edited.</span>
+                                </p>
+                            </div>
+                            <div class="modal-footer border-0 justify-content-between">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary warning-close-modal">Cancel</button>
+                                <button
+                                    type="submit"
+                                    name="track-draft"
+                                    value="track-draft"
+                                    id="application-submit-button"
+                                    class="btn btn-primary application-submit"
+                                    data-toggle="tooltip"
+                                    data-position="top"
+                                    t-att-disabled="None if editable else 'disabled'"
+                                    title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later by the contact person.">Save as Draft</button>
+                                <button
+                                    type="submit"
+                                    name="track-confirm"
+                                    value="track-confirm"
+                                    id="application-submit-button-send"
+                                    class="btn btn-primary application-submit"
+                                    data-toggle="tooltip"
+                                    data-position="top"
+                                    t-att-disabled="None if editable else 'disabled'"
+                                    title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited.">Save and Submit</button>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="modal-body bg-light border-bottom">
+                                <p class="alert alert-info alert-dismissable">
+                                    <a
+                                        href="#"
+                                        class="close"
+                                        data-dismiss="alert"
+                                        aria-label="close">×</a>
+                                    <i class="fa fa-info-circle" />
+                                    <span>By clicking <strong>"Submit Review"</strong> the review of the proposal shall be submitted.</span>
+                                </p>
+                            </div>
+                            <div class="modal-footer border-0 justify-content-between">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary warning-close-modal">Cancel</button>
+                                <button
+                                    type="submit"
+                                    name="review-confirm"
+                                    value="review-confirm"
+                                    id="application-submit-button-send"
+                                    class="btn btn-primary application-submit"
+                                    data-toggle="tooltip"
+                                    data-position="top"
+                                    title="By clicking &quot;Submit Review&quot; the review of the proposal shall be submitted.">Submit Review</button>
+                            </div>
+
+                        </t>
+                    </div>
+                </form>
+            </div>
+            <t t-call="website_event_track_advanced.event_track_warning_close_modal" />
+            <t
+                t-call="website_event_track_advanced.event_track_warning_remove_presenter"
+            />
+        </div>
+    </template>
+
+    <!-- REVIEW -->
+    <template name="Event Track Review" id="event_track_review">
+        <div
+            id="modal_event_track_application"
+            class="modal fade"
+            tabindex="-1"
+            role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <form
+                    id="track-application-form"
+                    class="mt32 js_website_submit_form"
+                    t-attf-action="/event/#{event.id}/track_proposal/review/post"
+                    method="post"
+                    enctype="multipart/form-data">
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        t-att-value="request.csrf_token(time_limit=False)"
+                    />
+                    <input
+                        type="hidden"
+                        id="editable"
+                        name="editable"
+                        t-att-value="editable"
+                    />
+                    <input type="hidden" name="track_id" t-att-value="track.id" />
+                    <div class="modal-content">
+                        <div class="modal-header align-items-center">
+                            <t t-if="editable">
+                            <h4 class="modal-title">Review Proposal</h4>
+                            </t>
+                            <button
+                                type="button"
+                                class="close warning-close-modal"
+                                aria-label="Close">
+                                <span>×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body bg-light border-bottom">
                             <t
-                                t-call="website_event_track_advanced.event_track_application_contact_info"
+                                t-call="website_event_track_advanced.event_track_application_type"
                             />
                             <t
-                                t-call="website_event_track_advanced.event_track_application_speakers"
+                                t-call="website_event_track_advanced.event_track_application_info"
                             />
                             <t
-                                t-call="website_event_track_advanced.event_track_application_webinar"
-                            />
-                            <t
-                                t-call="website_event_track_advanced.event_track_application_workshop"
-                            />
-                            <t
-                                t-call="website_event_track_advanced.event_track_application_extra_info"
+                                t-call="website_event_track_advanced.event_track_application_targetgroup_info"
                             />
                         </div>
                         <div class="modal-body bg-light border-bottom">
@@ -312,17 +455,6 @@
                                 <i class="fa fa-info-circle" />
                                 <span>By clicking <strong>"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
                             </p>
-                            <p class="alert alert-info alert-dismissable">
-                                <a
-                                    href="#"
-                                    class="close"
-                                    data-dismiss="alert"
-                                    aria-label="close">×</a>
-                                <i class="fa fa-info-circle" />
-                                <span>By clicking <strong>"Save and Submit"</strong> the proposal shall be saved and submitted for review.</span>
-                                <br />
-                                <span>Please note that a completed proposal can no longer be edited.</span>
-                            </p>
                         </div>
                         <div class="modal-footer border-0 justify-content-between">
                             <button
@@ -330,34 +462,21 @@
                                 class="btn btn-secondary warning-close-modal">Cancel</button>
                             <button
                                 type="submit"
-                                name="track-draft"
-                                value="track-draft"
-                                id="application-submit-button"
-                                class="btn btn-primary application-submit"
+                                name="review-confirm"
+                                value="review-confirm"
+                                id="review-submit-button-send"
+                                class="btn btn-primary review-submit"
                                 data-toggle="tooltip"
                                 data-position="top"
-                                t-att-disabled="None if editable else 'disabled'"
-                                title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later by the contact person.">Save as Draft</button>
-                            <button
-                                type="submit"
-                                name="track-confirm"
-                                value="track-confirm"
-                                id="application-submit-button-send"
-                                class="btn btn-primary application-submit"
-                                data-toggle="tooltip"
-                                data-position="top"
-                                t-att-disabled="None if editable else 'disabled'"
-                                title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited.">Save and Submit</button>
+                                title="By clicking &quot;Submit Review&quot; you will submit your review of the proposal.">Submit Review</button>
                         </div>
                     </div>
                 </form>
             </div>
             <t t-call="website_event_track_advanced.event_track_warning_close_modal" />
-            <t
-                t-call="website_event_track_advanced.event_track_warning_remove_presenter"
-            />
         </div>
     </template>
+
     <!-- Application type -->
     <template id="event_track_application_type">
         <div class="panel panel-primary" id="track-application-type-div">
@@ -412,6 +531,7 @@
             </div>
             <div class="panel-body">
                 <p
+                    t-if="not review"
                     id="track-application-application-alert-info"
                     class="alert alert-info alert-dismissable"><a
                         href="#"
@@ -421,6 +541,7 @@
                     This part of the application is disclosed to the reviewers.
                 </p>
                 <p
+                    t-if="not review"
                     id="track-application-application-alert-warning"
                     class="alert alert-warning alert-dismissable"><a
                         href="#"
@@ -532,6 +653,7 @@
             </div>
             <div class="panel-body">
                 <p
+                    t-if="not review"
                     id="track-application-targetgroup-alert-info"
                     class="alert alert-info alert-dismissable">
                     <a
@@ -585,6 +707,7 @@
                             for="tags"
                             class="col-form-label label-optional">Tags</label>
                         <p
+                            t-if="not review"
                             id="track-application-tag-alert-info"
                             class="alert alert-info alert-dismissable">
                             <a
@@ -1040,6 +1163,8 @@
             </div>
         </div>
     </template>
+
+    <!-- WORKSHOP -->
     <template id="event_track_application_workshop">
         <div
             t-attf-class="panel panel-warning #{'d-none' if not track.type.workshop else ''}"
@@ -1285,7 +1410,9 @@
             </div>
         </div>
     </template>
-    <template id="website_event_track_advanced.event_track_application_extra_info">
+
+    <!-- EXTRA INFO -->
+    <template id="event_track_application_extra_info">
         <div id="event-track-application-extra-info" class="panel panel-warning">
             <div class="panel-heading">
                 <h3 class="panel-title">Additional details</h3>
@@ -1315,6 +1442,52 @@
                             class="form-control o_wysiwyg_loader"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"><t t-esc="track.extra_info" /></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- REVIEW -->
+    <template id="event_track_application_review">
+        <div id="event-track-application-review" class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Review</h3>
+            </div>
+            <div class="panel-body" id="track-application-review-div">
+                <div class="row" id="track-application-review-row-div">
+                    <div class="form group col-xl-12">
+                        <label for="rating" class="col-form-label">Rating</label>
+                        <select
+                            name="rating"
+                            id="rating"
+                            class="form-control"
+                            required="required">
+                            <option value="">Select...</option>
+                            <t
+                                t-foreach="event.rating_grade_ids or []"
+                                t-as="rating_grade">
+                                <option
+                                    t-att-value="rating_grade.id"
+                                    t-att-selected="rating_grade.id == existing_rating.grade_id.id">
+                                    <t t-esc="rating_grade.name" />
+                                </option>
+                            </t>
+                        </select>
+                        <div
+                            class="invalid-feedback">Please select a rating grade.</div>
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label
+                            for="rating_comment"
+                            class="col-form-label label-optional">Verbal Rating</label>
+                        <textarea
+                            type="text"
+                            id="rating_comment"
+                            name="rating_comment"
+                            placeholder="Verbal Rating..."
+                            class="form-control o_wysiwyg_loader"
+                            rows="6"><t t-esc="existing_rating.comment" /></textarea>
                     </div>
                 </div>
             </div>
