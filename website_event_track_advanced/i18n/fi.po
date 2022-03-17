@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 10:22+0000\n"
-"PO-Revision-Date: 2022-03-14 10:22+0000\n"
+"POT-Creation-Date: 2022-03-17 13:01+0000\n"
+"PO-Revision-Date: 2022-03-17 13:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -61,9 +61,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
 "<i class=\"fa fa-info-circle\"/>\n"
-"                                <span>By clicking <strong>\"Save and Submit\"</strong> the proposal shall be saved and submitted for review.</span>\n"
-"                                <br/>\n"
-"                                <span>Please note that a completed proposal can no longer be edited.</span>"
+"                                    <span>By clicking <strong>\"Save and Submit\"</strong> the proposal shall be saved and submitted for review.</span>\n"
+"                                    <br/>\n"
+"                                    <span>Please note that a completed proposal can no longer be edited.</span>"
 msgstr ""
 "<i class=\"fa fa-info-circle\"/>\n"
 "                                <span>Klikkaamalla <strong>\"Tallenna ja lähetä\"</strong> ehdotus tallennetaan ja lähetetään arvioitavaksi.</span>\n"
@@ -72,6 +72,24 @@ msgstr ""
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                    <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later by the contact person.</span>"
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                <span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tallennetaan ja yhteyshenkilö voi myöhemmin muokata sitä.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                    <span>By clicking <strong>\"Submit Review\"</strong> the review of the proposal shall be submitted.</span>"
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                    <span>Klikkaamalla <strong>\"Lähetä arviointi\"</strong> arviointi esitysehdotuksesta lähetetään.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
 msgid ""
 "<i class=\"fa fa-info-circle\"/>\n"
 "                                <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later by the contact person.</span>"
@@ -857,6 +875,11 @@ msgid "Archived"
 msgstr "Arkistoitu"
 
 #. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_event_track_assign_wizard
+msgid "Assign Event Tracks to Reviewers"
+msgstr "Määritä esitykset arvioijille"
+
+#. module: website_event_track_advanced
 #: model:ir.actions.act_window,name:website_event_track_advanced.act_event_track_assign
 #: model:ir.actions.act_window,name:website_event_track_advanced.action_event_track_assign
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
@@ -923,6 +946,19 @@ msgstr ""
 "voi myöhemmin muokata sitä."
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"By clicking \"Submit Review\" the review of the proposal shall be submitted."
+msgstr ""
+"Klikkaamalla \"Lähetä arviointi\" arviointi esitysehdotuksesta lähetetään."
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
+msgid "By clicking \"Submit Review\" you will submit your review of the proposal."
+msgstr ""
+"Klikkaamalla \"Lähetä arviointi\" arviointi esitysehdotuksesta lähetetään."
+
+#. module: website_event_track_advanced
 #: model:ir.ui.menu,name:website_event_track_advanced.menu_event_track_configuration
 msgid "CFP Configuration"
 msgstr "CFP Asetukset"
@@ -930,6 +966,7 @@ msgstr "CFP Asetukset"
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_assign_wizard
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning
 msgid "Cancel"
 msgstr "Peruuta"
@@ -946,6 +983,7 @@ msgstr "Kaupunki"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_warning
 msgid "Close"
 msgstr "Sulje"
@@ -956,7 +994,6 @@ msgid "Close Proposal"
 msgstr "Sulje ehdotus"
 
 #. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__code
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__code
 msgid "Code"
 msgstr "Koodi"
@@ -1070,6 +1107,7 @@ msgstr "Kuvaus"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__display_name
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__display_name
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__display_name
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_res_users__display_name
 msgid "Display Name"
 msgstr "Näyttönimi"
 
@@ -1281,6 +1319,7 @@ msgstr "Haluan pitää webinaarin"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__id
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__id
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_res_users__id
 msgid "ID"
 msgstr "Tunniste (ID)"
 
@@ -1344,6 +1383,7 @@ msgstr "Esityksen kieli"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group____last_update
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type____last_update
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type____last_update
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_res_users____last_update
 msgid "Last Modified on"
 msgstr "Viimeksi muokattu"
 
@@ -1414,6 +1454,7 @@ msgid "My Tracks"
 msgstr "Minun Esityksiin"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__name
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_review_group__name
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_target_group__name
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__name
@@ -1539,6 +1580,11 @@ msgid "Please select a presentation target group."
 msgstr "Ole hyvä ja valitse esityksen kohderyhmä."
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
+msgid "Please select a rating grade."
+msgstr "Ole hyvä ja valitse arvosana."
+
+#. module: website_event_track_advanced
 #: model:ir.model.constraint,message:website_event_track_advanced.constraint_event_track_type_code
 msgid "Please use an unique code"
 msgstr "Ole hyvä ja käytä uniikkia koodia"
@@ -1620,6 +1666,16 @@ msgid "Rating"
 msgstr "Arviointi"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
+msgid "Rating"
+msgstr "Arvosana"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__rating_grade_ids
+msgid "Rating Grades"
+msgstr "Arvosanat"
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
 msgid "Rating:"
 msgstr "Arviointi:"
@@ -1671,9 +1727,20 @@ msgid "Remove this presenter, are you sure?"
 msgstr "Poista tämä esittäjä. Oletko varma?"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "Review"
+msgstr "Arviointi"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__review_group
 msgid "Review Group"
 msgstr "Arviointiryhmä"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
+msgid "Review Proposal"
+msgstr "Arvioi esitysehdotus"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_assign_wizard__review_group
@@ -1687,6 +1754,7 @@ msgstr "Arviointiryhmät"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__reviewer_id
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_res_users__reviewer_id
 msgid "Reviewer"
 msgstr "Arvioija"
 
@@ -1750,6 +1818,7 @@ msgstr "Hae ehdotusten arvioijia"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
 msgid "Select..."
@@ -1858,6 +1927,12 @@ msgid "Street"
 msgstr "Katuosoite"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
+msgid "Submit Review"
+msgstr "Lähetä arviointi"
+
+#. module: website_event_track_advanced
 #: code:addons/website_event_track_advanced/models/event_event.py:0
 #, python-format
 msgid "Sunday"
@@ -1895,6 +1970,7 @@ msgid "Target Group Info..."
 msgstr "Kohderyhmän tiedot..."
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__target_group_ids
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__target_group_ids
 msgid "Target Groups"
 msgstr "Kohderyhmät"
@@ -1908,11 +1984,6 @@ msgstr "Kohderyhmä"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group_info
 msgid "Target group info"
 msgstr "Kohderyhmän tiedot"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__target_group_ids
-msgid "Target groups"
-msgstr "Kohderyhmät"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track__keywords
@@ -1957,6 +2028,11 @@ msgstr "Titteli"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
 msgid "Track"
 msgstr "Esitys"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__grade_id
+msgid "Track Grade"
+msgstr "Esityksen arvosana"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_type_form_track
@@ -2045,11 +2121,6 @@ msgstr "Esitysten lukumäärä"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_tag__track_count_agenda
 msgid "Track count in agenda"
 msgstr "Esitysten lukumäärä ohjelmakartassa"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating__grade_id
-msgid "Track grade"
-msgstr "Esityksen arvosana"
 
 #. module: website_event_track_advanced
 #: model:mail.template,name:website_event_track_advanced.mail_template_data_track_announced
@@ -2142,9 +2213,20 @@ msgid "User"
 msgstr "Käyttäjä"
 
 #. module: website_event_track_advanced
+#: model:ir.model,name:website_event_track_advanced.model_res_users
+msgid "Users"
+msgstr "Käyttäjät"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__rating_comment
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
 msgid "Verbal Rating"
 msgstr "Sanallinen arviointi"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
+msgid "Verbal Rating..."
+msgstr "Sanallinen arviointi..."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
@@ -2262,19 +2344,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
 msgid "close"
 msgstr "sulje"
-
-#. module: website_event_track_advanced
-#: model:ir.model,name:website_event_track_advanced.model_event_track_assign_wizard
-msgid "event.track.assign.wizard"
-msgstr ""
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
 msgstr ""
-"on olemassa järjestelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success

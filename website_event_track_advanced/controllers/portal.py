@@ -51,6 +51,7 @@ class PortalTrack(CustomerPortal):
                         [
                             ("partner_id", "!=", request.env.user.partner_id.id),
                             ("review_group.reviewers", "=", reviewer.id),
+                            ("stage_id.is_submitted", "=", True),
                         ]
                     )
                 )
