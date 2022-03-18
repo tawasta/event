@@ -60,18 +60,24 @@ class EventTrackReviewer(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("user_id")
     def _compute_ratings_todo_count(self):
         for record in self:
-            record.ratings_todo_count = self.env["event.track"].search_count(
-                [("message_partner_ids", "=", record.id)]
-            )
+            if record.user_id and record.user_id.partner_id:
+                record.ratings_todo_count = self.env["event.track"].search_count(
+                    [("message_partner_ids", "=", record.user_id.partner_id.id)]
+                )
+            else:
+                record.ratings_todo_count = 0
 
     def _compute_ratings_done_count(self):
         for record in self:
-            if record.user_id:
-                record.ratings_done_count = self.env["event.track.rating"].search_count(
-                    [("reviewer_id", "=", record.user_id.id)]
+            record.ratings_done_count = (
+                self.env["event.track.rating"].search_count(
+                    [("reviewer_id", "=", record.id)]
                 )
+                or 0
+            )
 
     def _compute_ratings_done_percent(self):
         for record in self:
@@ -89,7 +95,7 @@ class EventTrackReviewer(models.Model):
     def _ensure_no_duplicate_user(self):
         for record in self:
             existing_reviewer = self.env["event.track.reviewer"].search(
-                [["user_id", "=", record.user_id.id], ["id", "!=", record.id]]
+                [["user_id", "=", record.user_id.ids], ["id", "!=", record.id]]
             )
             if existing_reviewer:
                 raise ValidationError(

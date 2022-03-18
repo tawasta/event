@@ -42,15 +42,45 @@ class PortalTrack(CustomerPortal):
             track_count = request.env["event.track"].search_count(
                 [("partner_id", "=", request.env.user.partner_id.id)]
             )
+            reviewer = request.env.user.reviewer_id
+            if reviewer:
+                review_track_count = (
+                    request.env["event.track"]
+                    .sudo()
+                    .search_count(
+                        [
+                            ("partner_id", "!=", request.env.user.partner_id.id),
+                            ("review_group.reviewers", "=", reviewer.id),
+                            ("stage_id.is_submitted", "=", True),
+                        ]
+                    )
+                )
+                track_count += review_track_count
             values["track_count"] = track_count or 0
         return values
 
     @http.route(["/my/tracks"], type="http", auth="user", website=True)
     def portal_my_tracks(self, **kw):
         values = self._prepare_portal_layout_values()
-        tracks = request.env["event.track"].search(
-            [("partner_id", "=", request.env.user.partner_id.id)]
+        tracks = (
+            request.env["event.track"]
+            .sudo()
+            .search([("partner_id", "=", request.env.user.partner_id.id)])
         )
+        reviewer = request.env.user.reviewer_id
+        if reviewer:
+            review_tracks = (
+                request.env["event.track"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "!=", request.env.user.partner_id.id),
+                        ("review_group.reviewers", "=", reviewer.id),
+                        ("stage_id.is_submitted", "=", True),
+                    ]
+                )
+            )
+            values.update({"review_tracks": review_tracks or False})
         values.update(
             {"tracks": tracks, "page_name": "track", "default_url": "/my/tracks"}
         )

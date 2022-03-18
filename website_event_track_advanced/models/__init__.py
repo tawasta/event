@@ -10,4 +10,5 @@ from . import (
     event_track_target_group,
     event_track_type,
     event_type,
+    res_users,
 )
