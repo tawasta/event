@@ -599,7 +599,6 @@
                         <textarea
                             type="text"
                             name="description"
-                            maxlength="500"
                             placeholder="Application Content..."
                             class="form-control o_wysiwyg_loader"
                             t-att-required="None if not editable else 'required'"
