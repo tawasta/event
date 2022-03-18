@@ -558,7 +558,7 @@
                         <input
                             name="name"
                             maxlength="100"
-                            placeholder="Application Title"
+                            placeholder="Presentation Title"
                             t-att-value="track.name"
                             t-att-required="None if not editable else 'required'"
                             class="form-control"
@@ -585,9 +585,21 @@
                         <label
                             for="description"
                             class="col-form-label">Content of the Presentation</label>
+                        <p
+                            t-if="not review"
+                            id="track-application-description-alert-warning"
+                            class="alert alert-warning alert-dismissable">
+                            <a
+                                href="#"
+                                class="close"
+                                data-dismiss="alert"
+                                aria-label="close">×</a>
+                            <span>Max. 500 words.</span>
+                        </p>
                         <textarea
                             type="text"
                             name="description"
+                            maxlength="500"
                             placeholder="Application Content..."
                             class="form-control o_wysiwyg_loader"
                             t-att-required="None if not editable else 'required'"

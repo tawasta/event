@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-17 13:01+0000\n"
-"PO-Revision-Date: 2022-03-17 13:01+0000\n"
+"POT-Creation-Date: 2022-03-18 10:30+0000\n"
+"PO-Revision-Date: 2022-03-18 10:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -101,6 +101,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 msgid "<span class=\"alert-message\">List the details of all presenters</span>"
 msgstr "<span class=\"alert-message\">Listaa kaikkien esittäjien tiedot</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
+msgid "<span>Max. 500 words.</span>"
+msgstr "<span>Max. 500 sanaa.</span>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
@@ -848,11 +853,6 @@ msgstr "Ehdotuksen tiedosto"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "Application Info"
 msgstr "Ehdotuksen tiedot"
-
-#. module: website_event_track_advanced
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid "Application Title"
-msgstr "Ehdotuksen otsikko"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_type
@@ -1662,13 +1662,9 @@ msgstr "Arvioitu %"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__grade_id
-msgid "Rating"
-msgstr "Arviointi"
-
-#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
 msgid "Rating"
-msgstr "Arvosana"
+msgstr "Arviointi"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__rating_grade_ids
