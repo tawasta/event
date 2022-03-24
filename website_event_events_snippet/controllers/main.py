@@ -53,11 +53,6 @@ class WebsiteEventEventsList(WebsiteEventController):
 
     @http.route(["/event/render_events_list"], type="json", auth="public", website=True)
     def render_events_list(self, template, domain, limit=None, order="date_begin asc"):
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         dom = expression.AND(
             [
                 [
@@ -69,13 +64,7 @@ class WebsiteEventEventsList(WebsiteEventController):
         )
         if domain:
             dom = expression.AND([dom, domain])
-        print(dom)
-        print(limit)
-        print(order)
         events = request.env["event.event"].search(dom, limit=limit, order=order)
-        # for event in events:
-        #     result["events"].append({"date": self.get_formated_date(event)})
-        print(events)
         return request.website.viewref(template)._render(
             {"events": events, "get_formated_date": self.get_formated_date}
         )

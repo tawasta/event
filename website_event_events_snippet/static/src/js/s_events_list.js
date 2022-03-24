@@ -17,7 +17,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
         start: function () {
             var self = this;
             const data = self.$target[0].dataset;
-            const limit = parseInt(data.eventsLimit) || 4;
+            const limit = parseInt(data.eventsLimit) || 3;
             // Compatibility with old template xml id
             data.template = "website_event_events_snippet.s_events_list_card_template";
             const template =
@@ -41,9 +41,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
                     },
                 })
                     .then(function (events) {
-                        console.log(events);
                         var $events = $(events).filter(".s_events_list_event");
-                        console.log($events);
                         if (!$events.length) {
                             self.$target.append(
                                 $("<div/>", {class: "col-md-6 offset-md-3"}).append(
