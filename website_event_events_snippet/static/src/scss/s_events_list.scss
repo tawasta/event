@@ -48,4 +48,62 @@
             }
         }
     }
+    .s_events_list_square {
+        .card {
+            height: 100%;
+            border: none;
+            border-radius: 0;
+
+            .s_events_list_event_cover {
+                .o_record_cover_container {
+                    background-color: transparent !important;
+                    padding-bottom: 100%;
+                    ovoverflow: hidden;
+
+                    .o_record_cover_image {
+                        @extend .card-img-top;
+                        position: absolute;
+                        border-top-left-radius: 0;
+                        border-top-right-radius: 0;
+                    }
+                }
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            h4 {
+                font-size: 19px;
+                font-weight: 600;
+            }
+
+            .card-footer {
+                background-color: transparent;
+                border-top: none;
+
+                .text-muted {
+                    color: rgba(52, 58, 64, 0.4) !important;
+                }
+            }
+        }
+        @media (max-width: 768px) {
+            .card {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                border-radius: 0.5rem;
+
+                .s_events_list_event_cover {
+                    margin: 40px 40px 0px 40px;
+                    .o_record_cover_container {
+                        padding-bottom: 50%;
+                    }
+                }
+
+                .card-body {
+                    padding: 20px 40px 0px 40px;
+                }
+            }
+        }
+    }
 }

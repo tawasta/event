@@ -19,7 +19,13 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             const data = self.$target[0].dataset;
             const limit = parseInt(data.eventsLimit) || 3;
             // Compatibility with old template xml id
-            data.template = "website_event_events_snippet.s_events_list_card_template";
+            if (
+                data.template &&
+                data.template.endsWith(".s_events_list_card_template")
+            ) {
+                data.template =
+                    "website_event_events_snippet.s_events_list_card_template";
+            }
             const template =
                 data.template ||
                 "website_event_events_snippet.s_events_list_card_template";
