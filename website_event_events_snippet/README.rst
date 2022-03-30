@@ -2,10 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==================================
-Website event track privacy values
-==================================
-Adds privacy to website event track advanced
+============================
+Website Event Events Snippet
+============================
+* Advanced Events List Snippet for Website
 
 Configuration
 =============
@@ -25,7 +25,6 @@ Credits
 Contributors
 ------------
 
-* Valtteri Lattu <valtteri.lattu@tawasta.fi>
 * Miika Nissi <miika.nissi@tawasta.fi>
 
 Maintainer

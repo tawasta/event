@@ -20,7 +20,6 @@
 # 1. Standard library imports:
 import base64
 import logging
-import re
 import sys
 
 # 2. Known third party imports:
@@ -58,11 +57,34 @@ class EventTrackControllerAdvanced(EventTrackController):
 
     def _get_event_track_proposal_form_values(self, event, **post):
         partner_id = request.env.user.partner_id
+        reviewer_id = request.env.user.reviewer_id
         track_id = post.get("track_id")
+        track_languages = request.env["res.lang"].search([], order="id")
+        review = False
         editable = False
+        existing_rating = False
         if track_id:
             track = request.env["event.track"].sudo().search([["id", "=", track_id]])
-            if track:
+            if (
+                reviewer_id
+                and track.review_group
+                and reviewer_id in track.review_group.reviewers
+                and partner_id != track.partner_id
+                and track.stage_id.is_submitted
+            ):
+                editable = False
+                review = True
+                existing_rating = (
+                    request.env["event.track.rating"]
+                    .sudo()
+                    .search(
+                        [
+                            ["event_track", "=", track.id],
+                            ["reviewer_id", "=", reviewer_id.id],
+                        ]
+                    )
+                )
+            elif track:
                 editable = (
                     True
                     if partner_id == track.partner_id and track.stage_id.is_editable
@@ -71,13 +93,14 @@ class EventTrackControllerAdvanced(EventTrackController):
         else:
             track = request.env["event.track"]
             editable = True
-        track_languages = request.env["res.lang"].search([], order="id")
         values = {
             "track": track,
             "track_languages": track_languages,
             "event": event,
             "main_object": event,
             "editable": editable,
+            "review": review,
+            "existing_rating": existing_rating,
             "partner": partner_id,
         }
         return values
@@ -154,25 +177,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         )
 
         # Tags/Keywords
-        tags = []
-        keywords = ""
-        if post.get("keywords"):
-            event_track_tag = request.env["event.track.tag"]
-            pattern = "[^-,A-Za-z0-9äåöÄÖÅ ]+"
-            keywords = re.sub(pattern, "", post.get("keywords"))
-            for keyword in keywords.split(","):
-                try:
-                    tag = event_track_tag.search([("name", "=ilike", keyword)], limit=1)
-                    if not tag:
-                        tag = event_track_tag.sudo().create({"name": keyword})
-                    tags.append(tag.id)
-                except Exception:
-                    _logger.warning(
-                        _(
-                            "Error occured during Event Track Tag creation for keyword: %s."
-                            % keyword
-                        )
-                    )
+        tags = list(map(int, request.httprequest.form.getlist("tags")))
 
         # Track
         track_id = self._get_record("event.track", post.get("track_id"))
@@ -188,7 +193,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             "extra_info": post.get("extra_info"),
             "target_group": target_group.id,
             "target_group_info": post.get("target_group_info"),
-            "keywords": keywords,
             "tag_ids": [(6, 0, tags)],
         }
 
@@ -443,7 +447,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             raise NotFound()
 
         values = self._get_event_track_proposal_form_values(event, **post)
-
         return (
             request.env["ir.ui.view"]
             .sudo()
@@ -451,6 +454,32 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "website_event_track_advanced.event_track_application", values
             )
         )
+
+    def _create_review(self, **post):
+        reviewer_id = request.env.user.reviewer_id
+        track_id = post.get("track_id")
+        if reviewer_id and track_id:
+            track = request.env["event.track"].sudo().search([["id", "=", track_id]])
+            vals = {
+                "event_track": track.id,
+                "reviewer_id": reviewer_id.id,
+                "grade_id": post.get("rating") or False,
+                "comment": post.get("rating_comment") or False,
+            }
+            existing_rating = (
+                request.env["event.track.rating"]
+                .sudo()
+                .search(
+                    [
+                        ["event_track", "=", track.id],
+                        ["reviewer_id", "=", reviewer_id.id],
+                    ]
+                )
+            )
+            if existing_rating:
+                existing_rating.sudo().write(vals)
+            else:
+                request.env["event.track.rating"].sudo().create(vals)
 
     @http.route(
         ["""/event/<model("event.event"):event>/track_proposal/post"""],
@@ -462,6 +491,11 @@ class EventTrackControllerAdvanced(EventTrackController):
     def event_track_proposal_post(self, event, **post):
         if not event.can_access_from_current_website():
             raise NotFound()
+
+        # If post is review. Create review and return confirmation
+        if post.get("review-confirm"):
+            self._create_review(**post)
+            return request.redirect("/my/tracks")
 
         followers = list()
         _logger.info(_("Posted values: %s" % dict(post)))

@@ -1,2 +1,1 @@
-from . import event_event
-from . import privacy
+from . import event_event, privacy

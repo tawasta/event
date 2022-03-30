@@ -70,6 +70,9 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         $button.prop("disabled", false);
                     });
 
+                    $(".tags-select").select2({
+                        maximumSelectionSize: 3,
+                    });
                     // Remove attachment with button
                     $("#btn-remove-attachment").click(function () {
                         $("#attachment_ids").val("");
@@ -412,6 +415,19 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
+                            var errorElements = document.querySelectorAll(
+                                ".form-control:invalid, .form-check-input:invalid"
+                            );
+                            if (errorElements) {
+                                var scrollLocation = $(errorElements[0]).offset().top;
+                                var scrollInside = $modal.scrollTop();
+                                $modal.animate(
+                                    {
+                                        scrollTop: scrollInside + scrollLocation,
+                                    },
+                                    500
+                                );
+                            }
                         } else {
                             submitted = true;
                             var input = document.createElement("input");

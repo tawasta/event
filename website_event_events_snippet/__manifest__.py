@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2018 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,20 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Website event track privacy values",
-    "summary": "Website event track privacy values",
-    "version": "14.0.1.0.1",
+    "name": "Website Event Events Snippet",
+    "summary": "Advanced Events Snippet for Website",
+    "version": "14.0.1.0.0",
     "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event/",
+    "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_track_advanced", "event", "privacy", "privacy_consent"],
-    "data": [
-        "security/ir.model.access.csv",
-        "views/event_view.xml",
-        "views/privacy_activity.xml",
-        "views/templates.xml",
-    ],
+    "depends": ["website_event"],
+    "data": ["views/event_snippets.xml", "views/snippets.xml"],
 }

@@ -37,6 +37,7 @@ from odoo import fields, models
 class EventTrackAssignWizard(models.TransientModel):
     # 1. Private attributes
     _name = "event.track.assign.wizard"
+    _description = "Assign Event Tracks to Reviewers"
 
     # 2. Fields declaration
     assign_random = fields.Boolean(

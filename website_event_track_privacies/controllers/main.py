@@ -1,20 +1,25 @@
 from odoo import http
 from odoo.http import request
 
-from odoo.addons.website_event_track_advanced.controllers.event_track import EventTrackControllerAdvanced
+from odoo.addons.website_event_track_advanced.controllers.event_track import (
+    EventTrackControllerAdvanced,
+)
 
 
 class EventTrackControllerAdvancedPrivacy(EventTrackControllerAdvanced):
     @http.route()
     def event_track_proposal_post(self, event, **post):
-        response_data = super(EventTrackControllerAdvancedPrivacy, self).event_track_proposal_post(event, **post)
-        current_track = response_data.qcontext['track']
-        self._create_privacy(post, current_track.partner_id, current_track.event_id)
+        response_data = super(
+            EventTrackControllerAdvancedPrivacy, self
+        ).event_track_proposal_post(event, **post)
+        if "track" in response_data.qcontext:
+            current_track = response_data.qcontext["track"]
+            self._create_privacy(post, current_track.partner_id, current_track.event_id)
 
         return response_data
 
     def _create_privacy(self, post, partner, event):
-        """ Create privacies """
+        """Create privacies"""
         privacy_ids = []
         for privacy in event.privacy_ids:
             if post.get("privacy_" + str(privacy.id)):
@@ -33,10 +38,7 @@ class EventTrackControllerAdvancedPrivacy(EventTrackControllerAdvanced):
                     request.env["privacy.consent"]
                     .sudo()
                     .search(
-                        [
-                            ("partner_id", "=", partner.id,),
-                            ("activity_id", "=", pr.id),
-                        ]
+                        [("partner_id", "=", partner.id), ("activity_id", "=", pr.id)]
                     )
                 )
                 if already_privacy_record:
