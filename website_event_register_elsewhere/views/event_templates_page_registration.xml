@@ -8,20 +8,11 @@
                 name="t-if">event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and not (event.registration_elsewhere and event.registration_link)</attribute>
         </xpath>
         <xpath expr="//form" position="after">
-            <form
+            <div
                 t-if="event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and event.registration_elsewhere and event.registration_link"
                 id="registration_elsewhere_form"
                 class="mb-5"
-                t-attf-action="#{event.registration_link}"
-                itemscope="itemscope"
-                itemprop="offers"
-                itemtype="http://schema.org/AggregateOffer"
-                target="_blank">
-                <input
-                    type="hidden"
-                    name="csrf_token"
-                    t-att-value="request.csrf_token()"
-                />
+                >
                 <div
                     id="o_wevent_tickets"
                     class="bg-white shadow-sm o_wevent_js_ticket_details"
@@ -45,16 +36,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0">
-                                <button
-                                    type="submit"
-                                    class="btn btn-primary o_wait_lazy_js btn-block a-submit">
-                            Register
-                        </button>
+                                <a t-attf-href="#{event.registration_link}" class="btn btn-primary o_wait_lazy_js btn-block a-submit" target="_blank">
+                                    Register
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </xpath>
     </template>
     <template
