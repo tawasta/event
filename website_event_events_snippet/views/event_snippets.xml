@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_events_list" name="Events List">
+        <section class="s_events_list pt16 pb16" data-vcss="001">
+            <div class="container">
+                <div
+                    class="row s_col_no_bgcolor s_nb_column_fixed js_get_events s_events_list_card"
+                    data-loading="true"
+                    data-template="website_event_events_snippet.s_events_list_card_template"
+                    data-events-limit="4"
+                    data-order="date_begin asc"
+                />
+            </div>
+        </section>
+    </template>
+    <!-- Squares layout -->
+    <template id="s_events_list_square_template">
+        <div
+            t-foreach="events"
+            t-as="e"
+            class="col-md-6 col-lg-3 s_events_list_event pb32">
+        <div class="card">
+                <a class="s_events_list_event_cover" t-attf-href="/event/#{e.id}">
+                    <t t-call="website.record_cover">
+                        <t t-set="_record" t-value="e" />
+                       <t
+                            t-set="additionnal_classes"
+                            t-value="'loading_container thumb'"
+                        />
+                    </t>
+                </a>
+                <div class="card-body text-center">
+                    <span><t t-esc="get_formated_date(e)" /></span>
+                    <h4 class="card-title" t-field="e.name" />
+                    <p class="card-text">Testi</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a t-attf-href="/event/#{e.id}">Read more <span
+                            class="fa fa-angle-double-right"
+                        /></a>
+        </div>
+        </div>
+        </div>
+    </template>
+    <!-- Cards layout -->
+    <template id="s_events_list_card_template">
+        <div
+            t-foreach="events"
+            t-as="e"
+            class="col-md-6 col-lg-4 s_events_list_event pb32">
+            <div class="card">
+                <a class="s_events_list_event_cover" t-attf-href="/event/#{e.id}">
+                    <t t-call="website.record_cover">
+                        <t t-set="_record" t-value="e" />
+                       <t
+                            t-set="additionnal_classes"
+                            t-value="'loading_container thumb'"
+                        />
+                    </t>
+                </a>
+                <div class="card-body">
+                    <a t-attf-href="/event/#{e.id}"><h4 class="mb-0"><t
+                                t-esc="e.name"
+                            /></h4></a>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span><t t-esc="get_formated_date(e)" /></span>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Options -->
+    <template id="s_events_list_options" inherit_id="website.snippet_options">
+        <xpath expr="//div[@data-js='Box']" position="before">
+            <div
+                data-js="js_get_events_list"
+                data-selector=".s_events_list"
+                data-target=".js_get_events"
+                data-no-check="true">
+                <we-select string="Layout" data-attribute-name="template">
+                    <we-button
+                        data-select-data-attribute="website_event_events_snippet.s_events_list_square_template"
+                        data-select-class="s_events_list_square"
+                        data-name="square_opt">Squares</we-button>
+                    <we-button
+                        data-select-data-attribute="website_event_events_snippet.s_events_list_card_template"
+                        data-select-class="s_events_list_card"
+                        data-name="card_opt">Cards</we-button>
+                </we-select>
+                <we-select
+                    string="Number of events"
+                    data-no-preview="true"
+                    data-attribute-name="eventsLimit"
+                    class="o_we_inline">
+                    <we-button data-select-data-attribute="1">1</we-button>
+                    <we-button data-select-data-attribute="2">2</we-button>
+                    <we-button data-select-data-attribute="3">3</we-button>
+                    <we-button data-select-data-attribute="4">4</we-button>
+                    <we-button data-select-data-attribute="5">5</we-button>
+                    <we-button data-select-data-attribute="6">6</we-button>
+                    <we-button data-select-data-attribute="7">7</we-button>
+                    <we-button data-select-data-attribute="8">8</we-button>
+                    <we-button data-select-data-attribute="9">9</we-button>
+                    <we-button data-select-data-attribute="10">10</we-button>
+                </we-select>
+            </div>
+        </xpath>
+        <xpath expr="//div[@data-js='layout_column']" position="attributes">
+            <attribute
+                name="data-exclude"
+                add=".s_events_list, .s_events_list_card"
+                separator=","
+            />
+        </xpath>
+    </template>
+    <!-- Assets -->
+    <template
+        id="assets_snippet_s_events_list_css_000"
+        inherit_id="website.assets_frontend">
+        <xpath expr="//link[last()]" position="after">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/website_event_events_snippet/static/src/scss/s_events_list.scss"
+            />
+        </xpath>
+    </template>
+    <template
+        id="assets_snippet_s_events_list_js_000"
+        inherit_id="website.assets_frontend">
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/website_event_events_snippet/static/src/js/s_events_list.js"
+            />
+        </xpath>
+    </template>
+</odoo>

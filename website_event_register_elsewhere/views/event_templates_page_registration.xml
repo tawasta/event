@@ -11,8 +11,7 @@
             <div
                 t-if="event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and event.registration_elsewhere and event.registration_link"
                 id="registration_elsewhere_form"
-                class="mb-5"
-                >
+                class="mb-5">
                 <div
                     id="o_wevent_tickets"
                     class="bg-white shadow-sm o_wevent_js_ticket_details"
@@ -36,7 +35,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0">
-                                <a t-attf-href="#{event.registration_link}" class="btn btn-primary o_wait_lazy_js btn-block a-submit" target="_blank">
+                                <a
+                                    t-attf-href="#{event.registration_link}"
+                                    class="btn btn-primary o_wait_lazy_js btn-block a-submit"
+                                    target="_blank">
                                     Register
                                 </a>
                             </div>
