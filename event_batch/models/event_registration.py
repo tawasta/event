@@ -58,7 +58,7 @@ class EventRegistration(models.Model):
             is_partner = Partner.search(
                 [("email", "=ilike", values.get("email"))], limit=1
             )
-            if not is_partner:
+            if not is_partner and values.get("name") and values.get("email"):
                 partner_vals = {
                     "name": values.get("name"),
                     "email": values.get("email"),
@@ -66,7 +66,7 @@ class EventRegistration(models.Model):
                 }
                 new_partner = Partner.sudo().create(partner_vals)
                 values["partner_id"] = new_partner.id
-            else:
+            elif is_partner:
                 values["partner_id"] = is_partner.id
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
@@ -79,7 +79,6 @@ class EventRegistration(models.Model):
                     "mobile": registration.partner_id.phone,
                 }
                 student_batch_vals = self.student_batch_values_preprocess(registration)
-
                 is_student = (
                     self.env["op.student"]
                     .sudo()
@@ -103,6 +102,7 @@ class EventRegistration(models.Model):
         values = {
             "batch_id": registration.event_ticket_id.product_id.batch_id.id,
             "event_id": registration.event_id.id,
+            "event_registration_id": registration.id,
         }
 
         return values
