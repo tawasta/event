@@ -19,13 +19,11 @@
 ##############################################################################
 
 # 1. Standard library imports:
-import dateutil.parser
-
-# 3. Odoo imports (openerp):
-from odoo import _, api, fields, models
 
 # 2. Known third party imports:
 
+# 3. Odoo imports (openerp):
+from odoo import _, api, fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -179,71 +177,6 @@ class EventEvent(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
-    def action_cron_generate_breaks(self):
-        # Search events that aren't over yet
-        events = self.search([("date_end", ">", fields.Datetime.now())])
-        for event in events:
-            event.action_generate_breaks()
-
-    def action_generate_breaks(self):
-        break_type = self.env.ref("website_event_track_advanced.event_track_type_break")
-        track_model = self.env["event.track"]
-        for record in self:
-            # Remove existing auto-generated breaks
-            # While a bit counter-intuitive, this is less resource intense
-            # than calculating overlapping breaks/tracks and shifting
-            # existing breaks
-            record.track_ids.filtered(lambda t: t.type.code == "break").unlink()
-            locations = record.track_ids.mapped("location_id")
-            for location_id in locations:
-                tracks = track_model.search(
-                    [
-                        "|",
-                        ("location_id", "=", location_id.id),
-                        ("location_id", "=", False),
-                        ("event_id", "=", record.id),
-                        ("date", "!=", False),
-                        ("website_published", "=", True),
-                    ],
-                    order="date",
-                )
-                previous_track_end = False
-                for track in tracks:
-                    if track.type == break_type:
-                        # Skip breaks
-                        continue
-                    if not previous_track_end or track.date == previous_track_end:
-                        # No break (the next track starts immediately)
-                        previous_track_end = track.date_end
-                        continue
-                    if (
-                        previous_track_end
-                        and previous_track_end[0:10] != track.date[0:10]
-                    ):
-                        # Different days. No break here
-                        previous_track_end = track.date_end
-                        continue
-
-                    duration = abs(
-                        dateutil.parser.parse(track.date)
-                        - dateutil.parser.parse(previous_track_end)
-                    )
-                    duration = duration.total_seconds() / 3600
-
-                    # Empty slot between tracks. Create a break
-                    track_values = dict(
-                        event_id=record.id,
-                        location_id=location_id.id,
-                        name="",
-                        date=previous_track_end,
-                        duration=duration,
-                        type=break_type.id,
-                        website_published=True,
-                        color=1,
-                    )
-                    previous_track_end = track.date_end
-                    track_model.create(track_values)
-
     def week_days(self, weekday):
         weekday = int(weekday)
         weekdays = [

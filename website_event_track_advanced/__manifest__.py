@@ -38,7 +38,6 @@
         "data/email_template_data.xml",
         "data/event_track_rating_grade_data.xml",
         "data/event_track_stage_data.xml",
-        "data/event_track_type_data.xml",
         "security/ir.model.access.csv",
         "security/event_track_security.xml",
         "wizards/event_track_assign_wizard.xml",
@@ -55,6 +54,7 @@
         "views/event_views.xml",
         "views/event_menus.xml",
         "views/event_track_templates_proposal.xml",
+        "views/event_track_templates_page.xml",
         "views/portal_templates.xml",
     ],
 }

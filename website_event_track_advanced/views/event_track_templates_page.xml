@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- HIDE AUTHOR -->
+    <template
+        id="event_track_content_hide_author"
+        inherit_id="website_event_track.event_track_content"
+        name="Hide Author"
+        active="True"
+        customize_show="True">
+        <xpath
+            expr="//div[@t-field='track.partner_biography']//.."
+            position="attributes">
+            <attribute name="class" separator=" " add="d-none" />
+        </xpath>
+        <xpath expr="//hr[@class='mt-2 mb-0']" position="attributes">
+            <attribute name="class" separator=" " add="d-none" />
+        </xpath>
+    </template>
+
+    <!-- SHOW SPEAKERS -->
+    <template
+        id="event_track_content_show_speakers"
+        inherit_id="website_event_track.event_track_content"
+        name="Show Speakers"
+        active="True"
+        customize_show="True">
+        <xpath
+            expr="//hr[@t-if='not is_html_empty(track.description)']"
+            position="attributes">
+            <attribute name="class" separator=" " add="d-none" />
+        </xpath>
+        <xpath expr="//div[@t-field='track.partner_biography']//.." position="after">
+            <t t-foreach="track.speaker_ids" t-as="speaker">
+                <hr class="mt-2 pb-1 mb-1" />
+                <div id="speaker-div" class="mx-3">
+                    <div class="mt-2 d-flex">
+                        <span
+                            t-if="speaker.image_256"
+                            t-field="speaker.image_256"
+                            class="o_wevent_online_page_avatar"
+                            t-options="{'widget': 'image', 'class': 'rounded-circle', 'max_width': '96'}"
+                        />
+                        <div class="pl-2 pr-0 pr-md-2 d-flex flex-column">
+                            <span
+                                t-field="speaker.name"
+                                class="font-weight-bold mb-2"
+                            />
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.function">
+                                <i class="fa fa-briefcase mr-2" /><span
+                                    t-esc="speaker.function"
+                                />
+                                <t t-if="speaker.parent_id.name">
+                                    <span>&amp;nbsp;at&amp;nbsp;</span><span
+                                        t-esc="speaker.parent_id.name"
+                                    />
+                                </t>
+                            </span>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.website">
+                                <i class="fa fa-home mr-2" /><a
+                                    t-att-href="speaker.website"><span
+                                        t-field="speaker.website"
+                                    /></a>
+                            </span>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.email">
+                                <i class="fa fa-envelope mr-2" /><a
+                                    t-att-mailto="speaker.email"><span
+                                        t-field="speaker.email"
+                                    /></a>
+                            </span>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.phone">
+                                <i class="fa fa-phone mr-2" /><span
+                                    t-field="speaker.phone"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div t-field="speaker.website_description" class="oe_no_empty" />
+                </div>
+            </t>
+            <hr t-if="not is_html_empty(track.description)" class="mt-2 pb-1 mb-1" />
+        </xpath>
+    </template>
+
+    <!-- SHOW TARGET GROUP -->
+    <template
+        id="event_track_content_show_target_group"
+        inherit_id="website_event_track.event_track_content"
+        name="Show Target Group"
+        active="True"
+        customize_show="True">
+        <xpath expr="//span[@t-field='track.location_id']//..//.." position="after">
+            <div id="target-group-div" class="mx-3 text-muted">
+                <t t-if="track.target_group">
+                    <strong>Target group:</strong> <span t-field="track.target_group" />
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
