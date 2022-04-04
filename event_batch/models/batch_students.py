@@ -21,6 +21,8 @@ class OpBatchStudents(models.Model):
         string="Event Registration", comodel_name="event.registration"
     )
 
+    first_time = fields.Boolean(string="First time", default=False)
+
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
