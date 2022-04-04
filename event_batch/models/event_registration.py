@@ -92,10 +92,20 @@ class EventRegistration(models.Model):
                     student_batch_vals.update({"student_id": create_student.id})
                     current_student = create_student
 
-                already_found_in_batch = self.env["op.batch.students"].sudo().search([
-                    ('student_id', '=', current_student.id),
-                    ('batch_id', '=', registration.event_ticket_id.product_id.batch_id.id)
-                ])
+                already_found_in_batch = (
+                    self.env["op.batch.students"]
+                    .sudo()
+                    .search(
+                        [
+                            ("student_id", "=", current_student.id),
+                            (
+                                "batch_id",
+                                "=",
+                                registration.event_ticket_id.product_id.batch_id.id,
+                            ),
+                        ]
+                    )
+                )
                 if not already_found_in_batch:
                     student_batch_vals.update({"first_time": True})
                 student_batch = (
