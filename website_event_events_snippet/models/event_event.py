@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,20 +18,37 @@
 #
 ##############################################################################
 
-{
-    "name": "Website Event Events Snippet",
-    "summary": "Advanced Events Snippet for Website",
-    "version": "14.0.1.0.0",
-    "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": ["website_event", "website_event_private_event"],
-    "data": [
-        "views/event_event_views.xml",
-        "views/event_snippets.xml",
-        "views/snippets.xml",
-    ],
-}
+# 1. Standard library imports:
+
+# 2. Known third party imports:
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class EventEvent(models.Model):
+    # 1. Private attributes
+    _inherit = "event.event"
+
+    # 2. Fields declaration
+    is_promoted = fields.Boolean(
+        "Promoted", help="Promoted events can be shown in an event widget."
+    )
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods

@@ -58,6 +58,7 @@ class WebsiteEventEventsList(WebsiteEventController):
                 [
                     ("website_published", "=", True),
                     ("date_begin", ">=", fields.Datetime.now()),
+                    ("is_private_event", "=", False),
                 ],
                 request.website.website_domain(),
             ]

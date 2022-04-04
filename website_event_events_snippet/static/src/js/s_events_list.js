@@ -17,6 +17,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
         start: function () {
             var self = this;
             const data = self.$target[0].dataset;
+            const promoted = data.promoted === "true" || false;
             const limit = parseInt(data.eventsLimit) || 3;
             // Compatibility with old template xml id
             if (
@@ -36,6 +37,9 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             this.$target.attr("contenteditable", "False"); // Prevent user edition
 
             var domain = [];
+            if (promoted) {
+                domain.push(["is_promoted", "=", true]);
+            }
             var prom = new Promise(function (resolve) {
                 self._rpc({
                     route: "/event/render_events_list",
