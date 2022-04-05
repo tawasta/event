@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 10:30+0000\n"
-"PO-Revision-Date: 2022-03-18 10:30+0000\n"
+"POT-Creation-Date: 2022-04-01 13:21+0000\n"
+"PO-Revision-Date: 2022-04-01 13:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -103,6 +103,11 @@ msgid "<span class=\"alert-message\">List the details of all presenters</span>"
 msgstr "<span class=\"alert-message\">Listaa kaikkien esittäjien tiedot</span>"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_show_speakers
+msgid "<span>&amp;nbsp;at&amp;nbsp;</span>"
+msgstr ""
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
 msgid "<span>Max. 500 words.</span>"
 msgstr "<span>Max. 500 sanaa.</span>"
@@ -152,6 +157,11 @@ msgstr "<strong>Kontakti:</strong>"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
 msgid "<strong>Presenters:</strong>"
 msgstr "<strong>Esiintyjät:</strong>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_show_target_group
+msgid "<strong>Target group:</strong>"
+msgstr "<strong>Kohderyhmä:</strong>"
 
 #. module: website_event_track_advanced
 #: model:mail.template,body_html:website_event_track_advanced.mail_template_data_track_draft
@@ -923,11 +933,6 @@ msgid "Avoid using identifiable information (name, organisation, project)."
 msgstr "Vältä käyttämästä tunnistetietoja (nimi, organisaatio, projekti)."
 
 #. module: website_event_track_advanced
-#: model:event.track.type,name:website_event_track_advanced.event_track_type_break
-msgid "Break"
-msgstr "Tauko"
-
-#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
 "By clicking \"Save and Submit\" the proposal shall be saved and submitted "
@@ -1274,11 +1279,6 @@ msgstr "Etunimi"
 #, python-format
 msgid "Friday"
 msgstr "Perjantai"
-
-#. module: website_event_track_advanced
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
-msgid "Generate Breaks"
-msgstr "Luo tauot"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_goals
@@ -1656,6 +1656,11 @@ msgid "Randomize review groups"
 msgstr "Satunnaista arviointiryhmät"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid "Rate Proposal"
+msgstr "Arvioi esitysehdotus"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__ratings_done_percent
 msgid "Rated %"
 msgstr "Arvioitu %"
@@ -1670,6 +1675,12 @@ msgstr "Arviointi"
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__rating_grade_ids
 msgid "Rating Grades"
 msgstr "Arvosanat"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_track_rating.py:0
+#, python-format
+msgid "Rating for track %s by reviewer %s already exists."
+msgstr "Arviointi esitykselle %s arvioijalta %s on jo olemassa."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced

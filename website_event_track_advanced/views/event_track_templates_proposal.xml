@@ -266,8 +266,11 @@
                     <input type="hidden" name="track_id" t-att-value="track.id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
-                            <t t-if="editable">
-                            <h4 class="modal-title">Proposal</h4>
+                            <t t-if="not review">
+                                <h4 class="modal-title">Proposal</h4>
+                            </t>
+                            <t t-else="">
+                                <h4 class="modal-title">Rate Proposal</h4>
                             </t>
                             <button
                                 type="button"
@@ -628,7 +631,7 @@
                         <div
                             class="invalid-feedback">Please select a presentation language.</div>
                     </div>
-                    <div class="form-group col-xl-6">
+                    <div t-if="not review" class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
                             for="attachment_ids">Add Attachments (optional)</label>

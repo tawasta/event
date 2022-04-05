@@ -85,10 +85,29 @@ class EventRegistration(models.Model):
                     .search([("partner_id", "=", registration.partner_id.id)])
                 )
                 if is_student:
+                    current_student = is_student
                     student_batch_vals.update({"student_id": is_student.id})
                 else:
                     create_student = self.env["op.student"].sudo().create(vals)
                     student_batch_vals.update({"student_id": create_student.id})
+                    current_student = create_student
+
+                already_found_in_batch = (
+                    self.env["op.batch.students"]
+                    .sudo()
+                    .search(
+                        [
+                            ("student_id", "=", current_student.id),
+                            (
+                                "batch_id",
+                                "=",
+                                registration.event_ticket_id.product_id.batch_id.id,
+                            ),
+                        ]
+                    )
+                )
+                if not already_found_in_batch:
+                    student_batch_vals.update({"first_time": True})
                 student_batch = (
                     self.env["op.batch.students"].sudo().create(student_batch_vals)
                 )

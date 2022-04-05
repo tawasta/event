@@ -19,13 +19,11 @@
 ##############################################################################
 
 # 1. Standard library imports:
-import babel.dates
 
 # 3. Odoo imports (openerp):
 from odoo import fields, http
 from odoo.http import request
 from odoo.osv import expression
-from odoo.tools.misc import get_lang
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_event.controllers.main import WebsiteEventController
@@ -42,13 +40,9 @@ class WebsiteEventEventsList(WebsiteEventController):
     def get_formated_date(self, event):
         start_date = fields.Datetime.from_string(event.date_begin).date()
         end_date = fields.Datetime.from_string(event.date_end).date()
-        month = babel.dates.get_month_names(
-            "abbreviated", locale=get_lang(event.env).code
-        )[start_date.month]
-        return ("%s %s%s") % (
-            month,
-            start_date.strftime("%e"),
-            (end_date != start_date and ("-" + end_date.strftime("%e")) or ""),
+        return ("%s%s") % (
+            start_date.strftime("%d.%m.%Y"),
+            (end_date != start_date and (" - " + end_date.strftime("%d.%m.%Y")) or ""),
         )
 
     @http.route(["/event/render_events_list"], type="json", auth="public", website=True)
@@ -58,6 +52,7 @@ class WebsiteEventEventsList(WebsiteEventController):
                 [
                     ("website_published", "=", True),
                     ("date_begin", ">=", fields.Datetime.now()),
+                    ("is_private_event", "=", False),
                 ],
                 request.website.website_domain(),
             ]

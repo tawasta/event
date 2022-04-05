@@ -28,6 +28,10 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event"],
-    "data": ["views/event_snippets.xml", "views/snippets.xml"],
+    "depends": ["website_event", "website_event_private_event"],
+    "data": [
+        "views/event_event_views.xml",
+        "views/event_snippets.xml",
+        "views/snippets.xml",
+    ],
 }

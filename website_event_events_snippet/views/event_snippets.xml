@@ -7,6 +7,7 @@
                     class="row s_col_no_bgcolor s_nb_column_fixed js_get_events s_events_list_card"
                     data-loading="true"
                     data-template="website_event_events_snippet.s_events_list_card_template"
+                    data-promoted="false"
                     data-events-limit="4"
                     data-order="date_begin asc"
                 />
@@ -19,7 +20,7 @@
             t-foreach="events"
             t-as="e"
             class="col-md-6 col-lg-3 s_events_list_event pb32">
-        <div class="card">
+            <div class="card">
                 <a class="s_events_list_event_cover" t-attf-href="/event/#{e.id}">
                     <t t-call="website.record_cover">
                         <t t-set="_record" t-value="e" />
@@ -32,14 +33,14 @@
                 <div class="card-body text-center">
                     <span><t t-esc="get_formated_date(e)" /></span>
                     <h4 class="card-title" t-field="e.name" />
-                    <p class="card-text">Testi</p>
+                    <p class="card-text" t-field="e.teaser" />
                 </div>
                 <div class="card-footer text-center">
-                    <a t-attf-href="/event/#{e.id}">Read more <span
+                    <a t-attf-href="/event/#{e.id}" class="btn-link">Read more <span
                             class="fa fa-angle-double-right"
                         /></a>
-        </div>
-        </div>
+                </div>
+            </div>
         </div>
     </template>
     <!-- Cards layout -->
@@ -52,7 +53,7 @@
                 <a class="s_events_list_event_cover" t-attf-href="/event/#{e.id}">
                     <t t-call="website.record_cover">
                         <t t-set="_record" t-value="e" />
-                       <t
+                        <t
                             t-set="additionnal_classes"
                             t-value="'loading_container thumb'"
                         />
@@ -77,6 +78,14 @@
                 data-selector=".s_events_list"
                 data-target=".js_get_events"
                 data-no-check="true">
+                <we-select
+                    string="Only show promoted events"
+                    data-no-preview="true"
+                    name="event_promoted_events"
+                    data-attribute-name="promoted">
+                    <we-button data-select-data-attribute="true">Yes</we-button>
+                    <we-button data-select-data-attribute="false">No</we-button>
+                </we-select>
                 <we-select string="Layout" data-attribute-name="template">
                     <we-button
                         data-select-data-attribute="website_event_events_snippet.s_events_list_square_template"

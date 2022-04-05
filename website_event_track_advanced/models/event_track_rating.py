@@ -23,7 +23,8 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
 
@@ -62,6 +63,23 @@ class TrackRating(models.Model):
                 rating.event_id = False
 
     # 5. Constraints and onchanges
+    @api.constrains("reviewer_id")
+    def _ensure_no_duplicate_rating(self):
+        for rec in self:
+            existing_rating = self.env["event.track.rating"].search(
+                [
+                    ["reviewer_id", "=", rec.reviewer_id.id],
+                    ["event_track", "=", rec.event_track.id],
+                    ["id", "!=", rec.id],
+                ]
+            )
+            if existing_rating:
+                raise ValidationError(
+                    _(
+                        "Rating for track %s by reviewer %s already exists."
+                        % (rec.event_track.name, rec.reviewer_id.name)
+                    )
+                )
 
     # 6. CRUD methods
 

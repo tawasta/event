@@ -13,6 +13,10 @@
                     name="event_registration_id"
                     attrs="{'invisible': [('event_id', '=', False)]}"
                 />
+                <field
+                    name="first_time"
+                    attrs="{'invisible': [('event_id', '=', False)]}"
+                />
             </field>
         </field>
     </record>
