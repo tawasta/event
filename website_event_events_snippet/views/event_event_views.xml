@@ -10,4 +10,14 @@
             </field>
         </field>
     </record>
+    <record model="ir.ui.view" id="view_event_tree_promoted">
+        <field name="name">event.event.tree.promoted</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="is_promoted" optional="show" />
+            </field>
+        </field>
+    </record>
 </odoo>

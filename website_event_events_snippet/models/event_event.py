@@ -23,7 +23,8 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.tools import html2plaintext
 
 # 4. Imports from Odoo modules:
 
@@ -40,10 +41,24 @@ class EventEvent(models.Model):
     is_promoted = fields.Boolean(
         "Promoted", help="Promoted events can be shown in an event widget."
     )
+    teaser = fields.Text("Teaser", compute="_compute_teaser", inverse="_inverse_teaser")
+    teaser_manual = fields.Text(string="Teaser Content")
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("description", "teaser_manual")
+    def _compute_teaser(self):
+        for event in self:
+            if event.teaser_manual:
+                event.teaser = event.teaser_manual
+            else:
+                description = html2plaintext(event.description).replace("\n", " ")
+                event.teaser = description[:200] + "..."
+
+    def _inverse_teaser(self):
+        for event in self:
+            event.teaser_manual = event.teaser
 
     # 5. Constraints and onchanges
 
