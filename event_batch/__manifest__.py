@@ -20,7 +20,7 @@
 {
     "name": "Event Batch",
     "summary": "Event Batch",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

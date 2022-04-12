@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-30 16:20+0000\n"
-"PO-Revision-Date: 2022-03-30 16:20+0000\n"
+"POT-Creation-Date: 2022-04-12 14:15+0000\n"
+"PO-Revision-Date: 2022-04-12 14:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -50,6 +50,11 @@ msgid "Events"
 msgstr "Tapahtumat"
 
 #. module: event_batch
+#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__first_time
+msgid "First time"
+msgstr "Ensimmäinen kerta"
+
+#. module: event_batch
 #: model:ir.model.fields,field_description:event_batch.field_event_registration__id
 #: model:ir.model.fields,field_description:event_batch.field_op_batch_students__id
 #: model:ir.model.fields,field_description:event_batch.field_op_student__id
@@ -68,7 +73,7 @@ msgstr "Viimeksi muokattu"
 #. module: event_batch
 #: model:ir.model.fields,help:event_batch.field_op_student__event_count
 msgid "Number of events the partner has participated."
-msgstr "Tapahtumien määrä mihin partneri on osallistunut."
+msgstr "Tapahtumien määrä mihin kumppani on osallistunut."
 
 #. module: event_batch
 #: model:ir.model,name:event_batch.model_product_product

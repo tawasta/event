@@ -114,7 +114,20 @@ class EventRegistration(models.Model):
                 registration.student_batch_id = student_batch.id
         return registrations
 
+    def unlink(self):
+        self._unlink_associated_student_batch()
+        return super(EventRegistration, self).unlink()
+
     # 7. Action methods
+    def _unlink_associated_student_batch(self):
+        for registration in self:
+            if (
+                registration.student_batch_id
+                and registration.student_batch_id.state == "draft"
+            ):
+                self.env["op.batch.students"].search(
+                    [("event_registration_id", "=", registration.id)]
+                ).unlink()
 
     # 8. Business methods
     def student_batch_values_preprocess(self, registration):
