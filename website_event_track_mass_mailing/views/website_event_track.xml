@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_event_track_mass_mail" model="ir.actions.act_window">
+        <field name="name">Mass mailing to contacts</field>
+        <field name="res_model">mail.compose.message</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="website_event_track.model_event_track" />
+        <field name="binding_view_types">list</field>
+        <field
+            name="context">{'default_composition_mode': 'mass_mail', 'default_partner_to': '${object.partner_id.id or ""}', 'default_use_template': True}</field>
+    </record>
+</odoo>
