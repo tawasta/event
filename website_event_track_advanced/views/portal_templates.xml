@@ -49,6 +49,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <t t-if="tracks">
+                        <caption
+                            class="table-caption"
+                            style="display: list-item; padding: 0.75rem;">My Tracks</caption>
+                    </t>
                     <t t-foreach="tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
@@ -120,6 +125,11 @@
                                 </form>
                             </td>
                          </tr>
+                    </t>
+                    <t t-if="review_tracks">
+                        <caption
+                            class="table-caption"
+                            style="display: list-item; padding: 0.75rem;">Review Tracks</caption>
                     </t>
                     <t t-foreach="review_tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />

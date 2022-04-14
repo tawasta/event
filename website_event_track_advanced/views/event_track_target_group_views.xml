@@ -23,8 +23,8 @@
                     </div>
                     <group>
                         <field name="name" />
-                        <field name="description" optional="show" />
-                        <field name="event_tracks" optional="show" />
+                        <field name="description" />
+                        <field name="event_tracks" widget="many2many_tags" />
                     </group>
                 </sheet>
             </form>
