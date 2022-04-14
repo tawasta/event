@@ -50,7 +50,7 @@ class TrackRating(models.Model):
     grade_id = fields.Many2one(
         comodel_name="event.track.rating.grade", string="Track Grade"
     )
-    comment = fields.Char("Comment")
+    comment = fields.Html("Comment")
 
     # 3. Default methods
 
