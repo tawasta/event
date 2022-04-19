@@ -94,10 +94,7 @@ class EventEvent(models.Model):
         "Cancel registration before date", compute="_compute_before_date", store=True
     )
     able_to_cancel = fields.Boolean(
-        "Able to cancel registration",
-        compute="_compute_able_to_cancel",
-        readonly=True,
-        store=True,
+        "Able to cancel registration", compute="_compute_able_to_cancel", readonly=True
     )
     date_begin_calendar_utc = fields.Char(
         string="Start Date Calendar UTC", compute="_compute_date_begin_calendar_utc"
