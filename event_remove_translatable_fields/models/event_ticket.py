@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import _, fields, models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -37,17 +37,8 @@ class EventTemplateTicket(models.Model):
     _inherit = "event.type.ticket"
 
     # 2. Fields declaration
-    name = fields.Char(
-        string="Name",
-        default=lambda self: _("Registration"),
-        required=True,
-        translate=False,
-    )
-    description = fields.Text(
-        "Description",
-        translate=False,
-        help="A description of the ticket that you want to communicate to your customers.",
-    )
+    name = fields.Char(translate=False)
+    description = fields.Text(translate=False)
 
     # 3. Default methods
 

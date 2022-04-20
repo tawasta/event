@@ -20,8 +20,8 @@
 
 {
     "name": "Event Remove Translatable Fields",
-    "summary": "Removes translatable fields from Event.",
-    "version": "14.0.1.0.0",
+    "summary": "Removes translatable name and description fields from Event.",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
