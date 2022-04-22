@@ -41,6 +41,7 @@
                 <thead>
                     <tr class="active">
                         <th>Track</th>
+                        <th>Target Group</th>
                         <th>Event</th>
                         <th>Event date</th>
                         <th>Contact Person</th>
@@ -58,7 +59,18 @@
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
                             <td>
-                                <span t-field="track.name" />
+                                <span
+                                    t-field="track.name"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.name"
+                                />
+                            </td>
+                            <td>
+                                <span
+                                    t-field="track.target_group.name"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.target_group.name"
+                                />
                             </td>
                             <td>
                                 <a
@@ -68,12 +80,16 @@
                                 </a>
                             </td>
                             <td>
-                               <span t-field="event.date_begin" /> - <span
-                                    t-field="event.date_end"
-                                />
+                               <span>
+                                   <t t-esc="get_formated_date(event)" />
+                               </span>
                             </td>
                             <td>
-                                <span t-field="track.partner_id.name" />
+                                <span
+                                    t-field="track.partner_id.name"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.partner_id.name"
+                                />
                             </td>
                             <td>
                                 <t t-set="track_state">badge-default</t>
@@ -93,8 +109,10 @@
                                     <t t-set="track_state">badge-danger</t>
                                 </t>
                                 <span
-                                    t-field="track.stage_id"
+                                    t-field="track.stage_id.name"
                                     t-attf-class="badge badge-pill {{track_state}}"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.stage_id.name"
                                 />
                             </td>
                             <td>
@@ -135,7 +153,18 @@
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
                             <td>
-                                <span t-field="track.name" />
+                                <span
+                                    t-field="track.name"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.name"
+                                />
+                            </td>
+                            <td>
+                                <span
+                                    t-field="track.target_group.name"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.target_group.name"
+                                />
                             </td>
                             <td>
                                 <a
@@ -145,9 +174,9 @@
                                 </a>
                             </td>
                             <td>
-                               <span t-field="event.date_begin" /> - <span
-                                    t-field="event.date_end"
-                                />
+                               <span>
+                                   <t t-esc="get_formated_date(event)" />
+                               </span>
                             </td>
                             <td>
                             </td>
@@ -171,6 +200,8 @@
                                 <span
                                     t-field="track.stage_id"
                                     t-attf-class="badge badge-pill {{track_state}}"
+                                    data-toggle="tooltip"
+                                    t-att-title="track.stage_id.name"
                                 />
                             </td>
                             <td>
@@ -191,12 +222,17 @@
                                         name="track_id"
                                         t-att-value="track.id"
                                     />
+                                    <span
+                                        t-if="track.is_rated"
+                                        class="font-italic text-muted"
+                                        data-toggle="tooltip"
+                                        title="You have already reviewed this track.">Reviewed</span>
                                     <button
                                         type="submit"
                                         class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
                                         role="button"
-                                        title="Edit this proposal"
-                                        aria-label="Edit this proposal"
+                                        title="Review this proposal"
+                                        aria-label="Review this proposal"
                                         t-attf-id="#{track.id}">Review</button>
                                 </form>
                             </td>
