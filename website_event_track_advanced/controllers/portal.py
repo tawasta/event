@@ -19,16 +19,18 @@
 ##############################################################################
 
 # 1. Standard library imports:
+import babel.dates
+
+# 3. Odoo imports (openerp):
+from odoo import fields, http
+from odoo.http import request
+from odoo.tools.misc import get_lang
+
+# 4. Imports from Odoo modules:
+from odoo.addons.portal.controllers.portal import CustomerPortal
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import http
-
-# 4. Imports from Odoo modules:
-from odoo.http import request
-
-from odoo.addons.portal.controllers.portal import CustomerPortal
 
 # 5. Local imports in the relative form:
 
@@ -59,6 +61,18 @@ class PortalTrack(CustomerPortal):
             values["track_count"] = track_count or 0
         return values
 
+    def get_formated_date(self, event):
+        start_date = fields.Datetime.from_string(event.date_begin).date()
+        end_date = fields.Datetime.from_string(event.date_end).date()
+        month = babel.dates.get_month_names(
+            "abbreviated", locale=get_lang(event.env).code
+        )[start_date.month]
+        return ("%s %s%s") % (
+            month,
+            start_date.strftime("%e"),
+            (end_date != start_date and ("-" + end_date.strftime("%e")) or ""),
+        )
+
     @http.route(["/my/tracks"], type="http", auth="user", website=True)
     def portal_my_tracks(self, **kw):
         values = self._prepare_portal_layout_values()
@@ -82,6 +96,11 @@ class PortalTrack(CustomerPortal):
             )
             values.update({"review_tracks": review_tracks or False})
         values.update(
-            {"tracks": tracks, "page_name": "track", "default_url": "/my/tracks"}
+            {
+                "tracks": tracks,
+                "page_name": "track",
+                "default_url": "/my/tracks",
+                "get_formated_date": self.get_formated_date,
+            }
         )
         return request.render("website_event_track_advanced.portal_my_tracks", values)

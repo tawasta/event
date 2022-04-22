@@ -61,6 +61,11 @@ class EventTrack(models.Model):
         string="Plain description", compute="_compute_description_plain"
     )
 
+    is_rated = fields.Boolean(
+        "Is Rated",
+        help="Helper field to check if current user has reviewed the track.",
+        compute="_compute_is_rated",
+    )
     ratings = fields.One2many("event.track.rating", "event_track", string="Ratings")
     ratings_count = fields.Integer("Ratings Count", compute="_compute_ratings_count")
     rating_avg = fields.Float(
@@ -281,6 +286,19 @@ class EventTrack(models.Model):
                         "comment": rec.rating_comment,
                     }
                 )
+
+    def _compute_is_rated(self):
+        for rec in self:
+            rec.is_rated = False
+            reviewer = self.env["event.track.reviewer"].search(
+                [("user_id", "=", rec.env.user.id)]
+            )
+            if reviewer:
+                existing_rating = rec.ratings.search(
+                    [("reviewer_id", "=", reviewer.id), ("event_track", "=", rec.id)]
+                )
+                if existing_rating:
+                    rec.is_rated = True
 
     def _compute_overlapping_location_track_ids(self):
         # Search overlapping tracks in the same location
