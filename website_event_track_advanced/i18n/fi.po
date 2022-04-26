@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-22 11:10+0000\n"
-"PO-Revision-Date: 2022-04-22 11:10+0000\n"
+"POT-Creation-Date: 2022-04-26 13:11+0000\n"
+"PO-Revision-Date: 2022-04-26 13:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -162,6 +162,11 @@ msgstr "<strong>Esiintyjät:</strong>"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_show_target_group
 msgid "<strong>Target group:</strong>"
 msgstr "<strong>Kohderyhmä:</strong>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_location_and_time
+msgid "<strong>Time:</strong>"
+msgstr "<strong>Ajankohta:</strong>"
 
 #. module: website_event_track_advanced
 #: model:mail.template,body_html:website_event_track_advanced.mail_template_data_track_draft
@@ -2391,7 +2396,7 @@ msgstr "sulje"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
 msgstr ""
-"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+"on olemassa järjestelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
