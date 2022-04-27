@@ -27,15 +27,21 @@ import werkzeug
 from odoo import http
 from odoo.http import request
 
-# 4. Imports from Odoo modules:
 from odoo.addons.website_event_sale.controllers.main import WebsiteEventSaleController
+
+# 4. Imports from Odoo modules:
+from odoo.addons.website_event_waiting_list.controllers.event import (
+    WebsiteEventControllerWaiting,
+)
 
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
 
 
-class WebsiteEventSaleWaitingListController(WebsiteEventSaleController):
+class WebsiteEventSaleWaitingListController(
+    WebsiteEventSaleController, WebsiteEventControllerWaiting
+):
     def _create_attendees_from_registration_post(
         self, event, registration_data, waiting_list_check
     ):
@@ -60,7 +66,7 @@ class WebsiteEventSaleWaitingListController(WebsiteEventSaleController):
                 info["sale_order_line_id"] = cart_values.get("line_id")
 
         return super(
-            WebsiteEventSaleController, self
+            WebsiteEventControllerWaiting, self
         )._create_attendees_from_registration_post(event, registration_data)
 
     @http.route()
