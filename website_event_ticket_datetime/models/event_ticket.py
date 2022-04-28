@@ -19,11 +19,13 @@
 ##############################################################################
 
 # 1. Standard library imports:
-
-# 2. Known third party imports:
+from datetime import datetime
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+
+# 2. Known third party imports:
+
 
 # 4. Imports from Odoo modules:
 
@@ -51,7 +53,14 @@ class EventTicket(models.Model):
                 ticket, fields.Datetime.now()
             )
             if ticket.end_sale_date:
-                ticket.is_expired = ticket.end_sale_date < current_date.now()
+                try:
+                    ticket.is_expired = ticket.end_sale_date < current_date.now()
+                except TypeError:
+                    ticket.is_expired = (
+                        datetime.combine(ticket.end_sale_date, datetime.min.time())
+                        < current_date.now()
+                    )
+
             else:
                 ticket.is_expired = False
 
@@ -70,6 +79,13 @@ class EventTicket(models.Model):
             current_date = fields.Datetime.context_timestamp(
                 ticket, fields.Datetime.now()
             )
-            return ticket.start_sale_date <= current_date.now()
+            try:
+                launched = ticket.start_sale_date <= current_date.now()
+            except TypeError:
+                launched = (
+                    datetime.combine(ticket.start_sale_date, datetime.min.time())
+                    <= current_date.now()
+                )
+            return launched
         else:
             return True

@@ -21,7 +21,7 @@
 {
     "name": "Website Event Ticket Datetime",
     "summary": "Define ticket sale start/end with datetime accuracy",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
