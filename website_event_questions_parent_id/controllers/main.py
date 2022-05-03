@@ -46,8 +46,6 @@ class WebsiteEventControllerCompanyID(WebsiteEvent):
         for key, value in form_details.items():
             if "company" in key and value:
                 registration_index, _question = key.split("-")
-                print(registration_index)
-                print(value)
                 company = (
                     request.env["res.partner"]
                     .sudo()
@@ -67,5 +65,4 @@ class WebsiteEventControllerCompanyID(WebsiteEvent):
                     )
                 registrations[int(registration_index) - 1]["parent_id"] = company.id
 
-        print(registrations)
         return registrations

@@ -32,6 +32,34 @@ from odoo import models
 # 6. Unknown third party imports:
 
 
+class SaleOrder(models.Model):
+    # 1. Private attributes
+    _inherit = "sale.order"
+
+    # 2. Fields declaration
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+    def write(self, vals):
+        res = super(SaleOrder, self).write(vals)
+        if vals.get("state") in ["sent", "sale", "done"]:
+            registrations = self.env["event.registration"].search(
+                [("sale_order_id", "in", self.ids)]
+            )
+            if registrations and registrations._check_auto_confirmation():
+                registrations.sudo().action_confirm()
+        return res
+
+    # 7. Action methods
+
+    # 8. Business methods
+
+
 class SaleOrderLine(models.Model):
     # 1. Private attributes
     _inherit = "sale.order.line"
@@ -45,7 +73,6 @@ class SaleOrderLine(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
-
     def _unlink_associated_registrations(self):
         # Do not unlink registration confirmed through waiting list
         # instead move it back to waiting list and remove sale_order
