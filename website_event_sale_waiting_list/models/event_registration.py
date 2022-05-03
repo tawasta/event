@@ -70,5 +70,24 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
+    def _check_auto_confirmation(self):
+        if self._context.get("skip_confirm") or self._context.get("skip_confirm_wait"):
+            return False
+        if any(
+            not registration.event_id.auto_confirm
+            or (
+                registration.event_id.seats_available <= 0
+                and registration.event_id.seats_limited
+                or registration.event_ticket_id.seats_available <= 0
+                and registration.event_ticket_id.seats_limited
+            )
+            or (
+                registration.sale_order_id
+                and registration.sale_order_id.state not in ["sent", "sale", "done"]
+            )
+            for registration in self
+        ):
+            return False
+        return True
 
     # 8. Business methods

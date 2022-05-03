@@ -161,17 +161,9 @@ class WebsiteEventSaleWaitingListController(
                         and event.sudo().seats_available >= 1
                     ):
                         if self._confirm_registration_from_waiting_list(registration):
-                            if registration.event_id.auto_confirm:
-                                registration.sudo().write(
-                                    {
-                                        "state": "open",
-                                        "confirmed_from_waiting_list": True,
-                                    }
-                                )
-                            else:
-                                registration.sudo().write(
-                                    {"confirmed_from_waiting_list": True}
-                                )
+                            registration.sudo().write(
+                                {"confirmed_from_waiting_list": True}
+                            )
                             return request.redirect("/shop/checkout")
                         else:
                             if registration.event_id.auto_confirm:
