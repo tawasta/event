@@ -23,7 +23,6 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo.http import request
 
 # 4. Imports from Odoo modules:
 from odoo.addons.website_event_waiting_list_questions.controllers.main import (
@@ -35,38 +34,24 @@ from odoo.addons.website_event_waiting_list_questions.controllers.main import (
 # 6. Unknown third party imports:
 
 
-class WebsiteEventControllerParentId(WebsiteEvent):
+class WebsiteEventControllerTitle(WebsiteEvent):
     def _process_attendees_form(self, event, form_details):
         registrations = super(
-            WebsiteEventControllerParentId, self
+            WebsiteEventControllerTitle, self
         )._process_attendees_form(event, form_details)
-        print("PROCESS COMP")
-        print("PROCESS COMP")
-        print("PROCESS COMP")
-        print("PROCESS COMP")
+        print("PROCESS")
+        print("PROCESS")
+        print("PROCESS")
+        print("PROCESS")
+        print("PROCESS")
         for registration in registrations:
-            registration["company_id"] = []
+            registration["title"] = []
 
         for key, value in form_details.items():
-            if "company" in key and value:
+            if "title" in key and value:
+                print("title")
                 registration_index, _question = key.split("-")
-                company = (
-                    request.env["res.partner"]
-                    .sudo()
-                    .search([("name", "=ilike", value)], limit=1)
-                )
-                if not company:
-                    company = (
-                        request.env["res.partner"]
-                        .sudo()
-                        .create(
-                            {
-                                "name": value,
-                                "type": "invoice",
-                                "company_type": "company",
-                            }
-                        )
-                    )
-                registrations[int(registration_index) - 1]["parent_id"] = company.id
+                registrations[int(registration_index) - 1]["title"] = value
+                print(value)
 
         return registrations
