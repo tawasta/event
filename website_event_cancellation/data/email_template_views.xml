@@ -163,7 +163,7 @@
     </template>
     <template id="view_email_template_event_cancellation">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
-        <div>
+        <div t-if="object.event_id.has_cancel">
             <t t-esc="link_message" />
             <a t-att-href="object.manage_url" />
             <br />

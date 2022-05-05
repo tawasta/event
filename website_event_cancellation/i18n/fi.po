@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 18:02+0000\n"
-"PO-Revision-Date: 2022-01-24 18:02+0000\n"
+"POT-Creation-Date: 2022-05-05 14:50+0000\n"
+"PO-Revision-Date: 2022-05-05 14:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -125,6 +125,18 @@ msgstr "<strong>Päättyy</strong>"
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__able_to_cancel
 msgid "Able to cancel registration"
 msgstr "Peruminen mahdollista"
+
+#. module: website_event_cancellation
+#: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__has_cancel
+#: model:ir.model.fields,field_description:website_event_cancellation.field_event_type__has_cancel
+msgid "Allow Cancellations"
+msgstr "Salli peruutukset"
+
+#. module: website_event_cancellation
+#: model:ir.model.fields,help:website_event_cancellation.field_event_event__has_cancel
+#: model:ir.model.fields,help:website_event_cancellation.field_event_type__has_cancel
+msgid "Allows registrants to cancel their registrations."
+msgstr "Sallii ilmoittautumisen perumisen ilmoittautujan toimesta."
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
@@ -309,7 +321,7 @@ msgstr "Julkinen linkki"
 #. module: website_event_cancellation
 #: model:ir.model,name:website_event_cancellation.model_event_mail_registration
 msgid "Registration Mail Scheduler"
-msgstr "Rekisteröinnin sähköpostiajastus"
+msgstr "Ilmoittautumisen sähköpostiajastus"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration

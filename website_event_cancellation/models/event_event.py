@@ -50,6 +50,11 @@ class EventType(models.Model):
     _inherit = "event.type"
 
     # 2. Fields declaration
+    has_cancel = fields.Boolean(
+        "Allow Cancellations",
+        help="Allows registrants to cancel their registrations.",
+        default=True,
+    )
     cancel_interval_nbr = fields.Integer("Interval", default=1)
     cancel_interval_unit = fields.Selection(
         [("hours", "Hours"), ("days", "Days"), ("weeks", "Weeks")],
@@ -75,18 +80,28 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     # 2. Fields declaration
+    has_cancel = fields.Boolean(
+        "Allow Cancellations",
+        compute="_compute_has_cancel",
+        help="Allows registrants to cancel their registrations.",
+        default=True,
+        readonly=False,
+        store=True,
+    )
     cancel_interval_nbr = fields.Integer(
         string="Interval",
         compute="_compute_cancel_interval_nbr",
-        required=True,
+        default=1,
+        required=False,
         readonly=False,
         store=True,
     )
     cancel_interval_unit = fields.Selection(
         [("hours", "Hours"), ("days", "Days"), ("weeks", "Weeks")],
         string="Unit",
-        required=True,
         compute="_compute_cancel_interval_unit",
+        default="days",
+        required=False,
         readonly=False,
         store=True,
     )
@@ -113,6 +128,15 @@ class EventEvent(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("event_type_id", "has_cancel")
+    def _compute_has_cancel(self):
+        """Update event configuration from its event type. Depends are set only
+        on event_type_id itself, not its sub fields. Purpose is to emulate an
+        onchange: if event type is changed, update event configuration. Changing
+        event type content itself should not trigger this method."""
+        for event in self:
+            event.has_cancel = event.event_type_id.has_cancel
+
     @api.depends("date_tz", "date_begin")
     def _compute_date_begin_calendar_utc(self):
         for event in self:
@@ -165,7 +189,7 @@ class EventEvent(models.Model):
     @api.depends("cancel_before_date", "date_end", "date_tz", "date_begin")
     def _compute_able_to_cancel(self):
         for event in self:
-            if datetime.now(
+            if not event.has_cancel or datetime.now(
                 tz=pytz.timezone(event.date_tz or "UTC")
             ) > event.cancel_before_date.astimezone(
                 pytz.timezone(event.date_tz or "UTC")
