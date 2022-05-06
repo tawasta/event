@@ -29,5 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["website_event_cancellation", "website_event_track_privacies"],
-    "data": ["data/email_template_views.xml"],
+    "data": ["data/email_template_views.xml", "views/templates.xml"],
 }
