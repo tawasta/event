@@ -40,10 +40,6 @@ class WebsiteEventControllerParentId(WebsiteEvent):
         registrations = super(
             WebsiteEventControllerParentId, self
         )._process_attendees_form(event, form_details)
-        print("PROCESS COMP")
-        print("PROCESS COMP")
-        print("PROCESS COMP")
-        print("PROCESS COMP")
         for registration in registrations:
             registration["company_id"] = []
 
