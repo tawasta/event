@@ -39,19 +39,12 @@ class WebsiteEventControllerTitle(WebsiteEvent):
         registrations = super(
             WebsiteEventControllerTitle, self
         )._process_attendees_form(event, form_details)
-        print("PROCESS")
-        print("PROCESS")
-        print("PROCESS")
-        print("PROCESS")
-        print("PROCESS")
         for registration in registrations:
             registration["title"] = []
 
         for key, value in form_details.items():
             if "title" in key and value:
-                print("title")
                 registration_index, _question = key.split("-")
                 registrations[int(registration_index) - 1]["title"] = value
-                print(value)
 
         return registrations
