@@ -45,6 +45,14 @@ _logger = logging.getLogger(__name__)
 
 
 class EventTrackControllerAdvanced(EventTrackController):
+    def _prepare_calendar_values(self, event):
+        """
+        sort locations based on sequence
+        """
+        res = super(EventTrackControllerAdvanced, self)._prepare_calendar_values(event)
+        res.get("locations").sort(key=lambda x: x.sequence)
+        return res
+
     def _get_event_track_proposal_values(self, event):
         partner_id = request.env.user.partner_id
         tracks = (
