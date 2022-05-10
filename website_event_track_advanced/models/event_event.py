@@ -194,12 +194,12 @@ class EventEvent(models.Model):
             for location_id in locations:
                 tracks = track_model.search(
                     [
-                        "|",
                         ("location_id", "=", location_id.id),
-                        ("location_id", "=", False),
                         ("event_id", "=", record.id),
                         ("date", "!=", False),
+                        ("date_end", "!=", False),
                         ("website_published", "=", True),
+                        ("stage_id.is_done", "=", True),
                     ],
                     order="date",
                 )
@@ -225,18 +225,31 @@ class EventEvent(models.Model):
                         continue
 
                     duration = track.date - previous_track_end
+                    hours, remainder = divmod(duration.seconds, 3600)
+                    minutes, seconds = divmod(remainder, 60)
+                    if hours > 0 and minutes > 0:
+                        break_name = _("Break: %s hours %s minutes") % (hours, minutes)
+                    elif hours > 0:
+                        break_name = _("Break: %s hours") % (hours)
+                    else:
+                        break_name = _("Break: %s minutes") % (minutes)
+
                     duration = duration.total_seconds() / 3600
 
+                    first_done_stage = self.env["event.track.stage"].search(
+                        [("is_done", "=", True)], order="sequence"
+                    )
                     # Empty slot between tracks. Create a break
                     track_values = dict(
                         event_id=record.id,
                         location_id=location_id.id,
-                        name="",
+                        name=break_name,
                         date=previous_track_end,
                         duration=duration,
                         type=break_type.id,
                         website_published=True,
                         color=1,
+                        stage_id=first_done_stage.id,
                     )
 
                     previous_track_end = track.date_end

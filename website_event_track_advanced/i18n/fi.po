@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-26 13:11+0000\n"
-"PO-Revision-Date: 2022-04-26 13:11+0000\n"
+"POT-Creation-Date: 2022-05-10 15:28+0000\n"
+"PO-Revision-Date: 2022-05-10 15:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -938,6 +938,29 @@ msgid "Avoid using identifiable information (name, organisation, project)."
 msgstr "Vältä käyttämästä tunnistetietoja (nimi, organisaatio, projekti)."
 
 #. module: website_event_track_advanced
+#: model:event.track.type,name:website_event_track_advanced.event_track_type_break
+msgid "Break"
+msgstr "Tauko"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Break: %s hours"
+msgstr "Tauko: %s tuntia"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Break: %s hours %s minutes"
+msgstr "Tauko: %s tuntia ja %s minuuttia"
+
+#. module: website_event_track_advanced
+#: code:addons/website_event_track_advanced/models/event_event.py:0
+#, python-format
+msgid "Break: %s minutes"
+msgstr "Tauko: %s minuuttia"
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
 "By clicking \"Save and Submit\" the proposal shall be saved and submitted "
@@ -1284,6 +1307,11 @@ msgstr "Etunimi"
 #, python-format
 msgid "Friday"
 msgstr "Perjantai"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
+msgid "Generate Breaks"
+msgstr "Luo tauot"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__workshop_goals
@@ -2396,7 +2424,7 @@ msgstr "sulje"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
 msgstr ""
-"on olemassa järjestelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
