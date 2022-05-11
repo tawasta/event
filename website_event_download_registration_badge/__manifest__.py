@@ -28,6 +28,14 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_cancellation", "website_event_track_privacies"],
-    "data": ["data/email_template_views.xml", "views/templates.xml"],
+    "depends": [
+        "website_event_cancellation",
+        "website_event_track_privacies",
+        "website_event_questions",
+    ],
+    "data": [
+        "data/email_template_views.xml",
+        "views/event_registration_views.xml",
+        "views/templates.xml",
+    ],
 }
