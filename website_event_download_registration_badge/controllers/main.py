@@ -84,7 +84,7 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                 accepted = pr.id in privacy_ids
                 privacy_values = {
                     "partner_id": partner.id,
-                    "registration_ids": [(4, [registration.id])],
+                    "registration_ids": [(4, registration.id, 0)],
                     "activity_id": pr.id,
                     "accepted": accepted,
                     "state": "answered",
