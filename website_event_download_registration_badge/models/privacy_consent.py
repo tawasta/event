@@ -19,13 +19,11 @@
 ##############################################################################
 
 # 1. Standard library imports:
-from werkzeug import urls
-
-# 3. Odoo imports (openerp):
-from odoo import api, fields, models
 
 # 2. Known third party imports:
 
+# 3. Odoo imports (openerp):
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -34,36 +32,23 @@ from odoo import api, fields, models
 # 6. Unknown third party imports:
 
 
-class EventRegistration(models.Model):
-    # 1. Private attribModelNameutes
-    _inherit = "event.registration"
+class PrivacyConsent(models.Model):
+    # 1. Private attributes
+    _inherit = "privacy.consent"
 
     # 2. Fields declaration
-    registration_badge_url = fields.Char(
-        "Registration Badge Download Link", compute="_compute_registration_badge_url"
-    )
-    registration_badge_downloaded = fields.Boolean(
-        "Badge Downloaded", store=True, readonly=True
-    )
-    privacy_consent_ids = fields.One2many(
-        comodel_name="privacy.consent",
-        inverse_name="registration_ids",
-        string="Privacy Consents",
+    registration_ids = fields.Many2many(
+        comodel_name="event.registration",
+        string="Event Registration",
+        required=True,
+        readonly=True,
+        tracking=True,
+        help="Event registrant asked for consent.",
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("event_id", "access_token")
-    def _compute_registration_badge_url(self):
-        """Url to donwload registration badge"""
-        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
-        for registration in self:
-            registration.registration_badge_url = urls.url_join(
-                base_url,
-                "/event/%s/registration/badge/%s"
-                % (registration.event_id.id, registration.access_token),
-            )
 
     # 5. Constraints and onchanges
 

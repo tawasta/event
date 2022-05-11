@@ -55,7 +55,10 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                     "privacies": event.sudo().privacy_ids,
                 }
                 if post:
-                    self._create_privacy(post, registration.partner_id, event)
+                    self._create_privacy(
+                        post, registration, registration.partner_id, event
+                    )
+                    registration.sudo().write({"registration_badge_downloaded": True})
                     return self._show_report(
                         model=registration,
                         report_type="pdf",
@@ -69,7 +72,7 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                 )
             return request.render("website.page_404")
 
-    def _create_privacy(self, post, partner, event):
+    def _create_privacy(self, post, registration, partner, event):
         """Create privacies"""
         privacy_ids = []
         for privacy in event.privacy_ids:
@@ -81,6 +84,7 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                 accepted = pr.id in privacy_ids
                 privacy_values = {
                     "partner_id": partner.id,
+                    "registration_ids": [(4, [registration.id])],
                     "activity_id": pr.id,
                     "accepted": accepted,
                     "state": "answered",
@@ -93,7 +97,12 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                     )
                 )
                 if already_privacy_record:
-                    already_privacy_record.sudo().write({"accepted": accepted})
+                    already_privacy_record.sudo().write(
+                        {
+                            "accepted": accepted,
+                            "registration_ids": [(4, registration.id, 0)],
+                        }
+                    )
                 else:
                     request.env["privacy.consent"].sudo().create(privacy_values)
 
