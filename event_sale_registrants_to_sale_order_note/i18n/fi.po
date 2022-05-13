@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_sale_registrants_to_sale_order_note
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-13 14:45+0000\n"
+"PO-Revision-Date: 2022-05-13 14:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_sale_registrants_to_sale_order_note
+#: model:ir.model.fields,field_description:event_sale_registrants_to_sale_order_note.field_sale_order__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: event_sale_registrants_to_sale_order_note
+#: model:ir.model.fields,field_description:event_sale_registrants_to_sale_order_note.field_sale_order__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: event_sale_registrants_to_sale_order_note
+#: model:ir.model.fields,field_description:event_sale_registrants_to_sale_order_note.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: event_sale_registrants_to_sale_order_note
+#: code:addons/event_sale_registrants_to_sale_order_note/models/sale_order.py:0
+#, python-format
+msgid "Linked Registrations: %s"
+msgstr "Liittyvät ilmoittautumiset: %s"
+
+#. module: event_sale_registrants_to_sale_order_note
+#: model:ir.model,name:event_sale_registrants_to_sale_order_note.model_sale_order
+msgid "Sales Order"
+msgstr "Myyntitilaus"

@@ -68,21 +68,21 @@ class EventRegistration(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
-    @api.model_create_multi
-    def create(self, vals_list):
-        for values in vals_list:
-            # Add note with registration names
-            if values.get("sale_order_id") and values.get("name"):
-                sale_order = (
-                    self.env["sale.order"].sudo().browse(values.get("sale_order_id"))
-                )
-                if sale_order.note:
-                    new_note = sale_order.note + ", " + values.get("name")
-                else:
-                    new_note = values.get("name")
-                sale_order.sudo().write({"note": new_note})
-        registrations = super(EventRegistration, self).create(vals_list)
-        return registrations
+    # @api.model_create_multi
+    # def create(self, vals_list):
+    #     for values in vals_list:
+    #         # Add note with registration names
+    #         if values.get("sale_order_id") and values.get("name"):
+    #             sale_order = (
+    #                 self.env["sale.order"].sudo().browse(values.get("sale_order_id"))
+    #             )
+    #             if sale_order.note:
+    #                 new_note = sale_order.note + ", " + values.get("name")
+    #             else:
+    #                 new_note = values.get("name")
+    #             sale_order.sudo().write({"note": new_note})
+    #     registrations = super(EventRegistration, self).create(vals_list)
+    #     return registrations
 
     # 7. Action methods
     def _check_auto_confirmation(self):
