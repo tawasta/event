@@ -21,7 +21,7 @@
     "name": "Website Event Download Registration Badge",
     "summary": "Ability to navigate to an URL and download Registration Badge",
     "description": "Ability to navigate to an URL and download Registration Badge",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Miika Nissi",

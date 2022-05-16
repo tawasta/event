@@ -41,7 +41,7 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
         auth="public",
         website=True,
     )
-    def confirm_url_template(self, event, code, **post):
+    def download_reg_badge(self, event, code, **post):
         """
         Return registration badge download page and
         save privacy values on post
@@ -70,7 +70,7 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                     "website_event_download_registration_badge.download_badge_page",
                     render_values,
                 )
-            return request.render("website.page_404")
+        return request.render("website.page_404")
 
     def _create_privacy(self, post, registration, partner, event):
         """Create privacies"""
