@@ -589,3 +589,77 @@ class EventTrackControllerAdvanced(EventTrackController):
         return request.render(
             "website_event_track_advanced.event_track_proposal_advanced", return_vals
         )
+
+    @http.route(
+        [
+            """/event/<model("event.event"):event>/track""",
+            """/event/<model("event.event"):event>/track/tag/<model("event.track.tag"):tag>""",
+        ],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+    )
+    def event_tracks(self, event, tag=None, **searches):
+        """Do not include break tracks in track list"""
+        if not event.can_access_from_current_website():
+            raise NotFound()
+
+        render_vals = self._event_tracks_get_values(event, tag=tag, **searches)
+        render_vals["tracks"] = render_vals.get("tracks").filtered(
+            lambda p: p.type.code != "break"
+        )
+        indexes_to_del = []
+        for track_by_day in render_vals.get("tracks_by_day"):
+            track_by_day["tracks"] = track_by_day.get("tracks").filtered(
+                lambda p: p.type.code != "break"
+            )
+            if not track_by_day["tracks"]:
+                indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
+
+        for i in sorted(indexes_to_del, reverse=True):
+            del render_vals["tracks_by_day"][i]
+        render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
+            lambda p: p.type.code != "break"
+        )
+        render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
+            lambda p: p.type.code != "break"
+        )
+        return request.render("website_event_track.tracks_session", render_vals)
+
+    # Poster listing
+    @http.route(
+        [
+            """/event/<model("event.event"):event>/poster""",
+            """/event/<model("event.event"):event>/poster/tag/<model("event.track.tag"):tag>""",
+        ],
+        type="http",
+        auth="public",
+        website=True,
+    )
+    def event_track_poster(self, event, tag=None, **searches):
+        """Only show poster tracks"""
+        if not event.can_access_from_current_website():
+            raise NotFound()
+
+        render_vals = self._event_tracks_get_values(event, tag=tag, **searches)
+        render_vals["tracks"] = render_vals.get("tracks").filtered(
+            lambda p: p.type.code == "poster"
+        )
+        indexes_to_del = []
+        for track_by_day in render_vals.get("tracks_by_day"):
+            track_by_day["tracks"] = track_by_day.get("tracks").filtered(
+                lambda p: p.type.code == "poster"
+            )
+            if not track_by_day["tracks"]:
+                indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
+
+        for i in sorted(indexes_to_del, reverse=True):
+            del render_vals["tracks_by_day"][i]
+        render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
+            lambda p: p.type.code == "poster"
+        )
+        render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
+            lambda p: p.type.code == "poster"
+        )
+        return request.render("website_event_track.tracks_session", render_vals)
