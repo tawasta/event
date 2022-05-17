@@ -28,7 +28,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "auto-install": True,
+    "auto_install": True,
     "depends": ["event", "website_event"],
     "data": [
         "views/event_templates_page_registration.xml",
