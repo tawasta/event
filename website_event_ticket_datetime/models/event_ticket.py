@@ -19,7 +19,6 @@
 ##############################################################################
 
 # 1. Standard library imports:
-from datetime import datetime
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
@@ -39,32 +38,41 @@ class EventTicket(models.Model):
     _inherit = "event.event.ticket"
 
     # 2. Fields declaration
-    start_sale_date = fields.Datetime(string="Registration Start")
-    end_sale_date = fields.Datetime(string="Registration End")
+    start_sale_datetime = fields.Datetime(string="Registration Start")
+    end_sale_datetime = fields.Datetime(string="Registration End")
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("end_sale_date", "event_id.date_tz")
+    @api.depends(
+        "is_expired",
+        "start_sale_datetime",
+        "event_id.date_tz",
+        "seats_available",
+        "seats_max",
+    )
+    def _compute_sale_available(self):
+        return super(EventTicket, self)._compute_sale_available()
+
+    @api.depends("end_sale_datetime", "event_id.date_tz")
     def _compute_is_expired(self):
         for ticket in self:
             ticket = ticket._set_tz_context()
-            current_date = fields.Datetime.context_timestamp(
+            current_datetime = fields.Datetime.context_timestamp(
                 ticket, fields.Datetime.now()
             )
-            if ticket.end_sale_date:
-                try:
-                    ticket.is_expired = ticket.end_sale_date < current_date.now()
-                except TypeError:
-                    ticket.is_expired = (
-                        datetime.combine(ticket.end_sale_date, datetime.min.time())
-                        < current_date.now()
-                    )
-
+            if ticket.end_sale_datetime:
+                end_sale_datetime = fields.Datetime.context_timestamp(
+                    ticket, ticket.end_sale_datetime
+                )
+                ticket.is_expired = end_sale_datetime < current_datetime
             else:
                 ticket.is_expired = False
 
     # 5. Constraints and onchanges
+    @api.constrains("start_sale_datetime", "end_sale_datetime")
+    def _constrains_dates_coherency(self):
+        return super(EventTicket, self)._constrains_dates_coherency()
 
     # 6. CRUD methods
 
@@ -74,18 +82,14 @@ class EventTicket(models.Model):
     def is_launched(self):
         # TDE FIXME: in master, make a computed field, easier to use
         self.ensure_one()
-        if self.start_sale_date:
+        if self.start_sale_datetime:
             ticket = self._set_tz_context()
-            current_date = fields.Datetime.context_timestamp(
+            current_datetime = fields.Datetime.context_timestamp(
                 ticket, fields.Datetime.now()
             )
-            try:
-                launched = ticket.start_sale_date <= current_date.now()
-            except TypeError:
-                launched = (
-                    datetime.combine(ticket.start_sale_date, datetime.min.time())
-                    <= current_date.now()
-                )
-            return launched
+            start_sale_datetime = fields.Datetime.context_timestamp(
+                ticket, ticket.start_sale_datetime
+            )
+            return start_sale_datetime <= current_datetime
         else:
             return True

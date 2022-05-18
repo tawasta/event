@@ -39,18 +39,32 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     # 2. Fields declaration
-    start_sale_date = fields.Datetime(
-        "Start sale date",
-        compute="_compute_start_sale_date",
+    start_sale_datetime = fields.Datetime(
+        "Start sale datetime",
+        compute="_compute_start_sale_datetime",
         help="If ticketing is used, contains the earliest starting sale date of tickets.",
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("event_ticket_ids.start_sale_datetime")
+    def _compute_start_sale_datetime(self):
+        """Compute the start sale date of an event. Currently lowest starting sale
+        date of tickets if they are used, of False."""
+        for event in self:
+            start_dates = [
+                ticket.start_sale_datetime
+                for ticket in event.event_ticket_ids
+                if not ticket.is_expired
+            ]
+            event.start_sale_datetime = (
+                min(start_dates) if start_dates and all(start_dates) else False
+            )
+
     @api.depends(
         "date_tz",
-        "start_sale_date",
+        "start_sale_datetime",
         "date_end",
         "seats_available",
         "seats_limited",
@@ -59,7 +73,7 @@ class EventEvent(models.Model):
     def _compute_event_registrations_open(self):
         """Compute whether people may take registrations for this event
         * event.date_end -> if event is done, registrations are not open anymore;
-        * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
+        * event.start_sale_datetime -> lowest start date of tickets (if any; start_sale_date
           is False if no ticket are defined, see _compute_start_sale_date);
         * any ticket is available for sale (seats available) if any;
         * seats are unlimited or seats are available;
@@ -76,8 +90,8 @@ class EventEvent(models.Model):
             )
             event.event_registrations_open = (
                 (
-                    event.start_sale_date <= current_datetime.now()
-                    if event.start_sale_date
+                    event.start_sale_datetime <= current_datetime.now()
+                    if event.start_sale_datetime
                     else True
                 )
                 and (date_end_tz >= current_datetime if date_end_tz else True)

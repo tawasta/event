@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-09 10:59+0000\n"
-"PO-Revision-Date: 2021-09-09 10:59+0000\n"
+"POT-Creation-Date: 2022-05-18 16:17+0000\n"
+"PO-Revision-Date: 2022-05-18 16:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,10 +38,11 @@ msgid "ID"
 msgstr "Tunniste (ID)"
 
 #. module: website_event_ticket_datetime
-#: model:ir.model.fields,help:website_event_ticket_datetime.field_event_event__start_sale_date
+#: model:ir.model.fields,help:website_event_ticket_datetime.field_event_event__start_sale_datetime
 msgid ""
 "If ticketing is used, contains the earliest starting sale date of tickets."
-msgstr "Jos lippuja käytetään, sisältää lipun aikaisimman myyntipäivän."
+msgstr ""
+"Jos liput on käytössä, sisältää aikaisimman lipun myyntien alkamisen"
 
 #. module: website_event_ticket_datetime
 #: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event____last_update
@@ -50,16 +51,16 @@ msgid "Last Modified on"
 msgstr "Viimeksi muokattu"
 
 #. module: website_event_ticket_datetime
-#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event_ticket__end_sale_date
+#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event_ticket__end_sale_datetime
 msgid "Registration End"
 msgstr "Ilmoittautuminen päättyy"
 
 #. module: website_event_ticket_datetime
-#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event_ticket__start_sale_date
+#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event_ticket__start_sale_datetime
 msgid "Registration Start"
 msgstr "Ilmoittautuminen alkaa"
 
 #. module: website_event_ticket_datetime
-#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event__start_sale_date
-msgid "Start sale date"
-msgstr "Myynnin aloituspäivämäärä"
+#: model:ir.model.fields,field_description:website_event_ticket_datetime.field_event_event__start_sale_datetime
+msgid "Start sale datetime"
+msgstr "Ilmoittautumisen alun päivämäärä"

@@ -3,15 +3,15 @@
     <template
         id="events_list_start_sale_date"
         inherit_id="website_event_ticket_datetime.events_list_datetime"
-        active="True"
+        active="False"
         customize_show="True"
         name="Show start sale date">
         <xpath expr="//t[@class='datetime-sale']" position="replace">
             <t
-                t-if="event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now()"
+                t-if="event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now()"
                 class="datetime-sale">
                 Registrations start on <span
-                    t-esc="event.start_sale_date"
+                    t-esc="event.start_sale_datetime"
                     t-options="{'widget': 'datetime', 'format': 'short'}"
                 />
             </t>

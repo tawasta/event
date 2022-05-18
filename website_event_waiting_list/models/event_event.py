@@ -186,7 +186,7 @@ class EventEvent(models.Model):
 
     @api.depends(
         "date_tz",
-        "start_sale_date",
+        "start_sale_datetime",
         "date_end",
         "seats_available",
         "seats_limited",
@@ -197,8 +197,8 @@ class EventEvent(models.Model):
         """Compute whether people may take registrations for this event
         * event.date_end -> if event is done, registrations are not open anymore;
         * event.
-        * event.start_sale_date -> lowest start date of tickets (if any; start_sale_date
-          is False if no ticket are defined, see _compute_start_sale_date);
+        * event.start_sale_datetime -> lowest start date of tickets (if any; start_sale_datetime
+          is False if no ticket are defined, see _compute_start_sale_datetime);
         * any ticket is available for sale (seats available) if any;
         * seats are unlimited or seats are available;
         * allow registrations to waiting list if enabled
@@ -215,8 +215,8 @@ class EventEvent(models.Model):
             )
             event.event_registrations_open = (
                 (
-                    event.start_sale_date <= current_datetime.now()
-                    if event.start_sale_date
+                    event.start_sale_datetime <= current_datetime.now()
+                    if event.start_sale_datetime
                     else True
                 )
                 and (date_end_tz >= current_datetime if date_end_tz else True)
