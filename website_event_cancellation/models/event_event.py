@@ -237,7 +237,7 @@ class EventEvent(models.Model):
 
     @api.depends(
         "date_tz",
-        "start_sale_date",
+        "start_sale_datetime",
         "date_end",
         "seats_available",
         "seats_limited",
