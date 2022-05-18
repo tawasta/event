@@ -134,12 +134,21 @@
                                         t-att-value="track.id"
                                     />
                                     <button
+                                        t-if="track.stage_id.is_editable"
                                         type="submit"
                                         class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
                                         role="button"
                                         title="Edit this proposal"
                                         aria-label="Edit this proposal"
-                                        t-attf-id="#{track.id}">View/Edit</button>
+                                        t-attf-id="#{track.id}">Edit</button>
+                                    <button
+                                        t-else=""
+                                        type="submit"
+                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
+                                        role="button"
+                                        title="Edit this proposal"
+                                        aria-label="Edit this proposal"
+                                        t-attf-id="#{track.id}">View</button>
                                 </form>
                             </td>
                          </tr>
