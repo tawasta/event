@@ -20,7 +20,7 @@
         inherit_id="website_event_ticket_datetime.events_list_datetime">
         <xpath expr="//t[@class='datetime-sale']" position="attributes">
             <attribute
-                name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
+                name="t-if">event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
         </xpath>
     </template>
     <template
@@ -28,7 +28,7 @@
         inherit_id="website_event_frontend_customization.events_list_start_sale_date">
         <xpath expr="//t[@class='datetime-sale']" position="attributes">
             <attribute
-                name="t-if">event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
+                name="t-if">event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now() and not event.sudo().stage_id.cancel</attribute>
         </xpath>
     </template>
 </odoo>
