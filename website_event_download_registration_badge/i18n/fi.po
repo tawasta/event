@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-11 14:29+0000\n"
-"PO-Revision-Date: 2022-05-11 14:29+0000\n"
+"POT-Creation-Date: 2022-05-20 13:31+0000\n"
+"PO-Revision-Date: 2022-05-20 13:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: code:addons/website_event_download_registration_badge/controllers/main.py:0
 #, python-format
 msgid "%s is not the reference of a report"
-msgstr "%s ei ole raportin viite"
+msgstr ""
 
 #. module: website_event_download_registration_badge
 #: model_terms:ir.ui.view,arch_db:website_event_download_registration_badge.download_badge_page
@@ -71,6 +71,7 @@ msgid "Consent of data processing"
 msgstr "Datan käsittelyn hyväksyntä"
 
 #. module: website_event_download_registration_badge
+#: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_registration__display_name
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_privacy_consent__display_name
 msgid "Display Name"
@@ -102,6 +103,21 @@ msgid "Download your registration badge here:"
 msgstr "Lataa nimilappusi tästä:"
 
 #. module: website_event_download_registration_badge
+#: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_event__registration_badge
+msgid "Enable Registration Badge"
+msgstr "Ota nimilappu käyttöön"
+
+#. module: website_event_download_registration_badge
+#: model:ir.model.fields,help:website_event_download_registration_badge.field_event_event__registration_badge
+msgid "Enable registration badge to be sent in registration emails."
+msgstr "Ota nimilappu käyttöön ilmoittautumisviesteihin."
+
+#. module: website_event_download_registration_badge
+#: model:ir.model,name:website_event_download_registration_badge.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_download_registration_badge
 #: model:ir.model,name:website_event_download_registration_badge.model_event_registration
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_privacy_consent__registration_ids
 msgid "Event Registration"
@@ -113,6 +129,7 @@ msgid "Event registrant asked for consent."
 msgstr "Tapahtuman osallistujalta kysytty lupa."
 
 #. module: website_event_download_registration_badge
+#: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_event__id
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_registration__id
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_privacy_consent__id
 msgid "ID"
@@ -127,9 +144,10 @@ msgstr "Jos uskot tämän olevan virhe. Ota yhteyttä tapahtuman järjestäjää
 #: code:addons/website_event_download_registration_badge/controllers/main.py:0
 #, python-format
 msgid "Invalid report type: %s"
-msgstr "Virheellinen raportin tyyppi: %s"
+msgstr ""
 
 #. module: website_event_download_registration_badge
+#: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_event____last_update
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_event_registration____last_update
 #: model:ir.model.fields,field_description:website_event_download_registration_badge.field_privacy_consent____last_update
 msgid "Last Modified on"
