@@ -140,7 +140,7 @@
                                         role="button"
                                         title="Edit this proposal"
                                         aria-label="Edit this proposal"
-                                        t-attf-id="#{track.id}">Edit</button>
+                                        t-attf-id="#{track.id}">Edit Track</button>
                                     <button
                                         t-else=""
                                         type="submit"
@@ -148,7 +148,38 @@
                                         role="button"
                                         title="Edit this proposal"
                                         aria-label="Edit this proposal"
-                                        t-attf-id="#{track.id}">View</button>
+                                        t-attf-id="#{track.id}">View Track</button>
+                                </form>
+                                <form
+                                    t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]])"
+                                    id="track_reviews"
+                                    t-attf-action="/event/#{slug(event)}/track_reviews/form"
+                                    method="post"
+                                    itemscope="itemscope"
+                                    itemprop="offers"
+                                    itemtype="http://schema.org/AggregateOffer">
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        t-att-value="request.csrf_token()"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="track_id"
+                                        t-att-value="track.id"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="reviews"
+                                        t-att-value="reviews"
+                                    />
+                                    <button
+                                        type="submit"
+                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
+                                        role="button"
+                                        title="View track reviews"
+                                        aria-label="View track reviews"
+                                        t-attf-id="#{track.id}">View Reviews</button>
                                 </form>
                             </td>
                          </tr>

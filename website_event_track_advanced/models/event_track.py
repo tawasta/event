@@ -72,7 +72,7 @@ class EventTrack(models.Model):
         "Average rating",
         digits=(3, 2),
         compute="_compute_rating_avg",
-        store=True,
+        store=False,
         copy=False,
     )
     grade_id = fields.Many2one(
