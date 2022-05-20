@@ -21,7 +21,9 @@
         <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="inside">
             <t t-set="speaker_count" t-value="len(track.speaker_ids)" />
             <t t-set="current_count" t-value="0" />
-            <t t-foreach="track.speaker_ids" t-as="speaker">
+            <t
+                t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
+                t-as="speaker">
                 <t t-set="current_count" t-value="current_count +1" />
                 <small>
                     <t t-esc="speaker.sudo().name" /><t
