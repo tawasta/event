@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,26 +17,41 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-{
-    "name": "Website Event Download Registration Badge",
-    "summary": "Ability to navigate to an URL and download Registration Badge",
-    "description": "Ability to navigate to an URL and download Registration Badge",
-    "version": "14.0.1.0.2",
-    "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Miika Nissi",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": [
-        "website_event_cancellation",
-        "website_event_track_privacies",
-        "website_event_questions",
-    ],
-    "data": [
-        "data/email_template_views.xml",
-        "views/event_registration_views.xml",
-        "views/templates.xml",
-        "views/event_views.xml",
-    ],
-}
+
+# 1. Standard library imports:
+
+# 2. Known third party imports:
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class EventEvent(models.Model):
+    # 1. Private attributes
+    _inherit = "event.event"
+
+    # 2. Fields declaration
+    registration_badge = fields.Boolean(
+        "Enable Registration Badge",
+        help="Enable registration badge to be sent in registration emails.",
+        readonly=False,
+        store=True,
+    )
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods

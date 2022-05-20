@@ -2,7 +2,8 @@
 <odoo>
     <template id="view_email_template_event_download_badge">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
-        <div>
+        <t t-esc="object.event_id.registration_badge" />
+        <div t-if="object.event_id.registration_badge">
             Download your registration badge here:
             <a t-att-href="object.registration_badge_url" />
             <br />

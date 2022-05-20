@@ -1,1 +1,1 @@
-from . import event_registration, privacy_consent
+from . import event_event, event_registration, privacy_consent
