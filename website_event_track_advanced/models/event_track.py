@@ -236,13 +236,13 @@ class EventTrack(models.Model):
 
     def _compute_rating_avg(self):
         for rec in self:
-            if not rec.ratings:
-                continue
-            ratings_sum = 0
-            for rating in rec.ratings:
-                ratings_sum += rating.grade_id.grade
-            rating_avg = float(ratings_sum) / float(rec.ratings_count)
-            rec.rating_avg = rating_avg or 0
+            rating_avg = 0
+            if rec.ratings:
+                ratings_sum = 0
+                for rating in rec.ratings:
+                    ratings_sum += rating.grade_id.grade
+                rating_avg = float(ratings_sum) / float(rec.ratings_count)
+            rec.rating_avg = rating_avg
 
     def _compute_user_rating(self):
         for rec in self:
