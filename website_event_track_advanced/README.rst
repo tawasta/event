@@ -8,11 +8,10 @@ Website Event Track Advanced
 Advanced features for Event Track
 
 Features:
-   - Create Review Groups and link them to tracks
-   - Create Track Rating Grades
-   - Ability to give Event Tracks ratings (Rating Grades) based on review groups
-   - Reviewers are users who belong to review groups and are able to rate certain tracks
-   - Advanced Track Proposal Form.
+   - Submit Event Track Proposals with different types
+   - Edit and view Proposals and reviews in portal.
+   - Create Review Groups, create reviewers, add reviewers to review groups, link review groups to tracks.
+     Review group reviewers can then review tracks in portal with track rating grades and verbal ratings.
 
 Configuration
 =============
@@ -33,10 +32,6 @@ Migration changes 10.0 -> 14.0:
    - event.track.rating use reviewer_id over user.uid
    - event.track.review.group reviewers from res.partner to event.track.reviewers
    - event.track.tag tracks field deprecated, use track_ids instead
-
-TODO:
-   - Emails
-   - Translations
 
 Credits
 =======

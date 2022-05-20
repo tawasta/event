@@ -663,3 +663,41 @@ class EventTrackControllerAdvanced(EventTrackController):
             lambda p: p.type.code == "poster"
         )
         return request.render("website_event_track.tracks_session", render_vals)
+
+    @http.route(
+        ["""/event/<model("event.event"):event>/track_reviews/form"""],
+        type="json",
+        auth="public",
+        methods=["POST"],
+        website=True,
+        sitemap=False,
+    )
+    def event_track_reviews_form(self, event, **post):
+        if not event.can_access_from_current_website():
+            raise NotFound()
+        try:
+            track = (
+                request.env["event.track"]
+                .sudo()
+                .search([["id", "=", post.get("track_id")]])
+            )
+        except Exception:
+            return 404
+        reviews = (
+            request.env["event.track.rating"]
+            .sudo()
+            .search([["event_track", "=", track.id]])
+        )
+        values = {
+            "track": track,
+            "event": event,
+            "reviews": reviews,
+            "average_review": track.rating_avg,
+        }
+        return (
+            request.env["ir.ui.view"]
+            .sudo()
+            ._render_template(
+                "website_event_track_advanced.event_track_reviews", values
+            )
+        )

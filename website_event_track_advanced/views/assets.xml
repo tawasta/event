@@ -9,6 +9,10 @@
                 type="text/javascript"
                 src="/website_event_track_advanced/static/src/js/track_proposal.js"
             />
+            <script
+                type="text/javascript"
+                src="/website_event_track_advanced/static/src/js/track_reviews.js"
+            />
         </xpath>
     </template>
 </odoo>
