@@ -23,7 +23,7 @@
     "summary": "Module to manage online Events. Includes a video conference link.",
     "version": "14.0.1.3.0",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://gitlab.com/tawasta/odoo/account-invoicing",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

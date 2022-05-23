@@ -20,11 +20,10 @@
 {
     "name": "Event Partner Membership State",
     "summary": "Show partner membership state on event registration",
-    "description": "Show partner membership state on event registration",
     "version": "14.0.1.0.0",
     "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Miika Nissi",
+    "website": "https://gitlab.com/tawasta/odoo/account-invoicing",
+    "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

@@ -23,7 +23,7 @@
     "summary": "Define ticket sale start/end with datetime accuracy",
     "version": "14.0.1.1.0",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://gitlab.com/tawasta/odoo/account-invoicing",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

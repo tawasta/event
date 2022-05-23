@@ -23,7 +23,7 @@
     "summary": "Adds a view to see event question answers",
     "version": "14.0.1.0.2",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event/",
+    "website": "https://gitlab.com/tawasta/odoo/account-invoicing",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
