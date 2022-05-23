@@ -2,13 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
-Website Event Cancellation
-==========================
-* Cancel events (disable registration, automatic emails and add notice on website)
-* Adds "cancel before" field to events: can't cancel registrations after this date.
-* Adds a personal registration cancellation link to emails.
-* Adds ability to cancel registrations through website by following a link in email.
+==============================
+Event Partner Membership State
+==============================
+Show Partner Membership State on Event Registration
 
 Configuration
 =============

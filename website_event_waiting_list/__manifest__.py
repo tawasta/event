@@ -23,7 +23,7 @@
     "summary": "Adds a waiting list functionality to Events.",
     "version": "14.0.1.3.3",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/account-invoicing",
+    "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

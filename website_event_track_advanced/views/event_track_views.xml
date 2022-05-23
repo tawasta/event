@@ -3,6 +3,7 @@
     <record id="view_event_track_form_advanced" model="ir.ui.view">
         <field name="name">view.event.track.form.advanced</field>
         <field name="model">event.track</field>
+        <field name="priority">99</field>
         <field name="inherit_id" ref="website_event_track.view_event_track_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
