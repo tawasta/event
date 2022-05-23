@@ -20,11 +20,10 @@
 {
     "name": "Event Sale Registrants To Sale Order Note",
     "summary": "Adds a note to Sale Order with Event Registrants names",
-    "description": "Adds a note to Sale Order with Event Registrants names",
     "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Miika Nissi",
+    "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

@@ -34,7 +34,7 @@ from odoo import fields, models
 
 class EventMailScheduler(models.Model):
     # 1. Private attributes
-    _inherit = "event.mail.registration"
+    _inherit = "event.mail"
 
     # 2. Fields declaration
 

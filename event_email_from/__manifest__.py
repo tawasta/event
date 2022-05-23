@@ -27,8 +27,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "external_dependencies": {"python": [], "bin": []},
     "depends": ["event", "website_event_waiting_list", "society_event_core"],
     "data": ["data/email_template_data.xml", "views/res_config_settings_view.xml"],
-    "demo": [],
 }

@@ -1,15 +1,15 @@
 image: "python:3.8.1-buster"
 
 stages:
-  - test
+    - test
 
 code-check:
-  stage: test
-  variables:
-    PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
-  cache:
-    paths:
-      - ${PRE_COMMIT_HOME}
-  script:
-    - pip3 install pre-commit
-    - pre-commit run --all-files
+    stage: test
+    variables:
+        PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+    cache:
+        paths:
+            - ${PRE_COMMIT_HOME}
+    script:
+        - pip3 install pre-commit
+        - pre-commit run --all-files
