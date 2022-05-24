@@ -1,0 +1,3 @@
+[submodule "connector_procountor"]
+	path = connector_procountor
+	url = git@gitlab.com:tawasta/odoo/connector_procountor.git

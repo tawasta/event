@@ -12,11 +12,13 @@
                                 />.</h3>
                         </t>
                         <t t-else="">
-                            <h3>Your registration is cancelled or has not been confirmed to the event <t
+                            <h3
+                            >Your registration is cancelled or has not been confirmed to the event <t
                                     t-esc="event.name"
                                 />.</h3>
                             <p
-                                class="py-2">If you believe this is a mistake. Please contact the event organizer. </p>
+                                class="py-2"
+                            >If you believe this is a mistake. Please contact the event organizer. </p>
                         </t>
                     </div>
                 </div>
@@ -27,9 +29,8 @@
                             type="button"
                             class="btn btn-primary ml-md-2 mt-2 mt-md-0"
                             data-toggle="modal"
-                            data-target="#download_modal"><i
-                                class="fa fa-fw fa-download"
-                            /> Download Registration Badge
+                            data-target="#download_modal"
+                        ><i class="fa fa-fw fa-download" /> Download Registration Badge
                             </button>
                     </t>
                 </div>
@@ -106,14 +107,16 @@
                     tabindex="-1"
                     role="dialog"
                     aria-labelledby="download_modal"
-                    aria-hidden="true">
+                    aria-hidden="true"
+                >
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <form
                                 id="download-modal"
                                 t-attf-action="{{request.httprequest.path}}"
                                 method="post"
-                                enctype="multipart/form-data">
+                                enctype="multipart/form-data"
+                            >
                                 <input
                                     type="hidden"
                                     name="csrf_token"
@@ -122,12 +125,14 @@
                                 <div class="modal-header">
                                     <h4
                                         class="modal-title hidden"
-                                        id="delete_language_title">Download Registration Badge</h4>
+                                        id="delete_language_title"
+                                    >Download Registration Badge</h4>
                                     <button
                                         type="button"
                                         class="close"
                                         data-dismiss="modal"
-                                        aria-label="Close">
+                                        aria-label="Close"
+                                    >
                                         <span aria-label="Close">&amp;times;</span>
                                     </button>
                                 </div>
@@ -146,15 +151,18 @@
                                                                 t-att-required="None if not p.is_required else 'required'"
                                                             />
                                                             <label
-                                                                t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"><t
-                                                                    t-esc="p.name"
-                                                                /><t t-if="p.link"> - <a
+                                                                t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
+                                                            ><t t-esc="p.name" /><t
+                                                                    t-if="p.link"
+                                                                > - <a
                                                                         t-att-href="p.link"
-                                                                        target="_blank"><t
+                                                                        target="_blank"
+                                                                    ><t
                                                                             t-esc="p.link_name"
                                                                         /></a></t></label>
                                                             <div
-                                                                class="invalid-feedback">Please accept these terms.</div>
+                                                                class="invalid-feedback"
+                                                            >Please accept these terms.</div>
                                                         </div>
                                                     </div>
                                                 </t>
@@ -166,11 +174,13 @@
                                     <button
                                         type="button"
                                         class="btn btn-default"
-                                        data-dismiss="modal">Cancel</button>
+                                        data-dismiss="modal"
+                                    >Cancel</button>
                                     <button
                                         id="download-registration-badge"
                                         class="btn btn-primary"
-                                        type="submit">Download</button>
+                                        type="submit"
+                                    >Download</button>
                                 </div>
                             </form>
                         </div>

@@ -7,7 +7,8 @@
         <field name="arch" type="xml">
             <field name="organizer_id" position="attributes">
                 <attribute
-                    name="domain">[("use_as_event_organizer", "=", True)]</attribute>
+                    name="domain"
+                >[("use_as_event_organizer", "=", True)]</attribute>
             </field>
         </field>
     </record>

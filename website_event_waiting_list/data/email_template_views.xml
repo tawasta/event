@@ -20,7 +20,8 @@
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
-            t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+            t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+        >
             <t t-set="email_heading">Your registration to waiting list</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -29,7 +30,8 @@
                         border="0"
                         cellpadding="0"
                         cellspacing="0"
-                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                    >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
@@ -39,10 +41,11 @@
                                         The ticket <strong><t
                                                 t-esc="object.event_ticket_id.name"
                                             /></strong> for event
-                                        <t
-                                            t-if="object.event_id.is_published"><strong><a
+                                        <t t-if="object.event_id.is_published"><strong
+                                            ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"><t
+                                                    style="color:#875A7B;text-decoration:none;"
+                                                ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
                                         <t t-else=""><strong><t
@@ -52,10 +55,11 @@
                                     </t>
                                     <t t-else="">
                                         The event
-                                        <t
-                                            t-if="object.event_id.is_published"><strong><a
+                                        <t t-if="object.event_id.is_published"><strong
+                                            ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"><t
+                                                    style="color:#875A7B;text-decoration:none;"
+                                                ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
                                         <t t-else=""><strong><t
@@ -68,9 +72,11 @@
                                 </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
-                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+                                >
                                     <t
-                                        t-set="link_message">To cancel your position in the waiting list follow the link below:</t>
+                                        t-set="link_message"
+                                    >To cancel your position in the waiting list follow the link below:</t>
                                     <t t-set="button_message">Cancel registration</t>
                                 </t>
                                 <div>
@@ -104,7 +110,8 @@
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
-            t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+            t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+        >
             <t t-set="email_heading">Your registration to waiting list</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -113,19 +120,22 @@
                         border="0"
                         cellpadding="0"
                         cellspacing="0"
-                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                    >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
                                     Hello <t t-esc="object.name or ''" />,<br /><br />
                                     <t t-if="object.event_ticket_id">
-                                        We have more seats available for the ticket <strong><t
+                                        We have more seats available for the ticket <strong
+                                        ><t
                                                 t-esc="object.event_ticket_id.name"
                                             /></strong> for the event
-                                        <t
-                                            t-if="object.event_id.is_published"><strong><a
+                                        <t t-if="object.event_id.is_published"><strong
+                                            ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"><t
+                                                    style="color:#875A7B;text-decoration:none;"
+                                                ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
                                         <t t-else=""><strong><t
@@ -134,10 +144,11 @@
                                     </t>
                                     <t t-else="">
                                         We have more seats available for the event
-                                        <t
-                                            t-if="object.event_id.is_published"><strong><a
+                                        <t t-if="object.event_id.is_published"><strong
+                                            ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"><t
+                                                    style="color:#875A7B;text-decoration:none;"
+                                                ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
                                         <t t-else=""><strong><t
@@ -149,11 +160,14 @@
                                 </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
-                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+                                >
                                     <t
-                                        t-set="link_message">Claim or cancel your seat from the link below:</t>
+                                        t-set="link_message"
+                                    >Claim or cancel your seat from the link below:</t>
                                     <t
-                                        t-set="button_message">Claim or cancel registration</t>
+                                        t-set="button_message"
+                                    >Claim or cancel registration</t>
                                 </t>
                                 <div>
                                     Thank you,<br />

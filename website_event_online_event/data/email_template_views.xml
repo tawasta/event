@@ -9,7 +9,8 @@
                         <a t-att-href="object.event_id.video_conference_link" /><br />
                         <div style="margin: 16px 0px 16px 0px;"><a
                             t-att-href="object.event_id.video_conference_link"
-                            style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                            style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+                        >
                                 Join the video conference here
                         </a></div>
                 </t>
@@ -18,12 +19,15 @@
     </template>
     <template
         id="view_email_template_subscription_with_cancel_online_event"
-        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel">
+        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+    >
         <xpath
             expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
-            position="before">
+            position="before"
+        >
             <t
-                t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
+                t-if="object.event_id.is_online_event and object.event_id.video_conference_link"
+            >
                 <t t-set="details">Join the video conference: <t
                         t-esc="object.event_id.video_conference_link"
                     /></t>
@@ -36,12 +40,15 @@
     </template>
     <template
         id="view_email_template_reminder_with_cancel_online_event"
-        inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel">
+        inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
+    >
         <xpath
             expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
-            position="before">
+            position="before"
+        >
             <t
-                t-if="object.event_id.is_online_event and object.event_id.video_conference_link">
+                t-if="object.event_id.is_online_event and object.event_id.video_conference_link"
+            >
                 <t t-set="details">Join the video conference: <t
                         t-esc="object.event_id.video_conference_link"
                     /></t>
@@ -54,7 +61,8 @@
     </template>
     <template
         id="view_email_template_event_details_online_event"
-        inherit_id="website_event_cancellation.view_email_template_event_details">
+        inherit_id="website_event_cancellation.view_email_template_event_details"
+    >
         <xpath expr="//td[@id='event-address-td']" position="attributes">
             <attribute name="t-if">not object.event_id.is_online_event</attribute>
         </xpath>
@@ -62,7 +70,8 @@
             <td
                 t-if="object.event_id.is_online_event"
                 id="event-address-online-td"
-                style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;">
+                style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;"
+            >
                 <div>
                     <span>Online</span>
                 </div>

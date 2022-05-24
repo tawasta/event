@@ -2,18 +2,23 @@
 <odoo>
     <template
         id="event_track_proposal_admin_show_proposal"
-        inherit_id="website_event_track.event_track_proposal">
+        inherit_id="website_event_track.event_track_proposal"
+    >
         <xpath
             expr="//div[@class='container']//section[@id='forms']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">not event.website_track_proposal and not request.env.user.has_group("event.group_event_manager")</attribute>
+                name="t-if"
+            >not event.website_track_proposal and not request.env.user.has_group("event.group_event_manager")</attribute>
         </xpath>
         <xpath
             expr="//div[@t-if='not track']//section[@id='forms']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">event.website_track_proposal or request.env.user.has_group("event.group_event_manager")</attribute>
+                name="t-if"
+            >event.website_track_proposal or request.env.user.has_group("event.group_event_manager")</attribute>
         </xpath>
     </template>
 </odoo>

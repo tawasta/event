@@ -8,7 +8,8 @@
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
             <field
-                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
+                name="email_from"
+            >${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation has been received
             </field>
@@ -17,7 +18,8 @@
                     border="0"
                     cellpadding="0"
                     cellspacing="0"
-                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+                >
                     <tr>
                         <td align="center">
                             % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -26,7 +28,8 @@
                                 cellpadding="0"
                                 cellspacing="0"
                                 width="590"
-                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                            >
                                 <tbody>
                                     <!-- HEADER -->
                                     <tr>
@@ -36,7 +39,8 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td valign="middle">
                                                         <span style="font-size: 10px;">
@@ -44,7 +48,8 @@
                                                         </span>
                                                         <br />
                                                         <span
-                                                            style="font-size: 20px; font-weight: bold;">
+                                                            style="font-size: 20px; font-weight: bold;"
+                                                        >
                                                             ${object.name}
                                                         </span>
                                                     </td>
@@ -52,7 +57,8 @@
                                                         % if website_url
                                                         <a
                                                             href="${website_url}/my/tracks"
-                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                        >
                                                             View Proposal
                                                         </a>
                                                         % else
@@ -67,7 +73,8 @@
                                                 <tr>
                                                     <td
                                                         colspan="2"
-                                                        style="text-align:center;">
+                                                        style="text-align:center;"
+                                                    >
                                                         <hr
                                                             width="100%"
                                                             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
@@ -85,24 +92,28 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td
                                                         valign="top"
-                                                        style="font-size: 14px;">
+                                                        style="font-size: 14px;"
+                                                    >
                                                         <div>
                                                             <p>
                                                                 Dear ${object.partner_id.name},
                                                             </p><br />
                                                             <p>
-                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.
+                                                                Thank you for your proposal <strong
+                                                                >${object.name}</strong> for the event ${object.event_id.name}.
                                                             </p>
                                                             % if 'website_url':
                                                             <p>
                                                                 The proposal can be edited in
                                                                 <a
                                                                     href="${website_url}/my/tracks"
-                                                                    style="color:#875A7B;">My Proposals</a>.
+                                                                    style="color:#875A7B;"
+                                                                >My Proposals</a>.
                                                             </p>
                                                             % endif
                                                             <p>
@@ -113,7 +124,8 @@
                                                             <div>
                                                                 Thank you,<br />
                                                                 <span
-                                                                    style="color: #454748;">
+                                                                    style="color: #454748;"
+                                                                >
                                                                 -- <br />
                                                                 The ${object.event_id.name} Team
                                                                 </span>
@@ -144,14 +156,16 @@
                                 border="0"
                                 cellpadding="0"
                                 cellspacing="0"
-                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                            >
                                 <tr>
                                     <td style="text-align: center; font-size: 14px;">
                                         Sent by
                                         <a
                                             target="_blank"
                                             href="${object.company_id.website}"
-                                            style="color: #875A7B;">
+                                            style="color: #875A7B;"
+                                        >
                                             ${object.company_id.name}
                                         </a>
                                     </td>
@@ -170,7 +184,8 @@
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
             <field
-                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
+                name="email_from"
+            >${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation was selected to the programme
             </field>
@@ -179,7 +194,8 @@
                     border="0"
                     cellpadding="0"
                     cellspacing="0"
-                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+                >
                     <tr>
                         <td align="center">
                             % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -188,7 +204,8 @@
                                 cellpadding="0"
                                 cellspacing="0"
                                 width="590"
-                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                            >
                                 <tbody>
                                     <!-- HEADER -->
                                     <tr>
@@ -198,7 +215,8 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td valign="middle">
                                                         <span style="font-size: 10px;">
@@ -206,7 +224,8 @@
                                                         </span>
                                                         <br />
                                                         <span
-                                                            style="font-size: 20px; font-weight: bold;">
+                                                            style="font-size: 20px; font-weight: bold;"
+                                                        >
                                                             ${object.name}
                                                         </span>
                                                     </td>
@@ -214,7 +233,8 @@
                                                         % if website_url
                                                         <a
                                                             href="${website_url}/my/tracks"
-                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                        >
                                                             View Proposal
                                                         </a>
                                                         % else
@@ -229,7 +249,8 @@
                                                 <tr>
                                                     <td
                                                         colspan="2"
-                                                        style="text-align:center;">
+                                                        style="text-align:center;"
+                                                    >
                                                         <hr
                                                             width="100%"
                                                             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
@@ -247,30 +268,39 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td
                                                         valign="top"
-                                                        style="font-size: 14px;">
+                                                        style="font-size: 14px;"
+                                                    >
                                                         <div>
                                                             <p>
                                                                 Dear ${object.partner_id.name},
                                                             </p><br />
                                                             <p>
-                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.
+                                                                Thank you for your proposal <strong
+                                                                >${object.name}</strong> for the event ${object.event_id.name}.
                                                             </p>
                                                             <p>
-                                                                Your proposal has been <strong>approved</strong> to the ${object.event_id.name} programme. Congratulations!
+                                                                Your proposal has been <strong
+                                                                >approved</strong> to the ${object.event_id.name} programme. Congratulations!
                                                             </p>
                                                             <p>
-                                                                The proposal had an average rating of <strong>${object.rating_avg}</strong> with scale of 1-5.
+                                                                The proposal had an average rating of <strong
+                                                                >${object.rating_avg}</strong> with scale of 1-5.
                                                             </p>
                                                             <br />
-                                                            <p>Please take care of these:</p>
+                                                            <p
+                                                            >Please take care of these:</p>
                                                             <ul>
-                                                                <li>Check and edit your presentation contents. The final contents will be used in conference handbill and publications.</li>
-                                                                <li>Confirm the presentation after you have done all the necessary edits.</li>
-                                                                <li>Unconfirmed presentations will be left out from conference programme.</li>
+                                                                <li
+                                                                >Check and edit your presentation contents. The final contents will be used in conference handbill and publications.</li>
+                                                                <li
+                                                                >Confirm the presentation after you have done all the necessary edits.</li>
+                                                                <li
+                                                                >Unconfirmed presentations will be left out from conference programme.</li>
                                                             </ul>
                                                             % if 'website_url':
                                                             <br />
@@ -278,7 +308,8 @@
                                                                 The proposal can be edited in
                                                                 <a
                                                                     href="${website_url}/my/tracks"
-                                                                    style="color:#875A7B;">My Proposals</a>.
+                                                                    style="color:#875A7B;"
+                                                                >My Proposals</a>.
                                                             </p>
                                                             % endif
                                                             <br />
@@ -286,7 +317,8 @@
                                                                 Welcome to the conference,<br
                                                                 />
                                                                 <span
-                                                                    style="color: #454748;">
+                                                                    style="color: #454748;"
+                                                                >
                                                                 -- <br />
                                                                 The ${object.event_id.name} Team
                                                                 </span>
@@ -317,14 +349,16 @@
                                 border="0"
                                 cellpadding="0"
                                 cellspacing="0"
-                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                            >
                                 <tr>
                                     <td style="text-align: center; font-size: 14px;">
                                         Sent by
                                         <a
                                             target="_blank"
                                             href="${object.company_id.website}"
-                                            style="color: #875A7B;">
+                                            style="color: #875A7B;"
+                                        >
                                             ${object.company_id.name}
                                         </a>
                                     </td>
@@ -343,7 +377,8 @@
             <field name="auto_delete" eval="True" />
             <field name="lang">${object.partner_id.lang}</field>
             <field
-                name="email_from">${object.event_id.organizer_id.email_formatted | safe}</field>
+                name="email_from"
+            >${object.event_id.organizer_id.email_formatted | safe}</field>
             <field name="subject">
                 ${object.event_id.name} - Your presentation was not selected to the programme
             </field>
@@ -352,7 +387,8 @@
                     border="0"
                     cellpadding="0"
                     cellspacing="0"
-                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+                >
                     <tr>
                         <td align="center">
                             % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -361,7 +397,8 @@
                                 cellpadding="0"
                                 cellspacing="0"
                                 width="590"
-                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                            >
                                 <tbody>
                                     <!-- HEADER -->
                                     <tr>
@@ -371,7 +408,8 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td valign="middle">
                                                         <span style="font-size: 10px;">
@@ -379,7 +417,8 @@
                                                         </span>
                                                         <br />
                                                         <span
-                                                            style="font-size: 20px; font-weight: bold;">
+                                                            style="font-size: 20px; font-weight: bold;"
+                                                        >
                                                             ${object.name}
                                                         </span>
                                                     </td>
@@ -387,7 +426,8 @@
                                                         % if website_url
                                                         <a
                                                             href="${website_url}/my/tracks"
-                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                            style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                        >
                                                             View Proposal
                                                         </a>
                                                         % else
@@ -402,7 +442,8 @@
                                                 <tr>
                                                     <td
                                                         colspan="2"
-                                                        style="text-align:center;">
+                                                        style="text-align:center;"
+                                                    >
                                                         <hr
                                                             width="100%"
                                                             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
@@ -420,20 +461,24 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td
                                                         valign="top"
-                                                        style="font-size: 14px;">
+                                                        style="font-size: 14px;"
+                                                    >
                                                         <div>
                                                             <p>
                                                                 Dear ${object.partner_id.name},
                                                             </p><br />
                                                             <p>
-                                                                Thank you for your proposal <strong>${object.name}</strong> for the event ${object.event_id.name}.
+                                                                Thank you for your proposal <strong
+                                                                >${object.name}</strong> for the event ${object.event_id.name}.
                                                             </p>
                                                             <p>
-                                                                Unfortunately your proposal <strong>${object.name}</strong> was not selected to the ${object.event_id.name} programme.
+                                                                Unfortunately your proposal <strong
+                                                                >${object.name}</strong> was not selected to the ${object.event_id.name} programme.
                                                             </p>
                                                             <br />
                                                             <p>
@@ -443,7 +488,8 @@
                                                             <div>
                                                                 Thank you,<br />
                                                                 <span
-                                                                    style="color: #454748;">
+                                                                    style="color: #454748;"
+                                                                >
                                                                 -- <br />
                                                                 The ${object.event_id.name} Team
                                                                 </span>
@@ -474,14 +520,16 @@
                                 border="0"
                                 cellpadding="0"
                                 cellspacing="0"
-                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                            >
                                 <tr>
                                     <td style="text-align: center; font-size: 14px;">
                                         Sent by
                                         <a
                                             target="_blank"
                                             href="${object.company_id.website}"
-                                            style="color: #875A7B;">
+                                            style="color: #875A7B;"
+                                        >
                                             ${object.company_id.name}
                                         </a>
                                     </td>

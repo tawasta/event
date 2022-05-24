@@ -3,10 +3,12 @@
     <template
         id="event_track_content_author_id"
         inherit_id="website_event_track.event_track_content"
-        name="Author ID for xpath">
+        name="Author ID for xpath"
+    >
         <xpath
             expr="//div[@t-field='track.partner_biography']//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="id">author-div</attribute>
         </xpath>
     </template>
@@ -16,10 +18,12 @@
         inherit_id="website_event_track.event_track_content"
         name="Compact Location"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath expr="//span[@t-field='track.date_end']" position="attributes">
             <attribute
-                name="t-options">{"time_only": "true", "format": "short"}</attribute>
+                name="t-options"
+            >{"time_only": "true", "format": "short"}</attribute>
         </xpath>
         <xpath expr="//t[@t-if='event.date_tz']" position="attributes">
             <attribute name="t-if">1==0</attribute>
@@ -31,13 +35,15 @@
         inherit_id="website_event_track.event_track_content"
         name="Location and Time"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath expr="//t[@t-if='track.date']" position="attributes">
             <attribute name="t-if">1==0</attribute>
         </xpath>
         <xpath
             expr="//t[@t-if='track.location_id']//span[last()]"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
         <xpath expr="//t[@t-if='track.duration']" position="attributes">
@@ -69,7 +75,8 @@
         inherit_id="website_event_track_advanced.event_track_content_author_id"
         name="Hide Author"
         active="True"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath expr="//div[@id='author-div']" position="attributes">
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
@@ -84,10 +91,12 @@
         inherit_id="website_event_track_advanced.event_track_content_author_id"
         name="Show Speakers"
         active="True"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//hr[@t-if='not is_html_empty(track.description)']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
         <xpath expr="//div[@id='author-div']" position="after">
@@ -108,7 +117,8 @@
                             />
                             <span
                                 class="mb-1 d-flex align-items-baseline text-break"
-                                t-if="speaker.function">
+                                t-if="speaker.function"
+                            >
                                 <i class="fa fa-briefcase mr-2" /><span
                                     t-esc="speaker.function"
                                 />
@@ -120,23 +130,24 @@
                             </span>
                             <span
                                 class="mb-1 d-flex align-items-baseline text-break"
-                                t-if="speaker.website">
+                                t-if="speaker.website"
+                            >
                                 <i class="fa fa-home mr-2" /><a
-                                    t-att-href="speaker.website"><span
-                                        t-field="speaker.website"
-                                    /></a>
+                                    t-att-href="speaker.website"
+                                ><span t-field="speaker.website" /></a>
                             </span>
                             <span
                                 class="mb-1 d-flex align-items-baseline text-break"
-                                t-if="speaker.email">
+                                t-if="speaker.email"
+                            >
                                 <i class="fa fa-envelope mr-2" /><a
-                                    t-att-mailto="speaker.email"><span
-                                        t-field="speaker.email"
-                                    /></a>
+                                    t-att-mailto="speaker.email"
+                                ><span t-field="speaker.email" /></a>
                             </span>
                             <span
                                 class="mb-1 d-flex align-items-baseline text-break"
-                                t-if="speaker.phone">
+                                t-if="speaker.phone"
+                            >
                                 <i class="fa fa-phone mr-2" /><span
                                     t-field="speaker.phone"
                                 />
@@ -155,15 +166,18 @@
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Profile Pictures"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//div[@id='speaker-div']//span[hasclass('o_wevent_online_page_avatar')]"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
         <xpath
             expr="//div[@id='author-div']//span[hasclass('o_wevent_online_page_avatar')]"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
     </template>
@@ -173,16 +187,19 @@
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Emails"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//div[@id='speaker-div']//span[@t-field='speaker.email']//..//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
         <xpath
             expr="//div[@id='author-div']//span[@t-field='track.partner_email']//..//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
@@ -193,16 +210,19 @@
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Phones"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//div[@id='speaker-div']//span[@t-field='speaker.phone']//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
         <xpath
             expr="//div[@id='author-div']//span[@t-field='track.partner_phone']//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
@@ -213,16 +233,19 @@
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Websites"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//div[@id='speaker-div']//span[@t-field='speaker.website']//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
         <xpath
             expr="//div[@id='author-div']//span[@t-field='track.partner_id.website']//.."
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
@@ -233,7 +256,8 @@
         inherit_id="website_event_track.event_track_content"
         name="Show Target Group"
         active="True"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath expr="//span[@t-field='track.location_id']//..//.." position="after">
             <div id="target-group-div" class="mx-3 text-muted">
                 <t t-if="track.target_group">
@@ -248,7 +272,8 @@
         inherit_id="website_event_track.event_track_content"
         name="Show Image"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
     <xpath expr="//span[@t-esc='track.name']//..//.." position="before">
             <span
                 t-if="track.website_image"

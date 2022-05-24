@@ -3,10 +3,12 @@
     <!-- Event - Registration -->
     <template
         id="registration_template_ticket_datetime"
-        inherit_id="website_event.registration_template">
+        inherit_id="website_event.registration_template"
+    >
         <xpath
             expr="//t[@t-if='event.start_sale_date and event.start_sale_date &gt; datetime.date.today()']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="t-if">
                 event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now()
             </attribute>
@@ -14,25 +16,32 @@
         <xpath expr="//t[@t-esc='event.start_sale_date']" position="attributes">
             <attribute name="t-esc">event.start_sale_datetime</attribute>
             <attribute
-                name="t-options">{'widget': 'datetime', 'format': 'short'}</attribute>
+                name="t-options"
+            >{'widget': 'datetime', 'format': 'short'}</attribute>
         </xpath>
         <xpath
             expr="//small[@t-if='ticket.end_sale_date and ticket.sale_available and not ticket.is_expired']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">ticket.end_sale_datetime and ticket.sale_available and not ticket.is_expired</attribute>
+                name="t-if"
+            >ticket.end_sale_datetime and ticket.sale_available and not ticket.is_expired</attribute>
         </xpath>
         <xpath
             expr="//small[@t-if='ticket.start_sale_date and not ticket.sale_available and not ticket.is_expired']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">ticket.start_sale_datetime and not ticket.sale_available and not ticket.is_expired</attribute>
+                name="t-if"
+            >ticket.start_sale_datetime and not ticket.sale_available and not ticket.is_expired</attribute>
         </xpath>
         <xpath
             expr="//small[@t-if='tickets.end_sale_date and tickets.sale_available and not tickets.is_expired']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">tickets.end_sale_datetime and tickets.sale_available and not tickets.is_expired</attribute>
+                name="t-if"
+            >tickets.end_sale_datetime and tickets.sale_available and not tickets.is_expired</attribute>
         </xpath>
         <xpath expr="//span[@t-field='ticket.end_sale_date']" position="attributes">
             <attribute name="t-field">ticket.end_sale_datetime</attribute>

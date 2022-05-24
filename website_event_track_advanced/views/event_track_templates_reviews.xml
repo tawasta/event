@@ -6,7 +6,8 @@
             id="modal_event_track_reviews"
             class="modal fade"
             tabindex="-1"
-            role="dialog">
+            role="dialog"
+        >
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header align-items-center">
@@ -14,7 +15,8 @@
                         <button
                             type="button"
                             class="close warning-close-modal-reviews"
-                            aria-label="Close">
+                            aria-label="Close"
+                        >
                                 <span>×</span>
                         </button>
                     </div>

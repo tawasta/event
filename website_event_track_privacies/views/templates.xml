@@ -3,10 +3,12 @@
     <template
         id="event_track_application"
         inherit_id="website_event_track_advanced.event_track_application"
-        name="Event Track Application privacy values">
+        name="Event Track Application privacy values"
+    >
         <xpath
             expr="(//div[@class='modal-footer border-0 justify-content-between'])"
-            position="before">
+            position="before"
+        >
             <t t-if="not track">
                 <div class="modal-body bg-light border-bottom">
                     <div class="row">
@@ -22,15 +24,16 @@
                                                 t-att-required="None if not p.is_required else 'required'"
                                             />
                                             <label
-                                                t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"><t
-                                                    t-esc="p.name"
-                                                /><t t-if="p.link"> - <a
+                                                t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
+                                            ><t t-esc="p.name" /><t t-if="p.link"> - <a
                                                         t-att-href="p.link"
-                                                        target="_blank"><t
+                                                        target="_blank"
+                                                    ><t
                                                             t-esc="p.link_name"
                                                         /></a></t></label>
                                         <div
-                                                class="invalid-feedback">Please accept these terms.</div>
+                                                class="invalid-feedback"
+                                            >Please accept these terms.</div>
                                         </div>
                                     </div>
                                 </t>
