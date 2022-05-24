@@ -12,7 +12,8 @@
     </template>
     <template
         id="events_list_location_online_event"
-        inherit_id="website_event_frontend_customization.events_list_location">
+        inherit_id="website_event_frontend_customization.events_list_location"
+    >
         <xpath expr="//div[@itemprop='location']" position="attributes">
             <attribute name="t-if">not event.is_online_event</attribute>
         </xpath>

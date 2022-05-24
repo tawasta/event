@@ -16,7 +16,8 @@
             <xpath expr="//div[@name='event_type_visibility_tags']" position="after">
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_track_types">
+                    name="event_type_track_types"
+                >
                     <div class="o_setting_left_pane" />
                     <div class="o_setting_right_pane">
                         <label for="track_types_ids" string="Track Types" />
@@ -33,7 +34,8 @@
                 </div>
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_track_target_groups">
+                    name="event_type_track_target_groups"
+                >
                     <div class="o_setting_left_pane" />
                     <div class="o_setting_right_pane">
                         <label for="target_group_ids" string="Track Target Groups" />
@@ -50,7 +52,8 @@
                 </div>
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_track_twitter_hashtags">
+                    name="event_type_track_twitter_hashtags"
+                >
                     <div class="o_setting_left_pane">
                         <field name="show_track_twitter_hashtags" />
                     </div>
@@ -62,7 +65,8 @@
             <xpath expr="//field[@name='use_timezone']//..//.." position="after">
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_location_ids">
+                    name="event_type_location_ids"
+                >
                     <div class="o_setting_left_pane" />
                     <div class="o_setting_right_pane">
                         <label for="location_ids" string="Track Locations" />
@@ -116,7 +120,8 @@
                     <group name="overlapping_tracks" col="1">
                         <field
                             name="overlapping_location_track_ids"
-                            attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="location_id" />
@@ -127,7 +132,8 @@
                         </field>
                         <field
                             name="overlapping_chairperson_track_ids"
-                            attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="chairperson_id" />
@@ -138,7 +144,8 @@
                         </field>
                         <field
                             name="overlapping_speaker_track_ids"
-                            attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="date" />

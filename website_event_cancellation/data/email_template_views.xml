@@ -56,7 +56,8 @@
                     border="0"
                     cellpadding="0"
                     cellspacing="0"
-                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+                >
                     <tr>
                         <td align="center">
                             <table
@@ -64,7 +65,8 @@
                                 cellpadding="0"
                                 cellspacing="0"
                                 width="590"
-                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                            >
                                 <tbody>
                                     <!-- HEADER -->
                                     <tr>
@@ -74,7 +76,8 @@
                                                 border="0"
                                                 cellpadding="0"
                                                 cellspacing="0"
-                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
                                                 <tr>
                                                     <td valign="middle">
                                                         <span style="font-size: 10px;">
@@ -84,16 +87,19 @@
                                                         </span>
                                                         <br />
                                                         <span
-                                                            style="font-size: 20px; font-weight: bold;">
+                                                            style="font-size: 20px; font-weight: bold;"
+                                                        >
                                                             <t t-esc="object.name" />
                                                         </span>
                                                     </td>
                                                     <td valign="middle" align="right">
                                                         <t
-                                                            t-if="object.event_id.is_published">
+                                                            t-if="object.event_id.is_published"
+                                                        >
                                                             <a
                                                                 t-att-href="object.event_id.website_url"
-                                                                style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+                                                                style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                            >
                         View Event
                     </a>
                                                         </t>
@@ -109,7 +115,8 @@
                                                 <tr>
                                                     <td
                                                         colspan="2"
-                                                        style="text-align:center;">
+                                                        style="text-align:center;"
+                                                    >
                                                         <hr
                                                             width="100%"
                                                             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
@@ -134,22 +141,24 @@
                                     border="0"
                                     cellpadding="0"
                                     cellspacing="0"
-                                    style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                                    style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                                >
                                     <tr>
                                         <td
-                                            style="text-align: center; font-size: 14px;">
+                                            style="text-align: center; font-size: 14px;"
+                                        >
                                                 Sent by <a
                                                 target="_blank"
                                                 t-att-href="object.company_id.website"
-                                                style="color: #875A7B;"><t
-                                                    t-esc="object.company_id.name"
-                                                /></a>
+                                                style="color: #875A7B;"
+                                            ><t t-esc="object.company_id.name" /></a>
                                                 <t
-                                                t-if="object.event_id.is_published"><br
-                                                />
+                                                t-if="object.event_id.is_published"
+                                            ><br />
             Discover <a
                                                     href="/event"
-                                                    style="text-decoration:none;color:#717188;">all our events</a>.
+                                                    style="text-decoration:none;color:#717188;"
+                                                >all our events</a>.
                                                 </t>
       </td>
                                     </tr>
@@ -170,7 +179,8 @@
             <div style="margin: 16px 0px 16px 0px;">
                 <a
                     t-att-href="object.manage_url"
-                    style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                    style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+                >
                     <t t-esc="button_message" />
                 </a>
             </div>
@@ -184,7 +194,8 @@
                     border="0"
                     cellpadding="0"
                     cellspacing="0"
-                    style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                    style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                >
                     <tr>
                         <td valign="top" style="font-size: 14px;">
                             <table style="width:100%;">
@@ -198,7 +209,8 @@
                                         />
                                     </td>
                                     <td
-                                        style="padding: 0px 10px 0px 10px;width:50%;line-height:20px;vertical-align:top;">
+                                        style="padding: 0px 10px 0px 10px;width:50%;line-height:20px;vertical-align:top;"
+                                    >
                                         <div>
                                             <strong>From</strong>
                                             <t
@@ -224,7 +236,8 @@
                                     </td>
                                     <td
                                         id="event-address-td"
-                                        style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;">
+                                        style="padding: 0px 10px 0px 10px;width:50%;vertical-align:top;"
+                                    >
                                         <t t-if="object.event_id.address_id.name">
                                             <div>
                                                 <t
@@ -252,7 +265,8 @@
                                                 />,
             </t>
                                             <t
-                                                t-if="object.event_id.address_id.state_id.name"><t
+                                                t-if="object.event_id.address_id.state_id.name"
+                                            ><t
                                                     t-esc="object.event_id.address_id.state_id.name"
                                                 />,
             </t>
@@ -283,7 +297,8 @@
                             <t t-if="object.event_id.organizer_id">
                                 <div>
                                     <span
-                                        style="font-weight:300;margin:10px 0px">Questions about this event?</span>
+                                        style="font-weight:300;margin:10px 0px"
+                                    >Questions about this event?</span>
                                     <div>Please contact the organizer:</div>
                                     <ul>
                                         <li>
@@ -294,7 +309,8 @@
                                         <t t-if="object.event_id.organizer_id.email">
                                             <li>Mail: <a
                                                     t-attf-href="mailto:#{object.event_id.organizer_id.email}"
-                                                    style="text-decoration:none;color:#875A7B;"><t
+                                                    style="text-decoration:none;color:#875A7B;"
+                                                ><t
                                                         t-esc="object.event_id.organizer_id.email"
                                                     /></a></li>
                                         </t>
@@ -329,7 +345,8 @@
                                             <div>
                                                 <a
                                                     t-attf-href="https://maps.google.com/maps?q=#{location}"
-                                                    target="new">
+                                                    target="new"
+                                                >
                                                     <img
                                                         t-attf-src="http://maps.googleapis.com/maps/api/staticmap?autoscale=1&amp;size=598x200&amp;maptype=roadmap&amp;format=png&amp;visual_refresh=true&amp;markers=size:mid%7Ccolor:0xa5117d%7Clabel:%7C#{location}"
                                                         style="vertical-align:bottom; width: 100%;"
@@ -355,7 +372,8 @@
             <a
                 t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=#{object.event_id.name}&amp;dates=#{object.event_id.date_begin_calendar_utc}/#{object.event_id.date_end_calendar_utc}&amp;location=#{location}&amp;details=#{details}"
                 style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
-                target="new"><img
+                target="new"
+            ><img
                     src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
                     style="vertical-align:middle;"
                     height="16"
@@ -363,7 +381,8 @@
                 /> Google</a>
             <a
                 t-attf-href="/event/#{slug(object.event_id)}/ics"
-                style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"><img
+                style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+            ><img
                     src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
                     style="vertical-align:middle;"
                     height="16"
@@ -372,7 +391,8 @@
             <a
                 t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title=#{object.event_id.name}&amp;in_loc=#{location}&amp;st=#{object.event_id.date_begin_calendar_locale}&amp;et=#{object.event_id.date_end_calendar_locale}&amp;desc=#{details}"
                 style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
-                target="new"><img
+                target="new"
+            ><img
                     src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
                     style="vertical-align:middle;"
                     height="16"
@@ -387,7 +407,8 @@
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
-            t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+            t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+        >
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -396,7 +417,8 @@
                         border="0"
                         cellpadding="0"
                         cellspacing="0"
-                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                    >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
@@ -405,9 +427,8 @@
                                     We are happy to confirm your registration to the event
                                     <t t-if="object.event_id.is_published"><a
                                             t-att-href="object.event_id.website_url"
-                                            style="color:#875A7B;text-decoration:none;"><t
-                                                t-esc="object.event_id.name"
-                                            /></a></t>
+                                            style="color:#875A7B;text-decoration:none;"
+                                        ><t t-esc="object.event_id.name" /></a></t>
                                     <t t-else=""><strong><t
                                                 t-esc="object.event_id.name"
                                             /></strong></t>
@@ -415,7 +436,8 @@
                                 </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
-                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+                                >
                                     <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
                                     </t>
@@ -461,7 +483,8 @@
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
-            t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+            t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+        >
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -470,7 +493,8 @@
                         border="0"
                         cellpadding="0"
                         cellspacing="0"
-                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                        style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                    >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
@@ -478,9 +502,8 @@
                                     We are excited to remind you that the event
                                     <t t-if="object.event_id.is_published"><a
                                             t-att-href="object.event_id.website_url"
-                                            style="color:#875A7B;text-decoration:none;"><t
-                                                t-esc="object.event_id.name"
-                                            /></a></t>
+                                            style="color:#875A7B;text-decoration:none;"
+                                        ><t t-esc="object.event_id.name" /></a></t>
                                     <t t-else=""><strong><t
                                                 t-esc="object.event_id.name"
                                             /></strong></t>
@@ -490,7 +513,8 @@
                                 </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
-                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id">
+                                    t-lang="object.partner_id.lang or object.visitor_id.lang_id"
+                                >
                                     <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
                                     </t>

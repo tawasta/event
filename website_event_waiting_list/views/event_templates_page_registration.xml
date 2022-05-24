@@ -3,27 +3,33 @@
     <template
         id="registration_template_waiting_list"
         inherit_id="website_event.registration_template"
-        name="Registration">
+        name="Registration"
+    >
         <!-- Multi ticket view -->
         <xpath expr="//div[@class='w-auto ml-auto']//select" position="attributes">
             <attribute
-                name="t-if">(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
+                name="t-if"
+            >(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
             <attribute name="id">seats_available_check_select</attribute>
         </xpath>
         <xpath
             expr="//div[@class='w-auto ml-auto']//div[@class='text-danger']//span[1]"
-            position="attributes">
+            position="attributes"
+        >
             <attribute
-                name="t-if">not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;=0</attribute>
+                name="t-if"
+            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;=0</attribute>
             <attribute name="id">ticket_available_check_span</attribute>
         </xpath>
         <xpath
             expr="//div[@class='w-auto ml-auto']//div[@class='text-danger']//span[1]"
-            position="after">
+            position="after"
+        >
             <select
                 t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched and ((not event.seats_limited or event.seats_available &lt;=0) or (not ticket.seats_limited or ticket.seats_available &lt;=0))"
                 t-attf-name="nb_register-#{ticket.id}"
-                class="custom-select waiting_list_select_multi">
+                class="custom-select waiting_list_select_multi"
+            >
                 <t t-foreach="range(0, 10)" t-as="nb">
                     <option
                         t-esc="nb"
@@ -35,19 +41,23 @@
         </xpath>
         <xpath
             expr="//div[@class='col-md-4 offset-md-8 py-2 pl-md-0 pr-md-2']//button"
-            position="replace">
+            position="replace"
+        >
             <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)">
+                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+            >
                 <button
                     type="submit"
                     name="waiting_list_button"
                     class="btn btn-primary o_wait_lazy_js btn-block a-submit"
-                    t-attf-id="#{event.id}">
+                    t-attf-id="#{event.id}"
+                >
                     Join the waiting list
                 </button>
             </t>
             <t
-                t-if="event.seats_limited and event.seats_max and event.seats_available &lt; 1">
+                t-if="event.seats_limited and event.seats_max and event.seats_available &lt; 1"
+            >
                 <button class="btn btn-danger btn-block" disabled="1">
                     Sold Out
                 </button>
@@ -58,10 +68,12 @@
                     name="register_button"
                     class="btn btn-primary o_wait_lazy_js btn-block a-submit"
                     disabled=""
-                    t-attf-id="#{event.id}">
+                    t-attf-id="#{event.id}"
+                >
                     Register
                     <t
-                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)">
+                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)"
+                    >
                         (only <t t-esc="event.seats_available" /> available)
                     </t>
                 </button>
@@ -70,15 +82,18 @@
         <!-- Single ticket view -->
         <xpath expr="//t[@t-if='event.event_registrations_open']" position="attributes">
             <attribute
-                name="t-if">(event.event_registrations_open and not event.waiting_list) or (event.event_registrations_open and event.waiting_list and not tickets and (not event.seats_limited or event.seats_available &gt; 0)) or (event.event_registrations_open and event.waiting_list and tickets and (not event.seats_limited or event.seats_available &gt; 0) and (not tickets.seats_limited or tickets.seats_available &gt; 0))</attribute>
+                name="t-if"
+            >(event.event_registrations_open and not event.waiting_list) or (event.event_registrations_open and event.waiting_list and not tickets and (not event.seats_limited or event.seats_available &gt; 0)) or (event.event_registrations_open and event.waiting_list and tickets and (not event.seats_limited or event.seats_available &gt; 0) and (not tickets.seats_limited or tickets.seats_available &gt; 0))</attribute>
         </xpath>
         <xpath
             expr="//div[@class='ml-auto o_wevent_nowrap']//t[@t-else='']//span"
-            position="after">
+            position="after"
+        >
             <t t-if="event.waiting_list">
                 <select
                     t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)"
-                    class="w-auto custom-select waiting_list_select_single">
+                    class="w-auto custom-select waiting_list_select_single"
+                >
                     <t t-foreach="range(0, 10)" t-as="nb">
                         <option
                             t-esc="nb"
@@ -92,14 +107,17 @@
         <!-- Single ticket view submit button -->
         <xpath
             expr="//div[@class='col-lg-4 pt-3 pt-lg-0 pl-2 pl-lg-0']//button[@type='submit']"
-            position="replace">
+            position="replace"
+        >
             <t
-                t-if="event.waiting_list and event.event_registrations_open and ((event.seats_limited and event.seats_available &lt;=0) or (tickets.seats_limited and tickets.seats_available &lt;= 0))">
+                t-if="event.waiting_list and event.event_registrations_open and ((event.seats_limited and event.seats_available &lt;=0) or (tickets.seats_limited and tickets.seats_available &lt;= 0))"
+            >
                 <button
                     type="submit"
                     name="waiting_list_button"
                     class="btn btn-primary o_wait_lazy_js btn-block a-submit"
-                    t-attf-id="#{event.id}">
+                    t-attf-id="#{event.id}"
+                >
                     Join the waiting list
                 </button>
             </t>
@@ -107,10 +125,12 @@
                 <button
                     type="submit"
                     class="btn btn-primary o_wait_lazy_js btn-block a-submit"
-                    t-attf-id="#{event.id}">
+                    t-attf-id="#{event.id}"
+                >
                     Register
                     <t
-                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)">
+                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)"
+                    >
                         (only <t t-esc="event.seats_available" /> available)
                     </t>
                 </button>
@@ -120,7 +140,8 @@
     <!-- Modal to register for an event inherit to add waiting list -->
     <template
         id="registration_attendee_details"
-        inherit_id="website_event.registration_attendee_details">
+        inherit_id="website_event.registration_attendee_details"
+    >
         <xpath expr="//h4[@class='modal-title']" position="replace">
             <input
                 class="d-none"
@@ -155,7 +176,8 @@
     <template
         id="registration_complete"
         inherit_id="website_event.registration_complete"
-        name="Registration">
+        name="Registration"
+    >
         <xpath expr="//div[@class='col-12']" position="replace">
             <div class="col-12">
                 <t t-if="attendees[0].state == 'wait'">
@@ -170,7 +192,8 @@
                 <span class="h4 text-muted" t-esc="event.name" />
                 <t t-if="attendees[0].state == 'wait'">
                     <p
-                        class="py-2">You will be contacted if the event has more seats available.</p>
+                        class="py-2"
+                    >You will be contacted if the event has more seats available.</p>
                 </t>
             </div>
         </xpath>

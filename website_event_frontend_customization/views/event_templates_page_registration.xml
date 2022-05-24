@@ -6,10 +6,12 @@
         inherit_id="website_event.event_description_full"
         active="False"
         customize_show="True"
-        name="Show event seats">
+        name="Show event seats"
+    >
         <xpath
             expr="//div[@class='col-lg-4 bg-light shadow-sm d-print-none']//div[@class='o_wevent_sidebar_block'][1]"
-            position="before">
+            position="before"
+        >
             <div id="show_seats" class="o_wevent_sidebar_block">
                 <h6 class="o_wevent_sidebar_title">Current seats</h6>
                 <t t-if="event.seats_limited">
@@ -27,10 +29,12 @@
         inherit_id="website_event.registration_template"
         active="False"
         customize_show="True"
-        name="Hide tickets not for sale">
+        name="Hide tickets not for sale"
+    >
         <xpath expr="//div[@id='o_wevent_tickets_collapse']//div" position="attributes">
             <attribute
-                name="t-att-class">'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
+                name="t-att-class"
+            >'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
         </xpath>
     </template>
     <template
@@ -38,10 +42,12 @@
         inherit_id="website_event.event_description_full"
         active="False"
         customize_show="True"
-        name="Hide share box">
+        name="Hide share box"
+    >
         <xpath
             expr="//div[@class='o_wevent_sidebar_block'][last()]"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class">o_wevent_sidebar_block d-none</attribute>
         </xpath>
     </template>
@@ -51,10 +57,12 @@
         inherit_id="website_event.registration_complete"
         active="True"
         customize_show="True"
-        name="Hide ticket reference">
+        name="Hide ticket reference"
+    >
         <xpath
             expr="//div[@class='d-flex flex-column']//span[last()]"
-            position="replace">
+            position="replace"
+        >
             <span>
                 <i class="fa fa-ticket mr-2" />
                 <t
@@ -70,10 +78,12 @@
         inherit_id="website_event.event_description_full"
         active="True"
         customize_show="True"
-        name="Hide Calender button">
+        name="Hide Calender button"
+    >
         <xpath
             expr="//div[@class='o_wevent_sidebar_block']//div[@class='dropdown']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="class">dropdown d-none</attribute>
         </xpath>
     </template>

@@ -3,7 +3,8 @@
     <template id="record_cover" inherit_id="website.record_cover">
         <xpath
             expr="//div[@t-att-data-name='display_opt_name or default_cover_name']//div[1]"
-            position="replace">
+            position="replace"
+        >
             <t t-if="event and event.banner_image">
                 <div
                     t-attf-class="o_record_cover_component o_record_cover_image #{snippet_autofocus and 'o_we_snippet_autofocus'}"

@@ -5,10 +5,12 @@
         inherit_id="website_event_track.agenda_main_track"
         name="Hide Author"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath
             expr="//small[@t-if='track.partner_id or track.partner_name']"
-            position="attributes">
+            position="attributes"
+        >
             <attribute name="t-if">1==0</attribute>
         </xpath>
     </template>
@@ -17,17 +19,20 @@
         inherit_id="website_event_track.agenda_main_track"
         name="Show Speakers"
         active="False"
-        customize_show="True">
+        customize_show="True"
+    >
         <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="inside">
             <t t-set="speaker_count" t-value="len(track.speaker_ids)" />
             <t t-set="current_count" t-value="0" />
             <t
                 t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
-                t-as="speaker">
+                t-as="speaker"
+            >
                 <t t-set="current_count" t-value="current_count +1" />
                 <small>
                     <t t-esc="speaker.sudo().name" /><t
-                        t-if="speaker_count - current_count != 0">,</t>
+                        t-if="speaker_count - current_count != 0"
+                    >,</t>
                 </small>
             </t>
         </xpath>

@@ -7,7 +7,8 @@
         <field name="view_mode">tree,kanban,pivot,graph</field>
         <field name="domain">[('event_id', '=', active_id)]</field>
         <field
-            name="context">{'default_event_id': active_id, 'search_default_group_registration': 1}</field>
+            name="context"
+        >{'default_event_id': active_id, 'search_default_group_registration': 1}</field>
     </record>
     <!-- EVENT.EVENT VIEWS -->
     <record id="event_event_view_form_questions_list" model="ir.ui.view">
@@ -24,7 +25,8 @@
                     class="oe_stat_button"
                     icon="fa-question-circle"
                     help="Question answers for this Event"
-                    attrs="{'invisible': [('has_answers', '!=', True)]}">
+                    attrs="{'invisible': [('has_answers', '!=', True)]}"
+                >
                     <field name="answer_count" widget="statinfo" string="Answers" />
                 </button>
             </xpath>
