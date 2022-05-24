@@ -5,8 +5,7 @@ stages:
 
 code-check:
     except:
-        refs:
-            - 14.0
+        - 14.0
     stage: test
     variables:
         PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
