@@ -21,13 +21,13 @@
 {
     "name": "Website Event Sale Disable Qty in Cart",
     "summary": "Disable changing Event Registration qty in cart",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_sale"],
+    "depends": ["website_sale_disable_qty_in_cart", "website_event_sale"],
     "data": ["views/website_sale_templates.xml"],
 }
