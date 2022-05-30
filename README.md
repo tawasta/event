@@ -36,7 +36,7 @@ addon | version | maintainers | summary
 [website_event_questions_title](website_event_questions_title/) | 14.0.1.0.0 |  | Question to ask for title in Event Registration
 [website_event_questions_view](website_event_questions_view/) | 14.0.1.0.2 |  | Adds a view to see event question answers
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 14.0.1.0.1 |  | Redirects registrations to another URL
-[website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.0 |  | Disable changing Event Registration qty in cart
+[website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.1 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 14.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_ticket_datetime](website_event_ticket_datetime/) | 14.0.1.1.0 |  | Define ticket sale start/end with datetime accuracy
 [website_event_track_advanced](website_event_track_advanced/) | 14.0.1.0.8 |  | Advanced features for Event Track
