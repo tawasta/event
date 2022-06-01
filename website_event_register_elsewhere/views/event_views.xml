@@ -9,10 +9,12 @@
             <field name="arch" type="xml">
                 <xpath
                     expr="//div[@name='event_type_attendees_tickets']"
-                    position="before">
+                    position="before"
+                >
                     <div
                         class="col-12 o_setting_box"
-                        name="event_type_registration_elsewhere">
+                        name="event_type_registration_elsewhere"
+                    >
                         <div class="o_setting_left_pane">
                             <field name="registration_elsewhere" />
                         </div>
@@ -21,7 +23,8 @@
                             <div class="row">
                                 <div
                                     class="col-lg-8 mt16"
-                                    attrs="{'invisible': [('registration_elsewhere', '=', False)]}">
+                                    attrs="{'invisible': [('registration_elsewhere', '=', False)]}"
+                                >
                                     <div>
                                         <label for="registration_link" />
                                         <field name="registration_link" />

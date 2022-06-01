@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_track_partners_mail_list" model="ir.actions.act_window">
+        <field name="name">Add partners to mailing list</field>
+        <field name="res_model">track.mail.list.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="website_event_track.model_event_track" />
+        <field name="binding_view_types">list</field>
+        <field name="context">{'contact': 'partner'}</field>
+    </record>
+    <record id="action_track_speakers_mail_list" model="ir.actions.act_window">
+        <field name="name">Add presenters to mailing list</field>
+        <field name="res_model">track.mail.list.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="website_event_track.model_event_track" />
+        <field name="binding_view_types">list</field>
+        <field name="context">{'contact': 'speaker'}</field>
+    </record>
+    <record model="ir.ui.view" id="track_mail_list_wizard_form">
+        <field name="name">track.mail.list.form</field>
+        <field name="model">track.mail.list.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create contact mailing list">
+                <group>
+                    <field name="mail_list_id" />
+                </group>
+                <footer>
+                    <button
+                        string="Add contacts to mailing list"
+                        name="add_to_mail_list"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

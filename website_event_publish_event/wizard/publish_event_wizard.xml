@@ -14,7 +14,8 @@
             <form string="Publish events on website">
                 Publish events on website
                 <group><field name="event_ids" nolabel="1" readonly="1"><tree
-                            string="Events"><field name="name" /><field
+                            string="Events"
+                        ><field name="name" /><field
                                 name="website_published"
                             /></tree></field></group>
                 <footer><button

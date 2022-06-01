@@ -12,31 +12,39 @@
 
         <record id="website_event_waiting_list.event_waiting" model="mail.template">
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
         <record
             id="website_event_waiting_list.event_confirm_waiting_registration"
-            model="mail.template">
+            model="mail.template"
+        >
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
         <record id="event.event_subscription" model="mail.template">
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
         <record id="event.event_reminder" model="mail.template">
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
         <record
             id="society_event_core.event_survey_feedback_template"
-            model="mail.template">
+            model="mail.template"
+        >
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
         <record id="event.event_registration_mail_template_badge" model="mail.template">
                <field
-                name="email_from">${(object.event_id.sender_email or '') | safe}</field>
+                name="email_from"
+            >${(object.event_id.sender_email or '') | safe}</field>
         </record>
     </data>
 </odoo>

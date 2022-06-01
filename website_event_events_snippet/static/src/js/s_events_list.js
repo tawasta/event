@@ -18,7 +18,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             var self = this;
             const data = self.$target[0].dataset;
             const promoted = data.promoted === "true" || false;
-            const limit = parseInt(data.eventsLimit) || 3;
+            const limit = parseInt(data.eventsLimit, 10) || 3;
             // Compatibility with old template xml id
             if (
                 data.template &&
@@ -33,8 +33,8 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             const loading = data.loading === "true";
             const order = data.order || "date_begin asc";
 
-            this.$target.empty(); // Compatibility with db that saved content inside by mistake
-            this.$target.attr("contenteditable", "False"); // Prevent user edition
+            this.$target.empty();
+            this.$target.attr("contenteditable", "False");
 
             var domain = [];
             if (promoted) {
@@ -98,12 +98,13 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             this._super.apply(this, arguments);
         },
 
-        //--------------------------------------------------------------------------
+        // --------------------------------------------------------------------------
         // Private
-        //--------------------------------------------------------------------------
+        // --------------------------------------------------------------------------
 
         /**
          * @private
+         * @param {Object} $events
          */
         _showLoading: function ($events) {
             var self = this;
@@ -117,7 +118,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
                         .css("background-image")
                         .replace("url(", "")
                         .replace(")", "")
-                        .replace(/\"/gi, "") || "none";
+                        .replace(/"/gi, "") || "none";
 
                 // Append $event to the snippet, regardless by the loading state.
                 $eventi.appendTo(self.$target);

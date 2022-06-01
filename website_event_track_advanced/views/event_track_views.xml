@@ -3,6 +3,7 @@
     <record id="view_event_track_form_advanced" model="ir.ui.view">
         <field name="name">view.event.track.form.advanced</field>
         <field name="model">event.track</field>
+        <field name="priority">99</field>
         <field name="inherit_id" ref="website_event_track.view_event_track_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
@@ -17,7 +18,8 @@
                         <field
                             name="speaker_ids"
                             nolabel="1"
-                            options="{'no_quick_create':True,'no_create_edit':True}">
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        >
                             <tree name="speakers" string="Speakers">
                                 <field name="name" />
                                 <field name="phone" />
@@ -86,7 +88,8 @@
                 <page
                     name="extra_info"
                     string="Extra info"
-                    groups="event.group_event_manager">
+                    groups="event.group_event_manager"
+                >
                     <group colspan="2">
                         <field name="extra_materials" />
                         <field name="video_url" />
@@ -96,7 +99,8 @@
                 <page
                     name="target_group"
                     string="Target Group"
-                    groups="event.group_event_manager">
+                    groups="event.group_event_manager"
+                >
                     <group name="portal">
                         <group>
                             <field
@@ -117,7 +121,8 @@
                 <page
                     string="Ratings"
                     name="ratings"
-                    groups="event.group_event_manager">
+                    groups="event.group_event_manager"
+                >
                     <field name="ratings" readonly="1" />
                 </page>
                 <page name="webinar" string="Webinar">
@@ -142,7 +147,8 @@
                     <group name="overlapping_tracks" col="1">
                         <field
                             name="overlapping_location_track_ids"
-                            attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_location_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="location_id" />
@@ -153,7 +159,8 @@
                         </field>
                         <field
                             name="overlapping_chairperson_track_ids"
-                            attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_chairperson_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="chairperson_id" />
@@ -164,7 +171,8 @@
                         </field>
                         <field
                             name="overlapping_speaker_track_ids"
-                            attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}">
+                            attrs="{'invisible':[('overlapping_speaker_track_ids', '=', [])]}"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="date" />
@@ -177,7 +185,8 @@
             </xpath>
             <xpath
                 expr="//page[@name='description']//field[@name='description']"
-                position="before">
+                position="before"
+            >
                 <group>
                     <field name="attachment_ids" widget="many2many">
                         <tree string="Attachments">

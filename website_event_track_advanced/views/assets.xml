@@ -3,11 +3,16 @@
     <template
         id="assets_frontend"
         inherit_id="website.assets_frontend"
-        name="Event Track Advanced Assets Frontend">
+        name="Event Track Advanced Assets Frontend"
+    >
         <xpath expr="//script[last()]" position="after">
             <script
                 type="text/javascript"
                 src="/website_event_track_advanced/static/src/js/track_proposal.js"
+            />
+            <script
+                type="text/javascript"
+                src="/website_event_track_advanced/static/src/js/track_reviews.js"
             />
         </xpath>
     </template>

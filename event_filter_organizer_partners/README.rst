@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============================
+===============================
 Event Filter Organizer Partners
-=============================
+===============================
 * Filter event partners for organizer_id with partner field "Use on Events as Organizer"
 
 Configuration

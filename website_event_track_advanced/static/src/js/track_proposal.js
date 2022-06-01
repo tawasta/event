@@ -1,4 +1,5 @@
 odoo.define("website_event_track_advanced.track_proposal", function (require) {
+    "use strict";
     var ajax = require("web.ajax");
     var core = require("web.core");
     var Widget = require("web.Widget");
@@ -24,12 +25,13 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
             return res;
         },
 
-        //--------------------------------------------------------------------------
+        // --------------------------------------------------------------------------
         // Handlers
-        //--------------------------------------------------------------------------
+        // --------------------------------------------------------------------------
         /**
          * @private
          * @param {Event} ev
+         * @returns {Ajax} ajax
          */
         on_click: function (ev) {
             var self = this;

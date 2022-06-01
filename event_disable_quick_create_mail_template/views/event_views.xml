@@ -9,7 +9,8 @@
             <field name="arch" type="xml">
                 <field name="template_id" position="attributes">
                     <attribute
-                        name="options">{'no_quick_create':True,'no_create_edit':True, 'no_create': True, 'no_open': True}</attribute>
+                        name="options"
+                    >{'no_quick_create':True,'no_create_edit':True, 'no_create': True, 'no_open': True}</attribute>
                 </field>
             </field>
         </record>

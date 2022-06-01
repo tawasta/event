@@ -21,14 +21,18 @@
 {
     "name": "Website Event Events Snippet",
     "summary": "Advanced Events Snippet for Website",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event", "website_event_private_event"],
+    "depends": [
+        "website_event",
+        "website_event_private_event",
+        "website_event_banner_image",
+    ],
     "data": [
         "views/event_event_views.xml",
         "views/event_snippets.xml",

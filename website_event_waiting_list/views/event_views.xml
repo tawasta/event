@@ -9,7 +9,8 @@
             <div name="event_type_attendees_auto_confirm" position="after">
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_attendees_waiting_list">
+                    name="event_type_attendees_waiting_list"
+                >
                     <div class="o_setting_left_pane">
                         <field name="waiting_list" />
                     </div>
@@ -39,7 +40,8 @@
                     context="{'search_default_waiting': True}"
                     class="oe_stat_button"
                     icon="fa-users"
-                    help="Total Registrations for this Event">
+                    help="Total Registrations for this Event"
+                >
                     <field name="seats_waiting" widget="statinfo" string="Waiting" />
                 </button>
             </xpath>
@@ -74,13 +76,15 @@
             </field>
             <div
                 t-if="total_seats &gt; 0 and ! record.auto_confirm.raw_value"
-                position="after">
+                position="after"
+            >
                 <t t-if="record.seats_waiting.raw_value &gt; 0">
                     <br />
                     <a
                         name="%(event.act_event_registration_from_event)d"
                         type="action"
-                        context="{'search_default_waiting': True}">
+                        context="{'search_default_waiting': True}"
+                    >
                         <span><t
                                 t-esc="record.seats_waiting.raw_value"
                             /> Waiting</span>
@@ -165,12 +169,14 @@
         <field name="arch" type="xml">
             <xpath
                 expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']"
-                position="attributes">
+                position="attributes"
+            >
                 <attribute name="states">draft,wait</attribute>
             </xpath>
             <xpath
                 expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']"
-                position="attributes">
+                position="attributes"
+            >
                 <attribute name="states">draft,wait</attribute>
             </xpath>
         </field>

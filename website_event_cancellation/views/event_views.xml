@@ -9,11 +9,18 @@
             <div name="event_type_location" position="inside">
                 <div
                     class="col-12 col-lg-6 o_setting_box"
-                    name="event_type_attendees_cancel_before">
+                    name="event_type_attendees_cancel_before"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="has_cancel" />
+                    </div>
                     <div class="o_setting_right_pane">
-                        <label for="cancel_interval_nbr" string="Cancel registration" />
+                        <label for="has_cancel" />
                         <div class="row">
-                            <div class="col-lg-8 mt16">
+                            <div
+                                class="col-lg-8 mt16"
+                                attrs="{'invisible': [('has_cancel', '=', False)]}"
+                            >
                                 <field
                                     name="cancel_interval_nbr"
                                     nolabel="1"
@@ -43,8 +50,13 @@
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <field name="date_tz" position="before">
-                <label for="cancel_interval_nbr" string="Cancel registration" />
-                <div class="o_row">
+                <field name="has_cancel" />
+                <label
+                    for="cancel_interval_nbr"
+                    string="Cancel registration"
+                    attrs="{'invisible': [('has_cancel','=',False)]}"
+                />
+                <div class="o_row" attrs="{'invisible': [('has_cancel','=',False)]}">
                     <field name="cancel_interval_nbr" nolabel="1" class="oe_inline" />
                     <field name="cancel_interval_unit" nolabel="1" class="oe_inline" />
                     <div class="mt4">

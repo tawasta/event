@@ -5,7 +5,6 @@
 ================
 Event Email From
 ================
-
 *
 
 Configuration

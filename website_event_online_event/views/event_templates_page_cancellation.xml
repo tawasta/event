@@ -3,7 +3,8 @@
     <template
         id="cancel_registration"
         inherit_id="website_event_cancellation.cancel_registration"
-        name="Cancel Registration">
+        name="Cancel Registration"
+    >
         <xpath expr="//div[@class='mt-4']" position="after">
             <div t-if="event.is_online_event" class="mt-4 online-event">
                 <h5 class="text-secondary font-weight-bold">Online</h5>

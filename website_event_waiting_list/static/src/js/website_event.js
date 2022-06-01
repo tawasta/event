@@ -37,24 +37,23 @@ odoo.define("website_event_waiting_list.website_event", function (require) {
                 return new Promise(function () {
                     return undefined;
                 });
-            } else {
-                $button.attr("disabled", true);
-                return ajax
-                    .jsonRpc($form.attr("action"), "call", post)
-                    .then(function (modal) {
-                        var $modal = $(modal);
-                        $modal.modal({backdrop: "static", keyboard: false});
-                        $modal.find(".modal-body > div").removeClass("container");
-                        $modal.appendTo("body").modal();
-                        $modal.on("click", ".js_goto_event", function () {
-                            $modal.modal("hide");
-                            $button.prop("disabled", false);
-                        });
-                        $modal.on("click", ".close", function () {
-                            $button.prop("disabled", false);
-                        });
-                    });
             }
+            $button.attr("disabled", true);
+            return ajax
+                .jsonRpc($form.attr("action"), "call", post)
+                .then(function (modal) {
+                    var $modal = $(modal);
+                    $modal.modal({backdrop: "static", keyboard: false});
+                    $modal.find(".modal-body > div").removeClass("container");
+                    $modal.appendTo("body").modal();
+                    $modal.on("click", ".js_goto_event", function () {
+                        $modal.modal("hide");
+                        $button.prop("disabled", false);
+                    });
+                    $modal.on("click", ".close", function () {
+                        $button.prop("disabled", false);
+                    });
+                });
         },
     });
     return EventWaitingForm;

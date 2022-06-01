@@ -3,15 +3,17 @@
     <template
         id="events_list_start_sale_date"
         inherit_id="website_event_ticket_datetime.events_list_datetime"
-        active="True"
+        active="False"
         customize_show="True"
-        name="Show start sale date">
+        name="Show start sale date"
+    >
         <xpath expr="//t[@class='datetime-sale']" position="replace">
             <t
-                t-if="event.start_sale_date and event.start_sale_date &gt; datetime.datetime.now()"
-                class="datetime-sale">
+                t-if="event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now()"
+                class="datetime-sale"
+            >
                 Registrations start on <span
-                    t-esc="event.start_sale_date"
+                    t-esc="event.start_sale_datetime"
                     t-options="{'widget': 'datetime', 'format': 'short'}"
                 />
             </t>
@@ -22,7 +24,8 @@
         inherit_id="website_event.events_list"
         active="True"
         customize_show="True"
-        name="Show location name and city">
+        name="Show location name and city"
+    >
         <xpath expr="//div[@itemprop='location']" position="replace">
             <div itemprop="location">
                 <span><t t-esc="event.sudo().address_id.name" />, <t
@@ -36,16 +39,20 @@
         inherit_id="website_event.events_list"
         active="False"
         customize_show="True"
-        name="Show event date range">
+        name="Show event date range"
+    >
         <xpath expr="//time[@itemprop='startDate']//span[1]" position="attributes">
             <attribute
-                name="t-options">{'date_only': 'true', 'format': 'short'}</attribute>
+                name="t-options"
+            >{'date_only': 'true', 'format': 'short'}</attribute>
         </xpath>
         <xpath expr="//time[@itemprop='startDate']//span[2]" position="attributes">
             <attribute
-                name="t-field">event.with_context(tz=event.date_tz).date_end</attribute>
+                name="t-field"
+            >event.with_context(tz=event.date_tz).date_end</attribute>
             <attribute
-                name="t-options">{'date_only': 'true', 'format': 'short'}</attribute>
+                name="t-options"
+            >{'date_only': 'true', 'format': 'short'}</attribute>
         </xpath>
     </template>
 </odoo>

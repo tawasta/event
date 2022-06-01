@@ -13,7 +13,8 @@
                             name="toggle_active"
                             type="object"
                             class="oe_stat_button"
-                            icon="fa-archive">
+                            icon="fa-archive"
+                        >
                             <field
                                 name="active"
                                 widget="boolean_button"
@@ -30,7 +31,7 @@
                                 <field name="phone" optional="show" />
                             </tree>
                         </field>
-                        <field name="event_tracks" />
+                        <field name="event_tracks" widget="many2many_tags" />
                     </group>
                 </sheet>
             </form>

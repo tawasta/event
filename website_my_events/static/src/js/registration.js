@@ -1,7 +1,5 @@
-odoo.define("website_my_events.portal_my_events", function (require) {
+odoo.define("website_my_events.portal_my_events", function () {
     "use strict";
-
-    var _t = require("web.core")._t;
 
     $(function () {
         $("#cancelModal").on("show.bs.modal", function (e) {
@@ -17,7 +15,7 @@ odoo.define("website_my_events.portal_my_events", function (require) {
             )[0].value;
             var action = "/registration/cancel/" + registrationValue;
             $("#cancelModal").modal("hide");
-            $.get(action).done(function (data) {
+            $.get(action).done(function () {
                 location.reload();
             });
         });

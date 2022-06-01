@@ -2,29 +2,35 @@
 <odoo>
     <template
         id="registration_template_registration_elsewhere"
-        inherit_id="website_event.registration_template">
+        inherit_id="website_event.registration_template"
+    >
         <xpath expr="//form" position="attributes">
             <attribute
-                name="t-if">event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and not (event.registration_elsewhere and event.registration_link)</attribute>
+                name="t-if"
+            >event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and not (event.registration_elsewhere and event.registration_link)</attribute>
         </xpath>
         <xpath expr="//form" position="after">
             <div
                 t-if="event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and event.registration_elsewhere and event.registration_link"
                 id="registration_elsewhere_form"
-                class="mb-5">
+                class="mb-5"
+            >
                 <div
                     id="o_wevent_tickets"
                     class="bg-white shadow-sm o_wevent_js_ticket_details"
-                    data-folded-by-default="0">
+                    data-folded-by-default="0"
+                >
                     <div class="o_wevent_registration_single">
                         <div class="row p-2 pl-3">
                             <div
                                 class="col-lg-8 d-flex flex-columns align-items-center"
                                 itemscope="itemscope"
-                                itemtype="http://schema.org/Offer">
+                                itemtype="http://schema.org/Offer"
+                            >
                                 <h6
                                     itemprop="name"
-                                    class="my-0 pr-3 border-right text-dark">
+                                    class="my-0 pr-3 border-right text-dark"
+                                >
                                     <span>Registration</span>
                                 </h6>
                                 <div class="ml-auto o_wevent_nowrap">
@@ -38,7 +44,8 @@
                                 <a
                                     t-attf-href="#{event.registration_link}"
                                     class="btn btn-primary o_wait_lazy_js btn-block a-submit"
-                                    target="_blank">
+                                    target="_blank"
+                                >
                                     Register
                                 </a>
                             </div>
@@ -50,10 +57,12 @@
     </template>
     <template
         id="show_seats_inherit"
-        inherit_id="website_event_frontend_customization.show_seats">
+        inherit_id="website_event_frontend_customization.show_seats"
+    >
         <xpath expr="//div[@id='show_seats']" position="attributes">
             <attribute
-                name="t-if">not event.registration_elsewhere and not event.registration_link</attribute>
+                name="t-if"
+            >not event.registration_elsewhere and not event.registration_link</attribute>
         </xpath>
     </template>
 </odoo>
