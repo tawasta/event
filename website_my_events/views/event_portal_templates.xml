@@ -45,124 +45,127 @@
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">events</t>
             </t>
-            <t t-if="not registrations">
-                <p>There are currently no registrations for your account.</p>
-            </t>
-            <t t-if="registrations" t-call="portal.portal_table">
-                <thead>
-                    <tr class="active">
-                        <th>Event</th>
-                        <th>Event date</th>
-                        <th>Registration Date</th>
-                        <th>Event Ticket</th>
-                        <th>Booker</th>
-                        <th>State</th>
-                        <th />
-                    </tr>
-                </thead>
-                <tbody>
-                    <t t-foreach="registrations" t-as="re">
-                        <tr>
-                            <td>
-                                <a
-                                    t-attf-href="/event/{{re.event_id.id}}/register"
-                                    t-att-title="re.event_id.name">
-                                    <t
-                                        t-esc="re.event_id.name"
-                                        t-if="re.event_id.name != '/'"
-                                    />
-                                </a>
-                            </td>
-                            <td><span t-field="re.event_id.date_begin" /> - <span
-                                    t-field="re.event_id.date_end"
-                                />
-                        </td>
-                            <td>
-                                <span t-field="re.date_open" />
-                            </td>
-                            <td>
-                                <span t-field="re.event_ticket_id.name" />
-                            </td>
-                            <td>
-                                <span t-field="re.visitor_id.sudo().partner_id.name" />
-                            </td>
-                            <td>
-                                <t t-if="re.state == 'open'">
-                                    <span
-                                        class="badge badge-pill badge-info">Confirmed</span>
-                                </t>
-                                <t t-if="re.state == 'draft'">
-                                    <span
-                                        class="badge badge-pill badge-info">Unconfirmed</span>
-                                </t>
-                                <t t-if="re.state == 'done'">
-                                    <span
-                                        class="badge badge-pill badge-success">Attended</span>
-                                </t>
-                                <t t-if="re.state == 'cancel'">
-                                    <span
-                                        class="badge badge-pill badge-warning">Cancelled</span>
-                                </t>
-                            </td>
-                            <t t-if="re.state not in ('cancel', 'done')">
-                                <t t-if="re.event_id.able_to_cancel">
-                                    <td>
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary btn-sm"
-                                            t-att-data-registration-id="re.id"
-                                            data-toggle="modal"
-                                            data-target="#cancelModal">
-                                        Cancel registration
-                                    </button>
-                                    </td>
-                                </t>
-                            </t>
+            <div class="container">
+                <t t-if="not registrations">
+                    <p>There are currently no registrations for your account.</p>
+                </t>
+                <h3 class="mt-2 mb-2">Registrations</h3>
+                <t t-if="registrations" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Event</th>
+                            <th>Event date</th>
+                            <th>Registration Date</th>
+                            <th>Event Ticket</th>
+                            <th>Booker</th>
+                            <th>State</th>
+                            <th />
                         </tr>
-                    </t>
-                </tbody>
-                <div id="cancelModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4
-                                    class="modal-title"
-                                    id="cancel_registration_title">Cancel a registration</h4>
-                                <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-label="Close">&amp;times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <div class="col-md-12">
-                                        <p>You are about to <strong>cancel</strong> <span
-                                                id="cancel_registration_object">a registration</span>.</p>
-                                        <p>Are you sure you want to continue?</p>
-                                    </div>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="registrations" t-as="re">
+                            <tr>
+                                <td>
+                                    <a
+                                        t-attf-href="/event/{{re.event_id.id}}/register"
+                                        t-att-title="re.event_id.name">
+                                        <t
+                                            t-esc="re.event_id.name"
+                                            t-if="re.event_id.name != '/'"
+                                        />
+                                    </a>
+                                </td>
+                                <td><span t-field="re.event_id.date_begin" /> - <span
+                                        t-field="re.event_id.date_end"
+                                    />
+                            </td>
+                                <td>
+                                    <span t-field="re.date_open" />
+                                </td>
+                                <td>
+                                    <span t-field="re.event_ticket_id.name" />
+                                </td>
+                                <td>
+                                    <span t-field="re.visitor_id.sudo().partner_id.name" />
+                                </td>
+                                <td>
+                                    <t t-if="re.state == 'open'">
+                                        <span
+                                            class="badge badge-pill badge-info">Confirmed</span>
+                                    </t>
+                                    <t t-if="re.state == 'draft'">
+                                        <span
+                                            class="badge badge-pill badge-info">Unconfirmed</span>
+                                    </t>
+                                    <t t-if="re.state == 'done'">
+                                        <span
+                                            class="badge badge-pill badge-success">Attended</span>
+                                    </t>
+                                    <t t-if="re.state == 'cancel'">
+                                        <span
+                                            class="badge badge-pill badge-warning">Cancelled</span>
+                                    </t>
+                                </td>
+                                <t t-if="re.state not in ('cancel', 'done')">
+                                    <t t-if="re.event_id.able_to_cancel">
+                                        <td>
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary btn-sm"
+                                                t-att-data-registration-id="re.id"
+                                                data-toggle="modal"
+                                                data-target="#cancelModal">
+                                            Cancel registration
+                                        </button>
+                                        </td>
+                                    </t>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                    <div id="cancelModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4
+                                        class="modal-title"
+                                        id="cancel_registration_title">Cancel a registration</h4>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-label="Close">&amp;times;</span>
+                                    </button>
                                 </div>
-                                <input
-                                    type="hidden"
-                                    id="cancel_registration_id"
-                                    name="cancel_registration_id"
-                                />
-                            </div>
-                            <div class="modal-footer">
-                                <button
-                                    type="button"
-                                    class="btn btn-default"
-                                    data-dismiss="modal">Cancel</button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger delete-confirm">Delete</button>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-md-12">
+                                            <p>You are about to <strong>cancel</strong> <span
+                                                    id="cancel_registration_object">a registration</span>.</p>
+                                            <p>Are you sure you want to continue?</p>
+                                        </div>
+                                    </div>
+                                    <input
+                                        type="hidden"
+                                        id="cancel_registration_id"
+                                        name="cancel_registration_id"
+                                    />
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default"
+                                        data-dismiss="modal">Cancel</button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger delete-confirm">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </t>
+                </t>
+            </div>
         </t>
     </template>
 </odoo>
