@@ -25,11 +25,11 @@ addon | version | maintainers | summary
 [event_template_disable_after_create](event_template_disable_after_create/) | 14.0.1.0.0 |  | Disable changing template after creation
 [event_user_is_organizer](event_user_is_organizer/) | 14.0.1.0.0 |  | Auto-change organizer when changing the event user
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
-[website_event_cancellation](website_event_cancellation/) | 14.0.1.3.5 |  | Cancel events and event registrations through website.
+[website_event_cancellation](website_event_cancellation/) | 14.0.1.3.6 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.2 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.1 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
-[website_event_online_event](website_event_online_event/) | 14.0.1.3.0 |  | Module to manage online Events. Includes a video conference link.
+[website_event_online_event](website_event_online_event/) | 14.0.1.3.1 |  | Module to manage online Events. Includes a video conference link.
 [website_event_private_event](website_event_private_event/) | 14.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 14.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.
 [website_event_questions_parent_id](website_event_questions_parent_id/) | 14.0.1.0.0 |  | Question to ask for parent_id in Event Registration
