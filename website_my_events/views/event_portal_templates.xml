@@ -90,7 +90,9 @@
                                     <span t-field="re.event_ticket_id.name" />
                                 </td>
                                 <td>
-                                    <span t-field="re.visitor_id.sudo().partner_id.name" />
+                                    <span
+                                        t-field="re.visitor_id.sudo().partner_id.name"
+                                    />
                                 </td>
                                 <td>
                                     <t t-if="re.state == 'open'">
