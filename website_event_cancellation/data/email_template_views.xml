@@ -19,37 +19,6 @@
     <template id="view_email_template_event_base">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <t t-set="details" t-value="" />
-        <!-- Complete location information depending on available information -->
-        <t t-if="object.event_id.address_id">
-            <t t-set="location" t-value="" />
-        </t>
-        <t t-if="object.event_id.address_id.street">
-            <t t-set="location" t-value="object.event_id.address_id.street" />
-        </t>
-        <t t-if="object.event_id.address_id.street2">
-            <t
-                t-set="location"
-                t-value="'%s, %s' % (location, object.event_id.address_id.street)"
-            />
-        </t>
-        <t t-if="object.event_id.address_id.city">
-            <t
-                t-set="location"
-                t-value="'%s, %s' % (location, object.event_id.address_id.city)"
-            />
-        </t>
-        <t t-if="object.event_id.address_id.state_id.name">
-            <t
-                t-set="location"
-                t-value="'%s, %s' % (location, object.event_id.address_id.state_id.name)"
-            />
-        </t>
-        <t t-if="object.event_id.address_id.zip">
-            <t
-                t-set="location"
-                t-value="'%s, %s' % (location, object.event_id.address_id.zip)"
-            />
-        </t>
         <body>
             <html>
                 <table
@@ -336,9 +305,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign="top" style="font-size: 14px;">
+                        <td id="google_maps" valign="top" style="font-size: 14px;">
                             <!-- GOOGLE MAPS LINK -->
-                            <t t-if="object.event_id.address_id">
+                            <t
+                                id="show_google_maps"
+                                t-if="location and object.event_id.address_id"
+                            >
                                 <table style="width:100%;">
                                     <tr>
                                         <td>
@@ -348,7 +320,7 @@
                                                     target="new"
                                                 >
                                                     <img
-                                                        t-attf-src="http://maps.googleapis.com/maps/api/staticmap?autoscale=1&amp;size=598x200&amp;maptype=roadmap&amp;format=png&amp;visual_refresh=true&amp;markers=size:mid%7Ccolor:0xa5117d%7Clabel:%7C#{location}"
+                                                        t-att-src="object.event_id.address_id.sudo().google_map_img(8,598,200)"
                                                         style="vertical-align:bottom; width: 100%;"
                                                         alt="Google Maps"
                                                     />
@@ -409,6 +381,37 @@
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id"
         >
+            <!-- Complete location information depending on available information -->
+            <t t-if="object.event_id.address_id">
+                <t t-set="location" t-value="" />
+            </t>
+            <t t-if="object.event_id.address_id.street">
+                <t t-set="location" t-value="object.event_id.address_id.street" />
+            </t>
+            <t t-if="object.event_id.address_id.street2">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.street)"
+                />
+            </t>
+            <t t-if="object.event_id.address_id.city">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.city)"
+                />
+            </t>
+            <t t-if="object.event_id.address_id.state_id.name">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.state_id.name)"
+                />
+            </t>
+            <t id="last_location_set" t-if="object.event_id.address_id.zip">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.zip)"
+                />
+            </t>
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
@@ -485,6 +488,37 @@
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id"
         >
+            <!-- Complete location information depending on available information -->
+            <t t-if="object.event_id.address_id">
+                <t t-set="location" t-value="" />
+            </t>
+            <t t-if="object.event_id.address_id.street">
+                <t t-set="location" t-value="object.event_id.address_id.street" />
+            </t>
+            <t t-if="object.event_id.address_id.street2">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.street)"
+                />
+            </t>
+            <t t-if="object.event_id.address_id.city">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.city)"
+                />
+            </t>
+            <t t-if="object.event_id.address_id.state_id.name">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.state_id.name)"
+                />
+            </t>
+            <t id="last_location_set" t-if="object.event_id.address_id.zip">
+                <t
+                    t-set="location"
+                    t-value="'%s, %s' % (location, object.event_id.address_id.zip)"
+                />
+            </t>
             <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">

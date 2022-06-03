@@ -21,6 +21,11 @@
         id="view_email_template_subscription_with_cancel_online_event"
         inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
     >
+        <xpath expr="//t[@id='last_location_set']" position="after">
+            <t t-if="object.event_id.is_online_event">
+                <t t-set="location">Online</t>
+            </t>
+        </xpath>
         <xpath
             expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
             position="before"
@@ -31,7 +36,6 @@
                 <t t-set="details">Join the video conference: <t
                         t-esc="object.event_id.video_conference_link"
                     /></t>
-                <t t-set="location">Online</t>
             </t>
             <t
                 t-call="website_event_online_event.view_email_template_event_online_event"
@@ -42,6 +46,11 @@
         id="view_email_template_reminder_with_cancel_online_event"
         inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
     >
+        <xpath expr="//t[@id='last_location_set']" position="after">
+            <t t-if="object.event_id.is_online_event">
+                <t t-set="location">Online</t>
+            </t>
+        </xpath>
         <xpath
             expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
             position="before"
@@ -52,7 +61,6 @@
                 <t t-set="details">Join the video conference: <t
                         t-esc="object.event_id.video_conference_link"
                     /></t>
-                <t t-set="location">Online</t>
             </t>
             <t
                 t-call="website_event_online_event.view_email_template_event_online_event"
@@ -63,6 +71,13 @@
         id="view_email_template_event_details_online_event"
         inherit_id="website_event_cancellation.view_email_template_event_details"
     >
+        <xpath expr="//t[@id='show_google_maps']" position="attributes">
+            <attribute
+                name="t-if"
+                separator=" and not "
+                add="object.event_id.is_online_event"
+            />
+        </xpath>
         <xpath expr="//td[@id='event-address-td']" position="attributes">
             <attribute name="t-if">not object.event_id.is_online_event</attribute>
         </xpath>
