@@ -18,7 +18,7 @@
         >
             <attribute
                 name="t-if"
-            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.seats_available &lt;=0</attribute>
+            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or (event.seats_available &lt;=0 and not ticket.is_expired and ticket.is_launched())</attribute>
             <attribute name="id">ticket_available_check_span</attribute>
         </xpath>
         <xpath
