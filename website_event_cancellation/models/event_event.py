@@ -231,8 +231,9 @@ class EventEvent(models.Model):
                 + _INTERVALS[event.cancel_interval_unit](
                     sign * event.cancel_interval_nbr
                 )
-                if date
-                else: False
+                if date:
+                else:
+                    False
             )
 
     @api.depends(
