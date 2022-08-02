@@ -232,7 +232,7 @@ class EventEvent(models.Model):
                     sign * event.cancel_interval_nbr
                 )
                 if date
-                else False
+                else: False
             )
 
     @api.depends(
