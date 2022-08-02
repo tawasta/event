@@ -224,6 +224,7 @@ class EventEvent(models.Model):
         "able_to_cancel",
     )
     def _compute_before_date(self):
+
         for event in self:
             date, sign = event.date_begin, -1
             event.cancel_before_date = (
@@ -231,9 +232,8 @@ class EventEvent(models.Model):
                 + _INTERVALS[event.cancel_interval_unit](
                     sign * event.cancel_interval_nbr
                 )
-                if date:
-                else:
-                    False
+                if date
+                else False
             )
 
     @api.depends(
