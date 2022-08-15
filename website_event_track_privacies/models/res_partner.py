@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -47,7 +47,6 @@ class ResPartner(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("event_registration_ids")
     def _compute_event_ids(self):
         for partner in self:
             event_ids = self.env["event.event"]
