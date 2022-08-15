@@ -21,7 +21,7 @@
 {
     "name": "Website Event Track Privacy Values",
     "summary": "Website event track privacy values",
-    "version": "14.0.1.0.3",
+    "version": "14.0.1.0.4",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -33,7 +33,6 @@
         "event",
         "privacy",
         "privacy_consent",
-        "partner_event",
     ],
     "data": [
         "security/ir.model.access.csv",

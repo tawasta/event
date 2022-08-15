@@ -41,7 +41,7 @@ class ResPartner(models.Model):
         "event.event",
         string="Events",
         compute="_compute_event_ids",
-        store=True,
+        search="_search_event_ids",
     )
 
     # 3. Default methods
@@ -49,14 +49,14 @@ class ResPartner(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     def _compute_event_ids(self):
         for partner in self:
-            event_ids = self.env["event.event"]
-            for registration in partner.event_registration_ids:
-                event_ids.append(
-                    self.env["event.event"].search(
-                        ["registration_ids", "in", registration.id]
-                    )
-                )
-            partner.event_ids = event_ids or False
+            partner.event_ids = self.env["event.event"].search(
+                [("registration_ids.partner_id", "child_of", partner.ids)]
+            )
+
+    def _search_event_ids(self, operator, value):
+        domain = [("name", operator, value)]
+        event_ids = self.env["event.event"]._search(domain)
+        return [("id", "in", event_ids)]
 
     # 5. Constraints and onchanges
 
