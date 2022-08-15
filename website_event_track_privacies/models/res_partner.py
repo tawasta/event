@@ -41,7 +41,7 @@ class ResPartner(models.Model):
         "event.event",
         string="Events",
         compute="_compute_event_ids",
-        search="_search_event_ids",
+        store=True,
     )
 
     # 3. Default methods
@@ -57,11 +57,6 @@ class ResPartner(models.Model):
                     )
                 )
             partner.event_ids = event_ids or False
-
-    def _search_event_ids(self, operator, value):
-        domain = [("name", operator, value)]
-        event_ids = self.env["event.event"]._search(domain)
-        return [("id", "in", event_ids)]
 
     # 5. Constraints and onchanges
 
