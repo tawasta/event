@@ -19,16 +19,22 @@
 ##############################################################################
 
 {
-    "name": "Website event track privacy values",
+    "name": "Website Event Track Privacy Values",
     "summary": "Website event track privacy values",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_track_advanced", "event", "privacy", "privacy_consent"],
+    "depends": [
+        "website_event_track_advanced",
+        "event",
+        "privacy",
+        "privacy_consent",
+        "partner_event",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/event_view.xml",
