@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [website_event_track_image](website_event_track_image/) | 14.0.1.0.0 |  | Add image to event tracks
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 14.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 14.0.1.0.0 |  | Allows sending mail to track contacts
-[website_event_track_privacies](website_event_track_privacies/) | 14.0.1.0.1 |  | Website event track privacy values
+[website_event_track_privacies](website_event_track_privacies/) | 14.0.1.0.2 |  | Website event track privacy values
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.4 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list

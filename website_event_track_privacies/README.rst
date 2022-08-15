@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 ==================================
-Website event track privacy values
+Website Event Track Privacy Values
 ==================================
 Adds privacy to website event track advanced
 
