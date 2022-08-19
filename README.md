@@ -35,6 +35,7 @@ addon | version | maintainers | summary
 [website_event_questions_parent_id](website_event_questions_parent_id/) | 14.0.1.0.0 |  | Question to ask for parent_id in Event Registration
 [website_event_questions_title](website_event_questions_title/) | 14.0.1.0.0 |  | Question to ask for title in Event Registration
 [website_event_questions_view](website_event_questions_view/) | 14.0.1.0.2 |  | Adds a view to see event question answers
+[website_event_recurring_event](website_event_recurring_event/) | 14.0.1.0.0 |  | Create recurring events and hide dates
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 14.0.1.0.1 |  | Redirects registrations to another URL
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.1 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 14.0.1.0.1 |  | Register to events using waiting list through website.

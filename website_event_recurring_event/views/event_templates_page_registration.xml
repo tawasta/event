@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+        <xpath expr="//small[@t-esc='event.date_tz']//.." position="attributes">
+            <attribute name="t-if">not event.recurring_event</attribute>
+        </xpath>
+    </template>
+</odoo>
