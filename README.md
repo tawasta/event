@@ -13,7 +13,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 14.0.1.0.1 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 14.0.1.0.2 |  | Event Batch
-[event_description](event_description/) | 14.0.1.0.4 |  | Add description field to event form.
+[event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.0 |  | Filter event partners for address by partner toggle
@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 14.0.1.3.6 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.2 |  | Ability to navigate to an URL and download Registration Badge
-[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.1 |  | Advanced Events Snippet for Website
+[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
 [website_event_online_event](website_event_online_event/) | 14.0.1.3.1 |  | Module to manage online Events. Includes a video conference link.
 [website_event_private_event](website_event_private_event/) | 14.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
@@ -35,6 +35,7 @@ addon | version | maintainers | summary
 [website_event_questions_parent_id](website_event_questions_parent_id/) | 14.0.1.0.0 |  | Question to ask for parent_id in Event Registration
 [website_event_questions_title](website_event_questions_title/) | 14.0.1.0.0 |  | Question to ask for title in Event Registration
 [website_event_questions_view](website_event_questions_view/) | 14.0.1.0.2 |  | Adds a view to see event question answers
+[website_event_recurring_event](website_event_recurring_event/) | 14.0.1.0.0 |  | Create recurring events and hide dates
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 14.0.1.0.1 |  | Redirects registrations to another URL
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.1 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 14.0.1.0.1 |  | Register to events using waiting list through website.

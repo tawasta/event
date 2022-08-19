@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_recurring_event
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-19 17:06+0000\n"
+"PO-Revision-Date: 2022-08-19 17:06+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_recurring_event
+#: model_terms:ir.ui.view,arch_db:website_event_recurring_event.events_list_recurring_date
+msgid "<span class=\"o_wevent_event_recurring_event\">Recurring</span>"
+msgstr "<span class=\"o_wevent_event_recurring_event\">Toistuva</span>"
+
+#. module: website_event_recurring_event
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_event__display_name
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_type__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: website_event_recurring_event
+#: model:ir.model,name:website_event_recurring_event.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_recurring_event
+#: model:ir.model,name:website_event_recurring_event.model_event_type
+msgid "Event Template"
+msgstr "Tapahtuman mallipohja"
+
+#. module: website_event_recurring_event
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_event__id
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_type__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event_recurring_event
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_event____last_update
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_type____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: website_event_recurring_event
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_event__recurring_event
+#: model:ir.model.fields,field_description:website_event_recurring_event.field_event_type__recurring_event
+msgid "Recurring Event"
+msgstr "Toistuva tapahtuma"
+
+#. module: website_event_recurring_event
+#: model:ir.model.fields,help:website_event_recurring_event.field_event_event__recurring_event
+#: model:ir.model.fields,help:website_event_recurring_event.field_event_type__recurring_event
+msgid ""
+"Recurring event hides the date field on the website. The event date is used "
+"to define the start and end date of the recurring event."
+msgstr ""
+"Toistuva tapahtuma piilottaa päivämäärän verkkosivulta. Tapahtuman "
+"päivämäärää käytetään määrittämään toistuvuuden alkamis- ja "
+"päättymispäivämäärän."

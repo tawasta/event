@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,26 +17,21 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
 {
-    "name": "Website Event Events Snippet",
-    "summary": "Advanced Events Snippet for Website",
-    "version": "14.0.1.0.2",
-    "category": "Event",
+    "name": "Website Event Recurring Event",
+    "version": "14.0.1.0.0",
+    "category": "Events",
+    "summary": "Create recurring events and hide dates",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_event_private_event",
-        "website_event_banner_image",
-        "event_description",
-    ],
+    "depends": ["website_event"],
     "data": [
-        "views/event_event_views.xml",
-        "views/event_snippets.xml",
-        "views/snippets.xml",
+        "views/event_views.xml",
+        "views/event_templates_page_registration.xml",
+        "views/event_templates_list.xml",
+        "views/assets.xml",
     ],
 }

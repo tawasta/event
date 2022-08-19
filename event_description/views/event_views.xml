@@ -6,7 +6,9 @@
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="before">
-                <field name="description" />
+                <group>
+                    <field name="description" />
+                </group>
             </xpath>
         </field>
     </record>
