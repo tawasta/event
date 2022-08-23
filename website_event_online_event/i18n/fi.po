@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-24 11:47+0000\n"
-"PO-Revision-Date: 2021-09-24 11:47+0000\n"
+"POT-Creation-Date: 2022-08-23 16:14+0000\n"
+"PO-Revision-Date: 2022-08-23 16:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,11 @@ msgid ""
 msgstr ""
 "<i class=\"fa fa-map-marker\" title=\"Sijainti\"/>\n"
 "                    <span class=\"o_text_overflow o_event_kanban_location\">Verkossa</span>"
+
+#. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.events_list_online_event
+msgid "<span>Hybrid</span>"
+msgstr "<span>Hybridi</span>"
 
 #. module: website_event_online_event
 #: model_terms:ir.ui.view,arch_db:website_event_online_event.events_list_online_event
@@ -45,6 +50,13 @@ msgstr "Tapahtuma"
 #: model:ir.model,name:website_event_online_event.model_event_type
 msgid "Event Template"
 msgstr "Tapahtuman mallipohja"
+
+#. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.cancel_registration
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.event_description_full_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.registration_complete_online_event
+msgid "Event also includes a video conference."
+msgstr "Tapahtuma sisältää myös verkkokokouksen."
 
 #. module: website_event_online_event
 #: model:ir.model.fields,field_description:website_event_online_event.field_event_event__id
@@ -105,18 +117,23 @@ msgstr "Verkossa"
 #. module: website_event_online_event
 #: model:ir.model.fields,field_description:website_event_online_event.field_event_event__is_online_event
 #: model:ir.model.fields,field_description:website_event_online_event.field_event_type__is_online_event
-msgid "Online Event"
-msgstr "Verkkotapahtuma"
+msgid "Online Only Event"
+msgstr "Vain verkkotapahtuma"
 
 #. module: website_event_online_event
 #: model:ir.model.fields,help:website_event_online_event.field_event_event__is_online_event
 #: model:ir.model.fields,help:website_event_online_event.field_event_type__is_online_event
 msgid ""
-"Online events like webinars do not require a specific location and are "
+"Online only events like webinars do not have a physical location and are "
 "hosted online."
 msgstr ""
-"Verkkotapahtumat kuten webinaarit eivät vaadi tiettyä sijaintia ja ne "
-"pidetään verkossa."
+"Vain verkkotapahtumat kuten webinaarit eivät sisällä fyysistä sijaintia "
+"vaan ne pidetään verkossa."
+
+#. module: website_event_online_event
+#: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_event_online_event
+msgid "This event is a hybrid event."
+msgstr "Tämä tapahtuma on hybriditapahtuma."
 
 #. module: website_event_online_event
 #: model_terms:ir.ui.view,arch_db:website_event_online_event.view_email_template_event_online_event

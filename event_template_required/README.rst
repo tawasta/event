@@ -2,10 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
-Website Event Online Event
-==========================
-* Module to manage online and hybrid events. Adds a video conference link to an event.
+=======================
+Event Template Required
+=======================
+* Always require a template for events.
 
 Configuration
 =============

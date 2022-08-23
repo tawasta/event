@@ -19,21 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Website Event Online Event",
-    "summary": "Module to manage online and hybrid events. Includes a video conference link.",
-    "version": "14.0.1.4.0",
+    "name": "Event Template Required",
+    "summary": "Always require a template for events",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_cancellation", "website_event_frontend_customization"],
-    "data": [
-        "views/event_views.xml",
-        "data/email_template_views.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_list.xml",
-        "views/event_templates_page_cancellation.xml",
-    ],
+    "depends": ["event"],
+    "data": ["views/event_views.xml"],
 }
