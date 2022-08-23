@@ -55,8 +55,8 @@ class EventType(models.Model):
 
     # 2. Fields declaration
     is_online_event = fields.Boolean(
-        "Online Event",
-        help="Online events like webinars do not require a specific location and "
+        "Online Only Event",
+        help="Online only events like webinars do not have a physical location and "
         "are hosted online.",
     )
 
@@ -79,16 +79,14 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     is_online_event = fields.Boolean(
-        "Online Event",
-        help="Online events like webinars do not require a specific location and "
+        "Online Only Event",
+        help="Online only events like webinars do not have a physical location and "
         "are hosted online.",
         readonly=False,
         store=True,
         compute="_compute_is_online_event",
     )
-    video_conference_link = fields.Char(
-        "Video Conference Link", readonly=False, store=True
-    )
+    video_conference_link = fields.Char(readonly=False, store=True)
 
     # 3. Default methods
 
@@ -135,7 +133,7 @@ class EventEvent(models.Model):
                 ).value = event.sudo().address_id.contact_address
             elif event.is_online_event:
                 cal_event.add("location").value = "Online"
-            if event.is_online_event and event.video_conference_link:
+            if event.video_conference_link:
                 video_link = _(
                     "Join the video conference: %s", event.sudo().video_conference_link
                 )
@@ -159,7 +157,7 @@ class EventEvent(models.Model):
             )
         elif self.is_online_event:
             params.update(location=_("Online"))
-        if self.is_online_event and self.video_conference_link:
+        if self.video_conference_link:
             params.update(
                 details=_("Join the video conference: ")
                 + self.sudo().video_conference_link

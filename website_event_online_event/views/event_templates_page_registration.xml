@@ -11,6 +11,14 @@
                 <h4>Online</h4>
             </div>
         </xpath>
+        <xpath expr="//div[@t-if='event.address_id']" position="inside">
+            <div
+                t-if="not event.is_online_event and event.video_conference_link"
+                class="pt-3"
+            >
+                <p>Event also includes a video conference.</p>
+            </div>
+        </xpath>
         <xpath expr="//div[@t-if='event.address_id']" position="attributes">
             <attribute
                 name="t-if"
@@ -25,6 +33,12 @@
         <xpath expr="//div[@class='mt-4']" position="after">
             <div t-if="event.is_online_event" class="mt-4 online-event">
                 <h5 class="text-secondary font-weight-bold">Online</h5>
+            </div>
+            <div
+                t-elif="not event.is_online_event and event.video_conference_link"
+                class="pt-3"
+            >
+                <p>Event also includes a video conference.</p>
             </div>
         </xpath>
         <xpath expr="//div[@class='mt-4']" position="attributes">

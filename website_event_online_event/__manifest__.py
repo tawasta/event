@@ -20,8 +20,8 @@
 
 {
     "name": "Website Event Online Event",
-    "summary": "Module to manage online Events. Includes a video conference link.",
-    "version": "14.0.1.3.1",
+    "summary": "Module to manage online and hybrid events. Includes a video conference link.",
+    "version": "14.0.1.4.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

@@ -23,10 +23,7 @@
         <field name="arch" type="xml">
             <field name="address_id" position="before">
                 <field name="is_online_event" />
-                <field
-                    name="video_conference_link"
-                    attrs="{'invisible': [('is_online_event','=',False)]}"
-                />
+                <field name="video_conference_link" />
             </field>
             <field name="address_id" position="attributes">
                 <attribute

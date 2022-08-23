@@ -8,6 +8,12 @@
             <div t-if="event.is_online_event" id="online-event-location">
                 <span>Online</span>
             </div>
+            <div
+                t-elif="not event.is_online_event and event.video_conference_link"
+                id="online-event-location"
+            >
+                <span>Hybrid</span>
+            </div>
         </xpath>
     </template>
     <template
