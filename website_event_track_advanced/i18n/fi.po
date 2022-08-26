@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-20 15:10+0000\n"
-"PO-Revision-Date: 2022-05-20 15:10+0000\n"
+"POT-Creation-Date: 2022-08-26 18:33+0000\n"
+"PO-Revision-Date: 2022-08-26 18:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,11 @@ msgstr ""
 "\n"
 "                ${object.event_id.name} - Esityksesi valittiin tapahtuman ohjelmaan\n"
 "            "
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.tracks_display_list_show_speakers
+msgid "&amp;bull;"
+msgstr ""
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -147,6 +152,11 @@ msgid ""
 msgstr ""
 "<span>Voit täyttää tämän jos haluat pitää webinaarin ennen varsinaista "
 "tapahtumaa.</span>"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_content_show_chairperson
+msgid "<strong>Chairperson:</strong>"
+msgstr "<strong>Puheenjohtaja:</strong>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced

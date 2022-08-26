@@ -266,6 +266,24 @@
             </div>
         </xpath>
     </template>
+    <!-- SHOW CHAIRPERSON -->
+    <template
+        id="event_track_content_show_chairperson"
+        inherit_id="website_event_track.event_track_content"
+        name="Show Chairperson"
+        active="True"
+        customize_show="True"
+    >
+        <xpath expr="//span[@t-field='track.location_id']//..//.." position="after">
+            <div id="chairperson-div" class="mx-3 text-muted">
+                <t t-if="track.chairperson_id">
+                    <strong>Chairperson:</strong> <span
+                        t-field="track.chairperson_id.name"
+                    />
+                </t>
+            </div>
+        </xpath>
+    </template>
     <!-- Show Image -->
     <template
         id="event_track_content_show_image"
