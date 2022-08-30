@@ -1,37 +1,10 @@
-##############################################################################
-#
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
+import logging
 
-# 1. Standard library imports:
-
-# 2. Known third party imports:
-
-# 3. Odoo imports (openerp):
 from odoo import SUPERUSER_ID, _, http
 from odoo.exceptions import UserError
 from odoo.http import content_disposition, request
 
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteEventControllerDownloadBadge(http.Controller):
@@ -58,7 +31,18 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                     self._create_privacy(
                         post, registration, registration.partner_id, event
                     )
-                    registration.sudo().write({"registration_badge_downloaded": True})
+                    try:
+                        registration.sudo().write(
+                            {"registration_badge_downloaded": True}
+                        )
+                    except ValueError:
+                        _logger.error(
+                            _(
+                                "Could not set registration '{}' badge as downloaded".format(
+                                    registration.id
+                                )
+                            )
+                        )
                     return self._show_report(
                         model=registration,
                         report_type="pdf",
