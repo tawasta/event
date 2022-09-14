@@ -37,4 +37,21 @@
             </t>
         </xpath>
     </template>
+    <template
+        id="agenda_main_track_show_chairperson"
+        inherit_id="website_event_track.agenda_main_track"
+        name="Show Chairperson"
+        active="False"
+        customize_show="True"
+    >
+        <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="after">
+            <t t-if="track.chairperson_id">
+                <div class="text-muted text-center">
+                    <small>
+                        <t t-esc="track.chairperson_id.sudo().name" />
+                    </small>
+                </div>
+            </t>
+        </xpath>
+    </template>
 </odoo>
