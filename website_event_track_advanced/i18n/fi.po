@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-26 18:33+0000\n"
-"PO-Revision-Date: 2022-08-26 18:33+0000\n"
+"POT-Creation-Date: 2022-09-16 13:42+0000\n"
+"PO-Revision-Date: 2022-09-16 13:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.tracks_display_list_show_speakers
 msgid "&amp;bull;"
 msgstr ""
+
+#. module: website_event_track_advanced
+#: model:ir.actions.report,print_report_name:website_event_track_advanced.report_event_track_location_schedule_report
+msgid "'Location Schedule - %s' % object.name"
+msgstr "'Sijainnin aikataulu - %s' % object.name"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -1486,6 +1491,11 @@ msgid "Leave empty for free workshops"
 msgstr "Jätä tyhjäksi ilmaisille työpajoille"
 
 #. module: website_event_track_advanced
+#: model:ir.actions.report,name:website_event_track_advanced.report_event_track_location_schedule_report
+msgid "Location Schedule"
+msgstr "Sijainnin aikataulu"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__location_ids
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__location_ids
 msgid "Locations"
@@ -1694,6 +1704,11 @@ msgstr "Esittäjä #"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
 msgid "Presenters"
 msgstr "Esittäjät"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_location_schedule_report
+msgid "Program"
+msgstr "Ohjelma"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application

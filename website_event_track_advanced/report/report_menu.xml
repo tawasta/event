@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="report_event_track_location_schedule_report" model="ir.actions.report">
+        <field name="name">Location Schedule</field>
+        <field name="model">event.track.location</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >website_event_track_advanced.event_track_location_schedule_report</field>
+        <field
+            name="report_file"
+        >website_event_track_advanced.event_track_location_schedule_report</field>
+        <field name="print_report_name">'Location Schedule - %s' % object.name</field>
+        <field
+            name="binding_model_id"
+            ref="website_event_track.model_event_track_location"
+        />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
