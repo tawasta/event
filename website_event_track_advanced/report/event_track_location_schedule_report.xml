@@ -22,7 +22,10 @@ td {
                     <table name="track_schedule_table" class="table table-condensed">
                         <t t-set="date" t-value="false" />
                         <tbody>
-                            <t t-foreach="doc.scheduled_track_ids" t-as="track">
+                            <t
+                                t-foreach="doc.scheduled_track_ids.filtered(lambda track: track.date.date() >= datetime.date.today())"
+                                t-as="track"
+                            >
                                 <t
                                     t-if="track.date"
                                     t-set="current"
