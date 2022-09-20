@@ -19,8 +19,10 @@
 ##############################################################################
 
 # 1. Standard library imports:
+import datetime
 
 # 2. Known third party imports:
+from itertools import groupby
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models
@@ -66,3 +68,13 @@ class TrackLocation(models.Model):
     # 7. Action methods
 
     # 8. Business methods
+    def get_grouped_tracks(self):
+        """Group tracks based on date and return a grouped list to use in reports"""
+        tracks = self.scheduled_track_ids.filtered(
+            lambda track: track.date.date() >= datetime.date.today()
+            and track.type.attendable
+        ).sorted(key=lambda t: t.date.date())
+        grouped_tracks = [
+            list(j) for _i, j in groupby(tracks, key=lambda t: t.date.date())
+        ]
+        return grouped_tracks
