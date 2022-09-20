@@ -16,54 +16,48 @@ td {
     padding: 1em 2em;
     white-space: nowrap;
 }
+.new-page {
+    page-break-before: always;
+    clear: both;
+}
                     </style>
-                    <div class="oe_structure" />
-                    <h1 t-field="doc.name" />
-                    <table name="track_schedule_table" class="table table-condensed">
-                        <t t-set="date" t-value="false" />
-                        <tbody>
-                            <t
-                                t-foreach="doc.scheduled_track_ids.filtered(lambda track: track.date.date() >= datetime.date.today())"
-                                t-as="track"
-                            >
-                                <t
-                                    t-if="track.date"
-                                    t-set="current"
-                                    t-value="track.date.date()"
-                                />
-
-                                <t t-if="not date or current != date">
-                                    <tr>
-                                        <t
-                                            t-if="track.date"
-                                            t-set="date"
-                                            t-value="track.date.date()"
-                                        />
-                                        <th colspan="2">
-                                            <h2>Program <span
-                                                    t-field="track.date"
-                                                    t-options='{"format": "dd.MM.YYYY"}'
-                                                /></h2>
-                                        </th>
-                                    </tr>
-                                </t>
-                                <t t-if="track.type.attendable">
-                                    <tr>
-                                        <td>
-                                            <span
-                                                t-field="track.date"
-                                                t-options='{"format": "HH:mm"}'
-                                            /> - <span
-                                                t-field="track.date_end"
-                                                t-options='{"format": "HH:mm"}'
-                                            />
-                                        </td>
-                                        <td><span t-field="track.name" /></td>
-                                    </tr>
-                                </t>
-                            </t>
-                        </tbody>
-                    </table>
+                    <div class="oe_structure">
+                        <t t-set="grouped_tracks" t-value="doc.get_grouped_tracks()" />
+                        <t t-foreach="grouped_tracks" t-as="track_group">
+                            <div class="new-page">
+                                <h1 t-field="doc.name" />
+                                <table
+                                    name="track_schedule_table"
+                                    class="table table-condensed"
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2">
+                                                <h2>Program <span
+                                                        t-field="track_group[0].date"
+                                                        t-options='{"format": "dd.MM.YYYY"}'
+                                                    /></h2>
+                                            </th>
+                                        </tr>
+                                        <t t-foreach="track_group" t-as="track">
+                                            <tr>
+                                                <td>
+                                                    <span
+                                                        t-field="track.date"
+                                                        t-options='{"format": "HH:mm"}'
+                                                    /> - <span
+                                                        t-field="track.date_end"
+                                                        t-options='{"format": "HH:mm"}'
+                                                    />
+                                                </td>
+                                                <td><span t-field="track.name" /></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                    </div>
                 </div>
             </t>
         </t>

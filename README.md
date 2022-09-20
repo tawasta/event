@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.1 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 14.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_ticket_datetime](website_event_ticket_datetime/) | 14.0.1.1.0 |  | Define ticket sale start/end with datetime accuracy
-[website_event_track_advanced](website_event_track_advanced/) | 14.0.1.1.2 |  | Advanced features for Event Track
+[website_event_track_advanced](website_event_track_advanced/) | 14.0.1.1.3 |  | Advanced features for Event Track
 [website_event_track_image](website_event_track_image/) | 14.0.1.0.0 |  | Add image to event tracks
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 14.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 14.0.1.0.0 |  | Allows sending mail to track contacts
