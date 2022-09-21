@@ -29,7 +29,7 @@ addon | version | maintainers | summary
 [event_user_is_organizer](event_user_is_organizer/) | 14.0.1.0.0 |  | Auto-change organizer when changing the event user
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 14.0.1.3.6 |  | Cancel events and event registrations through website.
-[website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.4 |  | Ability to navigate to an URL and download Registration Badge
+[website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.5 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
 [website_event_online_event](website_event_online_event/) | 14.0.1.4.0 |  | Module to manage online and hybrid events. Includes a video conference link.
