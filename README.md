@@ -49,7 +49,7 @@ addon | version | maintainers | summary
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 14.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_privacies](website_event_track_privacies/) | 14.0.1.0.4 |  | Website event track privacy values
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
-[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.5 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.6 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list
 [website_my_events](website_my_events/) | 14.0.1.1.0 |  | My events in website portal
 

@@ -336,7 +336,7 @@ class EventEvent(models.Model):
         self,
         template_id,
         force_send=False,
-        filter_func=lambda self: self.state not in ["cancel", "wait"],
+        filter_func=lambda self: self.state not in ["cancel", "wait", "draft"],
     ):
         for event in self:
             for attendee in event.registration_ids.filtered(filter_func):
