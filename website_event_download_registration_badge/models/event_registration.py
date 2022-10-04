@@ -45,7 +45,7 @@ class EventRegistration(models.Model):
     registration_badge_downloaded = fields.Boolean(
         "Badge Downloaded", store=True, readonly=True
     )
-    privacy_consent_ids = fields.One2many(
+    privacy_consent_ids = fields.Many2many(
         comodel_name="privacy.consent",
         inverse_name="registration_ids",
         string="Privacy Consents",
