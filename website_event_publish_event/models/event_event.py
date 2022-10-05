@@ -52,13 +52,15 @@ class EventEvent(models.Model):
     def _onchange_website_published(self):
         for event in self:
             if event.website_published:
-                event.action_publish_event()
+                event.action_set_stage_published()
 
     # 6. CRUD methods
 
     # 7. Action methods
     def action_publish_event(self):
         self.website_published = True
+
+    def action_set_stage_published(self):
         first_published_stage = self.env["event.stage"].search(
             [("pipe_publish", "=", True)], order="sequence"
         )
