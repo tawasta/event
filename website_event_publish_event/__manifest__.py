@@ -21,7 +21,7 @@
 {
     "name": "Website Event Publish Event",
     "summary": "Add website_published fields to event form and a publish wizard.",
-    "version": "14.0.1.0.0",
+    "version": "14.0.2.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -30,8 +30,10 @@
     "installable": True,
     "depends": ["website_event"],
     "data": [
-        "views/event_views.xml",
-        "wizard/publish_event_wizard.xml",
         "security/ir.model.access.csv",
+        "data/event_data.xml",
+        "views/event_views.xml",
+        "views/event_stage_views.xml",
+        "wizard/publish_event_wizard.xml",
     ],
 }
