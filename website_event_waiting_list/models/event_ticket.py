@@ -63,7 +63,7 @@ class EventTicket(models.Model):
         for ticket in self:
             ticket.waiting_list = ticket.event_id.waiting_list
 
-    @api.depends("seats_max", "registration_ids.state")
+    @api.depends("seats_max", "registration_ids")
     def _compute_seats(self):
         """
         Determine reserved, available, reserved but unconfirmed,

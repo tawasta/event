@@ -134,7 +134,7 @@ class EventEvent(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("seats_max", "registration_ids.state")
+    @api.depends("seats_max", "registration_ids")
     def _compute_seats(self):
         """
         Determine reserved, available, reserved but unconfirmed,
@@ -243,7 +243,7 @@ class EventEvent(models.Model):
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
 
-    @api.constrains("seats_available", "waiting_list", "registration_ids.state")
+    @api.constrains("seats_available", "waiting_list", "registration_ids")
     def _mail_to_waiting_list_confirmation(self):
         for event in self:
             if event.waiting_list:
