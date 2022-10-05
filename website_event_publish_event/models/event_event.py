@@ -22,7 +22,7 @@
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import api, models
+from odoo import models
 
 # 4. Imports from Odoo modules:
 
@@ -42,23 +42,19 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
 
     # 5. Constraints and onchanges
-    @api.onchange("stage_id")
-    def _onchange_stage_id(self):
-        for event in self:
-            if event.stage_id.pipe_publish:
-                event.action_publish_event()
-
-    @api.onchange("website_published")
-    def _onchange_website_published(self):
-        for event in self:
-            if event.website_published:
-                event.action_publish_event()
 
     # 6. CRUD methods
+    def write(self, vals):
+        res = super(EventEvent, self).write(vals)
+        if "website_published" in vals and vals.get("website_published"):
+            self.action_set_stage_published()
+        return res
 
     # 7. Action methods
     def action_publish_event(self):
         self.website_published = True
+
+    def action_set_stage_published(self):
         first_published_stage = self.env["event.stage"].search(
             [("pipe_publish", "=", True)], order="sequence"
         )

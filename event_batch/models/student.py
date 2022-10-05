@@ -15,13 +15,19 @@ class OpStudent(models.Model):
 
         for student in self:
             student.event_count = self.env["event.event"].search_count(
-                [("registration_ids.partner_id", "child_of", student.partner_id.ids)]
+                [
+                    (
+                        "registration_ids.attendee_partner_id",
+                        "child_of",
+                        student.partner_id.ids,
+                    )
+                ]
             )
 
     def action_event_view(self):
         action = self.env["ir.actions.actions"]._for_xml_id("event.action_event_view")
         action["context"] = {}
         action["domain"] = [
-            ("registration_ids.partner_id", "child_of", self.partner_id.ids)
+            ("registration_ids.attendee_partner_id", "child_of", self.partner_id.ids)
         ]
         return action
