@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 14.0-20220915\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 11:12+0000\n"
-"PO-Revision-Date: 2021-06-07 11:12+0000\n"
+"POT-Creation-Date: 2022-10-05 13:49+0000\n"
+"PO-Revision-Date: 2022-10-05 13:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,9 +41,21 @@ msgid "Created on"
 msgstr "Luotu"
 
 #. module: website_event_publish_event
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_event__display_name
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_stage__display_name
 #: model:ir.model.fields,field_description:website_event_publish_event.field_website_event_publish_event_wizard__display_name
 msgid "Display Name"
 msgstr "Näyttönimi"
+
+#. module: website_event_publish_event
+#: model:ir.model,name:website_event_publish_event.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_publish_event
+#: model:ir.model,name:website_event_publish_event.model_event_stage
+msgid "Event Stage"
+msgstr "Tapahtuman vaihe"
 
 #. module: website_event_publish_event
 #: model:ir.model.fields,field_description:website_event_publish_event.field_website_event_publish_event_wizard__event_ids
@@ -52,11 +64,24 @@ msgid "Events"
 msgstr "Tapahtumat"
 
 #. module: website_event_publish_event
-#: model:ir.model.fields,field_description:website_event_publish_event.field_website_event_publish_event_wizard__id
-msgid "ID"
-msgstr "Tunniste(ID)"
+#: model:ir.model.fields,help:website_event_publish_event.field_event_stage__pipe_publish
+msgid ""
+"Events will automatically be moved into this stage when they are published. "
+"The event moved into this stage will automatically be set as published."
+msgstr ""
+"Tapahtumat siirretään automaattisesti tähän vaiheeseen, kun ne ovat julkaistu."
+" Tähän vaiheeseen siirretty tapahtuma asetetaan automaattisesti julkaistuksi."
 
 #. module: website_event_publish_event
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_event__id
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_stage__id
+#: model:ir.model.fields,field_description:website_event_publish_event.field_website_event_publish_event_wizard__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: website_event_publish_event
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_event____last_update
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_stage____last_update
 #: model:ir.model.fields,field_description:website_event_publish_event.field_website_event_publish_event_wizard____last_update
 msgid "Last Modified on"
 msgstr "Viimeksi muokattu"
@@ -81,3 +106,8 @@ msgstr "Julkaise tapahtumat verkkosivulla"
 #: model_terms:ir.ui.view,arch_db:website_event_publish_event.view_event_form_website_published
 msgid "Published"
 msgstr "Julkaistu"
+
+#. module: website_event_publish_event
+#: model:ir.model.fields,field_description:website_event_publish_event.field_event_stage__pipe_publish
+msgid "Published Stage"
+msgstr "Julkaistu vaihe"

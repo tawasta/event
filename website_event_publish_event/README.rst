@@ -7,6 +7,8 @@ Website Event Publish Event
 ===========================
 * Adds boolean toggle for website_published field to event form.
 * Adds a wizard to publish multiple events at a time.
+* Automatically moves published events to first published stage.
+* Automatically publishes events that are moved to published stage.
 
 Configuration
 =============
@@ -15,6 +17,8 @@ Configuration
 Usage
 =====
 - Select events from listview > press action button > publish events on website
+- Move event to published stage top publish it
+- Toggle publish boolean on event form to publish and move to published stage
 
 Known issues / Roadmap
 ======================

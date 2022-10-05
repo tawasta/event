@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event_stage_view_form_publish" model="ir.ui.view">
+        <field name="name">event.stage.view.form.publish</field>
+        <field name="model">event.stage</field>
+        <field name="inherit_id" ref="event.event_stage_view_form" />
+        <field name="arch" type="xml">
+            <field name="pipe_end" position="after">
+                <field name="pipe_publish" />
+            </field>
+        </field>
+    </record>
+    <record id="event_stage_view_tree_publish" model="ir.ui.view">
+        <field name="name">event.stage.view.tree.publish</field>
+        <field name="model">event.stage</field>
+        <field name="inherit_id" ref="event.event_stage_view_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="pipe_publish" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
