@@ -60,6 +60,5 @@ class PublishEventWizard(models.TransientModel):
         event_ids = self.event_ids
         for event in event_ids:
             event.action_publish_event()
-            event.action_set_stage_published()
 
     # 8. Business methods
