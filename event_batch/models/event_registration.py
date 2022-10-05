@@ -53,36 +53,24 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
     @api.model_create_multi
     def create(self, vals_list):
-        for values in vals_list:
-            Partner = self.env["res.partner"]
-            is_partner = Partner.search(
-                [("email", "=ilike", values.get("email"))], limit=1
-            )
-            if not is_partner and values.get("name") and values.get("email"):
-                partner_vals = {
-                    "name": values.get("name"),
-                    "email": values.get("email"),
-                    "phone": values.get("phone"),
-                }
-                new_partner = Partner.sudo().create(partner_vals)
-                values["partner_id"] = new_partner.id
-            elif is_partner:
-                values["partner_id"] = is_partner.id
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
-            if registration.event_ticket_id.product_id.batch_id:
+            if (
+                registration.event_ticket_id.product_id.batch_id
+                and registration.attendee_partner_id
+            ):
                 vals = {
-                    "partner_id": registration.partner_id.id,
-                    "first_name": registration.partner_id.firstname,
-                    "last_name": registration.partner_id.lastname,
-                    "email": registration.partner_id.email,
-                    "mobile": registration.partner_id.phone,
+                    "partner_id": registration.attendee_partner_id.id,
+                    "first_name": registration.attendee_partner_id.firstname,
+                    "last_name": registration.attendee_partner_id.lastname,
+                    "email": registration.attendee_partner_id.email,
+                    "mobile": registration.attendee_partner_id.phone,
                 }
                 student_batch_vals = self.student_batch_values_preprocess(registration)
                 is_student = (
                     self.env["op.student"]
                     .sudo()
-                    .search([("partner_id", "=", registration.partner_id.id)])
+                    .search([("partner_id", "=", registration.attendee_partner_id.id)])
                 )
                 if is_student:
                     current_student = is_student

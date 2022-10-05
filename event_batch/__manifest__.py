@@ -20,14 +20,14 @@
 {
     "name": "Event Batch",
     "summary": "Event Batch",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.1.0",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "openeducat_core", "society_batch_core"],
+    "depends": ["event", "openeducat_core", "society_batch_core", "partner_event"],
     "data": [
         "views/batch_students_view.xml",
         "views/product_views.xml",

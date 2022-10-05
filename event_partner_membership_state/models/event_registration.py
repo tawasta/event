@@ -38,7 +38,7 @@ class EventRegistration(models.Model):
 
     # 2. Fields declaration
     partner_membership_state = fields.Selection(
-        related="partner_id.membership_state", readonly=True
+        related="attendee_partner_id.membership_state", readonly=True
     )
 
     # 3. Default methods

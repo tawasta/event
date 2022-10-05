@@ -20,13 +20,13 @@
 {
     "name": "Event Partner Membership State",
     "summary": "Show partner membership state on event registration",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "membership"],
+    "depends": ["event", "membership", "partner_event"],
     "data": ["views/event_registration_views.xml"],
 }
