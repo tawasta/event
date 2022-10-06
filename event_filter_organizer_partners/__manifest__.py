@@ -21,7 +21,7 @@
 {
     "name": "Event Filter Organizer Partners",
     "summary": "Filter event partners for organizer by partner toggle",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

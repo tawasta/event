@@ -9,6 +9,9 @@
                 <attribute
                     name="domain"
                 >[("use_as_event_address", "=", True)]</attribute>
+                <attribute
+                    name="context"
+                >{"default_use_as_event_address": True}</attribute>
             </field>
         </field>
     </record>
