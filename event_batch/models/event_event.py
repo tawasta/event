@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Tawasta
-#    Copyright 2020 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Oy Tawasta OS Technologies Ltd.
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,21 +17,36 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-{
-    "name": "Event Batch",
-    "summary": "Event Batch",
-    "version": "14.0.1.1.1",
-    "category": "Website",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": ["event", "openeducat_core", "society_batch_core", "partner_event"],
-    "data": [
-        "views/batch_students_view.xml",
-        "views/product_views.xml",
-        "views/student_views.xml",
-        "views/event_views.xml",
-    ],
-}
+
+# 1. Standard library imports:
+
+# 2. Known third party imports:
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class EventEvent(models.Model):
+    # 1. Private attributes
+    _inherit = "event.event"
+
+    # 2. Fields declaration
+    create_partner = fields.Boolean(default=True)
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods
