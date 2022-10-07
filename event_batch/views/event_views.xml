@@ -20,4 +20,14 @@
             </field>
         </field>
     </record>
+    <record model="ir.ui.view" id="view_event_form_partner_student_batch">
+        <field name="name">event.event.form.student.batch</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="partner_event.view_event_form_partner" />
+        <field name="arch" type="xml">
+            <field name="create_partner" position="after">
+                <field name="create_partner_student_user" />
+            </field>
+        </field>
+    </record>
 </odoo>

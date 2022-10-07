@@ -12,7 +12,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 14.0.1.0.1 |  | Adds audit log rules for events
-[event_batch](event_batch/) | 14.0.1.1.1 |  | Event Batch
+[event_batch](event_batch/) | 14.0.1.2.0 |  | Event Batch
 [event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From

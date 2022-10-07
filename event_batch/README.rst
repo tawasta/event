@@ -5,7 +5,8 @@
 ===========
 Event Batch
 ===========
-Ability to add batch for event registration product to create student batches from registrations.
+* Ability to add batch for event registration product to create student batches from registrations.
+* Creates student user on confirmation if enabled for event. Defaults to true.
 
 Configuration
 =============

@@ -38,6 +38,9 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     create_partner = fields.Boolean(default=True)
+    create_partner_student_user = fields.Boolean(
+        string="Create Partner Student Users in registration", default=True
+    )
 
     # 3. Default methods
 
