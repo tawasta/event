@@ -117,6 +117,12 @@ class EventRegistration(models.Model):
                     [("event_registration_id", "=", registration.id)]
                 ).unlink()
 
+    def action_confirm(self):
+        res = super(EventRegistration, self).action_confirm()
+        if self.student_batch_id and self.event_id.create_partner_student_user:
+            self.student_batch_id.student_id.create_student_user()
+        return res
+
     # 8. Business methods
     def student_batch_values_preprocess(self, registration):
         values = {

@@ -3,6 +3,8 @@
     <template id="view_email_template_event_download_badge">
         <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id" />
         <div t-if="object.event_id.registration_badge">
+            Remember to download and print your registration badge before arriving at the conference!
+            <br />
             Download your registration badge here:
             <a t-att-href="object.registration_badge_url" />
             <br />
