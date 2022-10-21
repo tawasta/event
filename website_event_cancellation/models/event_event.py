@@ -18,9 +18,11 @@
 #
 ##############################################################################
 
+# 1. Standard library imports:
+import logging
 from datetime import datetime
 
-# 1. Standard library imports:
+# 2. Known third party imports:
 import pytz
 from dateutil.relativedelta import relativedelta
 
@@ -28,15 +30,14 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from odoo.tools import format_datetime
 
-# 2. Known third party imports:
-
-
 # 4. Imports from Odoo modules:
 
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
 
+
+_logger = logging.getLogger(__name__)
 
 _INTERVALS = {
     "hours": lambda interval: relativedelta(hours=interval),
@@ -224,16 +225,14 @@ class EventEvent(models.Model):
         "able_to_cancel",
     )
     def _compute_before_date(self):
-
         for event in self:
             date, sign = event.date_begin, -1
+            cancel_interval_unit = event.cancel_interval_unit or "hours"
+            cancel_interval_nbr = event.cancel_interval_nbr or 1
             event.cancel_before_date = (
-                date
-                + _INTERVALS[event.cancel_interval_unit](
-                    sign * event.cancel_interval_nbr
-                )
+                date + _INTERVALS[cancel_interval_unit](sign * cancel_interval_nbr)
                 if date
-                else False
+                else None
             )
 
     @api.depends(
