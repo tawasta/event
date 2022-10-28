@@ -100,7 +100,10 @@
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
         <xpath expr="//div[@id='author-div']" position="after">
-            <t t-foreach="track.speaker_ids" t-as="speaker">
+            <t
+                t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
+                t-as="speaker"
+            >
                 <hr class="mt-2 pb-1 mb-1" />
                 <div id="speaker-div" class="mx-3">
                     <div class="mt-2 d-flex">
