@@ -16,6 +16,7 @@ addon | version | maintainers | summary
 [event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From
+[event_feedback_survey](event_feedback_survey/) | 14.0.1.0.0 |  | Send automated event feedback survey mails
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail

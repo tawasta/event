@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_feedback_survey
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20221025\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-21 17:27+0000\n"
+"PO-Revision-Date: 2022-11-21 17:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_feedback_survey
+#: model:mail.template,subject:event_feedback_survey.event_feedback
+msgid "${object.event_id.name}: Feedback"
+msgstr "${object.event_id.name}: Palaute"
+
+#. module: event_feedback_survey
+#: model:mail.template,subject:event_feedback_survey.event_feedback
+msgid "${object.event_id.name}: Feedback Survey"
+msgstr "${object.event_id.name}: Palautekysely"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid ""
+",<br/><br/>\n"
+"                                                            Thank you for joining our event"
+msgstr ""
+",<br/><br/>\n"
+"                                                            Kiitos osallistumisestasi tapahtumaan"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid ". Please help us improve our events by answering this feedback survey."
+msgstr ""
+". Auta meitä parantamaan tapahtumiamme vastaamalla tähän palautekyselyyn."
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid ""
+"<br/>\n"
+"                                                    Discover"
+msgstr ""
+"<br/>\n"
+"                                                    Tutustu"
+
+#. module: event_feedback_survey
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_event__display_name
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_type__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: event_feedback_survey
+#: model:ir.model.fields,help:event_feedback_survey.field_event_event__feedback_link
+#: model:ir.model.fields,help:event_feedback_survey.field_event_type__feedback_link
+msgid "Enter the URL address of a feedback survey."
+msgstr "Anna palautekyselyn URL-osoite."
+
+#. module: event_feedback_survey
+#: model:ir.model,name:event_feedback_survey.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_feedback_survey
+#: model:ir.model,name:event_feedback_survey.model_event_type
+msgid "Event Template"
+msgstr "Tapahtuman mallipohja"
+
+#. module: event_feedback_survey
+#: model:mail.template,name:event_feedback_survey.event_feedback
+msgid "Event: Feedback Mail"
+msgstr "Tapahtuman palauteviesti"
+
+#. module: event_feedback_survey
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_event__feedback_link
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_type__feedback_link
+msgid "Feedback Link (URL)"
+msgstr "Palautteen linkki (URL)"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Feedback Survey"
+msgstr "Palautekysely"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Hello"
+msgstr "Hei"
+
+#. module: event_feedback_survey
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_event__id
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_type__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: event_feedback_survey
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_event____last_update
+#: model:ir.model.fields,field_description:event_feedback_survey.field_event_type____last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Leave feedback:"
+msgstr "Anna palaute:"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Sent by"
+msgstr "Lähettäjä"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Team"
+msgstr "Tiimi"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "Thank you,<br/>"
+msgstr "Kiitos,<br/>"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "The"
+msgstr ""
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "View Event"
+msgstr "Näytä tapahtuma"
+
+#. module: event_feedback_survey
+#: model_terms:ir.ui.view,arch_db:event_feedback_survey.email_template_feedback
+msgid "all our events"
+msgstr "kaikkiin tapahtumiimme"
