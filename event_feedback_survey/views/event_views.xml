@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- EVENT.TYPE VIEWS -->
+        <record id="view_event_type_form_feedback_survey" model="ir.ui.view">
+            <field name="name">event.type.form</field>
+            <field name="model">event.type</field>
+            <field name="inherit_id" ref="event.view_event_type_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='event_type_communication']" position="before">
+                    <div class="col-12 o_setting_box" name="event_type_feedback_survey">
+                        <div class="o_setting_right_pane">
+                            <div class="row">
+                                <div>
+                                    <label for="feedback_link" />
+                                    <field name="feedback_link" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <!-- EVENT.EVENT VIEWS -->
+        <record id="view_event_form_feedback_survey" model="ir.ui.view">
+            <field name="name">event.event.form</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form" />
+            <field name="arch" type="xml">
+                <field name="tag_ids" position="after">
+                    <field name="feedback_link" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

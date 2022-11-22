@@ -16,6 +16,7 @@ addon | version | maintainers | summary
 [event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From
+[event_feedback_survey](event_feedback_survey/) | 14.0.1.0.0 |  | Send automated event feedback survey mails
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
@@ -24,6 +25,7 @@ addon | version | maintainers | summary
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 14.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 14.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 14.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
+[event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
 [event_template_disable_after_create](event_template_disable_after_create/) | 14.0.1.0.0 |  | Disable changing template after creation
 [event_template_required](event_template_required/) | 14.0.1.0.0 |  | Always require a template for events
 [event_user_is_organizer](event_user_is_organizer/) | 14.0.1.0.0 |  | Auto-change organizer when changing the event user
