@@ -18,7 +18,7 @@
                         <field
                             name="speaker_ids"
                             nolabel="1"
-                            options="{'no_quick_create':True,'no_create_edit':True, 'editable': bottom}"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
                         >
                             <tree name="speakers" string="Speakers">
                                 <field name="name" />
