@@ -30,7 +30,7 @@ addon | version | maintainers | summary
 [event_template_required](event_template_required/) | 14.0.1.0.0 |  | Always require a template for events
 [event_user_is_organizer](event_user_is_organizer/) | 14.0.1.0.0 |  | Auto-change organizer when changing the event user
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
-[website_event_cancellation](website_event_cancellation/) | 14.0.1.3.7 |  | Cancel events and event registrations through website.
+[website_event_cancellation](website_event_cancellation/) | 14.0.1.3.8 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.7 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
@@ -51,7 +51,7 @@ addon | version | maintainers | summary
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 14.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_privacies](website_event_track_privacies/) | 14.0.1.0.4 |  | Website event track privacy values
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
-[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.6 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.7 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list
 [website_my_events](website_my_events/) | 14.0.1.1.0 |  | My events in website portal
 

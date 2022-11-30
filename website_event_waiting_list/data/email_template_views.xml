@@ -83,7 +83,10 @@
                                     Thank you,<br />
                                     <span style="color: #454748;">
                                         -- <br />
-                                        <t t-if="object.event_id.organizer_id"><t
+                                        <t
+                                            t-if="object.event_id.organizer_id"
+                                            name="organizer-signature"
+                                        ><t
                                                 t-esc="object.event_id.organizer_id.name"
                                             /></t>
                                         <t t-else="">
@@ -173,7 +176,10 @@
                                     Thank you,<br />
                                     <span style="color: #454748;">
                                         -- <br />
-                                        <t t-if="object.event_id.organizer_id"><t
+                                        <t
+                                            t-if="object.event_id.organizer_id"
+                                            name="organizer-signature"
+                                        ><t
                                                 t-esc="object.event_id.organizer_id.name"
                                             /></t>
                                         <t t-else="">
