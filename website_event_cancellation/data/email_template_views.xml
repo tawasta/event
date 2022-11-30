@@ -252,45 +252,44 @@
                     </tr>
                     <tr>
                         <td style="text-align:center;">
-                            <t t-if="object.event_id.organizer_id">
-                                <hr
-                                    width="100%"
-                                    style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
-                                />
-                            </t>
+                            <hr
+                                t-if="object.event_id.organizer_id"
+                                name="organizer-separator"
+                                width="100%"
+                                style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td valign="top" style="font-size: 14px;">
                             <!-- CONTACT ORGANIZER -->
-                            <t t-if="object.event_id.organizer_id">
-                                <div>
-                                    <span
-                                        style="font-weight:300;margin:10px 0px"
-                                    >Questions about this event?</span>
-                                    <div>Please contact the organizer:</div>
-                                    <ul>
-                                        <li>
-                                            <t
-                                                t-esc="object.event_id.organizer_id.name"
-                                            />
-                                        </li>
-                                        <t t-if="object.event_id.organizer_id.email">
-                                            <li>Mail: <a
-                                                    t-attf-href="mailto:#{object.event_id.organizer_id.email}"
-                                                    style="text-decoration:none;color:#875A7B;"
-                                                ><t
-                                                        t-esc="object.event_id.organizer_id.email"
-                                                    /></a></li>
-                                        </t>
-                                        <t t-if="object.event_id.organizer_id.phone">
-                                            <li>Phone: <t
-                                                    t-esc="object.event_id.organizer_id.phone"
-                                                /></li>
-                                        </t>
-                                    </ul>
-                                </div>
-                            </t>
+                            <div
+                                t-if="object.event_id.organizer_id"
+                                name="organizer-info"
+                            >
+                                <span
+                                    style="font-weight:300;margin:10px 0px"
+                                >Questions about this event?</span>
+                                <div>Please contact the organizer:</div>
+                                <ul>
+                                    <li>
+                                        <t t-esc="object.event_id.organizer_id.name" />
+                                    </li>
+                                    <t t-if="object.event_id.organizer_id.email">
+                                        <li>Mail: <a
+                                                t-attf-href="mailto:#{object.event_id.organizer_id.email}"
+                                                style="text-decoration:none;color:#875A7B;"
+                                            ><t
+                                                    t-esc="object.event_id.organizer_id.email"
+                                                /></a></li>
+                                    </t>
+                                    <t t-if="object.event_id.organizer_id.phone">
+                                        <li>Phone: <t
+                                                t-esc="object.event_id.organizer_id.phone"
+                                            /></li>
+                                    </t>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -454,7 +453,10 @@
                                     See you soon,<br />
                                     <span style="color: #454748;">
                                         -- <br />
-                                        <t t-if="object.event_id.organizer_id"><t
+                                        <t
+                                            t-if="object.event_id.organizer_id"
+                                            name="organizer-signature"
+                                        ><t
                                                 t-esc="object.event_id.organizer_id.name"
                                             /></t>
                                         <t t-else="">
@@ -562,7 +564,10 @@
                                     See you soon,<br />
                                     <span style="color: #454748;">
                                         -- <br />
-                                        <t t-if="object.event_id.organizer_id"><t
+                                        <t
+                                            t-if="object.event_id.organizer_id"
+                                            name="organizer-signature"
+                                        ><t
                                                 t-esc="object.event_id.organizer_id.name"
                                             /></t>
                                         <t t-else="">

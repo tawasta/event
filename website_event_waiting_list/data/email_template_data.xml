@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
         <!-- Email when placed on a waiting list -->
         <record id="event_waiting" model="mail.template">
             <field name="name">Event: Waiting List Confirmation</field>
