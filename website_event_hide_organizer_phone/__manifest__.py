@@ -18,30 +18,15 @@
 #
 ##############################################################################
 {
-    "name": "Website Event Cancellation",
-    "summary": "Cancel events and event registrations through website.",
-    "version": "14.0.1.3.9",
+    "name": "Website Event Hide Organizer Phone",
+    "version": "14.0.1.0.0",
     "category": "Events",
+    "summary": "Hides organizer phone number from website and mail templates",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "mail_template_name_translatable",
-        "website_event",
-        "website_event_ticket_datetime",
-        "website_event_frontend_customization",
-        "email_template_qweb",
-    ],
-    "data": [
-        "views/event_views.xml",
-        "views/event_stage_views.xml",
-        "views/event_templates_page_cancellation.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_list.xml",
-        "data/email_template_views.xml",
-        "data/email_template_data.xml",
-        "data/event_data.xml",
-    ],
+    "depends": ["website_event_cancellation"],
+    "data": ["views/event_templates_registration.xml", "data/email_template_views.xml"],
 }

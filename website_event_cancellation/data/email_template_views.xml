@@ -283,7 +283,10 @@
                                                     t-esc="object.event_id.organizer_id.email"
                                                 /></a></li>
                                     </t>
-                                    <t t-if="object.event_id.organizer_id.phone">
+                                    <t
+                                        t-if="object.event_id.organizer_id.phone"
+                                        name="organizer_phone_list"
+                                    >
                                         <li>Phone: <t
                                                 t-esc="object.event_id.organizer_id.phone"
                                             /></li>
