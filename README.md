@@ -19,6 +19,7 @@ addon | version | maintainers | summary
 [event_feedback_survey](event_feedback_survey/) | 14.0.1.0.0 |  | Send automated event feedback survey mails
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
+[event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 14.0.1.0.1 |  | Removes translatable name and description fields from Event.
