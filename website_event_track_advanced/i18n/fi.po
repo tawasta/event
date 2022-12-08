@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 14.0-20221025\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-16 13:42+0000\n"
-"PO-Revision-Date: 2022-09-16 13:42+0000\n"
+"POT-Creation-Date: 2022-12-08 13:46+0000\n"
+"PO-Revision-Date: 2022-12-08 13:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -97,15 +97,6 @@ msgid ""
 msgstr ""
 "<i class=\"fa fa-info-circle\"/>\n"
 "                                    <span>Klikkaamalla <strong>\"Lähetä arviointi\"</strong> arviointi esitysehdotuksesta lähetetään.</span>"
-
-#. module: website_event_track_advanced
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
-msgid ""
-"<i class=\"fa fa-info-circle\"/>\n"
-"                                <span>By clicking <strong>\"Save as Draft\"</strong> the proposal shall be saved and can be edited later by the contact person.</span>"
-msgstr ""
-"<i class=\"fa fa-info-circle\"/>\n"
-"                                <span>Klikkaamalla <strong>\"Tallenna luonnoksena\"</strong> ehdotus tallennetaan ja yhteyshenkilö voi myöhemmin muokata sitä.</span>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
@@ -1716,6 +1707,11 @@ msgid "Proposal"
 msgstr "Esitysehdotus"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__is_draft
+msgid "Proposal is a draft"
+msgstr "Esitysehdotus on luonnos"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_stage__is_editable
 msgid "Proposal is editable"
 msgstr "Esitysehdotus on muokattavissa"
@@ -2110,6 +2106,11 @@ msgid "This proposal can be edited by the contact person."
 msgstr "Yhteyshenkilö voi muokata tätä ehdotusta."
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,help:website_event_track_advanced.field_event_track_stage__is_draft
+msgid "This proposal is a draft and has not yet been confirmed."
+msgstr "Tämä ehdodtus on luonnos ja sitä ei ole vielä vahvistettu."
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_stage__is_submitted
 msgid "This proposal is submitted."
 msgstr "Tämä ehdotus on lähetetty."
@@ -2465,7 +2466,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_review
 msgid "close"
 msgstr "sulje"
 

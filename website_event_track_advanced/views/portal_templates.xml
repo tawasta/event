@@ -98,7 +98,9 @@
                             </td>
                             <td>
                                 <t t-set="track_state">badge-default</t>
-                                <t t-if="track.stage_id.is_editable">
+                                <t
+                                    t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                                >
                                     <t t-set="track_state">badge-info</t>
                                 </t>
                                 <t t-if="track.stage_id.is_submitted">
@@ -234,7 +236,9 @@
                             </td>
                             <td>
                                 <t t-set="track_state">badge-default</t>
-                                <t t-if="track.stage_id.is_editable">
+                                <t
+                                    t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                                >
                                     <t t-set="track_state">badge-info</t>
                                 </t>
                                 <t t-if="track.stage_id.is_submitted">

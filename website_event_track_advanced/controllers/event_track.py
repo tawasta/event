@@ -71,6 +71,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         review = False
         editable = False
         existing_rating = False
+        draft = False
         if track_id:
             track = request.env["event.track"].sudo().search([["id", "=", track_id]])
             if (
@@ -98,9 +99,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                     if partner_id == track.partner_id and track.stage_id.is_editable
                     else False
                 )
+                draft = True if track.stage_id.is_draft else False
         else:
             track = request.env["event.track"]
             editable = True
+            draft = True
         values = {
             "track": track,
             "track_languages": track_languages,
@@ -108,6 +111,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "main_object": event,
             "editable": editable,
             "review": review,
+            "draft": draft,
             "existing_rating": existing_rating,
             "partner": partner_id,
         }
