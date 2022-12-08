@@ -48,7 +48,7 @@
         inherit_id="website_event_track.event_track_proposal_success"
     >
         <xpath expr="//section//p[last()]" position="replace">
-            <t t-if="track.stage_id.is_editable">
+            <t t-if="track.stage_id.is_editable and track.stage_id.is_draft">
                 <p>
                     Your proposal is saved as a draft and will not be reviewed until it is submitted.
                 </p>
@@ -147,7 +147,9 @@
                         <t t-esc="track.name" />
                         <td class="td-submit">
                             <t t-set="track_state">badge-default</t>
-                            <t t-if="track.stage_id.is_editable">
+                            <t
+                                t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                            >
                                 <t t-set="track_state">badge-info</t>
                             </t>
                             <t t-if="track.stage_id.is_submitted">
@@ -287,6 +289,7 @@
                         name="editable"
                         t-att-value="editable"
                     />
+                    <input type="hidden" id="draft" name="draft" t-att-value="draft" />
                     <input type="hidden" name="track_id" t-att-value="track.id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
@@ -378,13 +381,13 @@
                                     class="btn btn-primary application-submit"
                                     data-toggle="tooltip"
                                     data-position="top"
-                                    t-att-disabled="None if editable else 'disabled'"
+                                    t-att-disabled="None if editable and draft else 'disabled'"
                                     title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later by the contact person."
                                 >Save as Draft</button>
                                 <button
                                     type="submit"
                                     name="track-confirm"
-                                    value="track-confirm"
+                                    t-att-value="None if not draft else 'track-confirm'"
                                     id="application-submit-button-send"
                                     class="btn btn-primary application-submit"
                                     data-toggle="tooltip"
@@ -487,19 +490,6 @@
                             <t
                                 t-call="website_event_track_advanced.event_track_application_targetgroup_info"
                             />
-                        </div>
-                        <div class="modal-body bg-light border-bottom">
-                            <p class="alert alert-info alert-dismissable">
-                                <a
-                                    href="#"
-                                    class="close"
-                                    data-dismiss="alert"
-                                    aria-label="close"
-                                >×</a>
-                                <i class="fa fa-info-circle" />
-                                <span>By clicking <strong
-                                    >"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
-                            </p>
                         </div>
                         <div class="modal-footer border-0 justify-content-between">
                             <button

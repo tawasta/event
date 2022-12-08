@@ -41,6 +41,10 @@ class TrackStage(models.Model):
         string="Proposal is editable",
         help="This proposal can be edited by the contact person.",
     )
+    is_draft = fields.Boolean(
+        string="Proposal is a draft",
+        help="This proposal is a draft and has not yet been confirmed.",
+    )
     is_submitted = fields.Boolean(
         string="Proposal is submitted", help="This proposal is submitted."
     )

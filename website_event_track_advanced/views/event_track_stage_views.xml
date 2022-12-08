@@ -10,6 +10,7 @@
         <field name="arch" type="xml">
             <field name="is_accepted" position="before">
                 <field name="is_editable" />
+                <field name="is_draft" />
                 <field name="is_submitted" />
             </field>
         </field>
@@ -24,6 +25,7 @@
         <field name="arch" type="xml">
             <field name="is_accepted" position="before">
                 <field name="is_editable" />
+                <field name="is_draft" />
                 <field name="is_submitted" />
             </field>
         </field>
