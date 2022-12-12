@@ -123,6 +123,8 @@ class EventTrack(models.Model):
     keywords = fields.Text(string="Keywords", help="Text keywords")
     extra_info = fields.Html(string="Extra info")
     video_url = fields.Char(string="Track as a video (link to e.g. Youtube or Vimeo)")
+    is_webinar = fields.Boolean(related="type.webinar")
+    is_workshop = fields.Boolean(related="type.workshop")
     webinar = fields.Boolean(string="Pre-event webinar")
     webinar_info = fields.Html(string="Pre-event webinar info")
     workshop_goals = fields.Html(string="Goals")

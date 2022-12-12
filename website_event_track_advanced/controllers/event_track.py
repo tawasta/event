@@ -184,9 +184,12 @@ class EventTrackControllerAdvanced(EventTrackController):
         application_type = self._get_record("event.track.type", post.get("type"))
 
         # Target group
-        target_group = self._get_record(
-            "event.track.target.group", post.get("target_group")
-        )
+        if "target_group" in post and post.get("target_group"):
+            target_group = self._get_record(
+                "event.track.target.group", post.get("target_group")
+            )
+        else:
+            target_group = False
 
         # Tags/Keywords
         tags = list(map(int, request.httprequest.form.getlist("tags")))
@@ -195,15 +198,13 @@ class EventTrackControllerAdvanced(EventTrackController):
         track_id = self._get_record("event.track", post.get("track_id"))
         track_values = {
             "name": post.get("name"),
-            "type": application_type.id,
+            "type": application_type.id if application_type else False,
             "event_id": event.id,
             "user_id": False,
             "description": post.get("description"),
             "video_url": post.get("video_url"),
-            "webinar": post.get("webinar"),
-            "webinar_info": post.get("webinar_info"),
             "extra_info": post.get("extra_info"),
-            "target_group": target_group.id,
+            "target_group": target_group.id if target_group else False,
             "target_group_info": post.get("target_group_info"),
             "tag_ids": [(6, 0, tags)],
         }
@@ -234,6 +235,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "company_type": "person",
                     }
                 )
+
+        # Webinar
+        if post.get("is_webinar") and post.get("is_webinar") == "true":
+            track_values["webinar"] = post.get("webinar")
+            track_values["webinar_info"] = post.get("webinar_info")
 
         # Workshop
         if post.get("is_workshop") and post.get("is_workshop") == "true":

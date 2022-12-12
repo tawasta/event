@@ -543,6 +543,7 @@
                                     t-att-value="application_type.id"
                                     t-att-selected="application_type.id == track.type.id"
                                     t-att-data-workshop="application_type.workshop"
+                                    t-att-data-webinar="application_type.webinar"
                                     t-att-data-description="application_type.description"
                                 >
                                     <t t-esc="application_type.name" />
@@ -709,7 +710,11 @@
     </template>
     <!-- Target group info -->
     <template id="event_track_application_targetgroup_info">
-        <div class="panel panel-primary" id="track-application-targetgroup-div">
+        <div
+            class="panel panel-primary"
+            id="track-application-targetgroup-div"
+            t-if="event.sudo().target_group_ids"
+        >
             <div class="panel-heading">
                 <h3 class="panel-title">Target Group Details</h3>
             </div>
@@ -774,6 +779,47 @@
                             rows="6"
                         ><t t-esc="track.target_group_info" /></textarea>
                     </div>
+                    <div class="form-group col-xl-12">
+                        <label
+                            for="tags"
+                            class="col-form-label label-optional"
+                        >Tags</label>
+                        <p
+                            t-if="not review"
+                            id="track-application-tag-alert-info"
+                            class="alert alert-info alert-dismissable"
+                        >
+                            <a
+                                href="#"
+                                class="close"
+                                data-dismiss="alert"
+                                aria-label="close"
+                            >×</a>
+                            <span>Please select up to three tags.</span>
+                        </p>
+                        <select
+                            name="tags"
+                            id="tags"
+                            placeholder="Tags..."
+                            multiple="multiple"
+                            class="form-control tags-select"
+                            autocomplete="off"
+                            t-att-disabled="None if editable else 'disabled'"
+                        >
+                            <t t-foreach="event.allowed_track_tag_ids or []" t-as="tag">
+                                <option
+                                    t-att-value="tag.id"
+                                    t-att-selected="tag.id in track.tag_ids.ids"
+                                ><t t-esc="tag.name" /></option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary" t-else="">
+            <div class="panel-body">
+                <div class="row" id="track-application-targetgroup-info-div">
                     <div class="form-group col-xl-12">
                         <label
                             for="tags"
@@ -1207,8 +1253,12 @@
             </div>
         </div>
     </template>
+    <!-- WEBINAR -->
     <template id="event_track_application_webinar">
-        <div class="panel panel-warning" id="track-application-webinar-div">
+        <div
+            t-attf-class="panel panel-warning #{'d-none' if not track.type.webinar else ''}"
+            id="track-application-webinar-div"
+        >
             <div class="panel-heading">
                 <h3 class="panel-title">Webinar Details</h3>
             </div>
@@ -1227,6 +1277,12 @@
                     >You can fill this if you want to hold a webinar before the actual event.</span>
                 </p>
                 <div class="row" id="track-application-webinar-row-div">
+                    <input
+                        type="hidden"
+                        name="is_webinar"
+                        id="is_webinar"
+                        t-attf-value="#{'true' if track.type.webinar else 'false'}"
+                    />
                     <div class="form-group col-xl-12">
                         <div class="form-check">
                             <input
@@ -1235,7 +1291,7 @@
                                 name="webinar"
                                 data-toggle="webinar_info"
                                 t-att-checked="None if not track.webinar else 'checked'"
-                                t-att-disabled="None if editable else 'disabled'"
+                                t-att-disabled="None if editable and track.type.webinar else 'disabled'"
                             />
                             <label
                                 for="webinar"
@@ -1255,7 +1311,7 @@
                             name="webinar_info"
                             placeholder="Webinar info..."
                             rows="6"
-                            t-att-disabled="None if editable and track.webinar else 'disabled'"
+                            t-att-disabled="None if editable and track.type.webinar and track.webinar else 'disabled'"
                         ><t t-esc="track.webinar_info" /></textarea>
                     </div>
                 </div>
