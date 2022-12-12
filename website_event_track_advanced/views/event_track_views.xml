@@ -125,7 +125,12 @@
                 >
                     <field name="ratings" readonly="1" />
                 </page>
-                <page name="webinar" string="Webinar">
+                <field name="is_webinar" invisible="1" />
+                <page
+                    name="webinar"
+                    string="Webinar"
+                    attrs="{'invisible': [('is_webinar', '!=', True)]}"
+                >
                     <group>
                         <field name="webinar" />
                         <field
@@ -134,8 +139,12 @@
                         />
                     </group>
                 </page>
-                <page name="workshop" string="Workshop">
-                    <!-- Won't work. We would need to use "type.code" attrs="{'invisible': [('type', '!=', 'workshop')]}"-->
+                <field name="is_workshop" invisible="1" />
+                <page
+                    name="workshop"
+                    string="Workshop"
+                    attrs="{'invisible': [('is_workshop', '!=', True)]}"
+                >
                     <group cols="1">
                         <field name="workshop_participants" nolabel="0" />
                         <field name="workshop_fee" nolabel="0" />

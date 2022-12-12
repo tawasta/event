@@ -244,6 +244,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             $("#type option:selected").attr("data-description") || ""
                         );
                         var workshop = $("#type option:selected").attr("data-workshop");
+                        var webinar = $("#type option:selected").attr("data-webinar");
                         // Enable workshop inputs
                         if (workshop) {
                             $("#track-application-workshop-div").removeClass("d-none");
@@ -337,6 +338,51 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 .each(function () {
                                     $(this).removeAttr("required");
                                     $(this).attr("required-disabled", "disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "false");
+                                });
+                        }
+                        // Display webinar questions depending on type
+                        if (webinar) {
+                            $("#track-application-webinar-div").removeClass("d-none");
+                            $("#track-application-webinar-div")
+                                .find("input#is_webinar")
+                                .each(function () {
+                                    $(this).attr("value", "true");
+                                });
+                            $("#track-application-webinar-div")
+                                .find("input[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                });
+                            $("#track-application-webinar-div")
+                                .find("textarea[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "true");
+                                });
+                            // Disable webinar inputs
+                        } else {
+                            $("#track-application-webinar-div").addClass("d-none");
+                            $("#track-application-webinar-div")
+                                .find("input#is_webinar")
+                                .each(function () {
+                                    $(this).attr("value", "false");
+                                });
+                            $("#track-application-webinar-div")
+                                .find("input")
+                                .each(function () {
+                                    $(this).attr("disabled", "disabled");
+                                });
+                            $("#track-application-webinar-div")
+                                .find("textarea")
+                                .each(function () {
+                                    $(this).attr("disabled", "disabled");
                                     $(this)
                                         .siblings()
                                         .find(".note-editable")

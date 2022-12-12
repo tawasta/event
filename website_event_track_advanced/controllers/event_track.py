@@ -203,8 +203,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             "user_id": False,
             "description": post.get("description"),
             "video_url": post.get("video_url"),
-            "webinar": post.get("webinar"),
-            "webinar_info": post.get("webinar_info"),
             "extra_info": post.get("extra_info"),
             "target_group": target_group.id if target_group else False,
             "target_group_info": post.get("target_group_info"),
@@ -237,6 +235,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "company_type": "person",
                     }
                 )
+
+        # Webinar
+        if post.get("is_webinar") and post.get("is_webinar") == "true":
+            track_values["webinar"] = post.get("webinar")
+            track_values["webinar_info"] = post.get("webinar_info")
 
         # Workshop
         if post.get("is_workshop") and post.get("is_workshop") == "true":
