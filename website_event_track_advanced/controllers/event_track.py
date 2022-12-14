@@ -281,7 +281,12 @@ class EventTrackControllerAdvanced(EventTrackController):
             else False
         )
         track_draft = (
-            True if post.get("track-draft") and post.get("track-draft") != "" else False
+            True if "track-draft" in post and post.get("track-draft") != "" else False
+        )
+        track_is_done = (
+            True
+            if "track-is-done" in post and post.get("track-is-done") != ""
+            else False
         )
         values.update(
             {
@@ -292,6 +297,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "speakers": speaker_values,
                 "track_confirm": track_confirm,
                 "track_draft": track_draft,
+                "track_is_done": track_is_done,
             }
         )
 
@@ -499,6 +505,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             else:
                 request.env["event.track.rating"].sudo().create(vals)
 
+    # flake8: noqa: C901
     @http.route(
         ["""/event/<model("event.event"):event>/track_proposal/post"""],
         type="http",
@@ -516,11 +523,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             return request.redirect("/my/tracks")
 
         followers = list()
-        _logger.info(_("Posted values: %s" % dict(post)))
+        _logger.info(_("Posted values: %s") % dict(post))
 
         # 1. Sort posted values
         values = self._get_event_track_proposal_post_values(event, **post)
-        _logger.info(_("Used values: %s" % values))
+        _logger.info(_("Used values: %s") % values)
 
         # 2. Create user and contact (partner)
         user = False
@@ -562,7 +569,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             signee = self._create_partner(values["workshop_signee"])
             values["track"]["organizer_contact"] = signee.id
 
-        # 7. Check if we want to confirm the track
+        # 7. Check if we want to confirm or set track as done
         if values.get("track_confirm"):
             first_submitted_stage = (
                 request.env["event.track.stage"]
@@ -571,6 +578,15 @@ class EventTrackControllerAdvanced(EventTrackController):
             )
             if first_submitted_stage:
                 values["track"]["stage_id"] = first_submitted_stage[0].id
+
+        if values.get("track_is_done"):
+            first_is_done_stage = (
+                request.env["event.track.stage"]
+                .sudo()
+                .search([("is_done", "=", True)], order="sequence")
+            )
+            if first_is_done_stage:
+                values["track"]["stage_id"] = first_is_done_stage[0].id
 
         # 8. Create/Write the track
         create_track = False
