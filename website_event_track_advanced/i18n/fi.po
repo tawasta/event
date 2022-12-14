@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0-20221025\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-12 16:38+0000\n"
-"PO-Revision-Date: 2022-12-12 16:38+0000\n"
+"POT-Creation-Date: 2022-12-14 14:25+0000\n"
+"PO-Revision-Date: 2022-12-14 14:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,19 @@ msgid ""
 msgstr ""
 ". Sinun pitäisi pian saada sähköpostiviesti viimeistelläksesi tilin "
 "perustamisen. Kun olet määrittänyt tilisi, voit mennä"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                    <span>By clicking <strong>\"Save and Confirm\"</strong> the changes shall be saved and the track will be confirmed as part of the event.</span>\n"
+"                                    <br/>\n"
+"                                    <span>Please note that a confirmed track can no longer be edited.</span>"
+msgstr ""
+"<i class=\"fa fa-info-circle\"/>\n"
+"                                    <span>Klikkaamalla <strong>\"Tallenna ja vahvista\"</strong> muutoksenne tallennetaan ja esitys vahvistetaan osaksi tapahtuman ohjelmaa.</span>\n"
+"                                    <br/>\n"
+"                                    <span>Huomioi, että vahvistettua ehdotusta ei voi enää muokata.</span>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
@@ -974,11 +987,22 @@ msgstr "Tauko: %s minuuttia"
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid ""
+"By clicking \"Save and Confirm\" the changes shall be saved and the track "
+"will be confirmed as part of the event. Please note that a confirmed track "
+"can no longer be edited."
+msgstr ""
+"Klikkaamalla \"Tallenna ja vahvista\" muutoksenne tallennetaan ja esitys "
+"vahvistetaan osaksi tapahtuman ohjelmaa. Huomioi, että vahvistettua esitystä "
+"ei voi enää muokata."
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid ""
 "By clicking \"Save and Submit\" the proposal shall be saved and submitted "
 "for review. Please note that a completed proposal can no longer be edited."
 msgstr ""
-"Klikkaamalla \"Tallenna ja Lähetä\" ehdotus tallennetaan ja lähetetään "
-"arvioitavaksi. Huomioi että valmista ehdotusta ei voi enää muokata."
+"Klikkaamalla \"Tallenna ja lähetä\" ehdotus tallennetaan ja lähetetään "
+"arvioitavaksi. Huomioi, että valmista ehdotusta ei voi enää muokata."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
@@ -1877,6 +1901,11 @@ msgstr "Lauantai"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
+msgid "Save and Confirm"
+msgstr "Tallenna ja vahvista"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
 msgid "Save and Submit"
 msgstr "Tallenna ja lähetä"
 
@@ -2427,6 +2456,11 @@ msgstr ""
 " lähetetty."
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
+msgid "Your track is saved and confirmed as part of the event."
+msgstr "Esityksenne on tallennettu ja vahvistettu osaksi tapahtuman ohjelmaa."
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "Zip"
 msgstr "Postinumero"
@@ -2483,7 +2517,7 @@ msgstr "sulje"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
 msgid "exists in the system. After logging into your account, you can go to"
 msgstr ""
-"on olemassa järejstelmässä. Kun olet kirjautunut tilillesi, voit mennä"
+"on olemassa järjestelmässä. Kun olet kirjautunut tilillesi, voit mennä"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
@@ -2542,3 +2576,15 @@ msgid ""
 msgstr ""
 "tarkastellaksesi esitysehdotustanne. Jos olette unohtaneet salasananne, "
 "olkaa hyvä ja painakaa"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
+msgid "to view your track."
+msgstr "tarkastellaksesi esitystänne."
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
+msgid "to view your track. If you have forgotten your password, please click"
+msgstr ""
+"tarkastellaksesi esitystänne. Jos olette unohtaneet salasananne, olkaa hyvä "
+"ja painakaa"

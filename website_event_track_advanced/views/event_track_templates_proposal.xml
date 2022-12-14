@@ -73,6 +73,31 @@
                     </p>
                 </t>
             </t>
+            <t t-elif="track.stage_id.is_done">
+                <p>
+                    Your track is saved and confirmed as part of the event.
+                </p>
+                <t t-if="not user_exists">
+                    <p>
+                        An account has been created for the username <b><t
+                                t-esc="track.partner_id.user_ids[0].login"
+                            /></b>. You should receive an email shortly to finish seting up your account. After setting up your account, you can go to <a
+                            href="/my/tracks"
+                        >My Tracks</a> to view your track.
+                    </p>
+                </t>
+                <t t-else="">
+                    <p>
+                        An account for the username <b><t
+                                t-esc="track.partner_id.user_ids[0].login"
+                            /></b> exists in the system. After logging into your account, you can go to <a
+                            href="/my/tracks"
+                        >My Tracks</a> to view your track. If you have forgotten your password, please click <a
+                            href="/web/reset_password"
+                        >here</a>.
+                    </p>
+                </t>
+            </t>
             <t t-else="">
                 <p>
                     We will evaluate your proposition and get back to you shortly.
@@ -342,7 +367,10 @@
                         </div>
                         <t t-if="not review">
                             <div class="modal-body bg-light border-bottom">
-                                <p class="alert alert-info alert-dismissable">
+                                <p
+                                    class="alert alert-info alert-dismissable"
+                                    t-if="editable and draft"
+                                >
                                     <a
                                         href="#"
                                         class="close"
@@ -353,7 +381,10 @@
                                     <span>By clicking <strong
                                         >"Save as Draft"</strong> the proposal shall be saved and can be edited later by the contact person.</span>
                                 </p>
-                                <p class="alert alert-info alert-dismissable">
+                                <p
+                                    class="alert alert-info alert-dismissable"
+                                    t-if="editable and draft"
+                                >
                                     <a
                                         href="#"
                                         class="close"
@@ -366,6 +397,23 @@
                                     <br />
                                     <span
                                     >Please note that a completed proposal can no longer be edited.</span>
+                                </p>
+                                <p
+                                    class="alert alert-info alert-dismissable"
+                                    t-if="editable and not draft"
+                                >
+                                    <a
+                                        href="#"
+                                        class="close"
+                                        data-dismiss="alert"
+                                        aria-label="close"
+                                    >×</a>
+                                    <i class="fa fa-info-circle" />
+                                    <span>By clicking <strong
+                                        >"Save and Confirm"</strong> the changes shall be saved and the track will be confirmed as part of the event.</span>
+                                    <br />
+                                    <span
+                                    >Please note that a confirmed track can no longer be edited.</span>
                                 </p>
                             </div>
                             <div class="modal-footer border-0 justify-content-between">
@@ -384,17 +432,32 @@
                                     t-att-disabled="None if editable and draft else 'disabled'"
                                     title="By clicking &quot;Save as Draft&quot; the proposal shall be saved and can be edited later by the contact person."
                                 >Save as Draft</button>
-                                <button
-                                    type="submit"
-                                    name="track-confirm"
-                                    t-att-value="None if not draft else 'track-confirm'"
-                                    id="application-submit-button-send"
-                                    class="btn btn-primary application-submit"
-                                    data-toggle="tooltip"
-                                    data-position="top"
-                                    t-att-disabled="None if editable else 'disabled'"
-                                    title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited."
-                                >Save and Submit</button>
+                                <t t-if="not draft">
+                                    <button
+                                        type="submit"
+                                        name="track-is-done"
+                                        value="track-is-done"
+                                        id="application-submit-button-send"
+                                        class="btn btn-primary application-submit"
+                                        data-toggle="tooltip"
+                                        data-position="top"
+                                        t-att-disabled="None if editable else 'disabled'"
+                                        title="By clicking &quot;Save and Confirm&quot; the changes shall be saved and the track will be confirmed as part of the event. Please note that a confirmed track can no longer be edited."
+                                    >Save and Confirm</button>
+                                </t>
+                                <t t-else="">
+                                    <button
+                                        type="submit"
+                                        name="track-confirm"
+                                        value="track-confirm"
+                                        id="application-submit-button-send"
+                                        class="btn btn-primary application-submit"
+                                        data-toggle="tooltip"
+                                        data-position="top"
+                                        t-att-disabled="None if editable else 'disabled'"
+                                        title="By clicking &quot;Save and Submit&quot; the proposal shall be saved and submitted for review. Please note that a completed proposal can no longer be edited."
+                                    >Save and Submit</button>
+                                </t>
                             </div>
                         </t>
                         <t t-else="">
