@@ -1539,9 +1539,13 @@ msgstr "Maanantai"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_proposal_success
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
 msgid "My Tracks"
 msgstr "Omiin esityksiin"
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+msgid "My Tracks"
+msgstr "Omat esitykset"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_rating_grade__name
