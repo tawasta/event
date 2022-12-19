@@ -645,7 +645,7 @@
                     This part of the application is disclosed to the reviewers.
                 </p>
                 <p
-                    t-if="not review"
+                    t-if="track.stage_id.is_editable and track.stage_id.is_draft and not review"
                     id="track-application-application-alert-warning"
                     class="alert alert-warning alert-dismissable"
                 ><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
