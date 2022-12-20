@@ -848,7 +848,7 @@
                             class="col-form-label label-optional"
                         >Tags</label>
                         <p
-                            t-if="not review"
+                            t-if="not review and event.allow_track_tags_multiple"
                             id="track-application-tag-alert-info"
                             class="alert alert-info alert-dismissable"
                         >
@@ -860,22 +860,48 @@
                             >×</a>
                             <span>Please select up to three tags.</span>
                         </p>
-                        <select
-                            name="tags"
-                            id="tags"
-                            placeholder="Tags..."
-                            multiple="multiple"
-                            class="form-control tags-select"
-                            autocomplete="off"
-                            t-att-disabled="None if editable else 'disabled'"
-                        >
-                            <t t-foreach="event.allowed_track_tag_ids or []" t-as="tag">
-                                <option
-                                    t-att-value="tag.id"
-                                    t-att-selected="tag.id in track.tag_ids.ids"
-                                ><t t-esc="tag.name" /></option>
-                            </t>
-                        </select>
+                        <t t-if="event.allow_track_tags_multiple">
+                            <select
+                                name="tags"
+                                id="tags"
+                                placeholder="Tags..."
+                                multiple="multiple"
+                                class="form-control tags-select"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <t
+                                    t-foreach="event.allowed_track_tag_ids or []"
+                                    t-as="tag"
+                                >
+                                    <option
+                                        t-att-value="tag.id"
+                                        t-att-selected="tag.id in track.tag_ids.ids"
+                                    ><t t-esc="tag.name" /></option>
+                                </t>
+                            </select>
+                        </t>
+                        <t t-else="">
+                            <select
+                                name="tags"
+                                id="tags"
+                                placeholder="Tag..."
+                                class="form-control"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <option value="">Select...</option>
+                                <t
+                                    t-foreach="event.allowed_track_tag_ids or []"
+                                    t-as="tag"
+                                >
+                                    <option
+                                        t-att-value="tag.id"
+                                        t-att-selected="tag.id in track.tag_ids.ids"
+                                    ><t t-esc="tag.name" /></option>
+                                </t>
+                            </select>
+                        </t>
                     </div>
                 </div>
             </div>
@@ -889,7 +915,7 @@
                             class="col-form-label label-optional"
                         >Tags</label>
                         <p
-                            t-if="not review"
+                            t-if="not review and event.allow_track_tags_multiple"
                             id="track-application-tag-alert-info"
                             class="alert alert-info alert-dismissable"
                         >
@@ -901,22 +927,48 @@
                             >×</a>
                             <span>Please select up to three tags.</span>
                         </p>
-                        <select
-                            name="tags"
-                            id="tags"
-                            placeholder="Tags..."
-                            multiple="multiple"
-                            class="form-control tags-select"
-                            autocomplete="off"
-                            t-att-disabled="None if editable else 'disabled'"
-                        >
-                            <t t-foreach="event.allowed_track_tag_ids or []" t-as="tag">
-                                <option
-                                    t-att-value="tag.id"
-                                    t-att-selected="tag.id in track.tag_ids.ids"
-                                ><t t-esc="tag.name" /></option>
-                            </t>
-                        </select>
+                        <t t-if="event.allow_track_tags_multiple">
+                            <select
+                                name="tags"
+                                id="tags"
+                                placeholder="Tags..."
+                                multiple="multiple"
+                                class="form-control tags-select"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <t
+                                    t-foreach="event.allowed_track_tag_ids or []"
+                                    t-as="tag"
+                                >
+                                    <option
+                                        t-att-value="tag.id"
+                                        t-att-selected="tag.id in track.tag_ids.ids"
+                                    ><t t-esc="tag.name" /></option>
+                                </t>
+                            </select>
+                        </t>
+                        <t t-else="">
+                            <select
+                                name="tags"
+                                id="tags"
+                                placeholder="Tag..."
+                                class="form-control"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <option value="">Select...</option>
+                                <t
+                                    t-foreach="event.allowed_track_tag_ids or []"
+                                    t-as="tag"
+                                >
+                                    <option
+                                        t-att-value="tag.id"
+                                        t-att-selected="tag.id in track.tag_ids.ids"
+                                    ><t t-esc="tag.name" /></option>
+                                </t>
+                            </select>
+                        </t>
                     </div>
                 </div>
             </div>

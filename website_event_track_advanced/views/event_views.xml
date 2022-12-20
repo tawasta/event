@@ -105,6 +105,7 @@
                 <field name="rating_grade_ids" widget="many2many_tags" />
                 <field name="show_track_twitter_hashtags" />
                 <field name="allowed_track_tag_ids" widget="many2many_tags" />
+                <field name="allow_track_tags_multiple" />
             </field>
             <field name="address_id" position="after">
                 <field name="location_ids" widget="many2many_tags" />

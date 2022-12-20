@@ -87,8 +87,10 @@ class EventEvent(models.Model):
         string="Overlapping speakers",
         compute="_compute_overlapping_speaker_track_ids",
     )
-    event_over = fields.Boolean(string="Event over", compute="_compute_event_over")
-
+    event_over = fields.Boolean(compute="_compute_event_over")
+    allow_track_tags_multiple = fields.Boolean(
+        string="Allow Multiple Tags on Tracks", default=True
+    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
