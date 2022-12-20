@@ -192,7 +192,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             target_group = False
 
         # Tags/Keywords
-        tags = list(map(int, request.httprequest.form.getlist("tags")))
+        tags = False
+        tag_post = request.httprequest.form.getlist("tags")
+        _logger.debug("Tag list from post: %s" % tag_post)
+        if tag_post and not "" in tag_post:
+            tags = list(map(int, tag_post))
 
         # Track
         track_id = self._get_record("event.track", post.get("track_id"))
@@ -206,7 +210,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "extra_info": post.get("extra_info"),
             "target_group": target_group.id if target_group else False,
             "target_group_info": post.get("target_group_info"),
-            "tag_ids": [(6, 0, tags)],
+            "tag_ids": [(6, 0, tags)] if tags else False,
         }
 
         # Language

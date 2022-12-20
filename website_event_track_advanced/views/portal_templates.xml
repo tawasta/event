@@ -43,13 +43,12 @@
             <t t-if="tracks or review_tracks" t-call="portal.portal_table">
                 <thead>
                     <tr class="active">
-                        <th>Track</th>
-                        <th>Target Group</th>
-                        <th>Event</th>
-                        <th>Event date</th>
-                        <th>Contact Person</th>
-                        <th>Stage</th>
-                        <th />
+                        <th id="th_track">Track</th>
+                        <th id="th_event">Event</th>
+                        <th id="th_event_date">Event date</th>
+                        <th id="th_contact_person">Contact Person</th>
+                        <th id="th_stage">Stage</th>
+                        <th id="th_empty" />
                     </tr>
                 </thead>
                 <tbody>
@@ -62,21 +61,14 @@
                     <t t-foreach="tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
-                            <td>
+                            <td id="td_track">
                                 <span
                                     t-field="track.name"
                                     data-toggle="tooltip"
                                     t-att-title="track.name"
                                 />
                             </td>
-                            <td>
-                                <span
-                                    t-field="track.target_group.name"
-                                    data-toggle="tooltip"
-                                    t-att-title="track.target_group.name"
-                                />
-                            </td>
-                            <td>
+                            <td id="td_event">
                                 <a
                                     t-attf-href="/event/{{event.id}}/register"
                                     t-att-title="event.name"
@@ -84,19 +76,19 @@
                                     <t t-esc="event.name" t-if="event.name != '/'" />
                                 </a>
                             </td>
-                            <td>
+                            <td id="td_event_date">
                                <span>
                                    <t t-esc="get_formated_date(event)" />
                                </span>
                             </td>
-                            <td>
+                            <td id="td_contact_person">
                                 <span
                                     t-field="track.partner_id.name"
                                     data-toggle="tooltip"
                                     t-att-title="track.partner_id.name"
                                 />
                             </td>
-                            <td>
+                            <td id="td_stage">
                                 <t t-set="track_state">badge-default</t>
                                 <t
                                     t-if="track.stage_id.is_editable and track.stage_id.is_draft"
@@ -122,7 +114,7 @@
                                     t-att-title="track.stage_id.name"
                                 />
                             </td>
-                            <td>
+                            <td id="td_empty">
                                 <form
                                     id="track_proposal"
                                     t-attf-action="/event/#{slug(event)}/track_proposal/form"
@@ -300,6 +292,27 @@
                 </tbody>
             </t>
         </t>
+    </template>
+
+    <template
+        id="portal_my_tracks_target_group"
+        inherit_id="website_event_track_advanced.portal_my_tracks"
+        customize_show="True"
+        priority="20"
+        name="Show Target Group"
+    >
+        <xpath expr="//th[@id='th_track']" position="after">
+            <th id="th_target_group">Target Group</th>
+        </xpath>
+        <xpath expr="//td[@id='td_track']" position="after">
+            <td id="td_target_group">
+                <span
+                    t-field="track.target_group.name"
+                    data-toggle="tooltip"
+                    t-att-title="track.target_group.name"
+                />
+            </td>
+        </xpath>
     </template>
 
     <template id="event_track_portal_proposal" name="Event Track Portal Proposal">

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0-20221025\n"
+"Project-Id-Version: Odoo Server 14.0-20221202\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 14:25+0000\n"
-"PO-Revision-Date: 2022-12-14 14:25+0000\n"
+"POT-Creation-Date: 2022-12-20 14:09+0000\n"
+"PO-Revision-Date: 2022-12-20 14:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -852,6 +852,11 @@ msgid "Additional details"
 msgstr "Lisätiedot"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__allow_track_tags_multiple
+msgid "Allow Multiple Tags on Tracks"
+msgstr "Salli usea tunniste esityksille"
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
 msgid ""
 "An account for the contact person will be created upon form submission."
@@ -992,8 +997,8 @@ msgid ""
 "can no longer be edited."
 msgstr ""
 "Klikkaamalla \"Tallenna ja vahvista\" muutoksenne tallennetaan ja esitys "
-"vahvistetaan osaksi tapahtuman ohjelmaa. Huomioi, että vahvistettua esitystä "
-"ei voi enää muokata."
+"vahvistetaan osaksi tapahtuman ohjelmaa. Huomioi, että vahvistettua esitystä"
+" ei voi enää muokata."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application
@@ -1207,6 +1212,11 @@ msgid "Event"
 msgstr "Tapahtuma"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__event_over
+msgid "Event Over"
+msgstr "Tapahtuma ohi"
+
+#. module: website_event_track_advanced
 #: model:ir.model,name:website_event_track_advanced.model_event_type
 msgid "Event Template"
 msgstr "Tapahtuman mallipohja"
@@ -1283,11 +1293,6 @@ msgstr "Tapahtuman esitykset"
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
 msgid "Event date"
 msgstr "Tapahtuman pvm"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__event_over
-msgid "Event over"
-msgstr "Tapahtuma ohi"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__track_types_ids
@@ -2077,6 +2082,11 @@ msgstr "Tunnisteen nimi"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
+msgid "Tag..."
+msgstr "Tunniste..."
+
+#. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Tags"
 msgstr "Tunnisteet"
 
@@ -2087,7 +2097,7 @@ msgstr "Tunnisteet..."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks_target_group
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
 msgid "Target Group"
 msgstr "Kohderyhmä"
