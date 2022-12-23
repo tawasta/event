@@ -104,6 +104,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             track = request.env["event.track"]
             editable = True
             draft = True
+        _logger.debug(request.env.user)
+        _logger.debug(request.env.ref("base.public_user"))
         values = {
             "track": track,
             "track_languages": track_languages,
@@ -113,8 +115,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             "review": review,
             "draft": draft,
             "existing_rating": existing_rating,
-            "partner": partner_id,
+            "partner": partner_id
+            if request.env.user != request.env.ref("base.public_user")
+            else False,
         }
+        _logger.debug("Proposal form values:\n%s" % values)
         return values
 
     def _get_record(self, model, record_id):

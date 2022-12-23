@@ -766,6 +766,32 @@
                             multiple="true"
                             t-att-disabled="None if editable else 'disabled'"
                         />
+                        <div
+                            t-if="track.attachment_ids"
+                            class="o_track_proposal_attachment_container pt-3"
+                        >
+                            <span
+                                class="text-muted"
+                            >Previously uploaded attachments:</span>
+                            <t t-foreach="track.attachment_ids" t-as="attachment">
+                                <div
+                                    class="o_track_proposal_attachment"
+                                    t-att-id="attachment.id"
+                                >
+                                    <a
+                                        t-att-href="attachment.link_url"
+                                        aria-label="Download"
+                                        title="Download"
+                                        target="_blank"
+                                    >
+                                        <i class="fa fa-download" />
+                                        <span>
+                                            <t t-esc="attachment.name" />
+                                        </span>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1008,7 +1034,7 @@
                         <input
                             name="contact_firstname"
                             placeholder="First Name"
-                            t-att-value="track.partner_id.firstname or partner.firstname"
+                            t-att-value="track.partner_id.firstname or partner.firstname if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1023,7 +1049,7 @@
                         <input
                             name="contact_lastname"
                             placeholder="Last Name"
-                            t-att-value="track.partner_id.lastname or partner.lastname"
+                            t-att-value="track.partner_id.lastname or partner.lastname if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1035,7 +1061,7 @@
                         <input
                             name="contact_email"
                             placeholder="Email"
-                            t-att-value="track.partner_id.email or partner.email"
+                            t-att-value="track.partner_id.email or partner.email if partner else False"
                             class="form-control"
                             type="email"
                             t-att-required="None if not editable else 'required'"
@@ -1051,7 +1077,7 @@
                         <input
                             name="contact_phone"
                             placeholder="Phone"
-                            t-att-value="track.partner_id.phone or partner.phone"
+                            t-att-value="track.partner_id.phone or partner.phone if partner else False"
                             class="form-control"
                             type="tel"
                             t-att-disabled="None if editable else 'disabled'"
@@ -1065,7 +1091,7 @@
                         <input
                             name="contact_organization"
                             placeholder="Organization"
-                            t-att-value="track.partner_id.parent_id.name or partner.parent_id.name"
+                            t-att-value="track.partner_id.parent_id.name or partner.parent_id.name if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1077,7 +1103,7 @@
                         <input
                             name="contact_title"
                             placeholder="Title"
-                            t-att-value="track.partner_id.function or partner.function"
+                            t-att-value="track.partner_id.function or partner.function if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1266,7 +1292,7 @@
                                         placeholder="First Name"
                                         class="form-control"
                                         type="text"
-                                        t-att-value="partner.firstname"
+                                        t-att-value="partner.firstname if partner else False"
                                         t-att-required="None if not editable else 'required'"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
@@ -1281,7 +1307,7 @@
                                         placeholder="Last Name"
                                         class="form-control"
                                         type="text"
-                                        t-att-value="partner.lastname"
+                                        t-att-value="partner.lastname if partner else False"
                                         t-att-required="None if not editable else 'required'"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
@@ -1296,7 +1322,7 @@
                                         placeholder="Email"
                                         class="form-control"
                                         type="email"
-                                        t-att-value="partner.email"
+                                        t-att-value="partner.email if partner else False"
                                         t-att-required="None if not editable else 'required'"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
@@ -1311,7 +1337,7 @@
                                         placeholder="Phone"
                                         class="form-control"
                                         type="tel"
-                                        t-att-value="partner.phone"
+                                        t-att-value="partner.phone if partner else False"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
                                 </div>
@@ -1325,7 +1351,7 @@
                                         placeholder="Organization"
                                         class="form-control"
                                         type="text"
-                                        t-att-value="partner.parent_id.name"
+                                        t-att-value="partner.parent_id.name if partner else False"
                                         t-att-required="None if not editable else 'required'"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
@@ -1340,7 +1366,7 @@
                                         placeholder="Title"
                                         class="form-control"
                                         type="text"
-                                        t-att-value="partner.function"
+                                        t-att-value="partner.function if partner else False"
                                         t-att-required="None if not editable else 'required'"
                                         t-att-disabled="None if editable else 'disabled'"
                                     />
