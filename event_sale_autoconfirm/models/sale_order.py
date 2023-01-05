@@ -21,7 +21,6 @@
 # 1. Standard library imports:
 
 # 2. Known third party imports:
-
 # 3. Odoo imports (openerp):
 from odoo import api, models
 
@@ -32,9 +31,9 @@ from odoo import api, models
 # 6. Unknown third party imports:
 
 
-class SaleOrderLine(models.Model):
+class SaleOrder(models.Model):
     # 1. Private attributes
-    _inherit = "sale.order.line"
+    _inherit = "sale.order"
 
     # 2. Fields declaration
 
@@ -46,38 +45,15 @@ class SaleOrderLine(models.Model):
 
     # 6. CRUD methods
     @api.multi
-    def _update_registrations(
-        self, confirm=True, cancel_to_draft=False, registration_data=None
-    ):
-        """ Create or update registrations linked to a sales order line. A sale
-        order line has a product_uom_qty attribute that will be the number of
-        registrations linked to this line. This method update existing registrations
-        and create new one for missing one. """
-        Registration = self.env["event.registration"].sudo()
-        registrations = Registration.search([("sale_order_line_id", "in", self.ids)])
-        for so_line in self.filtered("event_id"):
-            existing_registrations = registrations.filtered(
-                lambda self: self.sale_order_line_id.id == so_line.id
+    def write(self, vals):
+        res = super(SaleOrder, self).write(vals)
+        if vals.get("state") in ["sent", "sale", "done"]:
+            registrations = self.env["event.registration"].search(
+                [("sale_order_id", "in", self.ids)]
             )
-            if confirm:
-                existing_registrations.filtered(
-                    lambda self: self.state not in ["open", "cancel"]
-                ).confirm_registration()
-            if cancel_to_draft:
-                existing_registrations.filtered(
-                    lambda self: self.state == "cancel"
-                ).do_draft()
-
-            for count in range(
-                int(so_line.product_uom_qty) - len(existing_registrations)
-            ):
-                registration = {}
-                if registration_data:
-                    registration = registration_data.pop()
-                # TDE CHECK: auto confirmation
-                registration["sale_order_line_id"] = so_line
-                Registration.create(Registration._prepare_attendee_values(registration))
-        return True
+            if registrations and registrations._check_auto_confirmation():
+                registrations.sudo().confirm_registration()
+        return res
 
     # 7. Action methods
 
