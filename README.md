@@ -35,7 +35,6 @@ addon | version | maintainers | summary
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.7 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
-[website_event_google_recaptcha](website_event_google_recaptcha/) | 14.0.1.0.0 |  | Adds Google reCAPTCHA to event registration form
 [website_event_hide_organizer_phone](website_event_hide_organizer_phone/) | 14.0.1.0.0 |  | Hides organizer phone number from website and mail templates
 [website_event_online_event](website_event_online_event/) | 14.0.1.4.0 |  | Module to manage online and hybrid events. Includes a video conference link.
 [website_event_private_event](website_event_private_event/) | 14.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
