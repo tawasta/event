@@ -70,7 +70,10 @@ class EventRegistration(models.Model):
                 is_student = (
                     self.env["op.student"]
                     .sudo()
-                    .search([("partner_id", "=", registration.attendee_partner_id.id)])
+                    .search(
+                        [("partner_id", "=", registration.attendee_partner_id.id)],
+                        limit=1,
+                    )
                 )
                 if is_student:
                     current_student = is_student
