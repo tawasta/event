@@ -5,7 +5,7 @@
 ==========================
 Website Event Waiting List
 ==========================
-* This module adds a waiting list functionality to Events.
+* This module adds a waiting list functionality to Events. When on waiting list and free seats become available, an email with a confirmation link is sent.
 * Extends website_event_cancellation to allow cancellation/confirmation of registrations through a url link sent by email.
 
 Configuration

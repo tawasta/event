@@ -5,7 +5,7 @@
 ============================
 Website Event Questions View
 ============================
-* Creates a view to see event question answers.
+* Creates a view to see event question answers. Essentially shows survey.user_input.line records filtered by the specific event. 
 
 Configuration
 =============

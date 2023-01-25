@@ -6,7 +6,7 @@
 Website Event Track Advanced
 ============================
 
-Advanced features for Event Track
+Advanced features for Event Track - Tawasta CfP process
 
 Features:
    - Submit Event Track Proposals with different types

@@ -5,7 +5,7 @@
 ============================
 Event Hide Contact Attendees
 ============================
-* Hides Contact Attendees button on event form
+* Hides Contact Attendees button on event form as the contact attendees is replaced by a custom mail wizard in module event_mail_attendees
 
 Configuration
 =============

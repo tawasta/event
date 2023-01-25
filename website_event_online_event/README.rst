@@ -5,7 +5,7 @@
 ==========================
 Website Event Online Event
 ==========================
-* Module to manage online and hybrid events. Adds a video conference link to an event.
+* Module to manage online and hybrid events. Adds a video conference link to an event which is sent in confirmation and reminder mails.
 
 Configuration
 =============

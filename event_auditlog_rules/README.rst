@@ -5,7 +5,14 @@
 =======================
 Audit Log Rules - Event
 =======================
-* Adds audit log rules for events
+* Adds audit log rules for events:
+    - event.event
+    - event.registration
+    - event.type
+    - event.type.mail
+    - event.mail
+    - event.type.ticket
+    - event.ticket
 
 Configuration
 =============
