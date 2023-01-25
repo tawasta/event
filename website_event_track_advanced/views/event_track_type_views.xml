@@ -12,6 +12,7 @@
                 <field name="show_in_agenda" optional="show" />
                 <field name="webinar" optional="show" />
                 <field name="workshop" optional="show" />
+                <field name="workshop_contract" optional="hide" />
                 <field name="attendable" optional="show" />
             </tree>
         </field>
@@ -32,6 +33,10 @@
                         <field name="show_in_agenda" />
                         <field name="webinar" />
                         <field name="workshop" />
+                        <field
+                            name="workshop_contract"
+                            attrs="{'invisible': [('workshop', '!=', True)]}"
+                        />
                         <field name="attendable" />
                     </group>
                     <group>

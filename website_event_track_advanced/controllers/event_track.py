@@ -257,33 +257,37 @@ class EventTrackControllerAdvanced(EventTrackController):
             track_values["workshop_schedule"] = post.get("workshop_schedule")
             track_values["workshop_fee"] = post.get("workshop_fee")
 
-            workshop_organizer_values = {
-                "name": post.get("organizer_organization"),
-                "street": post.get("organizer_street"),
-                "zip": post.get("organizer_zip"),
-                "city": post.get("organizer_city"),
-                "ref": post.get("organizer_reference"),
-                "type": "invoice",
-                "company_type": "company",
-            }
-            workshop_signee_values = {
-                "id": post.get("signee_id"),
-                "lastname": post.get("signee_lastname"),
-                "firstname": post.get("signee_firstname"),
-                "name": self._get_name(
-                    post.get("signee_lastname"), post.get("signee_firstname")
-                ),
-                "email": post.get("signee_email"),
-                "phone": post.get("signee_phone"),
-                "function": post.get("signee_title"),
-                "company_type": "person",
-            }
-            values.update(
-                {
-                    "workshop_organizer": workshop_organizer_values,
-                    "workshop_signee": workshop_signee_values,
+            if (
+                post.get("is_workshop_contract")
+                and post.get("is_workshop_contract") == "true"
+            ):
+                workshop_organizer_values = {
+                    "name": post.get("organizer_organization"),
+                    "street": post.get("organizer_street"),
+                    "zip": post.get("organizer_zip"),
+                    "city": post.get("organizer_city"),
+                    "ref": post.get("organizer_reference"),
+                    "type": "invoice",
+                    "company_type": "company",
                 }
-            )
+                workshop_signee_values = {
+                    "id": post.get("signee_id"),
+                    "lastname": post.get("signee_lastname"),
+                    "firstname": post.get("signee_firstname"),
+                    "name": self._get_name(
+                        post.get("signee_lastname"), post.get("signee_firstname")
+                    ),
+                    "email": post.get("signee_email"),
+                    "phone": post.get("signee_phone"),
+                    "function": post.get("signee_title"),
+                    "company_type": "person",
+                }
+                values.update(
+                    {
+                        "workshop_organizer": workshop_organizer_values,
+                        "workshop_signee": workshop_signee_values,
+                    }
+                )
         track_confirm = (
             True
             if post.get("track-confirm") and post.get("track-confirm") != ""
