@@ -5,8 +5,8 @@
 ===============================
 Website Event Sale Waiting List
 ===============================
-* Adds waiting list functionality to Website Event Sale.
-* Joining waiting list does not require payment - confirmation link from email redirects to payment.
+* This module extends website_event_waiting_list to add waiting list functionality to Website Event Sale. This module split is due to having cases where a client has no e-commerce in their system but use events without payments.
+* Joining waiting list does not require a payment - when signing up to an event from waiting list a confirmation link from email redirects to the payment.
 
 Configuration
 =============

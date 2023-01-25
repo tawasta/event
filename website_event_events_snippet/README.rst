@@ -5,7 +5,7 @@
 ============================
 Website Event Events Snippet
 ============================
-* Advanced Events List Snippet for Website
+* Advanced Events List Snippet for Website. A new snippet template.
 
 Configuration
 =============

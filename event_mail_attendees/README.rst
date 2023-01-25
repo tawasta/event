@@ -5,7 +5,7 @@
 ====================
 Event Mail Attendees
 ====================
-* Send mails to attendees without mass mailing
+* Send mails using a wizard to attendees without using complicated mass mailing
 
 Configuration
 =============

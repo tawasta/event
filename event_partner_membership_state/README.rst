@@ -5,7 +5,7 @@
 ==============================
 Event Partner Membership State
 ==============================
-Show Partner Membership State on Event Registration
+* Show Partner Membership State on Event Registration
 
 Configuration
 =============

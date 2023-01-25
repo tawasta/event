@@ -5,7 +5,7 @@
 ================================
 Website Event Register Elsewhere
 ================================
-* Redirects registrations to another URL
+* Redirects registrations to another URL - Registrations are not handled in Odoo
 
 Configuration
 =============

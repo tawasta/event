@@ -5,8 +5,10 @@
 ====================================
 Website Event Frontend Customization
 ====================================
-* Show reserved and available seats for events in views.
-* Hide tickets that are not available to be sold.
+* Optional Customize options to website:
+    - Show reserved and available seats for events in views.
+    - Hide tickets that are not available to be sold.
+    - Date and address formats on event list
 
 Configuration
 =============

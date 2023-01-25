@@ -5,8 +5,9 @@
 =================
 Website My Events
 =================
-* Add the events button to the my account view, which allows the user to view their own registrations
-* Also allows you to cancel your registration
+* Add the events button to the my account view, which allows the user to view their own 
+  registrations in portal
+* Also allows you to cancel your registration from portal
 
 Configuration
 =============

@@ -5,7 +5,7 @@
 =================================
 Website Event Questions Parent ID
 =================================
-* Adds a question for Parent ID (Organization)
+* Adds a question to registration form for Parent ID (Organization)
 
 Configuration
 =============

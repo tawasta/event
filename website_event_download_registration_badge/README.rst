@@ -5,7 +5,7 @@
 =========================================
 Website Event Download Registration Badge
 =========================================
-Download Registration Badge and accept privacies through a unique URL on the website.
+Download Registration Badge and accept privacies through a unique URL on the website. This way we can get data on who has downloaded the badge and we can force attendees to accept privacies before receiving the badge as opposed to sending the badge directly in email
 
 Configuration
 =============

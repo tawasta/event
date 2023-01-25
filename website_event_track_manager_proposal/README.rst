@@ -6,7 +6,7 @@
 Website Event Track Manager Show Proposal
 =========================================
 
-Always show proposal page and form for managers.
+* Always show proposal page and form for managers so that track proposal can be tested without it being open to public.
 
 Configuration
 =============

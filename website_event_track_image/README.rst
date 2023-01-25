@@ -5,7 +5,8 @@
 =========================
 Website Event Track Image
 =========================
-Add image to Event Tracks
+* Add image to Event Tracks
+* This module is most likely depracted as it does not have any functionality
 
 Configuration
 =============

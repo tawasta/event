@@ -5,7 +5,7 @@
 ====================================
 Website Event Waiting List Questions
 ====================================
-* Questions on Events when joining waiting list.
+* Questions on Events when joining a waiting list.
 
 Configuration
 =============
@@ -17,7 +17,8 @@ Usage
 
 Known issues / Roadmap
 ======================
-\-
+* This module could be combined with website_event_waiting_list as this is only a glue 
+  module to implement website_event_questions module into waiting list functionality
 
 Credits
 =======

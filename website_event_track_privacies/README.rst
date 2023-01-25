@@ -5,7 +5,7 @@
 ==================================
 Website Event Track Privacy Values
 ==================================
-Adds privacy to website event track advanced
+* Adds privacy to website event track advanced (cfp form)
 
 Configuration
 =============

@@ -5,8 +5,7 @@
 =================
 Event Description
 =================
-
-Adds description field to event form.
+* Adds description field to event form in the backend.
 
 Configuration
 =============

@@ -5,7 +5,8 @@
 ============================
 Website Event Track Settings
 ============================
-* Hide track proposal sidebar and description
+* This module contains toggleable settings under customize menu:
+    - Hide track proposal sidebar and description
 
 Configuration
 =============

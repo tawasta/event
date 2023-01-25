@@ -5,7 +5,7 @@
 =============================
 Website Event Ticket Datetime
 =============================
-Define ticket sale start/end with datetime accuracy as is done in v15 onwards.
+Define ticket sale start/end with datetime accuracy as is done in v15 onwards. In V14 ticket sale start/end is defined by date. 
 
 Configuration
 =============
@@ -17,7 +17,7 @@ Usage
 
 Known issues / Roadmap
 ======================
-No need to port to version 15 onwards as this functionality is default in Odoo.
+No need to port to version 15 onwards as this functionality is default in Odoo V15 onwards.
 
 Credits
 =======

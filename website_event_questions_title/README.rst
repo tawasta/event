@@ -5,7 +5,7 @@
 =============================
 Website Event Questions Title
 =============================
-* Adds a question for Title
+* Adds a question to registration form for Title
 
 Configuration
 =============

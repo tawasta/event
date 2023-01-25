@@ -5,7 +5,7 @@
 ======================================
 Website Event Sale Disable Qty in Cart
 ======================================
-* Disable changing Event Registration quantity in cart.
+* Disable changing Event Registration quantity in cart as this causes issues with the registration data.
 
 Configuration
 =============

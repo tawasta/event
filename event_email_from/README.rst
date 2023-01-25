@@ -5,7 +5,7 @@
 ================
 Event Email From
 ================
-*
+* Set a sender address to all event mails
 
 Configuration
 =============
