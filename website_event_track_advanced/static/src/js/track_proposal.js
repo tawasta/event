@@ -244,38 +244,41 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             $("#type option:selected").attr("data-description") || ""
                         );
                         var workshop = $("#type option:selected").attr("data-workshop");
+                        var workshop_contract = $("#type option:selected").attr(
+                            "data-workshop-contract"
+                        );
                         var webinar = $("#type option:selected").attr("data-webinar");
                         // Enable workshop inputs
                         if (workshop) {
                             $("#track-application-workshop-div").removeClass("d-none");
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input#is_workshop")
                                 .each(function () {
                                     $(this).attr("value", "true");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input[disabled]")
                                 .each(function () {
                                     $(this).removeAttr("disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
                                     $(this).attr("required", "required");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("select[disabled]")
                                 .each(function () {
                                     $(this).removeAttr("disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("select[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
                                     $(this).attr("required", "required");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("textarea[disabled]")
                                 .each(function () {
                                     $(this).removeAttr("disabled");
@@ -284,7 +287,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                         .find(".note-editable")
                                         .attr("contenteditable", "true");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("textarea[required-disabled]")
                                 .each(function () {
                                     $(this).removeAttr("required-disabled");
@@ -297,34 +300,34 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             // Disable workshop inputs
                         } else {
                             $("#track-application-workshop-div").addClass("d-none");
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input#is_workshop")
                                 .each(function () {
                                     $(this).attr("value", "false");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input")
                                 .each(function () {
                                     $(this).attr("disabled", "disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("input[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
                                     $(this).attr("required-disabled", "disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("select")
                                 .each(function () {
                                     $(this).attr("disabled", "disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("select[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");
                                     $(this).attr("required-disabled", "disabled");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
                                 .find("textarea")
                                 .each(function () {
                                     $(this).attr("disabled", "disabled");
@@ -333,7 +336,110 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                         .find(".note-editable")
                                         .attr("contenteditable", "false");
                                 });
-                            $("#track-application-workshop-div")
+                            $("#track-application-workshop-row-div")
+                                .find("textarea[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", "disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "false");
+                                });
+                        }
+                        // Enable workshop contract inputs
+                        if (workshop_contract) {
+                            $("#track-application-workshop-contract-div").removeClass(
+                                "d-none"
+                            );
+                            $("#track-application-workshop-contract-div")
+                                .find("input#is_workshop_contract")
+                                .each(function () {
+                                    $(this).attr("value", "true");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("input[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("input[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", "required");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("select[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("select[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", "required");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("textarea[disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "true");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("textarea[required-disabled]")
+                                .each(function () {
+                                    $(this).removeAttr("required-disabled");
+                                    $(this).attr("required", "required");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "true");
+                                });
+                            // Disable workshop contract inputs
+                        } else {
+                            $("#track-application-workshop-contract-div").addClass(
+                                "d-none"
+                            );
+                            $("#track-application-workshop-contract-div")
+                                .find("input#is_workshop_contract")
+                                .each(function () {
+                                    $(this).attr("value", "false");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("input")
+                                .each(function () {
+                                    $(this).attr("disabled", "disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("input[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", "disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("select")
+                                .each(function () {
+                                    $(this).attr("disabled", "disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("select[required]")
+                                .each(function () {
+                                    $(this).removeAttr("required");
+                                    $(this).attr("required-disabled", "disabled");
+                                });
+                            $("#track-application-workshop-contract-div")
+                                .find("textarea")
+                                .each(function () {
+                                    $(this).attr("disabled", "disabled");
+                                    $(this)
+                                        .siblings()
+                                        .find(".note-editable")
+                                        .attr("contenteditable", "false");
+                                });
+                            $("#track-application-workshop-contract-div")
                                 .find("textarea[required]")
                                 .each(function () {
                                     $(this).removeAttr("required");

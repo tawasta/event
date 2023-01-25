@@ -16,7 +16,12 @@ Features:
 
 Configuration
 =============
-\-
+Event track types have the following options:
+- Show in proposals - Whether this type can be selected in the proposal
+- Show in agenda - Whether this type of tracks will be shown in agenda
+- Webinar - Whether this type of tracks can have a webinar
+- Workshop - Whether this type of tracks have a workshop
+- Workshop contract - Whether this type of tracks require a signature and organization
 
 Usage
 =====

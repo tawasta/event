@@ -70,6 +70,11 @@ class EventTrackType(models.Model):
     workshop = fields.Boolean(
         string="Workshop", help="Tracks in this Type can hold workshops", default=False
     )
+    workshop_contract = fields.Boolean(
+        string="Workshop Contract",
+        help="Tracks in this type require signing a workshop contract",
+        default=False,
+    )
     webinar = fields.Boolean(help="Tracks in this type can hold webinars", default=True)
 
     # 3. Default methods
