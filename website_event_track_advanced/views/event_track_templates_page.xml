@@ -113,24 +113,19 @@
                             class="o_wevent_online_page_avatar"
                             t-options="{'widget': 'image', 'class': 'rounded-circle', 'max_width': '96'}"
                         />
-                        <div class="pl-2 pr-0 pr-md-2 d-flex flex-column">
-                            <span
-                                t-field="speaker.name"
-                                class="font-weight-bold mb-2"
-                            />
-                            <span
+                        <div class="pl-2 pr-0 pr-md-2 d-flex-column">
+                            <div class="d-flex mb-2">
+                                <span t-field="speaker.name" class="font-weight-bold" />
+                                <span t-if="speaker.function">, <t
+                                        t-esc="speaker.function"
+                                    /></span>
+                            </div>
+                            <div
                                 class="mb-1 d-flex align-items-baseline text-break"
-                                t-if="speaker.function"
+                                t-if="speaker.parent_id.name"
                             >
-                                <i class="fa fa-briefcase mr-2" /><span
-                                    t-esc="speaker.function"
-                                />
-                                <t t-if="speaker.parent_id.name">
-                                    <span>&amp;nbsp;at&amp;nbsp;</span><span
-                                        t-esc="speaker.parent_id.name"
-                                    />
-                                </t>
-                            </span>
+                                <span t-esc="speaker.parent_id.name" />
+                            </div>
                             <span
                                 class="mb-1 d-flex align-items-baseline text-break"
                                 t-if="speaker.website"
