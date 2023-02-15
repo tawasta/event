@@ -395,11 +395,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             .search([("id", "=", partner_values.get("id"))])
         )
         # Create or get existing organization
-        if partner_values.get("organization"):
-            organization = self._create_organization(
-                {"name": partner_values.get("organization")}
-            )
-            del partner_values["organization"]
+        organization_name = partner_values.pop("organization", False)
+        if organization_name:
+            organization = self._create_organization({"name": organization_name})
             if organization:
                 partner_values["parent_id"] = organization.id
         if existing_partner:
