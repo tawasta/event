@@ -203,21 +203,19 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         // Add a unique name
                         row.find("input").each(function () {
                             var property_value = $(this).prop("name");
-                            var index_name =
-                                property_value.substring(0, property_value.length - 3) +
-                                "[" +
-                                speaker_count +
-                                "]";
+                            var index_name = property_value.replace(
+                                (speaker_count - 1).toString(),
+                                speaker_count.toString()
+                            );
                             $(this).prop("name", index_name);
                         });
                         // Add a unique label
                         row.find("label").each(function () {
                             var property_value = $(this).prop("for");
-                            var index_name =
-                                property_value.substring(0, property_value.length - 3) +
-                                "[" +
-                                speaker_count +
-                                "]";
+                            var index_name = property_value.replace(
+                                (speaker_count - 1).toString(),
+                                speaker_count.toString()
+                            );
                             $(this).prop("for", index_name);
                         });
                         // Add a unique span text
