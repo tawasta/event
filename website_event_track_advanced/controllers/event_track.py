@@ -230,11 +230,15 @@ class EventTrackControllerAdvanced(EventTrackController):
                 speaker_values.append(
                     {
                         "id": post.get("speaker_id[%s]" % speaker_index),
-                        "lastname": post.get("speaker_lastname[%s]" % speaker_index),
-                        "firstname": post.get("speaker_firstname[%s]" % speaker_index),
+                        "lastname": post.get(
+                            "speaker_lastname[%s]" % speaker_index
+                        ).strip(),
+                        "firstname": post.get(
+                            "speaker_firstname[%s]" % speaker_index
+                        ).strip(),
                         "name": self._get_name(
-                            post.get("speaker_lastname[%s]" % speaker_index),
-                            post.get("speaker_firstname[%s]" % speaker_index),
+                            post.get("speaker_lastname[%s]" % speaker_index).strip(),
+                            post.get("speaker_firstname[%s]" % speaker_index).strip(),
                         ),
                         "email": post.get("speaker_email[%s]" % speaker_index),
                         "organization": post.get(
