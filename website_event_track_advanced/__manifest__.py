@@ -21,7 +21,7 @@
 {
     "name": "Website Event Track Advanced",
     "summary": "Advanced features for Event Track",
-    "version": "14.0.3.1.2",
+    "version": "14.0.3.1.3",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
