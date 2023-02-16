@@ -168,10 +168,11 @@ class EventTrackControllerAdvanced(EventTrackController):
         # Contact
         contact_values = {
             "id": post.get("contact_id"),
-            "lastname": post.get("contact_lastname"),
-            "firstname": post.get("contact_firstname"),
+            "lastname": post.get("contact_lastname").strip(),
+            "firstname": post.get("contact_firstname").strip(),
             "name": self._get_name(
-                post.get("contact_lastname"), post.get("contact_firstname")
+                post.get("contact_lastname").strip(),
+                post.get("contact_firstname").strip(),
             ),
             "login": post.get("contact_email"),
             "email": post.get("contact_email"),
@@ -229,11 +230,15 @@ class EventTrackControllerAdvanced(EventTrackController):
                 speaker_values.append(
                     {
                         "id": post.get("speaker_id[%s]" % speaker_index),
-                        "lastname": post.get("speaker_lastname[%s]" % speaker_index),
-                        "firstname": post.get("speaker_firstname[%s]" % speaker_index),
+                        "lastname": post.get(
+                            "speaker_lastname[%s]" % speaker_index
+                        ).strip(),
+                        "firstname": post.get(
+                            "speaker_firstname[%s]" % speaker_index
+                        ).strip(),
                         "name": self._get_name(
-                            post.get("speaker_lastname[%s]" % speaker_index),
-                            post.get("speaker_firstname[%s]" % speaker_index),
+                            post.get("speaker_lastname[%s]" % speaker_index).strip(),
+                            post.get("speaker_firstname[%s]" % speaker_index).strip(),
                         ),
                         "email": post.get("speaker_email[%s]" % speaker_index),
                         "organization": post.get(
@@ -395,9 +400,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             .search([("id", "=", partner_values.get("id"))])
         )
         # Create or get existing organization
-        organization_name = partner_values.pop("organization", False)
+        organization_name = partner_values.pop("organization", "")
         if organization_name:
-            organization = self._create_organization({"name": organization_name})
+            organization = self._create_organization(
+                {"name": organization_name.strip()}
+            )
             if organization:
                 partner_values["parent_id"] = organization.id
         if existing_partner:
