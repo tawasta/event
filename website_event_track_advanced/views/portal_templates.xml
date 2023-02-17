@@ -153,14 +153,13 @@
                                     >View Track</button>
                                 </form>
                                 <form
-                                    t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]])"
+                                    t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]]) and request.params.get('website_event_track_advanced.proposal_see_evaluation')"
                                     id="track_reviews"
                                     t-attf-action="/event/#{slug(event)}/track_reviews/form"
                                     method="post"
                                     itemscope="itemscope"
                                     itemprop="offers"
                                     itemtype="http://schema.org/AggregateOffer"
-                                    t-if="request.params.get('website_event_track_advanced.proposal_see_evaluation')"
                                 >
                                     <input
                                         type="hidden"
