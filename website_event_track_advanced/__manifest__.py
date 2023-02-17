@@ -44,6 +44,7 @@
         "security/event_track_security.xml",
         "wizards/event_track_assign_wizard.xml",
         "views/assets.xml",
+        "views/res_config_settings_view.xml",
         "views/event_track_rating_views.xml",
         "views/event_track_views.xml",
         "views/event_track_reviewer_views.xml",
