@@ -152,7 +152,10 @@
                                         t-attf-id="#{track.id}"
                                     >View Track</button>
                                 </form>
-                                <t t-set="see_evaluation" t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"/>
+                                <t
+                                    t-set="see_evaluation"
+                                    t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
+                                />
                                 <t t-if="see_evaluation">
                                     <form
                                         t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]])"
