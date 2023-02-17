@@ -152,39 +152,42 @@
                                         t-attf-id="#{track.id}"
                                     >View Track</button>
                                 </form>
-                                <form
-                                    t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]]) and request.params.get('website_event_track_advanced.proposal_see_evaluation')"
-                                    id="track_reviews"
-                                    t-attf-action="/event/#{slug(event)}/track_reviews/form"
-                                    method="post"
-                                    itemscope="itemscope"
-                                    itemprop="offers"
-                                    itemtype="http://schema.org/AggregateOffer"
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="csrf_token"
-                                        t-att-value="request.csrf_token()"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        name="track_id"
-                                        t-att-value="track.id"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        name="reviews"
-                                        t-att-value="reviews"
-                                    />
-                                    <button
-                                        type="submit"
-                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
-                                        role="button"
-                                        title="View track reviews"
-                                        aria-label="View track reviews"
-                                        t-attf-id="#{track.id}"
-                                    >View Reviews</button>
-                                </form>
+                                <t t-set="see_evaluation" t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"/>
+                                <t t-if="see_evaluation">
+                                    <form
+                                        t-if="request.env['event.track.rating'].sudo().search([['event_track', '=', track.id]])"
+                                        id="track_reviews"
+                                        t-attf-action="/event/#{slug(event)}/track_reviews/form"
+                                        method="post"
+                                        itemscope="itemscope"
+                                        itemprop="offers"
+                                        itemtype="http://schema.org/AggregateOffer"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            t-att-value="request.csrf_token()"
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="track_id"
+                                            t-att-value="track.id"
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="reviews"
+                                            t-att-value="reviews"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
+                                            role="button"
+                                            title="View track reviews"
+                                            aria-label="View track reviews"
+                                            t-attf-id="#{track.id}"
+                                        >View Reviews</button>
+                                    </form>
+                                </t>
                             </td>
                          </tr>
                     </t>
