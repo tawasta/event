@@ -160,6 +160,7 @@
                                     itemscope="itemscope"
                                     itemprop="offers"
                                     itemtype="http://schema.org/AggregateOffer"
+                                    t-if="request.params.get('website_event_track_advanced.proposal_see_evaluation')"
                                 >
                                     <input
                                         type="hidden"

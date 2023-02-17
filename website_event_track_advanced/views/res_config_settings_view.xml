@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40"/>
+        <field name="inherit_id" ref="event.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='attendance_setting_container']" position="after">
+                <h2>Event settings</h2>
+                <div class="row mt16 o_settings_container" name="event_track_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="event_track_setting">
+                        <div class="o_setting_left_pane">
+                            <field name="proposal_see_evaluation"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="proposal_see_evaluation"/>
+                            <div class="text-muted">
+                                The submitter of the proposal can see the evaluations
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
