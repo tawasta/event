@@ -136,17 +136,22 @@ class EventEvent(models.Model):
                     event.event_type_id.end_interval_unit or "days"
                 )
 
-    @api.depends(
-        "has_end_date",
-        "end_interval_unit",
-        "end_interval_nbr",
-        "event_ticket_ids",
-    )
-    def _compute_tickets_end_date(self):
-        for event in self:
-            for ticket in event.event_ticket_ids:
-                new_end_date = ticket.end_sale_datetime - relativedelta(days=event.end_interval_nbr)
+    def write(self, vals):
+        res = super(EventEvent, self).write(vals)
+        if "has_end_date" in vals and vals.get("has_end_date"):
+            for ticket in self.event_ticket_ids:
+                new_end_date = ticket.end_sale_datetime - relativedelta(days=self.end_interval_nbr)
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
+        return res
+
+    @api.model
+    def create(self, vals):
+        record = super(EventEvent, self).create(vals)
+        if "has_end_date" in vals and vals.get("has_end_date"):
+            for ticket in self.event_ticket_ids:
+                new_end_date = ticket.end_sale_datetime - relativedelta(days=self.end_interval_nbr)
+                ticket.sudo().write({"end_sale_datetime": new_end_date})
+        return record
 
     # 5. Constraints and onchanges
 
