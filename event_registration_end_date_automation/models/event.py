@@ -53,7 +53,7 @@ class EventType(models.Model):
     # 2. Fields declaration
     has_end_date = fields.Boolean(
         "Registration end date",
-        default=True,
+        default=False,
     )
     end_interval_nbr = fields.Integer("Interval", default=1)
     end_interval_unit = fields.Selection(
@@ -84,7 +84,7 @@ class EventEvent(models.Model):
         "Registration end date",
         compute="_compute_has_end",
         help="Allows registrants to cancel their registrations.",
-        default=True,
+        default=False,
         readonly=False,
         store=True,
     )
@@ -137,6 +137,7 @@ class EventEvent(models.Model):
                 )
 
     @api.depends(
+        "has_end_date",
         "end_interval_unit",
         "end_interval_nbr",
         "event_ticket_ids",
@@ -144,7 +145,8 @@ class EventEvent(models.Model):
     def _compute_tickets_end_date(self):
         for event in self:
             for ticket in event.event_ticket_ids:
-                ticket.end_sale_datetime = ticket.end_sale_datetime - relativedelta(days=event.end_interval_nbr)
+                new_end_date = ticket.end_sale_datetime - relativedelta(days=event.end_interval_nbr)
+                ticket.sudo().write({"end_sale_datetime": new_end_date})
 
     # 5. Constraints and onchanges
 
