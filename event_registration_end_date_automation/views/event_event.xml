@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_end" model="ir.ui.view">
+        <field name="name">event.type.form.end</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form" />
+        <field name="arch" type="xml">
+            <div name="event_type_location" position="inside">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    name="event_type_attendees_end_before"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="has_end_date" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="has_end_date" />
+                        <div class="row">
+                            <div
+                                class="col-lg-8 mt16"
+                                attrs="{'invisible': [('has_end_date', '=', False)]}"
+                            >
+                                <field
+                                    name="end_interval_nbr"
+                                    nolabel="1"
+                                    class="oe_inline mr-3"
+                                />
+                                <field
+                                    name="end_interval_unit"
+                                    nolabel="1"
+                                    class="oe_inline mr-3"
+                                />
+                                <div class="mt4">
+                                    <strong>
+                                        <span>before Event</span>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_end" model="ir.ui.view">
+        <field name="name">event.event.form.end</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="date_tz" position="before">
+                <field name="has_end_date" />
+                <label
+                    for="end_interval_nbr"
+                    string="Allow registration before"
+                    attrs="{'invisible': [('has_end_date','=',False)]}"
+                />
+                <div class="o_row" attrs="{'invisible': [('has_end_date','=',False)]}">
+                    <field name="end_interval_nbr" nolabel="1" class="oe_inline" />
+                    <field name="end_interval_unit" nolabel="1" class="oe_inline" />
+                    <div class="mt4">
+                        <strong>
+                            <span>before Event</span>
+                        </strong>
+                    </div>
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>
