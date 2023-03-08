@@ -5,7 +5,8 @@
 ======================================
 Event registration end date automation
 ======================================
-* 
+* A number value can be assigned to the event, which is used to automatically calculate the end date for the tickets
+* The value can be given via the template or directly to the event
 
 Configuration
 =============

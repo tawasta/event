@@ -52,7 +52,7 @@ class EventType(models.Model):
 
     # 2. Fields declaration
     has_end_date = fields.Boolean(
-        "Registration end date",
+        "Allow enrollment",
         default=False,
     )
     end_interval_nbr = fields.Integer("Interval", default=1)
@@ -81,9 +81,9 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     has_end_date = fields.Boolean(
-        "Registration end date",
+        "Allow enrollment",
         compute="_compute_has_end",
-        help="Allows registrants to cancel their registrations.",
+        help="Mark how many days before the registration ends",
         default=False,
         readonly=False,
         store=True,
