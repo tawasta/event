@@ -138,27 +138,19 @@ class EventEvent(models.Model):
 
     def write(self, vals):
         res = super(EventEvent, self).write(vals)
-        logging.info(vals);
         if "has_end_date" in vals and vals.get("has_end_date"):
-            logging.info("=======SAAA ARVON============");
             for ticket in self.event_ticket_ids:
-                logging.info(ticket);
-                new_end_date = ticket.end_sale_datetime - relativedelta(days=self.end_interval_nbr)
-                logging.info(new_end_date);
+                new_end_date = self.date_end - relativedelta(days=self.end_interval_nbr)
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
         return res
 
     @api.model
     def create(self, vals):
         record = super(EventEvent, self).create(vals)
-        logging.info(vals);
         if "has_end_date" in vals and vals.get("has_end_date"):
-            logging.info("=======SAAA ARVON CREATE============");
             for ticket in self.event_ticket_ids:
-                logging.info(ticket);
-                new_end_date = ticket.end_sale_datetime - relativedelta(days=self.end_interval_nbr)
+                new_end_date = self.date_end - relativedelta(days=self.end_interval_nbr)
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
-                logging.info(new_end_date);
         return record
 
     # 5. Constraints and onchanges
