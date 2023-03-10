@@ -147,8 +147,11 @@ class EventEvent(models.Model):
     @api.model
     def create(self, vals):
         record = super(EventEvent, self).create(vals)
+        logging.info(vals);
         if "has_end_date" in vals and vals.get("has_end_date"):
+            logging.info("=====SAA ARVON====");
             for ticket in self.event_ticket_ids:
+                logging.info(ticket);
                 new_end_date = self.date_end - relativedelta(days=self.end_interval_nbr)
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
         return record
