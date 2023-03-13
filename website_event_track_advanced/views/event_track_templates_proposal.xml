@@ -1550,6 +1550,7 @@
                         >Please enter session program and schedule.</div>
                     </div>
                 </div>
+                <t t-if="not track.type.workshop_contract">
                 <div
                     t-att-class="'d-none' if not track.type.workshop_contract else ''"
                     id="track-application-workshop-contract-div"
@@ -1727,6 +1728,7 @@
                     </div>
                 </div>
                 </div>
+                </t>
             </div>
         </div>
     </template>
