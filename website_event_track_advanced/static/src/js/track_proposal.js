@@ -564,13 +564,16 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                     // Submit form and validate
                     $modal.on("click", ".application-submit", function (event) {
                         var form = document.getElementById("track-application-form");
+                        console.log("===CLICK====");
                         if (form.checkValidity() === false) {
+                            console.log("======");
                             event.preventDefault();
                             event.stopPropagation();
                             var errorElements = document.querySelectorAll(
                                 ".form-control:invalid, .form-check-input:invalid"
                             );
                             if (errorElements) {
+                                console.log(errorElements);
                                 var scrollLocation = $(errorElements[0]).offset().top;
                                 var scrollInside = $modal.scrollTop();
                                 $modal.animate(
@@ -581,6 +584,7 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                 );
                             }
                         } else {
+                            console.log("===TANNE=====");
                             submitted = true;
                             var input = document.createElement("input");
                             input.setAttribute("name", $(this).val());
