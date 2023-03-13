@@ -397,7 +397,6 @@ class EventTrack(models.Model):
 
     # 7. Action methods
     def _track_template(self, changes):
-        res = super(EventTrack, self)._track_template(changes)
         logging.info(changes);
         track = self[0]
         logging.info("============");
