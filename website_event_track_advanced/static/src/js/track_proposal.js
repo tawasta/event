@@ -418,6 +418,11 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                                     $(this).attr("required-disabled", "disabled");
                                 });
                             $("#track-application-workshop-contract-div")
+                                .find("input")
+                                .each(function () {
+                                    $(this).attr("required", false);
+                                });
+                            $("#track-application-workshop-contract-div")
                                 .find("select")
                                 .each(function () {
                                     $(this).attr("disabled", "disabled");
