@@ -1552,179 +1552,179 @@
                 </div>
                 <t t-if="track.type.workshop_contract">
                 <div
-                    t-att-class="'d-none' if not track.type.workshop_contract else ''"
-                    id="track-application-workshop-contract-div"
-                >
+                        t-att-class="'d-none' if not track.type.workshop_contract else ''"
+                        id="track-application-workshop-contract-div"
+                    >
                 <h5>Contract Signee</h5>
                 <div id="track-application-organization-signee-row-div" class="row">
                     <input
-                            type="hidden"
-                            name="is_workshop_contract"
-                            id="is_workshop_contract"
-                            t-attf-value="#{'true' if track.type.workshop_contract else 'false'}"
-                        />
+                                type="hidden"
+                                name="is_workshop_contract"
+                                id="is_workshop_contract"
+                                t-attf-value="#{'true' if track.type.workshop_contract else 'false'}"
+                            />
                     <div class="form-group col-xl-4">
                         <label
-                                for="signee_firstname"
-                                class="col-form-label"
-                            >First Name</label>
+                                    for="signee_firstname"
+                                    class="col-form-label"
+                                >First Name</label>
                         <input
-                                name="signee_firstname"
-                                placeholder="First Name"
-                                t-att-value="track.organizer_contact.firstname"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                                class="form-control"
-                                type="text"
-                            />
+                                    name="signee_firstname"
+                                    placeholder="First Name"
+                                    t-att-value="track.organizer_contact.firstname"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    class="form-control"
+                                    type="text"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
-                                for="signee_lastname"
-                                class="col-form-label"
-                            >Last Name</label>
+                                    for="signee_lastname"
+                                    class="col-form-label"
+                                >Last Name</label>
                         <input
-                                name="signee_lastname"
-                                placeholder="Last Name"
-                                t-att-value="track.organizer_contact.lastname"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="signee_lastname"
+                                    placeholder="Last Name"
+                                    t-att-value="track.organizer_contact.lastname"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_email" class="col-form-label">Email</label>
                         <input
-                                name="signee_email"
-                                placeholder="Email"
-                                t-att-value="track.organizer_contact.email"
-                                class="form-control"
-                                type="email"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="signee_email"
+                                    placeholder="Email"
+                                    t-att-value="track.organizer_contact.email"
+                                    class="form-control"
+                                    type="email"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
-                                for="signee_phone"
-                                class="col-form-label label-optional"
-                            >Phone</label>
+                                    for="signee_phone"
+                                    class="col-form-label label-optional"
+                                >Phone</label>
                         <input
-                                name="signee_phone"
-                                placeholder="Phone"
-                                t-att-value="track.organizer_contact.phone"
-                                class="form-control"
-                                type="tel"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="signee_phone"
+                                    placeholder="Phone"
+                                    t-att-value="track.organizer_contact.phone"
+                                    class="form-control"
+                                    type="tel"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
-                                for="signee_organization"
-                                class="col-form-label label-optional"
-                            >Organization</label>
+                                    for="signee_organization"
+                                    class="col-form-label label-optional"
+                                >Organization</label>
                         <input
-                                name="signee_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer_contact.parent_id.name"
-                                class="form-control"
-                                type="text"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="signee_organization"
+                                    placeholder="Organization"
+                                    t-att-value="track.organizer_contact.parent_id.name"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="signee_title" class="col-form-label">Title</label>
                         <input
-                                name="signee_title"
-                                placeholder="Title"
-                                t-att-value="track.organizer_contact.function"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="signee_title"
+                                    placeholder="Title"
+                                    t-att-value="track.organizer_contact.function"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                 </div>
                 <h5>Organization invoice address</h5>
                 <div class="row" id="track-application-organization-invoice-row-div">
                     <div class="form-group col-xl-4">
                         <label
-                                for="organizer_organization"
-                                class="col-form-label"
-                            >Organization</label>
+                                    for="organizer_organization"
+                                    class="col-form-label"
+                                >Organization</label>
                         <input
-                                name="organizer_organization"
-                                placeholder="Organization"
-                                t-att-value="track.organizer.name"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="organizer_organization"
+                                    placeholder="Organization"
+                                    t-att-value="track.organizer.name"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
-                                for="organizer_street"
-                                class="col-form-label"
-                            >Street</label>
+                                    for="organizer_street"
+                                    class="col-form-label"
+                                >Street</label>
                         <input
-                                name="organizer_street"
-                                placeholder="Street"
-                                t-att-value="track.organizer.street"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="organizer_street"
+                                    placeholder="Street"
+                                    t-att-value="track.organizer.street"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_zip" class="col-form-label">Zip</label>
                         <input
-                                name="organizer_zip"
-                                placeholder="Zip"
-                                t-att-value="track.organizer.zip"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="organizer_zip"
+                                    placeholder="Zip"
+                                    t-att-value="track.organizer.zip"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label for="organizer_city" class="col-form-label">City</label>
                         <input
-                                name="organizer_city"
-                                placeholder="City"
-                                t-att-value="track.organizer.city"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="organizer_city"
+                                    placeholder="City"
+                                    t-att-value="track.organizer.city"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                     <div class="form-group col-xl-4">
                         <label
-                                for="organizer_reference"
-                                class="col-form-label"
-                            >Your Reference</label>
+                                    for="organizer_reference"
+                                    class="col-form-label"
+                                >Your Reference</label>
                         <input
-                                name="organizer_reference"
-                                placeholder="Your Reference"
-                                t-att-value="track.organizer.ref"
-                                class="form-control"
-                                type="text"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            />
+                                    name="organizer_reference"
+                                    placeholder="Your Reference"
+                                    t-att-value="track.organizer.ref"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
                     </div>
                 </div>
                 </div>
