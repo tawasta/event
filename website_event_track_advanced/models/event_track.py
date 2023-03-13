@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+import logging
 
 # 4. Imports from Odoo modules:
 from odoo.tools import html2plaintext
@@ -397,7 +398,11 @@ class EventTrack(models.Model):
     # 7. Action methods
     def _track_template(self, changes):
         res = super(EventTrack, self)._track_template(changes)
+        logging.info(changes);
         track = self[0]
+        logging.info("============");
+        logging.info(track);
+        logging.info("============");
         if "stage_id" in changes and track.stage_id.mail_template_id:
             res["stage_id"] = (
                 track.stage_id.mail_template_id,
