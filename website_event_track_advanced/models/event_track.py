@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+import logging
 
 # 4. Imports from Odoo modules:
 from odoo.tools import html2plaintext
