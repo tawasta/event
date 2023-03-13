@@ -532,7 +532,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         website=True,
     )
     def event_track_proposal_post(self, event, **post):
-        logging.info("==========POST===============");
         if not event.can_access_from_current_website():
             raise NotFound()
 
