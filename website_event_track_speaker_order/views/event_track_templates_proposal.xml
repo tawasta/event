@@ -7,8 +7,7 @@
         active="False"
         customize_show="True"
     >
-        <xpath
-            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
             <t
                 t-foreach="track.speaker_ids"
                 t-as="speaker"
@@ -30,8 +29,7 @@
         active="False"
         customize_show="True"
     >
-        <xpath
-            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
             <t
                 t-foreach="track.speaker_ids"
                 t-as="speaker"
@@ -54,8 +52,7 @@
         customize_show="True"
     >
 
-        <xpath
-            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
             <t
                 t-foreach="track.speaker_ids"
                 t-as="speaker"
