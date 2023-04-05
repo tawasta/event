@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="agenda_main_track_show_speakers"
+        inherit_id="website_event_track_advanced.agenda_main_track_show_speakers"
+        name="Show Speakers"
+        active="False"
+        customize_show="True"
+    >
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+            <t
+                t-foreach="track.speaker_ids"
+                t-as="speaker"
+            >
+                <t t-set="current_count" t-value="current_count +1" />
+                <small>
+                    <t t-esc="speaker.sudo().name" /><t
+                        t-if="speaker_count - current_count != 0"
+                    >,</t>
+                </small>
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="tracks_display_list_show_speakers"
+        inherit_id="website_event_track_advanced.tracks_display_list_show_speakers"
+        name="Show Speakers"
+        active="False"
+        customize_show="True"
+    >
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+            <t
+                t-foreach="track.speaker_ids"
+                t-as="speaker"
+            >
+                <t t-set="current_count" t-value="current_count +1" />
+                <span class="text-muted">
+                    <t t-esc="speaker.sudo().name" /><t
+                        t-if="speaker_count - current_count != 0"
+                    >, </t>
+                </span>
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="event_track_content_show_speakers"
+        inherit_id="website_event_track_advanced.event_track_content_show_speakers"
+        name="Show Speakers"
+        active="True"
+        customize_show="True"
+    >
+
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"position="replace">
+            <t
+                t-foreach="track.speaker_ids"
+                t-as="speaker"
+            >
+                <hr class="mt-2 pb-1 mb-1" />
+                <div id="speaker-div" class="mx-3">
+                    <div class="mt-2 d-flex">
+                        <span
+                            t-if="speaker.image_256"
+                            t-field="speaker.image_256"
+                            class="o_wevent_online_page_avatar"
+                            t-options="{'widget': 'image', 'class': 'rounded-circle', 'max_width': '96'}"
+                        />
+                        <div class="pl-2 pr-0 pr-md-2 d-flex-column">
+                            <div class="d-flex mb-2">
+                                <span t-field="speaker.name" class="font-weight-bold" />
+                                <span t-if="speaker.function">, <t
+                                        t-esc="speaker.function"
+                                    /></span>
+                            </div>
+                            <div
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.parent_id.name"
+                            >
+                                <span t-esc="speaker.parent_id.name" />
+                            </div>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.website"
+                            >
+                                <i class="fa fa-home mr-2" /><a
+                                    t-att-href="speaker.website"
+                                ><span t-field="speaker.website" /></a>
+                            </span>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.email"
+                            >
+                                <i class="fa fa-envelope mr-2" /><a
+                                    t-att-mailto="speaker.email"
+                                ><span t-field="speaker.email" /></a>
+                            </span>
+                            <span
+                                class="mb-1 d-flex align-items-baseline text-break"
+                                t-if="speaker.phone"
+                            >
+                                <i class="fa fa-phone mr-2" /><span
+                                    t-field="speaker.phone"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                    <div t-field="speaker.website_description" class="oe_no_empty" />
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
