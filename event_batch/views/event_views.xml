@@ -18,6 +18,9 @@
             <field name="event_ticket_id" position="after">
                 <field name="student_batch_id" />
             </field>
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm_reg" string="Confirm" states="draft" type="object" icon="fa-check"/>
+            </xpath>
         </field>
     </record>
     <record model="ir.ui.view" id="view_event_form_partner_student_batch">

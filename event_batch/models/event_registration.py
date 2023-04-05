@@ -1,4 +1,4 @@
-##############################################################################
+    ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
 #    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+import logging
 
 # 4. Imports from Odoo modules:
 
@@ -120,11 +121,20 @@ class EventRegistration(models.Model):
                     [("event_registration_id", "=", registration.id)]
                 ).unlink()
 
-    def action_confirm(self):
-        res = super(EventRegistration, self).action_confirm()
-        if self.student_batch_id and self.event_id.create_partner_student_user:
-            self.student_batch_id.student_id.create_student_user()
-        return res
+    def action_confirm(self, ):
+        if self.sale_order_id and self.sale_order_id.amount_total == 0 and self.event_id.educational_event and not self.event_id.auto_confirm:
+            logging.info("========TANNE MENNAAN ELI NOLLA HINTAINEN JOTA EI SAA HYVAKSYA====");
+            if self.student_batch_id and self.event_id.create_partner_student_user:
+                self.student_batch_id.student_id.create_student_user()
+        else:
+
+            res = super(EventRegistration, self).action_confirm()
+            if self.student_batch_id and self.event_id.create_partner_student_user:
+                self.student_batch_id.student_id.create_student_user()
+            return res
+
+    def action_confirm_reg(self):
+        self.write({'state': 'open'})
 
     # 8. Business methods
     def student_batch_values_preprocess(self, registration):
