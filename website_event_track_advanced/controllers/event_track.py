@@ -68,6 +68,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         Also return a set of all the time slots
         """
         logging.info("=======ON SPLIT TRACK BY DAYS=======");
+        logging.info(track);
         start_date = fields.Datetime.from_string(track.date).replace(tzinfo=pytz.utc).astimezone(local_tz)
         logging.info(start_date);
         start_datetime = self.time_slot_rounder(start_date, 15)
