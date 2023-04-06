@@ -28,7 +28,7 @@ from psycopg2.errors import InvalidTextRepresentation
 from werkzeug.exceptions import NotFound
 
 # 3. Odoo imports (openerp):
-from odoo import _, http
+from odoo import exceptions, http, fields, _
 from odoo.http import request
 import logging
 
