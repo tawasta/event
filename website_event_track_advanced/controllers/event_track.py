@@ -21,17 +21,14 @@
 import base64
 import logging
 import sys
-import pytz
-from pytz import timezone, utc
+
 # 2. Known third party imports:
 from psycopg2.errors import InvalidTextRepresentation
 from werkzeug.exceptions import NotFound
 
 # 3. Odoo imports (openerp):
-from odoo import exceptions, http, fields, _
+from odoo import _, http
 from odoo.http import request
-import logging
-from datetime import timedelta
 
 from odoo.addons.auth_signup.models.res_partner import SignupError
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
@@ -55,39 +52,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         res = super(EventTrackControllerAdvanced, self)._prepare_calendar_values(event)
         res.get("locations").sort(key=lambda x: x.sequence)
         return res
-
-    def _split_track_by_days(self, track, local_tz):
-        """
-        Based on the track start_date and the duration,
-        split the track duration into :
-            start_time by day : number of time slot (15 minutes) that the track takes on that day.
-        E.g. :  start date = 01-01-2000 10:00 PM and duration = 3 hours
-                return {
-                    01-01-2000 10:00:00 PM: 8 (2 * 4),
-                    01-02-2000 00:00:00 AM: 4 (1 * 4)
-                }
-        Also return a set of all the time slots
-        """
-        logging.info("=======ON SPLIT TRACK BY DAYS=======");
-        logging.info(track);
-        start_date = fields.Datetime.from_string(track.date).replace(tzinfo=pytz.utc).astimezone(local_tz)
-        logging.info(start_date);
-        start_datetime = self.time_slot_rounder(start_date, 15)
-        logging.info(start_datetime);
-        end_datetime = self.time_slot_rounder(start_datetime + timedelta(hours=(track.duration or 0.25)), 15)
-        time_slots_count = int(((end_datetime - start_datetime).total_seconds() / 3600) * 4)
-
-        time_slots_by_day_start_time = {start_datetime: 0}
-        for i in range(0, time_slots_count):
-            # If the new time slot is still on the current day
-            next_day = (start_datetime + timedelta(days=1)).date()
-            if (start_datetime + timedelta(minutes=15*i)).date() <= next_day:
-                time_slots_by_day_start_time[start_datetime] += 1
-            else:
-                start_datetime = next_day.datetime()
-                time_slots_by_day_start_time[start_datetime] = 0
-
-        return time_slots_by_day_start_time
 
     def _get_event_track_proposal_values(self, event):
         partner_id = request.env.user.partner_id
