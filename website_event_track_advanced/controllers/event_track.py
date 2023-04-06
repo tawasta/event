@@ -31,6 +31,7 @@ from werkzeug.exceptions import NotFound
 from odoo import exceptions, http, fields, _
 from odoo.http import request
 import logging
+from datetime import timedelta
 
 from odoo.addons.auth_signup.models.res_partner import SignupError
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
