@@ -30,6 +30,7 @@ addon | version | maintainers | summary
 [event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
 [event_template_disable_after_create](event_template_disable_after_create/) | 14.0.1.0.0 |  | Disable changing template after creation
 [event_template_required](event_template_required/) | 14.0.1.0.0 |  | Always require a template for events
+[event_track_remove_translatable_name](event_track_remove_translatable_name/) | 14.0.1.0.0 |  | Event Track Remove Translatable
 [event_user_is_organizer](event_user_is_organizer/) | 14.0.1.0.0 |  | Auto-change organizer when changing the event user
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 14.0.1.3.9 |  | Cancel events and event registrations through website.
