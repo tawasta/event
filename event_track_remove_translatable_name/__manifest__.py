@@ -28,6 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event"],
+    "depends": ["website_event_track"],
     "data": [],
 }
