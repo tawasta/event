@@ -31,6 +31,7 @@ from odoo import fields, models
 
 # 6. Unknown third party imports:
 
+
 class EventTrack(models.Model):
     # 1. Private attributes
     _inherit = "event.track"
