@@ -47,9 +47,9 @@
         <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="after">
             <t t-if="track.chairperson_id">
                 <div class="text-muted text-center">
-                    <small>
-                        <t t-esc="track.chairperson_id.sudo().name" />
-                    </small>
+                    <strong>
+                        PJ: <t t-esc="track.chairperson_id.sudo().name" />
+                    </strong>
                 </div>
             </t>
         </xpath>
