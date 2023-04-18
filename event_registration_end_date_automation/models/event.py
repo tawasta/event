@@ -136,7 +136,9 @@ class EventEvent(models.Model):
         res = super(EventEvent, self).write(vals)
         if "has_end_date" in vals and vals.get("has_end_date"):
             for ticket in self.event_ticket_ids:
-                new_end_date = self.date_end - relativedelta(days=self.end_interval_nbr)
+                new_end_date = self.date_begin - relativedelta(
+                    days=self.end_interval_nbr
+                )
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
         return res
 
@@ -148,7 +150,9 @@ class EventEvent(models.Model):
             logging.info("=====SAA ARVON====")
             for ticket in self.event_ticket_ids:
                 logging.info(ticket)
-                new_end_date = self.date_end - relativedelta(days=self.end_interval_nbr)
+                new_end_date = self.date_begin - relativedelta(
+                    days=self.end_interval_nbr
+                )
                 ticket.sudo().write({"end_sale_datetime": new_end_date})
         return record
 
