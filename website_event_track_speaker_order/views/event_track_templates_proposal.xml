@@ -4,11 +4,11 @@
         id="agenda_main_track_show_speakers"
         inherit_id="website_event_track_advanced.agenda_main_track_show_speakers"
     >
-        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
-            <t
-                t-foreach="track.speaker_ids"
-                t-as="speaker"
-            >
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"
+            position="replace"
+        >
+            <t t-foreach="track.speaker_ids" t-as="speaker">
                 <t t-set="current_count" t-value="current_count +1" />
                 <small>
                     <t t-esc="speaker.sudo().name" /><t
@@ -23,11 +23,11 @@
         id="tracks_display_list_show_speakers"
         inherit_id="website_event_track_advanced.tracks_display_list_show_speakers"
     >
-        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
-            <t
-                t-foreach="track.speaker_ids"
-                t-as="speaker"
-            >
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"
+            position="replace"
+        >
+            <t t-foreach="track.speaker_ids" t-as="speaker">
                 <t t-set="current_count" t-value="current_count +1" />
                 <span class="text-muted">
                     <t t-esc="speaker.sudo().name" /><t
@@ -43,11 +43,11 @@
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
     >
 
-        <xpath expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']" position="replace">
-            <t
-                t-foreach="track.speaker_ids"
-                t-as="speaker"
-            >
+        <xpath
+            expr="//t[@t-foreach='track.speaker_ids.sorted(key=lambda x: x.name)']"
+            position="replace"
+        >
+            <t t-foreach="track.speaker_ids" t-as="speaker">
                 <hr class="mt-2 pb-1 mb-1" />
                 <div id="speaker-div" class="mx-3">
                     <div class="mt-2 d-flex">
