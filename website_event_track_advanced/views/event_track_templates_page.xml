@@ -54,7 +54,7 @@
                 <t t-if="track.date">
                     <strong>Time:</strong> <span
                         t-field="track.date"
-                        t-options='{"hide_seconds":"True", "format": "short"}'
+                        t-options='{"hide_seconds":"True", "format": "short", "tz_name": track.event_id.date_tz}'
                     /> - <span
                         t-field="track.date_end"
                         t-options='{"time_only":"True", "format": "short"}'
