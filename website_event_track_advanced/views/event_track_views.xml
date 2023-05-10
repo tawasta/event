@@ -31,7 +31,7 @@
                     </group>
                 </page>
                 <page string="Speakers" name="track_speakers">
-                    <group>
+                    <!-- <group>
                         <field
                             name="track_speaker_ids"
                             nolabel="1"
@@ -39,6 +39,21 @@
                             context="{'default_track_id': id}"
                         >
                             <tree name="speakers" string="Speakers">
+                                <field name="sequence" widget="handle"/>
+                                <field name="partner_id" />
+                                <field name="phone" />
+                                <field name="email" />
+                                <field name="track_id" />
+                            </tree>
+                        </field>
+                    </group> -->
+                    <group>
+                        <field
+                                name="track_speaker_ids"
+                                nolabel="1"
+                                context="{'default_track_id':id}"
+                            >
+                            <tree string="Speakers" editable="bottom">
                                 <field name="sequence" widget="handle"/>
                                 <field name="partner_id" />
                                 <field name="phone" />
