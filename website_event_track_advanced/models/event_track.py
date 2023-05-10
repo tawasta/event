@@ -40,6 +40,8 @@ class EventTrack(models.Model):
     # 2. Fields declaration
     partner_id = fields.Many2one(string="Contact")
     speaker_ids = fields.Many2many("res.partner", string="Speakers")
+
+    track_speaker_ids = fields.Many2many("event.track.speaker", String="Speakers")
     chairperson_id = fields.Many2one(
         comodel_name="res.partner",
         string="Chairperson",

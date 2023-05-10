@@ -30,6 +30,21 @@
                         </field>
                     </group>
                 </page>
+                <page string="Speakers" name="track_speakers">
+                    <group>
+                        <field
+                            name="track_speaker_ids"
+                            nolabel="1"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        >
+                            <tree name="speakers" string="Speakers">
+                                <field name="partner_id" />
+                                <field name="phone" />
+                                <field name="email" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
             </xpath>
             <xpath expr="//sheet/group[last()]" position="after">
                 <group name="dates">

@@ -15,3 +15,5 @@ event_track_type_public,event_track_type_public,model_event_track_type,,1,0,0,0
 event_track_target_group_manager,event_track_target_group_manager,model_event_track_target_group,event.group_event_manager,1,1,1,1
 event_track_target_group_user,event_track_target_group_user,model_event_track_target_group,event.group_event_manager,1,0,0,0
 event_track_assign_wizard_user,event_track_assign_wizard,model_event_track_assign_wizard,event.group_event_manager,1,1,1,1
+event_track_speaker_public,event_track_speaker_public,model_event_track_speaker,,1,0,0,0
+event_track_speaker_manager,event_track_speaker_manager,model_event_track_speaker,event.group_event_manager,1,1,1,1
