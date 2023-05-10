@@ -36,6 +36,7 @@
                             name="track_speaker_ids"
                             nolabel="1"
                             options="{'no_quick_create':True,'no_create_edit':True}"
+                            context="{'default_track_id': id}"
                         >
                             <tree name="speakers" string="Speakers">
                                 <field name="partner_id" />
