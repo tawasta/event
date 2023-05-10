@@ -140,7 +140,7 @@ class EventTrack(models.Model):
     )
     partner_string = fields.Text(string="Partner", compute="_compute_partner_string")
     speakers_string = fields.Text(string="Speakers", compute="_compute_speakers_string")
-
+    track_speakers_string = fields.Text(string="Speakers", compute="_compute_track_speakers_string")
     external_registration = fields.Char(string="External registration link")
     twitter_hashtag = fields.Char(
         string="Twitter hashtag",
@@ -202,6 +202,14 @@ class EventTrack(models.Model):
                 speakers += " %s," % speaker.display_name
             speakers = speakers[1:-1]
             record.speakers_string = speakers or False
+
+    def _compute_track_speakers_string(self):
+        for record in self:
+            speakers = ""
+            for speaker in record.track_speaker_ids:
+                speakers += " %s," % speaker.partner_id.display_name
+            speakers = speakers[1:-1]
+            record.track_speakers_string = speakers or False
 
     @api.depends("type.twitter_hashtag")
     def _compute_twitter_hashtag(self):

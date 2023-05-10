@@ -248,10 +248,12 @@
         <field name="inherit_id" ref="website_event_track.view_event_track_kanban" />
         <field name="arch" type="xml">
             <xpath expr="//templates" position="before">
+                <field name="use_speaker_track" invisible="1" />
                 <field name="type" />
                 <field name="date" />
                 <field name="partner_string" />
-                <field name="speakers_string" />
+                <field name="speakers_string" attrs="{'invisible': [('use_speaker_track', '=', True)]}"/>
+                <field name="track_speakers_string" attrs="{'invisible': [('use_speaker_track', '=', False)]}"/>
                 <field name="duration" />
                 <field name="location_id" />
             </xpath>
@@ -265,7 +267,8 @@
                 </p>
                 <p>
                     <strong>Presenters:</strong>
-                    <field name="speakers_string" />
+                    <field name="speakers_string" attrs="{'invisible': [('use_speaker_track', '=', True)]}"/>
+                    <field name="track_speakers_string" attrs="{'invisible': [('use_speaker_track', '=', False)]}"/>
                 </p>
                 <div class="oe_kanban_body_left">
                     <p>
