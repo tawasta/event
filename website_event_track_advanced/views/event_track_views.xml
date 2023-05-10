@@ -11,9 +11,10 @@
                 <field name="chairperson_id" />
                 <field name="organizer" />
                 <field name="organizer_contact" />
+                <field name="use_speaker_track" invisible="1" />
             </xpath>
             <xpath expr="//page[@name='speakers']" position="replace">
-                <page string="Speakers" name="speakers">
+                <page string="Speakers" name="speakers" attrs="{'invisible': [('use_speaker_track', '=', True)]}">
                     <group>
                         <field
                             name="speaker_ids"
@@ -30,7 +31,7 @@
                         </field>
                     </group>
                 </page>
-                <page string="Speakers" name="track_speakers">
+                <page string="Speakers" name="track_speakers" attrs="{'invisible': [('use_speaker_track', '=', False)]}">
                     <!-- <group>
                         <field
                             name="track_speaker_ids"

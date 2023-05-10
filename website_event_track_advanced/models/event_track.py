@@ -44,6 +44,7 @@ class EventTrack(models.Model):
     track_speaker_ids = fields.One2many(
         comodel_name="event.track.speaker", inverse_name="track_id", string="Speakers"
     )
+    use_speaker_track = fields.Boolean(related="event_id.use_speaker_track")
     chairperson_id = fields.Many2one(
         comodel_name="res.partner",
         string="Chairperson",
