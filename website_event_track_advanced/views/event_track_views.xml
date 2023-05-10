@@ -39,9 +39,11 @@
                             context="{'default_track_id': id}"
                         >
                             <tree name="speakers" string="Speakers">
+                                <field name="sequence" />
                                 <field name="partner_id" />
                                 <field name="phone" />
                                 <field name="email" />
+                                <field name="track_id" />
                             </tree>
                         </field>
                     </group>
