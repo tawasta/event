@@ -22,18 +22,32 @@
         customize_show="True"
     >
         <xpath expr="//span[@t-esc='track.partner_name']" position="after">
-            <t t-set="speaker_count" t-value="len(track.speaker_ids)" />
-            <t t-set="current_count" t-value="0" />
-            <t
-                t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
-                t-as="speaker"
-            >
-                <t t-set="current_count" t-value="current_count +1" />
-                <span class="text-muted">
-                    <t t-esc="speaker.sudo().name" /><t
-                        t-if="speaker_count - current_count != 0"
-                    >, </t>
-                </span>
+            <t t-if="track.event_id.use_speaker_track">
+                <t t-set="speaker_count" t-value="len(track.track_speaker_ids)" />
+                <t t-set="current_count" t-value="0" />
+                <t t-foreach="track.track_speaker_ids" t-as="speaker">
+                    <t t-set="current_count" t-value="current_count +1" />
+                    <span class="text-muted">
+                        <t t-esc="speaker.partner_id.sudo().name" /><t
+                            t-if="speaker_count - current_count != 0"
+                        >, </t>
+                    </span>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-set="speaker_count" t-value="len(track.speaker_ids)" />
+                <t t-set="current_count" t-value="0" />
+                <t
+                    t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
+                    t-as="speaker"
+                >
+                    <t t-set="current_count" t-value="current_count +1" />
+                    <span class="text-muted">
+                        <t t-esc="speaker.sudo().name" /><t
+                            t-if="speaker_count - current_count != 0"
+                        >, </t>
+                    </span>
+                </t>
             </t>
         </xpath>
         <xpath expr="//span[@t-if='track.partner_name']" position="after">

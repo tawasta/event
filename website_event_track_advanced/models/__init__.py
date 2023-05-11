@@ -5,6 +5,7 @@ from . import (
     event_track_rating,
     event_track_review_group,
     event_track_reviewer,
+    event_track_speaker,
     event_track_stage,
     event_track_tag,
     event_track_target_group,
