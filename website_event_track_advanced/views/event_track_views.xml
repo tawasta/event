@@ -14,7 +14,11 @@
                 <field name="use_speaker_track" invisible="1" />
             </xpath>
             <xpath expr="//page[@name='speakers']" position="replace">
-                <page string="Speakers" name="speakers" attrs="{'invisible': [('use_speaker_track', '=', True)]}">
+                <page
+                    string="Speakers"
+                    name="speakers"
+                    attrs="{'invisible': [('use_speaker_track', '=', True)]}"
+                >
                     <group>
                         <field
                             name="speaker_ids"
@@ -31,7 +35,11 @@
                         </field>
                     </group>
                 </page>
-                <page string="Speakers" name="track_speakers" attrs="{'invisible': [('use_speaker_track', '=', False)]}">
+                <page
+                    string="Speakers"
+                    name="track_speakers"
+                    attrs="{'invisible': [('use_speaker_track', '=', False)]}"
+                >
                     <!-- <group>
                         <field
                             name="track_speaker_ids"
@@ -50,12 +58,12 @@
                     </group> -->
                     <group>
                         <field
-                                name="track_speaker_ids"
-                                nolabel="1"
-                                context="{'default_track_id':id}"
-                            >
+                            name="track_speaker_ids"
+                            nolabel="1"
+                            context="{'default_track_id':id}"
+                        >
                             <tree string="Speakers" editable="bottom">
-                                <field name="sequence" widget="handle"/>
+                                <field name="sequence" widget="handle" />
                                 <field name="partner_id" />
                                 <field name="phone" />
                                 <field name="email" />
@@ -252,8 +260,14 @@
                 <field name="type" />
                 <field name="date" />
                 <field name="partner_string" />
-                <field name="speakers_string" attrs="{'invisible': [('use_speaker_track', '=', True)]}"/>
-                <field name="track_speakers_string" attrs="{'invisible': [('use_speaker_track', '=', False)]}"/>
+                <field
+                    name="speakers_string"
+                    attrs="{'invisible': [('use_speaker_track', '=', True)]}"
+                />
+                <field
+                    name="track_speakers_string"
+                    attrs="{'invisible': [('use_speaker_track', '=', False)]}"
+                />
                 <field name="duration" />
                 <field name="location_id" />
             </xpath>
@@ -267,8 +281,14 @@
                 </p>
                 <p>
                     <strong>Presenters:</strong>
-                    <field name="speakers_string" attrs="{'invisible': [('use_speaker_track', '=', True)]}"/>
-                    <field name="track_speakers_string" attrs="{'invisible': [('use_speaker_track', '=', False)]}"/>
+                    <field
+                        name="speakers_string"
+                        attrs="{'invisible': [('use_speaker_track', '=', True)]}"
+                    />
+                    <field
+                        name="track_speakers_string"
+                        attrs="{'invisible': [('use_speaker_track', '=', False)]}"
+                    />
                 </p>
                 <div class="oe_kanban_body_left">
                     <p>

@@ -101,10 +101,7 @@
         </xpath>
         <xpath expr="//div[@id='author-div']" position="after">
             <t t-if="track.event_id.use_speaker_track">
-                <t
-                    t-foreach="track.track_speaker_ids"
-                    t-as="speaker"
-                >
+                <t t-foreach="track.track_speaker_ids" t-as="speaker">
                     <hr class="mt-2 pb-1 mb-1" />
                     <div id="speaker-div" class="mx-3">
                         <div class="mt-2 d-flex">
@@ -116,7 +113,10 @@
                             />
                             <div class="pl-2 pr-0 pr-md-2 d-flex-column">
                                 <div class="d-flex mb-2">
-                                    <span t-field="speaker.partner_id.name" class="font-weight-bold" />
+                                    <span
+                                        t-field="speaker.partner_id.name"
+                                        class="font-weight-bold"
+                                    />
                                     <span t-if="speaker.partner_id.function">, <t
                                             t-esc="speaker.partner_id.function"
                                         /></span>
@@ -153,7 +153,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div t-field="speaker.partner_id.website_description" class="oe_no_empty" />
+                        <div
+                            t-field="speaker.partner_id.website_description"
+                            class="oe_no_empty"
+                        />
                     </div>
                 </t>
             </t>
@@ -173,7 +176,10 @@
                             />
                             <div class="pl-2 pr-0 pr-md-2 d-flex-column">
                                 <div class="d-flex mb-2">
-                                    <span t-field="speaker.name" class="font-weight-bold" />
+                                    <span
+                                        t-field="speaker.name"
+                                        class="font-weight-bold"
+                                    />
                                     <span t-if="speaker.function">, <t
                                             t-esc="speaker.function"
                                         /></span>
@@ -210,7 +216,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div t-field="speaker.website_description" class="oe_no_empty" />
+                        <div
+                            t-field="speaker.website_description"
+                            class="oe_no_empty"
+                        />
                     </div>
                 </t>
             </t>

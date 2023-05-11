@@ -25,10 +25,7 @@
             <t t-if="track.event_id.use_speaker_track">
                 <t t-set="speaker_count" t-value="len(track.track_speaker_ids)" />
                 <t t-set="current_count" t-value="0" />
-                <t
-                    t-foreach="track.track_speaker_ids"
-                    t-as="speaker"
-                >
+                <t t-foreach="track.track_speaker_ids" t-as="speaker">
                     <t t-set="current_count" t-value="current_count +1" />
                     <span class="text-muted">
                         <t t-esc="speaker.partner_id.sudo().name" /><t

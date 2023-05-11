@@ -140,7 +140,9 @@ class EventTrack(models.Model):
     )
     partner_string = fields.Text(string="Partner", compute="_compute_partner_string")
     speakers_string = fields.Text(string="Speakers", compute="_compute_speakers_string")
-    track_speakers_string = fields.Text(string="Speakers", compute="_compute_track_speakers_string")
+    track_speakers_string = fields.Text(
+        string="Speakers", compute="_compute_track_speakers_string"
+    )
     external_registration = fields.Char(string="External registration link")
     twitter_hashtag = fields.Char(
         string="Twitter hashtag",

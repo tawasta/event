@@ -37,7 +37,6 @@ class EventTrackSpeaker(models.Model):
     _name = "event.track.speaker"
     _order = "sequence"
 
-
     def _default_sequence(self):
         return (self.search([], order="sequence desc", limit=1).sequence or 0) + 1
 
