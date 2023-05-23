@@ -114,7 +114,6 @@ class EventRegistration(models.Model):
         if self.student_batch_id:
             current_student_batch = self.student_batch_id
         res = super().action_cancel()
-
         if current_student_batch:
             current_student_batch.unlink()
 
