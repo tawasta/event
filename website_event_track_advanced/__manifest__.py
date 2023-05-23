@@ -53,6 +53,7 @@
         "views/event_track_type_views.xml",
         "views/event_track_tag_views.xml",
         "views/event_track_target_group_views.xml",
+        "views/event_track_speaker.xml",
         "views/event_track_stage_views.xml",
         "views/event_views.xml",
         "views/event_menus.xml",

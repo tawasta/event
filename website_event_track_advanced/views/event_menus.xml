@@ -23,6 +23,14 @@
         groups="event.group_event_manager"
     />
     <menuitem
+        id="track_speaker_menu"
+        name="Track Speakers"
+        action="event_track_speaker_action"
+        sequence="10"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
         id="event_track_rating_grade_menu"
         name="Track Rating Grades"
         action="event_track_rating_grade_action"
