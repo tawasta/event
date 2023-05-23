@@ -109,6 +109,16 @@ class EventRegistration(models.Model):
         self._unlink_associated_student_batch()
         return super(EventRegistration, self).unlink()
 
+    def action_cancel(self):
+        current_student_batch = False
+        if self.student_batch_id:
+            current_student_batch = self.student_batch_id
+        res = super().action_cancel()
+        if current_student_batch:
+            current_student_batch.unlink()
+
+        return res
+
     # 7. Action methods
     def _unlink_associated_student_batch(self):
         for registration in self:
