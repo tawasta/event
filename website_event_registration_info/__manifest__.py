@@ -20,7 +20,7 @@
 {
     "name": "Website Event Registration info",
     "summary": "Show customizable extra information before registration",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
