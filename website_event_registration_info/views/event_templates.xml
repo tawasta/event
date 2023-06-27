@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template
-        id="registration_attendee_details_questions_title"
+        id="registration_attendee_details_registration_info"
         inherit_id="website_event.registration_attendee_details"
-        name="Registration Attendee Details with questions title"
+        name="Registration info"
     >
         <xpath expr="//div[@class='modal-header align-items-center']" position="after">
             <div t-if="event.registration_info" class="modal-body align-items-center">
-                <i class="fa fa-exclamation fa-fw" /><p
+                <i class="fa fa-exclamation fa-fw" /><span
                     class="text-muted"
                     t-field="event.registration_info"
                 />
