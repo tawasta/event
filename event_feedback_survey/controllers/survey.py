@@ -110,3 +110,119 @@ class SurveyFeedbackEvent(Survey):
         return super(SurveyFeedbackEvent, self).survey_display_page(
             survey_token, answer_token, **post
         )
+
+    @http.route(
+        [
+            """/survey/results/<model("survey.survey"):survey>/event/<int:event_id>""",
+        ],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def survey_report_filter(self, survey, event_id=None, answer_token=None, **post):
+
+        user_input_lines, search_filters = self._extract_survey_data(
+            survey, event_id, post
+        )
+        survey_data = survey._prepare_statistics(user_input_lines)
+        question_and_page_data = survey.question_and_page_ids._prepare_statistics(
+            user_input_lines
+        )
+
+        template_values = {
+            # survey and its statistics
+            "survey": survey,
+            "question_and_page_data": question_and_page_data,
+            "survey_data": survey_data,
+            # search
+            "search_filters": search_filters,
+            "search_finished": post.get("finished") == "true",
+        }
+        user_input_lines, search_filters = self._extract_filters_data(survey, post)
+        user_input_ids = (
+            request.env["survey.user_input.line"]
+            .sudo()
+            .search([("id", "in", user_input_lines.ids)])
+            .mapped("user_input_id")
+        )
+
+        if survey.session_show_leaderboard:
+            template_values["leaderboard"] = survey._prepare_leaderboard_values()
+
+        return request.render("survey.survey_page_statistics", template_values)
+
+        # flake8: noqa: C901
+
+    def _extract_survey_data(
+        self,
+        survey,
+        event_id,
+        post,
+    ):
+        search_filters = []
+        line_filter_domain, line_choices = [], []
+        for data in post.get("filters", "").split("|"):
+            try:
+                row_id, answer_id = (int(item) for item in data.split(","))
+            except:
+                pass
+            else:
+                if row_id and answer_id:
+                    line_filter_domain = expression.AND(
+                        [
+                            [
+                                "&",
+                                ("matrix_row_id", "=", row_id),
+                                ("suggested_answer_id", "=", answer_id),
+                            ],
+                            line_filter_domain,
+                        ]
+                    )
+                    answers = request.env["survey.question.answer"].browse(
+                        [row_id, answer_id]
+                    )
+                elif answer_id:
+                    line_choices.append(answer_id)
+                    answers = request.env["survey.question.answer"].browse([answer_id])
+                if answer_id:
+                    question_id = (
+                        answers[0].matrix_question_id or answers[0].question_id
+                    )
+                    search_filters.append(
+                        {
+                            "question": question_id.title,
+                            "answers": "%s%s"
+                            % (
+                                answers[0].value,
+                                ": %s" % answers[1].value if len(answers) > 1 else "",
+                            ),
+                        }
+                    )
+        if line_choices:
+            # line_filter_domain = expression.AND([[('suggested_answer_id', '=', line_choices)], line_filter_domain])
+            for lc in line_choices:
+                line_filter_domain += [
+                    ("user_input_line_ids.suggested_answer_id", "=", lc)
+                ]
+        line_filter_domain += [("test_entry", "=", False)]
+        line_filter_domain += [("survey_id", "=", survey.id)]
+        if post.get("finished"):
+            line_filter_domain += [("state", "=", "done")]
+        else:
+            line_filter_domain += [("state", "!=", "new")]
+
+        if event_id:
+            select_event = (
+                request.env["event.event"].sudo().search([("id", "=", event_id)])
+            )
+            line_filter_domain += [("event_id", "=", select_event.id)]
+
+        user_input_lines = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search(line_filter_domain)
+            .mapped("user_input_line_ids")
+        )
+        logging.info(line_filter_domain)
+        logging.info(user_input_lines)
+        return user_input_lines, search_filters

@@ -67,11 +67,6 @@
                                 </td>
                                 <td>
                                     <a
-                                        t-if="e.registration_ids"
-                                        class="btn btn-secondary btn-sm"
-                                        t-attf-href="/my/events/{{e.id}}/attendances"
-                                    >Attendances</a>
-                                    <a
                                         t-if="e.feedback_survey_id"
                                         class="btn btn-secondary btn-sm"
                                         t-attf-href="/survey/results/{{e.feedback_survey_id.id}}/event/{{e.id}}"
