@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,15 +17,11 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
 # 1. Standard library imports:
-
 # 2. Known third party imports:
-
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
-import werkzeug
-import logging
+from odoo.tools import format_date, format_datetime
 
 # 4. Imports from Odoo modules:
 
@@ -34,14 +30,15 @@ import logging
 # 6. Unknown third party imports:
 
 
-class EventType(models.Model):
+class SurveyUserInput(models.Model):
     # 1. Private attributes
-    _inherit = "event.type"
+    _name = "survey.user_input"
+    _inherit = ["survey.user_input", "mail.thread", "mail.activity.mixin"]
 
     # 2. Fields declaration
-    feedback_survey_id = fields.Many2one(
-        string="Feedback survey", comodel_name="survey.survey"
-    )
+    event_id = fields.Many2one("event.event", string="Event", readonly=True, store=True)
+
+    tag_ids = fields.Many2many(related='event_id.tag_ids', string="Tags")
 
     # 3. Default methods
 
@@ -56,42 +53,18 @@ class EventType(models.Model):
     # 8. Business methods
 
 
-class EventEvent(models.Model):
+class SurveyUserInputLine(models.Model):
     # 1. Private attributes
-    _inherit = "event.event"
+    _inherit = "survey.user_input.line"
 
     # 2. Fields declaration
-    feedback_survey_id = fields.Many2one(
-        string="Feedback survey", comodel_name="survey.survey"
-    )
-
-    feedback_link = fields.Char(
-        "Feedback Link (URL)",
-        help="Enter the URL address of a feedback survey.",
-        readonly=False,
-        compute="_compute_feedback_link",
+    event_id = fields.Many2one(
+        related="user_input_id.event_id", string="Event", readonly=True, store=True
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    def _compute_feedback_link(self):
-        """Computes a public URL for the admission"""
-        for event in self:
-            self.env["ir.config_parameter"].sudo().get_param("web.base.url")
-            start_url = werkzeug.urls.url_join(
-                event.get_base_url(),
-                "/survey/start/%s/event/%s"
-                % (event.feedback_survey_id.access_token, event.id),
-            )
-
-            logging.info(start_url)
-            event.feedback_link = start_url
-
-
-
-    
-
 
     # 5. Constraints and onchanges
 
