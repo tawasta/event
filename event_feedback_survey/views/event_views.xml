@@ -12,7 +12,7 @@
                         <div class="o_setting_right_pane">
                             <div class="row">
                                 <div>
-                                    <label for="feedback_survey_id"/>
+                                    <label for="feedback_survey_id" />
                                     <field name="feedback_survey_id" />
                                 </div>
                             </div>

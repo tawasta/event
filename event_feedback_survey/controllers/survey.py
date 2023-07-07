@@ -79,9 +79,7 @@ class SurveyFeedbackEvent(Survey):
         )
         if not answer_sudo:
             try:
-                answer_sudo = survey_sudo._create_answer(
-                    user=False, email=False
-                )
+                answer_sudo = survey_sudo._create_answer(user=False, email=False)
             except UserError:
                 answer_sudo = False
 

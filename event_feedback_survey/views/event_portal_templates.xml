@@ -58,16 +58,25 @@
                                         t-attf-href="/event/{{e.id}}/register"
                                         t-att-title="e.name"
                                     >
-                                        <t
-                                            t-esc="e.name"
-                                            t-if="e.name != '/'"
-                                        />
+                                        <t t-esc="e.name" t-if="e.name != '/'" />
                                     </a>
                                 </td>
                                 <td><span t-field="e.date_begin" /> - <span
                                         t-field="e.date_end"
                                     />
-                            </td> 
+                                </td>
+                                <td>
+                                    <a
+                                        t-if="e.registration_ids"
+                                        class="btn btn-secondary btn-sm"
+                                        t-attf-href="/my/events/{{e.id}}/attendances"
+                                    >Attendances</a>
+                                    <a
+                                        t-if="e.feedback_survey_id"
+                                        class="btn btn-secondary btn-sm"
+                                        t-attf-href="/survey/results/{{e.feedback_survey_id.id}}/event/{{e.id}}"
+                                    >Answers</a>
+                                </td>
                             </tr>
                         </t>
                     </tbody>

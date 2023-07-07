@@ -22,10 +22,12 @@
 
 # 2. Known third party imports:
 
-# 3. Odoo imports (openerp):
-from odoo import api, fields, models
-import werkzeug
 import logging
+
+import werkzeug
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -87,11 +89,6 @@ class EventEvent(models.Model):
 
             logging.info(start_url)
             event.feedback_link = start_url
-
-
-
-    
-
 
     # 5. Constraints and onchanges
 

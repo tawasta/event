@@ -20,8 +20,7 @@
 # 1. Standard library imports:
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
-from odoo.tools import format_date, format_datetime
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -38,7 +37,7 @@ class SurveyUserInput(models.Model):
     # 2. Fields declaration
     event_id = fields.Many2one("event.event", string="Event", readonly=True, store=True)
 
-    tag_ids = fields.Many2many(related='event_id.tag_ids', string="Tags")
+    tag_ids = fields.Many2many(related="event_id.tag_ids", string="Tags")
 
     # 3. Default methods
 

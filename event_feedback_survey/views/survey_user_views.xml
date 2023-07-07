@@ -25,7 +25,7 @@
         <field name="arch" type="xml">
             <field name="survey_id" position="after">
                 <field name="event_id" />
-                <field name="tag_ids"  widget='many2many_tags'/>
+                <field name="tag_ids" widget='many2many_tags' />
             </field>
         </field>
     </record>
@@ -36,7 +36,7 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="before">
                 <field name="event_id" />
-                <field name="tag_ids"  widget='many2many_tags'/>
+                <field name="tag_ids" widget='many2many_tags' />
             </field>
             <field name="partner_id" position="attributes">
                 <attribute name="invisible">1</attribute>
