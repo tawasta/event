@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+survey.access_survey_survey_user,survey.survey.survey.user,survey.model_survey_survey,survey.group_survey_user,1,0,0,0

@@ -29,7 +29,11 @@
     "installable": True,
     "depends": ["event", "email_template_qweb"],
     "data": [
+        "security/ir.model.access.csv",
+        "security/security.xml",
+        "views/event_portal_templates.xml",
         "views/event_views.xml",
+        "views/survey_user_views.xml",
         "data/email_template_views.xml",
         "data/email_template_data.xml",
     ],

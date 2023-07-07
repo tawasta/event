@@ -12,8 +12,8 @@
                         <div class="o_setting_right_pane">
                             <div class="row">
                                 <div>
-                                    <label for="feedback_link" />
-                                    <field name="feedback_link" />
+                                    <label for="feedback_survey_id" />
+                                    <field name="feedback_survey_id" />
                                 </div>
                             </div>
                         </div>
@@ -28,6 +28,7 @@
             <field name="inherit_id" ref="event.view_event_form" />
             <field name="arch" type="xml">
                 <field name="tag_ids" position="after">
+                    <field name="feedback_survey_id" />
                     <field name="feedback_link" />
                 </field>
             </field>
