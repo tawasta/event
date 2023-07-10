@@ -64,7 +64,9 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     feedback_survey_id = fields.Many2one(
-        string="Feedback survey", comodel_name="survey.survey"
+        string="Feedback survey", comodel_name="survey.survey", readonly=False,
+        store=True,
+        compute="_compute_feedback_id",
     )
 
     feedback_link = fields.Char(
@@ -89,6 +91,16 @@ class EventEvent(models.Model):
 
             logging.info(start_url)
             event.feedback_link = start_url
+
+    @api.depends("event_type_id")
+    def _compute_feedback_id(self):
+        """Update event configuration from its event type. Depends are set only
+        on event_type_id itself, not its sub fields. Purpose is to emulate an
+        onchange: if event type is changed, update event configuration. Changing
+        event type content itself should not trigger this method."""
+        for event in self:
+            if not event.feedback_survey_id and event.event_type_id.feedback_survey_id:
+                event.feedback_survey_id = event.event_type_id.feedback_survey_id
 
     # 5. Constraints and onchanges
 
