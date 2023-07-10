@@ -27,7 +27,7 @@ import logging
 import werkzeug
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import fields, models, api
 
 # 4. Imports from Odoo modules:
 
