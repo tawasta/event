@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,25 +17,33 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-{
-    "name": "Event Feedback Survey",
-    "version": "14.0.1.0.0",
-    "category": "Events",
-    "summary": "Send automated event feedback survey mails",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": ["event", "email_template_qweb"],
-    "data": [
-        "security/ir.model.access.csv",
-        "security/security.xml",
-        "views/event_portal_templates.xml",
-        "views/event_views.xml",
-        "views/survey_result_view.xml",
-        "views/survey_user_views.xml",
-        "data/email_template_views.xml",
-        "data/email_template_data.xml",
-    ],
-}
+# 1. Standard library imports:
+# 2. Known third party imports:
+# 3. Odoo imports (openerp):
+from odoo import api, fields, models
+
+# 4. Imports from Odoo modules:
+
+# 5. Local imports in the relative form:
+
+# 6. Unknown third party imports:
+
+
+class SurveyQuestion(models.Model):
+    # 1. Private attributes
+    _inherit = "survey.question"
+
+    # 2. Fields declaration
+    show_event_name = fields.Boolean("Show event name")
+
+    # 3. Default methods
+
+    # 4. Compute and search fields, in the same order that fields declaration
+
+    # 5. Constraints and onchanges
+
+    # 6. CRUD methods
+
+    # 7. Action methods
+
+    # 8. Business methods

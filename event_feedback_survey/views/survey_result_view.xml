@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template inherit_id="survey.question_char_box" id="question_char_box">
+        <xpath expr="//div[@class='o_survey_comment_container p-0']" position="replace">
+            <t t-if="question.show_event_name">
+                <div class="o_survey_comment_container p-0">
+                    <input t-att-type="'email' if question.validation_email else 'text'"
+                       class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0" t-att-name="question.id"
+                       t-att-value="answer.event_id.name"
+                       t-att-data-question-type="question.question_type"
+                       t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
+                       t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"/>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="o_survey_comment_container p-0">
+                    <input t-att-type="'email' if question.validation_email else 'text'"
+                       class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0" t-att-name="question.id"
+                       t-att-value="answer_lines[0].value_char_box if answer_lines else None"
+                       t-att-data-question-type="question.question_type"
+                       t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
+                       t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    <template id="survey_filter_assets" name="Survey filter assets">
+        <script
+            type="text/javascript"
+            src="/event_feedback_survey/static/src/js/survey_filter.js"
+        />
+    </template>
+    <template
+        id="survey_page_statistics_inner"
+        inherit_id="survey.survey_page_statistics_inner"
+    >
+        <xpath expr="//div[@class='card d-print-none']" position="before">
+
+            <t t-call-assets="event_feedback_survey.survey_filter_assets" lazy_load="True" />
+            <div class="container pb-2 pt-2">
+                    <div class="row">
+                        <t t-call="event_feedback_survey.date_filter" />
+                        <t t-if="show_date"> 
+                            <t t-call="event_feedback_survey.date_end_filter" />
+                        </t>
+                        <t t-call="event_feedback_survey.events" />
+                        <t t-call="event_feedback_survey.tags" />
+                    </div>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="events" name="Events Box">
+        <div
+            id="event_container"
+            class="col-sm-4 mt-1 mb-1"
+            t-att-data-user="select_events if select_events else 0"
+        >
+            <select
+                class="form-control input-lg"
+                name="select_event"
+                id="select_event"
+                multiple="multiple"
+                t-att-disabled="'disabled' if readonly_events else None"
+            >
+                <t t-foreach="events" t-as="e">
+                    <option
+                        t-att-value="e.id"
+                        t-att-selected="None if not select_events else e.id in select_events.ids"
+                    >
+                        <t t-esc="e.name" />
+                    </option>
+                </t>
+            </select>
+            <input type="hidden" id="hidden_events" name="hidden_events_ids" />
+        </div>
+    </template>
+
+    <template id="tags" name="Tags Box">
+        <div
+            id="tag_container"
+            class="col-sm-4 mt-1 mb-1"
+            t-att-data-user="select_tags if select_tags else 0"
+        >
+            <select
+                class="form-control input-lg"
+                name="select_tag"
+                id="select_tag"
+                multiple="multiple"
+            >
+                <t t-foreach="tags" t-as="t">
+                    <option
+                        t-att-value="t.id"
+                        t-att-selected="None if not select_tags else t.id in select_tags.ids"
+                    >
+                        <t t-esc="t.name" />
+                    </option>
+                </t>
+            </select>
+            <input type="hidden" id="hidden_tags" name="hidden_tags_ids" />
+        </div>
+    </template>
+
+    <template id="date_filter" name="Date filter">
+      <div id="date_container" class="col-sm-4 mt-1 mb-1">
+        <div
+                class="input-group date"
+                id="datetimepicker-filter-date"
+                data-target-input="nearest"
+            >
+          <input
+                    type="text"
+                    data-date-format="yyyy/mm/dd"
+                    name="filter_date"
+                    id="filter-date"
+                    class="form-control datetimepicker-input"
+                    data-target="#datetimepicker-filter-date"
+                />
+          <div
+                    class="input-group-append"
+                    data-date-format="yyyy/mm/dd"
+                    data-target="#datetimepicker-filter-date"
+                    data-toggle="datetimepicker"
+                >
+            <div class="input-group-text"><i class="fa fa-calendar" /></div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="date_end_filter" name="Date end filter">
+      <div id="date_container" class="col-sm-4 mt-1 mb-1">
+        <div
+                class="input-group date"
+                id="datetimepicker-filter-end-date"
+                data-target-input="nearest"
+            >
+          <input
+                    type="text"
+                    data-date-format="yyyy/mm/dd"
+                    name="filter_end_date"
+                    id="filter-end-date"
+                    class="form-control datetimepicker-input"
+                    data-target="#datetimepicker-filter-end-date"
+                />
+          <div
+                    class="input-group-append"
+                    data-date-format="yyyy/mm/dd"
+                    data-target="#datetimepicker-filter-end-date"
+                    data-toggle="datetimepicker"
+                >
+            <div class="input-group-text"><i class="fa fa-calendar" /></div>
+          </div>
+        </div>
+      </div>
+    </template>
+</odoo>

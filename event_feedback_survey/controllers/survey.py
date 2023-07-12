@@ -23,6 +23,7 @@ import logging
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
 from odoo import http
+from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.http import request
 
@@ -37,6 +38,76 @@ _logger = logging.getLogger(__name__)
 
 
 class SurveyFeedbackEvent(Survey):
+
+    # flake8: noqa: C901
+    @http.route(
+        '/survey/results/<model("survey.survey"):survey>',
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def survey_report(
+        self,
+        survey,
+        selected_events=None,
+        selected_tags=None,
+        select_date=None,
+        date_end=None,
+        answer_token=None,
+        **post
+    ):
+
+        res = super(SurveyFeedbackEvent, self).survey_report(
+            survey,
+            answer_token,
+        )
+        user_input_lines, search_filters = self._extract_survey_data(
+            survey,
+            selected_events,
+            selected_tags,
+            select_date,
+            date_end,
+            post,
+        )
+        survey_data = survey._prepare_statistics(user_input_lines)
+        question_and_page_data = survey.question_and_page_ids._prepare_statistics(
+            user_input_lines
+        )
+        show_date = False
+        res.qcontext.update(
+            {
+                "question_and_page_data": question_and_page_data,
+                "survey_data": survey_data,
+                "search_filters": search_filters,
+                "show_date": show_date,
+            }
+        )
+        user_input_ids = (
+            request.env["survey.user_input.line"]
+            .sudo()
+            .search([("id", "in", user_input_lines.ids)])
+            .mapped("user_input_id")
+        )
+
+
+        events = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+            .mapped("event_id")
+        )
+        res.qcontext.update({"events": events})
+
+        tags = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+            .mapped("tag_ids")
+        )
+        res.qcontext.update({"tags": tags})
+
+        return res
+
     @http.route(
         "/survey/start/<string:survey_token>/event/<int:event_id>",
         type="http",
@@ -111,23 +182,48 @@ class SurveyFeedbackEvent(Survey):
             survey_token, answer_token, **post
         )
 
+    # flake8: noqa: C901
     @http.route(
         [
-            """/survey/results/<model("survey.survey"):survey>/event/<int:event_id>""",
+            """/survey/results/<model("survey.survey"):survey>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/date_start/<string:select_date>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/date_start/<string:select_date>/date_end/<string:date_end>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/event/<string:selected_events>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>/event/<string:selected_events>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>""",  # noqa
         ],
         type="http",
         auth="user",
         website=True,
     )
-    def survey_report_filter(self, survey, event_id=None, answer_token=None, **post):
+    def survey_report_filter(
+        self,
+        survey,
+        selected_events=None,
+        selected_tags=None,
+        select_date=None,
+        date_end=None,
+        answer_token=None,
+        **post
+    ):
 
         user_input_lines, search_filters = self._extract_survey_data(
-            survey, event_id, post
+            survey,
+            selected_events,
+            selected_tags,
+            select_date,
+            date_end,
+            post,
         )
         survey_data = survey._prepare_statistics(user_input_lines)
         question_and_page_data = survey.question_and_page_ids._prepare_statistics(
             user_input_lines
         )
+        show_date = False
+        readonly_events = False
 
         template_values = {
             # survey and its statistics
@@ -138,7 +234,34 @@ class SurveyFeedbackEvent(Survey):
             "search_filters": search_filters,
             "search_finished": post.get("finished") == "true",
         }
-        user_input_lines, search_filters = self._extract_filters_data(survey, post)
+        if request.env.user.has_group("survey.group_survey_user"):
+            readonly_events = True
+            template_values.update({"readonly_events": readonly_events})
+
+
+        if selected_events:
+            select_events = (
+                request.env["event.event"]
+                .sudo()
+                .search([("id", "in", list(map(int, selected_events.split(","))))])
+            )
+            template_values.update({"select_events": select_events})
+
+            if request.env.user.has_group("survey.group_survey_user"):
+                if select_events.user_id != request.env.user:
+                    return request.render("website.page_404")
+
+
+        if selected_tags:
+            logging.info(selected_tags);
+            select_tags = (
+                request.env["event.tag"]
+                .sudo()
+                .search([("id", "in", list(map(int, selected_tags.split(","))))])
+            )
+            logging.info(select_tags);
+            template_values.update({"select_tags": select_tags})
+        #user_input_lines, search_filters = self._extract_filters_data(survey, post)
         user_input_ids = (
             request.env["survey.user_input.line"]
             .sudo()
@@ -146,17 +269,41 @@ class SurveyFeedbackEvent(Survey):
             .mapped("user_input_id")
         )
 
+        events = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+            .mapped("event_id")
+        )
+        template_values.update({"events": events})
+
+        tags = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+            .mapped("tag_ids")
+        )
+        logging.info(tags);
+        template_values.update({"tags": tags})
+
+        if select_date:
+            show_date = True
+            template_values.update({"show_date": show_date})
+
         if survey.session_show_leaderboard:
             template_values["leaderboard"] = survey._prepare_leaderboard_values()
 
         return request.render("survey.survey_page_statistics", template_values)
-
         # flake8: noqa: C901
 
+    # flake8: noqa: C901
     def _extract_survey_data(
         self,
         survey,
-        event_id,
+        selected_events,
+        selected_tags,
+        select_date,
+        date_end,
         post,
     ):
         search_filters = []
@@ -211,11 +358,43 @@ class SurveyFeedbackEvent(Survey):
         else:
             line_filter_domain += [("state", "!=", "new")]
 
-        if event_id:
-            select_event = (
-                request.env["event.event"].sudo().search([("id", "=", event_id)])
+
+        if selected_events:
+            select_events = (
+                request.env["event.event"]
+                .sudo()
+                .search([("id", "in", list(map(int, selected_events.split(","))))])
             )
-            line_filter_domain += [("event_id", "=", select_event.id)]
+            line_filter_domain += [("event_id", "in", select_events.ids)]
+
+        if selected_tags:
+            select_tags = (
+                request.env["event.tag"]
+                .sudo()
+                .search([("id", "in", list(map(int, selected_tags.split(","))))])
+            )
+            line_filter_domain += [("tag_ids", "in", select_tags.ids)]
+
+
+        if select_date and not date_end:
+            select_date_obj = datetime.strptime(select_date, "%d.%m.%Y")
+            select_date_end_obj = select_date_obj + timedelta(
+                hours=23, minutes=59, seconds=59
+            )
+            line_filter_domain += [
+                ("create_date", ">=", select_date_obj),
+                ("create_date", "<=", select_date_end_obj),
+            ]
+        if select_date and date_end:
+            select_date_start_obj = datetime.strptime(select_date, "%d.%m.%Y")
+            select_date_end_obj = datetime.strptime(date_end, "%d.%m.%Y")
+            date_end_obj = select_date_end_obj + timedelta(
+                hours=23, minutes=59, seconds=59
+            )
+            line_filter_domain += [
+                ("create_date", ">=", select_date_start_obj),
+                ("create_date", "<=", date_end_obj),
+            ]
 
         user_input_lines = (
             request.env["survey.user_input"]
@@ -223,6 +402,5 @@ class SurveyFeedbackEvent(Survey):
             .search(line_filter_domain)
             .mapped("user_input_line_ids")
         )
-        logging.info(line_filter_domain)
-        logging.info(user_input_lines)
+
         return user_input_lines, search_filters
