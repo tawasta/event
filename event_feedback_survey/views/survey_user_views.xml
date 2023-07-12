@@ -76,9 +76,12 @@
         <field name="model">survey.question</field>
         <field name="inherit_id" ref="survey.survey_question_form" />
         <field name="arch" type="xml">
-            <field name="validation_required" position="after">
-                <field name="show_event_name"/>
-            </field>
+            <label for="save_as_nickname" position="after">
+                <br />
+                <field name="show_event_name" nolabel="1" />
+                <label for="show_event_name" />
+                <br />
+            </label>
         </field>
     </record>
 </odoo>
