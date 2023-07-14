@@ -84,4 +84,19 @@
             </label>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="survey_form">
+        <field name="name">Survey form groups</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_result_survey']" position="attributes">
+                <attribute
+                    name="groups"
+                >survey.group_survey_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    
 </odoo>
