@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template
+        id="portal_my_home_menu_events"
+        name="Portal layout : event menu entries"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="30"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'event'"
+                t-attf-class="breadcrumb-item #{'active ' if not event else ''}"
+            >
+                <a t-if="event" t-attf-href="/my/events?{{ keep_query() }}">Events</a>
+                <t t-else="">Events</t>
+            </li>
+        </xpath>
+    </template>
+    <template
+        id="portal_my_home_events"
+        name="Show events"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="30"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Events</t>
+                <t t-set="url" t-value="'/my/events'" />
+                <t t-set="placeholder_count" t-value="'event_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_events" name="My events">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">events</t>
+            </t>
+            <t t-if="not registrations">
+                <p>There are currently no events for your account.</p>
+            </t>
+            <div class="container">
+                <t t-if="events" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Event</th>
+                            <th>Event date</th>
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="events" t-as="e">
+                            <tr>
+                                <td>
+                                    <a
+                                        t-attf-href="/event/{{e.id}}/register"
+                                        t-att-title="e.name"
+                                    >
+                                        <t t-esc="e.name" t-if="e.name != '/'" />
+                                    </a>
+                                </td>
+                                <td><span t-field="e.date_begin" /> - <span
+                                        t-field="e.date_end"
+                                    />
+                                </td>
+                                <td>
+                                    <a
+                                        t-if="e.feedback_survey_id"
+                                        class="btn btn-secondary btn-sm"
+                                        t-attf-href="/survey/results/{{e.feedback_survey_id.id}}/event/{{e.id}}"
+                                    >Answers</a>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

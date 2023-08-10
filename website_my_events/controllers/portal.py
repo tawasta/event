@@ -10,8 +10,10 @@ class PortalCertificate(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
         if "event_count" in counters:
-            values["event_count"] = request.env["event.registration"].search_count(
-                [("partner_id", "=", request.env.user.partner_id.id)]
+            values["event_count"] = (
+                request.env["event.registration"]
+                .sudo()
+                .search_count([("partner_id", "=", request.env.user.partner_id.id)])
             )
 
         return values
@@ -20,8 +22,10 @@ class PortalCertificate(CustomerPortal):
     def portal_my_events(self, **kw):
         values = self._prepare_portal_layout_values()
 
-        registrations = request.env["event.registration"].search(
-            [("partner_id", "=", request.env.user.partner_id.id)]
+        registrations = (
+            request.env["event.registration"]
+            .sudo()
+            .search([("partner_id", "=", request.env.user.partner_id.id)])
         )
 
         values.update(

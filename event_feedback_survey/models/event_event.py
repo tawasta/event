@@ -22,6 +22,10 @@
 
 # 2. Known third party imports:
 
+import logging
+
+import werkzeug
+
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
 
@@ -37,9 +41,8 @@ class EventType(models.Model):
     _inherit = "event.type"
 
     # 2. Fields declaration
-    feedback_link = fields.Char(
-        "Feedback Link (URL)",
-        help="Enter the URL address of a feedback survey.",
+    feedback_survey_id = fields.Many2one(
+        string="Feedback survey", comodel_name="survey.survey"
     )
 
     # 3. Default methods
@@ -60,28 +63,46 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     # 2. Fields declaration
+    feedback_survey_id = fields.Many2one(
+        string="Feedback survey",
+        comodel_name="survey.survey",
+        readonly=False,
+        store=True,
+        compute="_compute_feedback_id",
+    )
+
     feedback_link = fields.Char(
         "Feedback Link (URL)",
         help="Enter the URL address of a feedback survey.",
         readonly=False,
-        store=True,
         compute="_compute_feedback_link",
     )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("event_type_id")
     def _compute_feedback_link(self):
+        """Computes a public URL for the admission"""
+        for event in self:
+            self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+            start_url = werkzeug.urls.url_join(
+                event.get_base_url(),
+                "/survey/start/%s/event/%s"
+                % (event.feedback_survey_id.access_token, event.id),
+            )
+
+            logging.info(start_url)
+            event.feedback_link = start_url
+
+    @api.depends("event_type_id")
+    def _compute_feedback_id(self):
         """Update event configuration from its event type. Depends are set only
         on event_type_id itself, not its sub fields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
         event type content itself should not trigger this method."""
         for event in self:
-            if not event.event_type_id:
-                event.feedback_link = event.feedback_link or None
-            else:
-                event.feedback_link = event.event_type_id.feedback_link or None
+            if not event.feedback_survey_id and event.event_type_id.feedback_survey_id:
+                event.feedback_survey_id = event.event_type_id.feedback_survey_id
 
     # 5. Constraints and onchanges
 

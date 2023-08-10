@@ -115,15 +115,11 @@
                                                             t-if="object.event_id.feedback_link"
                                                         >
                                                             Leave feedback:
-                                                            <a
-                                                                t-att-href="object.event_id.feedback_link"
-                                                            />
-                                                            <br />
                                                             <div
                                                                 style="margin: 16px 0px 16px 0px;"
                                                             >
                                                                 <a
-                                                                    t-att-href="object.manage_url"
+                                                                    t-att-href="object.event_id.feedback_link"
                                                                     style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
                                                                 >Feedback Survey</a>
                                                             </div>

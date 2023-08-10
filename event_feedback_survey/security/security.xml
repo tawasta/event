@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <!-- Record rules -->
+        <record model="ir.rule" id="view_event_surveys">
+            <field
+            name="name"
+        >Show only those survey answers where there is an event and you are the responsible</field>
+             <field name="groups" eval="[(4, ref('event.group_event_user'))]" />
+            <field name="model_id" ref="survey.model_survey_user_input" />
+            <field name="domain_force">[('event_id.user_id','=',user.id)]</field>
+            <field eval="1" name="perm_unlink" />
+            <field eval="1" name="perm_write" />
+            <field eval="1" name="perm_read" />
+            <field eval="1" name="perm_create" />
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('module', '=', 'survey'), ('name', '=', 'survey_user_input_rule_survey_user_read')]"
+            />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record model="ir.rule" id="survey.survey_user_input_rule_survey_user_read">
+            <field name="active">False</field>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('module', '=', 'survey'), ('name', '=', 'survey_survey_rule_survey_user_cwu')]"
+            />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record model="ir.rule" id="survey.survey_survey_rule_survey_user_cwu">
+            <field name="active">False</field>
+        </record>
+
+</odoo>

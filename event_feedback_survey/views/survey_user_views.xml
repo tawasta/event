@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="survey_user_input_view_search_event" model="ir.ui.view">
+        <field name="name">survey.user_input.view.search.event</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+                <field name="event_id" />
+            </field>
+            <filter name="group_by_partner" position="before">
+                <filter
+                    string="Event"
+                    name="group_by_event"
+                    domain="[]"
+                    context="{'group_by': 'event_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="survey_user_input_view_form_event" model="ir.ui.view">
+        <field name="name">survey.user_input.view.form.event</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form" />
+        <field name="arch" type="xml">
+            <field name="survey_id" position="after">
+                <field name="event_id" />
+                <field name="tag_ids" widget='many2many_tags' />
+            </field>
+        </field>
+    </record>
+    <record id="survey_user_input_view_tree_event" model="ir.ui.view">
+        <field name="name">survey.user_input.view.tree.event</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="before">
+                <field name="event_id" />
+                <field name="tag_ids" widget='many2many_tags' />
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+    <!-- SURVEY.USER_INPUT.LINE VIEWS -->
+    <record id="survey_response_line_view_tree_inherit" model="ir.ui.view">
+        <field name="name">survey.user_input.line.view.tree.inherit</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_response_line_view_tree" />
+        <field name="arch" type="xml">
+            <field name="user_input_id" position="after">
+                <field name="event_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="survey_user_input_line_view_search_inherit" model="ir.ui.view">
+        <field name="name">survey.user_input.line.view.search</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_user_input_line_view_search" />
+        <field name="arch" type="xml">
+            <filter name="group_by_survey" position="before">
+                <filter
+                    string="Event"
+                    name="group_by_event"
+                    domain="[]"
+                    context="{'group_by': 'event_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="survey_question_form">
+        <field name="name">Form view for survey question</field>
+        <field name="model">survey.question</field>
+        <field name="inherit_id" ref="survey.survey_question_form" />
+        <field name="arch" type="xml">
+            <label for="save_as_nickname" position="after">
+                <br />
+                <field name="show_event_name" nolabel="1" />
+                <label for="show_event_name" />
+                <br />
+            </label>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="survey_form">
+        <field name="name">Survey form groups</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_result_survey']" position="attributes">
+                <attribute name="groups">survey.group_survey_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
