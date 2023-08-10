@@ -19,11 +19,11 @@
 ##############################################################################
 # 1. Standard library imports:
 import logging
+from datetime import datetime, timedelta
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
 from odoo import http
-from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.http import request
 
@@ -88,7 +88,6 @@ class SurveyFeedbackEvent(Survey):
             .search([("id", "in", user_input_lines.ids)])
             .mapped("user_input_id")
         )
-
 
         events = (
             request.env["survey.user_input"]
@@ -238,7 +237,6 @@ class SurveyFeedbackEvent(Survey):
             readonly_events = True
             template_values.update({"readonly_events": readonly_events})
 
-
         if selected_events:
             select_events = (
                 request.env["event.event"]
@@ -251,17 +249,16 @@ class SurveyFeedbackEvent(Survey):
                 if select_events.user_id != request.env.user:
                     return request.render("website.page_404")
 
-
         if selected_tags:
-            logging.info(selected_tags);
+            logging.info(selected_tags)
             select_tags = (
                 request.env["event.tag"]
                 .sudo()
                 .search([("id", "in", list(map(int, selected_tags.split(","))))])
             )
-            logging.info(select_tags);
+            logging.info(select_tags)
             template_values.update({"select_tags": select_tags})
-        #user_input_lines, search_filters = self._extract_filters_data(survey, post)
+        # user_input_lines, search_filters = self._extract_filters_data(survey, post)
         user_input_ids = (
             request.env["survey.user_input.line"]
             .sudo()
@@ -283,7 +280,7 @@ class SurveyFeedbackEvent(Survey):
             .search([("id", "in", user_input_ids.ids)])
             .mapped("tag_ids")
         )
-        logging.info(tags);
+        logging.info(tags)
         template_values.update({"tags": tags})
 
         if select_date:
@@ -358,7 +355,6 @@ class SurveyFeedbackEvent(Survey):
         else:
             line_filter_domain += [("state", "!=", "new")]
 
-
         if selected_events:
             select_events = (
                 request.env["event.event"]
@@ -374,7 +370,6 @@ class SurveyFeedbackEvent(Survey):
                 .search([("id", "in", list(map(int, selected_tags.split(","))))])
             )
             line_filter_domain += [("tag_ids", "in", select_tags.ids)]
-
 
         if select_date and not date_end:
             select_date_obj = datetime.strptime(select_date, "%d.%m.%Y")

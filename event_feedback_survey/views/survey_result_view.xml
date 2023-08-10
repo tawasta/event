@@ -4,22 +4,28 @@
         <xpath expr="//div[@class='o_survey_comment_container p-0']" position="replace">
             <t t-if="question.show_event_name">
                 <div class="o_survey_comment_container p-0">
-                    <input t-att-type="'email' if question.validation_email else 'text'"
-                       class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0" t-att-name="question.id"
-                       t-att-value="answer.event_id.name"
-                       t-att-data-question-type="question.question_type"
-                       t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
-                       t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"/>
+                    <input
+                        t-att-type="'email' if question.validation_email else 'text'"
+                        class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+                        t-att-name="question.id"
+                        t-att-value="answer.event_id.name"
+                        t-att-data-question-type="question.question_type"
+                        t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
+                        t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"
+                    />
                 </div>
             </t>
             <t t-else="">
                 <div class="o_survey_comment_container p-0">
-                    <input t-att-type="'email' if question.validation_email else 'text'"
-                       class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0" t-att-name="question.id"
-                       t-att-value="answer_lines[0].value_char_box if answer_lines else None"
-                       t-att-data-question-type="question.question_type"
-                       t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
-                       t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"/>
+                    <input
+                        t-att-type="'email' if question.validation_email else 'text'"
+                        class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+                        t-att-name="question.id"
+                        t-att-value="answer_lines[0].value_char_box if answer_lines else None"
+                        t-att-data-question-type="question.question_type"
+                        t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
+                        t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"
+                    />
                 </div>
             </t>
         </xpath>
@@ -36,11 +42,14 @@
     >
         <xpath expr="//div[@class='card d-print-none']" position="before">
 
-            <t t-call-assets="event_feedback_survey.survey_filter_assets" lazy_load="True" />
+            <t
+                t-call-assets="event_feedback_survey.survey_filter_assets"
+                lazy_load="True"
+            />
             <div class="container pb-2 pt-2">
                     <div class="row">
                         <t t-call="event_feedback_survey.date_filter" />
-                        <t t-if="show_date"> 
+                        <t t-if="show_date">
                             <t t-call="event_feedback_survey.date_end_filter" />
                         </t>
                         <t t-call="event_feedback_survey.events" />

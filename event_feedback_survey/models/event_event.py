@@ -27,7 +27,7 @@ import logging
 import werkzeug
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -64,7 +64,9 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     feedback_survey_id = fields.Many2one(
-        string="Feedback survey", comodel_name="survey.survey", readonly=False,
+        string="Feedback survey",
+        comodel_name="survey.survey",
+        readonly=False,
         store=True,
         compute="_compute_feedback_id",
     )

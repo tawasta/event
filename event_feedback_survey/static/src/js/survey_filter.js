@@ -2,7 +2,6 @@ odoo.define("survey.survey_page_statistics_inner", function () {
     "use strict";
 
     $(function () {
-
         $("#select_event").select2({
             placeholder: "Select events",
             allowClear: true,
