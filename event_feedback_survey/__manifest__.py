@@ -27,7 +27,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "email_template_qweb"],
+    "depends": ["event", "email_template_qweb", "survey"],
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",
