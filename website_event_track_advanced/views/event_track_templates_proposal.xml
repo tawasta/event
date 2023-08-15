@@ -828,6 +828,70 @@
                 <div class="row" id="track-application-targetgroup-info-div">
                     <div class="form-group col-xl-12">
                         <label
+                            for="target_groups"
+                            class="col-form-label label-optional"
+                        >Target group(s)</label>
+                        <p
+                            t-if="not review and event.allow_target_group_multiple"
+                            id="track-application-tag-alert-info"
+                            class="alert alert-info alert-dismissable"
+                        >
+                            <a
+                                href="#"
+                                class="close"
+                                data-dismiss="alert"
+                                aria-label="close"
+                            >×</a>
+                            <span>Please select up to three target groups.</span>
+                        </p>
+                        <t t-if="event.allow_target_group_multiple">
+                            <select
+                                name="target_groups"
+                                id="target_groups"
+                                placeholder="Target groups..."
+                                multiple="multiple"
+                                class="form-control target-groups-select"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <t
+                                    t-foreach="event.sudo().target_group_ids or []"
+                                    t-as="t"
+                                >
+                                    <option
+                                        t-att-value="t.id"
+                                        t-att-selected="t.id in track.target_group_ids.ids"
+                                    ><t t-esc="t.name" /></option>
+                                </t>
+                            </select>
+                        </t>
+                        <t t-else="">
+                            <select
+                                name="target_groups"
+                                id="target_groups"
+                                placeholder="Target group..."
+                                class="form-control"
+                                autocomplete="off"
+                                t-att-disabled="None if editable else 'disabled'"
+                            >
+                                <option value="">Select...</option>
+                                <t
+                                    t-foreach="event.target_group_ids or []"
+                                    t-as="t"
+                                >
+                                    <option
+                                        t-att-value="t.id"
+                                        t-att-selected="t.id in track.target_group_ids.ids"
+                                    ><t t-esc="t.name" /></option>
+                                </t>
+                            </select>
+                        </t>
+                        <div
+                            class="invalid-feedback"
+                        >Please select a presentation target group.</div>
+                    </div>
+<!--                     <div class="form-group col-xl-12">
+                        <label
                             class="col-form-label"
                             for="target_group"
                         >Target Group</label>
@@ -850,10 +914,11 @@
                                 </option>
                             </t>
                         </select>
+
                         <div
                             class="invalid-feedback"
                         >Please select a presentation target group.</div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-xl-12">
                         <label
                             for="target_group_info"

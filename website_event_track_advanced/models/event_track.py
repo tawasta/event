@@ -104,6 +104,11 @@ class EventTrack(models.Model):
         relation="event_track",
         string="Target group",
     )
+
+    target_group_ids = fields.Many2many(
+        comodel_name="event.track.target.group",
+        string="Target groups",
+    )
     target_group_info = fields.Html(string="Target group info")
 
     review_group = fields.Many2one(

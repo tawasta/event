@@ -95,6 +95,9 @@ class EventEvent(models.Model):
     allow_track_tags_multiple = fields.Boolean(
         string="Allow Multiple Tags on Tracks", default=True
     )
+    allow_target_group_multiple = fields.Boolean(
+        string="Allow Multiple Target Groups on Tracks", default=False
+    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration

@@ -153,6 +153,7 @@
                                 name="target_group"
                                 options="{'no_quick_create':True,'no_create_edit':True}"
                             />
+                            <field name="target_group_ids" widget="many2many_tags" />
                         </group>
                         <group colspan="2">
                             <field name="target_group_info" />
