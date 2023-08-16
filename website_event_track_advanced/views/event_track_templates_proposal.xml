@@ -1796,6 +1796,41 @@
                                 />
                     </div>
                     <div class="form-group col-xl-4">
+                        <select
+                                name="einvoice_operator_id"
+                                id="einvoice_operator_id"
+                                placeholder="Einvoice operator..."
+                                class="form-control"
+                                autocomplete="off"
+                                t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                            >
+                                <option value="">Select...</option>
+                                <t
+                                    t-foreach="request.env['res.partner.operator.einvoice'].sudo().search([])"
+                                    t-as="o"
+                                >
+                                    <option
+                                        t-att-value="o.id"
+                                        t-att-selected="o.id in track.organizer.parent_id.einvoice_operator_id.id"
+                                    ><t t-esc="o.name" /></option>
+                                </t>
+                            </select>
+                    </div>
+                    <div class="form-group col-xl-4">
+                        <input
+                                    name="edicode"
+                                    placeholder="Edicode"
+                                    t-att-value="track.organizer.parent_id.edicode"
+                                    class="form-control"
+                                    type="text"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
+                                />
+                    </div>
+                    <div class="form-group col-xl-4">
                         <label
                                     for="organizer_reference"
                                     class="col-form-label"

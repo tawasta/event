@@ -280,6 +280,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                     "zip": post.get("organizer_zip"),
                     "city": post.get("organizer_city"),
                     "ref": post.get("organizer_reference"),
+                    "einvoice_operator_id": post.get("einvoice_operator_id"),
+                    "edicode": post.get("edicode"),
                     "type": "invoice",
                     "company_type": "company",
                 }
