@@ -1800,6 +1800,7 @@
                             t-set="operators"
                             t-value="request.env['res.partner.operator.einvoice'].sudo().search([])"
                         />
+                        <label class="col-form-label" for="einvoice_operator_id">eInvoice Operator</label>
                         <select
                                 name="einvoice_operator_id"
                                 id="einvoice_operator_id"
@@ -1823,6 +1824,7 @@
                             </select>
                     </div>
                     <div class="form-group col-xl-4">
+                        <label class="col-form-label" for="edicode">Edicode</label>
                         <input
                                     name="edicode"
                                     placeholder="Edicode"
