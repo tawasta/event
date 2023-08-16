@@ -189,6 +189,7 @@
                     attrs="{'invisible': [('is_workshop', '!=', True)]}"
                 >
                     <group cols="1">
+                        <field name="workshop_min_participants" />
                         <field name="workshop_participants" nolabel="0" />
                         <field name="workshop_fee" nolabel="0" />
                         <field name="workshop_goals" nolabel="0" />

@@ -265,6 +265,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         # Workshop
         if post.get("is_workshop") and post.get("is_workshop") == "true":
             track_values["workshop_participants"] = post.get("workshop_participants")
+            track_values["workshop_min_participants"] = post.get("workshop_min_participants")
             track_values["workshop_goals"] = post.get("workshop_goals")
             track_values["workshop_schedule"] = post.get("workshop_schedule")
             track_values["workshop_fee"] = post.get("workshop_fee")

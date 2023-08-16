@@ -140,6 +140,7 @@ class EventTrack(models.Model):
     workshop_goals = fields.Html(string="Goals")
     workshop_schedule = fields.Html(string="Schedule")
     workshop_participants = fields.Integer(string="Max participants")
+    workshop_min_participants = fields.Integer(string="Min participants")
     workshop_fee = fields.Text(
         string="Workshop participation fee", help="Leave empty for free workshops"
     )
