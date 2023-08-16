@@ -1817,7 +1817,7 @@
                                 >
                                     <option
                                         t-att-value="o.id"
-                                        t-att-selected="o.id = track.organizer.parent_id.einvoice_operator_id.id"
+                                        t-att-selected="o.id == track.organizer.parent_id.einvoice_operator_id.id"
                                     ><t t-esc="o.name" /></option>
                                 </t>
                             </select>
