@@ -53,12 +53,14 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
     @api.model_create_multi
     def create(self, vals_list):
-        registrations = super(EventRegistration, self).create(vals_list)
-        for registration in registrations:
-            if (
-                registration.event_ticket_id.product_id.batch_id
-                and registration.attendee_partner_id
-            ):
+        return super(EventRegistration, self).create(vals_list)
+
+    def create_student_batch(self):
+        for registration in self:
+            if (registration.event_ticket_id.product_id.batch_id
+                    and registration.attendee_partner_id):
+                student_batch_vals = self.student_batch_values_preprocess(registration)
+
                 vals = {
                     "partner_id": registration.attendee_partner_id.id,
                     "first_name": registration.attendee_partner_id.firstname,
@@ -75,34 +77,17 @@ class EventRegistration(models.Model):
                         limit=1,
                     )
                 )
+
                 if not is_student:
-                    self.env["op.student"].sudo().create(vals)
+                    create_student = self.env["op.student"].sudo().create(vals)
 
-        return registrations
-
-    def create_student_batch(self):
-        for registration in self:
-            if (registration.event_ticket_id.product_id.batch_id
-                    and registration.attendee_partner_id):
-                student_batch_vals = self.student_batch_values_preprocess(registration)
-
-                is_student = (
-                    self.env["op.student"]
-                    .sudo()
-                    .search(
-                        [("partner_id", "=", registration.attendee_partner_id.id)],
-                        limit=1,
-                    )
-                )
-
-                student_batch_vals.update({"student_id": is_student.id})
-
+                student_batch_vals.update({"student_id": create_student.id})
                 already_found_in_batch = (
                     self.env["op.batch.students"]
                     .sudo()
                     .search(
                         [
-                            ("student_id", "=", is_student.id),
+                            ("student_id", "=", create_student.id),
                             (
                                 "batch_id",
                                 "=",
@@ -114,6 +99,7 @@ class EventRegistration(models.Model):
 
                 if not already_found_in_batch:
                     student_batch_vals.update({"first_time": True})
+
                 student_batch = (
                     self.env["op.batch.students"].sudo().create(student_batch_vals)
                 )
