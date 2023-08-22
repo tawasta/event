@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="event_track_application_workshop"
+              name="Website track time"
+              inherit_id="website_event_track_advanced.event_track_application_workshop">
+
+        <xpath expr="//div[@id='track-application-workshop-row-div']" position="inside">
+            <div class="col-md-4" id="workshop-track-request-time-div">
+                <label for="request_time" class="control-label">Requested time
+                </label>
+
+                <div class="input-group">
+                    <select
+                        name="request_time"
+                        id="request_time"
+                        placeholder="Request time..."
+                        class="form-control"
+                        autocomplete="off"
+                        t-att-disabled="None if editable else 'disabled'"
+                    >
+                        <option value="false">-</option>
+                        <t t-foreach="request_times or []" t-as="rt">
+                            <option
+                                t-att-value="rt.id"
+                                t-att-selected="rt.id == track.request_time.id"
+                            >
+                                <t t-esc="rt.name" />
+                            </option>
+                        </t>
+                    </select>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
