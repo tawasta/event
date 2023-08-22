@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -54,8 +54,10 @@ class EventRegistration(models.Model):
 
     def create_student_batch(self):
         for registration in self:
-            if (registration.event_ticket_id.product_id.batch_id
-                    and registration.attendee_partner_id):
+            if (
+                registration.event_ticket_id.product_id.batch_id
+                and registration.attendee_partner_id
+            ):
                 student_batch_vals = self.student_batch_values_preprocess(registration)
 
                 vals = {
