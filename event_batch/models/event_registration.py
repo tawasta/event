@@ -129,7 +129,6 @@ class EventRegistration(models.Model):
                 ).unlink()
 
     def action_confirm(self):
-        print("ACTION CONFIRM")
         res = super(EventRegistration, self).action_confirm()
         self.create_student_batch()
         if self.student_batch_id and self.event_id.create_partner_student_user:
