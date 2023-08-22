@@ -51,9 +51,6 @@ class EventRegistration(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
-    @api.model_create_multi
-    def create(self, vals_list):
-        return super(EventRegistration, self).create(vals_list)
 
     def create_student_batch(self):
         for registration in self:
