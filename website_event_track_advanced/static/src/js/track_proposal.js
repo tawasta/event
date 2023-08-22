@@ -75,6 +75,9 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                     $(".tags-select").select2({
                         maximumSelectionSize: 3,
                     });
+                    $(".target-groups-select").select2({
+                        maximumSelectionSize: 3,
+                    });
                     // Remove attachment with button
                     $("#btn-remove-attachment").click(function () {
                         $("#attachment_ids").val("");

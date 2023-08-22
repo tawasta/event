@@ -104,6 +104,11 @@ class EventTrack(models.Model):
         relation="event_track",
         string="Target group",
     )
+
+    target_group_ids = fields.Many2many(
+        comodel_name="event.track.target.group",
+        string="Target groups",
+    )
     target_group_info = fields.Html(string="Target group info")
 
     review_group = fields.Many2one(
@@ -135,6 +140,7 @@ class EventTrack(models.Model):
     workshop_goals = fields.Html(string="Goals")
     workshop_schedule = fields.Html(string="Schedule")
     workshop_participants = fields.Integer(string="Max participants")
+    workshop_min_participants = fields.Integer(string="Min participants")
     workshop_fee = fields.Text(
         string="Workshop participation fee", help="Leave empty for free workshops"
     )
