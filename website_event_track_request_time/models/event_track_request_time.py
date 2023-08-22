@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
 # 1. Standard library imports:
-import dateutil.parser
 
 # 2. Known third party imports:
 
 # 3. Odoo imports:
-from odoo import api, fields, models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -17,8 +14,8 @@ from odoo import api, fields, models
 
 class EventTrackRequestTime(models.Model):
     # 1. Private attributes
-    _name = 'event.track.request.time'
-    _order = 'sequence'
+    _name = "event.track.request.time"
+    _order = "sequence"
 
     # 2. Fields declaration
     name = fields.Char(
@@ -28,18 +25,18 @@ class EventTrackRequestTime(models.Model):
         default=True,
     )
     start_time = fields.Datetime(
-        string='Start time',
+        string="Start time",
     )
     end_time = fields.Datetime(
-        string='End time',
+        string="End time",
     )
     event_tracks = fields.One2many(
-        comodel_name='event.track',
-        inverse_name='request_time',
-        string='Event track',
+        comodel_name="event.track",
+        inverse_name="request_time",
+        string="Event track",
     )
     sequence = fields.Integer(
-        string='Order',
+        string="Order",
     )
 
     # 3. Default methods

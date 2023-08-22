@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
@@ -20,30 +19,27 @@
 ##############################################################################
 
 {
-    'name': 'Requested track times',
-    'summary': 'Requested track times',
-    'version': '14.0.0.0.0',
-    'category': 'Events',
-    'website': 'http://www.tawasta.fi',
-    'author': 'Oy Tawasta Technologies Ltd.',
-    'license': 'AGPL-3',
-    'application': False,
-    'installable': True,
-    'external_dependencies': {
-        'python': [
-        ],
-        'bin': [],
+    "name": "Requested track times",
+    "summary": "Requested track times",
+    "version": "14.0.0.0.0",
+    "category": "Events",
+    "website": "https://gitlab.com/tawasta/odoo/event",
+    "author": "Tawasta",
+    "license": "AGPL-3",
+    "application": False,
+    "installable": True,
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
     },
-    'depends': [
-        'website_event_track_advanced',
+    "depends": [
+        "website_event_track_advanced",
     ],
-    'data': [
-        'security/ir.model.access.csv',
-
-        'views/event_track_form.xml',
-        'views/event_track_request_time.xml',
-        'views/website_event_track_application.xml',
+    "data": [
+        "security/ir.model.access.csv",
+        "views/event_track_view.xml",
+        "views/event_track_request_time.xml",
+        "views/website_event_track_application.xml",
     ],
-    'demo': [
-    ],
+    "demo": [],
 }

@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record id="event_track_request_time_action" model="ir.actions.act_window" >
+    <record id="event_track_request_time_action" model="ir.actions.act_window">
         <field name="name">Track request times</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">event.track.request.time</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="event_track_request_time_menu"
-              name="Track request times"
-              action="event_track_request_time_action"
-              sequence="40"
-              parent="website_event_track_advanced.menu_event_track_configuration"
-              groups="event.group_event_manager"
-              />
+    <menuitem
+        id="event_track_request_time_menu"
+        name="Track request times"
+        action="event_track_request_time_action"
+        sequence="40"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
 
 </odoo>

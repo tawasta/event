@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="event_track_application_workshop"
-              name="Website track time"
-              inherit_id="website_event_track_advanced.event_track_application_workshop">
+    <template
+        id="event_track_application_workshop"
+        name="Website track time"
+        inherit_id="website_event_track_advanced.event_track_application_workshop"
+    >
 
         <xpath expr="//div[@id='track-application-workshop-row-div']" position="inside">
             <div class="col-md-4" id="workshop-track-request-time-div">

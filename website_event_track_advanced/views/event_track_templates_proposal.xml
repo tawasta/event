@@ -875,10 +875,7 @@
                                 t-att-disabled="None if editable else 'disabled'"
                             >
                                 <option value="">Select...</option>
-                                <t
-                                    t-foreach="event.target_group_ids or []"
-                                    t-as="t"
-                                >
+                                <t t-foreach="event.target_group_ids or []" t-as="t">
                                     <option
                                         t-att-value="t.id"
                                         t-att-selected="t.id in track.target_group_ids.ids"
@@ -1797,29 +1794,29 @@
                     </div>
                     <div class="form-group col-xl-4">
                         <t
-                            t-set="operators"
-                            t-value="request.env['res.partner.operator.einvoice'].sudo().search([])"
-                        />
-                        <label class="col-form-label" for="einvoice_operator_id">eInvoice Operator</label>
+                                    t-set="operators"
+                                    t-value="request.env['res.partner.operator.einvoice'].sudo().search([])"
+                                />
+                        <label
+                                    class="col-form-label"
+                                    for="einvoice_operator_id"
+                                >eInvoice Operator</label>
                         <select
-                                name="einvoice_operator_id"
-                                id="einvoice_operator_id"
-                                placeholder="Einvoice operator..."
-                                class="form-control"
-                                autocomplete="off"
-                                t-att-required="None if not track.type.workshop or not editable else 'required'"
-                                t-att-disabled="None if editable and track.type.workshop else 'disabled'"
-                                t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
-                            >
-                                <option value="">Select...</option>
-                                <t
-                                    t-foreach="operators"
-                                    t-as="o"
+                                    name="einvoice_operator_id"
+                                    id="einvoice_operator_id"
+                                    placeholder="Einvoice operator..."
+                                    class="form-control"
+                                    autocomplete="off"
+                                    t-att-required="None if not track.type.workshop or not editable else 'required'"
+                                    t-att-disabled="None if editable and track.type.workshop else 'disabled'"
+                                    t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
                                 >
+                                <option value="">Select...</option>
+                                <t t-foreach="operators" t-as="o">
                                     <option
-                                        t-att-value="o.id"
-                                        t-att-selected="o.id == track.organizer.einvoice_operator_id.id"
-                                    ><t t-esc="o.name" /></option>
+                                            t-att-value="o.id"
+                                            t-att-selected="o.id == track.organizer.einvoice_operator_id.id"
+                                        ><t t-esc="o.name" /></option>
                                 </t>
                             </select>
                     </div>
