@@ -64,8 +64,8 @@
             <div class="card">
                 <a class="s_events_list_event_cover" t-attf-href="/event/#{e.id}">
                     <div
-                            class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc"
-                        >
+                        class="o_record_cover_container d-flex flex-column h-100 o_colored_level o_cc"
+                    >
                     <!-- <t t-call="website.record_cover">
                         <t t-set="_record" t-value="e" />
                         <t
@@ -73,7 +73,10 @@
                             t-value="'loading_container thumb'"
                         />
                     </t> -->
-                        <div t-attf-class="o_record_cover_component o_record_cover_image" t-attf-style="background-image: url(#{website.image_url(e, 'banner_image')});"/>
+                        <div
+                            t-attf-class="o_record_cover_component o_record_cover_image"
+                            t-attf-style="background-image: url(#{website.image_url(e, 'banner_image')});"
+                        />
                     </div>
                 </a>
                 <div class="card-body">
