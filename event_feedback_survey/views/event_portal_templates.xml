@@ -69,7 +69,7 @@
                                     <a
                                         t-if="e.feedback_survey_id"
                                         class="btn btn-secondary btn-sm"
-                                        t-attf-href="/survey/results/{{e.feedback_survey_id.id}}/event/{{e.id}}"
+                                        t-attf-href="/survey/results/{{e.feedback_survey_id.id}}/event/str({{e.id}})"
                                     >Answers</a>
                                 </td>
                             </tr>
