@@ -198,7 +198,7 @@ class SurveyFeedbackEvent(Survey):
         auth="user",
         website=True,
     )
-    def survey_report_filter(
+    def survey_report_filters(
         self,
         survey,
         selected_events=None,
@@ -209,6 +209,7 @@ class SurveyFeedbackEvent(Survey):
         **post
     ):
 
+        logging.info("======================TAALLA======================");
         user_input_lines, search_filters = self._extract_survey_data(
             survey,
             selected_events,
@@ -233,10 +234,11 @@ class SurveyFeedbackEvent(Survey):
             "search_filters": search_filters,
             "search_finished": post.get("finished") == "true",
         }
+        logging.info("======TEMPLATE VALUES===========");
         if request.env.user.has_group("survey.group_survey_user"):
             readonly_events = True
             template_values.update({"readonly_events": readonly_events})
-
+        logging.info("====MENEE ETEENPAIN======");
         if selected_events:
             select_events = (
                 request.env["event.event"]
@@ -245,7 +247,7 @@ class SurveyFeedbackEvent(Survey):
             )
             template_values.update({"select_events": select_events})
 
-            if request.env.user.has_group("survey.group_survey_user"):
+            if request.env.user.has_group("survey.group_survey_user") and not request.env.user.has_group("survey.group_survey_manager"):
                 if select_events.user_id != request.env.user:
                     return request.render("website.page_404")
 
@@ -289,6 +291,9 @@ class SurveyFeedbackEvent(Survey):
 
         if survey.session_show_leaderboard:
             template_values["leaderboard"] = survey._prepare_leaderboard_values()
+
+
+        logging.info("===OLLAANKO TAALLA=========");
 
         return request.render("survey.survey_page_statistics", template_values)
         # flake8: noqa: C901
