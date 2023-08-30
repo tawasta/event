@@ -1537,8 +1537,7 @@
                     id="track-application-workshop-alert-info"
                     class="alert alert-info alert-dismissable"
                 ><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    Session information and invoicing address.<br />
-                    The contract will be sent for the signee.
+                    The workshop's minimum and maximum number of participants and the participation fee for the participant. Workshops are typically free of charge for the participant.
                 </p>
                 <div class="row" id="track-application-workshop-row-div">
                     <input
