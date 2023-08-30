@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template
-        id="event_track_application_workshop"
-        name="Website track time"
-        inherit_id="website_event_track_advanced.event_track_application_workshop"
+        id="event_track_application_type"
+        inherit_id="website_event_track_advanced.event_track_application_type"
     >
-
-        <xpath expr="//div[@id='track-application-workshop-row-div']" position="inside">
-            <div class="col-md-4" id="workshop-track-request-time-div">
-                <label for="request_time" class="control-label">Requested time
+        <xpath expr="//div[@class='form-group col-xl-6'][last()]" position="after">
+            
+            <div t-attf-class="col-md-6 #{'d-none' if not track.type.workshop else ''}" id="workshop-track-request-time-div">
+                <label for="request_time" class="control-label">Desired duration of the workshop
                 </label>
 
                 <div class="input-group">
