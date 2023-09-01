@@ -9,6 +9,7 @@
                         class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
                         t-att-name="question.id"
                         t-att-value="answer.event_id.name"
+                        readonly="1"
                         t-att-data-question-type="question.question_type"
                         t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
                         t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"
