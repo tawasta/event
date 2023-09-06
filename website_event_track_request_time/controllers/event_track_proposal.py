@@ -29,8 +29,6 @@ class RequestEventTrackController(EventTrackControllerAdvanced):
         values["request_times"] = (
             request.env["event.track.request.time"].sudo().search([])
         )
-        logging.info("=============JOONVITTU============")
-        logging.info(values)
         return values
 
     def _get_event_track_proposal_post_values(self, event, **post):

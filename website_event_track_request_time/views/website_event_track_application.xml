@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+<!--     <template id="application_type_assets" name="Application type assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/website_event_track_request_time/static/src/js/main.js"/>
+        </xpath>
+    </template> -->
     <template
         id="event_track_application_type"
         inherit_id="website_event_track_advanced.event_track_application_type"
