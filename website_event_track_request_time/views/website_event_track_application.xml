@@ -10,9 +10,15 @@
         inherit_id="website_event_track_advanced.event_track_application_type"
     >
         <xpath expr="//div[@class='form-group col-xl-6'][last()]" position="after">
-            
-            <div t-attf-class="col-md-6 #{'d-none' if not track.type.workshop else ''}" id="workshop-track-request-time-div">
-                <label for="request_time" class="control-label">Desired duration of the workshop
+
+            <div
+                t-attf-class="col-md-6 #{'d-none' if not track.type.workshop else ''}"
+                id="workshop-track-request-time-div"
+            >
+                <label
+                    for="request_time"
+                    class="control-label"
+                >Desired duration of the workshop
                 </label>
 
                 <div class="input-group">

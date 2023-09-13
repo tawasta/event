@@ -251,10 +251,11 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                         var webinar = $("#type option:selected").attr("data-webinar");
                         // Enable workshop inputs
                         if (workshop) {
-                            const targetDiv = document.getElementById('workshop-track-request-time-div');
+                            const targetDiv = document.getElementById(
+                                "workshop-track-request-time-div"
+                            );
                             if (targetDiv) {
-
-                                targetDiv.classList.remove('d-none');
+                                targetDiv.classList.remove("d-none");
                             }
                             $("#track-application-workshop-div").removeClass("d-none");
                             $("#track-application-workshop-row-div")
@@ -306,10 +307,11 @@ odoo.define("website_event_track_advanced.track_proposal", function (require) {
                             // Disable workshop inputs
                         } else {
                             $("#track-application-workshop-div").addClass("d-none");
-                            const targetDiv = document.getElementById('workshop-track-request-time-div');
+                            const targetDiv = document.getElementById(
+                                "workshop-track-request-time-div"
+                            );
                             if (targetDiv) {
-
-                                targetDiv.classList.add('d-none');
+                                targetDiv.classList.add("d-none");
                             }
                             $("#track-application-workshop-row-div")
                                 .find("input#is_workshop")

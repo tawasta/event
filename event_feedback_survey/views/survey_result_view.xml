@@ -48,7 +48,11 @@
                 lazy_load="True"
             />
             <div>
-                <a class="btn btn-primary" t-attf-href="/download/report/{{ current_lines }}" id="generate-report">Generate xlsx</a>
+                <a
+                    class="btn btn-primary"
+                    t-attf-href="/download/report/{{ current_lines }}"
+                    id="generate-report"
+                >Generate xlsx</a>
             </div>
             <div class="container pb-2 pt-2">
                     <div class="row">

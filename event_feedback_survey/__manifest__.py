@@ -27,7 +27,12 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "email_template_qweb", "survey_user_input_report_xlsx", "survey"],
+    "depends": [
+        "event",
+        "email_template_qweb",
+        "survey_user_input_report_xlsx",
+        "survey",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",

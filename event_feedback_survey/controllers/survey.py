@@ -20,12 +20,13 @@
 # 1. Standard library imports:
 import logging
 from datetime import datetime, timedelta
-import xlsxwriter
 from io import BytesIO
+
+import xlsxwriter
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import http, _, fields
+from odoo import _, http
 from odoo.exceptions import UserError
 from odoo.http import request
 
@@ -90,7 +91,7 @@ class SurveyFeedbackEvent(Survey):
             .search([("id", "in", user_input_lines.ids)])
             .mapped("user_input_id")
         )
-        logging.info(user_input_ids);
+        logging.info(user_input_ids)
 
         events = (
             request.env["survey.user_input"]
@@ -107,9 +108,11 @@ class SurveyFeedbackEvent(Survey):
             .mapped("tag_ids")
         )
         res.qcontext.update({"tags": tags})
-        current_lines = request.env["survey.user_input"].sudo().search([
-            ('id', 'in', user_input_ids.ids)
-        ])
+        current_lines = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+        )
         res.qcontext.update({"current_lines": user_input_ids.ids})
         return res
 
@@ -215,7 +218,7 @@ class SurveyFeedbackEvent(Survey):
         **post
     ):
 
-        logging.info("======================TAALLA======================");
+        logging.info("======================TAALLA======================")
         user_input_lines, search_filters = self._extract_survey_data(
             survey,
             selected_events,
@@ -224,7 +227,7 @@ class SurveyFeedbackEvent(Survey):
             date_end,
             post,
         )
-        logging.info(user_input_lines);
+        logging.info(user_input_lines)
         current_user_input_ids = (
             request.env["survey.user_input.line"]
             .sudo()
@@ -254,11 +257,11 @@ class SurveyFeedbackEvent(Survey):
             "search_filters": search_filters,
             "search_finished": post.get("finished") == "true",
         }
-        logging.info("======TEMPLATE VALUES===========");
+        logging.info("======TEMPLATE VALUES===========")
         if request.env.user.has_group("survey.group_survey_user"):
             readonly_events = True
             template_values.update({"readonly_events": readonly_events})
-        logging.info("====MENEE ETEENPAIN======");
+        logging.info("====MENEE ETEENPAIN======")
         if selected_events:
             select_events = (
                 request.env["event.event"]
@@ -267,7 +270,9 @@ class SurveyFeedbackEvent(Survey):
             )
             template_values.update({"select_events": select_events})
 
-            if request.env.user.has_group("survey.group_survey_user") and not request.env.user.has_group("survey.group_survey_manager"):
+            if request.env.user.has_group(
+                "survey.group_survey_user"
+            ) and not request.env.user.has_group("survey.group_survey_manager"):
                 if select_events.user_id != request.env.user:
                     return request.render("website.page_404")
 
@@ -312,9 +317,8 @@ class SurveyFeedbackEvent(Survey):
         if survey.session_show_leaderboard:
             template_values["leaderboard"] = survey._prepare_leaderboard_values()
 
-
-        logging.info("===OLLAANKO TAALLA=========");
-        logging.info(template_values);
+        logging.info("===OLLAANKO TAALLA=========")
+        logging.info(template_values)
 
         return request.render("survey.survey_page_statistics", template_values)
         # flake8: noqa: C901
@@ -449,7 +453,6 @@ class SurveyFeedbackEvent(Survey):
                     user_input.create_date,
                     "%-d.%-m.%-Y %-H.%M",
                 )
-
                 or ""
             )
         if fname == "event_id":
@@ -461,17 +464,18 @@ class SurveyFeedbackEvent(Survey):
     )
     def download_excel_report(self, line_ids, **post):
 
-        
         lines = line_ids.replace("[", "").replace("]", "").replace(" ", "").split(",")
         current_lines = list(map(int, lines))
-        survey_user_inputs = request.env["survey.user_input"].sudo().search([
-            ('id', 'in', current_lines)
-        ])
-        logging.info(current_lines);
-        
-         # Luo raportti
+        survey_user_inputs = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", current_lines)])
+        )
+        logging.info(current_lines)
+
+        # Luo raportti
         output = BytesIO()
-        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        workbook = xlsxwriter.Workbook(output, {"in_memory": True})
         row = 0
         col = 0
         # Create a sheet and apply formatting
@@ -555,7 +559,10 @@ class SurveyFeedbackEvent(Survey):
         return request.make_response(
             output.read(),
             headers=[
-                ('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'),
-                ('Content-Disposition', 'attachment; filename=report.xlsx')
-            ]
+                (
+                    "Content-Type",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ),
+                ("Content-Disposition", "attachment; filename=report.xlsx"),
+            ],
         )
