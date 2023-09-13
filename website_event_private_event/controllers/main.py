@@ -138,7 +138,7 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             domain_search["country"] = [("country_id", "=", False)]
 
         def dom_without(without):
-            domain = []
+            domain = [("is_private_event", "=", False)]
             for key, search in domain_search.items():
                 if key != without:
                     domain += search
