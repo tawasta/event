@@ -56,6 +56,7 @@ addon | version | maintainers | summary
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 14.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 14.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_privacies](website_event_track_privacies/) | 14.0.1.0.4 |  | Website event track privacy values
+[website_event_track_request_time](website_event_track_request_time/) | 14.0.0.0.0 |  | Requested track times
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 14.0.1.0.0 |  | Always show Track Speaker Order
 [website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.7 |  | Adds a waiting list functionality to Events.

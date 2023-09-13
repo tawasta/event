@@ -23,7 +23,7 @@
 # 2. Known third party imports:
 
 # 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import fields, models
 
 # 4. Imports from Odoo modules:
 
@@ -51,14 +51,15 @@ class EventRegistration(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
-    @api.model_create_multi
-    def create(self, vals_list):
-        registrations = super(EventRegistration, self).create(vals_list)
-        for registration in registrations:
+
+    def create_student_batch(self):
+        for registration in self:
             if (
                 registration.event_ticket_id.product_id.batch_id
                 and registration.attendee_partner_id
             ):
+                student_batch_vals = self.student_batch_values_preprocess(registration)
+
                 vals = {
                     "partner_id": registration.attendee_partner_id.id,
                     "first_name": registration.attendee_partner_id.firstname,
@@ -66,7 +67,7 @@ class EventRegistration(models.Model):
                     "email": registration.attendee_partner_id.email,
                     "mobile": registration.attendee_partner_id.phone,
                 }
-                student_batch_vals = self.student_batch_values_preprocess(registration)
+
                 is_student = (
                     self.env["op.student"]
                     .sudo()
@@ -75,20 +76,17 @@ class EventRegistration(models.Model):
                         limit=1,
                     )
                 )
-                if is_student:
-                    current_student = is_student
-                    student_batch_vals.update({"student_id": is_student.id})
-                else:
-                    create_student = self.env["op.student"].sudo().create(vals)
-                    student_batch_vals.update({"student_id": create_student.id})
-                    current_student = create_student
 
+                if not is_student:
+                    create_student = self.env["op.student"].sudo().create(vals)
+
+                student_batch_vals.update({"student_id": create_student.id})
                 already_found_in_batch = (
                     self.env["op.batch.students"]
                     .sudo()
                     .search(
                         [
-                            ("student_id", "=", current_student.id),
+                            ("student_id", "=", create_student.id),
                             (
                                 "batch_id",
                                 "=",
@@ -97,13 +95,15 @@ class EventRegistration(models.Model):
                         ]
                     )
                 )
+
                 if not already_found_in_batch:
                     student_batch_vals.update({"first_time": True})
+
                 student_batch = (
                     self.env["op.batch.students"].sudo().create(student_batch_vals)
                 )
+
                 registration.student_batch_id = student_batch.id
-        return registrations
 
     def unlink(self):
         self._unlink_associated_student_batch()
@@ -132,6 +132,7 @@ class EventRegistration(models.Model):
 
     def action_confirm(self):
         res = super(EventRegistration, self).action_confirm()
+        self.create_student_batch()
         if self.student_batch_id and self.event_id.create_partner_student_user:
             self.student_batch_id.student_id.create_student_user()
         return res

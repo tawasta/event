@@ -20,10 +20,13 @@
 # 1. Standard library imports:
 import logging
 from datetime import datetime, timedelta
+from io import BytesIO
+
+import xlsxwriter
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import http
+from odoo import _, http
 from odoo.exceptions import UserError
 from odoo.http import request
 
@@ -88,6 +91,7 @@ class SurveyFeedbackEvent(Survey):
             .search([("id", "in", user_input_lines.ids)])
             .mapped("user_input_id")
         )
+        logging.info(user_input_ids)
 
         events = (
             request.env["survey.user_input"]
@@ -104,7 +108,12 @@ class SurveyFeedbackEvent(Survey):
             .mapped("tag_ids")
         )
         res.qcontext.update({"tags": tags})
-
+        current_lines = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", user_input_ids.ids)])
+        )
+        res.qcontext.update({"current_lines": user_input_ids.ids})
         return res
 
     @http.route(
@@ -198,7 +207,7 @@ class SurveyFeedbackEvent(Survey):
         auth="user",
         website=True,
     )
-    def survey_report_filter(
+    def survey_report_filters(
         self,
         survey,
         selected_events=None,
@@ -209,6 +218,7 @@ class SurveyFeedbackEvent(Survey):
         **post
     ):
 
+        logging.info("======================TAALLA======================")
         user_input_lines, search_filters = self._extract_survey_data(
             survey,
             selected_events,
@@ -216,6 +226,19 @@ class SurveyFeedbackEvent(Survey):
             select_date,
             date_end,
             post,
+        )
+        logging.info(user_input_lines)
+        current_user_input_ids = (
+            request.env["survey.user_input.line"]
+            .sudo()
+            .search([("id", "in", user_input_lines.ids)])
+            .mapped("user_input_id")
+        )
+
+        current_lines = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", current_user_input_ids.ids)])
         )
         survey_data = survey._prepare_statistics(user_input_lines)
         question_and_page_data = survey.question_and_page_ids._prepare_statistics(
@@ -227,16 +250,18 @@ class SurveyFeedbackEvent(Survey):
         template_values = {
             # survey and its statistics
             "survey": survey,
+            "current_lines": current_lines.ids,
             "question_and_page_data": question_and_page_data,
             "survey_data": survey_data,
             # search
             "search_filters": search_filters,
             "search_finished": post.get("finished") == "true",
         }
+        logging.info("======TEMPLATE VALUES===========")
         if request.env.user.has_group("survey.group_survey_user"):
             readonly_events = True
             template_values.update({"readonly_events": readonly_events})
-
+        logging.info("====MENEE ETEENPAIN======")
         if selected_events:
             select_events = (
                 request.env["event.event"]
@@ -245,7 +270,9 @@ class SurveyFeedbackEvent(Survey):
             )
             template_values.update({"select_events": select_events})
 
-            if request.env.user.has_group("survey.group_survey_user"):
+            if request.env.user.has_group(
+                "survey.group_survey_user"
+            ) and not request.env.user.has_group("survey.group_survey_manager"):
                 if select_events.user_id != request.env.user:
                     return request.render("website.page_404")
 
@@ -289,6 +316,9 @@ class SurveyFeedbackEvent(Survey):
 
         if survey.session_show_leaderboard:
             template_values["leaderboard"] = survey._prepare_leaderboard_values()
+
+        logging.info("===OLLAANKO TAALLA=========")
+        logging.info(template_values)
 
         return request.render("survey.survey_page_statistics", template_values)
         # flake8: noqa: C901
@@ -399,3 +429,140 @@ class SurveyFeedbackEvent(Survey):
         )
 
         return user_input_lines, search_filters
+
+    def _get_user_input_fnames(self):
+        """Returns a dictionary of static fields for report with title and field name"""
+        user_input_fnames = {
+            _("Survey"): "survey_id",
+            _("Partner"): "partner_id",
+            _("Created on"): "create_date",
+            _("Event"): "event_id",
+        }
+        return user_input_fnames
+
+    def _get_user_input_fname_value(self, user_input, fname):
+        """Returns a string value for a corresponding field"""
+        value = ""
+        if fname == "survey_id":
+            value = user_input.survey_id.display_name or ""
+        if fname == "partner_id":
+            value = user_input.partner_id.name or ""
+        if fname == "create_date":
+            value = (
+                datetime.strftime(
+                    user_input.create_date,
+                    "%-d.%-m.%-Y %-H.%M",
+                )
+                or ""
+            )
+        if fname == "event_id":
+            value = user_input.event_id.name or ""
+        return value
+
+    @http.route(
+        ["/download/report/<string:line_ids>"], type="http", auth="user", website=True
+    )
+    def download_excel_report(self, line_ids, **post):
+
+        lines = line_ids.replace("[", "").replace("]", "").replace(" ", "").split(",")
+        current_lines = list(map(int, lines))
+        survey_user_inputs = (
+            request.env["survey.user_input"]
+            .sudo()
+            .search([("id", "in", current_lines)])
+        )
+        logging.info(current_lines)
+
+        # Luo raportti
+        output = BytesIO()
+        workbook = xlsxwriter.Workbook(output, {"in_memory": True})
+        row = 0
+        col = 0
+        # Create a sheet and apply formatting
+        sheet = workbook.add_worksheet(_("Survey Answers"))
+        sheet.set_landscape()
+        sheet.fit_to_pages(1, 0)
+        user_input_fnames = self._get_user_input_fnames()
+        surveys = request.env["survey.survey"].search(
+            [["user_input_ids", "in", current_lines]]
+        )
+        # Write user input field titles
+        _logger.debug("Writing title columns for static fields: %s", user_input_fnames)
+        for fname in user_input_fnames:
+            sheet.write(row, col, fname, workbook.add_format({"bold": True}))
+            col += 1
+        # Write survey question titles
+        for survey in surveys:
+            _logger.debug(
+                "Writing title columns for survey %s questions: %s",
+                (survey, survey.question_ids),
+            )
+            for question in survey.question_ids:
+                if question.question_type == "matrix":
+                    for matrix_row in question.matrix_row_ids:
+                        sheet.write(
+                            row,
+                            col,
+                            matrix_row.value,
+                            workbook.add_format({"bold": True}),
+                        )
+                        col += 1
+                else:
+                    sheet.write(
+                        row, col, question.title, workbook.add_format({"bold": True})
+                    )
+                    col += 1
+        row += 1
+        col = 0
+        # Write a row for each user input
+        for user_input in survey_user_inputs:
+            _logger.debug("Writing a row for user input: %s", user_input)
+            # Write user input field values
+            for fname in user_input_fnames:
+                sheet.write(
+                    row,
+                    col,
+                    self._get_user_input_fname_value(
+                        user_input, user_input_fnames[fname]
+                    ),
+                )
+                col += 1
+            # Write each question answer
+            for survey in surveys:
+                for question in survey.question_ids:
+                    if question.question_type == "matrix":
+                        for matrix_row in question.matrix_row_ids:
+                            answer_list = []
+                            for user_input_line in user_input.user_input_line_ids:
+                                if (
+                                    user_input_line.question_id == question
+                                    and user_input_line.matrix_row_id == matrix_row
+                                ):
+                                    answer_list.append(
+                                        user_input_line.string_answer or ""
+                                    )
+                            sheet.write(row, col, ", ".join(answer_list))
+                            col += 1
+                    else:
+                        answer_list = []
+                        for user_input_line in user_input.user_input_line_ids:
+                            if user_input_line.question_id == question:
+                                answer_list.append(user_input_line.string_answer or "")
+                        sheet.write(row, col, ", ".join(answer_list))
+                        col += 1
+            row += 1
+            col = 0
+
+        workbook.close()
+        output.seek(0)
+
+        return request.make_response(
+            output.read(),
+            headers=[
+                (
+                    "Content-Type",
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ),
+                ("Content-Disposition", "attachment; filename=report.xlsx"),
+            ],
+        )

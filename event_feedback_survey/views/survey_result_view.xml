@@ -9,6 +9,7 @@
                         class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
                         t-att-name="question.id"
                         t-att-value="answer.event_id.name"
+                        readonly="1"
                         t-att-data-question-type="question.question_type"
                         t-att-data-validation-length-min="question.validation_length_min if question.validation_required else False"
                         t-att-data-validation-length-max="question.validation_length_max if question.validation_required else False"
@@ -46,6 +47,13 @@
                 t-call-assets="event_feedback_survey.survey_filter_assets"
                 lazy_load="True"
             />
+            <div>
+                <a
+                    class="btn btn-primary"
+                    t-attf-href="/download/report/{{ current_lines }}"
+                    id="generate-report"
+                >Generate xlsx</a>
+            </div>
             <div class="container pb-2 pt-2">
                     <div class="row">
                         <t t-call="event_feedback_survey.date_filter" />

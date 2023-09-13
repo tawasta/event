@@ -153,6 +153,7 @@
                                 name="target_group"
                                 options="{'no_quick_create':True,'no_create_edit':True}"
                             />
+                            <field name="target_group_ids" widget="many2many_tags" />
                         </group>
                         <group colspan="2">
                             <field name="target_group_info" />
@@ -188,6 +189,7 @@
                     attrs="{'invisible': [('is_workshop', '!=', True)]}"
                 >
                     <group cols="1">
+                        <field name="workshop_min_participants" />
                         <field name="workshop_participants" nolabel="0" />
                         <field name="workshop_fee" nolabel="0" />
                         <field name="workshop_goals" nolabel="0" />

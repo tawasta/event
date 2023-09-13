@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2017 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,30 +17,29 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+
 {
-    "name": "Event Feedback Survey",
-    "version": "14.0.1.0.0",
+    "name": "Requested track times",
+    "summary": "Requested track times",
+    "version": "14.0.0.0.0",
     "category": "Events",
-    "summary": "Send automated event feedback survey mails",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
+    },
     "depends": [
-        "event",
-        "email_template_qweb",
-        "survey_user_input_report_xlsx",
-        "survey",
+        "website_event_track_advanced",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "security/security.xml",
-        "views/event_portal_templates.xml",
-        "views/event_views.xml",
-        "views/survey_result_view.xml",
-        "views/survey_user_views.xml",
-        "data/email_template_views.xml",
-        "data/email_template_data.xml",
+        "views/event_track_view.xml",
+        "views/event_track_request_time.xml",
+        "views/website_event_track_application.xml",
     ],
+    "demo": [],
 }
