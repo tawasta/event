@@ -35,6 +35,15 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 
 class WebsiteEventControllerPrivateEvent(WebsiteEventController):
+
+    def dom_without(without):
+            domain = [("is_private_event", "=", False)]
+            for key, search in domain_search.items():
+                if key != without:
+                    domain += search
+            return domain
+
+
     @http.route(
         "/event/get_country_event_list", type="json", auth="public", website=True
     )
