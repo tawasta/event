@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<odoo>
+    <template id="website_event_assets" name="Assets for Website Event">
+        <script
+            type="text/javascript"
+            src="/event_recaptcha/static/src/js/registration.js"
+        />
+    </template>
+
+    <template id="event_details" inherit_id="website_event.event_details">
+        <xpath expr="//div[@name='event']" position="before">
+            <t t-call-assets="event_recaptcha.website_event_assets" lazy_load="True" />
+        </xpath>
+    </template>
+
+    <template
+        id="registration_attendee_details"
+        inherit_id="website_event.registration_attendee_details"
+    >
+        <xpath
+            expr="//div[@class='modal-footer border-0 justify-content-between']"
+            position="before"
+        >
+            <t
+                t-set="RECATPCHA_KEY"
+                t-value="request.env['website'].get_current_website().recaptcha_sitekey"
+            />
+            <div id="captcha" class="imageContainer col-md-12 pt-2 pb-2">
+                <div
+                    class="g-recaptcha"
+                    t-attf-data-sitekey="{{ RECATPCHA_KEY }}"
+                    data-callback="verifyRecaptchaCallback"
+                />
+                <input class="form-control d-none" data-recaptcha="true" />
+                <div
+                    class="help-block with-errors"
+                    id="err"
+                    style='color: red'
+                    required="required"
+                />
+            </div>
+            <script
+                type="text/javascript"
+                t-attf-src="https://www.google.com/recaptcha/api.js?hl={{lang}}"
+            />
+        </xpath>
+    </template>
+
+</odoo>
