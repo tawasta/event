@@ -9,10 +9,7 @@
 
     <template id="event_details" inherit_id="website_event.event_details">
         <xpath expr="//div[@name='event']" position="before">
-            <t
-                t-call-assets="event_recaptcha.website_event_assets"
-                lazy_load="True"
-            />
+            <t t-call-assets="event_recaptcha.website_event_assets" lazy_load="True" />
         </xpath>
     </template>
 
@@ -20,7 +17,10 @@
         id="registration_attendee_details"
         inherit_id="website_event.registration_attendee_details"
     >
-        <xpath expr="//div[@class='modal-footer border-0 justify-content-between']" position="before">
+        <xpath
+            expr="//div[@class='modal-footer border-0 justify-content-between']"
+            position="before"
+        >
             <t
                 t-set="RECATPCHA_KEY"
                 t-value="request.env['website'].get_current_website().recaptcha_sitekey"

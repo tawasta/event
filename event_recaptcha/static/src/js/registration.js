@@ -1,9 +1,9 @@
-odoo.define('event_recaptcha.event', function (require) {
-    'use strict';
-    
-    var SomeWidgetName = require('website_event.website_event'); // Korvaa oikealla module ja widget nimellä
-    var ajax = require('web.ajax');
-    
+odoo.define("event_recaptcha.event", function (require) {
+    "use strict";
+
+    var SomeWidgetName = require("website_event.website_event"); // Korvaa oikealla module ja widget nimellä
+    var ajax = require("web.ajax");
+
     SomeWidgetName.include({
         /**
          * @override
@@ -71,7 +71,7 @@ odoo.define('event_recaptcha.event', function (require) {
 
             if (recaptcha === "") {
                 console.log("===CATPCHA KUNTOON=====");
-                var err_message = ("Please check Captcha");
+                var err_message = "Please check Captcha";
                 $("#err").text(err_message);
                 error = true;
             }
