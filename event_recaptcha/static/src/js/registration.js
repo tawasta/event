@@ -1,3 +1,4 @@
+/* eslint-disable */
 odoo.define("event_recaptcha.event", function (require) {
     "use strict";
 
