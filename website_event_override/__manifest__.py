@@ -20,7 +20,8 @@
 
 {
     "name": "Website Event Override",
-    "summary": "The events function of the website_event module is overrun, because there is a logic error in the pager and the order of events",
+    "summary": """The events function of the website_event module is overrun,
+        because there is a logic error in the pager and the order of events""",
     "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
