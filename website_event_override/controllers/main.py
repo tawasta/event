@@ -44,7 +44,7 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 # 6. Unknown third party imports:
 
 
-class WebsiteEventControllerPrivateEvent(WebsiteEventController):
+class WebsiteEventControllerFix(WebsiteEventController):
     def sitemap_event(env, rule, qs):
         if not qs or qs.lower() in "/events":
             yield {"loc": "/events"}
@@ -173,7 +173,7 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             domain_search["country"] = [("country_id", "=", False)]
 
         def dom_without(without):
-            domain = [("is_private_event", "=", False)]
+            domain = []
             for key, search in domain_search.items():
                 if key != without:
                     domain += search
@@ -247,50 +247,3 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             values["canonical_params"] = OrderedMultiDict([("date", "old")])
 
         return request.render("website_event.index", values)
-
-    @http.route(
-        "/event/get_country_event_list", type="json", auth="public", website=True
-    )
-    def get_country_events(self, **post):
-        Event = request.env["event.event"]
-        country_code = request.session["geoip"].get("country_code")
-        result = {"events": [], "country": False}
-        events = None
-        domain = request.website.website_domain()
-        if country_code:
-            country = request.env["res.country"].search(
-                [("code", "=", country_code)], limit=1
-            )
-            events = Event.search(
-                domain
-                + [
-                    "|",
-                    ("address_id", "=", None),
-                    ("country_id.code", "=", country_code),
-                    ("date_begin", ">=", "%s 00:00:00" % fields.Date.today()),
-                    ("is_private_event", "=", False),
-                ],
-                order="date_begin",
-            )
-        if not events:
-            events = Event.search(
-                domain
-                + [
-                    ("date_begin", ">=", "%s 00:00:00" % fields.Date.today()),
-                    ("is_private_event", "=", False),
-                ],
-                order="date_begin",
-            )
-        for event in events:
-            if country_code and event.country_id.code == country_code:
-                result["country"] = country
-            result["events"].append(
-                {
-                    "date": self.get_formated_date(event),
-                    "event": event,
-                    "url": event.website_url,
-                }
-            )
-        return request.env["ir.ui.view"]._render_template(
-            "website_event.country_events_list", result
-        )
