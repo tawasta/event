@@ -211,7 +211,7 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             scope=5,
         )
 
-        order = "date_begin"
+        order = "date_begin, id"
         if searches.get("date", "all") == "old":
             order = "date_begin desc"
         order = "is_published desc, " + order
