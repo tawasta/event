@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models
+import logging
 
 # 4. Imports from Odoo modules:
 
@@ -53,6 +54,7 @@ class EventMailScheduler(models.Model):
         for mail in self:
             now = fields.Datetime.now()
             if mail.interval_type == "after_sub":
+                logging.info("WEBSITE EVENT CANCELLATION");
                 # update registration lines
                 lines = [
                     (0, 0, {"registration_id": registration.id})
@@ -64,6 +66,9 @@ class EventMailScheduler(models.Model):
                 if lines:
                     mail.write({"mail_registration_ids": lines})
                 # execute scheduler on registrations
+                logging.info("website_event_cancellation: if ehto");
+                logging.info(mail);
+                logging.info(mail.mail_registration_ids);
                 mail.mail_registration_ids.execute()
             else:
                 # Do not send emails if the mailing was scheduled before the event
@@ -78,6 +83,7 @@ class EventMailScheduler(models.Model):
                     )
                     and not mail.event_id.stage_id.cancel
                 ):
+                    logging.info("website_event_cancellation: else ehto menty lapi");
                     mail.event_id.mail_attendees(mail.template_id.id)
                     mail.write({"mail_sent": True})
         return True

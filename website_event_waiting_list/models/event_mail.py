@@ -23,6 +23,7 @@ from dateutil.relativedelta import relativedelta
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+import logging
 
 # 2. Known third party imports:
 
@@ -140,6 +141,7 @@ class EventMailScheduler(models.Model):
     # 7. Action methods
     def execute(self):
         for mail in self:
+            logging.info("website_event_waiting_list");
             now = fields.Datetime.now()
             if mail.interval_type in [
                 "after_sub",
@@ -170,6 +172,9 @@ class EventMailScheduler(models.Model):
                 if lines:
                     mail.write({"mail_registration_ids": lines})
                 # execute scheduler on registrations
+                logging.info("website_event_waiting_list: if ehto");
+                logging.info(mail);
+                logging.info(mail.mail_registration_ids);    
                 mail.mail_registration_ids.execute()
             else:
                 # Do not send emails if the mailing was scheduled
@@ -184,6 +189,7 @@ class EventMailScheduler(models.Model):
                     )
                     and not mail.event_id.stage_id.cancel
                 ):
+                    logging.info("website_event_waiting_list: else lohko");
                     mail.event_id.mail_attendees(mail.template_id.id)
                     mail.write({"mail_sent": True})
         return True
