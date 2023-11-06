@@ -139,97 +139,57 @@ class EventMailScheduler(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
-    # ALKUPERÄNEN
-    # def execute(self):
-    #     for mail in self:
-    #         logging.info("website_event_waiting_list");
-    #         now = fields.Datetime.now()
-    #         if mail.interval_type in [
-    #             "after_sub",
-    #             "after_wait",
-    #             "after_seats_available",
-    #         ]:
-    #             # update registration lines
-    #             lines = [
-    #                 (0, 0, {"registration_id": registration.id})
-    #                 for registration in (
-    #                     mail.event_id.registration_ids
-    #                     - mail.mapped("mail_registration_ids.registration_id")
-    #                 )
-    #                 if (
-    #                     mail.interval_type == "after_sub"
-    #                     and registration.state == "open"
-    #                 )
-    #                 or (
-    #                     mail.interval_type == "after_wait"
-    #                     and registration.state == "wait"
-    #                 )
-    #                 or (
-    #                     mail.interval_type == "after_seats_available"
-    #                     and registration.state == "wait"
-    #                     and registration.waiting_list_to_confirm
-    #                 )
-    #             ]
-    #             if lines:
-    #                 mail.write({"mail_registration_ids": lines})
-    #             # execute scheduler on registrations
-    #             logging.info("website_event_waiting_list: if ehto");
-    #             logging.info(mail);
-    #             logging.info(mail.mail_registration_ids);    
-    #             mail.mail_registration_ids.execute()
-    #         else:
-    #             # Do not send emails if the mailing was scheduled
-    #             # before the event but the event is over
-    #             if (
-    #                 not mail.mail_sent
-    #                 and mail.scheduled_date <= now
-    #                 and mail.notification_type == "mail"
-    #                 and (
-    #                     mail.interval_type != "before_event"
-    #                     or mail.event_id.date_end > now
-    #                 )
-    #                 and not mail.event_id.stage_id.cancel
-    #             ):
-    #                 logging.info("website_event_waiting_list: else lohko");
-    #                 mail.event_id.mail_attendees(mail.template_id.id)
-    #                 mail.write({"mail_sent": True})
-    #     return True
     def execute(self):
-        # Ensiksi kutsutaan vanhemman luokan metodia, jotta sen logiikka suoritetaan.
-        super(EventMailScheduler, self).execute()
-        logging.info("===INHERIT WAITING LIST=========");
-        # Sitten lisätään laajennettu toiminnallisuus
         for mail in self:
-            logging.info("website_event_waiting_list inheirt")
+            logging.info("website_event_waiting_list");
             now = fields.Datetime.now()
-            if mail.interval_type in ["after_sub", "after_wait", "after_seats_available"]:
-                # Päivitetään rekisteröintirivit uusien ehtojen mukaan
+            if mail.interval_type in [
+                "after_sub",
+                "after_wait",
+                "after_seats_available",
+            ]:
+                # update registration lines
                 lines = [
                     (0, 0, {"registration_id": registration.id})
-                    for registration in (mail.event_id.registration_ids - mail.mapped("mail_registration_ids.registration_id"))
+                    for registration in (
+                        mail.event_id.registration_ids
+                        - mail.mapped("mail_registration_ids.registration_id")
+                    )
                     if (
-                        (mail.interval_type == "after_sub" and registration.state == "open") or
-                        (mail.interval_type == "after_wait" and registration.state == "wait") or
-                        (mail.interval_type == "after_seats_available" and registration.state == "wait" and registration.waiting_list_to_confirm)
+                        mail.interval_type == "after_sub"
+                        and registration.state == "open"
+                    )
+                    or (
+                        mail.interval_type == "after_wait"
+                        and registration.state == "wait"
+                    )
+                    or (
+                        mail.interval_type == "after_seats_available"
+                        and registration.state == "wait"
+                        and registration.waiting_list_to_confirm
                     )
                 ]
                 if lines:
                     mail.write({"mail_registration_ids": lines})
-                # Suoritetaan aikataulut rekisteröinneille
-                logging.info("website_event_waiting_list: if ehto")
-                logging.info(mail)
-                logging.info(mail.mail_registration_ids)
+                # execute scheduler on registrations
+                logging.info("website_event_waiting_list: if ehto");
+                logging.info(mail);
+                logging.info(mail.mail_registration_ids);    
                 mail.mail_registration_ids.execute()
             else:
-                # Ei lähetetä sähköposteja, jos postitus on ajoitettu ennen tapahtumaa mutta tapahtuma on ohi
+                # Do not send emails if the mailing was scheduled
+                # before the event but the event is over
                 if (
-                    not mail.mail_sent and
-                    mail.scheduled_date <= now and
-                    mail.notification_type == "mail" and
-                    (mail.interval_type != "before_event" or mail.event_id.date_end > now) and
-                    not mail.event_id.stage_id.cancel
+                    not mail.mail_sent
+                    and mail.scheduled_date <= now
+                    and mail.notification_type == "mail"
+                    and (
+                        mail.interval_type != "before_event"
+                        or mail.event_id.date_end > now
+                    )
+                    and not mail.event_id.stage_id.cancel
                 ):
-                    logging.info("website_event_waiting_list: else lohko")
+                    logging.info("website_event_waiting_list: else lohko");
                     mail.event_id.mail_attendees(mail.template_id.id)
                     mail.write({"mail_sent": True})
         return True
