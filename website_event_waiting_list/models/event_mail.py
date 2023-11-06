@@ -197,10 +197,10 @@ class EventMailScheduler(models.Model):
     def execute(self):
         # Ensiksi kutsutaan vanhemman luokan metodia, jotta sen logiikka suoritetaan.
         super(EventMailScheduler, self).execute()
-        
+        logging.info("===INHERIT WAITING LIST=========");
         # Sitten lisätään laajennettu toiminnallisuus
         for mail in self:
-            logging.info("website_event_waiting_list")
+            logging.info("website_event_waiting_list inheirt")
             now = fields.Datetime.now()
             if mail.interval_type in ["after_sub", "after_wait", "after_seats_available"]:
                 # Päivitetään rekisteröintirivit uusien ehtojen mukaan
