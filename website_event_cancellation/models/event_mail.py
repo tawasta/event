@@ -50,43 +50,23 @@ class EventMailScheduler(models.Model):
     # 7. Action methods
 
     # 8. Business methods
-    def execute(self):
-        for mail in self:
-            now = fields.Datetime.now()
-            if mail.interval_type == "after_sub":
-                logging.info("WEBSITE EVENT CANCELLATION");
-                # update registration lines
-                lines = [
-                    (0, 0, {"registration_id": registration.id})
-                    for registration in (
-                        mail.event_id.registration_ids
-                        - mail.mapped("mail_registration_ids.registration_id")
-                    )
-                ]
-                if lines:
-                    mail.write({"mail_registration_ids": lines})
-                # execute scheduler on registrations
-                logging.info("website_event_cancellation: if ehto");
-                logging.info(mail);
-                logging.info(mail.mail_registration_ids);
-                mail.mail_registration_ids.execute()
-            else:
-                # Do not send emails if the mailing was scheduled before the event
-                # but the event is over
-                if (
-                    not mail.mail_sent
-                    and mail.scheduled_date <= now
-                    and mail.notification_type == "mail"
-                    and (
-                        mail.interval_type != "before_event"
-                        or mail.event_id.date_end > now
-                    )
-                    and not mail.event_id.stage_id.cancel
-                ):
-                    logging.info("website_event_cancellation: else ehto menty lapi");
-                    mail.event_id.mail_attendees(mail.template_id.id)
-                    mail.write({"mail_sent": True})
-        return True
+    def check_and_send_mail(self, mail):
+        now = fields.Datetime.now()
+        can_send = super(EventMailScheduler, self).check_and_send_mail(mail)
+        can_send = False
+        if (
+                not mail.mail_sent
+                and mail.scheduled_date <= now
+                and mail.notification_type == "mail"
+                and (
+                    mail.interval_type != "before_event"
+                    or mail.event_id.date_end > now
+                )
+                and not mail.event_id.stage_id.cancel
+            ):
+                can_send = True
+
+        return can_send
 
 
 class EventMailRegistration(models.Model):
