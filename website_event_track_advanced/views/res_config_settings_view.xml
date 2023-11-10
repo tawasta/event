@@ -22,6 +22,15 @@
                                 The submitter of the proposal can see the evaluations
                             </div>
                         </div>
+                        <div class="o_setting_left_pane">
+                            <field name="evaluator_see_attachments" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="evaluator_see_attachments" />
+                            <div class="text-muted">
+                                Evaluator persons can see the attachments
+                            </div>
+                        </div>
                     </div>
                 </div>
             </xpath>
