@@ -742,6 +742,38 @@
                             class="invalid-feedback"
                         >Please select a presentation language.</div>
                     </div>
+                    <t
+                        t-set="evaluator_see_attachments"
+                        t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.evaluator_see_attachments')"
+                    />
+                    <t t-if="evaluator_see_attachments and review">
+                        <div
+                            t-if="track.attachment_ids"
+                            class="o_track_proposal_attachment_container pt-3"
+                        >
+                            <span
+                                class="text-muted"
+                            >Previously uploaded attachments:</span>
+                            <t t-foreach="track.attachment_ids" t-as="attachment">
+                                <div
+                                    class="o_track_proposal_attachment"
+                                    t-att-id="attachment.id"
+                                >
+                                    <a
+                                        t-att-href="attachment.link_url"
+                                        aria-label="Download"
+                                        title="Download"
+                                        target="_blank"
+                                    >
+                                        <i class="fa fa-download" />
+                                        <span>
+                                            <t t-esc="attachment.name" />
+                                        </span>
+                                    </a>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
                     <div t-if="not review" class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
