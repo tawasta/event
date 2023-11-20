@@ -701,6 +701,15 @@ class EventTrackControllerAdvanced(EventTrackController):
             raise NotFound()
 
         render_vals = self._event_tracks_get_values(event, tag=tag, **searches)
+
+        # Suodatetaan vain julkaistut esitykset
+        published_tracks = render_vals.get("tracks").filtered(
+            lambda t: t.stage_id.is_done == True
+        )
+
+        # Päivitetään render_vals suodatetuilla arvoilla
+        render_vals["tracks"] = published_tracks
+
         render_vals["tracks"] = render_vals.get("tracks").filtered(
             lambda p: p.type.code == "poster"
         )
