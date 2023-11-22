@@ -711,12 +711,13 @@ class EventTrackControllerAdvanced(EventTrackController):
         render_vals["tracks"] = published_tracks
 
         render_vals["tracks"] = render_vals.get("tracks").filtered(
-            lambda p: p.type.code == "poster"
+            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
         )
+
         indexes_to_del = []
         for track_by_day in render_vals.get("tracks_by_day"):
             track_by_day["tracks"] = track_by_day.get("tracks").filtered(
-                lambda p: p.type.code == "poster"
+                lambda p: p.type.code == "poster" and p.stage_id.is_done == True
             )
             if not track_by_day["tracks"]:
                 indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
@@ -724,10 +725,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         for i in sorted(indexes_to_del, reverse=True):
             del render_vals["tracks_by_day"][i]
         render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
-            lambda p: p.type.code == "poster"
+            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
         )
         render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
-            lambda p: p.type.code == "poster"
+            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
         )
         return request.render("website_event_track.tracks_session", render_vals)
 
