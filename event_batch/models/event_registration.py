@@ -151,9 +151,11 @@ class EventRegistration(models.Model):
 
     def action_confirm(self):
         res = super(EventRegistration, self).action_confirm()
-        self.create_student_batch()
-        if self.student_batch_id and self.event_id.create_partner_student_user:
-            self.student_batch_id.student_id.create_student_user()
+        for rec in self:
+            if not rec.student_batch_id:
+                rec.create_student_batch()
+            if rec.student_batch_id and rec.event_id.create_partner_student_user:
+                rec.student_batch_id.student_id.create_student_user()
         return res
 
     # 8. Business methods
