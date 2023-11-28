@@ -24,6 +24,7 @@
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models
+import logging
 
 # 4. Imports from Odoo modules:
 
@@ -151,9 +152,13 @@ class EventRegistration(models.Model):
 
     def action_confirm(self):
         res = super(EventRegistration, self).action_confirm()
-        self.create_student_batch()
-        if self.student_batch_id and self.event_id.create_partner_student_user:
-            self.student_batch_id.student_id.create_student_user()
+        logging.info(self);
+        for rec in self:
+            logging.info("========REC VALUE========");
+            logging.info(rec);
+            rec.create_student_batch()
+            if rec.student_batch_id and rec.event_id.create_partner_student_user:
+                rec.student_batch_id.student_id.create_student_user()
         return res
 
     # 8. Business methods
