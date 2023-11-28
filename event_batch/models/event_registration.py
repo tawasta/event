@@ -156,7 +156,8 @@ class EventRegistration(models.Model):
         for rec in self:
             logging.info("========REC VALUE========");
             logging.info(rec);
-            rec.create_student_batch()
+            if not rec.student_batch_id:
+                rec.create_student_batch()
             if rec.student_batch_id and rec.event_id.create_partner_student_user:
                 rec.student_batch_id.student_id.create_student_user()
         return res
