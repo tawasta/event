@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event_registration_answer_view_search_inherit" model="ir.ui.view">
+        <field name="name">event.registration.answer.view.search.inherit</field>
+        <field name="model">event.registration.answer</field>
+        <field
+            name="inherit_id"
+            ref="website_event.event_registration_answer_view_search"
+        />
+        <field name="arch" type="xml">
+            <field name="question_id" position="after">
+                <filter
+                    name="group_question"
+                    string="Question"
+                    context="{'group_by':'question_id'}"
+                />
+                <filter
+                    name="group_registration"
+                    string="Registration"
+                    context="{'group_by':'registration_id'}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
