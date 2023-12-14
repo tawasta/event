@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_privacy_activity_public,access_privacy_activity_public,privacy.model_privacy_activity,base.group_public,1,0,0,0
-access_privacy_activity_portal,access_privacy_activity_portal,privacy.model_privacy_activity,base.group_portal,1,0,0,0
