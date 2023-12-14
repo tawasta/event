@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Event seats -->
+    <template
+        id="show_seats"
+        inherit_id="website_event.event_description_full"
+        active="False"
+        customize_show="True"
+        name="Show event seats"
+    >
+        <xpath
+            expr="//div[@class='d-lg-flex justify-content-end col-lg-4 col-xl-3 mb-3 mb-lg-0 d-print-none']/div/div[@class='o_wevent_sidebar_block'][1]"
+            position="before"
+        >
+            <div id="show_seats" class="o_wevent_sidebar_block">
+                <h6 class="o_wevent_sidebar_title">Current seats</h6>
+                <t t-if="event.seats_limited">
+                    <p class="mb-2">Seats available: <t
+                            t-esc="event.seats_available"
+                        /></p>
+                </t>
+                <p class="mb-2">Seats expected: <t t-esc="event.seats_taken" /></p>
+            </div>
+        </xpath>
+    </template>
+    <!-- Event tickets -->
+    <!-- Valtteri: tarvitaanko? Coressa on kuiteskin tarkituksia tätä varten? -->
+<!--     <template
+        id="hide_tickets_not_for_sale"
+        inherit_id="website_event.modal_ticket_registration"
+        active="False"
+        customize_show="True"
+        name="Hide tickets not for sale"
+    >
+        <xpath expr="//div[@id='o_wevent_tickets_collapse']/div" position="attributes">
+            <attribute
+                name="t-att-class"
+            >'row px-3 py-3 mx-0 bg-light border-bottom d-none' if not ticket.is_launched() or ticket.is_expired else 'row px-3 py-3 mx-0 bg-light border-bottom'</attribute>
+        </xpath>
+    </template> -->
+    <template
+        id="hide_share_box"
+        inherit_id="website_event.event_description_full"
+        active="False"
+        customize_show="True"
+        name="Hide share box"
+    >
+        <xpath
+            expr="//div[@class='o_wevent_sidebar_block'][last()]"
+            position="attributes"
+        >
+            <attribute name="class">o_wevent_sidebar_block d-none</attribute>
+        </xpath>
+    </template>
+    <!-- Event confirmation -->
+    <template
+        id="hide_ticket_ref"
+        inherit_id="website_event.registration_complete"
+        active="True"
+        customize_show="True"
+        name="Hide ticket reference"
+    >
+        <xpath
+            expr="//div[@class='d-flex flex-column']//span[last()]"
+            position="replace"
+        >
+            <span>
+                <i class="fa fa-ticket mr-2" />
+                <t
+                    t-if="attendee.event_ticket_id"
+                    t-esc="attendee.event_ticket_id.name"
+                />
+                <t t-else="">N/A</t>
+            </span>
+        </xpath>
+    </template>
+    <template
+        id="hide_calender_button"
+        inherit_id="website_event.event_description_full"
+        active="True"
+        customize_show="True"
+        name="Hide Calender button"
+    >
+        <xpath
+            expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']/a[@class='btn btn-secondary text-bg-secondary dropdown w-100 mt-3']"
+            position="attributes"
+        >
+            <attribute name="class">dropdown d-none</attribute>
+        </xpath>
+    </template>
+</odoo>
