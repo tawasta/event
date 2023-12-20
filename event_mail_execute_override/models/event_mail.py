@@ -33,16 +33,40 @@ class EventMailScheduler(models.Model):
     def execute(self):
         now = fields.Datetime.now()
         for mail in self:
-            # Kutsutaan apufunktiota ja saadaan sekä käsitellyt rivit että mailin tila
-            lines, is_mail_valid = self.process_registrations_based_on_interval(mail)
-            # Jos mail on validi ja on käsiteltyjä rivejä, päivitä mail_registration_ids
-            if is_mail_valid:
-                mail.write({'mail_registration_ids': lines})
-                mail.mail_registration_ids.execute()
+
+            # Hae aktiivisen sivuston rajoitetut sähköpostipohjat
+            Website = self.env['website'].sudo()
+            current_website = Website.get_current_website()
+            restricted_templates = current_website.restricted_mail_template_ids.ids
+            is_restricted_template = mail.template_id.id in restricted_templates
+
+            if mail.event_id.date_end < now:
+                if not is_restricted_template:
+
+                    # Kutsutaan apufunktiota ja saadaan sekä käsitellyt rivit että mailin tila
+                    lines, is_mail_valid = self.process_registrations_based_on_interval(mail)
+                    # Jos mail on validi ja on käsiteltyjä rivejä, päivitä mail_registration_ids
+                    if is_mail_valid:
+                        mail.write({'mail_registration_ids': lines})
+                        mail.mail_registration_ids.execute()
+                    else:
+                        mail_was_sent = self.check_and_send_mail(mail)
+                        if mail_was_sent:
+                            mail.event_id.mail_attendees(mail.template_id.id)
+                            mail.write({'mail_sent': True})
+
             else:
-                mail_was_sent = self.check_and_send_mail(mail)
-                if mail_was_sent:
-                    mail.event_id.mail_attendees(mail.template_id.id)
-                    mail.write({'mail_sent': True})
+
+                # Kutsutaan apufunktiota ja saadaan sekä käsitellyt rivit että mailin tila
+                lines, is_mail_valid = self.process_registrations_based_on_interval(mail)
+                # Jos mail on validi ja on käsiteltyjä rivejä, päivitä mail_registration_ids
+                if is_mail_valid:
+                    mail.write({'mail_registration_ids': lines})
+                    mail.mail_registration_ids.execute()
+                else:
+                    mail_was_sent = self.check_and_send_mail(mail)
+                    if mail_was_sent:
+                        mail.event_id.mail_attendees(mail.template_id.id)
+                        mail.write({'mail_sent': True})
         return True
 
