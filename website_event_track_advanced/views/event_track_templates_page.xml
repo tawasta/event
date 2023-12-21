@@ -135,7 +135,7 @@
                                         t-att-href="speaker.partner_id.website"
                                     ><span t-field="speaker.partner_id.website" /></a>
                                 </span>
-                                <span
+<!--                                 <span
                                     class="mb-1 d-flex align-items-baseline text-break"
                                     t-if="speaker.partner_id.email"
                                 >
@@ -150,7 +150,7 @@
                                     <i class="fa fa-phone mr-2" /><span
                                         t-field="speaker.partner_id.phone"
                                     />
-                                </span>
+                                </span> -->
                             </div>
                         </div>
                         <div
@@ -198,7 +198,7 @@
                                         t-att-href="speaker.website"
                                     ><span t-field="speaker.website" /></a>
                                 </span>
-                                <span
+<!--                                 <span
                                     class="mb-1 d-flex align-items-baseline text-break"
                                     t-if="speaker.email"
                                 >
@@ -213,7 +213,7 @@
                                     <i class="fa fa-phone mr-2" /><span
                                         t-field="speaker.phone"
                                     />
-                                </span>
+                                </span> -->
                             </div>
                         </div>
                         <div
@@ -248,7 +248,7 @@
         </xpath>
     </template>
     <!-- HIDE EMAILS -->
-    <template
+<!--     <template
         id="event_track_content_hide_emails"
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Emails"
@@ -269,9 +269,9 @@
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
-    </template>
+    </template> -->
     <!-- HIDE PHONES -->
-    <template
+<!--     <template
         id="event_track_content_hide_phones"
         inherit_id="website_event_track_advanced.event_track_content_show_speakers"
         name="Hide Phones"
@@ -292,7 +292,7 @@
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
-    </template>
+    </template> -->
     <!-- HIDE WEBSITES -->
     <template
         id="event_track_content_hide_websites"
