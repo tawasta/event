@@ -255,14 +255,15 @@
         active="False"
         customize_show="True"
     >
-        <!-- Piilottaa puhujan sähköpostin -->
-        <xpath expr="//div[@id='speaker-div']" position="inside">
-            <t t-set="speaker.email" t-value="''"/>
+        <xpath
+            expr="//div[@id='speaker-div']//span[@t-field='speaker.email']"
+            position="replace"
+        >
         </xpath>
-
-        <!-- Piilottaa kirjoittajan sähköpostin -->
-        <xpath expr="//div[@id='author-div']" position="inside">
-            <t t-set="track.partner_email" t-value="''"/>
+        <xpath
+            expr="//div[@id='author-div']//span[@t-field='track.partner_email']"
+            position="replace"
+        >
         </xpath>
     </template>
     <!-- HIDE PHONES -->
