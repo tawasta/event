@@ -256,12 +256,12 @@
         customize_show="True"
     >
         <xpath
-            expr="//div[@id='speaker-div']//span[@t-field='speaker.email']//.."
+            expr="//div[@id='speaker-div']//span[@t-field='speaker.email']//..//.."
             position="replace"
         >
         </xpath>
         <xpath
-            expr="//div[@id='author-div']//span[@t-field='track.partner_email']//.."
+            expr="//div[@id='author-div']//span[@t-field='track.partner_email']//..//.."
             position="replace"
         >
         </xpath>
