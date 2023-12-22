@@ -276,17 +276,15 @@
     >
         <xpath
             expr="//div[@id='speaker-div']//span[@t-field='speaker.phone']//.."
-            position="attributes"
+            position="replace"
         >
-            <attribute name="class" separator=" " add="d-none" />
-            <attribute name="class" separator=" " remove="d-flex" />
+
         </xpath>
         <xpath
             expr="//div[@id='author-div']//span[@t-field='track.partner_phone']//.."
-            position="attributes"
+            position="replace"
         >
-            <attribute name="class" separator=" " add="d-none" />
-            <attribute name="class" separator=" " remove="d-flex" />
+
         </xpath>
     </template>
     <!-- HIDE WEBSITES -->
