@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_mail_attendees" model="ir.ui.view">
+        <field name="name">event.event.form.mail.attendees</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <group>
+                    <group>
+                        <button
+                            name="action_message_attendees"
+                            groups="base.group_user"
+                            string="Contact Attendees"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="seats_taken == 0"
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
