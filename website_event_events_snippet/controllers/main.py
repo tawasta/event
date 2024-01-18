@@ -46,14 +46,39 @@ class WebsiteEventEventsList(WebsiteEventController):
         )
 
     @http.route(["/event/render_events_list"], type="json", auth="public", website=True)
-    def render_events_list(self, template, domain, limit=None, order="date_begin asc"):
+    def render_events_list(
+        self,
+        template,
+        domain,
+        limit=None,
+        order="date_begin asc",
+        eventType="upcoming",
+        category="0",
+    ):
+        time_filter = []
+        category_filter = []
+
+        if eventType == "upcoming":
+            time_filter.append(("date_begin", ">=", fields.Datetime.now()))
+        elif eventType == "past":
+            time_filter.append(("date_begin", "<", fields.Datetime.now()))
+
+        try:
+            category = int(category)
+        except ValueError:
+            category = 0
+
+        if category != 0:
+            category_filter.append(("tag_ids", "in", int(category)))
+
         dom = expression.AND(
             [
                 [
                     ("website_published", "=", True),
-                    ("date_begin", ">=", fields.Datetime.now()),
                     ("is_private_event", "=", False),
-                ],
+                ]
+                + time_filter
+                + category_filter,
                 request.website.website_domain(),
             ]
         )

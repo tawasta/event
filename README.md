@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
+[event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 14.0.1.1.0 |  | Event Recaptcha
 [event_registration_end_date_automation](event_registration_end_date_automation/) | 14.0.1.1.1 |  | Event registration end date automation
@@ -36,7 +37,7 @@ addon | version | maintainers | summary
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 14.0.1.3.9 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.7 |  | Ability to navigate to an URL and download Registration Badge
-[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
+[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.3 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
 [website_event_hide_organizer_phone](website_event_hide_organizer_phone/) | 14.0.1.0.0 |  | Hides organizer phone number from website and mail templates
 [website_event_online_event](website_event_online_event/) | 14.0.1.4.0 |  | Module to manage online and hybrid events. Includes a video conference link.
