@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_type_form_disable_template" model="ir.ui.view">
+        <field name="name">event.type.form.disable.template</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form" />
+        <field name="arch" type="xml">
+            <page name="event_type_communication">
+                <group>
+                    <field name="use_mail_schedule" string="Automatically Send Emails"/>
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>
