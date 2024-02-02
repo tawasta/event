@@ -37,6 +37,9 @@ class SurveyUserInput(models.Model):
     # 2. Fields declaration
     event_id = fields.Many2one("event.event", string="Event", readonly=True, store=True)
 
+    date_begin = fields.Datetime(related="event_id.date_begin", string="Event start date")
+    date_end = fields.Datetime(related="event_id.date_end", string="Event end date")
+
     tag_ids = fields.Many2many(related="event_id.tag_ids", string="Tags")
 
     # 3. Default methods
