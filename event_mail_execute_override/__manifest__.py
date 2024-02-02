@@ -29,7 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["event", "mail", "website"],
-    "data": [
-        "views/res_config_settings.xml"
-    ],
+    "data": ["views/res_config_settings.xml"],
 }

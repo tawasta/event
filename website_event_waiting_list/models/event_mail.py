@@ -23,7 +23,6 @@ from dateutil.relativedelta import relativedelta
 
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
-import logging
 
 # 2. Known third party imports:
 
@@ -140,11 +139,17 @@ class EventMailScheduler(models.Model):
 
     # 7. Action methods
     def process_registrations_based_on_interval(self, mail):
-        lines, is_mail_valid = super(EventMailScheduler, self).process_registrations_based_on_interval(mail)
+        lines, is_mail_valid = super(
+            EventMailScheduler, self
+        ).process_registrations_based_on_interval(mail)
         lines = []
         is_mail_valid = False
 
-        if mail.interval_type in ["after_sub", "after_wait", "after_seats_available",]:
+        if mail.interval_type in [
+            "after_sub",
+            "after_wait",
+            "after_seats_available",
+        ]:
             # update registration lines
             lines = [
                 (0, 0, {"registration_id": registration.id})
@@ -152,14 +157,8 @@ class EventMailScheduler(models.Model):
                     mail.event_id.registration_ids
                     - mail.mapped("mail_registration_ids.registration_id")
                 )
-                if (
-                    mail.interval_type == "after_sub"
-                    and registration.state == "open"
-                )
-                or (
-                    mail.interval_type == "after_wait"
-                    and registration.state == "wait"
-                )
+                if (mail.interval_type == "after_sub" and registration.state == "open")
+                or (mail.interval_type == "after_wait" and registration.state == "wait")
                 or (
                     mail.interval_type == "after_seats_available"
                     and registration.state == "wait"
@@ -177,16 +176,13 @@ class EventMailScheduler(models.Model):
         can_send = False
 
         if (
-                not mail.mail_sent
-                and mail.scheduled_date <= now
-                and mail.notification_type == "mail"
-                and (
-                    mail.interval_type != "before_event"
-                    or mail.event_id.date_end > now
-                )
-                and not mail.event_id.stage_id.cancel
-            ):
-                can_send = True
+            not mail.mail_sent
+            and mail.scheduled_date <= now
+            and mail.notification_type == "mail"
+            and (mail.interval_type != "before_event" or mail.event_id.date_end > now)
+            and not mail.event_id.stage_id.cancel
+        ):
+            can_send = True
 
         return can_send
 
