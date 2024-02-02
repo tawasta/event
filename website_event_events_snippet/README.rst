@@ -25,7 +25,7 @@ Credits
 Contributors
 ------------
 
-* Miika Nissi <miika.nissi@tawasta.fi>
+* Kalle Rantalainen <kalle.rantalainen@tawasta.fi>
 
 Maintainer
 ----------

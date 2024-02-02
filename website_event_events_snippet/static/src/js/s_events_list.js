@@ -4,8 +4,54 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
     var core = require("web.core");
     var wUtils = require("website.utils");
     var publicWidget = require("web.public.widget");
+    var sOptions = require("web_editor.snippets.options");
 
     var _t = core._t;
+
+    sOptions.registry.js_get_category_list = sOptions.Class.extend({
+        // --------------------------------------------------------------------------
+        // Private
+        // --------------------------------------------------------------------------
+
+        /**
+         * @override
+         */
+        _renderCustomXML: function (uiFragment) {
+            return this._rpc({
+                model: "event.event",
+                method: "search_read",
+                args: [[["tag_ids", "!=", false]], ["tag_ids"]],
+            }).then((events) => {
+                const tagSet = new Set();
+
+                // Extract unique tags from events
+                for (const event of events) {
+                    const tags = event.tag_ids;
+                    for (const tagId of tags) {
+                        tagSet.add(tagId);
+                    }
+                }
+
+                const tagIdsArray = Array.from(tagSet);
+
+                return this._rpc({
+                    model: "event.tag",
+                    method: "read",
+                    args: [tagIdsArray, ["name"]],
+                }).then((tagNames) => {
+                    const menuEl = uiFragment.querySelector('[name="category"]');
+
+                    // Create buttons for each unique tag
+                    for (const category of tagNames) {
+                        const el = document.createElement("we-button");
+                        el.dataset.selectDataAttribute = category.id; // Assuming category names are unique
+                        el.textContent = category.name;
+                        menuEl.appendChild(el);
+                    }
+                });
+            });
+        },
+    });
 
     publicWidget.registry.js_get_events = publicWidget.Widget.extend({
         selector: ".js_get_events",
@@ -19,6 +65,12 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             const data = self.$target[0].dataset;
             const promoted = data.promoted === "true" || false;
             const limit = parseInt(data.eventsLimit, 10) || 3;
+            const category = data.category || 0;
+            let eventType = data.eventType;
+            if (eventType === undefined) {
+                eventType = "upcoming";
+            }
+
             // Compatibility with old template xml id
             if (
                 data.template &&
@@ -40,6 +92,7 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
             if (promoted) {
                 domain.push(["is_promoted", "=", true]);
             }
+
             var prom = new Promise(function (resolve) {
                 self._rpc({
                     route: "/event/render_events_list",
@@ -48,6 +101,8 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
                         domain: domain,
                         limit: limit,
                         order: order,
+                        eventType: eventType,
+                        category: category,
                     },
                 })
                     .then(function (events) {

@@ -24,7 +24,6 @@
 
 # 3. Odoo imports (openerp):
 from odoo import fields, models
-import logging
 
 # 4. Imports from Odoo modules:
 
@@ -55,16 +54,13 @@ class EventMailScheduler(models.Model):
         can_send = super(EventMailScheduler, self).check_and_send_mail(mail)
         can_send = False
         if (
-                not mail.mail_sent
-                and mail.scheduled_date <= now
-                and mail.notification_type == "mail"
-                and (
-                    mail.interval_type != "before_event"
-                    or mail.event_id.date_end > now
-                )
-                and not mail.event_id.stage_id.cancel
-            ):
-                can_send = True
+            not mail.mail_sent
+            and mail.scheduled_date <= now
+            and mail.notification_type == "mail"
+            and (mail.interval_type != "before_event" or mail.event_id.date_end > now)
+            and not mail.event_id.stage_id.cancel
+        ):
+            can_send = True
 
         return can_send
 

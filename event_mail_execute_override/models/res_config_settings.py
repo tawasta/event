@@ -1,14 +1,16 @@
-from odoo import models, fields
+from odoo import fields, models
+
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     restricted_mail_template_ids = fields.Many2many(
         related="website_id.restricted_mail_template_ids",
-        comodel_name='mail.template', 
-        string='Rajoitetut Sähköpostipohjat',
+        comodel_name="mail.template",
+        string="Rajoitetut Sähköpostipohjat",
         readonly=False,
     )
+
 
 class Website(models.Model):
     _inherit = "website"
