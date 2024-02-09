@@ -320,8 +320,13 @@
     >
         <xpath expr="//span[@t-field='track.location_id']//..//.." position="after">
             <div id="target-group-div" class="mx-3 text-muted">
-                <t t-if="track.target_group">
-                    <strong>Target group:</strong> <span t-field="track.target_group" />
+                <t t-if="track.target_group_ids">
+                    <strong>Target groups:</strong>
+                    <ul>
+                        <t t-foreach="track.target_group_ids" t-as="target_group">
+                            <li><span t-esc="target_group.name"/></li>
+                        </t>
+                    </ul>
                 </t>
             </div>
         </xpath>
