@@ -324,7 +324,7 @@
                     <strong>Target groups:</strong>
                     <ul>
                         <t t-foreach="track.target_group_ids" t-as="target_group">
-                            <li><span t-esc="target_group.name"/></li>
+                            <li><span t-esc="target_group.name" /></li>
                         </t>
                     </ul>
                 </t>
