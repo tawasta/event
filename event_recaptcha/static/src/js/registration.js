@@ -42,7 +42,7 @@ odoo.define("event_recaptcha.event", function (require) {
                 // Init fields
                 $modal.on("click", ".btn-primary", function (event) {
                     var $attendee_form = $modal.find("#attendee_registration").first();
-                    var submit_values = self._submitForm($attendee_form, $modal);
+                    var submit_values = self._submitForm($attendee_form, $modal, post);
                     if (jQuery.isEmptyObject(submit_values)) {
                         event.preventDefault();
                     } else {
@@ -64,7 +64,7 @@ odoo.define("event_recaptcha.event", function (require) {
          * @private
          * @returns {Dictionary} post - the dictionary to send in post
          */
-        _submitForm: function ($form, $modal) {
+        _submitForm: function ($form, $modal, post) {
             var recaptcha = $("#g-recaptcha-response").val();
             var error = false;
             $("#err").text("");
