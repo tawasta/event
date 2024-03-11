@@ -130,6 +130,7 @@ class EventRegistration(models.Model):
         return super(EventRegistration, self).unlink()
 
     def action_cancel(self):
+        logging.info("====KAYKO EDES TAALLA=======");
         current_student_batch = False
         if self.student_batch_id:
             current_student_batch = self.student_batch_id
