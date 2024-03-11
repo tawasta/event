@@ -25,6 +25,7 @@
 # 3. Odoo imports (openerp):
 from odoo import http
 from odoo.http import request
+import logging
 
 from odoo.addons.website_event.controllers.main import WebsiteEventController
 
@@ -58,6 +59,7 @@ class WebsiteEventControllerCancel(WebsiteEventController):
                     new_state = post.get("new_state")
                     if new_state == "cancel":
                         registration.sudo().action_cancel()
+                        logging.info(registration.student_batch_id);
 
                 if registration.sudo().state not in ["done"]:
                     return request.render(
