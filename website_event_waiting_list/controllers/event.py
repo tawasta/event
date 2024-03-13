@@ -244,7 +244,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                     ):
                         registration.sudo().write({"state": "open"})
                     if new_state == "cancel":
-                        registration.sudo().write({"state": "cancel"})
+                        registration.sudo().action_cancel()
 
                 if registration.sudo().state in ["wait", "cancel", "open"]:
                     return request.render(
