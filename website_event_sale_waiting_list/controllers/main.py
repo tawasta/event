@@ -172,7 +172,7 @@ class WebsiteEventSaleWaitingListController(
                                 registration.sudo().write({"state": "draft"})
 
                     if new_state == "cancel":
-                        registration.sudo().write({"state": "cancel"})
+                        registration.sudo().action_cancel()
 
                 if registration.sudo().state in ["wait", "cancel", "open"]:
                     return request.render(
