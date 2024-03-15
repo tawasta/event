@@ -102,5 +102,15 @@
         </field>
     </record>
 
+    <record id="survey_kanban_inherited" model="ir.ui.view">
+        <field name="name">survey.survey.kanban.inherited</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_kanban"/>
+        <field name="arch" type="xml">
+            <a name="action_result_survey" position="attributes">
+                <attribute name="groups">survey.group_survey_manager</attribute>
+            </a>
+        </field>
+    </record>
 
 </odoo>
