@@ -96,9 +96,7 @@ odoo.define("survey.survey_page_statistics_inner", function () {
             }
         });
 
-
-
-        // var path = window.location.pathname;
+        // Var path = window.location.pathname;
         // if (path.indexOf("/date_start") >= 0) {
         //     var date_current = path.split("/date_start/")[1];
         //     var newDateTime = moment(date_current, "DD.MM.YYYY").toDate();
@@ -187,6 +185,5 @@ odoo.define("survey.survey_page_statistics_inner", function () {
                 window.location.href = path;
             }
         });
-
     });
 });
