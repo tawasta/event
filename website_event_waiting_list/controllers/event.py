@@ -97,6 +97,8 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                         and event_ticket.seats_max
                         and event_ticket.seats_available <= 0
                     ):
+                        logging.info(event_ticket.seats_max);
+                        logging.info(event_ticket.seats_available);
                         logging.info("====MENEE 3=======");
                         warning_msg = "You tried to order a ticket that is sold out"
                         availability_check = False
