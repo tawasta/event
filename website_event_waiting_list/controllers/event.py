@@ -59,9 +59,11 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         availability_check = True
         waiting_list_check = post.get("waiting_list_button")
         if waiting_list_check:
+            logging.info("===KAYKO=====");
             availability_check = False
 
         tickets = self._process_tickets_form(event, post)
+        logging.info(tickets);
         ordered_seats = 0
         for ticket in tickets:
             ordered_seats += ticket["quantity"]
