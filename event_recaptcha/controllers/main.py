@@ -18,16 +18,16 @@ class WebsiteEventCaptchaController(WebsiteEventSaleController):
 
             return res
 
-    @http.route()
-    def registration_new(self, event, **post):
-        referer = request.httprequest.headers.get("Referer")
-        base_url = http.request.httprequest.url_root
+    # @http.route()
+    # def registration_new(self, event, **post):
+    #     referer = request.httprequest.headers.get("Referer")
+    #     base_url = http.request.httprequest.url_root
 
-        if referer and str(base_url) not in referer:
-            raise request.not_found()
-        else:
-            res = super(WebsiteEventCaptchaController, self).registration_new(
-                event, **post
-            )
+    #     if referer and str(base_url) not in referer:
+    #         raise request.not_found()
+    #     else:
+    #         res = super(WebsiteEventCaptchaController, self).registration_new(
+    #             event, **post
+    #         )
 
-            return res
+    #         return res
