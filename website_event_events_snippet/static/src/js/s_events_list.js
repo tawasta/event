@@ -81,6 +81,26 @@ odoo.define("website_event_events_snippet.s_events_list_frontend", function (req
                         } else {
                             self.$target.html($events);
                         }
+
+                        // If the body contains editor_enable class, the user
+                        // is in edit mode.
+                        var inEditMode = $("body").hasClass("editor_enable");
+
+                        // If in edit mode, place an element over the event banner to
+                        // prevent colorPickerWidget is null error caused by
+                        // clicking the image and then editing the filter values.
+                        if (inEditMode) {
+                            self.$target
+                                .find(".s_events_list_event_cover")
+                                .each(function () {
+                                    var $cover = $(this);
+                                    var $overlay = $(
+                                        '<div class="cover-overlay"></div>'
+                                    );
+                                    $cover.after($overlay);
+                                });
+                        }
+
                         resolve();
                     })
                     .guardedCatch(function () {
