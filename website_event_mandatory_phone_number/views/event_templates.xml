@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="registration_attendee_details" inherit_id="website_event.registration_attendee_details">
+        <xpath expr="//label[contains(text(),'Phone')]/small[contains(text(),'(Optional)')]" position="replace"/>
+        <xpath expr="//input[@type='tel']" position="attributes">
+            <attribute name="required">This field is required</attribute>
+        </xpath>
+    </template>
+</odoo>
