@@ -19,7 +19,6 @@
 ##############################################################################
 
 # 1. Standard library imports:
-
 # 3. Odoo imports (openerp):
 from odoo import fields, http
 from odoo.http import request
@@ -85,6 +84,7 @@ class WebsiteEventEventsList(WebsiteEventController):
         if domain:
             dom = expression.AND([dom, domain])
         events = request.env["event.event"].search(dom, limit=limit, order=order)
+
         return request.website.viewref(template)._render(
             {"events": events, "get_formated_date": self.get_formated_date}
         )
