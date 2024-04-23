@@ -21,7 +21,7 @@
 {
     "name": "Website Event Mandatory Phone Number",
     "summary": "Make phone number into a mandatory field",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",

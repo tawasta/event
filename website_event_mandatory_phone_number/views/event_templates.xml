@@ -5,11 +5,14 @@
         inherit_id="website_event.registration_attendee_details"
     >
         <xpath
-            expr="//label[contains(text(),'Phone')]/small[contains(text(),'(Optional)')]"
+            expr="//label[./following-sibling::input[@type='tel']]"
             position="replace"
-        />
+        >
+            <label>Phone</label>
+        </xpath>
+
         <xpath expr="//input[@type='tel']" position="attributes">
-            <attribute name="required">This field is required</attribute>
+            <attribute name="required">true</attribute>
         </xpath>
     </template>
 </odoo>
