@@ -21,7 +21,7 @@
 {
     "name": "Website Event Events Snippet",
     "summary": "Advanced Events Snippet for Website",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
