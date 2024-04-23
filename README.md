@@ -37,7 +37,7 @@ addon | version | maintainers | summary
 [website_event_banner_image](website_event_banner_image/) | 14.0.2.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 14.0.1.3.9 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 14.0.1.0.7 |  | Ability to navigate to an URL and download Registration Badge
-[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.2 |  | Advanced Events Snippet for Website
+[website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.3 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
 [website_event_hide_organizer_phone](website_event_hide_organizer_phone/) | 14.0.1.0.0 |  | Hides organizer phone number from website and mail templates
 [website_event_mandatory_phone_number](website_event_mandatory_phone_number/) | 14.0.1.0.0 |  | Make phone number into a mandatory field
