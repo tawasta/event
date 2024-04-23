@@ -5,7 +5,7 @@
 ============================
 Website Event Events Snippet
 ============================
-* Advanced Events List Snippet for Website. A new snippet template.
+* This module, developed by Oy Tawasta OS Technologies Ltd., enhances the event management capabilities within Odoo by introducing additional features for better event visibility and management. Key enhancements include promoted events, improved date formatting, and dynamic event listing with customizable display options based on event categories, time (past or upcoming), and promotion status.
 
 Configuration
 =============
@@ -25,7 +25,8 @@ Credits
 Contributors
 ------------
 
-* Miika Nissi <miika.nissi@tawasta.fi>
+* Kalle Rantalainen <kalle.rantalainen@tawasta.fi>
+* Valtteri Lattu <valtteri.lattu@tawasta.fi>
 
 Maintainer
 ----------
