@@ -51,7 +51,7 @@ class SaleOrder(models.Model):
                 [("sale_order_id", "in", self.ids)]
             )
             if registrations and registrations._check_auto_confirmation():
-                registrations.sudo().confirm_registration()
+                registrations.sudo().action_confirm()
         return res
 
     # 7. Action methods
