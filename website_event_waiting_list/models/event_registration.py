@@ -144,6 +144,11 @@ class EventRegistration(models.Model):
         """Auto-trigger mail schedulers on state writes"""
         res = super().write(vals)
 
+        event_stage = self.event_id.stage_id
+        if event_stage.pipe_end or event_stage.cancel:
+            # Don't try to send messages for closed events
+            return res
+
         if vals.get("state") == "open":
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
                 lambda s: s.interval_type == "after_sub"
