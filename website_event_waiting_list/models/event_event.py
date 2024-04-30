@@ -1,115 +1,7 @@
-##############################################################################
-#
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
-
-# 1. Standard library imports:
 import pytz
 
-# 3. Odoo imports (openerp):
 from odoo import api, fields, models
 from odoo.osv import expression
-
-# 2. Known third party imports:
-
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
-
-
-class EventType(models.Model):
-    # 1. Private attributes
-    _inherit = "event.type"
-
-    # 2. Fields declaration
-    waiting_list = fields.Boolean(
-        string="Enable Waiting List",
-        help="Enable waiting list when attendee limit is reached.",
-        default=True,
-    )
-
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-    @api.depends("use_mail_schedule")
-    def _compute_event_type_mail_ids(self):
-        for template in self:
-            if not template.use_mail_schedule:
-                template.event_type_mail_ids = [(5, 0)]
-            elif not template.event_type_mail_ids:
-                template.event_type_mail_ids = [
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_unit": "now",
-                            "interval_type": "after_sub",
-                            "template_id": self.env.ref("event.event_subscription").id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_nbr": 10,
-                            "interval_unit": "days",
-                            "interval_type": "before_event",
-                            "template_id": self.env.ref("event.event_reminder").id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_unit": "now",
-                            "interval_type": "after_wait",
-                            "template_id": self.env.ref(
-                                "website_event_waiting_list.event_waiting"
-                            ).id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "notification_type": "mail",
-                            "interval_unit": "now",
-                            "interval_type": "after_seats_available",
-                            "template_id": self.env.ref(
-                                "website_event_waiting_list.event_confirm_waiting_registration"
-                            ).id,
-                        },
-                    ),
-                ]
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods
 
 
 class EventEvent(models.Model):
@@ -246,6 +138,10 @@ class EventEvent(models.Model):
     @api.constrains("seats_available", "waiting_list", "registration_ids")
     def _mail_to_waiting_list_confirmation(self):
         for event in self:
+            if event.pipe_end or event.cancel:
+                # Never try to send mail to closed events
+                continue
+
             if event.waiting_list:
                 # if seats are available, execute onsubscribe_schedulers
                 if event.seats_available:
