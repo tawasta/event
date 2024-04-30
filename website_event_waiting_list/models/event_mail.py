@@ -1,37 +1,6 @@
-##############################################################################
-#
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
-
-# 1. Standard library imports:
 from dateutil.relativedelta import relativedelta
 
-# 3. Odoo imports (openerp):
 from odoo import api, fields, models
-
-# 2. Known third party imports:
-
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 _INTERVALS = {
     "hours": lambda interval: relativedelta(hours=interval),
@@ -40,38 +9,6 @@ _INTERVALS = {
     "months": lambda interval: relativedelta(months=interval),
     "now": lambda interval: relativedelta(hours=0),
 }
-
-
-class EventTypeMail(models.Model):
-    """Template of event.mail to attach to event.type. Those will be copied
-    upon all events created in that type to ease event creation."""
-
-    # 1. Private attributes
-    _inherit = "event.type.mail"
-
-    # 2. Fields declaration
-    interval_type = fields.Selection(
-        selection_add=[
-            ("after_wait", "After registering to waiting list"),
-            (
-                "after_seats_available",
-                "After more seats are available send to waiting list registrations",
-            ),
-        ],
-        ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},
-    )
-
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods
 
 
 class EventMailScheduler(models.Model):
@@ -172,7 +109,7 @@ class EventMailScheduler(models.Model):
 
     def check_and_send_mail(self, mail):
         now = fields.Datetime.now()
-        can_send = super(EventMailScheduler, self).check_and_send_mail(mail)
+        can_send = super().check_and_send_mail(mail)
         can_send = False
 
         if (
@@ -185,49 +122,5 @@ class EventMailScheduler(models.Model):
             can_send = True
 
         return can_send
-
-    # 8. Business methods
-
-
-class EventMailRegistration(models.Model):
-
-    # 1. Private attributes
-    _inherit = "event.mail.registration"
-
-    # 2. Fields declaration
-
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-    def execute(self):
-        now = fields.Datetime.now()
-        todo = self.filtered(
-            lambda reg_mail: (
-                not reg_mail.mail_sent
-                and reg_mail.registration_id.state in ["open", "done", "wait"]
-                and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
-                and reg_mail.scheduler_id.notification_type == "mail"
-                and (
-                    (reg_mail.scheduler_id.interval_type != "after_seats_available")
-                    or (
-                        reg_mail.scheduler_id.interval_type == "after_seats_available"
-                        and reg_mail.registration_id.state == "wait"
-                        and reg_mail.registration_id.waiting_list_to_confirm
-                    )
-                )
-                and not reg_mail.registration_id.event_id.stage_id.cancel
-            )
-        )
-        for reg_mail in todo:
-            reg_mail.scheduler_id.template_id.send_mail(
-                reg_mail.registration_id.id, force_send=True
-            )
-        todo.write({"mail_sent": True})
 
     # 8. Business methods
