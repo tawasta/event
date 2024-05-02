@@ -246,7 +246,7 @@ class EventEvent(models.Model):
     @api.constrains("seats_available", "waiting_list", "registration_ids")
     def _mail_to_waiting_list_confirmation(self):
         for event in self:
-            if event.pipe_end or event.cancel:
+            if event.stage_id.pipe_end or event.stage_id.cancel:
                 # Never try to send mail to closed events
                 continue
 
