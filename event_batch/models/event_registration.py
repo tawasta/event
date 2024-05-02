@@ -22,6 +22,8 @@
 
 # 2. Known third party imports:
 
+import logging
+
 # 3. Odoo imports (openerp):
 from odoo import fields, models
 
@@ -129,10 +131,13 @@ class EventRegistration(models.Model):
         return super(EventRegistration, self).unlink()
 
     def action_cancel(self):
+        logging.info("====KAYKO EDES TAALLA=======")
         current_student_batch = False
         if self.student_batch_id:
             current_student_batch = self.student_batch_id
         res = super().action_cancel()
+        logging.info("====STUDENT BATCH=====")
+        logging.info(current_student_batch)
         if current_student_batch:
             current_student_batch.unlink()
 

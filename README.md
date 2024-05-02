@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
+[event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 14.0.1.1.0 |  | Event Recaptcha
 [event_registration_end_date_automation](event_registration_end_date_automation/) | 14.0.1.1.1 |  | Event registration end date automation
