@@ -21,7 +21,7 @@
 {
     "name": "Website Event Private Event",
     "summary": "Make events only visible from URL. (remove from public list)",
-    "version": "17.0.1.0",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -29,5 +29,7 @@
     "application": False,
     "installable": True,
     "depends": ["website_event"],
-    "data": ["views/event_views.xml",],
+    "data": [
+        "views/event_views.xml",
+    ],
 }

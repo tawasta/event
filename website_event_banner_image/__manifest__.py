@@ -21,7 +21,7 @@
 {
     "name": "Website Event Banner Image",
     "summary": "Add banner image to event from backend",
-    "version": "17.0.1.0",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -33,8 +33,8 @@
         "views/event_views.xml",
         "views/website_templates.xml",
     ],
-    'assets': {
-        'web.assets_backend': [
+    "assets": {
+        "web.assets_backend": [
             'website_event_banner_image/static/src/scss/event_banner_image.scss"',
         ],
     },

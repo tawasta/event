@@ -25,7 +25,7 @@
                     class="oe_stat_button"
                     icon="fa-question-circle"
                     help="Question answers for this Event"
-                    invisible="has_answers != True" 
+                    invisible="has_answers != True"
                 >
                     <field name="answer_count" widget="statinfo" string="Answers" />
                 </button>
