@@ -7,10 +7,7 @@
             <field name="model">event.type</field>
             <field name="inherit_id" ref="event.view_event_type_form" />
             <field name="arch" type="xml">
-                <xpath
-                    expr="//div[@name='event_type_title']"
-                    position="after"
-                >
+                <xpath expr="//div[@name='event_type_title']" position="after">
                     <div
                         class="col-12 o_setting_box"
                         name="event_type_registration_elsewhere"

@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Website Event Sale Disable Qty in Cart",
-    "summary": "Disable changing Event Registration qty in cart",
+    "name": "Website Event Track Mass Mailing",
+    "summary": "Allows sending mail to track contacts",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,6 +28,15 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_sale_disable_qty_in_cart", "website_event_sale"],
-    "data": ["views/website_sale_templates.xml"],
+    "depends": [
+        "mass_mailing",
+        "mass_mailing_partner",
+        "website_event_track",
+        #        "website_event_track_advanced"
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/website_event_track.xml",
+        "wizards/track_mail_list_wizard.xml",
+    ],
 }
