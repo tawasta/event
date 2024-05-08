@@ -64,7 +64,7 @@ addon | version | maintainers | summary
 [website_event_track_request_time](website_event_track_request_time/) | 14.0.0.0.0 |  | Requested track times
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 14.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.7 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.8 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list
 [website_my_events](website_my_events/) | 14.0.1.1.0 |  | My events in website portal
 
