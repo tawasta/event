@@ -34,7 +34,7 @@
                     >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
-                                <div>
+                                <div name="section-preface-text">
                                     Hello <t t-esc="object.name or ''" />,<br /><br />
                                     Thank you for your interest in our event.<br />
                                     <t t-if="object.event_ticket_id">
@@ -71,6 +71,7 @@
                                     /><br />
                                 </div>
                                 <t
+                                    name="section-claiming-or-cancellation"
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id"
                                 >
@@ -79,7 +80,7 @@
                                     >To cancel your position in the waiting list follow the link below:</t>
                                     <t t-set="button_message">Cancel registration</t>
                                 </t>
-                                <div>
+                                <div name="section-thank-you-note">
                                     Thank you,<br />
                                     <span style="color: #454748;">
                                         -- <br />
@@ -127,7 +128,7 @@
                     >
                         <tr>
                             <td valign="top" style="font-size: 14px;">
-                                <div>
+                                <div name="section-preface-text">
                                     Hello <t t-esc="object.name or ''" />,<br /><br />
                                     <t t-if="object.event_ticket_id">
                                         We have more seats available for the ticket <strong
@@ -162,6 +163,7 @@
                                     /><br />
                                 </div>
                                 <t
+                                    name="section-claim-or-cancel"
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id"
                                 >
@@ -172,7 +174,7 @@
                                         t-set="button_message"
                                     >Claim or cancel registration</t>
                                 </t>
-                                <div>
+                                <div name="section-thank-you-note">
                                     Thank you,<br />
                                     <span style="color: #454748;">
                                         -- <br />
