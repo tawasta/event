@@ -71,7 +71,7 @@
                                     /><br />
                                 </div>
                                 <t
-                                    name="section-claiming-or-cancellation"
+                                    name="section-cancellation"
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id"
                                 >
@@ -163,7 +163,7 @@
                                     /><br />
                                 </div>
                                 <t
-                                    name="section-claim-or-cancel"
+                                    name="section-claiming-or-cancellation"
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id"
                                 >
