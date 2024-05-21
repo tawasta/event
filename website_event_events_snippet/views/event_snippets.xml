@@ -91,31 +91,6 @@
         </div>
     </template>
 
-
-
-    <template id="s_category_list_options" inherit_id="website.snippet_options">
-        <xpath expr="//div[@data-js='Box']" position="before">
-            <div
-                data-js="js_get_category_list"
-                data-selector=".s_events_list"
-                data-target=".js_get_events"
-                data-no-check="true"
-            >
-                <we-select
-                    string="Category"
-                    data-no-preview="true"
-                    name="category"
-                    data-attribute-name="category"
-                >
-                    <we-button data-select-data-attribute="0">All categories</we-button>
-                </we-select>
-            </div>
-        </xpath>
-    </template>
-
-
-
-
     <!-- Options -->
     <template id="s_events_list_options" inherit_id="website.snippet_options">
         <xpath expr="//div[@data-js='Box']" position="before">
@@ -134,6 +109,7 @@
                     <we-button data-select-data-attribute="true">Yes</we-button>
                     <we-button data-select-data-attribute="false">No</we-button>
                 </we-select>
+
                 <we-select string="Layout" data-attribute-name="template">
                     <we-button
                         data-select-data-attribute="website_event_events_snippet.s_events_list_square_template"
@@ -175,12 +151,32 @@
                     <we-button data-select-data-attribute="past">Past Events</we-button>
                     <we-button data-select-data-attribute="both">All Events</we-button>
                 </we-select>
+
+                <div
+                    data-js="js_get_category_list"
+                    data-selector=".s_events_list"
+                    data-target=".js_get_events"
+                    data-no-check="true"
+                >
+                    <we-select
+                        string="Category"
+                        data-no-preview="true"
+                        name="category_selection"
+                        data-attribute-name="category_selection"
+                    >
+                        <we-button
+                            data-select-data-attribute="0"
+                        >All Categories</we-button>
+                        <!-- the blog list will be generated in js -->
+                    </we-select>
+                </div>
+
             </div>
         </xpath>
         <xpath expr="//div[@data-js='layout_column']" position="attributes">
             <attribute
                 name="data-exclude"
-                add=".s_events_list, .s_events_list_card, .s_category_list"
+                add=".s_events_list, .s_events_list_card"
                 separator=","
             />
         </xpath>
@@ -209,4 +205,17 @@
             />
         </xpath>
     </template>
+    <template
+        id="assets_wysiwyg"
+        inherit_id="website.assets_wysiwyg"
+        name="Category assets"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/website_event_events_snippet/static/src/js/add_category_options.js"
+            />
+        </xpath>
+    </template>
+
 </odoo>

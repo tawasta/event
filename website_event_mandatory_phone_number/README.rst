@@ -2,10 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-============================
-Website Event Events Snippet
-============================
-* This module, developed by Oy Tawasta OS Technologies Ltd., enhances the event management capabilities within Odoo by introducing additional features for better event visibility and management. Key enhancements include promoted events, improved date formatting, and dynamic event listing with customizable display options based on event categories, time (past or upcoming), and promotion status.
+====================================
+Website Event Mandatory Phone Number
+====================================
+* Make phone number a mandatory field in event registration in the front-end.
 
 Configuration
 =============
@@ -25,7 +25,7 @@ Credits
 Contributors
 ------------
 
-* Kalle Rantalainen <kalle.rantalainen@tawasta.fi>
+* Miika Nissi <miika.nissi@tawasta.fi>
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
 
 Maintainer

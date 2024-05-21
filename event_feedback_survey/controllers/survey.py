@@ -194,6 +194,10 @@ class SurveyFeedbackEvent(Survey):
     @http.route(
         [
             """/survey/results/<model("survey.survey"):survey>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/tag/<string:selected_tags>/date_start/<string:select_date>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/tag/<string:selected_tags>/date_start/<string:select_date>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/tag/<string:selected_tags>/date_start/<string:select_date>/date_end/<string:date_end>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/tag/<string:selected_tags>/date_start/<string:select_date>/date_end/<string:date_end>""",  # noqa
             """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/tag/<string:selected_tags>""",  # noqa
             """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>""",  # noqa
             """/survey/results/<model("survey.survey"):survey>/event/<string:selected_events>/date_start/<string:select_date>""",  # noqa
@@ -202,6 +206,10 @@ class SurveyFeedbackEvent(Survey):
             """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/event/<string:selected_events>""",  # noqa
             """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>/event/<string:selected_events>""",  # noqa
             """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/event/<string:selected_events>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>/event/<string:selected_events>/tag/<string:selected_tags>""",  # noqa
+            """/survey/results/<model("survey.survey"):survey>/date_start/<string:select_date>/date_end/<string:date_end>/tag/<string:selected_tags>""",  # noqa
         ],
         type="http",
         auth="user",
