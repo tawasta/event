@@ -9,10 +9,11 @@ class EventMailScheduler(models.Model):
         registrations = mail.mail_registration_ids.mapped("registration_id")
         if mail.template_id.is_feedback_email:
             if mail.feedback_survey_id:
-                registrations.write({'feedback_survey_id': mail.feedback_survey_id.id})
+                registrations.write({"feedback_survey_id": mail.feedback_survey_id.id})
             elif mail.event_id.feedback_survey_id and not mail.feedback_survey_id:
-                registrations.write({'feedback_survey_id': mail.event_id.feedback_survey_id.id})
-
+                registrations.write(
+                    {"feedback_survey_id": mail.event_id.feedback_survey_id.id}
+                )
 
     def process_registrations_based_on_interval(self, mail):
         # Apufunktio, joka käsittelee rekisteröintirivit interval_type perusteella
@@ -44,6 +45,7 @@ class EventMailScheduler(models.Model):
             return True
         return False
 
+    # flake8: noqa: C901
     def execute(self):
         now = fields.Datetime.now()
         for mail in self:
@@ -71,11 +73,24 @@ class EventMailScheduler(models.Model):
                         if mail_was_sent:
 
                             if mail.template_id.is_feedback_email:
-                                registrations = mail.event_id.registration_ids.filtered(lambda r: r.state != 'cancel')
+                                registrations = mail.event_id.registration_ids.filtered(
+                                    lambda r: r.state != "cancel"
+                                )
                                 if mail.feedback_survey_id:
-                                    registrations.write({'feedback_survey_id': mail.feedback_survey_id.id})
-                                elif mail.event_id.feedback_survey_id and not mail.feedback_survey_id:
-                                    registrations.write({'feedback_survey_id': mail.event_id.feedback_survey_id.id})
+                                    registrations.write(
+                                        {
+                                            "feedback_survey_id": mail.feedback_survey_id.id
+                                        }
+                                    )
+                                elif (
+                                    mail.event_id.feedback_survey_id
+                                    and not mail.feedback_survey_id
+                                ):
+                                    registrations.write(
+                                        {
+                                            "feedback_survey_id": mail.event_id.feedback_survey_id.id
+                                        }
+                                    )
 
                             mail.event_id.mail_attendees(mail.template_id.id)
                             mail.write({"mail_sent": True})
@@ -96,11 +111,22 @@ class EventMailScheduler(models.Model):
                     if mail_was_sent:
 
                         if mail.template_id.is_feedback_email:
-                            registrations = mail.event_id.registration_ids.filtered(lambda r: r.state != 'cancel')
+                            registrations = mail.event_id.registration_ids.filtered(
+                                lambda r: r.state != "cancel"
+                            )
                             if mail.feedback_survey_id:
-                                registrations.write({'feedback_survey_id': mail.feedback_survey_id.id})
-                            elif mail.event_id.feedback_survey_id and not mail.feedback_survey_id:
-                                registrations.write({'feedback_survey_id': mail.event_id.feedback_survey_id.id})
+                                registrations.write(
+                                    {"feedback_survey_id": mail.feedback_survey_id.id}
+                                )
+                            elif (
+                                mail.event_id.feedback_survey_id
+                                and not mail.feedback_survey_id
+                            ):
+                                registrations.write(
+                                    {
+                                        "feedback_survey_id": mail.event_id.feedback_survey_id.id
+                                    }
+                                )
 
                         mail.event_id.mail_attendees(mail.template_id.id)
                         mail.write({"mail_sent": True})
