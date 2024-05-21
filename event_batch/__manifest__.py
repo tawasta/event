@@ -19,7 +19,7 @@
 ##############################################################################
 {
     "name": "Event Batch",
-    "summary": "Event Batch",
+    "summary": "Allows creating student batches for event registrations",
     "version": "14.0.1.2.1",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
