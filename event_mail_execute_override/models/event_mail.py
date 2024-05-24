@@ -1,4 +1,5 @@
 from odoo import fields, models
+from datetime import datetime, timedelta
 
 
 class EventMailScheduler(models.Model):
@@ -48,6 +49,8 @@ class EventMailScheduler(models.Model):
     # flake8: noqa: C901
     def execute(self):
         now = fields.Datetime.now()
+        delay_time = timedelta(minutes=1)
+        start_time = datetime.now() + delay_time
         for mail in self:
 
             # Hae aktiivisen sivuston rajoitetut sähköpostipohjat
@@ -67,7 +70,8 @@ class EventMailScheduler(models.Model):
                     if is_mail_valid:
                         mail.write({"mail_registration_ids": lines})
                         self.update_feedback_survey(mail)
-                        mail.mail_registration_ids.execute()
+                        
+                        mail.mail_registration_ids.with_delay(eta=start_time).execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
                         if mail_was_sent:
@@ -92,7 +96,7 @@ class EventMailScheduler(models.Model):
                                         }
                                     )
 
-                            mail.event_id.mail_attendees(mail.template_id.id)
+                            mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
                             mail.write({"mail_sent": True})
 
             else:
@@ -105,7 +109,7 @@ class EventMailScheduler(models.Model):
                 if is_mail_valid:
                     mail.write({"mail_registration_ids": lines})
                     self.update_feedback_survey(mail)
-                    mail.mail_registration_ids.execute()
+                    mail.mail_registration_ids.with_delay(eta=start_time).execute()
                 else:
                     mail_was_sent = self.check_and_send_mail(mail)
                     if mail_was_sent:
@@ -128,6 +132,6 @@ class EventMailScheduler(models.Model):
                                     }
                                 )
 
-                        mail.event_id.mail_attendees(mail.template_id.id)
+                        mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
                         mail.write({"mail_sent": True})
         return True

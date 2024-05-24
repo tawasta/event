@@ -28,6 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "mail", "website"],
-    "data": ["views/res_config_settings.xml"],
+    "depends": ["event", "mail", "website", "queue_job",],
+    "data": ['data/queue_job_data.xml',"views/res_config_settings.xml"],
 }
