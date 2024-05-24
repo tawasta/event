@@ -48,8 +48,13 @@ class EventMailScheduler(models.Model):
         now = fields.Datetime.now()
         delay_time = timedelta(minutes=1)
         start_time = datetime.now() + delay_time
+        processed_mail_ids = set()  # Set to track processed mail IDs
         for mail in self:
-            _logger.info("===EXECUTE ALOITUS===")
+            if mail.id in processed_mail_ids:
+                _logger.info(f"Skipping already processed mail with ID {mail.id}")
+                continue
+
+            _logger.info(f"===EXECUTE ALOITUS mail_id: {mail.id}===")
 
             Website = self.env["website"].sudo()
             current_website = Website.get_current_website()
@@ -62,8 +67,8 @@ class EventMailScheduler(models.Model):
                     if is_mail_valid:
                         mail.write({"mail_registration_ids": lines})
                         self.update_feedback_survey(mail)
-                        _logger.info("===LAHETETAAN EXECUTE 1====")
-                        mail.mail_registration_ids.execute()
+                        _logger.info(f"===LAHETETAAN EXECUTE 1 mail_id: {mail.id}===")
+                        mail.mail_registration_ids.with_delay(eta=start_time).execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
                         if mail_was_sent:
@@ -72,76 +77,32 @@ class EventMailScheduler(models.Model):
                                     lambda r: r.state != "cancel"
                                 )
                                 if mail.feedback_survey_id:
-                                    registrations.write(
-                                        {
-                                            "feedback_survey_id": mail.feedback_survey_id.id
-                                        }
-                                    )
-                                elif (
-                                    mail.event_id.feedback_survey_id
-                                    and not mail.feedback_survey_id
-                                ):
-                                    registrations.write(
-                                        {
-                                            "feedback_survey_id": mail.event_id.feedback_survey_id.id
-                                        }
-                                    )
-                            _logger.info("===LAHETETAAN MAIL ATTENDEES 1===")
-                            mail.event_id.mail_attendees(mail.template_id.id)
+                                    registrations.write({"feedback_survey_id": mail.feedback_survey_id.id})
+                                elif (mail.event_id.feedback_survey_id and not mail.feedback_survey_id):
+                                    registrations.write({"feedback_survey_id": mail.event_id.feedback_survey_id.id})
+                            _logger.info(f"===LAHETETAAN MAIL ATTENDEES 1 mail_id: {mail.id}===")
+                            mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
                             mail.write({"mail_sent": True})
-
             else:
                 lines, is_mail_valid = self.process_registrations_based_on_interval(mail)
                 if is_mail_valid:
                     mail.write({"mail_registration_ids": lines})
                     self.update_feedback_survey(mail)
-                    _logger.info("===LAHETETAAN EXECUTE 2====")
-                    mail.mail_registration_ids.execute()
+                    _logger.info(f"===LAHETETAAN EXECUTE 2 mail_id: {mail.id}===")
+                    mail.mail_registration_ids.with_delay(eta=start_time).execute()
                 else:
                     mail_was_sent = self.check_and_send_mail(mail)
                     if mail_was_sent:
                         if mail.template_id.is_feedback_email:
-                            registrations = mail.event_id.registration_ids.filtered(
-                                lambda r: r.state != "cancel"
-                            )
+                            registrations = mail.event_id.registration_ids.filtered(lambda r: r.state != "cancel")
                             if mail.feedback_survey_id:
-                                registrations.write(
-                                    {"feedback_survey_id": mail.feedback_survey_id.id}
-                                )
-                            elif (
-                                mail.event_id.feedback_survey_id
-                                and not mail.feedback_survey_id
-                            ):
-                                registrations.write(
-                                    {
-                                        "feedback_survey_id": mail.event_id.feedback_survey_id.id
-                                    }
-                                )
-                        _logger.info("===LAHETETAAN MAIL ATTENDEES 2===")
-                        mail.event_id.mail_attendees(mail.template_id.id)
+                                registrations.write({"feedback_survey_id": mail.feedback_survey_id.id})
+                            elif (mail.event_id.feedback_survey_id and not mail.feedback_survey_id):
+                                registrations.write({"feedback_survey_id": mail.event_id.feedback_survey_id.id})
+                        _logger.info(f"===LAHETETAAN MAIL ATTENDEES 2 mail_id: {mail.id}===")
+                        mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
                         mail.write({"mail_sent": True})
-            _logger.info("===EXECUTE LOPPUN===")
-        return True
 
-    @api.model
-    def run(self, autocommit=False):
-        _logger.info("===CRON RUN START===")
-        delay_time = timedelta(minutes=1)
-        start_time = datetime.now() + delay_time
-        schedulers = self.search([
-            ('done', '=', False),
-            ('scheduled_date', '<=', datetime.strftime(fields.datetime.now(), tools.DEFAULT_SERVER_DATETIME_FORMAT))
-        ])
-        for scheduler in schedulers:
-            try:
-                with self.env.cr.savepoint():
-                    self.browse(scheduler.id).with_delay(eta=start_time).execute()
-            except Exception as e:
-                _logger.exception(e)
-                self.invalidate_cache()
-                self._warn_template_error(scheduler, e)
-            else:
-                if autocommit and not getattr(threading.currentThread(), 'testing', False):
-                    self.env.cr.commit()
-        _logger.info("===CRON RUN END===")
+            processed_mail_ids.add(mail.id)
+            _logger.info(f"===EXECUTE LOPPUN mail_id: {mail.id}===")
         return True
