@@ -122,3 +122,26 @@ class EventMailScheduler(models.Model):
                         mail.write({"mail_sent": True})
             _logger.info("===EXECUTE LOPPUN===")
         return True
+
+    @api.model
+    def run(self, autocommit=False):
+        _logger.info("===CRON RUN START===")
+        delay_time = timedelta(minutes=1)
+        start_time = datetime.now() + delay_time
+        schedulers = self.search([
+            ('done', '=', False),
+            ('scheduled_date', '<=', datetime.strftime(fields.datetime.now(), tools.DEFAULT_SERVER_DATETIME_FORMAT))
+        ])
+        for scheduler in schedulers:
+            try:
+                with self.env.cr.savepoint():
+                    self.browse(scheduler.id).with_delay(eta=start_time).execute()
+            except Exception as e:
+                _logger.exception(e)
+                self.invalidate_cache()
+                self._warn_template_error(scheduler, e)
+            else:
+                if autocommit and not getattr(threading.currentThread(), 'testing', False):
+                    self.env.cr.commit()
+        _logger.info("===CRON RUN END===")
+        return True
