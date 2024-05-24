@@ -1,5 +1,6 @@
 from odoo import fields, models
 from datetime import datetime, timedelta
+import logging
 
 
 class EventMailScheduler(models.Model):
@@ -70,7 +71,7 @@ class EventMailScheduler(models.Model):
                     if is_mail_valid:
                         mail.write({"mail_registration_ids": lines})
                         self.update_feedback_survey(mail)
-                        
+                        logging.info("===LAHETETAAN EXECUTE====");
                         mail.mail_registration_ids.with_delay(eta=start_time).execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
@@ -109,6 +110,7 @@ class EventMailScheduler(models.Model):
                 if is_mail_valid:
                     mail.write({"mail_registration_ids": lines})
                     self.update_feedback_survey(mail)
+                    logging.info("===LAHETETAAN EXECUTE 2====");
                     mail.mail_registration_ids.with_delay(eta=start_time).execute()
                 else:
                     mail_was_sent = self.check_and_send_mail(mail)
