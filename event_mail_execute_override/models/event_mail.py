@@ -1,8 +1,24 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, SUPERUSER_ID
 from datetime import datetime, timedelta
 import logging
 
 _logger = logging.getLogger(__name__)
+
+class EventRegistration(models.Model):
+    _inherit = "event.registration"
+
+
+    def write(self, vals):
+        ret = super(EventRegistration, self).write(vals)
+
+        if vals.get('state') == 'open':
+            logging.info("====WRTIE FUNKTIO====");
+            # auto-trigger after_sub (on subscribe) mail schedulers, if needed
+            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
+            logging.info(onsubscribe_schedulers);
+            onsubscribe_schedulers.with_user(SUPERUSER_ID).execute()
+
+        return ret
 
 class EventMailScheduler(models.Model):
     _inherit = "event.mail"
