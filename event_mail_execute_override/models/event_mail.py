@@ -4,21 +4,6 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class EventRegistration(models.Model):
-    _inherit = "event.registration"
-
-
-    def write(self, vals):
-        ret = super(EventRegistration, self).write(vals)
-
-        if vals.get('state') == 'open':
-            logging.info("====WRTIE FUNKTIO====");
-            # auto-trigger after_sub (on subscribe) mail schedulers, if needed
-            onsubscribe_schedulers = self.mapped('event_id.event_mail_ids').filtered(lambda s: s.interval_type == 'after_sub')
-            logging.info(onsubscribe_schedulers);
-            onsubscribe_schedulers.with_user(SUPERUSER_ID).execute()
-
-        return ret
 
 class EventMailScheduler(models.Model):
     _inherit = "event.mail"
@@ -84,7 +69,7 @@ class EventMailScheduler(models.Model):
                         mail.write({"mail_registration_ids": lines})
                         self.update_feedback_survey(mail)
                         _logger.info(f"===LAHETETAAN EXECUTE 1 mail_id: {mail.id}===")
-                        mail.mail_registration_ids.with_delay(eta=start_time).execute()
+                        mail.mail_registration_ids.execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
                         if mail_was_sent:
@@ -97,7 +82,7 @@ class EventMailScheduler(models.Model):
                                 elif (mail.event_id.feedback_survey_id and not mail.feedback_survey_id):
                                     registrations.write({"feedback_survey_id": mail.event_id.feedback_survey_id.id})
                             _logger.info(f"===LAHETETAAN MAIL ATTENDEES 1 mail_id: {mail.id}===")
-                            mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
+                            mail.event_id.mail_attendees(mail.template_id.id)
                             mail.write({"mail_sent": True})
             else:
                 lines, is_mail_valid = self.process_registrations_based_on_interval(mail)
@@ -105,7 +90,7 @@ class EventMailScheduler(models.Model):
                     mail.write({"mail_registration_ids": lines})
                     self.update_feedback_survey(mail)
                     _logger.info(f"===LAHETETAAN EXECUTE 2 mail_id: {mail.id}===")
-                    mail.mail_registration_ids.with_delay(eta=start_time).execute()
+                    mail.mail_registration_ids.execute()
                 else:
                     mail_was_sent = self.check_and_send_mail(mail)
                     if mail_was_sent:
@@ -116,7 +101,7 @@ class EventMailScheduler(models.Model):
                             elif (mail.event_id.feedback_survey_id and not mail.feedback_survey_id):
                                 registrations.write({"feedback_survey_id": mail.event_id.feedback_survey_id.id})
                         _logger.info(f"===LAHETETAAN MAIL ATTENDEES 2 mail_id: {mail.id}===")
-                        mail.event_id.with_delay(eta=start_time).mail_attendees(mail.template_id.id)
+                        mail.event_id.mail_attendees(mail.template_id.id)
                         mail.write({"mail_sent": True})
 
             processed_mail_ids.add(mail.id)

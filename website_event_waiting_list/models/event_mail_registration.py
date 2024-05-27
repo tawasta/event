@@ -1,4 +1,5 @@
 from odoo import fields, models
+import logging
 
 
 class EventMailRegistration(models.Model):
@@ -37,6 +38,8 @@ class EventMailRegistration(models.Model):
             )
         )
         for reg_mail in todo:
+            logging.info("===SEND EMAIL====");
+            logging.info(reg_mail);
             reg_mail.scheduler_id.template_id.send_mail(
                 reg_mail.registration_id.id, force_send=True
             )
