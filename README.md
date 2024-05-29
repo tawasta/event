@@ -22,6 +22,7 @@ addon | version | maintainers | summary
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
+[event_optional_attendee_partner_id](event_optional_attendee_partner_id/) | 14.0.1.0.0 |  | Make attendee_partner_id field optional in event.registrations tree view.
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 14.0.1.1.0 |  | Event Recaptcha
 [event_registration_end_date_automation](event_registration_end_date_automation/) | 14.0.1.1.1 |  | Event registration end date automation

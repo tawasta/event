@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2024- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,19 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Event Mail Execute Override",
-    "summary": "Event Mail Execute Override",
-    "version": "14.0.1.0.1",
+    "name": "Event Optional Show Attendee Partner ID",
+    "summary": "Make attendee_partner_id field optional in event.registrations tree view.",
+    "version": "14.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "event",
-        "mail",
-        "website",
-    ],
-    "data": ["views/res_config_settings.xml"],
+    "depends": ["event"],
+    "data": ["views/event_registration.xml"],
 }

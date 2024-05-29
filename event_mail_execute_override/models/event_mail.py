@@ -1,5 +1,6 @@
-from odoo import fields, models
 from datetime import datetime, timedelta
+
+from odoo import fields, models
 
 
 class EventMailScheduler(models.Model):
@@ -50,7 +51,7 @@ class EventMailScheduler(models.Model):
     def execute(self):
         now = fields.Datetime.now()
         delay_time = timedelta(minutes=1)
-        start_time = datetime.now() + delay_time
+        datetime.now() + delay_time
         for mail in self:
 
             # Hae aktiivisen sivuston rajoitetut sähköpostipohjat
@@ -70,7 +71,7 @@ class EventMailScheduler(models.Model):
                     if is_mail_valid:
                         mail.write({"mail_registration_ids": lines})
                         self.update_feedback_survey(mail)
-                        
+
                         mail.mail_registration_ids.execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
