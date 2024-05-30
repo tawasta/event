@@ -20,6 +20,7 @@
 
 
 from odoo import _, models
+from odoo.exceptions import UserError
 
 
 class SurveyUserInputXlsx(models.AbstractModel):
@@ -45,6 +46,18 @@ class SurveyUserInputXlsx(models.AbstractModel):
 
         # Create headers for the columns
         if event_registration_recs:
+            prev_event_name = event_registration_recs[0].event_id.name
+            for event_reg in event_registration_recs:
+                if event_reg.event_id.name != prev_event_name:
+                    raise UserError(
+                        _(
+                            "You are only able to export the answers of a"
+                            " single event into XLSX file. Please select"
+                            " an event and the attendee list of that event"
+                            "to export the answers."
+                        )
+                    )
+                prev_event_name = event_reg.event_id.name
             sheet_header = (
                 "Answers for the event: " + event_registration_recs[0].event_id.name
             )
