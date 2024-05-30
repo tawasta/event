@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 14.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 14.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
+[event_survey_results_to_excel](event_survey_results_to_excel/) | 14.0.1.0.0 |  | Create a xlsx report from event's questions
 [event_template_disable_after_create](event_template_disable_after_create/) | 14.0.1.0.0 |  | Disable changing template after creation
 [event_template_required](event_template_required/) | 14.0.1.0.0 |  | Always require a template for events
 [event_track_remove_translatable_name](event_track_remove_translatable_name/) | 14.0.1.0.0 |  | Event Track Remove Translatable
