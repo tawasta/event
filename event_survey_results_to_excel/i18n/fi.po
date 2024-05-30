@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_survey_results_to_excel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-30 07:23+0000\n"
+"PO-Revision-Date: 2024-05-30 07:23+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_survey_results_to_excel
+#: model:ir.actions.report,print_report_name:event_survey_results_to_excel.survey_user_input_xlsx
+msgid "'Event Attendee Answers'"
+msgstr "Osallistujien vastaukset"
+
+#. module: event_survey_results_to_excel
+#: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: event_survey_results_to_excel
+#: code:addons/event_survey_results_to_excel/report/event_questions_report.py:0
+#, python-format
+msgid "Event Answers"
+msgstr "Tapahtuman vastaukset"
+
+#. module: event_survey_results_to_excel
+#: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx__id
+msgid "ID"
+msgstr ""
+
+#. module: event_survey_results_to_excel
+#: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: event_survey_results_to_excel
+#: model:ir.actions.report,name:event_survey_results_to_excel.survey_user_input_xlsx
+msgid "Print Event Answers to XLSX"
+msgstr "Vie tapahtuman vastaukset XLSX tiedostoon"
+
+#. module: event_survey_results_to_excel
+#: model:ir.model,name:event_survey_results_to_excel.model_report_survey_user_input_report_xlsx_user_input_report_xlsx
+msgid "Survey User Input Report XLSX"
+msgstr ""
