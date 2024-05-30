@@ -37,6 +37,12 @@ class SurveyUserInputXlsx(models.AbstractModel):
         col_amount = 0
         answer_lengths = {}
 
+        # title_index_dict is a dict to keep track on what column the
+        # answer should be placed.
+        # The answers can be in different order on each event.registration rec,
+        # so the answers can't just be placed from left to right.
+        title_index_dict = {}
+
         # Create headers for the columns
         if event_registration_recs:
             sheet_header = (
@@ -45,44 +51,60 @@ class SurveyUserInputXlsx(models.AbstractModel):
             sheet.write(row, col, sheet_header, workbook.add_format({"bold": True}))
             row += 1
 
-            col_amount = len(event_registration_recs[0].registration_answer_ids) + 1
+            col_amount = len(event_registration_recs[0].event_id.question_ids) + 1
             for i in range(col_amount):
                 answer_lengths[i] = []
 
             sheet.write(row, col, "Responder name", workbook.add_format({"bold": True}))
             answer_lengths[col].append(len("Responder name"))
+            title_index_dict["Responder name"] = 0
             col += 1
 
-            for question in event_registration_recs[0].registration_answer_ids:
-                question_title = question.question_id.title
+            for question in event_registration_recs[0].event_id.question_ids:
+                question_title = question.title
                 sheet.write(
                     row, col, question_title, workbook.add_format({"bold": True})
                 )
+                title_index_dict[str(question_title)] = col
                 answer_lengths[col].append(len(question_title))
                 col += 1
             row += 1
             col = 0
 
         # Put all the answers under the right headers
-        for event_reg_rec in event_registration_recs:
-            sheet.write(row, col, event_reg_rec.name)
-            answer_lengths[col].append(len(event_reg_rec.name))
-            col += 1
+        if event_registration_recs:
 
-            for question in event_reg_rec.registration_answer_ids:
-                if question.question_type == "text_box":
-                    sheet.write(row, col, question.value_text_box)
-                    answer_lengths[col].append(len(question.value_text_box))
-                    col += 1
+            for event_reg_rec in event_registration_recs:
+                sheet.write(row, title_index_dict["Responder name"], event_reg_rec.name)
+                answer_lengths[title_index_dict["Responder name"]].append(
+                    len(event_reg_rec.name)
+                )
 
-                if question.question_type == "simple_choice":
-                    sheet.write(row, col, question.value_answer_id.name)
-                    answer_lengths[col].append(len(question.value_answer_id.name))
-                    col += 1
+                for question in event_reg_rec.registration_answer_ids:
 
-            row += 1
-            col = 0
+                    question_title = str(question.question_id.title)
+                    if question.question_type == "text_box":
+                        sheet.write(
+                            row,
+                            title_index_dict[question_title],
+                            question.value_text_box,
+                        )
+                        answer_lengths[title_index_dict[question_title]].append(
+                            len(question.value_text_box)
+                        )
 
-        # Adjust the width of the columns to fit the longest answer
-        for i in range(col_amount):
-            sheet.set_column(i, i, max(answer_lengths[i]) + 2)
+                    if question.question_type == "simple_choice":
+                        sheet.write(
+                            row,
+                            title_index_dict[question_title],
+                            question.value_answer_id.name,
+                        )
+                        answer_lengths[title_index_dict[question_title]].append(
+                            len(question.value_answer_id.name)
+                        )
+
+                row += 1
+
+            # Adjust the width of the columns to fit the longest answer
+            for i in range(col_amount):
+                sheet.set_column(i, i, max(answer_lengths[i]) + 2)

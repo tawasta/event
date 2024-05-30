@@ -18,12 +18,12 @@ msgstr ""
 #. module: event_survey_results_to_excel
 #: model:ir.actions.report,print_report_name:event_survey_results_to_excel.survey_user_input_xlsx
 msgid "'Event Attendee Answers'"
-msgstr "Osallistujien vastaukset"
+msgstr "'Osallistujien vastaukset'"
 
 #. module: event_survey_results_to_excel
 #: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Näytä nimi"
 
 #. module: event_survey_results_to_excel
 #: code:addons/event_survey_results_to_excel/report/event_questions_report.py:0
@@ -34,12 +34,12 @@ msgstr "Tapahtuman vastaukset"
 #. module: event_survey_results_to_excel
 #: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: event_survey_results_to_excel
 #: model:ir.model.fields,field_description:event_survey_results_to_excel.field_report_survey_user_input_report_xlsx_user_input_report_xlsx____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Viimeksi päivitetty"
 
 #. module: event_survey_results_to_excel
 #: model:ir.actions.report,name:event_survey_results_to_excel.survey_user_input_xlsx
@@ -49,4 +49,4 @@ msgstr "Vie tapahtuman vastaukset XLSX tiedostoon"
 #. module: event_survey_results_to_excel
 #: model:ir.model,name:event_survey_results_to_excel.model_report_survey_user_input_report_xlsx_user_input_report_xlsx
 msgid "Survey User Input Report XLSX"
-msgstr ""
+msgstr "Kyselyn XLSX raportti"
