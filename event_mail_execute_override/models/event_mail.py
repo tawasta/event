@@ -46,7 +46,8 @@ class EventMailScheduler(models.Model):
             and mail.scheduled_date <= now
             and mail.notification_type == "mail"
             and (mail.interval_type != "before_event" or mail.event_id.date_end > now)
-            and mail.event_id.stage_id.id not in mail.event_id.website_id.blocked_states_ids.ids
+            and mail.event_id.stage_id.id
+            not in mail.event_id.website_id.blocked_states_ids.ids
         ):
             return True
         return False
