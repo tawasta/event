@@ -46,6 +46,7 @@ class EventMailScheduler(models.Model):
             and mail.scheduled_date <= now
             and mail.notification_type == "mail"
             and (mail.interval_type != "before_event" or mail.event_id.date_end > now)
+            and mail.event_id.stage_id.id not in mail.event_id.website_id.blocked_states_ids.ids
         ):
             return True
         return False
@@ -61,7 +62,11 @@ class EventMailScheduler(models.Model):
             Website = self.env["website"].sudo()
             current_website = Website.get_current_website()
             restricted_templates = current_website.restricted_mail_template_ids.ids
+            blocked_states_ids = current_website.blocked_states_ids.ids
             is_restricted_template = mail.template_id.id in restricted_templates
+
+            if mail.event_id.stage_id.id in blocked_states_ids:
+                continue
 
             if mail.event_id.date_end < now:
                 if not is_restricted_template:
