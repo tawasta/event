@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="registration_attendee_details"
+        inherit_id="website_event.registration_attendee_details"
+    >
+        <xpath
+            expr="//label[./following-sibling::input[@type='tel']]"
+            position="replace"
+        >
+            <label>Phone</label>
+        </xpath>
+
+        <xpath expr="//input[@type='tel']" position="attributes">
+            <attribute name="required">true</attribute>
+        </xpath>
+    </template>
+</odoo>

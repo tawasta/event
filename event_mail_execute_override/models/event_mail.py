@@ -1,9 +1,24 @@
+from datetime import datetime, timedelta
+
 from odoo import fields, models
 
 
 class EventMailScheduler(models.Model):
     # 1. Private attributes
     _inherit = "event.mail"
+
+    def update_feedback_survey(self, mail):
+        registrations = mail.mail_registration_ids.mapped("registration_id")
+        if (
+            hasattr(mail.template_id, "is_feedback_email")
+            and mail.template_id.is_feedback_email
+        ):
+            if mail.feedback_survey_id:
+                registrations.write({"feedback_survey_id": mail.feedback_survey_id.id})
+            elif mail.event_id.feedback_survey_id and not mail.feedback_survey_id:
+                registrations.write(
+                    {"feedback_survey_id": mail.event_id.feedback_survey_id.id}
+                )
 
     def process_registrations_based_on_interval(self, mail):
         # Apufunktio, joka käsittelee rekisteröintirivit interval_type perusteella
@@ -35,8 +50,11 @@ class EventMailScheduler(models.Model):
             return True
         return False
 
+    # flake8: noqa: C901
     def execute(self):
         now = fields.Datetime.now()
+        delay_time = timedelta(minutes=1)
+        datetime.now() + delay_time
         for mail in self:
 
             # Hae aktiivisen sivuston rajoitetut sähköpostipohjat
@@ -55,10 +73,35 @@ class EventMailScheduler(models.Model):
                     # Jos mail on validi ja on käsiteltyjä rivejä, päivitä mail_registration_ids
                     if is_mail_valid:
                         mail.write({"mail_registration_ids": lines})
+                        self.update_feedback_survey(mail)
+
                         mail.mail_registration_ids.execute()
                     else:
                         mail_was_sent = self.check_and_send_mail(mail)
                         if mail_was_sent:
+                            if (
+                                hasattr(mail.template_id, "is_feedback_email")
+                                and mail.template_id.is_feedback_email
+                            ):
+                                registrations = mail.event_id.registration_ids.filtered(
+                                    lambda r: r.state != "cancel"
+                                )
+                                if mail.feedback_survey_id:
+                                    registrations.write(
+                                        {
+                                            "feedback_survey_id": mail.feedback_survey_id.id
+                                        }
+                                    )
+                                elif (
+                                    mail.event_id.feedback_survey_id
+                                    and not mail.feedback_survey_id
+                                ):
+                                    registrations.write(
+                                        {
+                                            "feedback_survey_id": mail.event_id.feedback_survey_id.id
+                                        }
+                                    )
+
                             mail.event_id.mail_attendees(mail.template_id.id)
                             mail.write({"mail_sent": True})
 
@@ -71,10 +114,32 @@ class EventMailScheduler(models.Model):
                 # Jos mail on validi ja on käsiteltyjä rivejä, päivitä mail_registration_ids
                 if is_mail_valid:
                     mail.write({"mail_registration_ids": lines})
+                    self.update_feedback_survey(mail)
                     mail.mail_registration_ids.execute()
                 else:
                     mail_was_sent = self.check_and_send_mail(mail)
                     if mail_was_sent:
+                        if (
+                            hasattr(mail.template_id, "is_feedback_email")
+                            and mail.template_id.is_feedback_email
+                        ):
+                            registrations = mail.event_id.registration_ids.filtered(
+                                lambda r: r.state != "cancel"
+                            )
+                            if mail.feedback_survey_id:
+                                registrations.write(
+                                    {"feedback_survey_id": mail.feedback_survey_id.id}
+                                )
+                            elif (
+                                mail.event_id.feedback_survey_id
+                                and not mail.feedback_survey_id
+                            ):
+                                registrations.write(
+                                    {
+                                        "feedback_survey_id": mail.event_id.feedback_survey_id.id
+                                    }
+                                )
+
                         mail.event_id.mail_attendees(mail.template_id.id)
                         mail.write({"mail_sent": True})
         return True

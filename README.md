@@ -12,7 +12,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 14.0.1.0.1 |  | Adds audit log rules for events
-[event_batch](event_batch/) | 14.0.1.2.1 |  | Event Batch
+[event_batch](event_batch/) | 14.0.1.2.1 |  | Allows creating student batches for event registrations
 [event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From
@@ -22,14 +22,17 @@ addon | version | maintainers | summary
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
+[event_optional_attendee_partner_id](event_optional_attendee_partner_id/) | 14.0.1.0.0 |  | Make attendee_partner_id field optional in event.registrations tree view.
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 14.0.1.1.0 |  | Event Recaptcha
 [event_registration_end_date_automation](event_registration_end_date_automation/) | 14.0.1.1.1 |  | Event registration end date automation
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 14.0.1.0.1 |  | Removes translatable name and description fields from Event.
+[event_sale_autoconfirm](event_sale_autoconfirm/) | 14.0.1.0.0 |  | Autoconfirm registrations even if not paid
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 14.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 14.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 14.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
+[event_survey_results_to_excel](event_survey_results_to_excel/) | 14.0.1.0.0 |  | Create a xlsx report from event's questions
 [event_template_disable_after_create](event_template_disable_after_create/) | 14.0.1.0.0 |  | Disable changing template after creation
 [event_template_required](event_template_required/) | 14.0.1.0.0 |  | Always require a template for events
 [event_track_remove_translatable_name](event_track_remove_translatable_name/) | 14.0.1.0.0 |  | Event Track Remove Translatable
@@ -40,6 +43,7 @@ addon | version | maintainers | summary
 [website_event_events_snippet](website_event_events_snippet/) | 14.0.1.0.3 |  | Advanced Events Snippet for Website
 [website_event_frontend_customization](website_event_frontend_customization/) | 14.0.1.1.0 |  | Customization options to Website Event Frontends
 [website_event_hide_organizer_phone](website_event_hide_organizer_phone/) | 14.0.1.0.0 |  | Hides organizer phone number from website and mail templates
+[website_event_mandatory_phone_number](website_event_mandatory_phone_number/) | 14.0.1.0.1 |  | Make phone number into a mandatory field
 [website_event_online_event](website_event_online_event/) | 14.0.1.4.0 |  | Module to manage online and hybrid events. Includes a video conference link.
 [website_event_override](website_event_override/) | 14.0.1.0.0 |  | The events function of the website_event module is overrun, because there is a logic error in the pager and the order of events
 [website_event_private_event](website_event_private_event/) | 14.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
@@ -62,7 +66,7 @@ addon | version | maintainers | summary
 [website_event_track_request_time](website_event_track_request_time/) | 14.0.0.0.0 |  | Requested track times
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 14.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.7 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.8 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list
 [website_my_events](website_my_events/) | 14.0.1.1.0 |  | My events in website portal
 
