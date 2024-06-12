@@ -2,10 +2,13 @@
 odoo.define("event_recaptcha.event", function (require) {
     "use strict";
 
-    var SomeWidgetName = require("website_event.website_event"); // Korvaa oikealla module ja widget nimellä
+    var WebsiteEvent = require("website_event.website_event");
     var ajax = require("web.ajax");
+    var core = require("web.core");
 
-    SomeWidgetName.include({
+    var _t = core._t;
+
+    WebsiteEvent.include({
         /**
          * @override
          */
@@ -16,8 +19,10 @@ odoo.define("event_recaptcha.event", function (require) {
             var $form = $(ev.currentTarget).closest("form");
             var $button = $(ev.currentTarget).closest('[type="submit"]');
             var post = {};
-            $("#registration_form table").siblings(".alert").remove();
-            $("#registration_form select").each(function () {
+            if ($($button).attr("name") === "waiting_list_button") {
+                post.waiting_list_button = "True";
+            }
+            $form.find("select").each(function () {
                 post[$(this).attr("name")] = $(this).val();
             });
             var tickets_ordered = _.some(
@@ -28,10 +33,8 @@ odoo.define("event_recaptcha.event", function (require) {
             if (!tickets_ordered) {
                 $('<div class="alert alert-info"/>')
                     .text(_t("Please select at least one ticket."))
-                    .insertAfter("#registration_form table");
-                return new Promise(function () {
-                    return undefined;
-                });
+                    .insertAfter($form.find("table"));
+                return new Promise(function () {});
             }
             $button.attr("disabled", true);
             ajax.jsonRpc($form.attr("action"), "call", post).then(function (modal) {
@@ -39,7 +42,6 @@ odoo.define("event_recaptcha.event", function (require) {
                 $modal.modal({backdrop: "static", keyboard: false});
                 $modal.find(".modal-body > div").removeClass("container");
                 $modal.appendTo("body").modal();
-                // Init fields
                 $modal.on("click", ".btn-primary", function (event) {
                     var $attendee_form = $modal.find("#attendee_registration").first();
                     var submit_values = self._submitForm($attendee_form, $modal, post);
@@ -56,6 +58,7 @@ odoo.define("event_recaptcha.event", function (require) {
                 });
             });
         },
+
         /**
          * Before submitting the answers, they are first validated and prepared for post.
          *
@@ -71,7 +74,7 @@ odoo.define("event_recaptcha.event", function (require) {
             $("#error-message").text("");
 
             if (recaptcha === "") {
-                console.log("===CATPCHA KUNTOON=====");
+                console.log("===CAPTCHA MISSING=====");
                 var err_message = "Please check Captcha";
                 $("#err").text(err_message);
                 error = true;
