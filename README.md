@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 14.0.1.0.1 |  | Removes translatable name and description fields from Event.
 [event_sale_autoconfirm](event_sale_autoconfirm/) | 14.0.1.0.0 |  | Autoconfirm registrations even if not paid
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 14.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
+[event_sale_order_prevention](event_sale_order_prevention/) | 14.0.1.0.0 |  | Event Sale Order Prevention
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 14.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 14.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
