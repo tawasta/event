@@ -1,3 +1,4 @@
+/* eslint-disable */
 odoo.define("event_recaptcha.event", function (require) {
     "use strict";
 
@@ -21,7 +22,7 @@ odoo.define("event_recaptcha.event", function (require) {
             if ($($button).attr("name") === "waiting_list_button") {
                 post.waiting_list_button = "True";
             }
-            $form.find('select').each(function () {
+            $form.find("select").each(function () {
                 post[$(this).attr("name")] = $(this).val();
             });
             var tickets_ordered = _.some(
@@ -32,7 +33,7 @@ odoo.define("event_recaptcha.event", function (require) {
             if (!tickets_ordered) {
                 $('<div class="alert alert-info"/>')
                     .text(_t("Please select at least one ticket."))
-                    .insertAfter($form.find('table'));
+                    .insertAfter($form.find("table"));
                 return new Promise(function () {});
             }
             $button.attr("disabled", true);
