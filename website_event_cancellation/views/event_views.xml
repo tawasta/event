@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_cancel" model="ir.ui.view">
+        <field name="name">event.type.form.cancel</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form" />
+        <field name="arch" type="xml">
+            <div name="event_type_title" position="after">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    name="event_type_attendees_cancel_before"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="has_cancel" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="has_cancel" />
+                        <div class="row">
+                            <div
+                                class="col-lg-8 mt16"
+                                invisible="has_cancel != True"
+                            >
+                                <field
+                                    name="cancel_interval_nbr"
+                                    nolabel="1"
+                                    class="oe_inline mr-3"
+                                />
+                                <field
+                                    name="cancel_interval_unit"
+                                    nolabel="1"
+                                    class="oe_inline mr-3"
+                                />
+                                <div class="mt4">
+                                    <strong>
+                                        <span>before Event</span>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_cancel" model="ir.ui.view">
+        <field name="name">event.event.form.cancel</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="date_tz" position="before">
+                <field name="has_cancel" />
+                <label
+                    for="cancel_interval_nbr"
+                    string="Cancel registration"
+                    invisible="has_cancel != True"
+                />
+                <div class="o_row" invisible="has_cancel != True" >
+                    <field name="cancel_interval_nbr" nolabel="1" class="oe_inline" />
+                    <field name="cancel_interval_unit" nolabel="1" class="oe_inline" />
+                    <div class="mt4">
+                        <strong>
+                            <span>before Event</span>
+                        </strong>
+                    </div>
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>

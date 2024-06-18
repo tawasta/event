@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Cancel registration views -->
+    <template id="cancel_registration" name="Cancel Registration">
+        <t t-call="website_event.layout">
+            <div class="container my-5 o_wereg_confirmed">
+                <div class="row mb-4">
+                    <div name="title-div" class="col-12 text-center">
+                        <t t-if="registration.state == 'cancel'">
+                            <h3 class="text-danger">Your registration to <t t-esc="event.name" /> has been cancelled</h3>
+                        </t>
+                        <t t-elif="registration.state in ['open', 'done', 'draft']">
+                            <h3>You are registered to <t t-esc="event.name" />.</h3>
+                            <t t-if="event.able_to_cancel">
+                                <p class="py-2">Cancel your registration here:</p>
+                            </t>
+                            <t t-else="">
+                                <p class="py-2">Registration cannot be cancelled after <t t-esc="event.cancel_before_date" t-options="{'widget': 'datetime', 'format': 'short'}" />.</p>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+                <div name="button-div" class="text-center mb-4">
+                    <!-- Buttons trigger modals -->
+                    <t t-if="registration.state != 'cancel' and event.able_to_cancel">
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#cancel_modal"
+                        ><i class="fa fa-fw fa-times-circle" /> Cancel registration
+                        </button>
+                    </t>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xs-12 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Attendee Information</h5>
+                                <p class="card-text"><strong>Name: </strong>
+                                    <t t-if="registration.name" t-esc="registration.name" />
+                                    <t t-else="">N/A</t>
+                                </p>
+                                <p class="card-text"><strong>Email: </strong>
+                                    <i class="fa fa-envelope mr-2" />
+                                    <t t-if="registration.email" t-esc="registration.email" />
+                                    <t t-else="">N/A</t>
+                                </p>
+                                <p class="card-text"><strong>Phone: </strong>
+                                    <i class="fa fa-phone mr-2" />
+                                    <t t-if="registration.phone" t-esc="registration.phone" />
+                                    <t t-else="">N/A</t>
+                                </p>
+                                <p class="card-text"><strong>Ticket: </strong>
+                                    <i class="fa fa-ticket mr-2" />
+                                    <t t-if="registration.event_ticket_id" t-esc="registration.event_ticket_id.name" />
+                                    <t t-else="">N/A</t>
+                                    (ref: <t t-esc="registration.id" />)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xs-12 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Information</h5>
+                                <p class="card-text"><strong>Start: </strong>
+                                    <span itemprop="startDate" t-esc="event.date_begin_located" />
+                                </p>
+                                <p class="card-text"><strong>End: </strong>
+                                    <span itemprop="endDate" t-esc="event.date_end_located" />
+                                </p>
+                                <h5 class="mt-4">Location</h5>
+                                <p class="card-text">
+                                    <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}" />
+                                    <a itemprop="location" t-att-href="event.google_map_link()" target="_BLANK" t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}" />
+                                    <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]}" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Confirm cancel modal -->
+                <div
+                    class="modal fade"
+                    id="cancel_modal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="cancel_modal"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form
+                                id="cancel-modal"
+                                t-attf-action="{{request.httprequest.path}}"
+                                method="post"
+                                enctype="multipart/form-data"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    t-att-value="request.csrf_token()"
+                                />
+                                <div class="modal-header">
+                                    <h4
+                                        class="modal-title hidden"
+                                        id="delete_language_title"
+                                    >Cancel registration</h4>
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <p>You are about to <strong>cancel</strong> your registration</p>
+                                            <p>Are you sure?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                    >Close</button>
+                                    <button
+                                        id="cancel-registration"
+                                        class="btn btn-danger"
+                                        type="submit"
+                                    >Cancel registration</button>
+                                </div>
+                                <input
+                                    type="hidden"
+                                    name="new_state"
+                                    t-attf-value="cancel"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="current_state"
+                                    t-attf-value="{{registration.state}}"
+                                />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
