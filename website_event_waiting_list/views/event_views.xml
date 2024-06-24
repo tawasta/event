@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- EVENT.TYPE VIEWS -->
+    <record id="view_event_type_form_waiting_list" model="ir.ui.view">
+        <field name="name">event.type.form</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='event_type_title']" position="after">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    name="event_type_attendees_waiting_list"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="waiting_list" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="waiting_list" />
+                        <div class="row">
+                            <div class="col-lg-8 mt16 text-muted">
+                                When registrations limit is reached add further registrations
+                                to a waiting list.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record id="view_event_form_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.form</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']//button[1]" position="after">
+                <button
+                    name="%(event.act_event_registration_from_event)d"
+                    type="action"
+                    context="{'search_default_waiting': True}"
+                    class="oe_stat_button"
+                    icon="fa-users"
+                    help="Total Registrations for this Event"
+                >
+                    <field name="seats_waiting" widget="statinfo" string="Waiting" />
+                </button>
+            </xpath>
+            <field name="badge_format" position="before">
+                <field name="waiting_list" />
+            </field>
+        </field>
+    </record>
+    <record id="view_event_tree_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+            <field name="seats_taken" position="after">
+                <field
+                    name="seats_waiting"
+                    string="Waiting Seats"
+                    sum="Total"
+                    readonly="1"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_event_kanban_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.kanban</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_kanban" />
+        <field name="arch" type="xml">
+            <field name="seats_reserved" position="before">
+                <field name="seats_waiting" />
+            </field>
+            <xpath expr="//div[@class='col-8 py-2 px-3 d-flex flex-column justify-content-between pt-3']/div" position="inside">
+                <t t-if="record.seats_waiting.raw_value &gt; 0">
+                    <div class="d-flex ps-1">
+                        <i class="fa fa-group mt-1 me-2 text-center" title="Waiting"/>
+                        <span t-out="record.seats_waiting.raw_value" class="me-1"/> Waiting
+                    </div>
+                </t>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_calendar_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.calendar</field>
+        <field name="model">event.event</field>
+        <field eval="2" name="priority" />
+        <field name="inherit_id" ref="event.view_event_calendar" />
+        <field name="arch" type="xml">
+            <field name="seats_reserved" position="after">
+                <field name="seats_waiting" />
+            </field>
+        </field>
+    </record>
+    <!-- EVENT.REGISTRATION VIEWS -->
+    <record id="view_event_registration_tree_waiting_list" model="ir.ui.view">
+        <field name="name">event.registration.tree</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree" />
+        <field name="arch" type="xml">
+            <button name="action_cancel" position="before">
+                <button
+                    name="action_waiting"
+                    string="Move to Waiting List"
+                    invisible="state != 'draft'"
+                    type="object"
+                    icon="fa-clock-o"
+                />
+            </button>
+            <button name="action_cancel" position="attributes">
+                <attribute name="invisible">context.get('state') not in ('draft', 'open', 'wait')</attribute>
+            </button>
+            <button name="action_confirm" position="attributes">
+                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+            </button>
+        </field>
+    </record>
+    <record id="view_event_registration_form_waiting_list" model="ir.ui.view">
+        <field name="name">event.registration.form</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <button name="action_cancel" position="before">
+                <button
+                    name="action_waiting"
+                    string="Move to Waiting List"
+                    invisible="state != 'draft'"
+                    type="object"
+                />
+            </button>
+            <!-- <button name="action_set_draft" position="attributes">
+                <attribute name="invisible">context.get('state') not in ('cancel', 'done')</attribute>
+            </button> -->
+            <button name="action_cancel" position="attributes">
+                <attribute name="invisible">context.get('state') not in ('draft', 'done', 'wait')</attribute>
+            </button>
+            <button name="action_confirm" position="attributes">
+                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+            </button>
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,open,done,wait</attribute>
+            </field>
+<!--             <field name="event_ticket_id" position="attributes">
+                <attribute name="domain">
+                     [
+                     ('event_id', '=', event_id),
+                     '|', '|', ('seats_limited', '=', False), ('seats_available', '&gt;', 0), ('waiting_list', '=', True)
+                     ]
+                 </attribute>
+            </field> -->
+        </field>
+    </record>
+    <record id="event_registration_view_kanban_waiting_list" model="ir.ui.view">
+        <field name="name">event.registration.kanban</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.event_registration_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+            </xpath>
+            <xpath
+                expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']"
+                position="attributes"
+            >
+                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_registration_search_waiting_list" model="ir.ui.view">
+        <field name="name">event.registration.search</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_registration_search" />
+        <field name="arch" type="xml">
+            <filter name="unconfirmed" position="before">
+                <filter
+                    string="Waiting"
+                    name="waiting"
+                    domain="[('state', '=', 'wait')]"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

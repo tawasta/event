@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- EVENT.TICKET -->
+    <record
+        id="event_event_ticket_view_tree_from_event_waiting_list"
+        model="ir.ui.view"
+    >
+        <field name="name">event.event.ticket.view.tree.from.event</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event" />
+        <field name="arch" type="xml">
+            <field name="seats_taken" position="after">
+                <field
+                    name="seats_waiting"
+                    sum="Total"
+                    width="105px"
+                    string="Waiting"
+                />
+            </field>
+        </field>
+    </record>
+    <record
+        id="event_event_ticket_view_form_from_event_waiting_list"
+        model="ir.ui.view"
+    >
+        <field name="name">event.event.ticket.view.form.from.event</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_form_from_event" />
+        <field name="arch" type="xml">
+            <field name="seats_reserved" position="after">
+                <field name="seats_waiting" />
+            </field>
+        </field>
+    </record>
+    <record
+        id="event_event_ticket_view_kanban_from_event_waiting_list"
+        model="ir.ui.view"
+    >
+        <field name="name">event.event.ticket.view.kanban.from.event</field>
+        <field name="model">event.event.ticket</field>
+        <field
+            name="inherit_id"
+            ref="event.event_event_ticket_view_kanban_from_event"
+        />
+        <field name="arch" type="xml">
+            <field name="seats_reserved" position="after">
+                <field name="seats_waiting" />
+            </field>
+        </field>
+    </record>
+    <record id="event_event_ticket_form_view_waiting_list" model="ir.ui.view">
+        <field name="name">event.event.ticket.view.form</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_form_view" />
+        <field name="arch" type="xml">
+            <field name="seats_reserved" position="after">
+                <field name="seats_waiting" />
+            </field>
+        </field>
+    </record>
+</odoo>
