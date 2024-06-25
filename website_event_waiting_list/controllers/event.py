@@ -147,38 +147,38 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
 
     #     return list(registrations.values())
 
-    # @http.route(
-    #     ['/event/<model("event.event"):event>/registration/manage/<string:code>'],
-    #     type="http",
-    #     auth="public",
-    #     website=True,
-    # )
-    # def confirm_url_template(self, event, code, **post):
-    #     """
-    #     Return correct confirmation page depending on state
-    #     Confirm state changes on post
-    #     """
-    #     for registration in event.sudo().registration_ids:
-    #         if registration.sudo().access_token == code:
-    #             render_values = {
-    #                 "event": event,
-    #                 "registration": registration,
-    #                 "ticket": registration.event_ticket_id,
-    #             }
-    #             if post:
-    #                 new_state = post.get("new_state")
-    #                 cur_state = post.get("current_state")
-    #                 if (
-    #                     cur_state == "wait"
-    #                     and new_state == "open"
-    #                     and event.sudo().seats_available >= 1
-    #                 ):
-    #                     registration.sudo().write({"state": "open"})
-    #                 if new_state == "cancel":
-    #                     registration.sudo().action_cancel()
+    @http.route(
+        ['/event/<model("event.event"):event>/registration/manage/<string:code>'],
+        type="http",
+        auth="public",
+        website=True,
+    )
+    def confirm_url_template(self, event, code, **post):
+        """
+        Return correct confirmation page depending on state
+        Confirm state changes on post
+        """
+        for registration in event.sudo().registration_ids:
+            if registration.sudo().access_token == code:
+                render_values = {
+                    "event": event,
+                    "registration": registration,
+                    "ticket": registration.event_ticket_id,
+                }
+                if post:
+                    new_state = post.get("new_state")
+                    cur_state = post.get("current_state")
+                    if (
+                        cur_state == "wait"
+                        and new_state == "open"
+                        and event.sudo().seats_available >= 1
+                    ):
+                        registration.sudo().write({"state": "open"})
+                    if new_state == "cancel":
+                        registration.sudo().action_cancel()
 
-    #             if registration.sudo().state in ["wait", "cancel", "open"]:
-    #                 return request.render(
-    #                     "website_event_waiting_list.confirm_waiting", render_values
-    #                 )
-    #     return request.render("website.page_404")
+                if registration.sudo().state in ["wait", "cancel", "open"]:
+                    return request.render(
+                        "website_event_waiting_list.confirm_waiting", render_values
+                    )
+        return request.render("website.page_404")
