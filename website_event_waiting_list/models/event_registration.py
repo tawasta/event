@@ -11,59 +11,59 @@ class EventRegistration(models.Model):
 
     # 2. Fields declaration
     waiting_list = fields.Boolean(related="event_id.waiting_list", store=True)
-    # waiting_list_to_confirm = fields.Boolean(
-    #     string="Available to confirm from waiting list",
-    #     readonly=True,
-    #     compute_sudo=True,
-    #     compute="_compute_available_to_confirm",
-    # )
+    waiting_list_to_confirm = fields.Boolean(
+        string="Available to confirm from waiting list",
+        readonly=True,
+        compute_sudo=True,
+        compute="_compute_available_to_confirm",
+    )
     state = fields.Selection(selection_add=[("wait", "Waiting")])
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
-    # @api.depends("event_id.seats_available")
-    # def _compute_available_to_confirm(self):
-    #     """
-    #     Compute all cases where registration from waiting list is able
-    #     to be confirmed:
-    #     1. Both ticket and event have limited but available seats
-    #     2. Both ticket and event have no limited seats
-    #     3. Ticket has no limited seats and event has limited but available seats
-    #     4. Ticket has limited but available seats and event has no limited seats
-    #     5. No ticket used and event has available seats
-    #     """
-    #     for registration in self:
-    #         if (
-    #             registration.waiting_list
-    #             and registration.state == "wait"
-    #             and (
-    #                 (
-    #                     not registration.event_id.seats_limited
-    #                     or not registration.event_id.seats_max
-    #                 )
-    #                 or (
-    #                     registration.event_id.seats_available > 0
-    #                     and registration.event_id.seats_limited
-    #                     and registration.event_id.seats_max
-    #                 )
-    #             )
-    #             and (
-    #                 (
-    #                     not registration.event_ticket_id
-    #                     or not registration.event_ticket_id.seats_limited
-    #                     or not registration.event_ticket_id.seats_max
-    #                 )
-    #                 or (
-    #                     registration.event_ticket_id.seats_available > 0
-    #                     and registration.event_ticket_id.seats_limited
-    #                     and registration.event_ticket_id.seats_max
-    #                 )
-    #             )
-    #         ):
-    #             registration.waiting_list_to_confirm = True
-    #         else:
-    #             registration.waiting_list_to_confirm = False
+    @api.depends("event_id.seats_available")
+    def _compute_available_to_confirm(self):
+        """
+        Compute all cases where registration from waiting list is able
+        to be confirmed:
+        1. Both ticket and event have limited but available seats
+        2. Both ticket and event have no limited seats
+        3. Ticket has no limited seats and event has limited but available seats
+        4. Ticket has limited but available seats and event has no limited seats
+        5. No ticket used and event has available seats
+        """
+        for registration in self:
+            if (
+                registration.waiting_list
+                and registration.state == "wait"
+                and (
+                    (
+                        not registration.event_id.seats_limited
+                        or not registration.event_id.seats_max
+                    )
+                    or (
+                        registration.event_id.seats_available > 0
+                        and registration.event_id.seats_limited
+                        and registration.event_id.seats_max
+                    )
+                )
+                and (
+                    (
+                        not registration.event_ticket_id
+                        or not registration.event_ticket_id.seats_limited
+                        or not registration.event_ticket_id.seats_max
+                    )
+                    or (
+                        registration.event_ticket_id.seats_available > 0
+                        and registration.event_ticket_id.seats_limited
+                        and registration.event_ticket_id.seats_max
+                    )
+                )
+            ):
+                registration.waiting_list_to_confirm = True
+            else:
+                registration.waiting_list_to_confirm = False
 
     def _compute_confirm_url(self):
         """Url to confirm registration (move state from wait -> open)"""
@@ -131,19 +131,16 @@ class EventRegistration(models.Model):
         3. Add registration as draft otherwise
         """
         # pass context to skip auto_confirm on super method
-        logging.info(vals_list);
         add_waiting_list = False
         for vals in vals_list:
             if self._check_waiting_list(vals):
                 add_waiting_list = True
 
-        logging.info(add_waiting_list);
         registrations = super(EventRegistration, self).create(vals_list)
         registrations = registrations.with_context(skip_confirm_wait=False)
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
         if add_waiting_list:
-            logging.info("==MENEE===");
             registrations.sudo().action_waiting()
         return registrations
 
@@ -177,11 +174,7 @@ class EventRegistration(models.Model):
     def _check_waiting_list(self, vals):
         event = self.env['event.event'].browse(vals['event_id'])
         ticket = self.env['event.event.ticket'].browse(vals['event_ticket_id']) if vals.get('event_ticket_id') else None
-        logging.info(event.waiting_list);
-        logging.info(event.seats_limited);
-        logging.info(event.seats_available);
-        if event.waiting_list and event.seats_limited and event.seats_available > 0:
-            logging.info("====ON PAIKKOJA=====");
+        if event.waiting_list and event.seats_limited and event.seats_available > 0 and ticket.seats_limited and ticket.seats_available > 0:
             return False
         else:
             return True

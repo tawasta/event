@@ -68,46 +68,7 @@ class EventEvent(models.Model):
         
         for event in self:
             event.update(results.get(event._origin.id or event.id, base_vals))
-    # @api.depends("seats_max", "registration_ids")
-    # def _compute_seats(self):
-    #     """
-    #     Determine reserved, available, reserved but unconfirmed,
-    #     used and waiting seats.
-    #     """
-    #     # initialize fields to 0
-    #     for event in self:
-    #         event.seats_unconfirmed = (
-    #             event.seats_reserved
-    #         ) = event.seats_used = event.seats_available = event.seats_waiting = 0
-    #     # aggregate registrations by event and by state
-    #     state_field = {
-    #         "draft": "seats_unconfirmed",
-    #         "open": "seats_reserved",
-    #         "done": "seats_used",
-    #         "wait": "seats_waiting",
-    #     }
-    #     base_vals = {fname: 0 for fname in state_field.values()}
-    #     results = {event_id: dict(base_vals) for event_id in self.ids}
-    #     if self.ids:
-    #         query = """ SELECT event_id, state, count(event_id)
-    #                     FROM event_registration
-    #                     WHERE event_id IN %s AND state IN ('draft', 'open', 'done', 'wait')
-    #                     GROUP BY event_id, state
-    #                     """
-    #         self.env["event.registration"].flush(["event_id", "state"])
-    #         self._cr.execute(query, (tuple(self.ids),))
-    #         res = self._cr.fetchall()
-    #         for event_id, state, num in res:
-    #             results[event_id][state_field[state]] += num
 
-    #     # compute seats_available and send automatic mail to waiting list
-    #     # if waiting list enabled and more seats become available
-    #     for event in self:
-    #         event.update(results.get(event._origin.id or event.id, base_vals))
-    #         if event.seats_max > 0:
-    #             event.seats_available = event.seats_max - (
-    #                 event.seats_reserved + event.seats_used
-    #             )
 
     @api.depends("event_type_id", "waiting_list")
     def _compute_waiting_list(self):
