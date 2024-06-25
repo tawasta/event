@@ -25,7 +25,49 @@ class EventEvent(models.Model):
 
     # 3. Default methods
 
+    @api.constrains('seats_max', 'seats_limited', 'registration_ids')
+    def _check_seats_availability(self, minimal_availability=0):
+        sold_out_events = []
+        for event in self:
+            if not event.waiting_list and event.seats_limited and event.seats_max and event.seats_available < minimal_availability:
+                sold_out_events.append(
+                    (_('- "%(event_name)s": Missing %(nb_too_many)i seats.',
+                        event_name=event.name, nb_too_many=-event.seats_available)))
+        if sold_out_events:
+            raise ValidationError(_('There are not enough seats available for:')
+                                  + '\n%s\n' % '\n'.join(sold_out_events))
+
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends('seats_max', 'registration_ids.state', 'registration_ids.active')
+    def _compute_seats(self):
+        """ Extend the original _compute_seats method to account for waiting list. """
+        super(EventEvent, self)._compute_seats()
+        
+        # Add logic for waiting list
+        for event in self:
+            event.seats_waiting = 0
+        
+        state_field = {
+            'wait': 'seats_waiting'
+        }
+        
+        base_vals = dict((fname, 0) for fname in state_field.values())
+        results = dict((event_id, dict(base_vals)) for event_id in self.ids)
+        
+        if self.ids:
+            query = """ SELECT event_id, state, count(event_id)
+                        FROM event_registration
+                        WHERE event_id IN %s AND state = 'wait' AND active = true
+                        GROUP BY event_id, state
+                    """
+            self.env['event.registration'].flush_model(['event_id', 'state', 'active'])
+            self._cr.execute(query, (tuple(self.ids),))
+            res = self._cr.fetchall()
+            for event_id, state, num in res:
+                results[event_id][state_field[state]] = num
+        
+        for event in self:
+            event.update(results.get(event._origin.id or event.id, base_vals))
     # @api.depends("seats_max", "registration_ids")
     # def _compute_seats(self):
     #     """

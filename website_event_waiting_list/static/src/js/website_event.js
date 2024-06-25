@@ -2,7 +2,6 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { jsonrpc } from "@web/core/network/rpc_service";
-import { Modal } from "bootstrap";
 
 // Ensimmäinen tarkistetaan ja varmennetaan, että EventRegistrationFormInstance on määritelty oikein
 const EventRegistrationFormInstance = publicWidget.registry.EventRegistrationFormInstance;
@@ -14,13 +13,13 @@ if (EventRegistrationFormInstance) {
          */
         start: function () {
             var self = this;
-            const post = this._getFormPostData();
+            const post = this._getPost();
             const noTicketsOrdered = Object.values(post).map((value) => parseInt(value)).every(value => value === 0);
             var res = this._super.apply(this, arguments).then(function () {
                 $('#registration_form .a-submit')
                     .off('click')
                     .click(function (ev) {
-                        self._onSubmitClick(ev);
+                        self.on_click(ev);
                     })
                     .prop('disabled', noTicketsOrdered);
                 
@@ -33,11 +32,17 @@ if (EventRegistrationFormInstance) {
             return res;
         },
 
-        _getFormPostData: function () {
+        _getPost: function () {
             var post = {};
             $('#registration_form select').each(function () {
                 post[$(this).attr('name')] = $(this).val();
             });
+            const waitingListValue = $('#registration_form input[name="waiting_list_registration"]').val();
+            if (waitingListValue) {
+                post["waiting_list_registration"] = waitingListValue;
+            }
+            console.log("===POST===");
+            console.log(post);
             return post;
         },
 
@@ -45,25 +50,28 @@ if (EventRegistrationFormInstance) {
          * @private
          * @param {Event} ev
          */
-        _onSubmitClick: function (ev) {
+        on_click: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
             var $form = $(ev.currentTarget).closest('form');
             var $button = $(ev.currentTarget).closest('[type="submit"]');
-            const post = this._getFormPostData();
+            console.log("====ON CLICK====");
+            const post = this._getPost();
+            console.log(post);
             $button.attr('disabled', true);
             return jsonrpc($form.attr('action'), post).then(function (modal) {
                 var $modal = $(modal);
                 $modal.find('.modal-body > div').removeClass('container'); // retrocompatibility - REMOVE ME in master / saas-19
                 $modal.appendTo(document.body);
-                const modalElement = $modal[0];
-                const modalInstance = new Modal(modalElement, { backdrop: 'static', keyboard: false });
-                modalInstance.show();
-                $modal.on('hidden.bs.modal', function () {
+                const modalBS = new Modal($modal[0], {backdrop: 'static', keyboard: false});
+                modalBS.show();
+                $modal.appendTo('body').modal('show');
+                $modal.on('click', '.js_goto_event', function () {
+                    $modal.modal('hide');
                     $button.prop('disabled', false);
                 });
-                $modal.on('click', '.js_goto_event, .btn-close', function () {
-                    modalInstance.hide();
+                $modal.on('click', '.btn-close', function () {
+                    $button.prop('disabled', false);
                 });
             });
         },

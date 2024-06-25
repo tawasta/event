@@ -22,6 +22,29 @@
         <xpath expr="//form[@id='registration_form']" position="attributes">
             <attribute name="t-if">event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) or event.waiting_list</attribute>
         </xpath>
+        <xpath
+            expr="//div[@class='col-md-4 d-flex align-items-center justify-content-between p-0']/t[@t-else='']"
+            position="inside"
+        >
+            <t t-set="tickets" t-value="event.event_ticket_ids"/>
+            <select
+                t-if="event.waiting_list"
+                t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)"
+                class="custom-select waiting_list_select_multi"
+            >
+                <t t-foreach="range(0, 10)" t-as="nb">
+                    <option
+                        t-esc="nb"
+                        class="waiting_list_option_multi"
+                    />
+                </t>
+            </select>
+            <input type="hidden" name="waiting_list_registration" value="True" />
+        </xpath>
+
+        <!-- <xpath expr="//div[@class='col-md-4 d-flex align-items-center justify-content-between p-0']/t" position="attributes">
+            <attribute name="t-if">event.event_registrations_open or event.waiting_list</attribute>
+        </xpath> -->
         <!-- Multi ticket view -->
 <!--         <xpath expr="//div[@class='w-auto ms-auto']/select" position="attributes">
             <attribute
@@ -147,12 +170,12 @@
         inherit_id="website_event.registration_attendee_details"
     >
         <xpath expr="//h4[@class='modal-title']" position="replace">
-            <input
+<!--             <input
                 class="d-none"
                 type="text"
                 t-attf-name="waiting_list_check"
                 t-attf-value="#{waiting_list_check}"
-            />
+            /> -->
             <t t-if="waiting_list_check">
                 <h4 class="modal-title">Attendees for waiting list</h4>
             </t>
@@ -201,12 +224,15 @@
                 </t>
             </div>
         </xpath>
+        <xpath expr="//div[@class='col-12 mb-2']" position="attributes">
+            <attribute name="t-if">attendees[0].state != "wait"</attribute>
+        </xpath>
         <xpath expr="//div[@id='add_to_calendar']" position="attributes">
             <attribute name="t-if">attendees[0].state != "wait"</attribute>
         </xpath>
     </template>
     <!-- Redirect if registration fails -->
-    <template id="registration_fail" name="Registration Fail">
+    <!-- <template id="registration_fail" name="Registration Fail">
         <t t-call="website_event.layout">
             <div class="container my-5 o_wereg_confirmed">
                 <div class="row mb-3">
@@ -220,5 +246,5 @@
                 </div>
             </div>
         </t>
-    </template>
+    </template> -->
 </odoo>

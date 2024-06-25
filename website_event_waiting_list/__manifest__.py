@@ -28,7 +28,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_cancellation"],
+    "depends": ["website_event_cancellation", "website_event"],
     "data": [
         "wizard/waiting_mail_list_wizard.xml",
         "security/ir.model.access.csv",
