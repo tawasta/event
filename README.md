@@ -11,7 +11,9 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.0.0 |  | Add banner image to event from backend
+[website_event_cancellation](website_event_cancellation/) | 17.0.0.0.1 |  | Cancel events and event registrations through website.
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.0 |  | Customization options to Website Event Frontends
 [website_event_private_event](website_event_private_event/) | 17.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 17.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.

@@ -17,10 +17,7 @@
                     <div class="o_setting_right_pane">
                         <label for="has_cancel" />
                         <div class="row">
-                            <div
-                                class="col-lg-8 mt16"
-                                invisible="has_cancel != True"
-                            >
+                            <div class="col-lg-8 mt16" invisible="has_cancel != True">
                                 <field
                                     name="cancel_interval_nbr"
                                     nolabel="1"
@@ -56,7 +53,7 @@
                     string="Cancel registration"
                     invisible="has_cancel != True"
                 />
-                <div class="o_row" invisible="has_cancel != True" >
+                <div class="o_row" invisible="has_cancel != True">
                     <field name="cancel_interval_nbr" nolabel="1" class="oe_inline" />
                     <field name="cancel_interval_unit" nolabel="1" class="oe_inline" />
                     <div class="mt4">

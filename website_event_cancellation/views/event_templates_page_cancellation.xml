@@ -7,7 +7,9 @@
                 <div class="row mb-4">
                     <div name="title-div" class="col-12 text-center">
                         <t t-if="registration.state == 'cancel'">
-                            <h3 class="text-danger">Your registration to <t t-esc="event.name" /> has been cancelled</h3>
+                            <h3 class="text-danger">Your registration to <t
+                                    t-esc="event.name"
+                                /> has been cancelled</h3>
                         </t>
                         <t t-elif="registration.state in ['open', 'done', 'draft']">
                             <h3>You are registered to <t t-esc="event.name" />.</h3>
@@ -15,7 +17,12 @@
                                 <p class="py-2">Cancel your registration here:</p>
                             </t>
                             <t t-else="">
-                                <p class="py-2">Registration cannot be cancelled after <t t-esc="event.cancel_before_date" t-options="{'widget': 'datetime', 'format': 'short'}" />.</p>
+                                <p
+                                    class="py-2"
+                                >Registration cannot be cancelled after <t
+                                        t-esc="event.cancel_before_date"
+                                        t-options="{'widget': 'datetime', 'format': 'short'}"
+                                    />.</p>
                             </t>
                         </t>
                     </div>
@@ -38,22 +45,34 @@
                             <div class="card-body">
                                 <h5 class="card-title">Attendee Information</h5>
                                 <p class="card-text"><strong>Name: </strong>
-                                    <t t-if="registration.name" t-esc="registration.name" />
+                                    <t
+                                        t-if="registration.name"
+                                        t-esc="registration.name"
+                                    />
                                     <t t-else="">N/A</t>
                                 </p>
                                 <p class="card-text"><strong>Email: </strong>
                                     <i class="fa fa-envelope mr-2" />
-                                    <t t-if="registration.email" t-esc="registration.email" />
+                                    <t
+                                        t-if="registration.email"
+                                        t-esc="registration.email"
+                                    />
                                     <t t-else="">N/A</t>
                                 </p>
                                 <p class="card-text"><strong>Phone: </strong>
                                     <i class="fa fa-phone mr-2" />
-                                    <t t-if="registration.phone" t-esc="registration.phone" />
+                                    <t
+                                        t-if="registration.phone"
+                                        t-esc="registration.phone"
+                                    />
                                     <t t-else="">N/A</t>
                                 </p>
                                 <p class="card-text"><strong>Ticket: </strong>
                                     <i class="fa fa-ticket mr-2" />
-                                    <t t-if="registration.event_ticket_id" t-esc="registration.event_ticket_id.name" />
+                                    <t
+                                        t-if="registration.event_ticket_id"
+                                        t-esc="registration.event_ticket_id.name"
+                                    />
                                     <t t-else="">N/A</t>
                                     (ref: <t t-esc="registration.id" />)
                                 </p>
@@ -67,16 +86,34 @@
                             <div class="card-body">
                                 <h5 class="card-title">Event Information</h5>
                                 <p class="card-text"><strong>Start: </strong>
-                                    <span itemprop="startDate" t-esc="event.date_begin_located" />
+                                    <span
+                                        itemprop="startDate"
+                                        t-esc="event.date_begin_located"
+                                    />
                                 </p>
                                 <p class="card-text"><strong>End: </strong>
-                                    <span itemprop="endDate" t-esc="event.date_end_located" />
+                                    <span
+                                        itemprop="endDate"
+                                        t-esc="event.date_end_located"
+                                    />
                                 </p>
                                 <h5 class="mt-4">Location</h5>
                                 <p class="card-text">
-                                    <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}" />
-                                    <a itemprop="location" t-att-href="event.google_map_link()" target="_BLANK" t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}" />
-                                    <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]}" />
+                                    <h5
+                                        t-field="event.address_id"
+                                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}"
+                                    />
+                                    <a
+                                        itemprop="location"
+                                        t-att-href="event.google_map_link()"
+                                        target="_BLANK"
+                                        t-field="event.address_id"
+                                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}"
+                                    />
+                                    <h5
+                                        t-field="event.address_id"
+                                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]}"
+                                    />
                                 </p>
                             </div>
                         </div>
@@ -114,12 +151,13 @@
                                         class="btn-close"
                                         data-bs-dismiss="modal"
                                         aria-label="Close"
-                                    ></button>
+                                    />
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
                                         <div class="col-12">
-                                            <p>You are about to <strong>cancel</strong> your registration</p>
+                                            <p>You are about to <strong
+                                                >cancel</strong> your registration</p>
                                             <p>Are you sure?</p>
                                         </div>
                                     </div>
