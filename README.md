@@ -11,6 +11,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[event_auditlog_rules](event_auditlog_rules/) | 17.0.1.0.0 |  | Adds audit log rules for events
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.0.0.1 |  | Cancel events and event registrations through website.
