@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="0">
+    <record model="auditlog.rule" id="auditlog-rule-event-1">
+        <field name="name">Event Event</field>
+        <field name="model_id" ref="event.model_event_event" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-2">
+        <field name="name">Event Registration</field>
+        <field name="model_id" ref="event.model_event_registration" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-3">
+        <field name="name">Event Template</field>
+        <field name="model_id" ref="event.model_event_type" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-4">
+        <field name="name">Event Template Mail</field>
+        <field name="model_id" ref="event.model_event_type_mail" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-5">
+        <field name="name">Event Mail</field>
+        <field name="model_id" ref="event.model_event_mail" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-6">
+        <field name="name">Event Template Ticket</field>
+        <field name="model_id" ref="event.model_event_type_ticket" />
+        <field name="state">subscribed</field>
+    </record>
+    <record model="auditlog.rule" id="auditlog-rule-event-7">
+        <field name="name">Event Ticket</field>
+        <field name="model_id" ref="event.model_event_event_ticket" />
+        <field name="state">subscribed</field>
+    </record>
+</odoo>
