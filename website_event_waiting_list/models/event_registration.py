@@ -141,6 +141,7 @@ class EventRegistration(models.Model):
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
         if add_waiting_list:
+            logging.info("=====TAMAAA??????????");
             registrations.sudo().action_waiting()
         return registrations
 

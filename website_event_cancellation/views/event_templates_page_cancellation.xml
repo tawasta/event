@@ -64,7 +64,7 @@
                 <div class="row mb-4">
                     <div class="col-md-6 col-xs-12 mx-auto">
                         <div class="card">
-                            <div class="card-body">
+                            <div id="event-information" class="card-body">
                                 <h5 class="card-title">Event Information</h5>
                                 <p class="card-text"><strong>Start: </strong>
                                     <span itemprop="startDate" t-esc="event.date_begin_located" />
@@ -73,7 +73,7 @@
                                     <span itemprop="endDate" t-esc="event.date_end_located" />
                                 </p>
                                 <h5 class="mt-4">Location</h5>
-                                <p class="card-text">
+                                <p id="location" class="card-text">
                                     <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}" />
                                     <a itemprop="location" t-att-href="event.google_map_link()" target="_BLANK" t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}" />
                                     <h5 t-field="event.address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]}" />

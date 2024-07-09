@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="events_list_online_event" inherit_id="website_event.events_list">
+        <xpath expr="//small[@itemprop='location']" position="attributes">
+            <attribute name="t-if">not event.is_online_event</attribute>
+        </xpath>
+        <xpath expr="//small[@itemprop='location']" position="after">
+            <div t-if="event.is_online_event" id="online-event-location">
+                <span>Online</span>
+            </div>
+            <div
+                t-elif="not event.is_online_event and event.video_conference_link"
+                id="online-event-location"
+            >
+                <span>Hybrid</span>
+            </div>
+        </xpath>
+    </template>
+<!--     <template
+        id="events_list_location_online_event"
+        inherit_id="website_event_frontend_customization.events_list_location"
+    >
+        <xpath expr="//small[@itemprop='location']" position="attributes">
+            <attribute name="t-if">not event.is_online_event</attribute>
+        </xpath>
+    </template> -->
+</odoo>
