@@ -158,11 +158,13 @@ class EventRegistration(models.Model):
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
                 lambda s: s.interval_type == "after_sub"
             )
+            logging.info("====WAIT EMAILS====");
             onsubscribe_schedulers.sudo().execute()
         if vals.get("state") == "wait":
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
                 lambda s: s.interval_type == "after_wait"
             )
+            logging.info("====WAIT EMAILS 222====");
             onsubscribe_schedulers.sudo().execute()
         return res
 

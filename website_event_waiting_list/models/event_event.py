@@ -1,5 +1,5 @@
 import pytz
-
+import logging
 from odoo import api, fields, models
 from odoo.osv import expression
 
@@ -69,6 +69,23 @@ class EventEvent(models.Model):
         for event in self:
             event.update(results.get(event._origin.id or event.id, base_vals))
 
+            if event.waiting_list and event.seats_available > 0:
+                onsubscribe_schedulers = event.event_mail_ids.filtered(
+                    lambda s: s.interval_type == "after_seats_available"
+                )
+                onsubscribe_schedulers.sudo().execute()
+                # Mark mails as not sent if seats become unavailable again
+                registrations_to_not_sent = event.event_mail_ids.mapped(
+                    "mail_registration_ids"
+                ).filtered(
+                    lambda reg_mail: reg_mail.mail_sent
+                    and reg_mail.registration_id.state == "wait"
+                    and reg_mail.scheduler_id.notification_type == "mail"
+                    and reg_mail.scheduler_id.interval_type == "after_seats_available"
+                    and not reg_mail.registration_id.waiting_list_to_confirm
+                )
+                registrations_to_not_sent.write({"mail_sent": False})
+
 
     @api.depends("event_type_id", "waiting_list")
     def _compute_waiting_list(self):
@@ -137,33 +154,6 @@ class EventEvent(models.Model):
         for event in self:
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
-
-    # @api.constrains("seats_available", "waiting_list", "registration_ids")
-    # def _mail_to_waiting_list_confirmation(self):
-    #     for event in self:
-    #         if event.stage_id.pipe_end or event.stage_id.cancel:
-    #             # Never try to send mail to closed events
-    #             continue
-
-    #         if event.waiting_list:
-    #             # if seats are available, execute onsubscribe_schedulers
-    #             if event.seats_available:
-    #                 onsubscribe_schedulers = self.mapped("event_mail_ids").filtered(
-    #                     lambda s: s.interval_type == "after_seats_available"
-    #                 )
-    #                 onsubscribe_schedulers.sudo().execute()
-    #             # write "after_seats_available" mail as not sent
-    #             # if seats become unavailable and mail was previously sent
-    #             registrations_to_not_sent = self.mapped(
-    #                 "event_mail_ids.mail_registration_ids"
-    #             ).filtered(
-    #                 lambda reg_mail: reg_mail.mail_sent
-    #                 and reg_mail.registration_id.state == "wait"
-    #                 and reg_mail.scheduler_id.notification_type == "mail"
-    #                 and reg_mail.scheduler_id.interval_type == "after_seats_available"
-    #                 and not reg_mail.registration_id.waiting_list_to_confirm
-    #             )
-    #             registrations_to_not_sent.write({"mail_sent": False})
 
     # def _compute_is_participating(self):
     #     """Heuristic

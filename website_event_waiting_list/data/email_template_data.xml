@@ -4,7 +4,7 @@
         <!-- Email when placed on a waiting list -->
         <record id="event_waiting" model="mail.template">
             <field name="name">Event: Waiting List Confirmation</field>
-            <field name="body_type">qweb</field>
+            <field name="body_type">qweb_view</field>
             <field
                 name="body_view_id"
                 ref="website_event_waiting_list.email_template_waiting_list"
