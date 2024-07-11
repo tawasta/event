@@ -12,21 +12,15 @@
             <field name="model_id" ref="event.model_event_registration" />
             <field
                 name="subject"
-            >You're on a waiting list for ${object.event_id.name}</field>
-            <field
-                name="email_from"
-            >${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
-            <field
-                name="email_to"
-            >${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
-            <field
-                name="lang"
-            >${object.partner_id.lang or object.visitor_id.lang_id}</field>
+            >You're on a waiting list for {{ object.event_id.name }}</field>
+            <field name="email_from">{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field name="email_to">{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="lang">{{ object.partner_id.lang or object.visitor_id.lang }}</field>
         </record>
         <!-- Email when open seats on an event -->
         <record id="event_confirm_waiting_registration" model="mail.template">
             <field name="name">Event: Waiting List Open Seats</field>
-            <field name="body_type">qweb</field>
+            <field name="body_type">qweb_view</field>
             <field
                 name="body_view_id"
                 ref="website_event_waiting_list.email_template_confirm_waiting_list"
@@ -34,16 +28,10 @@
             <field name="model_id" ref="event.model_event_registration" />
             <field
                 name="subject"
-            >We have more tickets available for ${object.event_id.name}</field>
-            <field
-                name="email_from"
-            >${(object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') | safe}</field>
-            <field
-                name="email_to"
-            >${(object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') | safe}</field>
-            <field
-                name="lang"
-            >${object.partner_id.lang or object.visitor_id.lang_id}</field>
+            >We have more tickets available for {{ object.event_id.name }}</field>
+            <field name="email_from">{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field name="email_to">{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="lang">{{ object.partner_id.lang or object.visitor_id.lang }}</field>
         </record>
     </data>
 </odoo>
