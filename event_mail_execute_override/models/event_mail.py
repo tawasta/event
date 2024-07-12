@@ -50,6 +50,10 @@ class EventMailScheduler(models.Model):
     #         return True
     #     return False
 
+    def _custom_processing(self, scheduler, new_registrations):
+        """Apufunktio, jota voidaan periä muissa moduuleissa"""
+        pass
+
     def process_registrations_based_on_interval(self, scheduler, now):
         new_registrations = []
         is_mail_valid = False
@@ -79,7 +83,8 @@ class EventMailScheduler(models.Model):
             if is_mail_valid:
                 logging.info(new_registrations);
                 scheduler._create_missing_mail_registrations(new_registrations)
-
+                # Kutsu apufunktiota
+                self._custom_processing(scheduler, new_registrations)
                 # execute scheduler on registrations
                 scheduler.mail_registration_ids.execute()
                 total_sent = len(scheduler.mail_registration_ids.filtered(lambda reg: reg.mail_sent))
