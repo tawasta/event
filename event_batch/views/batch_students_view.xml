@@ -1,0 +1,36 @@
+<odoo>
+    <record model="ir.ui.view" id="view_op_batches_students_inherit_form_event">
+        <field name="name">op.batch.students.form.inherit.event</field>
+        <field name="model">op.batch.students</field>
+        <field
+            name="inherit_id"
+            ref="society_batch_core.view_op_batches_students_form"
+        />
+        <field name="arch" type="xml">
+            <field name="student_id" position="after">
+                <field name="event_id" />
+                <field
+                    name="event_registration_id"
+                    invisible="not event_id"/>
+                <field
+                    name="first_time"
+                    invisible="not event_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_op_batches_students_inherit_tree_event">
+        <field name="name">op.batch.students.tree.inherit.event</field>
+        <field name="model">op.batch.students</field>
+        <field
+            name="inherit_id"
+            ref="society_batch_core.view_op_batches_students_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="student_id" position="after">
+                <field name="event_id" />
+                <field name="event_registration_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
