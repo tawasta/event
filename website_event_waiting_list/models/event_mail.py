@@ -1,6 +1,11 @@
+import logging
+
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields, models
+from odoo.exceptions import MissingError
+
+_logger = logging.getLogger(__name__)
 
 _INTERVALS = {
     "hours": lambda interval: relativedelta(hours=interval),

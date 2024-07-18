@@ -89,7 +89,8 @@ class EventTicket(models.Model):
             ):
                 sold_out_tickets.append(
                     _(
-                        '- the ticket "%(ticket_name)s" (%(event_name)s): Missing %(nb_too_many)i seats.',
+                        '- the ticket "%(ticket_name)s" (%(event_name)s): '
+                        "Missing %(nb_too_many)i seats.",
                         ticket_name=ticket.name,
                         event_name=ticket.event_id.name,
                         nb_too_many=-ticket.seats_available,

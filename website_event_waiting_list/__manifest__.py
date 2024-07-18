@@ -34,7 +34,6 @@
         "security/ir.model.access.csv",
         "data/email_template_views.xml",
         "data/email_template_data.xml",
-        # "views/assets.xml",
         "views/event_views.xml",
         "views/event_ticket_views.xml",
         "views/event_templates_page_registration.xml",
