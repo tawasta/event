@@ -21,8 +21,8 @@
 # 1. Standard library imports:
 
 # 2. Known third party imports:
-import werkzeug
 import logging
+
 # 3. Odoo imports (openerp):
 from odoo import http
 from odoo.http import request
@@ -42,97 +42,97 @@ from odoo.addons.website_event_waiting_list.controllers.event import (
 class WebsiteEventSaleWaitingListController(
     WebsiteEventSaleController, WebsiteEventControllerWaiting
 ):
-#     def _create_attendees_from_registration_post(
-#         self, event, registration_data, waiting_list_check
-#     ):
-#         # we have at least one registration linked to a ticket -> sale mode activate
-#         if (
-#             any(info.get("event_ticket_id") for info in registration_data)
-#             and not waiting_list_check
-#         ):
-#             order = request.website.sale_get_order(force_create=1)
+    #     def _create_attendees_from_registration_post(
+    #         self, event, registration_data, waiting_list_check
+    #     ):
+    #         # we have at least one registration linked to a ticket -> sale mode activate
+    #         if (
+    #             any(info.get("event_ticket_id") for info in registration_data)
+    #             and not waiting_list_check
+    #         ):
+    #             order = request.website.sale_get_order(force_create=1)
 
-#         if not waiting_list_check:
-#             for info in [r for r in registration_data if r.get("event_ticket_id")]:
-#                 ticket = (
-#                     request.env["event.event.ticket"]
-#                     .sudo()
-#                     .browse(info["event_ticket_id"])
-#                 )
-#                 cart_values = order.with_context(
-#                     event_ticket_id=ticket.id, fixed_price=True
-#                 )._cart_update(product_id=ticket.product_id.id, add_qty=1)
-#                 info["sale_order_id"] = order.id
-#                 info["sale_order_line_id"] = cart_values.get("line_id")
+    #         if not waiting_list_check:
+    #             for info in [r for r in registration_data if r.get("event_ticket_id")]:
+    #                 ticket = (
+    #                     request.env["event.event.ticket"]
+    #                     .sudo()
+    #                     .browse(info["event_ticket_id"])
+    #                 )
+    #                 cart_values = order.with_context(
+    #                     event_ticket_id=ticket.id, fixed_price=True
+    #                 )._cart_update(product_id=ticket.product_id.id, add_qty=1)
+    #                 info["sale_order_id"] = order.id
+    #                 info["sale_order_line_id"] = cart_values.get("line_id")
 
-#         return super(
-#             WebsiteEventControllerWaiting, self
-#         )._create_attendees_from_registration_post(event, registration_data)
+    #         return super(
+    #             WebsiteEventControllerWaiting, self
+    #         )._create_attendees_from_registration_post(event, registration_data)
 
-#     @http.route()
-#     def registration_confirm(self, event, **post):
-#         if not event.can_access_from_current_website():
-#             raise werkzeug.exceptions.NotFound()
+    #     @http.route()
+    #     def registration_confirm(self, event, **post):
+    #         if not event.can_access_from_current_website():
+    #             raise werkzeug.exceptions.NotFound()
 
-#         registrations = self._process_attendees_form(event, post)
-#         waiting_list_check = post.get("waiting_list_check")
+    #         registrations = self._process_attendees_form(event, post)
+    #         waiting_list_check = post.get("waiting_list_check")
 
-#         # If post was not for waiting_list and trying to register more seats than available
-#         # Or trying to register more seats for a ticket than available
-#         # return 404
-#         for ticket in event.event_ticket_ids:
-#             ticket_count = 0
-#             for registration in registrations:
-#                 if ticket.id == registration["event_ticket_id"]:
-#                     ticket_count += 1
-#             if (
-#                 not waiting_list_check
-#                 and ticket.seats_max
-#                 and ticket_count > ticket.seats_available
-#             ):
-#                 return request.render(
-#                     "website_event_waiting_list.registration_fail",
-#                     {
-#                         "warning_msg": "You tried to order more tickets than "
-#                         "tickets available.",
-#                         "event": event,
-#                     },
-#                 )
-#         if (
-#             not waiting_list_check
-#             and event.seats_limited
-#             and len(registrations) > event.seats_available
-#         ):
-#             return request.render(
-#                 "website_event_waiting_list.registration_fail",
-#                 {
-#                     "warning_msg": "You tried to order more tickets than available seats.",
-#                     "event": event,
-#                 },
-#             )
+    #         # If post was not for waiting_list and trying to register more seats than available
+    #         # Or trying to register more seats for a ticket than available
+    #         # return 404
+    #         for ticket in event.event_ticket_ids:
+    #             ticket_count = 0
+    #             for registration in registrations:
+    #                 if ticket.id == registration["event_ticket_id"]:
+    #                     ticket_count += 1
+    #             if (
+    #                 not waiting_list_check
+    #                 and ticket.seats_max
+    #                 and ticket_count > ticket.seats_available
+    #             ):
+    #                 return request.render(
+    #                     "website_event_waiting_list.registration_fail",
+    #                     {
+    #                         "warning_msg": "You tried to order more tickets than "
+    #                         "tickets available.",
+    #                         "event": event,
+    #                     },
+    #                 )
+    #         if (
+    #             not waiting_list_check
+    #             and event.seats_limited
+    #             and len(registrations) > event.seats_available
+    #         ):
+    #             return request.render(
+    #                 "website_event_waiting_list.registration_fail",
+    #                 {
+    #                     "warning_msg": "You tried to order more tickets than available seats.",
+    #                     "event": event,
+    #                 },
+    #             )
 
-#         attendees_sudo = self._create_attendees_from_registration_post(
-#             event, registrations, waiting_list_check
-#         )
+    #         attendees_sudo = self._create_attendees_from_registration_post(
+    #             event, registrations, waiting_list_check
+    #         )
 
-#         # we have at least one registration linked to a ticket
-#         # and not in a waiting list -> sale mode activate
-#         if (
-#             any(info["event_ticket_id"] for info in registrations)
-#             and not waiting_list_check
-#         ):
-#             order = request.website.sale_get_order(force_create=False)
-#             if order.amount_total:
-#                 return request.redirect("/shop/checkout")
-#             # free tickets -> order with amount = 0: auto-confirm, no checkout
-#             elif order:
-#                 order.action_confirm()  # tde notsure: email sending ?
-#                 request.website.sale_reset()
+    #         # we have at least one registration linked to a ticket
+    #         # and not in a waiting list -> sale mode activate
+    #         if (
+    #             any(info["event_ticket_id"] for info in registrations)
+    #             and not waiting_list_check
+    #         ):
+    #             order = request.website.sale_get_order(force_create=False)
+    #             if order.amount_total:
+    #                 return request.redirect("/shop/checkout")
+    #             # free tickets -> order with amount = 0: auto-confirm, no checkout
+    #             elif order:
+    #                 order.action_confirm()  # tde notsure: email sending ?
+    #                 request.website.sale_reset()
 
-#         return request.render(
-#             "website_event.registration_complete",
-#             self._get_registration_confirm_values(event, attendees_sudo),
-#         )
+    #         return request.render(
+    #             "website_event.registration_complete",
+    #             self._get_registration_confirm_values(event, attendees_sudo),
+    #         )
 
     @http.route(
         ['/event/<model("event.event"):event>/registration/manage/<string:code>'],
@@ -146,7 +146,7 @@ class WebsiteEventSaleWaitingListController(
         Confirm state changes on post
         """
         for registration in event.sudo().registration_ids:
-            logging.info(registration.event_id);
+            logging.info(registration.event_id)
             if registration.sudo().access_token == code:
                 render_values = {
                     "event": event,
@@ -154,7 +154,7 @@ class WebsiteEventSaleWaitingListController(
                     "ticket": registration.event_ticket_id,
                 }
                 if post:
-                    logging.info("==POST===");
+                    logging.info("==POST===")
                     new_state = post.get("new_state")
                     cur_state = post.get("current_state")
                     if (
@@ -162,17 +162,17 @@ class WebsiteEventSaleWaitingListController(
                         and new_state == "open"
                         and event.sudo().seats_available >= 1
                     ):
-                        logging.info("====THIS====");
+                        logging.info("====THIS====")
                         if self._confirm_registration_from_waiting_list(registration):
                             registration.sudo().write(
                                 {"confirmed_from_waiting_list": True}
                             )
-                            logging.info("===THIS1====");
-                            logging.info(registration.sale_order_id);
-                            logging.info(registration.sale_order_line_id);
+                            logging.info("===THIS1====")
+                            logging.info(registration.sale_order_id)
+                            logging.info(registration.sale_order_line_id)
                             return request.redirect("/shop/checkout")
                         else:
-                            logging.info("===OR=====");
+                            logging.info("===OR=====")
                             if registration.event_id.auto_confirm:
                                 registration.sudo().write({"state": "open"})
                             else:
@@ -190,7 +190,7 @@ class WebsiteEventSaleWaitingListController(
     def _confirm_registration_from_waiting_list(self, registration):
         if registration.event_ticket_id:
             order_sudo = request.website.sale_get_order(force_create=True)
-            if order_sudo.state != 'draft':
+            if order_sudo.state != "draft":
                 request.website.sale_reset()
                 order_sudo = request.website.sale_get_order(force_create=True)
 
@@ -199,7 +199,6 @@ class WebsiteEventSaleWaitingListController(
                 add_qty=1,
                 event_ticket_id=registration.event_ticket_id.id,
             )
-
 
             registration.sudo().write(
                 {

@@ -1,5 +1,7 @@
-from werkzeug import urls
 import logging
+
+from werkzeug import urls
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -141,7 +143,7 @@ class EventRegistration(models.Model):
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
         if add_waiting_list:
-            logging.info("=====TAMAAA??????????");
+            logging.info("=====TAMAAA??????????")
             registrations.sudo().action_waiting()
         return registrations
 
@@ -158,13 +160,13 @@ class EventRegistration(models.Model):
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
                 lambda s: s.interval_type == "after_sub"
             )
-            logging.info("====WAIT EMAILS====");
+            logging.info("====WAIT EMAILS====")
             onsubscribe_schedulers.sudo().execute()
         if vals.get("state") == "wait":
             onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
                 lambda s: s.interval_type == "after_wait"
             )
-            logging.info("====WAIT EMAILS 222====");
+            logging.info("====WAIT EMAILS 222====")
             onsubscribe_schedulers.sudo().execute()
         return res
 
@@ -175,9 +177,19 @@ class EventRegistration(models.Model):
         self.write({"state": "wait"})
 
     def _check_waiting_list(self, vals):
-        event = self.env['event.event'].browse(vals['event_id'])
-        ticket = self.env['event.event.ticket'].browse(vals['event_ticket_id']) if vals.get('event_ticket_id') else None
-        if event.waiting_list and event.seats_limited and event.seats_available > 0 and ticket.seats_limited and ticket.seats_available > 0:
+        event = self.env["event.event"].browse(vals["event_id"])
+        ticket = (
+            self.env["event.event.ticket"].browse(vals["event_ticket_id"])
+            if vals.get("event_ticket_id")
+            else None
+        )
+        if (
+            event.waiting_list
+            and event.seats_limited
+            and event.seats_available > 0
+            and ticket.seats_limited
+            and ticket.seats_available > 0
+        ):
             return False
         else:
             return True

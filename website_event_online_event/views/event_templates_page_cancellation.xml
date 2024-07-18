@@ -16,10 +16,16 @@
                 <p>Event also includes a video conference.</p>
             </div>
         </xpath>
-        <xpath expr="//div[@id='event-information']/h5[@class='mt-4']" position="attributes">
+        <xpath
+            expr="//div[@id='event-information']/h5[@class='mt-4']"
+            position="attributes"
+        >
             <attribute name="t-if">not event.is_online_event</attribute>
         </xpath>
-        <xpath expr="//div[@id='event-information']/p[@id='location']" position="attributes">
+        <xpath
+            expr="//div[@id='event-information']/p[@id='location']"
+            position="attributes"
+        >
             <attribute name="t-if">not event.is_online_event</attribute>
         </xpath>
     </template>

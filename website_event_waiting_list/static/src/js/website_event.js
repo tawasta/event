@@ -1,10 +1,11 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { jsonrpc } from "@web/core/network/rpc_service";
+import {jsonrpc} from "@web/core/network/rpc_service";
 
 // Ensimmäinen tarkistetaan ja varmennetaan, että EventRegistrationFormInstance on määritelty oikein
-const EventRegistrationFormInstance = publicWidget.registry.EventRegistrationFormInstance;
+const EventRegistrationFormInstance =
+    publicWidget.registry.EventRegistrationFormInstance;
 
 if (EventRegistrationFormInstance) {
     EventRegistrationFormInstance.include({
@@ -14,19 +15,23 @@ if (EventRegistrationFormInstance) {
         start: function () {
             var self = this;
             const post = this._getPost();
-            const noTicketsOrdered = Object.values(post).map((value) => parseInt(value)).every(value => value === 0);
+            const noTicketsOrdered = Object.values(post)
+                .map((value) => parseInt(value))
+                .every((value) => value === 0);
             var res = this._super.apply(this, arguments).then(function () {
-                $('#registration_form .a-submit')
-                    .off('click')
+                $("#registration_form .a-submit")
+                    .off("click")
                     .click(function (ev) {
                         self.on_click(ev);
                     })
-                    .prop('disabled', noTicketsOrdered);
-                
+                    .prop("disabled", noTicketsOrdered);
+
                 // Poista disabled attribuutti waiting_list_buttonista
-                const $waitingListButton = $('#registration_form button[name="waiting_list_button"]');
+                const $waitingListButton = $(
+                    '#registration_form button[name="waiting_list_button"]'
+                );
                 if ($waitingListButton.length) {
-                    $waitingListButton.removeAttr('disabled');
+                    $waitingListButton.removeAttr("disabled");
                 }
             });
             return res;
@@ -34,10 +39,12 @@ if (EventRegistrationFormInstance) {
 
         _getPost: function () {
             var post = {};
-            $('#registration_form select').each(function () {
-                post[$(this).attr('name')] = $(this).val();
+            $("#registration_form select").each(function () {
+                post[$(this).attr("name")] = $(this).val();
             });
-            const waitingListValue = $('#registration_form input[name="waiting_list_registration"]').val();
+            const waitingListValue = $(
+                '#registration_form input[name="waiting_list_registration"]'
+            ).val();
             if (waitingListValue) {
                 post["waiting_list_registration"] = waitingListValue;
             }
@@ -53,25 +60,28 @@ if (EventRegistrationFormInstance) {
         on_click: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            var $form = $(ev.currentTarget).closest('form');
+            var $form = $(ev.currentTarget).closest("form");
             var $button = $(ev.currentTarget).closest('[type="submit"]');
             console.log("====ON CLICK====");
             const post = this._getPost();
             console.log(post);
-            $button.attr('disabled', true);
-            return jsonrpc($form.attr('action'), post).then(function (modal) {
+            $button.attr("disabled", true);
+            return jsonrpc($form.attr("action"), post).then(function (modal) {
                 var $modal = $(modal);
-                $modal.find('.modal-body > div').removeClass('container'); // retrocompatibility - REMOVE ME in master / saas-19
+                $modal.find(".modal-body > div").removeClass("container"); // retrocompatibility - REMOVE ME in master / saas-19
                 $modal.appendTo(document.body);
-                const modalBS = new Modal($modal[0], {backdrop: 'static', keyboard: false});
-                modalBS.show();
-                $modal.appendTo('body').modal('show');
-                $modal.on('click', '.js_goto_event', function () {
-                    $modal.modal('hide');
-                    $button.prop('disabled', false);
+                const modalBS = new Modal($modal[0], {
+                    backdrop: "static",
+                    keyboard: false,
                 });
-                $modal.on('click', '.btn-close', function () {
-                    $button.prop('disabled', false);
+                modalBS.show();
+                $modal.appendTo("body").modal("show");
+                $modal.on("click", ".js_goto_event", function () {
+                    $modal.modal("hide");
+                    $button.prop("disabled", false);
+                });
+                $modal.on("click", ".btn-close", function () {
+                    $button.prop("disabled", false);
                 });
             });
         },

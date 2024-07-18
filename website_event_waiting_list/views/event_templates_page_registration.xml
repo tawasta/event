@@ -6,11 +6,20 @@
         inherit_id="website_event.registration_template"
         name="Registration"
     >
-        <xpath expr="//div[@class='alert alert-info mb-0 d-flex flex-wrap gap-2 justify-content-between align-items-center']/t[@t-else='']/button" position="before">
+        <xpath
+            expr="//div[@class='alert alert-info mb-0 d-flex flex-wrap gap-2 justify-content-between align-items-center']/t[@t-else='']/button"
+            position="before"
+        >
             <!-- <t
                 t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             > -->
-                <button t-if="event.waiting_list" type="button" data-bs-toggle="modal" data-bs-target="#modal_ticket_registration" class="btn btn-primary w-100">Join the waiting list</button>
+                <button
+                t-if="event.waiting_list"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modal_ticket_registration"
+                class="btn btn-primary w-100"
+            >Join the waiting list</button>
             <!-- </t> -->
         </xpath>
     </template>
@@ -20,23 +29,22 @@
         name="Registration"
     >
         <xpath expr="//form[@id='registration_form']" position="attributes">
-            <attribute name="t-if">event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) or event.waiting_list</attribute>
+            <attribute
+                name="t-if"
+            >event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) or event.waiting_list</attribute>
         </xpath>
         <xpath
             expr="//div[@class='col-md-4 d-flex align-items-center justify-content-between p-0']/t[@t-else='']"
             position="inside"
         >
-            <t t-set="tickets" t-value="event.event_ticket_ids"/>
+            <t t-set="tickets" t-value="event.event_ticket_ids" />
             <select
                 t-if="event.waiting_list"
                 t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)"
                 class="custom-select waiting_list_select_multi form-select"
             >
                 <t t-foreach="range(0, 10)" t-as="nb">
-                    <option
-                        t-esc="nb"
-                        class="waiting_list_option_multi"
-                    />
+                    <option t-esc="nb" class="waiting_list_option_multi" />
                 </t>
             </select>
             <input type="hidden" name="waiting_list_registration" value="True" />
@@ -103,10 +111,17 @@
                 </button>
             </t>
             <t t-else="">
-                <button type="submit" class="btn btn-primary o_wait_lazy_js a-submit" disabled="" t-attf-id="#{event.id}">
+                <button
+                    type="submit"
+                    class="btn btn-primary o_wait_lazy_js a-submit"
+                    disabled=""
+                    t-attf-id="#{event.id}"
+                >
                     Register
-                    <t t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)">
-                        (only <t t-out="event.seats_available"/> available)
+                    <t
+                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)"
+                    >
+                        (only <t t-out="event.seats_available" /> available)
                     </t>
                 </button>
             </t>
@@ -155,10 +170,17 @@
                 </button>
             </t>
             <t t-else="">
-                <button type="submit" class="btn btn-primary o_wait_lazy_js a-submit" t-attf-id="#{event.id}" disabled="disabled">
+                <button
+                    type="submit"
+                    class="btn btn-primary o_wait_lazy_js a-submit"
+                    t-attf-id="#{event.id}"
+                    disabled="disabled"
+                >
                     Register
-                    <t t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)">
-                        (only <t t-out="event.seats_available"/> available)
+                    <t
+                        t-if="event.seats_limited and event.seats_max and event.seats_available &lt;= (event.seats_max * 0.2)"
+                    >
+                        (only <t t-out="event.seats_available" /> available)
                     </t>
                 </button>
             </t>

@@ -31,7 +31,7 @@
     "depends": ["website_event_cancellation", "website_event_frontend_customization"],
     "data": [
         "views/event_views.xml",
-        #"data/email_template_views.xml",
+        # "data/email_template_views.xml",
         "views/event_templates_page_registration.xml",
         "views/event_templates_list.xml",
         "views/event_templates_page_cancellation.xml",

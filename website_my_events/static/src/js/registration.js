@@ -1,10 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { jsonrpc } from "@web/core/network/rpc_service";
+import {jsonrpc} from "@web/core/network/rpc_service";
 
 publicWidget.registry.PortalMyEvents = publicWidget.Widget.extend({
-    selector: '.portal_my_events',
+    selector: ".portal_my_events",
 
     /**
      * @override
@@ -20,16 +20,18 @@ publicWidget.registry.PortalMyEvents = publicWidget.Widget.extend({
         });
 
         $(document).on("click", ".delete-confirm", function () {
-            var registrationValue = document.getElementsByName("cancel_registration_id")[0].value;
+            var registrationValue = document.getElementsByName(
+                "cancel_registration_id"
+            )[0].value;
             var action = "/registration/cancel/" + registrationValue;
             $("#cancelModal").modal("hide");
-            jsonrpc(action, 'call', {}).then(function () {
+            jsonrpc(action, "call", {}).then(function () {
                 location.reload();
             });
         });
 
         return this._super.apply(this, arguments);
-    }
+    },
 });
 
 export default publicWidget.registry.PortalMyEvents;

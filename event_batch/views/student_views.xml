@@ -12,7 +12,8 @@
                         type="object"
                         icon="fa-ticket"
                         name="action_event_view"
-                        invisible="event_count == 0">
+                        invisible="event_count == 0"
+                    >
                         <field string="Events" name="event_count" widget="statinfo" />
                     </button>
             </xpath>

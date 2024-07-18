@@ -30,8 +30,8 @@
     "depends": [
         "mail_template_name_translatable",
         "website_event",
-        #"website_event_ticket_datetime",
-        #"website_event_frontend_customization",
+        # "website_event_ticket_datetime",
+        # "website_event_frontend_customization",
         "email_template_qweb",
     ],
     "data": [

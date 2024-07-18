@@ -29,7 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["event"],
-    "data": [
-        "views/event_views.xml"
-    ],
+    "data": ["views/event_views.xml"],
 }

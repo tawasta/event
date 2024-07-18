@@ -236,13 +236,13 @@ class EventEvent(models.Model):
             )
 
     @api.depends(
-        'date_tz', 
-        'event_registrations_started',
-        'date_end',
-        'seats_available',
-        'seats_limited',
-        'seats_max',
-        'event_ticket_ids.sale_available'
+        "date_tz",
+        "event_registrations_started",
+        "date_end",
+        "seats_available",
+        "seats_limited",
+        "seats_max",
+        "event_ticket_ids.sale_available",
     )
     def _compute_event_registrations_open(self):
         """If Event stage is cancelled close registrations"""

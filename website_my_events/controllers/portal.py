@@ -1,10 +1,9 @@
-from odoo import _, http
-from odoo.exceptions import AccessError, MissingError
-from odoo.http import request
 import json
 
+from odoo import http
+from odoo.http import request
+
 from odoo.addons.portal.controllers.portal import CustomerPortal
-from odoo.addons.portal.controllers.portal import pager as portal_pager
 
 
 class PortalEvent(CustomerPortal):
@@ -26,9 +25,7 @@ class PortalEvent(CustomerPortal):
         auth="user",
         website=True,
     )
-    def portal_my_events(
-        self, **kw
-    ):
+    def portal_my_events(self, **kw):
         values = self._prepare_portal_layout_values()
         event_obj = request.env["event.registration"]
         # Avoid error if the user does not have access.

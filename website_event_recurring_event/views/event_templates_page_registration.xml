@@ -7,10 +7,16 @@
         <xpath expr="//t[span[@t-out='event.date_tz']]" position="attributes">
             <attribute name="t-if">not event.recurring_event</attribute>
         </xpath>
-        <xpath expr="//span[@t-out='event.date_tz']/preceding-sibling::text()[contains(., '(')]/parent::node()" position="attributes">
+        <xpath
+            expr="//span[@t-out='event.date_tz']/preceding-sibling::text()[contains(., '(')]/parent::node()"
+            position="attributes"
+        >
             <attribute name="t-if">not event.recurring_event</attribute>
         </xpath>
-        <xpath expr="//span[@t-out='event.date_tz']/following-sibling::text()[contains(., ')')]/parent::node()" position="attributes">
+        <xpath
+            expr="//span[@t-out='event.date_tz']/following-sibling::text()[contains(., ')')]/parent::node()"
+            position="attributes"
+        >
             <attribute name="t-if">not event.recurring_event</attribute>
         </xpath>
     </template>

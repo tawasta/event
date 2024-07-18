@@ -11,22 +11,25 @@ publicWidget.registry.ticketDetailsWidget.include({
         console.log("Button found:", $waitingListButton.length);
         if ($waitingListButton.length) {
             console.log("0000 - Removing disabled attribute");
-            $waitingListButton.removeAttr('disabled');
+            $waitingListButton.removeAttr("disabled");
             console.log("Button after removing disabled:", $waitingListButton);
         }
     },
-    
+
     _onTicketQuantityChange: function () {
         this._super.apply(this, arguments);
         console.log("=======TAAALLA2=====");
         const $waitingListButton = this.$('button[name="waiting_list_button"]');
         if ($waitingListButton.length) {
             console.log("1111 - Removing disabled attribute");
-            $waitingListButton.removeAttr('disabled');
+            $waitingListButton.removeAttr("disabled");
             console.log("Button after removing disabled:", $waitingListButton);
         } else {
             console.log("2222 - Setting primary button disabled state");
-            this.$('button.btn-primary').attr('disabled', this._getTotalTicketCount() === 0);
+            this.$("button.btn-primary").attr(
+                "disabled",
+                this._getTotalTicketCount() === 0
+            );
         }
     },
 });

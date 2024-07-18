@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 _INTERVALS = {
     "hours": lambda interval: relativedelta(hours=interval),
@@ -32,26 +32,38 @@ class EventMailScheduler(models.Model):
     )
 
     def process_registrations_based_on_interval(self, scheduler, now):
-        new_registrations, is_mail_valid = super(EventMailScheduler, self).process_registrations_based_on_interval(scheduler, now)
-        
-        if scheduler.interval_type == 'after_wait':
-            new_registrations = scheduler.event_id.registration_ids.filtered_domain(
-                [('state', '=', 'wait')]
-            ) - scheduler.mail_registration_ids.registration_id
+        new_registrations, is_mail_valid = super(
+            EventMailScheduler, self
+        ).process_registrations_based_on_interval(scheduler, now)
+
+        if scheduler.interval_type == "after_wait":
+            new_registrations = (
+                scheduler.event_id.registration_ids.filtered_domain(
+                    [("state", "=", "wait")]
+                )
+                - scheduler.mail_registration_ids.registration_id
+            )
             is_mail_valid = True
-        
-        if scheduler.interval_type == 'after_seats_available':
-            new_registrations = scheduler.event_id.registration_ids.filtered_domain(
-                [('state', '=', 'wait'), ('waiting_list_to_confirm', '=', True)]
-            ) - scheduler.mail_registration_ids.registration_id
+
+        if scheduler.interval_type == "after_seats_available":
+            new_registrations = (
+                scheduler.event_id.registration_ids.filtered_domain(
+                    [("state", "=", "wait"), ("waiting_list_to_confirm", "=", True)]
+                )
+                - scheduler.mail_registration_ids.registration_id
+            )
             is_mail_valid = True
 
         return new_registrations, is_mail_valid
 
     def check_and_send_mail(self, scheduler, now):
-        if scheduler.interval_type in ['after_wait', 'after_seats_available'] and not scheduler.event_id.stage_id.cancel:
+        if (
+            scheduler.interval_type in ["after_wait", "after_seats_available"]
+            and not scheduler.event_id.stage_id.cancel
+        ):
             return True
         return super(EventMailScheduler, self).check_and_send_mail(scheduler, now)
+
 
 class EventMailRegistration(models.Model):
     _inherit = "event.mail.registration"
@@ -59,15 +71,20 @@ class EventMailRegistration(models.Model):
     def execute(self):
         super(EventMailRegistration, self).execute()  # Call the original method
         now = fields.Datetime.now()
-        todo = self.filtered(lambda reg_mail: reg_mail.scheduler_id.interval_type in ['after_wait', 'after_seats_available'])
+        todo = self.filtered(
+            lambda reg_mail: reg_mail.scheduler_id.interval_type
+            in ["after_wait", "after_seats_available"]
+        )
         for reg_mail in todo:
-            if not reg_mail.mail_sent and \
-               reg_mail.registration_id.state == 'wait' and \
-               (reg_mail.scheduled_date and reg_mail.scheduled_date <= now) and \
-               reg_mail.scheduler_id.notification_type == 'mail':
+            if (
+                not reg_mail.mail_sent
+                and reg_mail.registration_id.state == "wait"
+                and (reg_mail.scheduled_date and reg_mail.scheduled_date <= now)
+                and reg_mail.scheduler_id.notification_type == "mail"
+            ):
                 organizer = reg_mail.scheduler_id.event_id.organizer_id
                 company = self.env.company
-                author = self.env.ref('base.user_root')
+                author = self.env.ref("base.user_root")
                 if organizer.email:
                     author = organizer
                 elif company.email:
@@ -76,7 +93,7 @@ class EventMailRegistration(models.Model):
                     author = self.env.user
 
                 email_values = {
-                    'author_id': author.id,
+                    "author_id": author.id,
                 }
                 template = None
                 try:
@@ -85,15 +102,19 @@ class EventMailRegistration(models.Model):
                     pass
 
                 if not template:
-                    _logger.warning("Cannot process ticket %s, because Mail Scheduler %s has reference to non-existent template", reg_mail.registration_id, reg_mail.scheduler_id)
+                    _logger.warning(
+                        "Cannot process ticket %s, because Mail Scheduler %s has reference to non-existent template",
+                        reg_mail.registration_id,
+                        reg_mail.scheduler_id,
+                    )
                     continue
 
                 if not template.email_from:
-                    email_values['email_from'] = author.email_formatted
-                template.send_mail(reg_mail.registration_id.id, email_values=email_values)
+                    email_values["email_from"] = author.email_formatted
+                template.send_mail(
+                    reg_mail.registration_id.id, email_values=email_values
+                )
                 reg_mail.mail_sent = True
-
-
 
     # 3. Default methods
 

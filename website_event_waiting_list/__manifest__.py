@@ -34,17 +34,17 @@
         "security/ir.model.access.csv",
         "data/email_template_views.xml",
         "data/email_template_data.xml",
-        #"views/assets.xml",
+        # "views/assets.xml",
         "views/event_views.xml",
         "views/event_ticket_views.xml",
         "views/event_templates_page_registration.xml",
         "views/event_templates_page_waiting_list.xml",
         "wizard/waiting_mail_list_message.xml",
     ],
-    'assets': {
-        'web.assets_frontend': [
-            'website_event_waiting_list/static/src/js/website_event.js',
-            'website_event_waiting_list/static/src/js/website_event_ticket.js',
+    "assets": {
+        "web.assets_frontend": [
+            "website_event_waiting_list/static/src/js/website_event.js",
+            "website_event_waiting_list/static/src/js/website_event_ticket.js",
         ],
     },
 }

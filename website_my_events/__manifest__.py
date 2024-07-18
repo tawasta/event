@@ -30,9 +30,9 @@
     "installable": True,
     "depends": ["portal", "event", "website_event_cancellation"],
     "data": ["security/ir.model.access.csv", "views/event_portal_templates.xml"],
-    'assets': {
-        'web.assets_frontend': [
-            'website_my_events/static/src/js/registration.js',
+    "assets": {
+        "web.assets_frontend": [
+            "website_my_events/static/src/js/registration.js",
         ],
     },
 }

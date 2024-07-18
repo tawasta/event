@@ -74,11 +74,17 @@
             <field name="seats_reserved" position="before">
                 <field name="seats_waiting" />
             </field>
-            <xpath expr="//div[@class='col-8 py-2 px-3 d-flex flex-column justify-content-between pt-3']/div" position="inside">
+            <xpath
+                expr="//div[@class='col-8 py-2 px-3 d-flex flex-column justify-content-between pt-3']/div"
+                position="inside"
+            >
                 <t t-if="record.seats_waiting.raw_value &gt; 0">
                     <div class="d-flex ps-1">
-                        <i class="fa fa-group mt-1 me-2 text-center" title="Waiting"/>
-                        <span t-out="record.seats_waiting.raw_value" class="me-1"/> Waiting
+                        <i class="fa fa-group mt-1 me-2 text-center" title="Waiting" />
+                        <span
+                            t-out="record.seats_waiting.raw_value"
+                            class="me-1"
+                        /> Waiting
                     </div>
                 </t>
             </xpath>
@@ -111,10 +117,14 @@
                 />
             </button>
             <button name="action_cancel" position="attributes">
-                <attribute name="invisible">context.get('state') not in ('draft', 'open', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'open', 'wait')</attribute>
             </button>
             <button name="action_confirm" position="attributes">
-                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'wait')</attribute>
             </button>
         </field>
     </record>
@@ -135,10 +145,14 @@
                 <attribute name="invisible">context.get('state') not in ('cancel', 'done')</attribute>
             </button> -->
             <button name="action_cancel" position="attributes">
-                <attribute name="invisible">context.get('state') not in ('draft', 'done', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'done', 'wait')</attribute>
             </button>
             <button name="action_confirm" position="attributes">
-                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'wait')</attribute>
             </button>
             <field name="state" position="attributes">
                 <attribute name="statusbar_visible">draft,open,done,wait</attribute>
@@ -162,13 +176,17 @@
                 expr="//div[@id='event_attendees_kanban_icons_desktop']//a[@name='action_confirm']"
                 position="attributes"
             >
-                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'wait')</attribute>
             </xpath>
             <xpath
                 expr="//div[@id='event_attendees_kanban_icons_mobile']//a[@name='action_confirm']"
                 position="attributes"
             >
-                <attribute name="invisible">context.get('state') not in ('draft', 'wait')</attribute>
+                <attribute
+                    name="invisible"
+                >context.get('state') not in ('draft', 'wait')</attribute>
             </xpath>
         </field>
     </record>

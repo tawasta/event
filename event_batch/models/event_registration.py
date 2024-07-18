@@ -23,9 +23,11 @@
 # 2. Known third party imports:
 
 
-# 3. Odoo imports (openerp):
-from odoo import fields, models, api
 import logging
+
+# 3. Odoo imports (openerp):
+from odoo import fields, models
+
 _logger = logging.getLogger(__name__)
 # 4. Imports from Odoo modules:
 
@@ -152,11 +154,11 @@ class EventRegistration(models.Model):
                 ).unlink()
 
     def write(self, vals):
-        if self.env.context.get('no_create_batch'):
+        if self.env.context.get("no_create_batch"):
             return super(EventRegistration, self).write(vals)
         res = super(EventRegistration, self).write(vals)
         for rec in self:
-            if rec.state == 'open':
+            if rec.state == "open":
                 if not rec.student_batch_id:
                     _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
                     rec.with_context(no_create_batch=True).create_student_batch()
