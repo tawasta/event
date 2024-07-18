@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="events_list_recurring_date" inherit_id="website_event.events_list">
+        <xpath expr="//div[contains(@t-attf-class, 'o_wevent_event_date')]" position="attributes">
+    
+            <attribute name="t-if">not event.recurring_event</attribute>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_wevent_event_date')]" position="after">
+    
+            <div
+                t-if="event.recurring_event"
+                name="recurring_date"
+                class="o_wevent_event_date position-absolute bg-white shadow-sm text-dark"
+            >
+                <span class="o_wevent_event_recurring_event">Recurring</span>
+            </div>
+        </xpath>
+    </template>
+</odoo>
