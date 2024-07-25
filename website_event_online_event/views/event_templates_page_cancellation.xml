@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="cancel_registration"
+        inherit_id="website_event_cancellation.cancel_registration"
+        name="Cancel Registration"
+    >
+        <xpath expr="//div[@id='event-information']/p[@id='location']" position="after">
+            <div t-if="event.is_online_event" class="mt-4 online-event">
+                <h5 class="text-secondary font-weight-bold">Online</h5>
+            </div>
+            <div
+                t-elif="not event.is_online_event and event.video_conference_link"
+                class="pt-3"
+            >
+                <p>Event also includes a video conference.</p>
+            </div>
+        </xpath>
+        <xpath
+            expr="//div[@id='event-information']/h5[@class='mt-4']"
+            position="attributes"
+        >
+            <attribute name="t-if">not event.is_online_event</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='event-information']/p[@id='location']"
+            position="attributes"
+        >
+            <attribute name="t-if">not event.is_online_event</attribute>
+        </xpath>
+    </template>
+</odoo>

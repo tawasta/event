@@ -76,8 +76,8 @@ class EventRegistration(models.Model):
         for registration in registrations:
             if not registration.access_token:
                 registration.sudo().write({"access_token": str(uuid.uuid4())})
-        if registrations._check_auto_confirmation():
-            registrations.sudo().action_confirm()
+        # if registrations._check_auto_confirmation():
+        #     registrations.sudo().action_confirm()
         return registrations
 
     # 7. Action methods

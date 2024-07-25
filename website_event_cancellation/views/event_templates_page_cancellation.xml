@@ -83,7 +83,7 @@
                 <div class="row mb-4">
                     <div class="col-md-6 col-xs-12 mx-auto">
                         <div class="card">
-                            <div class="card-body">
+                            <div id="event-information" class="card-body">
                                 <h5 class="card-title">Event Information</h5>
                                 <p class="card-text"><strong>Start: </strong>
                                     <span
@@ -98,7 +98,7 @@
                                     />
                                 </p>
                                 <h5 class="mt-4">Location</h5>
-                                <p class="card-text">
+                                <p id="location" class="card-text">
                                     <h5
                                         t-field="event.address_id"
                                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}"

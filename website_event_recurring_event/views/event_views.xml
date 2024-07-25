@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- EVENT.TYPE VIEWS -->
+    <record model="ir.ui.view" id="view_event_type_form_recurring_event">
+        <field name="name">event.type.form.recurring.event</field>
+        <field name="model">event.type</field>
+        <field name="inherit_id" ref="event.view_event_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='event_type_title']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="recurring_event" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="recurring_event" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- EVENT.EVENT VIEWS -->
+    <record model="ir.ui.view" id="view_event_form_recurring_event">
+        <field name="name">event.event.form.recurring.event</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="date_tz" position="before">
+                <field name="recurring_event" />
+            </field>
+        </field>
+    </record>
+</odoo>

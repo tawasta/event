@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="website_event_waiting_mail_list_message" model="ir.ui.view">
+        <field name="name">website.event.waiting.mail.list.message.form</field>
+        <field name="model">website.event.waiting.mail.list.message</field>
+        <field name="arch" type="xml">
+            <form id="send_waiting_mail_message_form">
+                <field name="message" readonly="1" />
+                <group>
+                    <div id="registration_ids">
+                        <field name="registration_ids" nolabel="1" readonly="1">
+                            <tree string="Mail sent to following registrations">
+                                <field name="name" />
+                                <field name="email" />
+                                <field name="event_id" readonly="1" />
+                                <field name="state" />
+                            </tree>
+                        </field>
+                    </div>
+                </group>
+                <footer>
+                    <button special="cancel" string="OK" class="oe_highlight" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

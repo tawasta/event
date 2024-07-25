@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_event_registration_tree_student_batch">
+        <field name="name">event.registration.tree.student.batch</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="student_batch_id"
+                    optional="show"
+                    readonly="state != 'draft'"
+                />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_event_registration_form_student_batch">
+        <field name="name">event.registration.form.student.batch</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <field name="event_ticket_id" position="after">
+                <field name="student_batch_id" readonly="state != 'draft'" />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_event_form_partner_student_batch">
+        <field name="name">event.event.form.student.batch</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="partner_event.view_event_form_partner" />
+        <field name="arch" type="xml">
+            <field name="create_partner" position="after">
+                <field name="create_partner_student_user" />
+            </field>
+        </field>
+    </record>
+</odoo>
