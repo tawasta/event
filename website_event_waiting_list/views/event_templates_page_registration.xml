@@ -88,7 +88,7 @@
             </select>
         </xpath> -->
 
-        <xpath expr="//t/div[@class='modal-footer']//button[@type='submit' and contains(@class, 'btn btn-primary o_wait_lazy_js a-submit')]" position="replace">
+        <xpath expr="//t/div[@class='modal-footer flex-lg-row border-top']//button[@type='submit' and contains(@class, 'btn btn-primary o_wait_lazy_js a-submit')]" position="replace">
             
    
             <t
@@ -153,7 +153,7 @@
         </xpath> -->
         <!-- Single ticket view submit button -->
         <xpath
-            expr="//div[@class='o_wevent_registration_single']/div[@class='modal-footer']/button[@type='submit']"
+            expr="//div[@class='o_wevent_registration_single']/div[@class='modal-footer flex-lg-row border-top']/button[@type='submit']"
             position="replace"
         >
             <t

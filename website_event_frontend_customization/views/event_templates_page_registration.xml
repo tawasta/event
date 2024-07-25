@@ -82,7 +82,7 @@
         name="Hide Calender button"
     >
         <xpath
-            expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']/a[@class='btn btn-secondary text-bg-secondary dropdown w-100 mt-3']"
+            expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']/a/p/i[@class='fa fa-calendar me-2']/../.."
             position="attributes"
         >
             <attribute name="class">dropdown d-none</attribute>
