@@ -10,8 +10,6 @@ publicWidget.registry.PortalMyEvents = publicWidget.Widget.extend({
      * @override
      */
     start: function () {
-        var self = this;
-
         $("#cancelModal").on("show.bs.modal", function (e) {
             var removeRegistration = $(e.relatedTarget).data("registration-id");
             $(e.currentTarget)

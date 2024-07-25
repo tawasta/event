@@ -1,3 +1,4 @@
+/* eslint-disable */
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
@@ -46,7 +47,7 @@ if (EventRegistrationFormInstance) {
                 '#registration_form input[name="waiting_list_registration"]'
             ).val();
             if (waitingListValue) {
-                post["waiting_list_registration"] = waitingListValue;
+                post.waiting_list_registration = waitingListValue;
             }
             console.log("===POST===");
             console.log(post);
@@ -68,7 +69,7 @@ if (EventRegistrationFormInstance) {
             $button.attr("disabled", true);
             return jsonrpc($form.attr("action"), post).then(function (modal) {
                 var $modal = $(modal);
-                $modal.find(".modal-body > div").removeClass("container"); // retrocompatibility - REMOVE ME in master / saas-19
+                $modal.find(".modal-body > div").removeClass("container"); // Retrocompatibility - REMOVE ME in master / saas-19
                 $modal.appendTo(document.body);
                 const modalBS = new Modal($modal[0], {
                     backdrop: "static",
