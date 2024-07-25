@@ -115,7 +115,8 @@ class EventEvent(models.Model):
     #     """Compute whether people may take registrations for this event
     #     * event.date_end -> if event is done, registrations are not open anymore;
     #     * event.
-    #     * event.start_sale_datetime -> lowest start date of tickets (if any; start_sale_datetime
+    #     * event.start_sale_datetime -> lowest start date
+    #       of tickets (if any; start_sale_datetime
     #       is False if no ticket are defined, see _compute_start_sale_datetime);
     #     * any ticket is available for sale (seats available) if any;
     #     * seats are unlimited or seats are available;

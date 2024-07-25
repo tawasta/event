@@ -108,7 +108,8 @@ class EventMailRegistration(models.Model):
 
                 if not template:
                     _logger.warning(
-                        "Cannot process ticket %s, because Mail Scheduler %s has reference to non-existent template",
+                        "Cannot process ticket %s, because Mail Scheduler %s "
+                        "has reference to non-existent template",
                         reg_mail.registration_id,
                         reg_mail.scheduler_id,
                     )

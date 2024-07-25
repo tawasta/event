@@ -53,10 +53,10 @@ class EventMailScheduler(models.Model):
             if is_mail_valid:
                 if is_restricted_template and scheduler.event_id.date_end <= now:
                     logging.info(
-                        "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."
+                        "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."  # noqa: B950
                     )
                     continue
-                logging.info(new_registrations)
+
                 scheduler._create_missing_mail_registrations(new_registrations)
                 # Kutsu apufunktiota
                 self._custom_processing(scheduler, new_registrations)
@@ -78,12 +78,11 @@ class EventMailScheduler(models.Model):
             else:
                 if is_restricted_template and scheduler.event_id.date_end <= now:
                     logging.info(
-                        "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."
+                        "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."  # noqa: B950
                     )
                     continue
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:
-                    logging.info("===MAIL WAS SENT===")
                     scheduler.event_id.mail_attendees(scheduler.template_ref.id)
                     scheduler.update(
                         {

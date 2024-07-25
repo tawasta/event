@@ -42,8 +42,8 @@
     ],
     "assets": {
         "web.assets_frontend": [
-            "website_event_waiting_list/static/src/js/website_event.js",
-            "website_event_waiting_list/static/src/js/website_event_ticket.js",
+            "website_event_waiting_list/static/src/js/website_event.esm.js",
+            "website_event_waiting_list/static/src/js/website_event_ticket.esm.js",
         ],
     },
 }

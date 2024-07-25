@@ -32,7 +32,7 @@
     "data": ["security/ir.model.access.csv", "views/event_portal_templates.xml"],
     "assets": {
         "web.assets_frontend": [
-            "website_my_events/static/src/js/registration.js",
+            "website_my_events/static/src/js/registration.esm.js",
         ],
     },
 }
