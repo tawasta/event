@@ -87,10 +87,10 @@
                 </t>
             </select>
         </xpath> -->
-        <xpath
-            expr="//div[@class='modal-footer']/button[@type='submit']"
-            position="replace"
-        >
+
+        <xpath expr="//t/div[@class='modal-footer']//button[@type='submit' and contains(@class, 'btn btn-primary o_wait_lazy_js a-submit')]" position="replace">
+            
+   
             <t
                 t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             >
