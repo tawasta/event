@@ -40,8 +40,8 @@
         "views/event_templates_page_cancellation.xml",
         "views/event_templates_page_registration.xml",
         "views/event_templates_list.xml",
-        #"data/email_template_views.xml",
-        #"data/email_template_data.xml",
+        "data/email_template_views.xml",
+        "data/email_template_data.xml",
         #"data/event_data.xml",
     ],
 }

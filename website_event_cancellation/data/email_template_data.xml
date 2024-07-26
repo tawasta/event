@@ -32,7 +32,7 @@
                 name="email_to"
             >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
         </record>
-<!--         <function name="write" model="ir.model.data">
+        <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
                 <value
                     eval="[('module', '=', 'event'), ('name', '=', 'event_reminder')]"
@@ -64,6 +64,6 @@
             <field
                 name="email_to"
             >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
-        </record> -->
+        </record>
     </data>
 </odoo>
