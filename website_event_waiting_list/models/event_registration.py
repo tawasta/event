@@ -152,6 +152,10 @@ class EventRegistration(models.Model):
         res = super().write(vals)
 
         event_stage = self.event_id.stage_id
+        logging.info("=====WAITING LIST=====WRITE");
+        logging.info(self);
+        logging.info(self.event_id);
+        logging.info(self.event_id.stage_id);
         if event_stage.pipe_end or event_stage.cancel:
             # Don't try to send messages for closed events
             return res
