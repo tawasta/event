@@ -151,27 +151,29 @@ class EventRegistration(models.Model):
         """Auto-trigger mail schedulers on state writes"""
         res = super().write(vals)
 
-        event_stage = self.event_id.stage_id
-        logging.info("=====WAITING LIST=====WRITE");
-        logging.info(self);
-        logging.info(self.event_id);
-        logging.info(self.event_id.stage_id);
-        if event_stage.pipe_end or event_stage.cancel:
-            # Don't try to send messages for closed events
-            return res
+        for rec in self:
 
-        if vals.get("state") == "open":
-            onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
-                lambda s: s.interval_type == "after_sub"
-            )
-            logging.info("====WAIT EMAILS====")
-            onsubscribe_schedulers.sudo().execute()
-        if vals.get("state") == "wait":
-            onsubscribe_schedulers = self.mapped("event_id.event_mail_ids").filtered(
-                lambda s: s.interval_type == "after_wait"
-            )
-            logging.info("====WAIT EMAILS 222====")
-            onsubscribe_schedulers.sudo().execute()
+            event_stage = rec.event_id.stage_id
+            logging.info("=====WAITING LIST=====WRITE");
+            logging.info(rec);
+            logging.info(rec.event_id);
+            logging.info(rec.event_id.stage_id);
+            if event_stage.pipe_end or event_stage.cancel:
+                # Don't try to send messages for closed events
+                return res
+
+            if vals.get("state") == "open":
+                onsubscribe_schedulers = rec.mapped("event_id.event_mail_ids").filtered(
+                    lambda s: s.interval_type == "after_sub"
+                )
+                logging.info("====WAIT EMAILS====")
+                onsubscribe_schedulers.sudo().execute()
+            if vals.get("state") == "wait":
+                onsubscribe_schedulers = rec.mapped("event_id.event_mail_ids").filtered(
+                    lambda s: s.interval_type == "after_wait"
+                )
+                logging.info("====WAIT EMAILS 222====")
+                onsubscribe_schedulers.sudo().execute()
         return res
 
     # 7. Action methods
