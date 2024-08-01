@@ -41,6 +41,7 @@
         "views/event_templates_list.xml",
         "data/email_template_views.xml",
         "data/email_template_data.xml",
-        # "data/event_data.xml",
+        # File below is not used yet
+        "data/event_data.xml",
     ],
 }
