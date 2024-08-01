@@ -154,10 +154,10 @@ class EventRegistration(models.Model):
         for rec in self:
 
             event_stage = rec.event_id.stage_id
-            logging.info("=====WAITING LIST=====WRITE");
-            logging.info(rec);
-            logging.info(rec.event_id);
-            logging.info(rec.event_id.stage_id);
+            logging.info("=====WAITING LIST=====WRITE")
+            logging.info(rec)
+            logging.info(rec.event_id)
+            logging.info(rec.event_id.stage_id)
             if event_stage.pipe_end or event_stage.cancel:
                 # Don't try to send messages for closed events
                 return res
