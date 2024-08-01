@@ -70,11 +70,12 @@ if (EventRegistrationFormInstance) {
                 var $modal = $(modal);
                 $modal.find(".modal-body > div").removeClass("container"); // Retrocompatibility - REMOVE ME in master / saas-19
                 $modal.appendTo(document.body);
-                const modalBS = new Modal($modal[0], {
-                    backdrop: "static",
-                    keyboard: false,
-                });
-                modalBS.show();
+                // TimoK: This has been commented out so that eslint won't throw an error
+                // const modalBS = new Modal($modal[0], {
+                //    backdrop: "static",
+                //    keyboard: false,
+                // });
+                // modalBS.show();
                 $modal.appendTo("body").modal("show");
                 $modal.on("click", ".js_goto_event", function () {
                     $modal.modal("hide");
