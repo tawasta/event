@@ -13,7 +13,6 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.0.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.0 |  | Allows creating student batches for event registrations
-[event_description](event_description/) | 17.0.1.0.0 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
@@ -40,5 +39,12 @@ addon | version | maintainers | summary
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_waiting_list](website_event_waiting_list/) | 17.0.0.0.0 |  | Adds a waiting list functionality to Events.
 [website_my_events](website_my_events/) | 17.0.1.0.0 |  | My events in website portal
+
+
+Unported addons
+---------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[event_description](event_description/) | 17.0.1.1.0 (unported) |  | Add description field to backend event form (Deprecated)
 
 [//]: # (end addons)
