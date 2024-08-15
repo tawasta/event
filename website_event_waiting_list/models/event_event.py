@@ -9,10 +9,8 @@ class EventEvent(models.Model):
     # 2. Fields declaration
     waiting_list = fields.Boolean(
         string="Enable Waiting List",
-        compute="_compute_waiting_list",
         help="Enable waiting list when attendee limit is reached.",
-        readonly=False,
-        store=True,
+        tracking=True,
     )
     seats_waiting = fields.Integer(
         string="Seats on waiting list",
@@ -93,14 +91,15 @@ class EventEvent(models.Model):
                 )
                 registrations_to_not_sent.write({"mail_sent": False})
 
-    @api.depends("event_type_id", "waiting_list")
-    def _compute_waiting_list(self):
+    @api.onchange("event_type_id")
+    def _onchange_event_type_update_wait_list(self):
         """Update event configuration from its event type. Depends are set only
-        on event_type_id itself, not its sub fields. Purpose is to emulate an
+        on event_type_id itself, not its subfields. Purpose is to emulate an
         onchange: if event type is changed, update event configuration. Changing
         event type content itself should not trigger this method."""
         for event in self:
-            event.waiting_list = event.event_type_id.waiting_list
+            if event.event_type_id:
+                event.waiting_list = event.event_type_id.waiting_list
 
     # @api.depends(
     #     "date_tz",

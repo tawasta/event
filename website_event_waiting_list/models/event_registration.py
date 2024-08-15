@@ -184,10 +184,11 @@ class EventRegistration(models.Model):
 
     def _check_waiting_list(self, vals):
         event = self.env["event.event"].browse(vals["event_id"])
+        event_ticket = self.env["event.event.ticket"]
         ticket = (
-            self.env["event.event.ticket"].browse(vals["event_ticket_id"])
+            self.event_ticket.browse(vals["event_ticket_id"])
             if vals.get("event_ticket_id")
-            else None
+            else event_ticket
         )
         if (
             event.waiting_list
