@@ -55,6 +55,7 @@ class EventType(models.Model):
         "Allow Cancellations",
         help="Allows registrants to cancel their registrations.",
         default=True,
+        tracking=True,
     )
     cancel_interval_nbr = fields.Integer("Interval", default=1)
     cancel_interval_unit = fields.Selection(

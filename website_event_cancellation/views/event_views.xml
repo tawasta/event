@@ -46,14 +46,14 @@
         <field name="model">event.event</field>
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
-            <field name="date_tz" position="before">
-                <field name="has_cancel" />
+            <field name="badge_format" position="before">
+                <field name="has_cancel" widget="boolean_toggle" />
                 <label
                     for="cancel_interval_nbr"
                     string="Cancel registration"
-                    invisible="has_cancel != True"
+                    invisible="not has_cancel"
                 />
-                <div class="o_row" invisible="has_cancel != True">
+                <div class="o_row" invisible="not has_cancel">
                     <field name="cancel_interval_nbr" nolabel="1" class="oe_inline" />
                     <field name="cancel_interval_unit" nolabel="1" class="oe_inline" />
                     <div class="mt4">
