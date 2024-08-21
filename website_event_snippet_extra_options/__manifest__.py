@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,31 +17,27 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+
 {
-    "name": "Website Event Cancellation",
-    "summary": "Cancel events and event registrations through website.",
-    "version": "17.0.1.0.2",
-    "category": "Events",
+    "name": "Website 'Events' Snippet Extra Options",
+    "summary": "Additional configurations for the core snippet",
+    "version": "17.0.1.0.0",
+    "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "mail_template_name_translatable",
-        "website_event",
-        # "website_event_frontend_customization",
-        "email_template_qweb",
-    ],
+    "depends": ["website_event_private_event"],
     "data": [
-        "views/event_views.xml",
-        "views/event_stage_views.xml",
-        "views/event_templates_page_cancellation.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_list.xml",
-        "data/email_template_views.xml",
-        "data/email_template_data.xml",
-        # File below is not used yet
-        "data/event_data.xml",
+        "views/event_event_views.xml",
+        "views/snippets/s_events_extended.xml",
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "website_event/static/src/snippets/s_events/000.js",
+            "website_event_snippet_extra_options/static/src/"
+            "snippets/s_events_extended/000.esm.js",
+        ]
+    },
 }

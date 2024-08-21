@@ -45,8 +45,12 @@
                     <field name="seats_waiting" widget="statinfo" string="Waiting" />
                 </button>
             </xpath>
-            <field name="badge_format" position="before">
-                <field name="waiting_list" />
+            <field name="has_cancel" position="before">
+                <field
+                    name="waiting_list"
+                    widget="boolean_toggle"
+                    invisible="not seats_limited"
+                />
             </field>
         </field>
     </record>

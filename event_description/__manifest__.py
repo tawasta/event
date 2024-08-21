@@ -19,15 +19,15 @@
 ##############################################################################
 
 {
-    "name": "Event Description",
-    "summary": "Add description field to event form.",
-    "version": "17.0.1.0.0",
+    "name": "Event Description (Deprecated)",
+    "summary": "Add description field to backend event form (Deprecated)",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "depends": ["event"],
     "data": ["views/event_views.xml"],
 }
