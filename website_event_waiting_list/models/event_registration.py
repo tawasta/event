@@ -191,15 +191,15 @@ class EventRegistration(models.Model):
             else event_ticket
         )
         if (
-            event.waiting_list
-            and event.seats_limited
-            and event.seats_available > 0
-            and ticket.seats_limited
-            and ticket.seats_available > 0
+            event.waiting_list  # Jonotuslista on käytössä
+            and event.seats_limited  # Tapahtumalla on rajattu määrä paikkoja
+            and event.seats_available <= 0  # Paikkoja ei ole jäljellä
+            and ticket.seats_limited  # Lipuilla on rajattu määrä paikkoja
+            and ticket.seats_available <= 0  # Lippuja ei ole jäljellä
         ):
-            return False
+            return True  # Lisätään jonotuslistalle
         else:
-            return True
+            return False  # Ei lisätä jonotuslistalle
 
         # for registration in self:
         #     if (not registration.event_id.waiting_list) or (
