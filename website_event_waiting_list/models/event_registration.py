@@ -186,7 +186,7 @@ class EventRegistration(models.Model):
         event = self.env["event.event"].browse(vals["event_id"])
         event_ticket = self.env["event.event.ticket"]
         ticket = (
-            self.event_ticket.browse(vals["event_ticket_id"])
+            event_ticket.browse(vals["event_ticket_id"])
             if vals.get("event_ticket_id")
             else event_ticket
         )

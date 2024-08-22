@@ -40,7 +40,8 @@ class EventMailScheduler(models.Model):
     def execute(self):
         for scheduler in self:
             now = fields.Datetime.now()
-
+            # delay_time = timedelta(minutes=1)
+            # start_time = datetime.now() + delay_time
             Website = self.env["website"].sudo()
             current_website = Website.get_current_website()
             restricted_templates = current_website.restricted_mail_template_ids.ids
@@ -61,6 +62,7 @@ class EventMailScheduler(models.Model):
                 # Kutsu apufunktiota
                 self._custom_processing(scheduler, new_registrations)
                 # execute scheduler on registrations
+                logging.info("====EXECUTE=====");
                 scheduler.mail_registration_ids.execute()
                 total_sent = len(
                     scheduler.mail_registration_ids.filtered(lambda reg: reg.mail_sent)
@@ -81,6 +83,7 @@ class EventMailScheduler(models.Model):
                         "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."  # noqa: B950
                     )
                     continue
+                logging.info("=====SEN TMAIL=====");
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:
                     scheduler.event_id.mail_attendees(scheduler.template_ref.id)
