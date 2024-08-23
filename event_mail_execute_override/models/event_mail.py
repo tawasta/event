@@ -62,7 +62,7 @@ class EventMailScheduler(models.Model):
                 # Kutsu apufunktiota
                 self._custom_processing(scheduler, new_registrations)
                 # execute scheduler on registrations
-                logging.info("====EXECUTE=====");
+                logging.info("====EXECUTE=====")
                 scheduler.mail_registration_ids.execute()
                 total_sent = len(
                     scheduler.mail_registration_ids.filtered(lambda reg: reg.mail_sent)
@@ -83,7 +83,7 @@ class EventMailScheduler(models.Model):
                         "Sähköpostipohja on rajoitettu eikä viestiä lähetetä, koska tapahtuma on päättynyt."  # noqa: B950
                     )
                     continue
-                logging.info("=====SEN TMAIL=====");
+                logging.info("=====SEN TMAIL=====")
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:
                     scheduler.event_id.mail_attendees(scheduler.template_ref.id)
