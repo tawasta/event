@@ -22,6 +22,7 @@ addon | version | maintainers | summary
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
+[event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.2 |  | Cancel events and event registrations through website.
