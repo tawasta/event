@@ -12,22 +12,16 @@
         <field name="model">website.event.publish.event.wizard</field>
         <field name="arch" type="xml">
             <form string="Publish events on website">
-                Publish events on website
-                <group><field name="event_ids" nolabel="1" readonly="1"><tree
-                            string="Events"
-                        ><field name="name" /><field
-                                name="website_published"
-                            /></tree></field></group>
-                <footer><button
-                        string="Confirm"
-                        name="publish_event_on_website"
-                        type="object"
-                        class="oe_highlight"
-                    /><button
-                        string="Cancel"
-                        class="oe_link"
-                        special="cancel"
-                    /></footer>
+                <sheet>
+                    <group>
+                        <field name="event_ids" widget="many2many_tags" readonly="1" class="col-12" />
+                            
+                    </group>
+                    <footer>
+                        <button string="Confirm" name="publish_event_on_website" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </sheet>
             </form>
         </field>
     </record>
