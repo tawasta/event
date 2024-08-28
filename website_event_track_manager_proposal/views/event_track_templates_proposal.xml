@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="event_track_proposal_admin_show_proposal"
+        inherit_id="website_event_track.event_track_proposal"
+    >
+        <xpath
+            expr="//div/section[@id='forms']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not event.website_track_proposal and not request.env.user.has_group("event.group_event_manager")</attribute>
+        </xpath>
+    </template>
+</odoo>
