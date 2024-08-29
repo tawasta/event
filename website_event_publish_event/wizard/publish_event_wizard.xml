@@ -14,12 +14,22 @@
             <form string="Publish events on website">
                 <sheet>
                     <group>
-                        <field name="event_ids" widget="many2many_tags" readonly="1" class="col-12" />
-                            
+                        <field
+                            name="event_ids"
+                            widget="many2many_tags"
+                            readonly="1"
+                            class="col-12"
+                        />
+
                     </group>
                     <footer>
-                        <button string="Confirm" name="publish_event_on_website" type="object" class="oe_highlight"/>
-                        <button string="Cancel" class="oe_link" special="cancel"/>
+                        <button
+                            string="Confirm"
+                            name="publish_event_on_website"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                        <button string="Cancel" class="oe_link" special="cancel" />
                     </footer>
                 </sheet>
             </form>
