@@ -29,7 +29,12 @@
     "application": False,
     "installable": True,
     "depends": ["portal", "event", "website_event_cancellation"],
-    "data": ["security/ir.model.access.csv", "views/event_portal_templates.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/event_portal_template_home.xml",
+        "views/event_portal_template_menu.xml",
+        "views/event_portal_template_my.xml",
+    ],
     "assets": {
         "web.assets_frontend": [
             "website_my_events/static/src/js/registration.esm.js",
