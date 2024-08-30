@@ -316,11 +316,7 @@
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    <input
-                        type="hidden"
-                        name="csrf_token"
-                        t-att-value="request.csrf_token(time_limit=False)"
-                    />
+                    <input name="csrf_token" type="hidden" t-att-value="request.csrf_token()"/>
                     <input
                         type="hidden"
                         id="editable"
@@ -328,7 +324,7 @@
                         t-att-value="editable"
                     />
                     <input type="hidden" id="draft" name="draft" t-att-value="draft" />
-                    <input type="hidden" name="track_id" t-att-value="track.id" />
+                    <input type="hidden" name="track_id" />
                     <div class="modal-content">
                         <div class="modal-header align-items-center">
                             <t t-if="not review">
@@ -617,7 +613,6 @@
                             >
                                 <option
                                     t-att-value="application_type.id"
-                                    t-att-selected="application_type.id == track.type.id"
                                     t-att-data-workshop="application_type.workshop"
                                     t-att-data-workshop-contract="application_type.workshop_contract"
                                     t-att-data-webinar="application_type.webinar"
@@ -675,7 +670,6 @@
                             name="name"
                             maxlength="100"
                             placeholder="Presentation Title"
-                            t-att-value="track.name"
                             t-att-required="None if not editable else 'required'"
                             class="form-control"
                             type="text"
@@ -693,7 +687,6 @@
                         <input
                             name="video_url"
                             placeholder="https://www.youtube.com/..."
-                            t-att-value="track.video_url"
                             class="form-control"
                             type="text"
                             t-att-disabled="None if editable else 'disabled'"
@@ -725,7 +718,7 @@
                             t-att-required="None if not editable else 'required'"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"
-                        ><t t-esc="track.description" /></textarea>
+                        ></textarea>
                         <div class="invalid-feedback">Please enter presentation content.</div>
                     </div>
                     <div class="form-group col-xl-6">
@@ -743,7 +736,6 @@
                             <t t-foreach="track_languages or []" t-as="language">
                                 <option
                                     t-att-value="language.id"
-                                    t-att-selected="language.id == track.language.id"
                                 >
                                     <t t-esc="language.name" />
                                 </option>
@@ -753,7 +745,7 @@
                             class="invalid-feedback"
                         >Please select a presentation language.</div>
                     </div>
-                    <t
+<!--                     <t
                         t-set="evaluator_see_attachments"
                         t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.evaluator_see_attachments')"
                     />
@@ -784,7 +776,7 @@
                                 </div>
                             </t>
                         </div>
-                    </t>
+                    </t> -->
                     <div t-if="not review" class="form-group col-xl-6">
                         <label
                             class="col-form-label label-optional"
@@ -903,7 +895,6 @@
                                 >
                                     <option
                                         t-att-value="t.id"
-                                        t-att-selected="t.id in track.target_group_ids.ids"
                                     ><t t-esc="t.name" /></option>
                                 </t>
                             </select>
@@ -921,7 +912,6 @@
                                 <t t-foreach="event.target_group_ids or []" t-as="t">
                                     <option
                                         t-att-value="t.id"
-                                        t-att-selected="t.id in track.target_group_ids.ids"
                                     ><t t-esc="t.name" /></option>
                                 </t>
                             </select>
@@ -972,7 +962,7 @@
                             class="form-control o_wysiwyg_loader"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"
-                        ><t t-esc="track.target_group_info" /></textarea>
+                        ></textarea>
                     </div>
                     <div class="form-group col-xl-12">
                         <label
@@ -1008,7 +998,6 @@
                                 >
                                     <option
                                         t-att-value="tag.id"
-                                        t-att-selected="tag.id in track.tag_ids.ids"
                                     ><t t-esc="tag.name" /></option>
                                 </t>
                             </select>
@@ -1029,7 +1018,6 @@
                                 >
                                     <option
                                         t-att-value="tag.id"
-                                        t-att-selected="tag.id in track.tag_ids.ids"
                                     ><t t-esc="tag.name" /></option>
                                 </t>
                             </select>
@@ -1075,7 +1063,6 @@
                                 >
                                     <option
                                         t-att-value="tag.id"
-                                        t-att-selected="tag.id in track.tag_ids.ids"
                                     ><t t-esc="tag.name" /></option>
                                 </t>
                             </select>
@@ -1096,7 +1083,6 @@
                                 >
                                     <option
                                         t-att-value="tag.id"
-                                        t-att-selected="tag.id in track.tag_ids.ids"
                                     ><t t-esc="tag.name" /></option>
                                 </t>
                             </select>
@@ -1129,7 +1115,6 @@
                     <div class="form-group col-xl-4">
                         <input
                             t-attf-name="contact_id"
-                            t-att-value="track.partner_id.id"
                             class="d-none"
                             type="hidden"
                         />
@@ -1140,7 +1125,6 @@
                         <input
                             name="contact_firstname"
                             placeholder="First Name"
-                            t-att-value="track.partner_id.firstname or partner.firstname if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1155,7 +1139,6 @@
                         <input
                             name="contact_lastname"
                             placeholder="Last Name"
-                            t-att-value="track.partner_id.lastname or partner.lastname if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1167,7 +1150,6 @@
                         <input
                             name="contact_email"
                             placeholder="Email"
-                            t-att-value="track.partner_id.email or partner.email if partner else False"
                             class="form-control"
                             type="email"
                             t-att-required="None if not editable else 'required'"
@@ -1183,7 +1165,6 @@
                         <input
                             name="contact_phone"
                             placeholder="Phone"
-                            t-att-value="track.partner_id.phone or partner.phone if partner else False"
                             class="form-control"
                             type="tel"
                             t-att-disabled="None if editable else 'disabled'"
@@ -1197,7 +1178,6 @@
                         <input
                             name="contact_organization"
                             placeholder="Organization"
-                            t-att-value="track.partner_id.parent_id.name or partner.parent_id.name if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1209,7 +1189,6 @@
                         <input
                             name="contact_title"
                             placeholder="Title"
-                            t-att-value="track.partner_id.function or partner.function if partner else False"
                             class="form-control"
                             type="text"
                             t-att-required="None if not editable else 'required'"
@@ -1220,286 +1199,132 @@
             </div>
         </div>
     </template>
+    
     <template id="website_event_track_advanced.event_track_application_speakers">
         <div class="panel panel-primary" id="track-application-speakers-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Presenters</h3>
             </div>
             <div class="panel-body">
-                <p
-                    id="track-application-speakers-alert-info"
-                    class="alert alert-info alert-dismissable"
-                >
-                    <a
-                        href="#"
-                        class="close"
-                        data-dismiss="alert"
-                        aria-label="close"
-                    >×</a>
-                    <span
-                        class="alert-message"
-                    >List the details of all presenters</span>
+                <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <span class="alert-message">List the details of all presenters</span>
                 </p>
                 <t t-set="speaker_count" t-value="0" />
                 <div class="track-application-speakers-div-container">
-                    <!-- Add existing speakers to form -->
-                    <t t-foreach="track.speaker_ids" t-as="speaker">
-                        <t t-set="speaker_count" t-value="speaker_count + 1" />
-                        <input
-                            t-attf-name="speaker_id[#{speaker_count}]"
-                            t-att-value="speaker.id"
-                            class="d-none"
-                            type="hidden"
-                        />
-                        <div
-                            class="track-application-speakers-div-row-container"
-                            t-att-id="speaker_count"
-                        >
-                            <span class="text-muted presenter-span">Presenter #<t
-                                    t-esc="speaker_count"
-                                /></span>
-                            <button
-                                type="button"
-                                class="btn btn-default btn-remove-speaker"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="Remove speaker"
-                                t-att-disabled="None if editable and speaker_count &gt; 1 else 'disabled'"
-                            >
-                                    <i class="fa fa-trash" />
-                            </button>
-                            <div
-                                t-attf-id="track-application-speakers-row-div-#{speaker_count}"
-                                class="row"
-                            >
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_firstname[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >First Name</label>
-                                    <input
-                                        t-attf-name="speaker_firstname[#{speaker_count}]"
-                                        placeholder="First Name"
-                                        t-att-value="speaker.firstname"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_lastname[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Last Name</label>
-                                    <input
-                                        t-attf-name="speaker_lastname[#{speaker_count}]"
-                                        placeholder="Last Name"
-                                        t-att-value="speaker.lastname"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_email[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Email</label>
-                                    <input
-                                        t-attf-name="speaker_email[#{speaker_count}]"
-                                        placeholder="Email"
-                                        t-att-value="speaker.email"
-                                        class="form-control"
-                                        type="email"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_phone[#{speaker_count}]"
-                                        class="col-form-label label-optional"
-                                    >Phone</label>
-                                    <input
-                                        t-attf-name="speaker_phone[#{speaker_count}]"
-                                        placeholder="Phone"
-                                        t-att-value="speaker.phone"
-                                        class="form-control"
-                                        type="tel"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_organization[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Organization</label>
-                                    <input
-                                        t-attf-name="speaker_organization[#{speaker_count}]"
-                                        placeholder="Organization"
-                                        t-att-value="speaker.parent_id.name"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                                <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_title[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Title</label>
-                                    <input
-                                        t-attf-name="speaker_title[#{speaker_count}]"
-                                        placeholder="Title"
-                                        t-att-value="speaker.function"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </t>
-                    <!-- If no existing speakers, add a single empty speaker -->
                     <t t-if="speaker_count == 0">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
-                        <div
-                            class="track-application-speakers-div-row-container"
-                            t-att-id="speaker_count"
-                        >
-                            <span class="text-muted presenter-span">Presenter #<t
-                                    t-esc="speaker_count"
-                                /></span>
-                            <button
-                                type="button"
-                                class="btn btn-default btn-remove-speaker"
-                                disabled="disabled"
-                                data-toggle="tooltip"
-                                data-placement="right"
-                                title="Remove speaker"
-                            >
+                        <div class="track-application-speakers-div-row-container" t-att-id="speaker_count">
+                            <span class="text-muted presenter-span">Presenter #<t t-esc="speaker_count"/></span>
+                            <button type="button" class="btn btn-default btn-remove-speaker" 
+                                    disabled="disabled" data-toggle="tooltip" data-placement="right" 
+                                    title="Remove speaker">
                                 <i class="fa fa-trash" />
                             </button>
-                            <div
-                                t-attf-id="track-application-speakers-row-div-#{speaker_count}"
-                                class="row"
-                            >
+                            <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_firstname[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >First Name</label>
-                                    <input
-                                        t-attf-name="speaker_firstname[#{speaker_count}]"
-                                        placeholder="First Name"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-value="partner.firstname if partner else False"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
+                                    <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" 
+                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
+                                           t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_lastname[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Last Name</label>
-                                    <input
-                                        t-attf-name="speaker_lastname[#{speaker_count}]"
-                                        placeholder="Last Name"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-value="partner.lastname if partner else False"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
+                                    <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" 
+                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
+                                           t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_email[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Email</label>
-                                    <input
-                                        t-attf-name="speaker_email[#{speaker_count}]"
-                                        placeholder="Email"
-                                        class="form-control"
-                                        type="email"
-                                        t-att-value="partner.email if partner else False"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
+                                    <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" 
+                                           class="form-control" type="email" t-att-required="None if not editable else 'required'" 
+                                           t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_phone[#{speaker_count}]"
-                                        class="col-form-label label-optional"
-                                    >Phone</label>
-                                    <input
-                                        t-attf-name="speaker_phone[#{speaker_count}]"
-                                        placeholder="Phone"
-                                        class="form-control"
-                                        type="tel"
-                                        t-att-value="partner.phone if partner else False"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
+                                    <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" 
+                                           class="form-control" type="tel" t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_organization[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Organization</label>
-                                    <input
-                                        t-attf-name="speaker_organization[#{speaker_count}]"
-                                        placeholder="Organization"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-value="partner.parent_id.name if partner else False"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
+                                    <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" 
+                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
+                                           t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label
-                                        t-attf-for="speaker_title[#{speaker_count}]"
-                                        class="col-form-label"
-                                    >Title</label>
-                                    <input
-                                        t-attf-name="speaker_title[#{speaker_count}]"
-                                        placeholder="Title"
-                                        class="form-control"
-                                        type="text"
-                                        t-att-value="partner.function if partner else False"
-                                        t-att-required="None if not editable else 'required'"
-                                        t-att-disabled="None if editable else 'disabled'"
-                                    />
+                                    <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
+                                    <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" 
+                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
+                                           t-att-disabled="None if editable else 'disabled'" />
                                 </div>
                             </div>
                         </div>
                     </t>
                 </div>
-                <input
-                    id="track-application-speaker-input-index"
-                    name="speakers_input_index"
-                    t-att-value="speaker_count"
-                    class="d-none"
-                    type="hidden"
-                />
+                <input id="track-application-speaker-input-index" name="speakers_input_index" 
+                       t-att-value="speaker_count" class="d-none" type="hidden" />
                 <div class="form-group">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        t-att-disabled="None if editable else 'disabled'"
-                        id="add_speaker"
-                    >Add Presenter <i class="fa fa-user" />
-                    </button>
+                    <button type="button" class="btn btn-primary" t-att-disabled="None if editable else 'disabled'" 
+                            id="add_speaker">Add Presenter <i class="fa fa-user" /></button>
                 </div>
             </div>
         </div>
     </template>
+
+    <template id="website_event_track_advanced.speaker_row">
+        <div class="track-application-speakers-div-row-container" t-att-id="index">
+            <span class="text-muted presenter-span">Presenter #<t t-esc="index"/></span>
+            <button type="button" class="btn btn-default btn-remove-speaker" 
+                    data-toggle="tooltip" data-placement="right" title="Remove speaker">
+                <i class="fa fa-trash" />
+            </button>
+            <div t-attf-id="track-application-speakers-row-div-#{index}" class="row">
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_firstname[#{index}]" class="col-form-label">First Name</label>
+                    <input t-attf-name="speaker_firstname[#{index}]" placeholder="First Name" 
+                           class="form-control" type="text" t-att-value="speaker.firstname" 
+                           t-att-required="None if not editable else 'required'" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_lastname[#{index}]" class="col-form-label">Last Name</label>
+                    <input t-attf-name="speaker_lastname[#{index}]" placeholder="Last Name" 
+                           class="form-control" type="text" t-att-value="speaker.lastname" 
+                           t-att-required="None if not editable else 'required'" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_email[#{index}]" class="col-form-label">Email</label>
+                    <input t-attf-name="speaker_email[#{index}]" placeholder="Email" 
+                           class="form-control" type="email" t-att-value="speaker.email" 
+                           t-att-required="None if not editable else 'required'" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_phone[#{index}]" class="col-form-label label-optional">Phone</label>
+                    <input t-attf-name="speaker_phone[#{index}]" placeholder="Phone" 
+                           class="form-control" type="tel" t-att-value="speaker.phone" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_organization[#{index}]" class="col-form-label">Organization</label>
+                    <input t-attf-name="speaker_organization[#{index}]" placeholder="Organization" 
+                           class="form-control" type="text" t-att-value="speaker.organization" 
+                           t-att-required="None if not editable else 'required'" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+                <div class="form-group col-xl-4">
+                    <label t-attf-for="speaker_title[#{index}]" class="col-form-label">Title</label>
+                    <input t-attf-name="speaker_title[#{index}]" placeholder="Title" 
+                           class="form-control" type="text" t-att-value="speaker.title" 
+                           t-att-required="None if not editable else 'required'" 
+                           t-att-disabled="None if editable else 'disabled'" />
+                </div>
+            </div>
+        </div>
+    </template>
+
+
     <!-- WEBINAR -->
     <template id="event_track_application_webinar">
         <div
@@ -1559,7 +1384,7 @@
                             placeholder="Webinar info..."
                             rows="6"
                             t-att-disabled="None if editable and track.type.webinar and track.webinar else 'disabled'"
-                        ><t t-esc="track.webinar_info" /></textarea>
+                        ></textarea>
                     </div>
                 </div>
             </div>
@@ -1599,7 +1424,6 @@
                             name="workshop_min_participants"
                             class="form-control"
                             placeholder="0"
-                            t-att-value="track.workshop_min_participants"
                             t-att-required="None if not track.type.workshop or not editable else 'required'"
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1615,7 +1439,6 @@
                             name="workshop_participants"
                             class="form-control"
                             placeholder="0"
-                            t-att-value="track.workshop_participants"
                             t-att-required="None if not track.type.workshop or not editable else 'required'"
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1631,7 +1454,6 @@
                             name="workshop_fee"
                             class="form-control"
                             placeholder="0"
-                            t-att-value="track.workshop_fee"
                             t-att-required="None if not track.type.workshop or not editable else 'required'"
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1651,7 +1473,7 @@
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
                             rows="6"
-                        ><t t-esc="track.workshop_goals" /></textarea>
+                        ></textarea>
                         <div class="invalid-feedback">Please enter session goals.</div>
                     </div>
                     <div class="form-group col-xl-12">
@@ -1668,7 +1490,7 @@
                             t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                             t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
                             rows="6"
-                        ><t t-esc="track.workshop_schedule" /></textarea>
+                        ></textarea>
                         <div
                             class="invalid-feedback"
                         >Please enter session program and schedule.</div>
@@ -1695,7 +1517,6 @@
                         <input
                                     name="signee_firstname"
                                     placeholder="First Name"
-                                    t-att-value="track.organizer_contact.firstname"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
                                     t-att-disabled="None if editable and track.type.workshop else 'disabled'"
                                     t-att-required-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1711,7 +1532,6 @@
                         <input
                                     name="signee_lastname"
                                     placeholder="Last Name"
-                                    t-att-value="track.organizer_contact.lastname"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1724,7 +1544,6 @@
                         <input
                                     name="signee_email"
                                     placeholder="Email"
-                                    t-att-value="track.organizer_contact.email"
                                     class="form-control"
                                     type="email"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1740,7 +1559,6 @@
                         <input
                                     name="signee_phone"
                                     placeholder="Phone"
-                                    t-att-value="track.organizer_contact.phone"
                                     class="form-control"
                                     type="tel"
                                     t-att-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1754,7 +1572,6 @@
                         <input
                                     name="signee_organization"
                                     placeholder="Organization"
-                                    t-att-value="track.organizer_contact.parent_id.name"
                                     class="form-control"
                                     type="text"
                                     t-att-disabled="None if editable and track.type.workshop else 'disabled'"
@@ -1765,7 +1582,6 @@
                         <input
                                     name="signee_title"
                                     placeholder="Title"
-                                    t-att-value="track.organizer_contact.function"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1784,7 +1600,6 @@
                         <input
                                     name="organizer_organization"
                                     placeholder="Organization"
-                                    t-att-value="track.organizer.name"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1800,7 +1615,6 @@
                         <input
                                     name="organizer_street"
                                     placeholder="Street"
-                                    t-att-value="track.organizer.street"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1813,7 +1627,6 @@
                         <input
                                     name="organizer_zip"
                                     placeholder="Zip"
-                                    t-att-value="track.organizer.zip"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1826,7 +1639,6 @@
                         <input
                                     name="organizer_city"
                                     placeholder="City"
-                                    t-att-value="track.organizer.city"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1857,7 +1669,6 @@
                                 <t t-foreach="operators" t-as="o">
                                     <option
                                             t-att-value="o.id"
-                                            t-att-selected="o.id == track.organizer.einvoice_operator_id.id"
                                         ><t t-esc="o.name" /></option>
                                 </t>
                             </select>
@@ -1883,7 +1694,6 @@
                         <input
                                     name="organizer_reference"
                                     placeholder="Your Reference"
-                                    t-att-value="track.organizer.ref"
                                     class="form-control"
                                     type="text"
                                     t-att-required="None if not track.type.workshop or not editable else 'required'"
@@ -1934,7 +1744,7 @@
                             class="form-control o_wysiwyg_loader"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"
-                        ><t t-esc="track.extra_info" /></textarea>
+                        ></textarea>
                     </div>
                 </div>
             </div>
@@ -1964,7 +1774,6 @@
                             >
                                 <option
                                     t-att-value="rating_grade.id"
-                                    t-att-selected="rating_grade.id == existing_rating.grade_id.id"
                                 >
                                     <t t-esc="rating_grade.name" />
                                 </option>
@@ -1986,7 +1795,7 @@
                             placeholder="Verbal Rating..."
                             class="form-control o_wysiwyg_loader"
                             rows="6"
-                        ><t t-esc="existing_rating.comment" /></textarea>
+                        ></textarea>
                     </div>
                 </div>
             </div>

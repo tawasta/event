@@ -21,6 +21,7 @@
 import base64
 import logging
 import sys
+import json
 
 # 2. Known third party imports:
 from psycopg2.errors import InvalidTextRepresentation
@@ -65,30 +66,69 @@ class EventTrackControllerAdvanced(EventTrackController):
         values = {"tracks": tracks, "event": event, "main_object": event, "track_languages": track_languages}
         return values
 
-    @http.route('/event/track/data', type='json', auth='public', methods=['POST'], csrf=False)
-    def get_event_track_data(self, track_id):
-        # Etsi track-id:n avulla
-        track = request.env['event.track'].sudo().browse(track_id)
-        if not track.exists():
-            return {'error': 'Track not found'}
 
-        # Luo dict, jossa on tarvittavat tiedot
-        track_data = {
+    @http.route(["/event/track/data"], type='json', auth='public', methods=['POST'], website=True)
+    def get_track(self, track_id, **kwargs):
+        logging.info("=====FUNKTIO=====");
+        track = request.env['event.track'].sudo().browse(track_id)
+
+        speakers = []
+        for speaker in track.speaker_ids:
+            speakers.append({
+                'id': speaker.id,
+                'firstname': speaker.firstname or '',
+                'lastname': speaker.lastname or '',
+                'email': speaker.email or '',
+                'phone': speaker.phone or '',
+                'organization': speaker.parent_id.name if speaker.parent_id else '',
+                'title': speaker.function or '',
+            })
+
+        values = {
+            'track_id': track.id,
             'name': track.name,
             'description': track.description,
-            'type': track.type_id.name if track.type_id else '',
+            'type': track.type.id,
             'video_url': track.video_url,
-            'language': track.language_id.id if track.language_id else '',
+            'language': track.language.id,
             'target_group_ids': track.target_group_ids.ids,
+            'target_group_info': track.target_group_info,
+            'extra_info': track.extra_info,
             'partner_id': [track.partner_id.id, track.partner_id.name] if track.partner_id else '',
-            'workshop_participants': track.workshop_participants,
-            'workshop_min_participants': track.workshop_min_participants,
-            'workshop_fee': track.workshop_fee,
-            'webinar': track.webinar,
-            'webinar_info': track.webinar_info,
+            'contact': {
+                'id': track.partner_id.id,
+                'firstname': track.partner_id.firstname or '',
+                'lastname': track.partner_id.lastname or '',
+                'email': track.partner_id.email or '',
+                'phone': track.partner_id.phone or '',
+                'organization': track.partner_id.parent_id.name if track.partner_id.parent_id else '',
+                'title': track.partner_id.function or '',
+            },
+            'speakers': speakers,
         }
 
-        return track_data
+        # Lisätään workshop-tiedot vain jos track on tyyppiä workshop
+        if track.type and track.type.workshop:
+            values.update({
+                'workshop_participants': track.workshop_participants,
+                'workshop_min_participants': track.workshop_min_participants,
+                'workshop_fee': track.workshop_fee,
+                'workshop_goals': track.workshop_goals,
+                'workshop_schedule': track.workshop_schedule,
+                'workshop_contract': track.type.is_workshop_contract,
+            })
+
+        # Lisätään webinar-tiedot vain jos track on tyyppiä webinar
+        if track.type and track.type.webinar:
+            values.update({
+                'webinar': track.webinar,
+                'webinar_info': track.webinar_info,
+            })
+
+        logging.info(values);
+        return values
+
+
 
 
     def _get_event_track_proposal_form_values(self, event, **post):
@@ -572,115 +612,124 @@ class EventTrackControllerAdvanced(EventTrackController):
 
     # flake8: noqa: C901
     @http.route(
-        ["""/event/<model("event.event"):event>/track_proposal/post"""],
-        type="http",
+        ["/event/<model('event.event'):event>/track_proposal/post"],
+        type="http",  # Muutettu JSON-tyyppiseksi
         auth="public",
         methods=["POST"],
         website=True,
     )
     def event_track_proposal_post(self, event, **post):
         if not event.can_access_from_current_website():
-            raise NotFound()
+            return json.dumps({'error': 'Access denied'})
 
-        # If post is review. Create review and return confirmation
-        if post.get("review-confirm"):
-            self._create_review(**post)
-            return request.redirect("/my/tracks")
+        try:
+            # If post is review. Create review and return confirmation
+            if post.get("review-confirm"):
+                self._create_review(**post)
+                return json.dumps({'success': True, 'redirect': '/my/tracks'})
 
-        followers = list()
-        _logger.info(_("Posted values: %s") % dict(post))
+            followers = list()
+            _logger.info(_("Posted values: %s") % dict(post))
 
-        # 1. Sort posted values
-        values = self._get_event_track_proposal_post_values(event, **post)
+            # 1. Sort posted values
+            values = self._get_event_track_proposal_post_values(event, **post)
 
-        _logger.info(_("Used values: %s") % values)
+            _logger.info(_("Used values: %s") % values)
 
-        # 2. Create user and contact (partner)
-        user = False
-        partner = False
-        user_exists = False
-        if values.get("contact"):
-            user, user_exists = self._create_signup_user(values.get("contact"))
-            if user:
-                partner = user.partner_id
-                followers.append(partner.id)
-                values["track"]["partner_id"] = partner.id
+            # 2. Create user and contact (partner)
+            user = False
+            partner = False
+            user_exists = False
+            if values.get("contact"):
+                user, user_exists = self._create_signup_user(values.get("contact"))
+                if user:
+                    partner = user.partner_id
+                    followers.append(partner.id)
+                    values["track"]["partner_id"] = partner.id
 
-        # 3. Add contact to organization
-        if values.get("contact_organization"):
-            organization = self._create_organization(values.get("contact_organization"))
-            # Add contact to the existing organization
-            if partner and partner != organization:
-                partner.parent_id = organization.id
+            # 3. Add contact to organization
+            if values.get("contact_organization"):
+                organization = self._create_organization(values.get("contact_organization"))
+                # Add contact to the existing organization
+                if partner and partner != organization:
+                    partner.parent_id = organization.id
 
-        # 4. Add speakers
-        speakers, followers = self._create_speakers(values.get("speakers"), followers)
-        values["track"]["speaker_ids"] = [(6, 0, speakers)]
+            # 4. Add speakers
+            speakers, followers = self._create_speakers(values.get("speakers"), followers)
+            values["track"]["speaker_ids"] = [(6, 0, speakers)]
 
-        # 5. Add workshop organization
-        workshop_organizer = False
-        if values.get("workshop_organizer"):
-            workshop_organizer = self._create_organization(
-                values.get("workshop_organizer")
-            )
+            # 5. Add workshop organization
+            workshop_organizer = False
+            if values.get("workshop_organizer"):
+                workshop_organizer = self._create_organization(
+                    values.get("workshop_organizer")
+                )
 
-            if workshop_organizer:
-                values["track"]["organizer"] = workshop_organizer.id
+                if workshop_organizer:
+                    values["track"]["organizer"] = workshop_organizer.id
 
-        # 6. Add organizer contact
-        if values.get("workshop_signee") and values.get("workshop_signee").get("name"):
-            if workshop_organizer:
-                values["workshop_signee"]["parent_id"] = workshop_organizer.id
+            # 6. Add organizer contact
+            if values.get("workshop_signee") and values.get("workshop_signee").get("name"):
+                if workshop_organizer:
+                    values["workshop_signee"]["parent_id"] = workshop_organizer.id
 
-            signee = self._create_partner(values["workshop_signee"])
-            values["track"]["organizer_contact"] = signee.id
+                signee = self._create_partner(values["workshop_signee"])
+                values["track"]["organizer_contact"] = signee.id
 
-        # 7. Check if we want to confirm or set track as done
-        if values.get("track_confirm"):
-            first_submitted_stage = (
-                request.env["event.track.stage"]
-                .sudo()
-                .search([("is_submitted", "=", True)], order="sequence")
-            )
-            if first_submitted_stage:
-                values["track"]["stage_id"] = first_submitted_stage[0].id
+            # 7. Check if we want to confirm or set track as done
+            if values.get("track_confirm"):
+                first_submitted_stage = (
+                    request.env["event.track.stage"]
+                    .sudo()
+                    .search([("is_submitted", "=", True)], order="sequence")
+                )
+                if first_submitted_stage:
+                    values["track"]["stage_id"] = first_submitted_stage[0].id
 
-        if values.get("track_is_done"):
-            first_is_done_stage = (
-                request.env["event.track.stage"]
-                .sudo()
-                .search([("is_done", "=", True)], order="sequence")
-            )
-            if first_is_done_stage:
-                values["track"]["stage_id"] = first_is_done_stage[0].id
+            if values.get("track_is_done"):
+                first_is_done_stage = (
+                    request.env["event.track.stage"]
+                    .sudo()
+                    .search([("is_done", "=", True)], order="sequence")
+                )
+                if first_is_done_stage:
+                    values["track"]["stage_id"] = first_is_done_stage[0].id
 
-        # 8. Create/Write the track
-        create_track = False
-        if values.get("track_id"):
-            track = values.get("track_id")
-            track.sudo().write(values["track"])
-        else:
-            create_track = True
-            track = request.env["event.track"].sudo().create(values["track"])
+            # 8. Create/Write the track
+            create_track = False
+            if values.get("track_id"):
+                track = values.get("track_id")
+                track.sudo().write(values["track"])
+            else:
+                create_track = True
+                track = request.env["event.track"].sudo().create(values["track"])
 
-        # 9. Subscribe followers
-        track.sudo().message_subscribe(partner_ids=followers)
-        # If track is created, manually trigger change to send mail to new followers
-        if create_track:
-            track.sudo()._message_track_post_template(changes="{'stage_id'}")
+            # 9. Subscribe followers
+            track.sudo().message_subscribe(partner_ids=followers)
+            # If track is created, manually trigger change to send mail to new followers
+            if create_track:
+                track.sudo()._message_track_post_template(changes="{'stage_id'}")
 
-        # 10. Create attachments
-        if post.get("attachment_ids"):
-            self._create_attachments(track)
+            # 10. Create attachments
+            if post.get("attachment_ids"):
+                self._create_attachments(track)
 
-        # 11. Return
-        return_vals = self._get_event_track_proposal_values(event)
-        return_vals.update({"submitted": True})
-        return_vals.update({"track": track})
-        return_vals.update({"user_exists": user_exists})
-        return request.render(
-            "website_event_track_advanced.event_track_proposal_advanced", return_vals
-        )
+            # 11. Return
+            return_vals = self._get_event_track_proposal_values(event)
+            return_vals.update({"submitted": True})
+            return_vals.update({"track": track})
+            return_vals.update({"user_exists": user_exists})
+
+            return json.dumps({"success": True, "message": "Proposal saved successfully."})
+
+
+        except Exception as e:
+            _logger.error(f"Error in track proposal post: {str(e)}")
+            return json.dumps({"success": False, "message": str(e)})
+
+        # return request.render(
+        #     "website_event_track_advanced.event_track_proposal_advanced", return_vals
+        # )
 
     @http.route(
         [

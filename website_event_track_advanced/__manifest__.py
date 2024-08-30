@@ -69,6 +69,7 @@
     ],
     "assets": {
         "web.assets_frontend": [
+            "https://cdn.jsdelivr.net/npm/sweetalert2@11",
             "website_event_track_advanced/static/src/js/track_proposal.esm.js",
         ],
     },

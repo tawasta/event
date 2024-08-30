@@ -2,6 +2,9 @@
 
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { loadWysiwygFromTextarea } from "@web_editor/js/frontend/loadWysiwygFromTextarea"; // WYSIWYG loader import
+import {jsonrpc} from "@web/core/network/rpc_service"; // jsonrpc import
+//import { qweb } from 'web.core';
+
 
 publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     selector: '#modal_event_track_application',
@@ -22,7 +25,72 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._bindTypeChange();
         this._enableWysiwyg(); // Enable WYSIWYG editor
         this._loadTrackData(); // Load track data when modal is opened
+        this._clearFormOnClose(); // Clear form when modal is closed
+        this._bindFormSubmit();  // Bindataan lomakkeen submit AJAX-pyyntöön
+        this._bindAddSpeaker();
     },
+
+    _renderSpeakers: function (speakers) {
+        const container = $(".track-application-speakers-div-container");
+        const firstRow = container.find(".track-application-speakers-div-row-container:first");
+
+        // Ensimmäinen puhuja asetetaan olemassa oleviin kenttiin
+        if (speakers.length > 0) {
+            const firstSpeaker = speakers[0];
+            firstRow.find(".presenter-span").text(`Presenter #1`);
+            firstRow.find("input[name^='speaker_firstname']").val(firstSpeaker.firstname);
+            firstRow.find("input[name^='speaker_lastname']").val(firstSpeaker.lastname);
+            firstRow.find("input[name^='speaker_email']").val(firstSpeaker.email);
+            firstRow.find("input[name^='speaker_phone']").val(firstSpeaker.phone);
+            firstRow.find("input[name^='speaker_organization']").val(firstSpeaker.organization);
+            firstRow.find("input[name^='speaker_title']").val(firstSpeaker.title);
+        }
+
+        let speakerCount = 1;
+
+        // Loput puhujat lisätään kloonaamalla ensimmäinen rivi
+        speakers.slice(1).forEach((speaker, index) => {
+            speakerCount = index + 2;  // Aloitetaan laskeminen 2:sta
+
+            const newRow = firstRow.clone();
+            newRow.attr("id", speakerCount);
+
+            // Päivitetään kenttien arvot
+            newRow.find(".presenter-span").text(`Presenter #${speakerCount}`);
+            newRow.find("input[name^='speaker_firstname']").val(speaker.firstname);
+            newRow.find("input[name^='speaker_lastname']").val(speaker.lastname);
+            newRow.find("input[name^='speaker_email']").val(speaker.email);
+            newRow.find("input[name^='speaker_phone']").val(speaker.phone);
+            newRow.find("input[name^='speaker_organization']").val(speaker.organization);
+            newRow.find("input[name^='speaker_title']").val(speaker.title);
+
+            // Päivitetään kenttien id:t ja name-attribuutit oikeiksi
+            newRow.find("label[for^='speaker_firstname']").attr("for", `speaker_firstname[${speakerCount}]`);
+            newRow.find("input[name^='speaker_firstname']").attr("name", `speaker_firstname[${speakerCount}]`);
+            newRow.find("label[for^='speaker_lastname']").attr("for", `speaker_lastname[${speakerCount}]`);
+            newRow.find("input[name^='speaker_lastname']").attr("name", `speaker_lastname[${speakerCount}]`);
+            newRow.find("label[for^='speaker_email']").attr("for", `speaker_email[${speakerCount}]`);
+            newRow.find("input[name^='speaker_email']").attr("name", `speaker_email[${speakerCount}]`);
+            newRow.find("label[for^='speaker_phone']").attr("for", `speaker_phone[${speakerCount}]`);
+            newRow.find("input[name^='speaker_phone']").attr("name", `speaker_phone[${speakerCount}]`);
+            newRow.find("label[for^='speaker_organization']").attr("for", `speaker_organization[${speakerCount}]`);
+            newRow.find("input[name^='speaker_organization']").attr("name", `speaker_organization[${speakerCount}]`);
+            newRow.find("label[for^='speaker_title']").attr("for", `speaker_title[${speakerCount}]`);
+            newRow.find("input[name^='speaker_title']").attr("name", `speaker_title[${speakerCount}]`);
+
+            // Poista "disabled" attribuutti "Remove speaker" -painikkeesta kloonatuilla riveillä
+            newRow.find(".btn-remove-speaker").removeAttr("disabled");
+
+            container.append(newRow);
+        });
+
+        // Päivitetään piilotettu input, joka seuraa puhujien lukumäärää
+        $("#track-application-speaker-input-index").val(speakerCount);
+    },
+
+
+
+
 
     _loadTrackData: function () {
         const self = this;
@@ -31,49 +99,127 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             var button = $(event.relatedTarget);
             var trackId = button.data('track-id'); // Get track ID from button
             console.log(trackId);
-
-            if (trackId) {
-                // Use the rpc service to send a request to the server
-                this._rpc({
-                    route: '/event/track/data',  // Route that processes the request
-                    params: {
-                        track_id: trackId,
-                    },
-                }).then(function (data) {
-                    if (data.error) {
-                        console.error(data.error);
-                        return;
-                    }
-                    
-                    // Populate the form fields with the track data
-                    $('input[name="name"]').val(data.name);
-                    $('textarea[name="description"]').val(data.description);
-                    $('input[name="video_url"]').val(data.video_url);
-                    $('select[name="language"]').val(data.language);
-                    $('select[name="target_groups"]').val(data.target_group_ids);
-                    $('input[name="contact_firstname"]').val(data.partner_id[1]);
-
-                    // Handle workshop and webinar specific fields
-                    if (data.type === 'workshop') {
-                        $('#track-application-workshop-div').removeClass('d-none');
-                        $('input[name="workshop_participants"]').val(data.workshop_participants);
-                        $('input[name="workshop_min_participants"]').val(data.workshop_min_participants);
-                        $('input[name="workshop_fee"]').val(data.workshop_fee);
-                    } else {
-                        $('#track-application-workshop-div').addClass('d-none');
-                    }
-
-                    if (data.webinar) {
-                        $('#track-application-webinar-div').removeClass('d-none');
-                        $('input[name="webinar"]').prop('checked', data.webinar);
-                        $('textarea[name="webinar_info"]').val(data.webinar_info);
-                    } else {
-                        $('#track-application-webinar-div').addClass('d-none');
-                    }
-                });
+            if (!trackId) {
+                return;
             }
+
+            // Estä modalin näyttäminen ennen kuin data on ladattu ja asetettu
+            //event.preventDefault();
+            // Piilota modal aluksi
+            $('#modal_event_track_application').modal('hide');
+
+            var action = "/event/track/data/" + trackId;
+            jsonrpc('/event/track/data', {
+                'track_id': trackId,
+            }).then((trackData) => {
+                console.log(trackData);
+                $('input[name="track_id"]').val(trackData.track_id);
+                $('select[name="type"]').val(trackData.type);
+                $('input[name="name"]').val(trackData.name);
+                $('textarea[name="description"]').val(trackData.description);
+                $('input[name="video_url"]').val(trackData.video_url);
+                $('select[name="language"]').val(trackData.language);
+                $('select[name="target_groups"]').val(trackData.target_group_ids);
+                $('textarea[name="target_group_info"]').val(trackData.target_group_info);
+                $('textarea[name="extra_info"]').val(trackData.extra_info);
+
+                $('input[name="contact_firstname"]').val(trackData.contact.firstname);
+                $('input[name="contact_lastname"]').val(trackData.contact.lastname);
+                $('input[name="contact_email"]').val(trackData.contact.email);
+                $('input[name="contact_phone"]').val(trackData.contact.phone);
+                $('input[name="contact_organization"]').val(trackData.contact.organization);
+                $('input[name="contact_title"]').val(trackData.contact.title);
+
+                self._renderSpeakers(trackData.speakers);
+
+                // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
+                $('#modal_event_track_application').modal('show');
+            });
+
+
         });
     },
+
+    _clearFormOnClose: function () {
+        $('#modal_event_track_application').on('hide.bs.modal', function () {
+            // Hae lomakeelementti ja resetoi se
+            $('#track-application-form')[0].reset();
+        });
+    },
+
+    _bindAddSpeaker: function () {
+        const self = this;
+        const container = $(".track-application-speakers-div-container");
+
+        $("#add_speaker").click(function () {
+            const lastRow = container.find(".track-application-speakers-div-row-container:last");
+            const newRow = lastRow.clone();  // Clone the last row
+            const newIndex = parseInt($("#track-application-speaker-input-index").val()) + 1;
+
+            newRow.find("input, label").each(function () {
+                const elem = $(this);
+                const nameAttr = elem.attr("name");
+                const forAttr = elem.attr("for");
+
+                if (nameAttr) {
+                    elem.attr("name", nameAttr.replace(/\[\d+\]/, `[${newIndex}]`));
+                }
+                if (forAttr) {
+                    elem.attr("for", forAttr.replace(/\[\d+\]/, `[${newIndex}]`));
+                }
+            });
+
+            newRow.attr("id", newIndex);
+            newRow.find(".presenter-span").text(`Presenter #${newIndex}`);
+            newRow.find("input").val("");  // Clear values
+
+            container.append(newRow);
+            $("#track-application-speaker-input-index").val(newIndex);  // Update the index
+        });
+    },
+
+
+    _bindFormSubmit: function () {
+        const self = this;
+        $('#track-application-form').on('submit', function (e) {
+            e.preventDefault();  // Prevent default form submission
+
+            const formData = new FormData(this); // Collect form data
+            const action = $(this).attr('action'); // Get the form action
+
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: formData,
+                processData: false, // Don't process the files
+                contentType: false, // Set contentType to false as jQuery will tell the server its a query string request
+                success: function (response) {
+                    const jsonResponse = JSON.parse(response);
+                    if (jsonResponse.success) {
+                        console.log("Form submitted successfully");
+
+                        // Tyhjennetään lomake
+                        $('#track-application-form')[0].reset();
+
+                        // Suljetaan modal
+                        $('#modal_event_track_application').modal('hide');
+
+                        // Näytetään onnistumisviesti SweetAlertin avulla
+                        self._showSuccessMessage(jsonResponse.message);
+                        // Optionally, show success message or redirect
+                    } else if (jsonResponse.error) {
+                        console.error("Error: " + jsonResponse.error);
+                        // Optionally, show error message
+                    }
+                },
+                error: function (error) {
+                    console.error("An error occurred:", error);
+                    alert('An unexpected error occurred.');
+                }
+            });
+        });
+    },
+
 
     /**
      * Bindaa type-valikon muutokseen tarvittavat tapahtumat
@@ -358,6 +504,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         });
     },
 
+    _showSuccessMessage: function (message) {
+        console.log("====ONNISTUI====");
+    },
+
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
      */
@@ -394,6 +544,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             loadWysiwygFromTextarea(self, $textarea[0], options).then((wysiwyg) => {
                 // Poistetaan float-start-luokka kuvista, jotka sotkevat layoutin
                 $form.find('.note-editable').find('img.float-start').removeClass('float-start');
+                $form.on('submit', function() {
+                    $textarea.val(wysiwyg.getValue());
+                });
             });
         });
     }
