@@ -141,7 +141,7 @@
                                         t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
                                     />
 
-                                    <t t-if="see_evaluation">
+                                    <t t-if="see_evaluation and track.stage_id.is_accepted or track.stage_id.is_fully_accessible">
                                         <button
                                             type="button"
                                             class="btn btn-secondary btn-sm"

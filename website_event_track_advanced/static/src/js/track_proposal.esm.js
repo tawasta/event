@@ -417,10 +417,43 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         });
     },
 
+
     _bindFormSubmit: function () {
         const self = this;
         $('#track-application-form').on('submit', function (e) {
             e.preventDefault();  // Estä lomakkeen oletuslähetys
+
+            let validForm = true;
+            let $form = $(e.currentTarget);
+            let $textarea = $form.find('textarea[name=description]');
+            let $textareaContainer = $form.find('.o_wysiwyg_textarea_wrapper');
+
+            console.log($textarea);
+
+            // Tarkistetaan, onko WYSIWYG-editori täytetty
+            const fillableTextAreaEl = $form[0].querySelector(".o_wysiwyg_textarea_wrapper");
+            console.log(fillableTextAreaEl);
+            const isTextAreaFilled = fillableTextAreaEl &&
+                (fillableTextAreaEl.innerText.trim() || fillableTextAreaEl.querySelector("img"));
+
+            // Koska textarea on piilotettu, lisätään punainen reunus sen säilöön, jos se on tyhjä
+            if ($textarea[0] && $textarea[0].required) {
+                if (!isTextAreaFilled) {
+                    $textareaContainer.addClass('border border-danger rounded-top');
+                    validForm = false;
+                } else {
+                    $textareaContainer.removeClass('border border-danger rounded-top');
+                }
+            }
+
+            if (!validForm) {
+                console.log("====HTML KENTTÄ EI OLE TÄYTETTY VAIKKA PAKOLLINEN====");
+                e.preventDefault();
+                // Siirrytään virheelliseen kenttään
+                $textareaContainer[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;  // Palataan eikä jatketa lomakkeen lähettämistä
+            }
+
 
             const submitButton = $(this).find('[type="submit"]');
             submitButton.prop('disabled', true);  // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
