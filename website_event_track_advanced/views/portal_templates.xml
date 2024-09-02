@@ -58,6 +58,7 @@
                             style="display: list-item; padding: 0.75rem;"
                         >My Tracks</caption>
                     </t>
+                    <t t-call="website_event_track_advanced.event_track_application"/>
                     <t t-foreach="tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
@@ -115,53 +116,28 @@
                                 />
                             </td>
                             <td id="td_empty">
-<!--                                 <form
-                                    id="track_proposal"
-                                    t-attf-action="/event/#{slug(event)}/track_proposal/form"
-                                    method="post"
-                                    itemscope="itemscope"
-                                    itemprop="offers"
-                                    itemtype="http://schema.org/AggregateOffer"
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="csrf_token"
-                                        t-att-value="request.csrf_token()"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        name="track_id"
-                                        t-att-value="track.id"
-                                    /> -->
+
                                     <button
                                         t-if="track.stage_id.is_editable"
-                                        type="submit"
-                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
-                                        role="button"
-                                        title="Edit this proposal"
-                                        aria-label="Edit this proposal"
-                                        t-attf-id="#{track.id}"
-                                    >Edit Track</button>
-<!--                                     <button
-                                        t-else=""
-                                        type="submit"
-                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
-                                        role="button"
-                                        title="Edit this proposal"
-                                        aria-label="Edit this proposal"
-                                        t-attf-id="#{track.id}"
-                                    >View Track</button> -->
+                                        type="button"
+                                        class="btn btn-secondary btn-sm"
+                                        t-att-data-track-id="track.id"
+                                        t-att-data-event-id="track.event_id.id"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal_event_track_application"
+                                    ><i class="fa fa-fw fa-times-circle"/> Edit this proposal
+                                    </button>
                                     <button
                                         type="button"
                                         class="btn btn-secondary btn-sm"
                                         t-att-data-track-id="track.id"
+                                        t-att-data-event-id="event.id"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modal_event_track_application"
                                     ><i class="fa fa-fw fa-times-circle"/> View track
                                     </button>
-                                <!-- </form> -->
-                                <t t-call="website_event_track_advanced.event_track_application"/>
-                                <t
+                                
+<!--                                 <t
                                     t-set="see_evaluation"
                                     t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
                                 />
@@ -199,7 +175,7 @@
                                             t-attf-id="#{track.id}"
                                         >View Reviews</button>
                                     </form>
-                                </t>
+                                </t> -->
                             </td>
                          </tr>
                     </t>
@@ -251,12 +227,12 @@
                                 <t t-if="track.stage_id.is_submitted">
                                     <t t-set="track_state">badge-warning</t>
                                 </t>
-                                <t t-if="track.stage_id.is_accepted">
+<!--                                 <t t-if="track.stage_id.is_accepted">
                                     <t t-set="track_state">badge-primary</t>
-                                </t>
-                                <t t-if="track.stage_id.is_done">
+                                </t> -->
+<!--                                 <t t-if="track.stage_id.is_done">
                                     <t t-set="track_state">badge-success</t>
-                                </t>
+                                </t> -->
                                 <t t-if="track.stage_id.is_cancel">
                                     <t t-set="track_state">badge-danger</t>
                                 </t>
@@ -268,39 +244,22 @@
                                 />
                             </td>
                             <td>
-                                <form
-                                    id="track_proposal"
-                                    t-attf-action="/event/#{slug(event)}/track_proposal/form"
-                                    method="post"
-                                    itemscope="itemscope"
-                                    itemprop="offers"
-                                    itemtype="http://schema.org/AggregateOffer"
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="csrf_token"
-                                        t-att-value="request.csrf_token()"
-                                    />
-                                    <input
-                                        type="hidden"
-                                        name="track_id"
-                                        t-att-value="track.id"
-                                    />
-                                    <span
+                                <span
                                         t-if="track.is_rated"
                                         class="font-italic text-muted"
                                         data-toggle="tooltip"
                                         title="You have already reviewed this track."
                                     >Reviewed</span>
-                                    <button
-                                        type="submit"
-                                        class="btn btn-link a-submit float-right p-0 no-decoration o_wait_lazy_js"
-                                        role="button"
-                                        title="Review this proposal"
-                                        aria-label="Review this proposal"
-                                        t-attf-id="#{track.id}"
-                                    >Review</button>
-                                </form>
+                                <button
+                                        type="button"
+                                        class="btn btn-secondary btn-sm"
+                                        t-att-data-track-id="track.id"
+                                        t-att-data-event-id="event.id"
+                                        data-review="true"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal_event_track_application"
+                                    ><i class="fa fa-fw fa-times-circle"/> Review
+                                    </button>
                             </td>
                          </tr>
                     </t>
@@ -330,7 +289,7 @@
         </xpath>
     </template>
 
-    <template id="event_track_portal_proposal" name="Event Track Portal Proposal">
+<!--     <template id="event_track_portal_proposal" name="Event Track Portal Proposal">
         <div class="row">
             <t t-foreach="tracks" t-as="track">
                 <t t-set="event" t-value="track.event_id" />
@@ -339,5 +298,5 @@
                 />
             </t>
         </div>
-    </template>
+    </template> -->
 </odoo>

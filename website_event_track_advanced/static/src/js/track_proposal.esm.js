@@ -3,6 +3,8 @@
 import publicWidget from "@web/legacy/js/public/public_widget";
 import { loadWysiwygFromTextarea } from "@web_editor/js/frontend/loadWysiwygFromTextarea"; // WYSIWYG loader import
 import {jsonrpc} from "@web/core/network/rpc_service"; // jsonrpc import
+import Dialog from '@web/legacy/js/core/dialog';
+import { _t } from "@web/core/l10n/translation";
 //import { qweb } from 'web.core';
 
 
@@ -98,46 +100,270 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             console.log("===MENEE TANNE NAIN=====");
             var button = $(event.relatedTarget);
             var trackId = button.data('track-id'); // Get track ID from button
+            var eventId = button.data('event-id'); // Hae event ID napista
             console.log(trackId);
-            if (!trackId) {
-                return;
-            }
+
+            var isReview = button.data('review') || false;  // Tarkistetaan, onko kyseessä arvostelutila
+            console.log("==REVIEW===");
+            console.log(isReview);
+
 
             // Estä modalin näyttäminen ennen kuin data on ladattu ja asetettu
             //event.preventDefault();
             // Piilota modal aluksi
             $('#modal_event_track_application').modal('hide');
 
-            var action = "/event/track/data/" + trackId;
-            jsonrpc('/event/track/data', {
-                'track_id': trackId,
-            }).then((trackData) => {
-                console.log(trackData);
-                $('input[name="track_id"]').val(trackData.track_id);
-                $('select[name="type"]').val(trackData.type);
-                $('input[name="name"]').val(trackData.name);
-                $('textarea[name="description"]').val(trackData.description);
-                $('input[name="video_url"]').val(trackData.video_url);
-                $('select[name="language"]').val(trackData.language);
-                $('select[name="target_groups"]').val(trackData.target_group_ids);
-                $('textarea[name="target_group_info"]').val(trackData.target_group_info);
-                $('textarea[name="extra_info"]').val(trackData.extra_info);
+            // Määritä action URL ja aseta se lomakkeelle
+            var actionUrl = `/event/${eventId}/track_proposal/post`;
+            $('#track-application-form').attr('action', actionUrl);
 
-                $('input[name="contact_firstname"]').val(trackData.contact.firstname);
-                $('input[name="contact_lastname"]').val(trackData.contact.lastname);
-                $('input[name="contact_email"]').val(trackData.contact.email);
-                $('input[name="contact_phone"]').val(trackData.contact.phone);
-                $('input[name="contact_organization"]').val(trackData.contact.organization);
-                $('input[name="contact_title"]').val(trackData.contact.title);
+            if (!trackId) {
+                // Jos trackId ei ole määritelty, hae eventin track_types_ids
+                jsonrpc('/event/application_types', {
+                    'event_id': eventId,
+                }).then((response) => {
+                    self._populateSelectOptions('type', response.application_types);
+                    self._populateSelectOptions('target_groups', response.target_groups);
+                    self._populateSelectOptions('tags', response.tags);
+                    $('#modal_event_track_application').modal('show');
+                });
+            } else {
 
-                self._renderSpeakers(trackData.speakers);
+                var action = "/event/track/data/" + trackId;
+                jsonrpc('/event/track/data', {
+                    'track_id': trackId,
+                    'isReview': isReview,
+                }).then((trackData) => {
+                    console.log(trackData);
+                    self._populateSelectOptions('type', trackData.application_types, trackData.type);
+                    self._populateSelectOptions('target_groups', trackData.target_groups, trackData.target_group_ids);
+                    self._populateSelectOptions('tags', trackData.tags, trackData.tag_ids);
 
-                // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
-                $('#modal_event_track_application').modal('show');
-            });
+
+                    $('input[name="track_id"]').val(trackData.track_id);
+                    $('input[name="name"]').val(trackData.name);
+                    $('textarea[name="description"]').val(trackData.description);
+                    $('input[name="video_url"]').val(trackData.video_url);
+                    $('select[name="language"]').val(trackData.language);
+                    $('textarea[name="target_group_info"]').val(trackData.target_group_info);
+                    $('textarea[name="extra_info"]').val(trackData.extra_info);
+
+                    $('input[name="contact_firstname"]').val(trackData.contact.firstname);
+                    $('input[name="contact_lastname"]').val(trackData.contact.lastname);
+                    $('input[name="contact_email"]').val(trackData.contact.email);
+                    $('input[name="contact_phone"]').val(trackData.contact.phone);
+                    $('input[name="contact_organization"]').val(trackData.contact.organization);
+                    $('input[name="contact_title"]').val(trackData.contact.title);
+
+                    self._renderSpeakers(trackData.speakers);
+
+                    if (isReview && trackData.can_review && trackData.rating_grade_ids) {
+                        self._enableReviewMode(trackData.rating_grade_ids);  
+                    }
+
+                    if (trackData.is_readonly) {
+                        self._makeFieldsReadonly(isReview);
+                        self._disableSubmitButtons(isReview);  // Disable the save buttons if readonly
+                        self._disableAddPresenterButton();
+                    } else {
+                        self._enableSubmitButtons();  // Enable the save buttons if not readonly
+                        self._enableAddPresenterButton();
+                    }
+
+                    // Päivitä ja näytä webinar-osio, jos webinar on käytössä
+                    self._updateWebinarSection(trackData);
+
+                    // Päivitä ja näytä workshop-osio
+                    self._updateWorkshopSection(trackData);
+
+                    // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
+                    $('#modal_event_track_application').modal('show');
+                });
+            }
 
 
         });
+    },
+
+    _enableReviewMode: function(rating_grade_ids) {
+        // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
+        console.log("==LUPA ARVIOIDA====");
+        const reviewDiv = $('#header-track-application-review-div');
+        reviewDiv.removeClass('d-none');
+
+        this._populateSelectOptions('rating', rating_grade_ids);
+    },
+
+    _updateWorkshopSection: function(trackData) {
+        const workshopDiv = $('#track-application-workshop-div');
+        const contractDiv = $('#track-application-workshop-contract-div');
+
+        if (trackData.type.workshop) {
+            workshopDiv.removeClass('d-none');
+            $('input[name="is_workshop"]').val('true');
+            $('input[name="workshop_min_participants"]').val(trackData.workshop_min_participants).prop('disabled', false);
+            $('input[name="workshop_participants"]').val(trackData.workshop_participants).prop('disabled', false);
+            $('input[name="workshop_fee"]').val(trackData.workshop_fee).prop('disabled', false);
+            $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false);
+            $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false);
+
+            if (trackData.type.workshop_contract) {
+                contractDiv.removeClass('d-none');
+                $('input[name="is_workshop_contract"]').val('true');
+                $('input[name="signee_firstname"]').val(trackData.signee_firstname).prop('disabled', false);
+                $('input[name="signee_lastname"]').val(trackData.signee_lastname).prop('disabled', false);
+                $('input[name="signee_email"]').val(trackData.signee_email).prop('disabled', false);
+                $('input[name="signee_phone"]').val(trackData.signee_phone).prop('disabled', false);
+                $('input[name="signee_organization"]').val(trackData.signee_organization).prop('disabled', false);
+                $('input[name="signee_title"]').val(trackData.signee_title).prop('disabled', false);
+                $('input[name="organizer_organization"]').val(trackData.organizer_organization).prop('disabled', false);
+                $('input[name="organizer_street"]').val(trackData.organizer_street).prop('disabled', false);
+                $('input[name="organizer_zip"]').val(trackData.organizer_zip).prop('disabled', false);
+                $('input[name="organizer_city"]').val(trackData.organizer_city).prop('disabled', false);
+                $('select[name="einvoice_operator_id"]').val(trackData.einvoice_operator_id).prop('disabled', false);
+                $('input[name="edicode"]').val(trackData.edicode).prop('disabled', false);
+                $('input[name="organizer_reference"]').val(trackData.organizer_reference).prop('disabled', false);
+            } else {
+                contractDiv.addClass('d-none');
+                $('input[name="is_workshop_contract"]').val('false');
+                contractDiv.find('input, select').prop('disabled', true).val('');
+                contractDiv.find('textarea').prop('disabled', true).val('');
+            }
+        } else {
+            workshopDiv.addClass('d-none');
+            $('input[name="is_workshop"]').val('false');
+            workshopDiv.find('input, select').prop('disabled', true).val('');
+            workshopDiv.find('textarea').prop('disabled', true).val('');
+        }
+    },
+
+
+    _updateWebinarSection: function(trackData) {
+        const webinarDiv = $('#track-application-webinar-div');
+        const webinarCheckbox = $('input[name="webinar"]');
+        const webinarInfo = $('textarea[name="webinar_info"]');
+        const isWebinar = trackData.type.webinar || false;
+
+        if (isWebinar) {
+            webinarDiv.removeClass('d-none');
+            $('input[name="is_webinar"]').val('true');
+            webinarCheckbox.prop('checked', trackData.webinar);
+            webinarCheckbox.prop('disabled', false);
+            webinarInfo.prop('disabled', !trackData.webinar);
+            webinarInfo.val(trackData.webinar_info || '');
+        } else {
+            webinarDiv.addClass('d-none');
+            $('input[name="is_webinar"]').val('false');
+            webinarCheckbox.prop('checked', false);
+            webinarCheckbox.prop('disabled', true);
+            webinarInfo.prop('disabled', true);
+            webinarInfo.val('');
+        }
+    },
+
+
+    _populateSelectOptions: function(selectName, options, selectedIds = null) {
+        const $select = $(`select[name="${selectName}"]`);
+        $select.empty();
+
+        $select.append('<option value="">Select...</option>');
+
+        options.forEach((option) => {
+            const isSelected = Array.isArray(selectedIds) && selectedIds.includes(option.id);
+            
+            // Rakennetaan option elementti, joka sisältää tarvittavat attribuutit
+            const $option = $(`<option></option>`)
+                .attr('value', option.id)
+                .attr('data-workshop', option.workshop)
+                .attr('data-workshop-contract', option.workshop_contract)
+                .attr('data-webinar', option.webinar)
+                .attr('data-description', option.description || '')
+                .text(option.name);
+
+            if (isSelected) {
+                $option.attr('selected', 'selected');
+            }
+
+            $select.append($option);
+        });
+
+        if (!Array.isArray(selectedIds) && selectedIds) {
+            $select.val(selectedIds);
+        }
+
+        if (selectName === 'type') {
+            this._updateTypeDescription();
+        }
+    },
+
+
+    _updateTypeDescription: function() {
+        const $typeSelect = $('select[name="type"]');
+        const description = $typeSelect.find('option:selected').data('description');
+        $('#application_type_description').text(description || ''); // Päivitä kuvauksen kenttä
+    },
+
+    _disableAddPresenterButton: function() {
+        // Piilota tai disabloi Add Presenter -painike
+        $('#add_speaker').attr('disabled', true).hide();
+    },
+
+    _enableAddPresenterButton: function() {
+        // Näytä ja aktivoi Add Presenter -painike
+        $('#add_speaker').attr('disabled', false).show();
+    },
+
+    _makeFieldsReadonly: function(isReview) {
+        console.log("=====DISABLOIDAAN==");
+        const $form = $('.js_website_submit_cfp_form');
+        if (!isReview) {
+            console.log("kentat readonly ja disabled");
+            console.log($form);
+            // Aseta kaikki lomakkeen kentät readonly-tilaan
+            $form.find('input, textarea, select').attr('readonly', true).attr('disabled', true);
+
+            // Poista readonly tai disabled attribuutit vain modaalin sulkemispainikkeista
+            $form.find('.warning-close-modal').attr('disabled', false);
+        } else {
+            $form.find('input, textarea, select').attr('readonly', true).attr('disabled', true);
+            // Jätä seuraavat kentät editoitaviksi
+            const editableFields = [
+                'textarea[name="rating_comment"]',
+                'select[name="rating"]',
+            ];
+            console.log("naytetaan arviointi kentät");
+            editableFields.forEach(function(selector) {
+                $form.find(selector).removeAttr('readonly').removeAttr('disabled');
+            });
+
+        }
+        
+    },
+
+    _disableSubmitButtons: function(isReview) {
+
+        if (!isReview) {
+            // Piilota tai disabloi painikkeet Save as Draft ja Save and Confirm
+            $('#application-submit-button').attr('disabled', true).hide();
+            $('#application-submit-button-send').attr('disabled', true).hide();
+        } else {
+            console.log("NÄYTETÄÄN ARVIOINTI PAINIKKEET");
+            // Näytä ja aktivoi arvostelun lähetyspainikkeet ja info-osio
+            
+            $('#application-submit-button-send').attr('disabled', false).show();
+            $('#application-submit-button-send').attr('name', 'review-confirm');
+            $('#application-submit-button-send').attr('value', 'review-confirm');
+            $('#application-submit-button-send').attr('title', 'By clicking "Submit Review" the review of the proposal shall be submitted.');
+
+            $('#application-submit-button').attr('disabled', true).hide();
+        }
+    },
+
+    _enableSubmitButtons: function() {
+
+        // Näytä ja aktivoi painikkeet Save as Draft ja Save and Confirm
+        $('#application-submit-button').attr('disabled', false).show();
+        $('#application-submit-button-send').attr('disabled', false).show();
     },
 
     _clearFormOnClose: function () {
@@ -178,334 +404,158 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         });
     },
 
-
     _bindFormSubmit: function () {
         const self = this;
         $('#track-application-form').on('submit', function (e) {
-            e.preventDefault();  // Prevent default form submission
+            e.preventDefault();  // Estä lomakkeen oletuslähetys
 
-            const formData = new FormData(this); // Collect form data
-            const action = $(this).attr('action'); // Get the form action
+            const submitButton = $(this).find('[type="submit"]');
+            submitButton.prop('disabled', true);  // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
+
+            const formData = new FormData(this); // Kerää lomaketiedot
+            const action = $(this).attr('action'); // Hae lomakkeen action-osoite
+
+            // Lisää painetun painikkeen arvo lomakedataan
+            const activeButton = $(document.activeElement);
+            if (activeButton.attr("name")) {
+                formData.append(activeButton.attr("name"), activeButton.val());
+            }
 
             $.ajax({
                 url: action,
                 type: 'POST',
                 data: formData,
-                processData: false, // Don't process the files
-                contentType: false, // Set contentType to false as jQuery will tell the server its a query string request
+                processData: false, // Älä käsittele tiedostoja
+                contentType: false, // Aseta contentType falseksi, jotta jQuery lähettää lomakkeen tiedot oikein
                 success: function (response) {
                     const jsonResponse = JSON.parse(response);
                     if (jsonResponse.success) {
-                        console.log("Form submitted successfully");
+                        console.log("Lomake lähetettiin onnistuneesti");
 
-                        // Tyhjennetään lomake
+                        // Tyhjennä lomake
                         $('#track-application-form')[0].reset();
 
-                        // Suljetaan modal
+                        // Sulje modaali
                         $('#modal_event_track_application').modal('hide');
 
-                        // Näytetään onnistumisviesti SweetAlertin avulla
+                        // Näytä onnistumisviesti
                         self._showSuccessMessage(jsonResponse.message);
-                        // Optionally, show success message or redirect
                     } else if (jsonResponse.error) {
-                        console.error("Error: " + jsonResponse.error);
-                        // Optionally, show error message
+                        console.error("Virhe: " + jsonResponse.error);
                     }
                 },
                 error: function (error) {
-                    console.error("An error occurred:", error);
-                    alert('An unexpected error occurred.');
+                    console.error("Tapahtui virhe:", error);
+                    alert('Odottamaton virhe.');
+                },
+                complete: function () {
+                    submitButton.prop('disabled', false);  // Ota lähetyspainike uudelleen käyttöön
                 }
             });
         });
     },
 
 
+
     /**
      * Bindaa type-valikon muutokseen tarvittavat tapahtumat
      */
     _bindTypeChange: function () {
+        const self = this;
         $(document).ready(function () {
             $("#type").change(function () {
-                $("#application_type_description").text(
-                            $("#type option:selected").attr("data-description") || ""
-                        );
-                        var workshop = $("#type option:selected").attr("data-workshop");
-                        var workshop_contract = $("#type option:selected").attr(
-                            "data-workshop-contract"
-                        );
-                        var webinar = $("#type option:selected").attr("data-webinar");
-                        // Enable workshop inputs
-                        if (workshop) {
-                            const targetDiv = document.getElementById(
-                                "workshop-track-request-time-div"
-                            );
-                            if (targetDiv) {
-                                targetDiv.classList.remove("d-none");
-                            }
-                            $("#track-application-workshop-div").removeClass("d-none");
-                            $("#track-application-workshop-row-div")
-                                .find("input#is_workshop")
-                                .each(function () {
-                                    $(this).attr("value", "true");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("input[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("input[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("select[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("select[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("textarea[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "true");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("textarea[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "true");
-                                });
-                            // Disable workshop inputs
-                        } else {
-                            $("#track-application-workshop-div").addClass("d-none");
-                            const targetDiv = document.getElementById(
-                                "workshop-track-request-time-div"
-                            );
-                            if (targetDiv) {
-                                targetDiv.classList.add("d-none");
-                            }
-                            $("#track-application-workshop-row-div")
-                                .find("input#is_workshop")
-                                .each(function () {
-                                    $(this).attr("value", "false");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("input")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("input[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("select")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("select[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("textarea")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "false");
-                                });
-                            $("#track-application-workshop-row-div")
-                                .find("textarea[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "false");
-                                });
-                        }
-                        // Enable workshop contract inputs
-                        if (workshop_contract) {
-                            $("#track-application-workshop-contract-div").removeClass(
-                                "d-none"
-                            );
-                            $("#track-application-workshop-contract-div")
-                                .find("input#is_workshop_contract")
-                                .each(function () {
-                                    $(this).attr("value", "true");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("input[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("input[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("select[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("select[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("textarea[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "true");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("textarea[required-disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("required-disabled");
-                                    $(this).attr("required", "required");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "true");
-                                });
-                            // Disable workshop contract inputs
-                        } else {
-                            $("#track-application-workshop-contract-div").addClass(
-                                "d-none"
-                            );
-                            $("#track-application-workshop-contract-div")
-                                .find("input#is_workshop_contract")
-                                .each(function () {
-                                    $(this).attr("value", "false");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("input")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("input[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("input[required]")
-                                .each(function () {
-                                    $(this).attr("required-disabled", "disabled");
-                                });
-                            $("input[name^='signee']").attr("required", false);
-                            $("#track-application-workshop-contract-div")
-                                .find("select")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("select[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("textarea")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "false");
-                                });
-                            $("#track-application-workshop-contract-div")
-                                .find("textarea[required]")
-                                .each(function () {
-                                    $(this).removeAttr("required");
-                                    $(this).attr("required-disabled", "disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "false");
-                                });
-                        }
-                        // Display webinar questions depending on type
-                        if (webinar) {
-                            $("#track-application-webinar-div").removeClass("d-none");
-                            $("#track-application-webinar-div")
-                                .find("input#is_webinar")
-                                .each(function () {
-                                    $(this).attr("value", "true");
-                                });
-                            $("#track-application-webinar-div")
-                                .find("input[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                });
-                            $("#track-application-webinar-div")
-                                .find("textarea[disabled]")
-                                .each(function () {
-                                    $(this).removeAttr("disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "true");
-                                });
-                            // Disable webinar inputs
-                        } else {
-                            $("#track-application-webinar-div").addClass("d-none");
-                            $("#track-application-webinar-div")
-                                .find("input#is_webinar")
-                                .each(function () {
-                                    $(this).attr("value", "false");
-                                });
-                            $("#track-application-webinar-div")
-                                .find("input")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                });
-                            $("#track-application-webinar-div")
-                                .find("textarea")
-                                .each(function () {
-                                    $(this).attr("disabled", "disabled");
-                                    $(this)
-                                        .siblings()
-                                        .find(".note-editable")
-                                        .attr("contenteditable", "false");
-                                });
-                        }
+                console.log("===VAIHTUUU====");
+                const selectedType = $("#type option:selected");
+                const description = selectedType.attr("data-description") || "";
+                $("#application_type_description").text(description);
+
+                const workshop = selectedType.attr("data-workshop");
+                console.log(workshop);
+                const workshopContract = selectedType.attr("data-workshop-contract");
+                const webinar = selectedType.attr("data-webinar");
+
+                self._toggleWorkshopSection(workshop, workshopContract);
+                self._toggleWebinarSection(webinar);
             });
         });
     },
 
+    _toggleWorkshopSection: function (workshop, workshopContract) {
+        const workshopDiv = $('#track-application-workshop-div');
+        const contractDiv = $('#track-application-workshop-contract-div');
+        
+        // Tarkistetaan, että workshop on nimenomaan "true"
+        if (workshop === "true") {
+            workshopDiv.removeClass('d-none');
+            workshopDiv.find('input, select').prop('disabled', false);
+            workshopDiv.find('textarea').prop('disabled', false);
+
+            if (workshopContract === "true") {
+                contractDiv.removeClass('d-none');
+                contractDiv.find('input, select').prop('disabled', false);
+                contractDiv.find('textarea').prop('disabled', false);
+            } else {
+                contractDiv.addClass('d-none');
+                contractDiv.find('input, select').prop('disabled', true).val('');
+                contractDiv.find('textarea').prop('disabled', true).val('');
+            }
+        } else {
+            workshopDiv.addClass('d-none');
+            workshopDiv.find('input, select').prop('disabled', true).val('');
+            workshopDiv.find('textarea').prop('disabled', true).val('');
+        }
+    },
+
+
+    _toggleWebinarSection: function (webinar) {
+        const webinarDiv = $('#track-application-webinar-div');
+        const webinarCheckbox = $('input[name="webinar"]');
+        const webinarInfo = $('textarea[name="webinar_info"]');
+
+        if (webinar) {
+            webinarDiv.removeClass('d-none');
+            webinarCheckbox.prop('disabled', false);
+            webinarCheckbox.change(function () {
+                webinarInfo.prop('disabled', !this.checked);
+            });
+        } else {
+            webinarDiv.addClass('d-none');
+            webinarCheckbox.prop('disabled', true);
+            webinarInfo.prop('disabled', true);
+            webinarCheckbox.prop('checked', false);
+            webinarInfo.val('');
+        }
+    },
+
     _showSuccessMessage: function (message) {
-        console.log("====ONNISTUI====");
+        var self = this;
+        Dialog.alert(this, message, {
+            title: _t("Success"),
+            size: 'medium',
+            confirm_callback: function () {
+                // Tarkistetaan, ollaanko '/proposal' näkymässä
+                if (window.location.pathname.includes('/track_proposal')) {
+                    $(".proposals").load(
+                        window.location.pathname + " .proposals > *",
+                        function () {
+                            console.log("Proposal view content updated successfully.");
+                        }
+                    );
+                } 
+                // Tarkistetaan, ollaanko '/my/tracks' näkymässä
+                else if (window.location.pathname.includes('/my/tracks')) {
+                    $(".table-responsive").load(
+                        window.location.pathname + " .table-responsive > *",
+                        function () {
+                            console.log("My Tracks view content updated successfully.");
+                        }
+                    );
+                } 
+                else {
+                    console.log("No specific view update logic for the current path.");
+                }
+            }
+        });
     },
 
     /**

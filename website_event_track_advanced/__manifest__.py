@@ -60,7 +60,7 @@
         "views/event_menus.xml",
         "views/event_track_templates_proposal.xml",
         #"views/event_track_templates_page.xml",
-        #"views/event_track_templates_agenda.xml",
+        "views/event_track_templates_agenda.xml",
         #"views/event_track_templates_reviews.xml",
         #"views/event_track_templates_list.xml",
         "views/portal_templates.xml",

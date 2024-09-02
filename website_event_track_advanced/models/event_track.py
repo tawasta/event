@@ -424,8 +424,7 @@ class EventTrack(models.Model):
                 track.stage_id.mail_template_id,
                 {
                     "composition_mode": "comment",
-                    "auto_delete_message": True,
-                    "subtype_id": self.env["ir.model.data"].xmlid_to_res_id(
+                    "subtype_id": self.env["ir.model.data"]._xmlid_to_res_id(
                         "mail.mt_comment"
                     ),
                 },

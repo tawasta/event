@@ -8,7 +8,7 @@
         customize_show="True"
     >
         <xpath
-            expr="//small[@t-if='track.partner_id or track.partner_name']"
+            expr="//small[@t-out='track.partner_tag_line']"
             position="attributes"
         >
             <attribute name="t-if">1==0</attribute>
@@ -21,7 +21,7 @@
         active="False"
         customize_show="True"
     >
-        <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="inside">
+        <xpath expr="//div[@class='opacity-75 text-center']" position="after">
             <t t-if="track.event_id.use_speaker_track">
                 <t t-set="speaker_count" t-value="len(track.track_speaker_ids)" />
                 <t t-set="current_count" t-value="0" />
@@ -58,7 +58,7 @@
         active="False"
         customize_show="True"
     >
-        <xpath expr="//div[hasclass('text-muted', 'text-center')]" position="after">
+        <xpath expr="//div[@class='opacity-75 text-center']" position="after">
             <t t-if="track.chairperson_id">
                 <div class="text-muted text-center">
                     <strong>

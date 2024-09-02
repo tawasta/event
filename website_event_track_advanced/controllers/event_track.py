@@ -68,9 +68,32 @@ class EventTrackControllerAdvanced(EventTrackController):
 
 
     @http.route(["/event/track/data"], type='json', auth='public', methods=['POST'], website=True)
-    def get_track(self, track_id, **kwargs):
+    def get_track(self, track_id, isReview=False, **kwargs):
         logging.info("=====FUNKTIO=====");
         track = request.env['event.track'].sudo().browse(track_id)
+
+        user = request.env.user
+        can_review = False
+
+        values = {}
+
+        if isReview:
+            if user.id in track.review_group.reviewers.mapped('user_id').ids:
+                can_review = True
+                rating_grade_ids = [
+                    {
+                        'id': rating.id,
+                        'name': rating.name,
+                    }
+                    for rating in track.event_id.rating_grade_ids
+                ]
+                values.update({ 'can_review': can_review, "rating_grade_ids": rating_grade_ids })
+
+            if not can_review:
+                return {'error': 'You do not have permission to review this track.'}
+
+        # Tarkista, onko nykyinen vaihe is_submitted = True
+        is_readonly = not track.stage_id.is_editable
 
         speakers = []
         for speaker in track.speaker_ids:
@@ -83,8 +106,34 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'organization': speaker.parent_id.name if speaker.parent_id else '',
                 'title': speaker.function or '',
             })
+        application_types = [
+            {
+                'id': app_type.id,
+                'name': app_type.name,
+                'workshop': app_type.workshop,
+                'workshop_contract': app_type.workshop_contract,
+                'webinar': app_type.webinar,
+                'description': app_type.description or '',
+            }
+            for app_type in track.event_id.track_types_ids
+        ]
+        target_groups = [
+            {
+                'id': group.id,
+                'name': group.name
+            }
+            for group in track.event_id.target_group_ids
+        ]
 
-        values = {
+        tags = [
+            {
+                'id': tag.id,
+                'name': tag.name
+            }
+            for tag in track.event_id.allowed_track_tag_ids
+        ]
+
+        values.update({
             'track_id': track.id,
             'name': track.name,
             'description': track.description,
@@ -105,7 +154,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'title': track.partner_id.function or '',
             },
             'speakers': speakers,
-        }
+            'is_readonly': is_readonly,
+            'application_types': application_types,
+            'target_groups': target_groups,
+            'tags': tags,
+        })
 
         # Lisätään workshop-tiedot vain jos track on tyyppiä workshop
         if track.type and track.type.workshop:
@@ -124,9 +177,48 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'webinar': track.webinar,
                 'webinar_info': track.webinar_info,
             })
-
+        logging.info("===VALUESIT===");
         logging.info(values);
         return values
+
+    @http.route(["/event/application_types"], type='json', auth='public', methods=['POST'], website=True)
+    def get_application_types(self, event_id, **kwargs):
+        event = request.env['event.event'].sudo().browse(event_id)
+        
+        application_types = [
+            {
+                'id': app_type.id,
+                'name': app_type.name,
+                'workshop': app_type.workshop,
+                'workshop_contract': app_type.workshop_contract,
+                'webinar': app_type.webinar,
+                'description': app_type.description or '',
+            }
+            for app_type in event.track_types_ids
+        ]
+        
+        target_groups = [
+            {
+                'id': group.id,
+                'name': group.name
+            }
+            for group in event.target_group_ids
+        ]
+
+        tags = [
+            {
+                'id': tag.id,
+                'name': tag.name
+            }
+            for tag in event.allowed_track_tag_ids
+        ]
+
+        return {
+            'application_types': application_types,
+            'target_groups': target_groups,
+            'tags': tags
+        }
+
 
 
 
@@ -563,26 +655,26 @@ class EventTrackControllerAdvanced(EventTrackController):
             "website_event_track_advanced.event_track_proposal_advanced", values
         )
 
-    @http.route(
-        ["""/event/<model("event.event"):event>/track_proposal/form"""],
-        type="http",
-        auth="public",
-        methods=["POST"],
-        website=True,
-        sitemap=False,
-    )
-    def event_track_proposal_form(self, event, **post):
-        if not event.can_access_from_current_website():
-            raise NotFound()
+    # @http.route(
+    #     ["""/event/<model("event.event"):event>/track_proposal/form"""],
+    #     type="http",
+    #     auth="public",
+    #     methods=["POST"],
+    #     website=True,
+    #     sitemap=False,
+    # )
+    # def event_track_proposal_form(self, event, **post):
+    #     if not event.can_access_from_current_website():
+    #         raise NotFound()
 
-        values = self._get_event_track_proposal_form_values(event, **post)
-        return (
-            request.env["ir.ui.view"]
-            .sudo()
-            ._render_template(
-                "website_event_track_advanced.event_track_application", values
-            )
-        )
+    #     values = self._get_event_track_proposal_form_values(event, **post)
+    #     return (
+    #         request.env["ir.ui.view"]
+    #         .sudo()
+    #         ._render_template(
+    #             "website_event_track_advanced.event_track_application", values
+    #         )
+    #     )
 
     def _create_review(self, **post):
         reviewer_id = request.env.user.reviewer_id
@@ -676,22 +768,28 @@ class EventTrackControllerAdvanced(EventTrackController):
                 signee = self._create_partner(values["workshop_signee"])
                 values["track"]["organizer_contact"] = signee.id
 
+            if values.get("track_draft"):
+                draft_stage = request.env["event.track.stage"].sudo().search([("is_draft", "=", True)], limit=1)
+                if draft_stage:
+                    values["track"]["stage_id"] = draft_stage.id
+
             # 7. Check if we want to confirm or set track as done
-            if values.get("track_confirm"):
-                first_submitted_stage = (
-                    request.env["event.track.stage"]
-                    .sudo()
-                    .search([("is_submitted", "=", True)], order="sequence")
-                )
-                if first_submitted_stage:
-                    values["track"]["stage_id"] = first_submitted_stage[0].id
+            # if values.get("track_confirm"):
+            #     first_submitted_stage = (
+            #         request.env["event.track.stage"]
+            #         .sudo()
+            #         .search([("is_submitted", "=", True)], order="sequence")
+            #     )
+            #     if first_submitted_stage:
+            #         values["track"]["stage_id"] = first_submitted_stage[0].id
 
             if values.get("track_is_done"):
                 first_is_done_stage = (
                     request.env["event.track.stage"]
                     .sudo()
-                    .search([("is_done", "=", True)], order="sequence")
+                    .search([("is_submitted", "=", True)], order="sequence")
                 )
+                logging.info(first_is_done_stage);
                 if first_is_done_stage:
                     values["track"]["stage_id"] = first_is_done_stage[0].id
 
