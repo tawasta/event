@@ -12,6 +12,7 @@
                 <field name="is_editable" />
                 <field name="is_draft" />
                 <field name="is_submitted" />
+                <field name="is_accepted" />
             </field>
         </field>
     </record>
@@ -27,6 +28,7 @@
                 <field name="is_editable" />
                 <field name="is_draft" />
                 <field name="is_submitted" />
+                <field name="is_accepted" />
             </field>
         </field>
     </record>

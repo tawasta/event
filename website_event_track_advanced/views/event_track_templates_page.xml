@@ -70,7 +70,7 @@
         </xpath>
     </template>
     <!-- HIDE AUTHOR -->
-    <template
+<!--     <template
         id="event_track_content_hide_author"
         inherit_id="website_event_track_advanced.event_track_content_author_id"
         name="Hide Author"
@@ -83,7 +83,7 @@
         <xpath expr="//hr[@class='mt-2 mb-0']" position="attributes">
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
-    </template>
+    </template> -->
 
     <!-- SHOW SPEAKERS -->
     <template
@@ -260,8 +260,18 @@
             position="replace"
         >
         </xpath>
+    </template>
+
+    <template
+        id="event_track_content_author_hide_emails"
+        inherit_id="website_event_track.event_track_content_partner_info"
+        name="Hide author email"
+        active="False"
+        customize_show="True"
+    >
+
         <xpath
-            expr="//div[@id='author-div']//span[@t-field='track.partner_email']//..//.."
+            expr="//div[@t-if='track.partner_email']"
             position="replace"
         >
         </xpath>
@@ -280,13 +290,25 @@
         >
 
         </xpath>
+    </template>
+
+    <template
+        id="event_track_content_hide_author_phone"
+        inherit_id="website_event_track.event_track_content_partner_info"
+        name="Hide author phone"
+        active="False"
+        customize_show="True"
+    >
+
+
         <xpath
-            expr="//div[@id='author-div']//span[@t-field='track.partner_phone']//.."
+            expr="//div[@t-if='track.partner_phone']"
             position="replace"
         >
 
         </xpath>
     </template>
+
     <!-- HIDE WEBSITES -->
     <template
         id="event_track_content_hide_websites"
@@ -302,14 +324,26 @@
             <attribute name="class" separator=" " add="d-none" />
             <attribute name="class" separator=" " remove="d-flex" />
         </xpath>
+
+    </template>
+
+    <template
+        id="event_track_content_hide_author_website"
+        inherit_id="website_event_track.event_track_content_partner_info"
+        name="Hide author website"
+        active="False"
+        customize_show="True"
+    >
+
+
         <xpath
-            expr="//div[@id='author-div']//span[@t-field='track.partner_id.website']//.."
-            position="attributes"
+            expr="//div[@t-if='track.partner_id.website']"
+            position="replace"
         >
-            <attribute name="class" separator=" " add="d-none" />
-            <attribute name="class" separator=" " remove="d-flex" />
+
         </xpath>
     </template>
+
     <!-- SHOW TARGET GROUP -->
     <template
         id="event_track_content_show_target_group"

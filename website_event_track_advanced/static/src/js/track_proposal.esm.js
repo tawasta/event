@@ -30,7 +30,17 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._clearFormOnClose(); // Clear form when modal is closed
         this._bindFormSubmit();  // Bindataan lomakkeen submit AJAX-pyyntöön
         this._bindAddSpeaker();
+        this._removeAttachments();
     },
+
+    _removeAttachments: function () {
+        const self = this;
+
+        $("#btn-remove-attachment").click(function () {
+            $("#attachment_ids").val("");
+        });
+    },
+
 
     _renderSpeakers: function (speakers) {
         const container = $(".track-application-speakers-div-container");
@@ -155,6 +165,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="contact_organization"]').val(trackData.contact.organization);
                     $('input[name="contact_title"]').val(trackData.contact.title);
 
+
                     self._renderSpeakers(trackData.speakers);
 
                     if (isReview && trackData.can_review && trackData.rating_grade_ids) {
@@ -197,32 +208,34 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _updateWorkshopSection: function(trackData) {
         const workshopDiv = $('#track-application-workshop-div');
         const contractDiv = $('#track-application-workshop-contract-div');
-
-        if (trackData.type.workshop) {
+        console.log(trackData.type);
+        console.log(trackData.type.workshop);
+        if (trackData.is_workshop) {
+            console.log("===ON WORKSHOPPI===");
             workshopDiv.removeClass('d-none');
             $('input[name="is_workshop"]').val('true');
-            $('input[name="workshop_min_participants"]').val(trackData.workshop_min_participants).prop('disabled', false);
-            $('input[name="workshop_participants"]').val(trackData.workshop_participants).prop('disabled', false);
-            $('input[name="workshop_fee"]').val(trackData.workshop_fee).prop('disabled', false);
-            $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false);
-            $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false);
+            $('input[name="workshop_min_participants"]').val(trackData.workshop_min_participants).prop('disabled', false).attr('required', true);
+            $('input[name="workshop_participants"]').val(trackData.workshop_participants).prop('disabled', false).attr('required', true);
+            $('input[name="workshop_fee"]').val(trackData.workshop_fee).prop('disabled', false).attr('required', true);
+            $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false).attr('required', true);
+            $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false).attr('required', true);
 
-            if (trackData.type.workshop_contract) {
+            if (trackData.is_workshop_contract) {
                 contractDiv.removeClass('d-none');
                 $('input[name="is_workshop_contract"]').val('true');
-                $('input[name="signee_firstname"]').val(trackData.signee_firstname).prop('disabled', false);
-                $('input[name="signee_lastname"]').val(trackData.signee_lastname).prop('disabled', false);
-                $('input[name="signee_email"]').val(trackData.signee_email).prop('disabled', false);
+                $('input[name="signee_firstname"]').val(trackData.signee_firstname).prop('disabled', false).attr('required', true);
+                $('input[name="signee_lastname"]').val(trackData.signee_lastname).prop('disabled', false).attr('required', true);
+                $('input[name="signee_email"]').val(trackData.signee_email).prop('disabled', false).attr('required', true);
                 $('input[name="signee_phone"]').val(trackData.signee_phone).prop('disabled', false);
                 $('input[name="signee_organization"]').val(trackData.signee_organization).prop('disabled', false);
-                $('input[name="signee_title"]').val(trackData.signee_title).prop('disabled', false);
-                $('input[name="organizer_organization"]').val(trackData.organizer_organization).prop('disabled', false);
-                $('input[name="organizer_street"]').val(trackData.organizer_street).prop('disabled', false);
-                $('input[name="organizer_zip"]').val(trackData.organizer_zip).prop('disabled', false);
-                $('input[name="organizer_city"]').val(trackData.organizer_city).prop('disabled', false);
-                $('select[name="einvoice_operator_id"]').val(trackData.einvoice_operator_id).prop('disabled', false);
-                $('input[name="edicode"]').val(trackData.edicode).prop('disabled', false);
-                $('input[name="organizer_reference"]').val(trackData.organizer_reference).prop('disabled', false);
+                $('input[name="signee_title"]').val(trackData.signee_title).prop('disabled', false).attr('required', true);
+                $('input[name="organizer_organization"]').val(trackData.organizer_organization).prop('disabled', false).attr('required', true);
+                $('input[name="organizer_street"]').val(trackData.organizer_street).prop('disabled', false).attr('required', true);
+                $('input[name="organizer_zip"]').val(trackData.organizer_zip).prop('disabled', false).attr('required', true);
+                $('input[name="organizer_city"]').val(trackData.organizer_city).prop('disabled', false).attr('required', true);
+                $('select[name="einvoice_operator_id"]').val(trackData.einvoice_operator_id).prop('disabled', false).attr('required', true);
+                $('input[name="edicode"]').val(trackData.edicode).prop('disabled', false).attr('required', true);
+                $('input[name="organizer_reference"]').val(trackData.organizer_reference).prop('disabled', false).attr('required', true);
             } else {
                 contractDiv.addClass('d-none');
                 $('input[name="is_workshop_contract"]').val('false');
@@ -474,7 +487,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 const workshopContract = selectedType.attr("data-workshop-contract");
                 const webinar = selectedType.attr("data-webinar");
 
-                self._toggleWorkshopSection(workshop, workshopContract);
+                self._toggleWorkshopSection(workshop);
                 self._toggleWebinarSection(webinar);
             });
         });
@@ -487,8 +500,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         // Tarkistetaan, että workshop on nimenomaan "true"
         if (workshop === "true") {
             workshopDiv.removeClass('d-none');
-            workshopDiv.find('input, select').prop('disabled', false);
-            workshopDiv.find('textarea').prop('disabled', false);
+            workshopDiv.find('input, select').prop('disabled', false).attr('required', true);
+            workshopDiv.find('textarea').prop('disabled', false).attr('required', true);
+            // TODO TÄHÄN PAKOLLISET KENTÄT
 
             if (workshopContract === "true") {
                 contractDiv.removeClass('d-none');
@@ -501,8 +515,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             }
         } else {
             workshopDiv.addClass('d-none');
-            workshopDiv.find('input, select').prop('disabled', true).val('');
-            workshopDiv.find('textarea').prop('disabled', true).val('');
+            workshopDiv.find('input, select').prop('disabled', true).val('').attr('required', false);
+            workshopDiv.find('textarea').prop('disabled', true).val('').attr('required', false);
         }
     },
 

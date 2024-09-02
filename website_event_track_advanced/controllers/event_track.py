@@ -133,6 +133,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             for tag in track.event_id.allowed_track_tag_ids
         ]
 
+        attachments = [
+            {
+                'id': attachment.id,
+                'name': attachment.name
+            }
+            for attachment in track.attachment_ids
+        ]
+
         values.update({
             'track_id': track.id,
             'name': track.name,
@@ -158,6 +166,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             'application_types': application_types,
             'target_groups': target_groups,
             'tags': tags,
+            'attachments': attachments,
         })
 
         # Lisätään workshop-tiedot vain jos track on tyyppiä workshop
@@ -168,8 +177,30 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'workshop_fee': track.workshop_fee,
                 'workshop_goals': track.workshop_goals,
                 'workshop_schedule': track.workshop_schedule,
-                'workshop_contract': track.type.is_workshop_contract,
+                'workshop_contract': track.type.workshop_contract,
+                'is_workshop': track.type.workshop,
+
             })
+            if track.organizer_contact:
+                values.update({
+                    'signee_firstname': track.organizer_contact.firstname,
+                    'signee_lastname': track.organizer_contact.lastname,
+                    'signee_email': track.organizer_contact.email,
+                    'signee_phone': track.organizer_contact.phone,
+                    'signee_organization': track.organizer_contact.parent_id.name,
+                    'signee_title': track.organizer_contact.function,
+                    'organizer_organization': track.organizer.name,
+                    'organizer_street': track.organizer.street,
+                    'organizer_zip': track.organizer.zip,
+                    'organizer_city': track.organizer.city,
+                    'edicode': track.organizer.edicode,
+                    'organizer_reference': track.organizer.ref,
+
+                })
+            if track.stage_id.is_accepted:
+                values.update({
+                    'is_workshop_contract': True,
+                })
 
         # Lisätään webinar-tiedot vain jos track on tyyppiä webinar
         if track.type and track.type.webinar:
