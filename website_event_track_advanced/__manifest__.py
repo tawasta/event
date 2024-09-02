@@ -38,9 +38,9 @@
     ],
     "data": [
         #"data/email_template_data.xml",
-        #"data/event_track_rating_grade_data.xml",
+        "data/event_track_rating_grade_data.xml",
         #"data/event_track_stage_data.xml",
-        #"data/event_track_type_data.xml",
+        "data/event_track_type_data.xml",
         "security/ir.model.access.csv",
         "security/event_track_security.xml",
         "wizards/event_track_assign_wizard.xml",
@@ -61,11 +61,10 @@
         "views/event_track_templates_proposal.xml",
         "views/event_track_templates_page.xml",
         "views/event_track_templates_agenda.xml",
-        #"views/event_track_templates_reviews.xml",
         "views/event_track_templates_list.xml",
         "views/portal_templates.xml",
-        #"report/event_track_location_schedule_report.xml",
-        #"report/report_menu.xml",
+        "report/event_track_location_schedule_report.xml",
+        "report/report_menu.xml",
     ],
     "assets": {
         "web.assets_frontend": [
