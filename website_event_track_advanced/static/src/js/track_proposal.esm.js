@@ -135,6 +135,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._populateSelectOptions('type', response.application_types);
                     self._populateSelectOptions('target_groups', response.target_groups);
                     self._populateSelectOptions('tags', response.tags);
+                    self._populateSelectOptions('request_time', response.request_time);
                     $('#modal_event_track_application').modal('show');
                 });
             } else {
@@ -148,6 +149,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._populateSelectOptions('type', trackData.application_types, trackData.type);
                     self._populateSelectOptions('target_groups', trackData.target_groups, trackData.target_group_ids);
                     self._populateSelectOptions('tags', trackData.tags, trackData.tag_ids);
+                    self._populateSelectOptions('request_time', trackData.request_time);
 
 
                     $('input[name="track_id"]').val(trackData.track_id);
@@ -208,6 +210,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _updateWorkshopSection: function(trackData) {
         const workshopDiv = $('#track-application-workshop-div');
         const contractDiv = $('#track-application-workshop-contract-div');
+        const workshopRequestDiv = $('#workshop-track-request-time-div');
         console.log(trackData.type);
         console.log(trackData.type.workshop);
         if (trackData.is_workshop) {
@@ -219,6 +222,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $('input[name="workshop_fee"]').val(trackData.workshop_fee).prop('disabled', false).attr('required', true);
             $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false).attr('required', true);
             $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false).attr('required', true);
+
+            workshopRequestDiv.removeClass('d-none');
+            workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
+
 
             if (trackData.is_workshop_contract) {
                 contractDiv.removeClass('d-none');
@@ -247,6 +254,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $('input[name="is_workshop"]').val('false');
             workshopDiv.find('input, select').prop('disabled', true).val('');
             workshopDiv.find('textarea').prop('disabled', true).val('');
+
+            workshopRequestDiv.addClass('d-none');
+            workshopRequestDiv.find('select').prop('disabled', true).attr('required', false).val('');
         }
     },
 
@@ -528,6 +538,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
     _toggleWorkshopSection: function (workshop, workshopContract) {
         const workshopDiv = $('#track-application-workshop-div');
+        const workshopRequestDiv = $('#workshop-track-request-time-div');
         const contractDiv = $('#track-application-workshop-contract-div');
         
         // Tarkistetaan, että workshop on nimenomaan "true"
@@ -535,6 +546,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             workshopDiv.removeClass('d-none');
             workshopDiv.find('input, select').prop('disabled', false).attr('required', true);
             workshopDiv.find('textarea').prop('disabled', false).attr('required', true);
+
+            workshopRequestDiv.removeClass('d-none');
+            workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
             // TODO TÄHÄN PAKOLLISET KENTÄT
 
             if (workshopContract === "true") {
@@ -550,6 +564,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             workshopDiv.addClass('d-none');
             workshopDiv.find('input, select').prop('disabled', true).val('').attr('required', false);
             workshopDiv.find('textarea').prop('disabled', true).val('').attr('required', false);
+
+            workshopRequestDiv.addClass('d-none');
+            workshopRequestDiv.find('select').prop('disabled', true).val('').attr('required', false);
         }
     },
 

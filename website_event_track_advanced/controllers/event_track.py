@@ -117,6 +117,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             }
             for app_type in track.event_id.track_types_ids
         ]
+        request_time_ids = request.env["event.track.request.time"].sudo().search([])
+        request_time = [
+            {
+                'id': req.id,
+                'name': req.name
+            }
+            for req in request_time_ids
+        ]
         target_groups = [
             {
                 'id': group.id,
@@ -179,6 +187,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'workshop_schedule': track.workshop_schedule,
                 'workshop_contract': track.type.workshop_contract,
                 'is_workshop': track.type.workshop,
+                'request_time': request_time,
 
             })
             if track.organizer_contact:
@@ -227,6 +236,15 @@ class EventTrackControllerAdvanced(EventTrackController):
             }
             for app_type in event.track_types_ids
         ]
+
+        request_time_ids = request.env["event.track.request.time"].sudo().search([])
+        request_time = [
+            {
+                'id': req.id,
+                'name': req.name
+            }
+            for req in request_time_ids
+        ]
         
         target_groups = [
             {
@@ -247,7 +265,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         return {
             'application_types': application_types,
             'target_groups': target_groups,
-            'tags': tags
+            'tags': tags,
+            'request_time': request_time,
         }
 
 
@@ -464,6 +483,12 @@ class EventTrackControllerAdvanced(EventTrackController):
             track_values["workshop_goals"] = post.get("workshop_goals")
             track_values["workshop_schedule"] = post.get("workshop_schedule")
             track_values["workshop_fee"] = post.get("workshop_fee")
+
+
+            if post.get("request_time"):
+                request_time = self._get_record("event.track.request.time", post.get("request_time"))
+                track_values["request_time"] = request_time.id if request_time else False,
+
 
             if (
                 post.get("is_workshop_contract")

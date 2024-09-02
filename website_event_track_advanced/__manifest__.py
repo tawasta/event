@@ -47,6 +47,7 @@
         #"views/assets.xml",
         #"views/res_config_settings_view.xml",
         "views/event_track_rating_views.xml",
+        "views/event_track_request_time.xml",
         "views/event_track_views.xml",
         "views/event_track_reviewer_views.xml",
         "views/event_track_review_group_views.xml",

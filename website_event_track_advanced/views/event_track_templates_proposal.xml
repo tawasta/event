@@ -616,6 +616,29 @@
                             <!-- <t t-esc="track.type.description" /> -->
                         </p>
                     </div>
+                    <div
+                        class="col-md-6 d-none"
+                        id="workshop-track-request-time-div"
+                    >
+                        <label
+                            for="request_time"
+                            class="control-label"
+                        >Desired duration of the workshop
+                        </label>
+
+                        <div class="input-group">
+                            <select
+                                name="request_time"
+                                id="request_time"
+                                placeholder="Request time..."
+                                class="form-control"
+                                autocomplete="off"
+                                disabled="1"
+                            >
+                                
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
