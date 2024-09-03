@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="event_track_proposal_hide_introduction"
+        inherit_id="website_event_track.event_track_proposal"
+        active="True"
+        customize_show="True"
+        name="Hide Proposal Introduction"
+    >
+        <xpath expr="//p[@class='lead']/.." position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
+    <template
+        id="event_track_proposal_hide_sidebar"
+        inherit_id="website_event_track.event_track_proposal"
+        active="True"
+        customize_show="True"
+        name="Hide Proposal Sidebar"
+    >
+        <xpath
+            expr="//aside[@class='col-lg-4 col-xl-3 mt-3 mt-lg-0 pt-3']"
+            position="attributes"
+        >
+            <attribute
+                name="class"
+            >col-lg-4 col-xl-3 mt-3 mt-lg-0 pt-3 d-none</attribute>
+        </xpath>
+    </template>
+</odoo>
