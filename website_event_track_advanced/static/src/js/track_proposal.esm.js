@@ -195,6 +195,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         { selector: 'textarea[name="webinar_info"]' },
                     ]);
 
+                    $(".tags-select").select2({
+                        maximumSelectionSize: 3,
+                    });
+
                     $('#modal_event_track_application').modal('show');
                 });
             } else {
