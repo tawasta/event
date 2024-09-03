@@ -864,7 +864,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             # If post is review. Create review and return confirmation
             if post.get("review-confirm"):
                 self._create_review(**post)
-                return json.dumps({"success": True, "redirect": "/my/tracks"})
+                message = "Your review has been successfully saved."
+                return json.dumps({"success": True, 'message':message, "redirect": "/my/tracks"})
 
             followers = list()
             _logger.info(_("Posted values: %s") % dict(post))
@@ -976,8 +977,16 @@ class EventTrackControllerAdvanced(EventTrackController):
             return_vals.update({"track": track})
             return_vals.update({"user_exists": user_exists})
 
+            # 11. Create success message based on stage_id
+            if track.stage_id.is_editable and track.stage_id.is_draft:
+                message = "Your proposal is saved as a draft and will not be reviewed until it is submitted."
+            elif track.stage_id.is_fully_accessible:
+                message = "Your track is saved and confirmed as part of the event."
+            else:
+                message = "We will evaluate your proposition and get back to you shortly."
+
             return json.dumps(
-                {"success": True, "message": "Proposal saved successfully."}
+                {"success": True, "message": message}
             )
 
         except Exception as e:

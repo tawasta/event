@@ -5,6 +5,7 @@ import {loadWysiwygFromTextarea} from "@web_editor/js/frontend/loadWysiwygFromTe
 import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
+import { renderToElement } from "@web/core/utils/render";
 // Import { qweb } from 'web.core';
 
 publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
@@ -42,16 +43,27 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Lisää sulkemispainikkeille toiminnallisuus
         $(".close.warning-close-modal, .btn.btn-secondary.warning-close-modal").click(
-            function () {
-                // Nollaa lomake
-                $("#track-application-form")[0].reset();
+            function (e) {
+                // Näytä vahvistusviesti käyttäjälle
+                const confirmClose = confirm(
+                    "If you close the form now, any unsaved changes will be lost. Do you really want to close?"
+                );
 
-                // Sulje modal ja päivitä sivu
-                $("#modal_event_track_application").modal("hide");
-                location.reload(); // Päivitä sivu
+                if (confirmClose) {
+                    // Nollaa lomake
+                    $("#track-application-form")[0].reset();
+
+                    // Sulje modal ja päivitä sivu
+                    $("#modal_event_track_application").modal("hide");
+                    location.reload(); // Päivitä sivu
+                } else {
+                    // Jos käyttäjä ei vahvistanut, estetään modalin sulkeminen
+                    e.preventDefault();
+                }
             }
         );
     },
+
 
     _removeAttachments: function () {
         $("#btn-remove-attachment").click(function () {
@@ -650,6 +662,40 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $("#track-application-form").on("submit", function (e) {
             e.preventDefault(); // Estä lomakkeen oletuslähetys
 
+            const loadingScreen = function () {
+                const message = "Loading, please wait...";
+                const displayMessage = `
+                    <div id="loading-screen" style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        z-index: 9999;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #fff;
+                        text-align: center;
+                        font-size: 20px;
+                    ">
+                        <div>
+                            <img src="/web/static/src/img/spin.png" 
+                                style="animation: fa-spin 1s infinite steps(12); width: 50px; height: 50px;"/>
+                            <br/><br/>
+                            <h4>${message}</h4>
+                        </div>
+                    </div>`;
+                $("body").append(displayMessage);
+            };
+
+            const hideLoadingScreen = function () {
+                $("#loading-screen").remove();
+            };
+
+            loadingScreen(); // Näytä latausruutu
+
             // TODO TEXTAREA PAKOLLISUUDEN TARKITUS
 
             const submitButton = $(this).find('[type="submit"]');
@@ -690,6 +736,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     alert("Odottamaton virhe.");
                 },
                 complete: function () {
+                    hideLoadingScreen(); // Piilota latausruutu
                     submitButton.prop("disabled", false); // Ota lähetyspainike uudelleen käyttöön
                 },
             });
@@ -802,26 +849,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             title: _t("Success"),
             size: "medium",
             confirm_callback: function () {
-                // Tarkistetaan, ollaanko '/proposal' näkymässä
-                if (window.location.pathname.includes("/track_proposal")) {
-                    $(".proposals").load(
-                        window.location.pathname + " .proposals > *",
-                        function () {
-                            console.log("Proposal view content updated successfully.");
-                        }
-                    );
-                }
-                // Tarkistetaan, ollaanko '/my/tracks' näkymässä
-                else if (window.location.pathname.includes("/my/tracks")) {
-                    $(".table-responsive").load(
-                        window.location.pathname + " .table-responsive > *",
-                        function () {
-                            console.log("My Tracks view content updated successfully.");
-                        }
-                    );
-                } else {
-                    console.log("No specific view update logic for the current path.");
-                }
+                // Ladataan sivu uudelleen, kun käyttäjä sulkee ilmoituksen
+                location.reload();
             },
         });
     },
