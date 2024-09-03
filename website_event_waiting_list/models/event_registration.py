@@ -1,5 +1,3 @@
-import logging
-
 from werkzeug import urls
 
 from odoo import _, api, fields, models
@@ -27,8 +25,7 @@ class EventRegistration(models.Model):
     @api.depends("event_id.seats_available")
     def _compute_available_to_confirm(self):
         """
-        Compute all cases where registration from waiting list is able
-        to be confirmed:
+        Compute all cases where registration from waiting list can be confirmed:
         1. Both ticket and event have limited but available seats
         2. Both ticket and event have no limited seats
         3. Ticket has no limited seats and event has limited but available seats
@@ -143,7 +140,6 @@ class EventRegistration(models.Model):
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
         if add_waiting_list:
-            logging.info("=====TAMAAA??????????")
             registrations.sudo().action_waiting()
         return registrations
 
@@ -154,10 +150,6 @@ class EventRegistration(models.Model):
         for rec in self:
 
             event_stage = rec.event_id.stage_id
-            logging.info("=====WAITING LIST=====WRITE")
-            logging.info(rec)
-            logging.info(rec.event_id)
-            logging.info(rec.event_id.stage_id)
             if event_stage.pipe_end or event_stage.cancel:
                 # Don't try to send messages for closed events
                 return res
@@ -166,13 +158,11 @@ class EventRegistration(models.Model):
                 onsubscribe_schedulers = rec.mapped("event_id.event_mail_ids").filtered(
                     lambda s: s.interval_type == "after_sub"
                 )
-                logging.info("====WAIT EMAILS====")
                 onsubscribe_schedulers.sudo().execute()
             if vals.get("state") == "wait":
                 onsubscribe_schedulers = rec.mapped("event_id.event_mail_ids").filtered(
                     lambda s: s.interval_type == "after_wait"
                 )
-                logging.info("====WAIT EMAILS 222====")
                 onsubscribe_schedulers.sudo().execute()
         return res
 
