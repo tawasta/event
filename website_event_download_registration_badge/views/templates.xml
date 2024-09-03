@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Download registration badge views -->
+    <template id="download_badge_page" name="Download Registration Badge">
+        <t t-call="website_event.layout">
+            <div class="container my-5 o_wereg_confirmed">
+                <div class="row mb-3">
+                    <div name="title-div" class="col-12">
+                        <t t-if="registration.state in ['open', 'done']">
+                            <h3>Download your registration badge for the event <t
+                                    t-esc="event.name"
+                                />.</h3>
+                        </t>
+                        <t t-else="">
+                            <h3
+                            >Your registration is cancelled or has not been confirmed to the event <t
+                                    t-esc="event.name"
+                                />.</h3>
+                            <p
+                                class="py-2"
+                            >If you believe this is a mistake. Please contact the event organizer. </p>
+                        </t>
+                    </div>
+                </div>
+                <div name="button-div" class="mt-4 d-flex flex-column flex-md-row">
+                    <!-- Buttons trigger modals -->
+                    <t t-if="registration.state in ['open', 'done']">
+                        <button
+                            type="button"
+                            class="btn btn-primary ml-md-2 mt-2 mt-md-0"
+                            data-bs-toggle="modal"
+                            data-bs-target="#download_modal"
+                        ><i class="fa fa-fw fa-download" /> Download Registration Badge
+                            </button>
+                    </t>
+                </div>
+                <div class="row mb-3 o_wereg_confirmed_attendees">
+                    <div class="col-md-4 col-xs-12 mt-3">
+                        <div class="d-flex flex-column">
+                            <span class="font-weight-bold">
+                                <t t-if="registration.name" t-esc="registration.name" />
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-envelope mr-2" />
+                                <t
+                                    t-if="registration.email"
+                                    t-esc="registration.email"
+                                />
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span>
+                                <i class="fa fa-phone mr-2" />
+                                <t
+                                    t-if="registration.phone"
+                                    t-esc="registration.phone"
+                                />
+                                <t t-else="">N/A</t>
+                            </span>
+                            <span><i class="fa fa-ticket mr-2" /><t
+                                    t-if="registration.event_ticket_id"
+                                    t-esc="registration.event_ticket_id.name"
+                                /><t t-else="">N/A</t>
+                                    (ref: <t t-esc="registration.id" />)
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <p>
+                            <b>Start</b>
+                            <span
+                                itemprop="startDate"
+                                t-esc="event.date_begin_located"
+                            />
+                            <br />
+                            <b>End</b>
+                            <span itemprop="endDate" t-esc="event.date_end_located" />
+                        </p>
+                        <div class="mt-4">
+                            <h5
+                                t-field="event.address_id"
+                                class="text-secondary font-weight-bold"
+                                t-options="{                                                                                                                   &quot;widget&quot;: &quot;contact&quot;,                                                                                                                   &quot;fields&quot;: [&quot;name&quot;]                                                                                                                   }"
+                            />
+                            <a
+                                itemprop="location"
+                                t-att-href="event.google_map_link()"
+                                target="_BLANK"
+                                temprop="location"
+                                t-field="event.address_id"
+                                t-options="{                                                                                                                                                                      &quot;widget&quot;: &quot;contact&quot;,                                                                                                                                                                      &quot;fields&quot;: [&quot;address&quot;]                                                                                                                                                                      }"
+                            />
+                            <div
+                                itemprop="location"
+                                t-field="event.address_id"
+                                t-options="{                                                                                                &quot;widget&quot;: &quot;contact&quot;,                                                                                                &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]                                                                                                }"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <!-- Confirm Download Badge Modal -->
+                <div
+                    id="download_modal"
+                    class="modal fade"
+                    tabindex="-1"
+                    role="dialog"
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form
+                                id="download-modal"
+                                t-attf-action="{{request.httprequest.path}}"
+                                method="post"
+                                enctype="multipart/form-data"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    t-att-value="request.csrf_token()"
+                                />
+                                <div class="modal-header">
+                                    <h4
+                                        class="modal-title hidden"
+                                        id="delete_language_title"
+                                    >Download Registration Badge</h4>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-label="Close">&amp;times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <t t-if="privacies">
+                                                <p>Please accept these terms.</p>
+                                                <t t-foreach="privacies" t-as="p">
+                                                    <div class="form-group col-xl-12">
+                                                        <div class="form-check">
+                                                            <input
+                                                                type="checkbox"
+                                                                class="form-check-input privacy_acceptance"
+                                                                t-attf-name="privacy_#{str(p.id)}"
+                                                                t-att-required="None if not p.is_required else 'required'"
+                                                            />
+                                                            <label
+                                                                t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
+                                                            ><t t-esc="p.name" /><t
+                                                                    t-if="p.link"
+                                                                > - <a
+                                                                        t-att-href="p.link"
+                                                                        target="_blank"
+                                                                    ><t
+                                                                            t-esc="p.link_name"
+                                                                        /></a></t></label>
+                                                            <div
+                                                                class="invalid-feedback"
+                                                            >Please accept these terms.</div>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default"
+                                        data-dismiss="modal"
+                                    >Cancel</button>
+                                    <button
+                                        id="download-registration-badge"
+                                        class="btn btn-primary"
+                                        type="submit"
+                                    >Download</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
