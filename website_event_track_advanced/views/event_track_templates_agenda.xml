@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="agenda_main_track_hide_author"
+        inherit_id="website_event_track.agenda_main_track"
+        name="Hide Author"
+        active="False"
+        customize_show="True"
+    >
+        <xpath expr="//small[@t-out='track.partner_tag_line']" position="attributes">
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+    </template>
+    <template
+        id="agenda_main_track_show_speakers"
+        inherit_id="website_event_track.agenda_main_track"
+        name="Show Speakers"
+        active="False"
+        customize_show="True"
+    >
+        <xpath expr="//div[@class='opacity-75 text-center']" position="after">
+            <t t-if="track.event_id.use_speaker_track">
+                <t t-set="speaker_count" t-value="len(track.track_speaker_ids)" />
+                <t t-set="current_count" t-value="0" />
+                <t t-foreach="track.track_speaker_ids" t-as="speaker">
+                    <t t-set="current_count" t-value="current_count +1" />
+                    <small>
+                        <t t-esc="speaker.partner_id.sudo().name" /><t
+                            t-if="speaker_count - current_count != 0"
+                        >,</t>
+                    </small>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-set="speaker_count" t-value="len(track.speaker_ids)" />
+                <t t-set="current_count" t-value="0" />
+                <t
+                    t-foreach="track.speaker_ids.sorted(key=lambda x: x.name)"
+                    t-as="speaker"
+                >
+                    <t t-set="current_count" t-value="current_count +1" />
+                    <small>
+                        <t t-esc="speaker.sudo().name" /><t
+                            t-if="speaker_count - current_count != 0"
+                        >,</t>
+                    </small>
+                </t>
+            </t>
+        </xpath>
+    </template>
+    <template
+        id="agenda_main_track_show_chairperson"
+        inherit_id="website_event_track.agenda_main_track"
+        name="Show Chairperson"
+        active="False"
+        customize_show="True"
+    >
+        <xpath expr="//div[@class='opacity-75 text-center']" position="after">
+            <t t-if="track.chairperson_id">
+                <div class="text-muted text-center">
+                    <strong>
+                        PJ: <t t-esc="track.chairperson_id.sudo().name" />
+                    </strong>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

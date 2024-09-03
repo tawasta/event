@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_event_track_form_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.form.advanced</field>
+        <field name="model">event.track</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="partner_id" />
+                <field name="chairperson_id" />
+                <field name="organizer" />
+                <field name="organizer_contact" />
+                <field name="use_speaker_track" invisible="1" />
+                <field name="request_time" />
+            </xpath>
+            <xpath expr="//page[@name='speaker']" position="replace">
+                <page string="Speakers" name="speakers" invisible="use_speaker_track">
+                    <group>
+                        <field
+                            name="speaker_ids"
+                            nolabel="1"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        >
+                            <tree name="speakers" string="Speakers">
+                                <field name="name" />
+                                <field name="phone" />
+                                <field name="email" />
+                                <field name="city" optional="hide" />
+                                <field name="country_id" optional="hide" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+                <page
+                    string="Speakers"
+                    name="track_speakers"
+                    invisible="not use_speaker_track"
+                >
+                    <!-- <group>
+                        <field
+                            name="track_speaker_ids"
+                            nolabel="1"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                            context="{'default_track_id': id}"
+                        >
+                            <tree name="speakers" string="Speakers">
+                                <field name="sequence" widget="handle"/>
+                                <field name="partner_id" />
+                                <field name="phone" />
+                                <field name="email" />
+                                <field name="track_id" />
+                            </tree>
+                        </field>
+                    </group> -->
+                    <group>
+                        <field
+                            name="track_speaker_ids"
+                            nolabel="1"
+                            context="{'default_track_id':id}"
+                        >
+                            <tree string="Speakers" editable="bottom">
+                                <field name="sequence" widget="handle" />
+                                <field name="partner_id" />
+                                <field name="phone" />
+                                <field name="email" />
+                                <field name="track_id" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//sheet/group[last()]" position="after">
+                <group name="dates">
+                    <group>
+                        <field name="date" />
+                        <label for="duration" />
+                        <div><field
+                                name="duration"
+                                class="oe_inline"
+                                widget="float_time"
+                            />
+                            hours
+                        </div>
+                        <field name="date_end" />
+                    </group>
+                    <group>
+                        <label
+                            for="show_in_agenda"
+                            colspan="2"
+                            invisible="show_in_agenda"
+                            string="Will not be shown in agenda!"
+                        />
+                        <field name="show_in_agenda" invisible="1" />
+                        <field name="location_id" />
+                        <field
+                            name="type"
+                            domain="[('code', '!=', 'break')]"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        />
+                    </group>
+                </group>
+                <group name="reviewer" groups="event.group_event_manager">
+                    <group>
+                        <field
+                            name="review_group"
+                            groups="event.group_event_user"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        />
+                    </group>
+                    <field name="is_reviewer" invisible="1" />
+                    <group invisible="not is_reviewer">
+                        <label for="grade_id" />
+                        <div>
+                            <field
+                                name="grade_id"
+                                options="{'no_quick_create':True,'no_create_edit':True}"
+                            />
+                            <div>
+                                <field name="rating_comment" />
+                            </div>
+                        </div>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='description']" position="after">
+                <page
+                    name="extra_info"
+                    string="Extra info"
+                    groups="event.group_event_manager"
+                >
+                    <group colspan="2">
+                        <field name="extra_materials" />
+                        <field name="video_url" />
+                        <field name="external_registration" />
+                    </group>
+                </page>
+                <page
+                    name="target_group"
+                    string="Target Group"
+                    groups="event.group_event_manager"
+                >
+                    <group name="portal">
+                        <group>
+                            <field
+                                name="language"
+                                options="{'no_quick_create':True,'no_create_edit':True}"
+                            />
+                            <field
+                                name="target_group"
+                                options="{'no_quick_create':True,'no_create_edit':True}"
+                            />
+                            <field name="target_group_ids" widget="many2many_tags" />
+                        </group>
+                        <group colspan="2">
+                            <field name="target_group_info" />
+                            <field name="extra_info" />
+                        </group>
+                    </group>
+                </page>
+                <page
+                    string="Ratings"
+                    name="ratings"
+                    groups="event.group_event_manager"
+                >
+                    <field name="ratings" readonly="1" />
+                </page>
+                <field name="is_webinar" invisible="1" />
+                <page name="webinar" string="Webinar" invisible="not is_webinar">
+                    <group>
+                        <field name="webinar" />
+                        <field name="webinar_info" readonly="not webinar" />
+                    </group>
+                </page>
+                <field name="is_workshop" invisible="1" />
+                <page name="workshop" string="Workshop" invisible="not is_workshop">
+                    <group cols="1">
+                        <field name="workshop_min_participants" />
+                        <field name="workshop_participants" nolabel="0" />
+                        <field name="workshop_fee" nolabel="0" />
+                        <field name="workshop_goals" nolabel="0" />
+                        <field name="workshop_schedule" nolabel="0" />
+                    </group>
+                </page>
+                <page name="overlap" string="Overlapping presentations">
+                    <group name="overlapping_tracks" col="1">
+                        <field
+                            name="overlapping_location_track_ids"
+                            invisible="not overlapping_location_track_ids"
+                        >
+                            <tree>
+                                <field name="name" />
+                                <field name="location_id" />
+                                <field name="date" />
+                                <field name="date_end" />
+                                <field name="duration" widget="float_time" />
+                            </tree>
+                        </field>
+                        <field
+                            name="overlapping_chairperson_track_ids"
+                            invisible="not overlapping_chairperson_track_ids"
+                        >
+                            <tree>
+                                <field name="name" />
+                                <field name="chairperson_id" />
+                                <field name="date" />
+                                <field name="date_end" />
+                                <field name="duration" widget="float_time" />
+                            </tree>
+                        </field>
+                        <field
+                            name="overlapping_speaker_track_ids"
+                            invisible="not overlapping_speaker_track_ids"
+                        >
+                            <tree>
+                                <field name="name" />
+                                <field name="date" />
+                                <field name="date_end" />
+                                <field name="duration" widget="float_time" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath
+                expr="//page[@name='description']//field[@name='description']"
+                position="before"
+            >
+                <group>
+                    <field name="attachment_ids" widget="many2many">
+                        <tree string="Attachments">
+                            <field name="name" />
+                            <field name="type" />
+                            <field name="file_size" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_kanban_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.kanban.advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="use_speaker_track" invisible="1" />
+                <field name="type" />
+                <field name="date" />
+                <field name="partner_string" />
+                <field name="speakers_string" invisible="use_speaker_track" />
+                <field name="track_speakers_string" invisible="not use_speaker_track" />
+                <field name="duration" />
+                <field name="location_id" />
+            </xpath>
+            <xpath expr="//div[@class='o_kanban_record_body']" position="inside">
+                <strong>
+                    <field name="type" />
+                </strong>
+                <p>
+                    <strong>Contact:</strong>
+                    <field name="partner_string" />
+                </p>
+                <p>
+                    <strong>Presenters:</strong>
+                    <field name="speakers_string" invisible="use_speaker_track" />
+                    <field
+                        name="track_speakers_string"
+                        invisible="not use_speaker_track"
+                    />
+                </p>
+                <div class="oe_kanban_body_left">
+                    <p>
+                        Rating: <field name="rating_avg" />
+                    </p>
+                </div>
+                <div class="oe_kanban_body_right">
+                    <field name="location_id" />
+                    <br />
+                    <field name="date" widget="datetime" />
+                    <br />
+                    <t t-if="record.duration.raw_value"><field
+                            name="duration"
+                            widget="float_time"
+                        /> hours</t>
+                </div>
+                <div class="oe_clear" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_search_advanced" model="ir.ui.view">
+        <field name="name">view.event.track.search.advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="type" />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter
+                    string="Contact"
+                    name="contact"
+                    context="{'group_by': 'partner_id'}"
+                />
+                <filter string="Type" name="type" context="{'group_by': 'type'}" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_event_track_tree" model="ir.ui.view">
+        <field name="name">view_event_track_tree_advanced</field>
+        <field name="model">event.track</field>
+        <field name="inherit_id" ref="website_event_track.view_event_track_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_phone" position="after">
+                <field name="speaker_ids" widget="many2many_tags" optional="hide" />
+            </field>
+            <field name="event_id" position="after">
+                <field name="date" optional="show" />
+                <field name="location_id" optional="show" />
+                <field name="review_group" optional="show" />
+                <field name="ratings_count" optional="show" />
+                <field name="rating_avg" optional="show" />
+            </field>
+        </field>
+    </record>
+</odoo>
