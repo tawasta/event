@@ -50,7 +50,8 @@ class TrackStage(models.Model):
     )
 
     is_accepted = fields.Boolean(
-        string="Proposal is accepted to agenda", help="This proposal is accepted to agenda."
+        string="Proposal is accepted to agenda",
+        help="This proposal is accepted to agenda.",
     )
 
     # 3. Default methods

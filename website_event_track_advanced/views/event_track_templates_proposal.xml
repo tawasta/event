@@ -9,8 +9,11 @@
                 name="class"
             >text-center text-primary font-weight-bold my-4</attribute>
         </xpath> -->
-        <xpath expr="//div/section[@id='forms' and @t-if='event.website_track_proposal']
-" position="replace">
+        <xpath
+            expr="//div/section[@id='forms' and @t-if='event.website_track_proposal']
+"
+            position="replace"
+        >
             <div t-if="not submitted">
                 <div
                     t-if="event.website_track_proposal or request.env.user.has_group('event.group_event_manager')"
@@ -156,13 +159,16 @@
                 t-att-data-event-id="event.id"
                 data-bs-toggle="modal"
                 data-bs-target="#modal_event_track_application"
-            ><i class="fa fa-fw fa-times-circle"/> New proposal
+            ><i class="fa fa-fw fa-times-circle" /> New proposal
             </button>
         </div>
 
-        
+
         <t t-call="website_event_track_advanced.event_track_application">
-            <t t-set="editable" t-value="True if not track or not track.id else False"/>
+            <t
+                t-set="editable"
+                t-value="True if not track or not track.id else False"
+            />
         </t>
     </template>
      <template id="event_track_proposal_template" name="Event Track Application">
@@ -188,8 +194,8 @@
                         <td class="td-submit">
                             <t t-set="track_state">badge-default</t>
                             <t
-                                t-if="track.stage_id.is_editable and track.stage_id.is_draft"
-                            >
+                            t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                        >
                                 <t t-set="track_state">badge-info</t>
                             </t>
                             <t t-if="track.stage_id.is_submitted">
@@ -205,35 +211,35 @@
                                 <t t-set="track_state">badge-danger</t>
                             </t>
                             <span
-                                t-field="track.stage_id"
-                                t-attf-class="badge {{track_state}}"
-                            />
+                            t-field="track.stage_id"
+                            t-attf-class="badge {{track_state}}"
+                        />
                         </td>
                         <button
-                                        type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        t-att-data-track-id="track.id"
-                                        t-att-data-event-id="event.id"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal_event_track_application"
-                                    ><i class="fa fa-edit" />
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        t-att-data-track-id="track.id"
+                        t-att-data-event-id="event.id"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal_event_track_application"
+                    ><i class="fa fa-edit" />
                                     </button>
                     </h4>
                     <div class="card-body">
                         <div
-                            t-field="track.partner_id"
-                            t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
-                        />
+                        t-field="track.partner_id"
+                        t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
+                    />
                     </div>
                     <div class="card-footer">
                         <button
-                                        type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        t-att-data-track-id="track.id"
-                                        t-att-data-event-id="event.id"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal_event_track_application"
-                                    ><i class="fa fa-fw fa-times-circle"/> Edit this proposal
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        t-att-data-track-id="track.id"
+                        t-att-data-event-id="event.id"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal_event_track_application"
+                    ><i class="fa fa-fw fa-times-circle" /> Edit this proposal
                                     </button>
                     </div>
                 </div>
@@ -317,7 +323,11 @@
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    <input name="csrf_token" type="hidden" t-att-value="request.csrf_token()"/>
+                    <input
+                        name="csrf_token"
+                        type="hidden"
+                        t-att-value="request.csrf_token()"
+                    />
                     <input
                         type="hidden"
                         id="editable"
@@ -369,21 +379,33 @@
                                     t-call="website_event_track_advanced.event_track_application_extra_info"
                                 />
                             </t>
-                            <div id="header-track-application-review-div" class="d-none" disabled="1">
-                                <t t-call="website_event_track_advanced.event_track_application_review" />
+                            <div
+                                id="header-track-application-review-div"
+                                class="d-none"
+                                disabled="1"
+                            >
+                                <t
+                                    t-call="website_event_track_advanced.event_track_application_review"
+                                />
                             </div>
 
                             <div id="privacy-acceptance-container">
-                                <div class="form-group col-xl-12 privacy-template d-none">
+                                <div
+                                    class="form-group col-xl-12 privacy-template d-none"
+                                >
                                     <div class="form-check">
                                         <input
                                             type="checkbox"
                                             class="form-check-input privacy_acceptance"
                                         />
                                         <label class="form-check-label">
-                                            <span class="privacy-name"></span>
+                                            <span class="privacy-name" />
                                             <span class="privacy-link-container">
-                                                - <a href="#" target="_blank" class="privacy-link"></a>
+                                                - <a
+                                                    href="#"
+                                                    target="_blank"
+                                                    class="privacy-link"
+                                                />
                                             </span>
                                         </label>
                                         <div class="invalid-feedback">
@@ -485,7 +507,7 @@
                                 </t>
                             </div>
                         </t>
-                        
+
 <!--                             <div class="modal-body bg-light border-bottom review-info d-none">
                                 <p class="alert alert-info alert-dismissable">
                                     <a
@@ -516,7 +538,7 @@
                                 >Submit Review</button>
                             </div> -->
 
-                       
+
                     </div>
                 </form>
             </div>
@@ -621,7 +643,7 @@
                             class="form-control"
                             t-att-required="None if not editable else 'required'"
                         >
-                            
+
                         </select>
                         <div
                             class="invalid-feedback"
@@ -637,18 +659,12 @@
                         </p>
                     </div>
 
-                    <div
-                        class="col-md-6 d-none"
-                        id="workshop-track-request-time-div"
-                    >
+                    <div class="col-md-6 d-none" id="workshop-track-request-time-div">
                         <label
                             class="col-form-label"
                             for="request_time"
                         >Desired duration of the workshop</label>
-                        <select
-                            name="request_time"
-                            t-attf-class="form-control"
-                        >
+                        <select name="request_time" t-attf-class="form-control">
 
                         </select>
                     </div>
@@ -732,8 +748,10 @@
                             class="form-control o_wysiwyg_loader"
                             required="1"
                             rows="6"
-                        ></textarea>
-                        <div class="invalid-feedback">Please enter presentation content.</div>
+                        />
+                        <div
+                            class="invalid-feedback"
+                        >Please enter presentation content.</div>
                     </div>
                     <div class="form-group col-xl-6">
                         <label
@@ -754,11 +772,17 @@
 
                     <div class="form-group col-xl-6">
                         <div class="file-upload btn btn-secondary btn-block">
-                            <span>Attach Files <i class="fa fa-paperclip"/></span>
-                            <input type="file" class="upload" t-att-data-maxsize="maxfilesize" id="attachment_ids" name="attachment_ids"/>
+                            <span>Attach Files <i class="fa fa-paperclip" /></span>
+                            <input
+                                type="file"
+                                class="upload"
+                                t-att-data-maxsize="maxfilesize"
+                                id="attachment_ids"
+                                name="attachment_ids"
+                            />
                         </div>
 
-                        <div id="attachment_info_div" class="d-none alert mt-3"/>
+                        <div id="attachment_info_div" class="d-none alert mt-3" />
                     </div>
 
                 </div>
@@ -819,7 +843,7 @@
                             placeholder="Target Group Info..."
                             class="form-control o_wysiwyg_loader"
                             rows="6"
-                        ></textarea>
+                        />
                     </div>
                     <div class="form-group col-xl-12">
                         <label
@@ -863,11 +887,7 @@
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">
-                        <input
-                            t-attf-name="contact_id"
-                            class="d-none"
-                            type="hidden"
-                        />
+                        <input t-attf-name="contact_id" class="d-none" type="hidden" />
                         <label
                             for="contact_firstname"
                             class="col-form-label"
@@ -942,73 +962,146 @@
             </div>
         </div>
     </template>
-    
+
     <template id="website_event_track_advanced.event_track_application_speakers">
         <div class="panel panel-primary" id="track-application-speakers-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Presenters</h3>
             </div>
             <div class="panel-body">
-                <p id="track-application-speakers-alert-info" class="alert alert-info alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <span class="alert-message">List the details of all presenters</span>
+                <p
+                    id="track-application-speakers-alert-info"
+                    class="alert alert-info alert-dismissable"
+                >
+                    <a
+                        href="#"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="close"
+                    >×</a>
+                    <span
+                        class="alert-message"
+                    >List the details of all presenters</span>
                 </p>
                 <t t-set="speaker_count" t-value="0" />
                 <div class="track-application-speakers-div-container">
                     <t t-if="speaker_count == 0">
                         <t t-set="speaker_count" t-value="speaker_count + 1" />
-                        <div class="track-application-speakers-div-row-container" t-att-id="speaker_count">
-                            <span class="text-muted presenter-span">Presenter #<t t-esc="speaker_count"/></span>
-                            <button type="button" class="btn btn-default btn-remove-speaker" 
-                                    disabled="disabled" data-toggle="tooltip" data-placement="right" 
-                                    title="Remove speaker">
+                        <div
+                            class="track-application-speakers-div-row-container"
+                            t-att-id="speaker_count"
+                        >
+                            <span class="text-muted presenter-span">Presenter #<t
+                                    t-esc="speaker_count"
+                                /></span>
+                            <button
+                                type="button"
+                                class="btn btn-default btn-remove-speaker"
+                                disabled="disabled"
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="Remove speaker"
+                            >
                                 <i class="fa fa-trash" />
                             </button>
-                            <div t-attf-id="track-application-speakers-row-div-#{speaker_count}" class="row">
+                            <div
+                                t-attf-id="track-application-speakers-row-div-#{speaker_count}"
+                                class="row"
+                            >
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_firstname[#{speaker_count}]" class="col-form-label">First Name</label>
-                                    <input t-attf-name="speaker_firstname[#{speaker_count}]" placeholder="First Name" 
-                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
-                                            />
+                                    <label
+                                        t-attf-for="speaker_firstname[#{speaker_count}]"
+                                        class="col-form-label"
+                                    >First Name</label>
+                                    <input
+                                        t-attf-name="speaker_firstname[#{speaker_count}]"
+                                        placeholder="First Name"
+                                        class="form-control"
+                                        type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                    />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_lastname[#{speaker_count}]" class="col-form-label">Last Name</label>
-                                    <input t-attf-name="speaker_lastname[#{speaker_count}]" placeholder="Last Name" 
-                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
-                                            />
+                                    <label
+                                        t-attf-for="speaker_lastname[#{speaker_count}]"
+                                        class="col-form-label"
+                                    >Last Name</label>
+                                    <input
+                                        t-attf-name="speaker_lastname[#{speaker_count}]"
+                                        placeholder="Last Name"
+                                        class="form-control"
+                                        type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                    />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_email[#{speaker_count}]" class="col-form-label">Email</label>
-                                    <input t-attf-name="speaker_email[#{speaker_count}]" placeholder="Email" 
-                                           class="form-control" type="email" t-att-required="None if not editable else 'required'" 
-                                            />
+                                    <label
+                                        t-attf-for="speaker_email[#{speaker_count}]"
+                                        class="col-form-label"
+                                    >Email</label>
+                                    <input
+                                        t-attf-name="speaker_email[#{speaker_count}]"
+                                        placeholder="Email"
+                                        class="form-control"
+                                        type="email"
+                                        t-att-required="None if not editable else 'required'"
+                                    />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_phone[#{speaker_count}]" class="col-form-label label-optional">Phone</label>
-                                    <input t-attf-name="speaker_phone[#{speaker_count}]" placeholder="Phone" 
-                                           class="form-control" type="tel" />
+                                    <label
+                                        t-attf-for="speaker_phone[#{speaker_count}]"
+                                        class="col-form-label label-optional"
+                                    >Phone</label>
+                                    <input
+                                        t-attf-name="speaker_phone[#{speaker_count}]"
+                                        placeholder="Phone"
+                                        class="form-control"
+                                        type="tel"
+                                    />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_organization[#{speaker_count}]" class="col-form-label">Organization</label>
-                                    <input t-attf-name="speaker_organization[#{speaker_count}]" placeholder="Organization" 
-                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
-                                           />
+                                    <label
+                                        t-attf-for="speaker_organization[#{speaker_count}]"
+                                        class="col-form-label"
+                                    >Organization</label>
+                                    <input
+                                        t-attf-name="speaker_organization[#{speaker_count}]"
+                                        placeholder="Organization"
+                                        class="form-control"
+                                        type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                    />
                                 </div>
                                 <div class="form-group col-xl-4">
-                                    <label t-attf-for="speaker_title[#{speaker_count}]" class="col-form-label">Title</label>
-                                    <input t-attf-name="speaker_title[#{speaker_count}]" placeholder="Title" 
-                                           class="form-control" type="text" t-att-required="None if not editable else 'required'" 
-                                            />
+                                    <label
+                                        t-attf-for="speaker_title[#{speaker_count}]"
+                                        class="col-form-label"
+                                    >Title</label>
+                                    <input
+                                        t-attf-name="speaker_title[#{speaker_count}]"
+                                        placeholder="Title"
+                                        class="form-control"
+                                        type="text"
+                                        t-att-required="None if not editable else 'required'"
+                                    />
                                 </div>
                             </div>
                         </div>
                     </t>
                 </div>
-                <input id="track-application-speaker-input-index" name="speakers_input_index" 
-                       t-att-value="speaker_count" class="d-none" type="hidden" />
+                <input
+                    id="track-application-speaker-input-index"
+                    name="speakers_input_index"
+                    t-att-value="speaker_count"
+                    class="d-none"
+                    type="hidden"
+                />
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" 
-                            id="add_speaker">Add Presenter <i class="fa fa-user" /></button>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="add_speaker"
+                    >Add Presenter <i class="fa fa-user" /></button>
                 </div>
             </div>
         </div>
@@ -1017,10 +1110,7 @@
 
     <!-- WEBINAR -->
     <template id="event_track_application_webinar">
-        <div
-            class="panel panel-warning d-none"
-            id="track-application-webinar-div"
-        >
+        <div class="panel panel-warning d-none" id="track-application-webinar-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Webinar Details</h3>
             </div>
@@ -1074,7 +1164,7 @@
                             placeholder="Webinar info..."
                             rows="6"
                             disabled="1"
-                        ></textarea>
+                        />
                     </div>
                 </div>
             </div>
@@ -1084,10 +1174,7 @@
 
     <!-- WORKSHOP -->
     <template id="event_track_application_workshop">
-        <div
-            class="panel panel-warning d-none"
-            id="track-application-workshop-div"
-        >
+        <div class="panel panel-warning d-none" id="track-application-workshop-div">
             <div class="panel-heading">
                 <h3 class="panel-title">Session</h3>
             </div>
@@ -1096,7 +1183,12 @@
                     id="track-application-workshop-alert-info"
                     class="alert alert-info alert-dismissable"
                 >
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <a
+                        href="#"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="close"
+                    >×</a>
                     The workshop's minimum and maximum number of participants and the participation fee for the participant. Workshops are typically free of charge for the participant.
                 </p>
                 <div class="row" id="track-application-workshop-row-div">
@@ -1157,7 +1249,7 @@
                             class="form-control o_wysiwyg_loader"
                             rows="6"
                             disabled="1"
-                        ></textarea>
+                        />
                         <div class="invalid-feedback">Please enter session goals.</div>
                     </div>
                     <div class="form-group col-xl-12">
@@ -1172,16 +1264,13 @@
                             class="form-control o_wysiwyg_loader"
                             rows="6"
                             disabled="1"
-                        ></textarea>
+                        />
                         <div
                             class="invalid-feedback"
                         >Please enter session program and schedule.</div>
                     </div>
                 </div>
-                <div
-                    class="d-none"
-                    id="track-application-workshop-contract-div"
-                >
+                <div class="d-none" id="track-application-workshop-contract-div">
                     <h5>Contract Signee</h5>
                     <div id="track-application-organization-signee-row-div" class="row">
                         <input
@@ -1217,7 +1306,10 @@
                             />
                         </div>
                         <div class="form-group col-xl-4">
-                            <label for="signee_email" class="col-form-label">Email</label>
+                            <label
+                                for="signee_email"
+                                class="col-form-label"
+                            >Email</label>
                             <input
                                 name="signee_email"
                                 placeholder="Email"
@@ -1253,7 +1345,10 @@
                             />
                         </div>
                         <div class="form-group col-xl-4">
-                            <label for="signee_title" class="col-form-label">Title</label>
+                            <label
+                                for="signee_title"
+                                class="col-form-label"
+                            >Title</label>
                             <input
                                 name="signee_title"
                                 placeholder="Title"
@@ -1264,7 +1359,10 @@
                         </div>
                     </div>
                     <h5>Organization invoice address</h5>
-                    <div class="row" id="track-application-organization-invoice-row-div">
+                    <div
+                        class="row"
+                        id="track-application-organization-invoice-row-div"
+                    >
                         <div class="form-group col-xl-4">
                             <label
                                 for="organizer_organization"
@@ -1292,7 +1390,10 @@
                             />
                         </div>
                         <div class="form-group col-xl-4">
-                            <label for="organizer_zip" class="col-form-label">Zip</label>
+                            <label
+                                for="organizer_zip"
+                                class="col-form-label"
+                            >Zip</label>
                             <input
                                 name="organizer_zip"
                                 placeholder="Zip"
@@ -1302,7 +1403,10 @@
                             />
                         </div>
                         <div class="form-group col-xl-4">
-                            <label for="organizer_city" class="col-form-label">City</label>
+                            <label
+                                for="organizer_city"
+                                class="col-form-label"
+                            >City</label>
                             <input
                                 name="organizer_city"
                                 placeholder="City"
@@ -1393,7 +1497,7 @@
                             class="form-control o_wysiwyg_loader"
                             t-att-disabled="None if editable else 'disabled'"
                             rows="6"
-                        ></textarea>
+                        />
                     </div>
                 </div>
             </div>
@@ -1410,11 +1514,7 @@
                 <div class="row" id="track-application-review-row-div">
                     <div class="form group col-xl-12">
                         <label for="rating" class="col-form-label">Rating</label>
-                        <select
-                            name="rating"
-                            id="rating"
-                            class="form-control"
-                        >
+                        <select name="rating" id="rating" class="form-control">
                             <option value="">Select...</option>
                             <!-- <t
                                 t-foreach="event.rating_grade_ids or []"
@@ -1443,7 +1543,7 @@
                             placeholder="Verbal Rating..."
                             class="form-control o_wysiwyg_loader"
                             rows="6"
-                        ></textarea>
+                        />
                     </div>
                 </div>
             </div>

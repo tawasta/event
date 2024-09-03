@@ -5,10 +5,7 @@
         inherit_id="website_event.registration_attendee_details"
         name="Registration Attendee Details with questions title"
     >
-        <xpath
-            expr="//t[@t-foreach='event.specific_question_ids']"
-            position="after"
-        >
+        <xpath expr="//t[@t-foreach='event.specific_question_ids']" position="after">
             <div class="col-lg my-2">
                 <label>Title</label>
                 <input

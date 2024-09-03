@@ -129,7 +129,6 @@ class EventTrack(models.Model):
         string="Shown in agenda", compute="_compute_show_in_agenda"
     )
 
-
     request_time = fields.Many2one(
         comodel_name="event.track.request.time",
         string="Desired duration of the workshop",

@@ -270,10 +270,7 @@
         customize_show="True"
     >
 
-        <xpath
-            expr="//div[@t-if='track.partner_email']"
-            position="replace"
-        >
+        <xpath expr="//div[@t-if='track.partner_email']" position="replace">
         </xpath>
     </template>
     <!-- HIDE PHONES -->
@@ -301,10 +298,7 @@
     >
 
 
-        <xpath
-            expr="//div[@t-if='track.partner_phone']"
-            position="replace"
-        >
+        <xpath expr="//div[@t-if='track.partner_phone']" position="replace">
 
         </xpath>
     </template>
@@ -336,10 +330,7 @@
     >
 
 
-        <xpath
-            expr="//div[@t-if='track.partner_id.website']"
-            position="replace"
-        >
+        <xpath expr="//div[@t-if='track.partner_id.website']" position="replace">
 
         </xpath>
     </template>

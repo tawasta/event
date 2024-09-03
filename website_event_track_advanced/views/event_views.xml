@@ -96,7 +96,8 @@
                     string="Generate Breaks"
                     type="object"
                     invisible="track_count == 0"
-                    groups="event.group_event_manager"/>
+                    groups="event.group_event_manager"
+                />
             </xpath>
             <field name="tag_ids" position="after">
                 <field name="privacy_ids" widget="many2many_tags" />
@@ -123,7 +124,8 @@
                     <group name="overlapping_tracks" col="1">
                         <field
                             name="overlapping_location_track_ids"
-                            invisible="not overlapping_location_track_ids">
+                            invisible="not overlapping_location_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="location_id" />
@@ -134,7 +136,8 @@
                         </field>
                         <field
                             name="overlapping_chairperson_track_ids"
-                            invisible="not overlapping_chairperson_track_ids">
+                            invisible="not overlapping_chairperson_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="chairperson_id" />
@@ -145,7 +148,8 @@
                         </field>
                         <field
                             name="overlapping_speaker_track_ids"
-                            invisible="not overlapping_speaker_track_ids">
+                            invisible="not overlapping_speaker_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="date" />

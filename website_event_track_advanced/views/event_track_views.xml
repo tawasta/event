@@ -15,10 +15,7 @@
                 <field name="request_time" />
             </xpath>
             <xpath expr="//page[@name='speaker']" position="replace">
-                <page
-                    string="Speakers"
-                    name="speakers"
-                    invisible="use_speaker_track">
+                <page string="Speakers" name="speakers" invisible="use_speaker_track">
                     <group>
                         <field
                             name="speaker_ids"
@@ -38,7 +35,8 @@
                 <page
                     string="Speakers"
                     name="track_speakers"
-                    invisible="not use_speaker_track">
+                    invisible="not use_speaker_track"
+                >
                     <!-- <group>
                         <field
                             name="track_speaker_ids"
@@ -91,7 +89,8 @@
                             for="show_in_agenda"
                             colspan="2"
                             invisible="show_in_agenda"
-                            string="Will not be shown in agenda!"/>
+                            string="Will not be shown in agenda!"
+                        />
                         <field name="show_in_agenda" invisible="1" />
                         <field name="location_id" />
                         <field
@@ -167,22 +166,14 @@
                     <field name="ratings" readonly="1" />
                 </page>
                 <field name="is_webinar" invisible="1" />
-                <page
-                    name="webinar"
-                    string="Webinar"
-                    invisible="not is_webinar">
+                <page name="webinar" string="Webinar" invisible="not is_webinar">
                     <group>
                         <field name="webinar" />
-                        <field
-                            name="webinar_info"
-                            readonly="not webinar"/>
+                        <field name="webinar_info" readonly="not webinar" />
                     </group>
                 </page>
                 <field name="is_workshop" invisible="1" />
-                <page
-                    name="workshop"
-                    string="Workshop"
-                    invisible="not is_workshop">
+                <page name="workshop" string="Workshop" invisible="not is_workshop">
                     <group cols="1">
                         <field name="workshop_min_participants" />
                         <field name="workshop_participants" nolabel="0" />
@@ -195,7 +186,8 @@
                     <group name="overlapping_tracks" col="1">
                         <field
                             name="overlapping_location_track_ids"
-                            invisible="not overlapping_location_track_ids">
+                            invisible="not overlapping_location_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="location_id" />
@@ -206,7 +198,8 @@
                         </field>
                         <field
                             name="overlapping_chairperson_track_ids"
-                            invisible="not overlapping_chairperson_track_ids">
+                            invisible="not overlapping_chairperson_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="chairperson_id" />
@@ -217,7 +210,8 @@
                         </field>
                         <field
                             name="overlapping_speaker_track_ids"
-                            invisible="not overlapping_speaker_track_ids">
+                            invisible="not overlapping_speaker_track_ids"
+                        >
                             <tree>
                                 <field name="name" />
                                 <field name="date" />
@@ -254,12 +248,8 @@
                 <field name="type" />
                 <field name="date" />
                 <field name="partner_string" />
-                <field
-                    name="speakers_string"
-                    invisible="use_speaker_track"/>
-                <field
-                    name="track_speakers_string"
-                    invisible="not use_speaker_track"/>
+                <field name="speakers_string" invisible="use_speaker_track" />
+                <field name="track_speakers_string" invisible="not use_speaker_track" />
                 <field name="duration" />
                 <field name="location_id" />
             </xpath>
@@ -273,12 +263,11 @@
                 </p>
                 <p>
                     <strong>Presenters:</strong>
-                    <field
-                        name="speakers_string"
-                        invisible="use_speaker_track"/>
+                    <field name="speakers_string" invisible="use_speaker_track" />
                     <field
                         name="track_speakers_string"
-                        invisible="not use_speaker_track"/>
+                        invisible="not use_speaker_track"
+                    />
                 </p>
                 <div class="oe_kanban_body_left">
                     <p>

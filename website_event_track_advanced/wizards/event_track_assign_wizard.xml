@@ -18,13 +18,12 @@
                 <group>
                     <field name="reassign_assigned" />
                     <field name="assign_random" />
-                    <field
-                        name="assign_equally"
-                        invisible="not assign_random"/>
+                    <field name="assign_equally" invisible="not assign_random" />
                     <field
                         name="review_group"
                         invisible="assign_random"
-                        required="not assign_random"/>
+                        required="not assign_random"
+                    />
                 </group>
                 <field
                     name="track_ids"

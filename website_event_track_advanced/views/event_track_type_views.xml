@@ -33,9 +33,7 @@
                         <field name="show_in_agenda" />
                         <field name="webinar" />
                         <field name="workshop" />
-                        <field
-                            name="workshop_contract"
-                            invisible="not workshop"/>
+                        <field name="workshop_contract" invisible="not workshop" />
                         <field name="attendable" />
                     </group>
                     <group>

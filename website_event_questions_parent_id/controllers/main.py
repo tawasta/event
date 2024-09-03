@@ -26,9 +26,7 @@
 from odoo.http import request
 
 # 4. Imports from Odoo modules:
-from odoo.addons.website_event.controllers.main import (
-    WebsiteEventController,
-)
+from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 # 5. Local imports in the relative form:
 

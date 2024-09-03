@@ -1,15 +1,14 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { loadWysiwygFromTextarea } from "@web_editor/js/frontend/loadWysiwygFromTextarea"; // WYSIWYG loader import
-import {jsonrpc} from "@web/core/network/rpc_service"; // jsonrpc import
-import Dialog from '@web/legacy/js/core/dialog';
-import { _t } from "@web/core/l10n/translation";
-//import { qweb } from 'web.core';
-
+import {loadWysiwygFromTextarea} from "@web_editor/js/frontend/loadWysiwygFromTextarea"; // WYSIWYG loader import
+import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
+import Dialog from "@web/legacy/js/core/dialog";
+import {_t} from "@web/core/l10n/translation";
+// Import { qweb } from 'web.core';
 
 publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
-    selector: '#modal_event_track_application',
+    selector: "#modal_event_track_application",
 
     /**
      * @override
@@ -28,54 +27,57 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._enableWysiwyg(); // Enable WYSIWYG editor
         this._loadTrackData(); // Load track data when modal is opened
         this._clearFormOnClose(); // Clear form when modal is closed
-        this._bindFormSubmit();  // Bindataan lomakkeen submit AJAX-pyyntöön
+        this._bindFormSubmit(); // Bindataan lomakkeen submit AJAX-pyyntöön
         this._bindAddSpeaker();
         this._removeAttachments();
         this._setupModalCloseBehavior(); // Setup custom modal close behavior
     },
 
     _setupModalCloseBehavior: function () {
-        const self = this;
-
         // Estä modaalin sulkeutuminen ulkopuolisista klikkauksista tai Esc-näppäimen painalluksesta
-        $('#modal_event_track_application').modal({
-            backdrop: 'static',
-            keyboard: false
+        $("#modal_event_track_application").modal({
+            backdrop: "static",
+            keyboard: false,
         });
 
         // Lisää sulkemispainikkeille toiminnallisuus
-        $('.close.warning-close-modal, .btn.btn-secondary.warning-close-modal').click(function () {
-            // Nollaa lomake
-            $('#track-application-form')[0].reset();
+        $(".close.warning-close-modal, .btn.btn-secondary.warning-close-modal").click(
+            function () {
+                // Nollaa lomake
+                $("#track-application-form")[0].reset();
 
-            // Sulje modal ja päivitä sivu
-            $('#modal_event_track_application').modal('hide');
-            location.reload();  // Päivitä sivu
-        });
+                // Sulje modal ja päivitä sivu
+                $("#modal_event_track_application").modal("hide");
+                location.reload(); // Päivitä sivu
+            }
+        );
     },
 
     _removeAttachments: function () {
-        const self = this;
-
         $("#btn-remove-attachment").click(function () {
             $("#attachment_ids").val("");
         });
     },
 
-
     _renderSpeakers: function (speakers) {
         const container = $(".track-application-speakers-div-container");
-        const firstRow = container.find(".track-application-speakers-div-row-container:first");
+        const firstRow = container.find(
+            ".track-application-speakers-div-row-container:first"
+        );
 
         // Ensimmäinen puhuja asetetaan olemassa oleviin kenttiin
         if (speakers.length > 0) {
             const firstSpeaker = speakers[0];
             firstRow.find(".presenter-span").text(`Presenter #1`);
-            firstRow.find("input[name^='speaker_firstname']").val(firstSpeaker.firstname);
+            firstRow
+                .find("input[name^='speaker_firstname']")
+                .val(firstSpeaker.firstname);
             firstRow.find("input[name^='speaker_lastname']").val(firstSpeaker.lastname);
             firstRow.find("input[name^='speaker_email']").val(firstSpeaker.email);
             firstRow.find("input[name^='speaker_phone']").val(firstSpeaker.phone);
-            firstRow.find("input[name^='speaker_organization']").val(firstSpeaker.organization);
+            firstRow
+                .find("input[name^='speaker_organization']")
+                .val(firstSpeaker.organization);
             firstRow.find("input[name^='speaker_title']").val(firstSpeaker.title);
         }
 
@@ -83,7 +85,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Loput puhujat lisätään kloonaamalla ensimmäinen rivi
         speakers.slice(1).forEach((speaker, index) => {
-            speakerCount = index + 2;  // Aloitetaan laskeminen 2:sta
+            speakerCount = index + 2; // Aloitetaan laskeminen 2:sta
 
             const newRow = firstRow.clone();
             newRow.attr("id", speakerCount);
@@ -94,22 +96,48 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             newRow.find("input[name^='speaker_lastname']").val(speaker.lastname);
             newRow.find("input[name^='speaker_email']").val(speaker.email);
             newRow.find("input[name^='speaker_phone']").val(speaker.phone);
-            newRow.find("input[name^='speaker_organization']").val(speaker.organization);
+            newRow
+                .find("input[name^='speaker_organization']")
+                .val(speaker.organization);
             newRow.find("input[name^='speaker_title']").val(speaker.title);
 
             // Päivitetään kenttien id:t ja name-attribuutit oikeiksi
-            newRow.find("label[for^='speaker_firstname']").attr("for", `speaker_firstname[${speakerCount}]`);
-            newRow.find("input[name^='speaker_firstname']").attr("name", `speaker_firstname[${speakerCount}]`);
-            newRow.find("label[for^='speaker_lastname']").attr("for", `speaker_lastname[${speakerCount}]`);
-            newRow.find("input[name^='speaker_lastname']").attr("name", `speaker_lastname[${speakerCount}]`);
-            newRow.find("label[for^='speaker_email']").attr("for", `speaker_email[${speakerCount}]`);
-            newRow.find("input[name^='speaker_email']").attr("name", `speaker_email[${speakerCount}]`);
-            newRow.find("label[for^='speaker_phone']").attr("for", `speaker_phone[${speakerCount}]`);
-            newRow.find("input[name^='speaker_phone']").attr("name", `speaker_phone[${speakerCount}]`);
-            newRow.find("label[for^='speaker_organization']").attr("for", `speaker_organization[${speakerCount}]`);
-            newRow.find("input[name^='speaker_organization']").attr("name", `speaker_organization[${speakerCount}]`);
-            newRow.find("label[for^='speaker_title']").attr("for", `speaker_title[${speakerCount}]`);
-            newRow.find("input[name^='speaker_title']").attr("name", `speaker_title[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_firstname']")
+                .attr("for", `speaker_firstname[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_firstname']")
+                .attr("name", `speaker_firstname[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_lastname']")
+                .attr("for", `speaker_lastname[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_lastname']")
+                .attr("name", `speaker_lastname[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_email']")
+                .attr("for", `speaker_email[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_email']")
+                .attr("name", `speaker_email[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_phone']")
+                .attr("for", `speaker_phone[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_phone']")
+                .attr("name", `speaker_phone[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_organization']")
+                .attr("for", `speaker_organization[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_organization']")
+                .attr("name", `speaker_organization[${speakerCount}]`);
+            newRow
+                .find("label[for^='speaker_title']")
+                .attr("for", `speaker_title[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_title']")
+                .attr("name", `speaker_title[${speakerCount}]`);
 
             // Poista "disabled" attribuutti "Remove speaker" -painikkeesta kloonatuilla riveillä
             newRow.find(".btn-remove-speaker").removeAttr("disabled");
@@ -122,26 +150,33 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _populatePrivacyOptions: function (privacyIds) {
-        const container = $('#privacy-acceptance-container');
-        const template = container.find('.privacy-template').first();
+        const container = $("#privacy-acceptance-container");
+        const template = container.find(".privacy-template").first();
 
-        container.find('.privacy-template').not(':first').remove();
+        container.find(".privacy-template").not(":first").remove();
 
         if (privacyIds && Array.isArray(privacyIds)) {
             privacyIds.forEach(function (privacy) {
-                const newElement = template.clone().removeClass('d-none privacy-template');
+                const newElement = template
+                    .clone()
+                    .removeClass("d-none privacy-template");
 
-                newElement.find('input')
-                    .attr('name', `privacy_${privacy.id}`)
-                    .prop('required', privacy.is_required)
-                    .prop('checked', privacy.accepted);  // Asetetaan valmiiksi, jos hyväksytty
+                newElement
+                    .find("input")
+                    .attr("name", `privacy_${privacy.id}`)
+                    .prop("required", privacy.is_required)
+                    .prop("checked", privacy.accepted); // Asetetaan valmiiksi, jos hyväksytty
 
-                newElement.find('.privacy-name').text(privacy.name);
+                newElement.find(".privacy-name").text(privacy.name);
 
                 if (privacy.link) {
-                    newElement.find('.privacy-link').attr('href', privacy.link).text(privacy.link_name).removeClass('d-none');
+                    newElement
+                        .find(".privacy-link")
+                        .attr("href", privacy.link)
+                        .text(privacy.link_name)
+                        .removeClass("d-none");
                 } else {
-                    newElement.find('.privacy-link').addClass('d-none');
+                    newElement.find(".privacy-link").addClass("d-none");
                 }
 
                 container.append(newElement);
@@ -151,104 +186,139 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         }
     },
 
-
-
-
     _loadTrackData: function () {
         const self = this;
-        $('#modal_event_track_application').on('show.bs.modal', function (event) {
+        $("#modal_event_track_application").on("show.bs.modal", function (event) {
             var button = $(event.relatedTarget);
-            var trackId = button.data('track-id'); // Get track ID from button
-            var eventId = button.data('event-id'); // Hae event ID napista
+            var trackId = button.data("track-id"); // Get track ID from button
+            var eventId = button.data("event-id"); // Hae event ID napista
 
-            var isReview = button.data('review') || false;  // Tarkistetaan, onko kyseessä arvostelutila
-
+            var isReview = button.data("review") || false; // Tarkistetaan, onko kyseessä arvostelutila
 
             // Estä modalin näyttäminen ennen kuin data on ladattu ja asetettu
-            //event.preventDefault();
+            // event.preventDefault();
             // Piilota modal aluksi
-            $('#modal_event_track_application').modal('hide');
+            $("#modal_event_track_application").modal("hide");
 
             // Määritä action URL ja aseta se lomakkeelle
             var actionUrl = `/event/${eventId}/track_proposal/post`;
-            $('#track-application-form').attr('action', actionUrl);
+            $("#track-application-form").attr("action", actionUrl);
 
             if (!trackId) {
                 // Jos trackId ei ole määritelty, hae eventin track_types_ids
-                jsonrpc('/event/application_types', {
-                    'event_id': eventId,
+                jsonrpc("/event/application_types", {
+                    event_id: eventId,
                 }).then((response) => {
-                    self._populateSelectOptions('type', response.application_types);
-                    self._populateSelectOptions('target_groups', response.target_groups);
-                    self._populateSelectOptions('tags', response.tags);
-                    self._populateSelectOptions('request_time', response.request_time);
-                    self._populateSelectOptions('language', response.languages);
+                    self._populateSelectOptions("type", response.application_types);
+                    self._populateSelectOptions(
+                        "target_groups",
+                        response.target_groups
+                    );
+                    self._populateSelectOptions("tags", response.tags);
+                    self._populateSelectOptions("request_time", response.request_time);
+                    self._populateSelectOptions("language", response.languages);
 
                     self._populatePrivacyOptions(response.privacy_ids);
 
                     self._enableWysiwyg([
-                        { selector: 'textarea[name="description"]' },
-                        { selector: 'textarea[name="target_group_info"]' },
-                        { selector: 'textarea[name="extra_info"]' },
-                        { selector: 'textarea[name="workshop_goals"]' },
-                        { selector: 'textarea[name="workshop_schedule"]' },
-                        { selector: 'textarea[name="webinar_info"]' },
+                        {selector: 'textarea[name="description"]'},
+                        {selector: 'textarea[name="target_group_info"]'},
+                        {selector: 'textarea[name="extra_info"]'},
+                        {selector: 'textarea[name="workshop_goals"]'},
+                        {selector: 'textarea[name="workshop_schedule"]'},
+                        {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
                     $(".tags-select").select2({
                         maximumSelectionSize: 3,
                     });
 
-                    $('#modal_event_track_application').modal('show');
+                    $("#modal_event_track_application").modal("show");
                 });
             } else {
-
-                var action = "/event/track/data/" + trackId;
-                jsonrpc('/event/track/data', {
-                    'track_id': trackId,
-                    'isReview': isReview,
+                // Var action = "/event/track/data/" + trackId;
+                jsonrpc("/event/track/data", {
+                    track_id: trackId,
+                    isReview: isReview,
                 }).then((trackData) => {
-                    self._populateSelectOptions('type', trackData.application_types, trackData.type);
-                    self._populateSelectOptions('target_groups', trackData.target_groups, trackData.target_group_ids);
-                    self._populateSelectOptions('tags', trackData.tags, trackData.tag_ids);
-                    self._populateSelectOptions('language', trackData.languages, trackData.language);
-                    
+                    self._populateSelectOptions(
+                        "type",
+                        trackData.application_types,
+                        trackData.type
+                    );
+                    self._populateSelectOptions(
+                        "target_groups",
+                        trackData.target_groups,
+                        trackData.target_group_ids
+                    );
+                    self._populateSelectOptions(
+                        "tags",
+                        trackData.tags,
+                        trackData.tag_ids
+                    );
+                    self._populateSelectOptions(
+                        "language",
+                        trackData.languages,
+                        trackData.language
+                    );
 
                     self._populatePrivacyOptions(trackData.privacy_ids);
-
 
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);
                     // Täytä WYSIWYG-editori olemassa olevalla sisällöllä
-                    //self._enableWysiwyg('textarea.o_wysiwyg_loader', trackData.description);
+                    // self._enableWysiwyg('textarea.o_wysiwyg_loader', trackData.description);
                     $('input[name="video_url"]').val(trackData.video_url);
-                    //$('textarea[name="target_group_info"]').val(trackData.target_group_info);
-                    //$('textarea[name="extra_info"]').val(trackData.extra_info);
+                    // $('textarea[name="target_group_info"]').val(trackData.target_group_info);
+                    // $('textarea[name="extra_info"]').val(trackData.extra_info);
 
-                    $('input[name="contact_firstname"]').val(trackData.contact.firstname);
+                    $('input[name="contact_firstname"]').val(
+                        trackData.contact.firstname
+                    );
                     $('input[name="contact_lastname"]').val(trackData.contact.lastname);
                     $('input[name="contact_email"]').val(trackData.contact.email);
                     $('input[name="contact_phone"]').val(trackData.contact.phone);
-                    $('input[name="contact_organization"]').val(trackData.contact.organization);
+                    $('input[name="contact_organization"]').val(
+                        trackData.contact.organization
+                    );
                     $('input[name="contact_title"]').val(trackData.contact.title);
 
                     self._enableWysiwyg([
-                        { selector: 'textarea[name="description"]', content: trackData.description },
-                        { selector: 'textarea[name="target_group_info"]', content: trackData.target_group_info },
-                        { selector: 'textarea[name="extra_info"]', content: trackData.extra_info },
-                        { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
-                        { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
-                        { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
+                        {
+                            selector: 'textarea[name="description"]',
+                            content: trackData.description,
+                        },
+                        {
+                            selector: 'textarea[name="target_group_info"]',
+                            content: trackData.target_group_info,
+                        },
+                        {
+                            selector: 'textarea[name="extra_info"]',
+                            content: trackData.extra_info,
+                        },
+                        {
+                            selector: 'textarea[name="webinar_info"]',
+                            content: trackData.webinar_info,
+                        },
+                        {
+                            selector: 'textarea[name="workshop_goals"]',
+                            content: trackData.workshop_goals,
+                        },
+                        {
+                            selector: 'textarea[name="workshop_schedule"]',
+                            content: trackData.workshop_schedule,
+                        },
                     ]);
-
 
                     self._renderSpeakers(trackData.speakers);
 
-                    if (isReview && trackData.can_review && trackData.rating_grade_ids) {
-                        self._enableReviewMode(trackData.rating_grade_ids);  
+                    if (
+                        isReview &&
+                        trackData.can_review &&
+                        trackData.rating_grade_ids
+                    ) {
+                        self._enableReviewMode(trackData.rating_grade_ids);
                     }
-
-                    
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
                     self._updateWebinarSection(trackData);
@@ -258,139 +328,196 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     if (trackData.is_readonly) {
                         self._makeFieldsReadonly(isReview);
-                        self._disableSubmitButtons(isReview);  // Disable the save buttons if readonly
+                        self._disableSubmitButtons(isReview); // Disable the save buttons if readonly
                         self._disableAddPresenterButton();
                     } else {
-                        self._enableSubmitButtons();  // Enable the save buttons if not readonly
+                        self._enableSubmitButtons(); // Enable the save buttons if not readonly
                         self._enableAddPresenterButton();
                     }
 
                     // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
-                    $('#modal_event_track_application').modal('show');
+                    $("#modal_event_track_application").modal("show");
                 });
             }
-
-
         });
     },
 
-    _enableReviewMode: function(rating_grade_ids) {
+    _enableReviewMode: function (rating_grade_ids) {
         // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
-        const reviewDiv = $('#header-track-application-review-div');
-        reviewDiv.removeClass('d-none');
+        const reviewDiv = $("#header-track-application-review-div");
+        reviewDiv.removeClass("d-none");
 
-        this._populateSelectOptions('rating', rating_grade_ids);
+        this._populateSelectOptions("rating", rating_grade_ids);
 
-        this._enableWysiwyg([
-            { selector: 'textarea[name="rating_comment"]'},
-        ]);
+        this._enableWysiwyg([{selector: 'textarea[name="rating_comment"]'}]);
     },
 
-    _updateWorkshopSection: function(trackData) {
-        const workshopDiv = $('#track-application-workshop-div');
-        const contractDiv = $('#track-application-workshop-contract-div');
-        const workshopRequestDiv = $('#workshop-track-request-time-div');
+    _updateWorkshopSection: function (trackData) {
+        const workshopDiv = $("#track-application-workshop-div");
+        const contractDiv = $("#track-application-workshop-contract-div");
+        const workshopRequestDiv = $("#workshop-track-request-time-div");
         if (trackData.is_workshop) {
-            workshopDiv.removeClass('d-none');
-            $('input[name="is_workshop"]').val('true');
-            $('input[name="workshop_min_participants"]').val(trackData.workshop_min_participants).prop('disabled', false).attr('required', true);
-            $('input[name="workshop_participants"]').val(trackData.workshop_participants).prop('disabled', false).attr('required', true);
-            $('input[name="workshop_fee"]').val(trackData.workshop_fee).prop('disabled', false).attr('required', true);
-            $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false).attr('required', true);
-            $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false).attr('required', true);
+            workshopDiv.removeClass("d-none");
+            $('input[name="is_workshop"]').val("true");
+            $('input[name="workshop_min_participants"]')
+                .val(trackData.workshop_min_participants)
+                .prop("disabled", false)
+                .attr("required", true);
+            $('input[name="workshop_participants"]')
+                .val(trackData.workshop_participants)
+                .prop("disabled", false)
+                .attr("required", true);
+            $('input[name="workshop_fee"]')
+                .val(trackData.workshop_fee)
+                .prop("disabled", false)
+                .attr("required", true);
+            $('textarea[name="workshop_goals"]')
+                .val(trackData.workshop_goals)
+                .prop("disabled", false)
+                .attr("required", true);
+            $('textarea[name="workshop_schedule"]')
+                .val(trackData.workshop_schedule)
+                .prop("disabled", false)
+                .attr("required", true);
 
-            // this._enableWysiwyg([
+            // This._enableWysiwyg([
             //     { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
             //     { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
             // ]);
 
-            workshopRequestDiv.removeClass('d-none');
-            workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
-            this._populateSelectOptions('request_time', trackData.request_time, trackData.req_time);
+            workshopRequestDiv.removeClass("d-none");
+            workshopRequestDiv
+                .find("select")
+                .prop("disabled", false)
+                .attr("required", true);
+            this._populateSelectOptions(
+                "request_time",
+                trackData.request_time,
+                trackData.req_time
+            );
 
             if (trackData.is_workshop_contract) {
-                contractDiv.removeClass('d-none');
-                $('input[name="is_workshop_contract"]').val('true');
-                $('input[name="signee_firstname"]').val(trackData.signee_firstname).prop('disabled', false).attr('required', true);
-                $('input[name="signee_lastname"]').val(trackData.signee_lastname).prop('disabled', false).attr('required', true);
-                $('input[name="signee_email"]').val(trackData.signee_email).prop('disabled', false).attr('required', true);
-                $('input[name="signee_phone"]').val(trackData.signee_phone).prop('disabled', false);
-                $('input[name="signee_organization"]').val(trackData.signee_organization).prop('disabled', false);
-                $('input[name="signee_title"]').val(trackData.signee_title).prop('disabled', false).attr('required', true);
-                $('input[name="organizer_organization"]').val(trackData.organizer_organization).prop('disabled', false).attr('required', true);
-                $('input[name="organizer_street"]').val(trackData.organizer_street).prop('disabled', false).attr('required', true);
-                $('input[name="organizer_zip"]').val(trackData.organizer_zip).prop('disabled', false).attr('required', true);
-                $('input[name="organizer_city"]').val(trackData.organizer_city).prop('disabled', false).attr('required', true);
-                $('select[name="einvoice_operator_id"]').val(trackData.einvoice_operator_id).prop('disabled', false).attr('required', true);
-                $('input[name="edicode"]').val(trackData.edicode).prop('disabled', false).attr('required', true);
-                $('input[name="organizer_reference"]').val(trackData.organizer_reference).prop('disabled', false).attr('required', true);
+                contractDiv.removeClass("d-none");
+                $('input[name="is_workshop_contract"]').val("true");
+                $('input[name="signee_firstname"]')
+                    .val(trackData.signee_firstname)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="signee_lastname"]')
+                    .val(trackData.signee_lastname)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="signee_email"]')
+                    .val(trackData.signee_email)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="signee_phone"]')
+                    .val(trackData.signee_phone)
+                    .prop("disabled", false);
+                $('input[name="signee_organization"]')
+                    .val(trackData.signee_organization)
+                    .prop("disabled", false);
+                $('input[name="signee_title"]')
+                    .val(trackData.signee_title)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="organizer_organization"]')
+                    .val(trackData.organizer_organization)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="organizer_street"]')
+                    .val(trackData.organizer_street)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="organizer_zip"]')
+                    .val(trackData.organizer_zip)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="organizer_city"]')
+                    .val(trackData.organizer_city)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('select[name="einvoice_operator_id"]')
+                    .val(trackData.einvoice_operator_id)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="edicode"]')
+                    .val(trackData.edicode)
+                    .prop("disabled", false)
+                    .attr("required", true);
+                $('input[name="organizer_reference"]')
+                    .val(trackData.organizer_reference)
+                    .prop("disabled", false)
+                    .attr("required", true);
             } else {
-                contractDiv.addClass('d-none');
-                $('input[name="is_workshop_contract"]').val('false');
-                contractDiv.find('input, select').prop('disabled', true).val('');
-                contractDiv.find('textarea').prop('disabled', true).val('');
+                contractDiv.addClass("d-none");
+                $('input[name="is_workshop_contract"]').val("false");
+                contractDiv.find("input, select").prop("disabled", true).val("");
+                contractDiv.find("textarea").prop("disabled", true).val("");
             }
         } else {
-            workshopDiv.addClass('d-none');
-            $('input[name="is_workshop"]').val('false');
-            workshopDiv.find('input, select').prop('disabled', true).val('');
-            workshopDiv.find('textarea').prop('disabled', true).val('');
+            workshopDiv.addClass("d-none");
+            $('input[name="is_workshop"]').val("false");
+            workshopDiv.find("input, select").prop("disabled", true).val("");
+            workshopDiv.find("textarea").prop("disabled", true).val("");
 
-            workshopRequestDiv.addClass('d-none');
-            workshopRequestDiv.find('select').prop('disabled', true).attr('required', false).val('');
+            workshopRequestDiv.addClass("d-none");
+            workshopRequestDiv
+                .find("select")
+                .prop("disabled", true)
+                .attr("required", false)
+                .val("");
         }
     },
 
-
-    _updateWebinarSection: function(trackData) {
-        const webinarDiv = $('#track-application-webinar-div');
+    _updateWebinarSection: function (trackData) {
+        const webinarDiv = $("#track-application-webinar-div");
         const webinarCheckbox = $('input[name="webinar"]');
         const webinarInfo = $('textarea[name="webinar_info"]');
         const isWebinar = trackData.type.webinar || false;
 
         if (isWebinar) {
-            webinarDiv.removeClass('d-none');
-            $('input[name="is_webinar"]').val('true');
-            webinarCheckbox.prop('checked', trackData.webinar);
-            webinarCheckbox.prop('disabled', false);
-            webinarInfo.prop('disabled', !trackData.webinar);
-            webinarInfo.val(trackData.webinar_info || '');
+            webinarDiv.removeClass("d-none");
+            $('input[name="is_webinar"]').val("true");
+            webinarCheckbox.prop("checked", trackData.webinar);
+            webinarCheckbox.prop("disabled", false);
+            webinarInfo.prop("disabled", !trackData.webinar);
+            webinarInfo.val(trackData.webinar_info || "");
 
-            // this._enableWysiwyg([
+            // This._enableWysiwyg([
             //     { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
             // ]);
-
         } else {
-            webinarDiv.addClass('d-none');
-            $('input[name="is_webinar"]').val('false');
-            webinarCheckbox.prop('checked', false);
-            webinarCheckbox.prop('disabled', true);
-            webinarInfo.prop('disabled', true);
-            webinarInfo.val('');
+            webinarDiv.addClass("d-none");
+            $('input[name="is_webinar"]').val("false");
+            webinarCheckbox.prop("checked", false);
+            webinarCheckbox.prop("disabled", true);
+            webinarInfo.prop("disabled", true);
+            webinarInfo.val("");
         }
     },
 
-
-    _populateSelectOptions: function(selectName, options, selectedIds = null) {
+    _populateSelectOptions: function (selectName, options, selectedIds = null) {
         const $select = $(`select[name="${selectName}"]`);
         $select.empty();
 
         $select.append('<option value="">Select...</option>');
 
         options.forEach((option) => {
-            const isSelected = Array.isArray(selectedIds) && selectedIds.includes(option.id);
-            
+            const isSelected =
+                Array.isArray(selectedIds) && selectedIds.includes(option.id);
+
             // Rakennetaan option elementti, joka sisältää tarvittavat attribuutit
             const $option = $(`<option></option>`)
-                .attr('value', option.id)
-                .attr('data-workshop', option.workshop)
-                .attr('data-workshop-contract', option.workshop_contract)
-                .attr('data-webinar', option.webinar)
-                .attr('data-description', option.description || '')
+                .attr("value", option.id)
+                .attr("data-workshop", option.workshop)
+                .attr("data-workshop-contract", option.workshop_contract)
+                .attr("data-webinar", option.webinar)
+                .attr("data-description", option.description || "")
                 .text(option.name);
 
             if (isSelected) {
-                $option.attr('selected', 'selected');
+                $option.attr("selected", "selected");
             }
 
             $select.append($option);
@@ -400,99 +527,101 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $select.val(selectedIds);
         }
 
-        if (selectName === 'type') {
+        if (selectName === "type") {
             this._updateTypeDescription();
         }
     },
 
-
-    _updateTypeDescription: function() {
+    _updateTypeDescription: function () {
         const $typeSelect = $('select[name="type"]');
-        const description = $typeSelect.find('option:selected').data('description');
-        $('#application_type_description').text(description || ''); // Päivitä kuvauksen kenttä
+        const description = $typeSelect.find("option:selected").data("description");
+        $("#application_type_description").text(description || ""); // Päivitä kuvauksen kenttä
     },
 
-    _disableAddPresenterButton: function() {
+    _disableAddPresenterButton: function () {
         // Piilota tai disabloi Add Presenter -painike
-        $('#add_speaker').attr('disabled', true).hide();
+        $("#add_speaker").attr("disabled", true).hide();
     },
 
-    _enableAddPresenterButton: function() {
+    _enableAddPresenterButton: function () {
         // Näytä ja aktivoi Add Presenter -painike
-        $('#add_speaker').attr('disabled', false).show();
+        $("#add_speaker").attr("disabled", false).show();
     },
 
-    _makeFieldsReadonly: function(isReview) {
-        const $form = $('.js_website_submit_cfp_form');
+    _makeFieldsReadonly: function (isReview) {
+        const $form = $(".js_website_submit_cfp_form");
         console.log($form);
         console.log("====LAITETAAN READONLY====");
         if (!isReview) {
             console.log("===KENTÄT READONLY====");
             // Aseta kaikki lomakkeen kentät readonly-tilaan
-            $form.find('input, textarea, select').each(function() {
-                $(this).attr('readonly', true).attr('disabled', true);
+            $form.find("input, textarea, select").each(function () {
+                $(this).attr("readonly", true).attr("disabled", true);
             });
 
-
-            console.log($form.find('input, textarea, select'));
+            console.log($form.find("input, textarea, select"));
 
             // Poista readonly tai disabled attribuutit vain modaalin sulkemispainikkeista
-            $form.find('.warning-close-modal').attr('disabled', false);
+            $form.find(".warning-close-modal").attr("disabled", false);
         } else {
-            $form.find('input, textarea, select').attr('readonly', true).attr('disabled', true);
+            $form
+                .find("input, textarea, select")
+                .attr("readonly", true)
+                .attr("disabled", true);
             // Jätä seuraavat kentät editoitaviksi
             const editableFields = [
                 'textarea[name="rating_comment"]',
                 'select[name="rating"]',
             ];
-            editableFields.forEach(function(selector) {
-                $form.find(selector).removeAttr('readonly').removeAttr('disabled');
+            editableFields.forEach(function (selector) {
+                $form.find(selector).removeAttr("readonly").removeAttr("disabled");
             });
-
         }
-        
     },
 
-    _disableSubmitButtons: function(isReview) {
-
+    _disableSubmitButtons: function (isReview) {
         if (!isReview) {
             // Piilota tai disabloi painikkeet Save as Draft ja Save and Confirm
-            $('#application-submit-button').attr('disabled', true).hide();
-            $('#application-submit-button-send').attr('disabled', true).hide();
+            $("#application-submit-button").attr("disabled", true).hide();
+            $("#application-submit-button-send").attr("disabled", true).hide();
         } else {
             // Näytä ja aktivoi arvostelun lähetyspainikkeet ja info-osio
-            
-            $('#application-submit-button-send').attr('disabled', false).show();
-            $('#application-submit-button-send').attr('name', 'review-confirm');
-            $('#application-submit-button-send').attr('value', 'review-confirm');
-            $('#application-submit-button-send').attr('title', 'By clicking "Submit Review" the review of the proposal shall be submitted.');
 
-            $('#application-submit-button').attr('disabled', true).hide();
+            $("#application-submit-button-send").attr("disabled", false).show();
+            $("#application-submit-button-send").attr("name", "review-confirm");
+            $("#application-submit-button-send").attr("value", "review-confirm");
+            $("#application-submit-button-send").attr(
+                "title",
+                'By clicking "Submit Review" the review of the proposal shall be submitted.'
+            );
+
+            $("#application-submit-button").attr("disabled", true).hide();
         }
     },
 
-    _enableSubmitButtons: function() {
-
+    _enableSubmitButtons: function () {
         // Näytä ja aktivoi painikkeet Save as Draft ja Save and Confirm
-        $('#application-submit-button').attr('disabled', false).show();
-        $('#application-submit-button-send').attr('disabled', false).show();
+        $("#application-submit-button").attr("disabled", false).show();
+        $("#application-submit-button-send").attr("disabled", false).show();
     },
 
     _clearFormOnClose: function () {
-        $('#modal_event_track_application').on('hide.bs.modal', function () {
+        $("#modal_event_track_application").on("hide.bs.modal", function () {
             // Hae lomakeelementti ja resetoi se
-            $('#track-application-form')[0].reset();
+            $("#track-application-form")[0].reset();
         });
     },
 
     _bindAddSpeaker: function () {
-        const self = this;
         const container = $(".track-application-speakers-div-container");
 
         $("#add_speaker").click(function () {
-            const lastRow = container.find(".track-application-speakers-div-row-container:last");
-            const newRow = lastRow.clone();  // Clone the last row
-            const newIndex = parseInt($("#track-application-speaker-input-index").val()) + 1;
+            const lastRow = container.find(
+                ".track-application-speakers-div-row-container:last"
+            );
+            const newRow = lastRow.clone(); // Clone the last row
+            const newIndex =
+                parseInt($("#track-application-speaker-input-index").val()) + 1;
 
             newRow.find("input, label").each(function () {
                 const elem = $(this);
@@ -509,27 +638,25 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             newRow.attr("id", newIndex);
             newRow.find(".presenter-span").text(`Presenter #${newIndex}`);
-            newRow.find("input").val("");  // Clear values
+            newRow.find("input").val(""); // Clear values
 
             container.append(newRow);
-            $("#track-application-speaker-input-index").val(newIndex);  // Update the index
+            $("#track-application-speaker-input-index").val(newIndex); // Update the index
         });
     },
 
-
     _bindFormSubmit: function () {
         const self = this;
-        $('#track-application-form').on('submit', function (e) {
-            e.preventDefault();  // Estä lomakkeen oletuslähetys
+        $("#track-application-form").on("submit", function (e) {
+            e.preventDefault(); // Estä lomakkeen oletuslähetys
 
-            //TODO TEXTAREA PAKOLLISUUDEN TARKITUS
-
+            // TODO TEXTAREA PAKOLLISUUDEN TARKITUS
 
             const submitButton = $(this).find('[type="submit"]');
-            submitButton.prop('disabled', true);  // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
+            submitButton.prop("disabled", true); // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
 
             const formData = new FormData(this); // Kerää lomaketiedot
-            const action = $(this).attr('action'); // Hae lomakkeen action-osoite
+            const action = $(this).attr("action"); // Hae lomakkeen action-osoite
 
             // Lisää painetun painikkeen arvo lomakedataan
             const activeButton = $(document.activeElement);
@@ -539,19 +666,18 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             $.ajax({
                 url: action,
-                type: 'POST',
+                type: "POST",
                 data: formData,
                 processData: false, // Älä käsittele tiedostoja
                 contentType: false, // Aseta contentType falseksi, jotta jQuery lähettää lomakkeen tiedot oikein
                 success: function (response) {
                     const jsonResponse = JSON.parse(response);
                     if (jsonResponse.success) {
-
                         // Tyhjennä lomake
-                        $('#track-application-form')[0].reset();
+                        $("#track-application-form")[0].reset();
 
                         // Sulje modaali
-                        $('#modal_event_track_application').modal('hide');
+                        $("#modal_event_track_application").modal("hide");
 
                         // Näytä onnistumisviesti
                         self._showSuccessMessage(jsonResponse.message);
@@ -561,16 +687,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 },
                 error: function (error) {
                     console.error("Tapahtui virhe:", error);
-                    alert('Odottamaton virhe.');
+                    alert("Odottamaton virhe.");
                 },
                 complete: function () {
-                    submitButton.prop('disabled', false);  // Ota lähetyspainike uudelleen käyttöön
-                }
+                    submitButton.prop("disabled", false); // Ota lähetyspainike uudelleen käyttöön
+                },
             });
         });
     },
-
-
 
     /**
      * Bindaa type-valikon muutokseen tarvittavat tapahtumat
@@ -584,7 +708,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 $("#application_type_description").text(description);
 
                 const workshop = selectedType.attr("data-workshop");
-                const workshopContract = selectedType.attr("data-workshop-contract");
+
                 const webinar = selectedType.attr("data-webinar");
 
                 self._toggleWorkshopSection(workshop);
@@ -594,122 +718,138 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _toggleWorkshopSection: function (workshop, workshopContract) {
-        const workshopDiv = $('#track-application-workshop-div');
-        const workshopRequestDiv = $('#workshop-track-request-time-div');
-        const contractDiv = $('#track-application-workshop-contract-div');
-        
+        const workshopDiv = $("#track-application-workshop-div");
+        const workshopRequestDiv = $("#workshop-track-request-time-div");
+        const contractDiv = $("#track-application-workshop-contract-div");
+
         // Tarkistetaan, että workshop on nimenomaan "true"
         if (workshop === "true") {
-            workshopDiv.removeClass('d-none');
-            workshopDiv.find('input, select').prop('disabled', false).attr('required', true);
-            workshopDiv.find('textarea').prop('disabled', false).attr('required', true);
+            workshopDiv.removeClass("d-none");
+            workshopDiv
+                .find("input, select")
+                .prop("disabled", false)
+                .attr("required", true);
+            workshopDiv.find("textarea").prop("disabled", false).attr("required", true);
 
-            // this._enableWysiwyg([
+            // This._enableWysiwyg([
             //     { selector: 'textarea[name="workshop_goals"]' },
             //     { selector: 'textarea[name="workshop_schedule"]' },
             // ]);
 
-            workshopRequestDiv.removeClass('d-none');
-            workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
+            workshopRequestDiv.removeClass("d-none");
+            workshopRequestDiv
+                .find("select")
+                .prop("disabled", false)
+                .attr("required", true);
             // TODO TÄHÄN PAKOLLISET KENTÄT
 
             if (workshopContract === "true") {
-                contractDiv.removeClass('d-none');
-                contractDiv.find('input, select').prop('disabled', false);
-                contractDiv.find('textarea').prop('disabled', false);
+                contractDiv.removeClass("d-none");
+                contractDiv.find("input, select").prop("disabled", false);
+                contractDiv.find("textarea").prop("disabled", false);
             } else {
-                contractDiv.addClass('d-none');
-                contractDiv.find('input, select').prop('disabled', true).val('');
-                contractDiv.find('textarea').prop('disabled', true).val('');
+                contractDiv.addClass("d-none");
+                contractDiv.find("input, select").prop("disabled", true).val("");
+                contractDiv.find("textarea").prop("disabled", true).val("");
             }
         } else {
-            workshopDiv.addClass('d-none');
-            workshopDiv.find('input, select').prop('disabled', true).val('').attr('required', false);
-            workshopDiv.find('textarea').prop('disabled', true).val('').attr('required', false);
+            workshopDiv.addClass("d-none");
+            workshopDiv
+                .find("input, select")
+                .prop("disabled", true)
+                .val("")
+                .attr("required", false);
+            workshopDiv
+                .find("textarea")
+                .prop("disabled", true)
+                .val("")
+                .attr("required", false);
 
-            workshopRequestDiv.addClass('d-none');
-            workshopRequestDiv.find('select').prop('disabled', true).val('').attr('required', false);
+            workshopRequestDiv.addClass("d-none");
+            workshopRequestDiv
+                .find("select")
+                .prop("disabled", true)
+                .val("")
+                .attr("required", false);
         }
     },
 
-
     _toggleWebinarSection: function (webinar) {
-        const webinarDiv = $('#track-application-webinar-div');
+        const webinarDiv = $("#track-application-webinar-div");
         const webinarCheckbox = $('input[name="webinar"]');
         const webinarInfo = $('textarea[name="webinar_info"]');
 
-        
-
         if (webinar) {
-            // this._enableWysiwyg([
+            // This._enableWysiwyg([
             //     { selector: 'textarea[name="webinar_info"]' },
             // ]);
-            webinarDiv.removeClass('d-none');
-            webinarCheckbox.prop('disabled', false);
+            webinarDiv.removeClass("d-none");
+            webinarCheckbox.prop("disabled", false);
             webinarCheckbox.change(function () {
-                webinarInfo.prop('disabled', !this.checked);
+                webinarInfo.prop("disabled", !this.checked);
             });
         } else {
-            webinarDiv.addClass('d-none');
-            webinarCheckbox.prop('disabled', true);
-            webinarInfo.prop('disabled', true);
-            webinarCheckbox.prop('checked', false);
-            webinarInfo.val('');
+            webinarDiv.addClass("d-none");
+            webinarCheckbox.prop("disabled", true);
+            webinarInfo.prop("disabled", true);
+            webinarCheckbox.prop("checked", false);
+            webinarInfo.val("");
         }
     },
 
     _showSuccessMessage: function (message) {
-        var self = this;
         Dialog.alert(this, message, {
             title: _t("Success"),
-            size: 'medium',
+            size: "medium",
             confirm_callback: function () {
                 // Tarkistetaan, ollaanko '/proposal' näkymässä
-                if (window.location.pathname.includes('/track_proposal')) {
+                if (window.location.pathname.includes("/track_proposal")) {
                     $(".proposals").load(
                         window.location.pathname + " .proposals > *",
                         function () {
                             console.log("Proposal view content updated successfully.");
                         }
                     );
-                } 
+                }
                 // Tarkistetaan, ollaanko '/my/tracks' näkymässä
-                else if (window.location.pathname.includes('/my/tracks')) {
+                else if (window.location.pathname.includes("/my/tracks")) {
                     $(".table-responsive").load(
                         window.location.pathname + " .table-responsive > *",
                         function () {
                             console.log("My Tracks view content updated successfully.");
                         }
                     );
-                } 
-                else {
+                } else {
                     console.log("No specific view update logic for the current path.");
                 }
-            }
+            },
         });
     },
 
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
      */
-    _enableWysiwyg: function (selectors = []) {  // Oletus tyhjä taulukko, jos selectors puuttuu
+    _enableWysiwyg: function (selectors = []) {
+        // Oletus tyhjä taulukko, jos selectors puuttuu
         const self = this;
 
         if (!Array.isArray(selectors) || selectors.length === 0) {
-            console.error('No selectors provided for WYSIWYG initialization.');
+            console.error("No selectors provided for WYSIWYG initialization.");
             return;
         }
 
-        selectors.forEach(selector => {
+        selectors.forEach((selector) => {
             var $textarea = $(selector.selector);
-            
+
             if ($textarea.length === 0) {
-                console.error(`Textarea element not found for WYSIWYG initialization: ${selector.selector}`);
+                console.error(
+                    `Textarea element not found for WYSIWYG initialization: ${selector.selector}`
+                );
                 return;
             }
 
             var options = {
-                toolbarTemplate: 'website_forum.web_editor_toolbar',
+                toolbarTemplate: "website_forum.web_editor_toolbar",
                 toolbarOptions: {
                     showColors: false,
                     showFontSize: false,
@@ -722,8 +862,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 },
                 recordInfo: {
                     context: self._getContext(),
-                    res_model: 'event.track',
-                    res_id: +window.location.pathname.split('-').slice(-1)[0].split('/')[0],
+                    res_model: "event.track",
+                    res_id: Number(
+                        window.location.pathname.split("-").slice(-1)[0].split("/")[0]
+                    ),
                 },
                 resizable: true,
                 userGeneratedContent: true,
@@ -734,14 +876,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 if (selector.content) {
                     wysiwyg.setValue(selector.content); // Aseta olemassa oleva sisältö editoriin
                 }
-                $textarea.data('wysiwyg', wysiwyg); // Tallenna viite WYSIWYG-editoriin
+                $textarea.data("wysiwyg", wysiwyg); // Tallenna viite WYSIWYG-editoriin
             });
         });
     },
-
-
-
-
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;

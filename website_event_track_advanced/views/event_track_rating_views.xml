@@ -24,9 +24,7 @@
                         </button>
                     </div>
                     <group>
-                        <field
-                            name="event_track"
-                            readonly="id"/>
+                        <field name="event_track" readonly="id" />
                         <field name="event_id" />
                         <field name="reviewer_id" readonly="1" />
                         <field name="create_date" readonly="1" />

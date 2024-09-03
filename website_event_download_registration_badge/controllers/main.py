@@ -1,8 +1,7 @@
 import logging
 
-from odoo import SUPERUSER_ID, _, http
-from odoo.exceptions import UserError
-from odoo.http import content_disposition, request
+from odoo import _, http
+from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
@@ -44,17 +43,22 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                             )
                         )
 
-
-
-                    pdf = \
-                    request.env['ir.actions.report'].sudo()._render_qweb_pdf('event.event_registration_report_template_badge', [registration.id])[0]
+                    pdf = (
+                        request.env["ir.actions.report"]
+                        .sudo()
+                        ._render_qweb_pdf(
+                            "event.event_registration_report_template_badge",
+                            [registration.id],
+                        )[0]
+                    )
 
                     pdfhttpheaders = [
                         ("Content-Type", "application/pdf"),
                         ("Content-Length", len(pdf)),
                         (
                             "Content-Disposition",
-                            'attachment; filename="%s.pdf"' % registration.partner_id.name,
+                            'attachment; filename="%s.pdf"'
+                            % registration.partner_id.name,
                         ),
                     ]
                     return request.make_response(pdf, headers=pdfhttpheaders)
@@ -98,5 +102,3 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                     )
                 else:
                     request.env["privacy.consent"].sudo().create(privacy_values)
-
-

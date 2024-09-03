@@ -41,7 +41,7 @@
                 <p>There are currently no tracks for your account.</p>
             </t>
             <t t-if="tracks or review_tracks" t-call="portal.portal_table">
-                <t t-call="website_event_track_advanced.event_track_application"/>
+                <t t-call="website_event_track_advanced.event_track_application" />
                 <thead>
                     <tr class="active">
                         <th id="th_track">Track</th>
@@ -59,7 +59,7 @@
                             style="display: list-item; padding: 0.75rem;"
                         >My Tracks</caption>
                     </t>
-                    
+
                     <t t-foreach="tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
@@ -119,78 +119,121 @@
                             <td id="td_empty">
 
                                     <button
-                                        t-if="track.stage_id.is_editable"
-                                        type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        t-att-data-track-id="track.id"
-                                        t-att-data-event-id="track.event_id.id"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal_event_track_application"
-                                    ><i class="fa fa-fw fa-times-circle"/> Edit this proposal
+                                    t-if="track.stage_id.is_editable"
+                                    type="button"
+                                    class="btn btn-secondary btn-sm"
+                                    t-att-data-track-id="track.id"
+                                    t-att-data-event-id="track.event_id.id"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal_event_track_application"
+                                ><i
+                                        class="fa fa-fw fa-times-circle"
+                                    /> Edit this proposal
                                     </button>
                                     <button
+                                    type="button"
+                                    class="btn btn-secondary btn-sm"
+                                    t-att-data-track-id="track.id"
+                                    t-att-data-event-id="event.id"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal_event_track_application"
+                                ><i class="fa fa-fw fa-times-circle" /> View track
+                                    </button>
+                                    <t
+                                    t-set="see_evaluation"
+                                    t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
+                                />
+
+                                    <t
+                                    t-if="see_evaluation and track.stage_id.is_accepted or track.stage_id.is_fully_accessible"
+                                >
+                                        <button
                                         type="button"
                                         class="btn btn-secondary btn-sm"
                                         t-att-data-track-id="track.id"
-                                        t-att-data-event-id="event.id"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#modal_event_track_application"
-                                    ><i class="fa fa-fw fa-times-circle"/> View track
-                                    </button>
-                                    <t
-                                        t-set="see_evaluation"
-                                        t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
-                                    />
-
-                                    <t t-if="see_evaluation and track.stage_id.is_accepted or track.stage_id.is_fully_accessible">
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary btn-sm"
-                                            t-att-data-track-id="track.id"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal_track_reviews"
-                                        ><i class="fa fa-fw fa-times-circle"/> View Reviews
+                                        data-bs-target="#modal_track_reviews"
+                                    ><i class="fa fa-fw fa-times-circle" /> View Reviews
                                         </button>
 
                                         <div
-                                            id="modal_track_reviews"
-                                            class="modal fade"
-                                            tabindex="-1"
-                                            role="dialog"
+                                        id="modal_track_reviews"
+                                        class="modal fade"
+                                        tabindex="-1"
+                                        role="dialog"
+                                    >
+                                            <div
+                                            class="modal-dialog modal-lg"
+                                            role="document"
                                         >
-                                            <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header align-items-center">
-                                                        <h4 class="modal-title">Track Reviews</h4>
+                                                    <div
+                                                    class="modal-header align-items-center"
+                                                >
+                                                        <h4
+                                                        class="modal-title"
+                                                    >Track Reviews</h4>
                                                         <button
-                                                            type="button"
-                                                            class="close warning-close-modal-reviews"
-                                                            aria-label="Close"
-                                                        >
+                                                        type="button"
+                                                        class="close warning-close-modal-reviews"
+                                                        aria-label="Close"
+                                                    >
                                                                 <span>×</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body bg-light border-bottom">
-                                                        <div class="panel panel-primary" id="track-reviews-div">
+                                                    <div
+                                                    class="modal-body bg-light border-bottom"
+                                                >
+                                                        <div
+                                                        class="panel panel-primary"
+                                                        id="track-reviews-div"
+                                                    >
                                                             <div class="panel-body">
-                                                                <p>Average Rating: <t t-esc="average_review" /></p>
-                                                                <table class="table" style="border: none;">
-                                                                    <thead style="border: none;">
-                                                                        <tr class="active" style="border: none;">
-                                                                            <th style="border: none;">Rating</th>
-                                                                            <th style="border: none;">Verbal Rating</th>
+                                                                <p>Average Rating: <t
+                                                                    t-esc="average_review"
+                                                                /></p>
+                                                                <table
+                                                                class="table"
+                                                                style="border: none;"
+                                                            >
+                                                                    <thead
+                                                                    style="border: none;"
+                                                                >
+                                                                        <tr
+                                                                        class="active"
+                                                                        style="border: none;"
+                                                                    >
+                                                                            <th
+                                                                            style="border: none;"
+                                                                        >Rating</th>
+                                                                            <th
+                                                                            style="border: none;"
+                                                                        >Verbal Rating</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody style="border: none;">
-                                                                        <t t-foreach="track.ratings" t-as="review">
-                                                                            <tr style="border: none;">
-                                                                                <td style="border: none;">
+                                                                    <tbody
+                                                                    style="border: none;"
+                                                                >
+                                                                        <t
+                                                                        t-foreach="track.ratings"
+                                                                        t-as="review"
+                                                                    >
+                                                                            <tr
+                                                                            style="border: none;"
+                                                                        >
+                                                                                <td
+                                                                                style="border: none;"
+                                                                            >
                                                                                     <span
-                                                                                        t-field="review.grade_id.name"
-                                                                                    />
+                                                                                    t-field="review.grade_id.name"
+                                                                                />
                                                                                 </td>
-                                                                                <td style="border: none;">
-                                                                                    <span t-field="review.comment" />
+                                                                                <td
+                                                                                style="border: none;"
+                                                                            >
+                                                                                    <span
+                                                                                    t-field="review.comment"
+                                                                                />
                                                                                 </td>
                                                                             </tr>
                                                                         </t>
@@ -203,7 +246,7 @@
                                             </div>
                                         </div>
                                     </t>
-                                
+
 <!--                                 <t
                                     t-set="see_evaluation"
                                     t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
@@ -312,20 +355,20 @@
                             </td>
                             <td>
                                 <span
-                                        t-if="track.is_rated"
-                                        class="font-italic text-muted"
-                                        data-toggle="tooltip"
-                                        title="You have already reviewed this track."
-                                    >Reviewed</span>
+                                    t-if="track.is_rated"
+                                    class="font-italic text-muted"
+                                    data-toggle="tooltip"
+                                    title="You have already reviewed this track."
+                                >Reviewed</span>
                                 <button
-                                        type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        t-att-data-track-id="track.id"
-                                        t-att-data-event-id="event.id"
-                                        data-review="true"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modal_event_track_application"
-                                    ><i class="fa fa-fw fa-times-circle"/> Review
+                                    type="button"
+                                    class="btn btn-secondary btn-sm"
+                                    t-att-data-track-id="track.id"
+                                    t-att-data-event-id="event.id"
+                                    data-review="true"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal_event_track_application"
+                                ><i class="fa fa-fw fa-times-circle" /> Review
                                     </button>
                             </td>
                          </tr>

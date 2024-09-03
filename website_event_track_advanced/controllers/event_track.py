@@ -19,9 +19,9 @@
 ##############################################################################
 # 1. Standard library imports:
 import base64
+import json
 import logging
 import sys
-import json
 
 # 2. Known third party imports:
 from psycopg2.errors import InvalidTextRepresentation
@@ -63,14 +63,24 @@ class EventTrackControllerAdvanced(EventTrackController):
             .search([["partner_id", "=", partner_id.id], ["event_id", "=", event.id]])
         )
 
-        values = {"tracks": tracks, "event": event, "main_object": event, "track_languages": track_languages}
+        values = {
+            "tracks": tracks,
+            "event": event,
+            "main_object": event,
+            "track_languages": track_languages,
+        }
         return values
 
-
-    @http.route(["/event/track/data"], type='json', auth='public', methods=['POST'], website=True)
+    @http.route(
+        ["/event/track/data"],
+        type="json",
+        auth="public",
+        methods=["POST"],
+        website=True,
+    )
     def get_track(self, track_id, isReview=False, **kwargs):
-        logging.info("=====FUNKTIO=====");
-        track = request.env['event.track'].sudo().browse(track_id)
+        logging.info("=====FUNKTIO=====")
+        track = request.env["event.track"].sudo().browse(track_id)
 
         user = request.env.user
         can_review = False
@@ -78,247 +88,250 @@ class EventTrackControllerAdvanced(EventTrackController):
         values = {}
 
         if isReview:
-            if user.id in track.review_group.reviewers.mapped('user_id').ids:
+            if user.id in track.review_group.reviewers.mapped("user_id").ids:
                 can_review = True
                 rating_grade_ids = [
                     {
-                        'id': rating.id,
-                        'name': rating.name,
+                        "id": rating.id,
+                        "name": rating.name,
                     }
                     for rating in track.event_id.rating_grade_ids
                 ]
-                values.update({ 'can_review': can_review, "rating_grade_ids": rating_grade_ids })
+                values.update(
+                    {"can_review": can_review, "rating_grade_ids": rating_grade_ids}
+                )
 
             if not can_review:
-                return {'error': 'You do not have permission to review this track.'}
+                return {"error": "You do not have permission to review this track."}
 
         # Tarkista, onko nykyinen vaihe is_submitted = True
         is_readonly = not track.stage_id.is_editable
 
         speakers = []
         for speaker in track.speaker_ids:
-            speakers.append({
-                'id': speaker.id,
-                'firstname': speaker.firstname or '',
-                'lastname': speaker.lastname or '',
-                'email': speaker.email or '',
-                'phone': speaker.phone or '',
-                'organization': speaker.parent_id.name if speaker.parent_id else '',
-                'title': speaker.function or '',
-            })
+            speakers.append(
+                {
+                    "id": speaker.id,
+                    "firstname": speaker.firstname or "",
+                    "lastname": speaker.lastname or "",
+                    "email": speaker.email or "",
+                    "phone": speaker.phone or "",
+                    "organization": speaker.parent_id.name if speaker.parent_id else "",
+                    "title": speaker.function or "",
+                }
+            )
         application_types = [
             {
-                'id': app_type.id,
-                'name': app_type.name,
-                'workshop': app_type.workshop,
-                'workshop_contract': app_type.workshop_contract,
-                'webinar': app_type.webinar,
-                'description': app_type.description or '',
+                "id": app_type.id,
+                "name": app_type.name,
+                "workshop": app_type.workshop,
+                "workshop_contract": app_type.workshop_contract,
+                "webinar": app_type.webinar,
+                "description": app_type.description or "",
             }
             for app_type in track.event_id.track_types_ids
         ]
 
         request_time = [
-            {
-                'id': req.id,
-                'name': req.name
-            }
+            {"id": req.id, "name": req.name}
             for req in request.env["event.track.request.time"].sudo().search([])
         ]
         target_groups = [
-            {
-                'id': group.id,
-                'name': group.name
-            }
+            {"id": group.id, "name": group.name}
             for group in track.event_id.target_group_ids
         ]
 
         tags = [
-            {
-                'id': tag.id,
-                'name': tag.name
-            }
+            {"id": tag.id, "name": tag.name}
             for tag in track.event_id.allowed_track_tag_ids
         ]
 
         attachments = [
-            {
-                'id': attachment.id,
-                'name': attachment.name
-            }
+            {"id": attachment.id, "name": attachment.name}
             for attachment in track.attachment_ids
         ]
 
         languages = [
             {
-                'id': lang.id,
-                'name': lang.name,
+                "id": lang.id,
+                "name": lang.name,
             }
-            for lang in request.env['res.lang'].sudo().search([])
+            for lang in request.env["res.lang"].sudo().search([])
         ]
 
         # Get privacy settings and already accepted privacy
         privacy_ids = []
-        accepted_privacies = request.env["privacy.consent"].sudo().search(
-            [("partner_id", "=", track.partner_id.id), ("activity_id", "in", track.event_id.privacy_ids.ids)]
+        accepted_privacies = (
+            request.env["privacy.consent"]
+            .sudo()
+            .search(
+                [
+                    ("partner_id", "=", track.partner_id.id),
+                    ("activity_id", "in", track.event_id.privacy_ids.ids),
+                ]
+            )
         )
 
         for privacy in track.event_id.privacy_ids:
-            privacy_ids.append({
-                'id': privacy.id,
-                'name': privacy.name,
-                'link': privacy.link,
-                'link_name': privacy.link_name,
-                'is_required': privacy.is_required,
-                'accepted': privacy.id in accepted_privacies.mapped('activity_id.id')
-            })
+            privacy_ids.append(
+                {
+                    "id": privacy.id,
+                    "name": privacy.name,
+                    "link": privacy.link,
+                    "link_name": privacy.link_name,
+                    "is_required": privacy.is_required,
+                    "accepted": privacy.id
+                    in accepted_privacies.mapped("activity_id.id"),
+                }
+            )
 
-        values.update({
-            'track_id': track.id,
-            'name': track.name,
-            'description': track.description,
-            'type': track.type.id,
-            'video_url': track.video_url,
-            'language': track.language.id,
-            'languages': languages,
-            'target_group_ids': track.target_group_ids.ids,
-            'target_group_info': track.target_group_info,
-            'extra_info': track.extra_info,
-            'partner_id': [track.partner_id.id, track.partner_id.name] if track.partner_id else '',
-            'contact': {
-                'id': track.partner_id.id,
-                'firstname': track.partner_id.firstname or '',
-                'lastname': track.partner_id.lastname or '',
-                'email': track.partner_id.email or '',
-                'phone': track.partner_id.phone or '',
-                'organization': track.partner_id.parent_id.name if track.partner_id.parent_id else '',
-                'title': track.partner_id.function or '',
-            },
-            'speakers': speakers,
-            'is_readonly': is_readonly,
-            'application_types': application_types,
-            'target_groups': target_groups,
-            'tags': tags,
-            'attachments': attachments,
-            'privacy_ids': privacy_ids,
-        })
+        values.update(
+            {
+                "track_id": track.id,
+                "name": track.name,
+                "description": track.description,
+                "type": track.type.id,
+                "video_url": track.video_url,
+                "language": track.language.id,
+                "languages": languages,
+                "target_group_ids": track.target_group_ids.ids,
+                "target_group_info": track.target_group_info,
+                "extra_info": track.extra_info,
+                "partner_id": [track.partner_id.id, track.partner_id.name]
+                if track.partner_id
+                else "",
+                "contact": {
+                    "id": track.partner_id.id,
+                    "firstname": track.partner_id.firstname or "",
+                    "lastname": track.partner_id.lastname or "",
+                    "email": track.partner_id.email or "",
+                    "phone": track.partner_id.phone or "",
+                    "organization": track.partner_id.parent_id.name
+                    if track.partner_id.parent_id
+                    else "",
+                    "title": track.partner_id.function or "",
+                },
+                "speakers": speakers,
+                "is_readonly": is_readonly,
+                "application_types": application_types,
+                "target_groups": target_groups,
+                "tags": tags,
+                "attachments": attachments,
+                "privacy_ids": privacy_ids,
+            }
+        )
 
         # Lisätään workshop-tiedot vain jos track on tyyppiä workshop
         if track.type and track.type.workshop:
-            values.update({
-                'workshop_participants': track.workshop_participants,
-                'workshop_min_participants': track.workshop_min_participants,
-                'workshop_fee': track.workshop_fee,
-                'workshop_goals': track.workshop_goals,
-                'workshop_schedule': track.workshop_schedule,
-                'workshop_contract': track.type.workshop_contract,
-                'is_workshop': track.type.workshop,
-                'request_time': request_time,
-                'req_time': track.request_time.id,
-
-            })
+            values.update(
+                {
+                    "workshop_participants": track.workshop_participants,
+                    "workshop_min_participants": track.workshop_min_participants,
+                    "workshop_fee": track.workshop_fee,
+                    "workshop_goals": track.workshop_goals,
+                    "workshop_schedule": track.workshop_schedule,
+                    "workshop_contract": track.type.workshop_contract,
+                    "is_workshop": track.type.workshop,
+                    "request_time": request_time,
+                    "req_time": track.request_time.id,
+                }
+            )
             if track.organizer_contact:
-                values.update({
-                    'signee_firstname': track.organizer_contact.firstname,
-                    'signee_lastname': track.organizer_contact.lastname,
-                    'signee_email': track.organizer_contact.email,
-                    'signee_phone': track.organizer_contact.phone,
-                    'signee_organization': track.organizer_contact.parent_id.name,
-                    'signee_title': track.organizer_contact.function,
-                    'organizer_organization': track.organizer.name,
-                    'organizer_street': track.organizer.street,
-                    'organizer_zip': track.organizer.zip,
-                    'organizer_city': track.organizer.city,
-                    'edicode': track.organizer.edicode,
-                    'organizer_reference': track.organizer.ref,
-
-                })
+                values.update(
+                    {
+                        "signee_firstname": track.organizer_contact.firstname,
+                        "signee_lastname": track.organizer_contact.lastname,
+                        "signee_email": track.organizer_contact.email,
+                        "signee_phone": track.organizer_contact.phone,
+                        "signee_organization": track.organizer_contact.parent_id.name,
+                        "signee_title": track.organizer_contact.function,
+                        "organizer_organization": track.organizer.name,
+                        "organizer_street": track.organizer.street,
+                        "organizer_zip": track.organizer.zip,
+                        "organizer_city": track.organizer.city,
+                        "edicode": track.organizer.edicode,
+                        "organizer_reference": track.organizer.ref,
+                    }
+                )
             if track.stage_id.is_accepted:
-                values.update({
-                    'is_workshop_contract': True,
-                })
+                values.update(
+                    {
+                        "is_workshop_contract": True,
+                    }
+                )
 
         # Lisätään webinar-tiedot vain jos track on tyyppiä webinar
         if track.type and track.type.webinar:
-            values.update({
-                'webinar': track.webinar,
-                'webinar_info': track.webinar_info,
-            })
-        logging.info("===VALUESIT===");
-        logging.info(values);
+            values.update(
+                {
+                    "webinar": track.webinar,
+                    "webinar_info": track.webinar_info,
+                }
+            )
+        logging.info("===VALUESIT===")
+        logging.info(values)
         return values
 
-    @http.route(["/event/application_types"], type='json', auth='public', methods=['POST'], website=True)
+    @http.route(
+        ["/event/application_types"],
+        type="json",
+        auth="public",
+        methods=["POST"],
+        website=True,
+    )
     def get_application_types(self, event_id, **kwargs):
-        event = request.env['event.event'].sudo().browse(event_id)
-        
+        event = request.env["event.event"].sudo().browse(event_id)
+
         application_types = [
             {
-                'id': app_type.id,
-                'name': app_type.name,
-                'workshop': app_type.workshop,
-                'workshop_contract': app_type.workshop_contract,
-                'webinar': app_type.webinar,
-                'description': app_type.description or '',
+                "id": app_type.id,
+                "name": app_type.name,
+                "workshop": app_type.workshop,
+                "workshop_contract": app_type.workshop_contract,
+                "webinar": app_type.webinar,
+                "description": app_type.description or "",
             }
             for app_type in event.track_types_ids
         ]
 
         request_time = [
-            {
-                'id': req.id,
-                'name': req.name
-            }
+            {"id": req.id, "name": req.name}
             for req in request.env["event.track.request.time"].sudo().search([])
         ]
-        
+
         target_groups = [
-            {
-                'id': group.id,
-                'name': group.name
-            }
-            for group in event.target_group_ids
+            {"id": group.id, "name": group.name} for group in event.target_group_ids
         ]
 
-        tags = [
-            {
-                'id': tag.id,
-                'name': tag.name
-            }
-            for tag in event.allowed_track_tag_ids
-        ]
+        tags = [{"id": tag.id, "name": tag.name} for tag in event.allowed_track_tag_ids]
 
         languages = [
             {
-                'id': lang.id,
-                'name': lang.name,
+                "id": lang.id,
+                "name": lang.name,
             }
-            for lang in request.env['res.lang'].sudo().search([])
+            for lang in request.env["res.lang"].sudo().search([])
         ]
 
         privacy_ids = [
             {
-                'id': privacy.id,
-                'name': privacy.name,
-                'link': privacy.link,
-                'link_name': privacy.link_name,
-                'is_required': privacy.is_required,
+                "id": privacy.id,
+                "name": privacy.name,
+                "link": privacy.link,
+                "link_name": privacy.link_name,
+                "is_required": privacy.is_required,
             }
             for privacy in event.privacy_ids
         ]
 
         return {
-            'application_types': application_types,
-            'target_groups': target_groups,
-            'tags': tags,
-            'request_time': request_time,
-            'privacy_ids': privacy_ids,
-            'languages': languages,
+            "application_types": application_types,
+            "target_groups": target_groups,
+            "tags": tags,
+            "request_time": request_time,
+            "privacy_ids": privacy_ids,
+            "languages": languages,
         }
-
-
-
-
 
     def _get_event_track_proposal_form_values(self, event, **post):
         partner_id = request.env.user.partner_id
@@ -531,11 +544,13 @@ class EventTrackControllerAdvanced(EventTrackController):
             track_values["workshop_schedule"] = post.get("workshop_schedule")
             track_values["workshop_fee"] = post.get("workshop_fee")
 
-
             if post.get("request_time"):
-                request_time = self._get_record("event.track.request.time", post.get("request_time"))
-                track_values["request_time"] = request_time.id if request_time else False,
-
+                request_time = self._get_record(
+                    "event.track.request.time", post.get("request_time")
+                )
+                track_values["request_time"] = (
+                    request_time.id if request_time else False,
+                )
 
             if (
                 post.get("is_workshop_contract")
@@ -635,7 +650,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         """
         if not partner_values.get("id"):
             partner_values.pop("id", None)  # Poista 'id', jos se on olemassa ja tyhjä
-    
+
         user = (
             request.env["res.users"]
             .sudo()
@@ -652,8 +667,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             if not partner_values.get("login") and partner_values.get("email"):
                 partner_values["login"] = partner_values.get("email")
             try:
-                logging.info("==PARTNER VALUES===");
-                logging.info(partner_values);
+                logging.info("==PARTNER VALUES===")
+                logging.info(partner_values)
                 user = (
                     request.env["res.users"].sudo()._signup_create_user(partner_values)
                 )
@@ -843,13 +858,13 @@ class EventTrackControllerAdvanced(EventTrackController):
     )
     def event_track_proposal_post(self, event, **post):
         if not event.can_access_from_current_website():
-            return json.dumps({'error': 'Access denied'})
+            return json.dumps({"error": "Access denied"})
 
         try:
             # If post is review. Create review and return confirmation
             if post.get("review-confirm"):
                 self._create_review(**post)
-                return json.dumps({'success': True, 'redirect': '/my/tracks'})
+                return json.dumps({"success": True, "redirect": "/my/tracks"})
 
             followers = list()
             _logger.info(_("Posted values: %s") % dict(post))
@@ -874,13 +889,17 @@ class EventTrackControllerAdvanced(EventTrackController):
 
             # 3. Add contact to organization
             if values.get("contact_organization"):
-                organization = self._create_organization(values.get("contact_organization"))
+                organization = self._create_organization(
+                    values.get("contact_organization")
+                )
                 # Add contact to the existing organization
                 if partner and partner != organization:
                     partner.parent_id = organization.id
 
             # 4. Add speakers
-            speakers, followers = self._create_speakers(values.get("speakers"), followers)
+            speakers, followers = self._create_speakers(
+                values.get("speakers"), followers
+            )
             values["track"]["speaker_ids"] = [(6, 0, speakers)]
 
             # 5. Add workshop organization
@@ -894,7 +913,9 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values["track"]["organizer"] = workshop_organizer.id
 
             # 6. Add organizer contact
-            if values.get("workshop_signee") and values.get("workshop_signee").get("name"):
+            if values.get("workshop_signee") and values.get("workshop_signee").get(
+                "name"
+            ):
                 if workshop_organizer:
                     values["workshop_signee"]["parent_id"] = workshop_organizer.id
 
@@ -902,7 +923,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                 values["track"]["organizer_contact"] = signee.id
 
             if values.get("track_draft"):
-                draft_stage = request.env["event.track.stage"].sudo().search([("is_draft", "=", True)], limit=1)
+                draft_stage = (
+                    request.env["event.track.stage"]
+                    .sudo()
+                    .search([("is_draft", "=", True)], limit=1)
+                )
                 if draft_stage:
                     values["track"]["stage_id"] = draft_stage.id
 
@@ -922,7 +947,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     .sudo()
                     .search([("is_submitted", "=", True)], order="sequence")
                 )
-                logging.info(first_is_done_stage);
+                logging.info(first_is_done_stage)
                 if first_is_done_stage:
                     values["track"]["stage_id"] = first_is_done_stage[0].id
 
@@ -951,8 +976,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             return_vals.update({"track": track})
             return_vals.update({"user_exists": user_exists})
 
-            return json.dumps({"success": True, "message": "Proposal saved successfully."})
-
+            return json.dumps(
+                {"success": True, "message": "Proposal saved successfully."}
+            )
 
         except Exception as e:
             _logger.error(f"Error in track proposal post: {str(e)}")

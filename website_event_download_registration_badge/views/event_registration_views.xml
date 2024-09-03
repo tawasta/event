@@ -3,10 +3,7 @@
     <record model="ir.ui.view" id="event_registration_view_form_privacy">
         <field name="name">event.registration.form.privacy</field>
         <field name="model">event.registration</field>
-        <field
-            name="inherit_id"
-            ref="website_event.event_registration_view_form"
-        />
+        <field name="inherit_id" ref="website_event.event_registration_view_form" />
         <field name="arch" type="xml">
             <page name="questions" position="after">
                 <page string="Privacy Consents" name="privacy_consents">

@@ -26,10 +26,13 @@ addon | version | maintainers | summary
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.0.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.2 |  | Cancel events and event registrations through website.
+[website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.0 |  | Customization options to Website Event Frontends
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.0 |  | Module to manage online and hybrid events. Includes a video conference link.
 [website_event_private_event](website_event_private_event/) | 17.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 17.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.
+[website_event_questions_parent_id](website_event_questions_parent_id/) | 17.0.1.0.0 |  | Question to ask for parent_id in Event Registration
+[website_event_questions_title](website_event_questions_title/) | 17.0.1.0.0 |  | Question to ask for title in Event Registration
 [website_event_questions_view](website_event_questions_view/) | 17.0.1.0.0 |  | Adds a view to see event question answers
 [website_event_recurring_event](website_event_recurring_event/) | 17.0.1.0.0 |  | Create recurring events and hide dates
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
@@ -37,6 +40,8 @@ addon | version | maintainers | summary
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.0 |  | Additional configurations for the core snippet
+[website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.0 |  | Advanced features for Event Track
+[website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
 [website_event_waiting_list](website_event_waiting_list/) | 17.0.0.0.0 |  | Adds a waiting list functionality to Events.

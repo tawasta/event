@@ -29,8 +29,8 @@
     "installable": True,
     "depends": [
         "website_event_cancellation",
-        #"website_event_track_privacies",
-        'event',
+        # "website_event_track_privacies",
+        "event",
         "website_event",
     ],
     "data": [
