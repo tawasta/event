@@ -117,13 +117,13 @@ class EventTrackControllerAdvanced(EventTrackController):
             }
             for app_type in track.event_id.track_types_ids
         ]
-        request_time_ids = request.env["event.track.request.time"].sudo().search([])
+
         request_time = [
             {
                 'id': req.id,
                 'name': req.name
             }
-            for req in request_time_ids
+            for req in request.env["event.track.request.time"].sudo().search([])
         ]
         target_groups = [
             {
@@ -149,6 +149,30 @@ class EventTrackControllerAdvanced(EventTrackController):
             for attachment in track.attachment_ids
         ]
 
+        languages = [
+            {
+                'id': lang.id,
+                'name': lang.name,
+            }
+            for lang in request.env['res.lang'].sudo().search([])
+        ]
+
+        # Get privacy settings and already accepted privacy
+        privacy_ids = []
+        accepted_privacies = request.env["privacy.consent"].sudo().search(
+            [("partner_id", "=", track.partner_id.id), ("activity_id", "in", track.event_id.privacy_ids.ids)]
+        )
+
+        for privacy in track.event_id.privacy_ids:
+            privacy_ids.append({
+                'id': privacy.id,
+                'name': privacy.name,
+                'link': privacy.link,
+                'link_name': privacy.link_name,
+                'is_required': privacy.is_required,
+                'accepted': privacy.id in accepted_privacies.mapped('activity_id.id')
+            })
+
         values.update({
             'track_id': track.id,
             'name': track.name,
@@ -156,6 +180,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             'type': track.type.id,
             'video_url': track.video_url,
             'language': track.language.id,
+            'languages': languages,
             'target_group_ids': track.target_group_ids.ids,
             'target_group_info': track.target_group_info,
             'extra_info': track.extra_info,
@@ -175,6 +200,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             'target_groups': target_groups,
             'tags': tags,
             'attachments': attachments,
+            'privacy_ids': privacy_ids,
         })
 
         # Lisätään workshop-tiedot vain jos track on tyyppiä workshop
@@ -188,6 +214,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 'workshop_contract': track.type.workshop_contract,
                 'is_workshop': track.type.workshop,
                 'request_time': request_time,
+                'req_time': track.request_time.id,
 
             })
             if track.organizer_contact:
@@ -237,13 +264,12 @@ class EventTrackControllerAdvanced(EventTrackController):
             for app_type in event.track_types_ids
         ]
 
-        request_time_ids = request.env["event.track.request.time"].sudo().search([])
         request_time = [
             {
                 'id': req.id,
                 'name': req.name
             }
-            for req in request_time_ids
+            for req in request.env["event.track.request.time"].sudo().search([])
         ]
         
         target_groups = [
@@ -262,11 +288,32 @@ class EventTrackControllerAdvanced(EventTrackController):
             for tag in event.allowed_track_tag_ids
         ]
 
+        languages = [
+            {
+                'id': lang.id,
+                'name': lang.name,
+            }
+            for lang in request.env['res.lang'].sudo().search([])
+        ]
+
+        privacy_ids = [
+            {
+                'id': privacy.id,
+                'name': privacy.name,
+                'link': privacy.link,
+                'link_name': privacy.link_name,
+                'is_required': privacy.is_required,
+            }
+            for privacy in event.privacy_ids
+        ]
+
         return {
             'application_types': application_types,
             'target_groups': target_groups,
             'tags': tags,
             'request_time': request_time,
+            'privacy_ids': privacy_ids,
+            'languages': languages,
         }
 
 
@@ -551,6 +598,34 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         return values
 
+    def _create_privacy(self, post, partner, event):
+        """Create privacies"""
+        privacy_ids = []
+        for privacy in event.privacy_ids:
+            if post.get("privacy_" + str(privacy.id)):
+                privacy_ids.append(privacy.id)
+
+        if privacy_ids:
+            for pr in event.privacy_ids:
+                accepted = pr.id in privacy_ids
+                privacy_values = {
+                    "partner_id": partner.id,
+                    "activity_id": pr.id,
+                    "accepted": accepted,
+                    "state": "answered",
+                }
+                already_privacy_record = (
+                    request.env["privacy.consent"]
+                    .sudo()
+                    .search(
+                        [("partner_id", "=", partner.id), ("activity_id", "=", pr.id)]
+                    )
+                )
+                if already_privacy_record:
+                    already_privacy_record.sudo().write({"accepted": accepted})
+                else:
+                    request.env["privacy.consent"].sudo().create(privacy_values)
+
     def _create_signup_user(self, partner_values):
         """Find existing user by email. Update user if it is done by the user.
         If no user exists. Create a new user. Otherwise return existing user.
@@ -794,6 +869,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                     partner = user.partner_id
                     followers.append(partner.id)
                     values["track"]["partner_id"] = partner.id
+
+                    self._create_privacy(post, partner, event)
 
             # 3. Add contact to organization
             if values.get("contact_organization"):

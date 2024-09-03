@@ -372,6 +372,26 @@
                             <div id="header-track-application-review-div" class="d-none" disabled="1">
                                 <t t-call="website_event_track_advanced.event_track_application_review" />
                             </div>
+
+                            <div id="privacy-acceptance-container">
+                                <div class="form-group col-xl-12 privacy-template d-none">
+                                    <div class="form-check">
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input privacy_acceptance"
+                                        />
+                                        <label class="form-check-label">
+                                            <span class="privacy-name"></span>
+                                            <span class="privacy-link-container">
+                                                - <a href="#" target="_blank" class="privacy-link"></a>
+                                            </span>
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            Please accept these terms.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <t t-if="not review">
                             <div class="modal-body bg-light border-bottom">
@@ -616,28 +636,21 @@
                             <!-- <t t-esc="track.type.description" /> -->
                         </p>
                     </div>
+
                     <div
                         class="col-md-6 d-none"
                         id="workshop-track-request-time-div"
                     >
                         <label
+                            class="col-form-label"
                             for="request_time"
-                            class="control-label"
-                        >Desired duration of the workshop
-                        </label>
+                        >Desired duration of the workshop</label>
+                        <select
+                            name="request_time"
+                            t-attf-class="form-control"
+                        >
 
-                        <div class="input-group">
-                            <select
-                                name="request_time"
-                                id="request_time"
-                                placeholder="Request time..."
-                                class="form-control"
-                                autocomplete="off"
-                                disabled="1"
-                            >
-                                
-                            </select>
-                        </div>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -732,14 +745,7 @@
                             t-attf-class="form-control"
                             t-att-required="None if not editable else 'required'"
                         >
-                            <option value="">Select...</option>
-                            <t t-foreach="track_languages or []" t-as="language">
-                                <option
-                                    t-att-value="language.id"
-                                >
-                                    <t t-esc="language.name" />
-                                </option>
-                            </t>
+
                         </select>
                         <div
                             class="invalid-feedback"

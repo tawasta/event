@@ -99,6 +99,7 @@
                     groups="event.group_event_manager"/>
             </xpath>
             <field name="tag_ids" position="after">
+                <field name="privacy_ids" widget="many2many_tags" />
                 <field name="track_types_ids" widget="many2many_tags" />
                 <field name="target_group_ids" widget="many2many_tags" />
                 <field name="rating_grade_ids" widget="many2many_tags" />

@@ -98,6 +98,17 @@ class EventEvent(models.Model):
     allow_target_group_multiple = fields.Boolean(
         string="Allow Multiple Target Groups on Tracks", default=False
     )
+
+    privacy_ids = fields.Many2many(
+        "privacy.activity",
+        string="Privacies",
+        readonly=False,
+        store=True,
+        default=lambda self: self.env["privacy.activity"]
+        .sudo()
+        .search([("show_in_event", "=", True)])
+        .ids,
+    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration

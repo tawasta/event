@@ -35,6 +35,8 @@
         "partner_firstname",
         "web_content_link_url",
         "website_forum",
+        "privacy",
+        "privacy_consent",
     ],
     "data": [
         "data/email_template_data.xml",
@@ -64,6 +66,7 @@
         "views/event_track_templates_agenda.xml",
         "views/event_track_templates_list.xml",
         "views/portal_templates.xml",
+        "views/privacy_activity.xml",
         "report/event_track_location_schedule_report.xml",
         "report/report_menu.xml",
     ],

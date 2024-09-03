@@ -31,6 +31,27 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._bindFormSubmit();  // Bindataan lomakkeen submit AJAX-pyyntöön
         this._bindAddSpeaker();
         this._removeAttachments();
+        this._setupModalCloseBehavior(); // Setup custom modal close behavior
+    },
+
+    _setupModalCloseBehavior: function () {
+        const self = this;
+
+        // Estä modaalin sulkeutuminen ulkopuolisista klikkauksista tai Esc-näppäimen painalluksesta
+        $('#modal_event_track_application').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
+        // Lisää sulkemispainikkeille toiminnallisuus
+        $('.close.warning-close-modal, .btn.btn-secondary.warning-close-modal').click(function () {
+            // Nollaa lomake
+            $('#track-application-form')[0].reset();
+
+            // Sulje modal ja päivitä sivu
+            $('#modal_event_track_application').modal('hide');
+            location.reload();  // Päivitä sivu
+        });
     },
 
     _removeAttachments: function () {
@@ -100,6 +121,35 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $("#track-application-speaker-input-index").val(speakerCount);
     },
 
+    _populatePrivacyOptions: function (privacyIds) {
+        const container = $('#privacy-acceptance-container');
+        const template = container.find('.privacy-template').first();
+
+        container.find('.privacy-template').not(':first').remove();
+
+        if (privacyIds && Array.isArray(privacyIds)) {
+            privacyIds.forEach(function (privacy) {
+                const newElement = template.clone().removeClass('d-none privacy-template');
+
+                newElement.find('input')
+                    .attr('name', `privacy_${privacy.id}`)
+                    .prop('required', privacy.is_required)
+                    .prop('checked', privacy.accepted);  // Asetetaan valmiiksi, jos hyväksytty
+
+                newElement.find('.privacy-name').text(privacy.name);
+
+                if (privacy.link) {
+                    newElement.find('.privacy-link').attr('href', privacy.link).text(privacy.link_name).removeClass('d-none');
+                } else {
+                    newElement.find('.privacy-link').addClass('d-none');
+                }
+
+                container.append(newElement);
+            });
+        } else {
+            console.error("privacyIds is not an array or is undefined");
+        }
+    },
 
 
 
@@ -107,15 +157,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _loadTrackData: function () {
         const self = this;
         $('#modal_event_track_application').on('show.bs.modal', function (event) {
-            console.log("===MENEE TANNE NAIN=====");
             var button = $(event.relatedTarget);
             var trackId = button.data('track-id'); // Get track ID from button
             var eventId = button.data('event-id'); // Hae event ID napista
-            console.log(trackId);
 
             var isReview = button.data('review') || false;  // Tarkistetaan, onko kyseessä arvostelutila
-            console.log("==REVIEW===");
-            console.log(isReview);
 
 
             // Estä modalin näyttäminen ennen kuin data on ladattu ja asetettu
@@ -136,6 +182,19 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._populateSelectOptions('target_groups', response.target_groups);
                     self._populateSelectOptions('tags', response.tags);
                     self._populateSelectOptions('request_time', response.request_time);
+                    self._populateSelectOptions('language', response.languages);
+
+                    self._populatePrivacyOptions(response.privacy_ids);
+
+                    self._enableWysiwyg([
+                        { selector: 'textarea[name="description"]' },
+                        { selector: 'textarea[name="target_group_info"]' },
+                        { selector: 'textarea[name="extra_info"]' },
+                        { selector: 'textarea[name="workshop_goals"]' },
+                        { selector: 'textarea[name="workshop_schedule"]' },
+                        { selector: 'textarea[name="webinar_info"]' },
+                    ]);
+
                     $('#modal_event_track_application').modal('show');
                 });
             } else {
@@ -145,20 +204,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     'track_id': trackId,
                     'isReview': isReview,
                 }).then((trackData) => {
-                    console.log(trackData);
                     self._populateSelectOptions('type', trackData.application_types, trackData.type);
                     self._populateSelectOptions('target_groups', trackData.target_groups, trackData.target_group_ids);
                     self._populateSelectOptions('tags', trackData.tags, trackData.tag_ids);
-                    self._populateSelectOptions('request_time', trackData.request_time);
+                    self._populateSelectOptions('language', trackData.languages, trackData.language);
+                    
+
+                    self._populatePrivacyOptions(trackData.privacy_ids);
 
 
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);
-                    $('textarea[name="description"]').val(trackData.description);
+                    // Täytä WYSIWYG-editori olemassa olevalla sisällöllä
+                    //self._enableWysiwyg('textarea.o_wysiwyg_loader', trackData.description);
                     $('input[name="video_url"]').val(trackData.video_url);
-                    $('select[name="language"]').val(trackData.language);
-                    $('textarea[name="target_group_info"]').val(trackData.target_group_info);
-                    $('textarea[name="extra_info"]').val(trackData.extra_info);
+                    //$('textarea[name="target_group_info"]').val(trackData.target_group_info);
+                    //$('textarea[name="extra_info"]').val(trackData.extra_info);
 
                     $('input[name="contact_firstname"]').val(trackData.contact.firstname);
                     $('input[name="contact_lastname"]').val(trackData.contact.lastname);
@@ -167,12 +228,29 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="contact_organization"]').val(trackData.contact.organization);
                     $('input[name="contact_title"]').val(trackData.contact.title);
 
+                    self._enableWysiwyg([
+                        { selector: 'textarea[name="description"]', content: trackData.description },
+                        { selector: 'textarea[name="target_group_info"]', content: trackData.target_group_info },
+                        { selector: 'textarea[name="extra_info"]', content: trackData.extra_info },
+                        { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
+                        { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
+                        { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
+                    ]);
+
 
                     self._renderSpeakers(trackData.speakers);
 
                     if (isReview && trackData.can_review && trackData.rating_grade_ids) {
                         self._enableReviewMode(trackData.rating_grade_ids);  
                     }
+
+                    
+
+                    // Päivitä ja näytä webinar-osio, jos webinar on käytössä
+                    self._updateWebinarSection(trackData);
+
+                    // Päivitä ja näytä workshop-osio
+                    self._updateWorkshopSection(trackData);
 
                     if (trackData.is_readonly) {
                         self._makeFieldsReadonly(isReview);
@@ -182,12 +260,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         self._enableSubmitButtons();  // Enable the save buttons if not readonly
                         self._enableAddPresenterButton();
                     }
-
-                    // Päivitä ja näytä webinar-osio, jos webinar on käytössä
-                    self._updateWebinarSection(trackData);
-
-                    // Päivitä ja näytä workshop-osio
-                    self._updateWorkshopSection(trackData);
 
                     // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
                     $('#modal_event_track_application').modal('show');
@@ -200,21 +272,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
     _enableReviewMode: function(rating_grade_ids) {
         // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
-        console.log("==LUPA ARVIOIDA====");
         const reviewDiv = $('#header-track-application-review-div');
         reviewDiv.removeClass('d-none');
 
         this._populateSelectOptions('rating', rating_grade_ids);
+
+        this._enableWysiwyg([
+            { selector: 'textarea[name="rating_comment"]'},
+        ]);
     },
 
     _updateWorkshopSection: function(trackData) {
         const workshopDiv = $('#track-application-workshop-div');
         const contractDiv = $('#track-application-workshop-contract-div');
         const workshopRequestDiv = $('#workshop-track-request-time-div');
-        console.log(trackData.type);
-        console.log(trackData.type.workshop);
         if (trackData.is_workshop) {
-            console.log("===ON WORKSHOPPI===");
             workshopDiv.removeClass('d-none');
             $('input[name="is_workshop"]').val('true');
             $('input[name="workshop_min_participants"]').val(trackData.workshop_min_participants).prop('disabled', false).attr('required', true);
@@ -223,9 +295,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $('textarea[name="workshop_goals"]').val(trackData.workshop_goals).prop('disabled', false).attr('required', true);
             $('textarea[name="workshop_schedule"]').val(trackData.workshop_schedule).prop('disabled', false).attr('required', true);
 
+            // this._enableWysiwyg([
+            //     { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
+            //     { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
+            // ]);
+
             workshopRequestDiv.removeClass('d-none');
             workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
-
+            this._populateSelectOptions('request_time', trackData.request_time, trackData.req_time);
 
             if (trackData.is_workshop_contract) {
                 contractDiv.removeClass('d-none');
@@ -274,6 +351,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             webinarCheckbox.prop('disabled', false);
             webinarInfo.prop('disabled', !trackData.webinar);
             webinarInfo.val(trackData.webinar_info || '');
+
+            // this._enableWysiwyg([
+            //     { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
+            // ]);
+
         } else {
             webinarDiv.addClass('d-none');
             $('input[name="is_webinar"]').val('false');
@@ -337,13 +419,18 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _makeFieldsReadonly: function(isReview) {
-        console.log("=====DISABLOIDAAN==");
         const $form = $('.js_website_submit_cfp_form');
+        console.log($form);
+        console.log("====LAITETAAN READONLY====");
         if (!isReview) {
-            console.log("kentat readonly ja disabled");
-            console.log($form);
+            console.log("===KENTÄT READONLY====");
             // Aseta kaikki lomakkeen kentät readonly-tilaan
-            $form.find('input, textarea, select').attr('readonly', true).attr('disabled', true);
+            $form.find('input, textarea, select').each(function() {
+                $(this).attr('readonly', true).attr('disabled', true);
+            });
+
+
+            console.log($form.find('input, textarea, select'));
 
             // Poista readonly tai disabled attribuutit vain modaalin sulkemispainikkeista
             $form.find('.warning-close-modal').attr('disabled', false);
@@ -354,7 +441,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 'textarea[name="rating_comment"]',
                 'select[name="rating"]',
             ];
-            console.log("naytetaan arviointi kentät");
             editableFields.forEach(function(selector) {
                 $form.find(selector).removeAttr('readonly').removeAttr('disabled');
             });
@@ -370,7 +456,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $('#application-submit-button').attr('disabled', true).hide();
             $('#application-submit-button-send').attr('disabled', true).hide();
         } else {
-            console.log("NÄYTETÄÄN ARVIOINTI PAINIKKEET");
             // Näytä ja aktivoi arvostelun lähetyspainikkeet ja info-osio
             
             $('#application-submit-button-send').attr('disabled', false).show();
@@ -438,11 +523,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             let $textarea = $form.find('textarea[name=description]');
             let $textareaContainer = $form.find('.o_wysiwyg_textarea_wrapper');
 
-            console.log($textarea);
-
             // Tarkistetaan, onko WYSIWYG-editori täytetty
             const fillableTextAreaEl = $form[0].querySelector(".o_wysiwyg_textarea_wrapper");
-            console.log(fillableTextAreaEl);
+
             const isTextAreaFilled = fillableTextAreaEl &&
                 (fillableTextAreaEl.innerText.trim() || fillableTextAreaEl.querySelector("img"));
 
@@ -457,7 +540,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             }
 
             if (!validForm) {
-                console.log("====HTML KENTTÄ EI OLE TÄYTETTY VAIKKA PAKOLLINEN====");
+
                 e.preventDefault();
                 // Siirrytään virheelliseen kenttään
                 $textareaContainer[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -486,7 +569,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 success: function (response) {
                     const jsonResponse = JSON.parse(response);
                     if (jsonResponse.success) {
-                        console.log("Lomake lähetettiin onnistuneesti");
 
                         // Tyhjennä lomake
                         $('#track-application-form')[0].reset();
@@ -520,13 +602,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const self = this;
         $(document).ready(function () {
             $("#type").change(function () {
-                console.log("===VAIHTUUU====");
                 const selectedType = $("#type option:selected");
                 const description = selectedType.attr("data-description") || "";
                 $("#application_type_description").text(description);
 
                 const workshop = selectedType.attr("data-workshop");
-                console.log(workshop);
                 const workshopContract = selectedType.attr("data-workshop-contract");
                 const webinar = selectedType.attr("data-webinar");
 
@@ -546,6 +626,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             workshopDiv.removeClass('d-none');
             workshopDiv.find('input, select').prop('disabled', false).attr('required', true);
             workshopDiv.find('textarea').prop('disabled', false).attr('required', true);
+
+            // this._enableWysiwyg([
+            //     { selector: 'textarea[name="workshop_goals"]' },
+            //     { selector: 'textarea[name="workshop_schedule"]' },
+            // ]);
 
             workshopRequestDiv.removeClass('d-none');
             workshopRequestDiv.find('select').prop('disabled', false).attr('required', true);
@@ -576,7 +661,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const webinarCheckbox = $('input[name="webinar"]');
         const webinarInfo = $('textarea[name="webinar_info"]');
 
+        
+
         if (webinar) {
+            // this._enableWysiwyg([
+            //     { selector: 'textarea[name="webinar_info"]' },
+            // ]);
             webinarDiv.removeClass('d-none');
             webinarCheckbox.prop('disabled', false);
             webinarCheckbox.change(function () {
@@ -625,13 +715,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
      */
-    _enableWysiwyg: function () {
+    _enableWysiwyg: function (selectors = []) {  // Oletus tyhjä taulukko, jos selectors puuttuu
         const self = this;
 
-        // Käytetään WYSIWYG editoria kaikille o_wysiwyg_loader -tekstikentille
-        $('textarea.o_wysiwyg_loader').toArray().forEach((textarea) => {
-            var $textarea = $(textarea);
-            var $form = $textarea.closest('form');
+        if (!Array.isArray(selectors) || selectors.length === 0) {
+            console.error('No selectors provided for WYSIWYG initialization.');
+            return;
+        }
+
+        selectors.forEach(selector => {
+            var $textarea = $(selector.selector);
+            
+            if ($textarea.length === 0) {
+                console.error(`Textarea element not found for WYSIWYG initialization: ${selector.selector}`);
+                return;
+            }
+
             var options = {
                 toolbarTemplate: 'website_forum.web_editor_toolbar',
                 toolbarOptions: {
@@ -654,16 +753,18 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 height: 350,
             };
 
-            // Aktivoi WYSIWYG-editori
             loadWysiwygFromTextarea(self, $textarea[0], options).then((wysiwyg) => {
-                // Poistetaan float-start-luokka kuvista, jotka sotkevat layoutin
-                $form.find('.note-editable').find('img.float-start').removeClass('float-start');
-                $form.on('submit', function() {
-                    $textarea.val(wysiwyg.getValue());
-                });
+                if (selector.content) {
+                    wysiwyg.setValue(selector.content); // Aseta olemassa oleva sisältö editoriin
+                }
+                $textarea.data('wysiwyg', wysiwyg); // Tallenna viite WYSIWYG-editoriin
             });
         });
-    }
+    },
+
+
+
+
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;

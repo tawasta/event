@@ -41,6 +41,7 @@
                 <p>There are currently no tracks for your account.</p>
             </t>
             <t t-if="tracks or review_tracks" t-call="portal.portal_table">
+                <t t-call="website_event_track_advanced.event_track_application"/>
                 <thead>
                     <tr class="active">
                         <th id="th_track">Track</th>
@@ -58,7 +59,7 @@
                             style="display: list-item; padding: 0.75rem;"
                         >My Tracks</caption>
                     </t>
-                    <t t-call="website_event_track_advanced.event_track_application"/>
+                    
                     <t t-foreach="tracks" t-as="track">
                         <t t-set="event" t-value="track.event_id" />
                         <tr>
