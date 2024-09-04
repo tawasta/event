@@ -362,7 +362,7 @@
                             <t
                                 t-call="website_event_track_advanced.event_track_application_targetgroup_info"
                             />
-                            <t t-if="not review">
+                            
                                 <t
                                     t-call="website_event_track_advanced.event_track_application_contact_info"
                                 />
@@ -378,7 +378,7 @@
                                 <t
                                     t-call="website_event_track_advanced.event_track_application_extra_info"
                                 />
-                            </t>
+                            
                             <div
                                 id="header-track-application-review-div"
                                 class="d-none"

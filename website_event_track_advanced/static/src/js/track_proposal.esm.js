@@ -204,13 +204,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             var button = $(event.relatedTarget);
             var trackId = button.data("track-id"); // Get track ID from button
             var eventId = button.data("event-id"); // Hae event ID napista
-
             var isReview = button.data("review") || false; // Tarkistetaan, onko kyseessä arvostelutila
-
-            // Estä modalin näyttäminen ennen kuin data on ladattu ja asetettu
-            // event.preventDefault();
-            // Piilota modal aluksi
-            $("#modal_event_track_application").modal("hide");
 
             // Määritä action URL ja aseta se lomakkeelle
             var actionUrl = `/event/${eventId}/track_proposal/post`;
@@ -222,10 +216,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     event_id: eventId,
                 }).then((response) => {
                     self._populateSelectOptions("type", response.application_types);
-                    self._populateSelectOptions(
-                        "target_groups",
-                        response.target_groups
-                    );
+                    self._populateSelectOptions("target_groups", response.target_groups);
                     self._populateSelectOptions("tags", response.tags);
                     self._populateSelectOptions("request_time", response.request_time);
                     self._populateSelectOptions("language", response.languages);
@@ -245,34 +236,17 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         maximumSelectionSize: 3,
                     });
 
-                    $("#modal_event_track_application").modal("show");
                 });
             } else {
-                // Var action = "/event/track/data/" + trackId;
+                // Hae tiedot tietylle trackille
                 jsonrpc("/event/track/data", {
                     track_id: trackId,
                     isReview: isReview,
                 }).then((trackData) => {
-                    self._populateSelectOptions(
-                        "type",
-                        trackData.application_types,
-                        trackData.type
-                    );
-                    self._populateSelectOptions(
-                        "target_groups",
-                        trackData.target_groups,
-                        trackData.target_group_ids
-                    );
-                    self._populateSelectOptions(
-                        "tags",
-                        trackData.tags,
-                        trackData.tag_ids
-                    );
-                    self._populateSelectOptions(
-                        "language",
-                        trackData.languages,
-                        trackData.language
-                    );
+                    self._populateSelectOptions("type", trackData.application_types, trackData.type);
+                    self._populateSelectOptions("target_groups", trackData.target_groups, trackData.target_group_ids);
+                    self._populateSelectOptions("tags", trackData.tags, trackData.tag_ids);
+                    self._populateSelectOptions("language", trackData.languages, trackData.language);
 
                     $(".tags-select").select2({
                         maximumSelectionSize: 3,
@@ -282,57 +256,28 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);
-                    // Täytä WYSIWYG-editori olemassa olevalla sisällöllä
-                    // self._enableWysiwyg('textarea.o_wysiwyg_loader', trackData.description);
                     $('input[name="video_url"]').val(trackData.video_url);
-                    // $('textarea[name="target_group_info"]').val(trackData.target_group_info);
-                    // $('textarea[name="extra_info"]').val(trackData.extra_info);
 
-                    $('input[name="contact_firstname"]').val(
-                        trackData.contact.firstname
-                    );
+                    $('input[name="contact_firstname"]').val(trackData.contact.firstname);
                     $('input[name="contact_lastname"]').val(trackData.contact.lastname);
                     $('input[name="contact_email"]').val(trackData.contact.email);
                     $('input[name="contact_phone"]').val(trackData.contact.phone);
-                    $('input[name="contact_organization"]').val(
-                        trackData.contact.organization
-                    );
+                    $('input[name="contact_organization"]').val(trackData.contact.organization);
                     $('input[name="contact_title"]').val(trackData.contact.title);
 
+                    // Alusta WYSIWYG-editorit ja aseta arvot
                     self._enableWysiwyg([
-                        {
-                            selector: 'textarea[name="description"]',
-                            content: trackData.description,
-                        },
-                        {
-                            selector: 'textarea[name="target_group_info"]',
-                            content: trackData.target_group_info,
-                        },
-                        {
-                            selector: 'textarea[name="extra_info"]',
-                            content: trackData.extra_info,
-                        },
-                        {
-                            selector: 'textarea[name="webinar_info"]',
-                            content: trackData.webinar_info,
-                        },
-                        {
-                            selector: 'textarea[name="workshop_goals"]',
-                            content: trackData.workshop_goals,
-                        },
-                        {
-                            selector: 'textarea[name="workshop_schedule"]',
-                            content: trackData.workshop_schedule,
-                        },
+                        {selector: 'textarea[name="description"]', content: trackData.description},
+                        {selector: 'textarea[name="target_group_info"]', content: trackData.target_group_info},
+                        {selector: 'textarea[name="extra_info"]', content: trackData.extra_info},
+                        {selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info},
+                        {selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
+                        {selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
                     ]);
 
                     self._renderSpeakers(trackData.speakers);
 
-                    if (
-                        isReview &&
-                        trackData.can_review &&
-                        trackData.rating_grade_ids
-                    ) {
+                    if (isReview && trackData.can_review && trackData.rating_grade_ids) {
                         self._enableReviewMode(trackData.rating_grade_ids, trackData.rating, trackData.rating_comment);
                     }
 
@@ -344,19 +289,20 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     if (trackData.is_readonly) {
                         self._makeFieldsReadonly(isReview);
-                        self._disableSubmitButtons(isReview); // Disable the save buttons if readonly
+                        self._disableSubmitButtons(isReview);
                         self._disableAddPresenterButton();
                     } else {
-                        self._enableSubmitButtons(); // Enable the save buttons if not readonly
+                        self._enableSubmitButtons();
                         self._enableAddPresenterButton();
                     }
 
-                    // Nyt kun lomakkeen tiedot on asetettu, näytetään modal
-                    $("#modal_event_track_application").modal("show");
+                    const wysiwygTextareas = $("#track-application-form").find('textarea');
+                    console.log(wysiwygTextareas);
                 });
             }
         });
     },
+
 
     _enableReviewMode: function (rating_grade_ids, rating, rating_comment) {
         // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
@@ -713,7 +659,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             const submitButton = $(this).find('[type="submit"]');
             submitButton.prop("disabled", true); // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
-
             const formData = new FormData(this); // Kerää lomaketiedot
             const action = $(this).attr("action"); // Hae lomakkeen action-osoite
 
@@ -879,7 +824,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             console.error("No selectors provided for WYSIWYG initialization.");
             return;
         }
-
+        console.log(selectors);
         selectors.forEach((selector) => {
             var $textarea = $(selector.selector);
 
