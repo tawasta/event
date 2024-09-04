@@ -161,43 +161,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $("#track-application-speaker-input-index").val(speakerCount);
     },
 
-    _populatePrivacyOptions: function (privacyIds) {
-        const container = $("#privacy-acceptance-container");
-        const template = container.find(".privacy-template").first();
-
-        container.find(".privacy-template").not(":first").remove();
-
-        if (privacyIds && Array.isArray(privacyIds)) {
-            privacyIds.forEach(function (privacy) {
-                const newElement = template
-                    .clone()
-                    .removeClass("d-none privacy-template");
-
-                newElement
-                    .find("input")
-                    .attr("name", `privacy_${privacy.id}`)
-                    .prop("required", privacy.is_required)
-                    .prop("checked", privacy.accepted); // Asetetaan valmiiksi, jos hyväksytty
-
-                newElement.find(".privacy-name").text(privacy.name);
-
-                if (privacy.link) {
-                    newElement
-                        .find(".privacy-link")
-                        .attr("href", privacy.link)
-                        .text(privacy.link_name)
-                        .removeClass("d-none");
-                } else {
-                    newElement.find(".privacy-link").addClass("d-none");
-                }
-
-                container.append(newElement);
-            });
-        } else {
-            console.error("privacyIds is not an array or is undefined");
-        }
-    },
-
     _loadTrackData: function () {
         const self = this;
         $("#modal_event_track_application").on("show.bs.modal", function (event) {
@@ -230,7 +193,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._populateSelectOptions("request_time", response.request_time);
                     self._populateSelectOptions("language", response.languages);
 
-                    self._populatePrivacyOptions(response.privacy_ids);
+                    const privacyDIV = $("#privacy-acceptance-container");
+                    privacyDIV.removeClass("d-none");
 
                     self._enableWysiwyg([
                         {selector: 'textarea[name="description"]'},
@@ -260,8 +224,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('.tags-select').val(trackData.tag_ids).select2({
                         maximumSelectionSize: 3,
                     });
-
-                    self._populatePrivacyOptions(trackData.privacy_ids);
 
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);

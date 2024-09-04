@@ -389,29 +389,36 @@
                                 />
                             </div>
 
-                            <div id="privacy-acceptance-container">
+                            <div id="privacy-acceptance-container" class="d-none">
                                 <div
-                                    class="form-group col-xl-12 privacy-template d-none"
+                                    class="form-group col-xl-12 privacy-template"
                                 >
-                                    <div class="form-check">
-                                        <input
-                                            type="checkbox"
-                                            class="form-check-input privacy_acceptance"
-                                        />
-                                        <label class="form-check-label">
-                                            <span class="privacy-name" />
-                                            <span class="privacy-link-container">
-                                                - <a
-                                                    href="#"
-                                                    target="_blank"
-                                                    class="privacy-link"
-                                                />
-                                            </span>
-                                        </label>
-                                        <div class="invalid-feedback">
-                                            Please accept these terms.
-                                        </div>
-                                    </div>
+
+                                    <t t-if="event and event.privacy_ids">
+                                        <t t-foreach="event.sudo().privacy_ids" t-as="p">
+                                            <div class="form-group col-xl-12">
+                                                <div class="form-check">
+                                                    <input
+                                                        type="checkbox"
+                                                        class="form-check-input privacy_acceptance"
+                                                        t-attf-name="privacy_#{str(p.id)}"
+                                                        t-att-required="None if not p.is_required else 'required'"
+                                                    />
+                                                    <label
+                                                        t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
+                                                    ><t t-esc="p.name" /><t t-if="p.link"> - <a
+                                                                t-att-href="p.link"
+                                                                target="_blank"
+                                                            ><t
+                                                                    t-esc="p.link_name"
+                                                                /></a></t></label>
+                                                <div
+                                                        class="invalid-feedback"
+                                                    >Please accept these terms.</div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
                                 </div>
                             </div>
                         </div>

@@ -104,6 +104,7 @@ class PortalTrack(CustomerPortal):
                 "default_url": "/my/tracks",
                 "get_formated_date": self.get_formated_date,
                 "track_languages": track_languages,
+                'event': False,
             }
         )
         return request.render("website_event_track_advanced.portal_my_tracks", values)
