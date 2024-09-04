@@ -274,6 +274,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.language
                     );
 
+                    $(".tags-select").select2({
+                        maximumSelectionSize: 3,
+                    });
+
                     self._populatePrivacyOptions(trackData.privacy_ids);
 
                     $('input[name="track_id"]').val(trackData.track_id);
@@ -329,7 +333,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.can_review &&
                         trackData.rating_grade_ids
                     ) {
-                        self._enableReviewMode(trackData.rating_grade_ids);
+                        self._enableReviewMode(trackData.rating_grade_ids, trackData.rating, trackData.rating_comment);
                     }
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
@@ -354,14 +358,23 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         });
     },
 
-    _enableReviewMode: function (rating_grade_ids) {
+    _enableReviewMode: function (rating_grade_ids, rating, rating_comment) {
         // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
         const reviewDiv = $("#header-track-application-review-div");
         reviewDiv.removeClass("d-none");
 
-        this._populateSelectOptions("rating", rating_grade_ids);
+        this._populateSelectOptions(
+            "rating",
+            rating_grade_ids,
+            rating
+        );
 
-        this._enableWysiwyg([{selector: 'textarea[name="rating_comment"]'}]);
+        this._enableWysiwyg([
+            {
+                selector: 'textarea[name="rating_comment"]',
+                content: rating_comment,
+            },
+        ]);
     },
 
     _updateWorkshopSection: function (trackData) {

@@ -97,8 +97,21 @@ class EventTrackControllerAdvanced(EventTrackController):
                     }
                     for rating in track.event_id.rating_grade_ids
                 ]
+
+                reviewer_id = request.env["event.track.reviewer"].sudo().search([
+                    ('user_id', '=', user.id)
+                ])
+                user_rating = request.env["event.track.rating"].sudo().search([
+                    ('event_track', '=', track.id),
+                    ('reviewer_id', '=', reviewer_id.id),
+                ])
+                if user_rating:
+                    rating = user_rating.grade_id.id
+                    rating_comment = user_rating.comment
+
+                    values.update({'rating': rating, 'rating_comment': rating_comment})
                 values.update(
-                    {"can_review": can_review, "rating_grade_ids": rating_grade_ids}
+                    {"can_review": can_review, "rating_grade_ids": rating_grade_ids,}
                 )
 
             if not can_review:
@@ -827,12 +840,16 @@ class EventTrackControllerAdvanced(EventTrackController):
         track_id = post.get("track_id")
         if reviewer_id and track_id:
             track = request.env["event.track"].sudo().search([["id", "=", track_id]])
+            rating_id = request.env["event.track.rating.grade"].sudo().search([
+                ('id', '=' , post.get("rating"))
+            ])
             vals = {
                 "event_track": track.id,
                 "reviewer_id": reviewer_id.id,
-                "grade_id": post.get("rating") or False,
-                "comment": post.get("rating_comment") or False,
+                "grade_id": rating_id.id,
+                "comment": post.get("rating_comment"),
             }
+            logging.info(vals);
             existing_rating = (
                 request.env["event.track.rating"]
                 .sudo()
