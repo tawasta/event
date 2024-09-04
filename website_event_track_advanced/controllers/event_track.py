@@ -209,6 +209,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "languages": languages,
                 "target_group_ids": track.target_group_ids.ids,
                 "target_group_info": track.target_group_info,
+                'tag_ids': track.tag_ids.ids,
                 "extra_info": track.extra_info,
                 "partner_id": [track.partner_id.id, track.partner_id.name]
                 if track.partner_id

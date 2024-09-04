@@ -254,10 +254,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 }).then((trackData) => {
                     self._populateSelectOptions("type", trackData.application_types, trackData.type);
                     self._populateSelectOptions("target_groups", trackData.target_groups, trackData.target_group_ids);
-                    self._populateSelectOptions("tags", trackData.tags, trackData.tag_ids);
+                    self._populateSelectOptions("tags", trackData.tags);
                     self._populateSelectOptions("language", trackData.languages, trackData.language);
 
-                    $(".tags-select").select2({
+                    $('.tags-select').val(trackData.tag_ids).select2({
                         maximumSelectionSize: 3,
                     });
 
@@ -740,6 +740,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         // Tarkistetaan, että workshop on nimenomaan "true"
         if (workshop === "true") {
             workshopDiv.removeClass("d-none");
+            $('input[name="is_workshop"]').val("true");
             workshopDiv
                 .find("input, select")
                 .prop("disabled", false)
@@ -769,6 +770,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             }
         } else {
             workshopDiv.addClass("d-none");
+            $('input[name="is_workshop"]').val("false");
             workshopDiv
                 .find("input, select")
                 .prop("disabled", true)
