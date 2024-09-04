@@ -398,12 +398,27 @@
                                         <t t-foreach="event.sudo().privacy_ids" t-as="p">
                                             <div class="form-group col-xl-12">
                                                 <div class="form-check">
-                                                    <input
-                                                        type="checkbox"
-                                                        class="form-check-input privacy_acceptance"
-                                                        t-attf-name="privacy_#{str(p.id)}"
-                                                        t-att-required="None if not p.is_required else 'required'"
+                                                    <t
+                                                        t-set="user_privacy_consents"
+                                                        t-value="request.env['privacy.consent'].sudo().search([('partner_id', '=', request.env.user.partner_id.id), ('activity_id', '=', p.id),('accepted', '=', True)])"
                                                     />
+                                                    <t t-if="user_privacy_consents">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input privacy_acceptance"
+                                                            t-attf-name="privacy_#{str(p.id)}"
+                                                            t-att-checked="'checked' if user_privacy_consents else None"
+                                                            
+                                                        />
+                                                    </t>
+                                                    <t t-else="">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="form-check-input privacy_acceptance"
+                                                            t-attf-name="privacy_#{str(p.id)}"
+                                                            t-att-required="None if not p.is_required else 'required'"
+                                                        />
+                                                    </t>
                                                     <label
                                                         t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
                                                     ><t t-esc="p.name" /><t t-if="p.link"> - <a

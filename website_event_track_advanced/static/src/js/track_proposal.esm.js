@@ -200,8 +200,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="description"]'},
                         {selector: 'textarea[name="target_group_info"]'},
                         {selector: 'textarea[name="extra_info"]'},
-                        {selector: 'textarea[name="workshop_goals"]'},
-                        {selector: 'textarea[name="workshop_schedule"]'},
+                        // {selector: 'textarea[name="workshop_goals"]'},
+                        // {selector: 'textarea[name="workshop_schedule"]'},
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
@@ -709,10 +709,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .attr("required", true);
             workshopDiv.find("textarea").prop("disabled", false).attr("required", true);
 
-            // This._enableWysiwyg([
-            //     { selector: 'textarea[name="workshop_goals"]' },
-            //     { selector: 'textarea[name="workshop_schedule"]' },
-            // ]);
+            this._enableWysiwyg([
+                { selector: 'textarea[name="workshop_goals"]' },
+                { selector: 'textarea[name="workshop_schedule"]' },
+            ]);
 
             workshopRequestDiv.removeClass("d-none");
             workshopRequestDiv
