@@ -215,6 +215,15 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 jsonrpc("/event/application_types", {
                     event_id: eventId,
                 }).then((response) => {
+                    if (response.contact_info) {
+                        $('input[name="contact_firstname"]').val(response.contact_info.firstname);
+                        $('input[name="contact_lastname"]').val(response.contact_info.lastname);
+                        $('input[name="contact_email"]').val(response.contact_info.email);
+                        $('input[name="contact_phone"]').val(response.contact_info.phone);
+                        $('input[name="contact_organization"]').val(response.contact_info.organization);
+                        $('input[name="contact_title"]').val(response.contact_info.title);
+                        $('input[name="contact_id"]').val(response.contact_info.contact_id);
+                    }
                     self._populateSelectOptions("type", response.application_types);
                     self._populateSelectOptions("target_groups", response.target_groups);
                     self._populateSelectOptions("tags", response.tags);
@@ -264,6 +273,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="contact_phone"]').val(trackData.contact.phone);
                     $('input[name="contact_organization"]').val(trackData.contact.organization);
                     $('input[name="contact_title"]').val(trackData.contact.title);
+                    $('input[name="contact_id"]').val(trackData.contact.id);
 
                     // Alusta WYSIWYG-editorit ja aseta arvot
                     self._enableWysiwyg([

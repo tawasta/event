@@ -887,7 +887,7 @@
                 </p>
                 <div id="track-application-contact-row-div" class="row">
                     <div class="form-group col-xl-4">
-                        <input t-attf-name="contact_id" class="d-none" type="hidden" />
+                        <input name="contact_id" class="d-none" type="hidden" />
                         <label
                             for="contact_firstname"
                             class="col-form-label"

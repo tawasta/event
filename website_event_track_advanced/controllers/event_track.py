@@ -337,6 +337,22 @@ class EventTrackControllerAdvanced(EventTrackController):
             for privacy in event.privacy_ids
         ]
 
+        if request.env.user and not request.env.user._is_public():
+            user = request.env.user
+
+            # Lisätään käyttäjän yhteystiedot vastaukseen
+            contact_info = {
+                "firstname": user.partner_id.firstname,
+                "lastname": user.partner_id.lastname,
+                "email": user.partner_id.email or "",
+                "phone": user.partner_id.phone or "",
+                "organization": user.partner_id.parent_id.name or "",
+                "title": user.partner_id.function or "",
+                'contact_id': user.partner_id.id,
+            }
+        else:
+            contact_info = {}
+
         return {
             "application_types": application_types,
             "target_groups": target_groups,
@@ -344,6 +360,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "request_time": request_time,
             "privacy_ids": privacy_ids,
             "languages": languages,
+            "contact_info": contact_info,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):
