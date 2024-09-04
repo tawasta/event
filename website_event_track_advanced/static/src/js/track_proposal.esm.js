@@ -791,25 +791,28 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
      */
     _enableWysiwyg: function (selectors = []) {
-        // Oletus tyhjä taulukko, jos selectors puuttuu
         const self = this;
 
         if (!Array.isArray(selectors) || selectors.length === 0) {
             console.error("No selectors provided for WYSIWYG initialization.");
             return;
         }
-        console.log(selectors);
+
         selectors.forEach((selector) => {
-            var $textarea = $(selector.selector);
+            const $textarea = $(selector.selector);
 
             if ($textarea.length === 0) {
-                console.error(
-                    `Textarea element not found for WYSIWYG initialization: ${selector.selector}`
-                );
+                console.error(`Textarea element not found for WYSIWYG initialization: ${selector.selector}`);
                 return;
             }
 
-            var options = {
+            // Tarkista, onko WYSIWYG-editori jo alustettu
+            if ($textarea.data("wysiwyg")) {
+                console.log(`WYSIWYG-editor already initialized for: ${selector.selector}`);
+                return;
+            }
+
+            const options = {
                 toolbarTemplate: "website_forum.web_editor_toolbar",
                 toolbarOptions: {
                     showColors: false,
@@ -824,9 +827,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 recordInfo: {
                     context: self._getContext(),
                     res_model: "event.track",
-                    res_id: Number(
-                        window.location.pathname.split("-").slice(-1)[0].split("/")[0]
-                    ),
+                    res_id: Number(window.location.pathname.split("-").slice(-1)[0].split("/")[0]),
                 },
                 resizable: true,
                 userGeneratedContent: true,
@@ -841,6 +842,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             });
         });
     },
+
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;
