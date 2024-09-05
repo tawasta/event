@@ -553,7 +553,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             webinarInfo.val(trackData.webinar_info || "");
 
             this._enableWysiwyg([
-                { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
+                {
+                    selector: 'textarea[name="webinar_info"]',
+                    content: trackData.webinar_info,
+                },
             ]);
         } else {
             webinarDiv.addClass("d-none");
