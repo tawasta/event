@@ -45,24 +45,54 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             const $row = $(this).closest(".track-application-speakers-div-row-container"); // Viittaus rivin kontaineriin
             const speaker_id = $row.find("input[name^='speaker_id']").val();
             console.log(speaker_id);
+
             // Näytä vahvistusdialogi
             Dialog.confirm(this, _t("Are you sure you want to remove this speaker?"), {
                 title: _t("Confirm Removal"),
                 size: 'medium',
                 confirm_callback: function () {
                     $row.remove();
-                    var speaker_count =
-                        Number(
-                            $("#track-application-speaker-input-index").val()
-                        ) - 1;
-                    $("#track-application-speaker-input-index").val(
-                        speaker_count
-                    );
 
+                    // Päivitetään puhujien indeksit ja numerot
+                    _updateSpeakerIndexes();
+
+                    // Päivitetään puhujien lukumäärä
+                    var speaker_count = Number($("#track-application-speaker-input-index").val()) - 1;
+                    $("#track-application-speaker-input-index").val(speaker_count);
                 },
             });
         });
+
+        // Päivitetään puhujien indeksit ja numerot (ensimmäistä riviä ei kosketa)
+        function _updateSpeakerIndexes() {
+            const rows = container.find(".track-application-speakers-div-row-container");
+
+            // Aloitetaan toisesta rivistä (index 1), jolloin ensimmäistä riviä ei muuteta
+            rows.slice(1).each(function (index, row) {
+                const speakerCount = index + 2; // Numerointi alkaa 2:sta, koska index alkaa 1:stä (ensimmäistä riviä ei kosketa)
+                const $row = $(row);
+
+                // Päivitetään numero ja id-attribuutit
+                $row.find(".presenter-span").text(`Presenter #${speakerCount}`);
+
+                // Päivitetään kenttien name- ja id-attribuutit
+                $row.find("input, label").each(function () {
+                    const elem = $(this);
+                    const nameAttr = elem.attr("name");
+                    const forAttr = elem.attr("for");
+
+                    if (nameAttr) {
+                        elem.attr("name", nameAttr.replace(/\[\d+\]/, `[${speakerCount}]`));
+                    }
+                    if (forAttr) {
+                        elem.attr("for", forAttr.replace(/\[\d+\]/, `[${speakerCount}]`));
+                    }
+                });
+            });
+        }
     },
+
+
 
 
     _setupModalCloseBehavior: function () {

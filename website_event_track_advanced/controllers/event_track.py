@@ -121,7 +121,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         is_readonly = not track.stage_id.is_editable
 
         speakers = []
-        for speaker in track.speaker_ids:
+        for speaker in sorted(track.speaker_ids, key=lambda s: s.id):
             speakers.append(
                 {
                     "id": speaker.id,
