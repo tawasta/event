@@ -106,21 +106,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $(".close.warning-close-modal, .btn.btn-secondary.warning-close-modal").click(
             function (e) {
                 // Näytä vahvistusviesti käyttäjälle
-                const confirmClose = confirm(
-                    "If you close the form now, any unsaved changes will be lost. Do you really want to close?"
-                );
-
-                if (confirmClose) {
-                    // Nollaa lomake
-                    $("#track-application-form")[0].reset();
-
-                    // Sulje modal ja päivitä sivu
-                    $("#modal_event_track_application").modal("hide");
-                    location.reload(); // Päivitä sivu
-                } else {
-                    // Jos käyttäjä ei vahvistanut, estetään modalin sulkeminen
-                    e.preventDefault();
-                }
+                Dialog.confirm(this, _t("If you close the form now, any unsaved changes will be lost. Do you really want to close?"), {
+                    title: _t("Confirm close"),
+                    size: 'medium',
+                    confirm_callback: function () {
+                        $("#track-application-form")[0].reset();
+                        location.reload(); // Päivitä sivu
+                    },
+                });
             }
         );
     },
