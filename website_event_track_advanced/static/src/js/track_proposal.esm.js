@@ -58,7 +58,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $("#track-application-speaker-input-index").val(
                         speaker_count
                     );
-                    
+
                 },
             });
         });
@@ -276,8 +276,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="target_group_info"]', content: trackData.target_group_info},
                         {selector: 'textarea[name="extra_info"]', content: trackData.extra_info},
                         {selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info},
-                        {selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
-                        {selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
+                        //{selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
+                        //{selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
                     ]);
 
                     self._renderSpeakers(trackData.speakers);
@@ -334,6 +334,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const workshopRequestDiv = $("#workshop-track-request-time-div");
         if (trackData.is_workshop) {
             workshopDiv.removeClass("d-none");
+            this._enableWysiwyg([
+                { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
+                { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
+            ]);
             $('input[name="is_workshop"]').val("true");
             $('input[name="workshop_min_participants"]')
                 .val(trackData.workshop_min_participants)
@@ -355,11 +359,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .val(trackData.workshop_schedule)
                 .prop("disabled", false)
                 .attr("required", true);
-
-            // This._enableWysiwyg([
-            //     { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
-            //     { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
-            // ]);
 
             workshopRequestDiv.removeClass("d-none");
             workshopRequestDiv
@@ -626,6 +625,18 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const self = this;
         $("#track-application-form").on("submit", function (e) {
             e.preventDefault(); // Estä lomakkeen oletuslähetys
+
+            // Päivitä WYSIWYG-editorin sisältö ennen lomakkeen lähetystä
+            const wysiwygGoals = $('textarea[name="workshop_goals"]').data('wysiwyg');
+            const wysiwygSchedule = $('textarea[name="workshop_schedule"]').data('wysiwyg');
+
+            if (wysiwygGoals) {
+                $('textarea[name="workshop_goals"]').val(wysiwygGoals.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
+            }
+
+            if (wysiwygSchedule) {
+                $('textarea[name="workshop_schedule"]').val(wysiwygSchedule.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
+            }
 
             const loadingScreen = function () {
                 const message = "Loading, please wait...";
