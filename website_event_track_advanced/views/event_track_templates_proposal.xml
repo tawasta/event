@@ -420,23 +420,23 @@
                             <t
                                 t-call="website_event_track_advanced.event_track_application_targetgroup_info"
                             />
-                            
+
                                 <t
-                                    t-call="website_event_track_advanced.event_track_application_contact_info"
-                                />
+                                t-call="website_event_track_advanced.event_track_application_contact_info"
+                            />
                                 <t
-                                    t-call="website_event_track_advanced.event_track_application_speakers"
-                                />
+                                t-call="website_event_track_advanced.event_track_application_speakers"
+                            />
                                 <t
-                                    t-call="website_event_track_advanced.event_track_application_webinar"
-                                />
+                                t-call="website_event_track_advanced.event_track_application_webinar"
+                            />
                                 <t
-                                    t-call="website_event_track_advanced.event_track_application_workshop"
-                                />
+                                t-call="website_event_track_advanced.event_track_application_workshop"
+                            />
                                 <t
-                                    t-call="website_event_track_advanced.event_track_application_extra_info"
-                                />
-                            
+                                t-call="website_event_track_advanced.event_track_application_extra_info"
+                            />
+
                             <div
                                 id="header-track-application-review-div"
                                 class="d-none"
@@ -448,12 +448,13 @@
                             </div>
 
                             <div id="privacy-acceptance-container" class="d-none">
-                                <div
-                                    class="form-group col-xl-12 privacy-template"
-                                >
+                                <div class="form-group col-xl-12 privacy-template">
 
                                     <t t-if="event and event.privacy_ids">
-                                        <t t-foreach="event.sudo().privacy_ids" t-as="p">
+                                        <t
+                                            t-foreach="event.sudo().privacy_ids"
+                                            t-as="p"
+                                        >
                                             <div class="form-group col-xl-12">
                                                 <div class="form-check">
                                                     <t
@@ -466,7 +467,6 @@
                                                             class="form-check-input privacy_acceptance"
                                                             t-attf-name="privacy_#{str(p.id)}"
                                                             t-att-checked="'checked' if user_privacy_consents else None"
-                                                            
                                                         />
                                                     </t>
                                                     <t t-else="">
@@ -479,7 +479,9 @@
                                                     </t>
                                                     <label
                                                         t-att-class="'form-check-label label-optional' if not p.is_required else 'form-check-label'"
-                                                    ><t t-esc="p.name" /><t t-if="p.link"> - <a
+                                                    ><t t-esc="p.name" /><t
+                                                            t-if="p.link"
+                                                        > - <a
                                                                 t-att-href="p.link"
                                                                 target="_blank"
                                                             ><t

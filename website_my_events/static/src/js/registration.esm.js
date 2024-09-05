@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
-import publicWidget from "@web/legacy/js/public/public_widget";
 import {jsonrpc} from "@web/core/network/rpc_service";
+import publicWidget from "@web/legacy/js/public/public_widget";
 
 publicWidget.registry.PortalMyEvents = publicWidget.Widget.extend({
     selector: ".portal_my_events",
