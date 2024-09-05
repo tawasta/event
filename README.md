@@ -19,6 +19,7 @@ addon | version | maintainers | summary
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Event Mail Execute Override
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
+[event_recaptcha](event_recaptcha/) | 17.0.1.0.0 |  | Event Recaptcha
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
@@ -40,7 +41,7 @@ addon | version | maintainers | summary
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.0 |  | Additional configurations for the core snippet
-[website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.0 |  | Advanced features for Event Track
+[website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track

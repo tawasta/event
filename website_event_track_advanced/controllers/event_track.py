@@ -98,20 +98,31 @@ class EventTrackControllerAdvanced(EventTrackController):
                     for rating in track.event_id.rating_grade_ids
                 ]
 
-                reviewer_id = request.env["event.track.reviewer"].sudo().search([
-                    ('user_id', '=', user.id)
-                ])
-                user_rating = request.env["event.track.rating"].sudo().search([
-                    ('event_track', '=', track.id),
-                    ('reviewer_id', '=', reviewer_id.id),
-                ])
+                reviewer_id = (
+                    request.env["event.track.reviewer"]
+                    .sudo()
+                    .search([("user_id", "=", user.id)])
+                )
+                user_rating = (
+                    request.env["event.track.rating"]
+                    .sudo()
+                    .search(
+                        [
+                            ("event_track", "=", track.id),
+                            ("reviewer_id", "=", reviewer_id.id),
+                        ]
+                    )
+                )
                 if user_rating:
                     rating = user_rating.grade_id.id
                     rating_comment = user_rating.comment
 
-                    values.update({'rating': rating, 'rating_comment': rating_comment})
+                    values.update({"rating": rating, "rating_comment": rating_comment})
                 values.update(
-                    {"can_review": can_review, "rating_grade_ids": rating_grade_ids,}
+                    {
+                        "can_review": can_review,
+                        "rating_grade_ids": rating_grade_ids,
+                    }
                 )
 
             if not can_review:
@@ -209,7 +220,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "languages": languages,
                 "target_group_ids": track.target_group_ids.ids,
                 "target_group_info": track.target_group_info,
-                'tag_ids': track.tag_ids.ids,
+                "tag_ids": track.tag_ids.ids,
                 "extra_info": track.extra_info,
                 "partner_id": [track.partner_id.id, track.partner_id.name]
                 if track.partner_id
@@ -306,7 +317,6 @@ class EventTrackControllerAdvanced(EventTrackController):
     #             "success": True,
     #         }
 
-
     @http.route(
         ["/event/application_types"],
         type="json",
@@ -370,7 +380,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "phone": user.partner_id.phone or "",
                 "organization": user.partner_id.parent_id.name or "",
                 "title": user.partner_id.function or "",
-                'contact_id': user.partner_id.id,
+                "contact_id": user.partner_id.id,
             }
         else:
             contact_info = {}
@@ -488,7 +498,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         """
         values = {}
 
-        logging.info(post.get("contact_id"));
+        logging.info(post.get("contact_id"))
         # Contact
         contact_values = {
             "id": post.get("contact_id"),
@@ -881,16 +891,18 @@ class EventTrackControllerAdvanced(EventTrackController):
         track_id = post.get("track_id")
         if reviewer_id and track_id:
             track = request.env["event.track"].sudo().search([["id", "=", track_id]])
-            rating_id = request.env["event.track.rating.grade"].sudo().search([
-                ('id', '=' , post.get("rating"))
-            ])
+            rating_id = (
+                request.env["event.track.rating.grade"]
+                .sudo()
+                .search([("id", "=", post.get("rating"))])
+            )
             vals = {
                 "event_track": track.id,
                 "reviewer_id": reviewer_id.id,
                 "grade_id": rating_id.id,
                 "comment": post.get("rating_comment"),
             }
-            logging.info(vals);
+            logging.info(vals)
             existing_rating = (
                 request.env["event.track.rating"]
                 .sudo()
@@ -923,7 +935,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             if post.get("review-confirm"):
                 self._create_review(**post)
                 message = "Your review has been successfully saved."
-                return json.dumps({"success": True, 'message':message, "redirect": "/my/tracks"})
+                return json.dumps(
+                    {"success": True, "message": message, "redirect": "/my/tracks"}
+                )
 
             followers = list()
             _logger.info(_("Posted values: %s") % dict(post))
@@ -1041,11 +1055,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             elif track.stage_id.is_fully_accessible:
                 message = "Your track is saved and confirmed as part of the event."
             else:
-                message = "We will evaluate your proposition and get back to you shortly."
+                message = (
+                    "We will evaluate your proposition and get back to you shortly."
+                )
 
-            return json.dumps(
-                {"success": True, "message": message}
-            )
+            return json.dumps({"success": True, "message": message})
 
         except Exception as e:
             _logger.error(f"Error in track proposal post: {str(e)}")
