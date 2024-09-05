@@ -5,7 +5,7 @@ import {loadWysiwygFromTextarea} from "@web_editor/js/frontend/loadWysiwygFromTe
 import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
-import { renderToElement } from "@web/core/utils/render";
+import {renderToElement} from "@web/core/utils/render";
 // Import { qweb } from 'web.core';
 
 publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
@@ -39,17 +39,19 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const container = $(".track-application-speakers-div-container");
 
         // Käytetään delegoitua tapahtumankuuntelijaa, jotta myös kloonatut elementit saavat tapahtuman
-        container.on('click', '.btn-remove-speaker', function (event) {
+        container.on("click", ".btn-remove-speaker", function (event) {
             event.preventDefault(); // Estä oletustoiminto
 
-            const $row = $(this).closest(".track-application-speakers-div-row-container"); // Viittaus rivin kontaineriin
+            const $row = $(this).closest(
+                ".track-application-speakers-div-row-container"
+            ); // Viittaus rivin kontaineriin
             const speaker_id = $row.find("input[name^='speaker_id']").val();
             console.log(speaker_id);
 
             // Näytä vahvistusdialogi
             Dialog.confirm(this, _t("Are you sure you want to remove this speaker?"), {
                 title: _t("Confirm Removal"),
-                size: 'medium',
+                size: "medium",
                 confirm_callback: function () {
                     $row.remove();
 
@@ -57,7 +59,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     _updateSpeakerIndexes();
 
                     // Päivitetään puhujien lukumäärä
-                    var speaker_count = Number($("#track-application-speaker-input-index").val()) - 1;
+                    var speaker_count =
+                        Number($("#track-application-speaker-input-index").val()) - 1;
                     $("#track-application-speaker-input-index").val(speaker_count);
                 },
             });
@@ -65,7 +68,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Päivitetään puhujien indeksit ja numerot (ensimmäistä riviä ei kosketa)
         function _updateSpeakerIndexes() {
-            const rows = container.find(".track-application-speakers-div-row-container");
+            const rows = container.find(
+                ".track-application-speakers-div-row-container"
+            );
 
             // Aloitetaan toisesta rivistä (index 1), jolloin ensimmäistä riviä ei muuteta
             rows.slice(1).each(function (index, row) {
@@ -82,18 +87,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     const forAttr = elem.attr("for");
 
                     if (nameAttr) {
-                        elem.attr("name", nameAttr.replace(/\[\d+\]/, `[${speakerCount}]`));
+                        elem.attr(
+                            "name",
+                            nameAttr.replace(/\[\d+\]/, `[${speakerCount}]`)
+                        );
                     }
                     if (forAttr) {
-                        elem.attr("for", forAttr.replace(/\[\d+\]/, `[${speakerCount}]`));
+                        elem.attr(
+                            "for",
+                            forAttr.replace(/\[\d+\]/, `[${speakerCount}]`)
+                        );
                     }
                 });
             });
         }
     },
-
-
-
 
     _setupModalCloseBehavior: function () {
         // Estä modaalin sulkeutuminen ulkopuolisista klikkauksista tai Esc-näppäimen painalluksesta
@@ -124,7 +132,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             }
         );
     },
-
 
     _removeAttachments: function () {
         $("#btn-remove-attachment").click(function () {
@@ -242,16 +249,33 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     event_id: eventId,
                 }).then((response) => {
                     if (response.contact_info) {
-                        $('input[name="contact_firstname"]').val(response.contact_info.firstname);
-                        $('input[name="contact_lastname"]').val(response.contact_info.lastname);
-                        $('input[name="contact_email"]').val(response.contact_info.email);
-                        $('input[name="contact_phone"]').val(response.contact_info.phone);
-                        $('input[name="contact_organization"]').val(response.contact_info.organization);
-                        $('input[name="contact_title"]').val(response.contact_info.title);
-                        $('input[name="contact_id"]').val(response.contact_info.contact_id);
+                        $('input[name="contact_firstname"]').val(
+                            response.contact_info.firstname
+                        );
+                        $('input[name="contact_lastname"]').val(
+                            response.contact_info.lastname
+                        );
+                        $('input[name="contact_email"]').val(
+                            response.contact_info.email
+                        );
+                        $('input[name="contact_phone"]').val(
+                            response.contact_info.phone
+                        );
+                        $('input[name="contact_organization"]').val(
+                            response.contact_info.organization
+                        );
+                        $('input[name="contact_title"]').val(
+                            response.contact_info.title
+                        );
+                        $('input[name="contact_id"]').val(
+                            response.contact_info.contact_id
+                        );
                     }
                     self._populateSelectOptions("type", response.application_types);
-                    self._populateSelectOptions("target_groups", response.target_groups);
+                    self._populateSelectOptions(
+                        "target_groups",
+                        response.target_groups
+                    );
                     self._populateSelectOptions("tags", response.tags);
                     self._populateSelectOptions("request_time", response.request_time);
                     self._populateSelectOptions("language", response.languages);
@@ -271,7 +295,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $(".tags-select").select2({
                         maximumSelectionSize: 3,
                     });
-
                 });
             } else {
                 // Hae tiedot tietylle trackille
@@ -279,12 +302,24 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     track_id: trackId,
                     isReview: isReview,
                 }).then((trackData) => {
-                    self._populateSelectOptions("type", trackData.application_types, trackData.type);
-                    self._populateSelectOptions("target_groups", trackData.target_groups, trackData.target_group_ids);
+                    self._populateSelectOptions(
+                        "type",
+                        trackData.application_types,
+                        trackData.type
+                    );
+                    self._populateSelectOptions(
+                        "target_groups",
+                        trackData.target_groups,
+                        trackData.target_group_ids
+                    );
                     self._populateSelectOptions("tags", trackData.tags);
-                    self._populateSelectOptions("language", trackData.languages, trackData.language);
+                    self._populateSelectOptions(
+                        "language",
+                        trackData.languages,
+                        trackData.language
+                    );
 
-                    $('.tags-select').val(trackData.tag_ids).select2({
+                    $(".tags-select").val(trackData.tag_ids).select2({
                         maximumSelectionSize: 3,
                     });
 
@@ -292,28 +327,52 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="name"]').val(trackData.name);
                     $('input[name="video_url"]').val(trackData.video_url);
 
-                    $('input[name="contact_firstname"]').val(trackData.contact.firstname);
+                    $('input[name="contact_firstname"]').val(
+                        trackData.contact.firstname
+                    );
                     $('input[name="contact_lastname"]').val(trackData.contact.lastname);
                     $('input[name="contact_email"]').val(trackData.contact.email);
                     $('input[name="contact_phone"]').val(trackData.contact.phone);
-                    $('input[name="contact_organization"]').val(trackData.contact.organization);
+                    $('input[name="contact_organization"]').val(
+                        trackData.contact.organization
+                    );
                     $('input[name="contact_title"]').val(trackData.contact.title);
                     $('input[name="contact_id"]').val(trackData.contact.id);
 
                     // Alusta WYSIWYG-editorit ja aseta arvot
                     self._enableWysiwyg([
-                        {selector: 'textarea[name="description"]', content: trackData.description},
-                        {selector: 'textarea[name="target_group_info"]', content: trackData.target_group_info},
-                        {selector: 'textarea[name="extra_info"]', content: trackData.extra_info},
-                        {selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info},
-                        //{selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
-                        //{selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
+                        {
+                            selector: 'textarea[name="description"]',
+                            content: trackData.description,
+                        },
+                        {
+                            selector: 'textarea[name="target_group_info"]',
+                            content: trackData.target_group_info,
+                        },
+                        {
+                            selector: 'textarea[name="extra_info"]',
+                            content: trackData.extra_info,
+                        },
+                        {
+                            selector: 'textarea[name="webinar_info"]',
+                            content: trackData.webinar_info,
+                        },
+                        // {selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
+                        // {selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
                     ]);
 
                     self._renderSpeakers(trackData.speakers);
 
-                    if (isReview && trackData.can_review && trackData.rating_grade_ids) {
-                        self._enableReviewMode(trackData.rating_grade_ids, trackData.rating, trackData.rating_comment);
+                    if (
+                        isReview &&
+                        trackData.can_review &&
+                        trackData.rating_grade_ids
+                    ) {
+                        self._enableReviewMode(
+                            trackData.rating_grade_ids,
+                            trackData.rating,
+                            trackData.rating_comment
+                        );
                     }
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
@@ -331,24 +390,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         self._enableAddPresenterButton();
                     }
 
-                    const wysiwygTextareas = $("#track-application-form").find('textarea');
+                    const wysiwygTextareas = $("#track-application-form").find(
+                        "textarea"
+                    );
                     console.log(wysiwygTextareas);
                 });
             }
         });
     },
 
-
     _enableReviewMode: function (rating_grade_ids, rating, rating_comment) {
         // Asetetaan lomake tilaan, jossa vain arviointikentät ovat näkyvissä ja muokattavissa
         const reviewDiv = $("#header-track-application-review-div");
         reviewDiv.removeClass("d-none");
 
-        this._populateSelectOptions(
-            "rating",
-            rating_grade_ids,
-            rating
-        );
+        this._populateSelectOptions("rating", rating_grade_ids, rating);
 
         this._enableWysiwyg([
             {
@@ -365,8 +421,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         if (trackData.is_workshop) {
             workshopDiv.removeClass("d-none");
             this._enableWysiwyg([
-                { selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals },
-                { selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule },
+                {
+                    selector: 'textarea[name="workshop_goals"]',
+                    content: trackData.workshop_goals,
+                },
+                {
+                    selector: 'textarea[name="workshop_schedule"]',
+                    content: trackData.workshop_schedule,
+                },
             ]);
             $('input[name="is_workshop"]').val("true");
             $('input[name="workshop_min_participants"]')
@@ -657,8 +719,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             e.preventDefault(); // Estä lomakkeen oletuslähetys
 
             // Päivitä WYSIWYG-editorin sisältö ennen lomakkeen lähetystä
-            const wysiwygGoals = $('textarea[name="workshop_goals"]').data('wysiwyg');
-            const wysiwygSchedule = $('textarea[name="workshop_schedule"]').data('wysiwyg');
+            const wysiwygGoals = $('textarea[name="workshop_goals"]').data("wysiwyg");
+            const wysiwygSchedule = $('textarea[name="workshop_schedule"]').data(
+                "wysiwyg"
+            );
 
             if (wysiwygGoals) {
                 $('textarea[name="workshop_goals"]').val(wysiwygGoals.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
@@ -687,7 +751,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         font-size: 20px;
                     ">
                         <div>
-                            <img src="/web/static/src/img/spin.png" 
+                            <img src="/web/static/src/img/spin.png"
                                 style="animation: fa-spin 1s infinite steps(12); width: 50px; height: 50px;"/>
                             <br/><br/>
                             <h4>${message}</h4>
@@ -785,8 +849,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             workshopDiv.find("textarea").prop("disabled", false).attr("required", true);
 
             this._enableWysiwyg([
-                { selector: 'textarea[name="workshop_goals"]' },
-                { selector: 'textarea[name="workshop_schedule"]' },
+                {selector: 'textarea[name="workshop_goals"]'},
+                {selector: 'textarea[name="workshop_schedule"]'},
             ]);
 
             workshopRequestDiv.removeClass("d-none");
@@ -877,13 +941,17 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             const $textarea = $(selector.selector);
 
             if ($textarea.length === 0) {
-                console.error(`Textarea element not found for WYSIWYG initialization: ${selector.selector}`);
+                console.error(
+                    `Textarea element not found for WYSIWYG initialization: ${selector.selector}`
+                );
                 return;
             }
 
             // Tarkista, onko WYSIWYG-editori jo alustettu
             if ($textarea.data("wysiwyg")) {
-                console.log(`WYSIWYG-editor already initialized for: ${selector.selector}`);
+                console.log(
+                    `WYSIWYG-editor already initialized for: ${selector.selector}`
+                );
                 return;
             }
 
@@ -902,7 +970,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 recordInfo: {
                     context: self._getContext(),
                     res_model: "event.track",
-                    res_id: Number(window.location.pathname.split("-").slice(-1)[0].split("/")[0]),
+                    res_id: Number(
+                        window.location.pathname.split("-").slice(-1)[0].split("/")[0]
+                    ),
                 },
                 resizable: true,
                 userGeneratedContent: true,
@@ -917,7 +987,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             });
         });
     },
-
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;

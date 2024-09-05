@@ -5,10 +5,7 @@
         id="registration_attendee_details"
         inherit_id="website_event.registration_attendee_details"
     >
-        <xpath
-            expr="//div[@class='modal-footer border-top']"
-            position="before"
-        >
+        <xpath expr="//div[@class='modal-footer border-top']" position="before">
             <t
                 t-set="RECATPCHA_KEY"
                 t-value="request.env['website'].get_current_website().recaptcha_sitekey"
