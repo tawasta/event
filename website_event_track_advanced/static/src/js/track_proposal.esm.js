@@ -359,10 +359,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             selector: 'textarea[name="extra_info"]',
                             content: trackData.extra_info,
                         },
-                        {
-                            selector: 'textarea[name="webinar_info"]',
-                            content: trackData.webinar_info,
-                        },
+                        // {
+                        //     selector: 'textarea[name="webinar_info"]',
+                        //     content: trackData.webinar_info,
+                        // },
                         // {selector: 'textarea[name="workshop_goals"]', content: trackData.workshop_goals},
                         // {selector: 'textarea[name="workshop_schedule"]', content: trackData.workshop_schedule},
                     ]);
@@ -542,7 +542,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const webinarDiv = $("#track-application-webinar-div");
         const webinarCheckbox = $('input[name="webinar"]');
         const webinarInfo = $('textarea[name="webinar_info"]');
-        const isWebinar = trackData.type.webinar || false;
+        const isWebinar = trackData.is_webinar || false;
 
         if (isWebinar) {
             webinarDiv.removeClass("d-none");
@@ -552,9 +552,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             webinarInfo.prop("disabled", !trackData.webinar);
             webinarInfo.val(trackData.webinar_info || "");
 
-            // This._enableWysiwyg([
-            //     { selector: 'textarea[name="webinar_info"]', content: trackData.webinar_info },
-            // ]);
+            this._enableWysiwyg([
+                {
+                    selector: 'textarea[name="webinar_info"]',
+                    content: trackData.webinar_info,
+                },
+            ]);
         } else {
             webinarDiv.addClass("d-none");
             $('input[name="is_webinar"]').val("false");
@@ -725,6 +728,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             // Päivitä WYSIWYG-editorin sisältö ennen lomakkeen lähetystä
             const wysiwygGoals = $('textarea[name="workshop_goals"]').data("wysiwyg");
+            const wysiwygWebinar = $('textarea[name="webinar_info"]').data("wysiwyg");
             const wysiwygSchedule = $('textarea[name="workshop_schedule"]').data(
                 "wysiwyg"
             );
@@ -735,6 +739,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             if (wysiwygSchedule) {
                 $('textarea[name="workshop_schedule"]').val(wysiwygSchedule.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
+            }
+            if (wysiwygWebinar) {
+                $('textarea[name="webinar_info"]').val(wysiwygWebinar.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
             }
 
             const loadingScreen = function () {
@@ -907,12 +914,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             //     { selector: 'textarea[name="webinar_info"]' },
             // ]);
             webinarDiv.removeClass("d-none");
+            $('input[name="is_webinar"]').val("true");
             webinarCheckbox.prop("disabled", false);
             webinarCheckbox.change(function () {
                 webinarInfo.prop("disabled", !this.checked);
             });
         } else {
             webinarDiv.addClass("d-none");
+            $('input[name="is_webinar"]').val("false");
             webinarCheckbox.prop("disabled", true);
             webinarInfo.prop("disabled", true);
             webinarCheckbox.prop("checked", false);
