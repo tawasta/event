@@ -40,7 +40,7 @@
                         </t>
                     </div>
 <!--                     <div class="row review">
-                        
+
                         <t t-foreach="review_tracks" t-as="track">
                             <t
                                 t-call="website_event_track_advanced.event_track_review_template"
@@ -92,14 +92,14 @@
                     <div class="card-footer">
 
                         <button
-                                    type="button"
-                                    class="btn btn-secondary btn-sm"
-                                    t-att-data-track-id="track.id"
-                                    t-att-data-event-id="event.id"
-                                    data-review="true"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal_event_track_application"
-                                ><i class="fa fa-fw fa-times-circle" /> Review
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        t-att-data-track-id="track.id"
+                        t-att-data-event-id="event.id"
+                        data-review="true"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal_event_track_application"
+                    ><i class="fa fa-fw fa-times-circle" /> Review
                                     </button>
                     </div>
                 </div>

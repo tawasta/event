@@ -61,7 +61,7 @@
                     <t t-if="grouped_tracks">
                         <tr class="bg-primary text-white">
                             <td colspan="6" class="font-weight-bold text-center py-2">
-                                <i class="fa fa-list"></i> My Tracks
+                                <i class="fa fa-list" /> My Tracks
                             </td>
                         </tr>
 
@@ -69,7 +69,10 @@
                             <tr class="table-info">
                                 <td colspan="6" class="font-weight-bold">
                                     <!-- Event Name with Link -->
-                                    <a t-att-href="'/event/%s/register' % event_group[0].id" class="text-dark">
+                                    <a
+                                        t-att-href="'/event/%s/register' % event_group[0].id"
+                                        class="text-dark"
+                                    >
                                         <t t-esc="event_group[0].name" />
                                     </a>
                                 </td>
@@ -85,14 +88,18 @@
                                         <span t-field="track.event_id.name" />
                                     </td>
                                     <td>
-                                        <span><t t-esc="get_formated_date(track.event_id)" /></span>
+                                        <span><t
+                                                t-esc="get_formated_date(track.event_id)"
+                                            /></span>
                                     </td>
                                     <td>
                                         <span t-field="track.partner_id.name" />
                                     </td>
                                     <td>
                                         <t t-set="track_state">badge-default</t>
-                                        <t t-if="track.stage_id.is_editable and track.stage_id.is_draft">
+                                        <t
+                                            t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                                        >
                                             <t t-set="track_state">badge-info</t>
                                         </t>
                                         <t t-if="track.stage_id.is_submitted">
@@ -111,10 +118,12 @@
                                     </td>
                                     <td>
                                         <!-- View Track Button -->
-                                        <a class="btn btn-info btn-sm" 
+                                        <a
+                                            class="btn btn-info btn-sm"
                                             t-attf-href="/event/{{track.event_id.id}}/track_proposal"
-                                            t-att-title="track.event_id.name">
-                                            <i class="fa fa-eye"></i> View Track
+                                            t-att-title="track.event_id.name"
+                                        >
+                                            <i class="fa fa-eye" /> View Track
                                         </a>
                                     </td>
                                 </tr>
@@ -126,7 +135,7 @@
                     <t t-if="grouped_review_tracks">
                         <tr class="bg-primary text-white">
                             <td colspan="6" class="font-weight-bold text-center py-2">
-                                <i class="fa fa-list"></i> Review Tracks
+                                <i class="fa fa-list" /> Review Tracks
                             </td>
                         </tr>
 
@@ -134,7 +143,10 @@
                             <tr class="table-info">
                                 <td colspan="6" class="font-weight-bold">
                                     <!-- Event Name with Link -->
-                                    <a t-att-href="'/event/%s/register' % event_group[0].id" class="text-dark">
+                                    <a
+                                        t-att-href="'/event/%s/register' % event_group[0].id"
+                                        class="text-dark"
+                                    >
                                         <t t-esc="event_group[0].name" />
                                     </a>
                                 </td>
@@ -150,14 +162,18 @@
                                         <span t-field="track.event_id.name" />
                                     </td>
                                     <td>
-                                        <span><t t-esc="get_formated_date(track.event_id)" /></span>
+                                        <span><t
+                                                t-esc="get_formated_date(track.event_id)"
+                                            /></span>
                                     </td>
                                     <td>
                                         <span t-field="track.partner_id.name" />
                                     </td>
                                     <td>
                                         <t t-set="track_state">badge-default</t>
-                                        <t t-if="track.stage_id.is_editable and track.stage_id.is_draft">
+                                        <t
+                                            t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                                        >
                                             <t t-set="track_state">badge-info</t>
                                         </t>
                                         <t t-if="track.stage_id.is_submitted">
@@ -176,10 +192,12 @@
                                     </td>
                                     <td>
                                         <!-- Review Track Button -->
-                                        <a class="btn btn-warning btn-sm" 
+                                        <a
+                                            class="btn btn-warning btn-sm"
                                             t-attf-href="/event/{{track.event_id.id}}/track_proposal"
-                                            t-att-title="track.event_id.name">
-                                            <i class="fa fa-star"></i> Review Track
+                                            t-att-title="track.event_id.name"
+                                        >
+                                            <i class="fa fa-star" /> Review Track
                                         </a>
                                     </td>
                                 </tr>

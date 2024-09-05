@@ -112,16 +112,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Lisää sulkemispainikkeille toiminnallisuus
         $(".close.warning-close-modal, .btn.btn-secondary.warning-close-modal").click(
-            function (e) {
+            function () {
                 // Näytä vahvistusviesti käyttäjälle
-                Dialog.confirm(this, _t("If you close the form now, any unsaved changes will be lost. Do you really want to close?"), {
-                    title: _t("Confirm close"),
-                    size: 'medium',
-                    confirm_callback: function () {
-                        $("#track-application-form")[0].reset();
-                        location.reload(); // Päivitä sivu
-                    },
-                });
+                Dialog.confirm(
+                    this,
+                    _t(
+                        "If you close the form now, any unsaved changes will be lost. Do you really want to close?"
+                    ),
+                    {
+                        title: _t("Confirm close"),
+                        size: "medium",
+                        confirm_callback: function () {
+                            $("#track-application-form")[0].reset();
+                            location.reload(); // Päivitä sivu
+                        },
+                    }
+                );
             }
         );
     },
