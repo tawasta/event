@@ -69,6 +69,22 @@ class EventTrackControllerAdvanced(EventTrackController):
             "main_object": event,
             "track_languages": track_languages,
         }
+
+        reviewer = request.env.user.reviewer_id
+        if reviewer:
+            review_tracks = (
+                request.env["event.track"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "!=", request.env.user.partner_id.id),
+                        ("review_group.reviewers", "=", reviewer.id),
+                        ("stage_id.is_submitted", "=", True),
+                        ("event_id", "=", event.id),
+                    ],
+                )
+            )
+            values.update({"review_tracks": review_tracks})
         return values
 
     @http.route(
@@ -564,7 +580,14 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Language
         if post.get("language") and post.get("language") != "0":
-            track_values["language"] = post.get("language")
+            logging.info("==SAA KIELEN====")
+            lang_id = (
+                request.env["res.lang"]
+                .sudo()
+                .search([("id", "=", post.get("language"))])
+            )
+            track_values["language"] = lang_id.id
+            logging.info(track_values["language"])
 
         # Speakers
         speaker_values = list()

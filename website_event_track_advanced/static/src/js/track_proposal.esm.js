@@ -112,23 +112,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Lisää sulkemispainikkeille toiminnallisuus
         $(".close.warning-close-modal, .btn.btn-secondary.warning-close-modal").click(
-            function (e) {
+            function () {
                 // Näytä vahvistusviesti käyttäjälle
-                const confirmClose = confirm(
-                    "If you close the form now, any unsaved changes will be lost. Do you really want to close?"
+                Dialog.confirm(
+                    this,
+                    _t(
+                        "If you close the form now, any unsaved changes will be lost. Do you really want to close?"
+                    ),
+                    {
+                        title: _t("Confirm close"),
+                        size: "medium",
+                        confirm_callback: function () {
+                            $("#track-application-form")[0].reset();
+                            location.reload(); // Päivitä sivu
+                        },
+                    }
                 );
-
-                if (confirmClose) {
-                    // Nollaa lomake
-                    $("#track-application-form")[0].reset();
-
-                    // Sulje modal ja päivitä sivu
-                    $("#modal_event_track_application").modal("hide");
-                    location.reload(); // Päivitä sivu
-                } else {
-                    // Jos käyttäjä ei vahvistanut, estetään modalin sulkeminen
-                    e.preventDefault();
-                }
             }
         );
     },
@@ -234,6 +233,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _loadTrackData: function () {
         const self = this;
         $("#modal_event_track_application").on("show.bs.modal", function (event) {
+            $("#track-application-form")[0].reset();
             var button = $(event.relatedTarget);
             var trackId = button.data("track-id"); // Get track ID from button
             var eventId = button.data("event-id"); // Hae event ID napista
@@ -313,6 +313,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.target_group_ids
                     );
                     self._populateSelectOptions("tags", trackData.tags);
+                    console.log(trackData.languages);
+                    console.log(trackData.language);
                     self._populateSelectOptions(
                         "language",
                         trackData.languages,

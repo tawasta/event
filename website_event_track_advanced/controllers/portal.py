@@ -18,6 +18,8 @@
 #
 ##############################################################################
 
+from itertools import groupby
+
 # 1. Standard library imports:
 import babel.dates
 
@@ -79,7 +81,22 @@ class PortalTrack(CustomerPortal):
         tracks = (
             request.env["event.track"]
             .sudo()
-            .search([("partner_id", "=", request.env.user.partner_id.id)])
+            .search(
+                [("partner_id", "=", request.env.user.partner_id.id)], order="event_id"
+            )
+        )
+
+        grouped_tracks = {}
+        for event, tracks_in_event in groupby(tracks, key=lambda track: track.event_id):
+            grouped_tracks[event] = list(tracks_in_event)
+
+        values.update(
+            {
+                "grouped_tracks": grouped_tracks,
+                "page_name": "track",
+                "default_url": "/my/tracks",
+                "get_formated_date": self.get_formated_date,
+            }
         )
         reviewer = request.env.user.reviewer_id
         if reviewer:
@@ -91,20 +108,16 @@ class PortalTrack(CustomerPortal):
                         ("partner_id", "!=", request.env.user.partner_id.id),
                         ("review_group.reviewers", "=", reviewer.id),
                         ("stage_id.is_submitted", "=", True),
-                    ]
+                    ],
+                    order="event_id",
                 )
             )
-            values.update({"review_tracks": review_tracks or False})
+            grouped_review_tracks = {}
+            for event, review_tracks_in_event in groupby(
+                review_tracks, key=lambda track: track.event_id
+            ):
+                grouped_review_tracks[event] = list(review_tracks_in_event)
 
-        track_languages = request.env["res.lang"].search([], order="id")
-        values.update(
-            {
-                "tracks": tracks,
-                "page_name": "track",
-                "default_url": "/my/tracks",
-                "get_formated_date": self.get_formated_date,
-                "track_languages": track_languages,
-                "event": False,
-            }
-        )
+            values.update({"grouped_review_tracks": grouped_review_tracks})
+
         return request.render("website_event_track_advanced.portal_my_tracks", values)

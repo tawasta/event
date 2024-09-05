@@ -39,6 +39,14 @@
                             />
                         </t>
                     </div>
+<!--                     <div class="row review">
+
+                        <t t-foreach="review_tracks" t-as="track">
+                            <t
+                                t-call="website_event_track_advanced.event_track_review_template"
+                            />
+                        </t>
+                    </div> -->
                     <t t-set="track" t-value="request.env['event.track']" />
                     <t
                         t-call="website_event_track_advanced.event_track_proposal_template_new"
@@ -46,6 +54,56 @@
                 </div>
             </div>
         </xpath>
+    </template>
+
+    <template id="event_track_review_template" name="Event Track Review">
+        <div class="col-xl-6">
+                <div t-attf-class="card border border-primary">
+                    <h4 class="card-header">
+                        <t t-esc="track.name" />
+                        <td class="td-submit">
+                            <t t-set="track_state">badge-default</t>
+                            <t
+                            t-if="track.stage_id.is_editable and track.stage_id.is_draft"
+                        >
+                                <t t-set="track_state">badge-info</t>
+                            </t>
+                            <t t-if="track.stage_id.is_submitted">
+                                <t t-set="track_state">badge-warning</t>
+                            </t>
+                            <t t-if="track.stage_id.is_accepted">
+                                <t t-set="track_state">badge-primary</t>
+                            </t>
+                            <t t-if="track.stage_id.is_cancel">
+                                <t t-set="track_state">badge-danger</t>
+                            </t>
+                            <span
+                            t-field="track.stage_id"
+                            t-attf-class="badge {{track_state}}"
+                        />
+                        </td>
+                    </h4>
+                    <div class="card-body">
+                        <div
+                        t-field="track.partner_id"
+                        t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
+                    />
+                    </div>
+                    <div class="card-footer">
+
+                        <button
+                        type="button"
+                        class="btn btn-secondary btn-sm"
+                        t-att-data-track-id="track.id"
+                        t-att-data-event-id="event.id"
+                        data-review="true"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal_event_track_application"
+                    ><i class="fa fa-fw fa-times-circle" /> Review
+                                    </button>
+                    </div>
+                </div>
+        </div>
     </template>
     <!-- <template
         id="event_track_proposal_success"
