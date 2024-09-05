@@ -341,6 +341,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="contact_title"]').val(trackData.contact.title);
                     $('input[name="contact_id"]').val(trackData.contact.id);
 
+                    $("#description_readonly").html(trackData.description);
+                    $("#target_group_info_readonly").html(trackData.target_group_info);
+                    $("#extra_info_readonly").html(trackData.extra_info);
+                    $("#webinar_info_readonly").html(trackData.webinar_info);
                     // Alusta WYSIWYG-editorit ja aseta arvot
                     self._enableWysiwyg([
                         {
@@ -391,11 +395,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         self._enableSubmitButtons();
                         self._enableAddPresenterButton();
                     }
-
-                    const wysiwygTextareas = $("#track-application-form").find(
-                        "textarea"
-                    );
-                    console.log(wysiwygTextareas);
                 });
             }
         });
@@ -628,7 +627,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 $(this).attr("readonly", true).attr("disabled", true);
             });
 
-            console.log($form.find("input, textarea, select"));
+            $form.find(".o_wysiwyg_textarea_wrapper").each(function () {
+                // Hide editor, show div with content
+                $(this).hide();
+                $(".readonly-field").removeClass("d-none");
+            });
 
             // Poista readonly tai disabled attribuutit vain modaalin sulkemispainikkeista
             $form.find(".warning-close-modal").attr("disabled", false);
