@@ -305,6 +305,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         if track.type and track.type.webinar:
             values.update(
                 {
+                    "is_webinar": track.type.webinar,
                     "webinar": track.webinar,
                     "webinar_info": track.webinar_info,
                 }
