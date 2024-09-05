@@ -286,6 +286,27 @@ class EventTrackControllerAdvanced(EventTrackController):
         logging.info(values)
         return values
 
+    # @http.route(
+    #     ["/event/speaker/remove"],
+    #     type="json",
+    #     auth="public",
+    #     methods=["POST"],
+    #     website=True,
+    # )
+    # def remove_speaker(self, speaker_id, **kwargs):
+    #     speaker = request.env['res.partner'].browse(speaker_id)
+    #     event = speaker.track_id
+    #     logging.info(speaker.track_id.event_id.speaker_ids);
+    #     if speaker_id:
+    #         logging.info("===POISTETAAN=====");
+    #         speaker.sudo().unlink()  # Poista rekordi tietokannasta
+
+    #         logging.info(event.speaker_ids);
+    #         return {
+    #             "success": True,
+    #         }
+
+
     @http.route(
         ["/event/application_types"],
         type="json",
@@ -466,6 +487,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         :return dict values: sorted post values
         """
         values = {}
+
+        logging.info(post.get("contact_id"));
         # Contact
         contact_values = {
             "id": post.get("contact_id"),

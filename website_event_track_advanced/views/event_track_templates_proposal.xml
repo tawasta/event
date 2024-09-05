@@ -1107,6 +1107,7 @@
                                         t-att-required="None if not editable else 'required'"
                                     />
                                 </div>
+                                <input type="hidden" name="speaker_id" />
                             </div>
                         </div>
                     </t>

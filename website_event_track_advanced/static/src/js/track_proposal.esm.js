@@ -30,9 +30,40 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._clearFormOnClose(); // Clear form when modal is closed
         this._bindFormSubmit(); // Bindataan lomakkeen submit AJAX-pyyntöön
         this._bindAddSpeaker();
+        this._bindRemoveSpeaker();
         this._removeAttachments();
         this._setupModalCloseBehavior(); // Setup custom modal close behavior
     },
+
+    _bindRemoveSpeaker: function () {
+        const container = $(".track-application-speakers-div-container");
+
+        // Käytetään delegoitua tapahtumankuuntelijaa, jotta myös kloonatut elementit saavat tapahtuman
+        container.on('click', '.btn-remove-speaker', function (event) {
+            event.preventDefault(); // Estä oletustoiminto
+
+            const $row = $(this).closest(".track-application-speakers-div-row-container"); // Viittaus rivin kontaineriin
+            const speaker_id = $row.find("input[name^='speaker_id']").val();
+            console.log(speaker_id);
+            // Näytä vahvistusdialogi
+            Dialog.confirm(this, _t("Are you sure you want to remove this speaker?"), {
+                title: _t("Confirm Removal"),
+                size: 'medium',
+                confirm_callback: function () {
+                    $row.remove();
+                    var speaker_count =
+                        Number(
+                            $("#track-application-speaker-input-index").val()
+                        ) - 1;
+                    $("#track-application-speaker-input-index").val(
+                        speaker_count
+                    );
+                    
+                },
+            });
+        });
+    },
+
 
     _setupModalCloseBehavior: function () {
         // Estä modaalin sulkeutuminen ulkopuolisista klikkauksista tai Esc-näppäimen painalluksesta
@@ -91,6 +122,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .find("input[name^='speaker_organization']")
                 .val(firstSpeaker.organization);
             firstRow.find("input[name^='speaker_title']").val(firstSpeaker.title);
+            firstRow.find("input[name^='speaker_id']").val(firstSpeaker.id);
         }
 
         let speakerCount = 1;
@@ -104,6 +136,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             // Päivitetään kenttien arvot
             newRow.find(".presenter-span").text(`Presenter #${speakerCount}`);
+            newRow.find("input[name^='speaker_id']").val(speaker.id);
             newRow.find("input[name^='speaker_firstname']").val(speaker.firstname);
             newRow.find("input[name^='speaker_lastname']").val(speaker.lastname);
             newRow.find("input[name^='speaker_email']").val(speaker.email);
@@ -582,6 +615,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             newRow.attr("id", newIndex);
             newRow.find(".presenter-span").text(`Presenter #${newIndex}`);
             newRow.find("input").val(""); // Clear values
+            newRow.find(".btn-remove-speaker").prop("disabled", false);
 
             container.append(newRow);
             $("#track-application-speaker-input-index").val(newIndex); // Update the index
