@@ -227,6 +227,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _loadTrackData: function () {
         const self = this;
         $("#modal_event_track_application").on("show.bs.modal", function (event) {
+            $("#track-application-form")[0].reset();
             var button = $(event.relatedTarget);
             var trackId = button.data("track-id"); // Get track ID from button
             var eventId = button.data("event-id"); // Hae event ID napista
@@ -306,6 +307,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.target_group_ids
                     );
                     self._populateSelectOptions("tags", trackData.tags);
+                    console.log(trackData.languages);
+                    console.log(trackData.language);
                     self._populateSelectOptions(
                         "language",
                         trackData.languages,

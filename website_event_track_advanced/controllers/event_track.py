@@ -580,7 +580,12 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Language
         if post.get("language") and post.get("language") != "0":
-            track_values["language"] = post.get("language")
+            logging.info("==SAA KIELEN====");
+            lang_id = request.env["res.lang"].sudo().search([
+                ('id', '=', post.get("language"))
+            ])
+            track_values["language"] = lang_id.id
+            logging.info(track_values["language"]);
 
         # Speakers
         speaker_values = list()
