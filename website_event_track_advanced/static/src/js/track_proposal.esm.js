@@ -5,7 +5,7 @@ import {loadWysiwygFromTextarea} from "@web_editor/js/frontend/loadWysiwygFromTe
 import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
-import {renderToElement} from "@web/core/utils/render";
+// Import {renderToElement} from "@web/core/utils/render";
 // Import { qweb } from 'web.core';
 
 publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
@@ -37,34 +37,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
     _bindRemoveSpeaker: function () {
         const container = $(".track-application-speakers-div-container");
-
-        // Käytetään delegoitua tapahtumankuuntelijaa, jotta myös kloonatut elementit saavat tapahtuman
-        container.on("click", ".btn-remove-speaker", function (event) {
-            event.preventDefault(); // Estä oletustoiminto
-
-            const $row = $(this).closest(
-                ".track-application-speakers-div-row-container"
-            ); // Viittaus rivin kontaineriin
-            const speaker_id = $row.find("input[name^='speaker_id']").val();
-            console.log(speaker_id);
-
-            // Näytä vahvistusdialogi
-            Dialog.confirm(this, _t("Are you sure you want to remove this speaker?"), {
-                title: _t("Confirm Removal"),
-                size: "medium",
-                confirm_callback: function () {
-                    $row.remove();
-
-                    // Päivitetään puhujien indeksit ja numerot
-                    _updateSpeakerIndexes();
-
-                    // Päivitetään puhujien lukumäärä
-                    var speaker_count =
-                        Number($("#track-application-speaker-input-index").val()) - 1;
-                    $("#track-application-speaker-input-index").val(speaker_count);
-                },
-            });
-        });
 
         // Päivitetään puhujien indeksit ja numerot (ensimmäistä riviä ei kosketa)
         function _updateSpeakerIndexes() {
@@ -101,6 +73,34 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 });
             });
         }
+
+        // Käytetään delegoitua tapahtumankuuntelijaa, jotta myös kloonatut elementit saavat tapahtuman
+        container.on("click", ".btn-remove-speaker", function (event) {
+            event.preventDefault(); // Estä oletustoiminto
+
+            const $row = $(this).closest(
+                ".track-application-speakers-div-row-container"
+            ); // Viittaus rivin kontaineriin
+            const speaker_id = $row.find("input[name^='speaker_id']").val();
+            console.log(speaker_id);
+
+            // Näytä vahvistusdialogi
+            Dialog.confirm(this, _t("Are you sure you want to remove this speaker?"), {
+                title: _t("Confirm Removal"),
+                size: "medium",
+                confirm_callback: function () {
+                    $row.remove();
+
+                    // Päivitetään puhujien indeksit ja numerot
+                    _updateSpeakerIndexes();
+
+                    // Päivitetään puhujien lukumäärä
+                    var speaker_count =
+                        Number($("#track-application-speaker-input-index").val()) - 1;
+                    $("#track-application-speaker-input-index").val(speaker_count);
+                },
+            });
+        });
     },
 
     _setupModalCloseBehavior: function () {
