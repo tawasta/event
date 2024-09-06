@@ -225,6 +225,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                 }
             )
 
+        if track.stage_id.is_draft:
+            track_confirm = True
+            values.update({'track_confirm': track_confirm,})
+
+
         values.update(
             {
                 "track_id": track.id,
@@ -278,6 +283,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 }
             )
             if track.organizer_contact:
+                
                 values.update(
                     {
                         "signee_firstname": track.organizer_contact.firstname,
@@ -292,12 +298,20 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "organizer_city": track.organizer.city,
                         "edicode": track.organizer.edicode,
                         "organizer_reference": track.organizer.ref,
+                        'einvoice_operator_id': track.organizer.einvoice_operator_id.id,
                     }
                 )
             if track.stage_id.is_accepted:
+
+                operators = [
+                    {"id": ope.id, "name": ope.name}
+                    for ope in request.env["res.partner.operator.einvoice"].sudo().search([])
+                ]
+
                 values.update(
                     {
                         "is_workshop_contract": True,
+                        'operators': operators,
                     }
                 )
 
@@ -644,13 +658,16 @@ class EventTrackControllerAdvanced(EventTrackController):
                 post.get("is_workshop_contract")
                 and post.get("is_workshop_contract") == "true"
             ):
+                einvoice_operator_id = request.env["res.partner.operator.einvoice"].sudo().search([
+                    ('id', '=', post.get('einvoice_operator_id'))
+                ])
                 workshop_organizer_values = {
                     "name": post.get("organizer_organization"),
                     "street": post.get("organizer_street"),
                     "zip": post.get("organizer_zip"),
                     "city": post.get("organizer_city"),
                     "ref": post.get("organizer_reference"),
-                    "einvoice_operator_id": post.get("einvoice_operator_id"),
+                    "einvoice_operator_id": einvoice_operator_id.id,
                     "edicode": post.get("edicode"),
                     "type": "invoice",
                     "company_type": "company",
@@ -1029,20 +1046,20 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values["track"]["stage_id"] = draft_stage.id
 
             # 7. Check if we want to confirm or set track as done
-            # if values.get("track_confirm"):
-            #     first_submitted_stage = (
-            #         request.env["event.track.stage"]
-            #         .sudo()
-            #         .search([("is_submitted", "=", True)], order="sequence")
-            #     )
-            #     if first_submitted_stage:
-            #         values["track"]["stage_id"] = first_submitted_stage[0].id
+            if values.get("track_confirm"):
+                first_submitted_stage = (
+                    request.env["event.track.stage"]
+                    .sudo()
+                    .search([("is_submitted", "=", True)], order="sequence")
+                )
+                if first_submitted_stage:
+                    values["track"]["stage_id"] = first_submitted_stage[0].id
 
             if values.get("track_is_done"):
                 first_is_done_stage = (
                     request.env["event.track.stage"]
                     .sudo()
-                    .search([("is_submitted", "=", True)], order="sequence")
+                    .search([("is_fully_accessible", "=", True)], order="sequence")
                 )
                 logging.info(first_is_done_stage)
                 if first_is_done_stage:

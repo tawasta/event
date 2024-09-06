@@ -344,6 +344,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $("#description_readonly").html(trackData.description);
                     $("#target_group_info_readonly").html(trackData.target_group_info);
                     $("#extra_info_readonly").html(trackData.extra_info);
+                    $("#workshop_goals_readonly").html(trackData.workshop_goals);
+                    $("#workshop_schedule_readonly").html(trackData.workshop_schedule);
                     $("#webinar_info_readonly").html(trackData.webinar_info);
                     // Alusta WYSIWYG-editorit ja aseta arvot
                     self._enableWysiwyg([
@@ -368,6 +370,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     ]);
 
                     self._renderSpeakers(trackData.speakers);
+
+                    if(trackData.track_confirm){
+                        $('#application-submit-button-send').attr('name', 'track-confirm').val('track-confirm');
+                    }
+
 
                     if (
                         isReview &&
@@ -509,6 +516,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     .val(trackData.einvoice_operator_id)
                     .prop("disabled", false)
                     .attr("required", true);
+
+                this._populateSelectOptions("einvoice_operator_id", trackData.operators, trackData.einvoice_operator_id);
                 $('input[name="edicode"]')
                     .val(trackData.edicode)
                     .prop("disabled", false)
