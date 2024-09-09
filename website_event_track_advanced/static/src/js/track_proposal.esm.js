@@ -848,7 +848,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $("#type").change(function () {
                 const selectedType = $("#type option:selected");
                 const description = selectedType.attr("data-description") || "";
-                $("#application_type_description").text(description);
+                $("#application_type_description").html(description);
 
                 const workshop = selectedType.attr("data-workshop");
 
