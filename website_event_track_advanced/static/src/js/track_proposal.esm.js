@@ -796,6 +796,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             // Lisää painetun painikkeen arvo lomakedataan
             const activeButton = $(document.activeElement);
+            console.log(activeButton);
             if (activeButton.attr("name")) {
                 formData.append(activeButton.attr("name"), activeButton.val());
             }
