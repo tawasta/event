@@ -732,6 +732,13 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
     _bindFormSubmit: function () {
         const self = this;
+
+        let activeButton; // Muuttuja painetun painikkeen seuraamiseksi
+
+        // Kuuntele painikkeen klikkausta ja tallenna painike aktiiviseksi
+        $("#track-application-form").on("click", '[type="submit"]', function (e) {
+            activeButton = $(this); // Tallenna klikatun painikkeen viittaus
+        });
         $("#track-application-form").on("submit", function (e) {
             e.preventDefault(); // Estä lomakkeen oletuslähetys
 
@@ -794,10 +801,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             const formData = new FormData(this); // Kerää lomaketiedot
             const action = $(this).attr("action"); // Hae lomakkeen action-osoite
 
-            // Lisää painetun painikkeen arvo lomakedataan
-            const activeButton = $(document.activeElement);
-            console.log(activeButton);
-            if (activeButton.attr("name")) {
+            // Lisää painetun painikkeen arvo lomakedataan, jos painike on asetettu
+            if (activeButton && activeButton.attr("name")) {
                 formData.append(activeButton.attr("name"), activeButton.val());
             }
 
