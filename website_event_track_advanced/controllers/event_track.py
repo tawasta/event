@@ -233,11 +233,16 @@ class EventTrackControllerAdvanced(EventTrackController):
         if track.event_id.allow_target_group_multiple:
             multiple_target_groups = True
 
+        multiple_tags = False
+        if track.event_id.allow_track_tags_multiple:
+            multiple_tags = True
+
 
         values.update(
             {
                 "track_id": track.id,
                 "multiple_target_groups": multiple_target_groups,
+                "multiple_tags": multiple_tags,
                 "name": track.name,
                 "description": track.description,
                 "type": track.type.id,
@@ -425,6 +430,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         if event.allow_target_group_multiple:
             multiple_target_groups = True
 
+        multiple_tags = False
+        if event.allow_track_tags_multiple:
+            multiple_tags = True
+
         return {
             "application_types": application_types,
             "target_groups": target_groups,
@@ -434,6 +443,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "languages": languages,
             "contact_info": contact_info,
             "multiple_target_groups": multiple_target_groups,
+            "multiple_tags": multiple_tags,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):
@@ -1111,6 +1121,13 @@ class EventTrackControllerAdvanced(EventTrackController):
                 message = (
                     "We will evaluate your proposition and get back to you shortly."
                 )
+
+            if not user_exists:
+                message += """
+                <p>
+                    An account has been created for the username <b>{username}</b>. You should receive an email shortly to finish setting up your account. After setting up your account, you can go to <a href="/my/tracks">My Tracks</a> to edit and submit your proposal.
+                </p>
+                """.format(username=track.partner_id.user_ids[0].login)
 
             return json.dumps({"success": True, "message": message})
 

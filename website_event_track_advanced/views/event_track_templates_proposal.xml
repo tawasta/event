@@ -66,16 +66,16 @@
                             <t
                             t-if="track.stage_id.is_editable and track.stage_id.is_draft"
                         >
-                                <t t-set="track_state">badge-info</t>
+                                <t t-set="track_state">text-bg-info</t>
                             </t>
                             <t t-if="track.stage_id.is_submitted">
-                                <t t-set="track_state">badge-warning</t>
+                                <t t-set="track_state">text-bg-warning</t>
                             </t>
                             <t t-if="track.stage_id.is_accepted">
-                                <t t-set="track_state">badge-primary</t>
+                                <t t-set="track_state">text-bg-primary</t>
                             </t>
                             <t t-if="track.stage_id.is_cancel">
-                                <t t-set="track_state">badge-danger</t>
+                                <t t-set="track_state">text-bg-danger</t>
                             </t>
                             <span
                             t-field="track.stage_id"
@@ -254,19 +254,19 @@
                             <t
                             t-if="track.stage_id.is_editable and track.stage_id.is_draft"
                         >
-                                <t t-set="track_state">badge-info</t>
+                                <t t-set="track_state">text-bg-info</t>
                             </t>
                             <t t-if="track.stage_id.is_submitted">
-                                <t t-set="track_state">badge-warning</t>
+                                <t t-set="track_state">text-bg-warning</t>
                             </t>
                             <t t-if="track.stage_id.is_accepted">
-                                <t t-set="track_state">badge-primary</t>
+                                <t t-set="track_state">text-bg-primary</t>
                             </t>
                             <!-- <t t-if="track.stage_id.is_done">
                                 <t t-set="track_state">badge-success</t>
                             </t> -->
                             <t t-if="track.stage_id.is_cancel">
-                                <t t-set="track_state">badge-danger</t>
+                                <t t-set="track_state">text-bg-danger</t>
                             </t>
                             <span
                             t-field="track.stage_id"
@@ -944,7 +944,6 @@
                             name="tags"
                             id="tags"
                             placeholder="Tags..."
-                            multiple="multiple"
                             class="form-control tags-select"
                             autocomplete="off"
                         >

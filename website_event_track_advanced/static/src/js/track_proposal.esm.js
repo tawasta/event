@@ -281,6 +281,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         "target_groups",
                         response.target_groups
                     );
+
+                    if (response.multiple_tags) {
+                        $(".tags-select").attr("multiple", "multiple").select2({
+                            maximumSelectionSize: 3,
+                        });
+                    }
                     self._populateSelectOptions("tags", response.tags);
                     self._populateSelectOptions("request_time", response.request_time);
                     self._populateSelectOptions("language", response.languages);
@@ -297,12 +303,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
-                    
 
-
-                    $(".tags-select").select2({
-                        maximumSelectionSize: 3,
-                    });
                 });
             } else {
                 // Hae tiedot tietylle trackille
@@ -316,18 +317,29 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.type
                     );
                     
-                    self._populateSelectOptions("tags", trackData.tags);
-                    console.log(trackData.languages);
-                    console.log(trackData.language);
+                    if (trackData.multiple_tags) {
+                        $(".tags-select").attr("multiple", "multiple");
+                        self._populateSelectOptions(
+                            "tags",
+                            trackData.tags,
+                        );
+                        $(".tags-select").val(trackData.tag_ids).select2({
+                            maximumSelectionSize: 3,
+                        });
+                    } else {
+                        self._populateSelectOptions(
+                            "tags",
+                            trackData.tags,
+                            trackData.tag_ids,
+                        );
+                    }
+                    
+
                     self._populateSelectOptions(
                         "language",
                         trackData.languages,
                         trackData.language
                     );
-
-                    $(".tags-select").val(trackData.tag_ids).select2({
-                        maximumSelectionSize: 3,
-                    });
 
                     if (trackData.multiple_target_groups) {
                         $(".target-groups-select").attr("multiple", "multiple");
@@ -803,7 +815,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         font-size: 20px;
                     ">
                         <div>
-                            <img src="/web/static/src/img/spin.png"
+                            <img src="/web/static/img/spin.png"
                                 style="animation: fa-spin 1s infinite steps(12); width: 50px; height: 50px;"/>
                             <br/><br/>
                             <h4>${message}</h4>
@@ -969,15 +981,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _showSuccessMessage: function (message) {
-        Dialog.alert(this, message, {
+        new Dialog(this, {
             title: _t("Success"),
             size: "medium",
-            confirm_callback: function () {
-                // Ladataan sivu uudelleen, kun käyttäjä sulkee ilmoituksen
-                location.reload();
-            },
-        });
+            $content: $('<div/>').html(message), // Lisätään HTML sisältö
+            buttons: [{
+                text: _t("OK"),
+                close: true,
+                click: function () {
+                    // Ladataan sivu uudelleen, kun käyttäjä sulkee ilmoituksen
+                    location.reload();
+                },
+            }],
+        }).open();
     },
+
 
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
