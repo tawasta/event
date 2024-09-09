@@ -715,6 +715,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "track_is_done": track_is_done,
             }
         )
+        logging.info("====POSTI VALUES=====");
+        logging.info(values);
 
         return values
 
