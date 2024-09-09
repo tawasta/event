@@ -272,6 +272,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         );
                     }
                     self._populateSelectOptions("type", response.application_types);
+                    if (response.multiple_target_groups) {
+                        $(".target-groups-select").attr("multiple", "multiple").select2({
+                            maximumSelectionSize: 3,
+                        });
+                    }
                     self._populateSelectOptions(
                         "target_groups",
                         response.target_groups
@@ -292,11 +297,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
-                    if (response.multiple_target_groups) {
-                        $(".target-groups-select").attr("multiple", "multiple").select2({
-                            maximumSelectionSize: 3,
-                        });
-                    }
+                    
 
 
                     $(".tags-select").select2({
@@ -329,11 +330,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     });
 
                     if (trackData.multiple_target_groups) {
+                        $(".target-groups-select").attr("multiple", "multiple");
                         self._populateSelectOptions(
                             "target_groups",
                             trackData.target_groups,
                         );
-                        $(".target-groups-select").attr("multiple", "multiple").val(trackData.target_group_ids).select2({
+                        $(".target-groups-select").val(trackData.target_group_ids).select2({
                             maximumSelectionSize: 3,
                         });
                     } else {
