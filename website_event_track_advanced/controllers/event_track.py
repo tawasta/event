@@ -229,10 +229,15 @@ class EventTrackControllerAdvanced(EventTrackController):
             track_confirm = True
             values.update({'track_confirm': track_confirm,})
 
+        multiple_target_groups = False
+        if track.event_id.allow_target_group_multiple:
+            multiple_target_groups = True
+
 
         values.update(
             {
                 "track_id": track.id,
+                "multiple_target_groups": multiple_target_groups,
                 "name": track.name,
                 "description": track.description,
                 "type": track.type.id,
@@ -416,6 +421,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         else:
             contact_info = {}
 
+        multiple_target_groups = False
+        if event.allow_target_group_multiple:
+            multiple_target_groups = True
+
         return {
             "application_types": application_types,
             "target_groups": target_groups,
@@ -424,6 +433,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "privacy_ids": privacy_ids,
             "languages": languages,
             "contact_info": contact_info,
+            "multiple_target_groups": multiple_target_groups,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):

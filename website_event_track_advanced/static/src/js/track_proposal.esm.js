@@ -292,6 +292,13 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
+                    if (response.multiple_target_groups) {
+                        $(".target-groups-select").attr("multiple", "multiple").select2({
+                            maximumSelectionSize: 3,
+                        });
+                    }
+
+
                     $(".tags-select").select2({
                         maximumSelectionSize: 3,
                     });
@@ -307,11 +314,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.application_types,
                         trackData.type
                     );
-                    self._populateSelectOptions(
-                        "target_groups",
-                        trackData.target_groups,
-                        trackData.target_group_ids
-                    );
+                    
                     self._populateSelectOptions("tags", trackData.tags);
                     console.log(trackData.languages);
                     console.log(trackData.language);
@@ -324,6 +327,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $(".tags-select").val(trackData.tag_ids).select2({
                         maximumSelectionSize: 3,
                     });
+
+                    if (trackData.multiple_target_groups) {
+                        self._populateSelectOptions(
+                            "target_groups",
+                            trackData.target_groups,
+                        );
+                        $(".target-groups-select").attr("multiple", "multiple").val(trackData.target_group_ids).select2({
+                            maximumSelectionSize: 3,
+                        });
+                    } else {
+                        self._populateSelectOptions(
+                            "target_groups",
+                            trackData.target_groups,
+                            trackData.target_group_ids,
+                        );
+                    }
 
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);
