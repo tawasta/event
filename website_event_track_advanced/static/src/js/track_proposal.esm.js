@@ -615,7 +615,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _updateTypeDescription: function () {
         const $typeSelect = $('select[name="type"]');
         const description = $typeSelect.find("option:selected").data("description");
-        $("#application_type_description").text(description || ""); // Päivitä kuvauksen kenttä
+        $("#application_type_description").html(description || ""); // Päivitä kuvauksen kenttä
     },
 
     _disableAddPresenterButton: function () {
