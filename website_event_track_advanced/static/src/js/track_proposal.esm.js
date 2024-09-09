@@ -598,9 +598,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
     _populateSelectOptions: function (selectName, options, selectedIds = null) {
         const $select = $(`select[name="${selectName}"]`);
+        const isMultiple = $select.attr("multiple") === "multiple";
         $select.empty();
 
-        $select.append('<option value="">Select...</option>');
+        if (!isMultiple) {
+            $select.append('<option value="">Select...</option>');
+        }
 
         options.forEach((option) => {
             const isSelected =
