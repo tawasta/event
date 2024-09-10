@@ -690,6 +690,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _disableAddPresenterButton: function () {
         // Piilota tai disabloi Add Presenter -painike
         $("#add_speaker").attr("disabled", true).hide();
+        $("#clear-attachment").attr("disabled", true).hide();
+        $(".remove-attachment").attr("disabled", true).hide();
     },
 
     _enableAddPresenterButton: function () {
