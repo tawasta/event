@@ -981,6 +981,18 @@ class EventTrackControllerAdvanced(EventTrackController):
             else:
                 request.env["event.track.rating"].sudo().create(vals)
 
+    def _remove_attachments(self, track, attachment_ids):
+        """ Poistaa trackiin liittyvät liitteet, joiden ID:t on annettu """
+        attachment_ids = [int(attachment_id) for attachment_id in attachment_ids.split(',') if attachment_id]
+        if attachment_ids:
+            attachments = request.env['ir.attachment'].sudo().search([
+                ('res_model', '=', 'event.track'),
+                ('res_id', '=', track.id),
+                ('id', 'in', attachment_ids)
+            ])
+            if attachments:
+                attachments.unlink()
+
     # flake8: noqa: C901
     @http.route(
         ["/event/<model('event.event'):event>/track_proposal/post"],
@@ -1105,6 +1117,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             # 10. Create attachments
             if post.get("attachment_ids"):
                 self._create_attachments(track)
+
+            # 11. Poista liitteet, jos niitä on merkitty poistettavaksi
+            if post.get("remove_attachments"):
+                self._remove_attachments(track, post.get("remove_attachments"))
 
             # 11. Return
             return_vals = self._get_event_track_proposal_values(event)

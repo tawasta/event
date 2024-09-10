@@ -133,8 +133,26 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _removeAttachments: function () {
-        $("#btn-remove-attachment").click(function () {
-            $("#attachment_ids").val("");
+
+        $("#clear-attachment").click(function () {
+            $("#attachment_ids").val(""); // Tyhjennä liiteinput
+        });
+        // Tämä funktio käsittelee liitteiden poistamisen merkitsemisen
+        $(".remove-attachment").click(function () {
+            const attachmentId = $(this).data('id');
+            const attachmentDiv = $(`#attachment-${attachmentId}`);
+
+            // Lisätään poistettava liite hidden-kenttään
+            const removeInput = $('#remove_attachments_input');
+            let currentValues = removeInput.val() ? removeInput.val().split(',') : [];
+            if (!currentValues.includes(attachmentId.toString())) {
+                currentValues.push(attachmentId);
+                removeInput.val(currentValues.join(','));
+            }
+
+            // Merkitään visuaalisesti poistetuksi, mutta ei vielä poisteta
+            attachmentDiv.css("opacity", "0.5"); // Vähennetään näkyvyyttä osoittaen, että liite on merkitty poistettavaksi
+            $(this).prop("disabled", true).text("Marked for Removal");
         });
     },
 
@@ -332,6 +350,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             trackData.tags,
                             trackData.tag_ids,
                         );
+                    }
+
+                    if (trackData.attachments && trackData.attachments.length > 0) {
+                        let attachmentList = '';
+                        trackData.attachments.forEach(function (attachment) {
+                            attachmentList += `
+                                <div id="attachment-${attachment.id}" class="o_track_proposal_attachment">
+                                    <a href="/web/content/${attachment.id}" target="_blank">${attachment.name}</a>
+                                    <button class="btn btn-danger btn-sm remove-attachment" data-id="${attachment.id}">Remove</button>
+                                </div>`;
+                        });
+                        $("#existing_attachments").html(attachmentList);
+
+                        // Bindataan poiston merkitseminen
+                        self._removeAttachments();
                     }
                     
 

@@ -857,19 +857,28 @@
                     </div>
 
                     <div class="form-group col-xl-6">
-                        <div class="file-upload btn btn-secondary btn-block">
-                            <span>Attach Files <i class="fa fa-paperclip" /></span>
+                        <label class="form-label">Attach Files <i class="fa fa-paperclip"></i></label>
+                        <div class="input-group">
                             <input
                                 type="file"
-                                class="upload"
-                                t-att-data-maxsize="maxfilesize"
+                                class="form-control"
                                 id="attachment_ids"
                                 name="attachment_ids"
                             />
+                            <div class="input-group-append">
+                                <button type="button" id="clear-attachment" class="btn btn-danger">Clear</button>
+                            </div>
                         </div>
 
-                        <div id="attachment_info_div" class="d-none alert mt-3" />
+                        <div id="attachment_info_div" class="mt-3">
+                            <ul id="existing_attachments" class="list-unstyled">
+                                <!-- Liitetiedot näytetään tässä -->
+                            </ul>
+                        </div>
+
+                        <input type="hidden" id="remove_attachments_input" name="remove_attachments" />
                     </div>
+
 
                 </div>
             </div>
