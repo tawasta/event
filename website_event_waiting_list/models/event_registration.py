@@ -145,6 +145,14 @@ class EventRegistration(models.Model):
         res = super().write(vals)
 
         event_stage = self.event_id.stage_id
+
+        if len(event_stage) > 1:
+            # Though it should be impossible to get multiple stages,
+            # we've seen a couple of cases where it happens and throws a singleton error.
+            # We haven't been able to recreate the situation in which this is possible,
+            # but this will prevent the actual error from happening
+            event_stage = event_stage[0]
+
         if event_stage.pipe_end or event_stage.cancel:
             # Don't try to send messages for closed events
             return res
