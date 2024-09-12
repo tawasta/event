@@ -70,7 +70,7 @@
         </xpath>
     </template>
     <!-- HIDE AUTHOR -->
-<!--     <template
+    <template
         id="event_track_content_hide_author"
         inherit_id="website_event_track_advanced.event_track_content_author_id"
         name="Hide Author"
@@ -80,10 +80,10 @@
         <xpath expr="//div[@id='author-div']" position="attributes">
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
-        <xpath expr="//hr[@class='mt-2 mb-0']" position="attributes">
+<!--         <xpath expr="//hr[@class='mt-2 mb-0 d-flex']" position="attributes">
             <attribute name="class" separator=" " add="d-none" />
-        </xpath>
-    </template> -->
+        </xpath> -->
+    </template>
 
     <!-- SHOW SPEAKERS -->
     <template
@@ -235,17 +235,17 @@
         customize_show="True"
     >
         <xpath
-            expr="//div[@id='speaker-div']//span[hasclass('o_wevent_online_page_avatar')]"
+            expr="//div[@id='speaker-div']/div/span[@class='o_wevent_online_page_avatar']"
             position="attributes"
         >
             <attribute name="class" separator=" " add="d-none" />
         </xpath>
-        <xpath
+<!--         <xpath
             expr="//div[@id='author-div']//span[hasclass('o_wevent_online_page_avatar')]"
             position="attributes"
         >
             <attribute name="class" separator=" " add="d-none" />
-        </xpath>
+        </xpath> -->
     </template>
     <!-- HIDE EMAILS -->
     <template
@@ -382,7 +382,7 @@
         active="False"
         customize_show="True"
     >
-    <xpath expr="//span[@t-esc='track.name']//..//.." position="before">
+    <xpath expr="//span[@t-out='track.name']//..//.." position="before">
             <span
                 t-if="track.website_image"
                 t-field="track.website_image"
