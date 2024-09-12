@@ -1243,7 +1243,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         indexes_to_del = []
         for track_by_day in render_vals.get("tracks_by_day"):
             track_by_day["tracks"] = track_by_day.get("tracks").filtered(
-                lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+                lambda p: p.type.code == "poster"
+                and p.stage_id.is_fully_accessible == True
             )
             if not track_by_day["tracks"]:
                 indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
