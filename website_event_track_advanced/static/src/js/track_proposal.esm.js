@@ -727,6 +727,15 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .find("input, textarea, select")
                 .attr("readonly", true)
                 .attr("disabled", true);
+
+            $form.find(".o_wysiwyg_textarea_wrapper").each(function () {
+                // Tarkista, onko kenttä 'rating_comment', jos ei ole, piilotetaan editori
+                if (!$(this).find('textarea[name="rating_comment"]').length) {
+                    $(this).hide();
+                }
+                $(".readonly-field").removeClass("d-none");
+            });
+            $form.find("#rating_comment_readonly").addClass("d-none");
             // Jätä seuraavat kentät editoitaviksi
             const editableFields = [
                 'textarea[name="rating_comment"]',

@@ -39,6 +39,15 @@
                             />
                         </t>
                     </div>
+                    <t t-set="track" t-value="request.env['event.track']" />
+                    <t
+                        t-call="website_event_track_advanced.event_track_proposal_template_new"
+                    />
+
+                    <section class="mt-5" t-if="review_tracks">
+                        <h3 class="o_page_header">Review Proposals</h3>
+                        <p>Below are the proposals for you to review.</p>
+                    </section>
                     <div class="row review">
 
                         <t t-foreach="review_tracks" t-as="track">
@@ -47,10 +56,6 @@
                             />
                         </t>
                     </div>
-                    <t t-set="track" t-value="request.env['event.track']" />
-                    <t
-                        t-call="website_event_track_advanced.event_track_proposal_template_new"
-                    />
                 </div>
             </div>
         </xpath>
@@ -90,6 +95,12 @@
                     />
                     </div>
                     <div class="card-footer">
+                        <span
+                            t-if="track.is_rated"
+                            class="font-italic text-muted"
+                            data-toggle="tooltip"
+                            title="You have already reviewed this track."
+                        >Reviewed</span>
 
                         <button
                         type="button"

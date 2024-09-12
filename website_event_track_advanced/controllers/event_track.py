@@ -134,6 +134,13 @@ class EventTrackControllerAdvanced(EventTrackController):
                     rating_comment = user_rating.comment
 
                     values.update({"rating": rating, "rating_comment": rating_comment})
+
+                if (
+                    self.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param("website_event_track_advanced.proposal_see_evaluation")
+                ):
+                    values.update({"show_attachments": True})
                 values.update(
                     {
                         "can_review": can_review,
