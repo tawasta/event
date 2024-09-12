@@ -108,7 +108,7 @@
                 <field name="allowed_track_tag_ids" widget="many2many_tags" />
                 <field name="allow_track_tags_multiple" />
                 <field name="allow_target_group_multiple" />
-                <field name="use_speaker_track" />
+                <field name="use_speaker_track" readonly="1" />
             </field>
             <field name="address_id" position="after">
                 <field name="location_ids" widget="many2many_tags" />

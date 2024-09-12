@@ -17,7 +17,7 @@
             <xpath expr="//page[@name='speaker']" position="replace">
                 <page string="Speakers" name="speakers" invisible="use_speaker_track">
                     <group>
-                        <field
+<!--                         <field
                             name="speaker_ids"
                             nolabel="1"
                             options="{'no_quick_create':True,'no_create_edit':True}"
@@ -29,7 +29,8 @@
                                 <field name="city" optional="hide" />
                                 <field name="country_id" optional="hide" />
                             </tree>
-                        </field>
+                        </field> -->
+                        <field name="speaker_ids" readonly="1" />
                     </group>
                 </page>
                 <page
