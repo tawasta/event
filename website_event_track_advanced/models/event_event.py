@@ -47,7 +47,7 @@ class EventEvent(models.Model):
     )
 
     use_speaker_track = fields.Boolean(
-        string="Use speaker track instead of partners", default="False"
+        string="Use speaker track instead of partners", default=False
     )
 
     location_ids = fields.Many2many(
