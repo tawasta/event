@@ -39,14 +39,14 @@
                             />
                         </t>
                     </div>
-<!--                     <div class="row review">
+                    <div class="row review">
 
                         <t t-foreach="review_tracks" t-as="track">
                             <t
                                 t-call="website_event_track_advanced.event_track_review_template"
                             />
                         </t>
-                    </div> -->
+                    </div>
                     <t t-set="track" t-value="request.env['event.track']" />
                     <t
                         t-call="website_event_track_advanced.event_track_proposal_template_new"
