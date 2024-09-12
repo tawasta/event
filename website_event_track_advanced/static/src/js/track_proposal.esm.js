@@ -321,6 +321,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
+                    $('#application-submit-button-send').attr('name', 'track-confirm').val('track-confirm');
+
 
                 });
             } else {
