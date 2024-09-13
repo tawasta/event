@@ -21,7 +21,7 @@
             >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
             <field
                 name="lang"
-            >{{ object.partner_id.lang or object.visitor_id.lang_id }}</field>
+            >{{ object.partner_id.lang or object.visitor_id.lang_id.code }}</field>
         </record>
         <!-- Email when open seats on an event -->
         <record id="event_confirm_waiting_registration" model="mail.template">
@@ -43,7 +43,7 @@
             >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
             <field
                 name="lang"
-            >{{ object.partner_id.lang or object.visitor_id.lang_id }}</field>
+            >{{ object.partner_id.lang or object.visitor_id.lang_id.code }}</field>
         </record>
     </data>
 </odoo>
