@@ -134,6 +134,13 @@ class EventTrackControllerAdvanced(EventTrackController):
                     rating_comment = user_rating.comment
 
                     values.update({"rating": rating, "rating_comment": rating_comment})
+
+                if (
+                    request.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param("website_event_track_advanced.proposal_see_evaluation")
+                ):
+                    values.update({"show_attachments": True})
                 values.update(
                     {
                         "can_review": can_review,
@@ -966,6 +973,10 @@ class EventTrackControllerAdvanced(EventTrackController):
                 .sudo()
                 .search([("id", "=", post.get("rating"))])
             )
+            comment = post.get("rating_comment")
+            logging.info("===COMMENT====")
+            logging.info(post.get("rating_comment"))
+            logging.info(comment)
             vals = {
                 "event_track": track.id,
                 "reviewer_id": reviewer_id.id,
@@ -1025,6 +1036,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         try:
             # If post is review. Create review and return confirmation
             if post.get("review-confirm"):
+                logging.info(post)
                 self._create_review(**post)
                 message = "Your review has been successfully saved."
                 return json.dumps(
