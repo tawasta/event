@@ -456,7 +456,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             trackData.rating,
                             trackData.rating_comment
                         );
-                        if (!trackData.show_attachments){
+                        if (!trackData.show_attachments) {
                             $("#existing_attachments").addClass("d-none");
                         }
                     }
@@ -897,10 +897,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             const formData = new FormData(this); // Kerää lomaketiedot
             if (activeButton && activeButton.attr("name") === "review-confirm") {
                 const track_id = $('input[name="track_id"]').val();
-                formData.append('track_id', track_id);
+                formData.append("track_id", track_id);
 
                 const csrfToken = $('input[name="csrf_token"]').val();
-                formData.append('csrf_token', csrfToken);
+                formData.append("csrf_token", csrfToken);
             }
 
             const action = $(this).attr("action"); // Hae lomakkeen action-osoite

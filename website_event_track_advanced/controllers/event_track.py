@@ -974,9 +974,9 @@ class EventTrackControllerAdvanced(EventTrackController):
                 .search([("id", "=", post.get("rating"))])
             )
             comment = post.get("rating_comment")
-            logging.info("===COMMENT====");
-            logging.info(post.get("rating_comment"));
-            logging.info(comment);
+            logging.info("===COMMENT====")
+            logging.info(post.get("rating_comment"))
+            logging.info(comment)
             vals = {
                 "event_track": track.id,
                 "reviewer_id": reviewer_id.id,
@@ -1036,7 +1036,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         try:
             # If post is review. Create review and return confirmation
             if post.get("review-confirm"):
-                logging.info(post);
+                logging.info(post)
                 self._create_review(**post)
                 message = "Your review has been successfully saved."
                 return json.dumps(

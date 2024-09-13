@@ -96,11 +96,11 @@
                     </div>
                     <div class="card-footer">
                         <span
-                            t-if="track.is_rated"
-                            class="font-italic text-muted"
-                            data-toggle="tooltip"
-                            title="You have already reviewed this track."
-                        >Reviewed</span>
+                        t-if="track.is_rated"
+                        class="font-italic text-muted"
+                        data-toggle="tooltip"
+                        title="You have already reviewed this track."
+                    >Reviewed</span>
 
                         <button
                         type="button"
