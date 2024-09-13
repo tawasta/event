@@ -133,21 +133,20 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     },
 
     _removeAttachments: function () {
-
         $("#clear-attachment").click(function () {
             $("#attachment_ids").val(""); // Tyhjennä liiteinput
         });
         // Tämä funktio käsittelee liitteiden poistamisen merkitsemisen
         $(".remove-attachment").click(function () {
-            const attachmentId = $(this).data('id');
+            const attachmentId = $(this).data("id");
             const attachmentDiv = $(`#attachment-${attachmentId}`);
 
             // Lisätään poistettava liite hidden-kenttään
-            const removeInput = $('#remove_attachments_input');
-            let currentValues = removeInput.val() ? removeInput.val().split(',') : [];
+            const removeInput = $("#remove_attachments_input");
+            const currentValues = removeInput.val() ? removeInput.val().split(",") : [];
             if (!currentValues.includes(attachmentId.toString())) {
                 currentValues.push(attachmentId);
-                removeInput.val(currentValues.join(','));
+                removeInput.val(currentValues.join(","));
             }
 
             // Merkitään visuaalisesti poistetuksi, mutta ei vielä poisteta
@@ -291,9 +290,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     }
                     self._populateSelectOptions("type", response.application_types);
                     if (response.multiple_target_groups) {
-                        $(".target-groups-select").attr("multiple", "multiple").select2({
-                            maximumSelectionSize: 3,
-                        });
+                        $(".target-groups-select")
+                            .attr("multiple", "multiple")
+                            .select2({
+                                maximumSelectionSize: 3,
+                            });
                     }
                     self._populateSelectOptions(
                         "target_groups",
@@ -321,9 +322,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         {selector: 'textarea[name="webinar_info"]'},
                     ]);
 
-                    $('#application-submit-button-send').attr('name', 'track-confirm').val('track-confirm');
-
-
+                    $("#application-submit-button-send")
+                        .attr("name", "track-confirm")
+                        .val("track-confirm");
                 });
             } else {
                 // Hae tiedot tietylle trackille
@@ -336,13 +337,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.application_types,
                         trackData.type
                     );
-                    
+
                     if (trackData.multiple_tags) {
                         $(".tags-select").attr("multiple", "multiple");
-                        self._populateSelectOptions(
-                            "tags",
-                            trackData.tags,
-                        );
+                        self._populateSelectOptions("tags", trackData.tags);
                         $(".tags-select").val(trackData.tag_ids).select2({
                             maximumSelectionSize: 3,
                         });
@@ -350,12 +348,12 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         self._populateSelectOptions(
                             "tags",
                             trackData.tags,
-                            trackData.tag_ids,
+                            trackData.tag_ids
                         );
                     }
 
                     if (trackData.attachments && trackData.attachments.length > 0) {
-                        let attachmentList = '';
+                        let attachmentList = "";
                         trackData.attachments.forEach(function (attachment) {
                             attachmentList += `
                                 <div id="attachment-${attachment.id}" class="o_track_proposal_attachment">
@@ -368,7 +366,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         // Bindataan poiston merkitseminen
                         self._removeAttachments();
                     }
-                    
 
                     self._populateSelectOptions(
                         "language",
@@ -380,16 +377,18 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         $(".target-groups-select").attr("multiple", "multiple");
                         self._populateSelectOptions(
                             "target_groups",
-                            trackData.target_groups,
+                            trackData.target_groups
                         );
-                        $(".target-groups-select").val(trackData.target_group_ids).select2({
-                            maximumSelectionSize: 3,
-                        });
+                        $(".target-groups-select")
+                            .val(trackData.target_group_ids)
+                            .select2({
+                                maximumSelectionSize: 3,
+                            });
                     } else {
                         self._populateSelectOptions(
                             "target_groups",
                             trackData.target_groups,
-                            trackData.target_group_ids,
+                            trackData.target_group_ids
                         );
                     }
 
@@ -439,10 +438,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     self._renderSpeakers(trackData.speakers);
 
-                    if(trackData.track_confirm){
-                        $('#application-submit-button-send').attr('name', 'track-confirm').val('track-confirm');
+                    if (trackData.track_confirm) {
+                        $("#application-submit-button-send")
+                            .attr("name", "track-confirm")
+                            .val("track-confirm");
                     }
-
 
                     if (
                         isReview &&
@@ -587,7 +587,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     .prop("disabled", false)
                     .attr("required", true);
 
-                this._populateSelectOptions("einvoice_operator_id", trackData.operators, trackData.einvoice_operator_id);
+                this._populateSelectOptions(
+                    "einvoice_operator_id",
+                    trackData.operators,
+                    trackData.einvoice_operator_id
+                );
                 $('input[name="edicode"]')
                     .val(trackData.edicode)
                     .prop("disabled", false)
@@ -817,10 +821,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     _bindFormSubmit: function () {
         const self = this;
 
-        let activeButton; // Muuttuja painetun painikkeen seuraamiseksi
+        let activeButton = null; // Muuttuja painetun painikkeen seuraamiseksi
 
         // Kuuntele painikkeen klikkausta ja tallenna painike aktiiviseksi
-        $("#track-application-form").on("click", '[type="submit"]', function (e) {
+        $("#track-application-form").on("click", '[type="submit"]', function () {
             activeButton = $(this); // Tallenna klikatun painikkeen viittaus
         });
         $("#track-application-form").on("submit", function (e) {
@@ -1045,18 +1049,19 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         new Dialog(this, {
             title: _t("Success"),
             size: "medium",
-            $content: $('<div/>').html(message), // Lisätään HTML sisältö
-            buttons: [{
-                text: _t("OK"),
-                close: true,
-                click: function () {
-                    // Ladataan sivu uudelleen, kun käyttäjä sulkee ilmoituksen
-                    location.reload();
+            $content: $("<div/>").html(message), // Lisätään HTML sisältö
+            buttons: [
+                {
+                    text: _t("OK"),
+                    close: true,
+                    click: function () {
+                        // Ladataan sivu uudelleen, kun käyttäjä sulkee ilmoituksen
+                        location.reload();
+                    },
                 },
-            }],
+            ],
         }).open();
     },
-
 
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti

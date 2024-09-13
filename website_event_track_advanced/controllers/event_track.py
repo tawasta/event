@@ -234,7 +234,11 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         if track.stage_id.is_draft:
             track_confirm = True
-            values.update({'track_confirm': track_confirm,})
+            values.update(
+                {
+                    "track_confirm": track_confirm,
+                }
+            )
 
         multiple_target_groups = False
         if track.event_id.allow_target_group_multiple:
@@ -243,7 +247,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         multiple_tags = False
         if track.event_id.allow_track_tags_multiple:
             multiple_tags = True
-
 
         values.update(
             {
@@ -300,7 +303,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 }
             )
             if track.organizer_contact:
-                
+
                 values.update(
                     {
                         "signee_firstname": track.organizer_contact.firstname,
@@ -315,20 +318,22 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "organizer_city": track.organizer.city,
                         "edicode": track.organizer.edicode,
                         "organizer_reference": track.organizer.ref,
-                        'einvoice_operator_id': track.organizer.einvoice_operator_id.id,
+                        "einvoice_operator_id": track.organizer.einvoice_operator_id.id,
                     }
                 )
             if track.stage_id.is_accepted:
 
                 operators = [
                     {"id": ope.id, "name": ope.name}
-                    for ope in request.env["res.partner.operator.einvoice"].sudo().search([])
+                    for ope in request.env["res.partner.operator.einvoice"]
+                    .sudo()
+                    .search([])
                 ]
 
                 values.update(
                     {
                         "is_workshop_contract": True,
-                        'operators': operators,
+                        "operators": operators,
                     }
                 )
 
@@ -685,9 +690,11 @@ class EventTrackControllerAdvanced(EventTrackController):
                 post.get("is_workshop_contract")
                 and post.get("is_workshop_contract") == "true"
             ):
-                einvoice_operator_id = request.env["res.partner.operator.einvoice"].sudo().search([
-                    ('id', '=', post.get('einvoice_operator_id'))
-                ])
+                einvoice_operator_id = (
+                    request.env["res.partner.operator.einvoice"]
+                    .sudo()
+                    .search([("id", "=", post.get("einvoice_operator_id"))])
+                )
                 workshop_organizer_values = {
                     "name": post.get("organizer_organization"),
                     "street": post.get("organizer_street"),
@@ -742,8 +749,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "track_is_done": track_is_done,
             }
         )
-        logging.info("====POSTI VALUES=====");
-        logging.info(values);
+        logging.info("====POSTI VALUES=====")
+        logging.info(values)
 
         return values
 
@@ -993,14 +1000,24 @@ class EventTrackControllerAdvanced(EventTrackController):
                 request.env["event.track.rating"].sudo().create(vals)
 
     def _remove_attachments(self, track, attachment_ids):
-        """ Poistaa trackiin liittyvät liitteet, joiden ID:t on annettu """
-        attachment_ids = [int(attachment_id) for attachment_id in attachment_ids.split(',') if attachment_id]
+        """Poistaa trackiin liittyvät liitteet, joiden ID:t on annettu"""
+        attachment_ids = [
+            int(attachment_id)
+            for attachment_id in attachment_ids.split(",")
+            if attachment_id
+        ]
         if attachment_ids:
-            attachments = request.env['ir.attachment'].sudo().search([
-                ('res_model', '=', 'event.track'),
-                ('res_id', '=', track.id),
-                ('id', 'in', attachment_ids)
-            ])
+            attachments = (
+                request.env["ir.attachment"]
+                .sudo()
+                .search(
+                    [
+                        ("res_model", "=", "event.track"),
+                        ("res_id", "=", track.id),
+                        ("id", "in", attachment_ids),
+                    ]
+                )
+            )
             if attachments:
                 attachments.unlink()
 
@@ -1155,7 +1172,9 @@ class EventTrackControllerAdvanced(EventTrackController):
                 <p>
                     An account has been created for the username <b>{username}</b>. You should receive an email shortly to finish setting up your account. After setting up your account, you can go to <a href="/my/tracks">My Tracks</a> to edit and submit your proposal.
                 </p>
-                """.format(username=track.partner_id.user_ids[0].login)
+                """.format(
+                    username=track.partner_id.user_ids[0].login
+                )
 
             return json.dumps({"success": True, "message": message})
 
@@ -1223,20 +1242,21 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Suodatetaan vain julkaistut esitykset
         published_tracks = render_vals.get("tracks").filtered(
-            lambda t: t.stage_id.is_done == True
+            lambda t: t.stage_id.is_fully_accessible == True
         )
 
         # Päivitetään render_vals suodatetuilla arvoilla
         render_vals["tracks"] = published_tracks
 
         render_vals["tracks"] = render_vals.get("tracks").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
         )
 
         indexes_to_del = []
         for track_by_day in render_vals.get("tracks_by_day"):
             track_by_day["tracks"] = track_by_day.get("tracks").filtered(
-                lambda p: p.type.code == "poster" and p.stage_id.is_done == True
+                lambda p: p.type.code == "poster"
+                and p.stage_id.is_fully_accessible == True
             )
             if not track_by_day["tracks"]:
                 indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
@@ -1244,10 +1264,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         for i in sorted(indexes_to_del, reverse=True):
             del render_vals["tracks_by_day"][i]
         render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
         )
         render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_done == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
         )
         return request.render("website_event_track.tracks_session", render_vals)
 
