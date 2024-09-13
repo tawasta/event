@@ -2,7 +2,10 @@
 <odoo>
     <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
     <template id="email_template_waiting_list">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_waiting_list.view_email_template_waiting_list"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -10,14 +13,20 @@
     </template>
     <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
     <template id="email_template_confirm_waiting_list">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_waiting_list.view_email_template_confirm_waiting_list"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
     </template>
     <template id="view_email_template_waiting_list">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -111,7 +120,10 @@
         </t>
     </template>
     <template id="view_email_template_confirm_waiting_list">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"

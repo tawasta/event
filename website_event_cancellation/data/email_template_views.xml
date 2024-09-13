@@ -2,7 +2,10 @@
 <odoo>
     <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
     <template id="email_template_subscription_with_cancel">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_subscription_with_cancel"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -10,14 +13,20 @@
     </template>
     <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
     <template id="email_template_reminder_with_cancel">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_reminder_with_cancel"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
     </template>
     <template id="view_email_template_event_base">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t t-set="details" t-value="" />
         <body>
             <html>
@@ -140,7 +149,10 @@
         </body>
     </template>
     <template id="view_email_template_event_cancellation">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <div t-if="object.event_id.has_cancel and object.event_id.able_to_cancel">
             <t t-esc="link_message" />
             <a t-att-href="object.manage_url" />
@@ -339,7 +351,10 @@
         </tr>
     </template>
     <template id="view_email_template_event_calendar">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <div>
             <br />
             <strong>Add this event to your calendar</strong>
@@ -378,7 +393,10 @@
         </div>
     </template>
     <template id="view_email_template_subscription_with_cancel">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -488,7 +506,10 @@
         </t>
     </template>
     <template id="view_email_template_reminder_with_cancel">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"

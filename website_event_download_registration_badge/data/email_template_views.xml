@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="view_email_template_event_download_badge">
-        <t t-set="lang" t-value="object.partner_id.lang or object.visitor_id.lang_id.code" />
+        <t
+            t-set="lang"
+            t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+        />
         <div t-if="object.event_id.registration_badge">
             Remember to download and print your registration badge before arriving at the conference!
             <br />
