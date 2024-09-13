@@ -23,7 +23,7 @@
             <field name="subject">Your registration at ${object.event_id.name}</field>
             <field
                 name="lang"
-            >{{ object.partner_id.lang or object.visitor_id.lang_id or 'fi_FI' }}</field>
+            >{{ object.partner_id.lang or object.visitor_id.lang_id.code or 'fi_FI' }}</field>
 
             <field
                 name="email_from"
@@ -56,7 +56,7 @@
             >${object.event_id.name}: ${object.get_date_range_str()}</field>
             <field
                 name="lang"
-            >{{ object.partner_id.lang or object.visitor_id.lang_id or 'fi_FI' }}</field>
+            >{{ object.partner_id.lang or object.visitor_id.lang_id.code or 'fi_FI' }}</field>
 
             <field
                 name="email_from"
