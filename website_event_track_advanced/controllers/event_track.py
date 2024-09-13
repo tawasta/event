@@ -85,6 +85,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 )
             )
             values.update({"review_tracks": review_tracks})
+            logging.info(values);
         return values
 
     @http.route(
