@@ -136,7 +136,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values.update({"rating": rating, "rating_comment": rating_comment})
 
                 if (
-                    self.env["ir.config_parameter"]
+                    request.env["ir.config_parameter"]
                     .sudo()
                     .get_param("website_event_track_advanced.proposal_see_evaluation")
                 ):

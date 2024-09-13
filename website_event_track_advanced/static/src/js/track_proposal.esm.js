@@ -456,6 +456,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             trackData.rating,
                             trackData.rating_comment
                         );
+                        if (!trackData.show_attachments){
+                            $("#existing_attachments").addClass("d-none");
+                        }
                     }
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
