@@ -25,7 +25,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     start: function () {
         this._super.apply(this, arguments);
         this._bindTypeChange();
-        this._enableWysiwyg(); // Enable WYSIWYG editor
+        this._enableCkeditor(); // Enable WYSIWYG editor
         this._loadTrackData(); // Load track data when modal is opened
         this._clearFormOnClose(); // Clear form when modal is closed
         this._bindFormSubmit(); // Bindataan lomakkeen submit AJAX-pyyntöön
@@ -321,7 +321,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     const privacyDIV = $("#privacy-acceptance-container");
                     privacyDIV.removeClass("d-none");
 
-                    self._enableWysiwyg([
+                    self._enableCkeditor([
                         {selector: 'textarea[name="description"]'},
                         {selector: 'textarea[name="target_group_info"]'},
                         {selector: 'textarea[name="extra_info"]'},
@@ -440,7 +440,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $("#workshop_schedule_readonly").html(trackData.workshop_schedule);
                     $("#webinar_info_readonly").html(trackData.webinar_info);
                     // Alusta WYSIWYG-editorit ja aseta arvot
-                    self._enableWysiwyg([
+                    self._enableCkeditor([
                         {
                             selector: 'textarea[name="description"]',
                             content: trackData.description,
@@ -512,7 +512,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         this._populateSelectOptions("rating", rating_grade_ids, rating);
 
-        this._enableWysiwyg([
+        this._enableCkeditor([
             {
                 selector: 'textarea[name="rating_comment"]',
                 content: rating_comment,
@@ -526,7 +526,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const workshopRequestDiv = $("#workshop-track-request-time-div");
         if (trackData.is_workshop) {
             workshopDiv.removeClass("d-none");
-            this._enableWysiwyg([
+            this._enableCkeditor([
                 {
                     selector: 'textarea[name="workshop_goals"]',
                     content: trackData.workshop_goals,
@@ -552,11 +552,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             $('textarea[name="workshop_goals"]')
                 .val(trackData.workshop_goals)
                 .prop("disabled", false)
-                .attr("required", true);
+
             $('textarea[name="workshop_schedule"]')
                 .val(trackData.workshop_schedule)
                 .prop("disabled", false)
-                .attr("required", true);
+
 
             workshopRequestDiv.removeClass("d-none");
             workshopRequestDiv
@@ -666,7 +666,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             webinarInfo.prop("disabled", !trackData.webinar);
             webinarInfo.val(trackData.webinar_info || "");
 
-            this._enableWysiwyg([
+            this._enableCkeditor([
                 {
                     selector: 'textarea[name="webinar_info"]',
                     content: trackData.webinar_info,
@@ -858,34 +858,21 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $("#track-application-form").on("click", '[type="submit"]', function () {
             activeButton = $(this); // Tallenna klikatun painikkeen viittaus
         });
+
         $("#track-application-form").on("submit", function (e) {
             e.preventDefault(); // Estä lomakkeen oletuslähetys
 
-            // Päivitä WYSIWYG-editorin sisältö ennen lomakkeen lähetystä
-            const wysiwygGoals = $('textarea[name="workshop_goals"]').data("wysiwyg");
-            const wysiwygWebinar = $('textarea[name="webinar_info"]').data("wysiwyg");
-            const wysiwygRating = $('textarea[name="rating_comment"]').data("wysiwyg");
-            const wysiwygSchedule = $('textarea[name="workshop_schedule"]').data(
-                "wysiwyg"
-            );
-
-            if (wysiwygGoals) {
-                $('textarea[name="workshop_goals"]').val(wysiwygGoals.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
-            }
-
-            if (wysiwygRating) {
-                $('textarea[name="rating_comment"]').val(wysiwygRating.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
-            }
-
-            if (wysiwygSchedule) {
-                $('textarea[name="workshop_schedule"]').val(wysiwygSchedule.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
-            }
-            if (wysiwygWebinar) {
-                $('textarea[name="webinar_info"]').val(wysiwygWebinar.getValue()); // Aseta WYSIWYG-editorin arvo tekstikenttään
-            }
+            // Päivitä CKEditorin sisältö vastaaviin tekstialueisiin ennen lomakkeen lähettämistä
+            $('textarea').each(function () {
+                const editorInstance = $(this).data('ckeditorInstance');
+                if (editorInstance) {
+                    const editorData = editorInstance.getData();
+                    $(this).val(editorData); // Aseta CKEditorin arvo tekstialueeseen
+                }
+            });
 
             const loadingScreen = function () {
-                const message = "Loading, please wait...";
+                const message = "Ladataan, odota hetki...";
                 const displayMessage = `
                     <div id="loading-screen" style="
                         position: fixed;
@@ -918,11 +905,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             loadingScreen(); // Näytä latausruutu
 
-            // TODO TEXTAREA PAKOLLISUUDEN TARKITUS
-
             const submitButton = $(this).find('[type="submit"]');
             submitButton.prop("disabled", true); // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
             const formData = new FormData(this); // Kerää lomaketiedot
+
             if (activeButton && activeButton.attr("name") === "review-confirm") {
                 const track_id = $('input[name="track_id"]').val();
                 formData.append("track_id", track_id);
@@ -971,6 +957,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         });
     },
 
+
+
+
     /**
      * Bindaa type-valikon muutokseen tarvittavat tapahtumat
      */
@@ -1005,9 +994,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .find("input, select")
                 .prop("disabled", false)
                 .attr("required", true);
-            workshopDiv.find("textarea").prop("disabled", false).attr("required", true);
+            workshopDiv.find("textarea").prop("disabled", false);
 
-            this._enableWysiwyg([
+            this._enableCkeditor([
                 {selector: 'textarea[name="workshop_goals"]'},
                 {selector: 'textarea[name="workshop_schedule"]'},
             ]);
@@ -1097,64 +1086,70 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
     /**
      * Aktivoi WYSIWYG-editori tekstialueille core-mallin mukaisesti
      */
-    _enableWysiwyg: function (selectors = []) {
-        const self = this;
-
+    _enableCkeditor: function (selectors = []) {
         if (!Array.isArray(selectors) || selectors.length === 0) {
-            console.error("No selectors provided for WYSIWYG initialization.");
+            console.error("No selectors provided for editor initialization.");
             return;
         }
+
+        let initPromises = [];
 
         selectors.forEach((selector) => {
             const $textarea = $(selector.selector);
 
             if ($textarea.length === 0) {
                 console.error(
-                    `Textarea element not found for WYSIWYG initialization: ${selector.selector}`
+                    `Textarea element not found for editor initialization: ${selector.selector}`
                 );
                 return;
             }
 
-            // Tarkista, onko WYSIWYG-editori jo alustettu
-            if ($textarea.data("wysiwyg")) {
-                console.log(
-                    `WYSIWYG-editor already initialized for: ${selector.selector}`
-                );
-                return;
+            // Destroy any existing CKEditor instance on the element
+            if ($textarea.data('ckeditorInstance')) {
+                $textarea.data('ckeditorInstance').destroy()
+                    .then(() => {
+                        $textarea.removeData('ckeditorInstance');
+                    });
             }
 
-            const options = {
-                toolbarTemplate: "website_forum.web_editor_toolbar",
-                toolbarOptions: {
-                    showColors: false,
-                    showFontSize: false,
-                    showHistory: true,
-                    showHeading1: false,
-                    showHeading2: false,
-                    showHeading3: false,
-                    showLink: true,
-                    showImageEdit: true,
-                },
-                recordInfo: {
-                    context: self._getContext(),
-                    res_model: "event.track",
-                    res_id: Number(
-                        window.location.pathname.split("-").slice(-1)[0].split("/")[0]
-                    ),
-                },
-                resizable: true,
-                userGeneratedContent: true,
-                height: 350,
-            };
+            // Initialize CKEditor 5 and push the promise to the array
+            const initPromise = ClassicEditor
+                .create($textarea[0], {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                        'undo', 'redo'
+                    ],
+                    height: 350, // Set the height of the editor
+                    // Add more CKEditor 5 configuration options here if needed
+                })
+                .then(editor => {
+                    $textarea.data('ckeditorInstance', editor);
+                    if (selector.content) {
+                        editor.setData(selector.content);
+                    }
 
-            loadWysiwygFromTextarea(self, $textarea[0], options).then((wysiwyg) => {
-                if (selector.content) {
-                    wysiwyg.setValue(selector.content); // Aseta olemassa oleva sisältö editoriin
-                }
-                $textarea.data("wysiwyg", wysiwyg); // Tallenna viite WYSIWYG-editoriin
-            });
+                    
+
+                    // Hide the spinner
+                    $textarea.closest('.position-relative').find('.o_wysiwyg_loading').hide();
+                })
+                .catch(error => {
+                    console.error('Error initializing CKEditor 5:', error);
+                });
+
+            initPromises.push(initPromise);
+        });
+
+        // Ensure all editors are initialized before continuing
+        Promise.all(initPromises).then(() => {
+            console.log('All editors initialized');
         });
     },
+
+
+
+
 
 });
 

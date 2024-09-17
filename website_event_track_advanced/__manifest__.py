@@ -73,7 +73,8 @@
     "assets": {
         "web.assets_frontend": [
             "website_event_track_advanced/static/src/js/track_proposal.esm.js",
-            "https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"
+            "https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js",
+            "https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.css",
         ],
     },
 }

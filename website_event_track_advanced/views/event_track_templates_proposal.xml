@@ -938,9 +938,9 @@
                             name="description"
                             placeholder="Application Content..."
                             class="form-control o_wysiwyg_loader"
-                            required="1"
                             rows="6"
                         />
+
                         <div
                             id="description_readonly"
                             class="readonly-field  mb-3 p-2 d-none"
@@ -1006,7 +1006,6 @@
                         <select
                             name="presentation_language_ids"
                             t-attf-class="form-control presentation-select"
-                            t-att-required="None if not editable else 'required'"
                         >
 
                         </select>
