@@ -264,6 +264,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 jsonrpc("/event/application_types", {
                     event_id: eventId,
                 }).then((response) => {
+                    $('input[name="track_id"]').val('');
                     if (response.contact_info) {
                         $('input[name="contact_firstname"]').val(
                             response.contact_info.firstname
