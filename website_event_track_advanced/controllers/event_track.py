@@ -85,7 +85,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 )
             )
             values.update({"review_tracks": review_tracks})
-            logging.info(values);
+            logging.info(values)
         return values
 
     @http.route(
@@ -190,7 +190,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         ]
 
         track_subthemes = [
-            {"id": subtheme.id, "name": subtheme.name} for subtheme in track.event_id.track_subtheme_ids
+            {"id": subtheme.id, "name": subtheme.name}
+            for subtheme in track.event_id.track_subtheme_ids
         ]
 
         tags = [
@@ -421,7 +422,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         ]
 
         track_subthemes = [
-            {"id": subtheme.id, "name": subtheme.name} for subtheme in event.track_subtheme_ids
+            {"id": subtheme.id, "name": subtheme.name}
+            for subtheme in event.track_subtheme_ids
         ]
 
         tags = [{"id": tag.id, "name": tag.name} for tag in event.allowed_track_tag_ids]
@@ -633,7 +635,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             tags = list(map(int, tag_post))
 
         presentation_language_ids = False
-        presentation_language_post = request.httprequest.form.getlist("presentation_language_ids")
+        presentation_language_post = request.httprequest.form.getlist(
+            "presentation_language_ids"
+        )
 
         if presentation_language_post and not "" in presentation_language_post:
             presentation_language_ids = list(map(int, presentation_language_post))
@@ -660,7 +664,9 @@ class EventTrackControllerAdvanced(EventTrackController):
             else False,
             "target_group_info": post.get("target_group_info"),
             "tag_ids": [(6, 0, tags)] if tags else False,
-            "presentation_language_ids": [(6, 0, presentation_language_ids)] if presentation_language_ids else False,
+            "presentation_language_ids": [(6, 0, presentation_language_ids)]
+            if presentation_language_ids
+            else False,
         }
 
         # Language
@@ -675,7 +681,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             logging.info(track_values["language"])
 
         if post.get("subtheme"):
-            subtheme_id = request.env["event.track.subtheme"].sudo().search([('id', '=', post.get('subtheme'))])
+            subtheme_id = (
+                request.env["event.track.subtheme"]
+                .sudo()
+                .search([("id", "=", post.get("subtheme"))])
+            )
 
             track_values["subtheme_id"] = subtheme_id.id
 

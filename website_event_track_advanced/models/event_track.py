@@ -105,10 +105,12 @@ class EventTrack(models.Model):
         string="Target group",
     )
 
-    subtheme_id = fields.Many2one(string="Application subtheme", comodel_name="event.track.subtheme")
+    subtheme_id = fields.Many2one(
+        string="Application subtheme", comodel_name="event.track.subtheme"
+    )
 
     interested_in_article_publication = fields.Boolean(
-        string='Interested in Publishing Presentation as an Article'
+        string="Interested in Publishing Presentation as an Article"
     )
 
     target_group_ids = fields.Many2many(
@@ -193,7 +195,9 @@ class EventTrack(models.Model):
         compute="_compute_overlapping_speaker_track_ids",
     )
 
-    presentation_language_ids = fields.Many2many(string="I am ready to give a presentation.", comodel_name="res.lang")
+    presentation_language_ids = fields.Many2many(
+        string="I am ready to give a presentation.", comodel_name="res.lang"
+    )
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration

@@ -1,7 +1,6 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import {loadWysiwygFromTextarea} from "@web_editor/js/frontend/loadWysiwygFromTextarea"; // WYSIWYG loader import
 import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
@@ -390,11 +389,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     self._populateSelectOptions(
                         "presentation_language_ids",
-                        trackData.presentation_language_ids,
+                        trackData.presentation_language_ids
                     );
-                    $(".presentation-select").val(trackData.presentation_ids)
-                            .select2({
-                            });
+                    $(".presentation-select")
+                        .val(trackData.presentation_ids)
+                        .select2({});
 
                     if (trackData.multiple_target_groups) {
                         $(".target-groups-select").attr("multiple", "multiple");
@@ -419,7 +418,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="name"]').val(trackData.name);
                     $('input[name="video_url"]').val(trackData.video_url);
 
-                    $('input[name="publication"]').prop("checked", trackData.publication);
+                    $('input[name="publication"]').prop(
+                        "checked",
+                        trackData.publication
+                    );
 
                     $('input[name="contact_firstname"]').val(
                         trackData.contact.firstname
@@ -551,12 +553,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .attr("required", true);
             $('textarea[name="workshop_goals"]')
                 .val(trackData.workshop_goals)
-                .prop("disabled", false)
+                .prop("disabled", false);
 
             $('textarea[name="workshop_schedule"]')
                 .val(trackData.workshop_schedule)
-                .prop("disabled", false)
-
+                .prop("disabled", false);
 
             workshopRequestDiv.removeClass("d-none");
             workshopRequestDiv
@@ -863,8 +864,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             e.preventDefault(); // Estä lomakkeen oletuslähetys
 
             // Päivitä CKEditorin sisältö vastaaviin tekstialueisiin ennen lomakkeen lähettämistä
-            $('textarea').each(function () {
-                const editorInstance = $(this).data('ckeditorInstance');
+            $("textarea").each(function () {
+                const editorInstance = $(this).data("ckeditorInstance");
                 if (editorInstance) {
                     const editorData = editorInstance.getData();
                     $(this).val(editorData); // Aseta CKEditorin arvo tekstialueeseen
@@ -956,9 +957,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             });
         });
     },
-
-
-
 
     /**
      * Bindaa type-valikon muutokseen tarvittavat tapahtumat
@@ -1092,7 +1090,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             return;
         }
 
-        let initPromises = [];
+        const initPromises = [];
 
         selectors.forEach((selector) => {
             const $textarea = $(selector.selector);
@@ -1105,37 +1103,48 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             }
 
             // Destroy any existing CKEditor instance on the element
-            if ($textarea.data('ckeditorInstance')) {
-                $textarea.data('ckeditorInstance').destroy()
+            if ($textarea.data("ckeditorInstance")) {
+                $textarea
+                    .data("ckeditorInstance")
+                    .destroy()
                     .then(() => {
-                        $textarea.removeData('ckeditorInstance');
+                        $textarea.removeData("ckeditorInstance");
                     });
             }
 
             // Initialize CKEditor 5 and push the promise to the array
-            const initPromise = ClassicEditor
-                .create($textarea[0], {
-                    toolbar: [
-                        'heading', '|',
-                        'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
-                        'undo', 'redo'
-                    ],
-                    height: 350, // Set the height of the editor
-                    // Add more CKEditor 5 configuration options here if needed
-                })
-                .then(editor => {
-                    $textarea.data('ckeditorInstance', editor);
+            // eslint-disable-next-line no-undef
+            const initPromise = ClassicEditor.create($textarea[0], {
+                toolbar: [
+                    "heading",
+                    "|",
+                    "bold",
+                    "italic",
+                    "link",
+                    "bulletedList",
+                    "numberedList",
+                    "blockQuote",
+                    "|",
+                    "undo",
+                    "redo",
+                ],
+                height: 350, // Set the height of the editor
+                // Add more CKEditor 5 configuration options here if needed
+            })
+                .then((editor) => {
+                    $textarea.data("ckeditorInstance", editor);
                     if (selector.content) {
                         editor.setData(selector.content);
                     }
 
-                    
-
                     // Hide the spinner
-                    $textarea.closest('.position-relative').find('.o_wysiwyg_loading').hide();
+                    $textarea
+                        .closest(".position-relative")
+                        .find(".o_wysiwyg_loading")
+                        .hide();
                 })
-                .catch(error => {
-                    console.error('Error initializing CKEditor 5:', error);
+                .catch((error) => {
+                    console.error("Error initializing CKEditor 5:", error);
                 });
 
             initPromises.push(initPromise);
@@ -1143,14 +1152,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         // Ensure all editors are initialized before continuing
         Promise.all(initPromises).then(() => {
-            console.log('All editors initialized');
+            console.log("All editors initialized");
         });
     },
-
-
-
-
-
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;
