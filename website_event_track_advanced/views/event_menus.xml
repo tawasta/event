@@ -63,6 +63,14 @@
         groups="event.group_event_manager"
     />
     <menuitem
+        id="event_track_subtheme_menu"
+        name="Track subthemes"
+        action="event_track_subtheme_action"
+        sequence="40"
+        parent="website_event_track_advanced.menu_event_track_configuration"
+        groups="event.group_event_manager"
+    />
+    <menuitem
         id="event_track_target_group_menu"
         name="Track Target Groups"
         action="event_track_target_group_action"

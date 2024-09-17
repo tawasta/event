@@ -189,6 +189,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             for group in track.event_id.target_group_ids
         ]
 
+        track_subthemes = [
+            {"id": subtheme.id, "name": subtheme.name} for subtheme in track.event_id.track_subtheme_ids
+        ]
+
         tags = [
             {"id": tag.id, "name": tag.name}
             for tag in track.event_id.allowed_track_tag_ids
@@ -205,6 +209,14 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "name": lang.name,
             }
             for lang in request.env["res.lang"].sudo().search([])
+        ]
+
+        presentation_language_ids = [
+            {
+                "id": presentation_lang.id,
+                "name": presentation_lang.name,
+            }
+            for presentation_lang in request.env["res.lang"].sudo().search([])
         ]
 
         # Get privacy settings and already accepted privacy
@@ -260,6 +272,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "video_url": track.video_url,
                 "language": track.language.id,
                 "languages": languages,
+                "presentation_language_ids": presentation_language_ids,
+                "presentation_ids": track.presentation_language_ids.ids,
                 "target_group_ids": track.target_group_ids.ids,
                 "target_group_info": track.target_group_info,
                 "tag_ids": track.tag_ids.ids,
@@ -285,6 +299,9 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "tags": tags,
                 "attachments": attachments,
                 "privacy_ids": privacy_ids,
+                "track_subthemes": track_subthemes,
+                "subtheme": track.subtheme_id.ids,
+                "publication": track.interested_in_article_publication,
             }
         )
 
@@ -318,6 +335,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "organizer_zip": track.organizer.zip,
                         "organizer_city": track.organizer.city,
                         "edicode": track.organizer.edicode,
+                        "company_registry": track.organizer.company_registry,
                         "organizer_reference": track.organizer.ref,
                         "einvoice_operator_id": track.organizer.einvoice_operator_id.id,
                     }
@@ -402,6 +420,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             {"id": group.id, "name": group.name} for group in event.target_group_ids
         ]
 
+        track_subthemes = [
+            {"id": subtheme.id, "name": subtheme.name} for subtheme in event.track_subtheme_ids
+        ]
+
         tags = [{"id": tag.id, "name": tag.name} for tag in event.allowed_track_tag_ids]
 
         languages = [
@@ -411,7 +433,13 @@ class EventTrackControllerAdvanced(EventTrackController):
             }
             for lang in request.env["res.lang"].sudo().search([])
         ]
-
+        presentation_language_ids = [
+            {
+                "id": presentation_lang.id,
+                "name": presentation_lang.name,
+            }
+            for presentation_lang in request.env["res.lang"].sudo().search([])
+        ]
         privacy_ids = [
             {
                 "id": privacy.id,
@@ -449,11 +477,13 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         return {
             "application_types": application_types,
+            "track_subthemes": track_subthemes,
             "target_groups": target_groups,
             "tags": tags,
             "request_time": request_time,
             "privacy_ids": privacy_ids,
             "languages": languages,
+            "presentation_language_ids": presentation_language_ids,
             "contact_info": contact_info,
             "multiple_target_groups": multiple_target_groups,
             "multiple_tags": multiple_tags,
@@ -602,6 +632,12 @@ class EventTrackControllerAdvanced(EventTrackController):
         if tag_post and not "" in tag_post:
             tags = list(map(int, tag_post))
 
+        presentation_language_ids = False
+        presentation_language_post = request.httprequest.form.getlist("presentation_language_ids")
+
+        if presentation_language_post and not "" in presentation_language_post:
+            presentation_language_ids = list(map(int, presentation_language_post))
+
         # Target groups
         target_group_ids = False
         target_post = request.httprequest.form.getlist("target_groups")
@@ -624,6 +660,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             else False,
             "target_group_info": post.get("target_group_info"),
             "tag_ids": [(6, 0, tags)] if tags else False,
+            "presentation_language_ids": [(6, 0, presentation_language_ids)] if presentation_language_ids else False,
         }
 
         # Language
@@ -636,6 +673,11 @@ class EventTrackControllerAdvanced(EventTrackController):
             )
             track_values["language"] = lang_id.id
             logging.info(track_values["language"])
+
+        if post.get("subtheme"):
+            subtheme_id = request.env["event.track.subtheme"].sudo().search([('id', '=', post.get('subtheme'))])
+
+            track_values["subtheme_id"] = subtheme_id.id
 
         # Speakers
         speaker_values = list()
@@ -663,6 +705,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "company_type": "person",
                     }
                 )
+        track_values["interested_in_article_publication"] = post.get("publication")
 
         # Webinar
         if post.get("is_webinar") and post.get("is_webinar") == "true":
@@ -702,6 +745,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     "zip": post.get("organizer_zip"),
                     "city": post.get("organizer_city"),
                     "ref": post.get("organizer_reference"),
+                    "company_registry": post.get("company_registry"),
                     "einvoice_operator_id": einvoice_operator_id.id,
                     "edicode": post.get("edicode"),
                     "type": "invoice",

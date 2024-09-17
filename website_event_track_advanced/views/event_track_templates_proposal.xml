@@ -810,6 +810,7 @@
                             class="invalid-feedback"
                         >Please choose an application type.</div>
                     </div>
+                    
                     <div class="form-group col-xl-6">
                         <label
                             for="type_description"
@@ -819,7 +820,21 @@
                             <!-- <t t-esc="track.type.description" /> -->
                         </p>
                     </div>
+                    <div class="form-group col-xl-6">
+                        <label
+                            class="col-form-label"
+                            for="subtheme"
+                        >Application subtheme</label>
+                        <select
+                            name="subtheme"
+                            id="subtheme"
+                            class="form-control"
+                            t-att-required="None if not editable else 'required'"
+                        >
 
+                        </select>
+
+                    </div>
                     <div class="col-md-6 d-none" id="workshop-track-request-time-div">
                         <label
                             class="col-form-label"
@@ -828,6 +843,22 @@
                         <select name="request_time" t-attf-class="form-control">
 
                         </select>
+                    </div>
+
+                    <div class="form-group col-xl-12">
+                        <div class="form-check">
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="publication"
+                                data-toggle="publication"
+                                id="publication-checkbox"
+                            />
+                            <label
+                                for="publication"
+                                class="form-check-label label-optional"
+                            >Interested in Publishing Presentation as an Article</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -967,7 +998,20 @@
                             name="remove_attachments"
                         />
                     </div>
+                    <div class="form-group col-xl-6">
+                        <label
+                            class="col-form-label"
+                            for="presentation_language_ids"
+                        >I am ready to give a presentation</label>
+                        <select
+                            name="presentation_language_ids"
+                            t-attf-class="form-control presentation-select"
+                            t-att-required="None if not editable else 'required'"
+                        >
 
+                        </select>
+
+                    </div>
 
                 </div>
             </div>
@@ -1571,6 +1615,19 @@
                             <input
                                 name="organizer_organization"
                                 placeholder="Organization"
+                                class="form-control"
+                                type="text"
+                                disabled="1"
+                            />
+                        </div>
+                        <div class="form-group col-xl-4">
+                            <label
+                                for="company_registry"
+                                class="col-form-label"
+                            >Company registry</label>
+                            <input
+                                name="company_registry"
+                                placeholder="Company registry"
                                 class="form-control"
                                 type="text"
                                 disabled="1"

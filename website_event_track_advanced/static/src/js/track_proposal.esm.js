@@ -289,6 +289,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         );
                     }
                     self._populateSelectOptions("type", response.application_types);
+                    self._populateSelectOptions("subtheme", response.track_subthemes);
                     if (response.multiple_target_groups) {
                         $(".target-groups-select")
                             .attr("multiple", "multiple")
@@ -301,6 +302,13 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         response.target_groups
                     );
 
+                    $(".presentation-select").attr("multiple", "multiple").select2({
+                        maximumSelectionSize: 3,
+                    });
+                    self._populateSelectOptions(
+                        "presentation_language_ids",
+                        response.presentation_language_ids
+                    );
                     if (response.multiple_tags) {
                         $(".tags-select").attr("multiple", "multiple").select2({
                             maximumSelectionSize: 3,
@@ -352,6 +360,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         );
                     }
 
+                    self._populateSelectOptions(
+                        "subtheme",
+                        trackData.track_subthemes,
+                        trackData.subtheme
+                    );
                     if (trackData.attachments && trackData.attachments.length > 0) {
                         let attachmentList = "";
                         trackData.attachments.forEach(function (attachment) {
@@ -372,6 +385,16 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.languages,
                         trackData.language
                     );
+
+                    $(".presentation-select").attr("multiple", "multiple");
+
+                    self._populateSelectOptions(
+                        "presentation_language_ids",
+                        trackData.presentation_language_ids,
+                    );
+                    $(".presentation-select").val(trackData.presentation_ids)
+                            .select2({
+                            });
 
                     if (trackData.multiple_target_groups) {
                         $(".target-groups-select").attr("multiple", "multiple");
@@ -395,6 +418,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     $('input[name="track_id"]').val(trackData.track_id);
                     $('input[name="name"]').val(trackData.name);
                     $('input[name="video_url"]').val(trackData.video_url);
+
+                    $('input[name="publication"]').prop("checked", trackData.publication);
 
                     $('input[name="contact_firstname"]').val(
                         trackData.contact.firstname
@@ -564,6 +589,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     .prop("disabled", false);
                 $('input[name="signee_organization"]')
                     .val(trackData.signee_organization)
+                    .prop("disabled", false);
+                $('input[name="company_registry"]')
+                    .val(trackData.company_registry)
                     .prop("disabled", false);
                 $('input[name="signee_title"]')
                     .val(trackData.signee_title)
@@ -1127,6 +1155,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             });
         });
     },
+
 });
 
 export default publicWidget.registry.TrackProposalFormInstance;
