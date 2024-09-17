@@ -71,6 +71,12 @@ class EventEvent(models.Model):
         store=True,
         readonly=False,
     )
+    track_subtheme_ids = fields.Many2many(
+        "event.track.subtheme",
+        string="Track subthemes",
+        store=True,
+        readonly=False,
+    )
     rating_grade_ids = fields.Many2many(
         "event.track.rating.grade",
         relation="event_rating_grades_rel",

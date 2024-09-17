@@ -104,6 +104,7 @@
                 <field name="track_types_ids" widget="many2many_tags" />
                 <field name="target_group_ids" widget="many2many_tags" />
                 <field name="rating_grade_ids" widget="many2many_tags" />
+                <field name="track_subtheme_ids" widget="many2many_tags" />
                 <field name="show_track_twitter_hashtags" />
                 <field name="allowed_track_tag_ids" widget="many2many_tags" />
                 <field name="allow_track_tags_multiple" />

@@ -105,6 +105,14 @@ class EventTrack(models.Model):
         string="Target group",
     )
 
+    subtheme_id = fields.Many2one(
+        string="Application subtheme", comodel_name="event.track.subtheme"
+    )
+
+    interested_in_article_publication = fields.Boolean(
+        string="Interested in Publishing Presentation as an Article"
+    )
+
     target_group_ids = fields.Many2many(
         comodel_name="event.track.target.group",
         string="Target groups",
@@ -185,6 +193,10 @@ class EventTrack(models.Model):
         comodel_name="event.track",
         string="Overlapping speakers",
         compute="_compute_overlapping_speaker_track_ids",
+    )
+
+    presentation_language_ids = fields.Many2many(
+        string="I am ready to give a presentation.", comodel_name="res.lang"
     )
     # 3. Default methods
 
