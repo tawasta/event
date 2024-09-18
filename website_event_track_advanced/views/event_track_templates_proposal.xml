@@ -979,6 +979,10 @@
                             class="form-control o_wysiwyg_loader"
                             rows="6"
                         />
+                        <div id="word-count" class="mt-2">
+                            Words: <span class="word_count">0</span> / <span class="max_value">500</span>
+                        </div>
+
 
                         <div
                             id="description_readonly"
