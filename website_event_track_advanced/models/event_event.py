@@ -71,6 +71,12 @@ class EventEvent(models.Model):
         store=True,
         readonly=False,
     )
+    track_subtheme_ids = fields.Many2many(
+        "event.track.subtheme",
+        string="Track subthemes",
+        store=True,
+        readonly=False,
+    )
     rating_grade_ids = fields.Many2many(
         "event.track.rating.grade",
         relation="event_rating_grades_rel",
@@ -219,7 +225,7 @@ class EventEvent(models.Model):
                         ("date", "!=", False),
                         ("date_end", "!=", False),
                         ("website_published", "=", True),
-                        ("stage_id.is_done", "=", True),
+                        ("stage_id.is_fully_accessible", "=", True),
                     ],
                     order="date",
                 )
@@ -257,7 +263,7 @@ class EventEvent(models.Model):
                     duration = duration.total_seconds() / 3600
 
                     first_done_stage = self.env["event.track.stage"].search(
-                        [("is_done", "=", True)], order="sequence"
+                        [("is_fully_accessible", "=", True)], order="sequence"
                     )
                     # Empty slot between tracks. Create a break
                     track_values = dict(

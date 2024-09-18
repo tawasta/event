@@ -8,6 +8,7 @@ from . import (
     event_track_reviewer,
     event_track_speaker,
     event_track_stage,
+    event_track_subtheme,
     event_track_tag,
     event_track_target_group,
     event_track_type,

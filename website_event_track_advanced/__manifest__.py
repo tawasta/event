@@ -57,6 +57,7 @@
         "views/event_track_target_group_views.xml",
         "views/event_track_speaker.xml",
         "views/event_track_stage_views.xml",
+        "views/event_track_subtheme.xml",
         "views/event_views.xml",
         "views/event_menus.xml",
         "views/event_track_request_time.xml",
@@ -72,6 +73,8 @@
     "assets": {
         "web.assets_frontend": [
             "website_event_track_advanced/static/src/js/track_proposal.esm.js",
+            "https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js",
+            "https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.css",
         ],
     },
 }

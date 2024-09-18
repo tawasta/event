@@ -39,18 +39,23 @@
                             />
                         </t>
                     </div>
-<!--                     <div class="row review">
+                    <t t-set="track" t-value="request.env['event.track']" />
+                    <t
+                        t-call="website_event_track_advanced.event_track_proposal_template_new"
+                    />
+
+                    <section class="mt-5" t-if="review_tracks">
+                        <h3 class="o_page_header">Review Proposals</h3>
+                        <p>Below are the proposals for you to review.</p>
+                    </section>
+                    <div class="row review">
 
                         <t t-foreach="review_tracks" t-as="track">
                             <t
                                 t-call="website_event_track_advanced.event_track_review_template"
                             />
                         </t>
-                    </div> -->
-                    <t t-set="track" t-value="request.env['event.track']" />
-                    <t
-                        t-call="website_event_track_advanced.event_track_proposal_template_new"
-                    />
+                    </div>
                 </div>
             </div>
         </xpath>
@@ -90,6 +95,12 @@
                     />
                     </div>
                     <div class="card-footer">
+                        <span
+                        t-if="track.is_rated"
+                        class="font-italic text-muted"
+                        data-toggle="tooltip"
+                        title="You have already reviewed this track."
+                    >Reviewed</span>
 
                         <button
                         type="button"
@@ -299,6 +310,113 @@
                         data-bs-target="#modal_event_track_application"
                     ><i class="fa fa-fw fa-times-circle" /> Edit this proposal
                                     </button>
+
+                        <t
+                        t-set="see_evaluation"
+                        t-value="request.env['ir.config_parameter'].sudo().get_param('website_event_track_advanced.proposal_see_evaluation')"
+                    />
+
+                                    <t t-if="see_evaluation and track.ratings">
+                                        <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
+                            t-att-data-track-id="track.id"
+                            data-bs-toggle="modal"
+                            t-attf-data-bs-target="#modal_track_reviews_{{track.id}}"
+                        ><i class="fa fa-fw fa-times-circle" /> View Reviews
+                                        </button>
+
+                                        <div
+                            t-attf-id="modal_track_reviews_{{track.id}}"
+                            class="modal fade"
+                            tabindex="-1"
+                            role="dialog"
+                        >
+                                            <div
+                                class="modal-dialog modal-lg"
+                                role="document"
+                            >
+                                                <div class="modal-content">
+                                                    <div
+                                        class="modal-header align-items-center"
+                                    >
+                                                        <h4
+                                            class="modal-title"
+                                        >Track Reviews</h4>
+                                                        <button
+                                            type="button"
+                                            class="close warning-close-modal-reviews"
+                                            aria-label="Close"
+                                        >
+                                                                <span>×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div
+                                        class="modal-body bg-light border-bottom"
+                                    >
+                                                        <div
+                                            class="panel panel-primary"
+                                            id="track-reviews-div"
+                                        >
+                                                            <div class="panel-body">
+                                                                <p>Average Rating: <t
+                                                        t-esc="track.rating_avg"
+                                                    /></p>
+                                                                <table
+                                                    class="table"
+                                                    style="border: none;"
+                                                >
+                                                                    <thead
+                                                        style="border: none;"
+                                                    >
+                                                                        <tr
+                                                            class="active"
+                                                            style="border: none;"
+                                                        >
+                                                                            <th
+                                                                style="border: none;"
+                                                            >Rating</th>
+                                                                            <th
+                                                                style="border: none;"
+                                                            >Verbal Rating</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody
+                                                        style="border: none;"
+                                                    >
+                                                                        <t
+                                                            t-foreach="track.ratings"
+                                                            t-as="review"
+                                                        >
+                                                                            <tr
+                                                                style="border: none;"
+                                                            >
+                                                                                <td
+                                                                    style="border: none;"
+                                                                >
+                                                                                    <span
+                                                                        t-field="review.grade_id.name"
+                                                                    />
+                                                                                </td>
+                                                                                <td
+                                                                    style="border: none;"
+                                                                >
+                                                                                    <span
+                                                                        t-field="review.comment"
+                                                                    />
+                                                                                </td>
+                                                                            </tr>
+                                                                        </t>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+
                     </div>
                 </div>
             <!-- </form> -->
@@ -731,6 +849,7 @@
                             class="invalid-feedback"
                         >Please choose an application type.</div>
                     </div>
+
                     <div class="form-group col-xl-6">
                         <label
                             for="type_description"
@@ -740,7 +859,21 @@
                             <!-- <t t-esc="track.type.description" /> -->
                         </p>
                     </div>
+                    <div class="form-group col-xl-6">
+                        <label
+                            class="col-form-label"
+                            for="subtheme"
+                        >Application subtheme</label>
+                        <select
+                            name="subtheme"
+                            id="subtheme"
+                            class="form-control"
+                            t-att-required="None if not editable else 'required'"
+                        >
 
+                        </select>
+
+                    </div>
                     <div class="col-md-6 d-none" id="workshop-track-request-time-div">
                         <label
                             class="col-form-label"
@@ -749,6 +882,22 @@
                         <select name="request_time" t-attf-class="form-control">
 
                         </select>
+                    </div>
+
+                    <div class="form-group col-xl-12">
+                        <div class="form-check">
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="publication"
+                                data-toggle="publication"
+                                id="publication-checkbox"
+                            />
+                            <label
+                                for="publication"
+                                class="form-check-label label-optional"
+                            >Interested in Publishing Presentation as an Article</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -828,9 +977,9 @@
                             name="description"
                             placeholder="Application Content..."
                             class="form-control o_wysiwyg_loader"
-                            required="1"
                             rows="6"
                         />
+
                         <div
                             id="description_readonly"
                             class="readonly-field  mb-3 p-2 d-none"
@@ -888,7 +1037,19 @@
                             name="remove_attachments"
                         />
                     </div>
+                    <div class="form-group col-xl-6">
+                        <label
+                            class="col-form-label"
+                            for="presentation_language_ids"
+                        >I am ready to give a presentation</label>
+                        <select
+                            name="presentation_language_ids"
+                            t-attf-class="form-control presentation-select"
+                        >
 
+                        </select>
+
+                    </div>
 
                 </div>
             </div>
@@ -1492,6 +1653,19 @@
                             <input
                                 name="organizer_organization"
                                 placeholder="Organization"
+                                class="form-control"
+                                type="text"
+                                disabled="1"
+                            />
+                        </div>
+                        <div class="form-group col-xl-4">
+                            <label
+                                for="company_registry"
+                                class="col-form-label"
+                            >Company registry</label>
+                            <input
+                                name="company_registry"
+                                placeholder="Company registry"
                                 class="form-control"
                                 type="text"
                                 disabled="1"
