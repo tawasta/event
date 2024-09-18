@@ -980,7 +980,9 @@
                             rows="6"
                         />
                         <div id="word-count" class="mt-2">
-                            Words: <span class="word_count">0</span> / <span class="max_value">500</span>
+                            Words: <span class="word_count">0</span> / <span
+                                class="max_value"
+                            >500</span>
                         </div>
 
 

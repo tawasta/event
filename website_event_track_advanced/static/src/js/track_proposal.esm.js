@@ -1095,7 +1095,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
         selectors.forEach((selector) => {
             const $textarea = $(selector.selector);
-            const wordCountElement = document.querySelector('.word_count'); // Sanamäärä-elementti
+            const wordCountElement = document.querySelector(".word_count"); // Sanamäärä-elementti
 
             if ($textarea.length === 0) {
                 console.error(
@@ -1141,21 +1141,29 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     // Sanamäärän seuranta description-kentässä
                     if (selector.selector === 'textarea[name="description"]') {
-                        editor.model.document.on('change:data', () => {
+                        editor.model.document.on("change:data", () => {
                             const data = editor.getData();
-                            const wordCount = data.trim().split(/\s+/).filter(Boolean).length;
+                            const wordCount = data
+                                .trim()
+                                .split(/\s+/)
+                                .filter(Boolean).length;
                             wordCountElement.textContent = wordCount;
                             // Tarkista sanamäärä
                             if (wordCount > 500) {
                                 // Estä painikkeet
-                                $('#application-submit-button').prop('disabled', true);
-                                $('#application-submit-button-send').prop('disabled', true);
+                                $("#application-submit-button").prop("disabled", true);
+                                $("#application-submit-button-send").prop(
+                                    "disabled",
+                                    true
+                                );
                             } else {
                                 // Palauta painikkeet käyttöön
-                                $('#application-submit-button').prop('disabled', false);
-                                $('#application-submit-button-send').prop('disabled', false);
+                                $("#application-submit-button").prop("disabled", false);
+                                $("#application-submit-button-send").prop(
+                                    "disabled",
+                                    false
+                                );
                             }
-
                         });
                     }
 
