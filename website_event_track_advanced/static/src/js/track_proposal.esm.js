@@ -4,6 +4,7 @@ import publicWidget from "@web/legacy/js/public/public_widget";
 import {jsonrpc} from "@web/core/network/rpc_service"; // Jsonrpc import
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
+import {cookie} from "@web/core/browser/cookie";
 // Import {renderToElement} from "@web/core/utils/render";
 // Import { qweb } from 'web.core';
 
@@ -696,12 +697,17 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const isMultiple = $select.attr("multiple") === "multiple";
         $select.empty();
 
+        const lang = cookie.get("frontend_lang");
+        console.log(lang);
+
         const currentLanguage =
-            window.location.pathname.indexOf("en") >= 0
+            lang === "en_US"
                 ? "en"
-                : window.location.pathname.indexOf("sv_SE") >= 0
+                : lang === "sv_SE"
                 ? "sv"
-                : "fi";
+                : lang === "fi_FI"
+                ? "fi"
+                : "fi"; // Oletuskieli on suomi, jos mikään ei täsmää
 
         const translations = {
             en: "Select...",
