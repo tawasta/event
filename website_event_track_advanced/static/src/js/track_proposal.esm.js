@@ -696,13 +696,17 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const isMultiple = $select.attr("multiple") === "multiple";
         $select.empty();
 
-        const currentLanguage = window.location.pathname.indexOf("en") >= 0 ? "en" :
-                            window.location.pathname.indexOf("sv_SE") >= 0 ? "sv" : "fi";
+        const currentLanguage =
+            window.location.pathname.indexOf("en") >= 0
+                ? "en"
+                : window.location.pathname.indexOf("sv_SE") >= 0
+                ? "sv"
+                : "fi";
 
         const translations = {
             en: "Select...",
             sv: "Välj...",
-            fi: "Valitse..."
+            fi: "Valitse...",
         };
 
         const selectText = translations[currentLanguage] || "Select...";
