@@ -984,6 +984,9 @@
                                 class="max_value"
                             >500</span>
                         </div>
+                        <div id="word-warning" class="alert alert-danger d-none">
+                            You have exceeded the 500-word limit.
+                        </div>
 
 
                         <div
