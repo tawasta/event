@@ -49,7 +49,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 const $row = $(row);
 
                 // Päivitetään numero ja id-attribuutit
-                $row.find(".presenter-span").text(function(_, currentText) {
+                $row.find(".presenter-span").text(function (_, currentText) {
                     return currentText.replace(/\d+$/, speakerCount);
                 });
 
@@ -165,7 +165,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         // Ensimmäinen puhuja asetetaan olemassa oleviin kenttiin
         if (speakers.length > 0) {
             const firstSpeaker = speakers[0];
-            firstRow.find(".presenter-span").text(function(_, currentText) {
+            firstRow.find(".presenter-span").text(function (_, currentText) {
                 return currentText.replace(/\d+$/, 1);
             });
             firstRow
@@ -191,7 +191,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             newRow.attr("id", speakerCount);
 
             // Päivitetään kenttien arvot
-            newRow.find(".presenter-span").text(function(_, currentText) {
+            newRow.find(".presenter-span").text(function (_, currentText) {
                 return currentText.replace(/\d+$/, speakerCount);
             });
 
@@ -697,7 +697,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $select.empty();
 
         if (!isMultiple) {
-            $select.append('<option value="">' + _t('Select...') + '</option>');
+            $select.append('<option value="">' + _t("Select...") + "</option>");
         }
 
         options.forEach((option) => {
@@ -850,7 +850,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
             newRow.attr("id", newIndex);
 
-            newRow.find(".presenter-span").text(function(_, currentText) {
+            newRow.find(".presenter-span").text(function (_, currentText) {
                 return currentText.replace(/\d+$/, newIndex);
             });
             newRow.find("input").val(""); // Clear values
@@ -1158,7 +1158,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                                 .split(/\s+/)
                                 .filter(Boolean).length;
                             wordCountElement.textContent = wordCount;
-                            const wordWarningElement = document.getElementById("word-warning");
+                            const wordWarningElement =
+                                document.getElementById("word-warning");
                             // Tarkista sanamäärä
                             if (wordCount > 500) {
                                 // Estä painikkeet
@@ -1167,7 +1168,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                                     "disabled",
                                     true
                                 );
-                                wordWarningElement.classList.remove('d-none');
+                                wordWarningElement.classList.remove("d-none");
                             } else {
                                 // Palauta painikkeet käyttöön
                                 $("#application-submit-button").prop("disabled", false);
@@ -1175,7 +1176,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                                     "disabled",
                                     false
                                 );
-                                wordWarningElement.classList.add('d-none');
+                                wordWarningElement.classList.add("d-none");
                             }
                         });
                     }
