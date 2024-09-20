@@ -1093,7 +1093,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             if post.get("review-confirm"):
                 logging.info(post)
                 self._create_review(**post)
-                message = "Your review has been successfully saved."
+                message = _("Your review has been successfully saved.")
                 return json.dumps(
                     {"success": True, "message": message, "redirect": "/my/tracks"}
                 )
@@ -1214,22 +1214,24 @@ class EventTrackControllerAdvanced(EventTrackController):
 
             # 11. Create success message based on stage_id
             if track.stage_id.is_editable and track.stage_id.is_draft:
-                message = "Your proposal is saved as a draft and will not be reviewed until it is submitted."
+                message = _(
+                    "Your proposal is saved as a draft and will not be reviewed until it is submitted."
+                )
             elif track.stage_id.is_fully_accessible:
-                message = "Your track is saved and confirmed as part of the event."
+                message = _("Your track is saved and confirmed as part of the event.")
             else:
-                message = (
+                message = _(
                     "We will evaluate your proposition and get back to you shortly."
                 )
 
             if not user_exists:
-                message += """
+                message += _(
+                    """
                 <p>
                     An account has been created for the username <b>{username}</b>. You should receive an email shortly to finish setting up your account. After setting up your account, you can go to <a href="/my/tracks">My Tracks</a> to edit and submit your proposal.
                 </p>
-                """.format(
-                    username=track.partner_id.user_ids[0].login
-                )
+                """
+                ).format(username=track.partner_id.user_ids[0].login)
 
             return json.dumps({"success": True, "message": message})
 
