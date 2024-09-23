@@ -49,6 +49,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             formatSelectionTooBig: function (limit) {
                 return "Voit valita ainoastaan " + limit + " kpl";
             },
+            // eslint-disable-next-line no-unused-vars
             formatLoadMore: function (pageNumber) {
                 return "Ladataan lisää tuloksia…";
             },
