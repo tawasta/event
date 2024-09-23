@@ -34,7 +34,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._removeAttachments();
         this._setupModalCloseBehavior(); // Setup custom modal close behavior
 
-        $.fn.select2.locales['fi'] = {
+        $.fn.select2.locales.fi = {
             formatNoMatches: function () {
                 return "Ei tuloksia";
             },
@@ -54,7 +54,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             },
             formatSearching: function () {
                 return "Etsitään…";
-            }
+            },
         };
 
         // Check browser language, set default accordingly
