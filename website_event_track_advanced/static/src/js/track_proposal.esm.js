@@ -33,6 +33,41 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         this._bindRemoveSpeaker();
         this._removeAttachments();
         this._setupModalCloseBehavior(); // Setup custom modal close behavior
+
+        $.fn.select2.locales['fi'] = {
+            formatNoMatches: function () {
+                return "Ei tuloksia";
+            },
+            formatInputTooShort: function (input, min) {
+                var n = min - input.length;
+                return "Ole hyvä ja anna " + n + " merkkiä lisää";
+            },
+            formatInputTooLong: function (input, max) {
+                var n = input.length - max;
+                return "Ole hyvä ja anna " + n + " merkkiä vähemmän";
+            },
+            formatSelectionTooBig: function (limit) {
+                return "Voit valita ainoastaan " + limit + " kpl";
+            },
+            formatLoadMore: function (pageNumber) {
+                return "Ladataan lisää tuloksia…";
+            },
+            formatSearching: function () {
+                return "Etsitään…";
+            }
+        };
+
+        // Check browser language, set default accordingly
+        const lang = cookie.get("frontend_lang") || getLang();
+        const currentLanguage =
+            lang === "en_US"
+                ? "en"
+                : lang === "sv_SE"
+                ? "sv"
+                : lang === "fi_FI"
+                ? "fi"
+                : "fi"; // Oletuskieli on suomi, jos mikään ei täsmää
+        $.extend($.fn.select2.defaults, $.fn.select2.locales[currentLanguage]);
     },
 
     _bindRemoveSpeaker: function () {
