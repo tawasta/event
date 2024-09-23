@@ -59,7 +59,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         };
 
         // Check browser language, set default accordingly
-        const lang = cookie.get("frontend_lang") || getLang();
+        const lang = cookie.get("frontend_lang");
         const currentLanguage =
             lang === "en_US"
                 ? "en"
