@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.2 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.0 |  | Customization options to Website Event Frontends
+[website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.0 |  | Module to manage online and hybrid events. Includes a video conference link.
 [website_event_private_event](website_event_private_event/) | 17.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 17.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.
@@ -38,6 +39,7 @@ addon | version | maintainers | summary
 [website_event_recurring_event](website_event_recurring_event/) | 17.0.1.0.0 |  | Create recurring events and hide dates
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
+[website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.0 |  | Additional configurations for the core snippet
