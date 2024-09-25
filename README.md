@@ -40,7 +40,7 @@ addon | version | maintainers | summary
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
-[website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.0 |  | Additional configurations for the core snippet
+[website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
