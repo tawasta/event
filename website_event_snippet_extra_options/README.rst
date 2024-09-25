@@ -8,7 +8,8 @@ Website 'Events' Snippet Extra Options
 
 * Adds extra configurations to the Event List snippet in frontend
 
-  * Show the 'subtitle' field content text in the Event Cards
+  * Show the 'subtitle' field content text in the Event elements
+    both in Card Layout and Picture Layout
   * Filter by timeframe (past, upcoming or all)
   * Filter by promoted events (just promoted ones or all)
 

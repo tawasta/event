@@ -8,46 +8,50 @@
     >
         <xpath expr="//we-select[@data-name='filter_opt']" position="after">
 
-            <we-select
-                string="Timeframe"
-                data-no-preview="true"
-                data-attribute-name="eventTimeframe"
-            >
-                <we-button data-select-data-attribute="upcoming">Upcoming Events
-                </we-button>
-                <we-button data-select-data-attribute="past">
-                    Past Events
-                </we-button>
-                <we-button data-select-data-attribute="both">
-                    All Events
-                </we-button>
-            </we-select>
+            <t t-if="snippet_name == 'event_upcoming_snippet'">
 
-            <we-checkbox
-                string="Only Show Promoted Events"
-                data-no-preview="true"
-                data-attribute-name="eventPromotedOnly"
-                data-select-data-attribute="true"
-                name="event_filter_promoted_only"
-            />
+                <we-select
+                    string="Timeframe"
+                    data-model="event.tag"
+                    data-no-preview="true"
+                    data-attribute-name="eventTimeframe"
+                >
+                    <we-button data-select-data-attribute="upcoming">Upcoming Events
+                    </we-button>
+                    <we-button data-select-data-attribute="past">
+                        Past Events
+                    </we-button>
+                    <we-button data-select-data-attribute="both">
+                        All Events
+                    </we-button>
+                </we-select>
 
-            <we-checkbox
-                string="Show Subtitle In Card Layout"
-                data-no-preview="true"
-                data-attribute-name="eventShowSubtitleCardView"
-                data-customize-website-views="website_event_snippet_extra_options.opt_events_list_cards_subtitle"
-                name="event_show_subtitle_card_view"
-                data-reload="/"
-            />
+                <we-checkbox
+                    string="Only Show Promoted Events"
+                    data-no-preview="true"
+                    data-attribute-name="eventPromotedOnly"
+                    data-select-data-attribute="true"
+                    name="event_filter_promoted_only"
+                />
 
-            <we-checkbox
-                string="Show Subtitle In Picture Layout"
-                data-no-preview="true"
-                data-attribute-name="eventShowSubtitlePictureView"
-                data-customize-website-views="website_event_snippet_extra_options.opt_events_list_pictures_subtitle"
-                name="event_show_subtitle_picture_view"
-                data-reload="/"
-            />
+                <we-checkbox
+                    string="Show Subtitle In Card Layout"
+                    data-no-preview="true"
+                    data-attribute-name="eventShowSubtitleCardView"
+                    data-customize-website-views="website_event_snippet_extra_options.opt_events_list_cards_subtitle"
+                    name="event_show_subtitle_card_view"
+                    data-reload="/"
+                />
+
+                <we-checkbox
+                    string="Show Subtitle In Picture Layout"
+                    data-no-preview="true"
+                    data-attribute-name="eventShowSubtitlePictureView"
+                    data-customize-website-views="website_event_snippet_extra_options.opt_events_list_pictures_subtitle"
+                    name="event_show_subtitle_picture_view"
+                    data-reload="/"
+                />
+            </t>
 
         </xpath>
     </template>
