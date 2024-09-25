@@ -2,20 +2,15 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==============================
-Website Event Maintenance mode
-==============================
+===============================================
+Require a subscription for buying event tickets
+===============================================
 
-Add maintenance mode to website events
-
-Installation
-============
-\-
+Allows setting a required subscription type for event tickets
 
 Configuration
 =============
-* Go to Website settings, check the "Website sale: Maintenance mode" box
-  and type in a text shown for the visiting users.
+\-
 
 Usage
 =====

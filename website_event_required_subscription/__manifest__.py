@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Tawasta
-#    Copyright 2024 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Oy Tawasta OS Technologies Ltd.
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,18 +19,22 @@
 ##############################################################################
 
 {
-    "name": "Website Event Maintenance mode",
-    "summary": "Add maintenance mode to website events",
+    "name": "Require a subscription for buying event tickets",
+    "summary": "Allows setting a required subscription type for event tickets",
     "version": "17.0.1.0.0",
-    "category": "Website",
+    "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_sale_maintenance_mode",
+    "depends": ["event", "subscription_line_partner"],
+    "data": [
+        "views/event_form.xml",
     ],
-    "data": [],
+    "assets": {
+        "web.assets_frontend": [
+            "website_my_events/static/src/js/registration.esm.js",
+        ],
+    },
 }

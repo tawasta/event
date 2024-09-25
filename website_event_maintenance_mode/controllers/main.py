@@ -13,9 +13,7 @@ class WebsiteEventControllerMaintenance(WebsiteEventController):
                 "website_sale_maintenance_mode.website_sale_template", render_values
             )
         else:
-            response = super().events(
-                page=page, **searches
-            )
+            response = super().events(page=page, **searches)
 
             return response
 
@@ -27,9 +25,7 @@ class WebsiteEventControllerMaintenance(WebsiteEventController):
                 "website_sale_maintenance_mode.website_sale_template", render_values
             )
         else:
-            response = super().event_page(
-                event=event, page=page, **post
-            )
+            response = super().event_page(event=event, page=page, **post)
 
             return response
 
@@ -41,9 +37,7 @@ class WebsiteEventControllerMaintenance(WebsiteEventController):
                 "website_sale_maintenance_mode.website_sale_template", render_values
             )
         else:
-            response = super().event(
-                event=event, **post
-            )
+            response = super().event(event=event, **post)
 
             return response
 
@@ -55,8 +49,6 @@ class WebsiteEventControllerMaintenance(WebsiteEventController):
                 "website_sale_maintenance_mode.website_sale_template", render_values
             )
         else:
-            response = super().event_register(
-                event=event, **post
-            )
+            response = super().event_register(event=event, **post)
 
             return response
