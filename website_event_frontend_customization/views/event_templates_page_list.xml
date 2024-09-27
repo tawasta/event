@@ -12,10 +12,7 @@
                 t-if="event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now()"
                 class="datetime-sale"
             >
-                Registrations start on <span
-                    t-esc="event.start_sale_datetime"
-                    t-options="{'widget': 'datetime', 'format': 'short'}"
-                />
+                Registrations start on <span t-field="event.with_context(tz=event.date_tz).start_sale_datetime" t-options="{'format': 'short'}"/>
             </t>
         </xpath>
     </template>
