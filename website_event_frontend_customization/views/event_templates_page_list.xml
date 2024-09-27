@@ -13,8 +13,8 @@
                 class="datetime-sale"
             >
                 Registrations start on <span
-                    t-esc="event.start_sale_datetime"
-                    t-options="{'widget': 'datetime', 'format': 'short'}"
+                    t-field="event.with_context(tz=event.date_tz).start_sale_datetime"
+                    t-options="{'format': 'short'}"
                 />
             </t>
         </xpath>
