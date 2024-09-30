@@ -74,18 +74,17 @@
             </span>
         </xpath>
     </template>
+
     <template
-        id="hide_calender_button"
+        id="hide_calendar_button"
         inherit_id="website_event.event_description_full"
-        active="True"
+        active="False"
         customize_show="True"
-        name="Hide Calender button"
+        name="Hide 'Add to Calendar' button"
     >
-        <xpath
-            expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']/a/p/i[@class='fa fa-calendar me-2']/../.."
-            position="attributes"
-        >
+        <xpath expr="//i[hasclass('fa-calendar')]/../.." position="attributes">
             <attribute name="class">dropdown d-none</attribute>
         </xpath>
     </template>
+
 </odoo>

@@ -9,6 +9,7 @@ Website Event Frontend Customization
     - Show reserved and available seats for events in views.
     - Hide tickets that are not available to be sold.
     - Date and address formats on event list
+    - Hide 'Add to Calendar' button from event page
 
 Configuration
 =============
@@ -29,6 +30,8 @@ Contributors
 ------------
 
 * Miika Nissi <miika.nissi@tawasta.fi>
+* Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Timo Talvitie <timo.talvitie@tawasta.fi>
 
 Maintainer
 ----------
