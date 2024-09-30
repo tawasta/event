@@ -6,6 +6,8 @@
 Event Mail Execute Override
 ===========================
 
+Prevents sending emails to past events
+
 Configuration
 =============
 \-
