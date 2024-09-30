@@ -7,7 +7,6 @@ class ResConfigSettings(models.TransientModel):
     restricted_mail_template_ids = fields.Many2many(
         related="website_id.restricted_mail_template_ids",
         comodel_name="mail.template",
-        string="Rajoitetut Sähköpostipohjat",
         readonly=False,
     )
 
@@ -17,5 +16,6 @@ class Website(models.Model):
 
     restricted_mail_template_ids = fields.Many2many(
         comodel_name="mail.template",
-        string="Rajoitetut Sähköpostipohjat",
+        string="Restricted email templates",
+        help="Don't send these email templates after an event has ended",
     )

@@ -20,7 +20,7 @@
 
 {
     "name": "Event Mail Execute Override",
-    "summary": "Event Mail Execute Override",
+    "summary": "Prevents sending emails to past events",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
