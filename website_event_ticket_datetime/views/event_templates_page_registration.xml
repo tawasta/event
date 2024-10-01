@@ -13,11 +13,11 @@
                 event.start_sale_datetime and event.start_sale_datetime &gt; datetime.datetime.now()
             </attribute>
         </xpath>
-        <xpath expr="//t[@t-esc='event.start_sale_date']" position="attributes">
-            <attribute name="t-esc">event.start_sale_datetime</attribute>
-            <attribute
-                name="t-options"
-            >{'widget': 'datetime', 'format': 'short'}</attribute>
+        <xpath expr="//t[@t-esc='event.start_sale_date']" position="replace">
+          <span
+                    t-field="event.with_context(tz=event.date_tz).start_sale_datetime"
+                    t-options="{'format': 'short'}"
+                />
         </xpath>
         <xpath
             expr="//small[@t-if='ticket.end_sale_date and ticket.sale_available and not ticket.is_expired']"
