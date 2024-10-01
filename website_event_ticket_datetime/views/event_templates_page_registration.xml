@@ -15,9 +15,9 @@
         </xpath>
         <xpath expr="//t[@t-esc='event.start_sale_date']" position="replace">
           <span
-                    t-field="event.with_context(tz=event.date_tz).start_sale_datetime"
-                    t-options="{'format': 'short'}"
-                />
+                t-field="event.with_context(tz=event.date_tz).start_sale_datetime"
+                t-options="{'format': 'short'}"
+            />
         </xpath>
         <xpath
             expr="//small[@t-if='ticket.end_sale_date and ticket.sale_available and not ticket.is_expired']"
