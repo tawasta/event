@@ -5,6 +5,12 @@
             t-set="lang"
             t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
+
+        <t
+            t-set="email_secondary_color"
+            t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
+        />
+
         <div t-if="object.event_id.registration_badge">
             Remember to download and print your registration badge before arriving at the conference!
             <br />
@@ -14,7 +20,7 @@
             <div style="margin: 16px 0px 16px 0px;">
                 <a
                     t-att-href="object.registration_badge_url"
-                    style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+                    t-attf-style="background-color: #{email_secondary_color}; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
                 >Download Badge</a>
             </div>
         </div>

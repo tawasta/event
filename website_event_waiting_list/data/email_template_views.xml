@@ -27,6 +27,12 @@
             t-set="lang"
             t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
+
+        <t
+            t-set="email_secondary_color"
+            t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
+        />
+
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -53,7 +59,7 @@
                                         <t t-if="object.event_id.is_published"><strong
                                             ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"
+                                                    t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                                                 ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
@@ -67,7 +73,7 @@
                                         <t t-if="object.event_id.is_published"><strong
                                             ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"
+                                                    t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                                                 ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
@@ -124,6 +130,12 @@
             t-set="lang"
             t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
+
+        <t
+            t-set="email_secondary_color"
+            t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
+        />
+
         <t
             t-call="website_event_cancellation.view_email_template_event_base"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -150,7 +162,7 @@
                                         <t t-if="object.event_id.is_published"><strong
                                             ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"
+                                                    t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                                                 ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
@@ -163,7 +175,7 @@
                                         <t t-if="object.event_id.is_published"><strong
                                             ><a
                                                     t-att-href="object.event_id.website_url"
-                                                    style="color:#875A7B;text-decoration:none;"
+                                                    t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                                                 ><t
                                                         t-esc="object.event_id.name"
                                                     /></a></strong></t>
