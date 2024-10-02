@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0-20240603\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-05 14:50+0000\n"
-"PO-Revision-Date: 2022-05-05 14:50+0000\n"
+"POT-Creation-Date: 2024-10-02 07:22+0000\n"
+"PO-Revision-Date: 2024-10-02 07:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,18 +39,10 @@ msgstr ""
 "                                    Vahvistamme ilmoittautumisesi tapahtumaan"
 
 #. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid "<b>Start</b>"
-msgstr "<b>Alkaa</b>"
-
-#. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid ""
-"<br/>\n"
-"                            <b>End</b>"
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
+msgid "-- <br/>"
 msgstr ""
-"<br/>\n"
-"                            <b>Päättyy</b>"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_calendar
@@ -72,13 +64,8 @@ msgstr ""
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid "<i class=\"fa fa-fw fa-check\"/> Cancel registration"
-msgstr "<i class=\"fa fa-fw fa-check\"/> Peruuta ilmoittautuminen"
-
-#. module: website_event_cancellation
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid "<span aria-label=\"Close\">&amp;times;</span>"
-msgstr "<span aria-label=\"Sulje\">&amp;times;</span>"
+msgid "<i class=\"fa fa-fw fa-times-circle\"/> Cancel registration"
+msgstr "<i class=\"fa fa-fw fa-times-circle\"/> Peruuta ilmoittautuminen"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_details
@@ -112,9 +99,49 @@ msgstr ""
 "                        </strong>"
 
 #. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid ""
+"<strong>Email: </strong>\n"
+"                                    <i class=\"fa fa-envelope mr-2\"/>"
+msgstr ""
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<strong>End: </strong>"
+msgstr "<strong>Päättyy: </strong>"
+
+#. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_details
 msgid "<strong>From</strong>"
 msgstr "<strong>Alkaa</strong>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<strong>Name: </strong>"
+msgstr "<strong>Nimi: </strong>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid ""
+"<strong>Phone: </strong>\n"
+"                                    <i class=\"fa fa-phone mr-2\"/>"
+msgstr ""
+"<strong>Puhelinnumero: </strong>\n"
+"                                    <i class=\"fa fa-phone mr-2\"/>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "<strong>Start: </strong>"
+msgstr "<strong>Alkaa: </strong>"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid ""
+"<strong>Ticket: </strong>\n"
+"                                    <i class=\"fa fa-ticket mr-2\"/>"
+msgstr ""
+"<strong>Lippu: </strong>\n"
+"                                    <i class=\"fa fa-ticket mr-2\"/>"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_details
@@ -145,8 +172,8 @@ msgstr "Oletko varma?"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid "Cancel"
-msgstr "Peruuta"
+msgid "Attendee Information"
+msgstr "Osallistujan tiedot"
 
 #. module: website_event_cancellation
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_stage__cancel
@@ -158,7 +185,6 @@ msgstr "Peruttu tila"
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_event_form_cancel
-#: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_event_type_form_cancel
 msgid "Cancel registration"
 msgstr "Peruuta ilmoittautuminen"
 
@@ -184,15 +210,6 @@ msgid "Days"
 msgstr "Päivää"
 
 #. module: website_event_cancellation
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__display_name
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_mail_registration__display_name
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_registration__display_name
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_stage__display_name
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_type__display_name
-msgid "Display Name"
-msgstr "Näyttönimi"
-
-#. module: website_event_cancellation
 #: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__date_end_calendar_locale
 msgid "End Date Calendar Locale"
 msgstr "Päättymispäivä Kalenteri Lokalisoitu"
@@ -211,6 +228,11 @@ msgstr "Tapahtuma"
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.events_list_cancel
 msgid "Event Cancelled"
 msgstr "Tapahtuma peruttu"
+
+#. module: website_event_cancellation
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Event Information"
+msgstr "Tapahtuman tiedot"
 
 #. module: website_event_cancellation
 #: model:ir.model,name:website_event_cancellation.model_event_registration
@@ -264,15 +286,6 @@ msgid "Hours"
 msgstr "Tuntia"
 
 #. module: website_event_cancellation
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_event__id
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_mail_registration__id
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_registration__id
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_stage__id
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_type__id
-msgid "ID"
-msgstr "Tunniste (ID)"
-
-#. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_reminder_with_cancel
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_subscription_with_cancel
 msgid "If you wish to cancel your registration, follow the link below:"
@@ -285,13 +298,9 @@ msgid "Interval"
 msgstr "Aikaväli"
 
 #. module: website_event_cancellation
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_event____last_update
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_mail_registration____last_update
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_registration____last_update
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_stage____last_update
-#: model:ir.model.fields,field_description:website_event_cancellation.field_event_type____last_update
-msgid "Last Modified on"
-msgstr "Viimeksi muokattu"
+#: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
+msgid "Location"
+msgstr "Sijainti"
 
 #. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.view_email_template_event_details
@@ -319,13 +328,8 @@ msgid "Public link"
 msgstr "Julkinen linkki"
 
 #. module: website_event_cancellation
-#: model:ir.model,name:website_event_cancellation.model_event_mail_registration
-msgid "Registration Mail Scheduler"
-msgstr "Ilmoittautumisen sähköpostiajastus"
-
-#. module: website_event_cancellation
 #: model_terms:ir.ui.view,arch_db:website_event_cancellation.cancel_registration
-msgid "Registration can not be cancelled after"
+msgid "Registration cannot be cancelled after"
 msgstr "Ilmoittautumisen peruminen sulkeutui"
 
 #. module: website_event_cancellation
