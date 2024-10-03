@@ -22,7 +22,6 @@
 
 # 2. Known third party imports:
 
-import logging
 
 # 3. Odoo imports (openerp):
 from werkzeug.datastructures import OrderedMultiDict
@@ -57,7 +56,6 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             "displayExtraDetail": False,
             "displayExtraLink": False,
             "displayImage": False,
-            "is_private_event": False,
             "allowFuzzy": not post.get("noFuzzy"),
             "date": post.get("date"),
             "tags": post.get("tags"),
@@ -87,20 +85,20 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
         step = 12  # Number of events per page
 
         options = self._get_events_search_options(**searches)
-        logging.info(options)
+
         order = "date_begin"
         if searches.get("date", "upcoming") == "old":
             order = "date_begin desc"
         order = "is_published desc, " + order
         search = searches.get("search")
-        logging.info(search)
+
         event_count, details, fuzzy_search_term = website._search_with_fuzzy(
             "events", search, limit=page * step, order=order, options=options
         )
-        logging.info(event_count)
-        logging.info(details)
         event_details = details[0]
+
         events = event_details.get("results", Event)
+        events = [event for event in events if not event.is_private_event]
         events = events[(page - 1) * step : page * step]
 
         # count by domains without self search
@@ -175,7 +173,6 @@ class WebsiteEventControllerPrivateEvent(WebsiteEventController):
             "current_date": current_date,
             "current_country": current_country,
             "current_type": current_type,
-            # event_ids used in website_event_track so we keep name as it is
             "event_ids": events,
             "dates": dates,
             "categories": request.env["event.tag.category"].search(
