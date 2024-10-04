@@ -1,6 +1,3 @@
-import logging
-from datetime import datetime, timedelta
-
 from odoo import fields, models
 
 
@@ -39,12 +36,13 @@ class EventMailRegistration(models.Model):
                 and not reg_mail.registration_id.event_id.stage_id.cancel
             )
         )
-        delay_time = timedelta(minutes=1)
-        start_time = datetime.now() + delay_time
+        # delay_time = timedelta(minutes=1)
+        # start_time = datetime.now() + delay_time
         for reg_mail in todo:
-            logging.info("===SEND EMAIL====")
-            logging.info(reg_mail)
-            reg_mail.scheduler_id.template_id.with_delay(eta=start_time).send_mail(
+            # reg_mail.scheduler_id.template_id.with_delay(eta=start_time).send_mail(
+            #     reg_mail.registration_id.id, force_send=True
+            # )
+            reg_mail.scheduler_id.template_id.send_mail(
                 reg_mail.registration_id.id, force_send=True
             )
         todo.write({"mail_sent": True})

@@ -19,6 +19,7 @@ addon | version | maintainers | summary
 [event_feedback_survey](event_feedback_survey/) | 14.0.1.0.0 |  | Send automated event feedback survey mails
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
+[event_for_company](event_for_company/) | 14.0.1.0.0 |  | Add for company -field to events
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
@@ -29,6 +30,7 @@ addon | version | maintainers | summary
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 14.0.1.0.1 |  | Removes translatable name and description fields from Event.
 [event_sale_autoconfirm](event_sale_autoconfirm/) | 14.0.1.0.0 |  | Autoconfirm registrations even if not paid
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 14.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
+[event_sale_order_prevention](event_sale_order_prevention/) | 14.0.1.0.0 |  | Event Sale Order Prevention
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 14.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 14.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_stage_in_progress](event_stage_in_progress/) | 14.0.1.0.0 |  | 'In Progress' stage where started but not ended events are moved into
@@ -66,7 +68,7 @@ addon | version | maintainers | summary
 [website_event_track_request_time](website_event_track_request_time/) | 14.0.0.0.0 |  | Requested track times
 [website_event_track_settings](website_event_track_settings/) | 14.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 14.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.8 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 14.0.1.3.9 |  | Adds a waiting list functionality to Events.
 [website_event_waiting_list_questions](website_event_waiting_list_questions/) | 14.0.1.1.0 |  | Questions on Events when joining waiting list
 [website_my_events](website_my_events/) | 14.0.1.1.0 |  | My events in website portal
 
