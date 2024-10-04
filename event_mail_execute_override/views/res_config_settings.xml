@@ -20,6 +20,7 @@
                                 name="restricted_mail_template_ids"
                                 widget="many2many_tags"
                             />
+                            <field name="blocked_states_ids" widget="many2many_tags" />
                         </div>
                     </div>
                 </div>
