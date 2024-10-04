@@ -11,6 +11,13 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
     )
 
+    blocked_states_ids = fields.Many2many(
+        related="website_id.blocked_states_ids",
+        comodel_name="event.stage",
+        string="Blocked Event States",
+        readonly=False,
+    )
+
 
 class Website(models.Model):
     _inherit = "website"
@@ -18,4 +25,9 @@ class Website(models.Model):
     restricted_mail_template_ids = fields.Many2many(
         comodel_name="mail.template",
         string="Rajoitetut Sähköpostipohjat",
+    )
+
+    blocked_states_ids = fields.Many2many(
+        comodel_name="event.stage",
+        string="Blocked Event States",
     )
