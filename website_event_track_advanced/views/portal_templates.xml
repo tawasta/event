@@ -44,7 +44,7 @@
                 </div>
             </t>
 
-            <t t-if="grouped_tracks or review_tracks" t-call="portal.portal_table">
+            <t t-if="grouped_tracks or grouped_review_tracks" t-call="portal.portal_table">
                 <thead class="table-dark">
                     <tr>
                         <th>Track</th>
