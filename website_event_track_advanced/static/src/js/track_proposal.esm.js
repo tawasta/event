@@ -548,7 +548,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         self._enableAddPresenterButton();
                         if (trackData.track_announced) {
                             $("#application-submit-button")
-                                .attr("disabled", true).hide();
+                                .attr("disabled", true)
+                                .hide();
                         }
                     }
                 });

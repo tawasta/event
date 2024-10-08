@@ -198,7 +198,7 @@
                 >
                     <tr>
                         <td align="center">
-                            <t t-set="website_url" t-value="object.get_base_url()"></t>
+                            <t t-set="website_url" t-value="object.get_base_url()" />
                             <table
                                 border="0"
                                 cellpadding="0"
@@ -270,19 +270,29 @@
                                                     >
                                                         <div>
                                                             <p>
-                                                                Dear <t t-out="object.partner_id.name" />,
+                                                                Dear <t
+                                                                    t-out="object.partner_id.name"
+                                                                />,
                                                             </p><br />
                                                             <p>
                                                                 Thank you for your proposal <strong
-                                                                ><t t-out="object.name" /></strong> for the event <t t-out="object.event_id.name" />.
+                                                                ><t
+                                                                        t-out="object.name"
+                                                                    /></strong> for the event <t
+                                                                    t-out="object.event_id.name"
+                                                                />.
                                                             </p>
                                                             <p>
                                                                 Your proposal has been <strong
-                                                                >approved</strong> to the <t t-out="object.event_id.name" /> programme. Congratulations!
+                                                                >approved</strong> to the <t
+                                                                    t-out="object.event_id.name"
+                                                                /> programme. Congratulations!
                                                             </p>
                                                             <p>
                                                                 The proposal had an average rating of <strong
-                                                                ><t t-out="object.rating_avg" /></strong> with scale of 1-5.
+                                                                ><t
+                                                                        t-out="object.rating_avg"
+                                                                    /></strong> with scale of 1-5.
                                                             </p>
                                                             <br />
                                                             <p
@@ -300,9 +310,9 @@
                                                             <p>
                                                                 The proposal can be edited in
                                                                 <a
-                                                                    t-attf-href="{{website_url}}/my/tracks"
-                                                                    style="color:#875A7B;"
-                                                                >My Proposals</a>.
+                                                                        t-attf-href="{{website_url}}/my/tracks"
+                                                                        style="color:#875A7B;"
+                                                                    >My Proposals</a>.
                                                             </p>
                                                             </t>
                                                             <br />
@@ -313,7 +323,9 @@
                                                                     style="color: #454748;"
                                                                 >
                                                                 -- <br />
-                                                                The <t t-out="object.event_id.name" /> Team
+                                                                The <t
+                                                                        t-out="object.event_id.name"
+                                                                    /> Team
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -345,7 +357,9 @@
                                     style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
                                 >
                                     <tr>
-                                        <td style="text-align: center; font-size: 14px;">
+                                        <td
+                                            style="text-align: center; font-size: 14px;"
+                                        >
                                             Sent by
                                             <a
                                                 target="_blank"
@@ -384,7 +398,7 @@
                 >
                     <tr>
                         <td align="center">
-                            <t t-set="website_url" t-value="object.get_base_url()"></t>
+                            <t t-set="website_url" t-value="object.get_base_url()" />
                             <table
                                 border="0"
                                 cellpadding="0"
@@ -455,15 +469,25 @@
                                                     >
                                                         <div>
                                                             <p>
-                                                                Dear <t t-out="object.partner_id.name" />,
+                                                                Dear <t
+                                                                    t-out="object.partner_id.name"
+                                                                />,
                                                             </p><br />
                                                             <p>
                                                                 Thank you for your proposal <strong
-                                                                ><t t-out="object.name" /></strong> for the event <t t-out="object.event_id.name" />.
+                                                                ><t
+                                                                        t-out="object.name"
+                                                                    /></strong> for the event <t
+                                                                    t-out="object.event_id.name"
+                                                                />.
                                                             </p>
                                                             <p>
                                                                 Unfortunately your proposal <strong
-                                                                ><t t-out="object.name" /></strong> was not selected to the <t t-out="object.event_id.name" /> programme.
+                                                                ><t
+                                                                        t-out="object.name"
+                                                                    /></strong> was not selected to the <t
+                                                                    t-out="object.event_id.name"
+                                                                /> programme.
                                                             </p>
                                                             <br />
                                                             <p>
@@ -476,7 +500,9 @@
                                                                     style="color: #454748;"
                                                                 >
                                                                 -- <br />
-                                                                The <t t-out="object.event_id.name" /> Team
+                                                                The <t
+                                                                        t-out="object.event_id.name"
+                                                                    /> Team
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -501,20 +527,20 @@
                         <td align="center" style="min-width: 590px;">
                             <t t-if="object.company_id">
                             <table
-                                width="590"
-                                border="0"
-                                cellpadding="0"
-                                cellspacing="0"
-                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
-                            >
+                                    width="590"
+                                    border="0"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                                >
                                 <tr>
                                     <td style="text-align: center; font-size: 14px;">
                                         Sent by
                                         <a
-                                            target="_blank"
-                                            t-attf-href="{{object.company_id.website}}"
-                                            style="color: #875A7B;"
-                                        >
+                                                target="_blank"
+                                                t-attf-href="{{object.company_id.website}}"
+                                                style="color: #875A7B;"
+                                            >
                                             <t t-out="object.company_id.name" />
                                         </a>
                                     </td>
