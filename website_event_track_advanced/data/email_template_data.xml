@@ -6,12 +6,12 @@
             <field name="model_id" ref="website_event_track.model_event_track" />
             <field name="use_default_to" eval="True" />
             <field name="auto_delete" eval="True" />
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">{{object.partner_id.lang}}</field>
             <field
                 name="email_from"
-            >${object.event_id.organizer_id.email_formatted | safe}</field>
+            >{{object.event_id.organizer_id.email_formatted}}</field>
             <field name="subject">
-                ${object.event_id.name} - Your presentation has been received
+                {{object.event_id.name}} - Your presentation has been received
             </field>
             <field name="body_html" type="html">
                 <table
@@ -22,7 +22,7 @@
                 >
                     <tr>
                         <td align="center">
-                            % set website_url = object.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                            <t t-set="website_url" t-value="object.get_base_url()" />
                             <table
                                 border="0"
                                 cellpadding="0"
@@ -50,24 +50,16 @@
                                                         <span
                                                             style="font-size: 20px; font-weight: bold;"
                                                         >
-                                                            ${object.name}
+                                                            <t t-out="object.name" />
                                                         </span>
                                                     </td>
                                                     <td valign="middle" align="right">
-                                                        % if website_url
                                                         <a
-                                                            href="${website_url}/my/tracks"
+                                                            t-attf-href="{{website_url}}/my/tracks"
                                                             style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
                                                         >
                                                             View Proposal
                                                         </a>
-                                                        % else
-                                                        <img
-                                                            src="${'/logo.png?company=%s' % object.company_id.id}"
-                                                            style="padding: 0px; margin: 0px; height: auto; width: 80px;"
-                                                            alt="${'%s' % object.company_id.name}"
-                                                        />
-                                                        % endif
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -101,21 +93,27 @@
                                                     >
                                                         <div>
                                                             <p>
-                                                                Dear ${object.partner_id.name},
+                                                                Dear <t
+                                                                    t-out="object.partner_id.name"
+                                                                />,
                                                             </p><br />
                                                             <p>
                                                                 Thank you for your proposal <strong
-                                                                >${object.name}</strong> for the event ${object.event_id.name}.
+                                                                ><t
+                                                                        t-out="object.name"
+                                                                    /></strong> for the event <t
+                                                                    t-out="object.event_id.name"
+                                                                />.
                                                             </p>
-                                                            % if 'website_url':
+                                                            <t t-if="website_url">
                                                             <p>
                                                                 The proposal can be edited in
                                                                 <a
-                                                                    href="${website_url}/my/tracks"
-                                                                    style="color:#875A7B;"
-                                                                >My Proposals</a>.
+                                                                        t-attf-href="{{website_url}}/my/tracks"
+                                                                        style="color:#875A7B;"
+                                                                    >My Proposals</a>.
                                                             </p>
-                                                            % endif
+                                                            </t>
                                                             <p>
                                                                 Proposals that are left to "Draft" stage will not be reviewed.
                                                             </p>
@@ -127,7 +125,9 @@
                                                                     style="color: #454748;"
                                                                 >
                                                                 -- <br />
-                                                                The ${object.event_id.name} Team
+                                                                The <t
+                                                                        t-out="object.event_id.name"
+                                                                    /> Team
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -150,28 +150,28 @@
                     </tr>
                     <tr>
                         <td align="center" style="min-width: 590px;">
-                            % if object.company_id
+                            <t t-if="object.company_id">
                             <table
-                                width="590"
-                                border="0"
-                                cellpadding="0"
-                                cellspacing="0"
-                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
-                            >
+                                    width="590"
+                                    border="0"
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                                >
                                 <tr>
                                     <td style="text-align: center; font-size: 14px;">
                                         Sent by
                                         <a
-                                            target="_blank"
-                                            href="${object.company_id.website}"
-                                            style="color: #875A7B;"
-                                        >
-                                            ${object.company_id.name}
+                                                target="_blank"
+                                                t-attf-href="{{object.company_id.website}}"
+                                                style="color: #875A7B;"
+                                            >
+                                            <t t-out="object.company_id.name" />
                                         </a>
                                     </td>
                                 </tr>
                             </table>
-                            % endif
+                            </t>
                         </td>
                     </tr>
                 </table>
