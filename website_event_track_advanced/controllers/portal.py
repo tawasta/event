@@ -18,6 +18,7 @@
 #
 ##############################################################################
 
+import logging
 from itertools import groupby
 
 # 1. Standard library imports:
@@ -99,6 +100,7 @@ class PortalTrack(CustomerPortal):
             }
         )
         reviewer = request.env.user.reviewer_id
+        logging.info("===ON ARVIOIJA====")
         if reviewer:
             review_tracks = (
                 request.env["event.track"]
@@ -112,6 +114,7 @@ class PortalTrack(CustomerPortal):
                     order="event_id",
                 )
             )
+            logging.info(review_tracks)
             grouped_review_tracks = {}
             for event, review_tracks_in_event in groupby(
                 review_tracks, key=lambda track: track.event_id

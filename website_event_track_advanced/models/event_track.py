@@ -433,19 +433,19 @@ class EventTrack(models.Model):
         return res
 
     # 7. Action methods
-    def _track_template(self, changes):
-        res = super(EventTrack, self)._track_template(changes)
-        track = self[0]
-        if "stage_id" in changes and track.stage_id.mail_template_id:
-            res["stage_id"] = (
-                track.stage_id.mail_template_id,
-                {
-                    "composition_mode": "comment",
-                    "subtype_id": self.env["ir.model.data"]._xmlid_to_res_id(
-                        "mail.mt_comment"
-                    ),
-                },
-            )
-        return res
+    # def _track_template(self, changes):
+    #     res = super(EventTrack, self)._track_template(changes)
+    #     track = self[0]
+    #     if "stage_id" in changes and track.stage_id.mail_template_id:
+    #         res["stage_id"] = (
+    #             track.stage_id.mail_template_id,
+    #             {
+    #                 "composition_mode": "comment",
+    #                 "subtype_id": self.env["ir.model.data"]._xmlid_to_res_id(
+    #                     "mail.mt_comment"
+    #                 ),
+    #             },
+    #         )
+    #     return res
 
     # 8. Business methods

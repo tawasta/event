@@ -38,13 +38,16 @@
                 <t t-set="title">Tracks</t>
             </t>
 
-            <t t-if="not grouped_tracks and not review_tracks">
+            <t t-if="not grouped_tracks and not grouped_review_tracks">
                 <div class="alert alert-info">
                     <p>There are currently no tracks for your account.</p>
                 </div>
             </t>
 
-            <t t-if="grouped_tracks or review_tracks" t-call="portal.portal_table">
+            <t
+                t-if="grouped_tracks or grouped_review_tracks"
+                t-call="portal.portal_table"
+            >
                 <thead class="table-dark">
                     <tr>
                         <th>Track</th>

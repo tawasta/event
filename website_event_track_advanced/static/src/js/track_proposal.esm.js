@@ -546,6 +546,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     } else {
                         self._enableSubmitButtons();
                         self._enableAddPresenterButton();
+                        if (trackData.track_announced) {
+                            $("#application-submit-button")
+                                .attr("disabled", true)
+                                .hide();
+                        }
                     }
                 });
             }
@@ -844,6 +849,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             ];
             editableFields.forEach(function (selector) {
                 $form.find(selector).removeAttr("readonly").removeAttr("disabled");
+            });
+
+            // Disabloi kaikki painikkeet, joissa on luokka 'btn-remove-speaker'
+            $form.find("button.btn-remove-speaker").each(function () {
+                $(this).attr("disabled", true);
             });
         }
     },
