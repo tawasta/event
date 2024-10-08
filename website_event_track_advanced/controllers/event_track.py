@@ -253,6 +253,13 @@ class EventTrackControllerAdvanced(EventTrackController):
                     "track_confirm": track_confirm,
                 }
             )
+        if track.stage_id.is_accepted and track.stage_id.is_editable:
+            track_announced = True
+            values.update(
+                {
+                    "track_announced": track_announced,
+                }
+            )
 
         multiple_target_groups = False
         if track.event_id.allow_target_group_multiple:
