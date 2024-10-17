@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="modal_ticket_registration_inherit" inherit_id="website_event.modal_ticket_registration">
+    <template
+        id="modal_ticket_registration_inherit"
+        inherit_id="website_event.modal_ticket_registration"
+    >
         <!-- Move the switch toggle above the tickets section with clear spacing -->
         <xpath expr="//form//div[@id='o_wevent_tickets']" position="before">
             <div class="mb-3 p-3 bg-light rounded">
@@ -11,37 +14,75 @@
                         class="form-check-input"
                         name="invite_others"
                         value="1"
-                        t-att-checked="invite_others"/>
+                        t-att-checked="invite_others"
+                    />
                         Ilmoitan itseni tai kutsun muita
-                    <span
-                        class="form-text text-muted invite_others">
-                        <i>Jos kutsut muita, heitä pyydetään täyttämään yhteystiedot myöhemmin.</i>
+                    <span class="form-text text-muted invite_others">
+                        <i
+                        >Jos kutsut muita, heitä pyydetään täyttämään yhteystiedot myöhemmin.</i>
                     </span>
                 </div>
             </div>
         </xpath>
     </template>
 
-    <template id="portal_my_events_inherit" inherit_id="website_my_events.portal_my_events">
+    <template
+        id="portal_my_events_inherit"
+        inherit_id="website_my_events.portal_my_events"
+    >
         <xpath expr="//div[@class='container portal_my_events']" position="inside">
-            <div class="modal fade" id="inviteModal" tabindex="-1" aria-labelledby="inviteModalLabel" aria-hidden="true">
+            <div
+                class="modal fade"
+                id="inviteModal"
+                tabindex="-1"
+                aria-labelledby="inviteModalLabel"
+                aria-hidden="true"
+            >
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form id="invite-form" method="post" action="/send/invitation">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="inviteModalLabel">Send Invitation</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5
+                                    class="modal-title"
+                                    id="inviteModalLabel"
+                                >Send Invitation</h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                />
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="inviteEmail" class="form-label">Recipient's Email</label>
-                                    <input type="email" class="form-control" id="inviteEmail" name="invite_email" required="1"/>
-                                    <input type="hidden" name="registration_id" id="registration_id_modal" />
+                                    <label
+                                        for="inviteEmail"
+                                        class="form-label"
+                                    >Recipient's Email</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="inviteEmail"
+                                        name="invite_email"
+                                        required="1"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="registration_id"
+                                        id="registration_id_modal"
+                                    />
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Send Invitation</button>
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >Close</button>
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                >Send Invitation</button>
                             </div>
                         </form>
                     </div>
@@ -59,7 +100,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#inviteModal"
                     >
-                        <i class="fa fa-envelope"></i> Send Invitation
+                        <i class="fa fa-envelope" /> Send Invitation
                     </button>
                 </td>
             </t>
@@ -73,59 +114,98 @@
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
                         <div class="card-header bg-primary text-white">
-                            <h3 class="card-title">You're Invited to the Event: <strong><t t-esc="event.name"/></strong></h3>
+                            <h3 class="card-title">You're Invited to the Event: <strong
+                                    ><t t-esc="event.name" /></strong></h3>
                         </div>
                         <div class="card-body">
                             <p class="lead">
-                                Dear <t t-esc="invitation.invite_email"/>,
+                                Dear <t t-esc="invitation.invite_email" />,
                             </p>
                             <p>
-                                You have been invited to join the event <strong><t t-esc="event.name"/></strong>.
+                                You have been invited to join the event <strong><t
+                                            t-esc="event.name"
+                                        /></strong>.
                                 The event will take place on:
-                                <br/>
-                                <strong>From:</strong> <t t-esc="event.date_begin_located"/>
-                                <br/>
-                                <strong>To:</strong> <t t-esc="event.date_end_located"/>
-                                <br/>
-                                <strong>Location:</strong> <t t-esc="event.address_id.name or 'Online'"/>
+                                <br />
+                                <strong>From:</strong> <t
+                                        t-esc="event.date_begin_located"
+                                    />
+                                <br />
+                                <strong>To:</strong> <t
+                                        t-esc="event.date_end_located"
+                                    />
+                                <br />
+                                <strong>Location:</strong> <t
+                                        t-esc="event.address_id.name or 'Online'"
+                                    />
                             </p>
 
-                            <t t-if="invitation.is_used and not request.params.get('thank_you')">
+                            <t
+                                    t-if="invitation.is_used and not request.params.get('thank_you')"
+                                >
                                 <div class="alert alert-info" role="alert">
-                                    <strong>This invitation has already been accepted on <t t-esc="invitation.used_date"/>.</strong>
+                                    <strong
+                                        >This invitation has already been accepted on <t
+                                                t-esc="invitation.used_date"
+                                            />.</strong>
                                 </div>
                             </t>
                             <t t-elif="request.params.get('thank_you')">
                                 <div class="alert alert-success" role="alert">
-                                    <strong>Thank you! Your invitation has been successfully accepted.</strong>
+                                    <strong
+                                        >Thank you! Your invitation has been successfully accepted.</strong>
                                 </div>
                             </t>
                             <t t-else="">
                                 <form method="post" action="/accept_invitation">
-                                    <input type="hidden" name="invite_id" t-att-value="invitation.id"/>
-                                    <input type="hidden" name="access_token" t-att-value="invitation.access_token"/>
-                                    <input type="hidden" name="event_id" t-att-value="event.id"/>
-                                    <input type="hidden" name="return_url" t-att-value="request.httprequest.path"/>
                                     <input
-                                        type="hidden"
-                                        name="csrf_token"
-                                        t-att-value="request.csrf_token()"
-                                    />
+                                            type="hidden"
+                                            name="invite_id"
+                                            t-att-value="invitation.id"
+                                        />
+                                    <input
+                                            type="hidden"
+                                            name="access_token"
+                                            t-att-value="invitation.access_token"
+                                        />
+                                    <input
+                                            type="hidden"
+                                            name="event_id"
+                                            t-att-value="event.id"
+                                        />
+                                    <input
+                                            type="hidden"
+                                            name="return_url"
+                                            t-att-value="request.httprequest.path"
+                                        />
+                                    <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            t-att-value="request.csrf_token()"
+                                        />
                                     <t t-foreach="event.survey_ids" t-as="survey">
                                         <div
                                                 t-foreach="survey.question_and_page_ids"
                                                 t-as="question"
                                                 class=""
                                             >
-                                            <t t-call="society_event_core.registration_event_survey">
-                                                <t t-set="registration_index" t-value="counter" />
+                                            <t
+                                                    t-call="society_event_core.registration_event_survey"
+                                                >
+                                                <t
+                                                        t-set="registration_index"
+                                                        t-value="counter"
+                                                    />
                                             </t>
                                         </div>
                                     </t>
                                     <div class="form-group mt-3">
-                                        <button type="submit" class="btn btn-success">Accept Invitation</button>
+                                        <button
+                                                type="submit"
+                                                class="btn btn-success"
+                                            >Accept Invitation</button>
                                     </div>
-                                    
+
                                 </form>
                             </t>
                         </div>

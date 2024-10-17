@@ -19,7 +19,7 @@
 ##############################################################################
 {
     "name": "Event Ticket Registration: Self or Invite Others",
-    "summary": "Adds an option to event registration to choose between registering for yourself or inviting others.",
+    "summary": "Event Ticket Registration: Self or Invite Others",
     "version": "17.0.1.0.0",
     "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,7 +28,12 @@
     "application": False,
     "installable": True,
     "depends": ["website_event", "website_my_events"],
-    "data": ["data/mail_template_data.xml","views/event_templates.xml","views/event_view.xml", "security/ir.model.access.csv"],
+    "data": [
+        "data/mail_template_data.xml",
+        "views/event_templates.xml",
+        "views/event_view.xml",
+        "security/ir.model.access.csv",
+    ],
     "assets": {
         "web.assets_frontend": [
             "event_ticket_purchase_options/static/src/js/invitation.esm.js",

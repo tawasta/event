@@ -46,5 +46,6 @@ class EventRegistration(models.Model):
         default=False,
     )
 
-    invite_id = fields.Many2one(string="Invite record", comodel_name="registration.invitation")
-
+    invite_id = fields.Many2one(
+        string="Invite record", comodel_name="registration.invitation"
+    )

@@ -1,7 +1,6 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { jsonrpc } from "@web/core/network/rpc_service";
 import Dialog from "@web/legacy/js/core/dialog";
 import {_t} from "@web/core/l10n/translation";
 
@@ -20,7 +19,7 @@ publicWidget.registry.PortalInvite = publicWidget.Widget.extend({
     _bindModalEvents: function () {
         $("#inviteModal").on("show.bs.modal", function (e) {
             var registration = $(e.relatedTarget).data("registration-id");
-            $('#registration_id_modal').val(registration);
+            $("#registration_id_modal").val(registration);
         });
     },
 
@@ -28,7 +27,7 @@ publicWidget.registry.PortalInvite = publicWidget.Widget.extend({
         const self = this;
 
         $("#invite-form").on("submit", function (e) {
-            e.preventDefault();  // Estä oletuslähetys
+            e.preventDefault(); // Estä oletuslähetys
 
             // Lomakkeen validointi (HTML5:n reportValidity-metodi)
             if (!this.reportValidity()) {
