@@ -16,7 +16,6 @@ class EventRegistrationController(WebsiteEventController):
         )
 
         for ticket in tickets:
-            "nb_register-%s" % ticket["id"]
             other_ticket_name = "other_nb_register-%s" % ticket["id"]
 
             if other_ticket_name in form_details:
