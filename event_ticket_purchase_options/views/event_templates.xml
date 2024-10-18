@@ -104,7 +104,7 @@
                     </button>
                 </td>
             </t>
-            
+
             <!-- Jos kutsu on lähetetty, näytetään sen tila -->
             <t t-if="re.invite_others and re.invite_id">
                 <td>
@@ -112,14 +112,18 @@
                         <!-- Näytetään jos kutsu on käytetty -->
                         <span class="badge bg-success">
                             Invitation accepted on
-                            <t t-esc="re.invite_id.used_date.strftime('%Y-%m-%d %H:%M:%S')" />
+                            <t
+                                t-esc="re.invite_id.used_date.strftime('%Y-%m-%d %H:%M:%S')"
+                            />
                         </span>
                     </t>
                     <t t-else="">
                         <!-- Näytetään jos kutsua ei ole vielä käytetty -->
                         <span class="badge bg-warning">
                             Invitation sent on
-                            <t t-esc="re.invite_id.invited_date.strftime('%Y-%m-%d %H:%M:%S')" />
+                            <t
+                                t-esc="re.invite_id.invited_date.strftime('%Y-%m-%d %H:%M:%S')"
+                            />
                             , not yet accepted.
                         </span>
                     </t>

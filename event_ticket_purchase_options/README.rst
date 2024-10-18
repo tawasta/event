@@ -6,7 +6,7 @@
 Event Ticket Registration: Self or Invite Others
 ================================================
 
-*
+This module enhances Odoo's event registration system by allowing users to either register themselves for an event or invite others to join the event. It integrates with the existing shopping cart system and enables participants to manage invitations, track their status, and allow recipients to accept invitations through a secure link.
 
 Configuration
 =============
@@ -14,7 +14,9 @@ Configuration
 
 Usage
 =====
-\-
+1. **Invite Others**: When registering for an event, users can toggle the "Invite Others" option.
+2. **Send Invitations**: After registration, users can send invitations from the portal, and track whether they have been accepted or not.
+3. **Accept Invitations**: Invitees receive an email with a secure link to accept the invitation and complete their registration.
 
 Known issues / Roadmap
 ======================

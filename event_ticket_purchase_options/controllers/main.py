@@ -1,8 +1,9 @@
 import json
+import logging
 import secrets
 from collections import defaultdict
 from datetime import datetime
-import logging
+
 from odoo import _, http
 from odoo.http import request
 
@@ -26,8 +27,8 @@ class EventRegistrationController(WebsiteEventController):
     @http.route()
     def registration_new(self, event, **post):
         """
-        Käsittelee uusien rekisteröintien luomisen tapahtumaan. 
-        Tarkistetaan, kutsutaanko muita osallistujia ja jos kutsutaan, 
+        Käsittelee uusien rekisteröintien luomisen tapahtumaan.
+        Tarkistetaan, kutsutaanko muita osallistujia ja jos kutsutaan,
         luodaan draft-rekisteröinnit ja ohjataan ostoskoriin.
         """
         tickets = self._process_tickets_form(event, post)
@@ -64,15 +65,21 @@ class EventRegistrationController(WebsiteEventController):
             for ticket in tickets:
                 if ticket["is_inviting_others"]:
                     # Luodaan vain yksi rekisteröinti per lippu ilman määrän monistamista
-                    registration = request.env["event.registration"].sudo().create({
-                        "event_id": event.id,
-                        "name": "Draft Registration",
-                        "state": "draft",
-                        "event_ticket_id": ticket["ticket"].id,
-                        "sale_order_id": order_sudo.id,
-                        "sale_order_line_id": cart_data[ticket["ticket"].id],
-                        "invite_others": True,
-                    })
+                    registration = (
+                        request.env["event.registration"]
+                        .sudo()
+                        .create(
+                            {
+                                "event_id": event.id,
+                                "name": "Draft Registration",
+                                "state": "draft",
+                                "event_ticket_id": ticket["ticket"].id,
+                                "sale_order_id": order_sudo.id,
+                                "sale_order_line_id": cart_data[ticket["ticket"].id],
+                                "invite_others": True,
+                            }
+                        )
+                    )
                     draft_registrations.append(registration)
 
             # Päivitetään sessio ostoskorin määrällä
@@ -80,7 +87,7 @@ class EventRegistrationController(WebsiteEventController):
 
             # Palautetaan JSON-vastaus, jossa on redirect-url
             return {
-                'redirect': '/shop/checkout'  # Ohjaa oikeaan URL:iin tässä tapauksessa
+                "redirect": "/shop/checkout"  # Ohjaa oikeaan URL:iin tässä tapauksessa
             }
 
         # Jos kutsuja ei luoda, palautetaan suoraan superin toteutus
