@@ -60,8 +60,6 @@ class EventRegistrationController(WebsiteEventController):
                 cart_data[ticket_id] = cart_values["line_id"]
 
             # Luodaan luonnokset rekisteröinneistä kutsuttaville
-            logging.info("====LIPUT====")
-            logging.info(tickets)
             for ticket in tickets:
                 if ticket["is_inviting_others"]:
                     # Luodaan vain yksi rekisteröinti per lippu ilman määrän monistamista
