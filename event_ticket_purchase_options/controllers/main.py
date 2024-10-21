@@ -71,9 +71,7 @@ class EventRegistrationController(WebsiteEventController):
 
             request.session["website_sale_cart_quantity"] = order_sudo.cart_quantity
 
-            return {
-                "redirect": "/shop/checkout"
-            }
+            return {"redirect": "/shop/checkout"}
 
         return super(EventRegistrationController, self).registration_new(event, **post)
 
