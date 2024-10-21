@@ -25,11 +25,6 @@ class EventRegistrationController(WebsiteEventController):
 
     @http.route()
     def registration_new(self, event, **post):
-        """
-        Käsittelee uusien rekisteröintien luomisen tapahtumaan.
-        Tarkistetaan, kutsutaanko muita osallistujia ja jos kutsutaan,
-        luodaan draft-rekisteröinnit ja ohjataan ostoskoriin.
-        """
         tickets = self._process_tickets_form(event, post)
 
         # Tarkista, kutsutaanko muita
@@ -37,17 +32,14 @@ class EventRegistrationController(WebsiteEventController):
             draft_registrations = []
             order_sudo = request.website.sale_get_order(force_create=True)
             if order_sudo.state != "draft":
-                # Jos ostoskori ei ole draft-tilassa, nollataan se ja luodaan uusi
                 request.website.sale_reset()
                 order_sudo = request.website.sale_get_order(force_create=True)
 
-            # Laskemme, kuinka monta kutsua per lippu pitää luoda
             tickets_data = defaultdict(int)
             for ticket in tickets:
                 if ticket["is_inviting_others"]:
                     tickets_data[ticket["ticket"].id] += ticket["quantity"]
 
-            # Päivitetään ostoskori uusilla kutsuilla
             cart_data = {}
             for ticket_id, count in tickets_data.items():
                 ticket_sudo = request.env["event.event.ticket"].sudo().browse(ticket_id)
@@ -58,10 +50,8 @@ class EventRegistrationController(WebsiteEventController):
                 )
                 cart_data[ticket_id] = cart_values["line_id"]
 
-            # Luodaan luonnokset rekisteröinneistä kutsuttaville
             for ticket in tickets:
                 if ticket["is_inviting_others"]:
-                    # Luodaan vain yksi rekisteröinti per lippu ilman määrän monistamista
                     registration = (
                         request.env["event.registration"]
                         .sudo()
@@ -79,15 +69,12 @@ class EventRegistrationController(WebsiteEventController):
                     )
                     draft_registrations.append(registration)
 
-            # Päivitetään sessio ostoskorin määrällä
             request.session["website_sale_cart_quantity"] = order_sudo.cart_quantity
 
-            # Palautetaan JSON-vastaus, jossa on redirect-url
             return {
-                "redirect": "/shop/checkout"  # Ohjaa oikeaan URL:iin tässä tapauksessa
+                "redirect": "/shop/checkout"
             }
 
-        # Jos kutsuja ei luoda, palautetaan suoraan superin toteutus
         return super(EventRegistrationController, self).registration_new(event, **post)
 
     @http.route(
