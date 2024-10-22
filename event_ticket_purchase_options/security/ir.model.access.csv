@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+registration_invitation_manager,registration_invitation_manager,model_registration_invitation,event.group_event_manager,1,1,1,1

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_event_registration_form_student_batch">
+        <field name="name">event.registration.form.student.batch</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <field name="event_ticket_id" position="after">
+                <field name="invite_others" />
+                <field name="invite_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
