@@ -165,7 +165,7 @@ class EventRegistrationController(WebsiteEventController):
     @http.route(
         ["/event/<int:event_id>/invitation/<int:invite_id>/accept"],
         type="http",
-        auth="public",
+        auth="user",
         website=True,
     )
     def accept_invitation(self, event_id, invite_id, access_token=None, **post):
@@ -206,7 +206,7 @@ class EventRegistrationController(WebsiteEventController):
 
     # flake8: noqa: C901
     @http.route(
-        ["/accept_invitation"], type="http", auth="public", website=True, csrf=True
+        ["/accept_invitation"], type="http", auth="user", website=True, csrf=True
     )
     def accept_invitation_form(self, **post):
         invite_data = {
