@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_registration_invitation_tree">
+        <field name="name">registration.invitation.tree</field>
+        <field name="model">registration.invitation</field>
+        <field name="arch" type="xml">
+            <tree string="Registration Invitations" default_order="invited_date desc">
+                <field name="registration_id"/>
+                <field name="invite_email"/>
+                <field name="invited_date"/>
+                <field name="is_used"/>
+                <field name="used_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_registration_invitation_form">
+        <field name="name">registration.invitation.form</field>
+        <field name="model">registration.invitation</field>
+        <field name="arch" type="xml">
+            <form string="Registration Invitation">
+                <sheet>
+                    <group>
+                        <field name="registration_id" readonly="1"/>
+                        <field name="invite_email"/>
+                        <field name="invited_date" readonly="1"/>
+                        <field name="is_used"/>
+                        <field name="used_date" readonly="1"/>
+                        <field name="access_token" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_registration_invitation_search">
+        <field name="name">registration.invitation.search</field>
+        <field name="model">registration.invitation</field>
+        <field name="arch" type="xml">
+            <search string="Registration Invitations">
+                <field name="registration_id"/>
+                <field name="invite_email"/>
+                <field name="is_used"/>
+                <field name="invited_date"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_registration_invitation" model="ir.actions.act_window">
+        <field name="name">Registration Invitations</field>
+        <field name="res_model">registration.invitation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_registration_invitation_tree"/>
+        <field name="search_view_id" ref="view_registration_invitation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No Registration Invitations found!</p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_registration_invitations"
+        name="Registration Invitations"
+        parent="event.menu_reporting_events"
+        action="action_registration_invitation"
+        sequence="5"
+        groups="event.group_event_user"/>
+</odoo>

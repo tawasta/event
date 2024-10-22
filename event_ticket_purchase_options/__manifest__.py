@@ -32,6 +32,7 @@
         "data/mail_template_data.xml",
         "views/event_templates.xml",
         "views/event_view.xml",
+        "views/registration_invitation.xml",
         "security/ir.model.access.csv",
     ],
     "assets": {
