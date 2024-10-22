@@ -173,11 +173,12 @@ class EventRegistration(models.Model):
         self.write({"state": "wait"})
 
     def _check_waiting_list(self, vals):
+        if not vals.get("event_id") or not vals.get("event_ticket_id"):
+            return False  # Ei lisätä jonotuslistalle
+
         event = self.env["event.event"].browse(vals["event_id"])
         event_ticket = self.env["event.event.ticket"]
 
-        if not vals.get("event_ticket_id"):
-            return False  # Ei lisätä jonotuslistalle
         ticket = (
             event_ticket.browse(vals["event_ticket_id"])
             if vals.get("event_ticket_id")
