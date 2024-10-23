@@ -4,27 +4,66 @@
         id="modal_ticket_registration_inherit"
         inherit_id="website_event.modal_ticket_registration"
     >
-        <!-- Move the switch toggle above the tickets section with clear spacing -->
-        <xpath expr="//form//div[@id='o_wevent_tickets']" position="before">
-            <div class="mb-3 p-3 bg-light rounded">
-                <div class="form-check form-switch mt-2 mb-3">
-                    <input
-                        type="checkbox"
-                        id="invite_others_switch"
-                        class="form-check-input"
-                        name="invite_others"
-                        value="1"
-                        t-att-checked="invite_others"
-                    />
-                        Ilmoitan itseni tai kutsun muita
-                    <span class="form-text text-muted invite_others">
-                        <i
-                        >Jos kutsut muita, heitä pyydetään täyttämään yhteystiedot myöhemmin.</i>
-                    </span>
-                </div>
+    <!-- Selkeä korttimuotoilu Bootstrap-luokilla -->
+    <xpath expr="//form//div[@id='o_wevent_tickets']" position="before">
+        <div class="mb-3 p-3 bg-light rounded">
+            <label for="registration_choice" class="form-label fw-bold">
+                Ilmoita osallistuja(t)
+            </label>
+            <div id="registration_choice" class="d-flex gap-3 justify-content-around">
+                <!-- Kortti itselle ilmoittautumiseen -->
+                <label
+                        for="register_self"
+                        class="card text-center border-primary cursor-pointer"
+                        style="width: 45%;"
+                    >
+                    <div class="card-body p-3">
+                        <input
+                                type="radio"
+                                id="register_self"
+                                class="form-check-input d-none"
+                                name="registration_option"
+                                value="self"
+                                required="required"
+                                t-att-checked="invite_others == '0'"
+                            />
+                        <div class="w-100">
+                            <i class="fa fa-user fa-2x mb-2" />
+                            <div class="h5">Ilmoitan vain itseni</div>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Kortti muiden ilmoittamiseen -->
+                <label
+                        for="register_others"
+                        class="card text-center border-secondary cursor-pointer"
+                        style="width: 45%;"
+                    >
+                    <div class="card-body p-3">
+                        <input
+                                type="radio"
+                                id="register_others"
+                                class="form-check-input d-none"
+                                name="registration_option"
+                                value="others"
+                                required="required"
+                                t-att-checked="invite_others == '1'"
+                            />
+                        <div class="w-100">
+                            <i class="fa fa-users fa-2x mb-2" />
+                            <div class="h5">Ilmoitan muita osallistujia</div>
+                        </div>
+                    </div>
+                </label>
             </div>
-        </xpath>
-    </template>
+            <span class="form-text text-muted mt-3">
+                Jos ilmoitat muita, heitä pyydetään täyttämään yhteystiedot myöhemmin.
+            </span>
+        </div>
+    </xpath>
+</template>
+
 
     <template
         id="portal_my_events_inherit"

@@ -6,16 +6,35 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
     selector: "#modal_ticket_registration",
 
     events: {
-        "change #invite_others_switch": "_onInviteOthersSwitchChange",
+        "change input[name='registration_option']": "_onRegistrationOptionChange",
     },
 
+    /**
+     * Modaalin avaamisen jälkeen suoritetaan koodi
+     */
     start: function () {
-        this._super.apply(this, arguments);
+        const res = this._super.apply(this, arguments);
         console.log("InviteOthersWidget started");
 
-        this.coreTicketOptions = {};
-        this._saveCoreTicketOptions();
-        this._updateTicketOptions();
+        // Käynnistetään widget vasta, kun modaalin sisältö on näkyvissä
+        this.$el.closest(".modal").on("shown.bs.modal", () => {
+            this.coreTicketOptions = {};
+            this._saveCoreTicketOptions();
+            this._updateTicketOptions();
+            this._updateCardStyles();
+
+            // Tarkista rekisteröintipainikkeen tila
+            this._toggleRegisterButton();
+
+            // Kuuntele lippujen määrän muutoksia, jotta painikkeen tila pysyy synkronoituna
+            this.$el.on(
+                "change",
+                ".form-select",
+                this._toggleRegisterButton.bind(this)
+            );
+        });
+
+        return res;
     },
 
     // --------------------------------------------------------------------------
@@ -35,19 +54,21 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
     },
 
     /**
-     * Käsittelee liukukytkimen muutoksen
+     * Käsittelee radiopainikkeiden muutoksen
      * @private
      */
-    _onInviteOthersSwitchChange: function () {
+    _onRegistrationOptionChange: function () {
         this._updateTicketOptions();
+        this._updateCardStyles();
+        this._toggleRegisterButton();
     },
 
     /**
-     * Päivittää lippuvalintakentän näkyvyyden ja valinnat riippuen liukukytkimen tilasta
+     * Päivittää lippuvalintakentän näkyvyyden ja valinnat riippuen valitusta vaihtoehdosta
      * @private
      */
     _updateTicketOptions: function () {
-        const inviteOthersChecked = this.$("#invite_others_switch").is(":checked");
+        const inviteOthersChecked = this.$("#register_others").is(":checked");
 
         if (inviteOthersChecked) {
             this._restoreCoreTicketOptions("other_nb_register-");
@@ -88,6 +109,50 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
                 $(this).attr("name", namePrefix + ticketId);
             }
         );
+    },
+
+    /**
+     * Päivittää korttien tyylit, jotta valittu vaihtoehto näkyy aktiivisena
+     * @private
+     */
+    _updateCardStyles: function () {
+        // Poista aktiivinen tyyli kaikista korteista
+        this.$(".card").removeClass("bg-success text-white shadow border-success");
+        this.$(".card").addClass("border-secondary");
+
+        // Lisää aktiivinen tyyli valittuun korttiin
+        if (this.$("#register_self").is(":checked")) {
+            this.$("#register_self")
+                .closest(".card")
+                .addClass("bg-success text-white shadow border-success")
+                .removeClass("border-secondary");
+        } else if (this.$("#register_others").is(":checked")) {
+            this.$("#register_others")
+                .closest(".card")
+                .addClass("bg-success text-white shadow border-success")
+                .removeClass("border-secondary");
+        }
+    },
+
+    /**
+     * Päivittää rekisteröintipainikkeen tilan riippuen siitä, onko valinta tehty ja lippuja valittu
+     * @private
+     */
+    _toggleRegisterButton: function () {
+        // Tarkista, onko jokin valinta tehty
+        const isOptionSelected =
+            this.$("input[name='registration_option']:checked").length > 0;
+
+        // Tarkista, onko lippuja valittu (tässä viitataan core-widgetin logiikkaan)
+        const isTicketSelected = this.$(".form-select")
+            .toArray()
+            .some((select) => parseInt(select.value) > 0);
+
+        // Varmista, että rekisteröintipainike on aktiivinen vain, jos molemmat ehdot täyttyvät
+        const isButtonEnabled = isOptionSelected && isTicketSelected;
+
+        // Ota rekisteröintipainike käyttöön tai poista käytöstä riippuen molemmista ehdoista
+        this.$("button[type='submit']").prop("disabled", !isButtonEnabled);
     },
 });
 
