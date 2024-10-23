@@ -8,7 +8,7 @@
     <xpath expr="//form//div[@id='o_wevent_tickets']" position="before">
         <div class="mb-3 p-3 bg-light rounded">
             <label for="registration_choice" class="form-label fw-bold">
-                Ilmoita osallistuja(t)
+                Register participant(s)
             </label>
             <div id="registration_choice" class="d-flex gap-3 justify-content-around">
                 <!-- Kortti itselle ilmoittautumiseen -->
@@ -29,7 +29,7 @@
                             />
                         <div class="w-100">
                             <i class="fa fa-user fa-2x mb-2" />
-                            <div class="h5">Ilmoitan vain itseni</div>
+                            <div class="h5">I am registering only myself</div>
                         </div>
                     </div>
                 </label>
@@ -52,13 +52,13 @@
                             />
                         <div class="w-100">
                             <i class="fa fa-users fa-2x mb-2" />
-                            <div class="h5">Ilmoitan muita osallistujia</div>
+                            <div class="h5">I am registering other participants</div>
                         </div>
                     </div>
                 </label>
             </div>
             <span class="form-text text-muted mt-3">
-                Jos ilmoitat muita, heitä pyydetään täyttämään yhteystiedot myöhemmin.
+                If you are registering other participants, you will have the opportunity to invite them to fill in their contact details later.
             </span>
         </div>
     </xpath>
