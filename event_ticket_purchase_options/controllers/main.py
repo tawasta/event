@@ -1,7 +1,10 @@
 import json
+import logging
 import secrets
 from collections import defaultdict
 from datetime import datetime
+
+import werkzeug
 
 from odoo import _, http
 from odoo.http import request
@@ -30,48 +33,78 @@ class EventRegistrationController(WebsiteEventController):
         # Tarkista, kutsutaanko muita
         if any(ticket.get("is_inviting_others") for ticket in tickets):
             draft_registrations = []
-            order_sudo = request.website.sale_get_order(force_create=True)
-            if order_sudo.state != "draft":
-                request.website.sale_reset()
+            visitor_sudo = request.env["website.visitor"]._get_visitor_from_request(
+                force_create=True
+            )
+
+            is_free_event = all(ticket["price"] == 0.0 for ticket in tickets)
+            logging.info(is_free_event)
+
+            if not is_free_event:
                 order_sudo = request.website.sale_get_order(force_create=True)
+                if order_sudo.state != "draft":
+                    request.website.sale_reset()
+                    order_sudo = request.website.sale_get_order(force_create=True)
 
-            tickets_data = defaultdict(int)
+                tickets_data = defaultdict(int)
+                for ticket in tickets:
+                    if ticket["is_inviting_others"]:
+                        tickets_data[ticket["ticket"].id] += ticket["quantity"]
+
+                cart_data = {}
+                for ticket_id, count in tickets_data.items():
+                    ticket_sudo = (
+                        request.env["event.event.ticket"].sudo().browse(ticket_id)
+                    )
+                    cart_values = order_sudo._cart_update(
+                        product_id=ticket_sudo.product_id.id,
+                        add_qty=count,
+                        event_ticket_id=ticket_id,
+                    )
+                    cart_data[ticket_id] = cart_values["line_id"]
+
             for ticket in tickets:
                 if ticket["is_inviting_others"]:
-                    tickets_data[ticket["ticket"].id] += ticket["quantity"]
-
-            cart_data = {}
-            for ticket_id, count in tickets_data.items():
-                ticket_sudo = request.env["event.event.ticket"].sudo().browse(ticket_id)
-                cart_values = order_sudo._cart_update(
-                    product_id=ticket_sudo.product_id.id,
-                    add_qty=count,
-                    event_ticket_id=ticket_id,
-                )
-                cart_data[ticket_id] = cart_values["line_id"]
-
-            for ticket in tickets:
-                if ticket["is_inviting_others"]:
+                    registration_data = {
+                        "event_id": event.id,
+                        "name": "Draft Registration",
+                        "state": "draft",
+                        "event_ticket_id": ticket["ticket"].id,
+                        "invite_others": True,
+                        "visitor_id": visitor_sudo.id,
+                    }
+                    # Lisää myyntitilauksen tiedot vain jos tilaus on olemassa
+                    if not is_free_event:
+                        registration_data.update(
+                            {
+                                "sale_order_id": order_sudo.id,
+                                "sale_order_line_id": cart_data[ticket["ticket"].id],
+                            }
+                        )
                     registration = (
                         request.env["event.registration"]
                         .sudo()
-                        .create(
-                            {
-                                "event_id": event.id,
-                                "name": "Draft Registration",
-                                "state": "draft",
-                                "event_ticket_id": ticket["ticket"].id,
-                                "sale_order_id": order_sudo.id,
-                                "sale_order_line_id": cart_data[ticket["ticket"].id],
-                                "invite_others": True,
-                            }
-                        )
+                        .create(registration_data)
                     )
                     draft_registrations.append(registration)
 
-            request.session["website_sale_cart_quantity"] = order_sudo.cart_quantity
-
-            return {"redirect": "/shop/checkout"}
+            if is_free_event:
+                # Ohjataan suoraan onnistumissivulle maksuttomissa tapahtumissa
+                success_url = (
+                    "/event/%s/registration/success?" % event.id
+                    + werkzeug.urls.url_encode(
+                        {
+                            "registration_ids": ",".join(
+                                [str(reg.id) for reg in draft_registrations]
+                            )
+                        }
+                    )
+                )
+                return {"redirect": success_url}
+            else:
+                # Päivitä ostoskorin määrä
+                request.session["website_sale_cart_quantity"] = order_sudo.cart_quantity
+                return {"redirect": "/shop/checkout"}
 
         return super(EventRegistrationController, self).registration_new(event, **post)
 
