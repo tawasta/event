@@ -70,6 +70,10 @@ class EventRegistration(models.Model):
                 "mobile": registration.attendee_partner_id.phone,
             }
 
+            if not vals.get("first_name") and not vals.get("last_name"):
+                # If attendee is not set
+                vals["name"] = registration.name
+
             is_student = (
                 self.env["op.student"]
                 .sudo()

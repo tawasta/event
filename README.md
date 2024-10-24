@@ -12,7 +12,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.0.0 |  | Adds audit log rules for events
-[event_batch](event_batch/) | 17.0.1.0.0 |  | Allows creating student batches for event registrations
+[event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
