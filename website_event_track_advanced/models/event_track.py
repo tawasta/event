@@ -426,10 +426,36 @@ class EventTrack(models.Model):
     # 6. CRUD methods
     def write(self, vals):
         res = super(EventTrack, self).write(vals)
-        if vals.get("speaker_ids"):
-            # TODO: Get ids correctly
-            for speaker in vals.get("speaker_ids")[0][2]:
-                self.message_subscribe([speaker])
+
+        if "speaker_ids" in vals:
+            speaker_commands = vals.get("speaker_ids", [])
+
+            # Erota lisättävät komennot (tyypit 6 ja 4)
+            speakers_to_add_6 = list(
+                filter(lambda command: command[0] == 6, speaker_commands)
+            )
+            speakers_to_add_4 = list(
+                filter(lambda command: command[0] == 4, speaker_commands)
+            )
+
+            # Lisätään käyttäjät seuraajiksi tyypin 6 mukaan (monen käyttäjän lisäys)
+            if speakers_to_add_6:
+                for command in speakers_to_add_6:
+                    self.message_subscribe(command[2])
+
+            # Lisätään käyttäjät seuraajiksi tyypin 4 mukaan (yksittäinen käyttäjä)
+            if speakers_to_add_4:
+                for command in speakers_to_add_4:
+                    self.message_subscribe([command[1]])
+
+            # Käsitellään poistettavat käyttäjät (tyyppi 3)
+            speakers_to_remove = list(
+                filter(lambda command: command[0] == 3, speaker_commands)
+            )
+            if speakers_to_remove:
+                for command in speakers_to_remove:
+                    self.message_unsubscribe([command[1]])
+
         return res
 
     # 7. Action methods
