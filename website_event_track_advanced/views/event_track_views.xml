@@ -30,7 +30,7 @@
                                 <field name="country_id" optional="hide" />
                             </tree>
                         </field> -->
-                        <field name="speaker_ids" readonly="1" />
+                        <field name="speaker_ids" readonly="0" />
                     </group>
                 </page>
                 <page
