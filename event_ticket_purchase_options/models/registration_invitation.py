@@ -4,6 +4,7 @@ from odoo import fields, models
 class RegistrationInvitation(models.Model):
     _name = "registration.invitation"
     _description = "Registration Invitation"
+    _rec_name = 'invite_email'
 
     registration_id = fields.Many2one(
         "event.registration", string="Registration", required=True
