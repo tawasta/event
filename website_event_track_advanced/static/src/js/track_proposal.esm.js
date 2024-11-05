@@ -851,6 +851,11 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 $form.find(selector).removeAttr("readonly").removeAttr("disabled");
             });
 
+            $("#track-application-speakers-div").remove();
+            $("#track-application-contact-div").remove();
+            $("#track-application-webinar-div").remove();
+            $("#track-application-workshop-div").remove();
+            $("#event-track-application-extra-info").remove();
             // Disabloi kaikki painikkeet, joissa on luokka 'btn-remove-speaker'
             $form.find("button.btn-remove-speaker").each(function () {
                 $(this).attr("disabled", true);
