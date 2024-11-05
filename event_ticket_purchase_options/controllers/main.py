@@ -155,14 +155,15 @@ class EventRegistrationController(WebsiteEventController):
         if not invite_email:
             return json.dumps({"status": "error", "message": "No email provided"})
 
-        old_invite_id = (
-            request.env["registration.invitation"]
-            .sudo()
-            .search([("id", "=", int(post.get("invite_id")))], limit=1)
-        )
+        if post.get("invite_id"):
+            old_invite_id = (
+                request.env["registration.invitation"]
+                .sudo()
+                .search([("id", "=", int(post.get("invite_id")))], limit=1)
+            )
 
-        if old_invite_id and old_invite_id == registration.invite_id:
-            old_invite_id.unlink()
+            if old_invite_id and old_invite_id == registration.invite_id:
+                old_invite_id.unlink()
 
         invite_tracker = (
             request.env["registration.invitation"]
