@@ -850,7 +850,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             editableFields.forEach(function (selector) {
                 $form.find(selector).removeAttr("readonly").removeAttr("disabled");
             });
-            
+
             $("#track-application-speakers-div").remove();
             $("#track-application-contact-div").remove();
             $("#track-application-webinar-div").remove();
