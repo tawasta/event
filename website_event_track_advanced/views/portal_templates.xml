@@ -170,7 +170,7 @@
                                             /></span>
                                     </td>
                                     <td>
-                                        <span t-field="track.partner_id.name" />
+                                        <!-- <span t-field="track.partner_id.name" /> -->
                                     </td>
                                     <td>
                                         <t t-set="track_state">badge-default</t>
