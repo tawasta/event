@@ -68,7 +68,8 @@ if (EventRegistrationFormInstance) {
             $button.attr("disabled", true);
             return jsonrpc($form.attr("action"), post).then(function (modal) {
                 if (modal.redirect) {
-                    window.location.href = modal.redirect; // Ohjaa käyttäjä uudelle sivulle
+                    const queryString = $.param(modal.data);
+                    window.location.href = `${modal.redirect}?${queryString}`;
                 } else {
                     var $modal = $(modal);
                     $modal.find(".modal-body > div").removeClass("container"); // Retrocompatibility - REMOVE ME in master / saas-19

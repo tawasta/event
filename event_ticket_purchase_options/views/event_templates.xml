@@ -93,6 +93,13 @@
                                 />
                             </div>
                             <div class="modal-body">
+                                <div
+                                    id="resendInfo"
+                                    class="alert alert-warning d-none"
+                                    role="alert"
+                                >
+                                    You are about to send a new invitation. Sending this will cancel the previous invitation.
+                                </div>
                                 <div class="mb-3">
                                     <label
                                         for="inviteEmail"
@@ -110,7 +117,28 @@
                                         name="registration_id"
                                         id="registration_id_modal"
                                     />
+                                    <input
+                                        type="hidden"
+                                        name="invite_id"
+                                        id="invite_id_modal"
+                                    />
                                 </div>
+                                <div class="mb-3">
+                                    <label
+                                        for="confirmInviteEmail"
+                                        class="form-label"
+                                    >Confirm Recipient's Email</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="confirmInviteEmail"
+                                        name="confirm_invite_email"
+                                        required="1"
+                                    />
+                                </div>
+                                <p id="emailError" class="alert alert-danger d-none">
+                                    Emails do not match; please retype them.
+                                </p>
                             </div>
                             <div class="modal-footer">
                                 <button
@@ -157,14 +185,28 @@
                         </span>
                     </t>
                     <t t-else="">
-                        <!-- Näytetään jos kutsua ei ole vielä käytetty -->
-                        <span class="badge bg-warning">
-                            Invitation sent on
-                            <t
-                                t-esc="re.invite_id.invited_date.strftime('%Y-%m-%d %H:%M:%S')"
-                            />
-                            , not yet accepted.
-                        </span>
+                        <div class="d-flex flex-column align-items-start">
+                            <span class="badge bg-warning mb-2">
+                                Invitation sent on
+                                <t
+                                    t-esc="re.invite_id.invited_date.strftime('%Y-%m-%d %H:%M:%S')"
+                                />
+                                , not yet accepted.
+                            </span>
+
+                            <!-- Uudelleenlähetyspainike -->
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                t-att-data-registration-id="re.id"
+                                t-att-data-invite-id="re.invite_id.id"
+                                data-bs-toggle="modal"
+                                data-bs-target="#inviteModal"
+                                t-att-data-resend="true"
+                            >
+                                <i class="fa fa-envelope" /> Resend Invitation
+                            </button>
+                        </div>
                     </t>
                 </td>
             </t>

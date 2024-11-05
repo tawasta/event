@@ -19,7 +19,17 @@ publicWidget.registry.PortalInvite = publicWidget.Widget.extend({
     _bindModalEvents: function () {
         $("#inviteModal").on("show.bs.modal", function (e) {
             var registration = $(e.relatedTarget).data("registration-id");
+            var invite = $(e.relatedTarget).data("invite-id");
+            var isResend = $(e.relatedTarget).data("resend");
+            console.log(isResend);
             $("#registration_id_modal").val(registration);
+            $("#invite_id_modal").val(invite);
+
+            if (isResend) {
+                $("#resendInfo").removeClass("d-none"); // Näytetään uudelleenlähetysviesti
+            } else {
+                $("#resendInfo").addClass("d-none"); // Piilotetaan uudelleenlähetysviesti
+            }
         });
     },
 
@@ -33,6 +43,16 @@ publicWidget.registry.PortalInvite = publicWidget.Widget.extend({
             if (!this.reportValidity()) {
                 return;
             }
+
+            // Tarkista, että molemmat sähköpostikentät täsmäävät
+            const inviteEmail = $("#inviteEmail").val();
+            const confirmInviteEmail = $("#confirmInviteEmail").val();
+
+            if (inviteEmail !== confirmInviteEmail) {
+                $("#emailError").removeClass("d-none"); // Näytä virheilmoitus
+                return;
+            }
+            $("#emailError").addClass("d-none"); // Piilota virheilmoitus, jos osoitteet täsmäävät
 
             self._showLoadingScreen("Lähetetään kutsua, odota hetki...");
 
