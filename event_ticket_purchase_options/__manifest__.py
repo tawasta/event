@@ -30,6 +30,7 @@
     "depends": ["website_event", "website_my_events"],
     "data": [
         "data/mail_template_data.xml",
+        "data/mail_template_view.xml",
         "views/event_templates.xml",
         "views/event_view.xml",
         "views/registration_invitation.xml",
