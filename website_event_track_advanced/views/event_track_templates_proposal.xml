@@ -89,10 +89,12 @@
                         </td>
                     </h4>
                     <div class="card-body">
-                        <div
-                        t-field="track.partner_id"
-                        t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
-                    />
+                        <t t-if="not review_tracks">
+                            <div
+                            t-field="track.partner_id"
+                            t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'
+                        />
+                        </t>
                     </div>
                     <div class="card-footer">
                         <span
