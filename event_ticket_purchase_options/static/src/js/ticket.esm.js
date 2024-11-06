@@ -16,6 +16,19 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
         const res = this._super.apply(this, arguments);
         console.log("InviteOthersWidget started");
 
+        // Tarkista, löytyykö näkymästä "Join the waiting list" -painike
+        this.isWaitingList = this.$("button[name='waiting_list_button']").length > 0;
+
+        // Jos näkymässä on "Join the waiting list" -painike, estä muiden kutsuminen
+        if (this.isWaitingList) {
+            this.$("#register_others")
+                .prop("disabled", true)
+                .closest(".card")
+                .addClass("disabled-card") // Lisää mukautettu tyyli ei-aktiiviselle kortille
+                .removeClass("cursor-pointer"); // Poistaa cursor-pointer -luokan
+            this.$("#register_self").prop("checked", true);
+        }
+
         // Käynnistetään widget vasta, kun modaalin sisältö on näkyvissä
         this.$el.closest(".modal").on("shown.bs.modal", () => {
             this.coreTicketOptions = {};
@@ -70,7 +83,7 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
     _updateTicketOptions: function () {
         const inviteOthersChecked = this.$("#register_others").is(":checked");
 
-        if (inviteOthersChecked) {
+        if (inviteOthersChecked && !this.isWaitingList) {
             this._restoreCoreTicketOptions("other_nb_register-");
         } else {
             this._setSingleTicketOptions("nb_register-");
@@ -126,7 +139,7 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
                 .closest(".card")
                 .addClass("bg-success text-white shadow border-success")
                 .removeClass("border-secondary");
-        } else if (this.$("#register_others").is(":checked")) {
+        } else if (this.$("#register_others").is(":checked") && !this.isWaitingList) {
             this.$("#register_others")
                 .closest(".card")
                 .addClass("bg-success text-white shadow border-success")
