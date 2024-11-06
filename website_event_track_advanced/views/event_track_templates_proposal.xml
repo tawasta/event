@@ -39,15 +39,15 @@
                             />
                         </t>
                     </div>
-                    
-                    
 
-                    
+
+
+
                 </div>
                 <t t-set="track" t-value="request.env['event.track']" />
                 <t
-                        t-call="website_event_track_advanced.event_track_proposal_template_new"
-                    />
+                    t-call="website_event_track_advanced.event_track_proposal_template_new"
+                />
             </div>
             <section class="mt-5" t-if="review_tracks">
                         <h3 class="o_page_header">Review Proposals</h3>
@@ -57,8 +57,8 @@
 
                         <t t-foreach="review_tracks" t-as="track">
                             <t
-                                t-call="website_event_track_advanced.event_track_review_template"
-                            />
+                        t-call="website_event_track_advanced.event_track_review_template"
+                    />
                         </t>
                     </div>
         </xpath>
