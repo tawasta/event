@@ -39,12 +39,17 @@
                             />
                         </t>
                     </div>
-                    <t t-set="track" t-value="request.env['event.track']" />
-                    <t
+                    
+                    
+
+                    
+                </div>
+                <t t-set="track" t-value="request.env['event.track']" />
+                <t
                         t-call="website_event_track_advanced.event_track_proposal_template_new"
                     />
-
-                    <section class="mt-5" t-if="review_tracks">
+            </div>
+            <section class="mt-5" t-if="review_tracks">
                         <h3 class="o_page_header">Review Proposals</h3>
                         <p>Below are the proposals for you to review.</p>
                     </section>
@@ -56,8 +61,6 @@
                             />
                         </t>
                     </div>
-                </div>
-            </div>
         </xpath>
     </template>
 
@@ -230,6 +233,7 @@
                 t-att-data-event-id="event.id"
                 data-bs-toggle="modal"
                 data-bs-target="#modal_event_track_application"
+                t-if="event.website_track_proposal"
             ><i class="fa fa-fw fa-times-circle" /> New proposal
             </button>
         </div>
