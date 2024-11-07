@@ -177,17 +177,23 @@
                 <td>
                     <t t-if="re.invite_id.is_used">
                         <!-- Näytetään jos kutsu on käytetty -->
-                        <span class="badge bg-success">
-                            Invitation accepted on
-                            <t
-                                t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
-                            />
-                        </span>
+                        <div class="d-flex flex-column align-items-start text-wrap">
+                            <span class="badge bg-success">
+                                Invitation accepted on
+                            </span>
+                            <span>
+                                <t
+                                    t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
+                                />
+                            </span>
+                        </div>
                     </t>
                     <t t-else="">
-                        <div class="d-flex flex-column align-items-start">
+                        <div class="d-flex flex-column align-items-start text-wrap">
                             <span class="badge bg-warning mb-2">
                                 Invitation sent on
+                            </span>
+                            <span>
                                 <t
                                     t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
                                 />
