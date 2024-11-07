@@ -180,7 +180,7 @@
                         <span class="badge bg-success">
                             Invitation accepted on
                             <t
-                                t-esc="re.invite_id.used_date.strftime('%Y-%m-%d %H:%M:%S')"
+                                t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
                             />
                         </span>
                     </t>
@@ -189,7 +189,7 @@
                             <span class="badge bg-warning mb-2">
                                 Invitation sent on
                                 <t
-                                    t-esc="re.invite_id.invited_date.strftime('%Y-%m-%d %H:%M:%S')"
+                                    t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
                                 />
                                 , not yet accepted.
                             </span>
