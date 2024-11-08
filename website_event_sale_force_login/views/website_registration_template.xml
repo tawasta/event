@@ -9,7 +9,9 @@
             expr="//button[@data-bs-target='#modal_ticket_registration']"
             position="attributes"
         >
-            <attribute name="t-if">not website.is_public_user() and event.event_registrations_open</attribute>
+            <attribute
+                name="t-if"
+            >not website.is_public_user() and event.event_registrations_open</attribute>
         </xpath>
 
         <xpath
