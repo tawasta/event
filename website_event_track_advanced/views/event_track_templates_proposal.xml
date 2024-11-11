@@ -15,9 +15,7 @@
             position="replace"
         >
             <div t-if="not submitted">
-                <div
-                    
-                >
+                <div>
                     <section class="mt-5">
                         <t t-if="tracks">
                             <h3 class="o_page_header">Applications</h3>

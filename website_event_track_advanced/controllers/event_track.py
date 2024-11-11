@@ -153,18 +153,20 @@ class EventTrackControllerAdvanced(EventTrackController):
                 return {"error": "You do not have permission to review this track."}
 
         # Tarkista, onko nykyinen vaihe is_submitted = True
-        #is_readonly = not track.stage_id.is_editable or track.event_id.stage_id.pipe_end
+        # is_readonly = not track.stage_id.is_editable or track.event_id.stage_id.pipe_end
 
         if track.event_id.stage_id.pipe_end:
             is_readonly = True
         elif track.stage_id.is_editable and track.event_id.website_track_proposal:
             is_readonly = False
-        elif not track.event_id.website_track_proposal and track.stage_id.is_editable and track.stage_id.is_accepted:
+        elif (
+            not track.event_id.website_track_proposal
+            and track.stage_id.is_editable
+            and track.stage_id.is_accepted
+        ):
             is_readonly = False
         else:
             is_readonly = True
-
-
 
         speakers = []
         for speaker in sorted(track.speaker_ids, key=lambda s: s.id):
