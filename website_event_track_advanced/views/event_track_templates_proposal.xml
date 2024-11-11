@@ -16,7 +16,7 @@
         >
             <div t-if="not submitted">
                 <div
-                    t-if="event.website_track_proposal or request.env.user.has_group('event.group_event_manager')"
+                    
                 >
                     <section class="mt-5">
                         <t t-if="tracks">
