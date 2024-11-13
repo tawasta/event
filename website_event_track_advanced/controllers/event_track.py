@@ -213,7 +213,11 @@ class EventTrackControllerAdvanced(EventTrackController):
         ]
 
         attachments = [
-            {"id": attachment.id, "name": attachment.name, "link_url": attachment.link_url,}
+            {
+                "id": attachment.id,
+                "name": attachment.name,
+                "link_url": attachment.link_url,
+            }
             for attachment in track.attachment_ids
         ]
 
