@@ -414,7 +414,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         trackData.attachments.forEach(function (attachment) {
                             attachmentList += `
                                 <div id="attachment-${attachment.id}" class="o_track_proposal_attachment">
-                                    <a href="/web/content/${attachment.id}" target="_blank">${attachment.name}</a>
+                                    <a href="${attachment.link_url}" target="_blank">${attachment.name}</a>
                                     <button class="btn btn-danger btn-sm remove-attachment" data-id="${attachment.id}">Remove</button>
                                 </div>`;
                         });
