@@ -305,7 +305,10 @@ class EventRegistrationController(WebsiteEventController):
         )
 
         invitation.registration_id.sudo().write(
-            {"attendee_partner_id": request.env.user.partner_id.id, "name": request.env.user.partner_id.name}
+            {
+                "attendee_partner_id": request.env.user.partner_id.id,
+                "name": request.env.user.partner_id.name,
+            }
         )
 
         return_url = f"{invite_data['return_url']}?access_token={invite_data['access_token']}&thank_you=1"

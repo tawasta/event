@@ -15,24 +15,36 @@
     <record id="view_registration_search_inherit" model="ir.ui.view">
         <field name="name">event.registration.search.inherit</field>
         <field name="model">event.registration</field>
-        <field name="inherit_id" ref="event.view_registration_search"/>
+        <field name="inherit_id" ref="event.view_registration_search" />
         <field name="arch" type="xml">
             <!-- Lisää kutsu-suodattimet hakunäkymään -->
             <xpath expr="//search" position="inside">
-                <filter string="Invitation Registration" name="filter_invitation_registration"
+                <filter
+                    string="Invitation Registration"
+                    name="filter_invitation_registration"
                     domain="[('invite_others', '=', True)]"
-                    help="Show all registrations where invitations are allowed."/>
-                <filter string="Invitation Not Sent" name="filter_invitation_not_sent"
-                        domain="[('invite_others', '=', True), ('invite_id', '=', False)]"
-                        help="Show all registrations with invitation option, but the invitation has not been sent yet."/>
-                
-                <filter string="Invitation Sent, Not Accepted" name="filter_invitation_sent_not_accepted"
-                        domain="[('invite_others', '=', True), ('invite_id', '!=', False), ('invite_id.is_used', '=', False)]"
-                        help="Show all registrations with invitation option where the invitation has been sent but not yet accepted."/>
-                
-                <filter string="Invitation Accepted" name="filter_invitation_accepted"
-                        domain="[('invite_others', '=', True), ('invite_id', '!=', False), ('invite_id.is_used', '=', True)]"
-                        help="Show all registrations with invitation option where the invitation has been sent and accepted."/>
+                    help="Show all registrations where invitations are allowed."
+                />
+                <filter
+                    string="Invitation Not Sent"
+                    name="filter_invitation_not_sent"
+                    domain="[('invite_others', '=', True), ('invite_id', '=', False)]"
+                    help="Show all registrations with invitation option, but the invitation has not been sent yet."
+                />
+
+                <filter
+                    string="Invitation Sent, Not Accepted"
+                    name="filter_invitation_sent_not_accepted"
+                    domain="[('invite_others', '=', True), ('invite_id', '!=', False), ('invite_id.is_used', '=', False)]"
+                    help="Show all registrations with invitation option where the invitation has been sent but not yet accepted."
+                />
+
+                <filter
+                    string="Invitation Accepted"
+                    name="filter_invitation_accepted"
+                    domain="[('invite_others', '=', True), ('invite_id', '!=', False), ('invite_id.is_used', '=', True)]"
+                    help="Show all registrations with invitation option where the invitation has been sent and accepted."
+                />
             </xpath>
         </field>
     </record>

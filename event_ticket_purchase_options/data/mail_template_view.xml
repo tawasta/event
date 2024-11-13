@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-	<template id="view_email_template_subscription_with_invitation" inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel">
+    <template
+        id="view_email_template_subscription_with_invitation"
+        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+    >
     <!-- Tarkenna xpath vastaamaan tarkasti oikeaa <div>-elementtiä -->
-    <xpath expr="//tr/td[@align='center']/table/tr/td[@valign='top']/div" position="replace">
+    <xpath
+            expr="//tr/td[@align='center']/table/tr/td[@valign='top']/div"
+            position="replace"
+        >
         <t t-if="object.invite_others">
             <div>
-            	Hello <t t-esc="object.name or ''" />,<br /><br />
+                Hello <t t-esc="object.name or ''" />,<br /><br />
                 We are pleased to confirm your invitation to the event
                 <t t-if="object.event_id.is_published">
                     <a
-                        t-att-href="object.event_id.website_url"
-                        t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
-                    ><t t-esc="object.event_id.name" /></a>
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
+                        ><t t-esc="object.event_id.name" /></a>
                 </t>
                 <t t-else="">
                     <strong><t t-esc="object.event_id.name" /></strong>
@@ -19,8 +25,7 @@
                 <br /><br />
                 You can now invite other attendees to join at the event. Click the link below to manage your invitations:
                 <br />
-                <a href="/my/events"
-                    t-attf-style="text-decoration: underline;">
+                <a href="/my/events" t-attf-style="text-decoration: underline;">
                     Manage Invitations
                 </a>
             </div>
@@ -31,9 +36,9 @@
                 We are happy to confirm your registration to the event
                 <t t-if="object.event_id.is_published">
                     <a
-                        t-att-href="object.event_id.website_url"
-                        t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
-                    ><t t-esc="object.event_id.name" /></a>
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
+                        ><t t-esc="object.event_id.name" /></a>
                 </t>
                 <t t-else="">
                     <strong><t t-esc="object.event_id.name" /></strong>
