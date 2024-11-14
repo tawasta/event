@@ -67,23 +67,28 @@ if (EventRegistrationFormInstance) {
             console.log(post);
             $button.attr("disabled", true);
             return jsonrpc($form.attr("action"), post).then(function (modal) {
-                var $modal = $(modal);
-                $modal.find(".modal-body > div").removeClass("container"); // Retrocompatibility - REMOVE ME in master / saas-19
-                $modal.appendTo(document.body);
-                // TimoK: This has been commented out so that eslint won't throw an error
-                // const modalBS = new Modal($modal[0], {
-                //    backdrop: "static",
-                //    keyboard: false,
-                // });
-                // modalBS.show();
-                $modal.appendTo("body").modal("show");
-                $modal.on("click", ".js_goto_event", function () {
-                    $modal.modal("hide");
-                    $button.prop("disabled", false);
-                });
-                $modal.on("click", ".btn-close", function () {
-                    $button.prop("disabled", false);
-                });
+                if (modal.redirect) {
+                    const queryString = $.param(modal.data);
+                    window.location.href = `${modal.redirect}?${queryString}`;
+                } else {
+                    var $modal = $(modal);
+                    $modal.find(".modal-body > div").removeClass("container"); // Retrocompatibility - REMOVE ME in master / saas-19
+                    $modal.appendTo(document.body);
+                    // TimoK: This has been commented out so that eslint won't throw an error
+                    // const modalBS = new Modal($modal[0], {
+                    //    backdrop: "static",
+                    //    keyboard: false,
+                    // });
+                    // modalBS.show();
+                    $modal.appendTo("body").modal("show");
+                    $modal.on("click", ".js_goto_event", function () {
+                        $modal.modal("hide");
+                        $button.prop("disabled", false);
+                    });
+                    $modal.on("click", ".btn-close", function () {
+                        $button.prop("disabled", false);
+                    });
+                }
             });
         },
     });
