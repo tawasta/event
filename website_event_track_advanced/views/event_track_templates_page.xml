@@ -356,6 +356,23 @@
             </div>
         </xpath>
     </template>
+
+    <template
+        id="event_track_content_show_application"
+        inherit_id="website_event_track.event_track_content"
+        name="Show Application"
+        active="True"
+        customize_show="True"
+    >
+        <xpath expr="//span[@t-field='track.location_id']//..//.." position="after">
+            <div id="type-div" class="mx-3 text-muted">
+                <t t-if="track.type">
+                    <strong>Application type:</strong>
+                    <span t-esc="track.type.name" />
+                </t>
+            </div>
+        </xpath>
+    </template>
     <!-- SHOW CHAIRPERSON -->
     <template
         id="event_track_content_show_chairperson"
