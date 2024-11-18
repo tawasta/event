@@ -271,9 +271,10 @@
                                 >
                                 <div class="alert alert-info" role="alert">
                                     <strong
-                                        >This invitation has already been accepted on <t
-                                                t-esc="invitation.used_date"
-                                            />.</strong>
+                                        >This invitation has already been accepted on <span
+                                                t-field="invitation.used_date"
+                                                t-options="{'format': 'dd.MM.yyyy HH:mm'}"
+                                            /></strong>
                                 </div>
                             </t>
                             <t t-elif="request.params.get('thank_you')">
