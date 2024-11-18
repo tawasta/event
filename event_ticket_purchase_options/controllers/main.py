@@ -247,6 +247,9 @@ class EventRegistrationController(WebsiteEventController):
         if not event:
             return request.render("website.403")
 
+        if request.env.user.partner_id.email != invitation.invite_email:
+            return request.render("website.403")
+
         if invitation.is_used:
             values = {
                 "invitation": invitation,
