@@ -156,10 +156,10 @@
                 </div>
             </div>
         </xpath>
-        <xpath expr="//tbody//tr" position="inside">
+        <xpath expr="//tbody//tr/td[@class='table-cell-action']" position="inside">
             <!-- Näytetään kutsupainike, jos kutsuja ei ole vielä lähetetty -->
             <t t-if="re.invite_others and not re.invite_id">
-                <td>
+                
                     <button
                         type="button"
                         class="btn btn-primary btn-sm"
@@ -169,12 +169,12 @@
                     >
                         <i class="fa fa-envelope" /> Send Invitation
                     </button>
-                </td>
+                
             </t>
 
             <!-- Jos kutsu on lähetetty, näytetään sen tila -->
             <t t-if="re.invite_others and re.invite_id">
-                <td>
+                
                     <t t-if="re.invite_id.is_used">
                         <!-- Näytetään jos kutsu on käytetty -->
                         <div class="d-flex flex-column align-items-start">
@@ -210,8 +210,26 @@
                             </button>
                         </div>
                     </t>
-                </td>
+                
             </t>
+        </xpath>
+        <xpath expr="//th[contains(@class, 'table-header-event-ticket')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//td[contains(@class, 'table-cell-event-ticket')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//th[contains(@class, 'table-header-booker')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//td[contains(@class, 'table-cell-booker')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//th[contains(@class, 'table-header-state')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//td[contains(@class, 'table-cell-state')]" position="attributes">
+            <attribute name="class">d-none</attribute>
         </xpath>
     </template>
 
