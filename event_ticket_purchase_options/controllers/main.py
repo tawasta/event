@@ -311,6 +311,7 @@ class EventRegistrationController(WebsiteEventController):
             {
                 "attendee_partner_id": request.env.user.partner_id.id,
                 "name": request.env.user.partner_id.name,
+                "email": request.env.user.partner_id.email,
             }
         )
 
