@@ -15,11 +15,13 @@
                         <tr class="active">
                             <th class="table-header-event">Event</th>
                             <th class="table-header-event-date">Event date</th>
-                            <th class="table-header-registration-date">Registration Date</th>
+                            <th
+                                class="table-header-registration-date"
+                            >Registration Date</th>
                             <th class="table-header-event-ticket">Event Ticket</th>
                             <th class="table-header-booker">Booker</th>
                             <th class="table-header-state">State</th>
-                            <th class="table-header-action"/>
+                            <th class="table-header-action" />
                         </tr>
                     </thead>
                     <tbody>
@@ -36,9 +38,9 @@
                                         />
                                     </a>
                                 </td>
-                                <td class="table-cell-event-date"><span t-field="re.event_id.date_begin" /> - <span
-                                        t-field="re.event_id.date_end"
-                                    />
+                                <td class="table-cell-event-date"><span
+                                        t-field="re.event_id.date_begin"
+                                    /> - <span t-field="re.event_id.date_end" />
                             </td>
                                 <td class="table-cell-registration-date">
                                     <span t-field="re.create_date" />
@@ -76,7 +78,7 @@
                                 <td class="table-cell-action">
                                 <t t-if="re.state not in ('cancel', 'done')">
                                     <t t-if="re.event_id.able_to_cancel">
-                                        
+
                                         <button
                                                 type="button"
                                                 class="btn btn-secondary btn-sm"
@@ -87,7 +89,7 @@
                                                     class="fa fa-fw fa-times-circle"
                                                 /> Cancel registration
                                         </button>
-                                        
+
                                     </t>
                                 </t>
                                 </td>
