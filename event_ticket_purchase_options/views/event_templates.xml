@@ -156,33 +156,33 @@
                 </div>
             </div>
         </xpath>
-        <xpath expr="//tbody//tr" position="inside">
+        <xpath expr="//tbody//tr/td[@class='table-cell-action']" position="inside">
             <!-- Näytetään kutsupainike, jos kutsuja ei ole vielä lähetetty -->
             <t t-if="re.invite_others and not re.invite_id">
-                <td>
+
                     <button
-                        type="button"
-                        class="btn btn-primary btn-sm"
-                        t-att-data-registration-id="re.id"
-                        data-bs-toggle="modal"
-                        data-bs-target="#inviteModal"
-                    >
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    t-att-data-registration-id="re.id"
+                    data-bs-toggle="modal"
+                    data-bs-target="#inviteModal"
+                >
                         <i class="fa fa-envelope" /> Send Invitation
                     </button>
-                </td>
+
             </t>
 
             <!-- Jos kutsu on lähetetty, näytetään sen tila -->
             <t t-if="re.invite_others and re.invite_id">
-                <td>
+
                     <t t-if="re.invite_id.is_used">
                         <!-- Näytetään jos kutsu on käytetty -->
                         <div class="d-flex flex-column align-items-start">
                             <span class="badge bg-success text-wrap">
                                 Invitation accepted on
                                 <t
-                                    t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
-                                />
+                                t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
+                            />
                             </span>
                         </div>
                     </t>
@@ -191,27 +191,57 @@
                             <span class="badge bg-warning mb-2 text-wrap">
                                 Invitation sent on
                                 <t
-                                    t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
-                                />
+                                t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
+                            />
                                 , not yet accepted.
                             </span>
 
                             <!-- Uudelleenlähetyspainike -->
                             <button
-                                type="button"
-                                class="btn btn-outline-secondary btn-sm"
-                                t-att-data-registration-id="re.id"
-                                t-att-data-invite-id="re.invite_id.id"
-                                data-bs-toggle="modal"
-                                data-bs-target="#inviteModal"
-                                t-att-data-resend="true"
-                            >
+                            type="button"
+                            class="btn btn-outline-secondary btn-sm"
+                            t-att-data-registration-id="re.id"
+                            t-att-data-invite-id="re.invite_id.id"
+                            data-bs-toggle="modal"
+                            data-bs-target="#inviteModal"
+                            t-att-data-resend="true"
+                        >
                                 <i class="fa fa-envelope" /> Resend Invitation
                             </button>
                         </div>
                     </t>
-                </td>
+
             </t>
+        </xpath>
+        <xpath
+            expr="//th[contains(@class, 'table-header-event-ticket')]"
+            position="attributes"
+        >
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath
+            expr="//td[contains(@class, 'table-cell-event-ticket')]"
+            position="attributes"
+        >
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath
+            expr="//th[contains(@class, 'table-header-booker')]"
+            position="attributes"
+        >
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//td[contains(@class, 'table-cell-booker')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath
+            expr="//th[contains(@class, 'table-header-state')]"
+            position="attributes"
+        >
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//td[contains(@class, 'table-cell-state')]" position="attributes">
+            <attribute name="class">d-none</attribute>
         </xpath>
     </template>
 
@@ -253,9 +283,10 @@
                                 >
                                 <div class="alert alert-info" role="alert">
                                     <strong
-                                        >This invitation has already been accepted on <t
-                                                t-esc="invitation.used_date"
-                                            />.</strong>
+                                        >This invitation has already been accepted on <span
+                                                t-field="invitation.used_date"
+                                                t-options="{'format': 'dd.MM.yyyy HH:mm'}"
+                                            /></strong>
                                 </div>
                             </t>
                             <t t-elif="request.params.get('thank_you')">

@@ -13,19 +13,21 @@
                 <t t-if="registrations" t-call="portal.portal_table">
                     <thead>
                         <tr class="active">
-                            <th>Event</th>
-                            <th>Event date</th>
-                            <th>Registration Date</th>
-                            <th>Event Ticket</th>
-                            <th>Booker</th>
-                            <th>State</th>
-                            <th />
+                            <th class="table-header-event">Event</th>
+                            <th class="table-header-event-date">Event date</th>
+                            <th
+                                class="table-header-registration-date"
+                            >Registration Date</th>
+                            <th class="table-header-event-ticket">Event Ticket</th>
+                            <th class="table-header-booker">Booker</th>
+                            <th class="table-header-state">State</th>
+                            <th class="table-header-action" />
                         </tr>
                     </thead>
                     <tbody>
                         <t t-foreach="registrations" t-as="re">
                             <tr>
-                                <td>
+                                <td class="table-cell-event">
                                     <a
                                         t-attf-href="/event/{{re.event_id.id}}/register"
                                         t-att-title="re.event_id.name"
@@ -36,22 +38,22 @@
                                         />
                                     </a>
                                 </td>
-                                <td><span t-field="re.event_id.date_begin" /> - <span
-                                        t-field="re.event_id.date_end"
-                                    />
+                                <td class="table-cell-event-date"><span
+                                        t-field="re.event_id.date_begin"
+                                    /> - <span t-field="re.event_id.date_end" />
                             </td>
-                                <td>
+                                <td class="table-cell-registration-date">
                                     <span t-field="re.create_date" />
                                 </td>
-                                <td>
+                                <td class="table-cell-event-ticket">
                                     <span t-field="re.event_ticket_id.name" />
                                 </td>
-                                <td>
+                                <td class="table-cell-booker">
                                     <span
                                         t-field="re.visitor_id.sudo().partner_id.name"
                                     />
                                 </td>
-                                <td>
+                                <td class="table-cell-state">
                                     <t t-if="re.state == 'open'">
                                         <span
                                             class="badge text-bg-info"
@@ -73,9 +75,10 @@
                                         >Cancelled</span>
                                     </t>
                                 </td>
+                                <td class="table-cell-action">
                                 <t t-if="re.state not in ('cancel', 'done')">
                                     <t t-if="re.event_id.able_to_cancel">
-                                        <td>
+
                                         <button
                                                 type="button"
                                                 class="btn btn-secondary btn-sm"
@@ -86,9 +89,10 @@
                                                     class="fa fa-fw fa-times-circle"
                                                 /> Cancel registration
                                         </button>
-                                        </td>
+
                                     </t>
                                 </t>
+                                </td>
                             </tr>
                         </t>
                     </tbody>
