@@ -183,7 +183,7 @@ class EventRegistrationController(WebsiteEventController):
 
         mail_template = request.env.ref(
             "event_ticket_purchase_options.event_invitation_email_template"
-        )
+        ).sudo()
         if not mail_template:
             return json.dumps(
                 {"status": "error", "message": "Email template not found"}
