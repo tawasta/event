@@ -6,7 +6,7 @@
         inherit_id="website_event.registration_template"
     >
         <xpath expr="//form" position="before">
-                <div class="d-flex justify-content-end mb-2">
+                <div class="d-flex justify-content-end mb-2" t-if="event.event_registrations_open and request.website.is_public_user()">
                 <a
                     class="btn btn-primary"
                     t-attf-href="/web/login?redirect=/event/#{slug(event)}"
