@@ -7,7 +7,7 @@
     >
         <xpath expr="//t[@t-foreach='event.specific_question_ids']" position="after">
             <div class="col-lg my-2">
-                <label>Company</label>
+                <label>Company *</label>
                 <input
                     class="form-control"
                     type="text"
