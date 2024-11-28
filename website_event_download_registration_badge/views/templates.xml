@@ -183,9 +183,15 @@
         </t>
     </template>
 
-    <template id="custom_event_confirmation" inherit_id="website_event_sale.event_confirmation">
+    <template
+        id="custom_event_confirmation"
+        inherit_id="website_event_sale.event_confirmation"
+    >
         <!-- Replace original download button with the custom implementation -->
-        <xpath expr="//a[@class='btn btn-primary text-white mb-2 me-2']" position="replace">
+        <xpath
+            expr="//a[@class='btn btn-primary text-white mb-2 me-2']"
+            position="replace"
+        >
         </xpath>
 
     </template>
