@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="custom_event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+        <xpath expr="//div[@t-field='event.description']" position="before">
+            <div t-if="event.event_registrations_open" class="mt-3">
+                <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal_ticket_registration"
+                    class="btn btn-primary btn-lg w-100"
+                >
+                    Register Now
+                </button>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
