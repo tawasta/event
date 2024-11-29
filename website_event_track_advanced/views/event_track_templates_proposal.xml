@@ -682,9 +682,11 @@
                                         aria-label="close"
                                     >×</a>
                                     <i class="fa fa-info-circle" />
-                                    <span>By clicking <strong>"Save and Submit"</strong>, your changes will be saved, and the track will be confirmed as part of the event.</span>
+                                    <span>By clicking <strong
+                                        >"Save and Submit"</strong>, your changes will be saved, and the track will be confirmed as part of the event.</span>
                                     <br />
-                                    <span>Please note that once a track is confirmed, it can no longer be edited.</span>
+                                    <span
+                                    >Please note that once a track is confirmed, it can no longer be edited.</span>
                                 </p>
                             </div>
                             <div class="modal-footer border-0 justify-content-between">
