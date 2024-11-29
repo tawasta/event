@@ -484,6 +484,9 @@
                                             /></strong></t>
                                     for attendee <t t-esc="object.name" />.
                                 </div>
+                                <div style="padding-top: 10px;">
+                                    <t t-out="object.event_id.ticket_instructions or ''" />
+                                </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
