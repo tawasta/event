@@ -655,6 +655,7 @@
                                 <p
                                     class="alert alert-info alert-dismissable"
                                     t-if="editable and not draft"
+                                    id="save-info"
                                 >
                                     <a
                                         href="#"
@@ -668,6 +669,22 @@
                                     <br />
                                     <span
                                     >Please note that a confirmed track can no longer be edited.</span>
+                                </p>
+                                <p
+                                    class="alert alert-info alert-dismissable d-none"
+                                    t-if="editable and not draft"
+                                    id="confirm-info"
+                                >
+                                    <a
+                                        href="#"
+                                        class="close"
+                                        data-dismiss="alert"
+                                        aria-label="close"
+                                    >×</a>
+                                    <i class="fa fa-info-circle" />
+                                    <span>By clicking <strong>"Save and Submit"</strong>, your changes will be saved, and the track will be confirmed as part of the event.</span>
+                                    <br />
+                                    <span>Please note that once a track is confirmed, it can no longer be edited.</span>
                                 </p>
                             </div>
                             <div class="modal-footer border-0 justify-content-between">
