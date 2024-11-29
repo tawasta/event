@@ -552,6 +552,13 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                                 .hide();
                         }
                     }
+                    if (
+                        $("#application-submit-button-send").val() === "track-is-done"
+                    ) {
+                        // Piilota save-info ja näytä confirm-info
+                        $("#save-info").addClass("d-none");
+                        $("#confirm-info").removeClass("d-none");
+                    }
                 });
             }
         });
