@@ -99,20 +99,20 @@
                                         <span t-field="track.partner_id.name" />
                                     </td>
                                     <td>
-                                        <t t-set="track_state">badge-default</t>
+                                        <t t-set="track_state">bg-default</t>
                                         <t
                                             t-if="track.stage_id.is_editable and track.stage_id.is_draft"
                                         >
-                                            <t t-set="track_state">badge-info</t>
+                                            <t t-set="track_state">bg-info</t>
                                         </t>
                                         <t t-if="track.stage_id.is_submitted">
-                                            <t t-set="track_state">badge-warning</t>
+                                            <t t-set="track_state">bg-warning</t>
                                         </t>
                                         <t t-if="track.stage_id.is_accepted">
-                                            <t t-set="track_state">badge-primary</t>
+                                            <t t-set="track_state">bg-primary</t>
                                         </t>
                                         <t t-if="track.stage_id.is_cancel">
-                                            <t t-set="track_state">badge-danger</t>
+                                            <t t-set="track_state">bg-danger</t>
                                         </t>
                                         <span
                                             t-field="track.stage_id.name"
@@ -173,20 +173,20 @@
                                         <!-- <span t-field="track.partner_id.name" /> -->
                                     </td>
                                     <td>
-                                        <t t-set="track_state">badge-default</t>
+                                        <t t-set="track_state">bg-default</t>
                                         <t
                                             t-if="track.stage_id.is_editable and track.stage_id.is_draft"
                                         >
-                                            <t t-set="track_state">badge-info</t>
+                                            <t t-set="track_state">bg-info</t>
                                         </t>
                                         <t t-if="track.stage_id.is_submitted">
-                                            <t t-set="track_state">badge-warning</t>
+                                            <t t-set="track_state">bg-warning</t>
                                         </t>
                                         <t t-if="track.stage_id.is_accepted">
-                                            <t t-set="track_state">badge-primary</t>
+                                            <t t-set="track_state">bg-primary</t>
                                         </t>
                                         <t t-if="track.stage_id.is_cancel">
-                                            <t t-set="track_state">badge-danger</t>
+                                            <t t-set="track_state">bg-danger</t>
                                         </t>
                                         <span
                                             t-field="track.stage_id.name"
