@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [website_event_questions_title](website_event_questions_title/) | 17.0.1.0.0 |  | Question to ask for title in Event Registration
 [website_event_questions_view](website_event_questions_view/) | 17.0.1.0.0 |  | Adds a view to see event question answers
 [website_event_recurring_event](website_event_recurring_event/) | 17.0.1.0.0 |  | Create recurring events and hide dates
+[website_event_register_button](website_event_register_button/) | 17.0.1.0.0 |  | Website Event Register Button
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
