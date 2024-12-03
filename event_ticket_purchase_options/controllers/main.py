@@ -221,7 +221,7 @@ class EventRegistrationController(WebsiteEventController):
         return json.dumps(
             {
                 "status": "success",
-                "message": "Invitation sent",
+                "message": _("Invitation sent"),
                 "invite_id": invite_tracker.id,
             }
         )
