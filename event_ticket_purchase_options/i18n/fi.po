@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0-20240912\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-24 06:53+0000\n"
-"PO-Revision-Date: 2024-10-24 06:53+0000\n"
+"POT-Creation-Date: 2024-11-20 06:38+0000\n"
+"PO-Revision-Date: 2024-11-20 06:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,15 @@ msgid ", not yet accepted."
 msgstr ", ei ole vielä hyväksytty"
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid ""
+",<br/><br/>\n"
+"                We are happy to confirm your registration to the event"
+msgstr ""
+",<br/><br/>\n"
+"                Olemme iloisia voidessamme vahvistaa ilmoittautumisesi tapahtumaan"
+
+#. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
 msgid ""
 ".\n"
@@ -32,6 +41,19 @@ msgstr ""
 "                                Tapahtuma järjestetään:\n"
 "                                <br/>\n"
 "                                <strong>Alkaen:</strong>"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid ""
+".\n"
+"                <br/><br/>\n"
+"                You can now invite other attendees to join at the event. Click the link below to manage your invitations:\n"
+"                <br/>"
+msgstr ""
+".\n"
+"                <br/><br/>\n"
+"                Voit nyt kutsua muita osallistujia mukaan tapahtumaan. Klikkaa alla olevaa linkkiä hallitaksesi kutsujasi:\n"
+"                <br/>"
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
@@ -53,6 +75,11 @@ msgstr ""
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
+msgid "<i class=\"fa fa-envelope\"/> Resend Invitation"
+msgstr "<i class=\"fa fa-envelope\"/> Lähetä kutsu uudelleen"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
 msgid "<i class=\"fa fa-envelope\"/> Send Invitation"
 msgstr "<i class=\"fa fa-envelope\"/> Lähetä kutsu"
 
@@ -71,8 +98,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
 msgid ""
 "<strong>Thank you! Your invitation has been successfully accepted.</strong>"
-msgstr ""
-"<strong>Kiitos! Kutsusi on hyväksytty onnistuneesti.</strong>"
+msgstr "<strong>Kiitos! Kutsusi on hyväksytty onnistuneesti.</strong>"
 
 #. module: event_ticket_purchase_options
 #: model:mail.template,body_html:event_ticket_purchase_options.event_invitation_email_template
@@ -125,6 +151,36 @@ msgid ""
 "                </table>\n"
 "            "
 msgstr ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding:16px 0 0 0;box-sizing:border-box;caption-side:bottom;padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\" width=\"100%\"> <tbody style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\"> <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\"> <td align=\"center\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\"> <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"box-sizing: border-box; caption-side: bottom; padding: 16px; background-color: white; color: #454748; border-collapse: separate; font-family: Verdana, Arial, sans-serif;\"> <tbody style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\"> <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\"> <td align=\"center\" style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;min-width: 590px;\"> <span style=\"font-size: 20px; font-weight: bold;\"> Sinut on kutsuttu tapahtumaan: <t t-out=\"object.event_id.name or ''\"></t> </span> <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Hyvä vieras,</p> <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Sinut on kutsuttu osallistumaan tapahtumaan: <strong style=\"box-sizing:border-box;font-weight:bolder;\"><t t-out=\"object.event_id.name\"></t></strong>.</p> <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Tapahtuma pidetään: <t t-out=\"object.event_id.date_begin_located or ''\"></t> - <t t-out=\"object.event_id.date_end_located or ''\"></t> osoitteessa <t t-out=\"object.event_id.address_id.name or 'Verkossa'\"></t> </p> </td> </tr>\n"
+"\n"
+"                    <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                        <td style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;text-align:center;\">\n"
+"                            <hr width=\"100%\" style=\"border-style:none;border-image-width:1;border-image-source:none;border-image-slice:100%;border-image-repeat:stretch;border-image-outset:0;border-left-color:currentcolor;border-left-width:medium;border-bottom-color:currentcolor;border-bottom-width:medium;border-right-color:currentcolor;border-right-width:medium;border-top-color:currentcolor;border-top-width:medium;box-sizing: border-box; height: 1px; opacity: 0.25; color: #454748; background-color: #cccccc; border: medium; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px;\">\n"
+"                            <div style=\"font-size: 14px;\">\n"
+"                                Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä:\n"
+"                                <br><br>\n"
+"                                <a t-attf-href=\"/event/{{ object.event_id.id }}/invitation/{{ object.invite_id.id }}/accept?access_token={{ object.invite_id.access_token }}\" style=\"border-style:solid;box-sizing:border-box;border-image-width:1;border-image-source:none;border-image-slice:100%;border-image-repeat:stretch;border-image-outset:0;border-left-color:#875a7b;border-left-width:0px;border-bottom-color:#875a7b;border-bottom-width:0px;border-right-color:#875a7b;border-right-width:0px;border-top-color:#875a7b;border-top-width:0px;padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none ; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\" target=\"_blank\">Hyväksy kutsu\n"
+"                                </a>\n"
+"                            </div>\n"
+"                            <hr width=\"100%\" style=\"border-style:none;border-image-width:1;border-image-source:none;border-image-slice:100%;border-image-repeat:stretch;border-image-outset:0;border-left-color:currentcolor;border-left-width:medium;border-bottom-color:currentcolor;border-bottom-width:medium;border-right-color:currentcolor;border-right-width:medium;border-top-color:currentcolor;border-top-width:medium;box-sizing: border-box; height: 1px; opacity: 0.25; color: #454748; background-color: #cccccc; border: medium; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px;\">\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                    \n"
+"                    <tr style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;\">\n"
+"                        <td style=\"border-style:solid;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;font-size: 14px;\">\n"
+"                            <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Odotamme innolla näkevämme sinut tapahtumassa!</p>\n"
+"                            <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Parhain terveisin,<br>\n"
+"                               <t t-out=\"object.event_id.name or ''\"></t>-tiimi\n"
+"                            </p>\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </tbody>\n"
+"            </table>\n"
+"        </td>\n"
+"    </tr>\n"
+"</tbody>\n"
+"\n"
+"</table>"
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
@@ -139,7 +195,12 @@ msgstr ""
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
+msgid "Confirm Recipient's Email"
+msgstr "Vahvista vastaanottajan sähköpostiosoite"
 
 #. module: event_ticket_purchase_options
 #: model:ir.model.fields,field_description:event_ticket_purchase_options.field_registration_invitation__create_uid
@@ -162,6 +223,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
+msgid "Emails do not match; please retype them."
+msgstr "Sähköpostiosoitteet eivät täsmää; ole hyvä ja kirjoita ne uudelleen."
+
+#. module: event_ticket_purchase_options
 #: model:ir.model,name:event_ticket_purchase_options.model_event_registration
 msgid "Event Registration"
 msgstr "Tapahtuman ilmoittautuminen"
@@ -170,6 +236,11 @@ msgstr "Tapahtuman ilmoittautuminen"
 #: model:mail.template,name:event_ticket_purchase_options.event_invitation_email_template
 msgid "Event: Invitation"
 msgstr "Tapahtuma: Kutsu"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid "Hello"
+msgstr "Hei"
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.modal_ticket_registration_inherit
@@ -192,9 +263,29 @@ msgid "Invitation"
 msgstr "Kutsu"
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid "Invitation Accepted"
+msgstr "Kutsu hyväksytty"
+
+#. module: event_ticket_purchase_options
 #: model:ir.model.fields,field_description:event_ticket_purchase_options.field_registration_invitation__invited_date
 msgid "Invitation Date"
 msgstr "Kutsun päivämäärä"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid "Invitation Not Sent"
+msgstr "Kutsua ei ole lähetetty"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid "Invitation Registration"
+msgstr "Kutsu ilmoittautumiset"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid "Invitation Sent, Not Accepted"
+msgstr "Kutsu lähetetty, ei ole hyväksytty"
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
@@ -244,6 +335,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid "Manage Invitations"
+msgstr "Hallinnoi kutsuja"
+
+#. module: event_ticket_purchase_options
 #: model_terms:ir.actions.act_window,help:event_ticket_purchase_options.action_registration_invitation
 msgid "No Registration Invitations found!"
 msgstr "Kutsuja ei löytynyt!"
@@ -253,7 +349,7 @@ msgstr "Kutsuja ei löytynyt!"
 #: code:addons/event_ticket_purchase_options/static/src/js/invitation.esm.js:0
 #, python-format
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
@@ -290,6 +386,38 @@ msgid "Send Invitation"
 msgstr "Lähetä kutsu"
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid "Show all registrations where invitations are allowed."
+msgstr "Näytä kaikki rekisteröinnit, joissa kutsut ovat sallittuja."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid ""
+"Show all registrations with invitation option where the invitation has been "
+"sent and accepted."
+msgstr ""
+"Näytä kaikki rekisteröinnit, joissa kutsuvaihtoehto on käytössä ja kutsu on "
+"lähetetty ja hyväksytty."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid ""
+"Show all registrations with invitation option where the invitation has been "
+"sent but not yet accepted."
+msgstr ""
+"Näytä kaikki rekisteröinnit, joissa kutsuvaihtoehto on käytössä ja kutsu on "
+"lähetetty, mutta sitä ei ole vielä hyväksytty."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_registration_search_inherit
+msgid ""
+"Show all registrations with invitation option, but the invitation has not "
+"been sent yet."
+msgstr ""
+"Näytä kaikki rekisteröinnit, joissa kutsuvaihtoehto on käytössä, mutta kutsua "
+"ei ole vielä lähetetty."
+
+#. module: event_ticket_purchase_options
 #. odoo-javascript
 #: code:addons/event_ticket_purchase_options/static/src/js/invitation.esm.js:0
 #, python-format
@@ -307,6 +435,20 @@ msgid "Used Date"
 msgstr "Käytön päivämäärä"
 
 #. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid "We are pleased to confirm your invitation to the event"
+msgstr "Olemme iloisia voidessamme vahvistaa kutsusi tapahtumaan."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.portal_my_events_inherit
+msgid ""
+"You are about to send a new invitation. Sending this will cancel the "
+"previous invitation."
+msgstr ""
+"Olet lähettämässä uutta kutsua. Tämän lähettäminen peruuttaa "
+"aiemman kutsun."
+
+#. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
 msgid "You have been invited to join the event"
 msgstr "Olet saanut kutsun osallistua tapahtumaan"
@@ -319,4 +461,9 @@ msgstr "Olet kutsuttu tapahtumaan:"
 #. module: event_ticket_purchase_options
 #: model:mail.template,subject:event_ticket_purchase_options.event_invitation_email_template
 msgid "You're invited to {{ object.event_id.name }}"
-msgstr "Olet kutsuttu tapahtumaan {{ object.event_id.name }}
+msgstr "Olet kutsuttu tapahtumaan {{ object.event_id.name }}"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
+msgid "for attendee"
+msgstr "osallistujalle"

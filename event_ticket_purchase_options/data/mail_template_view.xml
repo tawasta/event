@@ -48,4 +48,22 @@
     </xpath>
 </template>
 
+<template
+        id="view_email_template_event_base"
+        inherit_id="website_event_cancellation.view_email_template_event_base"
+    >
+    <xpath
+            expr="//span[@style='font-size: 20px; font-weight: bold;']/t[@t-esc='object.name']"
+            position="replace"
+        >
+        <t t-if="not object.invite_others">
+            <span style="font-size: 20px; font-weight: bold;">
+                <t t-esc="object.name" />
+            </span>
+        </t>
+    </xpath>
+
+</template>
+
+
 </odoo>

@@ -4,6 +4,7 @@ from collections import defaultdict
 from datetime import datetime
 
 import werkzeug
+from werkzeug.exceptions import Forbidden
 
 from odoo import _, http
 from odoo.http import request
@@ -220,7 +221,7 @@ class EventRegistrationController(WebsiteEventController):
         return json.dumps(
             {
                 "status": "success",
-                "message": "Invitation sent",
+                "message": _("Invitation sent"),
                 "invite_id": invite_tracker.id,
             }
         )
@@ -239,16 +240,16 @@ class EventRegistrationController(WebsiteEventController):
         )
 
         if not invitation or invitation.access_token != access_token:
-            return request.render("website.403")
+            raise Forbidden()
 
         event = (
             request.env["event.event"].sudo().search([("id", "=", event_id)], limit=1)
         )
         if not event:
-            return request.render("website.403")
+            raise Forbidden()
 
         if request.env.user.partner_id.email != invitation.invite_email:
-            return request.render("website.403")
+            raise Forbidden()
 
         if invitation.is_used:
             values = {
