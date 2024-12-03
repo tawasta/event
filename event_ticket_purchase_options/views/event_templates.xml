@@ -263,7 +263,7 @@
                                 You have been invited to join the event <strong><t
                                             t-esc="event.name"
                                         /></strong>.
-                                
+
                                 <br />
                                 <t t-if="event.show_date_time">
                                     The event will take place on:

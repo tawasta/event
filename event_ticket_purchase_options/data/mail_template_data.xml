@@ -36,16 +36,24 @@
                                                     t-out="object.event_id.name or ''"
                                                 />
                                         </span>
-                                        <p t-if="object.event_id.show_date_time or object.event_id.show_location">
+                                        <p
+                                                t-if="object.event_id.show_date_time or object.event_id.show_location"
+                                            >
                                             The event will take place
                                             <t t-if="object.event_id.show_date_time">
                                                 on:
-                                                <t t-out="object.event_id.date_begin_located or ''"/> -
-                                                <t t-out="object.event_id.date_end_located or ''"/>
+                                                <t
+                                                        t-out="object.event_id.date_begin_located or ''"
+                                                    /> -
+                                                <t
+                                                        t-out="object.event_id.date_end_located or ''"
+                                                    />
                                             </t>
                                             <t t-if="object.event_id.show_location">
                                                 at
-                                                <t t-out="object.event_id.address_id.name or 'Online'"/>
+                                                <t
+                                                        t-out="object.event_id.address_id.name or 'Online'"
+                                                    />
                                             </t>
                                         </p>
                                     </td>

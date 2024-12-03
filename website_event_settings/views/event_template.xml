@@ -1,12 +1,24 @@
 <?xml version="1.0" ?>
 <odoo>
-    <template id="event_description_full_inherit" inherit_id="website_event.event_description_full" name="Event Description - Boolean Fields">
+    <template
+        id="event_description_full_inherit"
+        inherit_id="website_event.event_description_full"
+        name="Event Description - Boolean Fields"
+    >
         <!-- Date & Time Block -->
-        <xpath expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']" position="attributes">
+        <xpath
+            expr="//div[@class='o_wevent_sidebar_block border-bottom pb-3 my-3']"
+            position="attributes"
+        >
             <attribute name="t-if">event.show_date_time</attribute>
         </xpath>
-        <xpath expr="//div[@class='d-lg-flex justify-content-end col-lg-4 col-xl-3 mb-3 mb-lg-0 d-print-none']/div[@class='mt-3']" position="attributes">
-            <attribute name="t-attf-class">mt-3#{' col-12' if not event.show_date_time else ''}</attribute>
+        <xpath
+            expr="//div[@class='d-lg-flex justify-content-end col-lg-4 col-xl-3 mb-3 mb-lg-0 d-print-none']/div[@class='mt-3']"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >mt-3#{' col-12' if not event.show_date_time else ''}</attribute>
         </xpath>
 
         <!-- Location Block -->

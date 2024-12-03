@@ -19,13 +19,10 @@
 ##############################################################################
 
 # 1. Standard library imports:
-import logging
 
-import pytz
-import werkzeug.urls
 
 # 3. Odoo imports (openerp):
-from odoo import _, api, fields, models
+from odoo import fields, models
 
 # 2. Known third party imports:
 
@@ -44,17 +41,17 @@ class EventEvent(models.Model):
     show_date_time = fields.Boolean(
         string="Näytä päivämäärä ja aika",
         default=True,
-        help="Jos tämä valitaan, tapahtuman päivämäärä ja aika näytetään frontendissä."
+        help="Jos tämä valitaan, tapahtuman päivämäärä ja aika näytetään frontendissä.",
     )
     show_location = fields.Boolean(
         string="Näytä sijainti",
         default=True,
-        help="Jos tämä valitaan, tapahtuman sijainti näytetään frontendissä."
+        help="Jos tämä valitaan, tapahtuman sijainti näytetään frontendissä.",
     )
     show_share = fields.Boolean(
         string="Näytä jako",
         default=True,
-        help="Jos tämä valitaan, tapahtuman jako näytetään frontendissä."
+        help="Jos tämä valitaan, tapahtuman jako näytetään frontendissä.",
     )
 
     # 8. Business methods
