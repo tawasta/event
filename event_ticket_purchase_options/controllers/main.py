@@ -5,6 +5,7 @@ from datetime import datetime
 from werkzeug.exceptions import Forbidden, NotFound
 
 import werkzeug
+from werkzeug.exceptions import Forbidden
 
 from odoo import _, http
 from odoo.http import request
@@ -221,7 +222,7 @@ class EventRegistrationController(WebsiteEventController):
         return json.dumps(
             {
                 "status": "success",
-                "message": "Invitation sent",
+                "message": _("Invitation sent"),
                 "invite_id": invite_tracker.id,
             }
         )
