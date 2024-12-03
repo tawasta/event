@@ -36,22 +36,17 @@
                                                     t-out="object.event_id.name or ''"
                                                 />
                                         </span>
-                                        <p>Dear Guest,</p>
-                                        <p
-                                            >You have been invited to join the event: <strong
-                                                ><t
-                                                        t-out="object.event_id.name"
-                                                    /></strong>.</p>
-                                        <p>The event will take place on:
-                                            <t
-                                                    t-out="object.event_id.date_begin_located or ''"
-                                                /> -
-                                            <t
-                                                    t-out="object.event_id.date_end_located or ''"
-                                                /> at
-                                            <t
-                                                    t-out="object.event_id.address_id.name or 'Online'"
-                                                />
+                                        <p t-if="object.event_id.show_date_time or object.event_id.show_location">
+                                            The event will take place
+                                            <t t-if="object.event_id.show_date_time">
+                                                on:
+                                                <t t-out="object.event_id.date_begin_located or ''"/> -
+                                                <t t-out="object.event_id.date_end_located or ''"/>
+                                            </t>
+                                            <t t-if="object.event_id.show_location">
+                                                at
+                                                <t t-out="object.event_id.address_id.name or 'Online'"/>
+                                            </t>
                                         </p>
                                     </td>
                                 </tr>
@@ -77,18 +72,6 @@
                                                 width="100%"
                                                 style="background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
                                             />
-                                    </td>
-                                </tr>
-                                <!-- FOOTER -->
-                                <tr>
-                                    <td style="font-size: 14px;">
-                                        <p
-                                            >We look forward to seeing you at the event!</p>
-                                        <p>Best regards,<br />
-                                           The <t
-                                                    t-out="object.event_id.name or ''"
-                                                /> Team
-                                        </p>
                                     </td>
                                 </tr>
                             </tbody>
