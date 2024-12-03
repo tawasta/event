@@ -263,19 +263,24 @@
                                 You have been invited to join the event <strong><t
                                             t-esc="event.name"
                                         /></strong>.
-                                The event will take place on:
+
                                 <br />
-                                <strong>From:</strong> <t
-                                        t-esc="event.date_begin_located"
-                                    />
-                                <br />
-                                <strong>To:</strong> <t
-                                        t-esc="event.date_end_located"
-                                    />
-                                <br />
-                                <strong>Location:</strong> <t
-                                        t-esc="event.address_id.name or 'Online'"
-                                    />
+                                <t t-if="event.show_date_time">
+                                    The event will take place on:
+                                    <strong>From:</strong> <t
+                                            t-esc="event.date_begin_located"
+                                        />
+                                    <br />
+                                    <strong>To:</strong> <t
+                                            t-esc="event.date_end_located"
+                                        />
+                                    <br />
+                                </t>
+                                <t t-if="event.show_location">
+                                    <strong>Location:</strong> <t
+                                            t-esc="event.address_id.name or 'Online'"
+                                        />
+                                </t>
                             </p>
 
                             <t

@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2023 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,29 +17,20 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+
 {
-    "name": "Event Ticket Registration: Self or Invite Others",
-    "summary": "Event Ticket Registration: Self or Invite Others",
-    "version": "17.0.1.0.0",
-    "category": "Event",
+    "name": "Website Event Settings",
+    "summary": "Website Event Settings",
+    "version": "17.0.1.0.1",
+    "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event", "website_my_events", "website_event_settings"],
+    "depends": ["event", "website_event"],
     "data": [
-        "data/mail_template_data.xml",
-        "data/mail_template_view.xml",
-        "views/event_templates.xml",
-        "views/event_view.xml",
-        "views/registration_invitation.xml",
-        "security/ir.model.access.csv",
+        "views/event_template.xml",
+        "views/event_views.xml",
     ],
-    "assets": {
-        "web.assets_frontend": [
-            "event_ticket_purchase_options/static/src/js/invitation.esm.js",
-            "event_ticket_purchase_options/static/src/js/ticket.esm.js",
-        ],
-    },
 }
