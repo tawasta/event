@@ -251,7 +251,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
-                        <div class="card-header bg-primary text-white">
+                        <div class="card-header bg-primary">
                             <h3 class="card-title">You're Invited to the Event: <strong
                                     ><t t-esc="event.name" /></strong></h3>
                         </div>
