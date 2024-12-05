@@ -243,13 +243,18 @@
         <xpath expr="//td[contains(@class, 'table-cell-state')]" position="attributes">
             <attribute name="class">d-none</attribute>
         </xpath>
-        <xpath expr="//td[contains(@class, 'table-cell-event-date')]" position="replace">
+        <xpath
+            expr="//td[contains(@class, 'table-cell-event-date')]"
+            position="replace"
+        >
             <td class="table-cell-event-date">
                 <t t-if="re.event_id.show_date_time">
-                    <span t-field="re.event_id.date_begin"/> - <span t-field="re.event_id.date_end"/>
+                    <span t-field="re.event_id.date_begin" /> - <span
+                        t-field="re.event_id.date_end"
+                    />
                 </t>
                 <t t-if="not re.event_id.show_date_time">
-                    <span></span>
+                    <span />
                 </t>
             </td>
         </xpath>
