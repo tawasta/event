@@ -243,6 +243,21 @@
         <xpath expr="//td[contains(@class, 'table-cell-state')]" position="attributes">
             <attribute name="class">d-none</attribute>
         </xpath>
+        <xpath
+            expr="//td[contains(@class, 'table-cell-event-date')]"
+            position="replace"
+        >
+            <td class="table-cell-event-date">
+                <t t-if="re.event_id.show_date_time">
+                    <span t-field="re.event_id.date_begin" /> - <span
+                        t-field="re.event_id.date_end"
+                    />
+                </t>
+                <t t-if="not re.event_id.show_date_time">
+                    <span />
+                </t>
+            </td>
+        </xpath>
     </template>
 
     <template id="event_invitation_form" name="Event Invitation Form">
