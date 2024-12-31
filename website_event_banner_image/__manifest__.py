@@ -21,7 +21,7 @@
 {
     "name": "Website Event Banner Image",
     "summary": "Add banner image to event from backend",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
