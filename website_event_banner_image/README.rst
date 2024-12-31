@@ -6,10 +6,18 @@
 Website Event Banner Image
 ==========================
 * Ability to add a banner image from backend to an event or event type.
+* Banner image is primarily pulled from the event's event type. If event
+  type is not set, then from the event itself.
+* Note: backend based banner image will always take precedence over a banner
+  image that may have been set manually via the website builder. To show the website builder 
+  based image, you would need to delete the event's backend image.
+* For use cases where you expect to be using the website builder to manage the event images, 
+  it's not recommended to install this module.
 
 Configuration
 =============
-\-
+* Go to event page in backend and set the image. The image will now appear on
+  both the event page, as well as any Event widgets that are in use on the website.
 
 Usage
 =====
@@ -27,6 +35,7 @@ Contributors
 ------------
 
 * Miika Nissi <miika.nissi@tawasta.fi>
+* Timo Talvitie <timo.talvitie@tawasta.fi>
 
 Maintainer
 ----------

@@ -22,8 +22,12 @@
 
 # 2. Known third party imports:
 
+import logging
+
 # 3. Odoo imports (openerp):
 from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 # 4. Imports from Odoo modules:
 
