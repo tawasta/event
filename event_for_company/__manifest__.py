@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Tawasta
-#    Copyright 2020 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Oy Tawasta OS Technologies Ltd.
+#    Copyright 2024- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,27 +17,22 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+
 {
-    "name": "Event Batch",
-    "summary": "Allows creating student batches for event registrations",
-    "version": "14.0.1.2.1",
-    "category": "Website",
+    "name": "Event For Company",
+    "summary": "Add for company -field to events",
+    "version": "14.0.1.0.0",
+    "category": "Event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
+    "data": [
+        "views/event_event_views.xml",
+        "views/res_partner_views.xml",
+    ],
     "depends": [
         "event",
-        "openeducat_core",
-        "society_batch_core",
-        "society_student_core",
-        "partner_event",
     ],
-    "data": [
-        "views/batch_students_view.xml",
-        "views/product_views.xml",
-        "views/student_views.xml",
-        "views/event_views.xml",
-    ],
+    "application": False,
+    "installable": True,
 }

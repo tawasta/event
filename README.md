@@ -12,16 +12,18 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_auditlog_rules](event_auditlog_rules/) | 14.0.1.0.1 |  | Adds audit log rules for events
-[event_batch](event_batch/) | 14.0.1.2.1 |  | Event Batch
+[event_batch](event_batch/) | 14.0.1.2.1 |  | Allows creating student batches for event registrations
 [event_description](event_description/) | 14.0.1.0.5 |  | Add description field to event form.
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 14.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_email_from](event_email_from/) | 14.0.1.0.0 |  | Event Email From
 [event_feedback_survey](event_feedback_survey/) | 14.0.1.0.0 |  | Send automated event feedback survey mails
 [event_filter_address_partners](event_filter_address_partners/) | 14.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 14.0.1.0.1 |  | Filter event partners for organizer by partner toggle
+[event_for_company](event_for_company/) | 14.0.1.0.0 |  | Add for company -field to events
 [event_hide_contact_attendees](event_hide_contact_attendees/) | 14.0.1.0.0 |  | Hides contact attendees button on event form
 [event_mail_attendees](event_mail_attendees/) | 14.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 14.0.1.0.1 |  | Event Mail Execute Override
+[event_optional_attendee_partner_id](event_optional_attendee_partner_id/) | 14.0.1.0.0 |  | Make attendee_partner_id field optional in event.registrations tree view.
 [event_partner_membership_state](event_partner_membership_state/) | 14.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 14.0.1.1.0 |  | Event Recaptcha
 [event_registration_end_date_automation](event_registration_end_date_automation/) | 14.0.1.1.1 |  | Event registration end date automation
@@ -57,6 +59,7 @@ addon | version | maintainers | summary
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 14.0.1.0.1 |  | Disable changing Event Registration qty in cart
 [website_event_sale_hide_free_ticket_text](website_event_sale_hide_free_ticket_text/) | 14.0.1.0.0 |  | Hides free ticket text on event registrations
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 14.0.1.0.1 |  | Register to events using waiting list through website.
+[website_event_suggest_login](website_event_suggest_login/) | 14.0.1.0.0 |  | Website Event: Suggest login before registering to an event
 [website_event_ticket_datetime](website_event_ticket_datetime/) | 14.0.1.1.0 |  | Define ticket sale start/end with datetime accuracy
 [website_event_track_advanced](website_event_track_advanced/) | 14.0.3.1.3 |  | Advanced features for Event Track
 [website_event_track_image](website_event_track_image/) | 14.0.1.0.0 |  | Add image to event tracks

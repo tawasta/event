@@ -22,6 +22,8 @@
 
 # 2. Known third party imports:
 
+import logging
+
 # 3. Odoo imports (openerp):
 from odoo import fields, models
 
@@ -92,5 +94,7 @@ class EventMailRegistration(models.Model):
             and not reg_mail.registration_id.event_id.stage_id.cancel
         )
         for reg_mail in todo:
+            logging.info("====CANCELLATION SEND EMAIL")
+            logging.info(reg_mail)
             reg_mail.scheduler_id.template_id.send_mail(reg_mail.registration_id.id)
         todo.write({"mail_sent": True})

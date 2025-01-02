@@ -2,13 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===========
-Event Batch
-===========
-Allows creating student batches for event registrations
+============================
+Website Event: Suggest login
+============================
 
-* Ability to add batch for event registration product to create student batches from registrations.
-* Creates student user on confirmation if enabled for event. Defaults to true.
+* Suggest login before registering to an event
 
 Configuration
 =============
@@ -18,9 +16,6 @@ Usage
 =====
 \-
 
-Known issues / Roadmap
-======================
-\-
 
 Credits
 =======
@@ -28,8 +23,7 @@ Credits
 Contributors
 ------------
 
-* Miika Nissi <miika.nissi@tawasta.fi>
-* Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Valtteri Lattu  <valtteri.lattu@tawasta.fi>
 
 Maintainer
 ----------
