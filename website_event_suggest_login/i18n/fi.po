@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_sale_force_login
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20240826\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-30 19:23+0000\n"
+"PO-Revision-Date: 2024-09-30 22:23+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+
+#. module: website_sale_force_login
+#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
+msgid "<i class=\"fa fa-lock me-2\"/>Sign up"
+msgstr "<i class=\"fa fa-lock me-2\"/>Rekisteröidy"
+
+#. module: website_sale_force_login
+#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
+msgid "<i class=\"fa fa-sign-in me-2\"/>Login"
+msgstr "<i class=\"fa fa-sign-in me-2\"/>Kirjaudu sisään"
+
+#. module: website_sale_force_login
+#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
+msgid "<i class=\"font-italic\">Please login or register before continuing</i>"
+msgstr "<i class=\"font-italic\">Kirjaudu sisään tai luo käyttäjätunnus rekisteröimällä sähköpostiosoitteesi jatkaaksesi</i>"
+
+#. module: website_sale_force_login
+#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
+msgid "Please login or register before continuing"
+msgstr "Kirjaudu sisään tai rekisteröidy ennen jatkamista"
