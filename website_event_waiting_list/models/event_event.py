@@ -16,7 +16,7 @@ class EventEvent(models.Model):
         string="Seats on waiting list",
         store=True,
         readonly=True,
-        compute="_compute_seats_waiting",
+        compute="_compute_seats",
     )
 
     # 3. Default methods
@@ -46,7 +46,9 @@ class EventEvent(models.Model):
 
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("seats_max", "registration_ids.state", "registration_ids.active")
-    def _compute_seats_waiting(self):
+    def _compute_seats(self):
+        """Extend the original _compute_seats method to account for waiting list."""
+        super(EventEvent, self)._compute_seats()
 
         # Add logic for waiting list
         for event in self:
