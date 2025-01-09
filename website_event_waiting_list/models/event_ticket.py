@@ -9,7 +9,7 @@ class EventTicket(models.Model):
 
     # 2. Fields declaration
     seats_waiting = fields.Integer(
-        string="Waiting Seats", compute="_compute_seats", store=True
+        string="Waiting Seats", compute="_compute_seats", store=False
     )
 
     waiting_list = fields.Boolean(
