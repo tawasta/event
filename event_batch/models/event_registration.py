@@ -26,7 +26,7 @@
 import logging
 
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
 # 4. Imports from Odoo modules:
