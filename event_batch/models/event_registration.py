@@ -162,6 +162,9 @@ class EventRegistration(models.Model):
             return super(EventRegistration, self).write(vals)
         res = super(EventRegistration, self).write(vals)
         for rec in self:
+            logging.info("=====================REC===================");
+            logging.info(rec);
+            logging.info(rec.state);
             if rec.state == "open":
                 if not rec.student_batch_id:
                     _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
