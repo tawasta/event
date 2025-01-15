@@ -206,10 +206,6 @@ class EventRegistration(models.Model):
                         _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
                         rec.with_context(no_create_batch=True).create_student_batch()
 
-                _logger.info("======REG STATE=====")
-                _logger.info(registrations.mapped('state'))
-                _logger.info("======REG STATE=====")
-                _logger.info(reg.state)
             else:
                 sold_registrations = registrations.filtered(lambda reg: reg.sale_order_id.state == 'sale') - cancelled_registrations
                 sold_registrations.sale_status = 'sold'
