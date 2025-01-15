@@ -31,6 +31,6 @@ class EventEvent(models.Model):
             if event.date_begin:
                 dates = []
                 dates.append(fields.Date.to_string(fields.Datetime.context_timestamp(event, fields.Datetime.from_string(event.date_begin))))
-                name += ' (%s)' % ' - '.join(dates)
+                name += ' (%s)' % ' '.join(dates)
 
             event.display_name = name
