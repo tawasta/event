@@ -29,6 +29,7 @@
     "installable": True,
     "depends": [
         "event",
+        "event_sale",
         "openeducat_core",
         "society_batch_core",
         "society_student_core",
