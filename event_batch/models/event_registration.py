@@ -183,9 +183,6 @@ class EventRegistration(models.Model):
             return super(EventRegistration, self).write(vals)
         res = super(EventRegistration, self).write(vals)
         for rec in self:
-            logging.info("=====================REC===================");
-            logging.info(rec);
-            logging.info(rec.state);
             if rec.state == "open":
                 if not rec.student_batch_id:
                     _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
@@ -202,6 +199,14 @@ class EventRegistration(models.Model):
             if not so_line or float_is_zero(so_line.price_total, precision_rounding=so_line.currency_id.rounding):
                 registrations.sale_status = 'free'
                 registrations.filtered(lambda reg: not reg.state or reg.state == 'draft').state = "open"
+                # Lisätty toiminnallisuus
+                for rec in registrations:
+                    if rec.state == "open" and not rec.student_batch_id:
+                        _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
+                        rec.with_context(no_create_batch=True).create_student_batch()
+
+                _logger.info("======REG STATE=====")
+                _logger.info(registrations.mapped('state'))
                 _logger.info("======REG STATE=====")
                 _logger.info(reg.state)
             else:
@@ -209,8 +214,11 @@ class EventRegistration(models.Model):
                 sold_registrations.sale_status = 'sold'
                 (registrations - sold_registrations).sale_status = 'to_pay'
                 sold_registrations.filtered(lambda reg: not reg.state or reg.state in {'draft', 'cancel'}).state = "open"
-                _logger.info("======REG STATE=====")
-                _logger.info(reg.state)
+                # Lisätty toiminnallisuus
+                for rec in sold_registrations:
+                    if rec.state == "open" and not rec.student_batch_id:
+                        _logger.info("===LUODAAN STUDENT BATCH=== for record: %s", rec)
+                        rec.with_context(no_create_batch=True).create_student_batch()
                 (registrations - sold_registrations - cancelled_registrations).state = 'draft'
 
     # 8. Business methods
