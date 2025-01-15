@@ -28,12 +28,9 @@ class EventEvent(models.Model):
                     )
 
             # Append date range if available
-            if event.date_begin or event.date_end:
+            if event.date_begin:
                 dates = []
-                if event.date_begin:
-                    dates.append(fields.Date.to_string(fields.Datetime.context_timestamp(event, fields.Datetime.from_string(event.date_begin))))
-                if event.date_end:
-                    dates.append(fields.Date.to_string(fields.Datetime.context_timestamp(event, fields.Datetime.from_string(event.date_end))))
+                dates.append(fields.Date.to_string(fields.Datetime.context_timestamp(event, fields.Datetime.from_string(event.date_begin))))
                 name += ' (%s)' % ' - '.join(dates)
 
             event.display_name = name
