@@ -173,6 +173,7 @@ class EventRegistration(models.Model):
 
     @api.depends('sale_order_id.state', 'sale_order_id.currency_id', 'sale_order_line_id.price_total')
     def _compute_registration_status(self):
+        _logger.info("Compute function _compute_registration_status called")
         for so_line, registrations in self.grouped('sale_order_line_id').items():
             cancelled_so_registrations = registrations.filtered(lambda reg: reg.sale_order_id.state == 'cancel')
             cancelled_so_registrations.state = 'cancel'
@@ -180,15 +181,15 @@ class EventRegistration(models.Model):
             if not so_line or float_is_zero(so_line.price_total, precision_rounding=so_line.currency_id.rounding):
                 registrations.sale_status = 'free'
                 registrations.filtered(lambda reg: not reg.state or reg.state == 'draft').state = "open"
-                logging.info("======REG STATE=====");
-                logging.info(reg.state);
+                _logger.info("======REG STATE=====")
+                _logger.info(reg.state)
             else:
                 sold_registrations = registrations.filtered(lambda reg: reg.sale_order_id.state == 'sale') - cancelled_registrations
                 sold_registrations.sale_status = 'sold'
                 (registrations - sold_registrations).sale_status = 'to_pay'
                 sold_registrations.filtered(lambda reg: not reg.state or reg.state in {'draft', 'cancel'}).state = "open"
-                logging.info("======REG STATE=====");
-                logging.info(reg.state);
+                _logger.info("======REG STATE=====")
+                _logger.info(reg.state)
                 (registrations - sold_registrations - cancelled_registrations).state = 'draft'
 
     # 8. Business methods
