@@ -173,24 +173,15 @@ class EventRegistration(models.Model):
 
     @api.depends('sale_order_id.state', 'sale_order_id.currency_id', 'sale_order_line_id.price_total')
     def _compute_registration_status(self):
-        _logger.info("Compute function _compute_registration_status called")
-        for so_line, registrations in self.grouped('sale_order_line_id').items():
-            cancelled_so_registrations = registrations.filtered(lambda reg: reg.sale_order_id.state == 'cancel')
-            cancelled_so_registrations.state = 'cancel'
-            cancelled_registrations = cancelled_so_registrations | registrations.filtered(lambda reg: reg.state == 'cancel')
-            if not so_line or float_is_zero(so_line.price_total, precision_rounding=so_line.currency_id.rounding):
-                registrations.sale_status = 'free'
-                registrations.filtered(lambda reg: not reg.state or reg.state == 'draft').state = "open"
-                _logger.info("======REG STATE=====")
-                _logger.info(reg.state)
-            else:
-                sold_registrations = registrations.filtered(lambda reg: reg.sale_order_id.state == 'sale') - cancelled_registrations
-                sold_registrations.sale_status = 'sold'
-                (registrations - sold_registrations).sale_status = 'to_pay'
-                sold_registrations.filtered(lambda reg: not reg.state or reg.state in {'draft', 'cancel'}).state = "open"
-                _logger.info("======REG STATE=====")
-                _logger.info(reg.state)
-                (registrations - sold_registrations - cancelled_registrations).state = 'draft'
+        res = super(EventRegistration, self)._compute_registration_status()  # Kutsutaan alkuperäinen logiikka
+
+        # Lisää oma logiikkasi tähän
+        for registration in self:
+            _logger.info("===================REGISTRATION=====================")
+            _logger.info(registration)
+            _logger.info(registration.state)
+        return res
+
 
     # 8. Business methods
     def student_batch_values_preprocess(self, registration):
