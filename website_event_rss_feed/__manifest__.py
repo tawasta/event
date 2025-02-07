@@ -21,7 +21,7 @@
 {
     "name": "Website Event: RSS Multi-tag Feed",
     "summary": "Ability to create custom RSS Feeds with events of multiple event tags",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Events",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
