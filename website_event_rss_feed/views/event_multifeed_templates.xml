@@ -22,7 +22,25 @@
 
             <author><name t-esc="event.sudo().user_id.name" /></author>
 
-            <t t-set="summary_text" t-value="html2plaintext(event.description)" />
+            <!-- Add event dates as a part of the description -->
+            <t t-set='date_begin_formatted'>
+                <t
+                        t-options='{"widget": "datetime", "tz_name": event.date_tz}'
+                        t-esc="event.date_begin"
+                    />
+            </t>
+
+            <t t-set='date_end_formatted'>
+                <t
+                        t-options='{"widget": "datetime", "tz_name": event.date_tz}'
+                        t-esc="event.date_end"
+                    />
+            </t>
+
+            <t
+                    t-set="summary_text"
+                    t-value="date_begin_formatted + ' - ' + date_end_formatted + ': ' + html2plaintext(event.description)"
+                />
 
             <!-- Truncate a long description if needed -->
             <t t-if="len(summary_text) > 300">
