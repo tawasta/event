@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Event Rss multifeed Views -->
+    <record id="view_event_multifeed_tree" model="ir.ui.view">
+        <field name="name">event.multifeed.tree</field>
+        <field name="model">event.multifeed</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="description" optional="hide" />
+                <field name="lang" />
+                <field name="feed_url" widget="url" optional="show" />
+                <field name="event_tag_ids" widget="many2many_tags" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_event_multifeed_form" model="ir.ui.view">
+        <field name="name">event.multifeed.form</field>
+        <field name="model">event.multifeed</field>
+        <field name="arch" type="xml">
+            <form string="Multifeed">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="lang" />
+                        <field name="feed_url" widget="url" invisible="not feed_url" />
+                    </group>
+                    <field name="event_tag_ids" widget="many2many_tags" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_event_multifeeds" model="ir.actions.act_window">
+        <field name="name">Event Multifeeds</field>
+        <field name="res_model">event.multifeed</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_event_multifeed_tree" />
+    </record>
+
+    <menuitem
+        name="Event RSS"
+        id="menu_event_rss_heading"
+        sequence="120"
+        parent="website.menu_website_global_configuration"
+        groups="website.group_website_designer"
+    />
+
+    <menuitem
+        id="menu_website_event_multifeed_global"
+        parent="menu_event_rss_heading"
+        name="Event RSS Multifeeds"
+        action="action_event_multifeeds"
+        sequence="10"
+    />
+</odoo>
