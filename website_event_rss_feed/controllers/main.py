@@ -77,6 +77,17 @@ class WebsiteEventRssMultifeed(Website):
 
                         attachment_id = split_path[3].split("-")[0]
 
+                        if not attachment_id or not isinstance(attachment_id, int):
+                            # Add a failsafe in case some other modules modify with
+                            # how the event images are managed, to avoid crashing
+                            # the feed.
+                            _logger.info(
+                                "RSS: Could not get a numeric attachment ID for event ID %s. "
+                                "Attempted to parse %s. Details: "
+                                % (event.id, event._get_background())
+                            )
+                            continue
+
                         image_attachment = (
                             request.env["ir.attachment"]
                             .sudo()
@@ -92,8 +103,8 @@ class WebsiteEventRssMultifeed(Website):
                     v["event_images"][event.id] = image_info
 
                 except Exception as e:
-                    _logger.error(
-                        "Could not get image URL and mimetype for event ID %s. "
+                    _logger.info(
+                        "RSS: Could not get image URL and mimetype for event ID %s. "
                         "Attempted to parse %s. Details: "
                         % (event.id, event._get_background())
                     )

@@ -26,8 +26,8 @@
                         <field name="description" />
                         <field name="lang" />
                         <field name="feed_url" widget="url" invisible="not feed_url" />
+                        <field name="event_tag_ids" widget="many2many_tags" />
                     </group>
-                    <field name="event_tag_ids" widget="many2many_tags" />
                 </sheet>
             </form>
         </field>
