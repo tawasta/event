@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Atom Feed -->
+    <template id="event_multifeed">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+    <feed
+            t-att-xmlns="'http://www.w3.org/2005/Atom'"
+            xmlns:media="http://search.yahoo.com/mrss/"
+        >
+        <title t-esc="multifeed.name" />
+        <link t-att-href="'%s/event' % (base_url)" />
+        <id t-esc="'%s/event/' % (base_url)" />
+
+        <updated
+                t-esc="str(last_updated_event.write_date).replace(' ', 'T') + 'Z' if last_updated_event else ''"
+            />
+
+        <entry t-foreach="events" t-as="event">
+            <title t-esc="event.name" />
+            <link t-att-href="'%s%s' % (base_url, event.website_url)" />
+            <id t-esc="'%s%s' % (base_url, event.website_url)" />
+
+            <author><name t-esc="event.sudo().user_id.name" /></author>
+
+            <t t-set="summary_text" t-value="html2plaintext(event.description)" />
+
+            <!-- Truncate a long description if needed -->
+            <t t-if="len(summary_text) > 300">
+                <t t-set="summary_text" t-value="summary_text[:300] + '...'" />
+            </t>
+
+            <summary t-esc="summary_text" />
+
+            <!-- Add image if one exists for the event -->
+            <t t-if="event.id in event_images">
+                <media:content
+                        t-att-url="event_images[event.id]['image_url']"
+                        t-att-type="event_images[event.id]['image_mimetype']"
+                    />
+            </t>
+
+            <updated t-esc="str(event.write_date).replace(' ', 'T') + 'Z'" />
+
+
+        </entry>
+    </feed>
+    </template>
+</odoo>
