@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
+[website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.0 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.0.0 |  | Force login before registering to an event
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
