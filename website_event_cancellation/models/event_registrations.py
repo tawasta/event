@@ -41,7 +41,7 @@ class EventRegistration(models.Model):
     # 2. Fields declaration
     manage_url = fields.Char("Public link", compute="_compute_manage_url")
     access_token = fields.Char(
-        "Security Token", store=True, compute="_compute_access_token"
+        "Security Token", compute="_compute_access_token"
     )
 
     # 3. Default methods
@@ -60,7 +60,8 @@ class EventRegistration(models.Model):
 
     def _compute_access_token(self):
         for registration in self:
-            registration.access_token = str(uuid.uuid4())
+            if not registration.access_token:
+                registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
 
