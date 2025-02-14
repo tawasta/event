@@ -40,7 +40,9 @@ class EventRegistration(models.Model):
 
     # 2. Fields declaration
     manage_url = fields.Char("Public link", compute="_compute_manage_url")
-    access_token = fields.Char("Security Token", compute="_compute_access_token")
+    access_token = fields.Char(
+        "Security Token", readonly=True, default=lambda self: str(uuid.uuid4())
+    )
 
     # 3. Default methods
 
@@ -56,10 +58,10 @@ class EventRegistration(models.Model):
                 % (registration.event_id.id, registration.access_token),
             )
 
-    def _compute_access_token(self):
-        for registration in self:
-            if not registration.access_token:
-                registration.access_token = str(uuid.uuid4())
+    # def _compute_access_token(self):
+    #     for registration in self:
+    #         if not registration.access_token:
+    #             registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
 
@@ -72,9 +74,9 @@ class EventRegistration(models.Model):
         self = self.with_context(skip_confirm=True)
         registrations = super(EventRegistration, self).create(vals_list)
         registrations = registrations.with_context(skip_confirm=False)
-        for registration in registrations:
-            if not registration.access_token:
-                registration.sudo().write({"access_token": str(uuid.uuid4())})
+        # for registration in registrations:
+        #     if not registration.access_token:
+        #         registration.sudo().write({"access_token": str(uuid.uuid4())})
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
         return registrations
