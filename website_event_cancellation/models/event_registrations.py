@@ -40,7 +40,9 @@ class EventRegistration(models.Model):
 
     # 2. Fields declaration
     manage_url = fields.Char("Public link", compute="_compute_manage_url")
-    access_token = fields.Char("Security Token", readonly=True, default=lambda self: str(uuid.uuid4()))
+    access_token = fields.Char(
+        "Security Token", readonly=True, default=lambda self: str(uuid.uuid4())
+    )
 
     # 3. Default methods
 
