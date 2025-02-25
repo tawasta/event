@@ -9,11 +9,11 @@ Website Event Private Event
 
 Configuration
 =============
-\-
+* Check the "Private event" checkbox in backend for the event
 
 Usage
 =====
-\-
+* Open event list in frontend. Private events do not show up.
 
 Known issues / Roadmap
 ======================
@@ -26,6 +26,7 @@ Contributors
 ------------
 
 * Miika Nissi <miika.nissi@tawasta.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------

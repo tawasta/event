@@ -33,7 +33,7 @@ addon | version | maintainers | summary
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.1 |  | Customization options to Website Event Frontends
 [website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.1 |  | Module to manage online and hybrid events. Includes a video conference link.
-[website_event_private_event](website_event_private_event/) | 17.0.1.0.0 |  | Make events only visible from URL. (remove from public list)
+[website_event_private_event](website_event_private_event/) | 17.0.1.1.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 17.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.
 [website_event_questions_parent_id](website_event_questions_parent_id/) | 17.0.1.0.0 |  | Question to ask for parent_id in Event Registration
 [website_event_questions_title](website_event_questions_title/) | 17.0.1.0.0 |  | Question to ask for title in Event Registration
