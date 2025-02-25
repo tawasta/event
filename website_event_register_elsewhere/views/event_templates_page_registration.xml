@@ -4,26 +4,40 @@
         id="registration_template_registration_elsewhere"
         inherit_id="website_event.event_description_full"
     >
-        <xpath expr="//div[@class='container d-lg-none']/t[@t-call='website_event.registration_template']" position="replace">
+        <xpath
+            expr="//div[@class='container d-lg-none']/t[@t-call='website_event.registration_template']"
+            position="replace"
+        >
             <t t-if="event.registration_elsewhere and event.registration_link">
-                <a t-attf-href="#{event.registration_link}" class="btn btn-primary btn-block a-submit w-100" target="_blank">
+                <a
+                    t-attf-href="#{event.registration_link}"
+                    class="btn btn-primary btn-block a-submit w-100"
+                    target="_blank"
+                >
                     Register
                 </a>
             </t>
             <t t-else="">
-                <t t-call="website_event.registration_template"/>
+                <t t-call="website_event.registration_template" />
             </t>
         </xpath>
 
         <!-- Desktop-painikkeen ehdollinen tarkistus -->
-        <xpath expr="//div[@class='container d-none d-lg-block']/t[@t-call='website_event.registration_template']" position="replace">
+        <xpath
+            expr="//div[@class='container d-none d-lg-block']/t[@t-call='website_event.registration_template']"
+            position="replace"
+        >
             <t t-if="event.registration_elsewhere and event.registration_link">
-                <a t-attf-href="#{event.registration_link}" class="btn btn-primary btn-block a-submit w-100" target="_blank">
+                <a
+                    t-attf-href="#{event.registration_link}"
+                    class="btn btn-primary btn-block a-submit w-100"
+                    target="_blank"
+                >
                     Register
                 </a>
             </t>
             <t t-else="">
-                <t t-call="website_event.registration_template"/>
+                <t t-call="website_event.registration_template" />
             </t>
         </xpath>
     </template>
