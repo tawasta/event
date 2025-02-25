@@ -22,14 +22,14 @@
 
 # 2. Known third party imports:
 
+# 6. Unknown third party imports:
+
 # 3. Odoo imports (openerp):
-from odoo import fields, models
+from odoo import api, fields, models
 
 # 4. Imports from Odoo modules:
 
 # 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class EventEvent(models.Model):
@@ -52,3 +52,11 @@ class EventEvent(models.Model):
     # 7. Action methods
 
     # 8. Business methods
+    @api.model
+    def _search_get_detail(self, website, order, options):
+
+        res = super()._search_get_detail(website, order, options)
+
+        res["base_domain"].append([("is_private_event", "=", False)])
+
+        return res
