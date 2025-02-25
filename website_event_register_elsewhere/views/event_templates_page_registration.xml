@@ -4,49 +4,40 @@
         id="registration_template_registration_elsewhere"
         inherit_id="website_event.event_description_full"
     >
-        <xpath expr="//div[@class='container d-none d-lg-block']" position="replace">
-            <t
-                t-if="event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids)) and event.registration_elsewhere and event.registration_link"
-            >
-                <div id="registration_elsewhere_form" class="mb-5">
-                    <div
-                        id="o_wevent_tickets"
-                        class="bg-white shadow-sm o_wevent_js_ticket_details"
-                        data-folded-by-default="0"
-                    >
-                        <div class="o_wevent_registration_single">
-                            <div class="row p-2 pl-3">
-                                <div
-                                    class="d-flex flex-wrap justify-content-between align-items-center w-100 mb-3"
-                                    itemscope="itemscope"
-                                    itemtype="http://schema.org/Offer"
-                                >
-                                    <h4 class="mb-0">Registration</h4>
-                                    <div class="ml-auto o_wevent_nowrap">
-                                        <link
-                                            itemprop="availability"
-                                            content="http://schema.org/InStock"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="btn btn-primary w-100">
-                                    <a
-                                        t-attf-href="#{event.registration_link}"
-                                        class="btn btn-primary o_wait_lazy_js btn-block a-submit"
-                                        target="_blank"
-                                    >
-                                        Register
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <xpath
+            expr="//div[@class='container d-lg-none']/t[@t-call='website_event.registration_template']"
+            position="replace"
+        >
+            <t t-if="event.registration_elsewhere and event.registration_link">
+                <a
+                    t-attf-href="#{event.registration_link}"
+                    class="btn btn-primary btn-block a-submit w-100"
+                    target="_blank"
+                >
+                    Register
+                </a>
             </t>
             <t t-else="">
-                <div class="container d-none d-lg-block">
-                    <t t-call="website_event.registration_template" />
-                </div>
+                <t t-call="website_event.registration_template" />
+            </t>
+        </xpath>
+
+        <!-- Desktop-painikkeen ehdollinen tarkistus -->
+        <xpath
+            expr="//div[@class='container d-none d-lg-block']/t[@t-call='website_event.registration_template']"
+            position="replace"
+        >
+            <t t-if="event.registration_elsewhere and event.registration_link">
+                <a
+                    t-attf-href="#{event.registration_link}"
+                    class="btn btn-primary btn-block a-submit w-100"
+                    target="_blank"
+                >
+                    Register
+                </a>
+            </t>
+            <t t-else="">
+                <t t-call="website_event.registration_template" />
             </t>
         </xpath>
     </template>
