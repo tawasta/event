@@ -1,65 +1,87 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="event_track_location_schedule_report">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <div id="wrap" class="page">
-                    <style type="text/css">
+    <template id="report_track_location">
+        <t t-call="web.external_layout">
+            <style type="text/css">
 table {
     border-collapse: collapse;
+    width: 100%;
+    border-spacing: 0; /* Poistaa ylimääräiset välit solujen välillä */
+    table-layout: fixed; /* Pakottaa solut tasakokoisiksi */
 }
-th {
-    padding-top: 2em;
-}
+
 td {
-    border: 1px dotted #555;
-    padding: 1em 2em;
+    padding: 12px 10px; /* Tasainen välistys */
+    text-align: left;
+    vertical-align: middle; /* Keskittää tekstin pystysuunnassa */
+    border: 1px dotted #555; /* Pisteviiva solujen ympärille */
     overflow-wrap: break-word;
     hyphens: auto;
+    min-height: 25px; /* Pakottaa jokaisen solun vähintään tämän korkuiseksi */
 }
+
+th {
+    font-size: 16px; /* Isompi fonttikoko otsikoille */
+    font-weight: bold;
+    background-color: #f8f8f8; /* Kevyt taustaväri otsikoille */
+}
+
+td {
+    font-size: 14px;
+    line-height: 2.5; /* Parantaa luettavuutta */
+    word-break: break-word; /* Estää pitkien sanojen venyttämisen */
+}
+
 .new-page {
     page-break-before: always;
     clear: both;
 }
-                    </style>
-                    <div class="oe_structure">
-                        <t t-set="grouped_tracks" t-value="doc.get_grouped_tracks()" />
-                        <t t-foreach="grouped_tracks" t-as="track_group">
-                            <div class="new-page">
-                                <h1 t-field="doc.name" />
-                                <table
-                                    name="track_schedule_table"
-                                    class="table table-condensed"
-                                >
-                                    <tbody>
+            </style>
+            <t t-set="grouped_tracks" t-value="doc.get_grouped_tracks()" />
+            <div class="page">
+                <div class="oe_structure">
+                    <t t-foreach="grouped_tracks" t-as="track_group">
+                        <div class="new-page">
+                            <h1 t-field="doc.name" />
+                            <table
+                                name="track_schedule_table"
+                                class="table table-condensed"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2">
+                                            <h2>Program <span
+                                                    t-field="track_group[0].date"
+                                                    t-options='{"format": "dd.MM.YYYY"}'
+                                                /></h2>
+                                        </th>
+                                    </tr>
+                                    <t t-foreach="track_group" t-as="track">
                                         <tr>
-                                            <th colspan="2">
-                                                <h2>Program <span
-                                                        t-field="track_group[0].date"
-                                                        t-options='{"format": "dd.MM.YYYY"}'
-                                                    /></h2>
-                                            </th>
+                                            <td>
+                                                <span
+                                                    t-field="track.date"
+                                                    t-options='{"format": "HH:mm"}'
+                                                /> - <span
+                                                    t-field="track.date_end"
+                                                    t-options='{"format": "HH:mm"}'
+                                                />
+                                            </td>
+                                            <td><t t-esc="track.name" /></td>
                                         </tr>
-                                        <t t-foreach="track_group" t-as="track">
-                                            <tr>
-                                                <td>
-                                                    <span
-                                                        t-field="track.date"
-                                                        t-options='{"format": "HH:mm"}'
-                                                    /> - <span
-                                                        t-field="track.date_end"
-                                                        t-options='{"format": "HH:mm"}'
-                                                    />
-                                                </td>
-                                                <td><t t-esc="track.name" /></td>
-                                            </tr>
-                                        </t>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </t>
-                    </div>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
                 </div>
+            </div>
+        </t>
+    </template>
+    <template id="event_track_location_schedule_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="website_event_track_advanced.report_track_location" />
             </t>
         </t>
     </template>
