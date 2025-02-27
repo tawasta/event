@@ -51,7 +51,7 @@ td {
                                                         t-options='{"format": "HH:mm"}'
                                                     />
                                                 </td>
-                                                <td><span t-field="track.name" /></td>
+                                                <td><t t-esc="track.name" /></td>
                                             </tr>
                                         </t>
                                     </tbody>
