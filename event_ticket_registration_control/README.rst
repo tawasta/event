@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=======================================
+========================================
 Event Ticket Registration Control Module
-=======================================
+========================================
 This Odoo module automatically manages the registration start date for event tickets based on the event's start date. It ensures that ticket sales begin at an appropriate time to prevent early registrations and ensure fair access to event tickets.
 
 Configuration

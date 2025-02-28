@@ -11,6 +11,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[event_notification_subscription](event_notification_subscription/) | 16.0.1.0.1 |  | Event Notification Subscription
 [event_ticket_registration_control](event_ticket_registration_control/) | 16.0.1.0.1 |  | Event ticket automation
 
 [//]: # (end addons)

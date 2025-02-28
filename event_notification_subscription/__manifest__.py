@@ -18,8 +18,8 @@
 #
 ##############################################################################
 {
-    "name": "Event ticket automation",
-    "summary": "Event ticket automation",
+    "name": "Event Notification Subscription",
+    "summary": "Event Notification Subscription",
     "version": "16.0.1.0.1",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -29,7 +29,17 @@
     "installable": True,
     "depends": [
         "event",
-        "event_sale",
+        "portal",
+        "contacts",
     ],
-    "data": [],
+    "data": [
+        "data/cron_job.xml",
+        "views/portal_templates.xml",
+        "views/res_partner_view.xml",
+    ],
+    'assets': {
+        'web.assets_frontend': [
+            'event_notification_subscription/static/src/js/main.esm.js',
+        ],
+    },
 }

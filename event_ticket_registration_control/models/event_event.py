@@ -1,6 +1,6 @@
-from odoo import models, fields, api
 from datetime import timedelta
-import logging
+
+from odoo import api, fields, models
 
 
 class Event(models.Model):
@@ -8,7 +8,7 @@ class Event(models.Model):
 
     @api.model
     def create(self, vals):
-        """ Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän """
+        """Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän"""
         event = super(Event, self).create(vals)
 
         # Haetaan tapahtumaan liittyvät liput
@@ -20,14 +20,20 @@ class Event(models.Model):
                 "event_id": event.id,
                 "name": "Standard Ticket",
                 "price": 0.0,
-                "start_sale_datetime": self._compute_registration_start(event.date_begin),
+                "start_sale_datetime": self._compute_registration_start(
+                    event.date_begin
+                ),
             }
             self.env["event.event.ticket"].create(ticket_vals)
         else:
             # Päivitetään kaikki olemassa olevat liput
-            tickets.sudo().write({
-                "start_sale_datetime": self._compute_registration_start(event.date_begin),
-            })
+            tickets.sudo().write(
+                {
+                    "start_sale_datetime": self._compute_registration_start(
+                        event.date_begin
+                    ),
+                }
+            )
 
         return event
 
@@ -36,16 +42,22 @@ class Event(models.Model):
 
         if "date_begin" or "event_ticket_ids" in vals:
             for event in self:
-                tickets = self.env["event.event.ticket"].search([("event_id", "=", event.id)])
+                tickets = self.env["event.event.ticket"].search(
+                    [("event_id", "=", event.id)]
+                )
                 for ticket in tickets:
-                    ticket.sudo().write({
-                        "start_sale_datetime": self._compute_registration_start(event.date_begin),
-                    })
+                    ticket.sudo().write(
+                        {
+                            "start_sale_datetime": self._compute_registration_start(
+                                event.date_begin
+                            ),
+                        }
+                    )
 
         return res
 
     def _compute_registration_start(self, event_start):
-        """ Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella """
+        """Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella"""
         today = fields.Datetime.today()
         days_until_event = (event_start - today).days
 
