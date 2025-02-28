@@ -18,8 +18,8 @@
 #
 ##############################################################################
 {
-    "name": "Event Notification Subscription",
-    "summary": "Event Notification Subscription",
+    "name": "Event Registration Limitations",
+    "summary": "Restricts event registrations per exam type and prevents duplicates.",
     "version": "16.0.1.0.1",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,18 +28,9 @@
     "application": False,
     "installable": True,
     "depends": [
-        "event",
-        "portal",
-        "contacts",
+        "website_event",
     ],
     "data": [
-        "data/cron_job.xml",
-        "views/portal_templates.xml",
-        "views/res_partner_view.xml",
+        "views/event_template.xml",
     ],
-    "assets": {
-        "web.assets_frontend": [
-            "event_notification_subscription/static/src/js/main.esm.js",
-        ],
-    },
 }

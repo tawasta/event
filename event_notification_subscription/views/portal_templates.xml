@@ -1,27 +1,32 @@
 <?xml version="1.0" ?>
 <odoo>
 
-    <template id="portal_my_details_fields" inherit_id="portal.portal_my_details_fields">
+    <template
+        id="portal_my_details_fields"
+        inherit_id="portal.portal_my_details_fields"
+    >
         <xpath expr="//input[@name='zipcode']//.." position="after">
-            <t t-set="tags"
-               t-value="request.env['event.tag'].sudo().search([])"/>
+            <t t-set="tags" t-value="request.env['event.tag'].sudo().search([])" />
 
             <div class="mb-1  col-xl-6">
                 <label class="col-form-label label-optional" for="tag_id">Tags </label>
-                <select class="form-control input-lg"
-                        name="tag_id"
-                        id="tag"
-                        multiple="multiple">
+                <select
+                    class="form-control input-lg"
+                    name="tag_id"
+                    id="tag"
+                    multiple="multiple"
+                >
                     <t t-foreach="tags" t-as="t">
-                        <option t-att-value="t.id"
-                                t-att-selected="'selected' if t.id in partner.event_interest_tags.ids else None">
-                            <t t-esc="t.name"/>
+                        <option
+                            t-att-value="t.id"
+                            t-att-selected="'selected' if t.id in partner.event_interest_tags.ids else None"
+                        >
+                            <t t-esc="t.name" />
                         </option>
                     </t>
                 </select>
             </div>
-            <input type="hidden" id="hiddenmode" name="tag_ids"
-                   t-att-value="tag_ids"/>
+            <input type="hidden" id="hiddenmode" name="tag_ids" t-att-value="tag_ids" />
         </xpath>
     </template>
 

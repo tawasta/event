@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
+
 
 class Event(models.Model):
     _inherit = "event.event"
@@ -6,19 +7,21 @@ class Event(models.Model):
     announcement_sent = fields.Boolean(
         string="Announcement Sent",
         default=False,
-        help="Indicates if an announcement email has already been sent for this event."
+        help="Indicates if an announcement email has already been sent for this event.",
     )
 
     @api.model
     def send_event_notifications(self):
         """Lähettää sähköpostit kontakteille, jotka ovat kiinnostuneet tapahtuman tageista."""
-        events = self.search([("is_published", "=", True), ("announcement_sent", "=", False)])
+        events = self.search(
+            [("is_published", "=", True), ("announcement_sent", "=", False)]
+        )
 
         for event in events:
-            interested_partners = self.env["res.partner"].search([
-                ("event_interest_tags", "in", event.tag_ids.ids)
-            ])
-            
+            interested_partners = self.env["res.partner"].search(
+                [("event_interest_tags", "in", event.tag_ids.ids)]
+            )
+
             if interested_partners:
                 # TODO Lahetetaan sposti
                 # Minkalainen viesti lahetetaan
