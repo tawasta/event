@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="custom_registration_template" inherit_id="website_event.registration_template">
-        <xpath expr="//div[@class='o_wevent_registration_single']" position="after">
+        <xpath expr="//div[@id='o_wevent_tickets']" position="after">
             <t t-if="registration_disabled">
                 <div class="alert alert-secondary">
                     <i class="fa fa-warning"></i>
@@ -9,7 +9,7 @@
                 </div>
             </t>
         </xpath>
-        <xpath expr="//div[@class='o_wevent_registration_single']" position="attributes">
+        <xpath expr="//div[@id='o_wevent_tickets']" position="attributes">
             <attribute
                 name="t-if"
             >not registration_disabled</attribute>

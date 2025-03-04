@@ -14,7 +14,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
         if partner_id:
             # Tarkistetaan, onko käyttäjällä jo ilmoittautuminen samaan koetyyppiin
             existing_registration = request.env['event.registration'].sudo().search([
-                ('event_id.tag_ids', 'in', event.tag_ids.ids),
+                ('registration_survey_id', 'in', event.survey_ids.ids),
                 ('partner_id', '=', partner_id),
                 ('state', 'in', ['draft', 'open'])
             ])
@@ -28,6 +28,4 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
             'registration_disabled': registration_disabled,
             'error_message': error_message
         })
-        logging.info("=======================================");
-        logging.info(values.qcontext);
         return values
