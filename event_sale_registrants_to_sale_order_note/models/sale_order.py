@@ -2,7 +2,6 @@ from odoo import _, models
 
 
 class SaleOrder(models.Model):
-
     _inherit = "sale.order"
 
     def action_confirm(self):

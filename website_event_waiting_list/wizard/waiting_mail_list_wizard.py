@@ -34,7 +34,6 @@ from odoo.http import request
 
 
 class WaitingMailListWizard(models.TransientModel):
-
     # 1. Private attributes
     _name = "website.event.waiting.mail.list.wizard"
     _description = "Mail confirmation email to waiting list contacts"

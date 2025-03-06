@@ -22,7 +22,7 @@
     "version": "17.0.1.0.0",
     "category": "Events",
     "summary": "Create recurring events and hide dates",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

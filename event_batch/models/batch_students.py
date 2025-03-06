@@ -11,7 +11,6 @@ from odoo import fields, models
 
 
 class OpBatchStudents(models.Model):
-
     # 1. Private attributes
     _inherit = "op.batch.students"
 

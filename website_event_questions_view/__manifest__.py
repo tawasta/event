@@ -23,7 +23,7 @@
     "summary": "Adds a view to see event question answers",
     "version": "17.0.1.0.0",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

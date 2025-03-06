@@ -54,7 +54,6 @@ class EventEvent(models.Model):
     # 8. Business methods
     @api.model
     def _search_get_detail(self, website, order, options):
-
         res = super()._search_get_detail(website, order, options)
 
         res["base_domain"].append([("is_private_event", "=", False)])

@@ -22,7 +22,7 @@
     "summary": "Website Event Register Button",
     "version": "17.0.1.0.0",
     "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

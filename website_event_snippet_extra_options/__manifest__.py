@@ -23,7 +23,7 @@
     "summary": "Additional configurations for the core snippet",
     "version": "17.0.1.0.1",
     "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

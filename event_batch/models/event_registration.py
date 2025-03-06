@@ -79,7 +79,6 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
 
     def create_student_batch(self):
-
         registration = self
         if registration.event_ticket_id.product_id.batch_id:
             student_batch_vals = self.student_batch_values_preprocess(registration)

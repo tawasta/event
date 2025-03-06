@@ -4,7 +4,6 @@ from odoo import api, fields, models
 
 
 class WebsiteEventMultifeed(models.Model):
-
     _name = "event.multifeed"
     _description = "Event RSS Multifeed"
     _order = "name"

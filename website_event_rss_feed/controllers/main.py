@@ -50,13 +50,11 @@ class WebsiteEventRssMultifeed(Website):
         v["event_images"] = {}
 
         for event in multifeed_events:
-
             # this mixin function returns either "none" or "url('path-to-image')"
             event_background = event._get_background()
 
             if event_background != "none":
                 try:
-
                     # strip out the "url('" and "')" parts
                     event_image_path = event._get_background()[4:-1].strip("'")
 

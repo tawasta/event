@@ -22,7 +22,7 @@
     "summary": "Allows creating student batches for event registrations",
     "version": "17.0.1.0.1",
     "category": "Website",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

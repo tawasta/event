@@ -23,7 +23,7 @@
     "summary": "Ability to create custom RSS Feeds with events of multiple event tags",
     "version": "17.0.1.0.2",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

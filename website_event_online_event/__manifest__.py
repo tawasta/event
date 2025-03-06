@@ -23,7 +23,7 @@
     "summary": "Module to manage online and hybrid events. Includes a video conference link.",
     "version": "17.0.1.0.1",
     "category": "Events",
-    "website": "https://gitlab.com/tawasta/odoo/event",
+    "website": "https://github.com/tawasta/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,

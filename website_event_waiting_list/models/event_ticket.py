@@ -3,7 +3,6 @@ from odoo.exceptions import ValidationError
 
 
 class EventTicket(models.Model):
-
     # 1. Private attributes
     _inherit = "event.event.ticket"
 

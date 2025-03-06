@@ -2,7 +2,6 @@ from odoo import models
 
 
 class EventMailRegistration(models.Model):
-
     # 1. Private attributes
     _inherit = "event.mail.registration"
 

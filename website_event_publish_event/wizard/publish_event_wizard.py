@@ -33,7 +33,6 @@ from odoo import fields, models
 
 
 class PublishEventWizard(models.TransientModel):
-
     # 1. Private attributes
     _name = "website.event.publish.event.wizard"
     _description = "Action to publish all selected events on Website."
