@@ -5,7 +5,7 @@
 =================
 Website My Events
 =================
-* Add the events button to the my account view, which allows the user to view their own 
+* Add the events button to the my account view, which allows the user to view their own
   registrations in portal
 * Also allows you to cancel your registration from portal
 
@@ -27,14 +27,14 @@ Credits
 Contributors
 ------------
 
-* Valtteri Lattu <valtteri.lattu@tawasta.fi>
-* Miika Nissi <miika.nissi@tawasta.fi>
+* Valtteri Lattu <valtteri.lattu@futural.fi>
+* Miika Nissi <miika.nissi@futural.fi>
 
 Maintainer
 ----------
 
-.. image:: https://tawasta.fi/templates/tawastrap/images/logo.png
-   :alt: Oy Tawasta OS Technologies Ltd.
-   :target: https://tawasta.fi/
+.. image:: https://futural.fi/templates/tawastrap/images/logo.png
+   :alt: Futural Oy
+   :target: https://futural.fi/
 
-This module is maintained by Oy Tawasta OS Technologies Ltd.
+This module is maintained by Futural Oy
