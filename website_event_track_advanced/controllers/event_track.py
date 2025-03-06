@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2022- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -329,7 +329,6 @@ class EventTrackControllerAdvanced(EventTrackController):
                 }
             )
             if track.organizer_contact:
-
                 values.update(
                     {
                         "signee_firstname": track.organizer_contact.firstname,
@@ -349,7 +348,6 @@ class EventTrackControllerAdvanced(EventTrackController):
                     }
                 )
             if track.stage_id.is_accepted:
-
                 operators = [
                     {"id": ope.id, "name": ope.name}
                     for ope in request.env["res.partner.operator.einvoice"]
@@ -631,6 +629,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             target_group = self._get_record(
                 "event.track.target.group", post.get("target_group")
             )
+            # TODO: Target group doesn't seem to be used anywhere
+            _logger.info(target_group)
         else:
             pass
 
@@ -638,7 +638,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         tags = False
         tag_post = request.httprequest.form.getlist("tags")
         _logger.debug("Tag list from post: %s" % tag_post)
-        if tag_post and not "" in tag_post:
+        if tag_post and "" not in tag_post:
             tags = list(map(int, tag_post))
 
         presentation_language_ids = False
@@ -646,14 +646,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             "presentation_language_ids"
         )
 
-        if presentation_language_post and not "" in presentation_language_post:
+        if presentation_language_post and "" not in presentation_language_post:
             presentation_language_ids = list(map(int, presentation_language_post))
 
         # Target groups
         target_group_ids = False
         target_post = request.httprequest.form.getlist("target_groups")
         _logger.debug("Tag list from post: %s" % target_post)
-        if target_post and not "" in target_post:
+        if target_post and "" not in target_post:
             target_group_ids = list(map(int, target_post))
 
         # Track
@@ -1306,21 +1306,20 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Suodatetaan vain julkaistut esitykset
         published_tracks = render_vals.get("tracks").filtered(
-            lambda t: t.stage_id.is_fully_accessible == True
+            lambda t: t.stage_id.is_fully_accessible
         )
 
         # Päivitetään render_vals suodatetuilla arvoilla
         render_vals["tracks"] = published_tracks
 
         render_vals["tracks"] = render_vals.get("tracks").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
 
         indexes_to_del = []
         for track_by_day in render_vals.get("tracks_by_day"):
             track_by_day["tracks"] = track_by_day.get("tracks").filtered(
-                lambda p: p.type.code == "poster"
-                and p.stage_id.is_fully_accessible == True
+                lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
             )
             if not track_by_day["tracks"]:
                 indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
@@ -1328,10 +1327,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         for i in sorted(indexes_to_del, reverse=True):
             del render_vals["tracks_by_day"][i]
         render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
         render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
         return request.render("website_event_track.tracks_session", render_vals)
 

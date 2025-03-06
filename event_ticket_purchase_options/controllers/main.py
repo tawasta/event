@@ -5,7 +5,8 @@ from datetime import datetime
 
 import werkzeug
 
-from odoo import _, http
+from odoo import _
+from odoo import http
 from odoo.http import request
 
 from odoo.addons.website_event.controllers.main import WebsiteEventController
@@ -87,7 +88,7 @@ class EventRegistrationController(WebsiteEventController):
         # Luodaan rekisteröinnit
         for ticket in tickets:
             if ticket["is_inviting_others"]:
-                for _ in range(ticket["quantity"]):
+                for q in range(ticket["quantity"]):
                     registration_data = {
                         "event_id": event.id,
                         "name": "Draft Registration",
@@ -305,7 +306,10 @@ class EventRegistrationController(WebsiteEventController):
         )
 
         invitation.registration_id.sudo().write(
-            {"attendee_partner_id": request.env.user.partner_id.id, "name": request.env.user.partner_id.name}
+            {
+                "attendee_partner_id": request.env.user.partner_id.id,
+                "name": request.env.user.partner_id.name,
+            }
         )
 
         return_url = f"{invite_data['return_url']}?access_token={invite_data['access_token']}&thank_you=1"
