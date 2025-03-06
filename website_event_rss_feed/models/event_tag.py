@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class EventTag(models.Model):
-
     _inherit = "event.tag"
 
     event_multifeed_ids = fields.Many2many(

@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2021- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -54,7 +54,6 @@ class EventEvent(models.Model):
     # 8. Business methods
     @api.model
     def _search_get_detail(self, website, order, options):
-
         res = super()._search_get_detail(website, order, options)
 
         res["base_domain"].append([("is_private_event", "=", False)])

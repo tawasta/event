@@ -5,7 +5,6 @@ from odoo.exceptions import ValidationError
 
 
 class EventRegistration(models.Model):
-
     # 1. Private attributes
     _inherit = "event.registration"
 
@@ -148,7 +147,6 @@ class EventRegistration(models.Model):
         res = super().write(vals)
 
         for rec in self:
-
             event_stage = rec.event_id.stage_id
             if event_stage.pipe_end or event_stage.cancel:
                 # Don't try to send messages for closed events

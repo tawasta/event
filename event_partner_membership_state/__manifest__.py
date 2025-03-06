@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2022- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,8 +22,8 @@
     "summary": "Show partner membership state on event registration",
     "version": "17.0.1.1.0",
     "category": "Event",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
+    "website": "https://github.com/tawasta/event",
+    "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
