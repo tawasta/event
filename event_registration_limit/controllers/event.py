@@ -14,7 +14,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
         if partner_id:
             # Tarkistetaan, onko käyttäjällä jo ilmoittautuminen samaan koetyyppiin
             existing_registration = request.env['event.registration'].sudo().search([
-                ('registration_survey_id', 'in', event.survey_ids.ids),
+                ('registration_survey_id', 'in', event.sudo().survey_ids.ids),
                 ('partner_id', '=', partner_id),
                 ('state', 'in', ['draft', 'open'])
             ])
