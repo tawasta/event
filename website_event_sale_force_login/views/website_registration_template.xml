@@ -11,14 +11,17 @@
         >
             <attribute
                 name="t-if"
-            >not website.is_public_user() and event.event_registrations_open</attribute>
+            >event.event_registrations_open and (event.allow_guest_registration or not website.is_public_user())</attribute>
         </xpath>
 
         <xpath
             expr="//button[@data-bs-target='#modal_ticket_registration']"
             position="after"
         >
-            <t t-call="website_sale_force_login.product_login_buttons" />
+            <t
+                t-if="website.is_public_user() and not event.allow_guest_registration"
+                t-call="website_sale_force_login.product_login_buttons"
+            />
         </xpath>
 
     </template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="registration_attendee_details"
+        inherit_id="website_event_sale.registration_attendee_details"
+    >
+
+        <xpath expr="//t" position="attributes">
+            <attribute name="t-if" />
+        </xpath>
+
+    </template>
+
+</odoo>

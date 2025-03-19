@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_sale_force_login
+# 	* website_event_sale_force_login
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20240826\n"
+"Project-Id-Version: Odoo Server 17.0-20240924\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-30 19:23+0000\n"
-"PO-Revision-Date: 2024-09-30 22:23+0300\n"
+"POT-Creation-Date: 2025-03-19 13:55+0000\n"
+"PO-Revision-Date: 2025-03-19 15:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -17,22 +17,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#. module: website_sale_force_login
-#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
-msgid "<i class=\"fa fa-lock me-2\"/>Sign up"
-msgstr "<i class=\"fa fa-lock me-2\"/>Rekisteröidy"
+#. module: website_event_sale_force_login
+#: model:ir.model.fields,field_description:website_event_sale_force_login.field_event_event__allow_guest_registration
+#, fuzzy
+msgid "Allow registration without sign-in"
+msgstr "Rekisteröinnin salliminen ilman kirjautumista"
 
-#. module: website_sale_force_login
-#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
-msgid "<i class=\"fa fa-sign-in me-2\"/>Login"
-msgstr "<i class=\"fa fa-sign-in me-2\"/>Kirjaudu sisään"
+#. module: website_event_sale_force_login
+#: model:ir.model,name:website_event_sale_force_login.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
 
-#. module: website_sale_force_login
-#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
-msgid "<i class=\"font-italic\">Please login or register before continuing</i>"
-msgstr "<i class=\"font-italic\">Kirjaudu sisään tai luo käyttäjätunnus rekisteröimällä sähköpostiosoitteesi jatkaaksesi</i>"
+#. module: website_event_sale_force_login
+#: model:ir.model.fields,field_description:website_event_sale_force_login.field_event_event__free_registration
+msgid "Free registration"
+msgstr "Vapaa rekisteröityminen"
 
-#. module: website_sale_force_login
-#: model_terms:ir.ui.view,arch_db:website_sale_force_login.product_login_buttons
-msgid "Please login or register before continuing"
-msgstr "Kirjaudu sisään tai rekisteröidy ennen jatkamista"
+#. module: website_event_sale_force_login
+#. odoo-python
+#: code:addons/website_event_sale_force_login/models/event.py:0
+#, python-format
+msgid "Guest registration can't be enabled if tickets aren't free"
+msgstr "Vapaata rekisteröitymistä ei voi ottaa käyttöön, jos liput eivät ole ilmaisia"
+
+#. module: website_event_sale_force_login
+#: model:ir.model.fields,help:website_event_sale_force_login.field_event_event__free_registration
+#, fuzzy
+msgid "Helper field for showing if all tickets for this event are free"
+msgstr "Apukenttä, josta näyttää, ovatko kaikki tämän tapahtuman liput ilmaisia"
