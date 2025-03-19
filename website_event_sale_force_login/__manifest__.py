@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2024 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2024 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,18 +21,21 @@
 {
     "name": "Event eCommerce: Force login",
     "summary": "Force login before registering to an event",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Website",
-    "website": "https://gitlab.com/tawasta/odoo/event",
-    "author": "Tawasta",
+    "website": "https://github.com/tawasta/event",
+    "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
         "website_event",
+        "website_event_sale",
         "website_sale_force_login",
     ],
     "data": [
+        "views/event_form.xml",
+        "views/website_attendee_details_template.xml",
         "views/website_registration_template.xml",
     ],
 }

@@ -3,7 +3,6 @@ from odoo.exceptions import UserError
 
 
 class TrackMailListWizard(models.TransientModel):
-
     _name = "track.mail.list.wizard"
     _description = "Create contact mailing list"
 

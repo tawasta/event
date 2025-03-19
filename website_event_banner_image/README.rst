@@ -9,9 +9,9 @@ Website Event Banner Image
 * Banner image is primarily pulled from the event's event type. If event
   type is not set, then from the event itself.
 * Note: backend based banner image will always take precedence over a banner
-  image that may have been set manually via the website builder. To show the website builder 
+  image that may have been set manually via the website builder. To show the website builder
   based image, you would need to delete the event's backend image.
-* For use cases where you expect to be using the website builder to manage the event images, 
+* For use cases where you expect to be using the website builder to manage the event images,
   it's not recommended to install this module.
 
 Configuration
@@ -34,14 +34,14 @@ Credits
 Contributors
 ------------
 
-* Miika Nissi <miika.nissi@tawasta.fi>
-* Timo Talvitie <timo.talvitie@tawasta.fi>
+* Miika Nissi <miika.nissi@futural.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------
 
-.. image:: http://tawasta.fi/templates/tawastrap/images/logo.png
-   :alt: Oy Tawasta OS Technologies Ltd.
-   :target: http://tawasta.fi/
+.. image:: https://futural.fi/templates/tawastrap/images/logo.png
+   :alt: Futural Oy
+   :target: https://futural.fi/
 
-This module is maintained by Oy Tawasta OS Technologies Ltd.
+This module is maintained by Futural Oy

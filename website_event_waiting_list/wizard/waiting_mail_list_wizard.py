@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2021- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2021- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -34,7 +34,6 @@ from odoo.http import request
 
 
 class WaitingMailListWizard(models.TransientModel):
-
     # 1. Private attributes
     _name = "website.event.waiting.mail.list.wizard"
     _description = "Mail confirmation email to waiting list contacts"

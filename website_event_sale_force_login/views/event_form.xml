@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_event_form_description" model="ir.ui.view">
+        <field name="name">event.event.form.force.login</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="address_id" position="after">
+                <field name="free_registration" readonly="1" invisible="1" />
+                <field
+                    name="allow_guest_registration"
+                    widget="boolean_toggle"
+                    invisible="not free_registration"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

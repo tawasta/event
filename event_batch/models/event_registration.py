@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2022- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -79,7 +79,6 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
 
     def create_student_batch(self):
-
         registration = self
         if registration.event_ticket_id.product_id.batch_id:
             student_batch_vals = self.student_batch_values_preprocess(registration)

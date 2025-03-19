@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Oy Tawasta OS Technologies Ltd.
-#    Copyright 2022- Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Author: Futural Oy
+#    Copyright 2022- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -346,7 +346,6 @@ class EventTrackControllerAdvanced(EventTrackController):
                 }
             )
             if track.organizer_contact:
-
                 values.update(
                     {
                         "signee_firstname": track.organizer_contact.firstname,
@@ -366,7 +365,6 @@ class EventTrackControllerAdvanced(EventTrackController):
                     }
                 )
             if track.stage_id.is_accepted:
-
                 operators = [
                     {"id": ope.id, "name": ope.name}
                     for ope in request.env["res.partner.operator.einvoice"]
@@ -655,7 +653,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         tags = False
         tag_post = request.httprequest.form.getlist("tags")
         _logger.debug("Tag list from post: %s" % tag_post)
-        if tag_post and not "" in tag_post:
+        if tag_post and "" not in tag_post:
             tags = list(map(int, tag_post))
 
         presentation_language_ids = False
@@ -663,14 +661,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             "presentation_language_ids"
         )
 
-        if presentation_language_post and not "" in presentation_language_post:
+        if presentation_language_post and "" not in presentation_language_post:
             presentation_language_ids = list(map(int, presentation_language_post))
 
         # Target groups
         target_group_ids = False
         target_post = request.httprequest.form.getlist("target_groups")
         _logger.debug("Tag list from post: %s" % target_post)
-        if target_post and not "" in target_post:
+        if target_post and "" not in target_post:
             target_group_ids = list(map(int, target_post))
 
         # Track
