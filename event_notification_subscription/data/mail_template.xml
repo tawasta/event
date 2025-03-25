@@ -2,34 +2,52 @@
  <data noupdate="1">
          <record id="tag_based_notification_mail" model="mail.template">
             <field name="name">Event: Tag-Based Event Notification</field>
-            <field name="model_id" ref="event.model_event_event"/>
-            <field name="subject">{{object.company_id.name}}: New event '{{ object.name }}'</field>
+            <field name="model_id" ref="event.model_event_event" />
+            <field
+                name="subject"
+            >{{object.company_id.name}}: New event '{{ object.name }}'</field>
             <field name="email_from">{{object.company_id.email}}</field>
-            <field name="description">Notification email to contacts who have expressed interest in the event's tags</field>
+            <field
+                name="description"
+            >Notification email to contacts who have expressed interest in the event's tags</field>
             <field name="body_html" type="html">
-                
+
                 <p style="margin:0px 0 0px 0;box-sizing:border-box;margin-bottom: 0px;">
-                    Hello, 
-                    
-                    <br/><br/>
+                    Hello,
 
-                    We have published a new event <strong style="box-sizing:border-box;font-weight:bolder;"><t t-out="object.name or ''">event name</t></strong> you might be interested in.
-                    <br/><br/>
+                    <br /><br />
 
-                    <t t-set="tag_string" t-value="', '.join([tag.name for tag in object.tag_ids])"/>
+                    We have published a new event <strong
+                        style="box-sizing:border-box;font-weight:bolder;"
+                    ><t
+                            t-out="object.name or ''"
+                        >event name</t></strong> you might be interested in.
+                    <br /><br />
+
+                    <t
+                        t-set="tag_string"
+                        t-value="', '.join([tag.name for tag in object.tag_ids])"
+                    />
                     <ul>
                         <li>Event tags: <t t-out="tag_string or '-'">tags</t></li>
-                        <li>City: <t t-out="object.address_id and object.address_id.city or '-'">city</t></li>
-                        <li>Date: <t t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy')">date</t></li>
+                        <li>City: <t
+                                t-out="object.address_id and object.address_id.city or '-'"
+                            >city</t></li>
+                        <li>Date: <t
+                                t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy')"
+                            >date</t></li>
                     </ul>
-                    <br/>
+                    <br />
 
-                    More details are available on the <a t-attf-href="{{object.website_url}}" style="text-decoration: underline">event page</a>.
+                    More details are available on the <a
+                        t-attf-href="{{object.website_url}}"
+                        style="text-decoration: underline"
+                    >event page</a>.
 
-                    <br/><br/>
-                    Best regards, <br/>
+                    <br /><br />
+                    Best regards, <br />
                     - <t t-out="object.company_id.name">company name</t>
-                </p>                
+                </p>
             </field>
 
         </record>

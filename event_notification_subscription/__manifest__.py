@@ -19,10 +19,11 @@
 ##############################################################################
 {
     "name": "Event Notification Subscription",
-    "summary": "Portal users can select event tags they're interested in, and receive e-mail notifications about matching new events",
+    "summary": "Portal users can select event tags they're interested in, "
+    "and receive e-mail notifications about matching new events",
     "version": "16.0.1.1.0",
     "category": "Website",
-    "website": "https://github.com/tawasta/event",
+    "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
