@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Tawasta
-#    Copyright 2020 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Copyright 2025 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,9 @@
 ##############################################################################
 {
     "name": "Event Notification Subscription",
-    "summary": "Event Notification Subscription",
-    "version": "16.0.1.0.1",
+    "summary": "Portal users can select event tags they're interested in, "
+    "and receive e-mail notifications about matching new events",
+    "version": "16.0.1.1.0",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
@@ -34,8 +35,10 @@
     ],
     "data": [
         "data/cron_job.xml",
+        "data/mail_template.xml",
         "views/portal_templates.xml",
         "views/res_partner_view.xml",
+        "views/event_event_view.xml",
     ],
     "assets": {
         "web.assets_frontend": [

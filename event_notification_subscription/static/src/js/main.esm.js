@@ -1,8 +1,6 @@
 odoo.define(
     "event_notification_subscription.portal_my_details_fields",
     function (require) {
-
-
         var publicWidget = require("web.public.widget");
         var core = require("web.core");
         var _t = core._t;

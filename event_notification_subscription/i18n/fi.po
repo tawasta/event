@@ -1,13 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* event_batch
+# 	* event_notification_subscription
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0-20220915\n"
+"Project-Id-Version: Odoo Server 16.0-20250320\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-07 12:26+0000\n"
-"PO-Revision-Date: 2022-10-07 12:26+0000\n"
+"POT-Creation-Date: 2025-03-25 11:30+0000\n"
+"PO-Revision-Date: 2025-03-25 11:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,92 +15,106 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_op_student__event_count
-msgid "# Events"
-msgstr "# Tapahtumaa"
+#. module: event_notification_subscription
+#: model:mail.template,body_html:event_notification_subscription.tag_based_notification_mail
+msgid ""
+"<p style=\"margin:0px 0 0px 0;box-sizing:border-box;margin-bottom: 0px;\">\n"
+"                    Hello, \n"
+"                    \n"
+"                    <br><br>\n"
+"\n"
+"                    We have published a new event <strong style=\"box-sizing:border-box;font-weight:bolder;\"><t t-out=\"object.name or ''\">event name</t></strong> you might be interested in.\n"
+"                    <br><br>\n"
+"\n"
+"                    <t t-set=\"tag_string\" t-value=\"', '.join([tag.name for tag in object.tag_ids])\"></t>\n"
+"                    <ul>\n"
+"                        <li>Event tags: <t t-out=\"tag_string or '-'\">tags</t></li>\n"
+"                        <li>City: <t t-out=\"object.address_id and object.address_id.city or '-'\">city</t></li>\n"
+"                        <li>Date: <t t-out=\"format_datetime(object.date_begin, dt_format='dd.MM.yyyy')\">date</t></li>\n"
+"                    </ul>\n"
+"                    <br>\n"
+"\n"
+"                    More details are available on the <a t-attf-href=\"{{object.website_url}}\" style=\"text-decoration: underline\">event page</a>.\n"
+"\n"
+"                    <br><br>\n"
+"                    Best regards, <br>\n"
+"                    - <t t-out=\"object.company_id.name\">company name</t>\n"
+"                </p>                \n"
+"            "
+msgstr ""
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_product_product__batch_id
-msgid "Batch"
-msgstr "Toteutus"
+#. module: event_notification_subscription
+#: model_terms:ir.ui.view,arch_db:event_notification_subscription.portal_my_details_fields
+msgid ""
+"<span class=\"small m-1 text-muted\">You'll get an e-mail notification when "
+"matching events are published.</span>"
+msgstr ""
+"<span class=\"small m-1 text-muted\">Saat sähköposti-ilmoituksen, kun "
+"sopivia tapahtumia julkaistaan.</span>"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_event_event__create_partner_student_user
-msgid "Create Partner Student Users in registration"
-msgstr "Luo kontaktin opiskelijan käyttäjä rekisteröinneissä"
+#. module: event_notification_subscription
+#: model:ir.model.fields,field_description:event_notification_subscription.field_event_event__announcement_sent
+msgid "Announcement to Interested Contacts Sent"
+msgstr "Viesti lähetetty kiinnostuneille kontakteille"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_event_event__create_partner
-msgid "Create Partners in registration"
-msgstr "Luo kontaktit rekisteröinneissä"
+#. module: event_notification_subscription
+#: model:ir.model,name:event_notification_subscription.model_res_partner
+msgid "Contact"
+msgstr "Kontakti"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_event_event__display_name
-#: model:ir.model.fields,field_description:event_batch.field_event_registration__display_name
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__display_name
-#: model:ir.model.fields,field_description:event_batch.field_op_student__display_name
-#: model:ir.model.fields,field_description:event_batch.field_product_product__display_name
-msgid "Display Name"
-msgstr "Näyttönimi"
-
-#. module: event_batch
-#: model:ir.model,name:event_batch.model_event_event
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__event_id
+#. module: event_notification_subscription
+#: model:ir.model,name:event_notification_subscription.model_event_event
 msgid "Event"
 msgstr "Tapahtuma"
 
-#. module: event_batch
-#: model:ir.model,name:event_batch.model_event_registration
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__event_registration_id
-msgid "Event Registration"
-msgstr "Tapahtuman ilmoittautuminen"
+#. module: event_notification_subscription
+#: model_terms:ir.ui.view,arch_db:event_notification_subscription.portal_my_details_fields
+msgid "Event Tags I'm Interested In:"
+msgstr "Tapahtumatunnisteet, joista olen kiinnostunut:"
 
-#. module: event_batch
-#: model_terms:ir.ui.view,arch_db:event_batch.view_op_student_form
-msgid "Events"
-msgstr "Tapahtumat"
+#. module: event_notification_subscription
+#: model:ir.model.fields,field_description:event_notification_subscription.field_res_partner__event_interest_tags
+#: model:ir.model.fields,field_description:event_notification_subscription.field_res_users__event_interest_tags
+msgid "Event Tags Interested In"
+msgstr "Tapahtumatunnisteet, joista kiinnostunut"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__first_time
-msgid "First time"
-msgstr "Ensimmäinen kerta"
+#. module: event_notification_subscription
+#: model:ir.actions.server,name:event_notification_subscription.cron_event_notification_ir_actions_server
+#: model:ir.cron,cron_name:event_notification_subscription.cron_event_notification
+msgid "Event: Send Tag-based Event Notifications"
+msgstr "Tapahtuma: lähetä tagipohjaiset notifikaatiot kontakteille"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_event_event__id
-#: model:ir.model.fields,field_description:event_batch.field_event_registration__id
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students__id
-#: model:ir.model.fields,field_description:event_batch.field_op_student__id
-#: model:ir.model.fields,field_description:event_batch.field_product_product__id
-msgid "ID"
-msgstr "Tunniste (ID)"
+#. module: event_notification_subscription
+#: model:mail.template,name:event_notification_subscription.tag_based_notification_mail
+msgid "Event: Tag-Based Event Notification"
+msgstr "Tapahtuma: tagipohjainen notifikaatio kontakteille"
 
-#. module: event_batch
-#: model:ir.model.fields,field_description:event_batch.field_event_event____last_update
-#: model:ir.model.fields,field_description:event_batch.field_event_registration____last_update
-#: model:ir.model.fields,field_description:event_batch.field_op_batch_students____last_update
-#: model:ir.model.fields,field_description:event_batch.field_op_student____last_update
-#: model:ir.model.fields,field_description:event_batch.field_product_product____last_update
-msgid "Last Modified on"
-msgstr "Viimeksi muokattu"
+#. module: event_notification_subscription
+#: model:ir.model.fields,help:event_notification_subscription.field_event_event__announcement_sent
+msgid ""
+"Indicates if an announcement email has already been sent for this event to "
+"contacts who are interested in this event's tags."
+msgstr ""
+"Kertoo, onko tapahtumasta jo lähetetty sähköpostinotifikaatiot kontakteille,"
+" jotka ovat merkinneet olevansa kiinnostuneita tapahtuman tunnisteista."
 
-#. module: event_batch
-#: model:ir.model.fields,help:event_batch.field_op_student__event_count
-msgid "Number of events the partner has participated."
-msgstr "Tapahtumien määrä mihin kumppani on osallistunut."
+#. module: event_notification_subscription
+#: model:mail.template,description:event_notification_subscription.tag_based_notification_mail
+msgid ""
+"Notification email to contacts who have expressed interest in the event's "
+"tags"
+msgstr ""
+"Notifikaatiosähköposti kontakteille, jotka ovat ilmaisseet kiinnostuksensa "
+"tapahtuman tunnisteisiin."
 
-#. module: event_batch
-#: model:ir.model,name:event_batch.model_product_product
-msgid "Product"
-msgstr "Tuote"
+#. module: event_notification_subscription
+#. odoo-javascript
+#: code:addons/event_notification_subscription/static/src/js/main.esm.js:0
+#, python-format
+msgid "Select tags..."
+msgstr "Valitse tunnisteet..."
 
-#. module: event_batch
-#: model:ir.model,name:event_batch.model_op_student
-msgid "Student"
-msgstr "Opiskelija"
-
-#. module: event_batch
-#: model:ir.model,name:event_batch.model_op_batch_students
-#: model:ir.model.fields,field_description:event_batch.field_event_registration__student_batch_id
-msgid "Student Batch"
-msgstr "Opiskelijatoteutus"
+#. module: event_notification_subscription
+#: model:mail.template,subject:event_notification_subscription.tag_based_notification_mail
+msgid "{{object.company_id.name}}: New event '{{ object.name }}'"
+msgstr ""

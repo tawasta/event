@@ -10,7 +10,8 @@ This Odoo module allows portal users to subscribe to event categories based on t
 
 Configuration
 =============
-No additional configuration is required. The system automatically processes event notifications and allows users to manage their subscriptions through the portal.
+ * Automated event notifications are off by default. Before turning them on via Settings -> Scheduled actions, you'll likely want to set existing events' 
+   "Announcement to Interested Contacts Sent" field to avoid sending messages about already ongoing events. Afterwards, enable the scheduled action.
 
 Usage
 =====
@@ -42,6 +43,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------
