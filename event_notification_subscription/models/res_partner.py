@@ -6,6 +6,5 @@ class ResPartner(models.Model):
 
     event_interest_tags = fields.Many2many(
         "event.tag",
-        string="Interested Event Tags",
-        help="Select the event types you are interested in.",
+        string="Event Tags Interested In",
     )

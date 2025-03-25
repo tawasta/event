@@ -5,11 +5,11 @@
         id="portal_my_details_fields"
         inherit_id="portal.portal_my_details_fields"
     >
-        <xpath expr="//input[@name='zipcode']//.." position="after">
+        <xpath expr="//select[@name='state_id']//.." position="after">
             <t t-set="tags" t-value="request.env['event.tag'].sudo().search([])" />
 
-            <div class="mb-1  col-xl-6">
-                <label class="col-form-label label-optional" for="tag_id">Tags </label>
+            <div class="mb-1 col-12">
+                <label class="col-form-label label-optional" for="tag_id">Event Tags I'm Interested In:</label>
                 <select
                     class="form-control input-lg"
                     name="tag_id"
@@ -25,6 +25,7 @@
                         </option>
                     </t>
                 </select>
+                <span class="small m-1 text-muted">You'll get an e-mail notification when matching events are published.</span>
             </div>
             <input type="hidden" id="hiddenmode" name="tag_ids" t-att-value="tag_ids" />
         </xpath>
