@@ -3,6 +3,7 @@
     <template
         id="view_email_template_subscription_with_invitation"
         inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+        priority="99"
     >
     <!-- Tarkenna xpath vastaamaan tarkasti oikeaa <div>-elementtiä -->
     <xpath
@@ -51,6 +52,7 @@
 <template
         id="view_email_template_event_base"
         inherit_id="website_event_cancellation.view_email_template_event_base"
+        priority="99"
     >
     <xpath
             expr="//span[@style='font-size: 20px; font-weight: bold;']/t[@t-esc='object.name']"

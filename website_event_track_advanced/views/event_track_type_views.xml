@@ -4,7 +4,7 @@
         <field name="name">view.event.track.type.tree</field>
         <field name="model">event.track.type</field>
         <field name="arch" type="xml">
-            <tree string="Track Types">
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="code" />
                 <field name="name" />
