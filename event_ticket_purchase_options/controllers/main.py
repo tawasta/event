@@ -88,7 +88,7 @@ class EventRegistrationController(WebsiteEventController):
         # Luodaan rekisteröinnit
         for ticket in tickets:
             if ticket["is_inviting_others"]:
-                for _ in range(ticket["quantity"]):
+                for i in range(ticket["quantity"]):
                     registration_data = {
                         "event_id": event.id,
                         "name": "Draft Registration",

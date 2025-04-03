@@ -45,7 +45,7 @@ addon | version | maintainers | summary
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
 [website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.2 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
-[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.0.0 |  | Force login before registering to an event
+[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.1 |  | Force login before registering to an event
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <data noupdate="1">
-        <!-- Event Atteendee message subtype for messaging / Chatter -->
-        <record id="mt_mail_event_attendees" model="mail.message.subtype">
-            <field name="name">Event Attendee</field>
-            <field name="default" eval="False" />
-            <field name="internal" eval="True" />
-            <field name="sequence" eval="100" />
-            <field name="description">- Message sent to Event Attendees</field>
-        </record>
-    </data>
+<odoo noupdate="1">
+    <!-- Event Atteendee message subtype for messaging / Chatter -->
+    <record id="mt_mail_event_attendees" model="mail.message.subtype">
+        <field name="name">Event Attendee</field>
+        <field name="default" eval="False" />
+        <field name="internal" eval="True" />
+        <field name="sequence" eval="100" />
+        <field name="description">- Message sent to Event Attendees</field>
+    </record>
 </odoo>

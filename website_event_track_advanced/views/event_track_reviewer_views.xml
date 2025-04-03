@@ -34,7 +34,7 @@
         <field name="model">event.track.reviewer</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Track Reviewers">
+            <tree>
                 <field name="user_id" />
                 <field name="email" optional="hide" />
                 <field name="phone" optional="hide" />

@@ -40,7 +40,7 @@
         <field name="model">event.track.rating</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Event Track">
+            <tree>
                 <field name="event_id" optional="show" />
                 <field name="event_track" />
                 <field name="reviewer_id" />
@@ -116,7 +116,7 @@
         <field name="model">event.track.rating.grade</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Event Track">
+            <tree>
                 <field name="name" />
                 <field name="grade" />
             </tree>

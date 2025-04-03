@@ -3,6 +3,7 @@
     <template
         id="modal_ticket_registration_inherit"
         inherit_id="website_event.modal_ticket_registration"
+        priority="99"
     >
     <!-- Selkeä korttimuotoilu Bootstrap-luokilla -->
     <xpath expr="//form//div[@id='o_wevent_tickets']" position="before">
@@ -67,6 +68,7 @@
 
     <template
         id="portal_my_events_inherit"
+        priority="99"
         inherit_id="website_my_events.portal_my_events"
     >
         <xpath expr="//div[@class='container portal_my_events']" position="inside">

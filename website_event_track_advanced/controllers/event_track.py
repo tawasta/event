@@ -643,9 +643,7 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Target group
         if "target_group" in post and post.get("target_group"):
-            target_group = self._get_record(
-                "event.track.target.group", post.get("target_group")
-            )
+            self._get_record("event.track.target.group", post.get("target_group"))
         else:
             pass
 
@@ -1321,21 +1319,20 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Suodatetaan vain julkaistut esitykset
         published_tracks = render_vals.get("tracks").filtered(
-            lambda t: t.stage_id.is_fully_accessible == True
+            lambda t: t.stage_id.is_fully_accessible
         )
 
         # Päivitetään render_vals suodatetuilla arvoilla
         render_vals["tracks"] = published_tracks
 
         render_vals["tracks"] = render_vals.get("tracks").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
 
         indexes_to_del = []
         for track_by_day in render_vals.get("tracks_by_day"):
             track_by_day["tracks"] = track_by_day.get("tracks").filtered(
-                lambda p: p.type.code == "poster"
-                and p.stage_id.is_fully_accessible == True
+                lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
             )
             if not track_by_day["tracks"]:
                 indexes_to_del.append(render_vals["tracks_by_day"].index(track_by_day))
@@ -1343,10 +1340,10 @@ class EventTrackControllerAdvanced(EventTrackController):
         for i in sorted(indexes_to_del, reverse=True):
             del render_vals["tracks_by_day"][i]
         render_vals["tracks_live"] = render_vals.get("tracks_live").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
         render_vals["tracks_soon"] = render_vals.get("tracks_soon").filtered(
-            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible == True
+            lambda p: p.type.code == "poster" and p.stage_id.is_fully_accessible
         )
         return request.render("website_event_track.tracks_session", render_vals)
 

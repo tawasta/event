@@ -4,7 +4,7 @@
         <field name="name">registration.invitation.tree</field>
         <field name="model">registration.invitation</field>
         <field name="arch" type="xml">
-            <tree string="Registration Invitations" default_order="invited_date desc">
+            <tree default_order="invited_date desc">
                 <field name="registration_id" />
                 <field name="invite_email" />
                 <field name="invited_date" />

@@ -16,7 +16,7 @@
                 Send event confirmation mail
                 <group>
                     <field name="registration_ids" nolabel="1" readonly="1">
-                        <tree string="Registrations">
+                        <tree>
                             <field name="name" />
                             <field name="email" />
                             <field name="event_id" readonly="1" />
