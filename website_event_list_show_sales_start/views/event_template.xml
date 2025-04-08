@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="events_list" inherit_id="website_event.events_list">
+        <xpath expr="//main" position="inside">
+            <div t-if="event.event_ticket_earliest_start_sale" class="mt-1">
+                <small>Registrations open: <span t-out="event.event_ticket_earliest_start_sale" t-options='{"widget": "date"}'/></small>
+            </div> 
+        </xpath>
+    </template>
+
+</odoo>
