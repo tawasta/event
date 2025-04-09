@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record model="res.groups" id="group_publish_event_in_near_future">
+        <field name="name">Publish Events that are &lt; 30 days away on Website</field>
+    </record>
+
+</odoo>

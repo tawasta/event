@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_event_form" model="ir.ui.view">
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+
+            <field name="event_type_id" position="before">
+                <field name="is_published_sudo_helper" invisible="1" />
+                <field name="requires_additional_rights_to_publish" invisible="1" />
+            </field>
+
+            <!-- show info msg in form header-->
+            <xpath expr="//header" position="after">
+                <div
+                    class="alert alert-warning text-center mb-0"
+                    role="alert"
+                    attrs="{'invisible': ['|', ('requires_additional_rights_to_publish', '=', False), ('is_published_sudo_helper', '=', True)] }"
+                >
+                    <p>
+                        This event is set to start within 30 days. Publishing this event requires additional access rights.
+                    </p>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
