@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {
-    "name": "Event ticket automation",
+    "name": "Event Ticket Registration Control",
     "summary": "Event ticket automation",
     "version": "16.0.1.0.1",
     "category": "Website",
@@ -27,9 +27,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "event",
-        "event_sale",
-    ],
-    "data": [],
+    "depends": ["event", "event_sale", "sprintit_event_backend_management"],
+    "data": ["views/event_event.xml", "security/security.xml"],
 }

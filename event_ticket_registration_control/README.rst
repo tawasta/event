@@ -9,7 +9,7 @@ This Odoo module automatically manages the registration start date for event tic
 
 Configuration
 =============
-No additional configuration is required. The system automatically applies the rules when creating or modifying events and tickets.
+* Add relevant users to the 'Publish Events that are less than 30 days away on Website'
 
 Usage
 =====
@@ -39,6 +39,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@tawasta.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------
