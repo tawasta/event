@@ -20,7 +20,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                     [
                         ("registration_survey_id", "in", event.sudo().survey_ids.ids),
                         ("partner_id", "=", partner_id),
-                        ("state", "in", ["draft", "open"]),
+                        ("state", "in", ["open"]),
                     ]
                 )
             )
