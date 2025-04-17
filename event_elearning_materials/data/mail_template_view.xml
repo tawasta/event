@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="view_email_template_subscription_with_course"
+        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+    >
+        <xpath
+            expr="//tr/td[@align='center']/table/tr/td[@valign='top']/div"
+            position="inside"
+        >
+            <t t-if="object.event_id.slide_channel_id">
+                <div style="margin-top: 20px;">
+                    <strong>You also have access to the related online course:</strong><br/>
+                    <a t-att-href="'/slides/%s' % object.event_id.slide_channel_id.id"
+                       style="text-decoration: underline; color: #875A7B;">
+                        <t t-esc="object.event_id.slide_channel_id.name"/>
+                    </a>
+                    <br/>
+                    You can find additional materials and content related to this event on the course page.
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
