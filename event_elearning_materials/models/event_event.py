@@ -1,45 +1,51 @@
-# -*- coding: utf-8 -*-
 from odoo import models, fields, api
 
 
 class EventEvent(models.Model):
-    _inherit = 'event.event'
+    _inherit = "event.event"
 
     slide_channel_id = fields.Many2one(
-        'slide.channel', string="Related Course",
-        help="Optional: When attendees are confirmed, they will be enrolled in this eLearning course automatically."
+        "slide.channel",
+        string="Related Course",
+        help="Optional: When attendees are confirmed, they will be enrolled in this eLearning course automatically.",
     )
 
     def write(self, vals):
         res = super().write(vals)
-        if 'registration_ids' in vals or 'slide_channel_id' in vals:
+        if "registration_ids" in vals or "slide_channel_id" in vals:
             for event in self:
                 if event.slide_channel_id:
-                    confirmed_registrations = event.registration_ids.filtered(lambda r: r.state == 'open')
-                    partners = confirmed_registrations.mapped('partner_id')
+                    confirmed_registrations = event.registration_ids.filtered(
+                        lambda r: r.state == "open"
+                    )
+                    partners = confirmed_registrations.mapped("partner_id")
                     event.slide_channel_id._action_add_members(partners)
         return res
 
 
 class EventRegistration(models.Model):
-    _inherit = 'event.registration'
+    _inherit = "event.registration"
 
     is_course_member = fields.Boolean(
-        string="Enrolled in Course",
-        compute="_compute_is_course_member",
-        store=False
+        string="Enrolled in Course", compute="_compute_is_course_member", store=False
     )
 
-    @api.depends('event_id.slide_channel_id', 'partner_id')
+    @api.depends("event_id.slide_channel_id", "partner_id")
     def _compute_is_course_member(self):
         for reg in self:
             channel = reg.event_id.slide_channel_id
             partner = reg.partner_id
             if channel and partner:
-                exists = self.env['slide.channel.partner'].sudo().search_count([
-                    ('channel_id', '=', channel.id),
-                    ('partner_id', '=', partner.id)
-                ])
+                exists = (
+                    self.env["slide.channel.partner"]
+                    .sudo()
+                    .search_count(
+                        [
+                            ("channel_id", "=", channel.id),
+                            ("partner_id", "=", partner.id),
+                        ]
+                    )
+                )
                 reg.is_course_member = bool(exists)
             else:
                 reg.is_course_member = False
@@ -55,13 +61,20 @@ class EventRegistration(models.Model):
             partner = registration.partner_id
             if not course or not partner:
                 continue
-            if prev_state != 'open' and new_state == 'open':
+            if prev_state != "open" and new_state == "open":
                 course._action_add_members(partner)
-            elif prev_state == 'open' and new_state == 'cancel':
-                channel_partner = self.env['slide.channel.partner'].sudo().search([
-                    ('channel_id', '=', course.id),
-                    ('partner_id', '=', partner.id)
-                ], limit=1)
+            elif prev_state == "open" and new_state == "cancel":
+                channel_partner = (
+                    self.env["slide.channel.partner"]
+                    .sudo()
+                    .search(
+                        [
+                            ("channel_id", "=", course.id),
+                            ("partner_id", "=", partner.id),
+                        ],
+                        limit=1,
+                    )
+                )
                 if channel_partner:
                     channel_partner.unlink()
         return res
@@ -70,6 +83,6 @@ class EventRegistration(models.Model):
     def create(self, vals_list):
         registrations = super().create(vals_list)
         for reg in registrations:
-            if reg.state == 'open' and reg.event_id.slide_channel_id:
+            if reg.state == "open" and reg.event_id.slide_channel_id:
                 reg.event_id.slide_channel_id._action_add_members(reg.partner_id)
         return registrations

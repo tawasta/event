@@ -10,12 +10,15 @@
         >
             <t t-if="object.event_id.slide_channel_id">
                 <div style="margin-top: 20px;">
-                    <strong>You also have access to the related online course:</strong><br/>
-                    <a t-att-href="'/slides/%s' % object.event_id.slide_channel_id.id"
-                       style="text-decoration: underline; color: #875A7B;">
-                        <t t-esc="object.event_id.slide_channel_id.name"/>
+                    <strong
+                    >You also have access to the related online course:</strong><br />
+                    <a
+                        t-att-href="'/slides/%s' % object.event_id.slide_channel_id.id"
+                        style="text-decoration: underline; color: #875A7B;"
+                    >
+                        <t t-esc="object.event_id.slide_channel_id.name" />
                     </a>
-                    <br/>
+                    <br />
                     You can find additional materials and content related to this event on the course page.
                 </div>
             </t>
