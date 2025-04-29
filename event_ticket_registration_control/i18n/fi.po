@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0-20250320\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 13:20+0000\n"
-"PO-Revision-Date: 2025-04-09 13:20+0000\n"
+"POT-Creation-Date: 2025-04-29 17:48+0000\n"
+"PO-Revision-Date: 2025-04-29 17:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,15 @@ msgstr ""
 #: model:ir.model,name:event_ticket_registration_control.model_event_event
 msgid "Event"
 msgstr "Tapahtuma"
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+#, python-format
+msgid ""
+"Event is less than 30 days away. Updated ticket '%s' sales to open now."
+msgstr ""
+"Tapahtumaan on alle 30 päivää. Päivitettiin lipun '%s' myynti alkamaan heti."
 
 #. module: event_ticket_registration_control
 #: model:ir.model.fields,field_description:event_ticket_registration_control.field_event_event__is_published_sudo_helper
@@ -40,7 +49,8 @@ msgstr "Julkaisu vaatii korotettuja käyttöoikeuksia"
 msgid ""
 "Technical helper field so that all users can read the Is Published field"
 msgstr ""
-"Tekninen apukenttä, jotta kaikki käyttäjät voivav lukea Julkaistu-kentän sisältöä"
+"Tekninen apukenttä, jotta kaikki käyttäjät voivav lukea Julkaistu-kentän "
+"sisältöä"
 
 #. module: event_ticket_registration_control
 #. odoo-python
@@ -51,5 +61,5 @@ msgid ""
 "This event is set to start within 30 days. Publishing this event requires "
 "additional access rights."
 msgstr ""
-"Tämä tapahtuma alkaa 30 päivän sisällä. Sen julkaiseminen on mahdollista vain "
-"korkeammilla käyttöoikeuksilla."
+"Tämä tapahtuma alkaa 30 päivän sisällä. Sen julkaiseminen on mahdollista "
+"vain korkeammilla käyttöoikeuksilla."

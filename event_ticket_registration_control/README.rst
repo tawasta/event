@@ -25,7 +25,7 @@ Usage
 The registration start date follows these rules:
 - If the event is **more than 2 months away**, registration starts **1 month before** the event.
 - If the event is **between 1 and 2 months away**, registration starts **2 weeks before** the event.
-- If the event is **less than 1 month away**, registration requires **manual approval** and is set **1-3 days before** the event.
+- If the event is **less than 1 month away**, registration requires **manual approval** and registration starts when approval has been given. Until then a placeholder registration start of 1 day before event is shown in backend
 
 
 Known issues / Roadmap
