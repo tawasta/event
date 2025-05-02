@@ -9,7 +9,7 @@
                 <group>
                     <div id="registration_ids">
                         <field name="registration_ids" nolabel="1" readonly="1">
-                            <tree string="Mail sent to following registrations">
+                            <tree>
                                 <field name="name" />
                                 <field name="email" />
                                 <field name="event_id" readonly="1" />

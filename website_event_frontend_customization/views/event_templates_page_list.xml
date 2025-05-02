@@ -25,6 +25,7 @@
         inherit_id="website_event.events_list"
         active="True"
         customize_show="True"
+        priority="99"
         name="Show location name and city"
     >
         <xpath expr="//small[@itemprop='location']" position="replace">

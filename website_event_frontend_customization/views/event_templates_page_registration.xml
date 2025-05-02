@@ -58,6 +58,7 @@
         inherit_id="website_event.registration_complete"
         active="True"
         customize_show="True"
+        priority="99"
         name="Hide ticket reference"
     >
         <xpath

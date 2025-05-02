@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Download registration badge views -->
-    <template id="download_badge_page" name="Download Registration Badge">
+    <template id="download_badge_page" priority="99" name="Download Registration Badge">
         <t t-call="website_event.layout">
             <div class="container my-5 o_wereg_confirmed">
                 <div class="row mb-3">
@@ -185,6 +185,7 @@
 
     <template
         id="custom_event_confirmation"
+        priority="99"
         inherit_id="website_event_sale.event_confirmation"
     >
         <!-- Replace original download button with the custom implementation -->

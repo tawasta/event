@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="record_cover" inherit_id="website.record_cover">
+    <template id="record_cover" priority="99" inherit_id="website.record_cover">
 
         <!-- If the record cover is for an event, and a banner image is set, show it.
         If not, use the standard core functionality for background image rendering -->
