@@ -60,7 +60,7 @@
                             nolabel="1"
                             context="{'default_track_id':id}"
                         >
-                            <tree string="Speakers" editable="bottom">
+                            <tree editable="bottom">
                                 <field name="sequence" widget="handle" />
                                 <field name="partner_id" />
                                 <field name="phone" />
@@ -235,7 +235,7 @@
             >
                 <group>
                     <field name="attachment_ids" widget="many2many">
-                        <tree string="Attachments">
+                        <tree>
                             <field name="name" />
                             <field name="type" />
                             <field name="file_size" />

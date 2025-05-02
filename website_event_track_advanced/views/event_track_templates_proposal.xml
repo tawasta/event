@@ -2,6 +2,7 @@
 <odoo>
     <template
         id="event_track_proposal_advanced"
+        priority="99"
         inherit_id="website_event_track.event_track_proposal"
     >
         <!-- <xpath expr="//section[@class='pt48']//h2" position="attributes">
@@ -62,7 +63,7 @@
         </xpath>
     </template>
 
-    <template id="event_track_review_template" name="Event Track Review">
+    <template id="event_track_review_template" priority="99" name="Event Track Review">
         <div class="col-xl-6">
                 <div t-attf-class="card border border-primary">
                     <h4 class="card-header">

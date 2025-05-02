@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
+[website_event_filter_fix](website_event_filter_fix/) | 17.0.1.1.0 |  | Removes company_id filter from event.event in website.snippet.filter
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.1 |  | Customization options to Website Event Frontends
 [website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.1 |  | Module to manage online and hybrid events. Includes a video conference link.
@@ -47,7 +48,7 @@ addon | version | maintainers | summary
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
 [website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.2 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
-[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.0 |  | Force login before registering to an event
+[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.1 |  | Force login before registering to an event
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet

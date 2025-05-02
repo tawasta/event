@@ -6,8 +6,8 @@
         inherit_id="website_event_sale.registration_attendee_details"
     >
 
-        <xpath expr="//t" position="attributes">
-            <attribute name="t-if" />
+        <xpath expr="//a[@class='btn btn-primary']/.." position="attributes">
+            <attribute name="t-if">0</attribute>
         </xpath>
 
     </template>

@@ -2,6 +2,7 @@
 <odoo>
     <template
         id="registration_template_registration_elsewhere"
+        priority="99"
         inherit_id="website_event.event_description_full"
     >
         <xpath
