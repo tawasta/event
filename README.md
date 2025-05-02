@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
+[website_event_filter_fix](website_event_filter_fix/) | 17.0.1.1.0 |  | Removes company_id filter from event.event in website.snippet.filter
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.1 |  | Customization options to Website Event Frontends
 [website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.1 |  | Module to manage online and hybrid events. Includes a video conference link.

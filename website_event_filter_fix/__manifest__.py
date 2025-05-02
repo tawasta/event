@@ -29,6 +29,5 @@
     "application": False,
     "installable": True,
     "depends": ["website_snippet_filter_core"],
-    "data": [
-    ],
+    "data": [],
 }
