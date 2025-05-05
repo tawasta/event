@@ -5,11 +5,44 @@
         inherit_id="website_event.modal_ticket_registration"
         priority="101"
     >
-        <xpath expr="//t[@t-set='tickets']" position="replace">
+        <xpath
+            expr="//div[@id='o_wevent_tickets_collapse']/div/div[@class='d-flex flex-column flex-md-row align-items-center justify-content-between gap-2']/div[@class='ms-auto']/select"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not ticket.is_expired and ticket.sale_available and (not ticket.paywall_domain or ticket.user_in_paywall_domain)</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@id='o_wevent_tickets_collapse']/div/div[@class='d-flex flex-column flex-md-row align-items-center justify-content-between gap-2']/div[@class='ms-auto']/select"
+            position="after"
+        >
+            <t t-if="ticket.paywall_domain and not ticket.user_in_paywall_domain">
+                <div class="text-muted">
+                    <small>You don't have access to select this ticket.</small>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath
+            expr="//div[@class='o_wevent_registration_single_select w-auto ms-auto']/select"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not tickets.is_expired and tickets.sale_available and (not tickets.paywall_domain or tickets.user_in_paywall_domain)</attribute>
+        </xpath>
+        <xpath
+            expr="//div[@class='o_wevent_registration_single_select w-auto ms-auto']/select"
+            position="after"
+        >
             <t
-                t-set="tickets"
-                t-value="event.event_ticket_ids.filtered(lambda ticket: not ticket.is_expired and (not ticket.paywall_domain or ticket.user_in_paywall_domain))"
-            />
+                t-if="tickets and tickets.paywall_domain and not tickets.user_in_paywall_domain"
+            >
+                <div class="text-muted">
+                    <small>You don't have access to select this ticket.</small>
+                </div>
+            </t>
         </xpath>
     </template>
 </odoo>
