@@ -12,7 +12,7 @@
                     invisible="detailed_type != 'event'"
                 >
                     <p class="text_muted">
-                        When placed into web shop cart or Sale Order Line, an automatic discount
+                        When ticket is placed into web shop cart, an automatic discount
                         percentage will be added on the line based on the rules defined below.
                     </p>
                     <field name="product_qty_autodiscount_line_ids">
