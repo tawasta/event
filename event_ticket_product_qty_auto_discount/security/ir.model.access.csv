@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_qty_autodiscount_line_public,access_product_qty_autodiscount_line_public,model_product_quantity_auto_discount_line,,1,0,0,0
+access_product_qty_autodiscount_line_salesperson,access_product_qty_autodiscount_line_salesperson,model_product_quantity_auto_discount_line,sales_team.group_sale_salesman,1,1,1,1
