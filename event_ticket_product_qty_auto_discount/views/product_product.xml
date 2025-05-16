@@ -1,0 +1,29 @@
+<odoo>
+    <record id="product_product_form_view" model="ir.ui.view">
+        <field
+            name="name"
+        >product.product.form.inherit.product.quantity.autodiscount</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Event Ticket Quantity Discounts"
+                    invisible="detailed_type != 'event'"
+                >
+                    <p class="text_muted">
+                        When placed into web shop cart or Sale Order Line, an automatic discount
+                        percentage will be added on the line based on the rules defined below.
+                    </p>
+                    <field name="product_qty_autodiscount_line_ids">
+                        <tree editable="bottom">
+                            <field name="qty_min" />
+                            <field name="qty_max" />
+                            <field name="discount_percentage" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
