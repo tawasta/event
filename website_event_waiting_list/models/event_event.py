@@ -14,7 +14,6 @@ class EventEvent(models.Model):
     )
     seats_waiting = fields.Integer(
         string="Seats on waiting list",
-        store=True,
         readonly=True,
         compute="_compute_seats",
     )

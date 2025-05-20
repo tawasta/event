@@ -8,15 +8,11 @@ class EventTicket(models.Model):
 
     # 2. Fields declaration
     seats_waiting = fields.Integer(
-        string="Waiting Seats", compute="_compute_seats", store=True
+        string="Waiting Seats", compute="_compute_seats"
     )
 
     waiting_list = fields.Boolean(
-        string="Enable Waiting List",
-        compute="_compute_waiting_list",
-        help="Enable waiting list when attendee limit is reached.",
-        readonly=False,
-        store=True,
+        related="event_id.waiting_list",
     )
 
     # 3. Default methods
