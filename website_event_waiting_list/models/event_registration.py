@@ -134,7 +134,7 @@ class EventRegistration(models.Model):
             if self._check_waiting_list(vals):
                 add_waiting_list = True
 
-        registrations = super(EventRegistration, self).create(vals_list)
+        registrations = super().create(vals_list)
         registrations = registrations.with_context(skip_confirm_wait=False)
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()

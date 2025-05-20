@@ -95,9 +95,7 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             )
         else:
             # Kutsu alkuperäistä metodia normaalisti
-            return super(WebsiteEventControllerWaiting, self).registration_new(
-                event, **post
-            )
+            return super().registration_new(event, **post)
 
     @http.route(
         ["""/event/<model("event.event"):event>/registration/confirm"""],

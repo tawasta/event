@@ -37,9 +37,10 @@ class EventMailScheduler(models.Model):
     )
 
     def process_registrations_based_on_interval(self, scheduler, now):
-        new_registrations, is_mail_valid = super(
-            EventMailScheduler, self
-        ).process_registrations_based_on_interval(scheduler, now)
+        (
+            new_registrations,
+            is_mail_valid,
+        ) = super().process_registrations_based_on_interval(scheduler, now)
 
         if scheduler.interval_type == "after_wait":
             new_registrations = (
@@ -67,14 +68,14 @@ class EventMailScheduler(models.Model):
             and not scheduler.event_id.stage_id.cancel
         ):
             return True
-        return super(EventMailScheduler, self).check_and_send_mail(scheduler, now)
+        return super().check_and_send_mail(scheduler, now)
 
 
 class EventMailRegistration(models.Model):
     _inherit = "event.mail.registration"
 
     def execute(self):
-        super(EventMailRegistration, self).execute()  # Call the original method
+        super().execute()  # Call the original method
         now = fields.Datetime.now()
         todo = self.filtered(
             lambda reg_mail: reg_mail.scheduler_id.interval_type
