@@ -1,41 +1,11 @@
-##############################################################################
-#
-#    Author: Futural Oy
-#    Copyright 2021- Futural Oy (https://futural.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
-
-# 1. Standard library imports:
-
 import logging
 
-# 2. Known third party imports:
 import werkzeug
 
-# 3. Odoo imports (openerp):
 from odoo import http
 from odoo.http import request
 
 from odoo.addons.website_event.controllers.main import WebsiteEventController
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class WebsiteEventControllerWaiting(WebsiteEventController):
@@ -132,49 +102,6 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                 {"registration_ids": ",".join([str(id) for id in attendees_sudo.ids])}
             )
         )
-
-    # def _process_attendees_form(self, event, form_details):
-    #     """Process data posted from the attendee details form.
-    #     :param form_details: posted data from frontend registration form, like
-    #         {'1-name': 'r', '1-email': 'r@r.com', '1-phone': '', '1-event_ticket_id': '1'}
-    #     """
-    #     allowed_fields = request.env[
-    #         "event.registration"
-    #     ]._get_website_registration_allowed_fields()
-    #     registration_fields = {
-    #         key: v
-    #         for key, v in request.env["event.registration"]._fields.items()
-    #         if key in allowed_fields
-    #     }
-    #     registrations = {}
-    #     global_values = {}
-    #     for key, value in form_details.items():
-    #         # skip loop if key not splittable
-    #         try:
-    #             counter, attr_name = key.split("-", 1)
-    #         except ValueError:
-    #             continue
-    #         field_name = attr_name.split("-")[0]
-    #         if field_name not in registration_fields:
-    #             continue
-    #         elif isinstance(
-    #             registration_fields[field_name], (fields.Many2one, fields.Integer)
-    #         ):
-    #             value = (
-    #                 int(value) or False
-    #             )  # 0 is considered as a void many2one aka False
-    #         else:
-    #             value = value
-
-    #         if counter == "0":
-    #             global_values[attr_name] = value
-    #         else:
-    #             registrations.setdefault(counter, dict())[attr_name] = value
-    #     for key, value in global_values.items():
-    #         for registration in registrations.values():
-    #             registration[key] = value
-
-    #     return list(registrations.values())
 
     @http.route(
         ['/event/<model("event.event"):event>/registration/manage/<string:code>'],

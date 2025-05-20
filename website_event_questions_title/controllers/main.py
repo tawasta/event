@@ -34,9 +34,7 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 class WebsiteEventControllerTitle(WebsiteEventController):
     def _process_attendees_form(self, event, form_details):
-        registrations = super(
-            WebsiteEventControllerTitle, self
-        )._process_attendees_form(event, form_details)
+        registrations = super()._process_attendees_form(event, form_details)
         for registration in registrations:
             registration["title"] = []
 

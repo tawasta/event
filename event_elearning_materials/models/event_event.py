@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class EventEvent(models.Model):
@@ -7,7 +7,8 @@ class EventEvent(models.Model):
     slide_channel_id = fields.Many2one(
         "slide.channel",
         string="Related Course",
-        help="Optional: When attendees are confirmed, they will be enrolled in this eLearning course automatically.",
+        help="Optional: When attendees are confirmed, "
+        "they will be enrolled in this eLearning course automatically.",
     )
 
     def write(self, vals):

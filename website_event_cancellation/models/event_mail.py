@@ -53,7 +53,7 @@ class EventMailScheduler(models.Model):
     # 8. Business methods
     def check_and_send_mail(self, mail):
         now = fields.Datetime.now()
-        can_send = super(EventMailScheduler, self).check_and_send_mail(mail)
+        can_send = super().check_and_send_mail(mail)
         can_send = False
         if (
             not mail.mail_sent

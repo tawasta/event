@@ -102,9 +102,10 @@ class WebsiteEventRssMultifeed(Website):
 
                 except Exception as e:
                     _logger.info(
-                        "RSS: Could not get image URL and mimetype for event ID %s. "
-                        "Attempted to parse %s. Details: "
-                        % (event.id, event._get_background())
+                        "RSS: Could not get image URL and mimetype for event ID {}. "
+                        "Attempted to parse {}. Details: ".format(
+                            event.id, event._get_background()
+                        )
                     )
                     _logger.error(str(e))
                     continue

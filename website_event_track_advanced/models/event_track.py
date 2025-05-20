@@ -241,7 +241,7 @@ class EventTrack(models.Model):
         for record in self:
             hashtag = ""
             if record.type.twitter_hashtag:
-                hashtag = "{}{}".format(record.type.twitter_hashtag, record.id)
+                hashtag = f"{record.type.twitter_hashtag}{record.id}"
             record.twitter_hashtag = hashtag or False
 
     @api.depends("extra_materials")
@@ -425,7 +425,7 @@ class EventTrack(models.Model):
 
     # 6. CRUD methods
     def write(self, vals):
-        res = super(EventTrack, self).write(vals)
+        res = super().write(vals)
 
         if "speaker_ids" in vals:
             speaker_commands = vals.get("speaker_ids", [])

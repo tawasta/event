@@ -1,4 +1,4 @@
-from odoo import models, fields, http, _
+from odoo import _, fields, http, models
 from odoo.http import request
 from odoo.tools.safe_eval import safe_eval
 

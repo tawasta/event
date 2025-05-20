@@ -155,7 +155,7 @@ class EventRegistration(models.Model):
 
     def unlink(self):
         self._unlink_associated_student_batch()
-        return super(EventRegistration, self).unlink()
+        return super().unlink()
 
     def action_cancel(self):
         current_student_batch = False
@@ -180,8 +180,8 @@ class EventRegistration(models.Model):
 
     def write(self, vals):
         if self.env.context.get("no_create_batch"):
-            return super(EventRegistration, self).write(vals)
-        res = super(EventRegistration, self).write(vals)
+            return super().write(vals)
+        res = super().write(vals)
         for rec in self:
             if rec.state == "open":
                 if not rec.student_batch_id:

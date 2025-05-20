@@ -1,6 +1,7 @@
+import logging
+
 from odoo import models
 from odoo.osv import expression
-import logging
 
 _logger = logging.getLogger(__name__)
 
