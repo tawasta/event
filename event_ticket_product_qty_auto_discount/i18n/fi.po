@@ -1,0 +1,144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_ticket_product_qty_auto_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-16 19:33+0000\n"
+"PO-Revision-Date: 2025-05-16 19:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__discount_percentage
+msgid "Discount (%)"
+msgstr "Alennus (%)"
+
+#. module: event_ticket_product_qty_auto_discount
+#. odoo-python
+#: code:addons/event_ticket_product_qty_auto_discount/models/product_qty_autodiscount_line.py:0
+#, python-format
+msgid "Discount percentage must be between 0 and 100."
+msgstr "Alennusprosentin pitää olla välillä 0-100."
+
+#. module: event_ticket_product_qty_auto_discount
+#. odoo-python
+#: code:addons/event_ticket_product_qty_auto_discount/models/product_qty_autodiscount_line.py:0
+#, python-format
+msgid "Discount quantity ranges must not overlap for the same product."
+msgstr "Yhden rivin ala- ja ylärajan muodostama väli ei saa mennä limittäin toisen rivin kanssa."
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,help:event_ticket_product_qty_auto_discount.field_product_product__product_qty_autodiscount_line_ids
+#: model:ir.model.fields,help:event_ticket_product_qty_auto_discount.field_product_template__product_qty_autodiscount_line_ids
+msgid "Discounts to automatically apply when ordering tickets via website"
+msgstr "Automaattisesti asetettavat määräalennukset kun lippuja varataan verkkosivustolla"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model_terms:ir.ui.view,arch_db:event_ticket_product_qty_auto_discount.product_product_form_view
+#: model_terms:ir.ui.view,arch_db:event_ticket_product_qty_auto_discount.view_product_template_form_quantity_discount
+msgid "Event Ticket Quantity Discounts"
+msgstr "Tapahtumalippujen määräalennukset"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__id
+msgid "ID"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,help:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__qty_max
+#: model:ir.model.fields,help:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__qty_min
+msgid "If quantity falls between min and max, the discount will be applied"
+msgstr "Jos ostettu määrä osuu minimin ja maksimin väliin, annetaan määritetty alennus."
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__qty_max
+msgid "Maximum Quantity"
+msgstr "Yläraja"
+
+#. module: event_ticket_product_qty_auto_discount
+#. odoo-python
+#: code:addons/event_ticket_product_qty_auto_discount/models/product_qty_autodiscount_line.py:0
+#, python-format
+msgid "Maximum quantity must be greater than or equal to minimum quantity."
+msgstr "Ylärajan pitää olla suurempi kuin alaraja"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__qty_min
+msgid "Minimum Quantity"
+msgstr "Alaraja"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model,name:event_ticket_product_qty_auto_discount.model_product_template
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_quantity_auto_discount_line__product_id
+msgid "Product"
+msgstr "Tuote"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model,name:event_ticket_product_qty_auto_discount.model_product_product
+msgid "Product Variant"
+msgstr "Tuotevariaatio"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_product__product_qty_autodiscount_line_ids
+msgid "Quantity-Based Automatic Discounts"
+msgstr "Automaattiset määräalennukset"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model.fields,field_description:event_ticket_product_qty_auto_discount.field_product_template__product_qty_autodiscount_line_ids
+msgid "Quantity-based Automatic Discounts"
+msgstr "Automaattiset määräalennukset"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model,name:event_ticket_product_qty_auto_discount.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Myyntitilausrivi"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model,name:event_ticket_product_qty_auto_discount.model_website
+msgid "Website"
+msgstr "Verkkosivu"
+
+#. module: event_ticket_product_qty_auto_discount
+#: model_terms:ir.ui.view,arch_db:event_ticket_product_qty_auto_discount.product_product_form_view
+#: model_terms:ir.ui.view,arch_db:event_ticket_product_qty_auto_discount.view_product_template_form_quantity_discount
+msgid ""
+"When ticket is placed into web shop cart, an automatic discount\n"
+"                        percentage will be added on the line based on the rules defined below."
+msgstr "Kun lipputuote laitetaan ostoskoriin, määräalennusprosentti lasketaan oheisten sääntöjen mukaan."
+
+#. module: event_ticket_product_qty_auto_discount
+#: model:ir.model,name:event_ticket_product_qty_auto_discount.model_product_quantity_auto_discount_line
+msgid "product.quantity.auto.discount.line"
+msgstr ""
