@@ -70,7 +70,8 @@ class WebsiteEventRssMultifeed(Website):
                     else:
                         # If a custom image was added via website builder,
                         # find the attachment record so we can read the image mimetype.
-                        # path is in the form of /web/image/100231-<imagefilename>.<extension>
+                        # path is in the form of
+                        # /web/image/100231-<imagefilename>.<extension>
                         split_path = event_image_path.split("/")
 
                         attachment_id = split_path[3].split("-")[0]
@@ -80,9 +81,9 @@ class WebsiteEventRssMultifeed(Website):
                             # how the event images are managed, to avoid crashing
                             # the feed.
                             _logger.info(
-                                "RSS: Could not get a numeric attachment ID for event ID %s. "
-                                "Attempted to parse %s. Details: "
-                                % (event.id, event._get_background())
+                                "RSS: Could not get a numeric attachment ID "
+                                "for event ID {}. Attempted to parse {}. "
+                                "Details: ".format(event.id, event._get_background())
                             )
                             continue
 

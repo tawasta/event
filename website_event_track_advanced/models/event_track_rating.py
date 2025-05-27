@@ -45,8 +45,9 @@ class TrackRating(models.Model):
             if existing_rating:
                 raise ValidationError(
                     _(
-                        "Rating for track %s by reviewer %s already exists."
-                        % (rec.event_track.name, rec.reviewer_id.name)
+                        "Rating for track {} by reviewer {} already exists.".format(
+                            rec.event_track.name, rec.reviewer_id.name
+                        )
                     )
                 )
 

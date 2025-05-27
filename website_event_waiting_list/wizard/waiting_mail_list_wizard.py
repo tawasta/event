@@ -36,11 +36,13 @@ class WaitingMailListWizard(models.TransientModel):
                 registration_ids_sent.append(registration.id)
                 msg_template.sudo().send_mail(registration.id, force_send=True)
 
+        message_vals = {
+            "message": "Waiting list confirmation mail "
+            "sent to following registrations:",
+            "registration_ids": registration_ids_sent,
+        }
         message = self.env["website.event.waiting.mail.list.message"].create(
-            {
-                "message": "Waiting list confirmation mail sent to following registrations:",
-                "registration_ids": registration_ids_sent,
-            }
+            message_vals
         )
         return {
             "type": "ir.actions.act_window",

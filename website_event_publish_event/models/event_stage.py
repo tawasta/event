@@ -9,8 +9,8 @@ class EventStage(models.Model):
     pipe_publish = fields.Boolean(
         string="Published Stage",
         default=False,
-        help="Events will automatically be moved into this stage when they are published."
-        " The event moved into this stage will automatically be set as published.",
+        help="Published events are automatically moved into this stage. "
+        "The event moved into this stage are published automatically.",
     )
 
     # 3. Default methods
