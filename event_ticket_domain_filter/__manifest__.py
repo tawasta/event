@@ -21,14 +21,14 @@
 {
     "name": "Event Ticket Domain Filter",
     "summary": "Show event tickets only to users matching a partner domain.",
-    "version": "17.0.1.1.0",
+    "version": "17.0.1.2.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event"],
+    "depends": ["website_event", "partner_domain_filter"],
     "data": [
         "views/event_views.xml",
         "views/templates.xml",

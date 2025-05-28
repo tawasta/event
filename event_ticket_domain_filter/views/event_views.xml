@@ -7,9 +7,10 @@
         <field name="arch" type="xml">
             <field name="end_sale_datetime" position="after">
                 <field
-                    name="paywall_domain"
-                    widget="domain"
-                    options='{"model": "res.partner"}'
+                    name="partner_domain_filter_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color'}"
+                    optional="show"
                 />
             </field>
         </field>

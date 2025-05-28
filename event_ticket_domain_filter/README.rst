@@ -5,14 +5,15 @@
 ==========================
 Event Ticket Domain Filter
 ==========================
-This Odoo module allows restricting **event ticket visibility and selectability** based on a custom Odoo domain (`paywall_domain`). It enables finer access control for ticket types in both the backend and the public website.
+This Odoo module allows restricting **event ticket visibility and selectability** based on a custom Odoo domain.
+It enables finer access control for ticket types in both the backend and the public website.
 
 Users will only be able to select tickets if their partner record matches the configured domain.
 
 Features
 ========
 
-- Add a domain (`paywall_domain`) to each event ticket
+- Add a domain to each event ticket
 - Use the Odoo domain editor to configure conditions (e.g., `[('country_id.code', '=', 'FI')]`)
 - Tickets are visible to everyone but only selectable to matching users
 - Smart messaging in the frontend for non-selectable tickets
@@ -23,7 +24,7 @@ Usage
 =====
 
 1. Go to **Events > Tickets**
-2. Add a domain in the **Paywall Domain** field, e.g.::
+2. Add a domain in the **Partner filters** field, e.g.::
 
    [('country_id.code', '=', 'FI')]
 
@@ -35,8 +36,7 @@ Usage
 Technical details
 =================
 
-* `paywall_domain` is a CharField (parsed via `safe_eval`)
-* `user_in_paywall_domain` is a computed boolean
+* `user_in_partner_domain` is a computed boolean
 * The modal registration template is inherited via XPath to apply the ticket filtering
 
 
@@ -51,6 +51,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@futural.fi>
+* Jarmo Kortetjärvi <jarmo.kortetjarvi@futural.fi>
 
 Maintainer
 ----------
