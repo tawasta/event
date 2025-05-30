@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.event.mail.freetext.fields</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="event_mail_ids" position="after">
+                <group
+                    string="Welcome Message Custom Text"
+                    colspan="4"
+                    name="group_freetext_welcome"
+                >
+                    <field name="freetext_welcome" nolabel="1" colspan="2" />
+                </group>
+
+                <group
+                    string="Thank You Message Custom Text"
+                    colspan="4"
+                    name="group_freetext_thankyou"
+                >
+                    <field name="freetext_thankyou" nolabel="1" colspan="2" />
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
