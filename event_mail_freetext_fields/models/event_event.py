@@ -10,6 +10,12 @@ class EventEvent(models.Model):
         help="Additional text that can be embedded into e-mail templates",
     )
 
+    freetext_reminder = fields.Html(
+        string="Reminder Message: Additional Text",
+        translate=True,
+        help="Additional text that can be embedded into e-mail templates",
+    )
+
     freetext_thankyou = fields.Html(
         string="Thank You Message: Additional Text",
         translate=True,

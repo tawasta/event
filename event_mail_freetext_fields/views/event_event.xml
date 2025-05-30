@@ -14,6 +14,14 @@
                 </group>
 
                 <group
+                    string="Reminder Message Custom Text"
+                    colspan="4"
+                    name="group_freetext_reminder"
+                >
+                    <field name="freetext_reminder" nolabel="1" colspan="2" />
+                </group>
+
+                <group
                     string="Thank You Message Custom Text"
                     colspan="4"
                     name="group_freetext_thankyou"
