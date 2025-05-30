@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0-20250428\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-30 10:19+0000\n"
-"PO-Revision-Date: 2025-05-30 10:19+0000\n"
+"POT-Creation-Date: 2025-05-30 13:49+0000\n"
+"PO-Revision-Date: 2025-05-30 13:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: event_mail_freetext_fields
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_reminder
 #: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_thankyou
 #: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_welcome
 msgid "Additional text that can be embedded into e-mail templates"
@@ -25,6 +26,16 @@ msgstr "Vapaatekstiä, joka voidaan upottaa sähköpostipohjiin"
 #: model:ir.model,name:event_mail_freetext_fields.model_event_event
 msgid "Event"
 msgstr "Tapahtuma"
+
+#. module: event_mail_freetext_fields
+#: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_event_form_inherit
+msgid "Reminder Message Custom Text"
+msgstr "Muistutusviestin lisäteksti"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__freetext_reminder
+msgid "Reminder Message: Additional Text"
+msgstr "Muistutusviesti: lisäteksti"
 
 #. module: event_mail_freetext_fields
 #: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_event_form_inherit
