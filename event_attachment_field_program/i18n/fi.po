@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_attachment_field_program
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-02 08:31+0000\n"
+"PO-Revision-Date: 2025-06-02 08:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_attachment_field_program
+#: model:ir.model,name:event_attachment_field_program.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_attachment_field_program
+#: model:ir.model.fields,field_description:event_attachment_field_program.field_event_event__program_attachment_id
+msgid "Event Program"
+msgstr "Tapahtuman ohjelma"
+
+#. module: event_attachment_field_program
+#: model:ir.model.fields,field_description:event_attachment_field_program.field_event_event__program_attachment_url
+msgid "Event Program URL"
+msgstr "Tapahtuman ohjelman URL"
+
+#. module: event_attachment_field_program
+#: model:ir.model.fields,help:event_attachment_field_program.field_event_event__program_attachment_id
+msgid ""
+"Program for this event. Copy the URL to link to the file in e.g. e-mail "
+"templates"
+msgstr "Tämän tapahtuman ohjelma. Kopioi URL linkataksesi ohjelmatiedostoon "
+"esim. tapahtumasähköposteissa."
