@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.event.program.attachment</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="badge_image" position="after">
+                <field
+                    name="program_attachment_id"
+                    context="{ 'default_public': True}"
+                />
+                <field name="program_attachment_url" widget="CopyClipboardChar" />
+            </field>
+        </field>
+    </record>
+</odoo>
