@@ -1,5 +1,9 @@
 from odoo import models, fields, api
 
+import logging
+
+_logger = logging.getLogger(__name__)
+
 
 class EventEvent(models.Model):
     _inherit = "event.event"
@@ -9,6 +13,22 @@ class EventEvent(models.Model):
         string="Related Course",
         help="Optional: When attendees are confirmed, they will be enrolled in this eLearning course automatically.",
     )
+
+    slide_channel_url = fields.Char(
+        string="Related Course URL",
+        compute="_compute_slide_channel_url",
+        store=True,
+    )
+
+    @api.depends("slide_channel_id", "slide_channel_id.is_published")
+    def _compute_slide_channel_url(self):
+        # Get the URL so that it can be placed in the copy to clipboard widget
+
+        for event in self:
+            if event.slide_channel_id and event.slide_channel_id.is_published:
+                event.slide_channel_url = event.slide_channel_id.website_url
+            else:
+                event.slide_channel_url = False
 
     def write(self, vals):
         res = super().write(vals)
