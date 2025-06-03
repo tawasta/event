@@ -1,6 +1,6 @@
-from odoo import models, fields, api
-
 import logging
+
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -11,7 +11,8 @@ class EventEvent(models.Model):
     slide_channel_id = fields.Many2one(
         "slide.channel",
         string="Related Course",
-        help="Optional: When attendees are confirmed, they will be enrolled in this eLearning course automatically.",
+        help="Optional: When attendees are confirmed, "
+        "they will be enrolled in this eLearning course automatically.",
     )
 
     slide_channel_url = fields.Char(

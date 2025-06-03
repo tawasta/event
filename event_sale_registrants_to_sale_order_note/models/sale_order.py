@@ -6,7 +6,7 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         """Adds linked registrations to a sale order's note field"""
-        res = super(SaleOrder, self).action_confirm()
+        res = super().action_confirm()
         for so in self:
             registrations = (
                 self.env["event.registration"]

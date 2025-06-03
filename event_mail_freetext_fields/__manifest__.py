@@ -20,7 +20,7 @@
 
 {
     "name": "Event: Freetext Fields for Adding Content to Event Messaging",
-    "summary": "Adds HTML fields to backend which can be added into event email templates",
+    "summary": "Adds HTML fields for event, that be added into email templates",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",

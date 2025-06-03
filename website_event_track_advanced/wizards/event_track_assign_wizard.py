@@ -77,7 +77,7 @@ class EventTrackAssignWizard(models.TransientModel):
             ('state', 'in', ['confirmed']),
         ]).ids
         """
-        res = super(EventTrackAssignWizard, self).default_get(fields)
+        res = super().default_get(fields)
         return res
 
     # 4. Compute and search fields, in the same order that fields declaration

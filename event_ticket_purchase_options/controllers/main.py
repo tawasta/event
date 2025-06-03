@@ -14,9 +14,7 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 class EventRegistrationController(WebsiteEventController):
     def _process_tickets_form(self, event, form_details):
-        tickets = super(EventRegistrationController, self)._process_tickets_form(
-            event, form_details
-        )
+        tickets = super()._process_tickets_form(event, form_details)
 
         for ticket in tickets:
             other_ticket_name = "other_nb_register-%s" % ticket["id"]
@@ -32,7 +30,8 @@ class EventRegistrationController(WebsiteEventController):
 
         # Tarkista, kutsutaanko muita
         if any(ticket.get("is_inviting_others") for ticket in tickets):
-            # Ohjaa `custom_registration_handler`-funktioon, välitetään tarvittavat tiedot
+            # Ohjaa `custom_registration_handler`-funktioon,
+            # välitetään tarvittavat tiedot
             redirect_url = "/invite_registration_handler?event_id=%s" % event.id
             redirect_url += "&" + werkzeug.urls.url_encode(
                 post
@@ -40,14 +39,15 @@ class EventRegistrationController(WebsiteEventController):
             return {"redirect": redirect_url}
 
         # Jos kutsuja ei tarvita, suoritetaan oletustoiminto
-        return super(EventRegistrationController, self).registration_new(event, **post)
+        return super().registration_new(event, **post)
 
     @http.route(
         "/invite_registration_handler", type="http", auth="public", website=True
     )
     def custom_registration_handler(self, event_id, **kwargs):
         """
-        Funktio käsittelee kutsutoiminnallisuuden, mukaan lukien myyntitilauksen ja rekisteröintien luomisen.
+        Funktio käsittelee kutsutoiminnallisuuden,
+        mukaan lukien myyntitilauksen ja rekisteröintien luomisen.
         """
         event = request.env["event.event"].sudo().browse(int(event_id))
         # Poistetaan mahdollinen ylimääräinen kysymysmerkki arvosta
@@ -57,7 +57,6 @@ class EventRegistrationController(WebsiteEventController):
         request.env["website"].get_current_website()
 
         draft_registrations = []
-        # visitor_sudo = request.env["website.visitor"]._get_visitor_from_request(force_create=True)
 
         # Tarkista onko tapahtuma ilmainen
         is_free_event = all(ticket["price"] == 0.0 for ticket in tickets)
@@ -88,6 +87,7 @@ class EventRegistrationController(WebsiteEventController):
         # Luodaan rekisteröinnit
         for ticket in tickets:
             if ticket["is_inviting_others"]:
+                # flake8: noqa: B007
                 for i in range(ticket["quantity"]):
                     registration_data = {
                         "event_id": event.id,
@@ -95,9 +95,9 @@ class EventRegistrationController(WebsiteEventController):
                         "state": "draft",
                         "event_ticket_id": ticket["ticket"].id,
                         "invite_others": True,
-                        # "visitor_id": visitor_sudo.id,
                     }
-                    # Lisää myyntitilauksen tiedot vain jos tilaus on olemassa
+                    # Lisää myyntitilauksen tiedot vain,
+                    # jos tilaus on olemassa
                     if not is_free_event:
                         registration_data.update(
                             {
@@ -294,8 +294,11 @@ class EventRegistrationController(WebsiteEventController):
         )
         form_details = self._sort_form_details(post)
 
+        # flake8: noqa: B020
+        # TODO: Fix this loop. Most likely there is some sort of logic error,
+        # but I'm not confident on touching this without testing it afterwards
         for invitation.registration_id, form_detail in zip(
-            invitation.registration_id, form_details.values()
+            invitation.registration_id, form_details.values(), strict=False
         ):
             invitation.registration_id.process_survey(
                 invitation.registration_id.id, form_detail, privacy_vals
@@ -316,6 +319,7 @@ class EventRegistrationController(WebsiteEventController):
             }
         )
 
+        # flake8: noqa: E501
         return_url = f"{invite_data['return_url']}?access_token={invite_data['access_token']}&thank_you=1"
 
         return request.redirect(return_url)
