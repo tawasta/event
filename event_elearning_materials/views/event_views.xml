@@ -7,6 +7,18 @@
         <field name="arch" type="xml">
             <field name="tag_ids" position="after">
                 <field name="slide_channel_id" />
+                <field name="slide_channel_url" widget="CopyClipboardChar" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_event_tree" model="ir.ui.view">
+        <field name="name">event.event.tree.elearning</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+            <field name="stage_id" position="before">
+                <field name="slide_channel_id" optional="show" />
             </field>
         </field>
     </record>

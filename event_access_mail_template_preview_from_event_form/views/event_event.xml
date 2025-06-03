@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.event.mail.freetext.fields</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='event_mail_ids']/tree/field[@name='notification_type']"
+                position="before"
+            >
+                <button
+                    name="action_launch_email_template_preview"
+                    type="object"
+                    icon="fa-eye"
+                    string="Preview"
+                >
+                    Preview E-mail Templates
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

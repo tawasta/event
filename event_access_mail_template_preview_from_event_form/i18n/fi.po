@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_access_mail_template_preview_from_event_form
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-30 12:15+0000\n"
+"PO-Revision-Date: 2025-05-30 12:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model:ir.model,name:event_access_mail_template_preview_from_event_form.model_event_mail
+msgid "Event Automated Mailing"
+msgstr "Tapahtuman automatisoitu postitus"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model:ir.model,name:event_access_mail_template_preview_from_event_form.model_event_registration
+msgid "Event Registration"
+msgstr "Tapahtuman ilmoittautuminen"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model:ir.actions.server,name:event_access_mail_template_preview_from_event_form.ir_cron_event_registration_clear_placeholders_ir_actions_server
+msgid "Event: Unlink Placeholder Registrations Used for E-mail Previews"
+msgstr "Tapahtuma: Poista sähköpostin esikatselua varten luodut placeholder-ilmoittautumisluonnokset"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model:ir.model.fields,field_description:event_access_mail_template_preview_from_event_form.field_event_registration__placeholder_for_email_preview
+msgid "Placeholder For Email Preview"
+msgstr "Placeholder-tietue sähköpostin esikatselua varten"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model_terms:ir.ui.view,arch_db:event_access_mail_template_preview_from_event_form.view_event_form_inherit
+msgid "Preview"
+msgstr "Esikatselu"
+
+#. module: event_access_mail_template_preview_from_event_form
+#: model_terms:ir.ui.view,arch_db:event_access_mail_template_preview_from_event_form.view_event_form_inherit
+msgid "Preview E-mail Templates"
+msgstr "Esikatsele sähköpostipohjia"
+
+#. module: event_access_mail_template_preview_from_event_form
+#. odoo-python
+#: code:addons/event_access_mail_template_preview_from_event_form/models/event_mail.py:0
+#, python-format
+msgid "You can only preview e-mails."
+msgstr "Voit esikatsella vain sähköpostipohjia."
