@@ -294,6 +294,9 @@ class EventRegistrationController(WebsiteEventController):
         )
         form_details = self._sort_form_details(post)
 
+        # flake8: noqa: B020
+        # TODO: Fix this loop. Most likely there is some sort of logic error,
+        # but I'm not confident on touching this without testing it afterwards
         for invitation.registration_id, form_detail in zip(
             invitation.registration_id, form_details.values(), strict=False
         ):
