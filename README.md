@@ -61,7 +61,7 @@ addon | version | maintainers | summary
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 17.0.0.0.0 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 17.0.0.0.1 |  | Adds a waiting list functionality to Events.
 [website_my_events](website_my_events/) | 17.0.1.0.0 |  | My events in website portal
 
 
