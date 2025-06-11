@@ -7,7 +7,14 @@ class EventTicket(models.Model):
     _inherit = "event.event.ticket"
 
     # 2. Fields declaration
-    seats_waiting = fields.Integer(string="Waiting Seats", compute="_compute_seats")
+
+    # TODO: Seems like seats_waiting is not used anywhere? / JK
+    seats_waiting = fields.Integer(
+        string="Waiting Seats",
+        # The compute is removed because it's broken.
+        # It doesn't assign any values for field and leads to an error
+        # compute="_compute_seats",
+    )
 
     waiting_list = fields.Boolean(
         related="event_id.waiting_list",
