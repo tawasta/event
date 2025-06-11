@@ -39,8 +39,8 @@ class EventEvent(models.Model):
 
     # 2. Fields declaration
     show_track_twitter_hashtags = fields.Boolean(
-        string="Show Twitter hashtag",
-        help="Show Twitter hashtag in agenda",
+        string="Show X hashtag",
+        help="Show X hashtag in agenda",
         compute="_compute_show_track_twitter_hashtags",
         store=True,
         readonly=False,

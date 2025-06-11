@@ -133,7 +133,7 @@ class EventTrack(models.Model):
     )
     external_registration = fields.Char(string="External registration link")
     twitter_hashtag = fields.Char(
-        string="Twitter hashtag",
+        string="X hashtag",
         compute="_compute_twitter_hashtag",
         store=True,
         copy=False,
