@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.1.0 |  | Show event tickets only to users matching a partner domain.
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
+[website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
