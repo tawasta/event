@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_website_form_inherit" model="ir.ui.view">
+        <field
+            name="name"
+        >website.form.inherit.event.after.purchase.configurable.text</field>
+        <field name="model">website</field>
+        <field name="inherit_id" ref="website.view_website_form" />
+        <field name="arch" type="xml">
+            <field name="default_lang_id" position="after">
+                <field name="event_confirmation_custom_thankyou_text" />
+            </field>
+        </field>
+    </record>
+</odoo>
