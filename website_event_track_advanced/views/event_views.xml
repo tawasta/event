@@ -99,9 +99,6 @@
                     groups="event.group_event_manager"
                 />
             </xpath>
-            <field name="address_id" position="after">
-                <field name="location_ids" widget="many2many_tags" />
-            </field>
             <notebook position="inside">
                 <page string="Event Track Settings">
                     <group>
@@ -127,6 +124,7 @@
                             <field name="rating_grade_ids" widget="many2many_tags" />
                         </group>
                         <group string="miscellaneous" name="group_track_misc">
+                            <field name="location_ids" widget="many2many_tags" />
                             <field name="privacy_ids" widget="many2many_tags" />
                             <field name="use_speaker_track" readonly="1" />
                             <field name="show_track_twitter_hashtags" />
