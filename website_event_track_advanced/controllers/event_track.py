@@ -1,46 +1,17 @@
-##############################################################################
-#
-#    Author: Futural Oy
-#    Copyright 2022- Futural Oy (https://futural.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
-# 1. Standard library imports:
 import base64
 import json
 import logging
 import sys
 
-# 2. Known third party imports:
 from psycopg2.errors import InvalidTextRepresentation
 from werkzeug.exceptions import NotFound
 
-# 3. Odoo imports (openerp):
 from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_signup.models.res_partner import SignupError
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
-
-# 4. Imports from Odoo modules:
 from odoo.addons.website_event_track.controllers.event_track import EventTrackController
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
-
 
 _logger = logging.getLogger(__name__)
 
@@ -50,7 +21,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         """
         sort locations based on sequence
         """
-        res = super(EventTrackControllerAdvanced, self)._prepare_calendar_values(event)
+        res = super()._prepare_calendar_values(event)
         res.get("locations").sort(key=lambda x: x.sequence)
         return res
 
@@ -96,7 +67,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         website=True,
     )
     def get_track(self, track_id, isReview=False, **kwargs):
-        logging.info("=====FUNKTIO=====")
         track = request.env["event.track"].sudo().browse(track_id)
 
         user = request.env.user
@@ -153,7 +123,6 @@ class EventTrackControllerAdvanced(EventTrackController):
                 return {"error": "You do not have permission to review this track."}
 
         # Tarkista, onko nykyinen vaihe is_submitted = True
-        # is_readonly = not track.stage_id.is_editable or track.event_id.stage_id.pipe_end
 
         if track.event_id.stage_id.pipe_end:
             is_readonly = True
@@ -1017,27 +986,6 @@ class EventTrackControllerAdvanced(EventTrackController):
             "website_event_track_advanced.event_track_proposal_advanced", values
         )
 
-    # @http.route(
-    #     ["""/event/<model("event.event"):event>/track_proposal/form"""],
-    #     type="http",
-    #     auth="public",
-    #     methods=["POST"],
-    #     website=True,
-    #     sitemap=False,
-    # )
-    # def event_track_proposal_form(self, event, **post):
-    #     if not event.can_access_from_current_website():
-    #         raise NotFound()
-
-    #     values = self._get_event_track_proposal_form_values(event, **post)
-    #     return (
-    #         request.env["ir.ui.view"]
-    #         .sudo()
-    #         ._render_template(
-    #             "website_event_track_advanced.event_track_application", values
-    #         )
-    #     )
-
     def _create_review(self, **post):
         reviewer_id = request.env.user.reviewer_id
         track_id = post.get("track_id")
@@ -1234,6 +1182,7 @@ class EventTrackControllerAdvanced(EventTrackController):
 
             # 11. Create success message based on stage_id
             if track.stage_id.is_editable and track.stage_id.is_draft:
+                # flake8: noqa: E501
                 message = _(
                     "Your proposal is saved as a draft and will not be reviewed until it is submitted."
                 )
@@ -1245,6 +1194,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 )
 
             if not user_exists:
+                # flake8: noqa: E501
                 message += _(
                     """
                 <p>

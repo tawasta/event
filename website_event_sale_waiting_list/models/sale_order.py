@@ -46,7 +46,7 @@ class SaleOrder(models.Model):
 
     # 6. CRUD methods
     def write(self, vals):
-        res = super(SaleOrder, self).write(vals)
+        res = super().write(vals)
         if vals.get("state") in ["sent", "sale", "done"]:
             registrations = self.env["event.registration"].search(
                 [("sale_order_id", "in", self.ids)]

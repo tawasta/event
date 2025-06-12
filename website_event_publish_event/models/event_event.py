@@ -45,7 +45,7 @@ class EventEvent(models.Model):
 
     # 6. CRUD methods
     def write(self, vals):
-        res = super(EventEvent, self).write(vals)
+        res = super().write(vals)
         if "website_published" in vals and vals.get("website_published"):
             self.action_set_stage_published()
         return res

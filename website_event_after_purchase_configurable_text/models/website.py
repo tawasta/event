@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2022- Futural Oy (https://futural.fi)
+#    Copyright 2025- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -32,18 +32,16 @@ from odoo import fields, models
 # 6. Unknown third party imports:
 
 
-class EventType(models.Model):
+class Website(models.Model):
     # 1. Private attributes
-    _inherit = "event.type"
+    _inherit = "website"
 
     # 2. Fields declaration
-    show_track_twitter_hashtags = fields.Boolean(
-        string="Show X hashtag", help="Show X hashtag in agenda"
-    )
-    location_ids = fields.Many2many("event.track.location", string="Locations")
-    track_types_ids = fields.Many2many("event.track.type", string="Event Track Types")
-    target_group_ids = fields.Many2many(
-        "event.track.target.group", string="Target Groups"
+    event_confirmation_custom_thankyou_text = fields.Char(
+        string="Custom Text After Event Ticket Purchase",
+        translate=True,
+        help="Custom text to replace the default "
+        "'We are looking forward to meeting you at the following'.",
     )
 
     # 3. Default methods

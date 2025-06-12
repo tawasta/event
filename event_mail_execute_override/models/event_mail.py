@@ -1,6 +1,6 @@
 import logging
 
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class EventMailScheduler(models.Model):
@@ -45,6 +45,9 @@ class EventMailScheduler(models.Model):
             current_website = Website.get_current_website()
             restricted_templates = current_website.restricted_mail_template_ids.ids
             is_restricted_template = scheduler.template_ref.id in restricted_templates
+            msg = _(
+                "Sending this email template after the event has ended is restricted."
+            )
 
             (
                 new_registrations,
@@ -52,9 +55,7 @@ class EventMailScheduler(models.Model):
             ) = self.process_registrations_based_on_interval(scheduler, now)
             if is_mail_valid:
                 if is_restricted_template and scheduler.event_id.date_end <= now:
-                    logging.info(
-                        "Sending this email template after the event has ended is restricted."  # noqa: B950
-                    )
+                    logging.info(msg)
                     continue
 
                 scheduler._create_missing_mail_registrations(new_registrations)
@@ -78,9 +79,7 @@ class EventMailScheduler(models.Model):
                 )
             else:
                 if is_restricted_template and scheduler.event_id.date_end <= now:
-                    logging.info(
-                        "Sending this email template after the event has ended is restricted."  # noqa: B950
-                    )
+                    logging.info(msg)
                     continue
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:

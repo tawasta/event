@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2025- Futural Oy (https://futural.fi)
+#    Copyright 2024 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Event: Freetext Fields for Adding Content to Event Messaging",
-    "summary": "Adds HTML fields for event, that be added into email templates",
+    "name": "Website Event: Configurable Thank You Text After Purchase",
+    "summary": "Replace the core text with one configurable in backend",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
@@ -28,8 +28,11 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event"],
-    "data": [
-        "views/event_event.xml",
-    ],
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
+    },
+    "depends": ["website_event_sale"],
+    "data": ["views/website_views.xml", "views/website_templates.xml"],
+    "demo": [],
 }

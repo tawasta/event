@@ -14,7 +14,6 @@ class EventEvent(models.Model):
     )
     seats_waiting = fields.Integer(
         string="Seats on waiting list",
-        store=True,
         readonly=True,
         compute="_compute_seats",
     )
@@ -48,7 +47,7 @@ class EventEvent(models.Model):
     @api.depends("seats_max", "registration_ids.state", "registration_ids.active")
     def _compute_seats(self):
         """Extend the original _compute_seats method to account for waiting list."""
-        super(EventEvent, self)._compute_seats()
+        super()._compute_seats()
 
         # Add logic for waiting list
         for event in self:
@@ -101,58 +100,6 @@ class EventEvent(models.Model):
             if event.event_type_id:
                 event.waiting_list = event.event_type_id.waiting_list
 
-    # @api.depends(
-    #     "date_tz",
-    #     "start_sale_datetime",
-    #     "date_end",
-    #     "seats_available",
-    #     "seats_limited",
-    #     "event_ticket_ids.sale_available",
-    #     "stage_id",
-    # )
-    # def _compute_event_registrations_open(self):
-    #     """Compute whether people may take registrations for this event
-    #     * event.date_end -> if event is done, registrations are not open anymore;
-    #     * event.
-    #     * event.start_sale_datetime -> lowest start date
-    #       of tickets (if any; start_sale_datetime
-    #       is False if no ticket are defined, see _compute_start_sale_datetime);
-    #     * any ticket is available for sale (seats available) if any;
-    #     * seats are unlimited or seats are available;
-    #     * allow registrations to waiting list if enabled
-    #     """
-    #     for event in self:
-    #         event = event._set_tz_context()
-    #         current_datetime = fields.Datetime.context_timestamp(
-    #             event, fields.Datetime.now()
-    #         )
-    #         date_end_tz = (
-    #             event.date_end.astimezone(pytz.timezone(event.date_tz or "UTC"))
-    #             if event.date_end
-    #             else False
-    #         )
-    #         event.event_registrations_open = (
-    #             (
-    #                 event.start_sale_datetime <= current_datetime.now()
-    #                 if event.start_sale_datetime
-    #                 else True
-    #             )
-    #             and (date_end_tz >= current_datetime if date_end_tz else True)
-    #             and (
-    #                 not event.seats_limited or event.seats_available
-    #                 if not event.waiting_list
-    #                 else True
-    #             )
-    #             and (
-    #                 not event.event_ticket_ids
-    #                 or any(ticket.sale_available for ticket in event.event_ticket_ids)
-    #                 if not event.waiting_list
-    #                 or all(ticket.is_expired for ticket in event.event_ticket_ids)
-    #                 else True
-    #             )
-    #             and not event.stage_id.cancel
-    #         )
-
     # 5. Constraints and onchanges
     @api.constrains("seats_limited", "waiting_list")
     def _check_waiting_list(self):
@@ -161,82 +108,10 @@ class EventEvent(models.Model):
             if event.waiting_list and not event.seats_limited:
                 event.waiting_list = False
 
-    # def _compute_is_participating(self):
-    #     """Heuristic
-    #     * public, no visitor: not participating as we have no information;
-    #     * public and visitor: check visitor is linked to a registration. As
-    #       visitors are merged on the top parent, current visitor check is
-    #       sufficient even for successive visits;
-    #     * logged, no visitor: check partner is linked to a registration. Do
-    #       not check the email as it is not really secure;
-    #     * logged as visitor: check partner or visitor are linked to a
-    #       registration;
-    #     """
-    #     current_visitor = self.env["website.visitor"]._get_visitor_from_request(
-    #         force_create=False
-    #     )
-    #     if self.env.user._is_public() and not current_visitor:
-    #         events = self.env["event.event"]
-    #     elif self.env.user._is_public():
-    #         events = (
-    #             self.env["event.registration"]
-    #             .sudo()
-    #             .search(
-    #                 [
-    #                     ("event_id", "in", self.ids),
-    #                     ("state", "!=", "cancel"),
-    #                     ("state", "!=", "wait"),
-    #                     ("visitor_id", "=", current_visitor.id),
-    #                 ]
-    #             )
-    #             .event_id
-    #         )
-    #     else:
-    #         if current_visitor:
-    #             domain = [
-    #                 "|",
-    #                 ("partner_id", "=", self.env.user.partner_id.id),
-    #                 ("visitor_id", "=", current_visitor.id),
-    #             ]
-    #         else:
-    #             domain = [("partner_id", "=", self.env.user.partner_id.id)]
-    #         events = (
-    #             self.env["event.registration"]
-    #             .sudo()
-    #             .search(
-    #                 expression.AND(
-    #                     [
-    #                         domain,
-    #                         [
-    #                             "&",
-    #                             ("event_id", "in", self.ids),
-    #                             ("state", "!=", "cancel"),
-    #                             ("state", "!=", "wait"),
-    #                         ],
-    #                     ]
-    #                 )
-    #             )
-    #             .event_id
-    #         )
-
-    #     for event in self:
-    #         event.is_participating = event in events
-
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
 
     # 7. Action methods
-    # def mail_attendees(
-    #     self,
-    #     template_id,
-    #     force_send=False,
-    #     filter_func=lambda self: self.state not in ["cancel", "wait", "draft"],
-    # ):
-    #     for event in self:
-    #         for attendee in event.registration_ids.filtered(filter_func):
-    #             self.env["mail.template"].browse(template_id).send_mail(
-    #                 attendee.id, force_send=force_send
-    #             )
 
     # 8. Business methods

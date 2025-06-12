@@ -20,7 +20,7 @@
 
 {
     "name": "Event: Ticket Product Quantity Auto Discount",
-    "summary": "Simple way to add automatic quantity discounts for event ticket products",
+    "summary": "Add automatic quantity discounts for event ticket products",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",

@@ -64,9 +64,7 @@ class EventTrackType(models.Model):
         "Unattendable types will be muted in the agenda",
         default=True,
     )
-    twitter_hashtag = fields.Char(
-        string="Twitter hashtag", help="Twitter hashtag for tracks"
-    )
+    twitter_hashtag = fields.Char(string="X hashtag", help="X hashtag for tracks")
     workshop = fields.Boolean(
         string="Workshop", help="Tracks in this Type can hold workshops", default=False
     )

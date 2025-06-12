@@ -1,37 +1,8 @@
-##############################################################################
-#
-#    Author: Futural Oy
-#    Copyright 2021- Futural Oy (https://futural.fi)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
-#
-##############################################################################
-
-# 1. Standard library imports:
 import uuid
 
-# 2. Known third party imports:
 from werkzeug import urls
 
-# 3. Odoo imports (openerp):
 from odoo import api, fields, models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class EventRegistration(models.Model):
@@ -54,14 +25,10 @@ class EventRegistration(models.Model):
         for registration in self:
             registration.manage_url = urls.url_join(
                 base_url,
-                "/event/%s/registration/manage/%s"
-                % (registration.event_id.id, registration.access_token),
+                "/event/{}/registration/manage/{}".format(
+                    registration.event_id.id, registration.access_token
+                ),
             )
-
-    # def _compute_access_token(self):
-    #     for registration in self:
-    #         if not registration.access_token:
-    #             registration.access_token = str(uuid.uuid4())
 
     # 5. Constraints and onchanges
 
@@ -71,14 +38,8 @@ class EventRegistration(models.Model):
         """
         Override create method to assign write access_token.
         """
-        self = self.with_context(skip_confirm=True)
-        registrations = super(EventRegistration, self).create(vals_list)
+        registrations = super().create(vals_list)
         registrations = registrations.with_context(skip_confirm=False)
-        # for registration in registrations:
-        #     if not registration.access_token:
-        #         registration.sudo().write({"access_token": str(uuid.uuid4())})
-        # if registrations._check_auto_confirmation():
-        #     registrations.sudo().action_confirm()
         return registrations
 
     # 7. Action methods
