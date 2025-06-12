@@ -248,7 +248,7 @@ class EventEvent(models.Model):
     def _compute_event_registrations_open(self):
         """If Event stage is cancelled close registrations"""
         for event in self:
-            res = super(EventEvent, self)._compute_event_registrations_open()
+            res = super()._compute_event_registrations_open()
             if event.stage_id.cancel:
                 event.event_registrations_open = False
             return res

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="event_confirmation"
+        inherit_id="website_event_sale.event_confirmation"
+    >
+
+        <xpath expr="//section[hasclass('s_title')]//h4" position="attributes">
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+
+        <!-- Show the text configured in backend, or fall back to the same as in core -->
+        <xpath expr="//section[hasclass('s_title')]//h4" position="after">
+            <h4>
+                <t t-if="len(website.event_confirmation_custom_thankyou_text)">
+                    <t t-esc="website.event_confirmation_custom_thankyou_text" />
+                </t>
+                <t t-else="">
+                    We are looking forward to meeting you at the following <t
+                        t-if="len(events) == 1"
+                    >event</t><t t-else="">events</t>:
+                </t>
+            </h4>
+        </xpath>
+
+    </template>
+
+</odoo>

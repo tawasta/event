@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -32,9 +32,7 @@ class ProductQuantityAutoDiscountLine(models.Model):
                 )
             if record.qty_max < record.qty_min:
                 raise ValidationError(
-                    _(
-                        "Maximum quantity must be greater than or equal to minimum quantity."
-                    )
+                    _("Maximum quantity can't be less than minimum quantity")
                 )
             overlaps = self.search(
                 [

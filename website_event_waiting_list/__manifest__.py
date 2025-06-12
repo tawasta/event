@@ -21,7 +21,7 @@
 {
     "name": "Website Event Waiting List",
     "summary": "Adds a waiting list functionality to Events.",
-    "version": "17.0.0.0.0",
+    "version": "17.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -35,7 +35,6 @@
         "data/email_template_views.xml",
         "data/email_template_data.xml",
         "views/event_views.xml",
-        "views/event_ticket_views.xml",
         "views/event_templates_page_registration.xml",
         "views/event_templates_page_waiting_list.xml",
         "wizard/waiting_mail_list_message.xml",

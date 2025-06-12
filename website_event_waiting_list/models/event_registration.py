@@ -69,55 +69,12 @@ class EventRegistration(models.Model):
         for registration in self:
             registration.confirm_url = urls.url_join(
                 base_url,
-                "/event/%s/waiting-list/confirm/%s"
-                % (registration.event_id.id, registration.access_token),
+                "/event/{}/waiting-list/confirm/{}".format(
+                    registration.event_id.id, registration.access_token
+                ),
             )
 
     # 5. Constraints and onchanges
-    # @api.constrains("event_id", "state")
-    # def _check_seats_limit(self):
-    #     """
-    #     Raise validation error if no waiting list and seats are full
-    #     Or if seats are full and trying to confirm a registration
-    #     """
-    #     for registration in self:
-    #         for registration in self:
-    #             if (
-    #                 registration.event_id.seats_limited
-    #                 and registration.event_id.seats_max
-    #                 and registration.event_id.seats_available
-    #                 < (1 if registration.state == "draft" else 0)
-    #             ):
-    #                 if not registration.event_id.waiting_list:
-    #                     raise ValidationError(
-    #                         _("No more seats available for this event.")
-    #                     )
-    #                 if (
-    #                     registration.event_id.waiting_list
-    #                     and registration.state not in ["draft", "wait"]
-    #                 ):
-    #                     raise ValidationError(
-    #                         _("No more seats available for this event.")
-    #                     )
-
-    # @api.constrains("event_ticket_id", "state")
-    # def _check_ticket_seats_limit(self):
-    #     """
-    #     Raise validation error if no waiting list and seats are full
-    #     Or if seats are full and trying to confirm a registration
-    #     """
-    #     for registration in self:
-    #         if (
-    #             registration.event_ticket_id.seats_max
-    #             and registration.event_ticket_id.seats_available < 0
-    #         ):
-    #             if not registration.event_ticket_id.waiting_list:
-    #                 raise ValidationError(_("No more seats available for this ticket."))
-    #             if (
-    #                 registration.event_ticket_id.waiting_list
-    #                 and registration.state not in ["draft", "wait"]
-    #             ):
-    #                 raise ValidationError(_("No more seats available for this ticket."))
 
     # 6. CRUD methods
     @api.model_create_multi
@@ -134,7 +91,7 @@ class EventRegistration(models.Model):
             if self._check_waiting_list(vals):
                 add_waiting_list = True
 
-        registrations = super(EventRegistration, self).create(vals_list)
+        registrations = super().create(vals_list)
         registrations = registrations.with_context(skip_confirm_wait=False)
         # if registrations._check_auto_confirmation():
         #     registrations.sudo().action_confirm()
@@ -192,33 +149,5 @@ class EventRegistration(models.Model):
             return True  # Lisätään jonotuslistalle
         else:
             return False  # Ei lisätä jonotuslistalle
-
-        # for registration in self:
-        #     if (not registration.event_id.waiting_list) or (
-        #         registration.event_id.seats_limited
-        #         and registration.event_id.seats_available > 0
-        #         and (
-        #             not registration.event_ticket_id.seats_limited
-        #             or registration.event_ticket_id.seats_available > 0
-        #         )
-        #     ):
-        #         return False
-        #     return True
-
-    # def _check_auto_confirmation(self):
-    #     if self._context.get("skip_confirm") or self._context.get("skip_confirm_wait"):
-    #         return False
-    #     if any(
-    #         not registration.event_id.auto_confirm
-    #         or (
-    #             registration.event_id.seats_available <= 0
-    #             and registration.event_id.seats_limited
-    #             or registration.event_ticket_id.seats_available <= 0
-    #             and registration.event_ticket_id.seats_limited
-    #         )
-    #         for registration in self
-    #     ):
-    #         return False
-    #     return True
 
     # 8. Business methods

@@ -6,5 +6,6 @@ class EventEvent(models.Model):
 
     is_promoted = fields.Boolean(
         "Promoted",
-        help="The front-end Events snippet can be configured to show only promoted events.",
+        help="The front-end Events snippet "
+        "can be configured to show only promoted events.",
     )

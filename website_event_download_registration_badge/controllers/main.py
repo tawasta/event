@@ -35,13 +35,11 @@ class WebsiteEventControllerDownloadBadge(http.Controller):
                             {"registration_badge_downloaded": True}
                         )
                     except ValueError:
-                        _logger.error(
-                            _(
-                                "Could not set registration '{}' badge as downloaded".format(
-                                    registration.id
-                                )
-                            )
+                        msg = _(
+                            f"Could not set registration '{registration.id}' "
+                            "badge as downloaded"
                         )
+                        _logger.error(msg)
 
                     pdf = (
                         request.env["ir.actions.report"]

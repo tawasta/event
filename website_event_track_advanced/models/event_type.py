@@ -38,7 +38,7 @@ class EventType(models.Model):
 
     # 2. Fields declaration
     show_track_twitter_hashtags = fields.Boolean(
-        string="Show Twitter hashtag", help="Show Twitter hashtag in agenda"
+        string="Show X hashtag", help="Show X hashtag in agenda"
     )
     location_ids = fields.Many2many("event.track.location", string="Locations")
     track_types_ids = fields.Many2many("event.track.type", string="Event Track Types")

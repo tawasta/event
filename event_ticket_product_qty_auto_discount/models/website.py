@@ -1,7 +1,7 @@
-from odoo import fields, models, _
-from odoo.http import request
-
 import logging
+
+from odoo import _, fields, models
+from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 

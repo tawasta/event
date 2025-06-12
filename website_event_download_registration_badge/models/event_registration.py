@@ -61,8 +61,9 @@ class EventRegistration(models.Model):
         for registration in self:
             registration.registration_badge_url = urls.url_join(
                 base_url,
-                "/event/%s/registration/badge/%s"
-                % (registration.event_id.id, registration.access_token),
+                "/event/{}/registration/badge/{}".format(
+                    registration.event_id.id, registration.access_token
+                ),
             )
 
     # 5. Constraints and onchanges

@@ -99,30 +99,48 @@
                     groups="event.group_event_manager"
                 />
             </xpath>
-            <field name="tag_ids" position="after">
-                <field name="privacy_ids" widget="many2many_tags" />
-                <field name="track_types_ids" widget="many2many_tags" />
-                <field name="target_group_ids" widget="many2many_tags" />
-                <field name="rating_grade_ids" widget="many2many_tags" />
-                <field name="track_subtheme_ids" widget="many2many_tags" />
-                <field name="show_track_twitter_hashtags" />
-                <field name="allowed_track_tag_ids" widget="many2many_tags" />
-                <field name="allow_track_tags_multiple" />
-                <field name="allow_target_group_multiple" />
-                <field name="use_speaker_track" readonly="1" />
-            </field>
             <field name="address_id" position="after">
                 <field name="location_ids" widget="many2many_tags" />
             </field>
             <notebook position="inside">
-                <page string="Tracks">
+                <page string="Event Track Settings">
+                    <group>
+                        <group string="Target Groups" name="group_track_target_groups">
+                            <field name="target_group_ids" widget="many2many_tags" />
+                            <field name="allow_target_group_multiple" />
+                        </group>
+                        <group
+                            string="Types and Themes"
+                            name="group_track_types_and_themes"
+                        >
+                            <field name="track_types_ids" widget="many2many_tags" />
+                            <field name="track_subtheme_ids" widget="many2many_tags" />
+                        </group>
+                        <group string="Tagging" name="group_track_tagging">
+                            <field
+                                name="allowed_track_tag_ids"
+                                widget="many2many_tags"
+                            />
+                            <field name="allow_track_tags_multiple" />
+                        </group>
+                        <group string="Grading" name="group_track_grading">
+                            <field name="rating_grade_ids" widget="many2many_tags" />
+                        </group>
+                        <group string="miscellaneous" name="group_track_misc">
+                            <field name="privacy_ids" widget="many2many_tags" />
+                            <field name="use_speaker_track" readonly="1" />
+                            <field name="show_track_twitter_hashtags" />
+                        </group>
+                    </group>
+                </page>
+                <page string="Event Tracks">
                     <field
                         name="track_ids"
                         context="{'tree_view_ref': 'website_event_track_advanced.view_event_track_advanced_tree'}"
                     />
                 </page>
-                <page string="Conflicts">
-                    <group name="overlapping_tracks" col="1">
+                <page string="Event Track Conflicts">
+                    <group string="Overlapping Tracks" name="overlapping_tracks">
                         <field
                             name="overlapping_location_track_ids"
                             invisible="not overlapping_location_track_ids"
