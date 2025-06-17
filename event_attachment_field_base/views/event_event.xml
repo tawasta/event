@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.event.attachment.field.base</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@name='event_communication']" position="after">
+                <page string="Communication Attachments" name="page_event_attachments">
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

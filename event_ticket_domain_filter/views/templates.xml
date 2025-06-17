@@ -30,7 +30,7 @@
         >
             <attribute
                 name="t-if"
-            >not tickets.is_expired and tickets.sale_available and tickets.user_in_partner_domain</attribute>
+            >not tickets or (not tickets.is_expired and tickets.sale_available and tickets.user_in_partner_domain)</attribute>
         </xpath>
         <xpath
             expr="//div[@class='o_wevent_registration_single_select w-auto ms-auto']/select"

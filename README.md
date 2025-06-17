@@ -12,6 +12,8 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_access_mail_template_preview_from_event_form](event_access_mail_template_preview_from_event_form/) | 17.0.1.0.0 |  | Allow regular users to see mail template preview
+[event_attachment_field_base](event_attachment_field_base/) | 17.0.1.0.0 |  | Adds a separate notebook tab for attachment modules' fields
+[event_attachment_field_other_generic](event_attachment_field_other_generic/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_attachment_field_program](event_attachment_field_program/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.0.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
@@ -30,7 +32,7 @@ addon | version | maintainers | summary
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
-[event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.0 |  | Show event tickets only to users matching a partner domain.
+[event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.1 |  | Show event tickets only to users matching a partner domain.
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend

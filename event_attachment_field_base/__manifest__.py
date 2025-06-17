@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2021- Futural Oy (https://futural.fi)
+#    Copyright 2025- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,18 +19,17 @@
 ##############################################################################
 
 {
-    "name": "Event Ticket Domain Filter",
-    "summary": "Show event tickets only to users matching a partner domain.",
-    "version": "17.0.1.2.1",
+    "name": "Event: Attachment Fields' Container",
+    "summary": "Adds a separate notebook tab for attachment modules' fields",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event", "partner_domain_filter"],
+    "depends": ["event"],
     "data": [
-        "views/event_views.xml",
-        "views/templates.xml",
+        "views/event_event.xml",
     ],
 }

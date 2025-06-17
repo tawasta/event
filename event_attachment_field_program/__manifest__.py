@@ -28,7 +28,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event"],
+    "depends": ["event_attachment_field_base"],
     "data": [
         "views/event_event.xml",
     ],
