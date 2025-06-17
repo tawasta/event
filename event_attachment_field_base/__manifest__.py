@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Event: Attachment Field for Event Program",
-    "summary": "Attachment with public URL, to be embedded into event e-mails",
+    "name": "Event: Attachment Fields' Container",
+    "summary": "Adds a separate notebook tab for attachment modules' fields",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
@@ -28,7 +28,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event_attachment_field_base"],
+    "depends": ["event"],
     "data": [
         "views/event_event.xml",
     ],
