@@ -9,6 +9,45 @@ _logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    def action_compute_ticket_discounts(self):
+        # Compute qty discounts for tickets after they have been split to individual
+        # lines. TODO validate that it cannot be done before
+        for invoice in self:
+            products_on_lines = {}
+
+            # Group the invoice lines by product
+            for line in invoice.invoice_line_ids.filtered(
+                lambda il: il.product_id and il.product_id.detailed_type == "event"
+            ):
+                product_template = line.product_id.product_tmpl_id
+                if product_template.id not in products_on_lines:
+                    products_on_lines[product_template.id] = []
+                products_on_lines[product_template.id].append(line)
+
+            for product_template_id, invoice_lines in products_on_lines.items():
+                product_template = self.env["product.template"].browse(
+                    product_template_id
+                )
+
+                discounts_of_product = (
+                    product_template.event_ticket_qty_discount_ids.sorted(
+                        "ticket_number"
+                    )
+                )
+
+                # Loop through the invoice lines where this product is present,
+                # and apply discounts one by one
+                for idx, line in enumerate(invoice_lines):
+                    if idx < len(discounts_of_product):
+                        line.discount = discounts_of_product[idx].discount
+                    else:
+                        # TODO: if there are more tickets bought than there are
+                        # discount steps on the product, should rest of rows
+                        # get the highest discount?
+                        line.discount = 0.0
+
+        self.message_post(body=_("Ticket discounts have been computed and applied."))
+
     def action_split_event_ticket_lines(self):
         # Split each invoice line that contains a ticket product
         # into lines with qty of 1

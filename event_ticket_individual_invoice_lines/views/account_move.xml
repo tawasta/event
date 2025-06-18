@@ -12,6 +12,14 @@
                     invisible="state != 'draft' or move_type != 'out_invoice'"
                     class="oe_highlight"
                 />
+
+                <button
+                    name="action_compute_ticket_discounts"
+                    type="object"
+                    string="Compute Ticket Quantity Discounts"
+                    class="oe_highlight"
+                    invisible="state != 'draft' or move_type != 'out_invoice'"
+                />
             </xpath>
         </field>
     </record>

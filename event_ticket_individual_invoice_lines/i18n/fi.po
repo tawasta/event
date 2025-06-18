@@ -1,0 +1,148 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_ticket_individual_invoice_lines
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-18 20:39+0000\n"
+"PO-Revision-Date: 2025-06-18 20:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_ticket_individual_invoice_lines
+#: model_terms:ir.ui.view,arch_db:event_ticket_individual_invoice_lines.view_move_form_inherit
+msgid "Compute Ticket Quantity Discounts"
+msgstr "Laske lippujen määräalennukset"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__discount
+msgid "Discount %"
+msgstr "Alennus-%"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model,name:event_ticket_individual_invoice_lines.model_event_ticket_qty_discount
+msgid "Event Ticket Quantity Discount"
+msgstr "Tapahtumalipun määräalennus"
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid "Event tickets have been split into individual invoice lines."
+msgstr "Tapahtumaliput on eritelty omille laskuriveilleen"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__id
+msgid "ID"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid ""
+"Invoice line '%s' must be linked to exactly one sale order line. Split the "
+"invoice lines manually."
+msgstr ""
+"Laskurivin '%s' pitää olla linkitetty täsmälleen yhteen myyntitilausriviin. Erittele laskurivit käsin."
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model,name:event_ticket_individual_invoice_lines.model_account_move
+msgid "Journal Entry"
+msgstr "Päiväkirjan kirjaus"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid ""
+"Mismatch between invoice line quantity (%s) and number of registrations (%s)"
+" for line '%s'. Split the invoice lines manually."
+msgstr ""
+"Epäjatkuvuus laskurivin määrän (%s) ja osallistumisten määrän (%s) välillä rivillä %s. Erittele laskurivit käsin."
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model,name:event_ticket_individual_invoice_lines.model_product_template
+msgid "Product"
+msgstr "Tuote"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__product_template_id
+msgid "Product Template"
+msgstr "Tuotemalli"
+
+#. module: event_ticket_individual_invoice_lines
+#: model_terms:ir.ui.view,arch_db:event_ticket_individual_invoice_lines.view_move_form_inherit
+msgid "Split Event Ticket Invoice Lines"
+msgstr "Erittele tapahtumalippujen laskurivit"
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid "This action is only available for draft customer invoices."
+msgstr "Tämä toiminto on mahdollinen vain luonnostilassa oleville asiakaslaskuille"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_event_ticket_qty_discount__ticket_number
+msgid "Ticket #"
+msgstr "Lipun numero"
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_product_product__event_ticket_qty_discount_ids
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_product_template__event_ticket_qty_discount_ids
+#: model_terms:ir.ui.view,arch_db:event_ticket_individual_invoice_lines.product_template_only_form_view_inherit
+msgid "Ticket Quantity Discounts"
+msgstr "Lippujen määräalennukset"
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid "Ticket discounts have been computed and applied."
+msgstr "Lippujen määräalennukset on asetettu."
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/product_template.py:0
+#, python-format
+msgid "Ticket number sequence should be ascending with no gaps."
+msgstr "Lippunumeroiden järjestyksen pitää olla nouseva ja aukoton."

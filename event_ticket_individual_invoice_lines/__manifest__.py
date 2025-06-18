@@ -30,5 +30,9 @@
     "application": False,
     "installable": True,
     "depends": ["event_sale"],
-    "data": ["views/account_move.xml"],
+    "data": [
+        "views/account_move.xml",
+        "views/product_template.xml",
+        "security/ir.model.access.csv",
+    ],
 }

@@ -1,0 +1,24 @@
+<odoo>
+    <record id="product_template_only_form_view_inherit" model="ir.ui.view">
+        <field
+            name="name"
+        >product.template.form.inherit.individual.invoice.lines</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Ticket Quantity Discounts"
+                    invisible="detailed_type != 'event'"
+                >
+                    <field name="event_ticket_qty_discount_ids">
+                        <tree editable="bottom">
+                            <field name="ticket_number" />
+                            <field name="discount" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
