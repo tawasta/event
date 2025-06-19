@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.split.event.lines</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_split_event_ticket_lines"
+                    type="object"
+                    string="Split Event Ticket Invoice Lines"
+                    invisible="state != 'draft' or move_type != 'out_invoice'"
+                    class="oe_highlight"
+                />
+
+                <button
+                    name="action_compute_ticket_discounts"
+                    type="object"
+                    string="Compute Ticket Quantity Discounts"
+                    class="oe_highlight"
+                    invisible="state != 'draft' or move_type != 'out_invoice'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
