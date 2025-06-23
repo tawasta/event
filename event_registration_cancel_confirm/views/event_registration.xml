@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_event_registration_tree_inherit_confirm_cancel" model="ir.ui.view">
+    <field name="name">event.registration.tree.inherit.confirm_cancel</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_event_registration_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//button[@name='action_cancel']" position="attributes">
+        <attribute name="confirm">Are you sure you want to cancel this registration?</attribute>
+      </xpath>
+    </field>
+  </record>
+</odoo>
