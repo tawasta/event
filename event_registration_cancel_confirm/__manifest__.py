@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Tawasta
-#    Copyright 2025 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Copyright 2020 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,8 +18,8 @@
 #
 ##############################################################################
 {
-    "name": "Website Event: Show 'Sales Start' Info for Events",
-    "summary": "Show ticket sale start date in frontend event listing",
+    "name": "Event registration cancel confirm",
+    "summary": "Event registration cancel confirm",
     "version": "16.0.1.0.0",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
@@ -28,9 +28,7 @@
     "application": False,
     "installable": True,
     "depends": [
-        "website_event",
+        "event",
     ],
-    "data": [
-        "views/event_template.xml",
-    ],
+    "data": ["views/event_registration.xml"],
 }
