@@ -30,7 +30,5 @@
     "depends": [
         "event",
     ],
-    "data": [
-        "views/event_registration.xml"
-    ],
+    "data": ["views/event_registration.xml"],
 }
