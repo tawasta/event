@@ -35,6 +35,11 @@ class EventRegistration(models.Model):
                     ("id", "!=", confirmed_registration.id),
                     ("partner_id", "=", confirmed_registration.partner_id.id),
                     (
+                        "registration_partner_id",
+                        "=",
+                        confirmed_registration.registration_partner_id.id,
+                    ),
+                    (
                         "registration_survey_id",
                         "in",
                         confirmed_registration.event_id.survey_ids.ids,
