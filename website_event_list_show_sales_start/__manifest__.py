@@ -22,7 +22,7 @@
     "summary": "Show ticket sale start date in frontend event listing",
     "version": "16.0.1.0.0",
     "category": "Website",
-    "website": "https://github.com/tawasta/odoo/event",
+    "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
