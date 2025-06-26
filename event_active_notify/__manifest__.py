@@ -18,19 +18,20 @@
 #
 ##############################################################################
 {
-    "name": "Website Event: Show 'Sales Start' Info for Events",
-    "summary": "Show ticket sale start date in frontend event listing",
+    "name": "Event Active Notification",
+    "summary": "Notify group members when an event is activated",
     "version": "16.0.1.0.0",
-    "category": "Website",
+    "category": "event",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Tawasta",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
-        "website_event",
+        "event",
     ],
     "data": [
-        "views/event_template.xml",
+        "security/group.xml",
+        "data/mail_template.xml",
     ],
 }
