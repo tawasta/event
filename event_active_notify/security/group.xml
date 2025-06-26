@@ -2,6 +2,6 @@
 <odoo>
     <record id="group_event_notifications" model="res.groups">
         <field name="name">Event Notifications</field>
-        <field name="category_id" ref="base.module_category_marketing_events"/>
+        <field name="category_id" ref="base.module_category_marketing_events" />
     </record>
 </odoo>
