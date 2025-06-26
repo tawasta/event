@@ -55,12 +55,12 @@ class Event(models.Model):
 
         # ensure the user was allowed to publish
         event._check_publishing_access()
-            
-        # Finally, check if the event just got published by user with higher access: 
-        # if yes and the event is < 30 days away, override the ticket sales to start 
+
+        # Finally, check if the event just got published by user with higher access:
+        # if yes and the event is < 30 days away, override the ticket sales to start
         # immediately
         if event.is_published and event.requires_additional_rights_to_publish:
-            event._open_ticket_sales()     
+            event._open_ticket_sales()
 
         return event
 
@@ -73,9 +73,7 @@ class Event(models.Model):
         # Update the ticket sale start dates
         if "date_begin" or "event_ticket_ids" in vals:
             for event in self:
-                tickets = ticket_obj.search(
-                    [("event_id", "=", event.id)]
-                )
+                tickets = ticket_obj.search([("event_id", "=", event.id)])
                 for ticket in tickets:
                     ticket.sudo().write(
                         {
@@ -91,8 +89,8 @@ class Event(models.Model):
             for event in self:
                 event._check_publishing_access()
 
-        # Finally, check if the event just got published by user with higher access: 
-        # if yes and the event is < 30 days away, override the ticket sales to start 
+        # Finally, check if the event just got published by user with higher access:
+        # if yes and the event is < 30 days away, override the ticket sales to start
         # immediately
         if "is_published" in vals and vals["is_published"]:
             for event in self:
@@ -165,16 +163,13 @@ class Event(models.Model):
 
         ticket_obj = self.env["event.event.ticket"]
 
-        tickets = ticket_obj.search(
-            [("event_id", "=", self.id)]
-        )
+        tickets = ticket_obj.search([("event_id", "=", self.id)])
         for ticket in tickets:
-            ticket.sudo().write(
-                {
-                    "start_sale_datetime": fields.Datetime.now()
-                }
-            )
+            ticket.sudo().write({"start_sale_datetime": fields.Datetime.now()})
 
             self.message_post(
-                body=_("Event is less than 30 days away. Updated ticket '%s' sales to open now.") % ticket.name
+                body=_(
+                    "Event is less than 30 days away. Updated ticket '%s' sales to open now."
+                )
+                % ticket.name
             )

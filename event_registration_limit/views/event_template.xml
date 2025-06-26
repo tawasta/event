@@ -15,5 +15,6 @@
         <xpath expr="//div[@id='o_wevent_tickets']" position="attributes">
             <attribute name="t-if">not registration_disabled</attribute>
         </xpath>
+        <xpath expr="//div[@class='col col-md-8 d-flex']/em" position="replace" />
     </template>
 </odoo>
