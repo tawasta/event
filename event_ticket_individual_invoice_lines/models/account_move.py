@@ -105,9 +105,15 @@ class AccountMove(models.Model):
 
                     for registration in registrations:
                         line_data = line.copy_data({"quantity": 1.0})[0]
+
+                        # Reconnect to the original SO line
+                        line_data["sale_line_ids"] = [(6, 0, [sale_line.id])]
+
+                        # Update the line description
                         line_data[
                             "name"
                         ] = f"{event_name} {formatted_date}: {registration.name}"
+
                         new_lines.append(line_data)
 
                     lines_to_remove += line
