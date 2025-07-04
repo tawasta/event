@@ -28,5 +28,5 @@
     "application": False,
     "installable": True,
     "depends": ["website_event_sale"],
-    "data": ["views/event_templates.xml","views/res_config_settings.xml"],
+    "data": ["views/event_templates.xml", "views/res_config_settings.xml"],
 }

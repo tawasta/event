@@ -1,19 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
         <record id="res_config_settings_view_form" model="ir.ui.view">
             <field name="name">res.config.settings.view.form.inherit.event</field>
             <field name="model">res.config.settings</field>
-            <field name="priority" eval="65"/>
-            <field name="inherit_id" ref="event.res_config_settings_view_form"/>
+            <field name="priority" eval="65" />
+            <field name="inherit_id" ref="event.res_config_settings_view_form" />
             <field name="arch" type="xml">
-                <xpath expr="//block[@name='registration_setting_container']" position="inside">
+                <xpath
+                expr="//block[@name='registration_setting_container']"
+                position="inside"
+            >
 
-                        <block title="Registration settings" name="registration_settings_container">
-                            <setting id="payment_texts" help="Custom registration(payment) text">
-                                <field name="event_payment_button_text"/>
+                        <block
+                    title="Registration settings"
+                    name="registration_settings_container"
+                >
+                            <setting
+                        id="payment_texts"
+                        help="Custom registration(payment) text"
+                    >
+                                <field name="event_payment_button_text" />
                             </setting>
-                            <setting id="registration_texts" help="Custom registration text">
+                            <setting
+                        id="registration_texts"
+                        help="Custom registration text"
+                    >
                                 <field name="event_registration_button_text" />
                             </setting>
                         </block>
@@ -21,5 +32,4 @@
                 </xpath>
             </field>
         </record>
-    </data>
 </odoo>

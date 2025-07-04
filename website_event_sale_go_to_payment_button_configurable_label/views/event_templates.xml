@@ -3,18 +3,19 @@
     <template
         id="registration_attendee_details"
         inherit_id="website_event_sale.registration_attendee_details"
+        priority="100"
     >
         <xpath expr="//button[@t-if='availability_check']" position="replace">
             <button t-if="availability_check" type="submit" class="btn btn-primary">
                 <span t-if="has_paying_ticket">
                     <span t-if="website.payment_button_text">
-                        <t t-esc="website.payment_button_text"/>
+                        <t t-esc="website.payment_button_text" />
                     </span>
                     <span t-else="">Go to Payment</span>
                 </span>
                 <span t-else="">
                     <span t-if="website.registration_button_text">
-                        <t t-esc="website.registration_button_text"/>
+                        <t t-esc="website.registration_button_text" />
                     </span>
                     <span t-else="">Confirm Registration</span>
                 </span>
