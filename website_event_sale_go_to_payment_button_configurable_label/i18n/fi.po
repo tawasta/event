@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_sale_go_to_payment_button_configurable_label
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20240711\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-07 08:53+0000\n"
+"PO-Revision-Date: 2025-07-07 08:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model,name:website_event_sale_go_to_payment_button_configurable_label.model_res_config_settings
+msgid "Config Settings"
+msgstr "Asetukset"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model_terms:ir.ui.view,arch_db:website_event_sale_go_to_payment_button_configurable_label.registration_attendee_details
+msgid "Confirm Registration"
+msgstr "Vahvista ilmoittautuminen"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model.fields,help:website_event_sale_go_to_payment_button_configurable_label.field_res_config_settings__event_registration_button_text
+msgid ""
+"Enter a custom label for the 'Confirm Registration' button shown during "
+"event registration."
+msgstr ""
+"Anna mukautettu teksti 'Vahvista ilmoittautuminen' -painikkeelle, joka näytetään tapahtuman ilmoittautumisen yhteydessä."
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model_terms:ir.ui.view,arch_db:website_event_sale_go_to_payment_button_configurable_label.res_config_settings_view_form
+msgid ""
+"Enter a custom label for the 'Confirm Registration' button shown during "
+"event registration. Leave empty to use the default text."
+msgstr ""
+"Anna mukautettu teksti 'Vahvista ilmoittautuminen' -painikkeelle tapahtuman ilmoittautumisen yhteydessä. Jätä tyhjäksi käyttääksesi oletustekstiä."
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model.fields,help:website_event_sale_go_to_payment_button_configurable_label.field_res_config_settings__event_payment_button_text
+msgid ""
+"Enter a custom label for the 'Go to Payment' button shown during event "
+"registration."
+msgstr ""
+"Anna mukautettu teksti 'Siirry maksamaan' -painikkeelle, joka näytetään tapahtuman ilmoittautumisen yhteydessä."
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model_terms:ir.ui.view,arch_db:website_event_sale_go_to_payment_button_configurable_label.res_config_settings_view_form
+msgid ""
+"Enter a custom label for the 'Go to Payment' button shown during event "
+"registration. Leave empty to use the default text."
+msgstr ""
+"Anna mukautettu teksti 'Siirry maksamaan' -painikkeelle tapahtuman ilmoittautumisen yhteydessä. Jätä tyhjäksi käyttääksesi oletustekstiä."
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model.fields,field_description:website_event_sale_go_to_payment_button_configurable_label.field_res_config_settings__event_payment_button_text
+#: model:ir.model.fields,field_description:website_event_sale_go_to_payment_button_configurable_label.field_website__payment_button_text
+msgid "Event Payment Button Text"
+msgstr "Tapahtuman maksupainikkeen teksti"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model.fields,field_description:website_event_sale_go_to_payment_button_configurable_label.field_res_config_settings__event_registration_button_text
+#: model:ir.model.fields,field_description:website_event_sale_go_to_payment_button_configurable_label.field_website__registration_button_text
+msgid "Event Registration Button Text"
+msgstr "Tapahtuman ilmoittautumispainikkeen teksti"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model_terms:ir.ui.view,arch_db:website_event_sale_go_to_payment_button_configurable_label.registration_attendee_details
+msgid "Go to Payment"
+msgstr "Siirry maksamaan"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model_terms:ir.ui.view,arch_db:website_event_sale_go_to_payment_button_configurable_label.res_config_settings_view_form
+msgid "Registration settings"
+msgstr "Ilmoittautumisasetukset"
+
+#. module: website_event_sale_go_to_payment_button_configurable_label
+#: model:ir.model,name:website_event_sale_go_to_payment_button_configurable_label.model_website
+msgid "Website"
+msgstr "Verkkosivu"
