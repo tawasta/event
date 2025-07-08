@@ -32,6 +32,7 @@
     ],
     "data": [
         "security/group.xml",
+        "data/ir_cron.xml",
         "data/mail_template.xml",
     ],
 }
