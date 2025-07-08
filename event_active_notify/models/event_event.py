@@ -51,15 +51,17 @@ class EventEvent(models.Model):
         start_of_day = fields.Datetime.to_datetime(f"{today} 00:00:00")
         end_of_day = fields.Datetime.to_datetime(f"{today} 23:59:59")
 
-        tickets = self.env['event.event.ticket'].search([
-            ('start_sale_datetime', '>=', start_of_day),
-            ('start_sale_datetime', '<=', end_of_day),
-            ('event_id.ticket_sale_notification_sent', '=', False),
-            ('event_id.active', '=', True),
-        ])
+        tickets = self.env["event.event.ticket"].search(
+            [
+                ("start_sale_datetime", ">=", start_of_day),
+                ("start_sale_datetime", "<=", end_of_day),
+                ("event_id.ticket_sale_notification_sent", "=", False),
+                ("event_id.active", "=", True),
+            ]
+        )
 
         # Poimi niihin liittyvät tapahtumat
-        events = tickets.mapped('event_id')
+        events = tickets.mapped("event_id")
 
         group = self.env.ref(
             "event_active_notify.group_event_notifications", raise_if_not_found=False

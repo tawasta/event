@@ -57,22 +57,26 @@
             <field
                 name="email_from"
             >{{ object.company_id.email or 'no-reply@example.com' }}</field>
-            <field
-                name="description"
-            >Ticket sale starts today.</field>
+            <field name="description">Ticket sale starts today.</field>
             <field name="body_html" type="html">
 
                 <p style="margin:0px 0 0px 0;box-sizing:border-box;margin-bottom:0px;">
                     Hello,
                     <br /><br />
-                    The ticket sale for the event <strong style="box-sizing:border-box;font-weight:bolder;">
+                    The ticket sale for the event <strong
+                        style="box-sizing:border-box;font-weight:bolder;"
+                    >
                         <t t-out="object.name or ''">Event Name</t>
                     </strong> starts today.
                     <br /><br />
                     <ul>
-                        <li>Start Date: <t t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"/></li>
-                        <li>Location: <t t-out="object.address_id.city or '-'"/></li>
-                        <li>Organizer: <t t-out="object.organizer_id.name or '-'"/></li>
+                        <li>Start Date: <t
+                                t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"
+                            /></li>
+                        <li>Location: <t t-out="object.address_id.city or '-'" /></li>
+                        <li>Organizer: <t
+                                t-out="object.organizer_id.name or '-'"
+                            /></li>
                     </ul>
 
                     <br />
