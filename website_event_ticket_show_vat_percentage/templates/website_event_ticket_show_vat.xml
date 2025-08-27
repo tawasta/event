@@ -4,7 +4,7 @@
         id="registration_template"
         inherit_id="website_event_sale.modal_ticket_registration"
         priority="999"
-        >
+    >
         <xpath
             expr="//div[hasclass('o_wevent_registration_multi_select')]//span[@itemprop='price']"
             position="after"
