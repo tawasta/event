@@ -1,5 +1,4 @@
-from odoo import models
-from odoo import _
+from odoo import models, _
 
 class EventEventTicket(models.Model):
     _inherit = "event.event.ticket"
