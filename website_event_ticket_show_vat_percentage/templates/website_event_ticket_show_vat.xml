@@ -10,7 +10,7 @@
             position="after"
         >
         <small class="text-muted me-3">
-            <t t-out="ticket._get_register_modal_vat_text()"/>
+            <t t-out="ticket._get_register_modal_vat_text()" />
         </small>
         </xpath>
     </template>
