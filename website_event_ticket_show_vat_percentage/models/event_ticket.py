@@ -10,7 +10,16 @@ class EventEventTicket(models.Model):
         website = self.env["website"].get_current_website(fallback=False)
         if website.show_line_subtotals_tax_selection == "tax_excluded":
             return ""
-        elif not ticket.product_id.taxes_id.display_name:
+
+        # Suodata verot nykyisen sivuston yrityksen mukaan
+        taxes = ticket.product_id.taxes_id.filtered(
+            lambda t: t.company_id == website.company_id
+        )
+
+        # Jos veroja ei ole, palauta tyhjä kuten alkuperäinenkin teki
+        if not taxes:
             return ""
-        else:
-            return including_vat + " " + ticket.product_id.taxes_id.display_name
+
+        # Yhdistä mahdollisesti useiden verojen nimet pilkulla
+        names = ", ".join(taxes.mapped("display_name"))
+        return including_vat + " " + names
