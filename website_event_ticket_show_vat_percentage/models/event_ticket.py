@@ -11,9 +11,8 @@ class EventEventTicket(models.Model):
         if website.show_line_subtotals_tax_selection == "tax_excluded":
             return ""
 
-        # Suodata verot nykyisen sivuston yrityksen mukaan
         taxes = ticket.product_id.taxes_id.filtered(
-            lambda t: t.company_id == website.company_id
+            lambda t: t.company_id == ticket.product_id.variant_company_id
         )
 
         # Jos veroja ei ole, palauta tyhjä kuten alkuperäinenkin teki
