@@ -12,7 +12,7 @@ Configuration
 No configuration needed.  
 The module will automatically display VAT text when:  
 - Website subtotal setting is **tax included**  
-- Event ticket’s product has taxes defined for the same company as the website  
+- Event ticket’s product has taxes defined for the same company as the product variant company  
 
 Usage
 =====
@@ -20,7 +20,7 @@ Just install the module.
 When registering for an event on the website, the ticket price modal will show  
 an additional “inc. VAT …” text next to each ticket price.  
 If multiple taxes exist, their names are listed comma-separated.  
-If no taxes are found for the website’s company, nothing is shown.  
+If no taxes are found for the product's variant company, nothing is shown.  
 
 Known issues / Roadmap
 ======================
