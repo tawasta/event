@@ -1,7 +1,6 @@
 from odoo import http
-from odoo.http import request
-
 from odoo.addons.website_event.controllers.main import WebsiteEventController
+from odoo.http import request
 
 
 class CustomWebsiteEventRegistrationController(WebsiteEventController):

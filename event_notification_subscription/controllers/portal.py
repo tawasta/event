@@ -2,9 +2,8 @@
 import logging
 
 from odoo import http
-from odoo.http import request
-
 from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.http import request
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
