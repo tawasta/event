@@ -29,7 +29,8 @@ class EventEvent(models.Model):
 
     def _notify_group_users(self):
         group = self.env.ref(
-            "event_active_notify.group_event_notifications", raise_if_not_found=False
+            "event_active_notify.group_event_notifications",
+            raise_if_not_found=False,  # noqa: E501
         )
         template = self.env.ref(
             "event_active_notify.event_activation_internal_group_mail",
@@ -64,7 +65,8 @@ class EventEvent(models.Model):
         events = tickets.mapped("event_id")
 
         group = self.env.ref(
-            "event_active_notify.group_event_notifications", raise_if_not_found=False
+            "event_active_notify.group_event_notifications",
+            raise_if_not_found=False,  # noqa: E501
         )
         template = self.env.ref(
             "event_active_notify.event_ticket_sale_start_mail",

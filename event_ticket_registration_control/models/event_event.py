@@ -8,11 +8,13 @@ class Event(models.Model):
 
     @api.model
     def create(self, vals):
-        """Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän"""
+        """Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän"""  # noqa: E501
         event = super(Event, self).create(vals)
 
         # Haetaan tapahtumaan liittyvät liput
-        tickets = self.env["event.event.ticket"].search([("event_id", "=", event.id)])
+        tickets = self.env["event.event.ticket"].search(
+            [("event_id", "=", event.id)]
+        )  # noqa: E501
 
         if not tickets:
             # Luodaan oletuslippu, jos tapahtumalle ei ole vielä lippuja
@@ -48,7 +50,7 @@ class Event(models.Model):
                 for ticket in tickets:
                     ticket.sudo().write(
                         {
-                            "start_sale_datetime": self._compute_registration_start(
+                            "start_sale_datetime": self._compute_registration_start(  # noqa: E501
                                 event.date_begin
                             ),
                         }
@@ -57,7 +59,7 @@ class Event(models.Model):
         return res
 
     def _compute_registration_start(self, event_start):
-        """Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella"""
+        """Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella"""  # noqa: E501
         today = fields.Datetime.today()
         days_until_event = (event_start - today).days
 

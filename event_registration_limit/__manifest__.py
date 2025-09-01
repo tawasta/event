@@ -19,7 +19,10 @@
 ##############################################################################
 {
     "name": "Event Registration Limitations",
-    "summary": "Restricts event registrations per exam type and prevents duplicates.",
+    "summary": (
+        "Restricts event registrations per exam type "
+        "and prevents duplicates."  # noqa: E501
+    ),
     "version": "16.0.1.0.1",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",

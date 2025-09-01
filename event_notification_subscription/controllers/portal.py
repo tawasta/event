@@ -28,7 +28,9 @@ class PortalEventTag(CustomerPortal):
 
             if post.get("tag_ids"):
                 tag_ids = list(map(int, post.pop("tag_ids").split(",")))
-                request.env.user.partner_id.event_interest_tags = [(6, 0, tag_ids)]
+                request.env.user.partner_id.event_interest_tags = [
+                    (6, 0, tag_ids)
+                ]  # noqa: E501
                 post.pop("tag_ids", None)
         # Kutsutaan alkuperäisen ohjaimen metodia
         response = super(PortalEventTag, self).account(redirect, **post)
@@ -36,7 +38,11 @@ class PortalEventTag(CustomerPortal):
         return response
 
     def details_form_validate(self, data):
-        error, error_message = super(PortalEventTag, self).details_form_validate(data)
+        error, error_message = super(
+            PortalEventTag, self
+        ).details_form_validate(  # noqa: E501
+            data
+        )  # noqa: E501
 
         # Allow category_ids to be empty
         if "tag_ids" in data and not data["tag_ids"]:
