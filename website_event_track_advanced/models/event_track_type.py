@@ -75,7 +75,6 @@ class EventTrackType(models.Model):
     )
     webinar = fields.Boolean(help="Tracks in this type can hold webinars", default=True)
 
-
     privacy_id = fields.Many2one(
         "privacy.activity",
         string="Privacies",

@@ -336,7 +336,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "einvoice_operator_id": track.organizer.einvoice_operator_id.id,
                     }
                 )
-            #if track.stage_id.is_accepted:
+            # if track.stage_id.is_accepted:
             operators = [
                 {"id": ope.id, "name": ope.name}
                 for ope in request.env["res.partner.operator.einvoice"]
@@ -470,9 +470,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         multiple_tags = False
         if event.allow_track_tags_multiple:
             multiple_tags = True
-        
-        operators = request.env["res.partner.operator.einvoice"].sudo().search([])
 
+        operators = request.env["res.partner.operator.einvoice"].sudo().search([])
 
         return {
             "application_types": application_types,
@@ -736,10 +735,10 @@ class EventTrackControllerAdvanced(EventTrackController):
                     request_time.id if request_time else False,
                 )
 
-            #if (
+            # if (
             #    post.get("is_workshop_contract")
             #    and post.get("is_workshop_contract") == "true"
-            #):
+            # ):
             einvoice_operator_id = (
                 request.env["res.partner.operator.einvoice"]
                 .sudo()
@@ -1095,8 +1094,10 @@ class EventTrackControllerAdvanced(EventTrackController):
                     self._create_privacy(post, partner, event)
 
                     if post.get("is_workshop") and post.get("is_workshop") == "true":
-                        workshop_type = request.env["event.track.type"].sudo().search(
-                            [("workshop", "=", True)]
+                        workshop_type = (
+                            request.env["event.track.type"]
+                            .sudo()
+                            .search([("workshop", "=", True)])
                         )
                         workshop_privacy = workshop_type.privacy_id
                         if workshop_privacy:
@@ -1113,11 +1114,16 @@ class EventTrackControllerAdvanced(EventTrackController):
                                     request.env["privacy.consent"]
                                     .sudo()
                                     .search(
-                                        [("partner_id", "=", partner.id), ("activity_id", "=", workshop_privacy.id)]
+                                        [
+                                            ("partner_id", "=", partner.id),
+                                            ("activity_id", "=", workshop_privacy.id),
+                                        ]
                                     )
                                 )
                                 if not already_privacy_record:
-                                    request.env["privacy.consent"].sudo().create(workshop_privacy_vals)
+                                    request.env["privacy.consent"].sudo().create(
+                                        workshop_privacy_vals
+                                    )
 
             # 3. Add contact to organization
             if values.get("contact_organization"):

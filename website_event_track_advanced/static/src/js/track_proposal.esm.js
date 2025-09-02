@@ -359,8 +359,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         });
                     }
                     self._populateSelectOptions("tags", response.tags);
-                    //console.log(response.operators);
-                    //self._populateSelectOptions("operators", response.operators);
+                    // Console.log(response.operators);
+                    // self._populateSelectOptions("operators", response.operators);
                     self._populateSelectOptions("request_time", response.request_time);
                     self._populateSelectOptions("language", response.languages);
 
@@ -1076,7 +1076,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const workshopRequestDiv = $("#workshop-track-request-time-div");
         const contractDiv = $("#track-application-workshop-contract-div");
         const workshopPrivacy = $("#workshop-privacy-required");
-        const workshopPrivacyInput = $("#workshop-privacy-required input[type='checkbox']");
+        const workshopPrivacyInput = $(
+            "#workshop-privacy-required input[type='checkbox']"
+        );
 
         // Tarkistetaan, että workshop on nimenomaan "true"
         if (workshop === "true") {
@@ -1104,16 +1106,16 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             console.log(workshopContract);
             contractDiv.removeClass("d-none");
             contractDiv.find("input, select").prop("disabled", false);
-            contractDiv.find("textarea").prop("disabled", false);       
-            //if (workshopContract === "true") {
+            contractDiv.find("textarea").prop("disabled", false);
+            // If (workshopContract === "true") {
             //    contractDiv.removeClass("d-none");
             //    contractDiv.find("input, select").prop("disabled", false);
             //    contractDiv.find("textarea").prop("disabled", false);
-            //} else {
+            // } else {
             //    contractDiv.addClass("d-none");
             //    contractDiv.find("input, select").prop("disabled", true).val("");
             //    contractDiv.find("textarea").prop("disabled", true).val("");
-            //}
+            // }
             workshopPrivacy.removeClass("d-none");
             workshopPrivacyInput.prop("required", true).prop("disabled", false);
         } else {
@@ -1138,7 +1140,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .attr("required", false);
 
             workshopPrivacy.addClass("d-none");
-            workshopPrivacyInput.prop("required", false).prop("checked", false).prop("disabled", true);
+            workshopPrivacyInput
+                .prop("required", false)
+                .prop("checked", false)
+                .prop("disabled", true);
         }
     },
 
