@@ -34,11 +34,14 @@ class EventTrackControllerAdvanced(EventTrackController):
             .search([["partner_id", "=", partner_id.id], ["event_id", "=", event.id]])
         )
 
+        operators = request.env["res.partner.operator.einvoice"].sudo().search([])
+
         values = {
             "tracks": tracks,
             "event": event,
             "main_object": event,
             "track_languages": track_languages,
+            "operators": operators,
         }
 
         reviewer = request.env.user.reviewer_id
@@ -333,20 +336,20 @@ class EventTrackControllerAdvanced(EventTrackController):
                         "einvoice_operator_id": track.organizer.einvoice_operator_id.id,
                     }
                 )
-            if track.stage_id.is_accepted:
-                operators = [
-                    {"id": ope.id, "name": ope.name}
-                    for ope in request.env["res.partner.operator.einvoice"]
-                    .sudo()
-                    .search([])
-                ]
+            # if track.stage_id.is_accepted:
+            operators = [
+                {"id": ope.id, "name": ope.name}
+                for ope in request.env["res.partner.operator.einvoice"]
+                .sudo()
+                .search([])
+            ]
 
-                values.update(
-                    {
-                        "is_workshop_contract": True,
-                        "operators": operators,
-                    }
-                )
+            values.update(
+                {
+                    "is_workshop_contract": True,
+                    "operators": operators,
+                }
+            )
 
         # Lisätään webinar-tiedot vain jos track on tyyppiä webinar
         if track.type and track.type.webinar:
@@ -468,6 +471,8 @@ class EventTrackControllerAdvanced(EventTrackController):
         if event.allow_track_tags_multiple:
             multiple_tags = True
 
+        operators = request.env["res.partner.operator.einvoice"].sudo().search([])
+
         return {
             "application_types": application_types,
             "track_subthemes": track_subthemes,
@@ -480,6 +485,7 @@ class EventTrackControllerAdvanced(EventTrackController):
             "contact_info": contact_info,
             "multiple_target_groups": multiple_target_groups,
             "multiple_tags": multiple_tags,
+            "operators": operators,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):
@@ -729,45 +735,45 @@ class EventTrackControllerAdvanced(EventTrackController):
                     request_time.id if request_time else False,
                 )
 
-            if (
-                post.get("is_workshop_contract")
-                and post.get("is_workshop_contract") == "true"
-            ):
-                einvoice_operator_id = (
-                    request.env["res.partner.operator.einvoice"]
-                    .sudo()
-                    .search([("id", "=", post.get("einvoice_operator_id"))])
-                )
-                workshop_organizer_values = {
-                    "name": post.get("organizer_organization"),
-                    "street": post.get("organizer_street"),
-                    "zip": post.get("organizer_zip"),
-                    "city": post.get("organizer_city"),
-                    "ref": post.get("organizer_reference"),
-                    "company_registry": post.get("company_registry"),
-                    "einvoice_operator_id": einvoice_operator_id.id,
-                    "edicode": post.get("edicode"),
-                    "type": "invoice",
-                    "company_type": "company",
+            # if (
+            #    post.get("is_workshop_contract")
+            #    and post.get("is_workshop_contract") == "true"
+            # ):
+            einvoice_operator_id = (
+                request.env["res.partner.operator.einvoice"]
+                .sudo()
+                .search([("id", "=", post.get("einvoice_operator_id"))])
+            )
+            workshop_organizer_values = {
+                "name": post.get("organizer_organization"),
+                "street": post.get("organizer_street"),
+                "zip": post.get("organizer_zip"),
+                "city": post.get("organizer_city"),
+                "ref": post.get("organizer_reference"),
+                "company_registry": post.get("company_registry"),
+                "einvoice_operator_id": einvoice_operator_id.id,
+                "edicode": post.get("edicode"),
+                "type": "invoice",
+                "company_type": "company",
+            }
+            workshop_signee_values = {
+                "id": post.get("signee_id"),
+                "lastname": post.get("signee_lastname"),
+                "firstname": post.get("signee_firstname"),
+                "name": self._get_name(
+                    post.get("signee_lastname"), post.get("signee_firstname")
+                ),
+                "email": post.get("signee_email"),
+                "phone": post.get("signee_phone"),
+                "function": post.get("signee_title"),
+                "company_type": "person",
+            }
+            values.update(
+                {
+                    "workshop_organizer": workshop_organizer_values,
+                    "workshop_signee": workshop_signee_values,
                 }
-                workshop_signee_values = {
-                    "id": post.get("signee_id"),
-                    "lastname": post.get("signee_lastname"),
-                    "firstname": post.get("signee_firstname"),
-                    "name": self._get_name(
-                        post.get("signee_lastname"), post.get("signee_firstname")
-                    ),
-                    "email": post.get("signee_email"),
-                    "phone": post.get("signee_phone"),
-                    "function": post.get("signee_title"),
-                    "company_type": "person",
-                }
-                values.update(
-                    {
-                        "workshop_organizer": workshop_organizer_values,
-                        "workshop_signee": workshop_signee_values,
-                    }
-                )
+            )
         track_confirm = (
             True
             if post.get("track-confirm") and post.get("track-confirm") != ""
@@ -1086,6 +1092,38 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values["track"]["partner_id"] = partner.id
 
                     self._create_privacy(post, partner, event)
+
+                    if post.get("is_workshop") and post.get("is_workshop") == "true":
+                        workshop_type = (
+                            request.env["event.track.type"]
+                            .sudo()
+                            .search([("workshop", "=", True)])
+                        )
+                        workshop_privacy = workshop_type.privacy_id
+                        if workshop_privacy:
+                            _logger.info("===WORKSHOP PRIVACY====")
+                            if post.get("privacy_" + str(workshop_privacy.id)):
+                                _logger.info("===WORKSHOP PRIVACY 2====")
+                                workshop_privacy_vals = {
+                                    "partner_id": partner.id,
+                                    "activity_id": workshop_privacy.id,
+                                    "accepted": True,
+                                    "state": "answered",
+                                }
+                                already_privacy_record = (
+                                    request.env["privacy.consent"]
+                                    .sudo()
+                                    .search(
+                                        [
+                                            ("partner_id", "=", partner.id),
+                                            ("activity_id", "=", workshop_privacy.id),
+                                        ]
+                                    )
+                                )
+                                if not already_privacy_record:
+                                    request.env["privacy.consent"].sudo().create(
+                                        workshop_privacy_vals
+                                    )
 
             # 3. Add contact to organization
             if values.get("contact_organization"):
