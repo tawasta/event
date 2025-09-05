@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+
+        <!-- Replace original contact widget with field-specific visibility checks -->
+        <xpath
+            expr="//div[@t-if='event.organizer_id']/div[@t-field='event.organizer_id']"
+            position="attributes"
+        >
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+
+        <xpath
+            expr="//div[@t-if='event.organizer_id']/div[@t-field='event.organizer_id']"
+            position="after"
+        >
+            <div class="small">
+                <t
+                    t-if="event.organizer_show_phone_on_website and event.organizer_id.phone"
+                >
+                    <i
+                        class="fa fa-phone fa-fw mr-1 "
+                        role="img"
+                        aria-label="Phone"
+                        title="Phone"
+                    />
+                    <span t-esc="event.organizer_id.phone" class="mb-1" />
+                    <br />
+                </t>
+                <t
+                    t-if="event.organizer_show_mobile_on_website and event.organizer_id.mobile"
+                >
+                    <i
+                        class="fa fa-phone fa-fw mr-1 "
+                        role="img"
+                        aria-label="Mobile"
+                        title="Mobile"
+                    />
+                    <span t-esc="event.organizer_id.mobile" class="mb-1" />
+                    <br />
+                </t>
+                <t
+                    t-if="event.organizer_show_email_on_website and event.organizer_id.email"
+                >
+                    <i
+                        class="fa fa-envelope fa-fw mr-1 "
+                        role="img"
+                        aria-label="E-mail"
+                        title="E-mail"
+                    />
+                    <span t-esc="event.organizer_id.email" class="mb-1" />
+                </t>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>
