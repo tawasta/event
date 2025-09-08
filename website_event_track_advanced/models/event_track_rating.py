@@ -14,12 +14,12 @@ class TrackRating(models.Model):
     event_id = fields.Many2one(
         "event.event", "Event", compute="_compute_event_id", readonly=True
     )
-    event_track = fields.Many2one("event.track", "Event Track", required=True)
+    event_track = fields.Many2one("event.track", required=True)
     reviewer_id = fields.Many2one("event.track.reviewer", "Reviewer", required=True)
     grade_id = fields.Many2one(
         comodel_name="event.track.rating.grade", string="Track Grade"
     )
-    comment = fields.Html("Comment")
+    comment = fields.Html()
 
     # 3. Default methods
 

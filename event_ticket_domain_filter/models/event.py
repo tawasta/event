@@ -1,5 +1,4 @@
-from odoo import _, fields, http, models
-from odoo.http import request
+from odoo import fields, models
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -7,7 +6,6 @@ class EventEventTicket(models.Model):
     _inherit = "event.event.ticket"
 
     paywall_domain = fields.Char(
-        string="Paywall Domain",
         help="Comma-separated domains for which this ticket is visible.",
     )
 

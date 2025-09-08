@@ -75,7 +75,7 @@ class EventMailRegistration(models.Model):
     _inherit = "event.mail.registration"
 
     def execute(self):
-        super().execute()  # Call the original method
+        res = super().execute()  # Call the original method
         now = fields.Datetime.now()
         todo = self.filtered(
             lambda reg_mail: reg_mail.scheduler_id.interval_type
@@ -122,6 +122,7 @@ class EventMailRegistration(models.Model):
                     reg_mail.registration_id.id, email_values=email_values
                 )
                 reg_mail.mail_sent = True
+        return res
 
     # 3. Default methods
 
