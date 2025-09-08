@@ -9,7 +9,7 @@ class EventMailAttendeesWizard(models.TransientModel):
 
     # 2. Fields declaration
     subject = fields.Char(
-        "Subject", compute="_compute_subject", readonly=False, store=True, required=True
+        compute="_compute_subject", readonly=False, store=True, required=True
     )
     body = fields.Html(
         "Contents",

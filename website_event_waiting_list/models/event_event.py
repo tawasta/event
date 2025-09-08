@@ -47,7 +47,7 @@ class EventEvent(models.Model):
     @api.depends("seats_max", "registration_ids.state", "registration_ids.active")
     def _compute_seats(self):
         """Extend the original _compute_seats method to account for waiting list."""
-        super()._compute_seats()
+        res = super()._compute_seats()
 
         # Add logic for waiting list
         for event in self:
@@ -89,6 +89,8 @@ class EventEvent(models.Model):
                     and not reg_mail.registration_id.waiting_list_to_confirm
                 )
                 registrations_to_not_sent.write({"mail_sent": False})
+
+        return res
 
     @api.onchange("event_type_id")
     def _onchange_event_type_update_wait_list(self):

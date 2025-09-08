@@ -19,9 +19,9 @@ class EventTrack(models.Model):
         string="Chairperson",
         domain=[("is_company", "=", False)],
     )
-    organizer = fields.Many2one(comodel_name="res.partner", string="Organizer")
+    organizer = fields.Many2one(comodel_name="res.partner")
     organizer_contact = fields.Many2one(
-        comodel_name="res.partner", string="Organizer contact"
+        comodel_name="res.partner",
     )
     attachment_ids = fields.One2many(
         comodel_name="ir.attachment",
@@ -29,19 +29,18 @@ class EventTrack(models.Model):
         domain=[("res_model", "=", "event.track")],
         string="Attachments",
     )
-    application_file = fields.Binary(string="Application File")
+    application_file = fields.Binary()
     application_file_filename = fields.Char(string="Application filename")
     description_plain = fields.Text(
         string="Plain description", compute="_compute_description_plain"
     )
 
     is_rated = fields.Boolean(
-        "Is Rated",
         help="Helper field to check if current user has reviewed the track.",
         compute="_compute_is_rated",
     )
-    ratings = fields.One2many("event.track.rating", "event_track", string="Ratings")
-    ratings_count = fields.Integer("Ratings Count", compute="_compute_ratings_count")
+    ratings = fields.One2many("event.track.rating", "event_track")
+    ratings_count = fields.Integer(compute="_compute_ratings_count")
     rating_avg = fields.Float(
         "Average rating",
         digits=(3, 2),
@@ -64,14 +63,11 @@ class EventTrack(models.Model):
         inverse="_inverse_user_rating",
     )
 
-    type = fields.Many2one(
-        comodel_name="event.track.type", inverse_name="event_track", string="Type"
-    )
+    type = fields.Many2one(comodel_name="event.track.type", inverse_name="event_track")
 
     target_group = fields.Many2one(
         comodel_name="event.track.target.group",
         relation="event_track",
-        string="Target group",
     )
 
     subtheme_id = fields.Many2one(
@@ -86,34 +82,28 @@ class EventTrack(models.Model):
         comodel_name="event.track.target.group",
         string="Target groups",
     )
-    target_group_info = fields.Html(string="Target group info")
+    target_group_info = fields.Html()
 
-    review_group = fields.Many2one(
-        comodel_name="event.track.review.group", string="Review Group"
-    )
+    review_group = fields.Many2one(comodel_name="event.track.review.group")
     reviewers = fields.Many2many(
         comodel_name="event.track.reviewer",
-        string="Reviewers",
         compute="_compute_reviewers",
     )
     is_reviewer = fields.Boolean(
-        "Is reviewer",
         compute="_compute_is_reviewer",
         help="Helper field to check if current user is a reviewer.",
     )
 
-    show_in_agenda = fields.Boolean(
-        string="Shown in agenda", compute="_compute_show_in_agenda"
-    )
+    show_in_agenda = fields.Boolean(compute="_compute_show_in_agenda")
 
     request_time = fields.Many2one(
         comodel_name="event.track.request.time",
         string="Desired duration of the workshop",
     )
 
-    language = fields.Many2one(comodel_name="res.lang", string="Language")
-    keywords = fields.Text(string="Keywords", help="Text keywords")
-    extra_info = fields.Html(string="Extra info")
+    language = fields.Many2one(comodel_name="res.lang")
+    keywords = fields.Text(help="Text keywords")
+    extra_info = fields.Html()
     video_url = fields.Char(string="Track as a video (link to e.g. Youtube or Vimeo)")
     is_webinar = fields.Boolean(related="type.webinar")
     is_workshop = fields.Boolean(related="type.workshop")
@@ -139,7 +129,6 @@ class EventTrack(models.Model):
         copy=False,
     )
     extra_materials = fields.Html(
-        string="Extra materials",
         help="Extra materials (links etc.) that are shown in agenda",
     )
     extra_materials_plain = fields.Text(
