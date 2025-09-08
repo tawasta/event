@@ -1,18 +1,16 @@
-<odoo>
-    <data noupdate="1">
-
+<odoo noupdate="1">
         <record id="event_activation_internal_group_mail" model="mail.template">
             <field name="name">Event: Activation Notification to Internal Group</field>
             <field name="model_id" ref="event.model_event_event" />
             <field
-                name="subject"
-            >{{ object.company_id.name or '' }}: Event Activated '{{ object.name or '' }}'</field>
+            name="subject"
+        >{{ object.company_id.name or '' }}: Event Activated '{{ object.name or '' }}'</field>
             <field
-                name="email_from"
-            >{{ object.company_id.email or 'no-reply@example.com' }}</field>
+            name="email_from"
+        >{{ object.company_id.email or 'no-reply@example.com' }}</field>
             <field
-                name="description"
-            >Notify internal group members when an event is activated.</field>
+            name="description"
+        >Notify internal group members when an event is activated.</field>
             <field name="body_html" type="html">
 
                 <p style="margin:0px 0 0px 0;box-sizing:border-box;margin-bottom:0px;">
@@ -25,17 +23,17 @@
 
                     <ul>
                         <li>Organizer: <t
-                                t-out="object.organizer_id.name or '-'"
-                            >Organizer</t></li>
+                            t-out="object.organizer_id.name or '-'"
+                        >Organizer</t></li>
                         <li>Location: <t
-                                t-out="object.address_id.city or '-'"
-                            >Location</t></li>
+                            t-out="object.address_id.city or '-'"
+                        >Location</t></li>
                         <li>Start Date: <t
-                                t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"
-                            >Date Begin</t></li>
+                            t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"
+                        >Date Begin</t></li>
                         <li>End Date: <t
-                                t-out="format_datetime(object.date_end, dt_format='dd.MM.yyyy HH:mm')"
-                            >Date End</t></li>
+                            t-out="format_datetime(object.date_end, dt_format='dd.MM.yyyy HH:mm')"
+                        >Date End</t></li>
                     </ul>
 
                     <br />
@@ -52,11 +50,11 @@
             <field name="name">Event: Ticket Sale Starts Today</field>
             <field name="model_id" ref="event.model_event_event" />
             <field
-                name="subject"
-            >Ticket sale starts today '{{ object.name or '' }}'</field>
+            name="subject"
+        >Ticket sale starts today '{{ object.name or '' }}'</field>
             <field
-                name="email_from"
-            >{{ object.company_id.email or 'no-reply@example.com' }}</field>
+            name="email_from"
+        >{{ object.company_id.email or 'no-reply@example.com' }}</field>
             <field name="description">Ticket sale starts today.</field>
             <field name="body_html" type="html">
 
@@ -64,19 +62,19 @@
                     Hello,
                     <br /><br />
                     The ticket sale for the event <strong
-                        style="box-sizing:border-box;font-weight:bolder;"
-                    >
+                    style="box-sizing:border-box;font-weight:bolder;"
+                >
                         <t t-out="object.name or ''">Event Name</t>
                     </strong> starts today.
                     <br /><br />
                     <ul>
                         <li>Start Date: <t
-                                t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"
-                            /></li>
+                            t-out="format_datetime(object.date_begin, dt_format='dd.MM.yyyy HH:mm')"
+                        /></li>
                         <li>Location: <t t-out="object.address_id.city or '-'" /></li>
                         <li>Organizer: <t
-                                t-out="object.organizer_id.name or '-'"
-                            /></li>
+                            t-out="object.organizer_id.name or '-'"
+                        /></li>
                     </ul>
 
                     <br />
@@ -89,5 +87,4 @@
             </field>
         </record>
 
-    </data>
 </odoo>

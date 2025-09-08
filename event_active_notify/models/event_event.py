@@ -4,13 +4,9 @@ from odoo import api, fields, models
 class EventEvent(models.Model):
     _inherit = "event.event"
 
-    notification_sent = fields.Boolean(
-        string="Notification Sent", default=False, copy=False
-    )
+    notification_sent = fields.Boolean(default=False, copy=False)
 
-    ticket_sale_notification_sent = fields.Boolean(
-        string="Ticket Sale Notification Sent", default=False, copy=False
-    )
+    ticket_sale_notification_sent = fields.Boolean(default=False, copy=False)
 
     @api.model
     def create(self, vals):
