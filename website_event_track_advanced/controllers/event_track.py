@@ -660,7 +660,6 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Language
         if post.get("language") and post.get("language") != "0":
-            logging.info("==SAA KIELEN====")
             lang_id = (
                 request.env["res.lang"]
                 .sudo()
@@ -862,7 +861,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 _logger.warning(_("Signup is not allowed for uninvited users."))
                 return False
             try:
-                user.with_context({"create_user": True}).action_reset_password()
+                user.with_context(create_user=True).action_reset_password()
             except MailDeliveryException:
                 _logger.warning(
                     _("Could not deliver mail to %s" % partner_values.get("email"))

@@ -15,6 +15,4 @@ class RegistrationInvitation(models.Model):
     )
     is_used = fields.Boolean(default=False)
     used_date = fields.Datetime()
-    access_token = fields.Char(
-        required=True, copy=False, index=True
-    )
+    access_token = fields.Char(required=True, copy=False, index=True)
