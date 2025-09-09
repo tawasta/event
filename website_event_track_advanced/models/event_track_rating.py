@@ -3,13 +3,11 @@ from odoo.exceptions import ValidationError
 
 
 class TrackRating(models.Model):
-    # 1. Private attributes
     _name = "event.track.rating"
     _description = "Event Track Rating"
     _order = "event_track, grade_id"
     _rec_name = "grade_id"
 
-    # 2. Fields declaration
     active = fields.Boolean(default=True)
     event_id = fields.Many2one(
         "event.event", "Event", compute="_compute_event_id", readonly=True
@@ -21,9 +19,6 @@ class TrackRating(models.Model):
     )
     comment = fields.Html()
 
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
     def _compute_event_id(self):
         for rating in self:
             if rating.event_track:
@@ -31,7 +26,6 @@ class TrackRating(models.Model):
             else:
                 rating.event_id = False
 
-    # 5. Constraints and onchanges
     @api.constrains("reviewer_id")
     def _ensure_no_duplicate_rating(self):
         for rec in self:
@@ -45,37 +39,20 @@ class TrackRating(models.Model):
             if existing_rating:
                 raise ValidationError(
                     _(
-                        "Rating for track {} by reviewer {} already exists.".format(
-                            rec.event_track.name, rec.reviewer_id.name
-                        )
+                        "Rating for track %(track)s by reviewer %(reviewer)s "
+                        "already exists."
                     )
+                    % {
+                        "track": rec.event_track.name,
+                        "reviewer": rec.reviewer_id.name,
+                    }
                 )
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods
 
 
 class TrackRatingGrade(models.Model):
-    # 1. Private attributes
     _name = "event.track.rating.grade"
     _description = "Event Track Rating Grade"
     _order = "name, grade"
 
-    # 2. Fields declaration
-    name = fields.Char(string="Name", required=True, translate=True)
-    grade = fields.Integer(string="Grade", required=True)
-
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods
+    name = fields.Char(required=True, translate=True)
+    grade = fields.Integer(required=True)
