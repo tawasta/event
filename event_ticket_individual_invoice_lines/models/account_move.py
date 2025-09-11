@@ -1,6 +1,6 @@
 import logging
 
-from odoo import _, api, fields, models
+from odoo import _, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -88,16 +88,20 @@ class AccountMove(models.Model):
                     if len(registrations) != int(line.quantity):
                         raise UserError(
                             _(
-                                "Mismatch between invoice line quantity (%s) and "
-                                "number of registrations (%s) for line '%s'. Split "
-                                "the invoice lines manually."
+                                "Mismatch between invoice line quantity (%(qty)s) "
+                                "and number of registrations (%(regs)s) "
+                                "for line '%(line)s'. Split the invoice lines manually."
                             )
-                            % (int(line.quantity), len(registrations), line.name)
+                            % {
+                                "qty": int(line.quantity),
+                                "regs": len(registrations),
+                                "line": line.name,
+                            }
                         )
 
                     # Pull some data from the event and the registration to use
                     # as the invoice line description
-                    event_name = sale_line.event_id.name or _("Event")
+                    event_name = sale_line.event_id.name or ("Event")
                     event_date = sale_line.event_id.date_begin
                     formatted_date = (
                         event_date.strftime("%d.%m.%Y") if event_date else ""
