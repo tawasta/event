@@ -888,11 +888,12 @@ class EventTrackControllerAdvanced(EventTrackController):
             _logger.warning(_("Could not create organization (missing name)"))
             return False
 
-        organization = (
+        """organization = (
             request.env["res.partner"]
             .sudo()
             .search([("name", "=ilike", organization_name)], limit=1)
-        )
+        )"""
+        organization = False
 
         if not organization:
             organization_values["is_company"] = True
