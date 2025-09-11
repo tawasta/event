@@ -617,6 +617,35 @@
                                             </div>
                                         </t>
                                     </t>
+                                    <t
+                                        t-set="workshop_privacy_id"
+                                        t-value="request.env['event.track.type'].search([('workshop', '=', True)])"
+                                    />
+                                    <div
+                                        id="workshop-privacy-required"
+                                        class="form-group col-xl-12 d-none"
+                                    >
+                                    <div class="form-check">
+                                        <input
+                                                type="checkbox"
+                                                class="form-check-input privacy_acceptance"
+                                                t-attf-name="privacy_#{str(workshop_privacy_id.privacy_id.id)}"
+                                            />
+
+                                        <label
+                                                t-att-class="'form-check-label label-optional' if not workshop_privacy_id.privacy_id.is_required else 'form-check-label'"
+                                            ><t
+                                                    t-esc="workshop_privacy_id.privacy_id.name"
+                                                /><t
+                                                    t-if="workshop_privacy_id.privacy_id.link"
+                                                > - <a
+                                                        t-att-href="workshop_privacy_id.privacy_id.link"
+                                                        target="_blank"
+                                                    ><t
+                                                            t-esc="workshop_privacy_id.privacy_id.link_name"
+                                                        /></a></t></label>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1756,6 +1785,12 @@
                                 autocomplete="off"
                                 disabled="1"
                             >
+                                <option value="">Select...</option>
+                                <t t-foreach="operators" t-as="operator">
+                                    <option t-att-value="operator.id">
+                                        <t t-esc="operator.name" />
+                                    </option>
+                                </t>
 
                             </select>
                         </div>

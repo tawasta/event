@@ -62,6 +62,7 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
+[website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.0 |  | Show ticket VAT
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts

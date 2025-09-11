@@ -35,6 +35,7 @@
                         <field name="workshop" />
                         <field name="workshop_contract" invisible="not workshop" />
                         <field name="attendable" />
+                        <field name="privacy_id" />
                     </group>
                     <group>
                         <field name="description" />
