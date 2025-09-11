@@ -12,9 +12,9 @@ class WebsiteEventMultifeed(models.Model):
     def _get_lang(self):
         return self.env["res.lang"].get_installed()
 
-    name = fields.Char("Name", required=True, translate=True)
-    description = fields.Text("Description", translate=True)
-    feed_url = fields.Char("Feed URL", readonly=1, compute="_compute_feed_url")
+    name = fields.Char(required=True, translate=True)
+    description = fields.Text(translate=True)
+    feed_url = fields.Char(readonly=1, compute="_compute_feed_url")
     lang = fields.Selection(
         required=True,
         selection=_get_lang,
