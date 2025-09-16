@@ -21,6 +21,10 @@ class EventEvent(models.Model):
         store=True,
     )
 
+    slide_channel_is_published = fields.Boolean(
+        string="Related Course is Published", related="slide_channel_id.is_published"
+    )
+
     @api.depends("slide_channel_id", "slide_channel_id.is_published")
     def _compute_slide_channel_url(self):
         # Get the URL so that it can be placed in the copy to clipboard widget
