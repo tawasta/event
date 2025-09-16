@@ -6,8 +6,17 @@
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <field name="tag_ids" position="after">
+                <field name="slide_channel_is_published" invisible="1" />
                 <field name="slide_channel_id" />
                 <field name="slide_channel_url" widget="CopyClipboardChar" />
+                <div
+                    colspan="2"
+                    invisible="not slide_channel_id or slide_channel_is_published"
+                >
+                    <span
+                        class="text-danger"
+                    >The course has not been published yet</span>
+                </div>
             </field>
         </field>
     </record>
