@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+
+
+        <!-- New sidebar item for responsible person -->
+        <xpath expr="//h4[@t-field='event.organizer_id']/parent::div" position="after">
+
+
+            <div
+                t-if="event.user_id and event.responsible_show_on_website"
+                class="o_wevent_sidebar_block border-bottom pb-3 mb-3"
+            >
+                <h6 class="o_wevent_sidebar_title">Responsible</h6>
+                <h4
+                    t-field="event.user_id"
+                    class="font-sans-serif mt-0 mb-1"
+                    style="font-size: 1rem"
+                />
+
+                <div class="small">
+                    <t
+                        t-if="event.responsible_show_phone_on_website and event.user_id.phone"
+                    >
+                        <i
+                            class="fa fa-phone fa-fw mr-1 "
+                            role="img"
+                            aria-label="Phone"
+                            title="Phone"
+                        />
+                        <span t-esc="event.user_id.phone" class="mb-1" />
+                        <br />
+                    </t>
+                    <t
+                        t-if="event.responsible_show_mobile_on_website and event.user_id.mobile"
+                    >
+                        <i
+                            class="fa fa-phone fa-fw mr-1 "
+                            role="img"
+                            aria-label="Mobile"
+                            title="Mobile"
+                        />
+                        <span t-esc="event.user_id.mobile" class="mb-1" />
+                        <br />
+                    </t>
+                    <t
+                        t-if="event.responsible_show_email_on_website and event.user_id.email"
+                    >
+                        <i
+                            class="fa fa-envelope fa-fw mr-1 "
+                            role="img"
+                            aria-label="E-mail"
+                            title="E-mail"
+                        />
+                        <span t-esc="event.user_id.email" class="mb-1" />
+                    </t>
+                </div>
+
+
+            </div>
+
+        </xpath>
+
+
+    </template>
+
+</odoo>

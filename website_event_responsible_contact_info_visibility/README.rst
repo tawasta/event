@@ -2,21 +2,20 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============================================================
-Website Event: Configurable Organizer Contact Info Visibility
-=============================================================
+======================================================================
+Website Event: Configurable Responsible Person Contact Info Visibility
+======================================================================
 
-* Set per event if the organizer should be shown, and also more granularly if 
+* Set per event if the responsible user should be shown, and also more granularly if 
   their phone, mobile and/or email should be shown
-* Also serves as a workaround for the qweb contact widget rendering bug
-  where email would not appear (https://github.com/odoo/odoo/issues/190009)
-* Can be paired with website_event_responsible_contact_info_visibility to
+* In core, only showing the organizer is supported
+* Can be paired with website_event_organizer_contact_info_visibility to
   fine-tune whether to show organization's or responsible person's contact
   info
 
 Configuration
 =============
-* In event form view, select an organizer, and then what info to show for them 
+* In event form view, set the Responsible user, and then what info to show for them 
   on front end
 
 Usage
