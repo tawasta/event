@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.inherit.event.mail.freetext.fields</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page
+                    name="page_enabled_event_freetext_fields"
+                    string="Event Messaging: Enabled Freetext Fields"
+                >
+                    <group>
+                        <group>
+                            <field name="show_freetext_confirmation_field" />
+                            <field name="show_freetext_welcome_field" />
+                            <field name="show_freetext_reminder_field" />
+                            <field name="show_freetext_thankyou_field" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

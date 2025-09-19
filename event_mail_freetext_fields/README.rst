@@ -6,14 +6,19 @@
 Event: Freetext Fields for Adding Content to Event Messaging
 ============================================================
 
-* Adds HTML fields to backend, the contents of which can be added into event email templates.
+* Adds HTML fields to backend, the contents of which can be injected into event email templates.
 * Enables the user to add custom information about that specific event
   without the need to manage as many separate e-mail templates.
+* Four named fields are provided:
+
+  * 
 
 Configuration
 =============
 * This module just adds the fields but does nothing to any e-mail templates.
 * Configure your relevant event e-mail templates to contain the fields' contents
+* If you use fewer e-mail templates and some of the freetext fields are irrelevant to you, 
+  you can toggle showing each of the fields via company settings.
 
 Usage
 =====
