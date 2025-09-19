@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="view_email_template_event_details"
+        inherit_id="website_event_cancellation.view_email_template_event_details"
+    >
+
+        <xpath expr="//div[@name='organizer-info']" position="attributes">
+            <attribute name="t-if">object.event_id.user_id</attribute>
+        </xpath>
+
+        <!-- Name -->
+        <xpath
+            expr="//div[@name='organizer-info']//t[@t-esc='object.event_id.organizer_id.name']"
+            position="attributes"
+        >
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+
+        <xpath
+            expr="//div[@name='organizer-info']//t[@t-esc='object.event_id.organizer_id.name']"
+            position="after"
+        >
+            <t t-esc="object.event_id.user_id.name" />
+        </xpath>
+
+        <!-- Email -->
+        <xpath
+            expr="//div[@name='organizer-info']//t[@t-if='object.event_id.organizer_id.email']"
+            position="after"
+        >
+            <t t-if="object.event_id.user_id.email">
+                <li>Mail: <a
+                        t-attf-href="mailto:#{object.event_id.user_id.email}"
+                        t-attf-style="text-decoration:none; color:#{email_secondary_color};"
+                    ><t t-esc="object.event_id.user_id.email" /></a></li>
+            </t>
+        </xpath>
+
+        <xpath
+            expr="//div[@name='organizer-info']//t[@t-if='object.event_id.organizer_id.email']"
+            position="attributes"
+        >
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+
+        <!-- Phone -->
+        <xpath
+            expr="//div[@name='organizer-info']//t[@name='organizer_phone_list']//li"
+            position="after"
+        >
+            <li>Phone: <t t-esc="object.event_id.user_id.phone" /></li>
+        </xpath>
+
+        <xpath
+            expr="//div[@name='organizer-info']//t[@name='organizer_phone_list']//li"
+            position="attributes"
+        >
+            <attribute name="t-if">1==0</attribute>
+        </xpath>
+
+    </template>
+</odoo>

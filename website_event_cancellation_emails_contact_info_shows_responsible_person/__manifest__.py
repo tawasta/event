@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2025 Futural Oy (https://futural.fi)
+#    Copyright 2025- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,23 +17,21 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
 {
-    "name": "Website Event: Configurable Organizer Contact Info Visibility",
-    "summary": "Set per event if organizer and their "
-    "phone, mobile and/or email should be shown",
-    "version": "17.0.1.0.0",
+    "name": "Website Event Cancellation: E-mails Show Responsible Person Contact Info",
+    "summary": "E-mail templates show responsible person's contact info "
+    "instead or organizer's.",
+    "version": "17.0.1.0.3",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
-    "depends": ["website_event"],
-    "data": ["views/event_views.xml", "views/event_templates.xml"],
-    "demo": [],
+    "depends": [
+        "website_event_cancellation",
+    ],
+    "data": [
+        "data/email_template_views.xml",
+    ],
 }

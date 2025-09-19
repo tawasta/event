@@ -19,8 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Website Event: Configurable Organizer Contact Info Visibility",
-    "summary": "Set per event if organizer and their "
+    "name": "Website Event: Configurable Responsible Person Contact Info Visibility",
+    "summary": "Set per event if Responsible user and their "
     "phone, mobile and/or email should be shown",
     "version": "17.0.1.0.0",
     "category": "Events",
