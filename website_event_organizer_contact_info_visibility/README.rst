@@ -6,13 +6,17 @@
 Website Event: Configurable Organizer Contact Info Visibility
 =============================================================
 
-* Set per event if organizer phone, mobile and/or email should be shown
+* Set per event if the organizer should be shown, and also more granularly if 
+  their phone, mobile and/or email should be shown
 * Also serves as a workaround for the qweb contact widget rendering bug
   where email would not appear (https://github.com/odoo/odoo/issues/190009)
+* Can be paired with website_event_responsible_contact_info_visibility to
+  fine-tune whether to show organization's or responsible person's contact
+  info
 
 Configuration
 =============
-* In event form, select an organizer, and then which fields to show for them 
+* In event form view, select an organizer, and then what info to show for them 
   on front end
 
 Usage
