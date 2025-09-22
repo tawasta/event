@@ -5,10 +5,28 @@
         <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <field name="event_mail_ids" position="after">
+
+                <!-- Only those fields enabled in company settings are shown,
+                 to not crowd the UI in simpler use cases -->
+                <field name="show_freetext_confirmation_field" invisible="1" />
+                <field name="show_freetext_welcome_field" invisible="1" />
+                <field name="show_freetext_reminder_field" invisible="1" />
+                <field name="show_freetext_thankyou_field" invisible="1" />
+
+                <group
+                    string="Confirmation Message Custom Text"
+                    colspan="4"
+                    name="group_freetext_confirmation"
+                    invisible="not show_freetext_confirmation_field"
+                >
+                    <field name="freetext_confirmation" nolabel="1" colspan="2" />
+                </group>
+
                 <group
                     string="Welcome Message Custom Text"
                     colspan="4"
                     name="group_freetext_welcome"
+                    invisible="not show_freetext_welcome_field"
                 >
                     <field name="freetext_welcome" nolabel="1" colspan="2" />
                 </group>
@@ -17,6 +35,7 @@
                     string="Reminder Message Custom Text"
                     colspan="4"
                     name="group_freetext_reminder"
+                    invisible="not show_freetext_reminder_field"
                 >
                     <field name="freetext_reminder" nolabel="1" colspan="2" />
                 </group>
@@ -25,6 +44,7 @@
                     string="Thank You Message Custom Text"
                     colspan="4"
                     name="group_freetext_thankyou"
+                    invisible="not show_freetext_thankyou_field"
                 >
                     <field name="freetext_thankyou" nolabel="1" colspan="2" />
                 </group>
