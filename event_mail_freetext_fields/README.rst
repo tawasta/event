@@ -11,14 +11,17 @@ Event: Freetext Fields for Adding Content to Event Messaging
   without the need to manage as many separate e-mail templates.
 * Four named fields are provided:
 
-  * 
+  * Confirmation Message: Additional Text
+  * Welcome Message: Additional Text
+  * Reminder Message: Additional Text
+  * Thank You Message: Additional Text
 
 Configuration
 =============
 * This module just adds the fields but does nothing to any e-mail templates.
 * Configure your relevant event e-mail templates to contain the fields' contents
 * If you use fewer e-mail templates and some of the freetext fields are irrelevant to you, 
-  you can toggle showing each of the fields via company settings.
+  you can toggle whether to show each field on event form or not via company settings.
 
 Usage
 =====
