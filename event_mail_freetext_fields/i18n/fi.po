@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0-20250428\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-30 13:49+0000\n"
-"PO-Revision-Date: 2025-05-30 13:49+0000\n"
+"POT-Creation-Date: 2025-09-19 13:44+0000\n"
+"PO-Revision-Date: 2025-09-19 13:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: event_mail_freetext_fields
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_confirmation
 #: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_reminder
 #: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_thankyou
 #: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__freetext_welcome
@@ -23,9 +24,29 @@ msgid "Additional text that can be embedded into e-mail templates"
 msgstr "Vapaatekstiä, joka voidaan upottaa sähköpostipohjiin"
 
 #. module: event_mail_freetext_fields
+#: model:ir.model,name:event_mail_freetext_fields.model_res_company
+msgid "Companies"
+msgstr "Yritykset"
+
+#. module: event_mail_freetext_fields
+#: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_event_form_inherit
+msgid "Confirmation Message Custom Text"
+msgstr "Vahvistusviestin lisäteksti"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__freetext_confirmation
+msgid "Confirmation Message: Additional Text"
+msgstr "Vahvistusviesti: lisäteksti"
+
+#. module: event_mail_freetext_fields
 #: model:ir.model,name:event_mail_freetext_fields.model_event_event
 msgid "Event"
 msgstr "Tapahtuma"
+
+#. module: event_mail_freetext_fields
+#: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_company_form_inherit
+msgid "Event Messaging: Enabled Freetext Fields"
+msgstr "Tapahtumaviestintä: Näytetyt vapaatekstikentät"
 
 #. module: event_mail_freetext_fields
 #: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_event_form_inherit
@@ -36,6 +57,42 @@ msgstr "Muistutusviestin lisäteksti"
 #: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__freetext_reminder
 msgid "Reminder Message: Additional Text"
 msgstr "Muistutusviesti: lisäteksti"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__show_freetext_confirmation_field
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_res_company__show_freetext_confirmation_field
+msgid "Show Freetext Confirmation Field"
+msgstr "Näytä vahvistusviestin lisätekstikenttä"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__show_freetext_reminder_field
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_res_company__show_freetext_reminder_field
+msgid "Show Freetext Reminder Field"
+msgstr "Näytä muistutusviestin lisätekstikenttä"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__show_freetext_thankyou_field
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_res_company__show_freetext_thankyou_field
+msgid "Show Freetext Thankyou Field"
+msgstr "Näytä kiitosviestin lisätekstikenttä"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_event_event__show_freetext_welcome_field
+#: model:ir.model.fields,field_description:event_mail_freetext_fields.field_res_company__show_freetext_welcome_field
+msgid "Show Freetext Welcome Field"
+msgstr "Näytä tervetuloviestin lisätekstikenttä"
+
+#. module: event_mail_freetext_fields
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__show_freetext_confirmation_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__show_freetext_reminder_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__show_freetext_thankyou_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_event_event__show_freetext_welcome_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_res_company__show_freetext_confirmation_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_res_company__show_freetext_reminder_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_res_company__show_freetext_thankyou_field
+#: model:ir.model.fields,help:event_mail_freetext_fields.field_res_company__show_freetext_welcome_field
+msgid "Shows the field to users on event form."
+msgstr "Näyttää kentän käyttäjälle tapahtumalomakkeella"
 
 #. module: event_mail_freetext_fields
 #: model_terms:ir.ui.view,arch_db:event_mail_freetext_fields.view_event_form_inherit
