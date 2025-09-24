@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event_qr_form" model="ir.ui.view">
+        <field name="name">event.event.qr.form</field>
+        <field name="model">event.event</field>
+        <field
+            name="inherit_id"
+            ref="society_event_core.event_event_view_form_inherit_survey"
+        />
+        <field name="arch" type="xml">
+            <field name="feedback_survey_id" position="after">
+                <field name="qr_code" widget="image" class="oe_avatar" />
+            </field>
+        </field>
+    </record>
+</odoo>
