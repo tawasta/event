@@ -35,7 +35,12 @@ class PortalEvent(CustomerPortal):
         registrations = (
             request.env["event.registration"]
             .sudo()
-            .search([("partner_id", "=", request.env.user.partner_id.id), ("state", "!=", "open")])
+            .search(
+                [
+                    ("partner_id", "=", request.env.user.partner_id.id),
+                    ("state", "!=", "open"),
+                ]
+            )
         )
         values.update(
             {
