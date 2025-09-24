@@ -38,7 +38,7 @@ class PortalEvent(CustomerPortal):
             .search(
                 [
                     ("partner_id", "=", request.env.user.partner_id.id),
-                    ("state", "!=", "open"),
+                    ("state", "!=", "draft"),
                 ]
             )
         )
