@@ -3,6 +3,7 @@
     <template
         id="custom_registration_template"
         inherit_id="website_event.registration_template"
+        priority="101"
     >
         <xpath expr="//div[@id='o_wevent_tickets']" position="after">
             <t t-if="registration_disabled">
@@ -15,5 +16,6 @@
         <xpath expr="//div[@id='o_wevent_tickets']" position="attributes">
             <attribute name="t-if">not registration_disabled</attribute>
         </xpath>
+        <xpath expr="//div[@class='col col-md-8 d-flex']/em" position="replace" />
     </template>
 </odoo>
