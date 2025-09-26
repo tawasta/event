@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Tawasta
-#    Copyright 2020 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
+#    Copyright 2025 Oy Tawasta OS Technologies Ltd. (https://tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,22 +18,21 @@
 #
 ##############################################################################
 {
-    "name": "Event Registration Limitations",
-    "summary": (
-        "Restricts event registrations per exam type "
-        "and prevents duplicates."  # noqa: E501
-    ),
-    "version": "16.0.1.0.1",
-    "category": "Website",
+    "name": "Event Active Notification",
+    "summary": "Notify group members when an event is activated",
+    "version": "16.0.1.0.0",
+    "category": "event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
-        "website_event",
+        "event",
     ],
     "data": [
-        "views/event_template.xml",
+        "security/group.xml",
+        "data/ir_cron.xml",
+        "data/mail_template.xml",
     ],
 }
