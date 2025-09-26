@@ -6,7 +6,6 @@ class EventRegistration(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        """Hylkää muut saman koetyypin ilmoittautumiset, kun yksi vahvistetaan."""
         registrations = super(EventRegistration, self).create(vals_list)
         for registration in registrations:
             if registration.state == "open":
@@ -34,6 +33,11 @@ class EventRegistration(models.Model):
                 [
                     ("id", "!=", confirmed_registration.id),
                     ("partner_id", "=", confirmed_registration.partner_id.id),
+                    (
+                        "registration_partner_id",
+                        "=",
+                        confirmed_registration.registration_partner_id.id,
+                    ),
                     (
                         "registration_survey_id",
                         "in",

@@ -18,11 +18,11 @@ class Event(models.Model):
 
     @api.model
     def _send_event_notifications(self):
-        """Lähettää sähköpostit kontakteille, jotka ovat kiinnostuneet tapahtuman tageista."""
 
         now = fields.Datetime.now()
 
-        # Exclude events that are in the past or have alredy been completed/cancelled
+        # Exclude events that are in the past
+        # or have alredy been completed/cancelled
         events = self.search(
             [
                 ("is_published", "=", True),
@@ -59,4 +59,4 @@ class Event(models.Model):
                 event.id, force_send=True, email_values=email_values
             )
 
-            event.announcement_sent = True  # Merkitään, että tiedote on lähetetty
+            event.announcement_sent = True
