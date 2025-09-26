@@ -24,7 +24,8 @@ class Event(models.Model):
 
     @api.model
     def create(self, vals):
-        """Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän"""
+        """Luo automaattisesti lipputuote ja asettaa sen
+        ilmoittautumisen alkupäivämäärän"""
         event = super(Event, self).create(vals)
 
         ticket_obj = self.env["event.event.ticket"]
