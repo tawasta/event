@@ -24,7 +24,8 @@ class Event(models.Model):
 
     @api.model
     def create(self, vals):
-        """Luo automaattisesti lipputuote ja asettaa sen ilmoittautumisen alkupäivämäärän"""  # noqa: E501
+        """Luo automaattisesti lipputuote ja asettaa sen
+        ilmoittautumisen alkupäivämäärän"""
         event = super(Event, self).create(vals)
 
         ticket_obj = self.env["event.event.ticket"]
@@ -77,7 +78,7 @@ class Event(models.Model):
                 for ticket in tickets:
                     ticket.sudo().write(
                         {
-                            "start_sale_datetime": self._compute_registration_start(  # noqa: E501
+                            "start_sale_datetime": self._compute_registration_start(
                                 event.date_begin
                             ),
                         }
@@ -100,7 +101,7 @@ class Event(models.Model):
         return res
 
     def _compute_registration_start(self, event_start):
-        """Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella"""  # noqa: E501
+        """Laskee rekisteröinnin aloituspäivämäärän tapahtuman päivämäärän perusteella"""
         today = fields.Datetime.today()
         days_until_event = (event_start - today).days
 
