@@ -21,7 +21,7 @@
 {
     "name": "Audit Log Rules - Event",
     "summary": "Adds audit log rules for events",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

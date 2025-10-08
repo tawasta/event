@@ -160,7 +160,7 @@
         </xpath>
         <xpath expr="//tbody//tr/td[@class='table-cell-action']" position="inside">
             <!-- Näytetään kutsupainike, jos kutsuja ei ole vielä lähetetty -->
-            <t t-if="re.invite_others and not re.invite_id">
+            <t t-if="re.invite_others and not re.invite_id and re.state == 'open'">
 
                     <button
                     type="button"
