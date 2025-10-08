@@ -6,11 +6,12 @@
 Event eLearning Integration
 ===========================
 
-This module provides a seamless integration between Events and eLearning (Slides) in Odoo.  
-When attendees are confirmed for an event, they are automatically enrolled into a related online course.  
-If the registration is later cancelled, the attendee is also removed from the course.
+* When attendees are confirmed for an event, they are automatically enrolled into a related online course.
 
-Additionally, the event registration confirmation email is extended to include a direct link to the related course.
+  * Note: Attendee means the Attendee Partner, provided by OCA partner_event module
+
+* If the registration is later cancelled, the attendee is also removed from the course.
+* Additionally, the event registration confirmation email is extended to include a direct link to the related course.
 
 Features
 ========

@@ -29,7 +29,9 @@
     "installable": True,
     "depends": [
         "event",
+        "partner_event",
         "website_slides",
+        "website_slides_core",
         "website_event_cancellation",
     ],
     "data": [
