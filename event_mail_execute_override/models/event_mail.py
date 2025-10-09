@@ -83,7 +83,11 @@ class EventMailScheduler(models.Model):
                     continue
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:
-                    scheduler.event_id.mail_attendees(scheduler.template_ref.id)
+                    scheduler.event_id.mail_attendees(
+                        scheduler.template_ref.id,
+                        filter_func=lambda reg: reg.state not in ("cancel", "draft"),
+                    )
+
                     scheduler.update(
                         {
                             "mail_done": True,
