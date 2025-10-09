@@ -123,12 +123,12 @@
             <button name="action_cancel" position="attributes">
                 <attribute
                     name="invisible"
-                >context.get('state') not in ('draft', 'open', 'wait')</attribute>
+                >not active or state not in ['draft', 'open', 'wait']</attribute>
             </button>
             <button name="action_confirm" position="attributes">
                 <attribute
                     name="invisible"
-                >context.get('state') not in ('draft', 'wait')</attribute>
+                >not active or state not in ['draft', 'wait']</attribute>
             </button>
         </field>
     </record>
@@ -145,18 +145,15 @@
                     type="object"
                 />
             </button>
-            <!-- <button name="action_set_draft" position="attributes">
-                <attribute name="invisible">context.get('state') not in ('cancel', 'done')</attribute>
-            </button> -->
             <button name="action_cancel" position="attributes">
                 <attribute
                     name="invisible"
-                >context.get('state') not in ('draft', 'done', 'wait')</attribute>
+                >not active or state not in ['draft', 'open', 'wait']</attribute>
             </button>
             <button name="action_confirm" position="attributes">
                 <attribute
                     name="invisible"
-                >context.get('state') not in ('draft', 'wait')</attribute>
+                >not active or state not in ['draft', 'wait']</attribute>
             </button>
             <field name="state" position="attributes">
                 <attribute name="statusbar_visible">draft,open,done,wait</attribute>
