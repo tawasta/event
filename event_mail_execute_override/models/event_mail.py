@@ -85,7 +85,7 @@ class EventMailScheduler(models.Model):
                 if mail_was_sent:
                     scheduler.event_id.mail_attendees(
                         scheduler.template_ref.id,
-                        filter_func=lambda reg: reg.state not in ('cancel', 'draft')
+                        filter_func=lambda reg: reg.state not in ("cancel", "draft"),
                     )
 
                     scheduler.update(
