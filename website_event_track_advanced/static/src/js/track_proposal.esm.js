@@ -553,7 +553,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             $("#application-submit-button")
                                 .attr("disabled", true)
                                 .hide();
-                            $("#type").attr("disabled", true)
+                            $("#type").attr("disabled", true);
                         }
                     }
                     if (
