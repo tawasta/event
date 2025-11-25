@@ -153,7 +153,12 @@ class EventTrackControllerAdvanced(EventTrackController):
                     "title": speaker.function or "",
                 }
             )
-        if track.stage_id.is_editable and track.stage_id.is_accepted or track.stage_id.is_submitted or track.stage_id.is_visible_in_agenda:
+        if (
+            track.stage_id.is_editable
+            and track.stage_id.is_accepted
+            or track.stage_id.is_submitted
+            or track.stage_id.is_visible_in_agenda
+        ):
             # Palautetaan vain tämän trakin oma tyyppi
             app_type_records = track.type
         else:
