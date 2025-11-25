@@ -554,7 +554,6 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                                 .attr("disabled", true)
                                 .hide();
                             $("#type").attr("disabled", true);
-
                         }
                     }
                     if (
