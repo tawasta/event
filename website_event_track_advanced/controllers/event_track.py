@@ -615,8 +615,6 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Application type
         application_type = self._get_record("event.track.type", post.get("type"))
-        _logger.info("====APPLICATION TYPE====SAVED====")
-        _logger.info(application_type)
 
         # Target group
         if "target_group" in post and post.get("target_group"):
