@@ -153,6 +153,18 @@ class EventTrackControllerAdvanced(EventTrackController):
                     "title": speaker.function or "",
                 }
             )
+        if (
+            track.stage_id.is_editable
+            and track.stage_id.is_accepted
+            or track.stage_id.is_submitted
+            or track.stage_id.is_visible_in_agenda
+        ):
+            # Palautetaan vain tämän trakin oma tyyppi
+            app_type_records = track.type
+        else:
+            # Palautetaan kaikki eventin tyypit kuten ennenkin
+            app_type_records = track.event_id.track_types_ids
+
         application_types = [
             {
                 "id": app_type.id,
@@ -162,7 +174,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "webinar": app_type.webinar,
                 "description": app_type.description or "",
             }
-            for app_type in track.event_id.track_types_ids
+            for app_type in app_type_records
         ]
 
         request_time = [
