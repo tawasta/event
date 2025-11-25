@@ -1003,6 +1003,10 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             const submitButton = $(this).find('[type="submit"]');
             submitButton.prop("disabled", true); // Poista käytöstä lähetyspainike, jotta vältetään kaksoislähetys
             const formData = new FormData(this); // Kerää lomaketiedot
+            const $typeSelect = $("#type");
+            if ($typeSelect.prop("disabled")) {
+                formData.append($typeSelect.attr("name"), $typeSelect.val());
+            }
 
             if (activeButton && activeButton.attr("name") === "review-confirm") {
                 const track_id = $('input[name="track_id"]').val();
