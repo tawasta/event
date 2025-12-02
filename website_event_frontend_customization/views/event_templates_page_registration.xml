@@ -38,7 +38,7 @@
             position="before"
         >
             <div
-                t-if="event.event_ticket_ids"
+                t-if="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime)"
                 id="show_ticket_sale_end"
                 class="o_wevent_sidebar_block border-bottom pb-3 my-3"
             >
