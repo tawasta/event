@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-25 13:10+0000\n"
-"PO-Revision-Date: 2022-02-25 13:10+0000\n"
+"POT-Creation-Date: 2025-12-02 06:11+0000\n"
+"PO-Revision-Date: 2025-12-02 06:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,9 +26,9 @@ msgid "N/A"
 msgstr "Ei saatavilla"
 
 #. module: website_event_frontend_customization
-#: model_terms:ir.ui.view,arch_db:website_event_frontend_customization.events_list_start_sale_date
-msgid "Registrations start on"
-msgstr "Ilmoittautumiset alkavat"
+#: model_terms:ir.ui.view,arch_db:website_event_frontend_customization.show_ticket_sale_end
+msgid "Sales End On"
+msgstr "Ilmoittautuminen päättyy"
 
 #. module: website_event_frontend_customization
 #: model_terms:ir.ui.view,arch_db:website_event_frontend_customization.show_seats
