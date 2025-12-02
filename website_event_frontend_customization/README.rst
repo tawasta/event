@@ -7,7 +7,7 @@ Website Event Frontend Customization
 ====================================
 * Optional Customize options to website:
     - Show reserved and available seats for events in views.
-    - Show latest ticket sale end date in event form view
+    - Show latest ticket sale end date in event form view's sidebar
     - Hide tickets that are not available to be sold.
     - Date and address formats on event list
     - Hide 'Add to Calendar' button from event page
