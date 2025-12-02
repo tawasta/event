@@ -23,6 +23,50 @@
             </div>
         </xpath>
     </template>
+
+    <!-- Ticket sales end date (this is the latest possible date, in case there are multiple
+     ticket types available) -->
+    <template
+        id="show_ticket_sale_end"
+        inherit_id="website_event.event_description_full"
+        active="False"
+        customize_show="True"
+        name="Show 'Ticket Sales End On'"
+    >
+        <xpath
+            expr="//h6[@t-field='event.date_begin']/parent::div/parent::div"
+            position="before"
+        >
+            <div
+                t-if="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime)"
+                id="show_ticket_sale_end"
+                class="o_wevent_sidebar_block border-bottom pb-3 my-3"
+            >
+
+                <t
+                    t-set="latest_ticket"
+                    t-value="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime).sorted('end_sale_datetime', reverse=True)[0]"
+                />
+
+                <h6 class="o_wevent_sidebar_title">Sales End On</h6>
+
+                <p class="mb-2">
+                    <span
+                        t-out="latest_ticket.end_sale_datetime"
+                        t-options="{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'full', 'date_only': True}"
+                    />
+                    <span
+                        t-out="latest_ticket.end_sale_datetime"
+                        t-options="{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'short', 'time_only': True}"
+                    />
+                    (<span t-out="event.date_tz" />)
+                </p>
+
+            </div>
+        </xpath>
+    </template>
+
+
     <!-- Event tickets -->
     <!-- Valtteri: tarvitaanko? Coressa on kuiteskin tarkituksia tätä varten? -->
 <!--     <template
