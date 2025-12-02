@@ -35,7 +35,7 @@
     >
         <xpath
             expr="//h6[@t-field='event.date_begin']/parent::div/parent::div"
-            position="before"
+            position="after"
         >
             <div
                 t-if="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime)"
