@@ -15,16 +15,17 @@ addon | version | maintainers | summary
 [event_attachment_field_base](event_attachment_field_base/) | 17.0.1.0.0 |  | Adds a separate notebook tab for attachment modules' fields
 [event_attachment_field_other_generic](event_attachment_field_other_generic/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_attachment_field_program](event_attachment_field_program/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
-[event_auditlog_rules](event_auditlog_rules/) | 17.0.1.0.0 |  | Adds audit log rules for events
+[event_auditlog_rules](event_auditlog_rules/) | 17.0.1.1.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
+[event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Prevents sending emails to past events
-[event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that be added into email templates
+[event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 17.0.1.0.0 |  | Event Recaptcha
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
@@ -39,12 +40,13 @@ addon | version | maintainers | summary
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
+[website_event_cancellation_emails_contact_info_shows_responsible_person](website_event_cancellation_emails_contact_info_shows_responsible_person/) | 17.0.1.0.3 |  | E-mail templates show responsible person's contact info instead or organizer's.
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_filter_fix](website_event_filter_fix/) | 17.0.1.1.0 |  | Removes company_id filter from event.event in website.snippet.filter
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.1 |  | Customization options to Website Event Frontends
 [website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.1 |  | Manage online and hybrid events. Includes a video conference link.
-[website_event_organizer_contact_info_visibility](website_event_organizer_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if organizer phone, mobile and/or email should be shown
+[website_event_organizer_contact_info_visibility](website_event_organizer_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if organizer and their phone, mobile and/or email should be shown
 [website_event_private_event](website_event_private_event/) | 17.0.1.1.0 |  | Make events only visible from URL. (remove from public list)
 [website_event_publish_event](website_event_publish_event/) | 17.0.1.0.0 |  | Add website_published fields to event form and a publish wizard.
 [website_event_questions_parent_id](website_event_questions_parent_id/) | 17.0.1.0.0 |  | Question to ask for parent_id in Event Registration
@@ -55,6 +57,7 @@ addon | version | maintainers | summary
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
+[website_event_responsible_contact_info_visibility](website_event_responsible_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if Responsible user and their phone, mobile and/or email should be shown
 [website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.2 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
 [website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.1 |  | Force login before registering to an event
