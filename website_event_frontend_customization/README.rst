@@ -11,6 +11,8 @@ Website Event Frontend Customization
     - Hide tickets that are not available to be sold.
     - Date and address formats on event list
     - Hide 'Add to Calendar' button from event page
+    - Hide ticket download button from registration completion page
+    - Hide ticket reference number from registration completion page
 
 Configuration
 =============

@@ -103,7 +103,7 @@
         active="True"
         customize_show="True"
         priority="99"
-        name="Hide ticket reference"
+        name="Hide attendee's ticket reference from registration complete view"
     >
         <xpath
             expr="//div[@class='d-flex flex-column']//span[last()]"
@@ -117,6 +117,19 @@
                 />
                 <t t-else="">N/A</t>
             </span>
+        </xpath>
+    </template>
+
+    <template
+        id="hide_ticket_download"
+        inherit_id="website_event.registration_complete"
+        active="False"
+        customize_show="True"
+        priority="99"
+        name="Hide 'Download Tickets' from registration complete view"
+    >
+        <xpath expr="//div[@t-if='attendees']" position="attributes">
+            <attribute name="t-if" add="False" separator=" and " />
         </xpath>
     </template>
 
