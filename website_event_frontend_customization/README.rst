@@ -16,7 +16,7 @@ Website Event Frontend Customization
 
 Configuration
 =============
-- Enable from Website Customization menu
+- Enable settings from Website builder's Customization menu
 
 Usage
 =====
