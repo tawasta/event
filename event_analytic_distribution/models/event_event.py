@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class Event(models.Model):
     _name = "event.event"
-    _inherit = ["event.event", "analytic.mixin"]
+    _inherit = "event.event"
 
     matching_analytic_distribution_models_exist = fields.Boolean(
         compute="_compute_analytic_distribution_models_exist"
