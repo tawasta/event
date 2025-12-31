@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.analytic.distribution</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="matching_analytic_distribution_models_exist"
+                >
+                    Analytic distributions matching this event and tickets do not exist yet.
+                    <button
+                        name="%(analytic.action_analytic_distribution_model)d"
+                        string="⇒ Add Analytic Distributions"
+                        type="action"
+                        class="oe_link"
+                    />
+                </div>
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    invisible="not matching_analytic_distribution_models_exist"
+                >
+                    Analytic distributions matching this event and its tickets exist.
+                    <button
+                        name="%(analytic.action_analytic_distribution_model)d"
+                        string="⇒ Manage Analytic Distributions"
+                        type="action"
+                        class="oe_link"
+                    />
+                </div>
+            </xpath>
+
+            <field name="tag_ids" position="after">
+                <field name="matching_analytic_distribution_models_exist" />
+            </field>
+
+        </field>
+    </record>
+</odoo>

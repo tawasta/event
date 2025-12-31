@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="account_analytic_distribution_model_tree_view_inherit"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >account.analytic.distribution.model.tree.inherit.event</field>
+        <field name="model">account.analytic.distribution.model</field>
+        <field
+            name="inherit_id"
+            ref="analytic.account_analytic_distribution_model_tree_view"
+        />
+        <field name="arch" type="xml">
+            <field name="partner_category_id" position="after">
+                <field name="event_id" optional="show" />
+                <field name="event_ticket_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record
+        id="account_analytic_distribution_model_form_view_inherit"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >account.analytic.distribution.model.form.inherit.event</field>
+        <field name="model">account.analytic.distribution.model</field>
+        <field
+            name="inherit_id"
+            ref="analytic.account_analytic_distribution_model_form_view"
+        />
+        <field name="arch" type="xml">
+
+            <xpath expr="//group/group/group[2]" position="after">
+                <group name="group_event_fields">
+                    <field name="event_id" />
+                    <field name="event_ticket_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
