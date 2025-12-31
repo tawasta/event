@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_analytic_distribution
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-31 14:19+0000\n"
+"PO-Revision-Date: 2025-12-31 14:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_event_event__analytic_distribution
+msgid "Analytic Distribution"
+msgstr "Analyyttinen jakelu"
+
+#. module: event_analytic_distribution
+#: model:ir.model,name:event_analytic_distribution.model_account_analytic_distribution_model
+msgid "Analytic Distribution Model"
+msgstr "Analyyttinen jakomalli"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_event_event__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr "Analyyttisten jakeluiden haku"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_event_event__analytic_precision
+msgid "Analytic Precision"
+msgstr "Analyyttinen tarkkuus"
+
+#. module: event_analytic_distribution
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution.view_event_form_inherit
+msgid "Analytic distributions matching this event and its tickets exist."
+msgstr "Analyyttisista jakomalleista löytyy tähän tapahtumaan ja/tai lippuihin sopiva malli."
+
+#. module: event_analytic_distribution
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution.view_event_form_inherit
+msgid ""
+"Analytic distributions matching this event and tickets do not exist yet."
+msgstr "Analyyttisista jakomalleista ei vielä löydy tähän tapahtumaan ja/tai lippuihin sopivaa mallia."
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_event_event__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr "Jaon kustannuspaikka"
+
+#. module: event_analytic_distribution
+#: model:ir.model,name:event_analytic_distribution.model_event_event
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_account_analytic_distribution_model__event_id
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_account_analytic_distribution_model__event_ticket_id
+msgid "Event Ticket"
+msgstr "Tapahtuman lippu"
+
+#. module: event_analytic_distribution
+#: model:ir.model,name:event_analytic_distribution.model_account_move_line
+msgid "Journal Item"
+msgstr "Päiväkirjatapahtuma"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,field_description:event_analytic_distribution.field_event_event__matching_analytic_distribution_models_exist
+msgid "Matching Analytic Distribution Models Exist"
+msgstr "Sopiva analyyttinen jakomalli on olemassa"
+
+#. module: event_analytic_distribution
+#: model:ir.model,name:event_analytic_distribution.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Myyntitilausrivi"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,help:event_analytic_distribution.field_account_analytic_distribution_model__event_id
+msgid ""
+"Select an event for which the analytic distribution will be used (e.g. "
+"create new customer invoice or Sales order related to this event, it will "
+"automatically take this as an analytic account)"
+msgstr ""
+"Valitse tapahtuma, joka käyttää analyyttistä tiliä, joka on määritetty "
+"analyyttisessä oletusarvossa (esim. luodessamme uuden asiakaslaskun tai "
+"myyntitilauksen, jos valitsemme tämän tuotteen, se ottaa automaattisesti "
+"tämän analyyttiseksi tiliksi)"
+
+#. module: event_analytic_distribution
+#: model:ir.model.fields,help:event_analytic_distribution.field_account_analytic_distribution_model__event_ticket_id
+msgid ""
+"Select an ticket for which the analytic distribution will be used (e.g. "
+"create new customer invoice or Sales order related to this ticket, it will "
+"automatically take this as an analytic account)"
+msgstr ""
+"Valitse tapahtumalippu, joka käyttää analyyttistä tiliä, joka on määritetty "
+"analyyttisessä oletusarvossa (esim. luodessamme uuden asiakaslaskun tai "
+"myyntitilauksen, jos valitsemme tämän tuotteen, se ottaa automaattisesti "
+"tämän analyyttiseksi tiliksi)"
+
+#. module: event_analytic_distribution
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution.view_event_form_inherit
+msgid "⇒ Add Analytic Distributions"
+msgstr "⇒ Luo analyyttinen jakomalli"
+
+#. module: event_analytic_distribution
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution.view_event_form_inherit
+msgid "⇒ Manage Analytic Distributions"
+msgstr "⇒ Hallinnoi analyyttisia jakomalleja"

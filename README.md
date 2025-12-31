@@ -12,6 +12,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_access_mail_template_preview_from_event_form](event_access_mail_template_preview_from_event_form/) | 17.0.1.0.0 |  | Allow regular users to see mail template preview
+[event_analytic_distribution](event_analytic_distribution/) | 17.0.1.0.0 |  | Add analytic distribution support for events
 [event_attachment_field_base](event_attachment_field_base/) | 17.0.1.0.0 |  | Adds a separate notebook tab for attachment modules' fields
 [event_attachment_field_other_generic](event_attachment_field_other_generic/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_attachment_field_program](event_attachment_field_program/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
