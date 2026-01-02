@@ -26,7 +26,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                             event.sudo().survey_ids.ids,
                         ),  # noqa: E501
                         ("partner_id", "=", partner_id),
-                        ("state", "in", ["draft", "open"]),
+                        ("state", "in", ["open"]),
                     ]
                 )
             )
