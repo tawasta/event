@@ -31,7 +31,7 @@
     "depends": [
         "website_event",
         "website_event_cancellation",
-        "website_event_frontend_customization"
+        "website_event_frontend_customization",
     ],
     "data": [
         "views/event_views.xml",
