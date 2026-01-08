@@ -1,5 +1,6 @@
 from odoo import fields, models
 
+
 class ProjectProject(models.Model):
     _inherit = "project.project"
 
@@ -9,7 +10,6 @@ class ProjectProject(models.Model):
         string="Events",
     )
     event_count = fields.Integer(
-        string="Event Count",
         compute="_compute_event_count",
     )
 
