@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Futural Oy
-#    Copyright 2021- Futural Oy (https://futural.fi)
+#    Author: Oy Tawasta OS Technologies Ltd.
+#    Copyright 2018 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,25 +19,20 @@
 ##############################################################################
 
 {
-    "name": "Website Event Online Event",
-    "summary": "Manage online and hybrid events. Includes a video conference link.",
-    "version": "17.0.1.0.1",
-    "category": "Events",
+    "name": "Project - Event link",
+    "summary": "Link events to projects (1 project -> many events)",
+    "version": "17.0.1.0.0",
+    "category": "event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_event_cancellation",
-        "website_event_frontend_customization",
-    ],
+    "external_dependencies": {"python": [], "bin": []},
+    "depends": ["event", "project"],
     "data": [
-        "views/event_views.xml",
-        "data/email_template_views.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_list.xml",
-        "views/event_templates_page_cancellation.xml",
+        "views/event_event.xml",
+        "views/project.xml",
     ],
+    "demo": [],
 }

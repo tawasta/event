@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2021- Futural Oy (https://futural.fi)
+#    Copyright 2025 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,25 +19,18 @@
 ##############################################################################
 
 {
-    "name": "Website Event Online Event",
-    "summary": "Manage online and hybrid events. Includes a video conference link.",
-    "version": "17.0.1.0.1",
+    "name": "Event: Analytic Distribution Support",
+    "summary": "Add analytic distribution support for events",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_event_cancellation",
-        "website_event_frontend_customization",
-    ],
+    "depends": ["analytic", "event_sale"],
     "data": [
-        "views/event_views.xml",
-        "data/email_template_views.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_list.xml",
-        "views/event_templates_page_cancellation.xml",
+        "views/analytic_distribution_model.xml",
+        "views/event_event.xml",
     ],
 }

@@ -12,6 +12,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [event_access_mail_template_preview_from_event_form](event_access_mail_template_preview_from_event_form/) | 17.0.1.0.0 |  | Allow regular users to see mail template preview
+[event_analytic_distribution](event_analytic_distribution/) | 17.0.1.0.0 |  | Add analytic distribution support for events
 [event_attachment_field_base](event_attachment_field_base/) | 17.0.1.0.0 |  | Adds a separate notebook tab for attachment modules' fields
 [event_attachment_field_other_generic](event_attachment_field_other_generic/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_attachment_field_program](event_attachment_field_program/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
@@ -37,6 +38,7 @@ addon | version | maintainers | summary
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
+[project_event_link](project_event_link/) | 17.0.1.0.0 |  | Link events to projects (1 project -> many events)
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
