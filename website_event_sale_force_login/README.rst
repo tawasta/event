@@ -20,7 +20,7 @@ Changelog
 =========
 
 17.0.1.2.0
-~~~~~~~~~~
+----------
 
 * t-cache attributes taken into use to mitigate issue where the result
   of is_public_user() could be cached and produce wrong results when
