@@ -62,7 +62,7 @@ addon | version | maintainers | summary
 [website_event_responsible_contact_info_visibility](website_event_responsible_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if Responsible user and their phone, mobile and/or email should be shown
 [website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.2 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
-[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.1 |  | Force login before registering to an event
+[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.2.0 |  | Force login before registering to an event
 [website_event_sale_go_to_payment_button_configurable_label](website_event_sale_go_to_payment_button_configurable_label/) | 17.0.1.0.0 |  | Customize payment and registration button texts in event registration
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings

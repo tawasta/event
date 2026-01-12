@@ -12,6 +12,7 @@
             <attribute
                 name="t-if"
             >event.event_registrations_open and (event.allow_guest_registration or not website.is_public_user())</attribute>
+            <attribute name="t-nocache">Avoid caching public user checks</attribute>
         </xpath>
 
         <xpath
@@ -21,6 +22,7 @@
             <t
                 t-if="website.is_public_user() and not event.allow_guest_registration"
                 t-call="website_sale_force_login.product_login_buttons"
+                t-nocache="Avoid caching public user checks"
             />
         </xpath>
 
