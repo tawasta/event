@@ -16,6 +16,15 @@ Usage
 =====
 \-
 
+Changelog
+=========
+
+17.0.1.2.0
+~~~~~~~~~~
+
+* t-cache attributes taken into use to mitigate issue where the result
+  of is_public_user() could be cached and produce wrong results when
+  e.g. reloading the page rapidly as a portal user.
 
 Credits
 =======
@@ -24,6 +33,7 @@ Contributors
 ------------
 
 * Jarmo Kortetjärvi <jarmo.kortetjarvi@futural.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------

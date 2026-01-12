@@ -21,7 +21,7 @@
 {
     "name": "Event eCommerce: Force login",
     "summary": "Force login before registering to an event",
-    "version": "17.0.1.1.1",
+    "version": "17.0.1.2.0",
     "category": "Website",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
