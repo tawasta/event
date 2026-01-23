@@ -20,13 +20,14 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                 .sudo()
                 .search(
                     [
-                        (
+                        ( 
                             "registration_survey_id",
                             "in",
                             event.sudo().survey_ids.ids,
                         ),  # noqa: E501
                         ("partner_id", "=", partner_id),
                         ("state", "in", ["open"]),
+                        ("event_id.stage_id.pipe_end", "=", False),
                     ]
                 )
             )
