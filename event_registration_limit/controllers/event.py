@@ -27,6 +27,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                         ),  # noqa: E501
                         ("partner_id", "=", partner_id),
                         ("state", "in", ["open"]),
+                        ("event_id.stage_id.pipe_end", "=", False),
                     ]
                 )
             )
