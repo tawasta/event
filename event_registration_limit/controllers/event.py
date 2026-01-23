@@ -20,7 +20,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                 .sudo()
                 .search(
                     [
-                        ( 
+                        (
                             "registration_survey_id",
                             "in",
                             event.sudo().survey_ids.ids,
