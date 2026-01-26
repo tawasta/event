@@ -38,6 +38,7 @@ addon | version | maintainers | summary
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
+[event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event
 [project_event_link](project_event_link/) | 17.0.1.0.0 |  | Link events to projects (1 project -> many events)
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
