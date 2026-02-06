@@ -6,7 +6,7 @@
             <div t-if="event.event_ticket_earliest_start_sale" class="mt-1">
                 <small>Registrations open: <span
                         t-out="event.event_ticket_earliest_start_sale"
-                        t-options='{"widget": "date"}'
+                        t-options='{"widget": "datetime", "format": "dd.MM.yyyy HH:mm"}'
                     /></small>
             </div>
         </xpath>
