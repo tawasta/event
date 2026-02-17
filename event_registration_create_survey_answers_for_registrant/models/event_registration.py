@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import _, models
 
 
 class EventRegistration(models.Model):
@@ -8,7 +8,7 @@ class EventRegistration(models.Model):
         self.ensure_one()
 
         return {
-            "name": "Create Survey Answer",
+            "name": _("Add Survey Answers"),
             "type": "ir.actions.act_window",
             "res_model": "survey.user.input.creation.wizard",
             "view_mode": "form",

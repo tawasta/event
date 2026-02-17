@@ -25,44 +25,48 @@ class SurveyUserInputCreationWizard(models.TransientModel):
 
     available_survey_ids = fields.Many2many(
         "survey.survey",
-        compute="_compute_available_surveys",
         readonly=True,
     )
 
-    @api.depends("event_registration_id")
-    def _compute_available_surveys(self):
-        for wizard in self:
-            wizard.available_survey_ids = (
-                wizard.event_registration_id.event_id.survey_ids
-            )
+    @api.model
+    def default_get(self, fields_list):
+        # Limit selectable surveys to just those that haven't been answered yet
+        res = super().default_get(fields_list)
+        reg_id = res.get("event_registration_id")
+        if reg_id:
+            registration = self.env["event.registration"].browse(reg_id)
+            possible_surveys = registration.event_id.survey_ids
+            answered_surveys = registration.survey_answer_ids.mapped("survey_id")
+            res["available_survey_ids"] = (possible_surveys - answered_surveys).ids
+        return res
 
     def action_create_answer_for_survey(self):
+        # Create a placeholder survey user input records and launch the answering
+        # view.
         self.ensure_one()
 
         registration = self.event_registration_id
 
-        partner = registration.partner_id
-        # TODO attendee partner may be missing if creating from SO
-        # partner = registration.attendee_partner_id
-
+        partner = registration.attendee_partner_id or registration.partner_id
         selected_survey = self.survey_to_answer_id
 
         if not partner:
-            raise UserError(_("This registration has no attendee partner set."))
-
-        # society_event_core keeps the answers in the original stage when answers
-        # come in via website, do the same here. # TODO not working yet?
-        # earliest_stage = self.env["survey.user_input.stage"].search(
-        #     domain=[("is_editable", "=", True)], order="sequence ASC", limit="1"
-        # )
-
-        # _logger.info("stage: %s", earliest_stage)
+            raise UserError(_("This registration has no partner information set."))
 
         # Create a participation record for the selected survey and update some
-        # values for it
+        # initial values for it
         placeholder_user_input_id = selected_survey._create_answer(
             partner=partner, check_attempts=False
         )
+
+        # Clear the prefilled text questions' answers from any names, emails.
+        # For some reason empty string can crash the launch of the answering view,
+        # so just use dashes instead as a workaround...
+        for survey_user_input_line in placeholder_user_input_id.user_input_line_ids:
+            if survey_user_input_line.question_id.question_type == "char_box":
+                placeholder_user_input_id._save_lines(
+                    survey_user_input_line.question_id, "-"
+                )
 
         placeholder_user_input_id.write(
             {
@@ -77,7 +81,6 @@ class SurveyUserInputCreationWizard(models.TransientModel):
                     and self.event_registration_id.event_ticket_id.id
                     or False
                 ),
-                # "stage_id": earliest_stage[0].id,  # TODO: not working?
             }
         )
 

@@ -6,16 +6,22 @@
 Event Registration: Create Survey Answers for Registrant
 ========================================================
 
-* Allows creating survey answers for event registrations that were 
-  created from backend, not by a website visitor
+* Allows creating survey answers for event registrations on
+  behalf of the participant
+* Intended for situations where the event registration is
+  created by a backend Odoo user and you want to 
+  log answers for the event surveys.
 
 Configuration
 =============
-* WIP
+* None needed
 
 Usage
 =====
-* WIP
+* Set up an event with some surveys
+* Create a participation record for the event
+* Start answering the surveys via participation
+  form view's Add Survey Answers button
 
 Known issues / Roadmap
 ======================

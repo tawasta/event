@@ -29,7 +29,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["society_event_core"],
+    "depends": ["society_event_core", "partner_event"],
     "data": [
         "views/event_registration_views.xml",
         "wizards/survey_user_input_creation_wizard_views.xml",
