@@ -66,7 +66,7 @@ class SurveyUserInputCreationWizard(models.TransientModel):
 
         placeholder_user_input_id.write(
             {
-                # Add current user to contact_ids so that they have rights to 
+                # Add current user to contact_ids so that they have rights to
                 # edit the survey
                 "contact_ids": [(4, self.env.user.partner_id.id)],
                 "created_on_behalf_of_registrant": True,

@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [event_registration_static_company_name_from_survey_user_input](event_registration_static_company_name_from_survey_user_input/) | 17.0.1.0.0 |  | Compute field contents by fetching from user's answers
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
+[event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
