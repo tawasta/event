@@ -29,9 +29,12 @@ addon | version | maintainers | summary
 [event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 17.0.1.0.0 |  | Event Recaptcha
+[event_registration_create_survey_answers_for_registrant](event_registration_create_survey_answers_for_registrant/) | 17.0.1.0.0 |  | Allows creating survey answers for event registrations that were created from backend, not by a website visitor
+[event_registration_create_survey_answers_for_registrant_ticket_based_questions](event_registration_create_survey_answers_for_registrant_ticket_based_questions/) | 17.0.1.0.0 |  | Ticket-based question visibility support for survey answers created from backend
 [event_registration_static_company_name_from_survey_user_input](event_registration_static_company_name_from_survey_user_input/) | 17.0.1.0.0 |  | Compute field contents by fetching from user's answers
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
+[event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation

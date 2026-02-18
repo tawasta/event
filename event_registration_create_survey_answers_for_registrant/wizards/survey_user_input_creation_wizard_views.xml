@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_survey_user_input_creation_wizard_form" model="ir.ui.view">
+        <field name="name">survey.user.input.creation.wizard.form</field>
+        <field name="model">survey.user.input.creation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Survey Answer">
+
+                <p class="text-muted">
+                    With this tool you can add survey answers on behalf of event registrants.
+                </p>
+                <p class="text-muted">
+                    Choose the survey from the dropdown list below and click
+                    'Answer survey on behalf of registrant', and the questions will open in a
+                    new tab.
+                </p>
+                <p class="text-muted">
+                    After answering you can close that tab. Refreshing this page
+                    will show the answers now connected to this event registration.
+                </p>
+                <group>
+                    <field name="event_registration_id" invisible="1" />
+                    <field name="survey_to_answer_id" />
+                    <field name="available_survey_ids" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="action_create_answer_for_survey"
+                        string="Create answer for survey"
+                        type="object"
+                        class="btn-primary"
+                        context="{ 'creating_for_registrant': True }"
+                    />
+                    <button string="Cancel" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
