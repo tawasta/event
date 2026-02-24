@@ -35,5 +35,6 @@
         "data/mail_template_data.xml",
         "data/ir_cron_data.xml",
         "views/event_registration_views.xml",
+        "views/res_config_settings.xml",
     ],
 }

@@ -1,6 +1,6 @@
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -143,13 +143,33 @@ class EventRegistration(models.Model):
     # Email sending
     # -------------------------------------------------------------------------
 
-    def _send_survey_recap_email(self):
-        """Send the survey recap email for each registration in ``self``."""
-        template = self.env.ref(
+    def _get_survey_recap_email_template(self):
+        """Return the mail template to use for the survey recap email.
+
+        Reads the template configured in Settings > Events. Falls back to
+        the default template shipped with this module if none is set.
+        """
+        configured_template_id = int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param(
+                "event_registration_survey_recap_mail_after_registration"
+                ".default_survey_recap_email_template_id",
+                default=0,
+            )
+        )
+        if configured_template_id:
+            template = self.env["mail.template"].browse(configured_template_id).exists()
+            if template:
+                return template
+        return self.env.ref(
             "event_registration_survey_recap_mail_after_registration"
             ".mail_template_event_registration_survey_recap",
-            raise_if_not_found=True,
         )
+
+    def _send_survey_recap_email(self):
+        """Send the survey recap email for each registration in ``self``."""
+        template = self._get_survey_recap_email_template()
         for registration in self:
             try:
                 template.send_mail(
@@ -157,18 +177,6 @@ class EventRegistration(models.Model):
                     force_send=False,
                     raise_exception=False,
                 )
-
-                registration.survey_answer_recap_email_sent = fields.Datetime.now()
-                registration.message_post(
-                    body=_("Sent survey answer recap to registrant"),
-                )
-
-                _logger.debug(
-                    "Survey recap email queued for registration %s (id=%d)",
-                    registration.display_name,
-                    registration.id,
-                )
-
             except Exception:
                 _logger.exception(
                     "Failed to queue survey recap email for " "registration %s (id=%d)",
@@ -176,3 +184,9 @@ class EventRegistration(models.Model):
                     registration.id,
                 )
                 continue
+            registration.survey_answer_recap_email_sent = fields.Datetime.now()
+            _logger.debug(
+                "Survey recap email queued for registration %s (id=%d)",
+                registration.display_name,
+                registration.id,
+            )
