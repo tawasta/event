@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_event_form_inherit_survey_recap" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.survey.recap</field>
+        <field name="model">event.event</field>
+        <field
+            name="inherit_id"
+            ref="society_event_core.event_event_view_form_inherit_survey"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_ids']" position="after">
+                <group name="group_survey_recap">
+                    <field name="send_survey_recap_to_registrants" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

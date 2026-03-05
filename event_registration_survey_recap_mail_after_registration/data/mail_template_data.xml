@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo noupdate="0">>
-
-
+<!-- Placeholder recap email template to install -->
+<odoo noupdate="1">
         <record
         id="mail_template_event_registration_survey_recap"
         model="mail.template"

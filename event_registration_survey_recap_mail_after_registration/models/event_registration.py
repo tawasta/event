@@ -8,10 +8,6 @@ _logger = logging.getLogger(__name__)
 class EventRegistration(models.Model):
     _inherit = "event.registration"
 
-    # -------------------------------------------------------------------------
-    # Fields
-    # -------------------------------------------------------------------------
-
     survey_answer_recap_email_requested = fields.Boolean(
         string="Survey Recap Email Requested",
         default=False,
@@ -31,22 +27,27 @@ class EventRegistration(models.Model):
         ),
     )
 
-    # -------------------------------------------------------------------------
-    # Overrides
-    # -------------------------------------------------------------------------
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Flag registrations for recap email if created directly as confirmed.
 
-    # def action_confirm(self):
-    #     """Set the recap email request flag when a registration is confirmed."""
-    #     res = super().action_confirm()
-    #     self.write({"survey_answer_recap_email_requested": True})
-    #     return res
+        Handles cases where a registration is created with state='open' in a
+        single step, bypassing write().
+        """
+        records = super().create(vals_list)
+        to_flag = records.filtered(
+            lambda reg: reg.state == "open"
+            and not reg.survey_answer_recap_email_requested
+            and reg.event_id.send_survey_recap_to_registrants
+        )
+        if to_flag:
+            super(EventRegistration, to_flag).write(
+                {"survey_answer_recap_email_requested": True}
+            )
+        return records
 
     def write(self, vals):
-        """Override write to flag registrations for recap email on confirmation.
-
-        We intercept state changes here rather than in ``action_confirm()``
-        because registrations can reach the 'open' state through multiple
-        paths (e.g. the state widget on the form view).
+        """Flag registrations for recap email on confirmation.
 
         The inner write uses ``super()`` directly to avoid recursion — if we
         called ``self.write()`` it would re-enter this override and evaluate
@@ -54,8 +55,11 @@ class EventRegistration(models.Model):
         """
         res = super().write(vals)
         if vals.get("state") == "open":
+            # Filter those registrations that are not yet requested and whose
+            # events configured to use recap emails.
             to_flag = self.filtered(
                 lambda reg: not reg.survey_answer_recap_email_requested
+                and reg.event_id.send_survey_recap_to_registrants
             )
             if to_flag:
                 super(EventRegistration, to_flag).write(
@@ -63,27 +67,16 @@ class EventRegistration(models.Model):
                 )
         return res
 
-    # -------------------------------------------------------------------------
-    # Cron
-    # -------------------------------------------------------------------------
-
     def _cron_send_survey_recap_emails(self):
         """Called by ir.cron. Find eligible registrations and send emails."""
 
-        _logger.info("Running survey recap")
         candidates = self.search(self._get_survey_recap_email_domain())
         if not candidates:
             return
 
-        _logger.info("found candidates:")
-        _logger.info(candidates)
-
         eligible = candidates._filter_survey_recap_eligible()
         if not eligible:
             return
-
-        _logger.info("filtered eligibles:")
-        _logger.info(eligible)
 
         _logger.info(
             "Sending survey recap email for %d registration(s): %s",
@@ -92,21 +85,14 @@ class EventRegistration(models.Model):
         )
         eligible._send_survey_recap_email()
 
-    # -------------------------------------------------------------------------
-    # Domain & filtering helpers
-    # -------------------------------------------------------------------------
-
     @api.model
     def _get_survey_recap_email_domain(self):
-        """Return the search domain for candidate registrations.
-
-        Pushes as many criteria as possible into SQL so the Python-level
-        eligibility check only processes a small set.
-        """
+        """Return the search domain for candidate registrations."""
         return [
             ("state", "=", "open"),
             ("survey_answer_recap_email_requested", "=", True),
             ("survey_answer_recap_email_sent", "=", False),
+            ("event_id.send_survey_recap_to_registrants", "=", True),
             ("event_id.stage_id.pipe_end", "=", False),
             ("event_id.stage_id.cancel", "=", False),
         ]
@@ -114,16 +100,13 @@ class EventRegistration(models.Model):
     def _filter_survey_recap_eligible(self):
         """Return the subset of ``self`` where all expected surveys are answered.
 
-        An event registration is eligible when every ``survey.survey`` in
-        ``event_id.survey_ids`` has at least one corresponding record in
-        ``survey_answer_ids`` (i.e. the answered surveys are a superset of
+        An event registration is eligible when every survey.survey in
+        event_id.survey_ids has at least one corresponding answer record in
+        survey_answer_ids (i.e. the answered surveys are a superset of
         the expected surveys).
 
-        Only completed survey inputs (``state == 'done'``) are considered.
-        Inputs still in progress are ignored.
-
-        Registrations whose event has **no** linked surveys are skipped
-        because there is nothing to recap.
+        Only completed survey inputs are considered. Registrations whose event has
+        no linked surveys are skipped because there is nothing to recap.
         """
         eligible = self.browse()  # empty recordset
         for reg in self:
@@ -138,10 +121,6 @@ class EventRegistration(models.Model):
             if expected_survey_ids.issubset(answered_survey_ids):
                 eligible |= reg
         return eligible
-
-    # -------------------------------------------------------------------------
-    # Email sending
-    # -------------------------------------------------------------------------
 
     def _get_survey_recap_email_template(self):
         """Return the mail template to use for the survey recap email.
@@ -168,7 +147,7 @@ class EventRegistration(models.Model):
         )
 
     def _send_survey_recap_email(self):
-        """Send the survey recap email for each registration in ``self``."""
+        """Send the survey recap email for each registration in 'self'."""
         template = self._get_survey_recap_email_template()
         for registration in self:
             try:
@@ -184,6 +163,8 @@ class EventRegistration(models.Model):
                     registration.id,
                 )
                 continue
+
+            # Mark as sent to avoid future duplicate sending
             registration.survey_answer_recap_email_sent = fields.Datetime.now()
             _logger.debug(
                 "Survey recap email queued for registration %s (id=%d)",
