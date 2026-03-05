@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [event_registration_create_survey_answers_for_registrant](event_registration_create_survey_answers_for_registrant/) | 17.0.1.0.0 |  | Allows creating survey answers for event registrations that were created from backend, not by a website visitor
 [event_registration_create_survey_answers_for_registrant_ticket_based_questions](event_registration_create_survey_answers_for_registrant_ticket_based_questions/) | 17.0.1.0.0 |  | Ticket-based question visibility support for survey answers created from backend
 [event_registration_static_company_name_from_survey_user_input](event_registration_static_company_name_from_survey_user_input/) | 17.0.1.0.0 |  | Compute field contents by fetching from user's answers
+[event_registration_survey_recap_mail_after_registration](event_registration_survey_recap_mail_after_registration/) | 17.0.1.0.0 |  | Send survey answers as a separate email to event registrant
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
 [event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately

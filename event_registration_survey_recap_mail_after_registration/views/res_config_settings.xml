@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inherit_survey_recap" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.form.inherit.survey.recap
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="event.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <block name="registration_setting_container" position="after">
+                <h2>Event Registration Survey Recap E-mail</h2>
+                <div
+                    class="row mt16 o_settings_container"
+                    name="survey_recap_email_template_id_container"
+                >
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="row mt16 o_settings_container">
+                            <field
+                                name="survey_recap_email_template_id"
+                                options="{ 'no_create': True, 'no_create_edit': True}"
+                            />
+                            <div class="text-muted">
+                                Email template sent to registrants once all linked
+                                survey answers have been processed.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </block>
+
+        </field>
+    </record>
+
+</odoo>
