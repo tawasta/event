@@ -29,43 +29,19 @@ class EventRegistration(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        """Flag registrations for recap email if created directly as confirmed.
+        """Flag new registrations for receiving a recap email, if
+        the related event was configured to send them."""
 
-        Handles cases where a registration is created with state='open' in a
-        single step, bypassing write().
-        """
         records = super().create(vals_list)
         to_flag = records.filtered(
-            lambda reg: reg.state == "open"
-            and not reg.survey_answer_recap_email_requested
-            and reg.event_id.send_survey_recap_to_registrants
+            lambda reg: reg.event_id.send_survey_recap_to_registrants
         )
+
         if to_flag:
             super(EventRegistration, to_flag).write(
                 {"survey_answer_recap_email_requested": True}
             )
         return records
-
-    def write(self, vals):
-        """Flag registrations for recap email on confirmation.
-
-        The inner write uses ``super()`` directly to avoid recursion — if we
-        called ``self.write()`` it would re-enter this override and evaluate
-        the ``state`` check again unnecessarily.
-        """
-        res = super().write(vals)
-        if vals.get("state") == "open":
-            # Filter those registrations that are not yet requested and whose
-            # events configured to use recap emails.
-            to_flag = self.filtered(
-                lambda reg: not reg.survey_answer_recap_email_requested
-                and reg.event_id.send_survey_recap_to_registrants
-            )
-            if to_flag:
-                super(EventRegistration, to_flag).write(
-                    {"survey_answer_recap_email_requested": True}
-                )
-        return res
 
     def _cron_send_survey_recap_emails(self):
         """Called by ir.cron. Find eligible registrations and send emails."""

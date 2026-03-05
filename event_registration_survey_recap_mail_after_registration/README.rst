@@ -27,13 +27,13 @@ Usage
 =====
 * Register for the event, and you will get a recap e-mail once the cron runs.
 * Old registrations do not get recap emails - only those registrations that get confirmed after the 
-  'Send Survey Recap to Registrants' will get he recap emails.
+  'Send Survey Recap to Registrants' will get the recap emails.
 
 Known issues / Roadmap
 ======================
-* This module is a a workaround for not being able to embed the recap info into the 
-  automatic event registration email, since when an event registration gets confirmed, 
-  the queue jobs of society_event_core may not have yet been processed and therefore
+* This module is a a workaround for not being able to embed the recap info directly into the 
+  automatic event registration email, since when an event registration gets confirmed and email
+  is getting sent, the queue jobs of society_event_core may not have yet been processed and therefore
   the survey answer records may not yet have been attached to the event.registration record.
 
 Credits
