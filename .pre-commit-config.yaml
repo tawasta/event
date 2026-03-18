@@ -136,7 +136,7 @@ repos:
         args:
           - --rcfile=.pylintrc-mandatory
   - repo: https://github.com/tawasta/github-workflows.git
-    rev: v1.1.0
+    rev: v1.2.1
     hooks:
       - id: ensure-finnish-translation
   - repo: https://github.com/mondeja/pre-commit-po-hooks
@@ -144,6 +144,6 @@ repos:
     hooks:
       - id: untranslated-messages
   - repo: https://github.com/tawasta/github-workflows.git
-    rev: v1.1.0
+    rev: v1.2.1
     hooks:
       - id: ensure-module-icon
