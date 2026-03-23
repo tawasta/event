@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -66,7 +66,7 @@ class EventMailAttendeesWizard(models.TransientModel):
 
         if not self.env.user.email:
             raise UserError(
-                _(
+                self.env._(
                     "Unable to post message, "
                     "please configure the sender's email address."
                 )
