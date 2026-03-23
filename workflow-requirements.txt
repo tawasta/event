@@ -1,0 +1,1 @@
+https://github.com/tawasta/social/archive/refs/heads/19.0.zip#subdirectory=mail_template_name_translatable
