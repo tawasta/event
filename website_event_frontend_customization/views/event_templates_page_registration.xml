@@ -121,5 +121,4 @@
       <attribute name="t-if" add="False" separator=" and " />
     </xpath>
   </template>
-
 </odoo>
