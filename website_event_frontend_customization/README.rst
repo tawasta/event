@@ -10,7 +10,6 @@ Website Event Frontend Customization
     - Show latest ticket sale end date in event form view's sidebar
     - Hide tickets that are not available to be sold.
     - Date and address formats on event list
-    - Hide 'Add to Calendar' button from event page
     - Hide ticket download button from registration completion page
     - Hide ticket reference number from registration completion page
 
@@ -35,6 +34,7 @@ Contributors
 * Miika Nissi <miika.nissi@futural.fi>
 * Valtteri Lattu <valtteri.lattu@futural.fi>
 * Timo Talvitie <timo.talvitie@futural.fi>
+* Joona Isoaho <joona.isoaho@futural.fi>
 
 Maintainer
 ----------

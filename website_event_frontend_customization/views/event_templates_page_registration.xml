@@ -122,15 +122,4 @@
     </xpath>
   </template>
 
-  <template
-    id="hide_calendar_button"
-    inherit_id="website_event.event_description_full"
-    active="False"
-    customize_show="True"
-    name="Hide 'Add to Calendar' button"
-  >
-    <xpath expr="//i[hasclass('fa-calendar')]/../.." position="attributes">
-      <attribute name="class">dropdown d-none</attribute>
-    </xpath>
-  </template>
 </odoo>
