@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_events_inherit_certificate" inherit_id="website_my_events.portal_my_events">
+        <xpath expr="//th[@class='table-header-action']" position="before">
+            <th class="table-header-certificate">Certificate</th>
+        </xpath>
+
+        <xpath expr="//td[@class='table-cell-action']" position="before">
+            <td class="table-cell-certificate">
+                <t t-if="re.event_id.certificate_enabled and re.state == 'done'">
+                    <a
+                        t-attf-href="/my/events/registration/{{ re.id }}/certificate"
+                        class="btn btn-primary btn-sm"
+                        target="_blank"
+                    >
+                        <i class="fa fa-download" aria-hidden="true"/>
+                        <span class="ms-1">Download certificate</span>
+                    </a>
+                </t>
+            </td>
+        </xpath>
+    </template>
+</odoo>
