@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from odoo import fields, models
 
 
@@ -12,7 +11,10 @@ class EventEvent(models.Model):
     )
     certificate_send_email = fields.Boolean(
         string="Send certificate by email after event",
-        help="If enabled, attended registrations receive the certificate automatically after the event.",
+        help=(
+            "If enabled, attended registrations receive the certificate "
+            "automatically after the event."
+        ),
         tracking=True,
     )
     certificate_duration_text = fields.Char(

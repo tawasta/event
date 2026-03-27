@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="portal_my_events_inherit_certificate" inherit_id="website_my_events.portal_my_events">
+    <template
+        id="portal_my_events_inherit_certificate"
+        inherit_id="website_my_events.portal_my_events"
+    >
         <xpath expr="//th[@class='table-header-action']" position="before">
             <th class="table-header-certificate">Certificate</th>
         </xpath>
@@ -13,7 +16,7 @@
                         class="btn btn-primary btn-sm"
                         target="_blank"
                     >
-                        <i class="fa fa-download" aria-hidden="true"/>
+                        <i class="fa fa-download" aria-hidden="true" />
                         <span class="ms-1">Download certificate</span>
                     </a>
                 </t>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import base64
 
 from odoo import _, api, fields, models
@@ -39,7 +38,10 @@ class EventRegistration(models.Model):
         if not user or user._is_public():
             return False
 
-        return user.partner_id.commercial_partner_id in self._get_certificate_holder_partners()
+        return (
+            user.partner_id.commercial_partner_id
+            in self._get_certificate_holder_partners()
+        )
 
     def _check_certificate_access(self, user=None):
         self.ensure_one()
@@ -48,7 +50,9 @@ class EventRegistration(models.Model):
             raise AccessError(_("Certificate is not enabled for this event."))
 
         if self.state != "done":
-            raise AccessError(_("Certificate is only available for attended registrations."))
+            raise AccessError(
+                _("Certificate is only available for attended registrations.")
+            )
 
         if not self._portal_can_access_certificate(user=user):
             raise AccessError(_("You do not have access to this certificate."))
@@ -78,7 +82,11 @@ class EventRegistration(models.Model):
             return self.email
         if self.partner_id and self.partner_id.email:
             return self.partner_id.email
-        if self.visitor_id and self.visitor_id.partner_id and self.visitor_id.partner_id.email:
+        if (
+            self.visitor_id
+            and self.visitor_id.partner_id
+            and self.visitor_id.partner_id.email
+        ):
             return self.visitor_id.partner_id.email
         return False
 
@@ -97,9 +105,13 @@ class EventRegistration(models.Model):
         if not report_action:
             return b""
 
-        pdf_content, _content_type = self.env["ir.actions.report"].sudo()._render_qweb_pdf(
-            report_action.report_name,
-            [self.id],
+        pdf_content, _content_type = (
+            self.env["ir.actions.report"]
+            .sudo()
+            ._render_qweb_pdf(
+                report_action.report_name,
+                [self.id],
+            )
         )
         return pdf_content
 
@@ -110,14 +122,20 @@ class EventRegistration(models.Model):
         if not pdf_content:
             return self.env["ir.attachment"]
 
-        return self.env["ir.attachment"].sudo().create({
-            "name": self._get_certificate_report_filename(),
-            "type": "binary",
-            "datas": base64.b64encode(pdf_content),
-            "mimetype": "application/pdf",
-            "res_model": self._name,
-            "res_id": self.id,
-        })
+        return (
+            self.env["ir.attachment"]
+            .sudo()
+            .create(
+                {
+                    "name": self._get_certificate_report_filename(),
+                    "type": "binary",
+                    "datas": base64.b64encode(pdf_content),
+                    "mimetype": "application/pdf",
+                    "res_model": self._name,
+                    "res_id": self.id,
+                }
+            )
+        )
 
     def _send_certificate_email(self):
         template = self.env.ref(
@@ -156,18 +174,22 @@ class EventRegistration(models.Model):
                 email_values=email_values,
             )
 
-            registration.write({
-                "certificate_sent": True,
-                "certificate_sent_date": fields.Datetime.now(),
-            })
+            registration.write(
+                {
+                    "certificate_sent": True,
+                    "certificate_sent_date": fields.Datetime.now(),
+                }
+            )
 
     @api.model
     def cron_send_event_certificates(self):
-        registrations = self.search([
-            ("state", "=", "done"),
-            ("certificate_sent", "=", False),
-            ("event_id.certificate_enabled", "=", True),
-            ("event_id.certificate_send_email", "=", True),
-            ("event_id.is_finished", "=", True),
-        ])
+        registrations = self.search(
+            [
+                ("state", "=", "done"),
+                ("certificate_sent", "=", False),
+                ("event_id.certificate_enabled", "=", True),
+                ("event_id.certificate_send_email", "=", True),
+                ("event_id.is_finished", "=", True),
+            ]
+        )
         registrations._send_certificate_email()

@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="event_event_view_form_inherit_certificate" model="ir.ui.view">
         <field name="name">event.event.form.inherit.certificate</field>
         <field name="model">event.event</field>
-        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="inherit_id" ref="event.view_event_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet/notebook" position="inside">
                 <page string="Certificates">
                     <group>
                         <group>
-                            <field name="certificate_enabled"/>
-                            <field name="certificate_send_email"/>
+                            <field name="certificate_enabled" />
+                            <field name="certificate_send_email" />
                         </group>
                         <group>
-                            <field name="certificate_duration_text"/>
-                            <field name="certificate_lecturer_id"/>
+                            <field name="certificate_duration_text" />
+                            <field name="certificate_lecturer_id" />
                         </group>
                     </group>
                 </page>
