@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2024 Futural Oy (https://futural.fi)
+#    Copyright 2026- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,23 +19,23 @@
 ##############################################################################
 
 {
-    "name": "Event eCommerce: Force login",
-    "summary": "Force login before registering to an event",
-    "version": "17.0.1.2.0",
-    "category": "Website",
+    "name": "Event Registration: Survey Recap E-mail After Registration",
+    "summary": "Send survey answers as a separate email to event registrant",
+    "version": "17.0.1.0.0",
+    "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
-        "website_event",
-        "website_event_sale",
-        "website_sale_force_login",
+        "society_event_core",
     ],
     "data": [
-        "views/event_form.xml",
-        "views/website_attendee_details_template.xml",
-        "views/website_registration_template.xml",
+        "data/mail_template_data.xml",
+        "data/ir_cron_data.xml",
+        "views/event_event_views.xml",
+        "views/event_registration_views.xml",
+        "views/res_config_settings.xml",
     ],
 }

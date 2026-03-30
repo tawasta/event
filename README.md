@@ -18,6 +18,7 @@ addon | version | maintainers | summary
 [event_attachment_field_program](event_attachment_field_program/) | 17.0.1.0.0 |  | Attachment with public URL, to be embedded into event e-mails
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.1.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
+[event_certificate_portal](event_certificate_portal/) | 17.0.1.0.0 |  | Attendance certificates for events with portal download and post-event email sending
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
@@ -29,8 +30,13 @@ addon | version | maintainers | summary
 [event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 17.0.1.0.0 |  | Event Recaptcha
+[event_registration_create_survey_answers_for_registrant](event_registration_create_survey_answers_for_registrant/) | 17.0.1.0.0 |  | Allows creating survey answers for event registrations that were created from backend, not by a website visitor
+[event_registration_create_survey_answers_for_registrant_ticket_based_questions](event_registration_create_survey_answers_for_registrant_ticket_based_questions/) | 17.0.1.0.0 |  | Ticket-based question visibility support for survey answers created from backend
+[event_registration_static_company_name_from_survey_user_input](event_registration_static_company_name_from_survey_user_input/) | 17.0.1.0.0 |  | Compute field contents by fetching from user's answers
+[event_registration_survey_recap_mail_after_registration](event_registration_survey_recap_mail_after_registration/) | 17.0.1.0.0 |  | Send survey answers as a separate email to event registrant
 [event_remove_translatable_fields](event_remove_translatable_fields/) | 17.0.1.0.0 |  | Removes translatable name and description fields from Event.
 [event_sale_hide_subtotal](event_sale_hide_subtotal/) | 17.0.1.0.0 |  | Hides subtotal on event sale action widget on event form
+[event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
@@ -38,6 +44,8 @@ addon | version | maintainers | summary
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
+[event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event
+[partner_event_prioritize_users_and_contacts_when_finding_partner](partner_event_prioritize_users_and_contacts_when_finding_partner/) | 17.0.1.0.1 |  | Modify OCA module's partner searching logic to better support cases where there are multiple partners with same email address
 [project_event_link](project_event_link/) | 17.0.1.0.0 |  | Link events to projects (1 project -> many events)
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend
@@ -62,7 +70,7 @@ addon | version | maintainers | summary
 [website_event_responsible_contact_info_visibility](website_event_responsible_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if Responsible user and their phone, mobile and/or email should be shown
 [website_event_rss_feed](website_event_rss_feed/) | 17.0.1.0.2 |  | Ability to create custom RSS Feeds with events of multiple event tags
 [website_event_sale_disable_qty_in_cart](website_event_sale_disable_qty_in_cart/) | 17.0.1.0.0 |  | Disable changing Event Registration qty in cart
-[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.1.1 |  | Force login before registering to an event
+[website_event_sale_force_login](website_event_sale_force_login/) | 17.0.1.2.0 |  | Force login before registering to an event
 [website_event_sale_go_to_payment_button_configurable_label](website_event_sale_go_to_payment_button_configurable_label/) | 17.0.1.0.0 |  | Customize payment and registration button texts in event registration
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings

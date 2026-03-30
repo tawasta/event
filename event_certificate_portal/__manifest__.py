@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Futural Oy
-#    Copyright 2024 Futural Oy (https://futural.fi)
+#    Author: Oy Tawasta OS Technologies Ltd.
+#    Copyright 2018 Oy Tawasta OS Technologies Ltd. (http://www.tawasta.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,23 +19,37 @@
 ##############################################################################
 
 {
-    "name": "Event eCommerce: Force login",
-    "summary": "Force login before registering to an event",
-    "version": "17.0.1.2.0",
-    "category": "Website",
+    "name": "Event Certificate Portal",
+    "summary": (
+        "Attendance certificates for events with portal download "
+        "and post-event email sending"
+    ),
+    "version": "17.0.1.0.0",
+    "category": "event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
+    "external_dependencies": {"python": [], "bin": []},
     "depends": [
+        "event",
         "website_event",
-        "website_event_sale",
-        "website_sale_force_login",
+        "website_my_events",
+        "portal",
+        "mail",
+        "base",
     ],
     "data": [
-        "views/event_form.xml",
-        "views/website_attendee_details_template.xml",
-        "views/website_registration_template.xml",
+        "security/ir.model.access.csv",
+        "report/paperformat.xml",
+        "report/event_certificate_report.xml",
+        "data/mail_template.xml",
+        "data/ir_cron.xml",
+        "views/res_company_views.xml",
+        "views/event_event_views.xml",
+        "views/event_registration_views.xml",
+        "views/portal_templates.xml",
     ],
+    "demo": [],
 }

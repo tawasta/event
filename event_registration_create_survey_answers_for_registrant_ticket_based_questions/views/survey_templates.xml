@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- hide the question div entirely if if question is configured to be shown
+     only for different tickets -->
+    <template id="question_container" inherit_id="survey.question_container">
+        <xpath expr='//div[@t-att-id="question.id"]' position="attributes">
+            <attribute name="t-if">
+                not question.event_ticket_ids or not answer.event_ticket_id or (answer.event_ticket_id.id in question.event_ticket_ids.mapped('id'))
+            </attribute>
+        </xpath>
+    </template>
+</odoo>

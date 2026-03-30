@@ -1,0 +1,164 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_registration_survey_recap_mail_after_registration
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-05 12:46+0000\n"
+"PO-Revision-Date: 2026-03-05 12:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:mail.template,body_html:event_registration_survey_recap_mail_after_registration.mail_template_event_registration_survey_recap
+msgid ""
+"\n"
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"    <p>Dear {{ object.name or 'Participant' }},</p>\n"
+"    <p>\n"
+"        Thank you for registering for\n"
+"        <strong>{{ object.event_id.name }}</strong>.\n"
+"    </p>\n"
+"    <p>\n"
+"        All your survey responses have been processed.\n"
+"        Below is a summary of the surveys completed:\n"
+"    </p>\n"
+"    <ul>\n"
+"        {% for answer in object.survey_answer_ids %}\n"
+"        <li>{{ answer.survey_id.title }}</li>\n"
+"        {% endfor %}\n"
+"    </ul>\n"
+"    <p>Kind regards,<br/>\n"
+"        {{ object.event_id.organizer_id.name or object.company_id.name }}\n"
+"    </p>\n"
+"</div>\n"
+msgstr ""
+"\n"
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"    <p>Hei {{ object.name or 'Participant' }},</p>\n"
+"    <p>\n"
+"        Kiitos ilmoittautumisestasi tapahtumaan \n"
+"        <strong>{{ object.event_id.name }}</strong>.\n"
+"    </p>\n"
+"    <p>\n"
+"        Ohessa vielä yhteenveto ilmoittautumisen yhteydessä syöttämistäsi tiedoista:\n"
+"    </p>\n"
+"    <ul>\n"
+"        {% for answer in object.survey_answer_ids %}\n"
+"        <li>{{ answer.survey_id.title }}</li>\n"
+"        {% endfor %}\n"
+"    </ul>\n"
+"    <p>Terveisin,<br/>\n"
+"        {{ object.event_id.organizer_id.name or object.company_id.name }}\n"
+"    </p>\n"
+"</div>\n"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model,name:event_registration_survey_recap_mail_after_registration.model_res_config_settings
+msgid "Config Settings"
+msgstr "Asetukset"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model_terms:ir.ui.view,arch_db:event_registration_survey_recap_mail_after_registration.res_config_settings_view_form_inherit_survey_recap
+msgid ""
+"Email template sent to registrants once all linked\n"
+"                                survey answers have been processed."
+msgstr ""
+"Sähköpostipohja, joka lähetetään tapahtuman osallistujille, kun kaikki liittyvät kyselyvastaukset on saatu käsiteltyä."
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,help:event_registration_survey_recap_mail_after_registration.field_res_config_settings__survey_recap_email_template_id
+msgid ""
+"Email template sent to registrants once all survey answers have been "
+"processed. Leave empty to use the default template."
+msgstr ""
+"Sähköpostipohja, joka lähetetään tapahtuman osallistujille, kun kaikki liittyvät kyselyvastaukset on saatu käsiteltyä. "
+"Jätä tyhjäksi käyttääksesi yksinkertaista oletuspohjaa."
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model,name:event_registration_survey_recap_mail_after_registration.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model,name:event_registration_survey_recap_mail_after_registration.model_event_registration
+msgid "Event Registration"
+msgstr "Tapahtuman ilmoittautuminen"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model_terms:ir.ui.view,arch_db:event_registration_survey_recap_mail_after_registration.res_config_settings_view_form_inherit_survey_recap
+msgid "Event Registration Survey Recap E-mail"
+msgstr "Tapahtumaosallistumisen kyselyvastausten yhteenvetoviesti"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.actions.server,name:event_registration_survey_recap_mail_after_registration.ir_cron_send_survey_recap_emails_ir_actions_server
+msgid "Event Registration: Send Survey Recap Emails"
+msgstr "Tapahtumaosallistuminen: lähetä kyselyvastausten yhteenvetoviestit"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:mail.template,name:event_registration_survey_recap_mail_after_registration.mail_template_event_registration_survey_recap
+msgid "Event Registration: Survey Recap"
+msgstr "Tapahtumaosallistuminen: kyselyvastausten yhteenveto"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,field_description:event_registration_survey_recap_mail_after_registration.field_event_event__send_survey_recap_to_registrants
+msgid "Send Survey Recap to Registrants"
+msgstr "Lähetä kyselyvastausten yhteenveto osallistujille"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,help:event_registration_survey_recap_mail_after_registration.field_event_registration__survey_answer_recap_email_requested
+msgid ""
+"Set to True when the registration is confirmed and a recap email should be "
+"sent once all survey answers are available."
+msgstr "Arvoksi asettuu tosi kun osallistuminen vahvistetaan, jos "
+"tapahtuman asetuksissa on määritetty että yhteenvetoviesti tulisi lähettää."
+
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model_terms:ir.ui.view,arch_db:event_registration_survey_recap_mail_after_registration.view_event_registration_form_survey_recap
+msgid "Survey Recap Email"
+msgstr "Kyselyvastausten yhteenvetosähköposti"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,field_description:event_registration_survey_recap_mail_after_registration.field_event_registration__survey_answer_recap_email_requested
+msgid "Survey Recap Email Requested"
+msgstr "Kyselyvastausten yhteenvetosähköposti pyydetty"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,field_description:event_registration_survey_recap_mail_after_registration.field_event_registration__survey_answer_recap_email_sent
+msgid "Survey Recap Email Sent On"
+msgstr "Kyselyvastausten yhteenvetosähköposti lähetetty"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,field_description:event_registration_survey_recap_mail_after_registration.field_res_config_settings__survey_recap_email_template_id
+msgid "Survey Recap Email Template"
+msgstr "Kyselyvastausten yhteenvetoviestin sähköpostipohja"
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,help:event_registration_survey_recap_mail_after_registration.field_event_registration__survey_answer_recap_email_sent
+msgid ""
+"Timestamp of when the survey recap email was sent. Populated automatically "
+"by the cron job."
+msgstr ""
+"Ajankohta, jolloin kyselyvastausten yhteenvetoviesti lähetettiin. Aikataulutettu lähetystoiminto tallentaa "
+"ajankohdan automaattisesti."
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:ir.model.fields,help:event_registration_survey_recap_mail_after_registration.field_event_event__send_survey_recap_to_registrants
+msgid ""
+"When enabled, a survey answer recap email is sent to future registrants once"
+" all linked survey answers have been processed."
+msgstr ""
+"Jos käytössä, kyselyvastauksista lähetetään yhteenvetoviesti tuleville osallistujille "
+"siinä vaiheessa, kun kaikki liittyvät kyselyvastaukset on saatu käsiteltyä taustalla.
+
+#. module: event_registration_survey_recap_mail_after_registration
+#: model:mail.template,subject:event_registration_survey_recap_mail_after_registration.mail_template_event_registration_survey_recap
+msgid "Your survey answers for {{ object.event_id.name }}"
+msgstr "Kyselyvastauksesi liittyen tapahtumaan {{ object.event_id.name }}"

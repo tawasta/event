@@ -1,7 +1,7 @@
 ##############################################################################
 #
-#    Author: Futural Oy
-#    Copyright 2024 Futural Oy (https://futural.fi)
+#    Author: Futural
+#    Copyright 2026- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,25 +17,17 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
 {
-    "name": "Event eCommerce: Force login",
-    "summary": "Force login before registering to an event",
-    "version": "17.0.1.2.0",
+    "name": "Link partner to events: Prioritize users/persons",
+    "summary": "Modify OCA module's partner searching logic to better support "
+    "cases where there are multiple partners with same email address",
+    "version": "17.0.1.0.1",
     "category": "Website",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_event_sale",
-        "website_sale_force_login",
-    ],
-    "data": [
-        "views/event_form.xml",
-        "views/website_attendee_details_template.xml",
-        "views/website_registration_template.xml",
-    ],
+    "depends": ["partner_event"],
+    "data": [],
 }

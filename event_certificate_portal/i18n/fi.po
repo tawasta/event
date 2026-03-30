@@ -1,0 +1,256 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_certificate_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20251222\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-27 08:11+0000\n"
+"PO-Revision-Date: 2026-03-27 08:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_certificate_portal
+#: model:ir.actions.report,print_report_name:event_certificate_portal.action_report_event_certificate
+msgid ""
+"'Attendance Certificate - %s' % ((object.name or object.partner_id.name or "
+"'certificate').replace('/', '-'))"
+msgstr ""
+"'Osallistumistodistus - %s' % ((object.name or object.partner_id.name or "
+"'todistus').replace('/', '-'))"
+
+#. module: event_certificate_portal
+#: model:mail.template,body_html:event_certificate_portal.email_template_event_certificate
+msgid ""
+"<div>\n"
+"                <p>Hello <t t-out=\"object.name\"></t>,</p>\n"
+"\n"
+"                <p>\n"
+"                    Thank you for participating in the event\n"
+"                    <strong><t t-out=\"object.event_id.name\"></t></strong>.\n"
+"                </p>\n"
+"\n"
+"                <p>\n"
+"                    Your attendance certificate is attached as a PDF.\n"
+"                </p>\n"
+"\n"
+"                <p>\n"
+"                    The certificate is also available in the portal:\n"
+"                    <a t-att-href=\"object.get_base_url() + object._build_certificate_portal_url()\">open certificate</a>\n"
+"                </p>\n"
+"\n"
+"                <p>\n"
+"                    Best regards,<br>\n"
+"                    <t t-out=\"object.event_id.company_id.name\"></t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div>\n"
+"                <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">Hei <t t-out=\"object.name\"></t>,</p>\n"
+"\n"
+"                <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">\n"
+"                    Kiitos osallistumisestasi tapahtumaan\n"
+"                    <strong style=\"box-sizing:border-box;font-weight:bolder;\"><t t-out=\"object.event_id.name\"></t></strong>.\n"
+"                </p>\n"
+"\n"
+"                <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">\n"
+"                    Osallistumistodistuksesi on liitteenä PDF-muodossa.\n"
+"                </p>\n"
+"\n"
+"                <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">\n"
+"                    Todistus on saatavilla myös portaalissa:\n"
+"                    <a t-att-href=\"object.get_base_url() + object._build_certificate_portal_url()\" style=\"text-decoration: none; box-sizing: border-box; color: #495057;\">avaa todistus</a>\n"
+"                </p>\n"
+"\n"
+"                <p style=\"margin:0px 0 16px 0;box-sizing:border-box;\">\n"
+"                    Ystävällisin terveisin,<br>\n"
+"                    <t t-out=\"object.event_id.company_id.name\"></t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.portal_my_events_inherit_certificate
+msgid ""
+"<i class=\"fa fa-download\" aria-hidden=\"true\"/>\n"
+"                        <span class=\"ms-1\">Download certificate</span>"
+msgstr ""
+"<i class=\"fa fa-download\" aria-hidden=\"true\"/>\n"
+"                        <span class=\"ms-1\">Lataa todistus</span>"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "<span> / </span>"
+msgstr "<span> / </span>"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "<span>Date: </span>"
+msgstr "<span>Päivämäärä: </span>"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "<span>Participant: </span>"
+msgstr "<span>Osallistuja: </span>"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "ATTENDANCE CERTIFICATE"
+msgstr "OSALLISTUMISTODISTUS"
+
+#. module: event_certificate_portal
+#: model:ir.actions.report,name:event_certificate_portal.action_report_event_certificate
+msgid "Attendance Certificate"
+msgstr "Osallistumistodistus"
+
+#. module: event_certificate_portal
+#: model:mail.template,subject:event_certificate_portal.email_template_event_certificate
+msgid "Attendance Certificate: {{ object.event_id.name }}"
+msgstr "Osallistumistodistus: {{ object.event_id.name }}"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_registration_view_form_inherit_certificate
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.portal_my_events_inherit_certificate
+msgid "Certificate"
+msgstr "Todistus"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.view_company_form_inherit_event_certificate
+msgid "Certificate Signature"
+msgstr "Todistuksen allekirjoitus"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_duration_text
+msgid "Certificate duration"
+msgstr "Todistuksen kesto"
+
+#. module: event_certificate_portal
+#. odoo-python
+#: code:addons/event_certificate_portal/models/event_registration.py:0
+#, python-format
+msgid "Certificate is not enabled for this event."
+msgstr "Todistukset eivät ole käytössä tässä tapahtumassa."
+
+#. module: event_certificate_portal
+#. odoo-python
+#: code:addons/event_certificate_portal/models/event_registration.py:0
+#, python-format
+msgid "Certificate is only available for attended registrations."
+msgstr "Todistus on saatavilla vain osallistuneille."
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_registration__certificate_sent
+msgid "Certificate sent"
+msgstr "Todistus lähetetty"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_registration__certificate_sent_date
+msgid "Certificate sent at"
+msgstr "Todistus lähetetty"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_res_company__event_certificate_signatory_name
+msgid "Certificate signatory name"
+msgstr "Allekirjoittajan nimi"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_res_company__event_certificate_signatory_title
+msgid "Certificate signatory title"
+msgstr "Allekirjoittajan titteli"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_event_view_form_inherit_certificate
+msgid "Certificates"
+msgstr "Todistukset"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_enabled
+msgid "Certificates enabled"
+msgstr "Todistukset käytössä"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "Company logo"
+msgstr "Yrityksen logo"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,help:event_certificate_portal.field_event_event__certificate_enabled
+msgid "Enable attendance certificates for this event."
+msgstr "Ota osallistumistodistukset käyttöön tälle tapahtumalle."
+
+#. module: event_certificate_portal
+#: model:mail.template,name:event_certificate_portal.email_template_event_certificate
+msgid "Event Certificate Email"
+msgstr "Tapahtuman todistussähköposti"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.view_company_form_inherit_event_certificate
+msgid "Event Certificates"
+msgstr "Tapahtuman todistukset"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_res_company__event_certificate_signature
+msgid "Event certificate signature"
+msgstr "Tapahtumatodistuksen allekirjoitus"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "Event:"
+msgstr "Tapahtuma:"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,help:event_certificate_portal.field_event_event__certificate_duration_text
+msgid "Free text shown on the certificate, for example: 2 x 45 min"
+msgstr "Vapaamuotoinen teksti todistukselle, esim. 2 x 45 min"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,help:event_certificate_portal.field_event_event__certificate_send_email
+msgid ""
+"If enabled, attended registrations receive the certificate automatically "
+"after the event."
+msgstr ""
+"Jos käytössä, osallistuneille lähetetään todistus automaattisesti "
+"tapahtuman jälkeen."
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_lecturer_id
+msgid "Lecturer on certificate"
+msgstr "Kouluttaja todistuksella"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,help:event_certificate_portal.field_event_event__certificate_lecturer_id
+msgid "Lecturer shown on the attendance certificate."
+msgstr "Todistuksella näytettävä kouluttaja"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "Lecturer:"
+msgstr "Kouluttaja:"
+
+#. module: event_certificate_portal
+#: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_send_email
+msgid "Send certificate by email after event"
+msgstr "Lähetä todistus sähköpostilla tapahtuman jälkeen"
+
+#. module: event_certificate_portal
+#: model:ir.actions.server,name:event_certificate_portal.ir_cron_send_event_certificates_ir_actions_server
+msgid "Send event certificates"
+msgstr "Lähetä tapahtuman todistukset"
+
+#. module: event_certificate_portal
+#: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
+msgid "Signature"
+msgstr "Allekirjoitus"
+
+#. module: event_certificate_portal
+#. odoo-python
+#: code:addons/event_certificate_portal/models/event_registration.py:0
+#, python-format
+msgid "You do not have access to this certificate."
+msgstr "Sinulla ei ole oikeuksia tähän todistukseen."

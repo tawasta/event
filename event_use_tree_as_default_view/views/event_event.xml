@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event.action_event_view" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,calendar,form,pivot,graph,activity</field>
+    </record>
+</odoo>

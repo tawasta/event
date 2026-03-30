@@ -1,0 +1,162 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_registration_create_survey_answers_for_registrant
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 17:02+0000\n"
+"PO-Revision-Date: 2026-02-17 17:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#. odoo-python
+#: code:addons/event_registration_create_survey_answers_for_registrant/models/event_registration.py:0
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_event_registration_form_inherit_survey
+#, python-format
+msgid "Add Survey Answers"
+msgstr "Kirjaa kyselyn vastaukset"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid ""
+"After answering you can close that tab. Refreshing this page\n"
+"                    will show the answers now connected to this event registration."
+msgstr ""
+"Vastausten kirjaamisen jälkeen voit sulkea selaimen välilehden. Tämän sivun päivittäminen "
+"näyttää tähän tapahtumaosallistumiseen kytketyt vastaukset."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__available_survey_ids
+msgid "Available Survey"
+msgstr "Valittavat kyselyt"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid ""
+"Choose the survey from the dropdown list below and click\n"
+"                    'Answer survey on behalf of registrant', and the questions will open in a\n"
+"                    new tab."
+msgstr ""
+"Valitse kysely alasvetovalikosta ja klikkaa 'Kirjaa kyselyvastaukset'. Vastausnäkymä "
+"avautuu selaimessa uuteen välilehteen."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid "Create Survey Answer"
+msgstr "Kirjaa kyselyvastaus"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid "Create answer for survey"
+msgstr "Kirjaa kyselyvastaukset"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input__created_on_behalf_of_registrant
+msgid "Created On Behalf Of Registrant"
+msgstr "Luotu osallistujan puolesta"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__create_uid
+msgid "Created by"
+msgstr "Luonut"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__create_date
+msgid "Created on"
+msgstr "Luotu"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model,name:event_registration_create_survey_answers_for_registrant.model_event_registration
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__event_registration_id
+msgid "Event Registration"
+msgstr "Tapahtuman ilmoittautuminen"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Viimeksi päivittänyt"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__write_date
+msgid "Last Updated on"
+msgstr "Viimeksi päivitetty"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,field_description:event_registration_create_survey_answers_for_registrant.field_survey_user_input_creation_wizard__survey_to_answer_id
+msgid "Survey"
+msgstr "Kysely"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#. odoo-python
+#: code:addons/event_registration_create_survey_answers_for_registrant/wizards/survey_user_input_creation_wizard.py:0
+#, python-format
+msgid ""
+"Survey '{survey_name}' participation created on behalf of an event "
+"registrant by {user}."
+msgstr ""
+"Kyselyn '{survey_name}' osallistuminen luotu tapahtumaosallistujan puolesta, "
+"tekijänä {user}."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model,name:event_registration_create_survey_answers_for_registrant.model_survey_user_input
+msgid "Survey User Input"
+msgstr "Käyttäjäsyöte kyselyssä"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model,name:event_registration_create_survey_answers_for_registrant.model_survey_user_input_creation_wizard
+msgid "Survey User Input Creation Wizard"
+msgstr "Kyselyvastausten luonti"
+
+#. module: event_registration_create_survey_answers_for_registrant
+#. odoo-python
+#: code:addons/event_registration_create_survey_answers_for_registrant/wizards/survey_user_input_creation_wizard.py:0
+#, python-format
+msgid ""
+"Survey participation created on behalf of an event registrant by {user}."
+msgstr ""
+"Kyselyn osallistuminen kirjattu tapahtumaosallistujan puolesta, "
+"käyttäjänä {user}."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model:ir.model.fields,help:event_registration_create_survey_answers_for_registrant.field_survey_user_input__created_on_behalf_of_registrant
+msgid ""
+"This participation's answers were filled in backend on behalf of the the "
+"registrant."
+msgstr ""
+"Nämä vastaukset täytetiin backendissä tapahtumaosallistujan puolesta."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#. odoo-python
+#: code:addons/event_registration_create_survey_answers_for_registrant/wizards/survey_user_input_creation_wizard.py:0
+#, python-format
+msgid "This registration has no partner information set."
+msgstr "Osallistumiselta puuttuu kumppanitiedot."
+
+#. module: event_registration_create_survey_answers_for_registrant
+#: model_terms:ir.ui.view,arch_db:event_registration_create_survey_answers_for_registrant.view_survey_user_input_creation_wizard_form
+msgid ""
+"With this tool you can add survey answers on behalf of event registrants."
+msgstr ""
+"Tällä työkalulla voit kirjata kyselyvastauksia tapahtuman osallistujan puolesta."

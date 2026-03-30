@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="event_registration_view_tree_inherit_certificate" model="ir.ui.view">
+        <field name="name">event.registration.tree.inherit.certificate</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='state']" position="after">
+                <field name="certificate_sent" />
+                <field name="certificate_sent_date" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="event_registration_view_form_inherit_certificate" model="ir.ui.view">
+        <field name="name">event.registration.form.inherit.certificate</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="inside">
+                <group string="Certificate">
+                    <field name="certificate_sent" readonly="1" />
+                    <field name="certificate_sent_date" readonly="1" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

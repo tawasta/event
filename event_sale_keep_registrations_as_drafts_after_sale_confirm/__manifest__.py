@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2024 Futural Oy (https://futural.fi)
+#    Copyright 2026 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,23 +19,17 @@
 ##############################################################################
 
 {
-    "name": "Event eCommerce: Force login",
-    "summary": "Force login before registering to an event",
-    "version": "17.0.1.2.0",
-    "category": "Website",
+    "name": "Event Sale: Keep Registrations as Drafts after SO Confirmation",
+    "summary": "Add option to SOs to not autoconfirm event registrations immediately",
+    "version": "17.0.1.0.0",
+    "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "website_event",
-        "website_event_sale",
-        "website_sale_force_login",
-    ],
+    "depends": ["event_sale", "base_view_inheritance_extension"],
     "data": [
-        "views/event_form.xml",
-        "views/website_attendee_details_template.xml",
-        "views/website_registration_template.xml",
+        "views/sale_order_views.xml",
     ],
 }
