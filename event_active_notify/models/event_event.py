@@ -97,8 +97,11 @@ class EventEvent(models.Model):
                     )
                     template.with_context(
                         lang=recipient.lang or self.env.user.lang,
-                        email_to=recipient.partner_id.email,
-                    ).send_mail(event.id, force_send=True)
+                    ).send_mail(
+                        event.id,
+                        force_send=True,
+                        email_values={"email_to": recipient.partner_id.email},
+                    )
                 event.notification_sent = True
                 _logger.info(
                     "event_active_notify: marked notification_sent=True for event id=%s",
@@ -183,8 +186,11 @@ class EventEvent(models.Model):
                 )
                 template.with_context(
                     lang=recipient.lang or self.env.user.lang,
-                    email_to=recipient.partner_id.email,
-                ).send_mail(event.id, force_send=True)
+                ).send_mail(
+                    event.id,
+                    force_send=True,
+                    email_values={"email_to": recipient.partner_id.email},
+                )
             event.ticket_sale_notification_sent = True
             _logger.info(
                 "event_active_notify: marked ticket_sale_notification_sent=True for event id=%s",
