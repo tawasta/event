@@ -72,7 +72,7 @@ class Event(models.Model):
         res = super(Event, self).write(vals)
 
         # Update the ticket sale start dates
-        if "date_begin" or "event_ticket_ids" in vals:
+        if "date_begin" in vals or "event_ticket_ids" in vals:
             for event in self:
                 tickets = ticket_obj.search([("event_id", "=", event.id)])
                 for ticket in tickets:
