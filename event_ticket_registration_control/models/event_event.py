@@ -59,7 +59,10 @@ class Event(models.Model):
 
         # If the event was created as published and it is <= 60 days away,
         # override placeholder ticket sale start based on publish timing
-        if event.is_published and (event.date_begin - fields.Datetime.today()).days <= 60:
+        if (
+            event.is_published
+            and (event.date_begin - fields.Datetime.today()).days <= 60
+        ):
             event._open_ticket_sales()
 
         return event
@@ -176,7 +179,8 @@ class Event(models.Model):
         elif 30 <= days_until_event <= 60:
             start_sale_datetime = fields.Datetime.now() + timedelta(days=14)
             message = _(
-                "Event is 1-2 months away. Updated ticket '%s' sales to open two weeks from publishing."
+                "Event is 1-2 months away. Updated ticket '%s' sales to "
+                "open two weeks from publishing."
             )
         else:
             return
