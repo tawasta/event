@@ -57,10 +57,12 @@ class Event(models.Model):
         # ensure the user was allowed to publish
         event._check_publishing_access()
 
-        # Finally, check if the event just got published by user with higher access:
-        # if yes and the event is < 30 days away, override the ticket sales to start
-        # immediately
-        if event.is_published and event.requires_additional_rights_to_publish:
+        # If the event was created as published and it is <= 60 days away,
+        # override placeholder ticket sale start based on publish timing
+        if (
+            event.is_published
+            and (event.date_begin - fields.Datetime.today()).days <= 60
+        ):
             event._open_ticket_sales()
 
         return event
@@ -90,12 +92,11 @@ class Event(models.Model):
             for event in self:
                 event._check_publishing_access()
 
-        # Finally, check if the event just got published by user with higher access:
-        # if yes and the event is < 30 days away, override the ticket sales to start
-        # immediately
+        # If event gets published and it is <= 60 days away,
+        # override placeholder ticket sale start based on publish timing
         if "is_published" in vals and vals["is_published"]:
             for event in self:
-                if event.requires_additional_rights_to_publish:
+                if (event.date_begin - fields.Datetime.today()).days <= 60:
                     event._open_ticket_sales()
 
         return res
@@ -108,7 +109,10 @@ class Event(models.Model):
         if days_until_event > 60:
             return event_start - timedelta(days=30)
         elif 30 <= days_until_event <= 60:
-            return event_start - timedelta(days=14)
+            # This is a placeholder start date - when the event that is 1-2 months away
+            # gets published, the registration start will be set to two weeks from
+            # publishing
+            return event_start - timedelta(days=0)
         else:
             # This is a placeholder start date - when the event that is this close
             # gets published, the registration start will be set to the date of
@@ -159,18 +163,29 @@ class Event(models.Model):
             )
 
     def _open_ticket_sales(self):
-        # Set event's all tickets' sales to start now
         self.ensure_one()
 
         ticket_obj = self.env["event.event.ticket"]
-
         tickets = ticket_obj.search([("event_id", "=", self.id)])
-        for ticket in tickets:
-            ticket.sudo().write({"start_sale_datetime": fields.Datetime.now()})
 
-            self.message_post(
-                body=_(
-                    "Event is less than 30 days away. Updated ticket '%s' sales to open now."
-                )
-                % ticket.name
+        today = fields.Datetime.today()
+        days_until_event = (self.date_begin - today).days
+
+        if days_until_event < 30:
+            start_sale_datetime = fields.Datetime.now()
+            message = _(
+                "Event is less than 30 days away. Updated ticket '%s' sales to open now."
             )
+        elif 30 <= days_until_event <= 60:
+            start_sale_datetime = fields.Datetime.now() + timedelta(days=14)
+            message = _(
+                "Event is 1-2 months away. Updated ticket '%s' sales to "
+                "open two weeks from publishing."
+            )
+        else:
+            return
+
+        for ticket in tickets:
+            ticket.sudo().write({"start_sale_datetime": start_sale_datetime})
+
+            self.message_post(body=message % ticket.name)
