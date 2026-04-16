@@ -18,9 +18,11 @@
     </record>
 
     <template id="event_certificate_pdf">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="reg">
-                <t t-call="event_certificate_portal.event_certificate_page" />
+        <t t-foreach="docs" t-as="reg">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-call="event_certificate_portal.event_certificate_page" />
+                </div>
             </t>
         </t>
     </template>

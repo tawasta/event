@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20251222\n"
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-27 08:11+0000\n"
-"PO-Revision-Date: 2026-03-27 08:11+0000\n"
+"POT-Creation-Date: 2026-04-16 10:34+0000\n"
+"PO-Revision-Date: 2026-04-16 10:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr ""
 #. module: event_certificate_portal
 #: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
 msgid "<span> / </span>"
-msgstr "<span> / </span>"
+msgstr ""
 
 #. module: event_certificate_portal
 #: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
@@ -123,12 +123,12 @@ msgstr "Todistus"
 #. module: event_certificate_portal
 #: model_terms:ir.ui.view,arch_db:event_certificate_portal.view_company_form_inherit_event_certificate
 msgid "Certificate Signature"
-msgstr "Todistuksen allekirjoitus"
+msgstr "Allekirjoitus todistuksella"
 
 #. module: event_certificate_portal
 #: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_duration_text
 msgid "Certificate duration"
-msgstr "Todistuksen kesto"
+msgstr "Kesto todistuksella"
 
 #. module: event_certificate_portal
 #. odoo-python
@@ -175,6 +175,11 @@ msgid "Certificates enabled"
 msgstr "Todistukset käytössä"
 
 #. module: event_certificate_portal
+#: model:ir.model,name:event_certificate_portal.model_res_company
+msgid "Companies"
+msgstr "Yritykset"
+
+#. module: event_certificate_portal
 #: model_terms:ir.ui.view,arch_db:event_certificate_portal.event_certificate_page
 msgid "Company logo"
 msgstr "Yrityksen logo"
@@ -185,6 +190,11 @@ msgid "Enable attendance certificates for this event."
 msgstr "Ota osallistumistodistukset käyttöön tälle tapahtumalle."
 
 #. module: event_certificate_portal
+#: model:ir.model,name:event_certificate_portal.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_certificate_portal
 #: model:mail.template,name:event_certificate_portal.email_template_event_certificate
 msgid "Event Certificate Email"
 msgstr "Tapahtuman todistussähköposti"
@@ -193,6 +203,11 @@ msgstr "Tapahtuman todistussähköposti"
 #: model_terms:ir.ui.view,arch_db:event_certificate_portal.view_company_form_inherit_event_certificate
 msgid "Event Certificates"
 msgstr "Tapahtuman todistukset"
+
+#. module: event_certificate_portal
+#: model:ir.model,name:event_certificate_portal.model_event_registration
+msgid "Event Registration"
+msgstr "Tapahtuman ilmoittautuminen"
 
 #. module: event_certificate_portal
 #: model:ir.model.fields,field_description:event_certificate_portal.field_res_company__event_certificate_signature
@@ -215,8 +230,8 @@ msgid ""
 "If enabled, attended registrations receive the certificate automatically "
 "after the event."
 msgstr ""
-"Jos käytössä, osallistuneille lähetetään todistus automaattisesti "
-"tapahtuman jälkeen."
+"Jos käytössä, osallistuneille lähetetään todistus automaattisesti tapahtuman"
+" jälkeen."
 
 #. module: event_certificate_portal
 #: model:ir.model.fields,field_description:event_certificate_portal.field_event_event__certificate_lecturer_id
