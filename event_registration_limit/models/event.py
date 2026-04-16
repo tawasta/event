@@ -1,5 +1,6 @@
 from odoo import api, models
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class EventRegistration(models.Model):
     _inherit = "event.registration"
@@ -26,6 +27,14 @@ class EventRegistration(models.Model):
 
     def _reject_other_registrations(self, confirmed_registration):
         """Hylkää muut ilmoittautumiset saman koetyypin perusteella."""
+        _logger.info(
+            "CHECK CANCEL: confirmed id=%s partner_id=%s registration_partner_id=%s survey=%s event=%s",
+            confirmed_registration.id,
+            confirmed_registration.partner_id.id,
+            confirmed_registration.registration_partner_id.id,
+            confirmed_registration.registration_survey_id.id,
+            confirmed_registration.event_id.id,
+        )
         other_registrations = (
             self.env["event.registration"]
             .sudo()
@@ -46,5 +55,10 @@ class EventRegistration(models.Model):
                     ("state", "in", ["draft"]),
                 ]
             )
+        )
+        _logger.info(
+            "CANCELLING IDS for confirmed %s: %s",
+            confirmed_registration.id,
+            other_registrations.ids,
         )
         other_registrations.write({"state": "cancel"})
