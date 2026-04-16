@@ -1,6 +1,9 @@
-from odoo import api, models
 import logging
+
+from odoo import api, models
+
 _logger = logging.getLogger(__name__)
+
 
 class EventRegistration(models.Model):
     _inherit = "event.registration"
@@ -28,7 +31,7 @@ class EventRegistration(models.Model):
     def _reject_other_registrations(self, confirmed_registration):
         """Hylkää muut ilmoittautumiset saman koetyypin perusteella."""
         _logger.info(
-            "CHECK CANCEL: confirmed id=%s partner_id=%s registration_partner_id=%s survey=%s event=%s",
+            "CHECK CANCEL: confirmed id=%s partner_id=%s registration_partner_id=%s survey=%s event=%s",  # NOQA
             confirmed_registration.id,
             confirmed_registration.partner_id.id,
             confirmed_registration.registration_partner_id.id,
