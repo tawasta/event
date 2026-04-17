@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_layout_private_event_noindex" inherit_id="website.layout">
+        <xpath expr="//head" position="inside">
+            <t t-if="private_event_noindex">
+                <meta name="robots" content="noindex,nofollow,noarchive"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>
