@@ -1,20 +1,18 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from werkzeug.datastructures import OrderedMultiDict
 
-from odoo import http, _
-from odoo.addons.website.controllers.main import QueryURL
-from odoo.addons.website_event.controllers.main import WebsiteEventController
+from odoo import _, http
 from odoo.http import request
 from odoo.osv import expression
+
+from odoo.addons.website.controllers.main import QueryURL
+from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 _logger = logging.getLogger(__name__)
 
 
 class WebsiteEventPrivateController(WebsiteEventController):
-
     @http.route(
         [
             "/private-event",
@@ -73,9 +71,13 @@ class WebsiteEventPrivateController(WebsiteEventController):
         event_details = details[0]
         events = event_details.get("results", Event)
 
-        events = events[(page - 1) * step:page * step]
+        events = events[(page - 1) * step : page * step]
 
-        domain_search = [("name", "ilike", fuzzy_search_term or searches["search"])] if searches["search"] else []
+        domain_search = (
+            [("name", "ilike", fuzzy_search_term or searches["search"])]
+            if searches["search"]
+            else []
+        )
 
         no_date_domain = event_details["no_date_domain"]
         dates = event_details["dates"]
@@ -93,10 +95,15 @@ class WebsiteEventPrivateController(WebsiteEventController):
             groupby="country_id",
             orderby="country_id",
         )
-        countries.insert(0, {
-            "country_id_count": sum([int(country["country_id_count"]) for country in countries]),
-            "country_id": ("all", _("All Countries"))
-        })
+        countries.insert(
+            0,
+            {
+                "country_id_count": sum(
+                    [int(country["country_id_count"]) for country in countries]
+                ),
+                "country_id": ("all", _("All Countries")),
+            },
+        )
 
         search_tags = event_details["search_tags"]
         current_date = event_details["current_date"]
@@ -107,7 +114,9 @@ class WebsiteEventPrivateController(WebsiteEventController):
             current_type = SudoEventType.browse(int(searches["type"]))
 
         if searches["country"] != "all" and searches["country"] != "online":
-            current_country = request.env["res.country"].browse(int(searches["country"]))
+            current_country = request.env["res.country"].browse(
+                int(searches["country"])
+            )
 
         pager = website.pager(
             url="/private-event",
@@ -118,12 +127,17 @@ class WebsiteEventPrivateController(WebsiteEventController):
             scope=5,
         )
 
-        keep = QueryURL("/private-event", **{
-            key: value for key, value in searches.items() if (
-                key == "search" or
-                (value != "upcoming" if key == "date" else value != "all")
-            )
-        })
+        keep = QueryURL(
+            "/private-event",
+            **{
+                key: value
+                for key, value in searches.items()
+                if (
+                    key == "search"
+                    or (value != "upcoming" if key == "date" else value != "all")
+                )
+            },
+        )
 
         searches["search"] = fuzzy_search_term or search
 
@@ -133,12 +147,14 @@ class WebsiteEventPrivateController(WebsiteEventController):
             "current_type": current_type,
             "event_ids": events,
             "dates": dates,
-            "categories": request.env["event.tag.category"].search([
-                ("is_published", "=", True),
-                "|",
-                ("website_id", "=", website.id),
-                ("website_id", "=", False)
-            ]),
+            "categories": request.env["event.tag.category"].search(
+                [
+                    ("is_published", "=", True),
+                    "|",
+                    ("website_id", "=", website.id),
+                    ("website_id", "=", False),
+                ]
+            ),
             "countries": countries,
             "pager": pager,
             "searches": searches,
@@ -158,7 +174,7 @@ class WebsiteEventPrivateController(WebsiteEventController):
         return response
 
     @http.route(
-        ['''/event/<model("event.event"):event>'''],
+        ["""/event/<model("event.event"):event>"""],
         type="http",
         auth="public",
         website=True,
@@ -203,8 +219,8 @@ class WebsiteEventPrivateController(WebsiteEventController):
         return values
 
     @http.route(
-        ['''/event/<model("event.event"):event>/register'''],
-        type='http',
+        ["""/event/<model("event.event"):event>/register"""],
+        type="http",
         auth="public",
         website=True,
         sitemap=False,

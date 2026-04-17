@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from odoo import api, models
@@ -45,7 +43,7 @@ class EventEvent(models.Model):
             if (
                 isinstance(item, list)
                 and len(item) == 1
-                and isinstance(item[0], (list, tuple))
+                and isinstance(item[0], list | tuple)
                 and len(item[0]) == 3
                 and item[0][0] == "is_private_event"
             ):
