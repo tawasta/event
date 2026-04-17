@@ -11,14 +11,55 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 
 _logger = logging.getLogger(__name__)
 
+# Use a descriptive but less obvious route for the private event selection page.
+# The goal is not security-through-obscurity alone, but to avoid exposing an
+# unnecessarily obvious /private-event endpoint.
+PRIVATE_EVENT_ROUTE = "/invited-registration/event-selection"
+
 
 class WebsiteEventPrivateController(WebsiteEventController):
+    def _redirect_private_user_to_login(self):
+        """Redirect anonymous visitors to login while preserving the current URL.
+
+        This is used for private event endpoints that must only be available to
+        authenticated users. After login, Odoo redirects the user back to the
+        original target URL.
+        """
+        redirect_url = request.httprequest.full_path or request.httprequest.path
+        if redirect_url.endswith("?"):
+            redirect_url = redirect_url[:-1]
+        return request.redirect("/web/login?redirect=%s" % redirect_url)
+
+    def _ensure_private_event_access(self, event):
+        """Allow normal public events to behave as in core, but block anonymous
+        access to private events.
+
+        The private listing itself is already protected with auth="user", but
+        direct access to event detail, menu pages, register endpoints and
+        registration flows must also be guarded in case someone knows the URL.
+        """
+        if event.is_private_event and request.env.user._is_public():
+            return self._redirect_private_user_to_login()
+        return False
+
+    def _apply_private_headers(self, response):
+        """Apply SEO and caching protection headers for private pages.
+
+        X-Robots-Tag discourages indexing, while the cache headers reduce the
+        chance of private pages being stored by browsers or intermediary caches.
+        """
+        response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive"
+        response.headers[
+            "Cache-Control"
+        ] = "private, no-store, no-cache, max-age=0, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+
     @http.route(
         [
-            "/private-event",
-            "/private-event/page/<int:page>",
-            "/private-events",
-            "/private-events/page/<int:page>",
+            PRIVATE_EVENT_ROUTE,
+            PRIVATE_EVENT_ROUTE + "/page/<int:page>",
         ],
         type="http",
         auth="user",
@@ -35,10 +76,9 @@ class WebsiteEventPrivateController(WebsiteEventController):
         search domain and return only records marked as private.
 
         The route is excluded from the sitemap and the response is marked with
-        X-Robots-Tag / noindex semantics because this listing must not be promoted
-        to external search engines.
+        noindex and no-cache semantics because this listing must not be publicly
+        discoverable or cached aggressively.
         """
-
         Event = request.env["event.event"].with_context(private_event_listing=True)
         SudoEventType = request.env["event.type"].sudo()
 
@@ -70,7 +110,6 @@ class WebsiteEventPrivateController(WebsiteEventController):
 
         event_details = details[0]
         events = event_details.get("results", Event)
-
         events = events[(page - 1) * step : page * step]
 
         domain_search = (
@@ -99,7 +138,7 @@ class WebsiteEventPrivateController(WebsiteEventController):
             0,
             {
                 "country_id_count": sum(
-                    [int(country["country_id_count"]) for country in countries]
+                    int(country["country_id_count"]) for country in countries
                 ),
                 "country_id": ("all", _("All Countries")),
             },
@@ -119,7 +158,7 @@ class WebsiteEventPrivateController(WebsiteEventController):
             )
 
         pager = website.pager(
-            url="/private-event",
+            url=PRIVATE_EVENT_ROUTE,
             url_args=searches,
             total=event_count,
             page=page,
@@ -128,7 +167,7 @@ class WebsiteEventPrivateController(WebsiteEventController):
         )
 
         keep = QueryURL(
-            "/private-event",
+            PRIVATE_EVENT_ROUTE,
             **{
                 key: value
                 for key, value in searches.items()
@@ -163,6 +202,8 @@ class WebsiteEventPrivateController(WebsiteEventController):
             "search_count": event_count,
             "original_search": fuzzy_search_term and search,
             "website": website,
+            # This flag is consumed by the inherited website layout template to
+            # inject a robots meta tag into the HTML head.
             "private_event_noindex": True,
         }
 
@@ -170,8 +211,7 @@ class WebsiteEventPrivateController(WebsiteEventController):
             values["canonical_params"] = OrderedMultiDict([("date", "old")])
 
         response = request.render("website_event.index", values)
-        response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive"
-        return response
+        return self._apply_private_headers(response)
 
     @http.route(
         ["""/event/<model("event.event"):event>"""],
@@ -183,18 +223,42 @@ class WebsiteEventPrivateController(WebsiteEventController):
     def event(self, event, **post):
         """Extend the core event redirect endpoint without replacing its behavior.
 
-        In website_event, this route redirects the visitor either to the first
-        event menu page or to the registration page. Here the method intentionally
-        delegates the standard routing logic to `super()` and only appends SEO
-        protection headers when the target event is marked as private.
-
-        This keeps the core navigation flow untouched while ensuring that private
-        event entry URLs are discouraged from being indexed.
+        For public events, core behavior is preserved. For private events, access
+        is restricted to authenticated users before delegating to the standard
+        redirect logic.
         """
+        private_redirect = self._ensure_private_event_access(event)
+        if private_redirect:
+            return private_redirect
+
         response = super().event(event, **post)
 
         if event.is_private_event:
-            response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive"
+            return self._apply_private_headers(response)
+
+        return response
+
+    @http.route(
+        ["""/event/<model("event.event"):event>/page/<path:page>"""],
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+    )
+    def event_page(self, event, page, **post):
+        """Protect custom event menu pages for private events.
+
+        Event subpages can expose content even when the main listing is private,
+        so the same access control must be applied here as well.
+        """
+        private_redirect = self._ensure_private_event_access(event)
+        if private_redirect:
+            return private_redirect
+
+        response = super().event_page(event, page, **post)
+
+        if event.is_private_event:
+            return self._apply_private_headers(response)
 
         return response
 
@@ -206,10 +270,6 @@ class WebsiteEventPrivateController(WebsiteEventController):
         preparation logic and only enriches the rendering values for private
         events so that the inherited website layout can inject a robots meta tag
         into the final HTML page.
-
-        Using this helper override is the most Odoo-friendly approach because the
-        extra value is added at qcontext preparation time, instead of duplicating
-        the whole registration controller rendering logic.
         """
         values = super()._prepare_event_register_values(event, **post)
 
@@ -228,16 +288,16 @@ class WebsiteEventPrivateController(WebsiteEventController):
     def event_register(self, event, **post):
         """Extend the standard event registration page response for private events.
 
-        The core website_event route already renders the registration page and is
-        not included in the sitemap. This override keeps that rendering logic via
-        `super()` and adds an X-Robots-Tag header when the event is private.
-
-        Combined with `_prepare_event_register_values()`, this ensures that the
-        private registration page is protected both at HTTP header level and at
-        HTML meta level.
+        The core route rendering is preserved, but private events require login
+        and receive additional privacy headers.
         """
+        private_redirect = self._ensure_private_event_access(event)
+        if private_redirect:
+            return private_redirect
+
         response = super().event_register(event, **post)
+
         if event.is_private_event:
-            response.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive"
+            return self._apply_private_headers(response)
 
         return response
