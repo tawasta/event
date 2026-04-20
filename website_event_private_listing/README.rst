@@ -13,8 +13,8 @@ their own URL. The module reuses the standard website event frontend logic
 (filters, search, pager, templates) while restricting the dataset to events
 marked as private.
 
-In addition, the module applies SEO protection (noindex) and restricts access
-to authenticated users, ensuring that private events are not publicly discoverable.
+In addition, the module applies SEO protection (noindex), disables caching for
+private pages and restricts access to authenticated users.
 
 
 Configuration
@@ -37,8 +37,8 @@ Usage
 
 Private events are exposed through a dedicated route:
 
-- /private-event
-- /private-events
+- /invited-registration/event-selection
+- /invited-registration/event-selection/page/<page>
 
 Key behavior:
 
@@ -50,21 +50,35 @@ Key behavior:
 Public event listing (/event) remains unchanged and does not show private events
 (if another module excludes them).
 
+Private events:
+
+- Require login for all main flows:
+  - /event/<event>
+  - /event/<event>/page/<page>
+  - /event/<event>/register
+
+- Anonymous users are redirected to login and returned back to the original URL
+
+
 SEO protection:
 
-- Private listing includes HTTP header:
+- Private pages include HTTP headers:
 
       X-Robots-Tag: noindex, nofollow, noarchive
+      Cache-Control: private, no-store, no-cache, max-age=0, must-revalidate
+      Pragma: no-cache
+      Expires: 0
 
-- Private listing includes HTML meta tag:
+- Private pages include HTML meta tag:
 
       <meta name="robots" content="noindex,nofollow,noarchive"/>
 
-- Event redirect (/event/<event>) adds noindex header for private events
+- Applied to:
+  - Private listing
+  - Event detail pages (private only)
+  - Event subpages (private only)
+  - Registration pages (private only)
 
-- Registration page (/event/<event>/register):
-  - inherits values to inject ``private_event_noindex=True``
-  - adds both HTTP header and meta robots protection
 
 Model behavior:
 
@@ -91,9 +105,7 @@ Known issues / Roadmap
   If stricter access is needed (e.g. per partner, group, or token-based),
   additional access rules or controllers should be implemented.
 
-- Direct URLs to private events are still technically accessible if known.
-  The module prevents indexing but does not enforce access restrictions
-  on individual event pages.
+- The route is intentionally non-obvious, but not a security mechanism.
 
 Credits
 =======
