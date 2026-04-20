@@ -14,7 +14,13 @@ Event Registration: Create Survey Answers for Registrant
 
 Configuration
 =============
-* None needed
+* Ensure that the Survey Stage that the survey answer lands in
+  by default (e.g. 'In Progress') has the 'Allow Answer Edit' option toggled.
+* Ensure that the survey has 'Users can go back' checkbox set
+
+  * You'll likely also want to set survey paging to 
+    'One page with all the questions' but this needs to be before after setting
+    the above checkbox, or else the paging option gets hidden from UI.
 
 Usage
 =====
