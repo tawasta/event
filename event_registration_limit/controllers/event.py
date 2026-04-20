@@ -36,9 +36,7 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                 )
 
                 registered_dog_ids = set(
-                    existing_registrations.mapped(
-                        "registration_partner_id"
-                    ).ids
+                    existing_registrations.mapped("registration_partner_id").ids
                 )
 
                 if set(user_dog_ids).issubset(registered_dog_ids):
@@ -52,9 +50,9 @@ class CustomWebsiteEventRegistrationController(WebsiteEventController):
                 registration_disabled = True
                 error_message = "Sinulla ei ole koiria lisättynä."
 
-        values = super(
-            CustomWebsiteEventRegistrationController, self
-        ).event_register(event, **post)
+        values = super(CustomWebsiteEventRegistrationController, self).event_register(
+            event, **post
+        )
 
         values.qcontext.update(
             {
