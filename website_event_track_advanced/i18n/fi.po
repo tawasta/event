@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0-20250428\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 11:20+0000\n"
-"PO-Revision-Date: 2025-06-11 11:20+0000\n"
+"POT-Creation-Date: 2026-04-17 05:22+0000\n"
+"PO-Revision-Date: 2026-04-17 05:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -160,19 +160,9 @@ msgstr "<i class=\"fa fa-star\"/> Arvioi esitys"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_review
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
 msgid "<option value=\"\">Select...</option>"
 msgstr "<option value=\"\">Valitse...</option>"
-
-#. module: website_event_track_advanced
-#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
-msgid ""
-"<select name=\"einvoice_operator_id\" id=\"einvoice_operator_id\" placeholder=\"Einvoice operator...\" class=\"form-control\" autocomplete=\"off\" disabled=\"1\">\n"
-"\n"
-"                            </select>"
-msgstr ""
-"<select name=\"einvoice_operator_id\" id=\"einvoice_operator_id\" placeholder=\"Verkkolaskuoperaattori...\" class=\"form-control\" autocomplete=\"off\" disabled=\"1\">\n"
-"\n"
-"                            </select>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
@@ -1043,15 +1033,15 @@ msgstr "Tauko"
 #. odoo-python
 #: code:addons/website_event_track_advanced/models/event_event.py:0
 #, python-format
-msgid "Break: %s hours"
-msgstr "Tauko: %s tuntia"
+msgid "Break: %(hours)s hours %(minutes)s minutes"
+msgstr "Tauko: %(hours)s tuntia ja %(minutes)s minuuttia"
 
 #. module: website_event_track_advanced
 #. odoo-python
 #: code:addons/website_event_track_advanced/models/event_event.py:0
 #, python-format
-msgid "Break: %s hours %s minutes"
-msgstr "Tauko: %s tuntia ja %s minuuttia"
+msgid "Break: %s hours"
+msgstr "Tauko: %s tuntia"
 
 #. module: website_event_track_advanced
 #. odoo-python
@@ -1302,6 +1292,11 @@ msgid "Edicode"
 msgstr "Verkkolaskuosoite"
 
 #. module: website_event_track_advanced
+#: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_workshop
+msgid "Einvoice operator..."
+msgstr "Verkkolaskuoperaattori..."
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_reviewer__email
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_speaker__email
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
@@ -1435,6 +1430,7 @@ msgid "External registration link"
 msgstr "Ulkoinen rekisteröintilinkki"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_info
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_extra_info
 msgid "Extra Info"
 msgstr "Lisätiedot"
@@ -1445,15 +1441,14 @@ msgid "Extra Info..."
 msgstr "Lisätiedot..."
 
 #. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_info
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_materials
+msgid "Extra Materials"
+msgstr "Lisämateriaalit"
+
+#. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
 msgid "Extra info"
 msgstr "Lisätiedot"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__extra_materials
-msgid "Extra materials"
-msgstr "Lisämateriaalit"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track__extra_materials
@@ -1601,12 +1596,12 @@ msgstr "On arvioitu"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_privacy_activity__is_required
-msgid "Is required"
+msgid "Is Required"
 msgstr "On pakollinen"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__is_reviewer
-msgid "Is reviewer"
+msgid "Is Reviewer"
 msgstr "On arvioija"
 
 #. module: website_event_track_advanced
@@ -1757,7 +1752,7 @@ msgstr "Järjestäjä"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__organizer_contact
-msgid "Organizer contact"
+msgid "Organizer Contact"
 msgstr "Järjestäjän kontakti"
 
 #. module: website_event_track_advanced
@@ -1922,6 +1917,7 @@ msgstr "Esittäjät"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__privacy_ids
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__privacy_id
 msgid "Privacies"
 msgstr "Sovellettavat tietosuojatoimenpiteet"
 
@@ -1991,8 +1987,8 @@ msgstr "Arvosanat"
 #. odoo-python
 #: code:addons/website_event_track_advanced/models/event_track_rating.py:0
 #, python-format
-msgid "Rating for track {} by reviewer {} already exists."
-msgstr "Arviointi esitykselle {} arvioijalta {} on jo olemassa."
+msgid "Rating for track %(track)s by reviewer %(reviewer)s already exists."
+msgstr "Arviointi esitykselle %(track)s arvioijalta %(reviewer)s on jo olemassa."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_kanban_advanced
@@ -2179,6 +2175,23 @@ msgid "Session Schedule..."
 msgstr "Session aikataulu..."
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__show_in_agenda
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__show_in_agenda
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_agenda
+msgid "Show In Agenda"
+msgstr "Näytä ohjelmakartassa"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_privacy_activity__show_in_event
+msgid "Show In Event"
+msgstr "Näytä tapahtumassa"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_proposals
+msgid "Show In Proposals"
+msgstr "Näytä esitysehdotuksessa"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__show_track_twitter_hashtags
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_type__show_track_twitter_hashtags
 msgid "Show X hashtag"
@@ -2191,22 +2204,6 @@ msgid "Show X hashtag in agenda"
 msgstr "Näytä X-hashtag ohjelmakartassa"
 
 #. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_location__show_in_agenda
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_agenda
-msgid "Show in agenda"
-msgstr "Näytä ohjelmakartassa"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_privacy_activity__show_in_event
-msgid "Show in event"
-msgstr "Näytä tapahtumassa"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_proposals
-msgid "Show in proposals"
-msgstr "Näytä esitysehdotuksessa"
-
-#. module: website_event_track_advanced
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__show_in_proposals
 msgid "Show in proposals form"
 msgstr "Näytä esitysehdotuslomakkeella"
@@ -2216,11 +2213,6 @@ msgstr "Näytä esitysehdotuslomakkeella"
 #: model:ir.model.fields,help:website_event_track_advanced.field_event_track_type__show_in_agenda
 msgid "Show in website agenda"
 msgstr "Näytä verkkosivun ohjelmakartassa"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__show_in_agenda
-msgid "Shown in agenda"
-msgstr "Näytä ohjelmakartassa"
 
 #. module: website_event_track_advanced
 #. odoo-python
@@ -2298,6 +2290,7 @@ msgid "Tags..."
 msgstr "Tunnisteet..."
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_track_form_advanced
 msgid "Target Group"
 msgstr "Kohderyhmä"
@@ -2305,6 +2298,11 @@ msgstr "Kohderyhmä"
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
 msgid "Target Group Details"
+msgstr "Kohderyhmän tiedot"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group_info
+msgid "Target Group Info"
 msgstr "Kohderyhmän tiedot"
 
 #. module: website_event_track_advanced
@@ -2318,16 +2316,6 @@ msgstr "Kohderyhmän tiedot..."
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.view_event_form_track
 msgid "Target Groups"
 msgstr "Kohderyhmät"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group
-msgid "Target group"
-msgstr "Kohderyhmä"
-
-#. module: website_event_track_advanced
-#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__target_group_info
-msgid "Target group info"
-msgstr "Kohderyhmän tiedot"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_targetgroup_info
