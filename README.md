@@ -39,6 +39,7 @@ addon | version | maintainers | summary
 [event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
+[event_single_ticket_purchase](event_single_ticket_purchase/) | 17.0.1.0.0 |  | Event Single Ticket Purchase
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
 [event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.1 |  | Show event tickets only to users matching a partner domain.
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each

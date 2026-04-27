@@ -33,11 +33,13 @@ publicWidget.registry.SingleTicketPurchaseLimit = publicWidget.Widget.extend({
         this.$("select[name^='nb_register-']").each(function () {
             const currentValue = parseInt(this.value || "0");
 
-            $(this).find("option").each(function () {
-                if (parseInt(this.value || "0") > 1) {
-                    $(this).remove();
-                }
-            });
+            $(this)
+                .find("option")
+                .each(function () {
+                    if (parseInt(this.value || "0") > 1) {
+                        $(this).remove();
+                    }
+                });
 
             this.value = currentValue > 0 ? "1" : "0";
         });
