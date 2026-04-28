@@ -5,17 +5,35 @@
 =================
 Website My Events
 =================
-* Add the events button to the my account view, which allows the user to view their own
-  registrations in portal
-* Also allows you to cancel your registration from portal
+This module adds an **Events** entry to the customer portal.
+
+Portal users can view their own event registrations from **My Account**. The
+registration list supports the standard Odoo portal controls:
+
+* pagination
+* sorting
+* grouping
+* search
+* date filtering
+* registration cancellation from the portal
+
+The portal view only shows registrations linked to the current user's partner
+and excludes draft registrations.
 
 Configuration
 =============
-\-
+No configuration is needed.
 
 Usage
 =====
-\-
+To use this module:
+
+#. Install the module.
+#. Go to the website portal as a portal user.
+#. Open **My Account**.
+#. Click **Events**.
+#. View, search, sort, group, or filter your event registrations.
+#. Cancel a registration from the portal when the event allows cancellation.
 
 Known issues / Roadmap
 ======================
