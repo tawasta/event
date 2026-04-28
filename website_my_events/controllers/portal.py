@@ -59,6 +59,14 @@ class PortalEvent(CustomerPortal):
         group = self._get_event_groupby_mapping().get(groupby)
         return f"{group}, {order}" if group else order
 
+    def _get_event_state_labels(self):
+        return {
+            "open": _("Confirmed"),
+            "draft": _("Unconfirmed"),
+            "done": _("Attended"),
+            "cancel": _("Cancelled"),
+        }
+
     def _get_event_search_domain(self, search_in, search):
         search_domain = []
 
@@ -69,9 +77,30 @@ class PortalEvent(CustomerPortal):
             search_domain.append([("event_ticket_id.name", "ilike", search)])
 
         if search_in in ("status", "all"):
-            search_domain.append([("state", "ilike", search)])
+            search_lower = search.lower()
+            matched_states = []
 
-        return OR(search_domain)
+            for state, label in self._get_event_state_labels().items():
+                if search_lower in label.lower() or search_lower in state.lower():
+                    matched_states.append(state)
+
+            if matched_states:
+                search_domain.append([("state", "in", matched_states)])
+            else:
+                state_selection = dict(
+                    request.env["event.registration"]
+                    ._fields["state"]
+                    ._description_selection(request.env)
+                )
+                matched_states = [
+                    state
+                    for state, label in state_selection.items()
+                    if search_lower in label.lower()
+                ]
+                if matched_states:
+                    search_domain.append([("state", "in", matched_states)])
+
+        return OR(search_domain) if search_domain else []
 
     @http.route(
         ["/my/events", "/my/events/page/<int:page>"],
@@ -93,7 +122,6 @@ class PortalEvent(CustomerPortal):
         values = self._prepare_portal_layout_values()
         event_obj = request.env["event.registration"]
 
-        # Avoid error if the user does not have access.
         if not event_obj.check_access_rights("read", raise_exception=False):
             return request.redirect("/my")
 
