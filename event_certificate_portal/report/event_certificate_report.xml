@@ -99,6 +99,17 @@
                         <span t-esc="duration_text" />
                     </t>
                 </div>
+                <t
+                    t-set="program_text"
+                    t-value="event.certificate_program_text or ''"
+                />
+                <div t-if="program_text" style="margin-top: 30px;">
+                    <div>Training programme:</div>
+                    <div
+                        style="margin-top: 4px; white-space: pre-line;"
+                        t-esc="program_text"
+                    />
+                </div>
 
                 <div t-if="lecturer_name" style="margin-top: 38px;">
                     <div>Lecturer:</div>

@@ -16,6 +16,9 @@
                             <field name="certificate_duration_text" />
                             <field name="certificate_lecturer_id" />
                         </group>
+                        <group>
+                            <field name="certificate_program_text" />
+                        </group>
                     </group>
                 </page>
             </xpath>

@@ -26,3 +26,9 @@ class EventEvent(models.Model):
         string="Lecturer on certificate",
         help="Lecturer shown on the attendance certificate.",
     )
+
+    certificate_program_text = fields.Text(
+        string="Training programme on certificate",
+        help="Multiline programme text shown on the attendance certificate.",
+        tracking=True,
+    )
