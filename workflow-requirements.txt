@@ -1,2 +1,2 @@
 https://github.com/tawasta/social/archive/refs/heads/19.0.zip#subdirectory=mail_template_name_translatable
-https://github.com/tawasta/oca-backports/archive/refs/heads/19.0#subdirectory=email_template_qweb
+https://github.com/tawasta/oca-backports/archive/refs/heads/19.0.zip#subdirectory=email_template_qweb
