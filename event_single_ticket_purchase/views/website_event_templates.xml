@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="modal_ticket_registration_single_ticket_notice"
+        inherit_id="website_event.modal_ticket_registration"
+        priority="100"
+    >
+        <xpath
+            expr="//form[@id='registration_form']/div[@id='o_wevent_tickets']"
+            position="before"
+        >
+            <div class="alert alert-info mb-3" role="status">
+                You can select only one ticket. If you choose another ticket type, the previous selection will be automatically removed.
+            </div>
+        </xpath>
+    </template>
+</odoo>
