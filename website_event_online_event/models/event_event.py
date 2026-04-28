@@ -23,7 +23,7 @@ import logging
 import pytz
 import werkzeug.urls
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 GOOGLE_CALENDAR_URL = "https://www.google.com/calendar/render?"
@@ -99,7 +99,7 @@ class EventEvent(models.Model):
             elif event.is_online_event:
                 cal_event.add("location").value = "Online"
             if event.video_conference_link:
-                video_link = _(
+                video_link = self.env._(
                     "Join the video conference: %s", event.sudo().video_conference_link
                 )
                 cal_event.add("description").value = video_link
@@ -121,13 +121,13 @@ class EventEvent(models.Model):
                 location=self.sudo().address_id.contact_address.replace("\n", " ")
             )
         elif self.is_online_event:
-            params.update(location=_("Online"))
+            params.update(location=self.env._("Online"))
         if self.video_conference_link:
             params.update(
-                details=_("Join the video conference: ")
+                details=self.env._("Join the video conference: ")
                 + self.sudo().video_conference_link
             )
         encoded_params = werkzeug.urls.url_encode(params)
         google_url = GOOGLE_CALENDAR_URL + encoded_params
-        iCal_url = "/event/%d/ics?%s" % (self.id, encoded_params)
+        iCal_url = f"/event/{self.id}/ics?{encoded_params}"
         return {"google_url": google_url, "iCal_url": iCal_url}
