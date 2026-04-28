@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- Event page options -->
+  <template
+    id="event_options"
+    inherit_id="website_event.event_description_full"
+    name="Event options"
+  >
+    <xpath expr="//t[@t-set='opt_event_share_block']" position="after">
+      <!-- Event seats -->
+      <t
+        t-set="opt_event_seat_block"
+        t-value="is_view_active('website_event_frontend_customization.opt_event_seat_block')"
+      />
+      <!-- Ticket sales end date -->
+      <t
+        t-set="opt_event_registration_ticket_sales_end_date"
+        t-value="is_view_active('website_event_frontend_customization.opt_event_ticket_sales_end_date_block')"
+      />
+    </xpath>
+  </template>
+
+  <!-- Event seats -->
+  <template
+    id="opt_event_seat_block"
+    inherit_id="website_event.event_description_full"
+    name="Show event seats"
+    active="False"
+  >
+    <xpath
+      expr="//div[@t-if='opt_event_dates_block or opt_event_calendar_block']"
+      position="after"
+    >
+      <div
+        t-if="opt_event_seat_block"
+        class="o_wevent_sidebar_block o_wevent_event_main o_wevent_bordered_block pb-3 mb-4"
+      >
+        <h6 class="o_wevent_sidebar_title">Current seats</h6>
+        <t t-if="event.seats_limited">
+          <p class="mb-2">Seats available: <t t-esc="event.seats_available" /></p>
+        </t>
+        <p class="mb-2">Seats expected: <t t-esc="event.seats_taken" /></p>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- Start date -->
+  <template
+    id="opt_event_start_date_block"
+    inherit_id="website_event.event_description_dates"
+    name="No start date"
+    active="False"
+  >
+    <xpath
+      expr="//div[@t-if='opt_event_dates_block']/t[@t-else='']/div/div[position()=1]"
+      position="attributes"
+    >
+      <attribute name="t-if">opt_event_start_date</attribute>
+    </xpath>
+  </template>
+
+  <!-- End date -->
+  <template
+    id="opt_event_end_date_block"
+    inherit_id="website_event.event_description_dates"
+    name="No end date"
+    active="False"
+  >
+    <xpath
+      expr="//div[@t-if='opt_event_dates_block']/t[@t-else='']/div/div[position()=2]"
+      position="attributes"
+    >
+      <attribute name="t-if">opt_event_end_date</attribute>
+    </xpath>
+  </template>
+
+  <!-- Ticket sales end date (this is the latest possible date, in case there are multiple
+     ticket types available) -->
+  <template
+    id="opt_event_ticket_sales_end_date_block"
+    inherit_id="website_event.event_description_full"
+    name="Ticket sales end date"
+    active="False"
+  >
+    <xpath
+      expr="//div[@t-if='opt_event_dates_block or opt_event_calendar_block']"
+      position="after"
+    >
+      <div
+        t-if="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime)"
+        id="show_ticket_sale_end"
+        class="o_wevent_sidebar_block border-bottom pb-3 my-3"
+      >
+        <t
+          t-set="latest_ticket"
+          t-value="event.event_ticket_ids.filtered(lambda t: t.end_sale_datetime).sorted('end_sale_datetime', reverse=True)[0]"
+        />
+
+        <h6 class="o_wevent_sidebar_title">Sales End On</h6>
+
+        <p class="mb-2">
+                    <span
+          t-out="latest_ticket.end_sale_datetime"
+          t-options="{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'full', 'date_only': True}"
+        />
+                    <span
+          t-out="latest_ticket.end_sale_datetime"
+          t-options="{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'short', 'time_only': True}"
+        />
+                    (<span t-out="event.date_tz" />)
+                </p>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- No ticket download button -->
+  <template
+    id="opt_event_ticket_download_button_block"
+    inherit_id="website_event.registration_ticket_access"
+    name="No ticket download button"
+    active="False"
+  >
+    <xpath expr="//a[@t-if='event.address_id']" position="attributes">
+      <attribute name="style">display:none;</attribute>
+    </xpath>
+  </template>
+
+  <!-- No join online button -->
+  <template
+    id="opt_event_join_online_button_block"
+    inherit_id="website_event.registration_ticket_access"
+    name="No join online button"
+    active="False"
+  >
+    <xpath expr="//a[@t-else='']" position="attributes">
+      <attribute name="style">display:none;</attribute>
+    </xpath>
+  </template>
+</odoo>
