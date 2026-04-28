@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t
+    t-name="website_event_frontend_customization.EventPageOption"
+    t-inherit="website_event.EventPageOption"
+    t-inherit-mode="extension"
+  >
+    <xpath expr="//BuilderRow" position="after">
+      <!-- No ticket download button-->
+      <BuilderContext action="'websiteConfig'">
+        <BuilderRow label.translate="No ticket download button">
+          <BuilderCheckbox
+            actionParam="{views: ['website_event_frontend_customization.opt_event_ticket_download_button_block']}"
+          />
+        </BuilderRow>
+        <!-- No join online button-->
+        <BuilderRow label.translate="No join online button">
+          <BuilderCheckbox
+            actionParam="{views: ['website_event_frontend_customization.opt_event_join_online_button_block']}"
+          />
+        </BuilderRow>
+      </BuilderContext>
+    </xpath>
+  </t>
+
+<t
+    t-name="website_event_frontend_customization.EventMainPageOption"
+    t-inherit="website_event.EventMainPageOption"
+    t-inherit-mode="extension"
+  >
+    <xpath expr="//BuilderContext" position="inside" />
+
+    <xpath
+      expr="//BuilderContext/BuilderRow[@label.translate='Dates']"
+      position="after"
+    >
+      <!-- No start date -->
+      <BuilderRow label.translate="No start date" level="2">
+        <BuilderCheckbox
+          actionParam="{views: ['website_event_frontend_customization.opt_event_start_date_block']}"
+        />
+      </BuilderRow>
+      <!-- No end date -->
+      <BuilderRow label.translate="No end date" level="2">
+        <BuilderCheckbox
+          actionParam="{views: ['website_event_frontend_customization.opt_event_end_date_block']}"
+        />
+      </BuilderRow>
+    </xpath>
+
+    <xpath
+      expr="//BuilderContext/BuilderRow[@label.translate='Registration']"
+      position="after"
+    >
+      <!-- Seats -->
+      <BuilderRow label.translate="Seats" level="2">
+        <BuilderCheckbox
+          actionParam="{views: ['website_event_frontend_customization.opt_event_seat_block']}"
+        />
+      </BuilderRow>
+      <!-- Ticket sales end date-->
+      <BuilderRow label.translate="Ticket sales end date" level="2">
+        <BuilderCheckbox
+          actionParam="{views: ['website_event_frontend_customization.opt_event_ticket_sales_end_date_block']}"
+        />
+      </BuilderRow>
+    </xpath>
+  </t>
+</templates>
