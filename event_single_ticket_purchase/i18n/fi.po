@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_single_ticket_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20251222\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 04:13+0000\n"
+"PO-Revision-Date: 2026-04-28 04:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_single_ticket_purchase
+#: model_terms:ir.ui.view,arch_db:event_single_ticket_purchase.modal_ticket_registration_single_ticket_notice
+msgid ""
+"You can select only one ticket. If you choose another ticket type, the "
+"previous selection will be automatically removed."
+msgstr ""
+"Voit valita vain yhden lipun. Jos valitset toisen lipputyypin, "
+"aiempi valinta poistetaan automaattisesti."
