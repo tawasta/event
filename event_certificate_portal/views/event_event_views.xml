@@ -9,6 +9,7 @@
                 <page string="Certificates">
                     <group>
                         <group>
+                            <field name="certificate_lang" />
                             <field name="certificate_enabled" />
                             <field name="certificate_send_email" />
                         </group>

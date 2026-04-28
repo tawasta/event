@@ -32,3 +32,11 @@ class EventEvent(models.Model):
         help="Multiline programme text shown on the attendance certificate.",
         tracking=True,
     )
+
+    certificate_lang = fields.Selection(
+        selection=lambda self: self.env["res.lang"].get_installed(),
+        string="Certificate language",
+        default=lambda self: self.env.lang,
+        help="Language used when printing the attendance certificate.",
+        tracking=True,
+    )

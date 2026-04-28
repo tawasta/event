@@ -19,9 +19,13 @@
 
     <template id="event_certificate_pdf">
         <t t-foreach="docs" t-as="reg">
+            <t t-set="cert_lang" t-value="reg.event_id.certificate_lang or env.lang" />
             <t t-call="web.basic_layout">
                 <div class="page">
-                    <t t-call="event_certificate_portal.event_certificate_page" />
+                    <t
+                        t-call="event_certificate_portal.event_certificate_page"
+                        t-lang="reg.event_id.certificate_lang or env.lang"
+                    />
                 </div>
             </t>
         </t>
