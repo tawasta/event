@@ -21,25 +21,43 @@
                                 <thead>
                                     <tr class="active">
                                         <th class="table-header-event">Event</th>
-                                        <th class="table-header-details">Registration details</th>
-                                        <th class="table-header-action text-end">Actions</th>
+                                        <th
+                                            class="table-header-details"
+                                        >Registration details</th>
+                                        <th
+                                            class="table-header-action text-end"
+                                        >Actions</th>
                                     </tr>
                                 </thead>
 
-                                <t t-foreach="grouped_registrations" t-as="registrations_group">
+                                <t
+                                    t-foreach="grouped_registrations"
+                                    t-as="registrations_group"
+                                >
                                     <tbody t-if="registrations_group">
-                                        <tr t-if="groupby != 'none'" class="table-light">
+                                        <tr
+                                            t-if="groupby != 'none'"
+                                            class="table-light"
+                                        >
                                             <th colspan="3">
                                                 <t t-if="groupby == 'event'">
-                                                    <span t-if="registrations_group[0].event_id" t-field="registrations_group[0].event_id.name" />
+                                                    <span
+                                                        t-if="registrations_group[0].event_id"
+                                                        t-field="registrations_group[0].event_id.name"
+                                                    />
                                                     <span t-else="">No Event</span>
                                                 </t>
                                                 <t t-if="groupby == 'ticket'">
-                                                    <span t-if="registrations_group[0].event_ticket_id" t-field="registrations_group[0].event_ticket_id.name" />
+                                                    <span
+                                                        t-if="registrations_group[0].event_ticket_id"
+                                                        t-field="registrations_group[0].event_ticket_id.name"
+                                                    />
                                                     <span t-else="">No Ticket</span>
                                                 </t>
                                                 <t t-if="groupby == 'state'">
-                                                    <span t-field="registrations_group[0].state" />
+                                                    <span
+                                                        t-field="registrations_group[0].state"
+                                                    />
                                                 </t>
                                             </th>
                                         </tr>
@@ -47,9 +65,15 @@
                                         <t t-foreach="registrations_group" t-as="re">
                                             <tr>
                                                 <!-- EVENT -->
-                                                <td class="table-cell-event align-middle text-wrap">
-                                                    <div class="d-flex flex-column gap-1">
-                                                        <div class="fw-semibold text-wrap">
+                                                <td
+                                                    class="table-cell-event align-middle text-wrap"
+                                                >
+                                                    <div
+                                                        class="d-flex flex-column gap-1"
+                                                    >
+                                                        <div
+                                                            class="fw-semibold text-wrap"
+                                                        >
                                                             <a
                                                                 t-attf-href="/event/{{re.event_id.id}}/register"
                                                                 t-att-title="re.event_id.name"
@@ -62,16 +86,31 @@
                                                             </a>
                                                         </div>
 
-                                                        <div class="small text-muted text-wrap">
-                                                            <i class="fa fa-calendar me-1" />
-                                                            <span t-field="re.event_id.date_begin" />
+                                                        <div
+                                                            class="small text-muted text-wrap"
+                                                        >
+                                                            <i
+                                                                class="fa fa-calendar me-1"
+                                                            />
+                                                            <span
+                                                                t-field="re.event_id.date_begin"
+                                                            />
                                                             <span class="mx-1">-</span>
-                                                            <span t-field="re.event_id.date_end" />
+                                                            <span
+                                                                t-field="re.event_id.date_end"
+                                                            />
                                                         </div>
 
-                                                        <t t-if="re.event_ticket_id and re.event_ticket_id.name">
-                                                            <div class="small text-muted text-wrap mt-1">
-                                                                <i class="fa fa-ticket me-1" aria-hidden="true" />
+                                                        <t
+                                                            t-if="re.event_ticket_id and re.event_ticket_id.name"
+                                                        >
+                                                            <div
+                                                                class="small text-muted text-wrap mt-1"
+                                                            >
+                                                                <i
+                                                                    class="fa fa-ticket me-1"
+                                                                    aria-hidden="true"
+                                                                />
                                                                 <span
                                                                     class="text-wrap text-break"
                                                                     t-field="re.event_ticket_id.name"
@@ -82,33 +121,63 @@
                                                 </td>
 
                                                 <!-- DETAILS -->
-                                                <td class="table-cell-details align-middle">
-                                                    <div class="d-flex flex-column gap-2">
+                                                <td
+                                                    class="table-cell-details align-middle"
+                                                >
+                                                    <div
+                                                        class="d-flex flex-column gap-2"
+                                                    >
                                                         <div>
-                                                            <t t-if="re.state == 'open'">
-                                                                <span class="badge text-bg-info">Confirmed</span>
+                                                            <t
+                                                                t-if="re.state == 'open'"
+                                                            >
+                                                                <span
+                                                                    class="badge text-bg-info"
+                                                                >Confirmed</span>
                                                             </t>
-                                                            <t t-if="re.state == 'draft'">
-                                                                <span class="badge text-bg-secondary">Unconfirmed</span>
+                                                            <t
+                                                                t-if="re.state == 'draft'"
+                                                            >
+                                                                <span
+                                                                    class="badge text-bg-secondary"
+                                                                >Unconfirmed</span>
                                                             </t>
-                                                            <t t-if="re.state == 'done'">
-                                                                <span class="badge text-bg-success">Attended</span>
+                                                            <t
+                                                                t-if="re.state == 'done'"
+                                                            >
+                                                                <span
+                                                                    class="badge text-bg-success"
+                                                                >Attended</span>
                                                             </t>
-                                                            <t t-if="re.state == 'cancel'">
-                                                                <span class="badge text-bg-warning">Cancelled</span>
+                                                            <t
+                                                                t-if="re.state == 'cancel'"
+                                                            >
+                                                                <span
+                                                                    class="badge text-bg-warning"
+                                                                >Cancelled</span>
                                                             </t>
                                                         </div>
 
                                                         <div class="small text-muted">
                                                             <div>
-                                                                <span class="fw-semibold text-body">Registered:</span>
-                                                                <span t-field="re.create_date" />
+                                                                <span
+                                                                    class="fw-semibold text-body"
+                                                                >Registered:</span>
+                                                                <span
+                                                                    t-field="re.create_date"
+                                                                />
                                                             </div>
 
-                                                            <t t-if="re.visitor_id and re.visitor_id.sudo().partner_id">
+                                                            <t
+                                                                t-if="re.visitor_id and re.visitor_id.sudo().partner_id"
+                                                            >
                                                                 <div>
-                                                                    <span class="fw-semibold text-body">Booker:</span>
-                                                                    <span t-field="re.visitor_id.sudo().partner_id.name" />
+                                                                    <span
+                                                                        class="fw-semibold text-body"
+                                                                    >Booker:</span>
+                                                                    <span
+                                                                        t-field="re.visitor_id.sudo().partner_id.name"
+                                                                    />
                                                                 </div>
                                                             </t>
                                                         </div>
@@ -116,9 +185,15 @@
                                                 </td>
 
                                                 <!-- ACTIONS -->
-                                                <td class="table-cell-action align-middle text-end">
-                                                    <div class="d-flex flex-column justify-content-end align-items-end gap-2">
-                                                        <t t-if="re.state not in ('cancel', 'done') and re.event_id.able_to_cancel">
+                                                <td
+                                                    class="table-cell-action align-middle text-end"
+                                                >
+                                                    <div
+                                                        class="d-flex flex-column justify-content-end align-items-end gap-2"
+                                                    >
+                                                        <t
+                                                            t-if="re.state not in ('cancel', 'done') and re.event_id.able_to_cancel"
+                                                        >
                                                             <button
                                                                 type="button"
                                                                 class="btn btn-outline-danger btn-sm"
@@ -126,7 +201,9 @@
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#cancelModal"
                                                             >
-                                                                <i class="fa fa-fw fa-times-circle me-1" />
+                                                                <i
+                                                                    class="fa fa-fw fa-times-circle me-1"
+                                                                />
                                                                 Cancel registration
                                                             </button>
                                                         </t>
@@ -151,10 +228,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4
-                                    class="modal-title"
-                                    id="cancel_registration_title"
-                                >
+                                <h4 class="modal-title" id="cancel_registration_title">
                                     Cancel a registration
                                 </h4>
                                 <button
@@ -167,7 +241,9 @@
                             <div class="modal-body">
                                 <p>
                                     You are about to <strong>cancel</strong>
-                                    <span id="cancel_registration_object">a registration</span>.
+                                    <span
+                                        id="cancel_registration_object"
+                                    >a registration</span>.
                                 </p>
                                 <p>Are you sure you want to continue?</p>
 

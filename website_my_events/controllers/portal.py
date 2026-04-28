@@ -1,13 +1,14 @@
 import json
-
 from collections import OrderedDict
 from operator import itemgetter
 
-from odoo import http, _
+from odoo import _, http
 from odoo.http import request
-from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 from odoo.osv.expression import OR
 from odoo.tools import groupby as groupbyelem
+
+from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.portal.controllers.portal import pager as portal_pager
 
 
 class PortalEvent(CustomerPortal):
@@ -56,7 +57,7 @@ class PortalEvent(CustomerPortal):
 
     def _get_event_order(self, order, groupby):
         group = self._get_event_groupby_mapping().get(groupby)
-        return "%s, %s" % (group, order) if group else order
+        return f"{group}, {order}" if group else order
 
     def _get_event_search_domain(self, search_in, search):
         search_domain = []
@@ -87,7 +88,7 @@ class PortalEvent(CustomerPortal):
         groupby=None,
         search=None,
         search_in="all",
-        **kw
+        **kw,
     ):
         values = self._prepare_portal_layout_values()
         event_obj = request.env["event.registration"]
@@ -142,15 +143,11 @@ class PortalEvent(CustomerPortal):
             step=self._items_per_page,
         )
 
-        registrations = (
-            event_obj
-            .sudo()
-            .search(
-                domain,
-                order=order,
-                limit=self._items_per_page,
-                offset=pager["offset"],
-            )
+        registrations = event_obj.sudo().search(
+            domain,
+            order=order,
+            limit=self._items_per_page,
+            offset=pager["offset"],
         )
 
         group = self._get_event_groupby_mapping().get(groupby)
