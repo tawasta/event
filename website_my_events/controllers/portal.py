@@ -2,7 +2,7 @@ import json
 from collections import OrderedDict
 from operator import itemgetter
 
-from odoo import _, http
+from odoo import _, fields, http
 from odoo.http import request
 from odoo.osv.expression import OR
 from odoo.tools import groupby as groupbyelem
@@ -30,6 +30,7 @@ class PortalEvent(CustomerPortal):
             "event": {"label": _("Event"), "order": "event_id"},
             "ticket": {"label": _("Ticket"), "order": "event_ticket_id"},
             "state": {"label": _("Status"), "order": "state"},
+            "event_status": {"label": _("Event Status"), "order": "event_id"},
         }
 
     def _get_event_searchbar_groupby(self):
@@ -38,6 +39,7 @@ class PortalEvent(CustomerPortal):
             "event": {"input": "event", "label": _("Event")},
             "ticket": {"input": "ticket", "label": _("Ticket")},
             "state": {"input": "state", "label": _("Status")},
+            "event_status": {"input": "event_status", "label": _("Event Status")},
         }
 
     def _get_event_searchbar_inputs(self):
@@ -46,6 +48,10 @@ class PortalEvent(CustomerPortal):
             "event": {"input": "event", "label": _("Search in Event")},
             "ticket": {"input": "ticket", "label": _("Search in Ticket")},
             "status": {"input": "status", "label": _("Search in Status")},
+            "event_status": {
+                "input": "event_status",
+                "label": _("Search in Event Status"),
+            },
         }
 
     def _get_event_groupby_mapping(self):
@@ -67,6 +73,79 @@ class PortalEvent(CustomerPortal):
             "cancel": _("Cancelled"),
         }
 
+    def _get_event_date_status_labels(self):
+        return {
+            "upcoming": _("Upcoming"),
+            "ongoing": _("Ongoing"),
+            "ended": _("Ended"),
+        }
+
+    def _get_event_date_status_classes(self):
+        return {
+            "upcoming": "text-bg-primary",
+            "ongoing": "text-bg-success",
+            "ended": "text-bg-secondary",
+        }
+
+    def _get_event_date_status_order(self):
+        return {
+            "ongoing": 1,
+            "upcoming": 2,
+            "ended": 3,
+        }
+
+    def _get_event_date_status(self, event):
+        now = fields.Datetime.now()
+
+        if event.date_end and event.date_end < now:
+            return "ended"
+
+        if event.date_begin and event.date_begin > now:
+            return "upcoming"
+
+        return "ongoing"
+
+    def _get_event_status_data(self, registrations):
+        labels = self._get_event_date_status_labels()
+        classes = self._get_event_date_status_classes()
+
+        event_status_data = {}
+        for registration in registrations:
+            event = registration.event_id
+            if not event:
+                continue
+
+            status = self._get_event_date_status(event)
+            event_status_data[event.id] = {
+                "status": status,
+                "label": labels[status],
+                "class": classes[status],
+            }
+
+        return event_status_data
+
+    def _get_event_status_search_domain(self, search):
+        search_lower = search.lower()
+        labels = self._get_event_date_status_labels()
+        now = fields.Datetime.now()
+        domains = []
+
+        for status, label in labels.items():
+            if search_lower in label.lower() or search_lower in status:
+                if status == "upcoming":
+                    domains.append([("event_id.date_begin", ">", now)])
+                elif status == "ongoing":
+                    domains.append(
+                        [
+                            ("event_id.date_begin", "<=", now),
+                            ("event_id.date_end", ">=", now),
+                        ]
+                    )
+                elif status == "ended":
+                    domains.append([("event_id.date_end", "<", now)])
+
+        return OR(domains) if domains else []
+
     def _get_event_search_domain(self, search_in, search):
         search_domain = []
 
@@ -86,21 +165,58 @@ class PortalEvent(CustomerPortal):
 
             if matched_states:
                 search_domain.append([("state", "in", matched_states)])
-            else:
-                state_selection = dict(
-                    request.env["event.registration"]
-                    ._fields["state"]
-                    ._description_selection(request.env)
-                )
-                matched_states = [
-                    state
-                    for state, label in state_selection.items()
-                    if search_lower in label.lower()
-                ]
-                if matched_states:
-                    search_domain.append([("state", "in", matched_states)])
+
+        if search_in in ("event_status", "all"):
+            event_status_domain = self._get_event_status_search_domain(search)
+            if event_status_domain:
+                search_domain.append(event_status_domain)
 
         return OR(search_domain) if search_domain else []
+
+    def _sort_registrations_by_event_status(self, registrations):
+        status_order = self._get_event_date_status_order()
+        return registrations.sorted(
+            lambda registration: (
+                status_order.get(
+                    self._get_event_date_status(registration.event_id),
+                    99,
+                ),
+                registration.event_id.date_begin or fields.Datetime.now(),
+                registration.create_date,
+            )
+        )
+
+    def _group_registrations_by_event_status(self, registrations):
+        status_order = self._get_event_date_status_order()
+        sorted_registrations = registrations.sorted(
+            lambda registration: (
+                status_order.get(
+                    self._get_event_date_status(registration.event_id),
+                    99,
+                ),
+                registration.event_id.date_begin or fields.Datetime.now(),
+                registration.create_date,
+            )
+        )
+
+        grouped_registrations = []
+        current_status = False
+        current_group = request.env["event.registration"].sudo()
+
+        for registration in sorted_registrations:
+            status = self._get_event_date_status(registration.event_id)
+
+            if current_status and status != current_status:
+                grouped_registrations.append(current_group)
+                current_group = request.env["event.registration"].sudo()
+
+            current_status = status
+            current_group |= registration
+
+        if current_group:
+            grouped_registrations.append(current_group)
+
+        return grouped_registrations
 
     @http.route(
         ["/my/events", "/my/events/page/<int:page>"],
@@ -171,26 +287,41 @@ class PortalEvent(CustomerPortal):
             step=self._items_per_page,
         )
 
-        registrations = event_obj.sudo().search(
-            domain,
-            order=order,
-            limit=self._items_per_page,
-            offset=pager["offset"],
-        )
-
-        group = self._get_event_groupby_mapping().get(groupby)
-        if group:
-            grouped_registrations = [
-                event_obj.sudo().concat(*g)
-                for _k, g in groupbyelem(registrations, itemgetter(group))
+        if sortby == "event_status" or groupby == "event_status":
+            all_registrations = event_obj.sudo().search(domain, order=order)
+            all_registrations = self._sort_registrations_by_event_status(
+                all_registrations
+            )
+            registrations = all_registrations[
+                pager["offset"] : pager["offset"] + self._items_per_page
             ]
         else:
-            grouped_registrations = [registrations] if registrations else []
+            registrations = event_obj.sudo().search(
+                domain,
+                order=order,
+                limit=self._items_per_page,
+                offset=pager["offset"],
+            )
+
+        if groupby == "event_status":
+            grouped_registrations = self._group_registrations_by_event_status(
+                registrations
+            )
+        else:
+            group = self._get_event_groupby_mapping().get(groupby)
+            if group:
+                grouped_registrations = [
+                    event_obj.sudo().concat(*g)
+                    for _k, g in groupbyelem(registrations, itemgetter(group))
+                ]
+            else:
+                grouped_registrations = [registrations] if registrations else []
 
         values.update(
             {
                 "registrations": registrations,
                 "grouped_registrations": grouped_registrations,
+                "event_status_data": self._get_event_status_data(registrations),
                 "page_name": "Events",
                 "default_url": "/my/events",
                 "pager": pager,

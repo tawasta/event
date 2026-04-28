@@ -59,6 +59,12 @@
                                                         t-field="registrations_group[0].state"
                                                     />
                                                 </t>
+                                                <t t-if="groupby == 'event_status'">
+                                                    <span
+                                                        t-if="event_status_data.get(registrations_group[0].event_id.id)"
+                                                        t-esc="event_status_data.get(registrations_group[0].event_id.id).get('label')"
+                                                    />
+                                                </t>
                                             </th>
                                         </tr>
 
@@ -100,6 +106,17 @@
                                                                 t-field="re.event_id.date_end"
                                                             />
                                                         </div>
+
+                                                        <t
+                                                            t-if="event_status_data.get(re.event_id.id)"
+                                                        >
+                                                            <div class="small mt-1">
+                                                                <span
+                                                                    t-attf-class="badge #{event_status_data.get(re.event_id.id).get('class')}"
+                                                                    t-esc="event_status_data.get(re.event_id.id).get('label')"
+                                                                />
+                                                            </div>
+                                                        </t>
 
                                                         <t
                                                             t-if="re.event_ticket_id and re.event_ticket_id.name"
