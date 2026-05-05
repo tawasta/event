@@ -21,7 +21,7 @@
 {
     "name": "Website Event: Ticket show VAT",
     "summary": "Show ticket VAT",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -32,7 +32,7 @@
         "python": [],
         "bin": [],
     },
-    "depends": ["futural_event"],
+    "depends": ["product_variant_variant_company", "website_event_sale"],
     "data": ["templates/website_event_ticket_show_vat.xml"],
     "demo": [],
 }
