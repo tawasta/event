@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template
-        id="registration_template"
+        id="modal_ticket_registration"
         inherit_id="website_event_sale.modal_ticket_registration"
         priority="999"
     >
         <xpath
-            expr="//div[hasclass('o_wevent_registration_multi_select')]//span[@itemprop='price']"
-            position="after"
+            expr="//t[@t-if='ticket.price']/span[@itemprop='price']"
+            position="before"
         >
-        <small class="text-muted me-3">
-            <t t-out="ticket._get_register_modal_vat_text()" />
-        </small>
+            <small class="text-muted me-3">
+                <t t-out="ticket._get_register_modal_vat_text()" />
+            </small>
         </xpath>
+
+        <!-- TODO: support mono-ticket mode. See
+            website_event_sale.modal_ticket_registration
+            -> <t t-if="tickets.price">)
+        -->
     </template>
 </odoo>
