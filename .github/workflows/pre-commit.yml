@@ -10,6 +10,6 @@ on:
 
 jobs:
   pre-commit:
-    uses: tawasta/github-workflows/.github/workflows/odoo-pre-commit.yml@run-debug-prints-always
+    uses: tawasta/github-workflows/.github/workflows/odoo-pre-commit.yml@main
     with:
       python-version: '3.11'
