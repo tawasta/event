@@ -39,6 +39,7 @@ addon | version | maintainers | summary
 [event_sale_keep_registrations_as_drafts_after_sale_confirm](event_sale_keep_registrations_as_drafts_after_sale_confirm/) | 17.0.1.0.0 |  | Add option to SOs to not autoconfirm event registrations immediately
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
+[event_single_ticket_purchase](event_single_ticket_purchase/) | 17.0.1.0.0 |  | Event Single Ticket Purchase
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
 [event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.1 |  | Show event tickets only to users matching a partner domain.
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
@@ -76,8 +77,9 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
-[website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.0 |  | Show ticket VAT
+[website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
+[website_event_track_advanced_sessions_editable_in_treeview](website_event_track_advanced_sessions_editable_in_treeview/) | 17.0.1.0.0 |  | Editable session fields in treeview
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track

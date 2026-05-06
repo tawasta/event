@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2026- Futural Oy (https://futural.fi)
+#    Copyright 2023 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,22 +17,23 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
 {
-    "name": "Event Registration: Create Survey Answers for Registrant",
-    "summary": "Allows creating survey answers for event registrations that were "
-    "created from backend, not by a website visitor",
+    "name": "Event Single Ticket Purchase",
+    "summary": "Event Single Ticket Purchase",
     "version": "17.0.1.0.0",
-    "category": "Events",
+    "category": "Event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["society_event_core", "partner_event", "survey_stages"],
+    "depends": ["website_event"],
     "data": [
-        "views/event_registration_views.xml",
-        "wizards/survey_user_input_creation_wizard_views.xml",
-        "security/ir.model.access.csv",
+        "views/website_event_templates.xml",
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "event_single_ticket_purchase/static/src/js/ticket.esm.js",
+        ],
+    },
 }

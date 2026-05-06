@@ -19,9 +19,8 @@
 ##############################################################################
 
 {
-    "name": "Event Registration: Create Survey Answers for Registrant",
-    "summary": "Allows creating survey answers for event registrations that were "
-    "created from backend, not by a website visitor",
+    "name": "Website Event Track Advanced: Treeview-based editing",
+    "summary": "Editable session fields in treeview",
     "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
@@ -29,10 +28,10 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["society_event_core", "partner_event", "survey_stages"],
+    "depends": [
+        "website_event_track_advanced",
+    ],
     "data": [
-        "views/event_registration_views.xml",
-        "wizards/survey_user_input_creation_wizard_views.xml",
-        "security/ir.model.access.csv",
+        "views/event_track_views.xml",
     ],
 }
