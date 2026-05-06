@@ -2,8 +2,9 @@ name: CI
 
 on:
   pull_request:
+  push:
     branches:
-      - '**'
+      - '17*'
 
 jobs:
   pre-commit:
