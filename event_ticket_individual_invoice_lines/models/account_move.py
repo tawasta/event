@@ -84,21 +84,6 @@ class AccountMove(models.Model):
                         [("sale_order_line_id", "=", sale_line.id)]
                     )
 
-                    # Abort if e.g. any quantities have been modified
-                    if len(registrations) != int(line.quantity):
-                        raise UserError(
-                            _(
-                                "Mismatch between invoice line quantity (%(qty)s) "
-                                "and number of registrations (%(regs)s) "
-                                "for line '%(line)s'. Split the invoice lines manually."
-                            )
-                            % {
-                                "qty": int(line.quantity),
-                                "regs": len(registrations),
-                                "line": line.name,
-                            }
-                        )
-
                     # Pull some data from the event and the registration to use
                     # as the invoice line description
                     event_name = sale_line.event_id.name or ("Event")
