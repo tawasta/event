@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_event_tree_inherit" model="ir.ui.view">
+        <field name="name">event.event.tree.inherit.hideable.fields</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+
+
+            <field name="address_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="user_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="date_begin" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="date_end" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="seats_taken" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="seats_used" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+            <field name="stage_id" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+
+        </field>
+    </record>
+</odoo>
