@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2025 Futural Oy (https://futural.fi)
+#    Copyright 2026- Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,20 +19,19 @@
 ##############################################################################
 
 {
-    "name": "Website Event: Ticket show VAT",
-    "summary": "Show ticket VAT",
-    "version": "17.0.1.0.1",
+    "name": "Website Event Track Advanced: Treeview-based editing",
+    "summary": "Editable session fields in treeview",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
-    "depends": ["product_variant_variant_company", "website_event_sale"],
-    "data": ["templates/website_event_ticket_show_vat.xml"],
-    "demo": [],
+    "depends": [
+        "website_event_track_advanced",
+    ],
+    "data": [
+        "views/event_track_views.xml",
+    ],
 }

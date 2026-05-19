@@ -20,5 +20,9 @@ class EventEventTicket(models.Model):
             return ""
 
         # Yhdistä mahdollisesti useiden verojen nimet pilkulla
-        names = ", ".join(taxes.mapped("display_name"))
-        return including_vat + " " + names
+        tax_names = ""
+        for tax in taxes:
+            tax_names += f"{tax.invoice_label or tax.name}, "
+        tax_names = tax_names.rstrip(", ")
+        res = f"{including_vat} {tax_names}"
+        return res

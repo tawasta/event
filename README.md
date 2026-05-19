@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
+[event_list_view_hideable_fields](event_list_view_hideable_fields/) | 17.0.1.0.0 |  | Make more list view fields' visibility toggleable
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Prevents sending emails to past events
 [event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
@@ -77,8 +78,9 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
-[website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.0 |  | Show ticket VAT
+[website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
+[website_event_track_advanced_sessions_editable_in_treeview](website_event_track_advanced_sessions_editable_in_treeview/) | 17.0.1.0.0 |  | Editable session fields in treeview
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
 [website_event_track_mass_mailing](website_event_track_mass_mailing/) | 17.0.1.0.0 |  | Allows sending mail to track contacts
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track

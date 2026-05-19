@@ -36,7 +36,7 @@
         <field name="inherit_id" ref="event.view_event_tree" />
         <field name="arch" type="xml">
             <field name="address_id" position="before">
-                <field name="is_online_event" readonly="1" />
+                <field name="is_online_event" readonly="1" optional="show" />
             </field>
             <field name="address_id" position="attributes">
                 <attribute name="invisible">is_online_event</attribute>
