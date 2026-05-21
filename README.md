@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [event_list_view_hideable_fields](event_list_view_hideable_fields/) | 17.0.1.0.0 |  | Make more list view fields' visibility toggleable
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Prevents sending emails to past events
+[event_mail_freetext_confirmation_and_reminder](event_mail_freetext_confirmation_and_reminder/) | 17.0.1.0.0 |  | Event Mail Freetext Confirmation and Reminder
 [event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
 [event_recaptcha](event_recaptcha/) | 17.0.1.0.0 |  | Event Recaptcha
