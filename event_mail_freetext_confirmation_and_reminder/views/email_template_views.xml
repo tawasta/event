@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <template
         id="view_email_template_subscription_with_freetext_confirmation"
         inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
     >
-        <xpath expr="//div[@style='padding-top: 10px;'][.//t[@t-out=&quot;object.event_id.ticket_instructions or ''&quot;]]"
-               position="after">
+        <xpath
+            expr="//div[@style='padding-top: 10px;'][.//t[@t-out=&quot;object.event_id.ticket_instructions or ''&quot;]]"
+            position="after"
+        >
             <div
                 t-if="object.event_id.freetext_confirmation"
                 style="padding-top: 10px; padding-bottom: 10px;"
             >
-                <t t-out="object.event_id.freetext_confirmation"/>
+                <t t-out="object.event_id.freetext_confirmation" />
             </div>
         </xpath>
     </template>
@@ -20,13 +22,15 @@
         id="view_email_template_reminder_with_freetext_reminder"
         inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
     >
-        <xpath expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
-               position="before">
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
+            position="before"
+        >
             <div
                 t-if="object.event_id.freetext_reminder"
                 style="padding-top: 10px; padding-bottom: 10px;"
             >
-                <t t-out="object.event_id.freetext_reminder"/>
+                <t t-out="object.event_id.freetext_reminder" />
             </div>
         </xpath>
     </template>
