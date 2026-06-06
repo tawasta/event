@@ -29,7 +29,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event"],
+    "depends": ["website_event", "website_event_online_event"],
     "data": [
         "report/event_info_report.xml",
         "report/event_info_report_templates.xml",

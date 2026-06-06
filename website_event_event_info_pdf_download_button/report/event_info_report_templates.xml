@@ -19,10 +19,18 @@
                             class="text-uppercase small text-muted d-block mb-1"
                         >Where</strong>
                         <div>
-                            <span
-                                t-field="doc.address_id"
-                                t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": true}'
-                            />
+
+                            <!-- TODO: consider adding a configurable term for this, as
+                             some could prefer e.g. "Online" intead of "Webinar" -->
+                            <t t-if="doc.is_online_event">
+                                <span>Webinar</span>
+                            </t>
+                            <t t-else="">
+                                <span
+                                    t-field="doc.address_id"
+                                    t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": true}'
+                                />
+                            </t>
                         </div>
                     </div>
                     <div class="col-6">

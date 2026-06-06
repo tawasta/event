@@ -29,6 +29,10 @@ Known issues / Roadmap
   HTML description field to better fit on the PDF page.
   Checking how the PDF looks like during event creation is recommended,
   and if needed, simplifying the website HTML description.
+* Consider adding a configurable term for online events on the PDF print
+  (currently always "Webinar")
+* Consider adding a configurable option for showing/hiding timezone
+  info on the PDF print (currently always hidden)
 
 Credits
 =======
