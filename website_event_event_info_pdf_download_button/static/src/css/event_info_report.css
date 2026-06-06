@@ -1,0 +1,79 @@
+/*
+ * Overrides for website-builder snippets when rendered inside the
+ * "Event Information" PDF.
+ *
+ * wkhtmltopdf is based on an old QtWebKit and its flexbox support is
+ * unreliable, e.g. 3 flex children sized
+ * at `width: 100%` should each wrap to a new line, but wkhtmltopdf will
+ * render them side by side off the page edge instead. Forcing
+ * block layout is used to get around this.
+ */
+
+/*  1. Layout: kill flex, kill float, restore block stacking ---- */
+.o_event_info_pdf_description .row,
+.o_event_info_pdf_description .d-flex {
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.o_event_info_pdf_description [class*="col-"],
+.o_event_info_pdf_description .col {
+    display: block !important;
+    float: none !important;
+    flex: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Bootstrap `.col-auto` / `.col-{size}-auto` use `width: auto` — also kill. */
+.o_event_info_pdf_description [class*="col-"][class*="-auto"] {
+    width: 100% !important;
+}
+
+/*  2. Containers: drop the fixed Bootstrap widths ---- */
+.o_event_info_pdf_description .container,
+.o_event_info_pdf_description .container-fluid,
+.o_event_info_pdf_description section,
+.o_event_info_pdf_description [class*="s_"] {
+    width: auto !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/*  3. Media: hard-cap to the parent column width ---- */
+.o_event_info_pdf_description img,
+.o_event_info_pdf_description video,
+.o_event_info_pdf_description iframe,
+.o_event_info_pdf_description picture,
+.o_event_info_pdf_description svg {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+/*  4. Word wrap so long URLs don't punch through ---- */
+.o_event_info_pdf_description {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/*  5. Add a bit of vertical breathing room between stacked cards
+ *        now that they're block-level instead of flex columns ---- */
+.o_event_info_pdf_description [class*="col-"] + [class*="col-"] {
+    margin-top: 1rem;
+}
+
+/*  6. Universal safety net last, in case a snippet has elements we
+ *        didn't enumerate ---- */
+.o_event_info_pdf_description * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
