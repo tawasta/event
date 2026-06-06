@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_event_info_document">
+        <div class="article">
+            <div class="page o_event_info_report">
+
+                <!-- Event title -->
+                <h2 class="mt-2 mb-1" t-field="doc.name" />
+                <div
+                    t-if="doc.subtitle"
+                    class="text-muted mb-3"
+                    t-field="doc.subtitle"
+                />
+
+                <!-- Two-column info block: When / Where -->
+                <div class="row mt-4">
+                    <div class="col-6" t-if="doc.address_id">
+                        <strong
+                            class="text-uppercase small text-muted d-block mb-1"
+                        >Where</strong>
+                        <div>
+                            <span
+                                t-field="doc.address_id"
+                                t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": true}'
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <strong
+                            class="text-uppercase small text-muted d-block mb-1"
+                        >When</strong>
+                        <div>
+                            <i
+                                class="fa fa-calendar me-2"
+                                role="img"
+                                aria-label="Date"
+                            />
+                            <span t-out="doc.date_begin_located" />
+                            <span class="mx-1">&#8211;</span>
+                            <span t-out="doc.date_end_located" />
+                        </div>
+                        <!-- TODO: currently not needed, but maybe
+                         add configurable option for showing timezone
+                        <div t-if="doc.date_tz" class="text-muted small mt-1">
+                            <i
+                                class="fa fa-globe me-1"
+                                role="img"
+                                aria-label="Timezone"
+                            />
+                            <span t-out="doc.date_tz" />
+                        </div>
+                        -->
+                    </div>
+                </div>
+
+                <!-- Organizer block -->
+                <div t-if="doc.organizer_id" class="mt-4">
+                    <strong
+                        class="text-uppercase small text-muted d-block mb-1"
+                    >Organizer</strong>
+                    <div class="mb-1">
+                        <strong t-field="doc.organizer_id.name" />
+                    </div>
+                    <div t-if="doc.organizer_id.email">
+                        <i
+                            class="fa fa-envelope-o me-2"
+                            role="img"
+                            aria-label="Email"
+                        />
+                        <span t-field="doc.organizer_id.email" />
+                    </div>
+                    <div t-if="doc.organizer_id.phone">
+                        <i class="fa fa-phone me-2" role="img" aria-label="Phone" />
+                        <span t-field="doc.organizer_id.phone" />
+                    </div>
+                    <div t-if="doc.organizer_id.mobile">
+                        <i class="fa fa-mobile me-2" role="img" aria-label="Mobile" />
+                        <span t-field="doc.organizer_id.mobile" />
+                    </div>
+                    <div t-if="doc.organizer_id.website">
+                        <i class="fa fa-globe me-2" role="img" aria-label="Website" />
+                        <span t-field="doc.organizer_id.website" />
+                    </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <!-- Website-builder HTML description.
+                     Note: the module CSS enforces styles to e.g. not
+                     the content horizontally overflow the PDF edges -->
+                <div class="o_event_info_pdf_description">
+                    <div t-out="doc.description" t-options="{'widget': 'html'}" />
+                </div>
+
+            </div>
+        </div>
+    </template>
+
+    <template id="report_event_info">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-set="lang"
+                    t-value="(doc.event_type_id.default_lang_id.code if doc.event_type_id and doc.event_type_id.default_lang_id else False) or (user.lang if user else False) or env.context.get('lang') or 'en_US'"
+                />
+                <t
+                    t-call="website_event_event_info_pdf_download_button.report_event_info_document"
+                    t-lang="lang"
+                />
+            </t>
+        </t>
+    </template>
+
+</odoo>

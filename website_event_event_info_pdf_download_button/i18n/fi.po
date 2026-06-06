@@ -1,0 +1,98 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_event_info_pdf_download_button
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20250428\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-06 15:42+0000\n"
+"PO-Revision-Date: 2026-06-06 15:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_event_info_pdf_download_button
+#: model:ir.actions.report,print_report_name:website_event_event_info_pdf_download_button.action_report_event_info
+msgid "'Event Info - %s' % (object.name or '').replace('/', '_')"
+msgstr "'Tapahtumainfo - %s' % (object.name or '').replace('/', '_')"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<i class=\"fa fa-calendar me-2\" role=\"img\" aria-label=\"Date\"/>"
+msgstr "<i class=\"fa fa-calendar me-2\" role=\"img\" aria-label=\"Ajankohta\"/>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.event_description_full_sidebar_pdf_button
+msgid ""
+"<i class=\"fa fa-download me-2\" role=\"img\" aria-label=\"Download\"/>\n"
+"                    <span>Download Event Info PDF</span>"
+msgstr ""
+"<i class=\"fa fa-download me-2\" role=\"img\" aria-label=\"Lataa\"/>\n"
+"                    <span>Lataa tapahtuman info-PDF</span>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<i class=\"fa fa-envelope-o me-2\" role=\"img\" aria-label=\"Email\"/>"
+msgstr ""
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<i class=\"fa fa-globe me-2\" role=\"img\" aria-label=\"Website\"/>"
+msgstr "<i class=\"fa fa-globe me-2\" role=\"img\" aria-label=\"Verkkosivu\"/>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<i class=\"fa fa-mobile me-2\" role=\"img\" aria-label=\"Mobile\"/>"
+msgstr "<i class=\"fa fa-mobile me-2\" role=\"img\" aria-label=\"Matkapuhelin\"/>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<i class=\"fa fa-phone me-2\" role=\"img\" aria-label=\"Phone\"/>"
+msgstr "<i class=\"fa fa-phone me-2\" role=\"img\" aria-label=\"Puhelin\"/>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid "<span class=\"mx-1\">–</span>"
+msgstr ""
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid ""
+"<strong class=\"text-uppercase small text-muted d-block "
+"mb-1\">Organizer</strong>"
+msgstr ""
+"<strong class=\"text-uppercase small text-muted d-block "
+"mb-1\">Järjestäjä</strong>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid ""
+"<strong class=\"text-uppercase small text-muted d-block mb-1\">When</strong>"
+msgstr ""
+"<strong class=\"text-uppercase small text-muted d-block "
+"mb-1\">Milloin</strong>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model_terms:ir.ui.view,arch_db:website_event_event_info_pdf_download_button.report_event_info_document
+msgid ""
+"<strong class=\"text-uppercase small text-muted d-block "
+"mb-1\">Where</strong>"
+msgstr ""
+"<strong class=\"text-uppercase small text-muted d-block "
+"mb-1\">Missä</strong>"
+
+#. module: website_event_event_info_pdf_download_button
+#: model:ir.actions.report,name:website_event_event_info_pdf_download_button.action_report_event_info
+msgid "Event Information"
+msgstr "Tapahtuman tiedot"
+
+#. module: website_event_event_info_pdf_download_button
+#. odoo-python
+#: code:addons/website_event_event_info_pdf_download_button/controllers/main.py:0
+#, python-format
+msgid "Event_info.pdf"
+msgstr "Tapahtumainfo.pdf"
