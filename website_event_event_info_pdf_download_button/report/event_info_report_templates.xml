@@ -14,7 +14,7 @@
 
                 <!-- Two-column info block: When / Where -->
                 <div class="row mt-4">
-                    <div class="col-6" t-if="doc.address_id">
+                    <div class="col-6">
                         <strong
                             class="text-uppercase small text-muted d-block mb-1"
                         >Where</strong>
@@ -25,11 +25,14 @@
                             <t t-if="doc.is_online_event">
                                 <span>Webinar</span>
                             </t>
-                            <t t-else="">
+                            <t t-elif="doc.address_id">
                                 <span
                                     t-field="doc.address_id"
                                     t-options='{"widget": "contact", "fields": ["name", "address"], "no_marker": true}'
                                 />
+                            </t>
+                            <t t-else="">
+                                -
                             </t>
                         </div>
                     </div>
