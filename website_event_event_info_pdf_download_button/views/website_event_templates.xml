@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Add a new sidebar block to the event page sidebar, just before date and time info.
+    -->
+    <template
+        id="event_description_full_sidebar_pdf_button"
+        name="Event Sidebar: Download Info PDF Button"
+        inherit_id="website_event.event_description_full"
+    >
+
+        <xpath expr="//div[hasclass('o_wevent_sidebar_block')][1]" position="before">
+            <div class="o_wevent_sidebar_block border-bottom pb-3 my-3">
+                <a
+                    t-att-href="event.website_url + '/download-info-pdf'"
+                    class="btn btn-secondary w-100"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <i class="fa fa-download me-2" role="img" aria-label="Download" />
+                    <span>Download Event Info PDF</span>
+                </a>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>
