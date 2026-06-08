@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="event_event_ticket_view_tree_from_event_inherit_accessories" model="ir.ui.view">
+        <field name="name">event.event.ticket.tree.from.event.inherit.accessories</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_tree_from_event"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field
+                    name="accessory_product_ids"
+                    widget="many2many_tags"
+                    string="Lisätuotteet"
+                    optional="hide"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="event_event_ticket_view_form_from_event_inherit_accessories" model="ir.ui.view">
+        <field name="name">event.event.ticket.form.from.event.inherit.accessories</field>
+        <field name="model">event.event.ticket</field>
+        <field name="inherit_id" ref="event.event_event_ticket_view_form_from_event"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field
+                    name="accessory_product_ids"
+                    widget="many2many_tags"
+                    string="Lisätuotteet"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
