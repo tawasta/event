@@ -80,6 +80,7 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
+[website_event_ticket_accessories](website_event_ticket_accessories/) | 17.0.1.0.1 |  | Suggest extra products in cart based on the selected event ticket
 [website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
 [website_event_track_advanced_sessions_editable_in_treeview](website_event_track_advanced_sessions_editable_in_treeview/) | 17.0.1.0.0 |  | Editable session fields in treeview
