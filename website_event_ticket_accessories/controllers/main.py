@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import logging
 
 from odoo import http
@@ -11,7 +9,6 @@ _logger = logging.getLogger(__name__)
 
 
 class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
-
     _ticket_accessories_force_cart_key = "ticket_accessories_cart_forced_order_id"
 
     def _clear_ticket_accessories_force_cart_session(self):
@@ -32,18 +29,9 @@ class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
         )
 
         accessory_products = accessory_products.filtered(
-            lambda product:
-                product.id not in cart_product_ids
-                and product.sale_ok
-                and product._is_add_to_cart_allowed()
-        )
-
-        _logger.warning(
-            "[ticket_accessories] order=%s ticket_lines=%s tickets=%s accessory_products=%s",
-            order_sudo.id,
-            ticket_lines.ids,
-            ticket_lines.event_ticket_id.ids,
-            accessory_products.ids,
+            lambda product: product.id not in cart_product_ids
+            and product.sale_ok
+            and product._is_add_to_cart_allowed()
         )
 
         return accessory_products
@@ -100,7 +88,11 @@ class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
     def checkout(self, **post):
         order_sudo = request.website.sale_get_order()
 
-        if not order_sudo or order_sudo.state != "draft" or not order_sudo.cart_quantity:
+        if (
+            not order_sudo
+            or order_sudo.state != "draft"
+            or not order_sudo.cart_quantity
+        ):
             self._clear_ticket_accessories_force_cart_session()
             return super().checkout(**post)
 
@@ -110,10 +102,6 @@ class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
             self._order_has_ticket_accessories(order_sudo)
             and forced_order_id != order_sudo.id
         ):
-            _logger.warning(
-                "[ticket_accessories] redirect /shop/checkout -> /shop/cart order=%s",
-                order_sudo.id,
-            )
             request.session[self._ticket_accessories_force_cart_key] = order_sudo.id
             request.session["sale_last_order_id"] = order_sudo.id
             return request.redirect("/shop/cart")
