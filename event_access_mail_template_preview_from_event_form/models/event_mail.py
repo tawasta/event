@@ -29,6 +29,10 @@ class EventMail(models.Model):
                 }
             )
 
+            # This is a hacky workaround to get the previewed email's language to not
+            # force itself to english.
+            registration.partner_id = registration.attendee_partner_id.id
+
             return registration
 
     def action_launch_email_template_preview(self):

@@ -28,6 +28,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event", "mail"],
+    "depends": ["event", "mail", "partner_event"],
     "data": ["views/event_event.xml", "data/ir_cron.xml"],
 }
