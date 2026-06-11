@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="event_registration_custom" model="mail.template">
+            <field name="name">Event: Custom Registration Confirmation</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Custom Registration: {{ object.event_id.name }}</field>
+            <field
+                name="email_from"
+            >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field
+                name="email_to"
+            >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei <t t-out="object.name or 'Guest'" />,</p>
+                    <p>ilmoittautumisesi koulutukseen <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong> on vastaanotettu.</p>
+                    <p>
+                    Saat lähiaikoina myös viestin Moodlesta. Viesti sisältää tunnukset ja kirjautumislinkin koulutukseen.
+                    </p>
+                    <p>Tervetuloa opiskelemaan!</p>
+                    <p>TAKK</p>
+                    <br />
+                    <p>Kysyttävää?</p>
+                    <p>Ota yhteyttä TAKKiin: <a
+                            href="mailto:verkkokauppa@takk.fi"
+                        >verkkokauppa@takk.fi</a></p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_reminder_custom_7d" model="mail.template">
+            <field name="name">Event: Custom Reminder 7d</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Muistutus: {{ object.event_id.name }} on 7 päivän kuluttua</field>
+            <field
+                name="email_from"
+            >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field
+                name="email_to"
+            >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei <t t-out="object.name or 'Guest'" />,</p>
+                    <p>muistathan, että koulutus <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong> alkaa viikon kuluttua.
+                    </p>
+                    <div>
+                        <br />
+                        <strong>Lisää tämä koulutus kalenteriisi: </strong>
+                        <a
+                            t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{ object.event_id.name }}&amp;dates={{ date_begin }}/{{ date_end }}&amp;location={{ location }}"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                            target="new"
+                        ><img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> Google</a>
+                        <a
+                            t-attf-href="/event/{{ slug(object.event_id) }}/ics"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                        ><img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> iCal/Outlook</a>
+                        <a
+                            t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title={{ object.event_id.name }}&amp;in_loc={{ location }}&amp;st={{ format_datetime(object.event_id.date_begin, tz='UTC', dt_format='yyyyMMdd\'T\'HHmmss') }}&amp;et={{ format_datetime(object.event_id.date_end, tz='UTC', dt_format='yyyyMMdd\'T\'HHmmss') }}"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                            target="new"
+                        >
+                            <img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> Yahoo
+                        </a>
+                    </div>
+                    <br />
+                    <p>Tervetuloa koulutukseen,</p>
+                    <p>TAKK</p>
+                    <br />
+                    <p>Kysyttävää?</p>
+                    <p>Ota yhteyttä TAKKiin: <a
+                            href="mailto:verkkokauppa@takk.fi"
+                        >verkkokauppa@takk.fi</a></p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_reminder_custom_1d" model="mail.template">
+            <field name="name">Event: Custom Reminder 1d</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Muistutus: {{ object.event_id.name }} on 1 päivän kuluttua</field>
+            <field
+                name="email_from"
+            >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field
+                name="email_to"
+            >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei <t t-out="object.name or 'Guest'" />,</p>
+                    <p>
+                    muistathan, että koulutus <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong> alkaa huomenna.
+                    </p>
+                    <div>
+                        <br />
+                        <strong>Lisää tämä koulutus kalenteriisi: </strong>
+                        <a
+                            t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text={{ object.event_id.name }}&amp;dates={{ date_begin }}/{{ date_end }}&amp;location={{ location }}"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                            target="new"
+                        ><img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> Google</a>
+                        <a
+                            t-attf-href="/event/{{ slug(object.event_id) }}/ics"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                        ><img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> iCal/Outlook</a>
+                        <a
+                            t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title={{ object.event_id.name }}&amp;in_loc={{ location }}&amp;st={{ format_datetime(object.event_id.date_begin, tz='UTC', dt_format='yyyyMMdd\'T\'HHmmss') }}&amp;et={{ format_datetime(object.event_id.date_end, tz='UTC', dt_format='yyyyMMdd\'T\'HHmmss') }}"
+                            style="padding:3px 5px;border:1px solid #875A7B;color:#875A7B;text-decoration:none;border-radius:3px;"
+                            target="new"
+                        >
+                            <img
+                                src="/web_editor/font_to_img/61525/rgb(135,90,123)/16"
+                                style="vertical-align:middle;"
+                                height="16"
+                                alt=""
+                            /> Yahoo
+                        </a>
+                    </div>
+                    <br />
+                    <p>Tervetuloa koulutukseen,</p>
+                    <p>TAKK</p>
+                    <br />
+                    <p>Kysyttävää?</p>
+                    <p>Ota yhteyttä TAKKiin: <a
+                            href="mailto:verkkokauppa@takk.fi"
+                        >verkkokauppa@takk.fi</a></p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_waiting_custom" model="mail.template">
+            <field name="name">Event: Custom Waiting List Confirmation</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Custom Waiting List: {{ object.event_id.name }}</field>
+            <field
+                name="email_from"
+            >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field
+                name="email_to"
+            >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei <t t-out="object.name or 'Guest'" />,</p>
+                    <p>Kiitos kiinnostuksestasi koulustamme kohtaan.
+                    Kouluts <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong> on tällä hetkellä täynnä.</p>
+                    <p
+                    >Sinut on laitettu jonotuslistalle. Olemme sinuun yhteydessä, jos paikkoja vapautuu.</p>
+                    <p>Terveisin,</p>
+                    <p>TAKK</p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_confirm_waiting_custom" model="mail.template">
+            <field name="name">Event: Custom Waiting List Open Seats</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Custom Available Slots: {{ object.event_id.name }}</field>
+            <field
+                name="email_from"
+            >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+            <field
+                name="email_to"
+            >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei <t t-out="object.name or 'Guest'" />,</p>
+                    <p>meillä on vapautunut paikkoja koulutukseen <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong>.</p>
+                    <p
+                    >Vahvista paikkasi nopeasti, ne jaetaan vahvistamisjärjestyksessä.</p>
+                    <p>Terveisin,</p>
+                    <p>TAKK</p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_company_invitation" model="mail.template">
+            <field name="name">Event: Company Invitation</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field name="subject">Invitation: {{ object.event_id.name }}</field>
+            <field
+                name="email_from"
+            >{{ object.event_id.organizer_id.email or object.event_id.user_id.email or '' }}</field>
+            <field name="email_to">{{ object.email or '' }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei!</p>
+                    <p>Sinut on kutsuttu osallistumaan koulutukseen: <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong></p>
+                    <p>Koulutus pidetään
+                    <t
+                            t-out="object.event_id.start_date.strftime('%d.%m.%Y klo %H:%M') or ''"
+                        /> -
+                    <t
+                            t-out="object.event_id.end_date.strftime('%d.%m.%Y klo %H:%M') or ''"
+                        /> osoitteessa
+                    <t t-out="object.event_id.location or ''" />
+                    </p>
+                    <p>Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä.</p>
+                    <p><a href="object.event_id.">Hyväksy kutsu</a></p>
+                    <p>Tervetuloa koulutukseen!</p>
+                    <p>TAKK</p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="event_moodle_invitation" model="mail.template">
+            <field name="name">Event: Moodle Invitation</field>
+            <field name="model_id" ref="event.model_event_registration" />
+            <field
+                name="subject"
+            >Koulutus: {{ object.event_id.name }} Moodle kutsu</field>
+            <field
+                name="email_from"
+            >{{ object.event_id.organizer_id.email or object.event_id.user_id.email or '' }}</field>
+            <field name="email_to">{{ object.email or '' }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hei {{ object.name or 'Guest' }},</p>
+                    <p>Sinut on lisätty koulutukseen: <strong><t
+                                t-out="object.event_id.name or ''"
+                            /></strong></p>
+                    <p>voit siirtyä koulutukseen painamalla alla olevaa painiketta.</p>
+                    <p><a href="object.event_id.">Hyväksy kutsu</a></p>
+                    <p>Ystävällisin terveisin,</p>
+                    <p>TAKK</p>
+                </div>
+            </field>
+            <field name="lang">fi_FI</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+    </data>
+</odoo>
