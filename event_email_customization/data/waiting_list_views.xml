@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit waiting list view to translate text while preserving layout -->
+    <template
+        id="view_email_template_waiting_list"
+        inherit_id="website_event_waiting_list.view_email_template_waiting_list"
+        priority="99"
+    >
+        <!-- Override email heading: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='email_heading']" position="after">
+            <t t-set="email_heading">Ilmoittautumisesi jonotuslistalle</t>
+        </xpath>
+
+        <!-- Hide original preface text, add new after -->
+        <xpath expr="//div[@name='section-preface-text']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-preface-text']" position="after">
+            <div name="section-preface-text">
+                Hei <t t-esc="object.name or ''" />,<br /><br />
+                Kiitos kiinnostuksestasi koulutustamme kohtaan.<br />
+                Koulutus
+                <t t-if="object.event_id.is_published"><strong><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
+                        ><t t-esc="object.event_id.name" /></a></strong></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>,
+                on tällä hetkellä täynnä.<br />
+                Sinut on laitettu jonotuslistalle. Olemme sinuun yhteydessä, jos paikkoja vapautuu.<br
+                /><br />
+            </div>
+        </xpath>
+
+        <!-- Override cancel button text: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t
+                t-set="link_message"
+            >Peruuttaaksesi paikkasi jonotuslistalla, seuraa alla olevaa linkkiä:</t>
+        </xpath>
+
+        <!-- Override cancel button label: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+        </xpath>
+
+        <!-- Hide original thank-you note, add new after -->
+        <xpath expr="//div[@name='section-thank-you-note']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-thank-you-note']" position="after">
+            <div name="section-thank-you-note">
+                Ystävällisin terveisin,<br />
+                <span style="color: #454748;">
+                    -- <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="view_email_template_confirm_waiting_list"
+        inherit_id="website_event_waiting_list.view_email_template_confirm_waiting_list"
+        priority="99"
+    >
+        <!-- Override email heading: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='email_heading']" position="after">
+            <t t-set="email_heading">Paikkoja vapautunut</t>
+        </xpath>
+
+        <!-- Hide original preface text, add new after -->
+        <xpath expr="//div[@name='section-preface-text']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-preface-text']" position="after">
+            <div name="section-preface-text">
+                Hei <t t-esc="object.name or ''" />,<br /><br />
+                Meillä on vapautunut paikkoja koulutukseen
+                <t t-if="object.event_id.is_published"><strong><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
+                        ><t t-esc="object.event_id.name" /></a></strong></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>.<br
+                />
+                Vahvista paikkasi nopeasti, ne jaetaan vahvistamisjärjestyksessä.<br
+                /><br />
+            </div>
+        </xpath>
+
+        <!-- Override cancel button text: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t
+                t-set="link_message"
+            >Vahvista tai peruuta paikkasi alla olevasta linkistä:</t>
+        </xpath>
+
+        <!-- Override cancel button label: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Vahvista tai peruuta ilmoittautuminen</t>
+        </xpath>
+
+        <!-- Hide original thank-you note, add new after -->
+        <xpath expr="//div[@name='section-thank-you-note']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-thank-you-note']" position="after">
+            <div name="section-thank-you-note">
+                Ystävällisin terveisin,<br />
+                <span style="color: #454748;">
+                    -- <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+</odoo>

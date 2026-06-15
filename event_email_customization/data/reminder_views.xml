@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit reminder view to translate text -->
+    <template
+        id="view_email_template_reminder_with_cancel"
+        inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
+        priority="99"
+    >
+        <!-- Hide original greeting text, add new after -->
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]"
+            position="after"
+        >
+            <div>
+                Hei <t t-esc="object.name or ''" />,<br /><br />
+                Muistathan, että koulutus
+                <t t-if="object.event_id.is_published"><a
+                        t-att-href="object.event_id.website_url"
+                        t-attf-style="color:#{email_secondary_color};text-decoration:none;"
+                    ><t t-esc="object.event_id.name" /></a></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
+                    alkaa <strong><t t-esc="object.get_date_range_str()" /></strong>.
+            </div>
+        </xpath>
+
+        <!-- Override cancel button text: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t
+                t-set="link_message"
+            >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
+        </xpath>
+
+        <!-- Override cancel button label: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+        </xpath>
+
+        <!-- Hide original footer text, add new after -->
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="after"
+        >
+            <div>
+                Tervetuloa koulutukseen,<br />
+                <span style="color: #454748;">
+                    -- <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+</odoo>

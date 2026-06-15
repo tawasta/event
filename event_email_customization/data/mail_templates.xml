@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Reset noupdate for core registration confirmation -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'event'), ('name', '=', 'event_subscription')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="event.event_subscription" model="mail.template">
+        <field name="subject">Custom Registration: {{ object.event_id.name }}</field>
+        <field name="body_type">qweb_view</field>
+        <field
+            name="body_view_id"
+            ref="website_event_cancellation.email_template_subscription_with_cancel"
+        />
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- Reset noupdate for core reminder -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'event'), ('name', '=', 'event_reminder')]" />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="event.event_reminder" model="mail.template">
+        <field name="subject">Muistutus: {{ object.event_id.name }}</field>
+        <field name="body_type">qweb_view</field>
+        <field
+            name="body_view_id"
+            ref="website_event_cancellation.email_template_reminder_with_cancel"
+        />
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- Reset noupdate for waiting list templates -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'website_event_waiting_list'), ('name', '=', 'event_waiting')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="website_event_waiting_list.event_waiting" model="mail.template">
+        <field name="subject">Jonotuslistalla: {{ object.event_id.name }}</field>
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'website_event_waiting_list'), ('name', '=', 'event_confirm_waiting_registration')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record
+        id="website_event_waiting_list.event_confirm_waiting_registration"
+        model="mail.template"
+    >
+        <field name="subject">Paikkoja vapautunut: {{ object.event_id.name }}</field>
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- Reset noupdate for company invitation -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'event_ticket_purchase_options'), ('name', '=', 'event_invitation_email_template')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record
+        id="event_ticket_purchase_options.event_invitation_email_template"
+        model="mail.template"
+    >
+        <field name="subject">Invitation: {{ object.event_id.name }}</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Hei!</p>
+                <p>Sinut on kutsuttu osallistumaan koulutukseen: <strong><t
+                            t-out="object.event_id.name or ''"
+                        /></strong></p>
+                <p>Koulutus pidetään
+                <t t-if="object.event_id.start_date">
+                    <t
+                            t-out="object.event_id.start_date.strftime('%d.%m.%Y klo %H:%M')"
+                        />
+                </t>
+                <t t-else="">-</t>
+                -
+                <t t-if="object.event_id.end_date">
+                    <t
+                            t-out="object.event_id.end_date.strftime('%d.%m.%Y klo %H:%M')"
+                        />
+                </t>
+                <t t-else="">-</t>
+                osoitteessa
+                <t t-out="object.event_id.location or ''" />
+                </p>
+                <p>Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä.</p>
+                <p><a
+                        t-attf-href="/event/{{ object.event_id.id }}/invitation/{{ object.invite_id.id }}/accept?access_token={{ object.invite_id.access_token }}"
+                    >Hyväksy kutsu</a></p>
+                <p>Tervetuloa koulutukseen!</p>
+                <p>TAKK</p>
+            </div>
+        </field>
+        <field name="lang">fi_FI</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- Reset noupdate for moodle invitation -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'connector_moodle'), ('name', '=', 'moodle_course_email_template')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="connector_moodle.moodle_course_email_template" model="mail.template">
+        <field name="subject">Koulutus: {{ object.event_id.name }} Moodle kutsu</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Hei {{ object.name or 'Guest' }},</p>
+                <p>Sinut on lisätty koulutukseen: <strong><t
+                            t-out="object.event_id.name or ''"
+                        /></strong></p>
+                <p>voit siirtyä koulutukseen painamalla alla olevaa painiketta.</p>
+                <p><a
+                        t-att-href="object.env['moodle.binding'].sudo().get_course_url(object.event_id.moodle_course_id)"
+                    >Siirry koulutukseen</a></p>
+                <p>Ystävällisin terveisin,</p>
+                <p>TAKK</p>
+            </div>
+        </field>
+        <field name="lang">fi_FI</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+</odoo>
