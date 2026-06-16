@@ -2,10 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=============================
+=====================================
 Event: Email Template Customizations
-=============================
-* Adds 6 new custom email templates for events
+=====================================
+* Adds / modifies 6 different event related automated message templates
 * Adds functionlality, that overrides system default messaging in 
 case of the event -registration and -reminder emails
 * Additional templates for waiting list, moodle and company event messaging
@@ -13,7 +13,7 @@ case of the event -registration and -reminder emails
 Configuration
 =============
 * Install module
-* Events now use the new email templates
+* You can now access the modifies templates
 
 Usage
 =====
@@ -29,7 +29,7 @@ Credits
 Contributors
 ------------
 
-* HJoonas Lahtinen <joonas.lahtinen@futural.fi>
+* Joonas Lahtinen <joonas.lahtinen@futural.fi>
 
 Maintainer
 ----------
