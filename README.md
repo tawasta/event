@@ -49,6 +49,7 @@ addon | version | maintainers | summary
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
 [event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event
+[event_visibility](event_visibility/) | 17.0.1.1.0 |  | Event Visibility
 [partner_event_prioritize_users_and_contacts_when_finding_partner](partner_event_prioritize_users_and_contacts_when_finding_partner/) | 17.0.1.0.1 |  | Modify OCA module's partner searching logic to better support cases where there are multiple partners with same email address
 [project_event_link](project_event_link/) | 17.0.1.0.0 |  | Link events to projects (1 project -> many events)
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
