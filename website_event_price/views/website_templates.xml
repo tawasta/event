@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Event cards / kanban list price -->
+    <template id="events_list_show_event_price"
+              inherit_id="website_event.events_list"
+              name="Show Event Price on Event Cards">
+
+        <xpath expr="//main/div[@id='event_details']/h5" position="after">
+            <t t-set="active_tickets"
+               t-value="event.event_ticket_ids.filtered(lambda ticket: not ticket.is_expired)"/>
+
+            <t t-if="active_tickets">
+                <t t-if="website.show_line_subtotals_tax_selection == 'tax_excluded'"
+                   t-set="event_prices"
+                   t-value="active_tickets.mapped('price_reduce')"/>
+                <t t-else=""
+                   t-set="event_prices"
+                   t-value="active_tickets.mapped('price_reduce_taxinc')"/>
+
+                <t t-set="lowest_price" t-value="min(event_prices)"/>
+                <t t-set="highest_price" t-value="max(event_prices)"/>
+
+                <div class="o_takk_wevent_card_price mt-2 mb-2">
+                    <t t-if="highest_price &gt; 0">
+                        <div class="d-inline-flex align-items-baseline gap-1">
+                            <span t-if="lowest_price != highest_price"
+                                  class="small fw-semibold text-muted">
+                                From
+                            </span>
+                            <strong class="fs-5 fw-bold text-primary d-inline-block"
+                                    t-out="lowest_price"
+                                    t-options="{
+                                        'widget': 'monetary',
+                                        'from_currency': event.company_id.sudo().currency_id,
+                                        'display_currency': website.currency_id
+                                    }"/>
+                        </div>
+                    </t>
+
+                    <t t-else="">
+                        <span class="badge rounded-pill text-bg-success fw-semibold px-3 py-2">
+                            Free
+                        </span>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+
+    <!-- Event page sidebar price, after Register button and before Date & Time -->
+    <template id="event_description_full_show_sidebar_price"
+              inherit_id="website_event.event_description_full"
+              name="Show Event Price in Event Sidebar">
+
+        <xpath expr="//div[contains(@class, 'o_wevent_sidebar_block')][.//h6[contains(normalize-space(), 'Date')]]"
+               position="before">
+
+            <t t-set="active_tickets"
+               t-value="event.event_ticket_ids.filtered(lambda ticket: not ticket.is_expired)"/>
+
+            <t t-if="active_tickets">
+                <t t-if="website.show_line_subtotals_tax_selection == 'tax_excluded'"
+                   t-set="event_prices"
+                   t-value="active_tickets.mapped('price_reduce')"/>
+                <t t-else=""
+                   t-set="event_prices"
+                   t-value="active_tickets.mapped('price_reduce_taxinc')"/>
+
+                <t t-set="lowest_price" t-value="min(event_prices)"/>
+                <t t-set="highest_price" t-value="max(event_prices)"/>
+
+                <div class="o_wevent_sidebar_block border-bottom pb-3 my-3">
+                    <h6 class="o_wevent_sidebar_title">Price</h6>
+
+                    <t t-if="highest_price &gt; 0">
+                        <div class="d-flex align-items-baseline gap-2">
+                            <span t-if="lowest_price != highest_price"
+                                  class="fw-semibold text-muted">
+                                From
+                            </span>
+                            <strong class="fs-3 fw-bold text-primary"
+                                    t-out="lowest_price"
+                                    t-options="{
+                                        'widget': 'monetary',
+                                        'from_currency': event.company_id.sudo().currency_id,
+                                        'display_currency': website.currency_id
+                                    }"/>
+                        </div>
+
+                        <div t-if="lowest_price != highest_price"
+                             class="small text-muted mt-1">
+                            Exact ticket prices are shown during registration.
+                        </div>
+                    </t>
+
+                    <t t-else="">
+                        <strong class="fs-3 fw-bold text-success">
+                            Free
+                        </strong>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
