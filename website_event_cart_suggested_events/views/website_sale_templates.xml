@@ -30,7 +30,9 @@
                             class="d-none d-md-block flex-shrink-0 text-decoration-none"
                             style="width: 96px; height: 72px;"
                         >
-                            <div class="position-relative overflow-hidden rounded h-100 bg-light">
+                            <div
+                                class="position-relative overflow-hidden rounded h-100 bg-light"
+                            >
                                 <t t-call="website.record_cover">
                                     <t t-set="_record" t-value="suggested_event" />
                                     <t t-set="use_filters" t-value="False" />
