@@ -68,7 +68,10 @@
         inherit_id="website_event.registration_template"
         name="Show Event Price After Register Button"
     >
-        <xpath expr="//button[@data-bs-target='#modal_ticket_registration']" position="after">
+        <xpath
+            expr="//button[@data-bs-target='#modal_ticket_registration']"
+            position="after"
+        >
             <t
                 t-set="active_tickets"
                 t-value="event.event_ticket_ids.filtered(lambda ticket: not ticket.is_expired)"
