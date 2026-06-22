@@ -5,54 +5,40 @@
 ===================
 Website Event Price
 ===================
+This module improves the visibility of event ticket prices on the website.
 
-This module improves the visibility of event ticket pricing on the website.
+It shows the event ticket price on:
 
-It adds the event ticket price to:
+* event cards on the event listing page
+* the event page sidebar, after the registration button and before the date
+  and time information
 
-* the event cards on the event listing page
-* the event page sidebar, directly after the registration button and before
-  the date and time information
+If an event has one active ticket price, that price is shown directly.
 
-The displayed price is calculated from the active event tickets. If an event has
-multiple ticket prices, the lowest price is shown using a "From" prefix. Exact
-ticket prices remain available during the normal event registration flow.
+If an event has multiple active ticket prices, the lowest price is shown with
+the prefix "From". Exact ticket prices are shown during the normal registration
+flow.
 
-For free events, the module displays a clear "Free" label.
-
+Free events are shown with a clear "Free" label.
 Configuration
 =============
+
 No configuration is required.
 
-The module uses the website tax display setting to decide whether prices are
-shown tax excluded or tax included.
+The module follows the website tax display setting when choosing whether to show
+tax-excluded or tax-included prices.
 
 Usage
 =====
+Go to the website event listing page. The price is shown below the event title
+on each event card.
 
-#. Go to the website event listing page.
-#. Open an event card.
-#. The event price is shown below the event title.
-#. Open the event page.
-#. The price is shown in the right-hand sidebar after the registration button.
-
-Price display logic
-~~~~~~~~~~~~~~~~~~~
-
-Single paid ticket
-    The ticket price is shown directly.
-
-Multiple paid tickets with the same price
-    The shared ticket price is shown directly.
-
-Multiple paid tickets with different prices
-    The lowest ticket price is shown with the prefix "From".
-
-Free tickets
-    The event is shown as "Free".
+Open an event page. The price is shown in the sidebar after the registration
+button and before the date and time information.
 
 Known issues / Roadmap
 ======================
+\-
 
 Credits
 =======
