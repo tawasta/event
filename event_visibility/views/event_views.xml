@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Base event view: badge fields -->
+    <record id="event_event_view_form_hide_badge_fields" model="ir.ui.view">
+        <field name="name">event.event.form.hide.badge.fields</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="hide_badge_fields" invisible="1"/>
+                <field name="hide_feedback_fields" invisible="1"/>
+                <field name="hide_create_partner" invisible="1"/>
+                <field name="hide_registration_desk" invisible="1" />
+            </xpath>
+
+            <xpath expr="//field[@name='badge_format']" position="attributes">
+                <attribute name="invisible">hide_badge_fields</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='badge_image']" position="attributes">
+                <attribute name="invisible">hide_badge_fields</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='%(event.event_barcode_action_main_view)d']"
+                position="attributes">
+                <attribute name="invisible">hide_registration_desk</attribute>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']/button[@name='%(event.event_barcode_action_main_view)d']"
+                position="attributes">
+                <attribute name="invisible">hide_registration_desk</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- society_event_core: survey fields -->
+    <record id="event_event_view_form_hide_survey_fields" model="ir.ui.view">
+        <field name="name">event.event.form.hide.survey.fields</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="society_event_core.event_event_view_form_inherit_survey"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='feedback_survey_id']" position="attributes">
+                <attribute name="invisible">hide_feedback_fields</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='survey_start_url']" position="attributes">
+                <attribute name="invisible">hide_feedback_fields</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- partner_event: create partner -->
+    <record id="event_event_view_form_hide_create_partner" model="ir.ui.view">
+        <field name="name">event.event.form.hide.create.partner</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="partner_event.view_event_form_partner"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='create_partner']" position="attributes">
+                <attribute name="invisible">hide_create_partner</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

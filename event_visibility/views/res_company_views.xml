@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_company_view_form_event_visibility" model="ir.ui.view">
+        <field name="name">res.company.form.event.visibility</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Event Visibility" name="event_visibility">
+                    <group>
+                        <field name="event_hide_badge_fields"/>
+                        <field name="event_hide_feedback_fields"/>
+                        <field name="event_hide_create_partner"/>
+                        <field name="event_hide_registration_desk" />
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
