@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="cart_suggested_events"
+        inherit_id="website_sale.cart_lines"
+        name="Suggested Events in Cart"
+    >
+        <xpath expr="//div[@id='cart_products']" position="inside">
+            <t t-if="cart_suggested_event_ids">
+                <div class="mt32 mb-3">
+                    <h5 class="mb-1">Recommended events</h5>
+                    <p class="text-muted mb-0">
+                        You may also be interested in these related events.
+                    </p>
+                </div>
+
+                <div
+                    id="cart_suggested_events"
+                    class="d-flex flex-column align-items-stretch mb32"
+                >
+                    <div
+                        t-foreach="cart_suggested_event_ids"
+                        t-as="suggested_event"
+                        t-attf-class="d-flex gap-3 #{not suggested_event_last and 'border-bottom pb-4'} #{suggested_event_index &gt; 0 and 'pt-4'}"
+                        t-att-data-publish="suggested_event.website_published and 'on' or 'off'"
+                    >
+                        <a
+                            t-attf-href="/event/#{slug(suggested_event)}/register"
+                            class="d-none d-md-block flex-shrink-0 text-decoration-none"
+                            style="width: 96px; height: 72px;"
+                        >
+                            <div class="position-relative overflow-hidden rounded h-100 bg-light">
+                                <t t-call="website.record_cover">
+                                    <t t-set="_record" t-value="suggested_event" />
+                                    <t t-set="use_filters" t-value="False" />
+                                    <t t-set="use_size" t-value="False" />
+                                </t>
+                            </div>
+                        </a>
+
+                        <div class="flex-grow-1">
+                            <a
+                                class="h6 d-block mb-1 text-decoration-none"
+                                t-attf-href="/event/#{slug(suggested_event)}/register"
+                            >
+                                <t t-out="suggested_event.name" />
+                            </a>
+
+                            <div
+                                t-if="suggested_event.subtitle"
+                                class="text-muted small mb-2"
+                            >
+                                <t t-out="suggested_event.subtitle" />
+                            </div>
+
+                            <div class="small text-muted">
+                                <i class="fa fa-calendar me-1" />
+                                <span
+                                    t-out="suggested_event.date_begin"
+                                    t-options="{
+                                        'widget': 'datetime',
+                                        'tz_name': suggested_event.date_tz,
+                                        'format': 'medium'
+                                    }"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <a
+                                class="btn btn-outline-primary text-nowrap"
+                                t-attf-href="/event/#{slug(suggested_event)}/register"
+                            >
+                                View event
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
