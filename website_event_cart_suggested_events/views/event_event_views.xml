@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="event_event_view_form_inherit_cart_suggested_events" model="ir.ui.view">
+        <field name="name">event.event.form.inherit.cart.suggested.events</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Suggested Events">
+                    <group>
+                        <field
+                            name="cart_suggested_event_ids"
+                            widget="many2many_tags"
+                            context="{'default_website_published': True}"
+                        />
+                    </group>
+                    <p class="text-muted">
+                        These events are promoted in the webshop cart when this event
+                        has been selected. Customers are linked to the event registration
+                        page. Events are not added to the cart automatically.
+                    </p>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
