@@ -17,8 +17,7 @@
                     </group>
                     <p class="text-muted">
                         These events are promoted in the webshop cart when this event
-                        has been selected. Customers are linked to the event registration
-                        page. Events are not added to the cart automatically.
+                        has been selected. Events are not added to the cart automatically.
                     </p>
                 </page>
             </xpath>
