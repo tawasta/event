@@ -93,7 +93,7 @@
                 <t t-set="highest_price" t-value="max(event_prices)" />
 
                 <div class="o_takk_wevent_sidebar_price mt-3 pt-3 border-top">
-                    <div class="small text-muted mb-1">Price</div>
+                    <h6 class="o_wevent_sidebar_title">Price</h6>
 
                     <t t-if="highest_price &gt; 0">
                         <div class="d-flex align-items-baseline gap-2">
