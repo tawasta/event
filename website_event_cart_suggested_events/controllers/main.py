@@ -92,11 +92,7 @@ class WebsiteEventCartSuggestedEventsController(WebsiteSale):
         Once the cart page is successfully rendered, mark it as visited for
         the current sale order.
         """
-        response = super().cart(
-            access_token=access_token,
-            revive=revive,
-            **post
-        )
+        response = super().cart(access_token=access_token, revive=revive, **post)
 
         is_get_request = request.httprequest.method == "GET"
         is_xhr_request = bool(post.get("xhr"))
