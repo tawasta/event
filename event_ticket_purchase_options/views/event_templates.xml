@@ -228,7 +228,7 @@
 
     <!-- Vanha booker-sarake piiloon -> nykyisessä mallissa Booker-rivi piiloon -->
     <xpath
-            expr="//td[contains(@class, 'table-cell-details')]//div[span[contains(normalize-space(.), 'Booker:')]]"
+            expr="//td[contains(@class, 'table-cell-details')]//t[@t-if='re.visitor_id and re.visitor_id.sudo().partner_id']"
             position="attributes"
         >
         <attribute name="class">d-none</attribute>
