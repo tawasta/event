@@ -6,23 +6,23 @@
         inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
         priority="99"
     >
-        <!-- Hide invitation greeting text (inside t-if) -->
+
         <xpath
             expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-if='object.invite_others']/div"
             position="attributes"
         >
             <attribute name="t-if">False</attribute>
         </xpath>
-        <!-- Hide registration greeting text (inside t-else) -->
+
         <xpath
-            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[not(@t-if)]/div"
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-else]/div"
             position="attributes"
         >
             <attribute name="t-if">False</attribute>
         </xpath>
-        <!-- Add new greeting text after the registration greeting -->
+
         <xpath
-            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[not(@t-if)]/div"
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-else]"
             position="after"
         >
             <div>
@@ -41,19 +41,19 @@
             </div>
         </xpath>
 
-        <!-- Override cancel button text: set after existing t-set so it wins -->
+
         <xpath expr="//t[@t-set='link_message']" position="after">
             <t
                 t-set="link_message"
             >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
         </xpath>
 
-        <!-- Override cancel button label: set after existing t-set so it wins -->
+
         <xpath expr="//t[@t-set='button_message']" position="after">
             <t t-set="button_message">Peruuta ilmoittautuminen</t>
         </xpath>
 
-        <!-- Hide original footer text, add new after -->
+
         <xpath
             expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/div[last()]"
             position="attributes"
