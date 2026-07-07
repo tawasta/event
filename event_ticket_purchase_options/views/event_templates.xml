@@ -71,196 +71,195 @@
         priority="99"
         inherit_id="website_my_events.portal_my_events"
     >
-        <xpath expr="//div[@class='container portal_my_events']" position="inside">
-            <div
+    <xpath
+            expr="//div[contains(@class, 'container') and contains(@class, 'portal_my_events')]"
+            position="inside"
+        >
+        <div
                 class="modal fade"
                 id="inviteModal"
                 tabindex="-1"
                 aria-labelledby="inviteModalLabel"
                 aria-hidden="true"
             >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form id="invite-form" method="post" action="/send/invitation">
-                            <div class="modal-header">
-                                <h5
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="invite-form" method="post" action="/send/invitation">
+                        <div class="modal-header">
+                            <h5
                                     class="modal-title"
                                     id="inviteModalLabel"
                                 >Send Invitation</h5>
-                                <button
+                            <button
                                     type="button"
                                     class="btn-close"
                                     data-bs-dismiss="modal"
                                     aria-label="Close"
                                 />
-                            </div>
-                            <div class="modal-body">
-                                <div
+                        </div>
+                        <div class="modal-body">
+                            <div
                                     id="resendInfo"
                                     class="alert alert-warning d-none"
                                     role="alert"
                                 >
-                                    You are about to send a new invitation. Sending this will cancel the previous invitation.
-                                </div>
-                                <div class="mb-3">
-                                    <label
+                                You are about to send a new invitation. Sending this will cancel the previous invitation.
+                            </div>
+                            <div class="mb-3">
+                                <label
                                         for="inviteEmail"
                                         class="form-label"
                                     >Recipient's Email</label>
-                                    <input
+                                <input
                                         type="email"
                                         class="form-control"
                                         id="inviteEmail"
                                         name="invite_email"
                                         required="1"
                                     />
-                                    <input
+                                <input
                                         type="hidden"
                                         name="registration_id"
                                         id="registration_id_modal"
                                     />
-                                    <input
+                                <input
                                         type="hidden"
                                         name="invite_id"
                                         id="invite_id_modal"
                                     />
-                                </div>
-                                <div class="mb-3">
-                                    <label
+                            </div>
+                            <div class="mb-3">
+                                <label
                                         for="confirmInviteEmail"
                                         class="form-label"
                                     >Confirm Recipient's Email</label>
-                                    <input
+                                <input
                                         type="email"
                                         class="form-control"
                                         id="confirmInviteEmail"
                                         name="confirm_invite_email"
                                         required="1"
                                     />
-                                </div>
-                                <p id="emailError" class="alert alert-danger d-none">
-                                    Emails do not match; please retype them.
-                                </p>
                             </div>
-                            <div class="modal-footer">
-                                <button
+                            <p id="emailError" class="alert alert-danger d-none">
+                                Emails do not match; please retype them.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button
                                     type="button"
                                     class="btn btn-secondary"
                                     data-bs-dismiss="modal"
                                 >Close</button>
-                                <button
+                            <button
                                     type="submit"
                                     class="btn btn-primary"
                                 >Send Invitation</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </xpath>
-        <xpath expr="//tbody//tr/td[@class='table-cell-action']" position="inside">
-            <!-- Näytetään kutsupainike, jos kutsuja ei ole vielä lähetetty -->
-            <t t-if="re.invite_others and not re.invite_id and re.state == 'open'">
+        </div>
+    </xpath>
 
-                    <button
+    <!-- Actionit nykyisen Actions-sarakkeen nappiryhmään -->
+    <xpath expr="//td[contains(@class, 'table-cell-action')]/div" position="inside">
+        <t t-if="re.invite_others and not re.invite_id and re.state == 'open'">
+            <button
                     type="button"
                     class="btn btn-primary btn-sm"
                     t-att-data-registration-id="re.id"
                     data-bs-toggle="modal"
                     data-bs-target="#inviteModal"
                 >
-                        <i class="fa fa-envelope" /> Send Invitation
-                    </button>
+                <i class="fa fa-envelope me-1" /> Send Invitation
+            </button>
+        </t>
 
-            </t>
+        <t t-if="re.invite_others and re.invite_id and not re.invite_id.is_used">
+            <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    t-att-data-registration-id="re.id"
+                    t-att-data-invite-id="re.invite_id.id"
+                    data-bs-toggle="modal"
+                    data-bs-target="#inviteModal"
+                    t-att-data-resend="true"
+                >
+                <i class="fa fa-envelope me-1" /> Resend Invitation
+            </button>
+        </t>
+    </xpath>
 
-            <!-- Jos kutsu on lähetetty, näytetään sen tila -->
-            <t t-if="re.invite_others and re.invite_id">
-
-                    <t t-if="re.invite_id.is_used">
-                        <!-- Näytetään jos kutsu on käytetty -->
-                        <div class="d-flex flex-column align-items-start">
-                            <span class="badge bg-success text-wrap">
-                                Invitation accepted on
-                                <t
+    <!-- Kutsun tila nykyisen Registration details -sarakkeen sisään -->
+    <xpath expr="//td[contains(@class, 'table-cell-details')]/div" position="inside">
+        <t t-if="re.invite_others and re.invite_id">
+            <t t-if="re.invite_id.is_used">
+                <div class="d-flex flex-column align-items-start">
+                    <span class="badge bg-success text-wrap">
+                        Invitation accepted on
+                        <t
                                 t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
                             />
-                            </span>
-                        </div>
-                    </t>
-                    <t t-else="">
-                        <div class="d-flex flex-column align-items-start">
-                            <span class="badge bg-warning mb-2 text-wrap">
-                                Invitation sent on
-                                <t
-                                t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
-                            />
-                                , not yet accepted.
-                            </span>
-
-                            <!-- Uudelleenlähetyspainike -->
-                            <button
-                            type="button"
-                            class="btn btn-outline-secondary btn-sm"
-                            t-att-data-registration-id="re.id"
-                            t-att-data-invite-id="re.invite_id.id"
-                            data-bs-toggle="modal"
-                            data-bs-target="#inviteModal"
-                            t-att-data-resend="true"
-                        >
-                                <i class="fa fa-envelope" /> Resend Invitation
-                            </button>
-                        </div>
-                    </t>
-
+                    </span>
+                </div>
             </t>
-        </xpath>
-        <xpath
-            expr="//th[contains(@class, 'table-header-event-ticket')]"
+            <t t-else="">
+                <div class="d-flex flex-column align-items-start">
+                    <span class="badge bg-warning text-wrap">
+                        Invitation sent on
+                        <t
+                                t-esc="re.invite_id.invited_date.strftime('%d.%m.%Y %H:%M:%S')"
+                            />,
+                        not yet accepted.
+                    </span>
+                </div>
+            </t>
+        </t>
+    </xpath>
+
+    <!-- Vanha event ticket -sarake piiloon -> nykyisessä mallissa ticket-rivi piiloon -->
+    <xpath
+            expr="//td[contains(@class, 'table-cell-event')]//div[i[contains(@class, 'fa-ticket')]]"
             position="attributes"
         >
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath
-            expr="//td[contains(@class, 'table-cell-event-ticket')]"
+        <attribute name="class">d-none</attribute>
+    </xpath>
+
+    <!-- Vanha booker-sarake piiloon -> nykyisessä mallissa Booker-rivi piiloon -->
+    <xpath
+            expr="//td[contains(@class, 'table-cell-details')]//t[@t-if='re.visitor_id and re.visitor_id.sudo().partner_id']"
             position="attributes"
         >
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath
-            expr="//th[contains(@class, 'table-header-booker')]"
+        <attribute name="class">d-none</attribute>
+    </xpath>
+
+    <!-- Vanha state-sarake piiloon -> nykyisessä mallissa status-badge-blokki piiloon -->
+    <xpath
+            expr="//td[contains(@class, 'table-cell-details')]/div/div[1]"
             position="attributes"
         >
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath expr="//td[contains(@class, 'table-cell-booker')]" position="attributes">
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath
-            expr="//th[contains(@class, 'table-header-state')]"
-            position="attributes"
-        >
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath expr="//td[contains(@class, 'table-cell-state')]" position="attributes">
-            <attribute name="class">d-none</attribute>
-        </xpath>
-        <xpath
-            expr="//td[contains(@class, 'table-cell-event-date')]"
+        <attribute name="class">d-none</attribute>
+    </xpath>
+
+    <!-- Vanha event date replace -> nykyisessä mallissa päivämäärärivi replace -->
+    <xpath
+            expr="//td[contains(@class, 'table-cell-event')]//div[i[contains(@class, 'fa-calendar')]]"
             position="replace"
         >
-            <td class="table-cell-event-date">
-                <t t-if="re.event_id.show_date_time">
-                    <span t-field="re.event_id.date_begin" /> - <span
-                        t-field="re.event_id.date_end"
-                    />
-                </t>
-                <t t-if="not re.event_id.show_date_time">
-                    <span />
-                </t>
-            </td>
-        </xpath>
-    </template>
+        <t t-if="re.event_id.show_date_time">
+            <div class="small text-muted text-wrap">
+                <i class="fa fa-calendar me-1" />
+                <span t-field="re.event_id.date_begin" />
+                <span class="mx-1">-</span>
+                <span t-field="re.event_id.date_end" />
+            </div>
+        </t>
+        <t t-if="not re.event_id.show_date_time">
+            <div class="d-none" />
+        </t>
+    </xpath>
+</template>
 
     <template id="event_invitation_form" name="Event Invitation Form">
     <t t-call="website.layout">
