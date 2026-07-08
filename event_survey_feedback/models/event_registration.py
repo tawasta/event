@@ -44,7 +44,6 @@ class EventRegistration(models.Model):
         string="Feedback Answers",
     )
     feedback_answered = fields.Boolean(
-        string="Feedback Answered",
         compute="_compute_feedback_answered",
         store=True,
         help="Whether this attendee has completed the feedback survey.",

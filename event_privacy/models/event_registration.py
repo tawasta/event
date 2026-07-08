@@ -53,7 +53,7 @@ class EventRegistration(models.Model):
         :param event.event event: event whose ``privacy_ids`` are being answered
         """
         for activity in event.privacy_ids:
-            accepted = bool(privacy_vals.get("privacy_%d" % activity.id))
+            accepted = bool(privacy_vals.get(f"privacy_{activity.id}"))
             consent = (
                 self.env["privacy.consent"]
                 .sudo()

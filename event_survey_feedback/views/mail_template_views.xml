@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <odoo>
-    <record id="mail_template_view_form_inherit_feedback" model="ir.ui.view">
-        <field name="name">mail.template.view.form.inherit.feedback</field>
-        <field name="model">mail.template</field>
-        <field name="inherit_id" ref="mail.email_template_form" />
-        <field name="arch" type="xml">
-            <field name="auto_delete" position="after">
-                <field name="is_feedback_email" />
-            </field>
-        </field>
-    </record>
+  <record id="mail_template_view_form_inherit_feedback" model="ir.ui.view">
+    <field name="name">mail.template.view.form.inherit.feedback</field>
+    <field name="model">mail.template</field>
+    <field name="inherit_id" ref="mail.email_template_form" />
+    <field name="arch" type="xml">
+      <field name="auto_delete" position="after">
+        <field name="is_feedback_email" />
+      </field>
+    </field>
+  </record>
 </odoo>

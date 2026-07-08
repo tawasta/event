@@ -37,8 +37,7 @@ class EventMail(models.Model):
     feedback_survey_id = fields.Many2one(
         string="Feedback survey",
         comodel_name="survey.survey",
-        help="Overrides the event's own feedback survey for this scheduler, "
-        "if set.",
+        help="Overrides the event's own feedback survey for this scheduler, if set.",
     )
 
     # 8. Business methods

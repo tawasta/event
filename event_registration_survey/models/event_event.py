@@ -22,7 +22,7 @@
 # 3. Odoo imports (openerp):
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 # 4. Imports from Odoo modules:
@@ -132,7 +132,10 @@ class EventEvent(models.Model):
                 for survey in event.survey_ids:
                     if len(survey.question_ids) < 1:
                         raise ValidationError(
-                            _("Event Survey(s) needs to include at least one question.")
+                            self.env._(
+                                "Event Survey(s) needs to include at least one "
+                                "question."
+                            )
                         )
                     for question in survey.question_ids:
                         if question.save_as_firstname:
@@ -145,7 +148,7 @@ class EventEvent(models.Model):
                             counters["phone_count"] += 1
                 if any(i < 1 for i in counters.values()):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Event Survey(s) needs to include questions asking for "
                             "the registrants first name, last name, email and "
                             "phone number. One of these questions is missing."
@@ -153,7 +156,7 @@ class EventEvent(models.Model):
                     )
                 elif any(i > 1 for i in counters.values()):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Event Survey(s) can only have one question "
                             "for the registrants first name, last name, email and "
                             "phone number. One of these questions has a duplicate."

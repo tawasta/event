@@ -36,7 +36,6 @@ class SurveyUserInput(models.Model):
     # 2. Fields declaration
     feedback_event_id = fields.Many2one(
         "event.event",
-        string="Feedback Event",
         readonly=True,
         store=True,
         help="Event this feedback survey answer relates to. Deliberately "
@@ -45,7 +44,6 @@ class SurveyUserInput(models.Model):
     )
     feedback_registration_id = fields.Many2one(
         "event.registration",
-        string="Feedback Registration",
         readonly=True,
         store=True,
         help="Attendee this feedback answer was requested from, when the "

@@ -33,8 +33,13 @@ from odoo.addons.survey.controllers.main import Survey
 
 class SurveyEventFeedback(Survey):
     def _start_event_feedback_survey(
-        self, survey_token, event_id, registration_id=None, answer_token=None,
-        email=False, **post
+        self,
+        survey_token,
+        event_id,
+        registration_id=None,
+        answer_token=None,
+        email=False,
+        **post,
     ):
         """Stash event/registration context, then delegate to core's survey_start.
 
@@ -79,16 +84,25 @@ class SurveyEventFeedback(Survey):
         website=True,
     )
     def survey_start_event_registration(
-        self, survey_token, event_id, registration_id, answer_token=None,
-        email=False, **post
+        self,
+        survey_token,
+        event_id,
+        registration_id,
+        answer_token=None,
+        email=False,
+        **post,
     ):
         """Feedback link sent for one specific attendee (the usual case).
 
         See :meth:`_start_event_feedback_survey`.
         """
         return self._start_event_feedback_survey(
-            survey_token, event_id, registration_id=registration_id,
-            answer_token=answer_token, email=email, **post
+            survey_token,
+            event_id,
+            registration_id=registration_id,
+            answer_token=answer_token,
+            email=email,
+            **post,
         )
 
     @http.route(

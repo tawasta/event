@@ -22,7 +22,7 @@ import logging
 
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 from odoo.addons.queue_job.exception import RetryableJobError
@@ -123,7 +123,7 @@ class EventRegistration(models.Model):
 
         if not registration.partner_id:
             raise RetryableJobError(
-                _("Registration does not have an associated partner.")
+                self.env._("Registration does not have an associated partner.")
             )
         answer_ids = []
 
@@ -166,7 +166,7 @@ class EventRegistration(models.Model):
 
         for survey in surveys:
             if not survey.exists():
-                raise ValidationError(_("Survey not found."))
+                raise ValidationError(self.env._("Survey not found."))
 
             survey_details = survey_info.get(survey.id)
             if survey_details is None:
@@ -186,7 +186,9 @@ class EventRegistration(models.Model):
                     question, survey_details.get(question.id), answer_sudo
                 )
                 if answer:
-                    _logger.debug("Saved answer for question %s: %s", question.id, answer)
+                    _logger.debug(
+                        "Saved answer for question %s: %s", question.id, answer
+                    )
 
             # Update the answer info and mark it done
             answer_sudo.write(
