@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_event_registration_tree_inherit_feedback" model="ir.ui.view">
+        <field name="name">event.registration.list.inherit.feedback</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree" />
+        <field name="arch" type="xml">
+            <field name="event_id" position="after">
+                <field name="feedback_survey_id" optional="hide" />
+                <field name="feedback_answered" optional="hide" widget="boolean_toggle" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_registration_search_inherit_feedback" model="ir.ui.view">
+        <field name="name">event.registration.search.inherit.feedback</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_registration_search" />
+        <field name="arch" type="xml">
+            <field name="event_id" position="after">
+                <field name="feedback_survey_id" />
+            </field>
+            <filter name="attended" position="after">
+                <separator />
+                <filter
+                    string="Has Feedback Survey"
+                    name="filter_has_feedback_survey"
+                    domain="[('feedback_survey_id', '!=', False)]"
+                />
+                <filter
+                    string="Feedback Answered"
+                    name="filter_feedback_answered"
+                    domain="[('feedback_answered', '=', True)]"
+                />
+                <filter
+                    string="Feedback Not Answered"
+                    name="filter_feedback_not_answered"
+                    domain="[('feedback_survey_id', '!=', False), ('feedback_answered', '=', False)]"
+                />
+            </filter>
+            <filter name="group_event" position="after">
+                <filter
+                    string="Feedback Survey"
+                    name="group_by_feedback_survey_id"
+                    context="{'group_by': 'feedback_survey_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

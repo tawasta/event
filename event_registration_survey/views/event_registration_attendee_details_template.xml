@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="registration_attendee_details_survey"
+        inherit_id="website_event.registration_attendee_details"
+    >
+        <!-- Insert the survey question block right after core's own
+             per-attendee question div, BEFORE that div's t-if is touched
+             below - matching it again after changing its t-if would fail,
+             since the attribute value would no longer be the original one. -->
+        <xpath expr="//div[@t-if='event.specific_question_ids']" position="after">
+            <div
+                t-if="event.survey_ids and availability_check and limit_check"
+                class="modal-body"
+                name="survey_question_div"
+                t-att-data-conditional-question-info="json.dumps({
+                    str(survey.id): {
+                        'triggered_questions_by_answer': {
+                            str(answer.id): triggered_questions.ids
+                            for answer, triggered_questions in survey._get_conditional_maps()[1].items()
+                        }
+                    }
+                    for survey in event.survey_ids
+                })"
+            >
+                <!-- The conditional-question map above is embedded directly,
+                     the same way survey.survey_fill_form does it for its own
+                     data-triggered-questions-by-answer attribute, instead of
+                     fetching it via a separate RPC call: it is then available
+                     synchronously as soon as this modal is in the DOM, with
+                     no extra round-trip and no risk of a user interacting
+                     with a question before the data has arrived. -->
+                <div class="o_survey_form_content w-100 row">
+                    <t
+                        t-set="sorted_surveys"
+                        t-value="sorted(event.survey_ids, key=lambda s: (not s.default_survey, s.id))"
+                    />
+                    <t t-foreach="sorted_surveys" t-as="survey">
+                        <t t-foreach="survey.question_and_page_ids" t-as="question">
+                            <t
+                                t-call="event_registration_survey.registration_event_survey"
+                            >
+                                <t t-set="registration_index" t-value="counter" />
+                            </t>
+                        </t>
+                    </t>
+                </div>
+                <input
+                    class="d-none"
+                    type="text"
+                    t-attf-name="#{counter}-event_id"
+                    t-att-value="event.id"
+                />
+            </div>
+        </xpath>
+
+        <!-- Suppress core's own per-question rendering when a survey is used
+             as the registration form instead. -->
+        <xpath expr="//div[@t-if='event.specific_question_ids']" position="attributes">
+            <attribute
+                name="t-if"
+            >event.specific_question_ids and not event.survey_ids</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('o_wevent_registration_question_global')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >availability_check and limit_check and event.general_question_ids and not event.survey_ids</attribute>
+        </xpath>
+    </template>
+</odoo>

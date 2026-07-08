@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="survey_user_input_view_form_inherit_feedback" model="ir.ui.view">
+        <field name="name">survey.user_input.view.form.inherit.feedback</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="feedback_event_id" />
+                <field name="feedback_registration_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="survey_user_input_view_tree_inherit_feedback" model="ir.ui.view">
+        <field name="name">survey.user_input.view.list.inherit.feedback</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="feedback_event_id" optional="show" />
+                <field name="feedback_registration_id" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="survey_user_input_view_search_inherit_feedback" model="ir.ui.view">
+        <field name="name">survey.user_input.view.search.inherit.feedback</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="feedback_event_id" />
+                <field name="feedback_registration_id" />
+            </field>
+            <filter name="completed" position="after">
+                <separator />
+                <filter
+                    string="Feedback Survey"
+                    name="filter_feedback_survey"
+                    domain="[('feedback_event_id', '!=', False)]"
+                />
+            </filter>
+            <filter name="group_by_partner" position="after">
+                <filter
+                    string="Feedback Event"
+                    name="group_by_feedback_event"
+                    domain="[]"
+                    context="{'group_by': 'feedback_event_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>

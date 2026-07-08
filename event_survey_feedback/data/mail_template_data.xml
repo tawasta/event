@@ -1,0 +1,285 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record id="event_survey_feedback_template" model="mail.template">
+        <field name="name">Event: Feedback survey</field>
+        <field name="model_id" ref="event_survey_feedback.model_event_registration" />
+        <field name="is_feedback_email" eval="True" />
+        <field name="subject">Please answer the feedback survey</field>
+        <field
+            name="email_from"
+        >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+        <field
+            name="email_to"
+        >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+        <field name="body_html" type="html">
+            <table
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+            >
+                <tr>
+                    <td align="center">
+                        <table
+                            border="0"
+                            cellpadding="0"
+                            cellspacing="0"
+                            width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                        >
+                            <tbody><!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table
+                                            width="590"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                        >
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span
+                                                        style="font-size: 10px;"
+                                                    >Event</span><br />
+                                                    <span
+                                                        style="font-size: 20px; font-weight: bold;"
+                                                    >
+                                                        <t
+                                                            t-out="object.event_id.name"
+                                                        />
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img
+                                                        t-att-src="'/logo.png?company=%s' % object.company_id.id"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="'%s' % object.company_id.name"
+                                                    />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    colspan="2"
+                                                    style="text-align:center;"
+                                                >
+                                                    <hr
+                                                        width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- EVENT DESCRIPTION -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table
+                                            width="590"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                        >
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    style="font-size: 14px;"
+                                                >
+                                                    <div>
+                                                        Hello <t
+                                                            t-out="object.name or ''"
+                                                        />,<br />
+                                                        Thank you for attending the event. Please answer <a
+                                                            t-attf-href="{{ object.survey_start_url }}"
+                                                            style="color:#875A7B;text-decoration:none;"
+                                                        >the feedback survey</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr
+                                                        width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- DETAILS -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;" />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- FOOTER BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <t t-if="object.company_id">
+                            <table
+                                width="590"
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                            ><tr><td style="text-align: center; font-size: 14px;">
+                                Sent by <a
+                                        target="_blank"
+                                        t-attf-href="{{ object.company_id.website }}"
+                                        style="color: #875A7B;"
+                                        t-out="object.company_id.name or ''"
+                                    >
+                                        ></a>
+                            </td></tr></table>
+                        </t>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field
+            name="lang"
+        >{{ object.event_id.lang or object.partner_id.lang }}</field>
+    </record>
+
+    <record id="event_survey_feedback_reminder_template" model="mail.template">
+        <field name="name">Event: Feedback reminder</field>
+        <field name="model_id" ref="event_survey_feedback.model_event_registration" />
+        <field name="is_feedback_email" eval="True" />
+        <field name="subject">Reminder: Please answer our feedback survey</field>
+        <field
+            name="email_from"
+        >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+        <field
+            name="email_to"
+        >{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email) or object.partner_id.email_formatted or '') }}</field>
+        <field name="body_html" type="html">
+            <table
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+            >
+                <tr>
+                    <td align="center">
+                        <table
+                            border="0"
+                            cellpadding="0"
+                            cellspacing="0"
+                            width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                        >
+                            <tbody><!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table
+                                            width="590"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                        >
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span
+                                                        style="font-size: 10px;"
+                                                    >Event</span><br />
+                                                    <span
+                                                        style="font-size: 20px; font-weight: bold;"
+                                                    >
+                                                        <t
+                                                            t-out="object.event_id.name"
+                                                        />
+                                                    </span>
+                                                </td>
+                                                <td valign="middle" align="right">
+                                                    <img
+                                                        t-att-src="'/logo.png?company=%s' % object.company_id.id"
+                                                        style="padding: 0px; margin: 0px; height: auto; width: 80px;"
+                                                        t-att-alt="'%s' % object.company_id.name"
+                                                    />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                    colspan="2"
+                                                    style="text-align:center;"
+                                                >
+                                                    <hr
+                                                        width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- EVENT DESCRIPTION -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table
+                                            width="590"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                        >
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    style="font-size: 14px;"
+                                                >
+                                                    <div>
+                                                        Hi, thank you for participating in the event. If you haven't given your feedback about the event yet, please answer the feedback survey from this <a
+                                                            t-attf-href="{{ object.survey_start_url }}"
+                                                            style="color:#875A7B;text-decoration:none;"
+                                                        >link</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <hr
+                                                        width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr><!-- DETAILS -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;" />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- FOOTER BY -->
+                <tr>
+                    <td align="center" style="min-width: 590px;">
+                        <t t-if="object.company_id">
+                            <table
+                                width="590"
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;"
+                            ><tr><td style="text-align: center; font-size: 14px;">
+                                Sent by <a
+                                        target="_blank"
+                                        t-attf-href="{{ object.company_id.website }}"
+                                        style="color: #875A7B;"
+                                        t-out="object.company_id.name or ''"
+                                    >
+                                        ></a>
+                            </td></tr></table>
+                        </t>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+    </record>
+</odoo>
