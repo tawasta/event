@@ -32,10 +32,6 @@
              SurveyRegistrationQuestions.toggleRelatedQuestionVisibility once
              its triggering answer is picked. -->
     <t t-set="display_question" t-value="not question.triggering_answer_ids" />
-    <!--         <t
-            t-set="answer_lines"
-            t-value="answer.user_input_line_ids.filtered(lambda line: line.question_id == question)"
-        /> -->
     <!-- The keyboard-shortcut "Key" badge (survey.survey_selection_key)
              is meant for live-quiz sessions where the presenter's audience
              picks an answer by pressing a letter key; it makes no sense on
@@ -45,7 +41,7 @@
              doesn't have - always disabled here. -->
     <t t-set="letters" t-value="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
     <t t-set="useKeySelection" t-value="False" />
-    <!-- Extra 'right' margin is added on layouts that are not "page_per_question" to align with choices questions, since all choices have a mr-2 class (pixel perfect yay...) -->
+    <!-- Extra right margin aligns non-choice questions with choice questions, which all carry the mr-2 class -->
     <t
       t-set="extra_right_margin"
       t-value="survey.questions_layout != 'page_per_question' and question.question_type not in ['simple_choice', 'multiple_choice']"
@@ -72,11 +68,6 @@
           <span t-field="question.title" />
           <span t-if="question.constr_mandatory" class="text-danger">*</span>
         </strong>
-        <!--                 <div
-                    t-if="not is_html_empty(question.description)"
-                    t-field="question.description"
-                    class="text-muted oe_no_empty mt-1"
-                /> -->
       </div>
       <t t-if="question.question_type == 'text_box'">
         <t t-call="event_registration_survey.question_text_box" />
@@ -109,10 +100,10 @@
                  answering the same survey in a single POST - core's
                  per-respondent field naming (t-att-name="question.id") does
                  not support that, ours prefixes with counter/survey id.
-                 When core adds a new question_type (e.g. "scale" in Odoo 19,
-                 not yet supported here), a matching question_<type> template
-                 must be added here too - this fallback makes that gap
-                 visible instead of silently rendering nothing. -->
+                 Any question type not listed in the t-if below (e.g. "scale")
+                 falls through to the warning below instead of silently
+                 rendering nothing; add a matching question_<type> template
+                 here to support it. -->
       <t
         t-if="question.question_type not in ('text_box', 'char_box', 'numerical_box', 'date', 'datetime', 'simple_choice', 'multiple_choice', 'matrix')"
       >
@@ -338,7 +329,6 @@
   </template>
 
   <template id="question_multiple_choice" name="Question: multiple choice">
-    <!-- <t t-set="comment_line" t-value="answer_lines.filtered(lambda line: line.value_char_box)"/> -->
     <div
       class="row g-2 o_survey_answer_wrapper o_survey_form_choice o_survey_question_multiple_choice"
       t-attf-data-name="#{counter}-#{question.id}-#{survey.id}"
@@ -351,9 +341,6 @@
       />
       <t t-foreach='question.suggested_answer_ids' t-as='label'>
         <t t-set="item_idx" t-value="label_index" />
-        <!-- <t t-set="answer_line" t-value="answer_lines.filtered(lambda line: line.suggested_answer_id == label)"/>
-                <t t-set="answer_selected" t-value="answer_line and answer_line.suggested_answer_id.id == label.id"/> -->
-
         <!--Used for print mode with corrections -->
         <t
           t-set="answer_class"

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="registration_template"
+        inherit_id="website_event.registration_template"
+        name="Registration"
+    >
+        <xpath
+            expr="//div[contains(@t-if, 'insufficient_seats')]"
+            position="before"
+        >
+            <button
+                t-if="not event.event_registrations_open and event.waiting_list"
+                type="button"
+                data-bs-toggle="modal"
+                t-attf-class="btn btn-primary {{cta_additional_classes}}"
+                t-attf-data-bs-target="#modal_{{'slot' if event.is_multi_slots else 'ticket'}}_registration"
+            >Join the waiting list</button>
+        </xpath>
+    </template>
+
+    <template
+        id="registration_template_waiting_list"
+        inherit_id="website_event.modal_ticket_registration"
+        name="Registration Modal"
+    >
+        <!-- Let the form render even when sold out, so a waiting-list join
+             can still be submitted; individual ticket rows still decide for
+             themselves whether to offer a normal quantity selector or a
+             waiting-list one (see below). -->
+        <xpath expr="//form[@id='registration_form']" position="attributes">
+            <attribute
+                name="t-if"
+            >(event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids))) or event.waiting_list</attribute>
+        </xpath>
+
+        <!-- Multi-ticket layout: offer a waiting-list quantity selector on
+             each sold-out (but not expired) ticket row, using the exact
+             same widget core uses for normal quantities - reusing the
+             "o_wevent_input_nb_tickets" class and "nb_register-<id>" name
+             means core's own TicketDetails interaction (increment/decrement,
+             submit button enablement) handles it with no extra JS, and the
+             backend sees ordinary ticket quantities - event.registration.create()
+             is what actually routes them to the waiting list. -->
+        <xpath expr="//div[@t-foreach='tickets'][@t-as='ticket']" position="inside">
+            <div
+                t-if="event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched()"
+                class="d-flex justify-content-end align-items-center gap-2 mt-1"
+            >
+                <small class="text-muted">Join waiting list</small>
+                <div
+                    class="rounded input-group d-inline-flex border"
+                    style="width: 120px;"
+                >
+                    <button
+                        class="btn d-md-inline-block border-0 pe-2"
+                        data-increment-type="minus"
+                        type="button"
+                        disabled="disabled"
+                        t-attf-data-input-name="nb_register-#{ticket.id}"
+                    ><i class="oi oi-minus text-600" /></button>
+                    <input
+                        class="o_wevent_input_nb_tickets form-control text-center border-0 p-0"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        size="2"
+                        type="text"
+                        value="0"
+                        max="10"
+                        t-attf-name="nb_register-#{ticket.id}"
+                    />
+                    <button
+                        class="btn d-md-inline-block border-0 ps-2"
+                        data-increment-type="plus"
+                        type="button"
+                        t-attf-data-input-name="nb_register-#{ticket.id}"
+                    ><i class="oi oi-plus text-600" /></button>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Single-ticket layout: same idea, one waiting-list selector for
+             the (at most one) ticket, or the ticket-less generic registration. -->
+        <xpath
+            expr="//div[hasclass('o_wevent_registration_single')]//div[hasclass('col-md-6')][hasclass('d-flex')][hasclass('justify-content-between')]"
+            position="after"
+        >
+            <div
+                t-if="not event.event_registrations_open and event.waiting_list"
+                class="col-12 d-flex justify-content-end align-items-center gap-2 mt-2"
+            >
+                <small class="text-muted">Join waiting list</small>
+                <t t-set="waiting_register_id" t-value="tickets.id if tickets else 0" />
+                <div
+                    class="rounded input-group d-inline-flex border"
+                    style="width: 120px;"
+                >
+                    <button
+                        class="btn d-md-inline-block border-0 pe-2"
+                        data-increment-type="minus"
+                        type="button"
+                        disabled="disabled"
+                        t-attf-data-input-name="nb_register-#{waiting_register_id}"
+                    ><i class="oi oi-minus text-600" /></button>
+                    <input
+                        class="o_wevent_input_nb_tickets form-control text-center border-0 p-0"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        size="2"
+                        type="text"
+                        value="0"
+                        max="10"
+                        t-attf-name="nb_register-#{waiting_register_id}"
+                    />
+                    <button
+                        class="btn d-md-inline-block border-0 ps-2"
+                        data-increment-type="plus"
+                        type="button"
+                        t-attf-data-input-name="nb_register-#{waiting_register_id}"
+                    ><i class="oi oi-plus text-600" /></button>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Confirmation page: acknowledge a waiting-list join distinctly from
+         a normal confirmed registration. -->
+    <template
+        id="registration_complete_waiting_list"
+        inherit_id="website_event.registration_complete"
+        name="Registration Completed"
+    >
+        <xpath expr="//h1[@class='h3-fs']" position="attributes">
+            <attribute
+                name="t-if"
+            >attendees[0].state != 'wait'</attribute>
+        </xpath>
+        <xpath expr="//h1[@class='h3-fs']" position="after">
+            <h1 t-if="attendees[0].state == 'wait'" class="h3-fs">Joined the waiting list!</h1>
+        </xpath>
+        <xpath expr="//u[a[@class='h4 text-primary']]" position="after">
+            <p t-if="attendees[0].state == 'wait'" class="py-2">
+                You will be contacted if a seat becomes available.
+            </p>
+        </xpath>
+    </template>
+</odoo>
