@@ -98,6 +98,12 @@ class Event(models.Model):
             for event in self:
                 if (event.date_begin - fields.Datetime.today()).days <= 60:
                     event._open_ticket_sales()
+                if not event.event_ticket_ids:
+                    # Force using tickets.
+                    # We're not checking vals here to force saving before publishing
+                    raise ValidationError(
+                        _("Please add tickets to event before publishing.")
+                    )
 
         return res
 
