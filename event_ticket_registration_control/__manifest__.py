@@ -20,7 +20,7 @@
 {
     "name": "Event Ticket Registration Control",
     "summary": "Event ticket automation",
-    "version": "16.0.1.0.2",
+    "version": "16.0.1.0.3",
     "category": "Website",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
