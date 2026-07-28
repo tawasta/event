@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="view_email_template_subscription_with_cancel"
+        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+        priority="99"
+    >
+
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-if='object.invite_others']/div"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-else]/div"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-else]"
+            position="after"
+        >
+            <div>
+                Hei <t t-esc="object.name or ''" />,<br /><br />
+                Ilmoittautumisesi koulutukseen
+                <t t-if="object.event_id.is_published"><a
+                        t-att-href="object.event_id.website_url"
+                        t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
+                    ><t t-esc="object.event_id.name" /></a></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
+                on vastaanotettu.
+                <br /><br />
+                Saat lähiaikoina myös viestin Moodlesta. Viesti sisältää tunnukset ja kirjautumislinkin koulutukseen.
+                <br /><br />
+                Tervetuloa opiskelemaan!
+            </div>
+        </xpath>
+
+
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t
+                t-set="link_message"
+            >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
+        </xpath>
+
+
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+        </xpath>
+
+
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="after"
+        >
+            <div>
+                Tervetuloa opiskelemaan!<br />
+                <span style="color: #454748;">
+                    -- <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+</odoo>
