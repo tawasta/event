@@ -202,6 +202,9 @@
                                 t-esc="re.invite_id.used_date.strftime('%d.%m.%Y %H:%M:%S')"
                             />
                     </span>
+                    <small class="text-muted mt-1">
+                        Sent to: <strong t-esc="re.invite_id.invite_email" />
+                    </small>
                 </div>
             </t>
             <t t-else="">
@@ -213,6 +216,9 @@
                             />,
                         not yet accepted.
                     </span>
+                    <small class="text-muted mt-1">
+                        Sent to: <strong t-esc="re.invite_id.invite_email" />
+                    </small>
                 </div>
             </t>
         </t>
