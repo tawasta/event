@@ -100,10 +100,12 @@
                                                             />
                                                             <span
                                                                 t-field="re.event_id.date_begin"
+                                                                t-options='{"widget": "datetime", "format": "short"}'
                                                             />
                                                             <span class="mx-1">-</span>
                                                             <span
                                                                 t-field="re.event_id.date_end"
+                                                                t-options='{"widget": "datetime", "format": "short"}'
                                                             />
                                                         </div>
 
@@ -182,6 +184,7 @@
                                                                 >Registered:</span>
                                                                 <span
                                                                     t-field="re.create_date"
+                                                                    t-options='{"widget": "datetime", "format": "short"}'
                                                                 />
                                                             </div>
 
