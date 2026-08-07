@@ -45,10 +45,8 @@ class SurveySurvey(models.Model):
     ):
         """Set feedback event/registration from context when starting a feedback survey.
 
-        The context keys are set by
-        :meth:`SurveyEventFeedback._start_event_feedback_survey` on the
-        ``/survey/start/<token>/event/<event_id>[/registration/<id>]``
-        routes, so they are only ever present for feedback-survey answers.
+        Set by :meth:`SurveyEventFeedback._start_event_feedback_survey`, so
+        only ever present for feedback-survey answers.
         """
         event_id = self.env.context.get("event_survey_feedback_event_id")
         if event_id and "feedback_event_id" not in additional_vals:

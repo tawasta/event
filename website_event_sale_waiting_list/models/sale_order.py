@@ -37,13 +37,10 @@ class SaleOrder(models.Model):
     def _action_cancel(self):
         """Send paid waiting-list confirmations back to the waiting list.
 
-        event_sale's own EventRegistration._compute_registration_status
-        reacts to the order's state becoming "cancel" by marking every
-        registration linked to it as cancelled - correct for an ordinary
-        purchase, but for a registration that came from the waiting list
-        the seat was never actually claimed, so losing the visitor's place
-        in line would be wrong; send it back to "wait" instead, with the
-        order link cleared so it does not stay attached to a dead order.
+        Core's own compute marks every registration on a cancelled order
+        as "cancelled" - correct for an ordinary purchase, but a seat
+        claimed from the waiting list was never really taken, so it goes
+        back to "wait" instead, with the order link cleared.
         """
         waiting_registrations = self.env["event.registration"].search(
             [

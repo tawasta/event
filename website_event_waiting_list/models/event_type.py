@@ -44,18 +44,11 @@ class EventType(models.Model):
     def _default_event_mail_type_ids_with_waiting_list(self):
         """Extend core's own event-type mail-schedule defaults.
 
-        Core's ``event_type_mail_ids`` field stores a direct reference to
-        ``_default_event_mail_type_ids`` as its ``default=`` (not a method
-        name string), so simply overriding that method here would never
-        actually run: Odoo calls the stored function reference directly,
-        bypassing the override. The field is therefore redeclared below
-        with a new default that calls into core's own method through
-        ``self`` (which *does* go through the normal override chain) and
-        appends the waiting-list schedulers. The field's own ``default=``
-        below wraps this method in a ``lambda self: ...`` for the same
-        reason, rather than repeating core's mistake here: a bare
-        function reference would stop any *further* module from being
-        able to override this method either.
+        Core stores a direct reference to its default method (not a name
+        string), so overriding it would never run - the field is
+        redeclared below with a new default calling this method through
+        ``self`` instead. Wrapped in ``lambda self: ...`` there for the
+        same reason, so a further module can still override this one too.
         """
         return self._default_event_mail_type_ids() + [
             (

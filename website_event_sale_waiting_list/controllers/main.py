@@ -44,26 +44,14 @@ class WebsiteEventSaleWaitingListController(
     def registration_confirm(self, event, **post):
         """Never let the cart/checkout redirect swallow a waiting-list join.
 
-        Because of this class's own declaration above, ``WebsiteEventSaleController``
-        sits ahead of ``WebsiteEventControllerWaiting`` in the MRO - its
-        ``registration_confirm`` therefore runs *around*
-        ``WebsiteEventControllerWaiting.registration_confirm`` (called via
-        its own ``super()``), meaning whatever redirect the waiting-list-
-        aware base flow decided gets silently replaced by the sale
-        controller's own: it redirects to "/shop/checkout" or
-        "/shop/confirmation" whenever the visitor's cart ends up
-        containing an event ticket line, with no notion that a
-        registration in that cart might actually be in the ``wait``
-        state rather than genuinely purchased - not even for a free
-        ticket, since a leftover cart from earlier browsing is enough to
-        make ``request.cart`` non-empty. A waiting-list join must always
-        land back on this event's own "Joined the waiting list!"
-        confirmation (``website_event_waiting_list.registration_complete_waiting_list``)
-        instead, so the redirect is rebuilt here exactly like core's own
-        ``WebsiteEventController.registration_confirm`` does, whenever any
-        of the registrations just created by this request ended up
-        waiting - see :meth:`_create_attendees_from_registration_post`
-        below for how they are recovered.
+        ``WebsiteEventSaleController`` sits ahead of
+        ``WebsiteEventControllerWaiting`` in the MRO, so its own redirect to
+        "/shop/checkout" or "/shop/confirmation" (whenever the cart holds a
+        ticket line, even a free one from a leftover cart) silently wins
+        over the waiting-list-aware one. Rebuilt here, core-style, whenever
+        any registration from this request ended up ``wait`` - see
+        :meth:`_create_attendees_from_registration_post` for how they are
+        recovered.
         """
         res = super().registration_confirm(event, **post)
         attendees_sudo = getattr(
@@ -94,12 +82,9 @@ class WebsiteEventSaleWaitingListController(
     def waiting_list_manage(self, event, token, **post):
         """Route a paid-ticket waiting-list confirmation through the cart.
 
-        Only a "claim my seat" submission (``new_state=open``) for a
-        registration tied to a ticket that actually costs something is
-        intercepted here; a free ticket, a ticket-less registration, or a
-        cancel request all fall through to
-        :meth:`WebsiteEventControllerWaiting.waiting_list_manage` unchanged,
-        since those never need a cart or payment.
+        Only a "claim my seat" submission for a ticket that actually costs
+        something is intercepted here; a free or ticket-less registration,
+        or a cancel request, fall through unchanged.
         """
         if post.get("new_state") == "open":
             registration = event.sudo().registration_ids.filtered(
@@ -118,18 +103,12 @@ class WebsiteEventSaleWaitingListController(
     def _confirm_waiting_registration_paid(self, event, registration):
         """Add the ticket to the visitor's cart and send them to checkout.
 
-        The registration itself is left in ``wait`` state (see
-        ``EventRegistration._compute_registration_status``) until the order
-        is actually paid, so following the link never hands out a seat for
-        free - it only creates the ``sale.order``/``sale.order.line`` that
-        the normal checkout flow then confirms or cancels.
-
-        If the ticket sold out between the confirmation email being sent
-        and this click, ``_cart_add`` reports it via an empty/zero
-        ``cart_values`` instead of raising - the registration is left
-        untouched on the waiting list and the same management page is
-        re-rendered, which will accurately show it can no longer be
-        claimed, rather than the visitor being dropped into an empty cart.
+        The registration stays ``wait`` until the order is actually paid
+        (see ``EventRegistration._compute_registration_status``), so
+        following the link never hands out a seat for free. If the ticket
+        sold out in the meantime, ``_cart_add`` reports it via an
+        empty/zero ``cart_values`` instead of raising - the registration
+        is left on the waiting list and the same page re-rendered.
         """
         order_sudo = request.cart or request.website._create_cart()
         cart_values = order_sudo._cart_add(

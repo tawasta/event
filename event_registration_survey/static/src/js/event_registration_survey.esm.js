@@ -67,14 +67,9 @@ function isRequiredQuestionAnswered(questionWrapperEl) {
 
   const questionTypeEl = questionWrapperEl.querySelector("[data-question-type]");
   const questionType = questionTypeEl?.dataset.questionType;
-  // Counter/question-id/survey-id are rendered as separate data attributes
-  // by question_container (event_templates.xml) specifically so callers
-  // don't have to parse them back out of a combined string like the
-  // wrapper's own id ("{counter}-{question.id}-{survey.id}") - matrix row
-  // inputs are named "{counter}-{question.id}_{row.id}-{survey.id}" (the
-  // row id is spliced in the middle, not appended at the end), so those
-  // three pieces need to be reassembled around the row id, not just
-  // string-glued using the wrapper id or the table's data-name.
+  // Rendered as separate data attributes (event_templates.xml) so these
+  // don't need parsing back out of the wrapper id - matrix rows splice the
+  // row id in the middle, so they can't just be string-glued back together.
   const counter = questionWrapperEl.dataset.counter;
   const questionId = questionWrapperEl.dataset.questionId;
   const surveyId = questionWrapperEl.dataset.surveyId;
@@ -129,10 +124,8 @@ function isRequiredQuestionAnswered(questionWrapperEl) {
       return hasNonEmptyValue("input");
 
     default:
-      // Unrecognized/unsupported question type (the server-side
-      // template renders a warning instead of real inputs for these,
-      // see question_container in event_templates.xml) - fall back to
-      // a generic "some input has a value" check.
+      // Unsupported type - server renders a warning instead of real
+      // inputs, so fall back to a generic "some input has a value" check.
       if (!questionType) {
         console.warn(
           "event_registration_survey: question has no recognized " +
@@ -177,14 +170,9 @@ patch(ModalRegistration.prototype, {
 
     if (Object.keys(errors).length) {
       ev.preventDefault();
-      // Core's legacy public_root.js also listens for "submit" on any
-      // ".js_website_submit_form" (delegated on the document), and
-      // permanently disables the submit button with a spinner icon
-      // regardless of preventDefault, on the assumption that the page
-      // is about to navigate away. Stop the event from bubbling that
-      // far so it never runs when the submission is actually
-      // rejected, or the button is stuck disabled with no way to
-      // retry.
+      // Core's legacy submit-form listener disables the button with a
+      // spinner regardless of preventDefault - stop it bubbling there so a
+      // rejected submission doesn't leave the button stuck disabled.
       ev.stopPropagation();
       showErrors(formEl, errors);
       return;
@@ -212,11 +200,8 @@ export class SurveyRegistrationQuestions extends Interaction {
   };
 
   setup() {
-    // Embedded server-side by event_registration_attendee_details_template.xml
-    // (mirrors how survey.survey_fill_form embeds its own
-    // data-triggered-questions-by-answer attribute) - read once per
-    // attendee, since each attendee gets its own interaction instance
-    // and its own copy of this data attribute.
+    // Embedded server-side (event_registration_attendee_details_template.xml);
+    // read once per attendee, each with its own interaction instance.
     try {
       this.conditionalQuestionInfo = JSON.parse(
         this.el.dataset.conditionalQuestionInfo || "{}"
@@ -233,15 +218,9 @@ export class SurveyRegistrationQuestions extends Interaction {
   start() {
     this.el.querySelectorAll("textarea").forEach((el) => resizeTextArea(el));
 
-    // Both the "selected" and "unselected" icons are always rendered by
-    // the server template (event_templates.xml), and only one of the
-    // two is meant to be visible - core relies on a CSS rule scoped
-    // under ".o_survey_background" to do that, which this embedded
-    // modal doesn't have as an ancestor, so it has to be done in JS
-    // instead (see updateRadioIcons/updateCheckboxIcons/updateMatrixIcons).
-    // That JS only runs reactively on click, so it must also run once
-    // here for every choice, or all of them show both icons at once
-    // until the user interacts with them.
+    // Both icons are always rendered server-side; core hides one via a CSS
+    // rule this embedded modal doesn't have as an ancestor, so it must be
+    // done in JS here too, once for every choice on load.
     this.el.querySelectorAll(".o_survey_matrix_btn").forEach((matrixBtnEl) => {
       const inputEl = matrixBtnEl.querySelector("input");
       const isSelected = Boolean(inputEl?.checked);
@@ -304,12 +283,8 @@ export class SurveyRegistrationQuestions extends Interaction {
 
   updateCheckboxIcons(targetEl, isSelected) {
     const labelEl = targetEl.closest("label");
-    // Note: toggling the "d-none" class rather than the "hidden"
-    // property - FontAwesome's ".fa" class sets "display: inline-block"
-    // as an author-stylesheet rule, which wins over the UA stylesheet's
-    // "[hidden] { display: none }" regardless of selector specificity,
-    // so "hidden" alone would silently fail to hide these <i> icons.
-    // Bootstrap's ".d-none" uses "!important", so it always wins.
+    // ".d-none" not the "hidden" property: FontAwesome's own display
+    // rule would otherwise win over a plain "hidden" on these <i> icons.
     labelEl
       ?.querySelectorAll("i.fa-check-square, i.fa-square-o")
       .forEach((el) => el.classList.add("d-none"));

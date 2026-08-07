@@ -41,12 +41,10 @@ class EventRegistrationSurvey(WebsiteEventSaleController):
     def _merge_survey_post_data(self, post):
         """Merge the JSON-encoded ``post-data`` field into a flat dict.
 
-        The survey answers are posted as a single JSON-encoded ``post-data``
-        field (built client-side, see ``event_registration_survey.esm.js``)
-        rather than as individual form fields, since Odoo's POST param
-        binding for ``type="http"`` routes only keeps the first value for a
-        repeated field name, which would drop extra selections on
-        multiple_choice/matrix questions.
+        Survey answers are posted as one JSON-encoded field rather than
+        individual form fields, since Odoo's POST binding only keeps the
+        first value for a repeated name, dropping extra multiple_choice/
+        matrix selections.
 
         :param dict post: values posted by the registration form
         :return: a copy of ``post`` with ``post-data`` merged in and removed
@@ -65,9 +63,7 @@ class EventRegistrationSurvey(WebsiteEventSaleController):
     def registration_confirm(self, event, **post):
         """Merge the survey answers, then delegate to core.
 
-        Core handles reCAPTCHA verification, seat availability, attendee
-        creation and the sale/checkout redirect. The sorted survey answers
-        are stashed on the request so
+        The sorted answers are stashed on the request so
         :meth:`_create_attendees_from_registration_post` can reuse them
         further down the call chain.
 
@@ -84,13 +80,9 @@ class EventRegistrationSurvey(WebsiteEventSaleController):
     def _process_attendees_form(self, event, form_details):
         """Route to the survey-aware parser for events using a survey.
 
-        The posted field names then follow the
-        ``{counter}-{question_id}-{survey_id}`` convention instead of core's
-        ``{counter}-{question_type}-{question_id}`` one. Core calls this
-        method more than once per request (seat availability, then pricing
-        in ``website_event_sale``), so the sorted details computed in
-        :meth:`registration_confirm` are reused instead of sorting the
-        posted data again.
+        Core calls this more than once per request (seat availability,
+        then pricing), so the sorted details from
+        :meth:`registration_confirm` are reused instead of re-sorting.
 
         :param event.event event: event the registration is for
         :param dict form_details: values posted by the registration form
@@ -195,48 +187,11 @@ class EventRegistrationSurvey(WebsiteEventSaleController):
     def _sort_form_details(self, form_details):
         """Organize data posted from the attendee details form in a nested dictionary.
 
-        :param dict form_details: posted data from frontend registration form, like::
+        Turns flat ``{counter}-{field}-{survey_counter}`` keys (e.g.
+        ``'1-3-2': '0401234567'``) into ``{'1': {'2': {'3': '0401234567'}}}``,
+        one sub-dict per attendee and per survey on their form.
 
-            {
-                'nb_register-0': '1',
-                '1-event_ticket_id': '1',
-                '1-event_id': '1',
-                '1-survey-1': '00877e81-e25d-4ae7-afca-945a95ba1442',
-                '1-answer-1': 'f266f206-dc57-4abb-9eea-9c292e70a783',
-                'csrf_token': '687ec3ab0aa1cbd4139199030b1af786ffeea88do1656590004',
-                '1-1-1': 'Name',
-                '1-2-1': 'email@email.com',
-                '1-3-1': '0401234567',
-                '1-4-1': '2021-06-25',
-                '1-5-1': '2021-06-25 19:00:00',
-                '1-6-2': ['14', {'comment': ''}],
-                '1-7-2': {'18', ['15'], '19': ['15']},
-                ...
-            }
-
-        :return: a dictionary like::
-
-            {
-                '1': {
-                    '1': {
-                        'survey': '2abe3699-dc2f-428f-b0b8-fcfc8de2816a',
-                        'answer': '6cb0e410-3c32-4956-aae1-1c96dc590f1a',
-                        '1': 'Name',
-                        '2': 'email@email.com',
-                        '3': '0401234567',
-                        '4': '2021-07-16'
-                    }, '2': {
-                        'survey': 'df8026d6-beec-4dab-a18f-659f8a374a43',
-                        'answer': '2c8f6c6e-3011-4dc7-9381-4a1f1f990f98',
-                        '5': '2021-07-23 21:00:03',
-                        '6': ['14', {'comment': ''}],
-                        '7': {'18': ['15'], '19': ['15']},
-                    },
-                    'event_ticket_id': '1',
-                    'event_id': '1'
-                }
-            }
-
+        :param dict form_details: posted data from the frontend registration form
         :rtype: dict
         """
         registrations = {}

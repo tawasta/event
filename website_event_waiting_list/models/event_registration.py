@@ -87,13 +87,7 @@ class EventRegistration(models.Model):
         """Whether this waiting registration can now be confirmed.
 
         True when both the event and (if used) the ticket have either no
-        seat limit, or a limit with at least one seat still available:
-
-        1. Both ticket and event have limited but available seats
-        2. Both ticket and event have no limited seats
-        3. Ticket has no limited seats and event has limited but available seats
-        4. Ticket has limited but available seats and event has no limited seats
-        5. No ticket used and event has available seats
+        seat limit, or a limit with at least one seat still available.
         """
         for registration in self:
             event = registration.event_id
@@ -124,23 +118,14 @@ class EventRegistration(models.Model):
         """Route sold-out registrations straight into the waiting list.
 
         ``state`` is set to ``"wait"`` directly in ``vals``, before
-        ``super().create()`` runs - not afterwards, through a follow-up
-        :meth:`write` - because core's own ``create()`` calls
-        ``_update_mail_schedulers()`` on the just-created records while
-        still inside that same call (see core's
-        ``event.registration.create()``), and that method fires the
-        normal "you're registered" (``after_sub``) confirmation mail for
-        any registration it finds in the ``open`` state - which every
-        registration defaults to unless told otherwise. Leaving the
-        ``state`` transition to a later ``write()`` therefore means the
-        wrong confirmation mail has already gone out by the time this
-        method would flip it to ``wait``, regardless of whether the
-        waiting-list mail itself is configured correctly or not.
+        ``super().create()`` runs, not through a follow-up :meth:`write` -
+        core's own ``create()`` already sends the normal "you're
+        registered" mail to any ``open``-state registration (the default)
+        as part of that same call, so setting ``wait`` afterwards would be
+        too late to stop it.
 
-        Evaluated per record (not for the whole batch at once): a single
-        sold-out ticket in a multi-registration submission must not push
-        registrations for other, still-available tickets onto the waiting
-        list too.
+        Evaluated per record: a single sold-out ticket must not push
+        registrations for other, still-available tickets to wait too.
         """
         for vals in vals_list:
             if self._check_waiting_list(vals):
@@ -150,14 +135,11 @@ class EventRegistration(models.Model):
         return registrations
 
     def write(self, vals):
-        """Trigger the "after_wait" mail scheduler(s) right after joining the waitlist.
+        """Trigger the "after_wait" mail right after joining the waitlist.
 
-        Only relevant for an existing registration moved to ``wait``
-        afterwards (e.g. the "Move to Waiting List" backend action, via
-        :meth:`action_waiting`) - a registration created straight into
-        ``wait`` is already handled by :meth:`create` instead, since by
-        the time this ``write()`` would run for it the mail has already
-        been sent from there.
+        Only for an existing registration moved to ``wait`` afterwards
+        (e.g. the "Move to Waiting List" backend action) - one created
+        straight into ``wait`` is already handled by :meth:`create`.
         """
         res = super().write(vals)
         if vals.get("state") == "wait":
@@ -190,12 +172,9 @@ class EventRegistration(models.Model):
 
         Must wait if *either* the event's own capacity or the selected
         ticket's capacity is exhausted, not only when both are - the event
-        cap is a hard ceiling regardless of a specific ticket's own limit,
-        and a ticket-less registration is only bound by the event cap.
-        Mirrors :meth:`_compute_waiting_list_to_confirm`'s notion of
-        "seats really available" (event_ok/ticket_ok), inverted and
-        evaluated from raw ``vals`` since the registration does not exist
-        yet at this point.
+        cap is a hard ceiling regardless of a ticket's own limit. Mirrors
+        :meth:`_compute_waiting_list_to_confirm`, inverted, evaluated from
+        raw ``vals`` since the registration does not exist yet.
 
         :param dict vals: values passed to :meth:`create` for one registration
         :rtype: bool
@@ -230,14 +209,9 @@ class EventRegistration(models.Model):
     def _trigger_after_wait_mail(self):
         """Send the "after_wait" mail scheduler(s) immediately to these registrations.
 
-        Shared by :meth:`create` (registration created straight into
-        ``wait``) and :meth:`write` (an existing registration moved to
-        ``wait`` afterwards) - both need the exact same immediate-mail
-        trigger, just from a different moment in the registration's
-        lifecycle. Skipped per-record for events whose stage is an end
-        stage (``event.stage.pipe_end``) - closed events should not keep
-        emailing attendees - without cutting the loop short for the rest
-        of the batch.
+        Shared by :meth:`create` and :meth:`write`. Skipped per-record for
+        events in an end stage (``event.stage.pipe_end``), without cutting
+        the loop short for the rest of the batch.
         """
         for registration in self:
             if registration.event_id.stage_id.pipe_end:

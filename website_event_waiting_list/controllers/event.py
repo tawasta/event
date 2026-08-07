@@ -40,13 +40,9 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
     def _prepare_registration_new_values(self, event, **post):
         """Let the attendee-details form render even when sold out.
 
-        Core only shows the ticket/question fields when
-        ``availability_check`` is true (see
-        ``website_event.registration_attendee_details``); with a waiting
-        list enabled, an oversold order should still let the visitor fill
-        in their details and submit - :meth:`registration_confirm` and
-        ``event.registration.create()`` take care of routing it to the
-        waiting list instead of rejecting it.
+        Core hides the ticket/question fields unless ``availability_check``
+        is true; with a waiting list enabled, an oversold visitor should
+        still be able to fill in and submit their details.
         """
         values = super()._prepare_registration_new_values(event, **post)
         if values and event.waiting_list:
@@ -58,20 +54,11 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         """Let oversold submissions become waiting-list registrations.
 
         Scopes the seat-overflow bypass (see
-        ``event.event._verify_seats_availability``) to this one request via
-        context, so it never weakens overselling protection anywhere else.
-
-        Two separate places need the bypass, not just one: core's own
-        ``registration_confirm`` explicitly calls ``event._verify_seats_availability``
-        first (using the ``event`` argument below), but then creates the
-        registrations through ``request.env['event.registration']`` (see
-        ``_create_attendees_from_registration_post``), which triggers the
-        very same check again as an ``@api.constrains`` during ``create()``
-        - through ``request.env``'s own context, not through whatever
-        context ``event`` happens to carry. Both ``event`` and
-        ``request.env`` are therefore updated here, or the constraint would
-        still reject an oversold submission even though the earlier
-        explicit check passed.
+        ``event.event._verify_seats_availability``) to this one request, so
+        it never weakens overselling protection anywhere else. Both
+        ``event`` and ``request.env`` need the context flag: core checks
+        availability once directly on ``event``, then again via
+        ``request.env`` when the registration is actually created.
         """
         if event.waiting_list:
             request.update_context(website_event_waiting_list_bypass_seats_check=True)
@@ -89,15 +76,9 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
     def waiting_list_manage(self, event, token, **post):
         """Public page to confirm or cancel a waiting-list registration.
 
-        Deliberately independent of ``website_event_cancellation``: its own
+        Deliberately independent of ``website_event_cancellation``: own
         token, route and page, so this module never needs that one
-        installed. ``token`` is matched against
-        ``waiting_list_access_token`` (this module's own field), not
-        against ``website_event_cancellation``'s unrelated
-        ``access_token``.
-
-        :param event.event event: event the registration belongs to
-        :param str token: the registration's ``waiting_list_access_token``
+        installed.
         """
         registration = event.sudo().registration_ids.filtered(
             lambda r: r.waiting_list_access_token == token

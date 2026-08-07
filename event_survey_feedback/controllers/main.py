@@ -43,11 +43,9 @@ class SurveyEventFeedback(Survey):
     ):
         """Stash event/registration context, then delegate to core's survey_start.
 
-        Delegates to core's own :meth:`survey_start` for all validation and
-        answer creation/resume logic; the event (and, if known, the specific
-        registration) are attached through the environment context so
-        :meth:`survey.survey._create_answer` can set them at creation time,
-        instead of duplicating core's controller logic.
+        The event (and registration, if known) are attached through the
+        environment context so :meth:`survey.survey._create_answer` can set
+        them at creation time, instead of duplicating core's logic.
 
         :param str survey_token: access token of the feedback survey
         :param int event_id: event this feedback answer belongs to

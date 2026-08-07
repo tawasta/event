@@ -53,19 +53,10 @@ class EventMailScheduler(models.Model):
     def execute(self):
         """Keep this module's own interval types out of core's generic sweep.
 
-        Core's own ``execute()`` has no branch for "after_wait" or
-        "after_seats_available": they are not "after_sub" (attendee-based),
-        and for a non-multi-slot event fall through to the generic "one
-        shot, mail everyone" branch (``_execute_event_based()``, meant for
-        before/after-event communication) - wrong for a per-registration
-        mail that is already sent immediately and synchronously elsewhere
-        (see ``EventEvent._compute_seats`` and ``EventRegistration.write``,
-        both calling :meth:`_trigger_immediate_mail`). Left unfiltered, the
-        periodic cron (``event.mail.schedule_communications``) would
-        eventually pick these up too - typically once the event's
-        ``date_end`` has passed, since their ``scheduled_date`` has no
-        dedicated computation of its own and falls back to that - and mail
-        the wrong recipients.
+        Core's ``execute()`` has no branch for "after_wait"/
+        "after_seats_available" and would fall through to its "mail
+        everyone" one-shot branch - wrong for a per-registration mail
+        already sent immediately elsewhere (see :meth:`_trigger_immediate_mail`).
         """
         own_interval_types = ("after_wait", "after_seats_available")
         return super(
@@ -76,22 +67,10 @@ class EventMailScheduler(models.Model):
     def _trigger_immediate_mail(self, registrations):
         """Send each of these schedulers' mail to ``registrations`` right away.
 
-        Loops over ``self`` rather than requiring a single scheduler, since
-        callers filter ``event_mail_ids`` by ``interval_type`` and an event
-        is free to have more than one scheduler of the same type (or none
-        at all) - mirroring how core's own :meth:`_create_missing_mail_registrations`
-        and :meth:`execute` handle a multi-record ``self`` on this same model.
-
-        Unlike the cron-driven ``execute()``/``_execute_attendee_based()``
-        flow, this also picks up ``event.mail.registration`` tracking rows
-        that already exist but were reset (``mail_sent = False``) - e.g.
-        when seats became unavailable again after a previous notification -
-        not only brand new registrations. Both
-        :meth:`_create_missing_mail_registrations` and
-        :meth:`event.mail.registration._execute_on_registrations` are
-        core methods, reused as-is.
-
-        :param event.registration registrations: attendees to mail
+        Loops over ``self`` instead of requiring a single scheduler, since
+        an event can have zero or several of the same ``interval_type``.
+        Also re-sends to a registration whose ``mail_sent`` was reset (e.g.
+        seats became unavailable again), not only to brand new ones.
         """
         if not registrations:
             return

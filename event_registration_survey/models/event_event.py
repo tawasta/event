@@ -80,10 +80,7 @@ class EventEvent(models.Model):
     # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("event_type_id")
     def _compute_survey_ids(self):
-        """Update event configuration from its event type. Depends are set only
-        on event_type_id itself, not its sub fields. Purpose is to emulate an
-        onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method."""
+        """Copy the default survey from the event type when it changes."""
         for event in self:
             if not event.survey_ids and event.event_type_id.survey_ids:
                 event.survey_ids = event.event_type_id.survey_ids

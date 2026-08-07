@@ -49,9 +49,8 @@ class EventMail(models.Model):
     def _execute_event_based_for_registrations(self, registrations):
         """Tag ``registrations`` with the feedback survey before core sends the mail.
 
-        Covers the event-based and slot-based scheduler flows ('before/after
-        event', including per-slot); the attendee-based flow ('after each
-        registration') is covered separately in
+        Covers the event/slot-based flows; the attendee-based flow is
+        covered separately in
         :meth:`event.mail.registration._execute_on_registrations`.
         """
         self.ensure_one()

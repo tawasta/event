@@ -22,12 +22,9 @@
 def post_init_hook(env):
     """Backfill missing waiting-list mail schedulers on install/upgrade.
 
-    ``EventEvent.create``/``write`` only guarantee the two schedulers going
-    forward (see ``EventEvent._ensure_waiting_list_mail_schedulers``) - any
-    event that already had ``waiting_list`` enabled before this module
-    version was installed needs the same backfill run once here, or it
-    would keep silently sending no waiting-list mail until someone happens
-    to re-save it.
+    ``EventEvent.create``/``write`` only guarantee this going forward - an
+    event that had ``waiting_list`` enabled before needs the same backfill
+    run once here.
     """
     events = env["event.event"].search([("waiting_list", "=", True)])
     events._ensure_waiting_list_mail_schedulers()

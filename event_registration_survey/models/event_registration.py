@@ -127,16 +127,10 @@ class EventRegistration(models.Model):
             )
         answer_ids = []
 
-        # Prepare survey_info for matrix questions. Matrix answers are posted
-        # as "{question_id}_{row_id}" (a checked cell) or "{question_id}_comment"
-        # (the free-text comment, see question_matrix in event_templates.xml);
-        # only the former is a numeric row id.
-        #
-        # survey_info is the whole per-registration dict built by
-        # _sort_form_details, keyed by survey counter (e.g. "1": {...}) for
-        # actual survey answers, but also "event_ticket_id"/"event_id" as
-        # plain string values (not a dict) alongside them - skip those here,
-        # this method only deals with survey answers.
+        # Matrix answers are posted as "{question_id}_{row_id}" (a checked
+        # cell) or "{question_id}_comment" - reshape those into nested
+        # dicts. survey_info also carries "event_ticket_id"/"event_id" as
+        # plain strings alongside the per-survey dicts; skip those here.
         new_survey_info = {}
         for survey_id, details in survey_info.items():
             if not isinstance(details, dict):

@@ -59,11 +59,9 @@ class EventEvent(models.Model):
     def _compute_seats(self):
         """Extend core seat computation to also count waiting-list seats.
 
-        Also triggers the "seats available" mail scheduler(s) synchronously
-        as soon as a compute of this event's seats reveals free capacity,
-        and resets ``mail_sent`` on any not-yet-confirmed waiting attendee
-        so that a seat becoming unavailable again does not leave them
-        thinking they already got their confirmation email.
+        Also triggers the "seats available" mail immediately once a seat
+        frees up, and resets ``mail_sent`` on any waiting attendee no
+        longer eligible so a later round notifies them again.
         """
         res = super()._compute_seats()
 
@@ -95,10 +93,9 @@ class EventEvent(models.Model):
     def _trigger_seats_available_mails(self):
         """Send the "seats available" mail immediately to eligible waiting attendees.
 
-        Also resets ``mail_sent`` for waiting attendees that were already
-        notified but are no longer eligible (seats became unavailable
-        again before they confirmed), so a future round of availability
-        notifies them again instead of silently skipping them.
+        Also resets ``mail_sent`` on attendees no longer eligible (seats
+        became unavailable again before they confirmed), so a later round
+        of availability notifies them again.
         """
         self.ensure_one()
         schedulers = self.event_mail_ids.filtered(
@@ -123,14 +120,10 @@ class EventEvent(models.Model):
     def _verify_seats_availability(self, slot_tickets):
         """Skip the hard seat-overflow block for the website registration flow.
 
-        When this event has a waiting list, an overflowing website
-        submission should be routed to the waiting list by
-        :meth:`event.registration.create`, not rejected outright. Scoped
-        via context to that one flow (see
-        ``WebsiteEventControllerWaiting.registration_confirm``), not a
-        blanket bypass, so normal overselling protection still applies
-        everywhere else (manually confirming waiting attendees, backend
-        edits, ...).
+        An overflowing website submission should be routed to the waiting
+        list, not rejected outright. Scoped via context to that one flow
+        (see ``WebsiteEventControllerWaiting.registration_confirm``), not a
+        blanket bypass, so overselling protection still applies elsewhere.
         """
         self.ensure_one()
         if self.waiting_list and self.env.context.get(
@@ -141,10 +134,7 @@ class EventEvent(models.Model):
 
     @api.onchange("event_type_id")
     def _onchange_event_type_update_wait_list(self):
-        """Update event configuration from its event type. Depends are set only
-        on event_type_id itself, not its subfields. Purpose is to emulate an
-        onchange: if event type is changed, update event configuration. Changing
-        event type content itself should not trigger this method."""
+        """Copy the waiting-list setting from the event type when it changes."""
         for event in self:
             if event.event_type_id:
                 event.waiting_list = event.event_type_id.waiting_list
@@ -185,15 +175,10 @@ class EventEvent(models.Model):
     def create(self, vals_list):
         """Make sure a waiting-list event actually has its mail schedulers.
 
-        Relying on staff to remember to add the "after_wait"/
-        "after_seats_available" schedulers manually, or on the event
-        having been created from an event type that already had them (see
-        ``EventType._default_event_mail_type_ids_with_waiting_list``), is
-        fragile: an event missing one silently sends no waiting-list mail
-        at all. Checked against the created records themselves rather than
-        ``vals_list``, since ``waiting_list`` can end up true through
-        means other than an explicit key in ``vals`` (e.g. copied from the
-        event type via the form's onchange before save).
+        Relying on staff to add them manually is fragile: a missing one
+        silently sends no waiting-list mail at all. Checked on the created
+        records, not ``vals_list``, since ``waiting_list`` can end up true
+        without an explicit key (e.g. copied from the event type).
         """
         events = super().create(vals_list)
         events.filtered("waiting_list")._ensure_waiting_list_mail_schedulers()
@@ -213,9 +198,8 @@ class EventEvent(models.Model):
     def _ensure_waiting_list_mail_schedulers(self):
         """Create whichever of this event's two waiting-list schedulers are missing.
 
-        Never touches or duplicates one that already exists (by
-        ``interval_type``), so a scheduler someone customised - a
-        different template, timing, or wording - is always left alone.
+        Never touches one that already exists (by ``interval_type``), so a
+        customised scheduler is always left alone.
         """
         for event in self:
             existing_types = set(event.event_mail_ids.mapped("interval_type"))
@@ -231,11 +215,8 @@ class EventEvent(models.Model):
         """``event.mail`` creation values for this event's own two schedulers.
 
         Mirrors ``EventType._default_event_mail_type_ids_with_waiting_list``,
-        but targets ``event.mail`` (the per-event scheduler model) rather
-        than ``event.type.mail`` (the per-event-type template copied onto
-        new events). A template that has been uninstalled or deleted is
-        skipped rather than raising, since a half-broken mail setup should
-        not block saving the event itself.
+        but targets ``event.mail`` directly. A deleted template is skipped
+        rather than raising, since that should not block saving the event.
         """
         self.ensure_one()
         by_interval_type = {

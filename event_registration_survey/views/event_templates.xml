@@ -22,23 +22,13 @@
     id="question_container"
     name="Event Registration Survey: question container"
   >
-    <!-- Unlike /survey/..., this modal renders the whole survey in one
-             shot (no per-page navigation, no prior-page answers to look
-             back at), so core's questions_layout-dependent display logic
-             (which relies on selected_answers/triggering_answers_by_question
-             from an in-progress answer that doesn't exist yet here) doesn't
-             apply. A question with no trigger is always shown; a
+    <!-- This modal renders the whole survey in one shot (no per-page
+             navigation), so a question with no trigger is always shown; a
              conditional one starts hidden and is revealed by
-             SurveyRegistrationQuestions.toggleRelatedQuestionVisibility once
-             its triggering answer is picked. -->
+             SurveyRegistrationQuestions.toggleRelatedQuestionVisibility. -->
     <t t-set="display_question" t-value="not question.triggering_answer_ids" />
-    <!-- The keyboard-shortcut "Key" badge (survey.survey_selection_key)
-             is meant for live-quiz sessions where the presenter's audience
-             picks an answer by pressing a letter key; it makes no sense on
-             an event registration form (filled with mouse/touch, sometimes
-             for several attendees at once) and its absolute positioning CSS
-             assumes the full /survey/ page layout, which this embedded modal
-             doesn't have - always disabled here. -->
+    <!-- The "Key" badge is for live-quiz sessions with a presenter -
+             meaningless on a mouse/touch registration form, so always off. -->
     <t t-set="letters" t-value="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
     <t t-set="useKeySelection" t-value="False" />
     <!-- Extra right margin aligns non-choice questions with choice questions, which all carry the mr-2 class -->
@@ -93,17 +83,11 @@
       <t t-if="question.question_type == 'matrix'">
         <t t-call="event_registration_survey.question_matrix" />
       </t>
-      <!-- Each question type is rendered by its own copy of survey's
-                 QWeb templates (see question_text_box and siblings below)
-                 instead of calling survey.question_container directly,
-                 because an event registration can have several attendees
-                 answering the same survey in a single POST - core's
-                 per-respondent field naming (t-att-name="question.id") does
-                 not support that, ours prefixes with counter/survey id.
-                 Any question type not listed in the t-if below (e.g. "scale")
-                 falls through to the warning below instead of silently
-                 rendering nothing; add a matching question_<type> template
-                 here to support it. -->
+      <!-- Own copies of survey's QWeb templates, not survey.question_container
+                 directly, since several attendees can answer the same survey
+                 in one POST and core's field naming doesn't support that.
+                 Any type not listed below falls through to the warning
+                 instead of silently rendering nothing. -->
       <t
         t-if="question.question_type not in ('text_box', 'char_box', 'numerical_box', 'date', 'datetime', 'simple_choice', 'multiple_choice', 'matrix')"
       >

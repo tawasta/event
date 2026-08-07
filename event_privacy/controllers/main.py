@@ -46,10 +46,9 @@ class EventRegistrationPrivacy(WebsiteEventController):
     def registration_confirm(self, event, **post):
         """Stash the posted privacy consents, then delegate to core.
 
-        The consents are recorded once :meth:`_create_attendees_from_registration_post`
-        has created the attendees and resolved their partner, since core
-        itself may still change ``partner_id`` between now and then
-        (e.g. from the current visitor).
+        Recorded only once :meth:`_create_attendees_from_registration_post`
+        has resolved each attendee's ``partner_id``, since core may still
+        change it before then.
 
         :param event.event event: event the registration is for
         :param post: values posted by the registration form
@@ -60,11 +59,9 @@ class EventRegistrationPrivacy(WebsiteEventController):
     def _create_attendees_from_registration_post(self, event, registration_data):
         """Record each attendee's privacy consents after core creates them.
 
-        Runs regardless of how the attendees were produced (plain
-        ``website_event`` questions, a survey from another module, etc.),
-        since it only relies on the core ``partner_id`` core already sets
-        on each attendee. Silently skips attendees without a resolved
-        partner: consent cannot be tied to nobody.
+        Only relies on the ``partner_id`` core already sets on each
+        attendee, so it works regardless of how they were produced.
+        Skips attendees with no resolved partner.
 
         :param event.event event: event the registration is for
         :param list registration_data: list of dicts, one per attendee

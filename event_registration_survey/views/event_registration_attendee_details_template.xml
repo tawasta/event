@@ -4,10 +4,8 @@
     id="registration_attendee_details_survey"
     inherit_id="website_event.registration_attendee_details"
   >
-    <!-- Insert the survey question block right after core's own
-             per-attendee question div, BEFORE that div's t-if is touched
-             below - matching it again after changing its t-if would fail,
-             since the attribute value would no longer be the original one. -->
+    <!-- Inserted before the t-if below is changed, or re-matching this
+             xpath afterwards would fail (attribute value no longer original). -->
     <xpath expr="//div[@t-if='event.specific_question_ids']" position="after">
       <div
         t-if="event.survey_ids and availability_check and limit_check"
@@ -23,13 +21,9 @@
                     for survey in event.survey_ids
                 })"
       >
-        <!-- The conditional-question map above is embedded directly,
-                     the same way survey.survey_fill_form does it for its own
-                     data-triggered-questions-by-answer attribute, instead of
-                     fetching it via a separate RPC call: it is then available
-                     synchronously as soon as this modal is in the DOM, with
-                     no extra round-trip and no risk of a user interacting
-                     with a question before the data has arrived. -->
+        <!-- Embedded directly (like survey.survey_fill_form does) rather
+                     than fetched via RPC, so it's available as soon as the
+                     modal is in the DOM. -->
         <div class="o_survey_form_content w-100 row">
           <t
             t-set="sorted_surveys"

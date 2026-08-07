@@ -53,12 +53,9 @@ class EventRegistration(models.Model):
     def _compute_registration_status(self):
         """Keep a paid waiting-list confirmation on "wait" until it is paid.
 
-        Core's own computation (event_sale, run first via super()) assigns
-        "draft" to any registration whose linked order exists but is not
-        yet confirmed as "sale" - correct for an ordinary cart signup, but
-        wrong here: the registration was already on the waiting list and
-        should keep showing that until the order is actually paid, then
-        jump straight to "open".
+        Core's own computation assigns "draft" to any registration with an
+        unconfirmed order - correct for an ordinary cart signup, but wrong
+        here: it should keep showing "wait" until actually paid.
         """
         super()._compute_registration_status()
         for registration in self.filtered("confirmed_from_waiting_list"):
@@ -74,24 +71,13 @@ class EventRegistration(models.Model):
     def create(self, vals_list):
         """Never let a waiting-list registration end up linked to a cart.
 
-        ``website_event_sale``'s own ``_create_attendees_from_registration_post``
-        (see that controller) decides whether a ticket needs a sale order
-        line, and stamps ``sale_order_id``/``sale_order_line_id`` into
-        ``vals`` accordingly, before the registration itself is even
-        created - with no way yet to know that
-        ``website_event_waiting_list``'s own ``create()`` (run as part of
-        the same ``super()`` chain) is about to route this particular
-        registration to the waiting list instead. Even a free ticket can
-        end up linked this way, since the sale controller only skips the
-        cart entirely when the visitor has no cart open at all - a
-        leftover one from earlier browsing is enough to trigger it.
-        Left alone this makes no sense for a seat that was not actually
-        claimed, and confuses ``WebsiteEventSaleController.registration_confirm``
-        into redirecting to "/shop/checkout" or "/shop/confirmation"
-        instead of this event's own waiting-list confirmation - reusing
-        :meth:`_check_waiting_list` here (same method, same ``vals``)
-        keeps this decision consistent with that one regardless of which
-        of the two ``create()`` overrides actually runs first.
+        ``website_event_sale``'s controller stamps ``sale_order_id``/
+        ``sale_order_line_id`` into ``vals`` before the registration is
+        created, with no way yet to know it is about to be routed to the
+        waiting list instead - even a free ticket can get linked this way
+        if the visitor has a leftover cart open. Reusing
+        :meth:`_check_waiting_list` here keeps this decision consistent
+        regardless of which ``create()`` override runs first.
         """
         for vals in vals_list:
             if self._check_waiting_list(vals):
@@ -103,13 +89,11 @@ class EventRegistration(models.Model):
     def action_cancel(self):
         """Send a paid waiting-list registration back to the waiting list.
 
-        website_event_sale calls this on the registrations covering a cart
-        quantity decrease (see SaleOrder._cart_update_order_line in that
-        module). For an ordinary registration that correctly means
-        "cancelled", but for one that came from the waiting list the seat
-        was never actually claimed - cancelling it outright would just
-        lose the visitor's place in line instead of freeing the seat back
-        up for the next person waiting.
+        ``website_event_sale`` calls this on a cart quantity decrease
+        (see ``SaleOrder._cart_update_order_line``). Correct as
+        "cancelled" for an ordinary registration, but a seat claimed from
+        the waiting list was never really taken - send it back instead of
+        losing the visitor's place in line.
         """
         confirmed_waiting = self.filtered("confirmed_from_waiting_list")
         super(EventRegistration, self - confirmed_waiting).action_cancel()
