@@ -18,6 +18,8 @@
 #
 ##############################################################################
 # 1. Standard library imports:
+import logging
+
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
 from odoo import http
@@ -30,6 +32,8 @@ from odoo.addons.website_event.controllers.main import WebsiteEventController
 # 5. Local imports in the relative form:
 
 # 6. Unknown third party imports:
+
+_logger = logging.getLogger(__name__)
 
 
 class WebsiteEventControllerWaiting(WebsiteEventController):
@@ -56,18 +60,28 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         Scopes the seat-overflow bypass (see
         ``event.event._verify_seats_availability``) to this one request via
         context, so it never weakens overselling protection anywhere else.
+
+        Two separate places need the bypass, not just one: core's own
+        ``registration_confirm`` explicitly calls ``event._verify_seats_availability``
+        first (using the ``event`` argument below), but then creates the
+        registrations through ``request.env['event.registration']`` (see
+        ``_create_attendees_from_registration_post``), which triggers the
+        very same check again as an ``@api.constrains`` during ``create()``
+        - through ``request.env``'s own context, not through whatever
+        context ``event`` happens to carry. Both ``event`` and
+        ``request.env`` are therefore updated here, or the constraint would
+        still reject an oversold submission even though the earlier
+        explicit check passed.
         """
         if event.waiting_list:
+            request.update_context(website_event_waiting_list_bypass_seats_check=True)
             event = event.with_context(
                 website_event_waiting_list_bypass_seats_check=True
             )
         return super().registration_confirm(event, **post)
 
     @http.route(
-        [
-            '/event/<model("event.event"):event>/waiting-list/manage/'
-            "<string:token>"
-        ],
+        ['/event/<model("event.event"):event>/waiting-list/manage/<string:token>'],
         type="http",
         auth="public",
         website=True,
@@ -96,12 +110,16 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
             if new_state == "open" and registration.state == "wait":
                 try:
                     registration.sudo().action_waiting_confirm()
-                except ValidationError:
+                except ValidationError as exc:
                     # Someone else claimed the seat between the email being
                     # sent and this click; fall through to re-render the
                     # page, which will accurately show it is no longer
                     # confirmable instead of a hard error.
-                    pass
+                    _logger.info(
+                        "Waiting-list confirmation for registration %s rejected: %s",
+                        registration.id,
+                        exc,
+                    )
             elif new_state == "cancel":
                 registration.sudo().action_cancel()
 

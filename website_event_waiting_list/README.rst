@@ -35,6 +35,30 @@ Configuration
   (sent immediately when someone joins the waiting list) and "Event:
   Waiting List Open Seats" (sent immediately once a seat frees up for an
   eligible waiting attendee).
+* Both scheduler entries are enforced, not just offered: whenever
+  ``waiting_list`` is turned on for an event - through its event type,
+  directly on the event, via the API, or on an existing event that had it
+  enabled before this was added (backfilled once on install/upgrade by
+  this module's ``post_init_hook``) - ``EventEvent._ensure_waiting_list_mail_schedulers``
+  creates whichever of the two is missing, using the default templates
+  above. An event can never end up with the waiting list on and no mail
+  configured, which used to (before this) either send nothing or, worse,
+  crash outright when a registration tried to join with no scheduler to
+  notify it through. A scheduler that was intentionally customised (a
+  different template, wording, timing) is left untouched - only a
+  genuinely missing ``interval_type`` gets created.
+* A waiting-list registration is created directly in the ``wait`` state
+  (in ``vals``, before the row is inserted) rather than created normally
+  and moved to ``wait`` right afterwards. This matters regardless of
+  whether the mail scheduler above exists: core's own
+  ``event.registration.create()`` calls ``_update_mail_schedulers()`` on
+  the freshly inserted rows while still inside that same call, and that
+  method emails the normal "you're registered" (``after_sub``)
+  confirmation to anything it finds in the ``open`` state - which is what
+  every registration defaults to unless told otherwise. Moving the state
+  to ``wait`` only afterwards, through a follow-up write, meant that
+  wrong confirmation had already been sent by the time this module got a
+  chance to correct it.
 
 Usage
 =====
@@ -76,9 +100,9 @@ Known issues / Roadmap
   interpolation in the ``subject`` field, which modern ``mail.template``
   does not render. Neither affects this module in any way (no dependency,
   no shared code path) - just worth knowing if working on that module too.
-* The 17.0 ``website_event_sale_waiting_list`` module (routes a waiting-list
-  confirmation through ``website_event_sale``'s cart/checkout for paid
-  tickets) has not been ported yet. It should stay a separate, thin bridge
+* Paid tickets are handled by the separate ``website_event_sale_waiting_list``
+  module (routes a waiting-list confirmation through ``website_event_sale``'s
+  cart/checkout instead of confirming for free). Kept as a thin bridge
   module depending on both this one and ``website_event_sale`` - not merged
   into this one, which would force a sale-order dependency onto anyone who
   just wants a waiting list for free events.

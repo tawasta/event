@@ -42,8 +42,7 @@ class EventTypeMail(models.Model):
             ("after_wait", "After registering to waiting list"),
             (
                 "after_seats_available",
-                "After more seats are available send to waiting list "
-                "registrations",
+                "After more seats are available send to waiting list registrations",
             ),
         ],
         ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},

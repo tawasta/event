@@ -65,7 +65,7 @@ class EventEvent(models.Model):
         so that a seat becoming unavailable again does not leave them
         thinking they already got their confirmation email.
         """
-        super()._compute_seats()
+        res = super()._compute_seats()
 
         for event in self:
             event.seats_waiting = 0
@@ -89,6 +89,8 @@ class EventEvent(models.Model):
 
             if event.waiting_list and event.seats_available > 0:
                 event._trigger_seats_available_mails()
+
+        return res
 
     def _trigger_seats_available_mails(self):
         """Send the "seats available" mail immediately to eligible waiting attendees.
@@ -175,11 +177,85 @@ class EventEvent(models.Model):
         if sold_out_events:
             raise ValidationError(
                 self.env._("There are not enough seats available for:")
-                + "\n%s\n" % "\n".join(sold_out_events)
+                + "\n{}\n".format("\n".join(sold_out_events))
             )
 
     # 6. CRUD methods
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Make sure a waiting-list event actually has its mail schedulers.
+
+        Relying on staff to remember to add the "after_wait"/
+        "after_seats_available" schedulers manually, or on the event
+        having been created from an event type that already had them (see
+        ``EventType._default_event_mail_type_ids_with_waiting_list``), is
+        fragile: an event missing one silently sends no waiting-list mail
+        at all. Checked against the created records themselves rather than
+        ``vals_list``, since ``waiting_list`` can end up true through
+        means other than an explicit key in ``vals`` (e.g. copied from the
+        event type via the form's onchange before save).
+        """
+        events = super().create(vals_list)
+        events.filtered("waiting_list")._ensure_waiting_list_mail_schedulers()
+        return events
+
+    def write(self, vals):
+        """See :meth:`create` - only re-checked when ``waiting_list`` itself
+        is part of this write, so enabling it later is covered too."""
+        res = super().write(vals)
+        if vals.get("waiting_list"):
+            self._ensure_waiting_list_mail_schedulers()
+        return res
 
     # 7. Action methods
 
     # 8. Business methods
+    def _ensure_waiting_list_mail_schedulers(self):
+        """Create whichever of this event's two waiting-list schedulers are missing.
+
+        Never touches or duplicates one that already exists (by
+        ``interval_type``), so a scheduler someone customised - a
+        different template, timing, or wording - is always left alone.
+        """
+        for event in self:
+            existing_types = set(event.event_mail_ids.mapped("interval_type"))
+            missing_vals = [
+                vals
+                for vals in event._get_waiting_list_mail_vals()
+                if vals["interval_type"] not in existing_types
+            ]
+            if missing_vals:
+                self.env["event.mail"].sudo().create(missing_vals)
+
+    def _get_waiting_list_mail_vals(self):
+        """``event.mail`` creation values for this event's own two schedulers.
+
+        Mirrors ``EventType._default_event_mail_type_ids_with_waiting_list``,
+        but targets ``event.mail`` (the per-event scheduler model) rather
+        than ``event.type.mail`` (the per-event-type template copied onto
+        new events). A template that has been uninstalled or deleted is
+        skipped rather than raising, since a half-broken mail setup should
+        not block saving the event itself.
+        """
+        self.ensure_one()
+        by_interval_type = {
+            "after_wait": "website_event_waiting_list.event_waiting",
+            "after_seats_available": (
+                "website_event_waiting_list.event_confirm_waiting_registration"
+            ),
+        }
+        vals_list = []
+        for interval_type, template_xmlid in by_interval_type.items():
+            template = self.env.ref(template_xmlid, raise_if_not_found=False)
+            if not template:
+                continue
+            vals_list.append(
+                {
+                    "event_id": self.id,
+                    "interval_nbr": 0,
+                    "interval_unit": "now",
+                    "interval_type": interval_type,
+                    "template_ref": f"mail.template,{template.id}",
+                }
+            )
+        return vals_list

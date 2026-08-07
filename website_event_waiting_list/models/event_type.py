@@ -51,7 +51,11 @@ class EventType(models.Model):
         bypassing the override. The field is therefore redeclared below
         with a new default that calls into core's own method through
         ``self`` (which *does* go through the normal override chain) and
-        appends the waiting-list schedulers.
+        appends the waiting-list schedulers. The field's own ``default=``
+        below wraps this method in a ``lambda self: ...`` for the same
+        reason, rather than repeating core's mistake here: a bare
+        function reference would stop any *further* module from being
+        able to override this method either.
         """
         return self._default_event_mail_type_ids() + [
             (
@@ -61,8 +65,9 @@ class EventType(models.Model):
                     "interval_nbr": 0,
                     "interval_unit": "now",
                     "interval_type": "after_wait",
-                    "template_ref": "mail.template,%i"
-                    % self.env.ref("website_event_waiting_list.event_waiting").id,
+                    "template_ref": "mail.template,{}".format(
+                        self.env.ref("website_event_waiting_list.event_waiting").id
+                    ),
                 },
             ),
             (
@@ -72,10 +77,12 @@ class EventType(models.Model):
                     "interval_nbr": 0,
                     "interval_unit": "now",
                     "interval_type": "after_seats_available",
-                    "template_ref": "mail.template,%i"
-                    % self.env.ref(
-                        "website_event_waiting_list.event_confirm_waiting_registration"
-                    ).id,
+                    "template_ref": "mail.template,{}".format(
+                        self.env.ref(
+                            "website_event_waiting_list."
+                            "event_confirm_waiting_registration"
+                        ).id
+                    ),
                 },
             ),
         ]
@@ -84,7 +91,7 @@ class EventType(models.Model):
         "event.type.mail",
         "event_type_id",
         string="Mail Schedule",
-        default=_default_event_mail_type_ids_with_waiting_list,
+        default=lambda self: self._default_event_mail_type_ids_with_waiting_list(),
     )
 
     # 4. Compute and search fields, in the same order that fields declaration

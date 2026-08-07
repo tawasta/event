@@ -18,27 +18,16 @@
 #
 ##############################################################################
 
-{
-    "name": "Website Event Waiting List",
-    "summary": "Adds a waiting list functionality to Events.",
-    "version": "19.0.1.0.0",
-    "category": "Events",
-    "website": "https://github.com/tawasta/event",
-    "author": "Futural",
-    "license": "AGPL-3",
-    "application": False,
-    "installable": True,
-    "depends": [
-        "website_event",
-    ],
-    "data": [
-        "security/ir.model.access.csv",
-        "data/email_template_data.xml",
-        "views/event_views.xml",
-        "views/event_templates_page_registration.xml",
-        "views/event_templates_page_waiting_list.xml",
-        "wizard/waiting_mail_list_wizard.xml",
-        "wizard/waiting_mail_list_message.xml",
-    ],
-    "post_init_hook": "post_init_hook",
-}
+
+def post_init_hook(env):
+    """Backfill missing waiting-list mail schedulers on install/upgrade.
+
+    ``EventEvent.create``/``write`` only guarantee the two schedulers going
+    forward (see ``EventEvent._ensure_waiting_list_mail_schedulers``) - any
+    event that already had ``waiting_list`` enabled before this module
+    version was installed needs the same backfill run once here, or it
+    would keep silently sending no waiting-list mail until someone happens
+    to re-save it.
+    """
+    events = env["event.event"].search([("waiting_list", "=", True)])
+    events._ensure_waiting_list_mail_schedulers()

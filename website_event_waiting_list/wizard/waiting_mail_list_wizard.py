@@ -67,8 +67,7 @@ class WaitingMailListWizard(models.TransientModel):
         message = self.env["website.event.waiting.mail.list.message"].create(
             {
                 "message": self.env._(
-                    "Waiting list confirmation mail sent to following "
-                    "registrations:"
+                    "Waiting list confirmation mail sent to following registrations:"
                 ),
                 "registration_ids": registrations_sent.ids,
             }

@@ -48,7 +48,6 @@ class EventRegistration(models.Model):
     )
     state = fields.Selection(selection_add=[("wait", "Waiting")])
     waiting_list_access_token = fields.Char(
-        string="Waiting List Access Token",
         readonly=True,
         copy=False,
         default=lambda self: str(uuid.uuid4()),
@@ -99,11 +98,16 @@ class EventRegistration(models.Model):
         for registration in self:
             event = registration.event_id
             ticket = registration.event_ticket_id
-            event_ok = not event.seats_limited or not event.seats_max or (
-                event.seats_available > 0
+            event_ok = (
+                not event.seats_limited
+                or not event.seats_max
+                or (event.seats_available > 0)
             )
-            ticket_ok = not ticket or not ticket.seats_limited or not ticket.seats_max or (
-                ticket.seats_available > 0
+            ticket_ok = (
+                not ticket
+                or not ticket.seats_limited
+                or not ticket.seats_max
+                or (ticket.seats_available > 0)
             )
             registration.waiting_list_to_confirm = bool(
                 registration.waiting_list
@@ -117,48 +121,47 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
     @api.model_create_multi
     def create(self, vals_list):
-        """Move newly created registrations to the waiting list where needed.
+        """Route sold-out registrations straight into the waiting list.
+
+        ``state`` is set to ``"wait"`` directly in ``vals``, before
+        ``super().create()`` runs - not afterwards, through a follow-up
+        :meth:`write` - because core's own ``create()`` calls
+        ``_update_mail_schedulers()`` on the just-created records while
+        still inside that same call (see core's
+        ``event.registration.create()``), and that method fires the
+        normal "you're registered" (``after_sub``) confirmation mail for
+        any registration it finds in the ``open`` state - which every
+        registration defaults to unless told otherwise. Leaving the
+        ``state`` transition to a later ``write()`` therefore means the
+        wrong confirmation mail has already gone out by the time this
+        method would flip it to ``wait``, regardless of whether the
+        waiting-list mail itself is configured correctly or not.
 
         Evaluated per record (not for the whole batch at once): a single
         sold-out ticket in a multi-registration submission must not push
         registrations for other, still-available tickets onto the waiting
         list too.
         """
+        for vals in vals_list:
+            if self._check_waiting_list(vals):
+                vals["state"] = "wait"
         registrations = super().create(vals_list)
-        waiting_registration_ids = [
-            registration.id
-            for registration, vals in zip(registrations, vals_list, strict=True)
-            if self._check_waiting_list(vals)
-        ]
-        if waiting_registration_ids:
-            self.browse(waiting_registration_ids).sudo().action_waiting()
+        registrations.filtered(lambda r: r.state == "wait")._trigger_after_wait_mail()
         return registrations
 
     def write(self, vals):
         """Trigger the "after_wait" mail scheduler(s) right after joining the waitlist.
 
-        ``after_sub`` scheduling on confirmation is already handled by core's
-        own ``write()`` (see ``_update_mail_schedulers``); only the new
-        waiting-list trigger needs to be added here. Skipped per-record for
-        events whose stage is closed or cancelled - closed events should not
-        keep emailing attendees - without cutting the loop short for the
-        rest of the batch.
+        Only relevant for an existing registration moved to ``wait``
+        afterwards (e.g. the "Move to Waiting List" backend action, via
+        :meth:`action_waiting`) - a registration created straight into
+        ``wait`` is already handled by :meth:`create` instead, since by
+        the time this ``write()`` would run for it the mail has already
+        been sent from there.
         """
         res = super().write(vals)
-
-        if vals.get("state") != "wait":
-            return res
-
-        for registration in self:
-            event_stage = registration.event_id.stage_id
-            if event_stage.pipe_end or event_stage.cancel:
-                continue
-
-            schedulers = registration.event_id.event_mail_ids.filtered(
-                lambda s: s.interval_type == "after_wait"
-            )
-            schedulers.sudo()._trigger_immediate_mail(registration)
-
+        if vals.get("state") == "wait":
+            self._trigger_after_wait_mail()
         return res
 
     # 7. Action methods
@@ -177,8 +180,7 @@ class EventRegistration(models.Model):
             if not registration.waiting_list_to_confirm:
                 raise ValidationError(
                     self.env._(
-                        "There are no seats available to confirm this "
-                        "registration yet."
+                        "There are no seats available to confirm this registration yet."
                     )
                 )
             registration.action_confirm()
@@ -186,21 +188,62 @@ class EventRegistration(models.Model):
     def _check_waiting_list(self, vals):
         """Whether a registration being created with ``vals`` must wait.
 
+        Must wait if *either* the event's own capacity or the selected
+        ticket's capacity is exhausted, not only when both are - the event
+        cap is a hard ceiling regardless of a specific ticket's own limit,
+        and a ticket-less registration is only bound by the event cap.
+        Mirrors :meth:`_compute_waiting_list_to_confirm`'s notion of
+        "seats really available" (event_ok/ticket_ok), inverted and
+        evaluated from raw ``vals`` since the registration does not exist
+        yet at this point.
+
         :param dict vals: values passed to :meth:`create` for one registration
         :rtype: bool
         """
-        if not vals.get("event_id") or not vals.get("event_ticket_id"):
+        if not vals.get("event_id"):
             return False
 
         event = self.env["event.event"].browse(vals["event_id"])
-        ticket = self.env["event.event.ticket"].browse(vals.get("event_ticket_id"))
+        if not event.waiting_list:
+            return False
 
-        return bool(
-            event.waiting_list
-            and event.seats_limited
-            and event.seats_available <= 0
-            and ticket.seats_limited
-            and ticket.seats_available <= 0
+        ticket_id = vals.get("event_ticket_id")
+        ticket = (
+            self.env["event.event.ticket"].browse(ticket_id)
+            if ticket_id
+            else self.env["event.event.ticket"]
         )
+        event_ok = (
+            not event.seats_limited
+            or not event.seats_max
+            or (event.seats_available > 0)
+        )
+        ticket_ok = (
+            not ticket
+            or not ticket.seats_limited
+            or not ticket.seats_max
+            or (ticket.seats_available > 0)
+        )
+        return not (event_ok and ticket_ok)
 
     # 8. Business methods
+    def _trigger_after_wait_mail(self):
+        """Send the "after_wait" mail scheduler(s) immediately to these registrations.
+
+        Shared by :meth:`create` (registration created straight into
+        ``wait``) and :meth:`write` (an existing registration moved to
+        ``wait`` afterwards) - both need the exact same immediate-mail
+        trigger, just from a different moment in the registration's
+        lifecycle. Skipped per-record for events whose stage is an end
+        stage (``event.stage.pipe_end``) - closed events should not keep
+        emailing attendees - without cutting the loop short for the rest
+        of the batch.
+        """
+        for registration in self:
+            if registration.event_id.stage_id.pipe_end:
+                continue
+
+            schedulers = registration.event_id.event_mail_ids.filtered(
+                lambda s: s.interval_type == "after_wait"
+            )
+            schedulers.sudo()._trigger_immediate_mail(registration)

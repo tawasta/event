@@ -43,16 +43,44 @@ class EventMailScheduler(models.Model):
             ("after_wait", "After registering to waiting list"),
             (
                 "after_seats_available",
-                "After more seats are available send to waiting list "
-                "registrations",
+                "After more seats are available send to waiting list registrations",
             ),
         ],
         ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},
     )
 
     # 8. Business methods
+    def execute(self):
+        """Keep this module's own interval types out of core's generic sweep.
+
+        Core's own ``execute()`` has no branch for "after_wait" or
+        "after_seats_available": they are not "after_sub" (attendee-based),
+        and for a non-multi-slot event fall through to the generic "one
+        shot, mail everyone" branch (``_execute_event_based()``, meant for
+        before/after-event communication) - wrong for a per-registration
+        mail that is already sent immediately and synchronously elsewhere
+        (see ``EventEvent._compute_seats`` and ``EventRegistration.write``,
+        both calling :meth:`_trigger_immediate_mail`). Left unfiltered, the
+        periodic cron (``event.mail.schedule_communications``) would
+        eventually pick these up too - typically once the event's
+        ``date_end`` has passed, since their ``scheduled_date`` has no
+        dedicated computation of its own and falls back to that - and mail
+        the wrong recipients.
+        """
+        own_interval_types = ("after_wait", "after_seats_available")
+        return super(
+            EventMailScheduler,
+            self.filtered(lambda s: s.interval_type not in own_interval_types),
+        ).execute()
+
     def _trigger_immediate_mail(self, registrations):
-        """Send this scheduler's mail to ``registrations`` right away.
+        """Send each of these schedulers' mail to ``registrations`` right away.
+
+        Loops over ``self`` rather than requiring a single scheduler, since
+        callers filter ``event_mail_ids`` by ``interval_type`` and an event
+        is free to have more than one scheduler of the same type (or none
+        at all) - mirroring how core's own :meth:`_create_missing_mail_registrations`
+        and :meth:`execute` handle a multi-record ``self`` on this same model.
 
         Unlike the cron-driven ``execute()``/``_execute_attendee_based()``
         flow, this also picks up ``event.mail.registration`` tracking rows
@@ -65,16 +93,18 @@ class EventMailScheduler(models.Model):
 
         :param event.registration registrations: attendees to mail
         """
-        self.ensure_one()
         if not registrations:
             return
-        tracked = self.mail_registration_ids.filtered(
-            lambda mail_reg: mail_reg.registration_id in registrations
-        )
-        missing = registrations - tracked.registration_id
-        if missing:
-            tracked |= self._create_missing_mail_registrations(missing)
-        tracked.filtered(lambda mail_reg: not mail_reg.mail_sent)._execute_on_registrations()
+        for scheduler in self:
+            tracked = scheduler.mail_registration_ids.filtered(
+                lambda mail_reg: mail_reg.registration_id in registrations
+            )
+            missing = registrations - tracked.registration_id
+            if missing:
+                tracked |= scheduler._create_missing_mail_registrations(missing)
+            tracked.filtered(
+                lambda mail_reg: not mail_reg.mail_sent
+            )._execute_on_registrations()
 
     # 3. Default methods
 
