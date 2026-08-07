@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<odoo>
+  <!-- EVENT.TYPE VIEWS -->
+  <record id="view_event_type_form_waiting_list" model="ir.ui.view">
+    <field name="name">event.type.form.waiting.list</field>
+    <field name="model">event.type</field>
+    <field name="inherit_id" ref="event.view_event_type_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[field[@name='has_seats_limitation']]" position="after">
+        <label for="waiting_list" />
+        <div>
+          <field name="waiting_list" />
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <!-- EVENT.EVENT VIEWS -->
+  <record id="view_event_form_waiting_list" model="ir.ui.view">
+    <field name="name">event.event.form.waiting.list</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_form" />
+    <field name="arch" type="xml">
+      <div name="button_box" position="inside">
+        <button
+          name="%(event.act_event_registration_from_event)d"
+          type="action"
+          context="{'search_default_waiting': True}"
+          class="oe_stat_button"
+          icon="fa-clock-o"
+          invisible="not waiting_list"
+          help="Attendees currently on the waiting list"
+        >
+          <field name="seats_waiting" widget="statinfo" string="Waiting" />
+        </button>
+      </div>
+      <field name="badge_format" position="before">
+        <field
+          name="waiting_list"
+          widget="boolean_toggle"
+          invisible="not seats_limited"
+        />
+      </field>
+    </field>
+  </record>
+  <record id="view_event_tree_waiting_list" model="ir.ui.view">
+    <field name="name">event.event.list.waiting.list</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_tree" />
+    <field name="arch" type="xml">
+      <field name="seats_taken" position="after">
+        <field
+          name="seats_waiting"
+          string="Waiting Seats"
+          sum="Total"
+          readonly="1"
+          optional="hide"
+        />
+      </field>
+    </field>
+  </record>
+  <record id="view_event_kanban_waiting_list" model="ir.ui.view">
+    <field name="name">event.event.kanban.waiting.list</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_kanban" />
+    <field name="arch" type="xml">
+      <field name="date_end" position="after">
+        <field name="seats_waiting" />
+      </field>
+      <div t-if="record.seats_taken.raw_value" position="after">
+        <div t-if="record.seats_waiting.raw_value" class="d-flex ps-1">
+                    <i class="fa fa-clock-o mt-1 me-2 text-center" title="Waiting" />
+                    <field name="seats_waiting" class="me-1" /> Waiting
+                </div>
+      </div>
+    </field>
+  </record>
+  <record id="view_event_calendar_waiting_list" model="ir.ui.view">
+    <field name="name">event.event.calendar.waiting.list</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_calendar" />
+    <field name="arch" type="xml">
+      <field name="seats_used" position="after">
+        <field name="seats_waiting" />
+      </field>
+    </field>
+  </record>
+  <!-- EVENT.REGISTRATION VIEWS -->
+  <record id="view_event_registration_form_waiting_list" model="ir.ui.view">
+    <field name="name">event.registration.form.waiting.list</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_event_registration_form" />
+    <field name="arch" type="xml">
+      <button name="action_cancel" position="before">
+        <button
+          name="action_waiting"
+          string="Move to Waiting List"
+          invisible="not active or state != 'draft'"
+          type="object"
+        />
+      </button>
+      <button name="action_cancel" position="attributes">
+        <attribute
+          name="invisible"
+        >not active or state not in ['draft', 'open', 'wait']</attribute>
+      </button>
+      <button name="action_confirm" position="attributes">
+        <attribute
+          name="invisible"
+        >not active or state not in ['draft', 'wait']</attribute>
+      </button>
+      <field name="state" position="attributes">
+        <attribute name="statusbar_visible">open,done,wait</attribute>
+      </field>
+    </field>
+  </record>
+  <record id="view_event_registration_tree_waiting_list" model="ir.ui.view">
+    <field name="name">event.registration.list.waiting.list</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_event_registration_tree" />
+    <field name="arch" type="xml">
+      <button name="action_cancel" position="before">
+        <button
+          name="action_waiting"
+          string="Move to Waiting List"
+          invisible="not active or state != 'draft'"
+          type="object"
+          icon="fa-clock-o"
+        />
+      </button>
+      <button name="action_cancel" position="attributes">
+        <attribute
+          name="invisible"
+        >not active or state not in ['draft', 'open', 'wait']</attribute>
+      </button>
+      <button name="action_confirm" position="attributes">
+        <attribute
+          name="invisible"
+        >not active or state not in ['draft', 'wait']</attribute>
+      </button>
+    </field>
+  </record>
+  <record id="event_registration_view_kanban_waiting_list" model="ir.ui.view">
+    <field name="name">event.registration.kanban.waiting.list</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.event_registration_view_kanban" />
+    <field name="arch" type="xml">
+      <field name="state" position="attributes">
+        <attribute name="decoration-warning">state == 'wait'</attribute>
+      </field>
+    </field>
+  </record>
+  <record id="view_registration_search_waiting_list" model="ir.ui.view">
+    <field name="name">event.registration.search.waiting.list</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_registration_search" />
+    <field name="arch" type="xml">
+      <filter name="unconfirmed" position="before">
+        <filter string="Waiting" name="waiting" domain="[('state', '=', 'wait')]" />
+      </filter>
+    </field>
+  </record>
+</odoo>

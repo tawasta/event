@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template
+    id="registration_template"
+    inherit_id="website_event.registration_template"
+    name="Registration"
+  >
+    <xpath expr="//div[contains(@t-if, 'insufficient_seats')]" position="before">
+      <button
+        t-if="not event.event_registrations_open and event.waiting_list"
+        type="button"
+        data-bs-toggle="modal"
+        t-attf-class="btn btn-primary {{cta_additional_classes}}"
+        t-attf-data-bs-target="#modal_{{'slot' if event.is_multi_slots else 'ticket'}}_registration"
+      >Join the waiting list</button>
+    </xpath>
+  </template>
+
+  <template
+    id="registration_template_waiting_list"
+    inherit_id="website_event.modal_ticket_registration"
+    name="Registration Modal"
+  >
+    <!-- Let the form render even when sold out, so a waiting-list join
+             can still be submitted; individual ticket rows still decide for
+             themselves whether to offer a normal quantity selector or a
+             waiting-list one (see below). -->
+    <xpath expr="//form[@id='registration_form']" position="attributes">
+      <attribute
+        name="t-if"
+      >(event.event_registrations_open and (not event.event_ticket_ids or any(not ticket.is_expired for ticket in event.event_ticket_ids))) or event.waiting_list</attribute>
+    </xpath>
+
+    <!-- Multi-ticket layout: where core shows a plain "Sold Out" message
+             for a ticket (see website_event.modal_ticket_registration), show
+             a waiting-list quantity selector instead when this event has one
+             enabled - same visual slot, same alignment, no separate row.
+             Reuses core's own "o_wevent_input_nb_tickets" input class,
+             "nb_register-<id>" name, and the companion "(Max. N)" <p> core's
+             TicketDetails interaction expects next to every such input (it
+             unconditionally does `this.el.querySelector('p[name=...]')`, so
+             omitting it throws on the very first click/keystroke) - this
+             makes the whole widget behave identically to a normal ticket
+             selector (increment/decrement, submit button enablement) with no
+             extra JavaScript of this module's own, and the backend sees an
+             ordinary ticket quantity - event.registration.create() is what
+             actually routes it to the waiting list. limit_per_order and
+             max_input_value are already computed by core just above this
+             xpath's target, within the same enclosing <div class="ms-auto">,
+             so they are reused as-is rather than recomputed. -->
+    <xpath expr="//div[hasclass('text-danger')][hasclass('mt-1')]" position="replace">
+      <div
+        t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched()"
+        class="d-flex align-items-center justify-content-end gap-2"
+      >
+        <small class="text-muted">Waiting list</small>
+        <div class="rounded input-group d-inline-flex border" style="width: 120px;">
+          <button
+            class="btn d-md-inline-block border-0 pe-2"
+            data-increment-type="minus"
+            type="button"
+            disabled="disabled"
+            t-attf-data-input-name="nb_register-#{ticket.id}"
+          >
+            <i class="oi oi-minus text-600" />
+          </button>
+          <input
+            class="o_wevent_input_nb_tickets form-control text-center border-0 p-0"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            size="2"
+            type="text"
+            value="0"
+            t-attf-max="#{limit_per_order or event.EVENT_MAX_TICKETS}"
+            t-attf-name="nb_register-#{ticket.id}"
+          />
+          <button
+            class="btn d-md-inline-block border-0 ps-2"
+            data-increment-type="plus"
+            type="button"
+            t-attf-data-input-name="nb_register-#{ticket.id}"
+          >
+            <i class="oi oi-plus text-600" />
+          </button>
+        </div>
+        <p
+          class="text-muted text-center mb-0"
+          t-attf-name="nb_register-#{ticket.id}"
+          t-att-hidden="(limit_per_order or event.EVENT_MAX_TICKETS) &gt;= 1"
+        >(Max. <t t-out="limit_per_order or event.EVENT_MAX_TICKETS" />)</p>
+      </div>
+      <div t-else="" class="text-danger mt-1">
+        <span
+          t-if="(not ticket.sale_available and not ticket.is_expired and ticket.is_launched) or not max_input_value"
+        >Sold Out</span>
+        <span t-if="ticket.is_expired">Expired</span>
+      </div>
+    </xpath>
+
+    <!-- Single-ticket layout: same idea, in the same spot core uses for
+             its own single-ticket "Sold Out" message. limit_per_order is not
+             in scope here (core only computes it inside the sibling
+             t-if="event.event_registrations_open" branch, not for this
+             t-else one), so it is recomputed the same way core does. -->
+    <xpath
+      expr="//span[@itemprop='availability'][@content='http://schema.org/SoldOut']"
+      position="replace"
+    >
+      <t
+        t-set="wl_limit_per_order"
+        t-value="tickets._get_current_limit_per_order(event_slot if event_slot else False)[tickets.id] if tickets else event.EVENT_MAX_TICKETS"
+      />
+      <t t-set="waiting_register_id" t-value="tickets.id if tickets else 0" />
+      <div
+        t-if="event.waiting_list"
+        class="d-flex align-items-center justify-content-end gap-2 w-100"
+      >
+        <small class="text-muted">Waiting list</small>
+        <div class="rounded input-group d-inline-flex border" style="width: 120px;">
+          <button
+            class="btn d-md-inline-block border-0 pe-2"
+            data-increment-type="minus"
+            type="button"
+            disabled="disabled"
+            t-attf-data-input-name="nb_register-#{waiting_register_id}"
+          >
+            <i class="oi oi-minus text-600" />
+          </button>
+          <input
+            class="o_wevent_input_nb_tickets form-control text-center border-0 p-0"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            size="2"
+            type="text"
+            value="0"
+            t-attf-max="#{wl_limit_per_order or event.EVENT_MAX_TICKETS}"
+            t-attf-name="nb_register-#{waiting_register_id}"
+          />
+          <button
+            class="btn d-md-inline-block border-0 ps-2"
+            data-increment-type="plus"
+            type="button"
+            t-attf-data-input-name="nb_register-#{waiting_register_id}"
+          >
+            <i class="oi oi-plus text-600" />
+          </button>
+        </div>
+        <p
+          class="text-muted text-center mb-0"
+          t-attf-name="nb_register-#{waiting_register_id}"
+          t-att-hidden="(wl_limit_per_order or event.EVENT_MAX_TICKETS) &gt;= 1"
+        >(Max. <t t-out="wl_limit_per_order or event.EVENT_MAX_TICKETS" />)</p>
+      </div>
+      <span
+        t-else=""
+        itemprop="availability"
+        content="http://schema.org/SoldOut"
+        class="text-danger"
+      ><i class="fa fa-ban me-2" />Sold Out</span>
+    </xpath>
+  </template>
+
+  <!-- Confirmation page: acknowledge a waiting-list join distinctly from
+         a normal confirmed registration. -->
+  <template
+    id="registration_complete_waiting_list"
+    inherit_id="website_event.registration_complete"
+    name="Registration Completed"
+  >
+    <xpath expr="//h1[@class='h3-fs']" position="attributes">
+      <attribute name="t-if">attendees[0].state != 'wait'</attribute>
+    </xpath>
+    <xpath expr="//h1[@class='h3-fs']" position="after">
+      <h1
+        t-if="attendees[0].state == 'wait'"
+        class="h3-fs"
+      >Joined the waiting list!</h1>
+    </xpath>
+    <xpath expr="//u[a[@class='h4 text-primary']]" position="after">
+      <p t-if="attendees[0].state == 'wait'" class="py-2">
+                You will be contacted if a seat becomes available.
+            </p>
+    </xpath>
+  </template>
+</odoo>

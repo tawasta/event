@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="survey_user_input_view_search_event" model="ir.ui.view">
+    <field name="name">survey.user_input.view.search.event</field>
+    <field name="model">survey.user_input</field>
+    <field name="inherit_id" ref="survey.survey_user_input_view_search" />
+    <field name="arch" type="xml">
+      <field name="partner_id" position="before">
+        <field name="event_id" />
+        <field name="event_ticket_id" />
+        <field name="registration_id" />
+      </field>
+      <filter name="completed" position="after">
+        <separator />
+        <filter
+          string="Registration Survey"
+          name="filter_registration_survey"
+          domain="[('event_id', '!=', False)]"
+        />
+      </filter>
+      <filter name="group_by_partner" position="before">
+        <filter
+          string="Event"
+          name="group_by_event"
+          domain="[]"
+          context="{'group_by': 'event_id'}"
+        />
+        <filter
+          string="Event Ticket"
+          name="group_by_event_ticket"
+          domain="[]"
+          context="{'group_by': 'event_ticket_id'}"
+        />
+        <filter
+          string="Event Registration"
+          name="group_by_event_registration"
+          domain="[]"
+          context="{'group_by': 'registration_id'}"
+        />
+      </filter>
+    </field>
+  </record>
+  <record id="survey_user_input_view_form_event" model="ir.ui.view">
+    <field name="name">survey.user_input.view.form.event</field>
+    <field name="model">survey.user_input</field>
+    <field name="inherit_id" ref="survey.survey_user_input_view_form" />
+    <field name="arch" type="xml">
+      <field name="survey_id" position="after">
+        <field name="event_id" />
+        <field name="event_ticket_id" />
+        <field name="registration_id" />
+      </field>
+    </field>
+  </record>
+  <record id="survey_user_input_view_tree_event" model="ir.ui.view">
+    <field name="name">survey.user_input.view.tree.event</field>
+    <field name="model">survey.user_input</field>
+    <field name="inherit_id" ref="survey.survey_user_input_view_tree" />
+    <field name="arch" type="xml">
+      <field name="partner_id" position="before">
+        <field name="event_id" optional="show" />
+        <field name="event_ticket_id" optional="show" />
+        <field name="registration_id" optional="show" />
+      </field>
+    </field>
+  </record>
+  <!-- SURVEY.USER_INPUT.LINE VIEWS -->
+  <record id="survey_response_line_view_tree_inherit" model="ir.ui.view">
+    <field name="name">survey.user_input.line.view.tree.inherit</field>
+    <field name="model">survey.user_input.line</field>
+    <field name="inherit_id" ref="survey.survey_response_line_view_tree" />
+    <field name="arch" type="xml">
+      <field name="user_input_id" position="after">
+        <field name="event_id" column_invisible="True" />
+        <field name="event_ticket_id" column_invisible="True" />
+        <field name="registration_id" />
+      </field>
+      <field name="question_id" position="after">
+        <field name="string_answer" />
+        <field name="matrix_row_id" />
+      </field>
+      <!-- Hide fields -->
+      <field name="survey_id" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="user_input_id" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="create_date" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="answer_type" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="skipped" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="answer_score" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+    </field>
+  </record>
+  <record id="survey_response_line_action_pivot" model="ir.actions.act_window">
+    <field name="name">Answer Analysis</field>
+    <field name="res_model">survey.user_input.line</field>
+    <field name="view_mode">pivot,graph</field>
+  </record>
+  <record id="survey_response_line_view_pivot" model="ir.ui.view">
+    <field name="name">survey.response.line.view.pivot</field>
+    <field name="model">survey.user_input.line</field>
+    <field name="arch" type="xml">
+      <pivot string="Survey Answer Line" sample="1">
+        <field name="user_input_id" type="row" />
+        <field name="question_id" type="col" />
+      </pivot>
+    </field>
+  </record>
+  <record id="survey_user_input_line_view_search_inherit" model="ir.ui.view">
+    <field name="name">survey.user_input.line.view.search</field>
+    <field name="model">survey.user_input.line</field>
+    <field name="inherit_id" ref="survey.survey_user_input_line_view_search" />
+    <field name="arch" type="xml">
+      <filter name="group_by_survey" position="before">
+        <filter
+          string="Event"
+          name="group_by_event"
+          domain="[]"
+          context="{'group_by': 'event_id'}"
+        />
+        <filter
+          string="Event Registration"
+          name="group_by_event_registration"
+          domain="[]"
+          context="{'group_by': 'registration_id'}"
+        />
+      </filter>
+    </field>
+  </record>
+</odoo>

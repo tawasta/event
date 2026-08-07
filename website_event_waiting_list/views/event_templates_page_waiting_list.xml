@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- Standalone "manage my waiting-list registration" page, reachable via
+         the public, token-based link sent in the waiting-list emails (see
+         WebsiteEventControllerWaiting.waiting_list_manage). Deliberately
+         self-contained rather than extending
+         website_event_cancellation.cancel_registration, so this module
+         never needs that one installed. -->
+  <template id="manage_waiting_registration" name="Manage Waiting List Registration">
+    <t t-call="website_event.layout">
+      <div class="container my-5 o_wereg_confirmed">
+        <div class="row mb-4">
+          <div class="col-12 text-center">
+            <t t-if="registration.state == 'cancel'">
+              <h3 class="text-danger">Your waiting-list registration for <t
+                t-esc="event.name"
+              /> has been cancelled.</h3>
+            </t>
+            <t t-elif="registration.state != 'wait'">
+              <h3>Your registration to <t t-esc="event.name" /> is confirmed!</h3>
+            </t>
+            <t t-elif="registration.waiting_list_to_confirm">
+              <h3>A seat is available for <t t-esc="event.name" />!</h3>
+              <p class="py-2">Confirm or cancel your registration here:</p>
+            </t>
+            <t t-else="">
+              <h3>You are on the waiting list for <t t-esc="event.name" />.</h3>
+              <p class="py-2">There are currently no seats available. If you
+                                wish to cancel your position on the waiting list, click
+                                here:</p>
+            </t>
+          </div>
+        </div>
+        <div class="text-center mb-4">
+          <button
+            t-if="registration.waiting_list_to_confirm"
+            type="button"
+            class="btn btn-primary me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#confirm_waiting_modal"
+          ><i class="fa fa-fw fa-check" /> Confirm registration</button>
+          <button
+            t-if="registration.state == 'wait'"
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#cancel_waiting_modal"
+          ><i class="fa fa-fw fa-times-circle" /> Cancel registration</button>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-6 col-xs-12 mx-auto">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Attendee Information</h5>
+                <p class="card-text">
+                  <strong>Name: </strong>
+                  <t t-if="registration.name" t-esc="registration.name" />
+                  <t t-else="">N/A</t>
+                </p>
+                <p class="card-text">
+                  <strong>Email: </strong>
+                  <i class="fa fa-envelope me-2" />
+                  <t t-if="registration.email" t-esc="registration.email" />
+                  <t t-else="">N/A</t>
+                </p>
+                <p class="card-text">
+                  <strong>Ticket: </strong>
+                  <i class="fa fa-ticket me-2" />
+                  <t
+                    t-if="registration.event_ticket_id"
+                    t-esc="registration.event_ticket_id.name"
+                  />
+                  <t t-else="">N/A</t>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm modal -->
+        <div
+          class="modal fade"
+          id="confirm_waiting_modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="confirm_waiting_modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form t-attf-action="{{request.httprequest.path}}" method="post">
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  t-att-value="request.csrf_token()"
+                />
+                <div class="modal-header">
+                  <h4 class="modal-title">Confirm registration</h4>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div class="modal-body">
+                  <p>You are about to <strong>confirm</strong> your
+                                        registration.</p>
+                  <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >Close</button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                  >Confirm registration</button>
+                </div>
+                <input type="hidden" name="new_state" value="open" />
+                <input
+                  type="hidden"
+                  name="current_state"
+                  t-att-value="registration.state"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancel modal -->
+        <div
+          class="modal fade"
+          id="cancel_waiting_modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="cancel_waiting_modal"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form t-attf-action="{{request.httprequest.path}}" method="post">
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  t-att-value="request.csrf_token()"
+                />
+                <div class="modal-header">
+                  <h4 class="modal-title">Cancel registration</h4>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div class="modal-body">
+                  <p>You are about to <strong>cancel</strong> your
+                                        waiting-list registration.</p>
+                  <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >Close</button>
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                  >Cancel registration</button>
+                </div>
+                <input type="hidden" name="new_state" value="cancel" />
+                <input
+                  type="hidden"
+                  name="current_state"
+                  t-att-value="registration.state"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_survey_survey_public,access_survey_survey_public,survey.model_survey_survey,base.group_public,1,0,0,0
+access_survey_survey_portal,access_survey_survey_portal,survey.model_survey_survey,base.group_portal,1,0,0,0
+access_event_registration_public,access_event_registration_public,event.model_event_registration,base.group_public,1,0,0,0
+access_survey_question_public,access_survey_question_public,survey.model_survey_question,base.group_public,1,0,0,0
+access_survey_question_answer_public,access_survey_question_answer_public,survey.model_survey_question_answer,base.group_public,1,0,0,0
+access_survey_question_portal,access_survey_question_portal,survey.model_survey_question,base.group_portal,1,0,0,0
+access_survey_question_answer_portal,access_survey_question_answer_portal,survey.model_survey_question_answer,base.group_portal,1,0,0,0

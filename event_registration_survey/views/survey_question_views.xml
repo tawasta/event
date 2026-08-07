@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="survey_question_form">
+    <field name="name">Form view for survey question</field>
+    <field name="model">survey.question</field>
+    <field name="inherit_id" ref="survey.survey_question_form" />
+    <field name="arch" type="xml">
+      <field name="save_as_nickname" position="before">
+        <field name="validation_phone" />
+        <field name="save_as_phone" invisible="not validation_phone" />
+        <field name="save_as_firstname" />
+        <field name="save_as_lastname" />
+      </field>
+    </field>
+  </record>
+</odoo>

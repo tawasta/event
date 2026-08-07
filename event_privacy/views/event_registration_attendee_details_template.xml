@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template
+    id="registration_attendee_details_privacy"
+    inherit_id="website_event.registration_attendee_details"
+  >
+    <xpath expr="//div[hasclass('modal-footer')]" position="before">
+      <div t-if="event.privacy_ids" class="modal-body border-top">
+        <h5>Permissions</h5>
+        <div class="row">
+          <t t-foreach="event.privacy_ids" t-as="privacy_activity">
+            <div class="col-md-6 mb-2">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  t-attf-id="privacy_#{privacy_activity.id}"
+                  t-attf-name="privacy_#{privacy_activity.id}"
+                  t-att-required="privacy_activity.constr_mandatory or None"
+                />
+                <label
+                  class="form-check-label"
+                  t-attf-for="privacy_#{privacy_activity.id}"
+                >
+                  <t t-esc="privacy_activity.sudo().name" />
+                </label>
+              </div>
+            </div>
+          </t>
+        </div>
+      </div>
+    </xpath>
+  </template>
+</odoo>
