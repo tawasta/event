@@ -24,7 +24,7 @@
         "Attendance certificates for events with portal download "
         "and post-event email sending"
     ),
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
