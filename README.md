@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
+[event_id_show_in_ui_views](event_id_show_in_ui_views/) | 17.0.1.0.0 |  | Show event's ID in list, form and kanban views
 [event_list_view_hideable_fields](event_list_view_hideable_fields/) | 17.0.1.0.0 |  | Make more list view fields' visibility toggleable
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
 [event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Prevents sending emails to past events

@@ -1,0 +1,41 @@
+<odoo>
+
+    <record id="view_event_tree_inherit" model="ir.ui.view">
+        <field name="name">event.event.tree.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="id" string="ID" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="date_begin" position="before">
+                <field name="id" string="ID" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_event_kanban_inherit" model="ir.ui.view">
+        <field name="name">event.event.kanban.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//t[@t-name='kanban-box']//field[@name='name']"
+                position="after"
+            >
+                <span class="d-block text-muted small">
+                    ID: <t t-esc="record.id.raw_value" />
+                </span>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
