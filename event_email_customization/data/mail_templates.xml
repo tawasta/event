@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Reset noupdate for core registration confirmation -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'event'), ('name', '=', 'event_subscription')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="event.event_subscription" model="mail.template">
+        <field name="subject">Custom Registration: {{ object.event_id.name }}</field>
+        <field name="body_type">qweb_view</field>
+        <field
+            name="body_view_id"
+            ref="website_event_cancellation.email_template_subscription_with_cancel"
+        />
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- Reset noupdate for core reminder -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'event'), ('name', '=', 'event_reminder')]" />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="event.event_reminder" model="mail.template">
+        <field name="subject">Muistutus: {{ object.event_id.name }}</field>
+        <field name="body_type">qweb_view</field>
+        <field
+            name="body_view_id"
+            ref="website_event_cancellation.email_template_reminder_with_cancel"
+        />
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- Reset noupdate for waiting list templates -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'website_event_waiting_list'), ('name', '=', 'event_waiting')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record id="website_event_waiting_list.event_waiting" model="mail.template">
+        <field name="subject">Jonotuslistalla: {{ object.event_id.name }}</field>
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                eval="[('module', '=', 'website_event_waiting_list'), ('name', '=', 'event_confirm_waiting_registration')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+    <record
+        id="website_event_waiting_list.event_confirm_waiting_registration"
+        model="mail.template"
+    >
+        <field name="subject">Paikkoja vapautunut: {{ object.event_id.name }}</field>
+        <field name="lang">fi_FI</field>
+    </record>
+
+    <!-- New company invitation template (original noupdate override did not work) -->
+    <record id="event_company_invitation_custom" model="mail.template">
+        <field name="name">Event: Company Invitation (Custom)</field>
+        <field name="model_id" ref="event.model_event_registration" />
+        <field name="subject">Invitation: {{ object.event_id.name }}</field>
+        <field
+            name="email_from"
+        >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+        <field name="email_to" />
+        <field name="description">Invitation to register for an event</field>
+        <field name="body_html" type="html">
+            <table
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+            >
+                <tr><td align="center">
+                    <table
+                            border="0"
+                            cellpadding="0"
+                            cellspacing="0"
+                            width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                        >
+                        <tbody>
+                            <!-- HEADER -->
+                            <tr>
+                                <td align="center" style="min-width: 590px;">
+                                    <span style="font-size: 20px; font-weight: bold;">
+                                        Sinut on kutsuttu osallistumaan koulutukseen: <t
+                                                t-out="object.event_id.name or ''"
+                                            />
+                                    </span>
+                                    <p
+                                            t-if="object.event_id.show_date_time or object.event_id.show_location"
+                                        >
+                                        Koulutus pidetään
+                                        <t t-if="object.event_id.show_date_time">
+                                            :
+                                            <t
+                                                    t-out="object.event_id.date_begin_located or ''"
+                                                /> -
+                                            <t
+                                                    t-out="object.event_id.date_end_located or ''"
+                                                />
+                                        </t>
+                                        <t t-if="object.event_id.show_location">
+                                            osoitteessa
+                                            <t
+                                                    t-out="object.event_id.address_id.name or 'Online'"
+                                                />
+                                        </t>
+                                    </p>
+                                </td>
+                            </tr>
+                            <!-- INVITATION DETAILS -->
+                            <tr>
+                                <td style="text-align:center;">
+                                    <hr
+                                            width="100%"
+                                            style="background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                        />
+                                    <div style="font-size: 14px;">
+                                        Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä:
+                                        <br /><br />
+                                        <a
+                                                t-attf-href="/event/{{ object.event_id.id }}/invitation/{{ object.invite_id.id }}/accept?access_token={{ object.invite_id.access_token }}"
+                                                style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                target="_blank"
+                                            >
+                                            Hyväksy kutsu
+                                        </a>
+                                    </div>
+                                    <hr
+                                            width="100%"
+                                            style="background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                        />
+                                </td>
+                            </tr>
+                            <!-- FOOTER -->
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <p>Tervetuloa koulutukseen!</p>
+                                    <p>
+                                        Ystävällisin terveisin,<br />
+                                        TAKK
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td></tr>
+            </table>
+        </field>
+        <field name="lang">fi_FI</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <!-- New moodle invitation template (original noupdate override did not work) -->
+    <record id="event_moodle_invitation_custom" model="mail.template">
+        <field name="name">Event: Moodle Invitation (Custom)</field>
+        <field name="model_id" ref="event.model_event_registration" />
+        <field name="subject">Koulutus: {{ object.event_id.name }} Moodle kutsu</field>
+        <field
+            name="email_from"
+        >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
+        <field name="email_to" />
+        <field name="description">New attendee enrolled to course</field>
+        <field name="body_html" type="html">
+            <table
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+            >
+                <tr><td align="center">
+                    <table
+                            border="0"
+                            cellpadding="0"
+                            cellspacing="0"
+                            width="590"
+                            style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;"
+                        >
+                        <tbody>
+                            <!-- HEADER -->
+                            <tr>
+                                <td align="center" style="min-width: 590px;">
+                                    <span style="font-size: 20px; font-weight: bold;">
+                                        Sinut on lisätty koulutukseen: <t
+                                                t-out="object.event_id.name or ''"
+                                            />
+                                    </span>
+                                    <p>Hei <strong><t
+                                                    t-out="object.attendee_partner_id.name or object.partner_id.name"
+                                                /></strong>,</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;">
+                                    <div style="font-size: 14px;">
+                                        Voit siirtyä koulutukseen painamalla alla olevaa painiketta:
+                                        <br /><br />
+                                        <a
+                                                t-att-href="object.env['moodle.binding'].sudo().get_course_url(object.event_id.moodle_course_id)"
+                                                style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
+                                                target="_blank"
+                                            >
+                                            Siirry koulutukseen
+                                        </a>
+                                    </div>
+                                    <hr
+                                            width="100%"
+                                            style="background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
+                                        />
+                                </td>
+                            </tr>
+                            <!-- FOOTER -->
+                            <tr>
+                                <td style="font-size: 14px;">
+                                    <p>
+                                        Ystävällisin terveisin,<br />
+                                        TAKK
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td></tr>
+            </table>
+        </field>
+        <field name="lang">fi_FI</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+</odoo>

@@ -1,0 +1,25 @@
+{
+    "name": "Event Email Customization",
+    "version": "17.0.1.0.2",
+    "summary": "Custom event messaging emails",
+    "category": "Marketing/Events",
+    "author": "Futural",
+    "website": "https://github.com/tawasta/event",
+    "license": "LGPL-3",
+    "depends": [
+        "event",
+        "website_event_waiting_list",
+        "website_event_cancellation",
+        "event_ticket_purchase_options",
+        "connector_moodle",
+    ],
+    "data": [
+        "data/mail_templates.xml",
+        "data/registration_views.xml",
+        "data/reminder_views.xml",
+        "data/waiting_list_views.xml",
+    ],
+    "installable": True,
+    "application": False,
+    "auto_install": False,
+}
