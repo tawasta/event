@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_location_directions_visibility
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-14 06:00+0000\n"
+"PO-Revision-Date: 2026-08-14 06:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_location_directions_visibility
+#: model:ir.model,name:website_event_location_directions_visibility.model_res_partner
+msgid "Contact"
+msgstr "Kontakti"
+
+#. module: website_event_location_directions_visibility
+#: model:ir.model.fields,field_description:website_event_location_directions_visibility.field_res_partner__is_online_location
+msgid "Online Location"
+msgstr "Verkkosijainti"
+
+#. module: website_event_location_directions_visibility
+#: model:ir.model.fields,help:website_event_location_directions_visibility.field_res_partner__is_online_location
+msgid ""
+"Mark this partner as an online location, e.g. Moodle or Teams. When this "
+"partner is used as an event's location, the 'Get the Direction' button is "
+"hidden on the event's website page, since there is no physical address to "
+"navigate to."
+msgstr ""
+"Merkitse tämä kontakti verkkosijainniksi, esim. Moodle tai Teams. Kun "
+"tätä kontaktia käytetään tapahtuman sijaintina, \"Hae osoite\" -painike "
+"piilotetaan tapahtuman verkkosivulta, koska sinne ei ole fyysistä "
+"osoitetta, johon navigoida."

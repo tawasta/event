@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form.online.location</field>
+        <field name="model">res.partner</field>
+        <field
+            name="inherit_id"
+            ref="event_filter_address_partners.view_partner_form"
+        />
+        <field name="arch" type="xml">
+            <field name="use_as_event_address" position="after">
+                <field name="is_online_location" invisible="not use_as_event_address" />
+            </field>
+        </field>
+    </record>
+</odoo>
