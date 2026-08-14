@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Event page sidebar: "Location" block -->
+    <template
+        id="event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+        <xpath expr="//a[@t-att-href='event._google_map_link()']" position="attributes">
+            <attribute name="t-if">not event.address_id.is_online_location</attribute>
+        </xpath>
+    </template>
+
+</odoo>

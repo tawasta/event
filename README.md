@@ -62,6 +62,7 @@ addon | version | maintainers | summary
 [website_event_event_info_pdf_download_button](website_event_event_info_pdf_download_button/) | 17.0.1.1.0 |  | Adds a 'Download Event Info PDF' button to the website's event page sidebar
 [website_event_filter_fix](website_event_filter_fix/) | 17.0.1.1.0 |  | Removes company_id filter from event.event in website.snippet.filter
 [website_event_frontend_customization](website_event_frontend_customization/) | 17.0.1.0.1 |  | Customization options to Website Event Frontends
+[website_event_location_directions_visibility](website_event_location_directions_visibility/) | 17.0.1.0.0 |  | Hide the 'Get the Direction' button on the website for events whose location is an online platform
 [website_event_maintenance_mode](website_event_maintenance_mode/) | 17.0.1.0.0 |  | Add maintenance mode to website events
 [website_event_online_event](website_event_online_event/) | 17.0.1.0.1 |  | Manage online and hybrid events. Includes a video conference link.
 [website_event_organizer_contact_info_visibility](website_event_organizer_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if organizer and their phone, mobile and/or email should be shown
