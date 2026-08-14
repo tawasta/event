@@ -88,6 +88,7 @@ addon | version | maintainers | summary
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
 [website_event_ticket_accessories](website_event_ticket_accessories/) | 17.0.1.0.1 |  | Suggest extra products in cart based on the selected event ticket
 [website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
+[website_event_time_visibility](website_event_time_visibility/) | 17.0.1.0.0 |  | Set per event if the time of day should be shown on the website, or only the dates
 [website_event_track_advanced](website_event_track_advanced/) | 17.0.1.0.1 |  | Advanced features for Event Track
 [website_event_track_advanced_sessions_editable_in_treeview](website_event_track_advanced_sessions_editable_in_treeview/) | 17.0.1.0.0 |  | Editable session fields in treeview
 [website_event_track_manager_proposal](website_event_track_manager_proposal/) | 17.0.1.0.0 |  | Always show Track Proposal page for managers
