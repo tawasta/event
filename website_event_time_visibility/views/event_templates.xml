@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Event page sidebar: "Date & Time" block -->
+    <template
+        id="event_description_full"
+        inherit_id="website_event.event_description_full"
+    >
+
+        <!-- Start time of day -->
+        <xpath
+            expr="//span[@t-out='event.date_begin']/preceding-sibling::t[1]"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not event.is_one_day and event.show_time_on_website</attribute>
+        </xpath>
+        <xpath expr="//span[@t-out='event.date_begin']" position="attributes">
+            <attribute name="t-if">event.show_time_on_website</attribute>
+        </xpath>
+        <xpath expr="//i[@class='fa fa-long-arrow-right mx-1']" position="attributes">
+            <attribute name="t-if">event.show_time_on_website</attribute>
+        </xpath>
+
+        <!-- End time of day -->
+        <xpath
+            expr="//h6[@t-field='event.date_end']/parent::div/following-sibling::t[1]"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not event.is_one_day and event.show_time_on_website</attribute>
+        </xpath>
+        <xpath expr="//span[@t-out='event.date_end']" position="attributes">
+            <attribute
+                name="t-if"
+            >not event.is_one_day and event.show_time_on_website</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='event.date_end'][@t-else]" position="attributes">
+            <attribute name="t-else" />
+            <attribute
+                name="t-elif"
+            >event.is_one_day and event.show_time_on_website</attribute>
+        </xpath>
+
+    </template>
+
+    <!-- Registration confirmation page -->
+    <template
+        id="registration_complete"
+        inherit_id="website_event.registration_complete"
+    >
+        <xpath expr="//span[@itemprop='startDate']" position="attributes">
+            <attribute name="t-out">event.date_begin</attribute>
+            <attribute
+                name="t-options"
+            >{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'medium'} if event.show_time_on_website else {'widget': 'datetime', 'tz_name': event.date_tz, 'date_only': 'true', 'format': 'medium'}</attribute>
+        </xpath>
+        <xpath expr="//span[@itemprop='endDate']" position="attributes">
+            <attribute name="t-out">event.date_end</attribute>
+            <attribute
+                name="t-options"
+            >{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'medium'} if event.show_time_on_website else {'widget': 'datetime', 'tz_name': event.date_tz, 'date_only': 'true', 'format': 'medium'}</attribute>
+        </xpath>
+    </template>
+
+</odoo>
