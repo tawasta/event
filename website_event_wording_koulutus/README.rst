@@ -12,11 +12,22 @@ website event pages, snippets, tours and related field/model labels.
 
 This module ships its own ``i18n/fi.po``, containing only the 65 entries
 from ``website_event``'s own Finnish translation that mention "tapahtuma".
-Since Odoo resolves a translation by (language, source text, location) and
-not by which module supplied it, installing this module after
-``website_event`` (it depends on it) makes these specific Finnish strings
-resolve to the "koulutus"-based wording instead, while everything else
-(including English and all other languages) is untouched.
+
+Odoo's normal translation loading keeps any translation that already
+exists in the database and only fills in missing ones (see
+``odoo.tools.translate.TranslationImporter.save()``). Since
+``website_event`` is installed first and already provides a Finnish
+translation for every term this module overrides, a plain ``i18n/fi.po``
+would silently have no effect. This module therefore uses a
+``post_init_hook`` (``hooks.py``) to force-reload its own po file with
+``force_overwrite=True`` right after install, which does take effect
+regardless of the existing translation.
+
+**Caveat**: ``post_init_hook`` only runs on the module's first install,
+not on subsequent updates. If ``i18n/fi.po`` is edited later, re-apply it
+via Settings > Translations > Import, selecting Finnish and this module's
+po file with "Overwrite Existing Terms" checked (or re-trigger
+``post_init_hook`` manually, e.g. from an Odoo shell).
 
 Scope: only ``website_event``'s own strings are covered (the public
 website pages: event list, event page, registration, snippets, onboarding

@@ -36,4 +36,5 @@
     "depends": ["website_event"],
     "data": [],
     "demo": [],
+    "post_init_hook": "post_init_hook",
 }
