@@ -29,6 +29,25 @@ via Settings > Translations > Import, selecting Finnish and this module's
 po file with "Overwrite Existing Terms" checked (or re-trigger
 ``post_init_hook`` manually, e.g. from an Odoo shell).
 
+**Terms that come from Python code cannot be overridden via a po file at
+all.** Odoo resolves ``_()`` calls in Python/JS source code by reading the
+*owning* module's own ``i18n`` file directly from disk, by module name
+(``odoo.tools.translate.CodeTranslations``) - this bypasses the database
+and any po file shipped by a different module entirely, regardless of
+``force_overwrite``. For the handful of ``website_event`` strings produced
+this way (event list filter labels, a couple of validation/ticket sale
+error messages, the "Events" website home page shortcut), this module
+instead overrides the actual Python methods that produce them
+(``models/event_event.py``, ``models/event_question.py``,
+``models/website.py``, ``controllers/main.py``): each calls
+``super()`` normally and only swaps the resulting (already Finnish) text
+via ``const.WORDING_REPLACEMENTS``, without touching any underlying logic.
+
+Onboarding tour text (the JS tour in ``static/src/js/tours/event_tour.js``)
+uses the same code-translation mechanism but is not overridden here -
+it's ephemeral first-run UI help text, judged low value for the added
+complexity of patching OWL/JS tour steps.
+
 Scope: only ``website_event``'s own strings are covered (the public
 website pages: event list, event page, registration, snippets, onboarding
 tour). The backend ``event`` app's own terminology (e.g. the Events menu,
