@@ -48,6 +48,14 @@ uses the same code-translation mechanism but is not overridden here -
 it's ephemeral first-run UI help text, judged low value for the added
 complexity of patching OWL/JS tour steps.
 
+One term ("Upcoming Events", used as the collapsed date-filter dropdown's
+default label in ``website_event.event_time`` when no other date filter is
+selected) did not reliably pick up its po override in practice, for
+reasons not fully pinned down. It is fixed directly with a small,
+non-``replace`` view override (``views/event_templates.xml``) instead of
+relying on the po/hook mechanism: the same ``t-if="False"`` +
+``position="after"`` technique used elsewhere in this project.
+
 Scope: only ``website_event``'s own strings are covered (the public
 website pages: event list, event page, registration, snippets, onboarding
 tour). The backend ``event`` app's own terminology (e.g. the Events menu,
