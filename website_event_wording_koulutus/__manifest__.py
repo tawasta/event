@@ -33,7 +33,7 @@
         "python": [],
         "bin": [],
     },
-    "depends": ["website_event"],
+    "depends": ["website", "website_event"],
     "data": [],
     "demo": [],
     "post_init_hook": "post_init_hook",
