@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="event_time_koulutus" inherit_id="website_event.event_time">
+        <xpath expr="//a[@title='Filter by Date']/t[@t-else]" position="attributes">
+            <attribute name="t-else" />
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//a[@title='Filter by Date']/t[@t-if='False']" position="after">
+            <t t-if="not current_date">Tulevat koulutukset</t>
+        </xpath>
+    </template>
+</odoo>

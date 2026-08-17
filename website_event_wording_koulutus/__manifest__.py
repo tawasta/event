@@ -34,7 +34,7 @@
         "bin": [],
     },
     "depends": ["website", "website_event"],
-    "data": [],
+    "data": ["views/event_templates.xml"],
     "demo": [],
     "post_init_hook": "post_init_hook",
 }
