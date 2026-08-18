@@ -26,18 +26,16 @@
             position="after"
         >
             <div>
-                Hei <t t-esc="object.name or ''" />,<br /><br />
-                Ilmoittautumisesi koulutukseen
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                Your registration for the course
                 <t t-if="object.event_id.is_published"><a
                         t-att-href="object.event_id.website_url"
                         t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
                     ><t t-esc="object.event_id.name" /></a></t>
                 <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
-                on vastaanotettu.
+                has been received.
                 <br /><br />
-                Saat lähiaikoina myös viestin Moodlesta. Viesti sisältää tunnukset ja kirjautumislinkin koulutukseen.
-                <br /><br />
-                Tervetuloa opiskelemaan!
+                You will receive a message from Moodle shortly. The message will contain your credentials and login link for the course.
             </div>
         </xpath>
 
@@ -45,12 +43,12 @@
         <xpath expr="//t[@t-set='link_message']" position="after">
             <t
                 t-set="link_message"
-            >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
+            >If you want to cancel your registration, please follow the link below:</t>
         </xpath>
 
 
         <xpath expr="//t[@t-set='button_message']" position="after">
-            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+            <t t-set="button_message">Cancel Registration</t>
         </xpath>
 
 
@@ -65,9 +63,9 @@
             position="after"
         >
             <div>
-                Tervetuloa opiskelemaan!<br />
+                Welcome to the course!<br />
                 <span style="color: #454748;">
-                    -- <br />
+                    <br />
                     TAKK
                 </span>
             </div>
