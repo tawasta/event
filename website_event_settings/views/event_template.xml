@@ -32,4 +32,16 @@
         </xpath>
 
     </template>
+
+    <!-- Apply the same show_date_time setting to the "Upcoming Events"
+         dynamic snippet's Card Layout -->
+    <template
+        id="dynamic_filter_template_event_event_card_inherit"
+        inherit_id="website_event.dynamic_filter_template_event_event_card"
+        name="Event Card Layout - Boolean Fields"
+    >
+        <xpath expr="//time[@itemprop='startDate']" position="attributes">
+            <attribute name="t-if">record.show_date_time</attribute>
+        </xpath>
+    </template>
 </odoo>
