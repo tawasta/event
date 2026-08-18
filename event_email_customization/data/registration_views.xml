@@ -108,6 +108,47 @@
         >
             <t t-set="hide_organizer_contact_info" t-value="True" />
         </xpath>
+
+        <!-- These four t-call elements each carry their own hardcoded
+             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code",
+             completely independent of the outer wrapper's t-lang (already
+             fixed in email_template_subscription_with_cancel_event_lang
+             below) and of each other. Every one of them needs the same fix,
+             or sub-blocks like the calendar caption keep rendering in
+             whatever partner_id.lang resolves to, regardless of the
+             event's own language. -->
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_base']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_calendar']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
     </template>
 
     <!-- The organizer contact block is shared with the reminder email, so it
