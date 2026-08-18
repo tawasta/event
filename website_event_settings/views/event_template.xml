@@ -43,5 +43,11 @@
         <xpath expr="//time[@itemprop='startDate']" position="attributes">
             <attribute name="t-if">record.show_date_time</attribute>
         </xpath>
+        <xpath
+            expr="//div[@class='s_events_event_date position-absolute shadow-sm text-dark']"
+            position="attributes"
+        >
+            <attribute name="t-if">record.show_date_time</attribute>
+        </xpath>
     </template>
 </odoo>

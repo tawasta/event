@@ -21,7 +21,7 @@
 {
     "name": "Website Event Settings",
     "summary": "Website Event Settings",
-    "version": "17.0.1.0.2",
+    "version": "17.0.1.0.3",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
