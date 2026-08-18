@@ -71,6 +71,42 @@
         >
             <t t-set="hide_organizer_contact_info" t-value="True" />
         </xpath>
+
+        <!-- Same fix as registration_views.xml: these four t-call elements
+             each carry their own hardcoded t-lang, independent of the
+             outer wrapper and of each other. -->
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_base']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_cancellation']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_calendar']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
     </template>
 
     <!-- Shared by both the registration confirmation and reminder emails -->

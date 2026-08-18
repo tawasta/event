@@ -1,6 +1,6 @@
 {
     "name": "Event Email Customization",
-    "version": "17.0.1.1.2",
+    "version": "17.0.1.1.3",
     "summary": "Custom event messaging emails",
     "category": "Marketing/Events",
     "author": "Futural",
