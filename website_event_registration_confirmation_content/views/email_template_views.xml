@@ -31,6 +31,20 @@
             <t t-set="hide_organizer_contact_info" t-value="True" />
         </xpath>
 
+        <!-- Cancel link/button text: event_email_customization hardcodes a
+             Finnish t-set after the original English one, and since QWeb
+             t-set is last-write-wins, its Finnish text always renders
+             regardless of the recipient's language. Add one more English
+             t-set after theirs so English wins here. -->
+        <xpath expr="(//t[@t-set='link_message'])[last()]" position="after">
+            <t
+                t-set="link_message"
+            >If you wish to cancel your registration, follow the link below:</t>
+        </xpath>
+        <xpath expr="(//t[@t-set='button_message'])[last()]" position="after">
+            <t t-set="button_message">Cancel registration</t>
+        </xpath>
+
         <!-- Greeting and confirmation paragraph: hide the Finnish wording
              inserted by event_email_customization right after the
              invite_others/else branch added by event_ticket_purchase_options -->
@@ -63,6 +77,83 @@
         >
             <div>
                 Welcome to the course!<br />
+                TAKK
+                <br />
+                <br />
+                Questions?<br />
+                Please contact TAKK: <a
+                    href="mailto:verkkokauppa@takk.fi"
+                >verkkokauppa@takk.fi</a>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Priority 100: applies strictly after event_email_customization's own
+         reminder override (priority 99) and event_mail_freetext_confirmation_
+         and_reminder's freetext insertion (default priority 16), so this
+         replaces their already-composed Finnish wording. Used for both the
+         "1 week before" and "1 day before" reminder schedulers, since both
+         share this same mail template; get_date_range_str() already returns
+         the correct "tomorrow"/"next week" wording for whichever one fired. -->
+    <template
+        id="view_email_template_reminder_with_cancel_content"
+        inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
+        priority="100"
+    >
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="before"
+        >
+            <t t-set="hide_organizer_contact_info" t-value="True" />
+        </xpath>
+
+        <!-- Cancel link/button text: same last-write-wins fix as the
+             confirmation email above -->
+        <xpath expr="(//t[@t-set='link_message'])[last()]" position="after">
+            <t
+                t-set="link_message"
+            >If you wish to cancel your registration, follow the link below:</t>
+        </xpath>
+        <xpath expr="(//t[@t-set='button_message'])[last()]" position="after">
+            <t t-set="button_message">Cancel registration</t>
+        </xpath>
+
+        <!-- Greeting and reminder paragraph: hide the Finnish wording
+             inserted by event_email_customization right after the original
+             greeting div -->
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]/following-sibling::div[1]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]/following-sibling::div[1]"
+            position="after"
+        >
+            <div>
+                Hello "<t t-esc="object.name or ''" />",<br />
+                <br />
+                This is a reminder that the training course "<t
+                    t-esc="object.event_id.name or ''"
+                />" will begin <t t-esc="object.get_date_range_str()" />.
+            </div>
+        </xpath>
+
+        <!-- Closing signature and contact block: hide the Finnish signature
+             div event_email_customization appends last -->
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="after"
+        >
+            <div>
+                Welcome to the course,<br />
                 TAKK
                 <br />
                 <br />

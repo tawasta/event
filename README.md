@@ -76,7 +76,7 @@ addon | version | maintainers | summary
 [website_event_recurring_event](website_event_recurring_event/) | 17.0.1.0.0 |  | Create recurring events and hide dates
 [website_event_register_button](website_event_register_button/) | 17.0.1.0.0 |  | Website Event Register Button
 [website_event_register_elsewhere](website_event_register_elsewhere/) | 17.0.1.0.0 |  | Redirects registrations to another URL
-[website_event_registration_confirmation_content](website_event_registration_confirmation_content/) | 17.0.1.0.0 |  | Custom English wording for the event registration confirmation email
+[website_event_registration_confirmation_content](website_event_registration_confirmation_content/) | 17.0.1.1.0 |  | Custom English wording for the event registration confirmation and reminder emails
 [website_event_registration_info](website_event_registration_info/) | 17.0.1.0.0 |  | Show customizable extra information before registration
 [website_event_required_subscription](website_event_required_subscription/) | 17.0.1.0.0 |  | Allows setting a required subscription type for event tickets
 [website_event_responsible_contact_info_visibility](website_event_responsible_contact_info_visibility/) | 17.0.1.0.0 |  | Set per event if Responsible user and their phone, mobile and/or email should be shown

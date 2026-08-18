@@ -21,8 +21,8 @@
 {
     "name": "Website Event: Registration Confirmation Content",
     "summary": "Custom English wording for the event registration "
-    "confirmation email",
-    "version": "17.0.1.0.0",
+    "confirmation and reminder emails",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
