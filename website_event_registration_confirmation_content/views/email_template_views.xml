@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- The organizer contact block is shared with the reminder email, so it
+         stays untouched by default. Registration confirmation opts out of it
+         via the "hide_organizer_contact_info" flag set below, since its own
+         content already ends with the TAKK contact block. -->
+    <template
+        id="view_email_template_event_details_organizer_contact_optional"
+        inherit_id="website_event_cancellation.view_email_template_event_details"
+    >
+        <xpath expr="//div[@name='organizer-info']" position="attributes">
+            <attribute
+                name="t-if"
+            >object.event_id.organizer_id and not hide_organizer_contact_info</attribute>
+        </xpath>
+    </template>
+
+    <!-- Priority 100: applies strictly after event_ticket_purchase_options's
+         and event_email_customization's own overrides of this same template
+         (both priority 99), so this replaces their already-composed Finnish
+         wording instead of the pristine base content. -->
+    <template
+        id="view_email_template_subscription_with_cancel_content"
+        inherit_id="website_event_cancellation.view_email_template_subscription_with_cancel"
+        priority="100"
+    >
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="before"
+        >
+            <t t-set="hide_organizer_contact_info" t-value="True" />
+        </xpath>
+
+        <!-- Greeting and confirmation paragraph: hide the Finnish wording
+             inserted by event_email_customization right after the
+             invite_others/else branch added by event_ticket_purchase_options -->
+        <xpath expr="//t[@t-else]/following-sibling::div[1]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//t[@t-else]/following-sibling::div[1]" position="after">
+            <div>
+                Hello "<t t-esc="object.name or ''" />",<br />
+                <br />
+                Your registration for the course "<t
+                    t-esc="object.event_id.name or ''"
+                />" has been received. You will also receive a message from
+                Moodle shortly. The message will contain your login
+                credentials and a link to access the course.
+            </div>
+        </xpath>
+
+        <!-- Closing signature and contact block: hide the Finnish signature
+             div event_email_customization appends last -->
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath
+            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
+            position="after"
+        >
+            <div>
+                Welcome to the course!<br />
+                TAKK
+                <br />
+                <br />
+                Questions?<br />
+                Please contact TAKK: <a
+                    href="mailto:verkkokauppa@takk.fi"
+                >verkkokauppa@takk.fi</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>
