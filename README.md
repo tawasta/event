@@ -22,7 +22,7 @@ addon | version | maintainers | summary
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
-[event_email_customization](event_email_customization/) | 17.0.1.0.2 |  | Custom event messaging emails
+[event_email_customization](event_email_customization/) | 17.0.1.0.3 |  | Custom event messaging emails
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
@@ -97,6 +97,7 @@ addon | version | maintainers | summary
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
 [website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.1 |  | Adds a waiting list functionality to Events.
+[website_event_wording_koulutus](website_event_wording_koulutus/) | 17.0.1.0.0 |  | Overrides website_event's Finnish translations to use 'koulutus' instead of 'tapahtuma'
 [website_my_events](website_my_events/) | 17.0.1.0.0 |  | My events in website portal
 
 

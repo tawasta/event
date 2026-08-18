@@ -5,9 +5,8 @@
 =====================================
 Event: Email Template Customizations
 =====================================
-* Adds / modifies 6 different event related automated message templates
-* Adds functionlality, that overrides system default messaging in 
-case of the event -registration and -reminder emails
+* Adds / modifies 7 different event related automated message templates
+* Adds both english and finnish variants
 * Additional templates for waiting list, moodle and company event messaging
 
 Configuration

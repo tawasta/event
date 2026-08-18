@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20260609\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-16 19:50+0000\n"
-"PO-Revision-Date: 2026-06-16 19:50+0000\n"
+"POT-Creation-Date: 2026-08-17 00:00+0000\n"
+"PO-Revision-Date: 2026-08-17 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,157 +16,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid ""
-",\n"
-"                on tällä hetkellä täynnä.<br/>\n"
-"                Sinut on laitettu jonotuslistalle. Olemme sinuun yhteydessä, jos paikkoja vapautuu.<br/><br/>"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-msgid ""
-",<br/><br/>\n"
-"                Ilmoittautumisesi koulutukseen"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid ""
-",<br/><br/>\n"
-"                Kiitos kiinnostuksestasi koulutustamme kohtaan.<br/>\n"
-"                Koulutus"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-msgid ""
-",<br/><br/>\n"
-"                Meillä on vapautunut paikkoja koulutukseen"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-msgid ""
-",<br/><br/>\n"
-"                Muistathan, että koulutus"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-msgid ""
-".<br/>\n"
-"                Vahvista paikkasi nopeasti, ne jaetaan vahvistamisjärjestyksessä.<br/><br/>"
-msgstr ""
-
-#. module: event_email_customization
-#: model:mail.template,body_html:event_email_customization.event_company_invitation_custom
-msgid ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
-"                <tr><td align=\"center\">\n"
-"                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
-"                        <tbody>\n"
-"                            <!-- HEADER -->\n"
-"                            <tr>\n"
-"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                    <span style=\"font-size: 20px; font-weight: bold;\">\n"
-"                                        Sinut on kutsuttu osallistumaan koulutukseen: <t t-out=\"object.event_id.name or ''\"></t>\n"
-"                                    </span>\n"
-"                                    <p t-if=\"object.event_id.show_date_time or object.event_id.show_location\">\n"
-"                                        Koulutus pidetään\n"
-"                                        <t t-if=\"object.event_id.show_date_time\">\n"
-"                                            :\n"
-"                                            <t t-out=\"object.event_id.date_begin_located or ''\"></t> -\n"
-"                                            <t t-out=\"object.event_id.date_end_located or ''\"></t>\n"
-"                                        </t>\n"
-"                                        <t t-if=\"object.event_id.show_location\">\n"
-"                                            osoitteessa\n"
-"                                            <t t-out=\"object.event_id.address_id.name or 'Online'\"></t>\n"
-"                                        </t>\n"
-"                                    </p>\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                            <!-- INVITATION DETAILS -->\n"
-"                            <tr>\n"
-"                                <td style=\"text-align:center;\">\n"
-"                                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\">\n"
-"                                    <div style=\"font-size: 14px;\">\n"
-"                                        Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä:\n"
-"                                        <br><br>\n"
-"                                        <a t-attf-href=\"/event/{{ object.event_id.id }}/invitation/{{ object.invite_id.id }}/accept?access_token={{ object.invite_id.access_token }}\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\" target=\"_blank\">\n"
-"                                            Hyväksy kutsu\n"
-"                                        </a>\n"
-"                                    </div>\n"
-"                                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\">\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                            <!-- FOOTER -->\n"
-"                            <tr>\n"
-"                                <td style=\"font-size: 14px;\">\n"
-"                                    <p>Tervetuloa koulutukseen!</p>\n"
-"                                    <p>\n"
-"                                        Ystävällisin terveisin,<br>\n"
-"                                        TAKK\n"
-"                                    </p>\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                        </tbody>\n"
-"                    </table>\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        "
-msgstr ""
-
-#. module: event_email_customization
-#: model:mail.template,body_html:event_email_customization.event_moodle_invitation_custom
-msgid ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
-"                <tr><td align=\"center\">\n"
-"                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
-"                        <tbody>\n"
-"                            <!-- HEADER -->\n"
-"                            <tr>\n"
-"                                <td align=\"center\" style=\"min-width: 590px;\">\n"
-"                                    <span style=\"font-size: 20px; font-weight: bold;\">\n"
-"                                        Sinut on lisätty koulutukseen: <t t-out=\"object.event_id.name or ''\"></t>\n"
-"                                    </span>\n"
-"                                    <p>Hei <strong><t t-out=\"object.attendee_partner_id.name or object.partner_id.name\"></t></strong>,</p>\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                            <tr>\n"
-"                                <td style=\"text-align:center;\">\n"
-"                                    <div style=\"font-size: 14px;\">\n"
-"                                        Voit siirtyä koulutukseen painamalla alla olevaa painiketta:\n"
-"                                        <br><br>\n"
-"                                        <a t-att-href=\"object.env['moodle.binding'].sudo().get_course_url(object.event_id.moodle_course_id)\" style=\"padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px\" target=\"_blank\">\n"
-"                                            Siirry koulutukseen\n"
-"                                        </a>\n"
-"                                    </div>\n"
-"                                    <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\">\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                            <!-- FOOTER -->\n"
-"                            <tr>\n"
-"                                <td style=\"font-size: 14px;\">\n"
-"                                    <p>\n"
-"                                        Ystävällisin terveisin,<br>\n"
-"                                        TAKK\n"
-"                                    </p>\n"
-"                                </td>\n"
-"                            </tr>\n"
-"                        </tbody>\n"
-"                    </table>\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        "
-msgstr ""
-
-#. module: event_email_customization
 #. odoo-python
 #: code:addons/event_email_customization/models/event_registration.py:0
 #, python-format
 msgid "Course info sent"
-msgstr ""
+msgstr "Kurssitiedot lähetetty"
 
 #. module: event_email_customization
 #: model:ir.model,name:event_email_customization.model_event_mail
@@ -180,25 +34,12 @@ msgstr "Tapahtuman ilmoittautuminen"
 
 #. module: event_email_customization
 #: model:mail.template,name:event_email_customization.event_company_invitation_custom
-msgid "Event: Company Invitation (Custom)"
+msgid "Event: company invitation (fi)"
 msgstr ""
 
 #. module: event_email_customization
 #: model:mail.template,name:event_email_customization.event_moodle_invitation_custom
-msgid "Event: Moodle Invitation (Custom)"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid "Hei"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid "Ilmoittautumisesi jonotuslistalle"
+msgid "Event: Moodle invitation (fi)"
 msgstr ""
 
 #. module: event_email_customization
@@ -207,7 +48,7 @@ msgstr ""
 #: code:addons/event_email_customization/controllers/main.py:0
 #, python-format
 msgid "Invitation sent"
-msgstr ""
+msgstr "Kutsu lähetetty"
 
 #. module: event_email_customization
 #: model:mail.template,description:event_email_customization.event_company_invitation_custom
@@ -220,90 +61,6 @@ msgid "Invitation: {{ object.event_id.name }}"
 msgstr ""
 
 #. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-msgid "Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:"
-msgstr ""
-
-#. module: event_email_customization
-#: model:mail.template,subject:event_email_customization.event_moodle_invitation_custom
-msgid "Koulutus: {{ object.event_id.name }} Moodle kutsu"
-msgstr ""
-
-#. module: event_email_customization
 #: model:mail.template,description:event_email_customization.event_moodle_invitation_custom
 msgid "New attendee enrolled to course"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-msgid "Paikkoja vapautunut"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid "Peruuta ilmoittautuminen"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid "Peruuttaaksesi paikkasi jonotuslistalla, seuraa alla olevaa linkkiä:"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-msgid ""
-"Tervetuloa koulutukseen,<br/>\n"
-"                <span style=\"color: #454748;\">\n"
-"                    -- <br/>\n"
-"                    TAKK\n"
-"                </span>"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-msgid ""
-"Tervetuloa opiskelemaan!<br/>\n"
-"                <span style=\"color: #454748;\">\n"
-"                    -- <br/>\n"
-"                    TAKK\n"
-"                </span>"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-msgid "Vahvista tai peruuta ilmoittautuminen"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-msgid "Vahvista tai peruuta paikkasi alla olevasta linkistä:"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_confirm_waiting_list
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_waiting_list
-msgid ""
-"Ystävällisin terveisin,<br/>\n"
-"                <span style=\"color: #454748;\">\n"
-"                    -- <br/>\n"
-"                    TAKK\n"
-"                </span>"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_reminder_with_cancel
-msgid "alkaa"
-msgstr ""
-
-#. module: event_email_customization
-#: model_terms:ir.ui.view,arch_db:event_email_customization.view_email_template_subscription_with_cancel
-msgid ""
-"on vastaanotettu.\n"
-"                <br/><br/>\n"
-"                Saat lähiaikoina myös viestin Moodlesta. Viesti sisältää tunnukset ja kirjautumislinkin koulutukseen.\n"
-"                <br/><br/>\n"
-"                Tervetuloa opiskelemaan!"
 msgstr ""

@@ -1,8 +1,4 @@
-import logging
-
 from odoo import _, models
-
-_logger = logging.getLogger(__name__)
 
 
 class EventRegistration(models.Model):
@@ -14,7 +10,6 @@ class EventRegistration(models.Model):
         connector_moodle template. All other logic remains identical.
         """
         for rec in self:
-            _logger.info(f"Event registration record {rec.id}")
             course = rec.event_id.moodle_course_id
             if not course:
                 continue
@@ -24,10 +19,6 @@ class EventRegistration(models.Model):
                 "event_email_customization.event_moodle_invitation_custom"
             ).sudo()
             if not mail_template:
-                _logger.error(
-                    "Could not find "
-                    "event_email_customization.event_moodle_invitation_custom"
-                )
                 continue
 
             if rec.moodle_info_sent:
@@ -36,10 +27,6 @@ class EventRegistration(models.Model):
             partner = rec.attendee_partner_id
             if not partner:
                 partner = rec.partner_id
-                _logger.info(
-                    f"Registration {rec.id} no attendee partner "
-                    f"use partner_id with email {partner.email} instead"
-                )
 
             invite_others = hasattr(rec, "invite_others") and rec.invite_others
             used = hasattr(rec, "invite_id") and rec.invite_id and rec.invite_id.is_used
@@ -48,9 +35,6 @@ class EventRegistration(models.Model):
                 if not invite_others or (invite_others and used):
                     # Send to Moodle if not draft registrations
                     # OR draft registration but used
-                    _logger.info(
-                        f"Enrol partner {partner.email} to course {course.name}..."
-                    )
                     rec.env["moodle.binding"].sudo().with_context(
                         lang="fi_FI"
                     ).enrol_user_sale(partner, course)
@@ -81,8 +65,5 @@ class EventRegistration(models.Model):
                             message_type="notification",
                         )
                         rec.sudo().write({"moodle_info_sent": True})
-                    except Exception as e:
-                        _logger.error(
-                            f"Error when trying to send course info email: {e}"
-                        )
+                    except Exception:
                         continue

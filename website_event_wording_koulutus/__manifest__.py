@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2026- Futural Oy (https://futural.fi)
+#    Copyright 2026 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,30 +19,22 @@
 ##############################################################################
 
 {
-    "name": "Event Email Customization",
-    "version": "17.0.1.0.3",
-    "summary": "Custom event messaging emails",
-    "category": "Marketing/Events",
-    "author": "Futural",
+    "name": "Website Event: Finnish Wording (Koulutus)",
+    "summary": "Overrides website_event's Finnish translations to use "
+    "'koulutus' instead of 'tapahtuma'",
+    "version": "17.0.1.0.0",
+    "category": "Events",
     "website": "https://github.com/tawasta/event",
-    "license": "LGPL-3",
-    "depends": [
-        "event",
-        "website_event_waiting_list",
-        "website_event_cancellation",
-        "event_ticket_purchase_options",
-        "connector_moodle",
-    ],
-    "data": [
-        "data/registration_views.xml",
-        "data/registration_views_en.xml",
-        "data/reminder_views.xml",
-        "data/reminder_views_en.xml",
-        "data/waiting_list_views.xml",
-        "data/waiting_list_views_en.xml",
-        "data/mail_templates.xml",
-    ],
-    "installable": True,
+    "author": "Futural",
+    "license": "AGPL-3",
     "application": False,
-    "auto_install": False,
+    "installable": True,
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
+    },
+    "depends": ["website", "website_event"],
+    "data": ["views/event_templates.xml"],
+    "demo": [],
+    "post_init_hook": "post_init_hook",
 }

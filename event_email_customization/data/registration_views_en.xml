@@ -1,80 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!-- Inherit reminder view to translate text -->
-    <template
-        id="view_email_template_reminder_with_cancel"
-        inherit_id="website_event_cancellation.view_email_template_reminder_with_cancel"
-        priority="99"
-    >
-        <!-- Hide original greeting text, add new after -->
-        <xpath
-            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]"
-            position="attributes"
-        >
-            <attribute name="t-if">False</attribute>
-        </xpath>
-        <xpath
-            expr="//td[@valign='top' and @style='font-size: 14px;']/div[1]"
-            position="after"
-        >
-            <div>
-                Hei <t t-esc="object.name or ''" />,<br /><br />
-                Muistathan, että koulutus
-                <t t-if="object.event_id.is_published"><a
-                        t-att-href="object.event_id.website_url"
-                        t-attf-style="color:#{email_secondary_color};text-decoration:none;"
-                    ><t t-esc="object.event_id.name" /></a></t>
-                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
-                    alkaa viikon päästä.
-            </div>
-        </xpath>
-
-        <!-- Override cancel button text: set after existing t-set so it wins -->
-        <xpath expr="//t[@t-set='link_message']" position="after">
-            <t
-                t-set="link_message"
-            >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
-        </xpath>
-
-        <!-- Override cancel button label: set after existing t-set so it wins -->
-        <xpath expr="//t[@t-set='button_message']" position="after">
-            <t t-set="button_message">Peruuta ilmoittautuminen</t>
-        </xpath>
-
-        <!-- Hide original footer text, add new after -->
-        <xpath
-            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
-            position="attributes"
-        >
-            <attribute name="t-if">False</attribute>
-        </xpath>
-        <xpath
-            expr="//td[@valign='top' and @style='font-size: 14px;']/div[last()]"
-            position="after"
-        >
-            <div>
-                Tervetuloa koulutukseen,<br />
-                <span style="color: #454748;">
-                    -- <br />
-                    TAKK
-                </span>
-            </div>
-        </xpath>
-    </template>
-
-    <!-- Finnish 1-day reminder -->
-    <template id="email_template_reminder_with_cancel_1d_fi">
+    <!-- English registration confirmation email view -->
+    <template id="email_template_subscription_with_cancel_en">
         <t
             t-set="lang"
             t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
         <t
-            t-call="event_email_customization.view_email_template_reminder_with_cancel_1d_fi"
+            t-call="event_email_customization.view_email_template_subscription_with_cancel_en"
             t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
         />
     </template>
 
-    <template id="view_email_template_reminder_with_cancel_1d_fi">
+    <template id="view_email_template_subscription_with_cancel_en">
         <t
             t-set="lang"
             t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
@@ -120,7 +58,7 @@
                     t-value="'%s, %s' % (location, object.event_id.address_id.zip)"
                 />
             </t>
-            <t t-set="email_heading">Ilmoittautumisesi</t>
+            <t t-set="email_heading">Your registration</t>
             <tr>
                 <td align="center" style="min-width: 590px;">
                     <table
@@ -133,34 +71,36 @@
                         <tr>
                             <td valign="top" style="font-size: 14px;">
                                 <div>
-                                    Hei <t t-esc="object.name or ''" />,<br /><br />
-                                    Muistathan, että koulutus
+                                    Hello <t t-esc="object.name or ''" />,<br /><br />
+                                    Your registration for the training
                                     <t t-if="object.event_id.is_published"><a
                                             t-att-href="object.event_id.website_url"
-                                            t-attf-style="color:#{email_secondary_color};text-decoration:none;"
+                                            t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
                                         ><t t-esc="object.event_id.name" /></a></t>
                                     <t t-else=""><strong><t
                                                 t-esc="object.event_id.name"
                                             /></strong></t>
-                                        alkaa tänään.
+                                    has been received.
+                                    <br /><br />
+                                    You will soon also receive a message from Moodle. The message will contain the credentials and login link for the training.
+                                    <br /><br />
+                                    Welcome to study!
                                 </div>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_cancellation"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
                                 >
                                     <t t-set="link_message">
-                                        Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:
+                                        If you wish to cancel your registration, follow the link below:
                                     </t>
-                                    <t
-                                        t-set="button_message"
-                                    >Peruuta ilmoittautuminen</t>
+                                    <t t-set="button_message">Cancel registration</t>
                                 </t>
                                 <t
                                     t-call="website_event_cancellation.view_email_template_event_calendar"
                                     t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
                                 />
                                 <div>
-                                    Tervetuloa koulutukseen,<br />
+                                    Welcome to study!<br />
                                     <span style="color: #454748;">
                                         -- <br />
                                         TAKK
