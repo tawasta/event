@@ -25,7 +25,9 @@
                         t-attf-style="color:#{email_secondary_color};text-decoration:none;"
                     ><t t-esc="object.event_id.name" /></a></t>
                 <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
-                    starts <strong><t t-esc="object.get_date_range_str()" /></strong>.
+                    will begin <strong><t
+                        t-esc="object.get_date_range_str()"
+                    /></strong>.
             </div>
         </xpath>
 
@@ -54,11 +56,55 @@
         >
             <div>
                 Welcome to the course,<br />
-                <span style="color: #454748;">
-                    <br />
-                    TAKK
-                </span>
+                TAKK
+                <br /><br />
+                Questions?<br />
+                Please contact TAKK: <a
+                    href="mailto:verkkokauppa@takk.fi"
+                >verkkokauppa@takk.fi</a>
             </div>
+        </xpath>
+
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="before"
+        >
+            <t t-set="hide_organizer_contact_info" t-value="True" />
+        </xpath>
+    </template>
+
+    <!-- Shared by both the registration confirmation and reminder emails -->
+    <template
+        id="view_email_template_event_calendar_course_wording"
+        inherit_id="website_event_cancellation.view_email_template_event_calendar"
+    >
+        <xpath expr="//strong[1]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//strong[1]" position="after">
+            <strong>Add this course to your calendar:</strong>
+        </xpath>
+    </template>
+
+    <!-- Same fix as registration_views.xml's
+         email_template_subscription_with_cancel_event_lang, but for the
+         reminder's own outer wrapper template. -->
+    <template
+        id="email_template_reminder_with_cancel_event_lang"
+        inherit_id="website_event_cancellation.email_template_reminder_with_cancel"
+    >
+        <xpath expr="//t[@t-set='lang']" position="attributes">
+            <attribute
+                name="t-value"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_reminder_with_cancel']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
         </xpath>
     </template>
 </odoo>

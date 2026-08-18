@@ -16,7 +16,7 @@
             name="body_view_id"
             ref="website_event_cancellation.email_template_subscription_with_cancel"
         />
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
     </record>
 
     <!-- Reset noupdate for core reminder -->
@@ -33,7 +33,7 @@
             name="body_view_id"
             ref="website_event_cancellation.email_template_reminder_with_cancel"
         />
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
     </record>
 
     <!-- Reset noupdate for waiting list templates -->
@@ -47,7 +47,7 @@
     </function>
     <record id="website_event_waiting_list.event_waiting" model="mail.template">
         <field name="subject">Jonotuslistalla: {{ object.event_id.name }}</field>
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
     </record>
 
     <function name="write" model="ir.model.data">
@@ -63,7 +63,7 @@
         model="mail.template"
     >
         <field name="subject">Paikkoja vapautunut: {{ object.event_id.name }}</field>
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
     </record>
 
     <!-- New company invitation template (original noupdate override did not work) -->
@@ -95,15 +95,17 @@
                             <!-- HEADER -->
                             <tr>
                                 <td align="center" style="min-width: 590px;">
-                                    <span style="font-size: 20px; font-weight: bold;">
-                                        Sinut on kutsuttu osallistumaan koulutukseen: <t
+                                    <span style="font-size: 14px;">
+                                        Hello,<br />
+                                        You have been invited to participate in the
+                                        training course: <t
                                                 t-out="object.event_id.name or ''"
                                             />
                                     </span>
                                     <p
                                             t-if="object.event_id.show_date_time or object.event_id.show_location"
                                         >
-                                        Koulutus pidetään
+                                        The course takes place
                                         <t t-if="object.event_id.show_date_time">
                                             :
                                             <t
@@ -114,7 +116,7 @@
                                                 />
                                         </t>
                                         <t t-if="object.event_id.show_location">
-                                            osoitteessa
+                                            at
                                             <t
                                                     t-out="object.event_id.address_id.name or 'Online'"
                                                 />
@@ -130,14 +132,14 @@
                                             style="background-color:rgb(204,204,204);border:none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;"
                                         />
                                     <div style="font-size: 14px;">
-                                        Hyväksyäksesi kutsun, klikkaa alla olevaa linkkiä:
+                                        To accept the invitation, please click the link below:
                                         <br /><br />
                                         <a
                                                 t-attf-href="/event/{{ object.event_id.id }}/invitation/{{ object.invite_id.id }}/accept?access_token={{ object.invite_id.access_token }}"
                                                 style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
                                                 target="_blank"
                                             >
-                                            Hyväksy kutsu
+                                            Accept Invitation
                                         </a>
                                     </div>
                                     <hr
@@ -149,9 +151,8 @@
                             <!-- FOOTER -->
                             <tr>
                                 <td style="font-size: 14px;">
-                                    <p>Tervetuloa koulutukseen!</p>
                                     <p>
-                                        Ystävällisin terveisin,<br />
+                                        Welcome to the course!<br />
                                         TAKK
                                     </p>
                                 </td>
@@ -161,7 +162,7 @@
                 </td></tr>
             </table>
         </field>
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True" />
     </record>
 
@@ -169,7 +170,7 @@
     <record id="event_moodle_invitation_custom" model="mail.template">
         <field name="name">Event: Moodle Invitation (Custom)</field>
         <field name="model_id" ref="event.model_event_registration" />
-        <field name="subject">Koulutus: {{ object.event_id.name }} Moodle kutsu</field>
+        <field name="subject">Moodle Course Invitation</field>
         <field
             name="email_from"
         >{{ (object.event_id.organizer_id.email_formatted or object.event_id.user_id.email_formatted or '') }}</field>
@@ -194,12 +195,11 @@
                             <!-- HEADER -->
                             <tr>
                                 <td align="center" style="min-width: 590px;">
-                                    <span style="font-size: 20px; font-weight: bold;">
-                                        Sinut on lisätty koulutukseen: <t
-                                                t-out="object.event_id.name or ''"
-                                            />
+                                    <span style="font-size: 14px;">
+                                        You have been enrolled in the training
+                                        course <t t-out="object.event_id.name or ''" />.
                                     </span>
-                                    <p>Hei <strong><t
+                                    <p>Hello <strong><t
                                                     t-out="object.attendee_partner_id.name or object.partner_id.name"
                                                 /></strong>,</p>
                                 </td>
@@ -207,14 +207,14 @@
                             <tr>
                                 <td style="text-align:center;">
                                     <div style="font-size: 14px;">
-                                        Voit siirtyä koulutukseen painamalla alla olevaa painiketta:
+                                        You can access the course by clicking the button below.
                                         <br /><br />
                                         <a
                                                 t-att-href="object.env['moodle.binding'].sudo().get_course_url(object.event_id.moodle_course_id)"
                                                 style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px"
                                                 target="_blank"
                                             >
-                                            Siirry koulutukseen
+                                            Go to the Course
                                         </a>
                                     </div>
                                     <hr
@@ -227,8 +227,14 @@
                             <tr>
                                 <td style="font-size: 14px;">
                                     <p>
-                                        Ystävällisin terveisin,<br />
+                                        Kind regards,<br />
                                         TAKK
+                                    </p>
+                                    <p>
+                                        Questions?<br />
+                                        Please contact TAKK: <a
+                                                href="mailto:verkkokauppa@takk.fi"
+                                            >verkkokauppa@takk.fi</a>
                                     </p>
                                 </td>
                             </tr>
@@ -237,7 +243,7 @@
                 </td></tr>
             </table>
         </field>
-        <field name="lang">fi_FI</field>
+        <field name="lang">{{ object.event_id.lang or object.partner_id.lang }}</field>
         <field name="auto_delete" eval="True" />
     </record>
 </odoo>

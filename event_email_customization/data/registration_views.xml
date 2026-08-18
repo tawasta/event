@@ -7,11 +7,40 @@
         priority="99"
     >
 
+        <!-- Hide event_ticket_purchase_options' own English content for
+             both the invite_others=True and invite_others=False branches,
+             and replace each with our own wording below - conditionally,
+             matching the same object.invite_others each replaces, so the
+             "invite others" confirmation never shows the normal
+             registration text or vice versa. -->
         <xpath
             expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-if='object.invite_others']/div"
             position="attributes"
         >
             <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath
+            expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-if='object.invite_others']"
+            position="after"
+        >
+            <t t-if="object.invite_others">
+                <div>
+                    We confirm your invitation to the course
+                    <t t-if="object.event_id.is_published"><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
+                        ><t t-esc="object.event_id.name" /></a></t>
+                    <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
+                    .
+                    <br /><br />
+                    You can now invite other participants to join the course. Click the link below to manage your invitations:
+                    <br /><br />
+                    <a href="/my/events" t-attf-style="text-decoration: underline;">
+                        Manage Invitations
+                    </a>
+                </div>
+            </t>
         </xpath>
 
         <xpath
@@ -25,18 +54,18 @@
             expr="//td[@align='center']/table/tr/td[@valign='top' and @style='font-size: 14px;']/t[@t-else]"
             position="after"
         >
-            <div>
-                Hello <t t-esc="object.name or ''" />,<br /><br />
-                Your registration for the course
-                <t t-if="object.event_id.is_published"><a
-                        t-att-href="object.event_id.website_url"
-                        t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
-                    ><t t-esc="object.event_id.name" /></a></t>
-                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
-                has been received.
-                <br /><br />
-                You will receive a message from Moodle shortly. The message will contain your credentials and login link for the course.
-            </div>
+            <t t-if="not object.invite_others">
+                <div>
+                    Hello <t t-esc="object.name or ''" />,<br /><br />
+                    Your registration for the course
+                    <t t-if="object.event_id.is_published"><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color: #{email_secondary_color}; text-decoration: underline;"
+                        ><t t-esc="object.event_id.name" /></a></t>
+                    <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
+                    has been received. You will also receive a message from Moodle shortly. The message will contain your login credentials and a link to access the course.
+                </div>
+            </t>
         </xpath>
 
 
@@ -64,11 +93,62 @@
         >
             <div>
                 Welcome to the course!<br />
-                <span style="color: #454748;">
-                    <br />
-                    TAKK
-                </span>
+                TAKK
+                <br /><br />
+                Questions?<br />
+                Please contact TAKK: <a
+                    href="mailto:verkkokauppa@takk.fi"
+                >verkkokauppa@takk.fi</a>
             </div>
+        </xpath>
+
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_event_details']"
+            position="before"
+        >
+            <t t-set="hide_organizer_contact_info" t-value="True" />
+        </xpath>
+    </template>
+
+    <!-- The organizer contact block is shared with the reminder email, so it
+         stays untouched by default there. The registration confirmation
+         above opts out of it via the "hide_organizer_contact_info" flag,
+         since its own content already ends with the TAKK contact block. -->
+    <template
+        id="view_email_template_event_details_organizer_contact_optional"
+        inherit_id="website_event_cancellation.view_email_template_event_details"
+    >
+        <xpath expr="//div[@name='organizer-info']" position="attributes">
+            <attribute
+                name="t-if"
+            >object.event_id.organizer_id and not hide_organizer_contact_info</attribute>
+        </xpath>
+    </template>
+
+    <!-- This is the OUTER wrapper template that event.event_subscription's
+         body_view_id actually points to (not view_email_template_
+         subscription_with_cancel above, which is the inner content
+         template it t-calls). It computes its own "lang" for the t-lang
+         used on that t-call, completely independent of mail.template's
+         own "lang" field - it never considered the event's own language,
+         only the partner's/visitor's, which is why fixing mail.template's
+         lang field alone wasn't enough. -->
+    <template
+        id="email_template_subscription_with_cancel_event_lang"
+        inherit_id="website_event_cancellation.email_template_subscription_with_cancel"
+    >
+        <xpath expr="//t[@t-set='lang']" position="attributes">
+            <attribute
+                name="t-value"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_event_cancellation.view_email_template_subscription_with_cancel']"
+            position="attributes"
+        >
+            <attribute
+                name="t-lang"
+            >object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code</attribute>
         </xpath>
     </template>
 </odoo>
