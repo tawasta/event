@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- website_event's own "Upcoming Events" filter (website_event.
+         ir_filters_event_list_snippet) has a fixed domain requiring
+         date_begin >= today, baked into the filter itself. The snippet's
+         own "Timeframe" option (Upcoming/Past/All) only adds an extra
+         date_begin condition on top of that - it can never remove it, so
+         "All Events" there still only shows upcoming events, and "Past
+         Events" is always empty (date_begin >= today AND date_begin <
+         today can never match).
+
+         This filter has no date restriction at all, so combined with the
+         snippet's "All Events" timeframe it actually shows every event,
+         and combined with "Past Events" it correctly shows only past
+         ones. It shows up automatically as a second choice in the same
+         "Filter" dropdown, since that dropdown is populated from every
+         website.snippet.filter targeting the event.event model. -->
+    <record id="ir_filters_event_list_snippet_all" model="ir.filters">
+        <field name="name">All Events</field>
+        <field name="model_id">event.event</field>
+        <field name="user_id" eval="False" />
+        <field name="domain">[]</field>
+        <field name="sort">["date_begin asc"]</field>
+    </record>
+
+    <record id="website_snippet_filter_event_list_all" model="website.snippet.filter">
+        <field name="filter_id" ref="ir_filters_event_list_snippet_all" />
+        <field name="field_names">name,subtitle</field>
+        <field name="limit" eval="16" />
+        <field name="name">All Events</field>
+    </record>
+</odoo>

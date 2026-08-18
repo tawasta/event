@@ -22,7 +22,7 @@ addon | version | maintainers | summary
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
-[event_email_customization](event_email_customization/) | 17.0.1.1.3 |  | Custom event messaging emails
+[event_email_customization](event_email_customization/) | 17.0.1.1.4 |  | Custom event messaging emails
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
 [event_filter_organizer_partners](event_filter_organizer_partners/) | 17.0.1.0.1 |  | Filter event partners for organizer by partner toggle
@@ -86,7 +86,7 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_search_extension](website_event_search_extension/) | 17.0.1.0.0 |  | Extend website event search fields
 [website_event_settings](website_event_settings/) | 17.0.1.0.1 |  | Website Event Settings
-[website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.0.1 |  | Additional configurations for the core snippet
+[website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.1.0 |  | Additional configurations for the core snippet
 [website_event_ticket_accessories](website_event_ticket_accessories/) | 17.0.1.0.1 |  | Suggest extra products in cart based on the selected event ticket
 [website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
 [website_event_time_visibility](website_event_time_visibility/) | 17.0.1.0.0 |  | Set per event if the time of day should be shown on the website, or only the dates

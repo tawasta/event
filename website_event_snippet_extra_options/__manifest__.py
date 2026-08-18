@@ -21,7 +21,7 @@
 {
     "name": "Website 'Events' Snippet Extra Options",
     "summary": "Additional configurations for the core snippet",
-    "version": "17.0.1.0.1",
+    "version": "17.0.1.1.0",
     "category": "Event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -32,6 +32,7 @@
     "data": [
         "views/event_event_views.xml",
         "views/snippets/s_events_extended.xml",
+        "data/website_snippet_data.xml",
     ],
     "assets": {
         "web.assets_frontend": [
