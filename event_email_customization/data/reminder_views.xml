@@ -18,14 +18,14 @@
             position="after"
         >
             <div>
-                Hei <t t-esc="object.name or ''" />,<br /><br />
-                Muistathan, että koulutus
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                This is a reminder that the training course
                 <t t-if="object.event_id.is_published"><a
                         t-att-href="object.event_id.website_url"
                         t-attf-style="color:#{email_secondary_color};text-decoration:none;"
                     ><t t-esc="object.event_id.name" /></a></t>
                 <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>
-                    alkaa <strong><t t-esc="object.get_date_range_str()" /></strong>.
+                    starts <strong><t t-esc="object.get_date_range_str()" /></strong>.
             </div>
         </xpath>
 
@@ -33,12 +33,12 @@
         <xpath expr="//t[@t-set='link_message']" position="after">
             <t
                 t-set="link_message"
-            >Jos haluat peruuttaa ilmoittautumisesi, seuraa alla olevaa linkkiä:</t>
+            >If you want to cancel your registration, please follow the link below:</t>
         </xpath>
 
         <!-- Override cancel button label: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='button_message']" position="after">
-            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+            <t t-set="button_message">Cancel Registration</t>
         </xpath>
 
         <!-- Hide original footer text, add new after -->
@@ -53,9 +53,9 @@
             position="after"
         >
             <div>
-                Tervetuloa koulutukseen,<br />
+                Welcome to the course,<br />
                 <span style="color: #454748;">
-                    -- <br />
+                    <br />
                     TAKK
                 </span>
             </div>

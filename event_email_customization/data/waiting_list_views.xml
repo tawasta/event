@@ -8,7 +8,7 @@
     >
         <!-- Override email heading: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='email_heading']" position="after">
-            <t t-set="email_heading">Ilmoittautumisesi jonotuslistalle</t>
+            <t t-set="email_heading">Your registration to the waiting list</t>
         </xpath>
 
         <!-- Hide original preface text, add new after -->
@@ -17,16 +17,16 @@
         </xpath>
         <xpath expr="//div[@name='section-preface-text']" position="after">
             <div name="section-preface-text">
-                Hei <t t-esc="object.name or ''" />,<br /><br />
-                Kiitos kiinnostuksestasi koulutustamme kohtaan.<br />
-                Koulutus
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                Thank you for your interest in our training course.<br />
+                The course
                 <t t-if="object.event_id.is_published"><strong><a
                             t-att-href="object.event_id.website_url"
                             t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                         ><t t-esc="object.event_id.name" /></a></strong></t>
                 <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>,
-                on tällä hetkellä täynnä.<br />
-                Sinut on laitettu jonotuslistalle. Olemme sinuun yhteydessä, jos paikkoja vapautuu.<br
+                is currently full.<br />
+                You have been added to the waiting list. We will contact you if places become available.<br
                 /><br />
             </div>
         </xpath>
@@ -35,12 +35,12 @@
         <xpath expr="//t[@t-set='link_message']" position="after">
             <t
                 t-set="link_message"
-            >Peruuttaaksesi paikkasi jonotuslistalla, seuraa alla olevaa linkkiä:</t>
+            >If you want to cancel your registration, please follow the link below:</t>
         </xpath>
 
         <!-- Override cancel button label: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='button_message']" position="after">
-            <t t-set="button_message">Peruuta ilmoittautuminen</t>
+            <t t-set="button_message">Cancel Registration</t>
         </xpath>
 
         <!-- Hide original thank-you note, add new after -->
@@ -49,9 +49,9 @@
         </xpath>
         <xpath expr="//div[@name='section-thank-you-note']" position="after">
             <div name="section-thank-you-note">
-                Ystävällisin terveisin,<br />
+                Best regards,<br />
                 <span style="color: #454748;">
-                    -- <br />
+                    <br />
                     TAKK
                 </span>
             </div>
@@ -65,7 +65,7 @@
     >
         <!-- Override email heading: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='email_heading']" position="after">
-            <t t-set="email_heading">Paikkoja vapautunut</t>
+            <t t-set="email_heading">Places Available</t>
         </xpath>
 
         <!-- Hide original preface text, add new after -->
@@ -74,29 +74,37 @@
         </xpath>
         <xpath expr="//div[@name='section-preface-text']" position="after">
             <div name="section-preface-text">
-                Hei <t t-esc="object.name or ''" />,<br /><br />
-                Meillä on vapautunut paikkoja koulutukseen
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                Places have become available on the training course
                 <t t-if="object.event_id.is_published"><strong><a
                             t-att-href="object.event_id.website_url"
                             t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
                         ><t t-esc="object.event_id.name" /></a></strong></t>
                 <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>.<br
                 />
-                Vahvista paikkasi nopeasti, ne jaetaan vahvistamisjärjestyksessä.<br
+                Please confirm your place as soon as possible. Places will be allocated in the order confirmations are received.<br
                 /><br />
             </div>
         </xpath>
 
         <!-- Override cancel button text: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='link_message']" position="after">
+            <t t-set="link_message">Confirm or cancel your registration below:</t>
             <t
-                t-set="link_message"
-            >Vahvista tai peruuta paikkasi alla olevasta linkistä:</t>
+                name="section-claiming-or-cancellation"
+                t-call="website_event_cancellation.view_email_template_event_cancellation"
+                t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+            >
+                <t
+                    t-set="link_message"
+                >Claim or cancel your seat from the link below:</t>
+                <t t-set="button_message">Claim or cancel registration</t>
+            </t>
         </xpath>
 
         <!-- Override cancel button label: set after existing t-set so it wins -->
         <xpath expr="//t[@t-set='button_message']" position="after">
-            <t t-set="button_message">Vahvista tai peruuta ilmoittautuminen</t>
+            <t t-set="button_message">Confirm or cancel your registration</t>
         </xpath>
 
         <!-- Hide original thank-you note, add new after -->
@@ -105,9 +113,9 @@
         </xpath>
         <xpath expr="//div[@name='section-thank-you-note']" position="after">
             <div name="section-thank-you-note">
-                Ystävällisin terveisin,<br />
+                Best regards,<br />
                 <span style="color: #454748;">
-                    -- <br />
+                    <br />
                     TAKK
                 </span>
             </div>
