@@ -22,7 +22,7 @@
     "name": "Website Event: TAKK Signup & Login Instructions",
     "summary": "Adds TAKK-specific signup/Moodle instructions to "
     "/web/signup and /web/login",
-    "version": "17.0.1.1.0",
+    "version": "17.0.1.1.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

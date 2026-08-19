@@ -16,9 +16,13 @@
                     syötä verkkokaupan käyttäjätunnuksesi sekä
                     salasanasi.
                 </p>
-                <p class="mb-0">
+                <p>
                     Kirjautumisen jälkeen sinut ohjataan automaattisesti
                     takaisin verkkokauppaan.
+                </p>
+                <p class="mb-0">
+                    Jos olet uusi käyttäjä, paina "Rekisteröidy
+                    käyttäjäksi".
                 </p>
             </div>
         </xpath>
