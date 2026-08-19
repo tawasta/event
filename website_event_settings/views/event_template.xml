@@ -50,4 +50,19 @@
             <attribute name="t-if">record.show_date_time</attribute>
         </xpath>
     </template>
+
+    <!-- Apply the same show_date_time setting to the events list page's
+         (/event) short date badge on each event's cover image -->
+    <template
+        id="events_list_inherit"
+        inherit_id="website_event.events_list"
+        name="Events List - Boolean Fields"
+    >
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_wevent_event_date')]"
+            position="attributes"
+        >
+            <attribute name="t-if">event.show_date_time</attribute>
+        </xpath>
+    </template>
 </odoo>
