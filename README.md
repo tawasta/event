@@ -85,7 +85,7 @@ addon | version | maintainers | summary
 [website_event_sale_go_to_payment_button_configurable_label](website_event_sale_go_to_payment_button_configurable_label/) | 17.0.1.0.0 |  | Customize payment and registration button texts in event registration
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_search_extension](website_event_search_extension/) | 17.0.1.0.0 |  | Extend website event search fields
-[website_event_settings](website_event_settings/) | 17.0.1.0.2 |  | Website Event Settings
+[website_event_settings](website_event_settings/) | 17.0.1.0.4 |  | Website Event Settings
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.1.0 |  | Additional configurations for the core snippet
 [website_event_ticket_accessories](website_event_ticket_accessories/) | 17.0.1.0.1 |  | Suggest extra products in cart based on the selected event ticket
 [website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT
