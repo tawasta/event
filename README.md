@@ -58,6 +58,7 @@ addon | version | maintainers | summary
 [website_event_cancellation](website_event_cancellation/) | 17.0.1.0.3 |  | Cancel events and event registrations through website.
 [website_event_cancellation_emails_contact_info_shows_responsible_person](website_event_cancellation_emails_contact_info_shows_responsible_person/) | 17.0.1.0.3 |  | E-mail templates show responsible person's contact info instead or organizer's.
 [website_event_cart_suggested_events](website_event_cart_suggested_events/) | 17.0.1.0.1 |  | Promote related events in cart based on selected event tickets
+[website_event_continue_shopping_redirect](website_event_continue_shopping_redirect/) | 17.0.1.0.0 |  | Redirects the cart's 'Continue shopping' button to /event when only events are sold on the website
 [website_event_download_registration_badge](website_event_download_registration_badge/) | 17.0.1.0.0 |  | Ability to navigate to an URL and download Registration Badge
 [website_event_event_info_pdf_download_button](website_event_event_info_pdf_download_button/) | 17.0.1.1.0 |  | Adds a 'Download Event Info PDF' button to the website's event page sidebar
 [website_event_filter_fix](website_event_filter_fix/) | 17.0.1.1.0 |  | Removes company_id filter from event.event in website.snippet.filter
@@ -86,7 +87,7 @@ addon | version | maintainers | summary
 [website_event_sale_waiting_list](website_event_sale_waiting_list/) | 17.0.1.0.1 |  | Register to events using waiting list through website.
 [website_event_search_extension](website_event_search_extension/) | 17.0.1.0.0 |  | Extend website event search fields
 [website_event_settings](website_event_settings/) | 17.0.1.0.4 |  | Website Event Settings
-[website_event_signup_instructions_takk](website_event_signup_instructions_takk/) | 17.0.1.1.0 |  | Adds TAKK-specific signup/Moodle instructions to /web/signup and /web/login
+[website_event_signup_instructions_takk](website_event_signup_instructions_takk/) | 17.0.1.1.1 |  | Adds TAKK-specific signup/Moodle instructions to /web/signup and /web/login
 [website_event_snippet_extra_options](website_event_snippet_extra_options/) | 17.0.1.1.0 |  | Additional configurations for the core snippet
 [website_event_ticket_accessories](website_event_ticket_accessories/) | 17.0.1.0.1 |  | Suggest extra products in cart based on the selected event ticket
 [website_event_ticket_show_vat_percentage](website_event_ticket_show_vat_percentage/) | 17.0.1.0.1 |  | Show ticket VAT

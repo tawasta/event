@@ -19,19 +19,16 @@
 ##############################################################################
 
 {
-    "name": "Website Event: TAKK Signup & Login Instructions",
-    "summary": "Adds TAKK-specific signup/Moodle instructions to "
-    "/web/signup and /web/login",
-    "version": "17.0.1.1.1",
+    "name": "Website Event: Continue Shopping Redirect",
+    "summary": "Redirects the cart's 'Continue shopping' button to /event "
+    "when only events are sold on the website",
+    "version": "17.0.1.0.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["auth_signup", "web"],
-    "data": [
-        "views/auth_signup_templates.xml",
-        "views/web_login_templates.xml",
-    ],
+    "depends": ["website_sale", "website_event", "event_sale"],
+    "data": [],
 }
