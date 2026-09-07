@@ -119,6 +119,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     {
                         "can_review": can_review,
                         "rating_grade_ids": rating_grade_ids,
+                        "reviewer_show_all": track.event_id.reviewer_show_all,
                     }
                 )
 
@@ -279,6 +280,8 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "description": track.description,
                 "type": track.type.id,
                 "video_url": track.video_url,
+                "hide_presentation_link": track.event_id.hide_presentation_link,
+                "hide_attachment_field": track.event_id.hide_attachment_field,
                 "language": track.language.id,
                 "languages": languages,
                 "presentation_language_ids": presentation_language_ids,
@@ -498,6 +501,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             "multiple_target_groups": multiple_target_groups,
             "multiple_tags": multiple_tags,
             "operators": operators,
+            "hide_presentation_link": event.hide_presentation_link,
+            "hide_attachment_field": event.hide_attachment_field,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):
