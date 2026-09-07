@@ -66,7 +66,6 @@ class EventRegistration(models.Model):
                     try:
                         mail_template.send_mail(
                             rec.id,
-                            force_send=True,
                             raise_exception=True,
                             email_values=email_values,
                         )

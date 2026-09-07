@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2022- Futural Oy (https://futural.fi)
+#    Copyright 2026 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,26 +19,16 @@
 ##############################################################################
 
 {
-    "name": "Website 'Events' Snippet Extra Options",
-    "summary": "Additional configurations for the core snippet",
-    "version": "17.0.1.1.0",
-    "category": "Event",
+    "name": "Website Event: Continue Shopping Redirect",
+    "summary": "Redirects the cart's 'Continue shopping' button to /event "
+    "when only events are sold on the website",
+    "version": "17.0.1.0.0",
+    "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_private_event"],
-    "data": [
-        "views/event_event_views.xml",
-        "views/snippets/s_events_extended.xml",
-        "data/website_snippet_data.xml",
-    ],
-    "assets": {
-        "web.assets_frontend": [
-            "website_event/static/src/snippets/s_events/000.js",
-            "website_event_snippet_extra_options/static/src/"
-            "snippets/s_events_extended/000.esm.js",
-        ]
-    },
+    "depends": ["website_sale", "website_event", "event_sale"],
+    "data": [],
 }
