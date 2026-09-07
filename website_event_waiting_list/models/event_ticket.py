@@ -64,6 +64,19 @@ class EventTicket(models.Model):
                 )
         return res
 
+    @api.depends(
+        "seats_limited", "seats_available", "event_id.event_registrations_sold_out"
+    )
+    def _compute_is_sold_out(self):
+        """Extend the original method: a negative seats_available (ticket or
+        inherited event limit oversold) is truthy in Python, so core's
+        `not ticket.seats_available` check wrongly leaves it not sold out."""
+        res = super()._compute_is_sold_out()
+        for ticket in self:
+            if ticket.seats_limited and ticket.seats_available < 0:
+                ticket.is_sold_out = True
+        return res
+
     @api.constrains("registration_ids", "seats_max")
     def _check_seats_availability(self, minimal_availability=0):
         sold_out_tickets = []
