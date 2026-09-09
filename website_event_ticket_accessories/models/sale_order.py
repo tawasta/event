@@ -22,8 +22,14 @@ class SaleOrder(models.Model):
         )
 
     def _cart_accessories(self):
-        """Core only calls _cart_accessories() (not the controller's
-        _cart_values()) when re-rendering the cart lines after an AJAX
-        add-to-cart, so without this override the ticket accessories
-        disappear from view until a full page reload."""
-        return super()._cart_accessories() | self._get_ticket_accessory_products()
+        """Both the /shop/cart page and the AJAX add-to-cart response
+        build "suggested products" from this method directly, so without
+        this override the ticket accessories would never show up there.
+
+        Core returns a plain list (random.sample() of the recordset), not
+        a recordset, so it has to be converted back before it can be
+        combined with the ticket accessories."""
+        core_accessories = self.env["product.product"].concat(
+            *super()._cart_accessories()
+        )
+        return list(core_accessories | self._get_ticket_accessory_products())
