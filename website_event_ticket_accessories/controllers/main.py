@@ -18,23 +18,7 @@ class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
         if not order_sudo:
             return request.env["product.product"]
 
-        ticket_lines = order_sudo.order_line.filtered("event_ticket_id")
-        if not ticket_lines:
-            return request.env["product.product"]
-
-        cart_product_ids = set(order_sudo.order_line.product_id.ids)
-
-        accessory_products = ticket_lines.event_ticket_id.sudo().mapped(
-            "accessory_product_ids"
-        )
-
-        accessory_products = accessory_products.filtered(
-            lambda product: product.id not in cart_product_ids
-            and product.sale_ok
-            and product._is_add_to_cart_allowed()
-        )
-
-        return accessory_products
+        return order_sudo._get_ticket_accessory_products()
 
     def _order_has_ticket_accessories(self, order_sudo):
         return bool(self._get_ticket_accessory_products(order_sudo))
