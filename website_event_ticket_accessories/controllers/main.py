@@ -23,20 +23,6 @@ class WebsiteEventTicketAccessoriesSaleController(WebsiteSale):
     def _order_has_ticket_accessories(self, order_sudo):
         return bool(self._get_ticket_accessory_products(order_sudo))
 
-    def _cart_values(self, **post):
-        values = super()._cart_values(**post)
-
-        order_sudo = request.website.sale_get_order()
-        accessory_products = self._get_ticket_accessory_products(order_sudo)
-
-        if accessory_products:
-            values["suggested_products"] = (
-                values.get("suggested_products", request.env["product.product"])
-                | accessory_products
-            )
-
-        return values
-
     @http.route(
         ["/shop/cart"],
         type="http",
