@@ -101,7 +101,7 @@ addon | version | maintainers | summary
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
 [website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.1 |  | Adds a waiting list functionality to Events.
 [website_event_wording_koulutus](website_event_wording_koulutus/) | 17.0.1.0.0 |  | Overrides website_event's Finnish translations to use 'koulutus' instead of 'tapahtuma'
-[website_my_events](website_my_events/) | 17.0.1.0.0 |  | My events in website portal
+[website_my_events](website_my_events/) | 17.0.1.1.0 |  | My events in website portal
 
 
 Unported addons
