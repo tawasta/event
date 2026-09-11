@@ -15,5 +15,6 @@ from . import (
     event_type,
     privacy,
     res_config_settings,
+    res_partner,
     res_users,
 )
