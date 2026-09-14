@@ -9,12 +9,16 @@
                 <page string="Certificates">
                     <group>
                         <group>
+                            <field name="certificate_lang" />
                             <field name="certificate_enabled" />
                             <field name="certificate_send_email" />
                         </group>
                         <group>
                             <field name="certificate_duration_text" />
                             <field name="certificate_lecturer_id" />
+                        </group>
+                        <group>
+                            <field name="certificate_program_text" />
                         </group>
                     </group>
                 </page>

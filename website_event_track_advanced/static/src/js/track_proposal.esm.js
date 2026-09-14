@@ -332,6 +332,8 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                             response.contact_info.contact_id
                         );
                     }
+                    self._toggleVideoUrlSection(response.hide_presentation_link);
+                    self._toggleAttachmentSection(response.hide_attachment_field);
                     self._populateSelectOptions("type", response.application_types);
                     self._populateSelectOptions("subtheme", response.track_subthemes);
                     if (response.multiple_target_groups) {
@@ -535,6 +537,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                         }
                     }
 
+                    self._toggleVideoUrlSection(trackData.hide_presentation_link);
+                    self._toggleAttachmentSection(trackData.hide_attachment_field);
+
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
                     self._updateWebinarSection(trackData);
 
@@ -542,7 +547,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._updateWorkshopSection(trackData);
 
                     if (trackData.is_readonly) {
-                        self._makeFieldsReadonly(isReview);
+                        self._makeFieldsReadonly(isReview, trackData.reviewer_show_all);
                         self._disableSubmitButtons(isReview);
                         self._disableAddPresenterButton();
                     } else {
@@ -798,6 +803,15 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         }
 
         if (selectName === "type") {
+            if (!selectedIds && options.length === 1) {
+                // Only one application type available for a new proposal:
+                // preselect it and lock the field. Trigger "change" first so
+                // the existing type-change handler (workshop/webinar section
+                // toggling) still runs; _bindFormSubmit already re-appends a
+                // disabled #type field's value to the submitted FormData.
+                $select.val(options[0].id).trigger("change");
+                $select.prop("disabled", true);
+            }
             this._updateTypeDescription();
         }
     },
@@ -820,7 +834,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $("#add_speaker").attr("disabled", false).show();
     },
 
-    _makeFieldsReadonly: function (isReview) {
+    _makeFieldsReadonly: function (isReview, reviewerShowAll) {
         const $form = $(".js_website_submit_cfp_form");
         console.log($form);
         console.log("====LAITETAAN READONLY====");
@@ -862,11 +876,13 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 $form.find(selector).removeAttr("readonly").removeAttr("disabled");
             });
 
-            $("#track-application-speakers-div").remove();
-            $("#track-application-contact-div").remove();
-            $("#track-application-webinar-div").remove();
+            if (!reviewerShowAll) {
+                $("#track-application-speakers-div").remove();
+                $("#track-application-contact-div").remove();
+                $("#track-application-webinar-div").remove();
+                $("#event-track-application-extra-info").remove();
+            }
             $("#track-application-workshop-div").remove();
-            $("#event-track-application-extra-info").remove();
             // Disabloi kaikki painikkeet, joissa on luokka 'btn-remove-speaker'
             $form.find("button.btn-remove-speaker").each(function () {
                 $(this).attr("disabled", true);
@@ -1150,6 +1166,22 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 .prop("required", false)
                 .prop("checked", false)
                 .prop("disabled", true);
+        }
+    },
+
+    _toggleVideoUrlSection: function (hidePresentationLink) {
+        const $videoUrlDiv = $("#track-application-video-url-div");
+        $videoUrlDiv.toggleClass("d-none", Boolean(hidePresentationLink));
+        if (hidePresentationLink) {
+            $videoUrlDiv.find('input[name="video_url"]').val("");
+        }
+    },
+
+    _toggleAttachmentSection: function (hideAttachmentField) {
+        const $attachmentDiv = $("#track-application-attachment-div");
+        $attachmentDiv.toggleClass("d-none", Boolean(hideAttachmentField));
+        if (hideAttachmentField) {
+            $attachmentDiv.find('input[name="attachment_ids"]').val("");
         }
     },
 

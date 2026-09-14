@@ -45,6 +45,8 @@ Configuration
    * Enable *Send certificate by email after event* (optional)
    * Set duration text (optional)
    * Set lecturer (optional)
+   * Set training programme (optional)
+   * Set report language
 
 Usage
 =====

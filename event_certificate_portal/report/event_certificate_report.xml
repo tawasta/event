@@ -19,9 +19,13 @@
 
     <template id="event_certificate_pdf">
         <t t-foreach="docs" t-as="reg">
+            <t t-set="cert_lang" t-value="reg.event_id.certificate_lang or env.lang" />
             <t t-call="web.basic_layout">
                 <div class="page">
-                    <t t-call="event_certificate_portal.event_certificate_page" />
+                    <t
+                        t-call="event_certificate_portal.event_certificate_page"
+                        t-lang="reg.event_id.certificate_lang or env.lang"
+                    />
                 </div>
             </t>
         </t>
@@ -98,6 +102,17 @@
                         <span> / </span>
                         <span t-esc="duration_text" />
                     </t>
+                </div>
+                <t
+                    t-set="program_text"
+                    t-value="event.certificate_program_text or ''"
+                />
+                <div t-if="program_text" style="margin-top: 30px;">
+                    <div>Training programme:</div>
+                    <div
+                        style="margin-top: 4px; white-space: pre-line;"
+                        t-esc="program_text"
+                    />
                 </div>
 
                 <div t-if="lecturer_name" style="margin-top: 38px;">

@@ -995,7 +995,10 @@
                             class="invalid-feedback"
                         >Please enter a presentation title.</div>
                     </div>
-                    <div class="form-group col-xl-6">
+                    <div
+                        class="form-group col-xl-6"
+                        id="track-application-video-url-div"
+                    >
                         <label
                             for="video_url"
                             class="col-form-label label-optional"
@@ -1067,7 +1070,10 @@
                         >Please select a presentation language.</div>
                     </div>
 
-                    <div class="form-group col-xl-6">
+                    <div
+                        class="form-group col-xl-6"
+                        id="track-application-attachment-div"
+                    >
                         <label class="form-label">Attach Files <i
                                 class="fa fa-paperclip"
                             /></label>
