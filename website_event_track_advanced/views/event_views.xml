@@ -128,6 +128,9 @@
                             <field name="privacy_ids" widget="many2many_tags" />
                             <field name="use_speaker_track" readonly="1" />
                             <field name="show_track_twitter_hashtags" />
+                            <field name="hide_presentation_link" />
+                            <field name="hide_attachment_field" />
+                            <field name="reviewer_show_all" />
                         </group>
                     </group>
                 </page>
