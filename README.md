@@ -19,6 +19,7 @@ addon | version | maintainers | summary
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.1.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
 [event_certificate_portal](event_certificate_portal/) | 17.0.1.0.0 |  | Attendance certificates for events with portal download and post-event email sending
+[event_default_future_dates](event_default_future_dates/) | 17.0.1.0.0 |  | New and duplicated events' dates default to future instead of today
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
