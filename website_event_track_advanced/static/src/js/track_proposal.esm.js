@@ -334,6 +334,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     }
                     self._toggleVideoUrlSection(response.hide_presentation_link);
                     self._toggleAttachmentSection(response.hide_attachment_field);
+                    self._toggleSubthemeSection(response.hide_subtheme_field);
                     self._populateSelectOptions("type", response.application_types);
                     self._populateSelectOptions("subtheme", response.track_subthemes);
                     if (response.multiple_target_groups) {
@@ -539,6 +540,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
 
                     self._toggleVideoUrlSection(trackData.hide_presentation_link);
                     self._toggleAttachmentSection(trackData.hide_attachment_field);
+                    self._toggleSubthemeSection(trackData.hide_subtheme_field);
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
                     self._updateWebinarSection(trackData);
@@ -1182,6 +1184,14 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         $attachmentDiv.toggleClass("d-none", Boolean(hideAttachmentField));
         if (hideAttachmentField) {
             $attachmentDiv.find('input[name="attachment_ids"]').val("");
+        }
+    },
+
+    _toggleSubthemeSection: function (hideSubthemeField) {
+        const $subthemeDiv = $("#track-application-subtheme-div");
+        $subthemeDiv.toggleClass("d-none", Boolean(hideSubthemeField));
+        if (hideSubthemeField) {
+            $subthemeDiv.find('select[name="subtheme"]').val("");
         }
     },
 
