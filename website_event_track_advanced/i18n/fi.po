@@ -2192,6 +2192,11 @@ msgid "Hide Subtheme Field"
 msgstr "Piilota alateema-kenttä"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__hide_webinar_field
+msgid "Hide Webinar Field"
+msgstr "Piilota webinaari-kenttä"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_proposals
 msgid "Show In Proposals"
 msgstr "Näytä esitysehdotuksessa"

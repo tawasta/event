@@ -87,6 +87,7 @@ class EventEvent(models.Model):
     hide_presentation_link = fields.Boolean(default=False)
     hide_attachment_field = fields.Boolean(default=False)
     hide_subtheme_field = fields.Boolean(default=False)
+    hide_webinar_field = fields.Boolean(default=True)
 
     reviewer_show_all = fields.Boolean(default=False)
     # 3. Default methods

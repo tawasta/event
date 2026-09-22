@@ -335,6 +335,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._toggleVideoUrlSection(response.hide_presentation_link);
                     self._toggleAttachmentSection(response.hide_attachment_field);
                     self._toggleSubthemeSection(response.hide_subtheme_field);
+                    self._toggleWebinarFieldSection(response.hide_webinar_field);
                     self._populateSelectOptions("type", response.application_types);
                     self._populateSelectOptions("subtheme", response.track_subthemes);
                     if (response.multiple_target_groups) {
@@ -541,6 +542,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                     self._toggleVideoUrlSection(trackData.hide_presentation_link);
                     self._toggleAttachmentSection(trackData.hide_attachment_field);
                     self._toggleSubthemeSection(trackData.hide_subtheme_field);
+                    self._toggleWebinarFieldSection(trackData.hide_webinar_field);
 
                     // Päivitä ja näytä webinar-osio, jos webinar on käytössä
                     self._updateWebinarSection(trackData);
@@ -725,7 +727,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const webinarDiv = $("#track-application-webinar-div");
         const webinarCheckbox = $('input[name="webinar"]');
         const webinarInfo = $('textarea[name="webinar_info"]');
-        const isWebinar = trackData.is_webinar || false;
+        const isWebinar = !this.hideWebinarField && (trackData.is_webinar || false);
 
         if (isWebinar) {
             webinarDiv.removeClass("d-none");
@@ -1090,7 +1092,7 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
                 const webinar = selectedType.attr("data-webinar");
 
                 self._toggleWorkshopSection(workshop);
-                self._toggleWebinarSection(webinar);
+                self._toggleWebinarSection(self.hideWebinarField ? false : webinar);
             });
         });
     },
@@ -1191,7 +1193,23 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
         const $subthemeDiv = $("#track-application-subtheme-div");
         $subthemeDiv.toggleClass("d-none", Boolean(hideSubthemeField));
         if (hideSubthemeField) {
-            $subthemeDiv.find('select[name="subtheme"]').val("");
+            // A hidden required field can't be focused for native validation,
+            // which blocks form submission entirely - drop required with it.
+            $subthemeDiv
+                .find('select[name="subtheme"]')
+                .val("")
+                .prop("required", false);
+        }
+    },
+
+    _toggleWebinarFieldSection: function (hideWebinarField) {
+        this.hideWebinarField = Boolean(hideWebinarField);
+        if (this.hideWebinarField) {
+            const $webinarDiv = $("#track-application-webinar-div");
+            $webinarDiv.addClass("d-none");
+            $('input[name="webinar"]').prop("checked", false);
+            $('textarea[name="webinar_info"]').val("");
+            $('input[name="is_webinar"]').val("false");
         }
     },
 
