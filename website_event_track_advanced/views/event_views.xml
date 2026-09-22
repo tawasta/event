@@ -130,6 +130,7 @@
                             <field name="show_track_twitter_hashtags" />
                             <field name="hide_presentation_link" />
                             <field name="hide_attachment_field" />
+                            <field name="hide_subtheme_field" />
                             <field name="reviewer_show_all" />
                         </group>
                     </group>
