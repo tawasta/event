@@ -92,9 +92,12 @@ class EventRegistration(models.Model):
 
     def action_print_certificate(self):
         self.ensure_one()
-        return self.env.ref(
-            "event_certificate_portal.action_report_event_certificate"
-        ).report_action(self)
+        lang = self.event_id.certificate_lang or self.env.lang
+        return (
+            self.env.ref("event_certificate_portal.action_report_event_certificate")
+            .with_context(lang=lang)
+            .report_action(self)
+        )
 
     def _render_certificate_pdf(self):
         self.ensure_one()
@@ -105,9 +108,12 @@ class EventRegistration(models.Model):
         if not report_action:
             return b""
 
+        lang = self.event_id.certificate_lang or self.env.lang
+
         pdf_content, _content_type = (
             self.env["ir.actions.report"]
             .sudo()
+            .with_context(lang=lang)
             ._render_qweb_pdf(
                 report_action.report_name,
                 [self.id],
