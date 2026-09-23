@@ -29,10 +29,14 @@
         name="Show location name and city"
     >
         <xpath expr="//small[@itemprop='location']" position="replace">
+
             <small itemprop="location">
-                <span><t t-esc="event.sudo().address_id.name" />, <t
-                        t-esc="event.sudo().address_id.city"
-                    /></span>
+                <t t-set="addr" t-value="event.sudo().address_id" />
+                <span>
+                    <t t-esc="addr.name" />
+                    <t t-if="addr.name and addr.city">,</t>
+                    <t t-esc="addr.city" />
+                </span>
             </small>
         </xpath>
     </template>

@@ -27,7 +27,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event"],
+    "depends": ["website_event_sale"],
     "data": [
         "views/website_event_templates.xml",
     ],

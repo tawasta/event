@@ -128,26 +128,24 @@ class EventRegistration(models.Model):
         self.write({"state": "wait"})
 
     def _check_waiting_list(self, vals):
-        if not vals.get("event_id") or not vals.get("event_ticket_id"):
+        if not vals.get("event_id"):
             return False  # Ei lisätä jonotuslistalle
 
         event = self.env["event.event"].browse(vals["event_id"])
-        event_ticket = self.env["event.event.ticket"]
+        if not event.waiting_list:
+            return False  # Jonotuslista ei ole käytössä
 
-        ticket = (
-            event_ticket.browse(vals["event_ticket_id"])
-            if vals.get("event_ticket_id")
-            else event_ticket
+        ticket = self.env["event.event.ticket"]
+        if vals.get("event_ticket_id"):
+            ticket = ticket.browse(vals["event_ticket_id"])
+
+        event_full = (
+            event.seats_limited and event.seats_max and event.seats_available <= 0
         )
-        if (
-            event.waiting_list  # Jonotuslista on käytössä
-            and event.seats_limited  # Tapahtumalla on rajattu määrä paikkoja
-            and event.seats_available <= 0  # Paikkoja ei ole jäljellä
-            and ticket.seats_limited  # Lipuilla on rajattu määrä paikkoja
-            and ticket.seats_available <= 0  # Lippuja ei ole jäljellä
-        ):
-            return True  # Lisätään jonotuslistalle
-        else:
-            return False  # Ei lisätä jonotuslistalle
+        ticket_full = (
+            ticket.seats_limited and ticket.seats_max and ticket.seats_available <= 0
+        )
+
+        return event_full or ticket_full
 
     # 8. Business methods

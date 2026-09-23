@@ -1,0 +1,41 @@
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
+
+=========================================
+Website Event: Continue Shopping Redirect
+=========================================
+
+* On the webshop cart page, redirects the "Continue shopping" button to
+  ``/event`` instead of ``/shop``, when the website has no sellable,
+  published products other than event tickets - going "back to shop"
+  would otherwise land on an empty product list
+
+Configuration
+=============
+\-
+
+Usage
+=====
+\-
+
+Known issues / Roadmap
+======================
+\-
+
+Credits
+=======
+
+Contributors
+------------
+
+* Valtteri Lattu <valtteri.lattu@futural.fi>
+
+Maintainer
+----------
+
+.. image:: https://futural.fi/templates/tawastrap/images/logo.png
+   :alt: Futural Oy
+   :target: https://futural.fi/
+
+This module is maintained by Futural Oy

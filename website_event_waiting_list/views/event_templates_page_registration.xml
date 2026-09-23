@@ -224,7 +224,14 @@
             </t>
         </xpath>
         <xpath expr="//button[@type='submit']" position="attributes">
-            <attribute name="t-if">availability_check or waiting_list_check</attribute>
+            <attribute
+                name="t-if"
+            >availability_check and not waiting_list_check</attribute>
+        </xpath>
+        <xpath expr="//button[@type='submit']" position="before">
+            <button t-if="waiting_list_check" type="submit" class="btn btn-primary">
+                Join the waiting list
+            </button>
         </xpath>
     </template>
     <!-- Confirmation page add waiting list -->

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20251222\n"
+"Project-Id-Version: Odoo Server 17.0-20260908\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 04:13+0000\n"
-"PO-Revision-Date: 2026-04-28 04:13+0000\n"
+"POT-Creation-Date: 2026-09-22 09:51+0000\n"
+"PO-Revision-Date: 2026-09-22 09:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,9 +17,22 @@ msgstr ""
 
 #. module: event_single_ticket_purchase
 #: model_terms:ir.ui.view,arch_db:event_single_ticket_purchase.modal_ticket_registration_single_ticket_notice
+msgid "Go to cart"
+msgstr "Näytä ostoskori"
+
+#. module: event_single_ticket_purchase
+#. odoo-python
+#: code:addons/event_single_ticket_purchase/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:event_single_ticket_purchase.modal_ticket_registration_single_ticket_notice
+#, python-format
+msgid "You already have a ticket for this event in your cart."
+msgstr "Ostoskorissasi on jo lippu tähän tapahtumaan."
+
+#. module: event_single_ticket_purchase
+#: model_terms:ir.ui.view,arch_db:event_single_ticket_purchase.modal_ticket_registration_single_ticket_notice
 msgid ""
 "You can select only one ticket. If you choose another ticket type, the "
 "previous selection will be automatically removed."
 msgstr ""
-"Voit valita vain yhden lipun. Jos valitset toisen lipputyypin, "
-"aiempi valinta poistetaan automaattisesti."
+"Voit valita vain yhden lipun ilmoittautuaksesi. Jos valitset toisen "
+"lipputyypin, aiempi valinta poistetaan automaattisesti."

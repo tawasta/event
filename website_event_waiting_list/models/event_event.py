@@ -92,6 +92,35 @@ class EventEvent(models.Model):
 
         return res
 
+    @api.depends(
+        "date_tz",
+        "event_registrations_started",
+        "date_end",
+        "seats_available",
+        "seats_limited",
+        "seats_max",
+        "event_ticket_ids.sale_available",
+    )
+    def _compute_event_registrations_open(self):
+        """Extend the original method: a negative seats_available (event
+        overbooked after lowering seats_max) is truthy in Python, so core's
+        `or event.seats_available` check wrongly leaves registrations open."""
+        res = super()._compute_event_registrations_open()
+        for event in self:
+            if event.seats_limited and event.seats_max and event.seats_available < 0:
+                event.event_registrations_open = False
+        return res
+
+    @api.depends("event_ticket_ids.sale_available", "seats_available", "seats_limited")
+    def _compute_event_registrations_sold_out(self):
+        """Extend the original method: a negative seats_available must count
+        as sold out, see _compute_event_registrations_open above."""
+        res = super()._compute_event_registrations_sold_out()
+        for event in self:
+            if event.seats_limited and event.seats_max and event.seats_available < 0:
+                event.event_registrations_sold_out = True
+        return res
+
     @api.onchange("event_type_id")
     def _onchange_event_type_update_wait_list(self):
         """Update event configuration from its event type. Depends are set only

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="signup_takk_instructions"
+        inherit_id="auth_signup.signup"
+        name="TAKK Signup Instructions"
+    >
+        <xpath expr="//t[@t-call='auth_signup.fields']" position="before">
+            <div class="alert alert-info" role="alert">
+                <p>
+                    Määritä näkymässä sähköpostiosoitteesi, nimesi ja
+                    salasanasi. Salasanan minimipituus on 16 merkkiä, ja
+                    sen tulee sisältää vähintään yksi iso kirjain, yksi
+                    pieni kirjain, yksi numero ja yksi erikoismerkki.
+                </p>
+                <p>
+                    Rekisteröitymisen jälkeen sinut ohjataan Moodleen.
+                    Paina avautuvassa näkymässä Login-painiketta ja
+                    syötä juuri määrittämäsi käyttäjätunnus sekä
+                    salasana.
+                </p>
+                <p class="mb-0">
+                    Kirjautumisen jälkeen rekisteröitymisesi
+                    viimeistellään ja sinut ohjataan automaattisesti
+                    takaisin verkkokauppaan.
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>

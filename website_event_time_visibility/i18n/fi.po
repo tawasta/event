@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_time_visibility
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-14 06:00+0000\n"
+"PO-Revision-Date: 2026-08-14 06:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_event_time_visibility
+#: model:ir.model,name:website_event_time_visibility.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: website_event_time_visibility
+#: model:ir.model.fields,field_description:website_event_time_visibility.field_event_event__show_time_on_website
+msgid "Show Time on Website"
+msgstr "Näytä kellonaika verkkosivulla"
+
+#. module: website_event_time_visibility
+#: model:ir.model.fields,help:website_event_time_visibility.field_event_event__show_time_on_website
+msgid ""
+"Show the time of day for the start and end date on the website, in "
+"addition to the dates themselves. Disable this for e.g. self-paced online "
+"courses that start at a specific time but have no fixed end time of day."
+msgstr ""
+"Näytä alkamis- ja päättymispäivän kellonaika verkkosivulla, päivämäärien "
+"lisäksi. Poista tämä käytöstä esimerkiksi verkkokursseilta, jotka alkavat "
+"tiettynä kellonaikana mutta joilla ei ole kiinteää päättymiskellonaikaa."

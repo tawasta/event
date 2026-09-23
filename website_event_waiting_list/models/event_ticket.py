@@ -23,6 +23,60 @@ class EventTicket(models.Model):
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("seats_max", "event_id.waiting_list", "event_id.seats_limited")
+    def _compute_seats_limited(self):
+        """A ticket with no limit of its own is still bound by its event's
+        overall limit, if the event has one. Without this, every check that
+        relies on seats_limited/seats_available (cart quantity, sold-out
+        badges, registration_open) only ever look at the ticket's own,
+        non-existent limit and let the event's capacity be bypassed."""
+        res = super()._compute_seats_limited()
+        for ticket in self:
+            if (
+                not ticket.seats_limited
+                and ticket.event_id.waiting_list
+                and ticket.event_id.seats_limited
+            ):
+                ticket.seats_limited = True
+        return res
+
+    @api.depends(
+        "seats_max",
+        "registration_ids.state",
+        "registration_ids.active",
+        "event_id.seats_available",
+        "event_id.waiting_list",
+        "event_id.seats_limited",
+    )
+    def _compute_seats(self):
+        """A ticket's own limit and its event's overall limit are independent
+        - whichever is tighter is the one that should actually apply, not
+        just whichever the ticket happens to have configured."""
+        res = super()._compute_seats()
+        for ticket in self:
+            if not (ticket.event_id.waiting_list and ticket.event_id.seats_limited):
+                continue
+            if not ticket.seats_max:
+                ticket.seats_available = ticket.event_id.seats_available
+            else:
+                ticket.seats_available = min(
+                    ticket.seats_available, ticket.event_id.seats_available
+                )
+        return res
+
+    @api.depends(
+        "seats_limited", "seats_available", "event_id.event_registrations_sold_out"
+    )
+    def _compute_is_sold_out(self):
+        """Extend the original method: a negative seats_available (ticket or
+        inherited event limit oversold) is truthy in Python, so core's
+        `not ticket.seats_available` check wrongly leaves it not sold out."""
+        res = super()._compute_is_sold_out()
+        for ticket in self:
+            if ticket.seats_limited and ticket.seats_available < 0:
+                ticket.is_sold_out = True
+        return res
+
     @api.constrains("registration_ids", "seats_max")
     def _check_seats_availability(self, minimal_availability=0):
         sold_out_tickets = []

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit waiting list view to translate text while preserving layout -->
+    <template
+        id="view_email_template_waiting_list"
+        inherit_id="website_event_waiting_list.view_email_template_waiting_list"
+        priority="99"
+    >
+        <!-- Override email heading: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='email_heading']" position="after">
+            <t t-set="email_heading">Your registration to the waiting list</t>
+        </xpath>
+
+        <!-- Hide original preface text, add new after -->
+        <xpath expr="//div[@name='section-preface-text']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-preface-text']" position="after">
+            <div name="section-preface-text">
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                Thank you for your interest in our training course.<br />
+                The course
+                <t t-if="object.event_id.is_published"><strong><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
+                        ><t t-esc="object.event_id.name" /></a></strong></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>,
+                is currently full.<br />
+                You have been added to the waiting list. We will contact you if places become available.<br
+                /><br />
+            </div>
+        </xpath>
+
+        <!-- Override cancel button text: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t
+                t-set="link_message"
+            >If you want to cancel your registration, please follow the link below:</t>
+        </xpath>
+
+        <!-- Override cancel button label: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Cancel Registration</t>
+        </xpath>
+
+        <!-- Hide original thank-you note, add new after -->
+        <xpath expr="//div[@name='section-thank-you-note']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-thank-you-note']" position="after">
+            <div name="section-thank-you-note">
+                Best regards,<br />
+                <span style="color: #454748;">
+                    <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="view_email_template_confirm_waiting_list"
+        inherit_id="website_event_waiting_list.view_email_template_confirm_waiting_list"
+        priority="99"
+    >
+        <!-- Override email heading: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='email_heading']" position="after">
+            <t t-set="email_heading">Places Available</t>
+        </xpath>
+
+        <!-- Hide original preface text, add new after -->
+        <xpath expr="//div[@name='section-preface-text']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-preface-text']" position="after">
+            <div name="section-preface-text">
+                Hello <t t-esc="object.name or ''" />,<br /><br />
+                Places have become available on the training course
+                <t t-if="object.event_id.is_published"><strong><a
+                            t-att-href="object.event_id.website_url"
+                            t-attf-style="color:#{email_secondary_color};text-decoration:underline;"
+                        ><t t-esc="object.event_id.name" /></a></strong></t>
+                <t t-else=""><strong><t t-esc="object.event_id.name" /></strong></t>.<br
+                />
+                Please confirm your place as soon as possible. Places will be allocated in the order confirmations are received.<br
+                /><br />
+            </div>
+        </xpath>
+
+        <!-- Override cancel button text: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='link_message']" position="after">
+            <t t-set="link_message">Confirm or cancel your registration below:</t>
+            <t
+                name="section-claiming-or-cancellation"
+                t-call="website_event_cancellation.view_email_template_event_cancellation"
+                t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+            >
+                <t
+                    t-set="link_message"
+                >Claim or cancel your seat from the link below:</t>
+                <t t-set="button_message">Claim or cancel registration</t>
+            </t>
+        </xpath>
+
+        <!-- Override cancel button label: set after existing t-set so it wins -->
+        <xpath expr="//t[@t-set='button_message']" position="after">
+            <t t-set="button_message">Confirm or cancel your registration</t>
+        </xpath>
+
+        <!-- Hide original thank-you note, add new after -->
+        <xpath expr="//div[@name='section-thank-you-note']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//div[@name='section-thank-you-note']" position="after">
+            <div name="section-thank-you-note">
+                Best regards,<br />
+                <span style="color: #454748;">
+                    <br />
+                    TAKK
+                </span>
+            </div>
+        </xpath>
+    </template>
+</odoo>

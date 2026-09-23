@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="login_takk_instructions"
+        inherit_id="web.login"
+        name="TAKK Login Instructions"
+    >
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+            <div class="alert alert-info" role="alert">
+                <p>
+                    Kirjautuessasi verkkokauppaan käytä "Kirjaudu sisään
+                    Moodlella" -painiketta.
+                </p>
+                <p>
+                    Avautuvassa näkymässä paina Login-painiketta ja
+                    syötä verkkokaupan käyttäjätunnuksesi sekä
+                    salasanasi.
+                </p>
+                <p>
+                    Kirjautumisen jälkeen sinut ohjataan automaattisesti
+                    takaisin verkkokauppaan.
+                </p>
+                <p class="mb-0">
+                    Jos olet uusi käyttäjä, paina "Rekisteröidy
+                    käyttäjäksi".
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
