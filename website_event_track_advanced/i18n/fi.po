@@ -166,8 +166,8 @@ msgstr "<option value=\"\">Valitse...</option>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_speakers
-msgid "<span class=\"alert-message\">List the details of all presenters</span>"
-msgstr "<span class=\"alert-message\">Listaa kaikkien esittäjien tiedot</span>"
+msgid "<span class=\"alert-message\">Note! The presentation's contact person is not automatically a presenter. List the details of all presenters here.</span>"
+msgstr "<span class=\"alert-message\">Huom! Esityksen yhteyshenkilö ei ole automaattisesti esittäjä. Täytä tähän kaikki esityksen esittäjät.</span>"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
@@ -1518,13 +1518,13 @@ msgstr "Apukenttä tarkistamaan onko käyttäjä arvioija."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid "I am ready to give a presentation"
-msgstr "Olen valmis pitämään esityksen"
+msgid "I am also ready to give a presentation"
+msgstr "Olen valmis pitämään esityksen myös"
 
 #. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track__presentation_language_ids
 msgid "I am ready to give a presentation."
-msgstr "Olen valmis pitämään esityksen."
+msgstr "Olen valmis pitämään esityksen myös."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_webinar
@@ -1616,8 +1616,8 @@ msgstr "Kieli"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_info
-msgid "Language of the Presentation"
-msgstr "Esityksen kieli"
+msgid "Primary Language of the Presentation"
+msgstr "Esityksen ensisijainen kieli"
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.event_track_application_contact_info
@@ -2187,6 +2187,16 @@ msgid "Show In Event"
 msgstr "Näytä tapahtumassa"
 
 #. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__hide_subtheme_field
+msgid "Hide Subtheme Field"
+msgstr "Piilota alateema-kenttä"
+
+#. module: website_event_track_advanced
+#: model:ir.model.fields,field_description:website_event_track_advanced.field_event_event__hide_webinar_field
+msgid "Hide Webinar Field"
+msgstr "Piilota webinaari-kenttä"
+
+#. module: website_event_track_advanced
 #: model:ir.model.fields,field_description:website_event_track_advanced.field_event_track_type__show_in_proposals
 msgid "Show In Proposals"
 msgstr "Näytä esitysehdotuksessa"
@@ -2347,10 +2357,14 @@ msgstr "Esitysehdotuksen lähettäjä näkee arvioinnit"
 msgid ""
 "The workshop's minimum and maximum number of participants and the "
 "participation fee for the participant. Workshops are typically free of "
-"charge for the participant."
+"charge for the participant. The workshop organizer is responsible for the "
+"costs of organizing the workshop, such as venue costs and the "
+"participants' administration fee."
 msgstr ""
 "Työpajan minimi- ja maksimiosallistujamäärät sekä osallistumismaksut. "
-"Työpajat ovat tyypillisesti maksuttomia osallistujille."
+"Työpajat ovat tyypillisesti maksuttomia osallistujille. Workshopin "
+"järjestäjä vastaa workshopin järjestämisen kustannuksista, kuten "
+"tilakustannukset sekä osallistujien hallintomaksu."
 
 #. module: website_event_track_advanced
 #: model_terms:ir.ui.view,arch_db:website_event_track_advanced.portal_my_tracks
