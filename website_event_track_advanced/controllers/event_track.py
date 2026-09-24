@@ -25,6 +25,13 @@ class EventTrackControllerAdvanced(EventTrackController):
         res.get("locations").sort(key=lambda x: x.sequence)
         return res
 
+    def _get_language_dicts(self):
+        """List of {id, name} dicts for all languages, Finnish first."""
+        langs = request.env["res.lang"].sudo().search([])
+        finnish = langs.filtered(lambda lang: lang.code == "fi_FI")
+        langs = finnish + (langs - finnish)
+        return [{"id": lang.id, "name": lang.name} for lang in langs]
+
     def _get_event_track_proposal_values(self, event):
         partner_id = request.env.user.partner_id
         track_languages = request.env["res.lang"].search([], order="id")
@@ -119,6 +126,7 @@ class EventTrackControllerAdvanced(EventTrackController):
                     {
                         "can_review": can_review,
                         "rating_grade_ids": rating_grade_ids,
+                        "reviewer_show_all": track.event_id.reviewer_show_all,
                     }
                 )
 
@@ -205,21 +213,8 @@ class EventTrackControllerAdvanced(EventTrackController):
             for attachment in track.attachment_ids
         ]
 
-        languages = [
-            {
-                "id": lang.id,
-                "name": lang.name,
-            }
-            for lang in request.env["res.lang"].sudo().search([])
-        ]
-
-        presentation_language_ids = [
-            {
-                "id": presentation_lang.id,
-                "name": presentation_lang.name,
-            }
-            for presentation_lang in request.env["res.lang"].sudo().search([])
-        ]
+        languages = self._get_language_dicts()
+        presentation_language_ids = self._get_language_dicts()
 
         # Get privacy settings and already accepted privacy
         privacy_ids = []
@@ -279,6 +274,10 @@ class EventTrackControllerAdvanced(EventTrackController):
                 "description": track.description,
                 "type": track.type.id,
                 "video_url": track.video_url,
+                "hide_presentation_link": track.event_id.hide_presentation_link,
+                "hide_attachment_field": track.event_id.hide_attachment_field,
+                "hide_subtheme_field": track.event_id.hide_subtheme_field,
+                "hide_webinar_field": track.event_id.hide_webinar_field,
                 "language": track.language.id,
                 "languages": languages,
                 "presentation_language_ids": presentation_language_ids,
@@ -434,20 +433,8 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         tags = [{"id": tag.id, "name": tag.name} for tag in event.allowed_track_tag_ids]
 
-        languages = [
-            {
-                "id": lang.id,
-                "name": lang.name,
-            }
-            for lang in request.env["res.lang"].sudo().search([])
-        ]
-        presentation_language_ids = [
-            {
-                "id": presentation_lang.id,
-                "name": presentation_lang.name,
-            }
-            for presentation_lang in request.env["res.lang"].sudo().search([])
-        ]
+        languages = self._get_language_dicts()
+        presentation_language_ids = self._get_language_dicts()
         privacy_ids = [
             {
                 "id": privacy.id,
@@ -498,6 +485,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             "multiple_target_groups": multiple_target_groups,
             "multiple_tags": multiple_tags,
             "operators": operators,
+            "hide_presentation_link": event.hide_presentation_link,
+            "hide_attachment_field": event.hide_attachment_field,
+            "hide_subtheme_field": event.hide_subtheme_field,
+            "hide_webinar_field": event.hide_webinar_field,
         }
 
     def _get_event_track_proposal_form_values(self, event, **post):
