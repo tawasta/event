@@ -12,10 +12,7 @@ class AccountMove(models.Model):
     def _has_event_ticket_lines(self):
         # Check if the invoice contains any event ticket lines
         self.ensure_one()
-        return any(
-            line.product_id and line.product_id.detailed_type == "event"
-            for line in self.invoice_line_ids
-        )
+        return any(line._is_event_ticket_line() for line in self.invoice_line_ids)
 
     def _post(self, soft=True):
         # Split event ticket lines and compute their discounts automatically
@@ -45,7 +42,7 @@ class AccountMove(models.Model):
 
             # Group the invoice lines by product
             for line in invoice.invoice_line_ids.filtered(
-                lambda il: il.product_id and il.product_id.detailed_type == "event"
+                lambda il: il._is_event_ticket_line()
             ):
                 product_template = line.product_id.product_tmpl_id
                 if product_template.id not in products_on_lines:
@@ -92,11 +89,7 @@ class AccountMove(models.Model):
             lines_to_remove = self.env["account.move.line"]
 
             for line in invoice.invoice_line_ids:
-                product = line.product_id
-                if (
-                    product.product_tmpl_id.detailed_type == "event"
-                    and not line.event_ticket_line_split
-                ):
+                if line._is_event_ticket_line() and not line.event_ticket_line_split:
                     # Find the related sale line which in turn is linked to the related
                     # event registrations
                     sale_lines = line.sale_line_ids
