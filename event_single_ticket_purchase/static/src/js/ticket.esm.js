@@ -15,6 +15,11 @@ publicWidget.registry.SingleTicketPurchaseLimit = publicWidget.Widget.extend({
     start: function () {
         const res = this._super.apply(this, arguments);
 
+        if (this._hasTicketInCart()) {
+            this._blockTicketSelection();
+            return res;
+        }
+
         this._limitTicketSelectOptions();
         this._enforceSingleTicketSelection();
         this._toggleSubmitButton();
@@ -25,6 +30,21 @@ publicWidget.registry.SingleTicketPurchaseLimit = publicWidget.Widget.extend({
     // --------------------------------------------------------------------------
     // Private
     // --------------------------------------------------------------------------
+
+    /**
+     * Whether the cart already has a ticket for this event.
+     */
+    _hasTicketInCart: function () {
+        return this.$(".o_wevent_ticket_in_cart").length > 0;
+    },
+
+    /**
+     * Prevent selecting any tickets and submitting the form
+     */
+    _blockTicketSelection: function () {
+        this.$("select[name^='nb_register-']").val("0").prop("disabled", true);
+        this.$("button[type='submit']").prop("disabled", true);
+    },
 
     /**
      * Restrict each ticket select to values 0 or 1.
@@ -90,6 +110,10 @@ publicWidget.registry.SingleTicketPurchaseLimit = publicWidget.Widget.extend({
     // --------------------------------------------------------------------------
 
     _onTicketQuantityChange: function (ev) {
+        if (this._hasTicketInCart()) {
+            this._blockTicketSelection();
+            return;
+        }
         this._limitTicketSelectOptions();
         this._enforceSingleTicketSelection(ev.currentTarget);
         this._toggleSubmitButton();

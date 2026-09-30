@@ -17,6 +17,8 @@ Features
 - Ensures only **one ticket total** can be selected
 - Automatically resets the previous selection when a new ticket is chosen
 - Disables the registration button unless exactly one ticket is selected
+- Also blocks ticket selection in the registration modal when the cart already
+  contains a ticket for the same event, and shows a notice with a link to the cart
 
 Configuration
 =============
@@ -43,6 +45,7 @@ Contributors
 ------------
 
 * Valtteri Lattu <valtteri.lattu@futural.fi>
+* Timo Talvitie <timo.talvitie@futural.fi>
 
 Maintainer
 ----------

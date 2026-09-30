@@ -1,7 +1,7 @@
 ##############################################################################
 #
 #    Author: Futural Oy
-#    Copyright 2023 Futural Oy (https://futural.fi)
+#    Copyright 2026 Futural Oy (https://futural.fi)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,23 +17,18 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+
 {
-    "name": "Event Single Ticket Purchase",
-    "summary": "Event Single Ticket Purchase",
+    "name": "Event survey results to Excel",
     "version": "17.0.1.0.0",
     "category": "Event",
+    "summary": "Create a xlsx report from event's questions",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_sale"],
-    "data": [
-        "views/website_event_templates.xml",
-    ],
-    "assets": {
-        "web.assets_frontend": [
-            "event_single_ticket_purchase/static/src/js/ticket.esm.js",
-        ],
-    },
+    "external_dependencies": {"python": ["xlsxwriter"]},
+    "depends": ["report_xlsx", "website_event"],
+    "data": ["report/event_questions_report.xml"],
 }

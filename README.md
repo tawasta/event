@@ -19,6 +19,7 @@ addon | version | maintainers | summary
 [event_auditlog_rules](event_auditlog_rules/) | 17.0.1.1.0 |  | Adds audit log rules for events
 [event_batch](event_batch/) | 17.0.1.0.1 |  | Allows creating student batches for event registrations
 [event_certificate_portal](event_certificate_portal/) | 17.0.1.0.1 |  | Attendance certificates for events with portal download and post-event email sending
+[event_default_future_dates](event_default_future_dates/) | 17.0.1.0.0 |  | New and duplicated events' dates default to future instead of today
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
 [event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
@@ -44,9 +45,10 @@ addon | version | maintainers | summary
 [event_sale_registrants_to_sale_order_line](event_sale_registrants_to_sale_order_line/) | 17.0.1.0.0 |  | Adds a Event Registrants name to SO line description
 [event_sale_registrants_to_sale_order_note](event_sale_registrants_to_sale_order_note/) | 17.0.1.0.0 |  | Adds a note to Sale Order with Event Registrants names
 [event_single_ticket_purchase](event_single_ticket_purchase/) | 17.0.1.0.0 |  | Event Single Ticket Purchase
+[event_survey_results_to_excel](event_survey_results_to_excel/) | 17.0.1.0.0 |  | Create a xlsx report from event's questions
 [event_template_disable_after_create](event_template_disable_after_create/) | 17.0.1.0.0 |  | Disable changing template after creation
 [event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.1 |  | Show event tickets only to users matching a partner domain.
-[event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.0.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
+[event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.1.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
 [event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event

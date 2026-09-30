@@ -9,7 +9,19 @@
             expr="//form[@id='registration_form']/div[@id='o_wevent_tickets']"
             position="before"
         >
-            <div class="alert alert-info mb-3" role="status">
+            <!-- If SO lines of the same event were found in cart, show specific message -->
+            <div
+                t-if="cart_event_ticket_lines"
+                class="alert alert-warning o_wevent_ticket_in_cart mb-3"
+                role="status"
+            >
+                You already have a ticket for this event in your cart. <a
+                    href="/shop/cart"
+                    class="alert-link"
+                >Go to cart</a>
+            </div>
+            <!-- otherwise show a generic info message -->
+            <div t-else="" class="alert alert-info mb-3" role="status">
                 You can select only one ticket. If you choose another ticket type, the previous selection will be automatically removed.
             </div>
         </xpath>

@@ -146,3 +146,29 @@ msgstr "Lippujen määräalennukset on asetettu."
 #, python-format
 msgid "Ticket number sequence should be ascending with no gaps."
 msgstr "Lippunumeroiden järjestyksen pitää olla nouseva ja aukoton."
+
+#. module: event_ticket_individual_invoice_lines
+#: model:ir.model.fields,field_description:event_ticket_individual_invoice_lines.field_res_config_settings__event_ticket_auto_split_on_post
+#: model_terms:ir.ui.view,arch_db:event_ticket_individual_invoice_lines.res_config_settings_view_form_inherit
+msgid "Split Event Ticket Lines on Invoice Confirmation"
+msgstr "Erittele tapahtumalippujen laskurivit laskua vahvistettaessa"
+
+#. module: event_ticket_individual_invoice_lines
+#: model_terms:ir.ui.view,arch_db:event_ticket_individual_invoice_lines.res_config_settings_view_form_inherit
+msgid ""
+"When a customer invoice is confirmed, automatically split event ticket lines"
+" per participant and apply ticket quantity discounts."
+msgstr ""
+"Kun asiakaslasku vahvistetaan, tapahtumalippujen laskurivit eritellään "
+"automaattisesti osallistujakohtaisesti ja lippujen määräalennukset asetetaan."
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid ""
+"Split the event ticket invoice lines before computing ticket quantity "
+"discounts."
+msgstr ""
+"Erittele tapahtumalippujen laskurivit ennen lippujen määräalennusten "
+"laskemista."

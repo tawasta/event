@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="event_registration_answers_xlsx" model="ir.actions.report">
+        <field name="name">Print Event Answers to XLSX</field>
+        <field name="model">event.registration</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">event_survey_results_to_excel.answers_xlsx</field>
+        <field name="report_file">event_survey_results_to_excel.answers_xlsx</field>
+        <field name="print_report_name">'Event Attendee Answers'</field>
+        <field name="binding_model_id" ref="event.model_event_registration" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
