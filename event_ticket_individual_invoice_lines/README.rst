@@ -15,6 +15,9 @@ Event: Individual Invoice Lines when Invoicing Tickets
 Configuration
 =============
 * Set event ticket discounts, if there are any, on the product template form
+* Optionally, enable 'Split Event Ticket Lines on Invoice Confirmation' in
+  Events settings to split lines and compute discounts automatically when
+  a customer invoice containing event tickets is confirmed
 
 Usage
 =====
@@ -23,6 +26,9 @@ Usage
   invoice form
 * Calculate any discounts with the new 'Compute Ticket Quantity Discounts'
   button.
+* If automatic splitting is enabled in settings, the above steps are done
+  when the invoice is confirmed. The buttons are still available for manual
+  use, and lines that have already been split are not split again.
 
 
 Known issues / Roadmap
@@ -31,8 +37,6 @@ Known issues / Roadmap
   SO lines and event registrations to be intact. More complex splits
   need to be manually, if e.g. the records have been manually modified
   after the registration -> SO -> invoice process
-* Add validation that discount calculation is prohibited if splitting
-  has not yet been done.
 
 Credits
 =======

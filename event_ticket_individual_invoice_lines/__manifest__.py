@@ -22,7 +22,7 @@
     "name": "Event: Individual Invoice Lines when Invoicing Tickets",
     "summary": "Splits e.g. line with 3 event tickets into separate "
     "invoice lines for each",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -33,6 +33,7 @@
     "data": [
         "views/account_move.xml",
         "views/product_template.xml",
+        "views/res_config_settings_views.xml",
         "security/ir.model.access.csv",
     ],
 }

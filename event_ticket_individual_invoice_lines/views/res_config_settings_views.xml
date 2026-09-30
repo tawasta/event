@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.individual.invoice.lines</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="event.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//block[@name='registration_setting_container']"
+                position="inside"
+            >
+                <setting
+                    id="event_ticket_auto_split_on_post_setting"
+                    string="Split Event Ticket Lines on Invoice Confirmation"
+                    help="When a customer invoice is confirmed, automatically split event ticket lines per participant and apply ticket quantity discounts."
+                >
+                    <field name="event_ticket_auto_split_on_post" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

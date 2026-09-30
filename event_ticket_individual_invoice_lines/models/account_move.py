@@ -9,16 +9,53 @@ _logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    def _has_event_ticket_lines(self):
+        # Check if the invoice contains any event ticket lines
+        self.ensure_one()
+        return any(line._is_event_ticket_line() for line in self.invoice_line_ids)
+
+    def _post(self, soft=True):
+        # Split event ticket lines and compute their discounts automatically
+        # when confirming, if enabled in settings
+        auto_split = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("event_ticket_individual_invoice_lines.auto_split_on_post")
+        )
+        if auto_split:
+            invoices_to_split = self.filtered(
+                lambda move: move.state == "draft"
+                and move.move_type == "out_invoice"
+                and move._has_event_ticket_lines()
+            )
+            if invoices_to_split:
+                invoices_to_split.action_split_event_ticket_lines()
+                invoices_to_split.action_compute_ticket_discounts()
+
+        return super()._post(soft)
+
     def action_compute_ticket_discounts(self):
         # Compute qty discounts for tickets after they have been split to individual
-        # lines. TODO validate that it cannot be done before
+        # lines
         for invoice in self:
             products_on_lines = {}
 
+            ticket_lines = invoice.invoice_line_ids.filtered(
+                lambda il: il._is_event_ticket_line()
+            )
+
+            # Discounts are applied per ticket, so the lines must have been
+            # split first
+            if ticket_lines.filtered(lambda il: not il.event_ticket_line_split):
+                raise UserError(
+                    _(
+                        "Split the event ticket invoice lines before computing "
+                        "ticket quantity discounts."
+                    )
+                )
+
             # Group the invoice lines by product
-            for line in invoice.invoice_line_ids.filtered(
-                lambda il: il.product_id and il.product_id.detailed_type == "event"
-            ):
+            for line in ticket_lines:
                 product_template = line.product_id.product_tmpl_id
                 if product_template.id not in products_on_lines:
                     products_on_lines[product_template.id] = []
@@ -46,7 +83,9 @@ class AccountMove(models.Model):
                         # get the highest discount?
                         line.discount = 0.0
 
-        self.message_post(body=_("Ticket discounts have been computed and applied."))
+            invoice.message_post(
+                body=_("Ticket discounts have been computed and applied.")
+            )
 
     def action_split_event_ticket_lines(self):
         # Split each invoice line that contains a ticket product
@@ -62,8 +101,7 @@ class AccountMove(models.Model):
             lines_to_remove = self.env["account.move.line"]
 
             for line in invoice.invoice_line_ids:
-                product = line.product_id
-                if product.product_tmpl_id.detailed_type == "event":
+                if line._is_event_ticket_line() and not line.event_ticket_line_split:
                     # Find the related sale line which in turn is linked to the related
                     # event registrations
                     sale_lines = line.sale_line_ids
@@ -97,6 +135,9 @@ class AccountMove(models.Model):
 
                         # Reconnect to the original SO line
                         line_data["sale_line_ids"] = [(6, 0, [sale_line.id])]
+
+                        # Mark the line as split, so it won't get split again
+                        line_data["event_ticket_line_split"] = True
 
                         # Update the line description
                         line_data[
