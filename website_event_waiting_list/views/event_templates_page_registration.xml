@@ -97,7 +97,7 @@
 
 
             <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             >
                 <button
                     type="submit"
@@ -109,7 +109,7 @@
                 </button>
             </t>
             <t
-                t-if="event.seats_limited and event.seats_max and event.seats_available &lt; 1"
+                t-elif="event.seats_limited and event.seats_max and event.seats_available &lt; 1"
             >
                 <button class="btn btn-danger btn-block" disabled="1">
                     Sold Out
