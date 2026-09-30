@@ -161,3 +161,14 @@ msgid ""
 msgstr ""
 "Kun asiakaslasku vahvistetaan, tapahtumalippujen laskurivit eritellään "
 "automaattisesti osallistujakohtaisesti ja lippujen määräalennukset asetetaan."
+
+#. module: event_ticket_individual_invoice_lines
+#. odoo-python
+#: code:addons/event_ticket_individual_invoice_lines/models/account_move.py:0
+#, python-format
+msgid ""
+"Split the event ticket invoice lines before computing ticket quantity "
+"discounts."
+msgstr ""
+"Erittele tapahtumalippujen laskurivit ennen lippujen määräalennusten "
+"laskemista."

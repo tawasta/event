@@ -37,8 +37,6 @@ Known issues / Roadmap
   SO lines and event registrations to be intact. More complex splits
   need to be manually, if e.g. the records have been manually modified
   after the registration -> SO -> invoice process
-* Add validation that discount calculation is prohibited if splitting
-  has not yet been done.
 
 Credits
 =======

@@ -36,14 +36,26 @@ class AccountMove(models.Model):
 
     def action_compute_ticket_discounts(self):
         # Compute qty discounts for tickets after they have been split to individual
-        # lines. TODO validate that it cannot be done before
+        # lines
         for invoice in self:
             products_on_lines = {}
 
-            # Group the invoice lines by product
-            for line in invoice.invoice_line_ids.filtered(
+            ticket_lines = invoice.invoice_line_ids.filtered(
                 lambda il: il._is_event_ticket_line()
-            ):
+            )
+
+            # Discounts are applied per ticket, so the lines must have been
+            # split first
+            if ticket_lines.filtered(lambda il: not il.event_ticket_line_split):
+                raise UserError(
+                    _(
+                        "Split the event ticket invoice lines before computing "
+                        "ticket quantity discounts."
+                    )
+                )
+
+            # Group the invoice lines by product
+            for line in ticket_lines:
                 product_template = line.product_id.product_tmpl_id
                 if product_template.id not in products_on_lines:
                     products_on_lines[product_template.id] = []
