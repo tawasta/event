@@ -53,6 +53,8 @@ The registration status is shown using the event registration state:
 * Unconfirmed
 * Attended
 * Cancelled
+* Waiting, only shown for registrations on an event's waiting list (see
+  ``website_event_waiting_list``)
 
 Event status
 ------------
@@ -70,9 +72,9 @@ Portal controls
 
 The Events portal page supports sorting by:
 
-* Newest
-* Event
-* Ticket
+* Newest, by the event's own date
+* Event, alphabetically by event name
+* Ticket, alphabetically by ticket name
 * Status
 * Event Status
 

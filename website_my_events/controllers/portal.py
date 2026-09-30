@@ -26,7 +26,14 @@ class PortalEvent(CustomerPortal):
 
     def _get_event_searchbar_sortings(self):
         return {
-            "date": {"label": _("Newest"), "order": "create_date desc"},
+            # event.event's own _order is "date_begin, id", so ordering by
+            # the bare relation field sorts by the event's date.
+            "date": {"label": _("Newest"), "order": "event_id desc"},
+            # Sorted in Python (see _sort_registrations_by_event_name):
+            # the ORM's order clause can't sort through a relation by a
+            # field on the comodel other than via the comodel's own _order,
+            # which for event.event/event.event.ticket doesn't start with
+            # name.
             "event": {"label": _("Event"), "order": "event_id"},
             "ticket": {"label": _("Ticket"), "order": "event_ticket_id"},
             "state": {"label": _("Status"), "order": "state"},
@@ -71,6 +78,7 @@ class PortalEvent(CustomerPortal):
             "draft": _("Unconfirmed"),
             "done": _("Attended"),
             "cancel": _("Cancelled"),
+            "wait": _("Waiting"),
         }
 
     def _get_event_date_status_labels(self):
@@ -172,6 +180,22 @@ class PortalEvent(CustomerPortal):
                 search_domain.append(event_status_domain)
 
         return OR(search_domain) if search_domain else []
+
+    def _sort_registrations_by_event_name(self, registrations):
+        return registrations.sorted(
+            key=lambda registration: (
+                (registration.event_id.name or "").lower(),
+                registration.id,
+            )
+        )
+
+    def _sort_registrations_by_ticket_name(self, registrations):
+        return registrations.sorted(
+            key=lambda registration: (
+                (registration.event_ticket_id.name or "").lower(),
+                registration.id,
+            )
+        )
 
     def _sort_registrations_by_event_status(self, registrations):
         status_order = self._get_event_date_status_order()
@@ -287,11 +311,22 @@ class PortalEvent(CustomerPortal):
             step=self._items_per_page,
         )
 
-        if sortby == "event_status" or groupby == "event_status":
+        python_sort_key = "event_status" if groupby == "event_status" else sortby
+
+        if python_sort_key in ("event_status", "event", "ticket"):
             all_registrations = event_obj.sudo().search(domain, order=order)
-            all_registrations = self._sort_registrations_by_event_status(
-                all_registrations
-            )
+            if python_sort_key == "event_status":
+                all_registrations = self._sort_registrations_by_event_status(
+                    all_registrations
+                )
+            elif python_sort_key == "event":
+                all_registrations = self._sort_registrations_by_event_name(
+                    all_registrations
+                )
+            else:
+                all_registrations = self._sort_registrations_by_ticket_name(
+                    all_registrations
+                )
             registrations = all_registrations[
                 pager["offset"] : pager["offset"] + self._items_per_page
             ]

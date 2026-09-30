@@ -175,6 +175,16 @@
                                                                     class="badge text-bg-warning"
                                                                 >Cancelled</span>
                                                             </t>
+                                                            <!-- 'wait' only exists when
+                                                            website_event_waiting_list is
+                                                            installed -->
+                                                            <t
+                                                                t-if="re.state == 'wait'"
+                                                            >
+                                                                <span
+                                                                    class="badge text-bg-primary"
+                                                                >Waiting</span>
+                                                            </t>
                                                         </div>
 
                                                         <div class="small text-muted">
