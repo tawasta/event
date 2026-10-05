@@ -1,0 +1,7 @@
+<odoo>
+
+    <record id="website_event_track.menu_event_track" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('event.group_event_user'))]" />
+    </record>
+
+</odoo>
