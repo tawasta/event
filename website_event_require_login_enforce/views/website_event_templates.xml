@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="registration_template"
+        inherit_id="website_event.registration_template"
+    >
+        <xpath expr="//form[@id='registration_form']" position="before">
+            <t
+                t-set="login_required"
+                t-value="event.website_require_login and request.website.is_public_user()"
+            />
+            <div
+                t-if="login_required and event.event_registrations_open"
+                class="alert alert-info d-flex justify-content-between align-items-center mb-5"
+                role="status"
+            >
+                <span>Log in to register for this event.</span>
+                <a
+                    class="btn btn-primary ml-3"
+                    t-attf-href="/web/login?redirect=#{event.website_url}"
+                >
+                    <span>Log in</span>
+                    <span class="fa fa-sign-in ml-1" />
+                </a>
+            </div>
+        </xpath>
+        <xpath expr="//form[@id='registration_form']" position="replace">
+            <t t-if="not login_required">$0</t>
+        </xpath>
+    </template>
+</odoo>
