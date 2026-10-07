@@ -33,8 +33,9 @@ msgstr "Tapahtumailmoittautuminen"
 #. module: website_event_registration_partner_tags
 #: model:ir.model.fields,help:website_event_registration_partner_tags.field_event_event__registration_partner_category_ids
 msgid ""
-"Tags added to the contact of each registration to this event. Existing tags "
-"of the contact are kept."
+"Tags added to the contact of each registration to this event once the "
+"registration is confirmed. Existing tags of the contact are kept."
 msgstr ""
 "Tunnisteet, jotka lisätään jokaisen tähän tapahtumaan ilmoittautuneen "
-"kontaktille. Kontaktin olemassa olevat tunnisteet säilyvät."
+"kontaktille, kun ilmoittautuminen vahvistetaan. Kontaktin olemassa olevat "
+"tunnisteet säilyvät."

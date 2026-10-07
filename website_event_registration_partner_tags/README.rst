@@ -7,9 +7,13 @@ Website Event: Registration Partner Tags
 =========================================
 
 * Adds "Customer Tags" to events.
-* When a registration is created, the tags of the event that the contact of
+* When a registration is confirmed, the tags of the event that the contact of
   the registration does not have yet are added to the contact. Existing tags
   of the contact are kept.
+* A registration is confirmed right away when the event confirms
+  registrations automatically, when a free sale order is confirmed, or when
+  the invoice of a paid registration is paid. Unfinished registrations, e.g.
+  left in the cart, do not add tags.
 * Events without customer tags do not change contacts.
 
 Configuration

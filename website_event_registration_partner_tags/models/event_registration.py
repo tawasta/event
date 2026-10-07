@@ -1,16 +1,18 @@
 from collections import defaultdict
 
-from odoo import api, models
+from odoo import models
 
 
 class EventRegistration(models.Model):
     _inherit = "event.registration"
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        registrations = super().create(vals_list)
-        registrations._add_event_partner_tags()
-        return registrations
+    def write(self, vals):
+        res = super().write(vals)
+        # Every confirmation ends here: auto confirmation on create, a free
+        # sale order being confirmed and a paid invoice all call action_confirm
+        if vals.get("state") == "open":
+            self._add_event_partner_tags()
+        return res
 
     def _add_event_partner_tags(self):
         """Add the event's customer tags that the registration contact lacks."""

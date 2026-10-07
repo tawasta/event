@@ -10,6 +10,7 @@ class EventEvent(models.Model):
         column1="event_id",
         column2="category_id",
         string="Customer Tags",
-        help="Tags added to the contact of each registration to this event. "
-        "Existing tags of the contact are kept.",
+        help="Tags added to the contact of each registration to this event "
+        "once the registration is confirmed. Existing tags of the contact are "
+        "kept.",
     )
