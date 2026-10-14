@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_event_analytic_accounting_rule_user,product.event.analytic.accounting.rule.user,model_product_event_analytic_accounting_rule,base.group_user,1,0,0,0
+access_product_event_analytic_accounting_rule_analytic,product.event.analytic.accounting.rule.analytic,model_product_event_analytic_accounting_rule,analytic.group_analytic_accounting,1,1,1,1

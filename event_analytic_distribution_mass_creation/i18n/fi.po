@@ -1,0 +1,372 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_analytic_distribution_mass_creation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260908\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-14 16:04+0000\n"
+"PO-Revision-Date: 2026-10-14 16:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_event_tag_category__use_in_analytic_accounting_rules
+msgid ""
+"Allow selecting the tags of this category in the event analytic accounting "
+"rules of ticket products"
+msgstr ""
+"Salli tämän kategorian tunnisteiden valitseminen lipputuotteiden tapahtumien"
+" analyyttisen kirjanpidon säännöissä"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.constraint,message:event_analytic_distribution_mass_creation.constraint_product_event_analytic_accounting_rule_product_event_tag_unique
+msgid "An event tag can be used only on one line per product."
+msgstr "Tapahtuman tunnistetta voi käyttää tuotteella vain yhdellä rivillä."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__analytic_account_id
+msgid "Analytic Account"
+msgstr "Kustannuspaikka"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.res_config_settings_view_form
+msgid "Analytic Accounting"
+msgstr "Analyyttinen kirjanpito"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_account_analytic_distribution_model
+msgid "Analytic Distribution Model"
+msgstr "Analyyttinen jakomalli"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_event_event__analytic_distributions_outdated
+msgid "Analytic Distributions Outdated"
+msgstr "Analyyttiset jakomallit vanhentuneet"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__analytic_account_id
+msgid ""
+"Analytic account for the tickets that are sold with this product in the "
+"events that have the tag"
+msgstr ""
+"Kustannuspaikka lipuille, jotka myydään tällä tuotteella tapahtumissa, "
+"joilla on kyseinen tunniste"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_product_product__product_event_analytic_accounting_rule_ids
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_product_template__product_event_analytic_accounting_rule_ids
+msgid ""
+"Analytic accounts to use for the tickets of this product, based on the tags "
+"of the event"
+msgstr ""
+"Tämän tuotteen lipuille käytettävät kustannuspaikat tapahtuman tunnisteiden "
+"perusteella"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.product_template_only_form_view
+msgid ""
+"Analytic distribution models can be generated from an event for\n"
+"                        its tickets. The analytic account of a ticket is picked from the\n"
+"                        line below that has one of the tags of the event."
+msgstr ""
+"Analyyttiset jakomallit voidaan luoda tapahtumalta sen lipuille. Lipun "
+"kustannuspaikka poimitaan alla olevalta riviltä, jolla on jokin tapahtuman "
+"tunnisteista."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__comment
+msgid "Comment"
+msgstr "Kommentti"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__company_id
+msgid "Company"
+msgstr "Yritys"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_res_config_settings
+msgid "Config Settings"
+msgstr "Asetukset"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_res_config_settings__event_analytic_account_creation
+msgid "Create Event Analytic Accounts"
+msgstr "Luo tapahtumille kustannuspaikat"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.res_config_settings_view_form
+msgid ""
+"Create an analytic account for each event when generating its analytic "
+"distributions"
+msgstr ""
+"Luo jokaiselle tapahtumalle samalla myös kustannuspaikka, kun sen analyyttiset jakomallit"
+" luodaan"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.view_event_form_inherit
+msgid ""
+"Create or update the analytic distribution models for the tickets of this "
+"event, based on the event tags and the rules set on the ticket products"
+msgstr ""
+"Luo tai päivitä tämän tapahtuman lippujen analyyttiset jakomallit "
+"tapahtuman tunnisteiden ja lipputuotteille määriteltyjen sääntöjen "
+"perusteella"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__create_uid
+msgid "Created by"
+msgstr "Luonut"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_account_analytic_distribution_model__generated_from_event_rules
+msgid ""
+"Created from the event analytic accounting rules of the ticket products. "
+"Generating analytic distributions on the event keeps this model up to date. "
+"Untick to keep manual changes."
+msgstr ""
+"Luotu lipputuotteiden tapahtumakohtaisista analyyttisen kirjanpidon "
+"säännöistä. Analyyttisten jakomallien luonti tapahtumalta pitää tämän mallin"
+" ajan tasalla. Poista valinta, jos haluat ylläpitää jakomallia käsin."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__create_date
+msgid "Created on"
+msgstr "Luotu"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Created:"
+msgstr "Luotu:"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid ""
+"Creating event analytic accounts is enabled in the Events settings, but the "
+"analytic plan for them is not set."
+msgstr ""
+"Tapahtumien kustannuspaikkojen luonti on otettu käyttöön Tapahtumat-"
+"sovelluksen asetuksissa, mutta niiden analyyttistä suunnitelmaa ei ole "
+"asetettu."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__display_name
+msgid "Display Name"
+msgstr "Näyttönimi"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.product_template_only_form_view
+msgid "Event Analytic Accounting"
+msgstr "Tapahtumien analyyttinen kirjanpito"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_product__product_event_analytic_accounting_rule_ids
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_template__product_event_analytic_accounting_rule_ids
+msgid "Event Analytic Accounting Rules"
+msgstr "Tapahtumien analyyttisen kirjanpidon säännöt"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_res_config_settings__event_analytic_account_plan_id
+msgid "Event Analytic Plan"
+msgstr "Tapahtumien analyyttinen suunnitelma"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__event_tag_id
+msgid "Event Tag"
+msgstr "Tapahtuman tunniste"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_event_tag_category
+msgid "Event Tag Category"
+msgstr "Tapahtuman tunnisteen kategoria"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Event analytic account:"
+msgstr "Tapahtuman kustannuspaikka:"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.view_event_form_inherit
+msgid ""
+"Exactly one tag from the categories used in analytic accounting rules is "
+"needed to generate analytic distributions."
+msgstr ""
+"Analyyttisten jakomallien luonti edellyttää täsmälleen yhtä tunnistetta "
+"niistä kategorioista, joita käytetään analyyttisen kirjanpidon säännöissä."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__comment
+msgid "Free text explanation of the rule"
+msgstr "Vapaamuotoinen selite säännölle"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.view_event_form_inherit
+msgid "Generate Analytic Distributions"
+msgstr "Luo analyyttiset jakomallit"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_account_analytic_distribution_model__generated_from_event_rules
+msgid "Generated from Event Rules"
+msgstr "Luotu tapahtumasäännöistä"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Generation of analytic distribution models for the tickets"
+msgstr "Analyyttisten jakomallien luonti lipuille"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__id
+msgid "ID"
+msgstr "Tunniste (ID)"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__write_uid
+msgid "Last Updated by"
+msgstr "Viimeksi päivittänyt"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__write_date
+msgid "Last Updated on"
+msgstr "Viimeksi päivitetty"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "No new analytic distribution models were created."
+msgstr "Uusia analyyttisia jakomalleja ei luotu."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_res_config_settings__event_analytic_account_plan_id
+msgid ""
+"Plan of the event analytic accounts. It must differ from the plans of the "
+"analytic accounts used in the rules of ticket products."
+msgstr ""
+"Tapahtumien kustannuspaikkojen analyyttinen suunnitelma. Sen on oltava eri "
+"kuin lipputuotteiden sääntöjen kustannuspaikkojen suunnitelmat."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_product_template
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__product_id
+msgid "Product"
+msgstr "Tuote"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_product_event_analytic_accounting_rule
+msgid "Product Event Analytic Accounting Rule"
+msgstr "Tuotteen tapahtumakohtainen analyyttisen kirjanpidon sääntö"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model,name:event_analytic_distribution_mass_creation.model_product_product
+msgid "Product Variant"
+msgstr "Tuotevariaatio"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Removed, the product no longer has a rule for the event's tag:"
+msgstr "Poistettu, tuotteella ei ole enää sääntöä tapahtuman tunnisteelle:"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_event_event__show_analytic_accounting_tag_warning
+msgid "Show Analytic Accounting Tag Warning"
+msgstr "Näytä analyyttisen kirjanpidon tunnistevaroitus"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Skipped, the product has no rule for the tags of the event:"
+msgstr "Ohitettu, tuotteella ei ole sääntöä tapahtuman tunnisteille:"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid ""
+"Skipped, the ticket has a manually maintained analytic distribution model:"
+msgstr "Ohitettu, lipulla on käsin ylläpidetty analyyttinen jakomalli:"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid ""
+"The analytic accounts of the ticket product rules must not belong to the "
+"event analytic plan %(plan)s. Change the rules or the plan in the Events "
+"settings. Overlapping analytic accounts: %(accounts)s"
+msgstr ""
+"Lipputuotteiden sääntöjen kustannuspaikat eivät saa kuulua tapahtumien "
+"analyyttiseen suunnitelmaan %(plan)s. Muuta sääntöjä tai Tapahtumat-"
+"sovelluksen asetuksissa olevaa suunnitelmaa. Päällekkäiset kustannuspaikat: "
+"%(accounts)s"
+
+#. module: event_analytic_distribution_mass_creation
+#: model_terms:ir.ui.view,arch_db:event_analytic_distribution_mass_creation.view_event_form_inherit
+msgid ""
+"The analytic distributions of this event no longer match its tags and the "
+"ticket product rules. Future ticket sales will use the old analytic accounts"
+" until you click \"Generate Analytic Distributions\"."
+msgstr ""
+"Tämän tapahtuman analyyttiset jakomallit eivät enää vastaa sen tunnisteita "
+"ja lipputuotteiden sääntöjä. Tulevat lippumyynnit käyttävät vanhoja "
+"jakomalleja, kunnes painat \"Luo analyyttiset jakomallit\" uudelleen."
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid ""
+"The event must have exactly one tag from the tag categories used in analytic"
+" accounting rules before analytic distributions can be generated."
+msgstr ""
+"Tapahtumalla on oltava täsmälleen yksi tunniste niistä "
+"tunnistekategorioista, joita käytetään analyyttisen kirjanpidon säännöissä, "
+"ennen kuin analyyttiset jakomallit voidaan luoda."
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_product_event_analytic_accounting_rule__event_tag_id
+msgid "The rule is used for events that have this tag"
+msgstr "Sääntöä käytetään tapahtumille, joilla on tämä tunniste"
+
+#. module: event_analytic_distribution_mass_creation
+#. odoo-python
+#: code:addons/event_analytic_distribution_mass_creation/models/event_event.py:0
+#, python-format
+msgid "Updated:"
+msgstr "Päivitetty:"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,field_description:event_analytic_distribution_mass_creation.field_event_tag_category__use_in_analytic_accounting_rules
+msgid "Use in Analytic Accounting Rules"
+msgstr "Käytä analyyttisen kirjanpidon säännöissä"
+
+#. module: event_analytic_distribution_mass_creation
+#: model:ir.model.fields,help:event_analytic_distribution_mass_creation.field_res_config_settings__event_analytic_account_creation
+msgid ""
+"When analytic distributions are generated for an event, also create an "
+"analytic account for the event and allocate the tickets to it"
+msgstr ""
+"Kun tapahtumalle luodaan analyyttiset jakomallit, luo tapahtumalle myös oma "
+"kustannuspaikka ja kohdista liput myös sille"
