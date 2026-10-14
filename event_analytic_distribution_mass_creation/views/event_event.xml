@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field
+            name="name"
+        >event.event.form.inherit.analytic.distribution.mass.creation</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_generate_analytic_distributions"
+                    string="Generate Analytic Distributions"
+                    type="object"
+                    groups="analytic.group_analytic_accounting"
+                    help="Create or update the analytic distribution models for the tickets of this event, based on the event tags and the rules set on the ticket products"
+                />
+            </xpath>
+            <xpath expr="//header" position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not analytic_distributions_outdated"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    The analytic distributions of this event no longer match its tags and the ticket product rules. Future ticket sales will use the old analytic accounts until you click "Generate Analytic Distributions".
+                </div>
+            </xpath>
+            <!-- website_event adds a second tag_ids field right after the first
+                 one, so append to the group to stay below the visible one -->
+            <xpath expr="//field[@name='tag_ids']/.." position="inside">
+                <field name="show_analytic_accounting_tag_warning" invisible="1" />
+                <field
+                    name="analytic_distributions_outdated"
+                    invisible="1"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <div
+                    class="text-warning"
+                    colspan="2"
+                    invisible="not show_analytic_accounting_tag_warning"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    Exactly one tag from the categories used in analytic accounting rules is needed to generate analytic distributions.
+                </div>
+            </xpath>
+            <!-- The alerts of event_analytic_distribution count any matching model,
+                 which is misleading next to the outdated warning of this module -->
+            <xpath
+                expr="//div[@invisible='matching_analytic_distribution_models_exist']"
+                position="attributes"
+            >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath
+                expr="//div[@invisible='not matching_analytic_distribution_models_exist']"
+                position="attributes"
+            >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
