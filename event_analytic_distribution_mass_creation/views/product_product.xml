@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field
+            name="name"
+        >product.product.form.inherit.event.analytic.accounting.rule</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Event Analytic Accounting"
+                    name="event_analytic_accounting_rules"
+                    invisible="detailed_type != 'event'"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    <p class="text-muted">
+                        Analytic distribution models can be generated from an event for
+                        its tickets. The analytic account of a ticket is picked from the
+                        line below that has one of the tags of the event.
+                    </p>
+                    <field name="product_event_analytic_accounting_rule_ids">
+                        <tree editable="bottom">
+                            <field name="event_tag_id" options="{'no_create': True}" />
+                            <field
+                                name="analytic_account_id"
+                                options="{'no_create': True}"
+                            />
+                            <field name="comment" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

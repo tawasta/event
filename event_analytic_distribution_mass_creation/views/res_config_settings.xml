@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.event.analytic.distribution.mass.creation</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="event.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='event']" position="inside">
+                <block
+                    title="Analytic Accounting"
+                    name="event_analytic_accounting_setting_container"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    <setting
+                        id="event_analytic_account_creation"
+                        help="Create an analytic account for each event when generating its analytic distributions"
+                    >
+                        <field name="event_analytic_account_creation" />
+                        <div
+                            class="content-group row mt16"
+                            invisible="not event_analytic_account_creation"
+                        >
+                            <label
+                                for="event_analytic_account_plan_id"
+                                class="col-lg-3 o_light_label"
+                            />
+                            <field
+                                name="event_analytic_account_plan_id"
+                                required="event_analytic_account_creation"
+                                options="{'no_create': True}"
+                            />
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
