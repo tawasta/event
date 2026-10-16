@@ -49,9 +49,7 @@ mailed again from the list of attendees with the action
 
 Known issues / Roadmap
 ======================
-
-The paid tickets are handled by the module
-*website_event_sale_waiting_list*.
+\-
 
 Credits
 =======
