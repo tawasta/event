@@ -17,23 +17,12 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
-# 2. Known third party imports:
-# 3. Odoo imports (openerp):
 from odoo import api, fields, models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class EventRegistration(models.Model):
-    # 1. Private attributes
     _inherit = "event.registration"
 
-    # 2. Fields declaration
     confirmed_from_waiting_list = fields.Boolean(
         readonly=True,
         copy=False,
@@ -46,9 +35,6 @@ class EventRegistration(models.Model):
         "action_cancel and SaleOrder._action_cancel).",
     )
 
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
     @api.depends("sale_order_id.state")
     def _compute_registration_status(self):
         """Keep a paid waiting-list confirmation on "wait" until it is paid.
@@ -57,46 +43,46 @@ class EventRegistration(models.Model):
         unconfirmed order - correct for an ordinary cart signup, but wrong
         here: it should keep showing "wait" until actually paid.
         """
-        super()._compute_registration_status()
+        res = super()._compute_registration_status()
         for registration in self.filtered("confirmed_from_waiting_list"):
             if registration.sale_order_id.state == "sale":
                 registration.state = "open"
             elif registration.sale_order_id.state != "cancel":
                 registration.state = "wait"
+        return res
 
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-    @api.model_create_multi
-    def create(self, vals_list):
+    def _route_overflow_to_waiting_list(self, vals_list):
         """Never let a waiting-list registration end up linked to a cart.
 
         ``website_event_sale``'s controller stamps ``sale_order_id``/
         ``sale_order_line_id`` into ``vals`` before the registration is
         created, with no way yet to know it is about to be routed to the
         waiting list instead - even a free ticket can get linked this way
-        if the visitor has a leftover cart open. Reusing
-        :meth:`_check_waiting_list` here keeps this decision consistent
-        regardless of which ``create()`` override runs first.
+        if the visitor has a leftover cart open. The links are cleared right
+        after the routing has decided, so no other ``create()`` override can
+        decide differently.
         """
+        res = super()._route_overflow_to_waiting_list(vals_list)
         for vals in vals_list:
-            if self._check_waiting_list(vals):
+            if vals.get("state") == "wait":
                 vals["sale_order_id"] = False
                 vals["sale_order_line_id"] = False
-        return super().create(vals_list)
+        return res
 
-    # 7. Action methods
     def action_cancel(self):
         """Send a paid waiting-list registration back to the waiting list.
 
-        ``website_event_sale`` calls this on a cart quantity decrease
-        (see ``SaleOrder._cart_update_order_line``). Correct as
-        "cancelled" for an ordinary registration, but a seat claimed from
-        the waiting list was never really taken - send it back instead of
-        losing the visitor's place in line.
+        Only when the ticket leaves the cart: ``website_event_sale`` cancels the
+        registrations of a cart line whose quantity decreases (see
+        ``SaleOrder._cart_update_order_line``). Correct as "cancelled" for an
+        ordinary registration, but a seat claimed from the waiting list was
+        never really taken - send it back instead of losing the visitor's place
+        in line. Any other cancelling really cancels.
         """
+        if not self.env.context.get("waiting_list_cart_update"):
+            return super().action_cancel()
         confirmed_waiting = self.filtered("confirmed_from_waiting_list")
-        super(EventRegistration, self - confirmed_waiting).action_cancel()
+        res = super(EventRegistration, self - confirmed_waiting).action_cancel()
         confirmed_waiting.write(
             {
                 "state": "wait",
@@ -105,5 +91,25 @@ class EventRegistration(models.Model):
                 "confirmed_from_waiting_list": False,
             }
         )
+        return res
 
-    # 8. Business methods
+    def action_waiting_cancel(self):
+        """The attendee leaves the waiting list: the ticket leaves the cart too."""
+        in_cart = self.filtered("confirmed_from_waiting_list")
+        lines_in_cart = [
+            (registration.sale_order_id, registration.sale_order_line_id)
+            for registration in in_cart
+            if registration.sale_order_id.state == "draft"
+        ]
+        in_cart.write(
+            {
+                "sale_order_id": False,
+                "sale_order_line_id": False,
+                "confirmed_from_waiting_list": False,
+            }
+        )
+        res = super().action_waiting_cancel()
+        # The links are cleared first, so the cart does not cancel the registration
+        for order, line in lines_in_cart:
+            order._cart_update_line_quantity(line.id, line.product_uom_qty - 1)
+        return res

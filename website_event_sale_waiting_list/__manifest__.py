@@ -21,7 +21,7 @@
 {
     "name": "Website Event Sale Waiting List",
     "summary": "Bridges the waiting list to paid tickets sold through the webshop.",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -17,37 +17,35 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
-# 2. Known third party imports:
-# 3. Odoo imports (openerp):
 from odoo import models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class SaleOrder(models.Model):
-    # 1. Private attributes
     _inherit = "sale.order"
 
-    # 8. Business methods
+    def _cart_update_order_line(self, order_line, quantity, **kwargs):
+        """Mark the cart changes, so a confirmation that the cart drops goes back
+        to the waiting list (see ``EventRegistration.action_cancel``)."""
+        return super(
+            SaleOrder, self.with_context(waiting_list_cart_update=True)
+        )._cart_update_order_line(order_line, quantity, **kwargs)
+
     def _action_cancel(self):
         """Send paid waiting-list confirmations back to the waiting list.
 
         Core's own compute marks every registration on a cancelled order
         as "cancelled" - correct for an ordinary purchase, but a seat
         claimed from the waiting list was never really taken, so it goes
-        back to "wait" instead, with the order link cleared.
+        back to "wait" instead, with the order link cleared. The seats of the
+        other registrations are freed, so the waiting list is told.
         """
-        waiting_registrations = self.env["event.registration"].search(
-            [
-                ("sale_order_id", "in", self.ids),
-                ("confirmed_from_waiting_list", "=", True),
-            ]
+        # sudo: whoever cancels an order (a salesman) may not see registrations
+        registrations = (
+            self.env["event.registration"]
+            .sudo()
+            .search([("sale_order_id", "in", self.ids)])
         )
+        waiting_registrations = registrations.filtered("confirmed_from_waiting_list")
         res = super()._action_cancel()
         waiting_registrations.write(
             {
@@ -57,4 +55,6 @@ class SaleOrder(models.Model):
                 "confirmed_from_waiting_list": False,
             }
         )
+        # The cancelled state is computed by core, which does not write it
+        registrations.event_id._trigger_mail_scheduler_cron()
         return res

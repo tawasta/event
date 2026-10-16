@@ -17,28 +17,21 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
 import uuid
+from collections import defaultdict
 
-# 2. Known third party imports:
 from werkzeug.urls import url_join
 
-# 3. Odoo imports (openerp):
-from odoo import api, fields, models
+from odoo import SUPERUSER_ID, api, fields, models, tools
 from odoo.exceptions import ValidationError
 
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
+# States that take a seat, like in core
+SEAT_TAKING_STATES = ("open", "done")
 
 
 class EventRegistration(models.Model):
-    # 1. Private attributes
     _inherit = "event.registration"
 
-    # 2. Fields declaration
     waiting_list = fields.Boolean(related="event_id.waiting_list", store=True)
     waiting_list_to_confirm = fields.Boolean(
         string="Available to confirm from waiting list",
@@ -46,10 +39,13 @@ class EventRegistration(models.Model):
         compute_sudo=True,
         compute="_compute_waiting_list_to_confirm",
     )
-    state = fields.Selection(selection_add=[("wait", "Waiting")])
+    state = fields.Selection(
+        selection_add=[("wait", "Waiting")], ondelete={"wait": "set draft"}
+    )
     waiting_list_access_token = fields.Char(
         readonly=True,
         copy=False,
+        index=True,
         default=lambda self: str(uuid.uuid4()),
         help="Secret token identifying this registration in the public "
         "waiting-list confirm/cancel link, so that link works without the "
@@ -61,9 +57,24 @@ class EventRegistration(models.Model):
         compute="_compute_waiting_list_manage_url",
     )
 
-    # 3. Default methods
+    def _auto_init(self):
+        """Give every registration its own token.
 
-    # 4. Compute and search fields, in the same order that fields declaration
+        The ORM fills a newly created column with one default value evaluated
+        once, so on a database that already has registrations they would all
+        share the same token and each link would open every registration.
+        """
+        new_column = not tools.sql.column_exists(
+            self.env.cr, self._table, "waiting_list_access_token"
+        )
+        res = super()._auto_init()
+        if new_column:
+            self.env.cr.execute(
+                "UPDATE event_registration "
+                "SET waiting_list_access_token = gen_random_uuid()::text"
+            )
+        return res
+
     @api.depends("event_id", "waiting_list_access_token")
     def _compute_waiting_list_manage_url(self):
         for registration in self:
@@ -76,89 +87,148 @@ class EventRegistration(models.Model):
     @api.depends(
         "state",
         "waiting_list",
+        "event_slot_id",
+        "event_ticket_id",
         "event_id.seats_available",
         "event_id.seats_limited",
         "event_id.seats_max",
+        "event_id.kanban_state",
+        "event_id.stage_id.pipe_end",
+        "event_id.date_end",
+        "event_slot_id.seats_available",
+        "event_slot_id.end_datetime",
         "event_ticket_id.seats_available",
-        "event_ticket_id.seats_limited",
         "event_ticket_id.seats_max",
     )
     def _compute_waiting_list_to_confirm(self):
         """Whether this waiting registration can now be confirmed.
 
-        True when both the event and (if used) the ticket have either no
-        seat limit, or a limit with at least one seat still available.
+        True when the seats of its event (or slot) and ticket have no limit or a
+        place left, and the event or slot is not cancelled or over. Core answers
+        the limit question, so every way of limiting seats is covered.
         """
-        for registration in self:
-            event = registration.event_id
-            ticket = registration.event_ticket_id
-            event_ok = (
-                not event.seats_limited
-                or not event.seats_max
-                or (event.seats_available > 0)
+        self.waiting_list_to_confirm = False
+        now = fields.Datetime.now()
+        waiting = self.filtered(lambda r: r.state == "wait" and r.waiting_list)
+        for event, registrations in waiting.grouped("event_id").items():
+            if event._is_over():
+                continue
+            slot_tickets = list(
+                {(r.event_slot_id, r.event_ticket_id) for r in registrations}
             )
-            ticket_ok = (
-                not ticket
-                or not ticket.seats_limited
-                or not ticket.seats_max
-                or (ticket.seats_available > 0)
+            seats = dict(
+                zip(
+                    slot_tickets,
+                    event._get_seats_availability(slot_tickets),
+                    strict=True,
+                )
             )
-            registration.waiting_list_to_confirm = bool(
-                registration.waiting_list
-                and registration.state == "wait"
-                and event_ok
-                and ticket_ok
-            )
+            for registration in registrations:
+                slot = registration.event_slot_id
+                available = seats[(slot, registration.event_ticket_id)]
+                registration.waiting_list_to_confirm = (
+                    not slot or slot.end_datetime >= now
+                ) and (available is None or available > 0)
 
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
     @api.model_create_multi
     def create(self, vals_list):
-        """Route sold-out registrations straight into the waiting list.
+        """Route the registrations that do not fit in the seats to the waiting list.
 
-        ``state`` is set to ``"wait"`` directly in ``vals``, before
-        ``super().create()`` runs, not through a follow-up :meth:`write` -
-        core's own ``create()`` already sends the normal "you're
-        registered" mail to any ``open``-state registration (the default)
-        as part of that same call, so setting ``wait`` afterwards would be
-        too late to stop it.
-
-        Evaluated per record: a single sold-out ticket must not push
-        registrations for other, still-available tickets to wait too.
+        ``state`` is set to ``"wait"`` in ``vals``, before ``super().create()``:
+        core's own ``create()`` already mails the normal "you're registered" to
+        any ``open`` registration, so moving it to ``wait`` afterwards is too late.
         """
-        for vals in vals_list:
-            if self._check_waiting_list(vals):
-                vals["state"] = "wait"
+        self._route_overflow_to_waiting_list(vals_list)
         registrations = super().create(vals_list)
         registrations.filtered(lambda r: r.state == "wait")._trigger_after_wait_mail()
         return registrations
 
     def write(self, vals):
-        """Trigger the "after_wait" mail right after joining the waitlist.
+        """Mail the registrations moved to the waiting list afterwards.
 
-        Only for an existing registration moved to ``wait`` afterwards
-        (e.g. the "Move to Waiting List" backend action) - one created
-        straight into ``wait`` is already handled by :meth:`create`.
+        One created straight into ``wait`` is handled by :meth:`create`. A seat
+        may open up when the state or the archiving changes.
         """
         res = super().write(vals)
         if vals.get("state") == "wait":
             self._trigger_after_wait_mail()
+        if vals.keys() & {"state", "active"}:
+            self.event_id._trigger_mail_scheduler_cron()
         return res
 
-    # 7. Action methods
+    def unlink(self):
+        events = self.event_id
+        res = super().unlink()
+        events._trigger_mail_scheduler_cron()
+        return res
+
+    def _route_overflow_to_waiting_list(self, vals_list):
+        """Set ``state`` to ``wait`` for the registrations that find no seat.
+
+        A batch is placed in the given order, so the first ones get the free seats
+        and the rest wait. A seat has to be free in the event (or the slot) and in
+        the ticket. Core answers whether it is (``_verify_seats_availability``),
+        so every way of limiting seats is covered, and its check of the created
+        registrations stays as a second guard.
+        """
+        # No state means the default one (open), or one computed from the order
+        # (event_sale has no default), and both take a seat when confirmed
+        seat_takers = [
+            vals
+            for vals in vals_list
+            if vals.get("event_id")
+            and vals.get("active", True)
+            and vals.get("state", "open") in SEAT_TAKING_STATES
+        ]
+        events = (
+            self.env["event.event"]
+            .browse({vals["event_id"] for vals in seat_takers})
+            .filtered("waiting_list")
+        )
+        events._lock_for_registration_changes()
+        taken = defaultdict(int)
+        for vals in seat_takers:
+            if vals["event_id"] not in events.ids:
+                continue
+            event = events.browse(vals["event_id"])
+            slot = self.env["event.slot"].browse(vals.get("event_slot_id"))
+            ticket = self.env["event.event.ticket"].browse(vals.get("event_ticket_id"))
+            keys = (event.id, slot.id), (event.id, slot.id, ticket.id)
+            # A registration done already has its seat, but the others count on it
+            if vals.get("state") != "done" and not self._has_free_seat(
+                event, slot, ticket, taken[keys[0]] + 1, taken[keys[1]] + 1
+            ):
+                vals["state"] = "wait"
+                continue
+            for key in keys:
+                taken[key] += 1
+
+    def _has_free_seat(self, event, slot, ticket, event_count, ticket_count):
+        """Whether the event (or slot) and the ticket have seats for these counts."""
+        try:
+            event._verify_seats_availability(
+                [
+                    (slot, self.env["event.event.ticket"], event_count),
+                    (slot, ticket, ticket_count),
+                ]
+            )
+        except ValidationError:
+            return False
+        return True
+
     def action_waiting(self):
-        if not self.event_id.waiting_list:
+        if not all(self.event_id.mapped("waiting_list")):
             raise ValidationError(
                 self.env._("Waiting list for this event is not enabled.")
             )
         self.write({"state": "wait"})
 
     def action_waiting_confirm(self):
-        """Confirm a waiting registration once a seat has actually opened up."""
-        for registration in self:
-            if registration.state != "wait":
-                continue
+        """Confirm waiting registrations once a seat has actually opened up."""
+        to_confirm = self.filtered(lambda r: r.state == "wait")
+        to_confirm.event_id._lock_for_registration_changes()
+        to_confirm.invalidate_recordset(["waiting_list_to_confirm"])
+        for registration in to_confirm:
             if not registration.waiting_list_to_confirm:
                 raise ValidationError(
                     self.env._(
@@ -167,57 +237,29 @@ class EventRegistration(models.Model):
                 )
             registration.action_confirm()
 
-    def _check_waiting_list(self, vals):
-        """Whether a registration being created with ``vals`` must wait.
+    def action_waiting_cancel(self):
+        """The attendee leaves the waiting list."""
+        return self.action_cancel()
 
-        Must wait if *either* the event's own capacity or the selected
-        ticket's capacity is exhausted, not only when both are - the event
-        cap is a hard ceiling regardless of a ticket's own limit. Mirrors
-        :meth:`_compute_waiting_list_to_confirm`, inverted, evaluated from
-        raw ``vals`` since the registration does not exist yet.
+    def action_confirm(self):
+        """Start the "after subscription" mails of the ones leaving the waiting list.
 
-        :param dict vals: values passed to :meth:`create` for one registration
-        :rtype: bool
+        Core does it only for registrations coming from draft or cancelled.
         """
-        if not vals.get("event_id"):
-            return False
+        waiting = self.filtered(lambda r: r.state == "wait")
+        res = super().action_confirm()
+        waiting._update_mail_schedulers()
+        return res
 
-        event = self.env["event.event"].browse(vals["event_id"])
-        if not event.waiting_list:
-            return False
-
-        ticket_id = vals.get("event_ticket_id")
-        ticket = (
-            self.env["event.event.ticket"].browse(ticket_id)
-            if ticket_id
-            else self.env["event.event.ticket"]
-        )
-        event_ok = (
-            not event.seats_limited
-            or not event.seats_max
-            or (event.seats_available > 0)
-        )
-        ticket_ok = (
-            not ticket
-            or not ticket.seats_limited
-            or not ticket.seats_max
-            or (ticket.seats_available > 0)
-        )
-        return not (event_ok and ticket_ok)
-
-    # 8. Business methods
     def _trigger_after_wait_mail(self):
-        """Send the "after_wait" mail scheduler(s) immediately to these registrations.
+        """Send the "after_wait" mail right away to these registrations.
 
-        Shared by :meth:`create` and :meth:`write`. Skipped per-record for
-        events in an end stage (``event.stage.pipe_end``), without cutting
-        the loop short for the rest of the batch.
+        Not for an event that is over or cancelled.
         """
-        for registration in self:
-            if registration.event_id.stage_id.pipe_end:
-                continue
-
-            schedulers = registration.event_id.event_mail_ids.filtered(
+        mailable = self.filtered(lambda r: not r.event_id._is_over())
+        for event, registrations in mailable.grouped("event_id").items():
+            schedulers = event.event_mail_ids.filtered(
                 lambda s: s.interval_type == "after_wait"
             )
-            schedulers.sudo()._trigger_immediate_mail(registration)
+            # Like core runs the schedulers: the visitor who joins cannot read them
+            schedulers.with_user(SUPERUSER_ID)._trigger_immediate_mail(registrations)

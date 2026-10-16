@@ -24,7 +24,7 @@
         <button
           name="%(event.act_event_registration_from_event)d"
           type="action"
-          context="{'search_default_waiting': True}"
+          context="{'search_default_waiting': True, 'search_default_taken': False}"
           class="oe_stat_button"
           icon="fa-clock-o"
           invisible="not waiting_list"
@@ -33,13 +33,18 @@
           <field name="seats_waiting" widget="statinfo" string="Waiting" />
         </button>
       </div>
-      <field name="badge_format" position="before">
-        <field
-          name="waiting_list"
-          widget="boolean_toggle"
-          invisible="not seats_limited"
+      <xpath
+        expr="//group[@name='right_event_details']//field[@name='seats_limited']/parent::div"
+        position="after"
+      >
+        <label
+          for="waiting_list"
+          invisible="not seats_limited and not event_ticket_ids"
         />
-      </field>
+        <div invisible="not seats_limited and not event_ticket_ids">
+          <field name="waiting_list" />
+        </div>
+      </xpath>
     </field>
   </record>
   <record id="view_event_tree_waiting_list" model="ir.ui.view">
@@ -98,11 +103,6 @@
           type="object"
         />
       </button>
-      <button name="action_cancel" position="attributes">
-        <attribute
-          name="invisible"
-        >not active or state not in ['draft', 'open', 'wait']</attribute>
-      </button>
       <button name="action_confirm" position="attributes">
         <attribute
           name="invisible"
@@ -144,9 +144,9 @@
     <field name="model">event.registration</field>
     <field name="inherit_id" ref="event.event_registration_view_kanban" />
     <field name="arch" type="xml">
-      <field name="state" position="attributes">
+      <xpath expr="//t[@t-name='card']//field[@name='state']" position="attributes">
         <attribute name="decoration-warning">state == 'wait'</attribute>
-      </field>
+      </xpath>
     </field>
   </record>
   <record id="view_registration_search_waiting_list" model="ir.ui.view">

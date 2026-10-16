@@ -17,45 +17,18 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
-# 2. Known third party imports:
-# 3. Odoo imports (openerp):
 from odoo import fields, models
 
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
+from .event_mail import (
+    WAITING_LIST_INTERVAL_ONDELETE,
+    WAITING_LIST_INTERVAL_SELECTION,
+)
 
 
 class EventTypeMail(models.Model):
-    """Template of event.mail to attach to event.type. Those will be copied
-    upon all events created in that type to ease event creation."""
-
-    # 1. Private attributes
     _inherit = "event.type.mail"
 
-    # 2. Fields declaration
     interval_type = fields.Selection(
-        selection_add=[
-            ("after_wait", "After registering to waiting list"),
-            (
-                "after_seats_available",
-                "After more seats are available send to waiting list registrations",
-            ),
-        ],
-        ondelete={"after_wait": "cascade", "after_seats_available": "cascade"},
+        selection_add=WAITING_LIST_INTERVAL_SELECTION,
+        ondelete=WAITING_LIST_INTERVAL_ONDELETE,
     )
-
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods

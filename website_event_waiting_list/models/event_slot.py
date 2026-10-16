@@ -17,14 +17,23 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
+from datetime import datetime
+
+from odoo import models
 
 
-def post_init_hook(env):
-    """Backfill missing waiting-list mail schedulers on install/upgrade.
+class EventSlot(models.Model):
+    _inherit = "event.slot"
 
-    ``EventEvent.create``/``write`` only guarantee this going forward - an
-    event that had ``waiting_list`` enabled before needs the same backfill
-    run once here.
-    """
-    events = env["event.event"].search([("waiting_list", "=", True)])
-    events._ensure_waiting_list_mail_schedulers()
+    def _filter_open_slots(self):
+        """Offer the full slots too when the event has a waiting list.
+
+        Core lists only the slots that still have seats, so a visitor could
+        never join the waiting list of a full slot.
+        """
+        open_slots = super()._filter_open_slots()
+        waiting_slots = self.filtered(
+            lambda slot: slot.event_id.waiting_list
+            and slot.start_datetime > datetime.now()
+        )
+        return (open_slots | waiting_slots).sorted()

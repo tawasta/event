@@ -17,30 +17,18 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
-# 2. Known third party imports:
-# 3. Odoo imports (openerp):
 from odoo import fields, models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class EventType(models.Model):
-    # 1. Private attributes
     _inherit = "event.type"
 
-    # 2. Fields declaration
     waiting_list = fields.Boolean(
         string="Enable Waiting List",
         help="Enable waiting list when attendee limit is reached.",
         default=True,
     )
 
-    # 3. Default methods
     def _default_event_mail_type_ids_with_waiting_list(self):
         """Extend core's own event-type mail-schedule defaults.
 
@@ -50,6 +38,7 @@ class EventType(models.Model):
         ``self`` instead. Wrapped in ``lambda self: ...`` there for the
         same reason, so a further module can still override this one too.
         """
+        templates = self.env["event.mail"]._get_waiting_list_templates()
         return self._default_event_mail_type_ids() + [
             (
                 0,
@@ -57,27 +46,11 @@ class EventType(models.Model):
                 {
                     "interval_nbr": 0,
                     "interval_unit": "now",
-                    "interval_type": "after_wait",
-                    "template_ref": "mail.template,{}".format(
-                        self.env.ref("website_event_waiting_list.event_waiting").id
-                    ),
+                    "interval_type": interval_type,
+                    "template_ref": f"mail.template,{template.id}",
                 },
-            ),
-            (
-                0,
-                0,
-                {
-                    "interval_nbr": 0,
-                    "interval_unit": "now",
-                    "interval_type": "after_seats_available",
-                    "template_ref": "mail.template,{}".format(
-                        self.env.ref(
-                            "website_event_waiting_list."
-                            "event_confirm_waiting_registration"
-                        ).id
-                    ),
-                },
-            ),
+            )
+            for interval_type, template in templates.items()
         ]
 
     event_type_mail_ids = fields.One2many(
@@ -86,13 +59,3 @@ class EventType(models.Model):
         string="Mail Schedule",
         default=lambda self: self._default_event_mail_type_ids_with_waiting_list(),
     )
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
-
-    # 8. Business methods

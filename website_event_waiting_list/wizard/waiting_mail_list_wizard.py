@@ -17,67 +17,57 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-# 1. Standard library imports:
-# 2. Known third party imports:
-# 3. Odoo imports (openerp):
 from odoo import fields, models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class WaitingMailListWizard(models.TransientModel):
-    # 1. Private attributes
     _name = "website.event.waiting.mail.list.wizard"
     _description = "Mail confirmation email to waiting list contacts"
 
-    # 2. Fields declaration
     registration_ids = fields.Many2many(
         "event.registration",
-        default=lambda self: self.env["event.registration"].browse(
-            self._context.get("active_ids")
-        ),
+        default=lambda self: self._default_registration_ids(),
         string="Registrations",
     )
 
-    # 3. Default methods
+    def _default_registration_ids(self):
+        context = self.env.context
+        if context.get("active_model") != "event.registration":
+            return self.env["event.registration"]
+        return self.env["event.registration"].browse(context.get("active_ids"))
 
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
     def send_confirmation_mail(self):
         self.ensure_one()
-        msg_template = self.env.ref(
+        template = self.env.ref(
             "website_event_waiting_list.event_confirm_waiting_registration"
         )
-        registrations_sent = self.registration_ids.filtered(
+        sent = self.registration_ids.filtered(
             lambda registration: registration.email
             and registration.waiting_list_to_confirm
         )
-        for registration in registrations_sent:
-            msg_template.sudo().send_mail(registration.id, force_send=True)
-
+        for registration in sent:
+            template.sudo().send_mail(registration.id, force_send=True)
+        self._mark_notified(sent)
         message = self.env["website.event.waiting.mail.list.message"].create(
             {
                 "message": self.env._(
                     "Waiting list confirmation mail sent to following registrations:"
                 ),
-                "registration_ids": registrations_sent.ids,
+                "registration_ids": sent.ids,
             }
         )
         return {
             "type": "ir.actions.act_window",
-            "res_model": "website.event.waiting.mail.list.message",
+            "res_model": message._name,
             "view_mode": "form",
             "res_id": message.id,
             "target": "new",
         }
 
-    # 8. Business methods
+    def _mark_notified(self, registrations):
+        """Record the mails as sent, so the automatic "seats available" mail does
+        not send the same mail again to the same registrations."""
+        for event, event_registrations in registrations.grouped("event_id").items():
+            event.sudo().event_mail_ids.filtered(
+                lambda scheduler: scheduler.interval_type == "after_seats_available"
+            )._mark_mail_sent(event_registrations)
