@@ -4,28 +4,28 @@
   <template id="email_template_subscription_with_cancel">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
     <t
       t-call="website_event_cancellation.view_email_template_subscription_with_cancel"
-      t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
   </template>
   <!-- Call view using container to set t-lang, otherwise translation doesn't work -->
   <template id="email_template_reminder_with_cancel">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
     <t
       t-call="website_event_cancellation.view_email_template_reminder_with_cancel"
-      t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
   </template>
   <template id="view_email_template_event_base">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
     <t t-set="details" t-value="" />
 
@@ -33,8 +33,8 @@
       t-set="email_secondary_color"
       t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
     />
-    <body>
-      <html>
+    <html>
+      <body>
         <table
           border="0"
           cellpadding="0"
@@ -103,7 +103,7 @@
                     </td>
                   </tr>
                   <!-- CONTENT BODY-->
-                  <t t-raw="0" />
+                  <t t-out="0" />
                 </tbody>
               </table>
             </td>
@@ -143,21 +143,20 @@
             </td>
           </tr>
         </table>
-      </html>
-    </body>
+      </body>
+    </html>
   </template>
   <template id="view_email_template_event_cancellation">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
     <t
       t-set="email_secondary_color"
       t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
     />
-    <div t-if="object.event_id.has_cancel and object.event_id.able_to_cancel">
+    <div t-if="object.able_to_cancel">
       <t t-esc="link_message" />
-      <a t-att-href="object.manage_url" />
       <br />
       <div style="margin: 16px 0px 16px 0px;">
         <a
@@ -190,7 +189,7 @@
                 <tr>
                   <td style="vertical-align:top;">
                     <img
-                      src="/web_editor/font_to_img/61555/rgb(81,81,102)/34"
+                      src="/mail/font_to_img/61555/rgb(81,81,102)/34"
                       style="padding:4px;max-width:inherit;"
                       height="34"
                       alt=""
@@ -201,17 +200,23 @@
                   >
                     <div>
                       <strong>From</strong>
-                      <t t-esc="object.event_id.date_begin_located" />
+                      <t
+                        t-out="object.event_begin_date"
+                        t-options="{'widget': 'datetime', 'tz_name': object.event_id.date_tz}"
+                      />
                     </div>
                     <div>
                       <strong>To</strong>
-                      <t t-esc="object.event_id.date_end_located" />
+                      <t
+                        t-out="object.event_end_date"
+                        t-options="{'widget': 'datetime', 'tz_name': object.event_id.date_tz}"
+                      />
                     </div>
                   </td>
                   <td style="vertical-align:top;">
                     <t t-if="object.event_id.address_id">
                       <img
-                        src="/web_editor/font_to_img/61505/rgb(81,81,102)/34"
+                        src="/mail/font_to_img/61505/rgb(81,81,102)/34"
                         style="padding:4px;max-width:inherit;"
                         height="34"
                         alt=""
@@ -338,7 +343,7 @@
   <template id="view_email_template_event_calendar">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
 
     <t
@@ -346,34 +351,42 @@
       t-value="object.event_id.company_id and object.event_id.company_id.email_secondary_color or '#875A7B'"
     />
 
+    <t
+      t-set="calendar_date_begin"
+      t-value="format_datetime(object.event_begin_date, tz='UTC', dt_format=&quot;yyyyMMdd'T'HHmmss'Z'&quot;)"
+    />
+    <t
+      t-set="calendar_date_end"
+      t-value="format_datetime(object.event_end_date, tz='UTC', dt_format=&quot;yyyyMMdd'T'HHmmss'Z'&quot;)"
+    />
     <div>
       <br />
       <strong>Add this event to your calendar</strong>
       <a
-        t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=#{object.event_id.name}&amp;dates=#{object.event_id.date_begin_calendar_utc}/#{object.event_id.date_end_calendar_utc}&amp;location=#{location}&amp;details=#{details}"
+        t-attf-href="https://www.google.com/calendar/render?action=TEMPLATE&amp;text=#{object.event_id.name}&amp;dates=#{calendar_date_begin}/#{calendar_date_end}&amp;location=#{location}&amp;details=#{details}"
         t-attf-style="padding:3px 5px;border:1px solid #{email_secondary_color}; background-color:#{email_secondary_color}; color: #FFFFFF; text-decoration:none;border-radius:3px;"
         target="new"
       ><img
-        src="/web_editor/font_to_img/61525/rgb(255,255,255)/16"
+        src="/mail/font_to_img/61525/rgb(255,255,255)/16"
         style="vertical-align:middle;"
         height="16"
         alt=""
       /> Google</a>
       <a
-        t-attf-href="/event/#{slug(object.event_id)}/ics"
+        t-attf-href="/event/#{slug(object.event_id)}/ics#{object.event_slot_id and '?slot_id=%s' % object.event_slot_id.id or ''}"
         t-attf-style="padding:3px 5px;border:1px solid #{email_secondary_color}; background-color:#{email_secondary_color}; color: #FFFFFF; text-decoration:none;border-radius:3px;"
       ><img
-        src="/web_editor/font_to_img/61525/rgb(255,255,255)/16"
+        src="/mail/font_to_img/61525/rgb(255,255,255)/16"
         style="vertical-align:middle;"
         height="16"
         alt=""
       /> iCal/Outlook</a>
       <a
-        t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title=#{object.event_id.name}&amp;in_loc=#{location}&amp;st=#{object.event_id.date_begin_calendar_locale}&amp;et=#{object.event_id.date_end_calendar_locale}&amp;desc=#{details}"
+        t-attf-href="https://calendar.yahoo.com/?v=60&amp;view=d&amp;type=20&amp;title=#{object.event_id.name}&amp;in_loc=#{location}&amp;st=#{calendar_date_begin}&amp;et=#{calendar_date_end}&amp;desc=#{details}"
         t-attf-style="padding:3px 5px;border:1px solid #{email_secondary_color}; background-color:#{email_secondary_color}; color: #FFFFFF; text-decoration:none;border-radius:3px;"
         target="new"
       ><img
-        src="/web_editor/font_to_img/61525/rgb(255,255,255)/16"
+        src="/mail/font_to_img/61525/rgb(255,255,255)/16"
         style="vertical-align:middle;"
         height="16"
         alt=""
@@ -386,7 +399,7 @@
   <template id="view_email_template_subscription_with_cancel">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
 
     <t
@@ -396,7 +409,7 @@
 
     <t
       t-call="website_event_cancellation.view_email_template_event_base"
-      t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     >
       <!-- Complete location information depending on available information -->
       <t t-if="object.event_id.address_id">
@@ -408,7 +421,7 @@
       <t t-if="object.event_id.address_id.street2">
         <t
           t-set="location"
-          t-value="'%s, %s' % (location, object.event_id.address_id.street)"
+          t-value="'%s, %s' % (location, object.event_id.address_id.street2)"
         />
       </t>
       <t t-if="object.event_id.address_id.city">
@@ -465,7 +478,7 @@
                 </div>
                 <t
                   t-call="website_event_cancellation.view_email_template_event_cancellation"
-                  t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+                  t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
                 >
                   <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
@@ -474,7 +487,7 @@
                 </t>
                 <t
                   t-call="website_event_cancellation.view_email_template_event_calendar"
-                  t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+                  t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
                 />
                 <div>
                                     See you soon,<br />
@@ -507,14 +520,14 @@
       <!-- DETAILS -->
       <t
         t-call="website_event_cancellation.view_email_template_event_details"
-        t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+        t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
       />
     </t>
   </template>
   <template id="view_email_template_reminder_with_cancel">
     <t
       t-set="lang"
-      t-value="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-value="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     />
 
     <t
@@ -524,7 +537,7 @@
 
     <t
       t-call="website_event_cancellation.view_email_template_event_base"
-      t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+      t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
     >
       <!-- Complete location information depending on available information -->
       <t t-if="object.event_id.address_id">
@@ -536,7 +549,7 @@
       <t t-if="object.event_id.address_id.street2">
         <t
           t-set="location"
-          t-value="'%s, %s' % (location, object.event_id.address_id.street)"
+          t-value="'%s, %s' % (location, object.event_id.address_id.street2)"
         />
       </t>
       <t t-if="object.event_id.address_id.city">
@@ -586,12 +599,12 @@
                   </strong>
                 </t>
                                         is starting <strong>
-                  <t t-esc="object.get_date_range_str()" />
+                  <t t-out="object.event_date_range" />
                 </strong>.
                                 </div>
                 <t
                   t-call="website_event_cancellation.view_email_template_event_cancellation"
-                  t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+                  t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
                 >
                   <t t-set="link_message">
                                         If you wish to cancel your registration, follow the link below:
@@ -600,7 +613,7 @@
                 </t>
                 <t
                   t-call="website_event_cancellation.view_email_template_event_calendar"
-                  t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+                  t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
                 />
                 <div>
                                     See you soon,<br />
@@ -633,7 +646,7 @@
       <!-- DETAILS -->
       <t
         t-call="website_event_cancellation.view_email_template_event_details"
-        t-lang="object.partner_id.lang or object.visitor_id.lang_id.code"
+        t-lang="object.event_id.lang or object.partner_id.lang or object.visitor_id.lang_id.code"
       />
     </t>
   </template>

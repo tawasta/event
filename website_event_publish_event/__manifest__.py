@@ -21,7 +21,7 @@
 {
     "name": "Website Event Publish Event",
     "summary": "Add website_published fields to event form and a publish wizard.",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -18,15 +18,25 @@
 #
 ##############################################################################
 
-from odoo import fields, models
-
-
-class EventStage(models.Model):
-    _inherit = "event.stage"
-
-    cancel = fields.Boolean(
-        string="Cancel Stage",
-        default=False,
-        help="Events moved into this stage will disable registrations, "
-        "automated emails and add an event canceled sign on website.",
-    )
+{
+    "name": "Event Privacy",
+    "summary": "Collect privacy consents when registering for an event",
+    "version": "19.0.1.0.0",
+    "category": "Events",
+    "website": "https://github.com/tawasta/event",
+    "author": "Futural",
+    "license": "AGPL-3",
+    "application": False,
+    "installable": True,
+    "depends": [
+        "web",
+        "website_event",
+        "privacy",
+        "privacy_consent",
+    ],
+    "data": [
+        "views/event_views.xml",
+        "views/privacy_activity_views.xml",
+        "views/event_registration_attendee_details_template.xml",
+    ],
+}
