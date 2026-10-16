@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- The register button leads to the link, and the ones of Odoo are hidden.
+       The conditions are added to the existing ones instead of replacing them,
+       so the other modules that change the same buttons keep working. -->
+  <template
+    id="registration_template_register_elsewhere"
+    inherit_id="website_event.registration_template"
+    name="Registration"
+  >
+    <xpath expr="//a[contains(@t-att-href, '/register')]" position="before">
+      <a
+        t-if="event.registration_elsewhere and event.registration_link and event.event_registrations_open"
+        t-att-href="event.registration_link"
+        target="_blank"
+        rel="noopener"
+        t-attf-class="btn btn-primary {{cta_additional_classes}}"
+      >
+        Register <i class="fa fa-external-link ms-1" aria-hidden="true" />
+      </a>
+    </xpath>
+    <xpath expr="//a[contains(@t-att-href, '/register')]" position="attributes">
+      <attribute name="t-if" separator=" and " add="not event.registration_elsewhere" />
+    </xpath>
+    <xpath expr="//button[@data-bs-toggle='modal']" position="attributes">
+      <attribute
+        name="t-elif"
+        separator=" and "
+        add="not event.registration_elsewhere"
+      />
+    </xpath>
+  </template>
+  <!-- The seats of Odoo mean nothing when the registration is made elsewhere -->
+  <template
+    id="opt_event_seat_block_register_elsewhere"
+    inherit_id="website_event_frontend_customization.opt_event_seat_block"
+    name="Hide the seats when registering elsewhere"
+  >
+    <xpath expr="//div[@t-if='opt_event_seat_block']" position="attributes">
+      <attribute name="t-if" separator=" and " add="not event.registration_elsewhere" />
+    </xpath>
+  </template>
+</odoo>
