@@ -2,171 +2,228 @@
 <odoo>
   <!-- Cancel registration views -->
   <template id="cancel_registration" name="Cancel Registration">
+    <!-- The registration comes from sudo, so the address and the organizer are
+         readable although the visitor is public: the secret token gave access -->
+    <t t-set="address" t-value="registration.event_id.address_id" />
+    <t t-set="organizer" t-value="registration.event_id.organizer_id" />
+    <t
+      t-set="tone"
+      t-value="{'cancel': 'danger', 'open': 'success', 'done': 'success', 'draft': 'warning'}.get(registration.state, 'info')"
+    />
+    <t
+      t-set="date_options"
+      t-value="{'widget': 'datetime', 'tz_name': event.date_tz, 'date_only': True, 'format': 'medium'}"
+    />
+    <t
+      t-set="time_options"
+      t-value="{'widget': 'datetime', 'tz_name': event.date_tz, 'time_only': True, 'format': 'short'}"
+    />
     <t t-call="website_event.layout">
       <div class="container my-5 o_wereg_confirmed">
-        <div class="row mb-4">
-          <div name="title-div" class="col-12 text-center">
-            <t t-if="registration.state == 'cancel'">
-              <h3 class="text-danger">Your registration to <t
-                t-esc="event.name"
-              /> has been cancelled</h3>
-            </t>
-            <t t-elif="registration.state in ['open', 'done', 'draft']">
-              <h3>You are registered to <t t-esc="event.name" />.</h3>
-              <t t-if="event.able_to_cancel">
-                <p class="py-2">Cancel your registration here:</p>
-              </t>
-              <t t-else="">
-                <p class="py-2">Registration cannot be cancelled after <t
-                  t-esc="event.cancel_before_date"
-                  t-options="{'widget': 'datetime', 'format': 'short'}"
-                />.</p>
-              </t>
-            </t>
+        <div
+          t-if="event.kanban_state == 'cancel'"
+          class="alert alert-danger mb-4"
+          role="status"
+        >
+          <b>This event has been cancelled.</b>
+        </div>
+        <div class="row mb-5">
+          <div name="title-div" class="col-12">
+            <span t-attf-class="badge rounded-pill text-bg-#{tone} mb-3" role="status">
+              <t t-if="registration.state == 'cancel'">Cancelled</t>
+              <t t-elif="registration.state in ('open', 'done')">Registered</t>
+              <t t-elif="registration.state == 'draft'">Pending confirmation</t>
+              <t t-else="">Waiting list</t>
+            </span>
+            <h1 class="h3-fs mb-2">
+              <a
+                class="text-reset text-decoration-none"
+                t-out="event.name"
+                t-att-href="event.website_url"
+              />
+            </h1>
+            <p class="lead text-muted mb-0">
+              <t
+                t-if="registration.state == 'cancel'"
+              >Your registration has been cancelled.</t>
+              <t
+                t-elif="registration.state in ('open', 'done')"
+              >You are registered to this event.</t>
+              <t
+                t-elif="registration.state == 'draft'"
+              >Your registration is waiting for confirmation.</t>
+              <t t-else="">You are on the waiting list of this event.</t>
+            </p>
           </div>
         </div>
-        <div name="button-div" class="text-center mb-4">
-          <!-- Buttons trigger modals -->
-          <t t-if="registration.state != 'cancel' and event.able_to_cancel">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-toggle="modal"
-              data-bs-target="#cancel_modal"
-            ><i class="fa fa-fw fa-times-circle" /> Cancel registration
-                        </button>
-          </t>
-        </div>
-        <div class="row mb-4">
-          <div class="col-md-6 col-xs-12 mx-auto">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Attendee Information</h5>
-                <p class="card-text">
-                  <strong>Name: </strong>
-                  <t t-if="registration.name" t-esc="registration.name" />
-                  <t t-else="">N/A</t>
-                </p>
-                <p class="card-text">
-                  <strong>Email: </strong>
-                  <i class="fa fa-envelope mr-2" />
-                  <t t-if="registration.email" t-esc="registration.email" />
-                  <t t-else="">N/A</t>
-                </p>
-                <p class="card-text">
-                  <strong>Phone: </strong>
-                  <i class="fa fa-phone mr-2" />
-                  <t t-if="registration.phone" t-esc="registration.phone" />
-                  <t t-else="">N/A</t>
-                </p>
-                <p class="card-text"><strong>Ticket: </strong>
-                                    <i class="fa fa-ticket mr-2" />
-                                    <t
-                  t-if="registration.event_ticket_id"
-                  t-esc="registration.event_ticket_id.name"
+        <div class="row g-5">
+          <div id="event-information" class="col-12 col-lg-6">
+            <h2 class="h5 pb-2 mb-4 border-bottom">Event Details</h2>
+            <div class="d-flex gap-3 mb-3">
+              <i
+                class="fa fa-fw fa-lg fa-calendar text-primary mt-1"
+                aria-hidden="true"
+              />
+              <div>
+                <div class="small text-muted">Start</div>
+                <div class="fw-semibold">
+                  <t
+                  t-out="registration.event_begin_date"
+                  t-options="date_options"
+                />, <t t-out="registration.event_begin_date" t-options="time_options" />
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <i
+                class="fa fa-fw fa-lg fa-flag-checkered text-primary mt-1"
+                aria-hidden="true"
+              />
+              <div>
+                <div class="small text-muted">End</div>
+                <div class="fw-semibold">
+                  <t t-out="registration.event_end_date" t-options="date_options" />, <t
+                  t-out="registration.event_end_date"
+                  t-options="time_options"
                 />
-                                    <t t-else="">N/A</t>
-                                    (ref: <t t-esc="registration.id" />)
-                                </p>
+                </div>
               </div>
             </div>
+            <h5 class="mt-4">Location</h5>
+            <p id="location">
+              <t t-if="address">
+                <span class="d-block fw-semibold" t-out="address.name" />
+                <a
+                  class="d-block"
+                  t-att-href="event.google_map_link()"
+                  target="_blank"
+                  rel="noopener"
+                  t-out="event.address_inline"
+                />
+              </t>
+              <t t-else="">N/A</t>
+            </p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <h2 class="h5 pb-2 mb-4 border-bottom">Attendee Information</h2>
+            <dl class="row mb-0">
+              <dt class="col-sm-4 fw-normal text-muted">Name</dt>
+              <dd class="col-sm-8 text-break">
+                <t t-if="registration.name" t-out="registration.name" />
+                <t t-else="">N/A</t>
+              </dd>
+              <dt class="col-sm-4 fw-normal text-muted">Email</dt>
+              <dd class="col-sm-8 text-break">
+                <t t-if="registration.email" t-out="registration.email" />
+                <t t-else="">N/A</t>
+              </dd>
+              <dt class="col-sm-4 fw-normal text-muted">Phone</dt>
+              <dd class="col-sm-8 text-break">
+                <t t-if="registration.phone" t-out="registration.phone" />
+                <t t-else="">N/A</t>
+              </dd>
+              <dt class="col-sm-4 fw-normal text-muted">Ticket</dt>
+              <dd class="col-sm-8 mb-0">
+                <t t-if="ticket" t-out="ticket.name" />
+                <t t-else="">N/A</t>
+                <span class="text-muted">(ref: <t t-out="registration.id" />)</span>
+              </dd>
+            </dl>
           </div>
         </div>
-        <div class="row mb-4">
-          <div class="col-md-6 col-xs-12 mx-auto">
-            <div class="card">
-              <div id="event-information" class="card-body">
-                <h5 class="card-title">Event Information</h5>
-                <p class="card-text">
-                  <strong>Start: </strong>
-                  <span itemprop="startDate" t-esc="event.date_begin_located" />
-                </p>
-                <p class="card-text">
-                  <strong>End: </strong>
-                  <span itemprop="endDate" t-esc="event.date_end_located" />
-                </p>
-                <h5 class="mt-4">Location</h5>
-                <p id="location" class="card-text">
-                  <h5
-                    t-field="event.address_id"
-                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;]}"
-                  />
-                  <a
-                    itemprop="location"
-                    t-att-href="event.google_map_link()"
-                    target="_BLANK"
-                    t-field="event.address_id"
-                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}"
-                  />
-                  <h5
-                    t-field="event.address_id"
-                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;mobile&quot;, &quot;email&quot;]}"
-                  />
-                </p>
-              </div>
-            </div>
+        <!-- What the attendee can do next -->
+        <div
+          t-if="registration.state != 'done'"
+          name="button-div"
+          class="mt-5 p-4 rounded-3 bg-body-tertiary d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3"
+        >
+          <div t-if="registration.able_to_cancel">
+            <h2 class="h5 mb-1">Can't make it?</h2>
+            <p class="mb-0 text-muted">
+              You can cancel your registration until <b
+              t-out="registration.cancel_before_date"
+              t-options="date_options"
+            />, <b t-out="registration.cancel_before_date" t-options="time_options" />.
+            </p>
           </div>
+          <div t-elif="registration.state == 'cancel'">
+            <h2 class="h5 mb-1">Changed your mind?</h2>
+            <p class="mb-0 text-muted">You can register to the event again.</p>
+          </div>
+          <div t-else="">
+            <h2 class="h5 mb-1">Need to change something?</h2>
+            <p class="mb-0 text-muted">
+              Cancelling online is no longer possible.
+              <t t-if="organizer.email">
+                Please contact the organizer: <a
+              t-att-href="'mailto:%s' % organizer.email"
+              t-out="organizer.email"
+            />.
+              </t>
+            </p>
+          </div>
+          <button
+            t-if="registration.able_to_cancel"
+            type="button"
+            class="btn btn-outline-danger flex-shrink-0"
+            data-bs-toggle="modal"
+            data-bs-target="#cancel_modal"
+          >Cancel registration</button>
+          <a
+            t-elif="registration.state == 'cancel' and event.event_registrations_open"
+            class="btn btn-primary flex-shrink-0"
+            t-att-href="'/event/%s/register' % slug(event)"
+          >Register again</a>
         </div>
         <!-- Confirm cancel modal -->
         <div
+          t-if="registration.able_to_cancel"
           class="modal fade"
           id="cancel_modal"
           tabindex="-1"
-          role="dialog"
-          aria-labelledby="cancel_modal"
+          aria-labelledby="cancel_modal_title"
           aria-hidden="true"
         >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow rounded-4">
               <form
                 id="cancel-modal"
-                t-attf-action="{{request.httprequest.path}}"
+                t-att-action="request.httprequest.path"
                 method="post"
-                enctype="multipart/form-data"
               >
                 <input
                   type="hidden"
                   name="csrf_token"
                   t-att-value="request.csrf_token()"
                 />
-                <div class="modal-header">
-                  <h4
-                    class="modal-title hidden"
-                    id="delete_language_title"
-                  >Cancel registration</h4>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  />
-                </div>
-                <div class="modal-body">
-                  <div class="container">
-                    <div class="col-12">
-                      <p>You are about to <strong>cancel</strong> your registration</p>
-                      <p>Are you sure?</p>
-                    </div>
+                <div class="modal-body text-center p-4 p-md-5">
+                  <span
+                    class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger-subtle text-danger p-4 mb-4"
+                  >
+                    <i class="fa fa-fw fa-2x fa-calendar-times-o" aria-hidden="true" />
+                  </span>
+                  <h2
+                    class="h4 mb-3"
+                    id="cancel_modal_title"
+                  >Cancel your registration?</h2>
+                  <p class="text-muted mb-4">
+                    You are about to cancel your registration to <b
+                    t-out="event.name"
+                  />. This cannot be undone.
+                  </p>
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button
+                      type="button"
+                      class="btn btn-light order-sm-1"
+                      data-bs-dismiss="modal"
+                    >Keep registration</button>
+                    <button
+                      id="cancel-registration"
+                      class="btn btn-danger order-sm-2"
+                      type="submit"
+                    >Cancel registration</button>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >Close</button>
-                  <button
-                    id="cancel-registration"
-                    class="btn btn-danger"
-                    type="submit"
-                  >Cancel registration</button>
-                </div>
-                <input type="hidden" name="new_state" t-attf-value="cancel" />
-                <input
-                  type="hidden"
-                  name="current_state"
-                  t-attf-value="{{registration.state}}"
-                />
               </form>
             </div>
           </div>
