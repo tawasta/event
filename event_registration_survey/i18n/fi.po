@@ -1,0 +1,232 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_registration_survey
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.question_container
+msgid "\" is not supported by the event registration survey form yet."
+msgstr "\" ei ole vielä tuettu tapahtuman ilmoittautumiskyselylomakkeessa."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input_line__string_answer
+msgid "Answer"
+msgstr "Vastaus"
+
+#. module: event_registration_survey
+#: model:ir.actions.act_window,name:event_registration_survey.survey_response_line_action_pivot
+msgid "Answer Analysis"
+msgstr "Vastausanalyysi"
+
+#. module: event_registration_survey
+#: model:ir.actions.act_window,name:event_registration_survey.act_event_survey_answer_sheet_from_event
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.event_event_view_form_answer_sheet_button
+msgid "Answer Sheet"
+msgstr "Vastauslomake"
+
+#. module: event_registration_survey
+#: model:ir.actions.act_window,name:event_registration_survey.act_event_survey_answers_from_event
+msgid "Answers"
+msgstr "Vastaukset"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_survey__default_survey
+msgid "Is default survey"
+msgstr "On oletuskysely"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_user_input__firstname
+msgid ""
+"Attendee first name, mainly used to identify him in the survey session "
+"leaderboard."
+msgstr ""
+"Osallistujan etunimi, jota käytetään lähinnä tunnistamaan hänet kyselyn "
+"istunnon tulostaulukossa."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_user_input__lastname
+msgid ""
+"Attendee last name, mainly used to identify him in the survey session "
+"leaderboard."
+msgstr ""
+"Osallistujan sukunimi, jota käytetään lähinnä tunnistamaan hänet kyselyn "
+"istunnon tulostaulukossa."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input__event_id
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input_line__event_id
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_line_view_search_inherit
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_view_search_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input__registration_id
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input_line__registration_id
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_line_view_search_inherit
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_view_search_event
+msgid "Event Registration"
+msgstr "Tapahtumailmoittautuminen"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input__event_ticket_id
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input_line__event_ticket_id
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_view_search_event
+msgid "Event Ticket"
+msgstr "Tapahtumalippu"
+
+#. module: event_registration_survey
+#: code:addons/event_registration_survey/models/event_event.py:0
+msgid ""
+"Event Survey(s) can only have one question for the registrants first name, "
+"last name, email and phone number. One of these questions has a duplicate."
+msgstr ""
+"Tapahtumakyselyssä voi olla vain yksi kysymys ilmoittautujan etunimelle, "
+"sukunimelle, sähköpostille ja puhelinnumerolle. Yksi näistä kysymyksistä on "
+"kahdennettu."
+
+#. module: event_registration_survey
+#: code:addons/event_registration_survey/models/event_event.py:0
+msgid "Event Survey(s) needs to include at least one question."
+msgstr "Tapahtumakyselyn on sisällettävä vähintään yksi kysymys."
+
+#. module: event_registration_survey
+#: code:addons/event_registration_survey/models/event_event.py:0
+msgid ""
+"Event Survey(s) needs to include questions asking for the registrants first "
+"name, last name, email and phone number. One of these questions is missing."
+msgstr ""
+"Tapahtumakyselyn on sisällettävä kysymykset ilmoittautujan etunimestä, "
+"sukunimestä, sähköpostista ja puhelinnumerosta. Yksi näistä kysymyksistä "
+"puuttuu."
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_form_event
+msgid "Events"
+msgstr "Tapahtumat"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input__firstname
+msgid "First Name"
+msgstr "Etunimi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_question__validation_phone
+msgid "Input must be a phone number"
+msgstr "Syötteen on oltava puhelinnumero"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_survey__is_event_survey
+msgid "Is an Event Survey"
+msgstr "On tapahtumakysely"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_survey__is_event_survey
+msgid "If checked, this survey can be used as an Event Survey."
+msgstr "Jos valittu, tätä kyselyä voi käyttää tapahtumakyselynä."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_question__save_as_firstname
+msgid "If checked, this option will save the user's answer as its first name."
+msgstr "Jos valittu, käyttäjän vastaus tallennetaan hänen etunimekseen."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_question__save_as_lastname
+msgid "If checked, this option will save the user's answer as its last name."
+msgstr "Jos valittu, käyttäjän vastaus tallennetaan hänen sukunimekseen."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_question__save_as_phone
+msgid ""
+"If checked, this option will save the user's answer as its phone number."
+msgstr "Jos valittu, käyttäjän vastaus tallennetaan hänen puhelinnumerokseen."
+
+#. module: event_registration_survey
+#: model:ir.model.fields,help:event_registration_survey.field_survey_survey__default_survey
+msgid ""
+"If selected, this survey will be automatically selected when the event is "
+"created "
+msgstr ""
+"Jos valittu, tämä kysely valitaan automaattisesti, kun tapahtuma luodaan "
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_user_input__lastname
+msgid "Last Name"
+msgstr "Sukunimi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_event_event__answer_sheet_count
+msgid "Number of Answer Sheets"
+msgstr "Vastauslomakkeiden määrä"
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.event_event_view_form_answer_sheet_button
+msgid "Question answer sheet for this Event"
+msgstr "Tämän tapahtuman kysymysten vastauslomake"
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.question_container
+msgid "Question type \""
+msgstr "Kysymystyyppi \""
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_user_input_view_search_event
+msgid "Registration Survey"
+msgstr "Ilmoittautumiskysely"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_question__save_as_firstname
+msgid "Save as user first name"
+msgstr "Tallenna käyttäjän etunimeksi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_question__save_as_lastname
+msgid "Save as user last name"
+msgstr "Tallenna käyttäjän sukunimeksi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_survey_question__save_as_phone
+msgid "Save as user phone number"
+msgstr "Tallenna käyttäjän puhelinnumeroksi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_event_event__survey_ids
+#: model:ir.model.fields,field_description:event_registration_survey.field_event_type__survey_ids
+msgid "Survey"
+msgstr "Kysely"
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.survey_response_line_view_pivot
+msgid "Survey Answer Line"
+msgstr "Kyselyn vastausrivi"
+
+#. module: event_registration_survey
+#: model:ir.model.fields,field_description:event_registration_survey.field_event_registration__survey_answer_ids
+msgid "Survey User Input"
+msgstr "Kyselyvastaus"
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.question_container
+msgid "The answer you entered is not valid."
+msgstr "Antamasi vastaus ei kelpaa."
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.question_container
+msgid "This question requires an answer."
+msgstr "Tähän kysymykseen vaaditaan vastaus."
+
+#. module: event_registration_survey
+#: model_terms:ir.ui.view,arch_db:event_registration_survey.registration_attendee_details_survey
+msgid "Ticket #"
+msgstr "Lippu #"

@@ -21,7 +21,7 @@
 {
     "name": "Event Privacy",
     "summary": "Collect privacy consents when registering for an event",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -33,6 +33,7 @@
         "website_event",
         "privacy",
         "privacy_consent",
+        "partner_event",
     ],
     "data": [
         "views/event_views.xml",

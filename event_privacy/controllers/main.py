@@ -50,18 +50,27 @@ class EventRegistrationPrivacy(WebsiteEventController):
         has resolved each attendee's ``partner_id``, since core may still
         change it before then.
 
+        A mandatory consent is checked here, not only by the ``required``
+        attribute of the checkbox, so a direct POST cannot skip it.
+
         :param event.event event: event the registration is for
         :param post: values posted by the registration form
         """
-        request.event_privacy_form_vals = self._extract_privacy_vals(post)
+        privacy_vals = self._extract_privacy_vals(post)
+        # sudo: the public visitor is not allowed to read privacy activities
+        mandatory = event.sudo().privacy_ids.filtered("constr_mandatory")
+        if any(not privacy_vals.get(f"privacy_{a.id}") for a in mandatory):
+            return request.redirect(f"/event/{event.id}/register")
+        request.event_privacy_form_vals = privacy_vals
         return super().registration_confirm(event, **post)
 
     def _create_attendees_from_registration_post(self, event, registration_data):
         """Record each attendee's privacy consents after core creates them.
 
-        Only relies on the ``partner_id`` core already sets on each
-        attendee, so it works regardless of how they were produced.
-        Skips attendees with no resolved partner.
+        The consent is recorded for the partner who made the registration. An
+        anonymous registration has none, so the attendee partner that
+        ``partner_event`` creates for the event is used. Skips attendees with
+        no partner.
 
         :param event.event event: event the registration is for
         :param list registration_data: list of dicts, one per attendee
@@ -75,8 +84,9 @@ class EventRegistrationPrivacy(WebsiteEventController):
         if event.privacy_ids:
             privacy_vals = getattr(request, "event_privacy_form_vals", {})
             for attendee in attendees_sudo:
-                if attendee.partner_id:
+                partner = attendee.partner_id or attendee.attendee_partner_id
+                if partner:
                     request.env["event.registration"]._create_privacy(
-                        privacy_vals, attendee.partner_id, event
+                        privacy_vals, partner, event
                     )
         return attendees_sudo

@@ -9,8 +9,14 @@
   </template>
 
   <template id="registration_event_survey" name="Registration Event Survey">
-    <label t-if="question.is_page" t-field="question.title" />
-    <label t-if="question.is_page" t-field="question.description" />
+    <div t-if="question.is_page" class="col-12 mt-2 mb-3 pb-2 border-bottom">
+      <h6 class="text-uppercase text-muted mb-0" t-field="question.title" />
+      <div
+        t-if="question.description"
+        class="small text-muted"
+        t-field="question.description"
+      />
+    </div>
     <t
       t-if="not question.is_page"
       t-call="event_registration_survey.question_container"
@@ -44,7 +50,7 @@
     <div
       class="col-lg-3 col-md-6 col-sm-12"
       t-att-class="'js_question-wrapper %s %s' % ('d-none' if not display_question else '', 'mr-2' if extra_right_margin else '')"
-      t-attf-class="js_question-wrapper #{'d-none' if not display_question else ''} #{'mr-2' if extra_right_margin else ''} #{'col-lg-3 col-md-6 col-sm-12' if question.question_type in ['char_box', 'numerical_box', 'date', 'datetime'] else 'col-12'}"
+      t-attf-class="js_question-wrapper #{'d-none' if not display_question else ''} #{'mr-2' if extra_right_margin else ''} mb-3 #{'col-md-6' if question.question_type in ['char_box', 'numerical_box', 'date', 'datetime'] else 'col-12'}"
       t-attf-id="#{counter}-#{question.id}-#{survey.id}"
       t-att-data-required="question.constr_mandatory"
       t-att-data-constr-error-msg="question.constr_error_msg or default_constr_error_msg"
@@ -53,11 +59,11 @@
       t-att-data-question-id="question.id"
       t-att-data-survey-id="survey.id"
     >
-      <div class="mb-2">
-        <strong t-if="not hide_question_title">
+      <div class="mb-1">
+        <span t-if="not hide_question_title" class="fw-semibold">
           <span t-field="question.title" />
           <span t-if="question.constr_mandatory" class="text-danger">*</span>
-        </strong>
+        </span>
       </div>
       <t t-if="question.question_type == 'text_box'">
         <t t-call="event_registration_survey.question_text_box" />
@@ -96,16 +102,13 @@
                     not supported by the event registration survey form yet.
                 </div>
       </t>
-      <div
-        class="o_survey_question_error overflow-hidden border-0 py-0 px-3 alert alert-danger"
-        role="alert"
-      />
+      <div class="o_survey_question_error text-danger small" role="alert" />
     </div>
   </template>
   <template id="question_text_box" name="Question: free text box">
     <div class="o_survey_comment_container p-0">
       <textarea
-        class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+        class="form-control o_survey_question_text_box"
         rows="3"
         t-attf-name="#{counter}-#{question.id}-#{survey.id}"
         t-att-placeholder="question.question_placeholder"
@@ -117,7 +120,7 @@
     <div class="o_survey_comment_container p-0">
       <input
         t-att-type="'email' if question.validation_email else 'text'"
-        class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+        class="form-control o_survey_question_text_box"
         t-attf-name="#{counter}-#{question.id}-#{survey.id}"
         t-att-placeholder="question.question_placeholder"
         t-att-value="request.env.user.partner_id.email if question.validation_email and counter == 1 and request.env.user.has_group('base.group_user') else request.env.user.partner_id.firstname if question.save_as_firstname and counter == 1 and request.env.user.has_group('base.group_user') else request.env.user.partner_id.lastname if question.save_as_lastname and counter == 1 and request.env.user.has_group('base.group_user') else request.env.user.partner_id.phone if question.save_as_phone and counter == 1 and request.env.user.has_group('base.group_user') else ''"
@@ -128,11 +131,11 @@
     </div>
   </template>
   <template id="question_numerical_box" name="Question: numerical box">
-    <div class="o_survey_answer_wrapper p-1 rounded">
+    <div class="o_survey_answer_wrapper">
       <input
         type="number"
         step="any"
-        class="form-control o_survey_question_numerical_box bg-transparent text-dark rounded-0 p-0"
+        class="form-control o_survey_question_numerical_box"
         t-attf-name="#{counter}-#{question.id}-#{survey.id}"
         t-att-placeholder="question.question_placeholder"
         t-att-data-question-type="question.question_type"
@@ -143,10 +146,10 @@
   </template>
 
   <template id="question_date" name="Question: date box">
-    <div class="input-group o_survey_form_date o_survey_answer_wrapper p-1 rounded">
+    <div class="input-group o_survey_form_date o_survey_answer_wrapper">
       <input
         type="text"
-        class="form-control datetimepicker-input o_survey_question_date bg-transparent text-dark rounded-0 p-0"
+        class="form-control datetimepicker-input o_survey_question_date"
         t-attf-name="#{counter}-#{question.id}-#{survey.id}"
         t-att-placeholder="question.question_placeholder"
         t-att-value="format_date(answer_lines[0].value_date) if answer_lines else None"
@@ -158,7 +161,7 @@
       />
       <div
         t-if="not survey_form_readonly"
-        class="position-absolute input-group-text text-primary border-0 bg-transparent p-0 end-0 pe-none"
+        class="position-absolute input-group-text text-primary border-0 bg-transparent pe-3 end-0 pe-none"
       >
         <i class="fa fa-calendar" />
       </div>
@@ -175,7 +178,7 @@
     >
       <input
         type="text"
-        class="form-control datetimepicker-input o_survey_question_datetime bg-transparent text-dark rounded-0 p-0"
+        class="form-control datetimepicker-input o_survey_question_datetime"
         t-attf-data-target="##{counter}-datetimepicker_#{question.id}-#{survey.id}"
         t-attf-name="#{counter}-#{question.id}-#{survey.id}"
         t-att-data-question-type="question.question_type"
@@ -184,9 +187,9 @@
         t-if="not survey_form_readonly"
         class="input-group-append position-absolute"
         t-attf-data-target="##{counter}-datetimepicker_#{question.id}-#{survey.id}"
-        data-toggle="datetimepicker"
+        data-bs-toggle="datetimepicker"
       >
-        <div class="input-group-text text-primary border-0 bg-transparent p-0">
+        <div class="input-group-text text-primary border-0 bg-transparent pe-3">
           <i class="fa fa-calendar" />
         </div>
       </div>
@@ -290,7 +293,7 @@
         >
           <textarea
             type="text"
-            class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+            class="form-control o_survey_question_text_box"
             t-att-disabled="None if comment_line else 'disabled'"
           >
             <t t-esc="comment_line.value_char_box if comment_line else ''" />
@@ -303,7 +306,7 @@
       >
         <textarea
           type="text"
-          class="col form-control o_survey_comment o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+          class="col form-control o_survey_comment o_survey_question_text_box"
           t-att-placeholder="question.comments_message or default_comments_message if not survey_form_readonly else ''"
         >
           <t t-esc="comment_line.value_char_box if comment_line else ''" />
@@ -397,7 +400,7 @@
         >
           <textarea
             type="text"
-            class="form-control o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+            class="form-control o_survey_question_text_box"
             t-att-disabled="None if comment_line else 'disabled'"
           >
             <t t-esc="comment_line.value_char_box if comment_line else ''" />
@@ -410,7 +413,7 @@
       >
         <textarea
           type="text"
-          class="col form-control o_survey_comment o_survey_question_text_box bg-transparent text-dark rounded-0 p-0"
+          class="col form-control o_survey_comment o_survey_question_text_box"
           t-att-placeholder="question.comments_message or default_comments_message if not survey_form_readonly else ''"
         >
           <t t-esc="comment_line.value_char_box if comment_line else ''" />
@@ -493,7 +496,7 @@
     <div t-if='question.comments_allowed'>
       <textarea
         type="text"
-        class="form-control o_survey_question_text_box o_survey_comment bg-transparent text-dark rounded-0 p-0 mt-3"
+        class="form-control o_survey_question_text_box o_survey_comment mt-3"
         t-att-placeholder="question.comments_message or default_comments_message if not survey_form_readonly else ''"
         t-attf-name="#{counter}-#{question.id}_comment-#{survey.id}"
       >

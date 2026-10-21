@@ -21,7 +21,7 @@
 {
     "name": "Event Survey Feedback",
     "summary": "Send a feedback survey to attendees after an event",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

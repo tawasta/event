@@ -291,6 +291,7 @@ export class SurveyRegistrationQuestions extends Interaction {
     labelEl
       ?.querySelector(isSelected ? "i.fa-check-square" : "i.fa-square-o")
       ?.classList.remove("d-none");
+    labelEl?.classList.toggle("o_survey_selected", isSelected);
   }
 
   onRadioChoiceClick(targetEl) {
@@ -330,6 +331,7 @@ export class SurveyRegistrationQuestions extends Interaction {
     labelEl
       ?.querySelector(isSelected ? "i.fa-check-circle" : "i.fa-circle-thin")
       ?.classList.remove("d-none");
+    labelEl?.classList.toggle("o_survey_selected", isSelected);
   }
 
   onMatrixBtnClick(targetEl) {

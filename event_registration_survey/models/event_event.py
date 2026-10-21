@@ -85,7 +85,7 @@ class EventEvent(models.Model):
             if not event.survey_ids and event.event_type_id.survey_ids:
                 event.survey_ids = event.event_type_id.survey_ids
 
-    @api.depends("survey_ids.user_input_ids")
+    @api.depends("registration_ids.survey_answer_ids", "registration_ids.state")
     def _compute_answer_count(self):
         counts = dict(
             self.env["survey.user_input.line"]._read_group(
@@ -100,7 +100,7 @@ class EventEvent(models.Model):
         for event in self:
             event.answer_count = counts.get(event, 0)
 
-    @api.depends("survey_ids.user_input_ids")
+    @api.depends("registration_ids.survey_answer_ids", "registration_ids.state")
     def _compute_answer_sheet_count(self):
         counts = dict(
             self.env["survey.user_input"]._read_group(

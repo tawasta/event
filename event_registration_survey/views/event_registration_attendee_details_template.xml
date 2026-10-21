@@ -21,6 +21,12 @@
                     for survey in event.survey_ids
                 })"
       >
+        <!-- Same heading as core shows above each attendee's own questions,
+                     which is suppressed below when a survey is used. -->
+        <h5 class="mt-1 mb-3 pb-2 border-bottom">
+          Ticket #<span t-out="counter" />
+          <small class="text-muted">- <span t-out="ticket['name']" /></small>
+        </h5>
         <!-- Embedded directly (like survey.survey_fill_form does) rather
                      than fetched via RPC, so it's available as soon as the
                      modal is in the DOM. -->

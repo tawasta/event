@@ -13,16 +13,22 @@ Configuration
    Activities*) and enable "Show in event" on those relevant for event
    registrations.
 2. Optionally mark an activity "Mandatory Answer" to require the registrant
-   to check it before the registration form can be submitted.
+   to check it before the registration form can be submitted. The server
+   checks it too, so a registration cannot be created without the consent
+   even by posting the form directly.
 3. Attach activities to an Event (or its Event Type, from which new events
-   copy them once).
+   copy them once). An Event with activities always has "Create Partners in
+   registration" (from ``partner_event``) enabled, because a consent needs a
+   partner.
 
 Usage
 =====
 When an event has ``Privacy`` activities configured, the registration form
 shows a checkbox per activity. On registration, a ``privacy.consent`` record
-is created or updated for each activity, for the partner resolved by core
-for that attendee (existing consents are updated rather than duplicated).
+is created or updated for each activity (existing consents are updated rather
+than duplicated). The consent is recorded for the partner who made the
+registration. An anonymous registration has none, so the attendee partner that
+``partner_event`` creates (or finds by email) is used.
 
 Known issues / Roadmap
 ======================

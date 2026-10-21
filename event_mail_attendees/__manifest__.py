@@ -21,7 +21,7 @@
 {
     "name": "Event Mail Attendees",
     "summary": "Wizard to mail Attendees without mass mail",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

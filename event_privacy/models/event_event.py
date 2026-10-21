@@ -53,10 +53,21 @@ class EventEvent(models.Model):
         .search([("show_in_event", "=", True)])
         .ids,
     )
+    create_partner = fields.Boolean(
+        compute="_compute_create_partner", store=True, readonly=False
+    )
 
     # 3. Default methods
 
     # 4. Compute and search fields, in the same order that fields declaration
+    @api.depends("privacy_ids")
+    def _compute_create_partner(self):
+        """A consent needs a partner, so the registrations of an event that asks
+        for consents always create their partner."""
+        for event in self:
+            if event.privacy_ids:
+                event.create_partner = True
+
     @api.depends("event_type_id")
     def _compute_privacy_ids(self):
         """Copy privacies from the event type once, like an onchange.

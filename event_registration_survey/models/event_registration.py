@@ -23,9 +23,6 @@ import logging
 # 2. Known third party imports:
 # 3. Odoo imports (openerp):
 from odoo import fields, models
-from odoo.exceptions import ValidationError
-
-from odoo.addons.queue_job.exception import RetryableJobError
 
 _logger = logging.getLogger(__name__)
 
@@ -120,11 +117,6 @@ class EventRegistration(models.Model):
 
     def process_survey(self, registration_id, survey_info):
         registration = self.browse(registration_id)
-
-        if not registration.partner_id:
-            raise RetryableJobError(
-                self.env._("Registration does not have an associated partner.")
-            )
         answer_ids = []
 
         # Matrix answers are posted as "{question_id}_{row_id}" (a checked
@@ -154,26 +146,20 @@ class EventRegistration(models.Model):
 
         survey_info = new_survey_info
 
-        # Fetch all surveys at once
-        survey_ids = list(map(int, survey_info.keys()))
-        surveys = self.env["survey.survey"].sudo().browse(survey_ids)
+        # The ids come from the posted form, so only the surveys of the event of
+        # this registration, and the questions of those surveys, can be answered
+        survey_ids = set(survey_info)
+        surveys = registration.event_id.sudo().survey_ids.filtered(
+            lambda survey: survey.id in survey_ids
+        )
 
         for survey in surveys:
-            if not survey.exists():
-                raise ValidationError(self.env._("Survey not found."))
-
-            survey_details = survey_info.get(survey.id)
-            if survey_details is None:
-                _logger.error("Survey details not found for survey ID %s", survey.id)
-                continue
+            survey_details = survey_info[survey.id]
 
             answer_sudo = survey._create_answer(user=self.env.user, test_entry=False)
 
-            # Fetch all questions at once
-            question_ids = [
-                int(key) for key in survey_details.keys() if isinstance(key, int)
-            ]
-            questions = self.env["survey.question"].sudo().browse(question_ids)
+            question_ids = {key for key in survey_details if isinstance(key, int)}
+            questions = survey.question_ids & survey.question_ids.browse(question_ids)
 
             for question in questions:
                 answer = self._process_question(

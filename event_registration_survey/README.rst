@@ -18,7 +18,15 @@ Usage
     - If Survey has a question with "Save as user lastname", it is used as the Event registration last name.
     - If Survey has a question with "Save as user email", it is used as the Event registration email.
     - If Survey has a question with "Save as user phone number", it is used as the Event registration phone number.
-2. Attach it/them to an Event.
+2. Attach it/them to an Event. Only the Surveys attached to the Event, and their
+   questions, are accepted from the registration form.
+3. The counts of answers and answer sheets of an Event follow the answers and
+   the state of the registrations, so cancelling a registration updates them.
+4. The registration form is laid out with Bootstrap form controls: each
+   attendee has a "Ticket #" heading, survey pages are shown as section
+   headings, short questions are placed two per row and an error is shown as
+   text below the question. Choice answers are highlighted like in the
+   survey form, and the selected state updates on click.
 
 Known issues / Roadmap
 ======================

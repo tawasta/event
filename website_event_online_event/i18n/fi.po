@@ -67,13 +67,6 @@ msgstr "Liity verkkokokoukseen:"
 #. odoo-python
 #: code:addons/website_event_online_event/models/event_event.py:0
 #, python-format
-msgid "Join the video conference: "
-msgstr "Liity verkkokokoukseen: "
-
-#. module: website_event_online_event
-#. odoo-python
-#: code:addons/website_event_online_event/models/event_event.py:0
-#, python-format
 msgid "Join the video conference: %s"
 msgstr "Liity verkkokokoukseen: %s"
 
