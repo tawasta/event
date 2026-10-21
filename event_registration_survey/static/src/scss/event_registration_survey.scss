@@ -1,50 +1,50 @@
 // Survey scopes its choice and matrix styles to .o_survey_form, which the
 // registration modal does not have as an ancestor.
 .o_survey_form_content .o_survey_choice_btn {
-    cursor: pointer;
-    background-color: rgba($primary, 0.1);
-    box-shadow: $primary 0px 0px 0px 1px;
-    transition: background-color 0.3s ease;
+  cursor: pointer;
+  background-color: rgba($primary, 0.1);
+  box-shadow: $primary 0px 0px 0px 1px;
+  transition: background-color 0.3s ease;
 
-    &.o_survey_selected {
-        box-shadow: $primary 0px 0px 0px 2px;
-    }
+  &.o_survey_selected {
+    box-shadow: $primary 0px 0px 0px 2px;
+  }
 
-    &:hover {
-        background-color: rgba($primary, 0.3);
-    }
+  &:hover {
+    background-color: rgba($primary, 0.3);
+  }
 }
 
 .o_survey_form_content .o_survey_question_matrix {
+  th {
+    background-color: $primary;
+  }
+
+  td {
+    min-width: 100px;
+    background-color: rgba($primary, 0.2);
+
+    &:hover {
+      background-color: rgba($primary, 0.5);
+      cursor: pointer;
+    }
+  }
+
+  thead {
+    th:first-child {
+      border-top-left-radius: 0.25rem;
+    }
+    th:last-child {
+      border-top-right-radius: 0.25rem;
+    }
+  }
+
+  tbody tr:last-child {
     th {
-        background-color: $primary;
+      border-bottom-left-radius: 0.25rem;
     }
-
-    td {
-        min-width: 100px;
-        background-color: rgba($primary, 0.2);
-
-        &:hover {
-            background-color: rgba($primary, 0.5);
-            cursor: pointer;
-        }
+    td:last-child {
+      border-bottom-right-radius: 0.25rem;
     }
-
-    thead {
-        th:first-child {
-            border-top-left-radius: 0.25rem;
-        }
-        th:last-child {
-            border-top-right-radius: 0.25rem;
-        }
-    }
-
-    tbody tr:last-child {
-        th {
-            border-bottom-left-radius: 0.25rem;
-        }
-        td:last-child {
-            border-bottom-right-radius: 0.25rem;
-        }
-    }
+  }
 }
