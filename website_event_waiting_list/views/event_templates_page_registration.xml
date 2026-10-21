@@ -12,7 +12,7 @@
             position="before"
         >
             <!-- <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             > -->
                 <button
                 t-if="event.waiting_list and event.event_registrations_sold_out and (event.date_end > datetime.datetime.now())"
@@ -68,7 +68,7 @@
         >
             <attribute
                 name="t-if"
-            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or (event.seats_available &lt;=0 and not ticket.is_expired and ticket.is_launched())</attribute>
+            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched or (event.seats_available &lt;=0 and not ticket.is_expired and ticket.is_launched)</attribute>
             <attribute name="id">ticket_available_check_span</attribute>
         </xpath> -->
 <!--         <xpath
@@ -97,7 +97,7 @@
 
 
             <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             >
                 <button
                     type="submit"
