@@ -21,7 +21,7 @@
 {
     "name": "Event Registration Survey",
     "summary": "Use a Survey as the Event registration form",
-    "version": "19.0.1.0.1",
+    "version": "19.0.1.0.2",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -87,6 +87,9 @@ class EventEvent(models.Model):
 
     @api.depends("registration_ids.survey_answer_ids", "registration_ids.state")
     def _compute_answer_count(self):
+        """Add the survey answer lines to the answers of the registration
+        questions that ``website_event_questions_view`` counts."""
+        res = super()._compute_answer_count()
         counts = dict(
             self.env["survey.user_input.line"]._read_group(
                 domain=[
@@ -98,7 +101,8 @@ class EventEvent(models.Model):
             )
         )
         for event in self:
-            event.answer_count = counts.get(event, 0)
+            event.answer_count += counts.get(event, 0)
+        return res
 
     @api.depends("registration_ids.survey_answer_ids", "registration_ids.state")
     def _compute_answer_sheet_count(self):

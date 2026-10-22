@@ -149,6 +149,12 @@ class EventRegistrationSurvey(WebsiteEventSaleController):
                 event_ticket_id = False
             registrations[registration_counter]["event_ticket_id"] = event_ticket_id
 
+            # Multi-slot events require the slot, which core posts as
+            # "{counter}-event_slot_id" next to the ticket.
+            event_slot_id = int(registration_info.get("event_slot_id") or 0)
+            if event_slot_id:
+                registrations[registration_counter]["event_slot_id"] = event_slot_id
+
             partner_values = {}
             for survey_info in registration_info.values():
                 # "event_ticket_id"/"event_id" sit next to the survey-counter

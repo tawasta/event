@@ -22,7 +22,11 @@ Usage
    questions, are accepted from the registration form.
 3. The counts of answers and answer sheets of an Event follow the answers and
    the state of the registrations, so cancelling a registration updates them.
-4. The registration form is laid out with Bootstrap form controls: each
+   The count of answers adds the survey answers to the answers of the
+   registration questions (``website_event_questions_view``).
+4. On an Event with time slots, the slot chosen in the registration form is
+   kept in the registration.
+5. The registration form is laid out with Bootstrap form controls: each
    attendee has a "Ticket #" heading, survey pages are shown as section
    headings, short questions are placed two per row and an error is shown as
    text below the question. Choice answers are highlighted like in the

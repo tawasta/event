@@ -44,15 +44,20 @@ class EventRegistration(models.Model):
     # 6. CRUD methods
 
     # 7. Action methods
-    def _create_privacy(self, privacy_vals, partner, event):
-        """Create or update ``partner``'s consent for each of ``event``'s privacies.
+    def _create_privacy(self, privacy_vals, partner, event, overwrite=False):
+        """Create ``partner``'s consent for each of ``event``'s privacies.
 
         :param dict privacy_vals: posted ``privacy_<activity_id>`` checkbox
             values, keyed like the checkbox names in the registration form
         :param res.partner partner: partner the consent is recorded for
         :param event.event event: event whose ``privacy_ids`` are being answered
+        :param bool overwrite: also update an existing consent. Only for the
+            partner's own answer: the partner of an anonymous registration is
+            found by the email typed in the form, so anyone could otherwise
+            change that person's consents.
         """
-        for activity in event.privacy_ids:
+        # sudo: the public visitor is not allowed to read privacy activities
+        for activity in event.sudo().privacy_ids:
             accepted = bool(privacy_vals.get(f"privacy_{activity.id}"))
             consent = (
                 self.env["privacy.consent"]
@@ -64,9 +69,7 @@ class EventRegistration(models.Model):
                     ]
                 )
             )
-            if consent:
-                consent.write({"accepted": accepted})
-            else:
+            if not consent:
                 self.env["privacy.consent"].sudo().create(
                     {
                         "partner_id": partner.id,
@@ -75,5 +78,7 @@ class EventRegistration(models.Model):
                         "state": "answered",
                     }
                 )
+            elif overwrite:
+                consent.write({"accepted": accepted})
 
     # 8. Business methods

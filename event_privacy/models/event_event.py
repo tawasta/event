@@ -83,6 +83,19 @@ class EventEvent(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Enable the partner creation of an event created with privacies.
+
+        ``partner_event`` gives ``create_partner`` a default value, and the
+        form does not post the field while it is readonly, so on create the
+        default wins and the compute does not run.
+        """
+        events = super().create(vals_list)
+        events.filtered(
+            lambda event: event.privacy_ids and not event.create_partner
+        ).create_partner = True
+        return events
 
     # 7. Action methods
 

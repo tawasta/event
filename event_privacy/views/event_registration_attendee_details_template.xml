@@ -5,10 +5,11 @@
     inherit_id="website_event.registration_attendee_details"
   >
     <xpath expr="//div[hasclass('modal-footer')]" position="before">
-      <div t-if="event.privacy_ids" class="modal-body border-top">
+      <!-- sudo: the public visitor is not allowed to read privacy activities -->
+      <div t-if="event.sudo().privacy_ids" class="modal-body border-top">
         <h5>Permissions</h5>
         <div class="row">
-          <t t-foreach="event.privacy_ids" t-as="privacy_activity">
+          <t t-foreach="event.sudo().privacy_ids" t-as="privacy_activity">
             <div class="col-md-6 mb-2">
               <div class="form-check">
                 <input

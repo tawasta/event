@@ -81,12 +81,20 @@ class EventRegistrationPrivacy(WebsiteEventController):
         attendees_sudo = super()._create_attendees_from_registration_post(
             event, registration_data
         )
-        if event.privacy_ids:
+        # sudo: the public visitor is not allowed to read privacy activities
+        if event.sudo().privacy_ids:
             privacy_vals = getattr(request, "event_privacy_form_vals", {})
+            user = request.env.user
             for attendee in attendees_sudo:
                 partner = attendee.partner_id or attendee.attendee_partner_id
                 if partner:
+                    # An anonymous registration finds its attendee partner by
+                    # the typed email, so only a logged in user may change the
+                    # consents of his own partner.
                     request.env["event.registration"]._create_privacy(
-                        privacy_vals, partner, event
+                        privacy_vals,
+                        partner,
+                        event,
+                        overwrite=not user._is_public() and partner == user.partner_id,
                     )
         return attendees_sudo

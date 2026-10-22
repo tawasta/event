@@ -18,17 +18,22 @@ Configuration
    even by posting the form directly.
 3. Attach activities to an Event (or its Event Type, from which new events
    copy them once). An Event with activities always has "Create Partners in
-   registration" (from ``partner_event``) enabled, because a consent needs a
-   partner.
+   registration" (from ``partner_event``) enabled, also when the Event is
+   created, because a consent needs a partner.
 
 Usage
 =====
 When an event has ``Privacy`` activities configured, the registration form
 shows a checkbox per activity. On registration, a ``privacy.consent`` record
-is created or updated for each activity (existing consents are updated rather
-than duplicated). The consent is recorded for the partner who made the
-registration. An anonymous registration has none, so the attendee partner that
-``partner_event`` creates (or finds by email) is used.
+is created for each activity that the partner has no consent for yet. The
+consent is recorded for the partner who made the registration. An anonymous
+registration has none, so the attendee partner that ``partner_event`` creates
+(or finds by email) is used.
+
+An existing consent is updated only when a logged in user registers: the
+consents of his own partner follow the checkboxes of the form. An anonymous
+registration never changes an existing consent, because the partner is found
+by the email typed in the form and anyone could use another person's email.
 
 Known issues / Roadmap
 ======================
