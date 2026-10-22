@@ -10,13 +10,14 @@ Website Event Waiting List
 
 Configuration
 =============
-\-
+* When the waiting list is used, set the attendee limit on the event only and leave the "Maximum" of the tickets empty.
 
 Usage
 =====
 * Enable waiting list for an event by toggling it on event view.
 * When maximum attendees to an event is reached, further registrations go to a waiting list.
 * If tickets are used and ticket is sold out, registrations go to waiting list.
+* On events with several ticket types, a waiting list quantity can be selected for each ticket once the event's attendee limit is reached.
 * You can attach an email scheduler to an Event to send automatic emails to waiting list when more seats are available
 
 Known issues / Roadmap

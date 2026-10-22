@@ -55,40 +55,33 @@
         <!-- <xpath expr="//div[@class='col-md-4 d-flex align-items-center justify-content-between p-0']/t" position="attributes">
             <attribute name="t-if">event.event_registrations_open or event.waiting_list</attribute>
         </xpath> -->
-        <!-- Multi ticket view -->
-<!--         <xpath expr="//div[@class='w-auto ms-auto']/select" position="attributes">
-            <attribute
-                name="t-if"
-            >(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
-            <attribute name="id">seats_available_check_select</attribute>
-        </xpath>
+        <!-- Multi ticket view: core renders no quantity select for a sold out
+             ticket. Add one once the whole event is full, so a waiting list
+             registration can carry a quantity. Checking the event rather than
+             the ticket keeps waiting list and regular quantities from being
+             mixed in one post if a ticket has its own seat limit. -->
         <xpath
-            expr="//div[@class='w-auto ms-auto']//div[@class='text-danger']//span[1]"
-            position="attributes"
-        >
-            <attribute
-                name="t-if"
-            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched or (event.seats_available &lt;=0 and not ticket.is_expired and ticket.is_launched)</attribute>
-            <attribute name="id">ticket_available_check_span</attribute>
-        </xpath> -->
-<!--         <xpath
-            expr="//div[@class='w-auto ms-auto']//div[@class='text-danger']//span[1]"
+            expr="//div[@id='o_wevent_tickets_collapse']//div[hasclass('ms-auto')]/div[hasclass('text-danger')]"
             position="after"
         >
             <select
-                t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched and ((not event.seats_limited or event.seats_available &lt;=0) or (not ticket.seats_limited or ticket.seats_available &lt;=0))"
+                t-if="event.waiting_list and event.seats_limited and event.seats_max and event.seats_available &lt; 1 and not ticket.is_expired and ticket.is_launched"
                 t-attf-name="nb_register-#{ticket.id}"
-                class="custom-select waiting_list_select_multi"
+                class="form-select w-auto mt-1"
             >
                 <t t-foreach="range(0, 10)" t-as="nb">
-                    <option
-                        t-esc="nb"
-                        t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"
-                        class="waiting_list_option_multi"
-                    />
+                    <option t-esc="nb" />
                 </t>
             </select>
-        </xpath> -->
+        </xpath>
+        <xpath expr="//div[@id='o_wevent_tickets_collapse']" position="inside">
+            <input
+                t-if="event.waiting_list and event.seats_limited and event.seats_max and event.seats_available &lt; 1"
+                type="hidden"
+                name="waiting_list_registration"
+                value="True"
+            />
+        </xpath>
 
         <xpath
             expr="//t/div[@class='modal-footer flex-lg-row border-top']//button[@type='submit' and contains(@class, 'btn btn-primary o_wait_lazy_js a-submit')]"
