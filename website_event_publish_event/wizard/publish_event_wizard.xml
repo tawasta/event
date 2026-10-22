@@ -6,6 +6,7 @@
     <field name="binding_model_id" ref="event.model_event_event" />
     <field name="view_mode">form</field>
     <field name="target">new</field>
+    <field name="group_ids" eval="[(4, ref('event.group_event_manager'))]" />
   </record>
   <record model="ir.ui.view" id="website_event_publish_event_wizard">
     <field name="name">website.event.publish.event.form</field>

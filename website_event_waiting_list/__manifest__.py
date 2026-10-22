@@ -18,15 +18,26 @@
 #
 ##############################################################################
 
-from odoo import fields, models
-
-
-class EventStage(models.Model):
-    _inherit = "event.stage"
-
-    cancel = fields.Boolean(
-        string="Cancel Stage",
-        default=False,
-        help="Events moved into this stage will disable registrations, "
-        "automated emails and add an event canceled sign on website.",
-    )
+{
+    "name": "Website Event Waiting List",
+    "summary": "Adds a waiting list functionality to Events.",
+    "version": "19.0.1.1.0",
+    "category": "Events",
+    "website": "https://github.com/tawasta/event",
+    "author": "Futural",
+    "license": "AGPL-3",
+    "application": False,
+    "installable": True,
+    "depends": [
+        "website_event",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/email_template_data.xml",
+        "views/event_views.xml",
+        "views/event_templates_page_registration.xml",
+        "views/event_templates_page_waiting_list.xml",
+        "wizard/waiting_mail_list_wizard.xml",
+        "wizard/waiting_mail_list_message.xml",
+    ],
+}

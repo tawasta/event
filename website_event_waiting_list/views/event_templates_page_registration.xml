@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- The event counts as open for registration while the waiting list takes
+       registrations (see event.event), so core shows its Register button and
+       the modal. These templates only tell the visitor what will happen and
+       let sold out tickets be ordered. -->
+  <template
+    id="registration_template"
+    inherit_id="website_event.registration_template"
+    name="Registration"
+  >
+    <xpath
+      expr="//a[@t-if='event_page and event.event_registrations_open']"
+      position="before"
+    >
+      <div
+        t-if="event.waiting_list_open"
+        class="alert alert-warning mb-3 small"
+        role="status"
+      >
+        <b>Sold Out</b> - registrations join the waiting list.
+      </div>
+    </xpath>
+    <xpath expr="//button[@t-elif='event.event_registrations_open']" position="after">
+      <a
+        t-if="event_page and event.waiting_list_open"
+        type="button"
+        t-attf-class="btn btn-primary {{cta_additional_classes}}"
+        t-att-href="'/event/%s/register' % (slug(event))"
+      >
+        Join the waiting list
+      </a>
+      <button
+        t-elif="event.waiting_list_open"
+        type="button"
+        data-bs-toggle="modal"
+        t-attf-class="btn btn-primary {{cta_additional_classes}}"
+        t-attf-data-bs-target="#modal_{{'slot' if event.is_multi_slots else 'ticket'}}_registration"
+      >
+        Join the waiting list
+      </button>
+    </xpath>
+    <xpath
+      expr="//a[@t-if='event_page and event.event_registrations_open']"
+      position="attributes"
+    >
+      <attribute
+        name="t-if"
+      >event_page and event.event_registrations_open and not event.waiting_list_open</attribute>
+    </xpath>
+    <xpath
+      expr="//button[@t-elif='event.event_registrations_open']"
+      position="attributes"
+    >
+      <attribute
+        name="t-elif"
+      >event.event_registrations_open and not event.waiting_list_open</attribute>
+    </xpath>
+  </template>
+  <template
+    id="registration_template_waiting_list"
+    inherit_id="website_event.modal_ticket_registration"
+    name="Registration Modal"
+  >
+    <xpath expr="//div[contains(@t-if, 'insufficient_seats')]" position="after">
+      <div
+        t-if="event.waiting_list_open"
+        class="alert alert-warning m-3 small"
+        role="status"
+      >
+        <b>Sold Out</b> - your registration joins the waiting list. You will get
+        an email if a seat becomes available.
+      </div>
+    </xpath>
+    <!-- Seats do not limit how many can be ordered for the waiting list: the
+         ones that do not fit wait. Only the limit per order of the ticket does. -->
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']//t[@t-set='max_input_value']"
+      position="after"
+    >
+      <t
+        t-if="event.waiting_list"
+        t-set="max_input_value"
+        t-value="event._get_waiting_list_order_limit(ticket)"
+      />
+    </xpath>
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']//div[contains(@t-if, 'ticket.sale_available')]"
+      position="attributes"
+    >
+      <attribute
+        name="t-if"
+      >(not ticket.is_expired and (ticket.sale_available or (event.waiting_list and ticket.is_launched)) and max_input_value) or seats_available_slot_ticket</attribute>
+    </xpath>
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']//div[contains(@t-if, 'ticket.sale_available')]"
+      position="inside"
+    >
+      <t
+        t-set="waiting_ticket"
+        t-value="event.waiting_list and ((event_slot and (event.seats_limited or ticket.seats_limited) and not seats_available_slot_ticket) or (not event_slot and not ticket.sale_available))"
+      />
+      <small
+        t-if="waiting_ticket"
+        class="d-block text-body-secondary text-center"
+      >Waiting list</small>
+    </xpath>
+    <xpath
+      expr="//div[hasclass('o_wevent_registration_single_select')]//button[@data-increment-type='plus']"
+      position="attributes"
+    >
+      <attribute name="t-att-disabled">max_input_value == 1</attribute>
+    </xpath>
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']/following-sibling::div[hasclass('modal-footer')]//t[contains(@t-if, 'seats_available')]"
+      position="attributes"
+    >
+      <attribute
+        name="t-if"
+      >event.seats_limited and event.seats_max and 0 &lt; event.seats_available &lt;= (event.seats_max * 0.2)</attribute>
+    </xpath>
+    <xpath
+      expr="//div[hasclass('o_wevent_registration_single')]/div[hasclass('modal-footer')]//t[contains(@t-if, 'seats_available')]"
+      position="attributes"
+    >
+      <attribute
+        name="t-if"
+      >event.seats_limited and event.seats_max and 0 &lt; event.seats_available &lt;= (event.seats_max * 0.2)</attribute>
+    </xpath>
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']/following-sibling::div[hasclass('modal-footer')]/button[@type='submit']"
+      position="after"
+    >
+      <button
+        t-if="event.waiting_list_open"
+        type="submit"
+        class="btn btn-primary a-submit"
+        disabled=""
+        t-attf-id="#{event.id}"
+      >Join the waiting list</button>
+    </xpath>
+    <xpath
+      expr="//div[@id='o_wevent_tickets_collapse']/following-sibling::div[hasclass('modal-footer')]/button[@type='submit']"
+      position="attributes"
+    >
+      <attribute name="t-if">not event.waiting_list_open</attribute>
+    </xpath>
+    <xpath
+      expr="//div[hasclass('o_wevent_registration_single')]/div[hasclass('modal-footer')]/button[@type='submit']"
+      position="after"
+    >
+      <button
+        t-if="event.waiting_list_open"
+        type="submit"
+        class="btn btn-primary a-submit"
+        disabled="disabled"
+        t-attf-id="#{event.id}"
+      >Join the waiting list</button>
+    </xpath>
+    <xpath
+      expr="//div[hasclass('o_wevent_registration_single')]/div[hasclass('modal-footer')]/button[@type='submit']"
+      position="attributes"
+    >
+      <attribute name="t-if">not event.waiting_list_open</attribute>
+    </xpath>
+    <xpath
+      expr="//div[hasclass('o_wevent_registration_single_select')]//t[@t-set='max_input_value']"
+      position="after"
+    >
+      <t
+        t-if="event.waiting_list"
+        t-set="max_input_value"
+        t-value="event._get_waiting_list_order_limit(tickets)"
+      />
+    </xpath>
+  </template>
+  <template
+    id="registration_attendee_details_waiting_list"
+    inherit_id="website_event.registration_attendee_details"
+    name="Registration Attendee Details"
+  >
+    <!-- The whole footer is swapped, not its button: website_event_sale replaces
+         that button with its own buttons inside a t, so it is not a direct child
+         of the footer any more -->
+    <xpath expr="//div[hasclass('modal-footer')]" position="after">
+      <div t-if="event.waiting_list_open" class="modal-footer border-top">
+        <button
+          type="button"
+          class="btn btn-secondary js_goto_event"
+          data-bs-dismiss="modal"
+        >Cancel</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          t-if="availability_check and limit_check"
+        >Join the waiting list</button>
+      </div>
+    </xpath>
+    <xpath expr="//div[hasclass('modal-footer')]" position="attributes">
+      <attribute name="t-if">not event.waiting_list_open</attribute>
+    </xpath>
+  </template>
+  <!-- Confirmation page: acknowledge a waiting-list join distinctly from
+       a normal confirmed registration. -->
+  <template
+    id="registration_complete_waiting_list"
+    inherit_id="website_event.registration_complete"
+    name="Registration Completed"
+  >
+    <xpath expr="//h1[@class='h3-fs']" position="attributes">
+      <attribute name="t-if">not all_waiting</attribute>
+    </xpath>
+    <xpath expr="//h1[@class='h3-fs']" position="after">
+      <h1 t-if="all_waiting" class="h3-fs">Joined the waiting list!</h1>
+    </xpath>
+    <xpath expr="//u[a[@class='h4 text-primary']]" position="after">
+      <div t-if="waiting_attendees" class="alert alert-info mt-3" role="status">
+        <t
+          t-if="all_waiting"
+        >You will be contacted by email if a seat becomes available.</t>
+        <t t-else=""><t
+          t-out="len(waiting_attendees)"
+        /> of your registrations joined the waiting list. You will be contacted by email if seats become available.</t>
+      </div>
+    </xpath>
+    <xpath
+      expr="//t[@t-call='website_event.registration_ticket_access']"
+      position="attributes"
+    >
+      <attribute name="t-if">attendees and not all_waiting</attribute>
+    </xpath>
+    <xpath
+      expr="//div[t[@t-call='website_event.event_calendar_links']]"
+      position="attributes"
+    >
+      <attribute name="t-if">not all_waiting</attribute>
+    </xpath>
+  </template>
+</odoo>

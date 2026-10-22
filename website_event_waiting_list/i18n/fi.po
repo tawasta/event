@@ -1,0 +1,507 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_waiting_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-16 08:00+0000\n"
+"PO-Revision-Date: 2026-10-16 11:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid ". This cannot be undone."
+msgstr ". Tätä ei voi perua."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template
+msgid "<b>Sold Out</b> - registrations join the waiting list."
+msgstr "<b>Loppuunmyyty</b> - ilmoittautuneet liittyvät jonotuslistalle."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "<b>Sold Out</b> - your registration joins the waiting list. You will get an email if a seat becomes available."
+msgstr "<b>Loppuunmyyty</b> - ilmoittautumisesi menee jonotuslistalle. Saat sähköpostia, jos paikka vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "<b>Sorry, the seat was taken by someone else.</b> You are still on the waiting list. We will email you if a seat becomes available."
+msgstr "<b>Valitettavasti joku muu ehti ottaa paikan.</b> Olet edelleen jonotuslistalla. Lähetämme sähköpostia, jos paikka vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "<b>This event has been cancelled.</b>"
+msgstr "<b>Tämä tapahtuma on peruttu.</b>"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "A seat has opened up!"
+msgstr "Paikka on vapautunut!"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "A seat is available for you."
+msgstr "Sinulle on vapaa paikka."
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields.selection,name:website_event_waiting_list.selection__event_mail__interval_type__after_seats_available
+#: model:ir.model.fields.selection,name:website_event_waiting_list.selection__event_type_mail__interval_type__after_seats_available
+msgid "After more seats are available send to waiting list registrations"
+msgstr "Kun paikkoja vapautuu, lähetetään jonotuslistan ilmoittautuneille"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields.selection,name:website_event_waiting_list.selection__event_mail__interval_type__after_wait
+#: model:ir.model.fields.selection,name:website_event_waiting_list.selection__event_type_mail__interval_type__after_wait
+msgid "After registering to waiting list"
+msgstr "Jonotuslistalle liittymisen jälkeen"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "all our events"
+msgstr "kaikkiin tapahtumiimme"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Attendee Information"
+msgstr "Osallistujan tiedot"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_registration__waiting_list_to_confirm
+msgid "Available to confirm from waiting list"
+msgstr "Vahvistettavissa jonotuslistalta"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_attendee_details_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.website_event_mail_list_wizard_form
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Cancel registration"
+msgstr "Peruuta ilmoittautuminen"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Cancelled"
+msgstr "Peruttu"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "Claim or cancel registration"
+msgstr "Varaa tai peruuta ilmoittautuminen"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "Claim or cancel your seat from the link below:"
+msgstr "Varaa tai peruuta paikkasi alla olevasta linkistä:"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "Claim your seat quickly as we give seats on a first come first serve basis."
+msgstr "Varaa paikkasi nopeasti, sillä paikat jaetaan saapumisjärjestyksessä."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Close"
+msgstr "Sulje"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Confirm registration"
+msgstr "Vahvista ilmoittautuminen"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_website_event_waiting_mail_list_message__message
+msgid "Confirm Waiting Message sent"
+msgstr "Jonotuslistan vahvistusviesti lähetetty"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Confirm your registration now. The seat goes to the first one who confirms."
+msgstr "Vahvista ilmoittautumisesi nyt. Paikka annetaan ensimmäiselle, joka vahvistaa."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Confirm your registration?"
+msgstr "Vahvistetaanko ilmoittautuminen?"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Discover"
+msgstr "Tutustu"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Email"
+msgstr "Sähköposti"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_event__waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_registration__waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_type__waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_form_waiting_list
+msgid "Enable Waiting List"
+msgstr "Ota jonotuslista käyttöön"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,help:website_event_waiting_list.field_event_event__waiting_list
+#: model:ir.model.fields,help:website_event_waiting_list.field_event_type__waiting_list
+msgid "Enable waiting list when attendee limit is reached."
+msgstr "Ota jonotuslista käyttöön, kun osallistujamäärän raja täyttyy."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "End"
+msgstr "Päättyy"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Event Details"
+msgstr "Tapahtuman tiedot"
+
+#. module: website_event_waiting_list
+#: model:mail.template,name:website_event_waiting_list.event_waiting
+msgid "Event: Waiting List Confirmation"
+msgstr "Tapahtuma: Jonotuslistan vahvistus"
+
+#. module: website_event_waiting_list
+#: model:mail.template,name:website_event_waiting_list.event_confirm_waiting_registration
+msgid "Event: Waiting List Open Seats"
+msgstr "Tapahtuma: Jonotuslistan vapautuneet paikat"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "for event"
+msgstr "tapahtumaan"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "for the event"
+msgstr "tapahtumaan"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Hello"
+msgstr "Hei"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "is currently sold out."
+msgstr "on tällä hetkellä loppuunmyyty."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_attendee_details_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "Join the waiting list"
+msgstr "Liity jonotuslistalle"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete_waiting_list
+msgid "Joined the waiting list!"
+msgstr "Liityit jonotuslistalle!"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Leave the waiting list"
+msgstr "Poistu jonotuslistalta"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Leave the waiting list?"
+msgstr "Poistutaanko jonotuslistalta?"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Location"
+msgstr "Sijainti"
+
+#. module: website_event_waiting_list
+#: model:ir.model,name:website_event_waiting_list.model_website_event_waiting_mail_list_wizard
+msgid "Mail confirmation email to waiting list contacts"
+msgstr "Vahvistusviesti jonotuslistan yhteyshenkilöille"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_registration_form_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_registration_tree_waiting_list
+msgid "Move to Waiting List"
+msgstr "Siirrä jonotuslistalle"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "N/A"
+msgstr "Ei saatavilla"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Name"
+msgstr "Nimi"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Not now"
+msgstr "Ei nyt"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete_waiting_list
+msgid "of your registrations joined the waiting list. You will be contacted by email if seats become available."
+msgstr "ilmoittautumisestasi meni jonotuslistalle. Sinuun otetaan yhteyttä sähköpostitse, jos paikkoja vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Pending confirmation"
+msgstr "Odottaa vahvistusta"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Registered"
+msgstr "Ilmoittautunut"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_website_event_waiting_mail_list_message__registration_ids
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_website_event_waiting_mail_list_wizard__registration_ids
+msgid "Registrations"
+msgstr "Ilmoittautumiset"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Seat available"
+msgstr "Paikka vapaana"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_event__seats_waiting
+msgid "Seats on waiting list"
+msgstr "Jonotuslistalla olevat"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,help:website_event_waiting_list.field_event_registration__waiting_list_access_token
+msgid "Secret token identifying this registration in the public waiting-list confirm/cancel link, so that link works without the recipient needing to be logged in. Kept separate from any token other, independent modules may add for their own similar links."
+msgstr "Salainen tunnus, joka tunnistaa ilmoittautumisen julkisessa jonotuslistan vahvistus- tai peruutuslinkissä, jotta linkki toimii ilman kirjautumista. Pidetään erillään muiden moduulien omista vastaavista tunnuksista."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.website_event_mail_list_wizard_form
+msgid "Send"
+msgstr "Lähetä"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.website_event_mail_list_wizard_form
+msgid "Send confirmation mail"
+msgstr "Lähetä vahvistusviesti"
+
+#. module: website_event_waiting_list
+#: model:ir.actions.act_window,name:website_event_waiting_list.action_waiting_mail_list_tree
+msgid "Send event confirmation mail"
+msgstr "Lähetä tapahtuman vahvistusviesti"
+
+#. module: website_event_waiting_list
+#: model:ir.model,name:website_event_waiting_list.model_website_event_waiting_mail_list_message
+msgid "Send message after mail action is sent"
+msgstr "Viesti viestin lähettämisen jälkeen"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Sent by"
+msgstr "Lähettäjä"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Start"
+msgstr "Alkaa"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Stay on the list"
+msgstr "Pysy listalla"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Still waiting"
+msgstr "Odotat edelleen"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Team"
+msgstr "Tiimi"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Thank you for your interest in our event."
+msgstr "Kiitos kiinnostuksestasi tapahtumaamme kohtaan."
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Thank you,"
+msgstr "Kiitos,"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "The"
+msgstr "Tapahtuman"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "The event"
+msgstr "Tapahtuma"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "The ticket"
+msgstr "Lippu"
+
+#. module: website_event_waiting_list
+#: code:addons/website_event_waiting_list/models/event_registration.py:0
+msgid "There are no seats available to confirm this registration yet."
+msgstr "Ilmoittautumisen vahvistamiseen ei ole vielä vapaita paikkoja."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Ticket"
+msgstr "Lippu"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "To cancel your position in the waiting list follow the link below:"
+msgstr "Jos haluat poistua jonotuslistalta, seuraa alla olevaa linkkiä:"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "View Event"
+msgstr "Näytä tapahtuma"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields.selection,name:website_event_waiting_list.selection__event_registration__state__wait
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_form_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_kanban_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_registration_search_waiting_list
+msgid "Waiting"
+msgstr "Jonotuslistalla"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "Waiting list"
+msgstr "Jonotuslista"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_event__waiting_list_open
+msgid "Open for the waiting list"
+msgstr "Avoinna jonotuslistalle"
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,help:website_event_waiting_list.field_event_event__waiting_list_open
+msgid "Everything is sold out, so a registration joins the waiting list."
+msgstr "Kaikki on myyty loppuun, joten ilmoittautuminen liittyy jonotuslistalle."
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_registration__waiting_list_access_token
+msgid "Waiting List Access Token"
+msgstr "Jonotuslistan käyttötunnus"
+
+#. module: website_event_waiting_list
+#: code:addons/website_event_waiting_list/wizard/waiting_mail_list_wizard.py:0
+msgid "Waiting list confirmation mail sent to following registrations:"
+msgstr "Jonotuslistan vahvistusviesti lähetetty seuraaville ilmoittautumisille:"
+
+#. module: website_event_waiting_list
+#: code:addons/website_event_waiting_list/models/event_registration.py:0
+msgid "Waiting list for this event is not enabled."
+msgstr "Tämän tapahtuman jonotuslista ei ole käytössä."
+
+#. module: website_event_waiting_list
+#: model:ir.model.fields,field_description:website_event_waiting_list.field_event_registration__waiting_list_manage_url
+msgid "Waiting List Manage Link"
+msgstr "Jonotuslistan hallintalinkki"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_event_tree_waiting_list
+msgid "Waiting Seats"
+msgstr "Jonossa olevat"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "We have more seats available for the event"
+msgstr "Meillä on lisää paikkoja tapahtumaan"
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+msgid "We have more seats available for the ticket"
+msgstr "Meillä on lisää paikkoja lippuun"
+
+#. module: website_event_waiting_list
+#: model:mail.template,subject:website_event_waiting_list.event_confirm_waiting_registration
+msgid "We have more tickets available for {{ object.event_id.name }}"
+msgstr "Tapahtumaan {{ object.event_id.name }} on vapautunut lisää lippuja"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "We will email you if a seat becomes available."
+msgstr "Lähetämme sähköpostia, jos paikka vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "You are about to confirm your registration to"
+msgstr "Olet vahvistamassa ilmoittautumisesi tapahtumaan"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "You are on the waiting list of this event."
+msgstr "Olet tämän tapahtuman jonotuslistalla."
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "You have been placed on a waiting list. We will contact you if any seats become available."
+msgstr "Sinut on lisätty jonotuslistalle. Otamme yhteyttä, jos paikkoja vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_complete_waiting_list
+msgid "You will be contacted by email if a seat becomes available."
+msgstr "Sinuun otetaan yhteyttä sähköpostitse, jos paikka vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "You will lose your place on the waiting list of"
+msgstr "Menetät paikkasi jonotuslistalla tapahtumassa"
+
+#. module: website_event_waiting_list
+#: model:mail.template,subject:website_event_waiting_list.event_waiting
+msgid "You're on a waiting list for {{ object.event_id.name }}"
+msgstr "Olet jonotuslistalla tapahtumaan {{ object.event_id.name }}"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Your registration is confirmed."
+msgstr "Ilmoittautumisesi on vahvistettu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Your registration is waiting for confirmation."
+msgstr "Ilmoittautumisesi odottaa vahvistusta."
+
+#. module: website_event_waiting_list
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_confirm_waiting_registration
+#: model_terms:mail.template,body_html:website_event_waiting_list.event_waiting
+msgid "Your registration to waiting list"
+msgstr "Ilmoittautumisesi jonotuslistalle"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.manage_waiting_registration
+msgid "Your waiting-list registration has been cancelled."
+msgstr "Jonotuslistan ilmoittautumisesi on peruttu."

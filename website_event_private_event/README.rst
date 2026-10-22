@@ -5,7 +5,8 @@
 ===========================
 Website Event Private Event
 ===========================
-* Make event only visible with URL. Remove from public event list.
+* Make event only visible with URL. Remove from public event list and from
+  the sitemap (sitemap.xml).
 
 Configuration
 =============
@@ -14,6 +15,7 @@ Configuration
 Usage
 =====
 * Open event list in frontend. Private events do not show up.
+* Open /sitemap.xml. Private events are not listed.
 
 Known issues / Roadmap
 ======================
@@ -27,6 +29,7 @@ Contributors
 
 * Miika Nissi <miika.nissi@futural.fi>
 * Timo Talvitie <timo.talvitie@futural.fi>
+* Valtteri Lattu <valtteri.lattu@futural.fi>
 
 Maintainer
 ----------

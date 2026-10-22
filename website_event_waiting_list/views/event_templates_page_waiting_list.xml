@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <!-- Standalone "manage my waiting-list registration" page, reachable via
+       the public, token-based link sent in the waiting-list emails (see
+       WebsiteEventControllerWaiting.waiting_list_manage). Deliberately
+       self-contained rather than extending
+       website_event_cancellation.cancel_registration, so this module
+       never needs that one installed. -->
+  <template id="manage_waiting_registration" name="Manage Waiting List Registration">
+    <!-- The registration comes from sudo, so the address is readable
+         although the visitor is public: the secret token gave access -->
+    <t t-set="address" t-value="registration.event_id.address_id" />
+    <t
+      t-set="tone"
+      t-value="{'cancel': 'danger', 'open': 'success', 'done': 'success', 'draft': 'warning'}.get(registration.state, 'success' if registration.waiting_list_to_confirm else 'warning')"
+    />
+    <t
+      t-set="date_options"
+      t-value="{'widget': 'datetime', 'tz_name': event.date_tz, 'format': 'medium'}"
+    />
+    <t t-call="website_event.layout">
+      <div class="container my-5 o_wereg_confirmed">
+        <div
+          t-if="event.kanban_state == 'cancel'"
+          class="alert alert-danger mb-4"
+          role="status"
+        >
+          <b>This event has been cancelled.</b>
+        </div>
+        <div t-if="confirm_failed" class="alert alert-warning mb-4" role="alert">
+          <b>Sorry, the seat was taken by someone else.</b> You are still on the
+          waiting list. We will email you if a seat becomes available.
+        </div>
+        <div class="row mb-5">
+          <div name="title-div" class="col-12">
+            <span t-attf-class="badge rounded-pill text-bg-#{tone} mb-3" role="status">
+              <t t-if="registration.state == 'cancel'">Cancelled</t>
+              <t t-elif="registration.state in ('open', 'done')">Registered</t>
+              <t t-elif="registration.state == 'draft'">Pending confirmation</t>
+              <t t-elif="registration.waiting_list_to_confirm">Seat available</t>
+              <t t-else="">Waiting list</t>
+            </span>
+            <h1 class="h3-fs mb-2">
+              <a
+                class="text-reset text-decoration-none"
+                t-out="event.name"
+                t-att-href="event.website_url"
+              />
+            </h1>
+            <p class="lead text-muted mb-0">
+              <t
+                t-if="registration.state == 'cancel'"
+              >Your waiting-list registration has been cancelled.</t>
+              <t
+                t-elif="registration.state in ('open', 'done')"
+              >Your registration is confirmed.</t>
+              <t
+                t-elif="registration.state == 'draft'"
+              >Your registration is waiting for confirmation.</t>
+              <t
+                t-elif="registration.waiting_list_to_confirm"
+              >A seat is available for you.</t>
+              <t t-else="">You are on the waiting list of this event.</t>
+            </p>
+          </div>
+        </div>
+        <div class="row g-5">
+          <div id="event-information" class="col-12 col-lg-6">
+            <h2 class="h5 pb-2 mb-4 border-bottom">Event Details</h2>
+            <div class="d-flex gap-3 mb-3">
+              <i
+                class="fa fa-fw fa-lg fa-calendar text-primary mt-1"
+                aria-hidden="true"
+              />
+              <div>
+                <div class="small text-muted">Start</div>
+                <div
+                  class="fw-semibold"
+                  t-out="registration.event_begin_date"
+                  t-options="date_options"
+                />
+              </div>
+            </div>
+            <div class="d-flex gap-3">
+              <i
+                class="fa fa-fw fa-lg fa-flag-checkered text-primary mt-1"
+                aria-hidden="true"
+              />
+              <div>
+                <div class="small text-muted">End</div>
+                <div
+                  class="fw-semibold"
+                  t-out="registration.event_end_date"
+                  t-options="date_options"
+                />
+              </div>
+            </div>
+            <h5 class="mt-4">Location</h5>
+            <p id="location">
+              <t t-if="address">
+                <span class="d-block fw-semibold" t-out="address.name" />
+                <a
+                  class="d-block"
+                  t-att-href="event.google_map_link()"
+                  target="_blank"
+                  rel="noopener"
+                  t-out="event.address_inline"
+                />
+              </t>
+              <t t-else="">N/A</t>
+            </p>
+          </div>
+          <div class="col-12 col-lg-6">
+            <h2 class="h5 pb-2 mb-4 border-bottom">Attendee Information</h2>
+            <dl class="row mb-0">
+              <dt class="col-sm-4 fw-normal text-muted">Name</dt>
+              <dd class="col-sm-8 text-break">
+                <t t-if="registration.name" t-out="registration.name" />
+                <t t-else="">N/A</t>
+              </dd>
+              <dt class="col-sm-4 fw-normal text-muted">Email</dt>
+              <dd class="col-sm-8 text-break">
+                <t t-if="registration.email" t-out="registration.email" />
+                <t t-else="">N/A</t>
+              </dd>
+              <dt class="col-sm-4 fw-normal text-muted">Ticket</dt>
+              <dd class="col-sm-8 mb-0">
+                <t
+                  t-if="registration.event_ticket_id"
+                  t-out="registration.event_ticket_id.name"
+                />
+                <t t-else="">N/A</t>
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <!-- What the attendee can do next -->
+        <div
+          t-if="registration.state == 'wait'"
+          name="button-div"
+          class="mt-5 p-4 rounded-3 bg-body-tertiary d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3"
+        >
+          <div t-if="registration.waiting_list_to_confirm">
+            <h2 class="h5 mb-1">A seat has opened up!</h2>
+            <p
+              class="mb-0 text-muted"
+            >Confirm your registration now. The seat goes to the first one who confirms.</p>
+          </div>
+          <div t-else="">
+            <h2 class="h5 mb-1">Still waiting</h2>
+            <p
+              class="mb-0 text-muted"
+            >We will email you if a seat becomes available.</p>
+          </div>
+          <div class="d-grid gap-2 d-md-flex flex-shrink-0">
+            <button
+              t-if="registration.waiting_list_to_confirm"
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#confirm_waiting_modal"
+            >Confirm registration</button>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#cancel_waiting_modal"
+            >Leave the waiting list</button>
+          </div>
+        </div>
+        <!-- Confirm modal -->
+        <div
+          t-if="registration.state == 'wait' and registration.waiting_list_to_confirm"
+          class="modal fade"
+          id="confirm_waiting_modal"
+          tabindex="-1"
+          aria-labelledby="confirm_waiting_modal_title"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow rounded-4">
+              <form t-att-action="request.httprequest.path" method="post">
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  t-att-value="request.csrf_token()"
+                />
+                <input type="hidden" name="new_state" value="open" />
+                <div class="modal-body text-center p-4 p-md-5">
+                  <span
+                    class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success p-4 mb-4"
+                  >
+                    <i class="fa fa-fw fa-2x fa-check" aria-hidden="true" />
+                  </span>
+                  <h2
+                    class="h4 mb-3"
+                    id="confirm_waiting_modal_title"
+                  >Confirm your registration?</h2>
+                  <p class="text-muted mb-4">
+                    You are about to confirm your registration to <b
+                    t-out="event.name"
+                  />.
+                  </p>
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button
+                      type="button"
+                      class="btn btn-light order-sm-1"
+                      data-bs-dismiss="modal"
+                    >Not now</button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary order-sm-2"
+                    >Confirm registration</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Leave the waiting list modal -->
+        <div
+          t-if="registration.state == 'wait'"
+          class="modal fade"
+          id="cancel_waiting_modal"
+          tabindex="-1"
+          aria-labelledby="cancel_waiting_modal_title"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow rounded-4">
+              <form t-att-action="request.httprequest.path" method="post">
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  t-att-value="request.csrf_token()"
+                />
+                <input type="hidden" name="new_state" value="cancel" />
+                <div class="modal-body text-center p-4 p-md-5">
+                  <span
+                    class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger-subtle text-danger p-4 mb-4"
+                  >
+                    <i class="fa fa-fw fa-2x fa-times" aria-hidden="true" />
+                  </span>
+                  <h2
+                    class="h4 mb-3"
+                    id="cancel_waiting_modal_title"
+                  >Leave the waiting list?</h2>
+                  <p class="text-muted mb-4">
+                    You will lose your place on the waiting list of <b
+                    t-out="event.name"
+                  />. This cannot be undone.
+                  </p>
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button
+                      type="button"
+                      class="btn btn-light order-sm-1"
+                      data-bs-dismiss="modal"
+                    >Stay on the list</button>
+                    <button
+                      type="submit"
+                      class="btn btn-danger order-sm-2"
+                    >Leave the waiting list</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

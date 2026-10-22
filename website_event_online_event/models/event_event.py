@@ -19,14 +19,14 @@
 ##############################################################################
 
 import logging
+import urllib.parse
 
-import pytz
 import werkzeug.urls
+from markupsafe import escape
 
 from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
-GOOGLE_CALENDAR_URL = "https://www.google.com/calendar/render?"
 
 try:
     import vobject
@@ -70,64 +70,38 @@ class EventEvent(models.Model):
         for event in self:
             event.is_online_event = event.event_type_id.is_online_event
 
-    def _get_ics_file(self):
-        """Returns iCalendar file for the event invitation.
-        :returns a dict of .ics file content for each event
-        """
-        result = {}
+    def _get_external_description(self):
+        """Add the video conference link to the description that core uses in
+        the calendar file and in the calendar links."""
+        description = super()._get_external_description()
+        if self.video_conference_link:
+            description += "\n" + self.env._(
+                "Join the video conference: %s", escape(self.video_conference_link)
+            )
+        return description
+
+    def _get_ics_file(self, slot=False):
+        """Set the location of an online event to Online in the core file."""
+        result = super()._get_ics_file(slot=slot)
         if not vobject:
             return result
-
-        for event in self:
-            cal = vobject.iCalendar()
-            cal_event = cal.add("vevent")
-
-            cal_event.add("created").value = fields.Datetime.now().replace(
-                tzinfo=pytz.timezone("UTC")
-            )
-            cal_event.add("dtstart").value = fields.Datetime.from_string(
-                event.date_begin
-            ).replace(tzinfo=pytz.timezone("UTC"))
-            cal_event.add("dtend").value = fields.Datetime.from_string(
-                event.date_end
-            ).replace(tzinfo=pytz.timezone("UTC"))
-            cal_event.add("summary").value = event.name
-            if event.address_id and not event.is_online_event:
-                cal_event.add(
-                    "location"
-                ).value = event.sudo().address_id.contact_address
-            elif event.is_online_event:
-                cal_event.add("location").value = "Online"
-            if event.video_conference_link:
-                video_link = self.env._(
-                    "Join the video conference: %s", event.sudo().video_conference_link
-                )
-                cal_event.add("description").value = video_link
-
-            result[event.id] = cal.serialize().encode("utf-8")
+        for event in self.filtered("is_online_event"):
+            calendar = vobject.readOne(result[event.id].decode("utf-8"))
+            if hasattr(calendar.vevent, "location"):
+                calendar.vevent.location.value = "Online"
+            else:
+                calendar.vevent.add("location").value = "Online"
+            result[event.id] = calendar.serialize().encode("utf-8")
         return result
 
-    def _get_event_resource_urls(self):
-        url_date_start = self.date_begin.strftime("%Y%m%dT%H%M%SZ")
-        url_date_stop = self.date_end.strftime("%Y%m%dT%H%M%SZ")
-        params = {
-            "action": "TEMPLATE",
-            "text": self.name,
-            "dates": url_date_start + "/" + url_date_stop,
-            "details": self.name,
-        }
-        if self.address_id and not self.is_online_event:
-            params.update(
-                location=self.sudo().address_id.contact_address.replace("\n", " ")
-            )
-        elif self.is_online_event:
-            params.update(location=self.env._("Online"))
-        if self.video_conference_link:
-            params.update(
-                details=self.env._("Join the video conference: ")
-                + self.sudo().video_conference_link
-            )
-        encoded_params = werkzeug.urls.url_encode(params)
-        google_url = GOOGLE_CALENDAR_URL + encoded_params
-        iCal_url = f"/event/{self.id}/ics?{encoded_params}"
-        return {"google_url": google_url, "iCal_url": iCal_url}
+    def _get_event_resource_urls(self, slot=False):
+        """Set the location of an online event to Online in the Google link."""
+        urls = super()._get_event_resource_urls(slot=slot)
+        if self.is_online_event:
+            google_url = urllib.parse.urlsplit(urls["google_url"])
+            params = dict(urllib.parse.parse_qsl(google_url.query))
+            params["location"] = self.env._("Online")
+            urls["google_url"] = google_url._replace(
+                query=werkzeug.urls.url_encode(params)
+            ).geturl()
+        return urls

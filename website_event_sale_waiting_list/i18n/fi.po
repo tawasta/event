@@ -1,0 +1,27 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_event_sale_waiting_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-16 08:00+0000\n"
+"PO-Revision-Date: 2026-10-16 11:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: website_event_sale_waiting_list
+#: model:ir.model.fields,field_description:website_event_sale_waiting_list.field_event_registration__confirmed_from_waiting_list
+msgid "Confirmed From Waiting List"
+msgstr "Vahvistettu jonotuslistalta"
+
+#. module: website_event_sale_waiting_list
+#: model:ir.model.fields,help:website_event_sale_waiting_list.field_event_registration__confirmed_from_waiting_list
+msgid "Set while a waiting-list registration is linked to a sale order for its ticket payment. Distinguishes it from an ordinary cart signup so its state can be kept as 'wait' until the order is actually paid (see _compute_registration_status) and so it can be sent back to the waiting list rather than lost if that order is cancelled or the ticket removed from the cart (see action_cancel and SaleOrder._action_cancel)."
+msgstr "Asetettu, kun jonotuslistan ilmoittautuminen on liitetty myyntitilaukseen lipun maksua varten. Erottaa sen tavallisesta ostoskorin ilmoittautumisesta, jotta sen tila pysyy tilassa 'wait' kunnes tilaus on maksettu ja jotta se voidaan palauttaa jonotuslistalle, jos tilaus perutaan tai lippu poistetaan ostoskorista."
