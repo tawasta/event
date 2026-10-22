@@ -17,8 +17,8 @@ msgstr ""
 
 #. module: website_event_registration_partner_tags
 #: model:ir.model.fields,field_description:website_event_registration_partner_tags.field_event_event__registration_partner_category_ids
-msgid "Customer Tags"
-msgstr "Asiakkaan tunnisteet"
+msgid "Customer of"
+msgstr "Asiakkaana yrityksessä"
 
 #. module: website_event_registration_partner_tags
 #: model:ir.model,name:website_event_registration_partner_tags.model_event_event
@@ -33,9 +33,10 @@ msgstr "Tapahtumailmoittautuminen"
 #. module: website_event_registration_partner_tags
 #: model:ir.model.fields,help:website_event_registration_partner_tags.field_event_event__registration_partner_category_ids
 msgid ""
-"Tags added to the contact of each registration to this event once the "
-"registration is confirmed. Existing tags of the contact are kept."
+"Companies added to the Customer of field of the contact of each registration "
+"to this event once the registration is confirmed. Existing companies of the "
+"contact are kept."
 msgstr ""
-"Tunnisteet, jotka lisätään jokaisen tähän tapahtumaan ilmoittautuneen "
-"kontaktille, kun ilmoittautuminen vahvistetaan. Kontaktin olemassa olevat "
-"tunnisteet säilyvät."
+"Yritykset, jotka lisätään jokaisen tähän tapahtumaan ilmoittautuneen "
+"kontaktin Asiakkaana yrityksessä -kenttään, kun ilmoittautuminen "
+"vahvistetaan. Kontaktin olemassa olevat yritykset säilyvät."

@@ -15,18 +15,19 @@ class EventRegistration(models.Model):
         return res
 
     def _add_event_partner_tags(self):
-        """Add the event's customer tags that the registration contact lacks."""
-        tags_by_partner = defaultdict(lambda: self.env["res.partner.category"])
+        """Add the event's companies that the registration contact lacks as
+        customer of."""
+        companies_by_partner = defaultdict(lambda: self.env["res.company"])
         for registration in self.filtered("partner_id"):
-            tags_by_partner[
+            companies_by_partner[
                 registration.partner_id
             ] |= registration.event_id.registration_partner_category_ids
 
-        for partner, tags in tags_by_partner.items():
-            missing_tags = tags - partner.category_id
-            if missing_tags:
-                # sudo: tagging is a side effect of registering, also for
+        for partner, companies in companies_by_partner.items():
+            missing_companies = companies - partner.customer_of
+            if missing_companies:
+                # sudo: this is a side effect of registering, also for
                 # website users and event users who cannot edit contacts
                 partner.sudo().write(
-                    {"category_id": [(4, tag.id) for tag in missing_tags]}
+                    {"customer_of": [(4, company.id) for company in missing_companies]}
                 )

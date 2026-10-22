@@ -5,12 +5,9 @@ class EventEvent(models.Model):
     _inherit = "event.event"
 
     registration_partner_category_ids = fields.Many2many(
-        comodel_name="res.partner.category",
-        relation="event_event_registration_partner_category_rel",
-        column1="event_id",
-        column2="category_id",
-        string="Customer Tags",
-        help="Tags added to the contact of each registration to this event "
-        "once the registration is confirmed. Existing tags of the contact are "
-        "kept.",
+        comodel_name="res.company",
+        string="Customer of",
+        help="Companies added to the Customer of field of the contact of each "
+        "registration to this event once the registration is confirmed. "
+        "Existing companies of the contact are kept.",
     )

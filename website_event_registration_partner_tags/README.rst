@@ -6,19 +6,23 @@
 Website Event: Registration Partner Tags
 =========================================
 
-* Adds "Customer Tags" to events.
-* When a registration is confirmed, the tags of the event that the contact of
-  the registration does not have yet are added to the contact. Existing tags
-  of the contact are kept.
+* Adds "Customer of" (companies) to events.
+* When a registration is confirmed, the companies of the event that the
+  contact of the registration does not have yet in "Customer of" are added to
+  the contact. Existing companies of the contact are kept.
 * A registration is confirmed right away when the event confirms
   registrations automatically, when a free sale order is confirmed, or when
   the invoice of a paid registration is paid. Unfinished registrations, e.g.
   left in the cart, do not add tags.
-* Events without customer tags do not change contacts.
+* Events without "Customer of" companies do not change contacts.
+* The module requires res_partner_multicompany, which provides the "Customer
+  of" field of the contact.
+* The customer tags (res.partner.category) selected in the event before this
+  change are not migrated: "Customer of" contains companies, not tags.
 
 Configuration
 =============
-* Select the tags in "Customer Tags" on the event form.
+* Select the companies in "Customer of" on the event form.
 
 Usage
 =====

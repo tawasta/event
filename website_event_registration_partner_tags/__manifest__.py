@@ -21,13 +21,13 @@
 {
     "name": "Website Event: Registration Partner Tags",
     "summary": "Add event specific tags to the contact of a registration",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Website",
     "website": "https://gitlab.com/tawasta/odoo/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["event"],
+    "depends": ["event", "res_partner_multicompany"],
     "data": ["views/event_event_views.xml"],
 }
