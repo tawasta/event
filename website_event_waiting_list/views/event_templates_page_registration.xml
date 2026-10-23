@@ -12,7 +12,7 @@
             position="before"
         >
             <!-- <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
             > -->
                 <button
                 t-if="event.waiting_list and event.event_registrations_sold_out and (event.date_end > datetime.datetime.now())"
@@ -45,7 +45,7 @@
                 t-att-name="'nb_register-%s' % (tickets.id if tickets else 0)"
                 class="custom-select waiting_list_select_multi form-select"
             >
-                <t t-foreach="range(0, 10)" t-as="nb">
+                <t t-foreach="range(0, 2)" t-as="nb">
                     <option t-esc="nb" class="waiting_list_option_multi" />
                 </t>
             </select>
@@ -55,40 +55,88 @@
         <!-- <xpath expr="//div[@class='col-md-4 d-flex align-items-center justify-content-between p-0']/t" position="attributes">
             <attribute name="t-if">event.event_registrations_open or event.waiting_list</attribute>
         </xpath> -->
-        <!-- Multi ticket view -->
-<!--         <xpath expr="//div[@class='w-auto ms-auto']/select" position="attributes">
+        <!-- Multi ticket view: core renders no quantity select for a sold out
+             ticket. Add one once the whole event is full, so a waiting list
+             registration can carry a quantity. Checking the event rather than
+             the ticket keeps waiting list and regular quantities from being
+             mixed in one post if a ticket has its own seat limit. -->
+        <xpath
+            expr="//div[@id='o_wevent_tickets_collapse']//div[hasclass('ms-auto')]/div[hasclass('text-danger')]"
+            position="after"
+        >
+            <t
+                t-if="event.waiting_list and ticket.is_sold_out and not ticket.is_expired and ticket.is_launched"
+            >
+                <select
+                    t-attf-name="nb_register-#{ticket.id}"
+                    class="form-select w-auto"
+                >
+                    <t t-foreach="range(0, 2)" t-as="nb">
+                        <option t-esc="nb" />
+                    </t>
+                </select>
+            </t>
+        </xpath>
+        <!-- With a waiting list a sold out ticket has a quantity select like
+             the other tickets, so the "Sold Out" text is replaced by a hint
+             under the ticket name. The rows stay aligned. -->
+        <xpath
+            expr="//div[@id='o_wevent_tickets_collapse']//div[hasclass('ms-auto')]/div[hasclass('text-danger')]"
+            position="attributes"
+        >
             <attribute
-                name="t-if"
-            >(not ticket.is_expired and ticket.sale_available and not event.waiting_list) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0)) or (not ticket.is_expired and ticket.sale_available and event.waiting_list and (not event.seats_limited or event.seats_available &gt; 0) and (not ticket.seats_limited or ticket.seats_available &gt; 0))</attribute>
-            <attribute name="id">seats_available_check_select</attribute>
+                name="t-att-class"
+            >'d-none' if event.waiting_list else 'text-danger'</attribute>
         </xpath>
         <xpath
-            expr="//div[@class='w-auto ms-auto']//div[@class='text-danger']//span[1]"
+            expr="//div[@id='o_wevent_tickets_collapse']//div[@itemtype='http://schema.org/Offer']"
+            position="inside"
+        >
+            <small
+                t-if="event.waiting_list and ticket.is_sold_out and not ticket.is_expired and ticket.is_launched"
+                class="d-block text-muted"
+            >Sold out - you can join the waiting list</small>
+        </xpath>
+        <xpath
+            expr="//span[@t-if='not event.event_registrations_open']"
             position="attributes"
         >
             <attribute
                 name="t-if"
-            >not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or (event.seats_available &lt;=0 and not ticket.is_expired and ticket.is_launched())</attribute>
-            <attribute name="id">ticket_available_check_span</attribute>
-        </xpath> -->
-<!--         <xpath
-            expr="//div[@class='w-auto ms-auto']//div[@class='text-danger']//span[1]"
-            position="after"
-        >
-            <select
-                t-if="event.waiting_list and not ticket.is_expired and ticket.is_launched and ((not event.seats_limited or event.seats_available &lt;=0) or (not ticket.seats_limited or ticket.seats_available &lt;=0))"
-                t-attf-name="nb_register-#{ticket.id}"
-                class="custom-select waiting_list_select_multi"
+            >not event.event_registrations_open and not event.waiting_list</attribute>
+        </xpath>
+        <!-- Tell the customer which tickets go to the waiting list -->
+        <xpath expr="//div[@id='o_wevent_tickets_collapse']" position="before">
+            <t
+                t-set="selling_tickets"
+                t-value="tickets.filtered(lambda ticket: ticket.is_launched and not ticket.is_expired)"
+            />
+            <t
+                t-set="waiting_tickets"
+                t-value="selling_tickets.filtered(lambda ticket: ticket.is_sold_out)"
+            />
+            <div
+                t-if="event.waiting_list and waiting_tickets"
+                class="alert alert-info small mx-3 mt-3 mb-0"
+                role="alert"
             >
-                <t t-foreach="range(0, 10)" t-as="nb">
-                    <option
-                        t-esc="nb"
-                        t-att-selected="len(ticket) == 0 and nb == 0 and 'selected'"
-                        class="waiting_list_option_multi"
-                    />
+                <i class="fa fa-info-circle me-2" />
+                <t t-if="len(waiting_tickets) == len(selling_tickets)">
+                    The event is full. Select 1 on a ticket to join the waiting list. We will contact you if a seat becomes available.
                 </t>
-            </select>
-        </xpath> -->
+                <t t-else="">
+                    The tickets marked Sold Out go to the waiting list: select 1 to join it. Other tickets are registered normally.
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='o_wevent_tickets_collapse']" position="inside">
+            <input
+                t-if="event.waiting_list and any(ticket.is_sold_out and not ticket.is_expired and ticket.is_launched for ticket in tickets)"
+                type="hidden"
+                name="waiting_list_registration"
+                value="True"
+            />
+        </xpath>
 
         <xpath
             expr="//t/div[@class='modal-footer flex-lg-row border-top']//button[@type='submit' and contains(@class, 'btn btn-primary o_wait_lazy_js a-submit')]"
@@ -97,7 +145,11 @@
 
 
             <t
-                t-if="any(event.waiting_list and not ticket.sale_available and not ticket.is_expired and ticket.is_launched() or event.waiting_list and event.seats_available &lt;= 0 for ticket in tickets)"
+                t-set="open_tickets"
+                t-value="tickets.filtered(lambda ticket: ticket.is_launched and not ticket.is_expired)"
+            />
+            <t
+                t-if="event.waiting_list and open_tickets and all(ticket.is_sold_out for ticket in open_tickets)"
             >
                 <button
                     type="submit"
@@ -109,7 +161,7 @@
                 </button>
             </t>
             <t
-                t-if="event.seats_limited and event.seats_max and event.seats_available &lt; 1"
+                t-elif="event.seats_limited and event.seats_max and event.seats_available &lt; 1"
             >
                 <button class="btn btn-danger btn-block" disabled="1">
                     Sold Out
