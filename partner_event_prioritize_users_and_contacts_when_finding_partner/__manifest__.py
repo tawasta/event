@@ -21,7 +21,7 @@
     "name": "Link partner to events: Prioritize users/persons",
     "summary": "Modify OCA module's partner searching logic to better support "
     "cases where there are multiple partners with same email address",
-    "version": "17.0.1.0.1",
+    "version": "17.0.1.0.2",
     "category": "Website",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

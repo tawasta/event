@@ -13,7 +13,11 @@ Link partner to events: Prioritize users/persons
   account, another account can't (and shouldn't) be created, and an error would be raised.
 * This module reworks the _update_attendee_partner_id() function to 
 
-  * Primarily seek a partner with the same email and an existing user account
+  * Primarily use the partner of a user account matching the email: first the user whose login is the email,
+    then a user whose partner has the email. The login is checked first, because it identifies the account the
+    person signs in with, and a user may have changed their contact email while their login still has the old
+    one. Without this, a duplicate partner would be created, and creating a
+    user account for it would fail because the login is already taken.
   * Secondarily seek a partner with the same email and that is a contact (not a company)
   * Finally as a fallback, whatever partner has the same e-mail address (i.e. same as in OCA partner_event)
 
