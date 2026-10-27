@@ -43,9 +43,9 @@ class EventRegistration(models.Model):
         Check event registration state, and enroll/remove from the related course
         accordingly
         """
-        # Only registrations that granted course access remove it when cancelled.
-        # Cancelling a draft registration or a later write on a cancelled one
-        # must not remove access gained some other way.
+        # Only registrations that granted course access remove it when they stop
+        # giving it. Cancelling a draft registration or a later write on a
+        # cancelled one must not remove access gained some other way.
         confirmed_registrations = self._filter_granting_course_access()
 
         res = super().write(vals)
@@ -61,9 +61,13 @@ class EventRegistration(models.Model):
             if registration.state == "open" and not registration.is_course_member:
                 registration._enroll_attendees_in_course()
 
-        confirmed_registrations.filtered(
-            lambda reg: reg.state == "cancel"
-        )._remove_attendee_from_course()
+        # Registrations that stopped giving access, e.g. cancelled, set back to
+        # unconfirmed or moved to a waiting list
+        registrations_losing_access = (
+            confirmed_registrations
+            - confirmed_registrations._filter_granting_course_access()
+        )
+        registrations_losing_access._remove_attendee_from_course()
 
         return res
 
@@ -100,7 +104,8 @@ class EventRegistration(models.Model):
 
     def _remove_attendee_from_course(self, deleting=False):
         """
-        Remove the attendees of cancelled registrations from the related course,
+        Remove the attendees of registrations that no longer give course access
+        from the related course,
         unless another confirmed registration still gives them access
 
         :param deleting: the registrations are being deleted. The other

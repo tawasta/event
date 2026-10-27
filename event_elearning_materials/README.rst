@@ -19,6 +19,7 @@ Event eLearning Integration
 * If the registration is later cancelled, the attendee is also removed from the course.
 
   * This also covers registrations cancelled by cancelling their sale order
+  * The same applies when a registration is set back to unconfirmed or moved to the waiting list
   * Deleting a registration that gives course access also removes the attendee from the course. The note is logged in the attendee's contact chatter, because the registration's chatter is deleted with it.
   * Only cancelling a confirmed registration removes access. Cancelling an unconfirmed registration keeps access the attendee got some other way.
   * The attendee keeps access if they still have another confirmed registration on an event linked to the same course
@@ -50,7 +51,8 @@ Usage
 
 Known issues / Roadmap
 ======================
-\-
+
+* ``website_event_waiting_list`` creates waiting-list registrations as confirmed first. The attendee is briefly enrolled in the course, and may get a new user and a password e-mail, before being moved to the waiting list and removed again.
 
 Credits
 =======
