@@ -231,36 +231,39 @@ class EventRegistration(models.Model):
             lambda reg: reg.event_id.slide_channel_id and reg.attendee_partner_id
         )
         registrations_to_enroll = confirmed_registrations._filter_not_course_members()
-        registrations_by_course = registrations_to_enroll.grouped(
-            lambda reg: reg.event_id.slide_channel_id
-        )
-        for course, registrations in registrations_by_course.items():
-            # A failing enrollment (e.g. the new user's email in
-            # website_slides_core) must not roll back the sale order
-            # confirmation or payment processing that confirmed the registration
+        for registration in registrations_to_enroll:
+            course = registration.event_id.slide_channel_id
+            # One savepoint per attendee: a failing enrollment (e.g. the new
+            # user's email in website_slides_core) must not block the other
+            # attendees, nor roll back the sale order confirmation or payment
+            # processing that confirmed the registration
             try:
                 with self.env.cr.savepoint():
                     # sudo: the enrollment follows from a confirmed registration,
                     # and on-invitation courses would otherwise be skipped silently
                     # for users without eLearning rights (e.g. a salesperson)
-                    course.sudo()._action_add_members(registrations.attendee_partner_id)
+                    course.sudo()._action_add_members(registration.attendee_partner_id)
             except Exception as error:
                 _logger.exception(
-                    "Could not enroll registrations %s to course %s",
-                    registrations.ids,
+                    "Could not enroll registration %s to course %s",
+                    registration.id,
                     course.id,
                 )
-                body = _(
-                    "Could not enroll the attendee to the course %(course)s: %(error)s",
-                    course=course.name,
-                    error=error,
+                registration._message_log(
+                    body=_(
+                        "Could not enroll the attendee to the course "
+                        "%(course)s: %(error)s",
+                        course=course.name,
+                        error=error,
+                    )
                 )
-                for registration in registrations:
-                    registration._message_log(body=body)
                 continue
-            body = _("Attendee enrolled to the course %(course)s", course=course.name)
-            for registration in registrations:
-                registration._message_log(body=body)
+            registration._message_log(
+                body=_(
+                    "Attendee enrolled to the course %(course)s",
+                    course=course.name,
+                )
+            )
 
     def _filter_not_course_members(self):
         """

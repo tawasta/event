@@ -6,13 +6,17 @@ class SaleOrder(models.Model):
 
     def action_confirm(self):
         """
-        Enroll attendees to the related course. Free registrations are
-        confirmed already in the cart, so core's confirmation hook does not
-        include them.
+        Enroll the attendees of free registrations to the related course. They
+        are confirmed already in the cart, so core's confirmation hook, which
+        covers the draft registrations, does not include them. Enrolling only
+        these avoids a second attempt (and a second error note) for the others.
         """
-        res = super().action_confirm()
         # sudo: salespersons without event rights may confirm event orders
-        self.sudo().order_line.registration_ids._enroll_attendees_in_course()
+        free_registrations = self.sudo().order_line.registration_ids.filtered(
+            lambda reg: reg.state in ("open", "done")
+        )
+        res = super().action_confirm()
+        free_registrations._enroll_attendees_in_course()
         return res
 
     def _action_cancel(self):

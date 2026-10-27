@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 [event_default_future_dates](event_default_future_dates/) | 17.0.1.0.0 |  | New and duplicated events' dates default to future instead of today
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
-[event_elearning_materials](event_elearning_materials/) | 17.0.1.1.7 |  | Link eLearning materials to events and share them with attendees.
+[event_elearning_materials](event_elearning_materials/) | 17.0.1.1.8 |  | Link eLearning materials to events and share them with attendees.
 [event_email_customization](event_email_customization/) | 17.0.1.1.4 |  | Custom event messaging emails
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
