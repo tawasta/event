@@ -144,7 +144,12 @@ class EventRegistration(models.Model):
             if not channel_partner:
                 continue
 
-            channel_partner.unlink()
+            # Core removal archives the membership and unsubscribes the attendee
+            # from the course chatter, like leaving the course does. The course
+            # progress is kept for a possible rejoin.
+            # sudo: removing members needs eLearning rights the user cancelling
+            # the registration may not have
+            course.sudo()._remove_membership(partner.ids)
             registration._log_course_removal(course, deleting)
 
     def _log_course_removal(self, course, deleting):

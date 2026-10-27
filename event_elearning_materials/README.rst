@@ -22,6 +22,7 @@ Event eLearning Integration
   * This also covers registrations cancelled by cancelling their sale order
   * The same applies when a registration is set back to unconfirmed or moved to the waiting list
   * Deleting a registration that gives course access also removes the attendee from the course. The note is logged in the attendee's contact chatter, because the registration's chatter is deleted with it.
+  * Removal archives the course membership and unsubscribes the attendee from the course's notifications, like leaving the course does. The course progress is kept if the attendee joins again.
   * Only cancelling a confirmed registration removes access. Cancelling an unconfirmed registration keeps access the attendee got some other way.
   * The attendee keeps access if they still have another confirmed registration on an event linked to the same course
 * Additionally, the event registration confirmation email is extended to include a direct link to the related course.
