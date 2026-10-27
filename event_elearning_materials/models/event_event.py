@@ -43,6 +43,9 @@ class EventEvent(models.Model):
         linked or changed. Access to a previously linked course is kept.
         """
         res = super().write(vals)
-        if "registration_ids" in vals or "slide_channel_id" in vals:
+        # Only on a course change: registrations created from the event form
+        # are enrolled on create, and edits must not give back access removed
+        # on purpose (e.g. by an auto-remove cron)
+        if "slide_channel_id" in vals:
             self.registration_ids._enroll_attendees_in_course()
         return res

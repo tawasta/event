@@ -15,6 +15,7 @@ Event eLearning Integration
   * If the enrollment fails, the order confirmation is not blocked. The error is logged in the registration's chatter instead.
   * Changes to the Attendee Partner are tracked in the registration's chatter
   * Linking a course to an event that already has confirmed registrations enrolls their attendees. If the course is changed, attendees keep their access to the previous course.
+  * Enrollment happens when a registration starts giving course access, or when its attendee changes. Other edits of a registration don't enroll again, so access removed on purpose (e.g. by ``website_slides_channel_auto_remove_participant_after_x_days``) stays removed. An open registration that was not enrolled for some reason is enrolled by setting it back to unconfirmed and confirming it again.
 
 * If the registration is later cancelled, the attendee is also removed from the course.
 
@@ -52,6 +53,7 @@ Usage
 Known issues / Roadmap
 ======================
 
+* With ``website_slides_channel_auto_remove_participant_after_x_days``, the time limit counts from enrollment. Attendees are usually enrolled when they register, often well before the event, so set the number of days to cover the time between registration and the end of the event.
 * ``website_event_waiting_list`` creates waiting-list registrations as confirmed first. The attendee is briefly enrolled in the course, and may get a new user and a password e-mail, before being moved to the waiting list and removed again.
 
 Credits

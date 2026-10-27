@@ -47,19 +47,25 @@ class EventRegistration(models.Model):
         # giving it. Cancelling a draft registration or a later write on a
         # cancelled one must not remove access gained some other way.
         confirmed_registrations = self._filter_granting_course_access()
+        attendee_and_course_before = {
+            reg.id: (reg.attendee_partner_id, reg.event_id.slide_channel_id)
+            for reg in self
+        }
 
         res = super().write(vals)
 
-        for registration in self:
-            event = registration.event_id
-            course = event.slide_channel_id
-            partner = registration.attendee_partner_id
-
-            if not course or not partner:
-                continue
-
-            if registration.state == "open" and not registration.is_course_member:
-                registration._enroll_attendees_in_course()
+        # Enroll only registrations that start giving access, or whose attendee
+        # or course changed (e.g. moved to another event). Other writes must not
+        # give back access that was removed on purpose, e.g. by the auto-remove
+        # cron of website_slides_channel_auto_remove_participant_after_x_days.
+        # The values are compared instead of checking vals, because
+        # partner_event adds attendee_partner_id to vals on every email write.
+        registrations_to_enroll = self._filter_granting_course_access().filtered(
+            lambda reg: reg not in confirmed_registrations
+            or (reg.attendee_partner_id, reg.event_id.slide_channel_id)
+            != attendee_and_course_before[reg.id]
+        )
+        registrations_to_enroll._enroll_attendees_in_course()
 
         # Registrations that stopped giving access, e.g. cancelled, set back to
         # unconfirmed or moved to a waiting list
