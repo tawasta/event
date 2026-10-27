@@ -9,6 +9,10 @@ Event eLearning Integration
 * When attendees are confirmed for an event, they are automatically enrolled into a related online course.
 
   * Note: Attendee means the Attendee Partner, provided by OCA partner_event module
+  * This also covers paid registrations, which are confirmed when their sale order is confirmed
+  * Enrollment and removal are logged in the registration's chatter
+  * If the enrollment fails, the order confirmation is not blocked. The error is logged in the registration's chatter instead.
+  * Changes to the Attendee Partner are tracked in the registration's chatter
 
 * If the registration is later cancelled, the attendee is also removed from the course.
 * Additionally, the event registration confirmation email is extended to include a direct link to the related course.
