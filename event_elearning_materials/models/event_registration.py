@@ -43,6 +43,12 @@ class EventRegistration(models.Model):
         Check event registration state, and enroll/remove from the related course
         accordingly
         """
+        # Only confirmed registrations granted course access, so only their
+        # cancellation removes it. Cancelling a draft registration or a later
+        # write on a cancelled one must not remove access gained some other way.
+        confirmed_registrations = self.filtered(
+            lambda reg: reg.state in ("open", "done")
+        )
 
         res = super().write(vals)
 
@@ -56,29 +62,72 @@ class EventRegistration(models.Model):
 
             if registration.state == "open" and not registration.is_course_member:
                 registration._enroll_attendees_in_course()
-            elif registration.state == "cancel" and registration.is_course_member:
-                _logger.info("removing access")
-                channel_partner = (
-                    self.env["slide.channel.partner"]
-                    .sudo()
-                    .search(
-                        [
-                            ("channel_id", "=", course.id),
-                            ("partner_id", "=", partner.id),
-                        ],
-                        limit=1,
-                    )
-                )
-                if channel_partner:
-                    channel_partner.unlink()
-                    registration._message_log(
-                        body=_(
-                            "Attendee removed from the course %(course)s",
-                            course=course.name,
-                        )
-                    )
+
+        confirmed_registrations.filtered(
+            lambda reg: reg.state == "cancel"
+        )._remove_attendee_from_course()
 
         return res
+
+    def _remove_attendee_from_course(self):
+        """
+        Remove the attendees of cancelled registrations from the related course,
+        unless another confirmed registration still gives them access
+        """
+        for registration in self:
+            course = registration.event_id.slide_channel_id
+            partner = registration.attendee_partner_id
+            if not course or not partner:
+                continue
+            if registration._has_course_registration_from_other_event():
+                continue
+
+            channel_partner = (
+                self.env["slide.channel.partner"]
+                .sudo()
+                .search(
+                    [
+                        ("channel_id", "=", course.id),
+                        ("partner_id", "=", partner.id),
+                    ],
+                    limit=1,
+                )
+            )
+            if not channel_partner:
+                continue
+
+            channel_partner.unlink()
+            registration._message_log(
+                body=_(
+                    "Attendee removed from the course %(course)s",
+                    course=course.name,
+                )
+            )
+
+    def _has_course_registration_from_other_event(self):
+        """
+        Whether the attendee has another confirmed registration on an event
+        linked to the same course
+        """
+        self.ensure_one()
+        other_registration_count = (
+            self.env["event.registration"]
+            .sudo()
+            .search_count(
+                [
+                    ("id", "!=", self.id),
+                    ("attendee_partner_id", "=", self.attendee_partner_id.id),
+                    (
+                        "event_id.slide_channel_id",
+                        "=",
+                        self.event_id.slide_channel_id.id,
+                    ),
+                    ("state", "in", ["open", "done"]),
+                ],
+                limit=1,
+            )
+        )
+        return bool(other_registration_count)
 
     def _update_mail_schedulers(self):
         """

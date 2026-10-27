@@ -15,6 +15,10 @@ Event eLearning Integration
   * Changes to the Attendee Partner are tracked in the registration's chatter
 
 * If the registration is later cancelled, the attendee is also removed from the course.
+
+  * This also covers registrations cancelled by cancelling their sale order
+  * Only cancelling a confirmed registration removes access. Cancelling an unconfirmed registration keeps access the attendee got some other way.
+  * The attendee keeps access if they still have another confirmed registration on an event linked to the same course
 * Additionally, the event registration confirmation email is extended to include a direct link to the related course.
 
 Features
