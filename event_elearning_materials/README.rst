@@ -14,6 +14,7 @@ Event eLearning Integration
   * Enrollment and removal are logged in the registration's chatter
   * If the enrollment fails, the order confirmation is not blocked. The error is logged in the registration's chatter instead.
   * Changes to the Attendee Partner are tracked in the registration's chatter
+  * Linking a course to an event that already has confirmed registrations enrolls their attendees. If the course is changed, attendees keep their access to the previous course.
 
 * If the registration is later cancelled, the attendee is also removed from the course.
 

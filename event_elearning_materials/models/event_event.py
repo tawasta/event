@@ -39,15 +39,10 @@ class EventEvent(models.Model):
 
     def write(self, vals):
         """
-        Auto-enroll event participants to the related course
+        Auto-enroll event attendees to the related course when the course is
+        linked or changed. Access to a previously linked course is kept.
         """
         res = super().write(vals)
         if "registration_ids" in vals or "slide_channel_id" in vals:
-            for event in self:
-                if event.slide_channel_id:
-                    confirmed_registrations = event.registration_ids.filtered(
-                        lambda r: r.state == "open"
-                    )
-                    partners = confirmed_registrations.mapped("partner_id")
-                    event.slide_channel_id._action_add_members(partners)
+            self.registration_ids._enroll_attendees_in_course()
         return res
