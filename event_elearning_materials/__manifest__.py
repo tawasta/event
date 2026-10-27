@@ -20,7 +20,7 @@
 {
     "name": "Event eLearning Integration",
     "summary": "Link eLearning materials to events and share them with attendees.",
-    "version": "17.0.1.1.3",
+    "version": "17.0.1.1.4",
     "category": "Website",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

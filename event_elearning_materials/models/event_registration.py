@@ -67,6 +67,16 @@ class EventRegistration(models.Model):
 
         return res
 
+    def unlink(self):
+        """
+        Remove the attendee from the related course when a registration that gave
+        course access is deleted, like cancelling it does
+        """
+        self._filter_granting_course_access()._remove_attendee_from_course(
+            deleting=True
+        )
+        return super().unlink()
+
     def _filter_granting_course_access(self):
         """
         Return the registrations that should give the attendee access to the
@@ -88,17 +98,25 @@ class EventRegistration(models.Model):
             lambda reg: not reg.sale_order_id or reg.sale_order_id.state == "sale"
         )
 
-    def _remove_attendee_from_course(self):
+    def _remove_attendee_from_course(self, deleting=False):
         """
         Remove the attendees of cancelled registrations from the related course,
         unless another confirmed registration still gives them access
+
+        :param deleting: the registrations are being deleted. The other
+            registrations in self then don't keep the access, and the note goes
+            to the attendee's contact, because the registration's chatter is
+            deleted with it.
         """
         for registration in self:
             course = registration.event_id.slide_channel_id
             partner = registration.attendee_partner_id
             if not course or not partner:
                 continue
-            if registration._has_course_registration_from_other_event():
+            ignored_registrations = self if deleting else registration
+            if registration._has_course_registration_from_other_event(
+                ignored_registrations
+            ):
                 continue
 
             channel_partner = (
@@ -116,17 +134,39 @@ class EventRegistration(models.Model):
                 continue
 
             channel_partner.unlink()
-            registration._message_log(
+            registration._log_course_removal(course, deleting)
+
+    def _log_course_removal(self, course, deleting):
+        """
+        Log the removal on the registration, or on the attendee's contact when
+        the registration is being deleted: its chatter is deleted with it
+        """
+        self.ensure_one()
+        if deleting:
+            self.attendee_partner_id._message_log(
                 body=_(
-                    "Attendee removed from the course %(course)s",
+                    "Removed from the course %(course)s: the registration to the "
+                    "event %(event)s was deleted",
                     course=course.name,
+                    event=self.event_id.name,
                 )
             )
+            return
 
-    def _has_course_registration_from_other_event(self):
+        self._message_log(
+            body=_(
+                "Attendee removed from the course %(course)s",
+                course=course.name,
+            )
+        )
+
+    def _has_course_registration_from_other_event(self, ignored_registrations):
         """
         Whether the attendee has another confirmed registration on an event
         linked to the same course
+
+        :param ignored_registrations: registrations that don't count, e.g. the
+            ones being deleted together with this one
         """
         self.ensure_one()
         # Any other registration of the same attendee, on any event linked to the
@@ -141,7 +181,7 @@ class EventRegistration(models.Model):
             .sudo()
             .search_count(
                 [
-                    ("id", "!=", self.id),
+                    ("id", "not in", ignored_registrations.ids),
                     ("attendee_partner_id", "=", self.attendee_partner_id.id),
                     (
                         "event_id.slide_channel_id",

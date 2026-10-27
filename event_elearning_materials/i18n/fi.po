@@ -101,3 +101,19 @@ msgstr "Liittyvän kurssin URL"
 #: model:ir.model.fields,field_description:event_elearning_materials.field_event_event__slide_channel_is_published
 msgid "Related Course is Published"
 msgstr "Liittyvä kurssi on julkaistu"
+
+#. module: event_elearning_materials
+#. odoo-python
+#: code:addons/event_elearning_materials/models/event_registration.py:0
+#, python-format
+msgid ""
+"Removed from the course %(course)s: the registration to the event %(event)s "
+"was deleted"
+msgstr ""
+"Poistettu kurssilta %(course)s: ilmoittautuminen tapahtumaan %(event)s "
+"poistettiin"
+
+#. module: event_elearning_materials
+#: model:ir.model,name:event_elearning_materials.model_sale_order
+msgid "Sales Order"
+msgstr "Myyntitilaus"
