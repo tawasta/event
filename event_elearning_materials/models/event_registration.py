@@ -43,12 +43,10 @@ class EventRegistration(models.Model):
         Check event registration state, and enroll/remove from the related course
         accordingly
         """
-        # Only confirmed registrations granted course access, so only their
-        # cancellation removes it. Cancelling a draft registration or a later
-        # write on a cancelled one must not remove access gained some other way.
-        confirmed_registrations = self.filtered(
-            lambda reg: reg.state in ("open", "done")
-        )
+        # Only registrations that granted course access remove it when cancelled.
+        # Cancelling a draft registration or a later write on a cancelled one
+        # must not remove access gained some other way.
+        confirmed_registrations = self._filter_granting_course_access()
 
         res = super().write(vals)
 
@@ -68,6 +66,27 @@ class EventRegistration(models.Model):
         )._remove_attendee_from_course()
 
         return res
+
+    def _filter_granting_course_access(self):
+        """
+        Return the registrations that should give the attendee access to the
+        related course.
+
+        A registration gives access when it is confirmed (Registered or Attended)
+        and, if it was sold through a sale order, that order is confirmed too.
+        The order check matters for free tickets: they are confirmed as soon as
+        they are added to the web shop cart, before the order is placed.
+        """
+
+        confirmed_registrations = self.filtered(
+            lambda reg: reg.state in ("open", "done")
+        )
+        # Registrations without a sale order give access once confirmed, e.g.
+        # website registrations for an event without tickets, or registrations
+        # created in the backend
+        return confirmed_registrations.filtered(
+            lambda reg: not reg.sale_order_id or reg.sale_order_id.state == "sale"
+        )
 
     def _remove_attendee_from_course(self):
         """
@@ -110,6 +129,13 @@ class EventRegistration(models.Model):
         linked to the same course
         """
         self.ensure_one()
+        # Any other registration of the same attendee, on any event linked to the
+        # same course, that still gives course access. The state and sale order
+        # conditions are the same rule as in _filter_granting_course_access():
+        # keep them in sync. For example, a free ticket in an unconfirmed cart
+        # does not count.
+        # sudo: the attendee's other registrations may not be readable by the
+        # user who cancels this one (e.g. a portal user)
         other_registration_count = (
             self.env["event.registration"]
             .sudo()
@@ -123,6 +149,9 @@ class EventRegistration(models.Model):
                         self.event_id.slide_channel_id.id,
                     ),
                     ("state", "in", ["open", "done"]),
+                    "|",
+                    ("sale_order_id", "=", False),
+                    ("sale_order_id.state", "=", "sale"),
                 ],
                 limit=1,
             )
@@ -142,10 +171,8 @@ class EventRegistration(models.Model):
         return res
 
     def _enroll_attendees_in_course(self):
-        confirmed_registrations = self.filtered(
-            lambda reg: reg.state == "open"
-            and reg.event_id.slide_channel_id
-            and reg.attendee_partner_id
+        confirmed_registrations = self._filter_granting_course_access().filtered(
+            lambda reg: reg.event_id.slide_channel_id and reg.attendee_partner_id
         )
         registrations_to_enroll = confirmed_registrations._filter_not_course_members()
         registrations_by_course = registrations_to_enroll.grouped(

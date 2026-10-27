@@ -10,6 +10,7 @@ Event eLearning Integration
 
   * Note: Attendee means the Attendee Partner, provided by OCA partner_event module
   * This also covers paid registrations, which are confirmed when their sale order is confirmed
+  * A registration sold through a sale order gives course access only once the order is confirmed. This also applies to free tickets, which are confirmed already in the cart.
   * Enrollment and removal are logged in the registration's chatter
   * If the enrollment fails, the order confirmation is not blocked. The error is logged in the registration's chatter instead.
   * Changes to the Attendee Partner are tracked in the registration's chatter
