@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 [event_default_future_dates](event_default_future_dates/) | 17.0.1.0.0 |  | New and duplicated events' dates default to future instead of today
 [event_disable_quick_create_mail_template](event_disable_quick_create_mail_template/) | 17.0.1.0.0 |  | Prevents quick create mail template on Event
 [event_display_name_dates](event_display_name_dates/) | 17.0.1.1.0 |  | Event Display Name Dates
-[event_elearning_materials](event_elearning_materials/) | 17.0.1.0.1 |  | Link eLearning materials to events and share them with attendees.
+[event_elearning_materials](event_elearning_materials/) | 17.0.1.1.8 |  | Link eLearning materials to events and share them with attendees.
 [event_email_customization](event_email_customization/) | 17.0.1.1.4 |  | Custom event messaging emails
 [event_feedback_qrcode](event_feedback_qrcode/) | 17.0.1.0.0 |  | Event feedback qr code
 [event_filter_address_partners](event_filter_address_partners/) | 17.0.1.0.1 |  | Filter event partners for address by partner toggle
@@ -54,7 +54,7 @@ addon | version | maintainers | summary
 [event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
 [event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event
 [event_visibility](event_visibility/) | 17.0.1.1.0 |  | Event Visibility
-[partner_event_prioritize_users_and_contacts_when_finding_partner](partner_event_prioritize_users_and_contacts_when_finding_partner/) | 17.0.1.0.1 |  | Modify OCA module's partner searching logic to better support cases where there are multiple partners with same email address
+[partner_event_prioritize_users_and_contacts_when_finding_partner](partner_event_prioritize_users_and_contacts_when_finding_partner/) | 17.0.1.0.2 |  | Modify OCA module's partner searching logic to better support cases where there are multiple partners with same email address
 [project_event_link](project_event_link/) | 17.0.1.0.0 |  | Link events to projects (1 project -> many events)
 [website_event_after_purchase_configurable_text](website_event_after_purchase_configurable_text/) | 17.0.1.0.0 |  | Replace the core text with one configurable in backend
 [website_event_banner_image](website_event_banner_image/) | 17.0.1.1.0 |  | Add banner image to event from backend

@@ -11,15 +11,25 @@ class EventRegistration(models.Model):
     def _find_best_matching_partner(self, email):
         """Find the best matching partner for a given email address.
 
-        When multiple partners share the same email, apply the following
-        priority order:
-          1. A partner that has a linked user account (user_ids is set)
-          2. A contact partner (is_company=False)
-          3. Any partner (fallback, including companies. Equivalent to
-             partner_event module's logic)
+        Apply the following priority order:
+          1. The partner of a user matching the email: by login first, then by
+             the partner's email
+          2. A contact partner (is_company=False) with that email
+          3. Any partner with that email (fallback, including companies.
+             Equivalent to partner_event module's logic)
 
         Returns a single res.partner record (or empty recordset).
         """
+        # Priority 1: The partner of a user account
+        user_partner = self._find_partner_with_user(email)
+
+        if user_partner:
+            _logger.info(
+                "P1: Selected partner %s (ID %d) — has user account",
+                user_partner.name,
+                user_partner.id,
+            )
+            return user_partner
 
         Partner = self.env["res.partner"]
         candidates = Partner.search([("email", "=ilike", email)], order="id")
@@ -31,16 +41,6 @@ class EventRegistration(models.Model):
             len(candidates),
             email,
         )
-
-        # Priority 1: Partner with a linked user account
-        with_user = candidates.filtered(lambda p: p.user_ids)
-        if with_user:
-            _logger.info(
-                "P1: Selected partner %s (ID %d) — has user account",
-                with_user[0].name,
-                with_user[0].id,
-            )
-            return with_user[0]
 
         # Priority 2: A contact (not a company)
         contacts = candidates.filtered(lambda p: not p.is_company)
@@ -59,6 +59,20 @@ class EventRegistration(models.Model):
             candidates[0].id,
         )
         return candidates[0]
+
+    def _find_partner_with_user(self, email):
+        """
+        Return the partner of a user matching the given email. The login is
+        checked first: it identifies the account the person signs in with, and a
+        user may have changed their contact email (e.g. to an invoicing address)
+        while their login still has the old one.
+        """
+        # sudo: portal users can't read other users
+        Users = self.env["res.users"].sudo()
+        user = Users.search([("login", "=ilike", email)], limit=1) or Users.search(
+            [("partner_id.email", "=ilike", email)], order="id", limit=1
+        )
+        return user.partner_id
 
     def _update_attendee_partner_id(self, vals):
         # Replace the partner_event function: otherwise the same functionality, but
