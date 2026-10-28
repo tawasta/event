@@ -38,6 +38,32 @@ msgstr ""
 "verkkosisältöön:</strong><br/>"
 
 #. module: event_elearning_materials
+#: model:ir.model.fields,field_description:event_elearning_materials.field_event_registration__attendee_partner_id
+msgid "Attendee Partner"
+msgstr "Osallistuva kumppani"
+
+#. module: event_elearning_materials
+#. odoo-python
+#: code:addons/event_elearning_materials/models/event_registration.py:0
+#, python-format
+msgid "Attendee enrolled to the course %(course)s"
+msgstr "Osallistuja ilmoitettu kurssille %(course)s"
+
+#. module: event_elearning_materials
+#. odoo-python
+#: code:addons/event_elearning_materials/models/event_registration.py:0
+#, python-format
+msgid "Attendee removed from the course %(course)s"
+msgstr "Osallistuja poistettu kurssilta %(course)s"
+
+#. module: event_elearning_materials
+#. odoo-python
+#: code:addons/event_elearning_materials/models/event_registration.py:0
+#, python-format
+msgid "Could not enroll the attendee to the course %(course)s: %(error)s"
+msgstr "Osallistujaa ei voitu ilmoittaa kurssille %(course)s: %(error)s"
+
+#. module: event_elearning_materials
 #: model:ir.model.fields,field_description:event_elearning_materials.field_event_registration__is_course_member
 msgid "Enrolled in Course"
 msgstr "On ilmoittautuneena tapahtuman kurssille"
@@ -75,3 +101,19 @@ msgstr "Liittyvän kurssin URL"
 #: model:ir.model.fields,field_description:event_elearning_materials.field_event_event__slide_channel_is_published
 msgid "Related Course is Published"
 msgstr "Liittyvä kurssi on julkaistu"
+
+#. module: event_elearning_materials
+#. odoo-python
+#: code:addons/event_elearning_materials/models/event_registration.py:0
+#, python-format
+msgid ""
+"Removed from the course %(course)s: the registration to the event %(event)s "
+"was deleted"
+msgstr ""
+"Poistettu kurssilta %(course)s: ilmoittautuminen tapahtumaan %(event)s "
+"poistettiin"
+
+#. module: event_elearning_materials
+#: model:ir.model,name:event_elearning_materials.model_sale_order
+msgid "Sales Order"
+msgstr "Myyntitilaus"
