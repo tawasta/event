@@ -6,21 +6,29 @@
 Event eLearning Integration
 ===========================
 
-* When attendees are confirmed for an event, they are automatically enrolled into a related online course.
+* When attendees are confirmed for an event, they are automatically enrolled into the related elearning channel.
 
   * Note: Attendee means the Attendee Partner, provided by OCA partner_event module
+  * This also covers paid registrations, which are confirmed when their sale order is confirmed
+  * A registration sold through a sale order gives course access only once the order is confirmed. This also applies to free tickets, 
+    which are confirmed already in the cart.
+  * Enrollment and removal are logged in the registration's chatter
+  * If the enrollment fails, the order confirmation is not blocked. The error is logged in the registration's chatter instead.
+  * Linking a course to an event that already has confirmed registrations autoenrolls the eventattendees. If the course is changed, 
+    attendees keep their access to the previous course.
+  * Enrollment happens when a registration starts giving course access, or when its attendee changes. Other edits of a 
+    registration don't enroll again, so access removed on purpose (e.g. by ``website_slides_channel_auto_remove_participant_after_x_days``) 
+    stays removed. An open registration that was not enrolled for some reason is enrolled by setting it back to unconfirmed and confirming it again.
 
 * If the registration is later cancelled, the attendee is also removed from the course.
+
+  * The same applies when a registration is set back to unconfirmed (or moved to the waiting list if `website_event_waiting_list` is used)
+  * Deleting a registration that gives course access also removes the attendee from the course.
+  * Removal archives the course membership and unsubscribes the attendee from the course's notifications, like leaving the course does. The
+    course progress is kept if the attendee joins again.
+  * Only cancelling a confirmed registration removes access. Cancelling an unconfirmed registration keeps access the attendee got some other way.
+  * The attendee keeps access if they still have another confirmed registration on an event that is linked to the same course
 * Additionally, the event registration confirmation email is extended to include a direct link to the related course.
-
-Features
-========
-
-- Link an `event.event` to a `slide.channel` (course).
-- Automatically enroll attendees in the related course when their registration is confirmed.
-- Automatically remove attendees from the course if they cancel their registration.
-- Show the course membership status directly on the event registration form.
-- Extend confirmation emails with a link to the course if configured.
 
 Configuration
 =============
