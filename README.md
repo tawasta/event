@@ -102,7 +102,7 @@ addon | version | maintainers | summary
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_show_menu_without_technical_features](website_event_track_show_menu_without_technical_features/) | 17.0.1.0.0 |  | Show the 'Tracks' menu to event users without developer mode
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.2 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.3 |  | Adds a waiting list functionality to Events.
 [website_event_wording_koulutus](website_event_wording_koulutus/) | 17.0.1.0.0 |  | Overrides website_event's Finnish translations to use 'koulutus' instead of 'tapahtuma'
 [website_my_events](website_my_events/) | 17.0.1.0.0 |  | My events in website portal
 
