@@ -18,7 +18,7 @@ Usage
 * When maximum attendees to an event is reached, further registrations go to a waiting list.
 * If tickets are used and ticket is sold out, registrations go to waiting list.
 * On events with several ticket types, a waiting list quantity can be selected for each ticket once the event's attendee limit is reached.
-* You can attach an email scheduler to an Event to send automatic emails to waiting list when more seats are available. The scheduler is run only for saved events, so editing the attendee limit on the event form no longer fails.
+* You can attach an email scheduler to an Event to send automatic emails to waiting list when more seats are available. The scheduler is run when the event is saved with a changed attendee limit, so raising the limit notifies the waiting list, and editing the limit on the event form does not fail.
 
 Known issues / Roadmap
 ======================

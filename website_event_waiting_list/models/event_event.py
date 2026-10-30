@@ -144,6 +144,13 @@ class EventEvent(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
+    def write(self, vals):
+        res = super().write(vals)
+        if {"seats_max", "seats_limited"} & vals.keys():
+            # Seats are not stored, so saving the form does not recompute them.
+            # Recompute here to notify the waiting list of the freed seats.
+            self._compute_seats()
+        return res
 
     # 7. Action methods
 
