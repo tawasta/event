@@ -17,47 +17,20 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
-# 1. Standard library imports:
-
-# 2. Known third party imports:
-
-# 3. Odoo imports (openerp):
 from odoo import fields, models
-
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
 
 
 class PublishEventWizard(models.TransientModel):
-    # 1. Private attributes
     _name = "website.event.publish.event.wizard"
     _description = "Action to publish all selected events on Website."
 
-    # 2. Fields declaration
     event_ids = fields.Many2many(
         "event.event",
         default=lambda self: self.env["event.event"].browse(
-            self._context.get("active_ids")
+            self.env.context.get("active_ids")
         ),
         string="Events",
     )
 
-    # 3. Default methods
-
-    # 4. Compute and search fields, in the same order that fields declaration
-
-    # 5. Constraints and onchanges
-
-    # 6. CRUD methods
-
-    # 7. Action methods
     def publish_event_on_website(self):
-        event_ids = self.event_ids
-        for event in event_ids:
-            event.action_publish_event()
-
-    # 8. Business methods
+        self.event_ids.action_publish_event()

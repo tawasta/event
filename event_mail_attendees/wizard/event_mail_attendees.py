@@ -72,8 +72,7 @@ class EventMailAttendeesWizard(models.TransientModel):
                 )
             )
 
-        mail_values = []
-        for recipient in self.recipients:
+        for recipient in self.recipients.filtered("email"):
             msg_template = self.template_id
             email_from_value = self.env["ir.config_parameter"].get_param(
                 "event_sender_address"
@@ -86,7 +85,7 @@ class EventMailAttendeesWizard(models.TransientModel):
                 "attachment_ids": self.attachment_ids.ids,
             }
             msg_template.sudo().send_mail(
-                recipient.id, email_values=mail_values, force_send=True
+                recipient.id, email_values=mail_values, force_send=False
             )
             recipient.sudo().message_post(
                 subject=self.subject,

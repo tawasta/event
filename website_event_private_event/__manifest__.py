@@ -21,7 +21,7 @@
 {
     "name": "Website Event Private Event",
     "summary": "Make events only visible from URL. (remove from public list)",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

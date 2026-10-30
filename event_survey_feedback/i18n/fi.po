@@ -1,0 +1,144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_survey_feedback
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,help:event_survey_feedback.field_survey_user_input__feedback_registration_id
+msgid ""
+"Attendee this feedback answer was requested from, when the feedback link was "
+"sent for a specific registration rather than shared generically for the "
+"event."
+msgstr ""
+"Osallistuja, jolta tätä palautevastausta pyydettiin, kun palautelinkki "
+"lähetettiin tietylle ilmoittautumiselle eikä jaettu yleisesti tapahtumalle."
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,help:event_survey_feedback.field_survey_user_input__feedback_event_id
+msgid ""
+"Event this feedback survey answer relates to. Deliberately separate from any "
+"registration-survey event link, so this module does not depend on how (or "
+"whether) attendees registered."
+msgstr ""
+"Tapahtuma, jota tämä palautekyselyn vastaus koskee. Tämä on tarkoituksella "
+"erillään ilmoittautumiskyselyn tapahtumalinkistä, jotta moduuli ei riipu "
+"siitä, miten (tai ovatko) osallistujat ilmoittautuneet."
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,help:event_survey_feedback.field_event_registration__feedback_answered
+msgid "Whether this attendee has completed the feedback survey."
+msgstr "Onko osallistuja täyttänyt palautekyselyn."
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,help:event_survey_feedback.field_event_mail__feedback_survey_id
+msgid "Overrides the event's own feedback survey for this scheduler, if set."
+msgstr "Korvaa tapahtuman oman palautekyselyn tällä ajastimella, jos asetettu."
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,help:event_survey_feedback.field_mail_template__is_feedback_email
+msgid ""
+"If enabled, sending this template to an event registration sets the "
+"recipient's feedback survey."
+msgstr ""
+"Jos käytössä, tämän pohjan lähettäminen tapahtumailmoittautumiselle asettaa "
+"vastaanottajan palautekyselyn."
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_event__feedback_answer_count
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_event__feedback_user_input_ids
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_registration__feedback_user_input_ids
+#: model:ir.actions.act_window,name:event_survey_feedback.act_event_feedback_answers_from_event
+msgid "Feedback Answers"
+msgstr "Palautevastaukset"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_registration__feedback_answered
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.view_registration_search_inherit_feedback
+msgid "Feedback Answered"
+msgstr "Palaute vastattu"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_survey_user_input__feedback_event_id
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.survey_user_input_view_search_inherit_feedback
+msgid "Feedback Event"
+msgstr "Palautteen tapahtuma"
+
+#. module: event_survey_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.view_registration_search_inherit_feedback
+msgid "Feedback Not Answered"
+msgstr "Palautetta ei vastattu"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_survey_user_input__feedback_registration_id
+msgid "Feedback Registration"
+msgstr "Palautteen ilmoittautuminen"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_event__feedback_survey_id
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_mail__feedback_survey_id
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_registration__feedback_survey_id
+msgid "Feedback survey"
+msgstr "Palautekysely"
+
+#. module: event_survey_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.survey_user_input_view_search_inherit_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.view_registration_search_inherit_feedback
+msgid "Feedback Survey"
+msgstr "Palautekysely"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_event__survey_start_url
+#: model:ir.model.fields,field_description:event_survey_feedback.field_event_registration__survey_start_url
+msgid "Feedback link"
+msgstr "Palautelinkki"
+
+#. module: event_survey_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.event_view_form_inherit_feedback
+msgid "Feedback"
+msgstr "Palaute"
+
+#. module: event_survey_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.view_registration_search_inherit_feedback
+msgid "Has Feedback Survey"
+msgstr "Sisältää palautekyselyn"
+
+#. module: event_survey_feedback
+#: model:ir.model.fields,field_description:event_survey_feedback.field_mail_template__is_feedback_email
+msgid "Is Feedback Email"
+msgstr "On palautesähköposti"
+
+#. module: event_survey_feedback
+#: model_terms:ir.ui.view,arch_db:event_survey_feedback.event_view_form_inherit_feedback
+msgid "Answered feedback surveys for this Event"
+msgstr "Tämän tapahtuman vastatut palautekyselyt"
+
+#. module: event_survey_feedback
+#: model:mail.template,name:event_survey_feedback.event_survey_feedback_template
+msgid "Event: Feedback survey"
+msgstr "Tapahtuma: Palautekysely"
+
+#. module: event_survey_feedback
+#: model:mail.template,name:event_survey_feedback.event_survey_feedback_reminder_template
+msgid "Event: Feedback reminder"
+msgstr "Tapahtuma: Palautemuistutus"
+
+#. module: event_survey_feedback
+#: model:mail.template,subject:event_survey_feedback.event_survey_feedback_template
+msgid "Please answer the feedback survey"
+msgstr "Vastaathan palautekyselyyn"
+
+#. module: event_survey_feedback
+#: model:mail.template,subject:event_survey_feedback.event_survey_feedback_reminder_template
+msgid "Reminder: Please answer our feedback survey"
+msgstr "Muistutus: Vastaathan palautekyselyymme"

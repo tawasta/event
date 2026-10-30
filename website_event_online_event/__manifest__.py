@@ -21,7 +21,7 @@
 {
     "name": "Website Event Online Event",
     "summary": "Manage online and hybrid events. Includes a video conference link.",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -8,6 +8,8 @@ Website Event Online Event
 Module to manage online and hybrid events
 
 * Adds a video conference link to an event which is sent in confirmation and reminder mails.
+* The calendar file and the Google calendar link of an online event have the location "Online".
+  The video conference link is added to their description. The core handling of event slots is used.
 
 Configuration
 =============

@@ -20,6 +20,9 @@ Usage
 5. Add optional attachments
 6. Click send
 
+The mails are put in the outgoing mail queue and sent by the mail queue cron,
+not while the wizard is running. Attendees without an email address are skipped.
+
 Known issues / Roadmap
 ======================
 \-
@@ -32,6 +35,7 @@ Contributors
 
 * Miika Nissi <miika.nissi@futural.fi>
 * Joona Isoaho <joona.isoaho@futural.fi>
+* Valtteri Lattu <valtteri.lattu@futural.fi>
 
 Maintainer
 ----------

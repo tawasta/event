@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<odoo>
+  <!-- EVENT.TYPE VIEWS -->
+  <record id="view_event_type_form_register_elsewhere" model="ir.ui.view">
+    <field name="name">event.type.form.register.elsewhere</field>
+    <field name="model">event.type</field>
+    <field name="inherit_id" ref="event.view_event_type_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='has_seats_limitation']/parent::div" position="after">
+        <label for="registration_elsewhere" />
+        <div>
+          <field name="registration_elsewhere" />
+          <span invisible="not registration_elsewhere">
+            <field
+              name="registration_link"
+              placeholder="https://"
+              required="registration_elsewhere"
+              class="oe_inline"
+            />
+          </span>
+        </div>
+      </xpath>
+    </field>
+  </record>
+  <!-- EVENT.EVENT VIEWS -->
+  <record id="view_event_form_register_elsewhere" model="ir.ui.view">
+    <field name="name">event.event.form.register.elsewhere</field>
+    <field name="model">event.event</field>
+    <field name="inherit_id" ref="event.view_event_form" />
+    <field name="arch" type="xml">
+      <xpath
+        expr="//group[@name='right_event_details']//field[@name='seats_limited']/parent::div"
+        position="after"
+      >
+        <label for="registration_elsewhere" />
+        <div>
+          <field name="registration_elsewhere" />
+          <span invisible="not registration_elsewhere">
+            <field
+              name="registration_link"
+              placeholder="https://"
+              required="registration_elsewhere"
+              class="oe_inline"
+            />
+          </span>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

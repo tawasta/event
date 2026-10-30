@@ -17,51 +17,65 @@
 #    along with this program. If not, see http://www.gnu.org/licenses/agpl.html
 #
 ##############################################################################
-
-# 1. Standard library imports:
-
-# 2. Known third party imports:
-
-
-# 3. Odoo imports (openerp):
 from odoo import http
 from odoo.http import request
 
 from odoo.addons.website_event.controllers.main import WebsiteEventController
 
-# 4. Imports from Odoo modules:
-
-# 5. Local imports in the relative form:
-
-# 6. Unknown third party imports:
-
 
 class WebsiteEventControllerCancel(WebsiteEventController):
+    def _get_registration_by_token(self, event, token):
+        """Return the registration of this event that owns the access token.
+
+        sudo: the visitor is usually public and cannot read registrations, the
+        unguessable token from the emailed link is the proof of access.
+        """
+        return (
+            request.env["event.registration"]
+            .sudo()
+            .search(
+                [("event_id", "=", event.id), ("access_token", "=", token)], limit=1
+            )
+        )
+
     @http.route(
-        ['/event/<model("event.event"):event>/registration/manage/<string:code>'],
+        ['/event/<model("event.event"):event>/registration/manage/<string:token>'],
         type="http",
         auth="public",
+        methods=["GET"],
         website=True,
+        sitemap=False,
+        readonly=True,
     )
-    def confirm_url_template(self, event, code, **post):
-        """
-        Return registration managements page and
-        Confirm state changes on post
-        """
-        for registration in event.sudo().registration_ids:
-            if registration.sudo().access_token == code:
-                render_values = {
-                    "event": event,
-                    "registration": registration,
-                    "ticket": registration.event_ticket_id,
-                }
-                if post:
-                    new_state = post.get("new_state")
-                    if new_state == "cancel":
-                        registration.sudo().action_cancel()
+    def registration_manage(self, event, token, **post):
+        """Show the registration and, when allowed, the cancel button."""
+        registration = self._get_registration_by_token(event, token)
+        if not registration:
+            return request.not_found()
+        return request.render(
+            "website_event_cancellation.cancel_registration",
+            {
+                "event": event,
+                "registration": registration,
+                "ticket": registration.event_ticket_id,
+            },
+        )
 
-                if registration.sudo().state not in ["done"]:
-                    return request.render(
-                        "website_event_cancellation.cancel_registration", render_values
-                    )
-        return request.render("website.page_404")
+    @http.route(
+        ['/event/<model("event.event"):event>/registration/manage/<string:token>'],
+        type="http",
+        auth="public",
+        methods=["POST"],
+        website=True,
+        sitemap=False,
+    )
+    def registration_manage_cancel(self, event, token, **post):
+        """Cancel the registration. State changes only on POST (CSRF protected)."""
+        registration = self._get_registration_by_token(event, token)
+        if not registration:
+            return request.not_found()
+        # Rules are enforced here, not only by hiding the button in the template
+        if registration.able_to_cancel:
+            registration.action_cancel()
+        # Redirect so a page reload does not resubmit the form
+        return request.redirect(request.httprequest.path)
