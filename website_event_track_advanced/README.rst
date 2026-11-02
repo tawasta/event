@@ -65,7 +65,9 @@ Features
   specific to workshop-type submissions.
 * **Automated stage emails**: templates for "proposal received", "proposal
   accepted" and "proposal refused" (see *Known issues* - not linked to
-  stages out of the box).
+  stages out of the box). When a proposal is created from the portal form,
+  the email of its initial stage (e.g. saving as a draft) is sent exactly
+  once, by the standard stage tracking.
 * **Website editor toggles**: on the track detail page and agenda cards,
   editors can show/hide the author, show the speaker list (in either
   presenter mode), show the chairperson, and switch between compact and

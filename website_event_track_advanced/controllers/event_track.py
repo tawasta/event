@@ -1188,19 +1188,16 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values["track"]["stage_id"] = first_is_done_stage[0].id
 
             # 8. Create/Write the track
-            create_track = False
             if values.get("track_id"):
                 track = values.get("track_id")
                 track.sudo().write(values["track"])
             else:
-                create_track = True
                 track = request.env["event.track"].sudo().create(values["track"])
 
             # 9. Subscribe followers
+            # The stage template is sent by core on create (precommit), after
+            # the followers are subscribed, so it must not be posted here again
             track.sudo().message_subscribe(partner_ids=followers)
-            # If track is created, manually trigger change to send mail to new followers
-            if create_track:
-                track.sudo()._message_track_post_template(changes="{'stage_id'}")
 
             # 10. Create attachments
             if post.get("attachment_ids"):
