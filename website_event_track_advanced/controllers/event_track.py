@@ -1209,9 +1209,13 @@ class EventTrackControllerAdvanced(EventTrackController):
 
             # 9. Subscribe followers
             track.sudo().message_subscribe(partner_ids=followers)
-            # If track is created, manually trigger change to send mail to new followers
+            # If track is created, manually trigger change to send mail to new followers.
+            # The submitter is also the author of the message, and core would
+            # skip the author when notifying
             if create_track:
-                track.sudo()._message_track_post_template(changes="{'stage_id'}")
+                track.sudo().with_context(
+                    mail_notify_author=True
+                )._message_track_post_template(changes="{'stage_id'}")
 
             # 10. Create attachments
             if post.get("attachment_ids"):
