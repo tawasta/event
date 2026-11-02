@@ -1202,6 +1202,17 @@ class EventTrackControllerAdvanced(EventTrackController):
             # The stage template is sent by core on create (precommit), after
             # the followers are subscribed, so it must not be posted here again
             track.sudo().message_subscribe(partner_ids=followers)
+            _logger.info(
+                "DEBUG track %s: stage=%s template=%s partner=%s (email=%s) "
+                "followers=%s env_user=%s",
+                track.id,
+                track.sudo().stage_id.name,
+                track.sudo().stage_id.mail_template_id,
+                track.sudo().partner_id,
+                track.sudo().partner_id.email,
+                followers,
+                request.env.user,
+            )
 
             # 10. Create attachments
             if post.get("attachment_ids"):

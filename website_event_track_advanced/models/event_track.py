@@ -1,5 +1,9 @@
+import logging
+
 from odoo import api, fields, models
 from odoo.tools import html2plaintext
+
+_logger = logging.getLogger(__name__)
 
 
 class EventTrack(models.Model):
@@ -417,6 +421,15 @@ class EventTrack(models.Model):
         return res
 
     # 7. Action methods
+    def _message_track_post_template(self, changes):
+        _logger.info(
+            "DEBUG %s %s: _message_track_post_template changes=%s",
+            self._name,
+            self.ids,
+            changes,
+        )
+        return super()._message_track_post_template(changes)
+
     # def _track_template(self, changes):
     #     res = super(EventTrack, self)._track_template(changes)
     #     track = self[0]
