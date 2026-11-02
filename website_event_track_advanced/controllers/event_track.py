@@ -1192,27 +1192,26 @@ class EventTrackControllerAdvanced(EventTrackController):
                     values["track"]["stage_id"] = first_is_done_stage[0].id
 
             # 8. Create/Write the track
+            create_track = False
             if values.get("track_id"):
                 track = values.get("track_id")
                 track.sudo().write(values["track"])
             else:
-                track = request.env["event.track"].sudo().create(values["track"])
+                create_track = True
+                # The stage email is posted below, once the followers are
+                # subscribed. Skip core's own post on create to send it only once
+                track = (
+                    request.env["event.track"]
+                    .sudo()
+                    .with_context(mail_notrack=True)
+                    .create(values["track"])
+                )
 
             # 9. Subscribe followers
-            # The stage template is sent by core on create (precommit), after
-            # the followers are subscribed, so it must not be posted here again
             track.sudo().message_subscribe(partner_ids=followers)
-            _logger.info(
-                "DEBUG track %s: stage=%s template=%s partner=%s (email=%s) "
-                "followers=%s env_user=%s",
-                track.id,
-                track.sudo().stage_id.name,
-                track.sudo().stage_id.mail_template_id,
-                track.sudo().partner_id,
-                track.sudo().partner_id.email,
-                followers,
-                request.env.user,
-            )
+            # If track is created, manually trigger change to send mail to new followers
+            if create_track:
+                track.sudo()._message_track_post_template(changes="{'stage_id'}")
 
             # 10. Create attachments
             if post.get("attachment_ids"):
