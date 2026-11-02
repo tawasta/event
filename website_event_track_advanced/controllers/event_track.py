@@ -852,7 +852,11 @@ class EventTrackControllerAdvanced(EventTrackController):
         user_exists = True
         # Only write values to user if it is done by the user.
         if user.id == request.env.user.id:
-            user.sudo().write(partner_values)
+            # The login already matches the posted email. Writing it again
+            # would send core's "Login Changed" security notification.
+            user.sudo().write(
+                {key: value for key, value in partner_values.items() if key != "login"}
+            )
             _logger.info(_("Updated user values for %s." % user))
         # If no user exists. Create a new user.
         elif not user:
