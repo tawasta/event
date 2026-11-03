@@ -21,7 +21,7 @@
 {
     "name": "Event: Attachment Field for Generic Event Attachment",
     "summary": "Attachment with public URL, to be embedded into event e-mails",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -21,7 +21,7 @@
 {
     "name": "Event: Attachment Fields' Container",
     "summary": "Adds a separate notebook tab for attachment modules' fields",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
