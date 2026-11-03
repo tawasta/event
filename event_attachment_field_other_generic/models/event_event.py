@@ -12,7 +12,8 @@ class EventEvent(models.Model):
         comodel_name="ir.attachment",
         string="Other Attachment",
         domain="[('res_model', '=', 'event.event')]",
-        ondelete="cascade",
+        ondelete="set null",
+        copy=False,
         help="Other generic attachment for this event. Copy the URL to link "
         "to the file in e.g. e-mail templates",
     )
@@ -33,3 +34,7 @@ class EventEvent(models.Model):
                 )
             else:
                 event.other_generic_attachment_url = False
+
+    @api.model
+    def _get_linked_attachment_fields(self):
+        return super()._get_linked_attachment_fields() + ["other_generic_attachment_id"]
