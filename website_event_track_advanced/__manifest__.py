@@ -21,7 +21,7 @@
 {
     "name": "Website Event Track Advanced",
     "summary": "Advanced features for Event Track",
-    "version": "17.0.1.0.1",
+    "version": "17.0.1.0.4",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

@@ -852,7 +852,11 @@ class EventTrackControllerAdvanced(EventTrackController):
         user_exists = True
         # Only write values to user if it is done by the user.
         if user.id == request.env.user.id:
-            user.sudo().write(partner_values)
+            # The login already matches the posted email. Writing it again
+            # would send core's "Login Changed" security notification.
+            user.sudo().write(
+                {key: value for key, value in partner_values.items() if key != "login"}
+            )
             _logger.info(_("Updated user values for %s." % user))
         # If no user exists. Create a new user.
         elif not user:
@@ -1194,13 +1198,24 @@ class EventTrackControllerAdvanced(EventTrackController):
                 track.sudo().write(values["track"])
             else:
                 create_track = True
-                track = request.env["event.track"].sudo().create(values["track"])
+                # The stage email is posted below, once the followers are
+                # subscribed. Skip core's own post on create to send it only once
+                track = (
+                    request.env["event.track"]
+                    .sudo()
+                    .with_context(mail_notrack=True)
+                    .create(values["track"])
+                )
 
             # 9. Subscribe followers
             track.sudo().message_subscribe(partner_ids=followers)
-            # If track is created, manually trigger change to send mail to new followers
+            # If track is created, manually trigger change to send mail to new followers.
+            # The submitter is also the author of the message, and core would
+            # skip the author when notifying
             if create_track:
-                track.sudo()._message_track_post_template(changes="{'stage_id'}")
+                track.sudo().with_context(
+                    mail_notify_author=True
+                )._message_track_post_template(changes="{'stage_id'}")
 
             # 10. Create attachments
             if post.get("attachment_ids"):
