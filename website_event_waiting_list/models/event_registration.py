@@ -85,18 +85,17 @@ class EventRegistration(models.Model):
         2. Add to waiting list when no available seats and waiting list enabled
         3. Add registration as draft otherwise
         """
-        # pass context to skip auto_confirm on super method
-        add_waiting_list = False
         for vals in vals_list:
             if self._check_waiting_list(vals):
-                add_waiting_list = True
+                # Create as waiting: core sends the confirmation message to the
+                # registrations that are open when they are created
+                vals["state"] = "wait"
 
         registrations = super().create(vals_list)
-        registrations = registrations.with_context(skip_confirm_wait=False)
-        # if registrations._check_auto_confirmation():
-        #     registrations.sudo().action_confirm()
-        if add_waiting_list:
-            registrations.sudo().action_waiting()
+        waiting = registrations.filtered(lambda reg: reg.state == "wait")
+        if waiting:
+            # Triggers the "after registering to waiting list" schedulers
+            waiting.sudo().action_waiting()
         return registrations
 
     def write(self, vals):
