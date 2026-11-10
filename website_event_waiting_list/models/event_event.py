@@ -73,7 +73,9 @@ class EventEvent(models.Model):
         for event in self:
             event.update(results.get(event._origin.id or event.id, base_vals))
 
-            if event.waiting_list and event.seats_available > 0:
+            # Skip unsaved events (onchange): their schedulers cannot get
+            # registration lines written to the database.
+            if event.id and event.waiting_list and event.seats_available > 0:
                 onsubscribe_schedulers = event.event_mail_ids.filtered(
                     lambda s: s.interval_type == "after_seats_available"
                 )
@@ -142,6 +144,13 @@ class EventEvent(models.Model):
     # 5. Constraints and onchanges
 
     # 6. CRUD methods
+    def write(self, vals):
+        res = super().write(vals)
+        if {"seats_max", "seats_limited"} & vals.keys():
+            # Seats are not stored, so saving the form does not recompute them.
+            # Recompute here to notify the waiting list of the freed seats.
+            self._compute_seats()
+        return res
 
     # 7. Action methods
 
