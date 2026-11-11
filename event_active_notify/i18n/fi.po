@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_active_notify
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_active_notify
+#: model:ir.model,name:event_active_notify.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_active_notify
+#: model:mail.template,name:event_active_notify.event_activation_internal_group_mail
+msgid "Event: Activation Notification to Internal Group"
+msgstr "Tapahtuma: aktivointi-ilmoitus sisäiselle ryhmälle"
+
+#. module: event_active_notify
+#: model:mail.template,name:event_active_notify.event_ticket_sale_start_mail
+msgid "Event: Ticket Sale Starts Today"
+msgstr "Tapahtuma: lipunmyynti alkaa tänään"
+
+#. module: event_active_notify
+#: model:res.groups,name:event_active_notify.group_event_notifications
+#: model:res.groups.privilege,name:event_active_notify.res_groups_privilege_event_notifications
+msgid "Event Notifications"
+msgstr "Tapahtumailmoitukset"
+
+#. module: event_active_notify
+#: model:mail.template,description:event_active_notify.event_activation_internal_group_mail
+msgid "Notify internal group members when an event is activated."
+msgstr "Ilmoittaa sisäisen ryhmän jäsenille, kun tapahtuma aktivoidaan."
+
+#. module: event_active_notify
+#: model:ir.actions.server,name:event_active_notify.ir_cron_notify_ticket_sale_start_ir_actions_server
+#: model:ir.cron,cron_name:event_active_notify.ir_cron_notify_ticket_sale_start
+msgid "Notify Ticket Sales Start"
+msgstr "Ilmoita lipunmyynnin alkamisesta"
+
+#. module: event_active_notify
+#: model:ir.model.fields,field_description:event_active_notify.field_event_event__notification_sent
+msgid "Notification Sent"
+msgstr "Ilmoitus lähetetty"
+
+#. module: event_active_notify
+#: model:mail.template,description:event_active_notify.event_ticket_sale_start_mail
+msgid "Ticket sale starts today."
+msgstr "Lipunmyynti alkaa tänään."
+
+#. module: event_active_notify
+#: model:ir.model.fields,field_description:event_active_notify.field_event_event__ticket_sale_notification_sent
+msgid "Ticket Sale Notification Sent"
+msgstr "Lipunmyynnin alkamisilmoitus lähetetty"

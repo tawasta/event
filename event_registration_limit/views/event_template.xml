@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template
+        id="custom_registration_template"
+        inherit_id="website_event.registration_template"
+        priority="101"
+    >
+        <xpath expr="//a[@t-if]" position="before">
+            <div
+                t-if="registration_disabled and event.event_registrations_open"
+                class="alert alert-secondary mb-3"
+                role="status"
+            >
+                <i class="fa fa-warning me-2" aria-hidden="true" />
+                <t t-out="error_message" />
+            </div>
+        </xpath>
+        <xpath expr="//a[@t-if]" position="attributes">
+            <attribute
+                name="t-if"
+            >event_page and event.event_registrations_open and not registration_disabled</attribute>
+        </xpath>
+        <xpath expr="//button[@t-elif]" position="attributes">
+            <attribute
+                name="t-elif"
+            >event.event_registrations_open and not registration_disabled</attribute>
+        </xpath>
+        <!-- The planned sales start date is not shown, only that sales are not open -->
+        <xpath expr="//div[hasclass('alert-info')]" position="replace">
+            <div
+                t-elif="not event.event_registrations_started and not event.event_registrations_sold_out"
+                class="alert alert-info mb-3 small"
+                role="status"
+            >
+                Registrations are not open yet
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Events with several time slots offer a second way to start a registration -->
+    <template
+        id="custom_event_description_dates"
+        inherit_id="website_event.event_description_dates"
+    >
+        <xpath
+            expr="//button[@data-bs-target='#modal_slot_registration']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >event.event_registrations_open and not registration_disabled</attribute>
+        </xpath>
+    </template>
+
+</odoo>

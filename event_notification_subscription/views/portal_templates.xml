@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="portal_my_details" inherit_id="portal.portal_my_details">
+        <xpath expr="//div[@name='address_details']" position="inside">
+            <div
+                t-if="event_tags"
+                class="o_event_interest_tags col-12 mt-3 mb-2"
+                role="group"
+                aria-labelledby="o_event_interest_tags_title"
+                aria-describedby="o_event_interest_tags_help"
+            >
+                <div class="card">
+                    <div class="card-header d-flex align-items-center gap-2">
+                        <i class="fa fa-bell-o text-primary" aria-hidden="true" />
+                        <h6
+                            id="o_event_interest_tags_title"
+                            class="mb-0"
+                        >Which events would you like to hear about?</h6>
+                    </div>
+                    <div class="card-body">
+                        <p id="o_event_interest_tags_help" class="text-muted mb-3">Click the tags you are interested in. A selected tag is filled and has a check mark. Click it again to remove it. You will get an e-mail when a matching event is published.</p>
+                        <input type="hidden" name="event_interest_tags_present" value="1" />
+                        <div class="d-flex flex-wrap gap-2">
+                            <t t-foreach="event_tags" t-as="tag">
+                                <t t-set="is_selected" t-value="tag in partner_sudo.event_interest_tags" />
+                                <input
+                                    type="checkbox"
+                                    class="btn-check"
+                                    name="event_interest_tag_ids"
+                                    t-attf-id="o_event_interest_tag_#{tag.id}"
+                                    t-att-value="tag.id"
+                                    t-att-checked="'checked' if is_selected else None"
+                                />
+                                <label
+                                    class="btn btn-outline-primary rounded-pill px-3"
+                                    t-attf-for="o_event_interest_tag_#{tag.id}"
+                                >
+                                    <i
+                                        t-attf-class="o_event_interest_tag_icon fa #{'fa-check' if is_selected else 'fa-plus'} me-1"
+                                        aria-hidden="true"
+                                    />
+                                    <t t-out="tag.name" />
+                                </label>
+                            </t>
+                        </div>
+                        <div class="alert alert-info d-flex align-items-center gap-2 small mt-3 mb-0">
+                            <i class="fa fa-info-circle" aria-hidden="true" />
+                            <p class="mb-0">Remember to press "Save Address" at the bottom of the page to save your choice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,90 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_notification_subscription
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_notification_subscription
+#: model:ir.model.fields,field_description:event_notification_subscription.field_event_event__announcement_sent
+msgid "Announcement to Interested Contacts Sent"
+msgstr "Viesti lähetetty kiinnostuneille kontakteille"
+
+#. module: event_notification_subscription
+#: model:ir.model,name:event_notification_subscription.model_res_partner
+msgid "Contact"
+msgstr "Kontakti"
+
+#. module: event_notification_subscription
+#: model:ir.model,name:event_notification_subscription.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_notification_subscription
+#: model_terms:ir.ui.view,arch_db:event_notification_subscription.portal_my_details
+msgid ""
+"Click the tags you are interested in. A selected tag is filled and has a "
+"check mark. Click it again to remove it. You will get an e-mail when a "
+"matching event is published."
+msgstr ""
+"Klikkaa tunnisteita, jotka kiinnostavat sinua. Valittu tunniste on "
+"korostettu ja siinä on valintamerkki. Klikkaa sitä uudelleen, niin valinta "
+"poistuu. Saat sähköpostia, kun vastaava tapahtuma julkaistaan."
+
+#. module: event_notification_subscription
+#: model_terms:ir.ui.view,arch_db:event_notification_subscription.portal_my_details
+msgid "Remember to press \"Save Address\" at the bottom of the page to save your choice."
+msgstr ""
+"Muista painaa sivun alareunan \"Tallenna osoite\" -painiketta, jotta valintasi "
+"tallentuu."
+
+#. module: event_notification_subscription
+#: model_terms:ir.ui.view,arch_db:event_notification_subscription.portal_my_details
+msgid "Which events would you like to hear about?"
+msgstr "Mistä tapahtumista haluat tietoa?"
+
+#. module: event_notification_subscription
+#: model:ir.model.fields,field_description:event_notification_subscription.field_res_partner__event_interest_tags
+#: model:ir.model.fields,field_description:event_notification_subscription.field_res_users__event_interest_tags
+msgid "Event Tags Interested In"
+msgstr "Tapahtumatunnisteet, joista kiinnostunut"
+
+#. module: event_notification_subscription
+#: model:ir.actions.server,name:event_notification_subscription.cron_event_notification_ir_actions_server
+#: model:ir.cron,cron_name:event_notification_subscription.cron_event_notification
+msgid "Event: Send Tag-based Event Notifications"
+msgstr "Tapahtuma: lähetä tagipohjaiset notifikaatiot kontakteille"
+
+#. module: event_notification_subscription
+#: model:mail.template,name:event_notification_subscription.tag_based_notification_mail
+msgid "Event: Tag-Based Event Notification"
+msgstr "Tapahtuma: tagipohjainen notifikaatio kontakteille"
+
+#. module: event_notification_subscription
+#: model:ir.model.fields,help:event_notification_subscription.field_event_event__announcement_sent
+msgid ""
+"Indicates if an announcement email has already been sent for this event to "
+"contacts who are interested in this event's tags."
+msgstr ""
+"Kertoo, onko tapahtumasta jo lähetetty sähköpostinotifikaatiot kontakteille,"
+" jotka ovat merkinneet olevansa kiinnostuneita tapahtuman tunnisteista."
+
+#. module: event_notification_subscription
+#: model:mail.template,description:event_notification_subscription.tag_based_notification_mail
+msgid ""
+"Notification email to contacts who have expressed interest in the event's "
+"tags"
+msgstr ""
+"Notifikaatiosähköposti kontakteille, jotka ovat ilmaisseet kiinnostuksensa "
+"tapahtuman tunnisteisiin."

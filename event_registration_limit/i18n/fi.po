@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_registration_limit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_registration_limit
+#. odoo-python
+#: code:addons/event_registration_limit/controllers/event.py:0
+msgid ""
+"All your dogs are already registered for this test type. Please wait for the "
+"evaluation before registering again."
+msgstr ""
+"Kaikki koirasi ovat jo ilmoittautuneet tähän koetyyppiin. Odota arviointia "
+"ennen uutta ilmoittautumista."
+
+#. module: event_registration_limit
+#: model_terms:ir.ui.view,arch_db:event_registration_limit.custom_registration_template
+msgid "Registrations are not open yet"
+msgstr "Ilmoittautuminen ei ole vielä auki"
+
+#. module: event_registration_limit
+#. odoo-python
+#: code:addons/event_registration_limit/controllers/event.py:0
+msgid "You have no dogs added."
+msgstr "Sinulla ei ole koiria lisättynä."

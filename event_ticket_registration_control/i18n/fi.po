@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_ticket_registration_control
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_ticket_registration_control
+#: model:ir.model,name:event_ticket_registration_control.model_event_event
+msgid "Event"
+msgstr "Tapahtuma"
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+msgid ""
+"Event is less than 30 days away. Updated the sales of the ticket %(ticket)s "
+"to open now."
+msgstr ""
+"Tapahtumaan on alle 30 päivää. Päivitettiin lipun %(ticket)s myynti "
+"alkamaan heti."
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+msgid ""
+"Event is 1-2 months away. Updated the sales of the ticket %(ticket)s to open "
+"two weeks from publishing."
+msgstr ""
+"Tapahtumaan on 1-2 kuukautta. Päivitettiin lipun %(ticket)s myynti "
+"alkamaan kaksi viikkoa julkaisusta."
+
+#. module: event_ticket_registration_control
+#: model:ir.model.fields,field_description:event_ticket_registration_control.field_event_event__is_published_sudo_helper
+msgid "Is published (read as sudo)"
+msgstr "Julkaistu (luetaan sudona)"
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+msgid "Please add tickets to event before publishing."
+msgstr "Lisää tapahtumalle liput ennen julkaisua."
+
+#. module: event_ticket_registration_control
+#: model:res.groups,name:event_ticket_registration_control.group_publish_event_in_near_future
+msgid "Publish Events that are < 30 days away on Website"
+msgstr "Saa julkaista verkkosivuilla tapahtumia, jotka alle 30pv päässä"
+
+#. module: event_ticket_registration_control
+#: model:res.groups.privilege,name:event_ticket_registration_control.res_groups_privilege_publish_event_near_future
+msgid "Event Publishing in Near Future"
+msgstr "Lähitapahtumien julkaisu"
+
+#. module: event_ticket_registration_control
+#: model:ir.model.fields,field_description:event_ticket_registration_control.field_event_event__requires_additional_rights_to_publish
+msgid "Requires Additional Rights to Publish"
+msgstr "Julkaisu vaatii korotettuja käyttöoikeuksia"
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+msgid "Standard Ticket"
+msgstr "Peruslippu"
+
+#. module: event_ticket_registration_control
+#: model:ir.model.fields,help:event_ticket_registration_control.field_event_event__is_published_sudo_helper
+msgid ""
+"Technical helper field so that all users can read the Is Published field"
+msgstr ""
+"Tekninen apukenttä, jotta kaikki käyttäjät voivat lukea Julkaistu-kentän "
+"sisältöä"
+
+#. module: event_ticket_registration_control
+#. odoo-python
+#: code:addons/event_ticket_registration_control/models/event_event.py:0
+#: model_terms:ir.ui.view,arch_db:event_ticket_registration_control.view_event_form
+msgid ""
+"This event is set to start within 30 days. Publishing this event requires "
+"additional access rights."
+msgstr ""
+"Tämä tapahtuma alkaa 30 päivän sisällä. Sen julkaiseminen on mahdollista "
+"vain korkeammilla käyttöoikeuksilla."
