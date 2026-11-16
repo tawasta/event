@@ -15,6 +15,9 @@ Configuration
 Usage
 =====
 
+The ``_custom_processing`` hook lets other modules prepare the recipient
+registrations just before the emails are sent: after each registration, and
+when a before or after event email is sent.
 
 Known issues / Roadmap
 ======================
