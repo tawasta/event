@@ -21,14 +21,18 @@
 {
     "name": "Website Event Waiting List",
     "summary": "Adds a waiting list functionality to Events.",
-    "version": "17.0.1.0.1",
+    "version": "17.0.1.0.3",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["website_event_cancellation", "website_event"],
+    "depends": [
+        "website_event_cancellation",
+        "website_event",
+        "event_mail_execute_override",
+    ],
     "data": [
         "wizard/waiting_mail_list_wizard.xml",
         "security/ir.model.access.csv",

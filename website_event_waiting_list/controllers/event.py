@@ -1,4 +1,5 @@
 import logging
+from collections import Counter
 
 import werkzeug
 
@@ -22,11 +23,19 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         if "waiting_list_registration" in post:
             # Kutsu alkuperäistä metodia muokatuilla parametreilla
             tickets = self._process_tickets_form(event, post)
+            # Sold out tickets are ordered to the waiting list, the others
+            # normally
+            waiting_tickets = [
+                ticket
+                for ticket in tickets
+                if ticket["ticket"] and ticket["ticket"].is_sold_out
+            ]
             availability_check = True
             if event.seats_limited:
                 ordered_seats = 0
                 for ticket in tickets:
-                    ordered_seats += ticket["quantity"]
+                    if ticket not in waiting_tickets:
+                        ordered_seats += ticket["quantity"]
                 if event.seats_available < ordered_seats:
                     availability_check = False
             if not tickets:
@@ -48,8 +57,12 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
                     }
 
             if post.get("waiting_list_registration"):
-                # availability_check = True
-                waiting_list_check = True
+                if waiting_tickets:
+                    # The seats of the other tickets must still be available
+                    waiting_list_check = availability_check
+                else:
+                    # Without tickets the whole event is on the waiting list
+                    waiting_list_check = not event.event_ticket_ids
 
             logging.info("====availability_check=====")
             logging.info(availability_check)
@@ -80,13 +93,16 @@ class WebsiteEventControllerWaiting(WebsiteEventController):
         If we don't, the user is instead redirected to page to register with a
         formatted error message."""
         registrations_data = self._process_attendees_form(event, post)
-        event_ticket_ids = {
+        registration_tickets = Counter(
             registration["event_ticket_id"] for registration in registrations_data
-        }
-        event_tickets = request.env["event.event.ticket"].browse(event_ticket_ids)
+        )
+        event_tickets = request.env["event.event.ticket"].browse(
+            list(registration_tickets.keys())
+        )
         if not event.waiting_list and any(
             event_ticket.seats_limited
-            and event_ticket.seats_available < len(registrations_data)
+            and event_ticket.seats_available
+            < registration_tickets.get(event_ticket.id, 0)
             for event_ticket in event_tickets
         ):
             return request.redirect(
