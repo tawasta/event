@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [event_id_show_in_ui_views](event_id_show_in_ui_views/) | 17.0.1.0.0 |  | Show event's ID in list, form and kanban views
 [event_list_view_hideable_fields](event_list_view_hideable_fields/) | 17.0.1.0.0 |  | Make more list view fields' visibility toggleable
 [event_mail_attendees](event_mail_attendees/) | 17.0.1.0.1 |  | Wizard to mail Attendees without mass mail
-[event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.0 |  | Prevents sending emails to past events
+[event_mail_execute_override](event_mail_execute_override/) | 17.0.1.0.1 |  | Prevents sending emails to past events
 [event_mail_freetext_confirmation_and_reminder](event_mail_freetext_confirmation_and_reminder/) | 17.0.1.0.0 |  | Event Mail Freetext Confirmation and Reminder
 [event_mail_freetext_fields](event_mail_freetext_fields/) | 17.0.1.0.0 |  | Adds HTML fields for event, that can be injected into email templates
 [event_partner_membership_state](event_partner_membership_state/) | 17.0.1.1.0 |  | Show partner membership state on event registration
@@ -102,7 +102,7 @@ addon | version | maintainers | summary
 [website_event_track_settings](website_event_track_settings/) | 17.0.1.0.0 |  | Customization option settings to Website Event Track
 [website_event_track_show_menu_without_technical_features](website_event_track_show_menu_without_technical_features/) | 17.0.1.0.0 |  | Show the 'Tracks' menu to event users without developer mode
 [website_event_track_speaker_order](website_event_track_speaker_order/) | 17.0.1.0.0 |  | Always show Track Speaker Order
-[website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.1 |  | Adds a waiting list functionality to Events.
+[website_event_waiting_list](website_event_waiting_list/) | 17.0.1.0.3 |  | Adds a waiting list functionality to Events.
 [website_event_wording_koulutus](website_event_wording_koulutus/) | 17.0.1.0.0 |  | Overrides website_event's Finnish translations to use 'koulutus' instead of 'tapahtuma'
 [website_my_events](website_my_events/) | 17.0.1.1.0 |  | My events in website portal
 

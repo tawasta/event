@@ -83,9 +83,15 @@ class EventMailScheduler(models.Model):
                     continue
                 mail_was_sent = self.check_and_send_mail(scheduler, now)
                 if mail_was_sent:
+                    registrations = scheduler.event_id.registration_ids.filtered(
+                        lambda reg: reg.state in ("open", "done")
+                    )
+                    # One-shot mails need the same recipient preparation as
+                    # mails sent after each registration.
+                    self._custom_processing(scheduler, registrations)
                     scheduler.event_id.mail_attendees(
                         scheduler.template_ref.id,
-                        filter_func=lambda reg: reg.state not in ("cancel", "draft"),
+                        filter_func=lambda reg: reg.state in ("open", "done"),
                     )
 
                     scheduler.update(

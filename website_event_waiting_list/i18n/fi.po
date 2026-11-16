@@ -546,3 +546,26 @@ msgstr "tapahtumalle"
 #: model_terms:ir.ui.view,arch_db:website_event_waiting_list.view_email_template_confirm_waiting_list
 msgid "for the event"
 msgstr "tapahtumalle"
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid ""
+"The event is full. Select 1 on a ticket to join the waiting list. We will "
+"contact you if a seat becomes available."
+msgstr ""
+"Tapahtuma on täynnä. Valitse lipulle määräksi 1 liittyäksesi jonotuslistaan. "
+"Otamme sinuun yhteyttä, jos paikka vapautuu."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid ""
+"The tickets marked Sold Out go to the waiting list: select 1 to join it. "
+"Other tickets are registered normally."
+msgstr ""
+"Loppuunmyytyihin lippuihin ilmoittaudutaan jonotuslistalle: valitse 1 "
+"liittyäksesi jonoon. Muihin lippuihin ilmoittaudutaan normaalisti."
+
+#. module: website_event_waiting_list
+#: model_terms:ir.ui.view,arch_db:website_event_waiting_list.registration_template_waiting_list
+msgid "Sold out - you can join the waiting list"
+msgstr "Loppuunmyyty - voit liittyä jonotuslistalle"
