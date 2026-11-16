@@ -21,7 +21,7 @@
 {
     "name": "Event Mail Execute Override",
     "summary": "Prevents sending emails to past events",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Events",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
