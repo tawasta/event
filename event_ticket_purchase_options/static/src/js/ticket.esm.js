@@ -14,7 +14,6 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
      */
     start: function () {
         const res = this._super.apply(this, arguments);
-        console.log("InviteOthersWidget started");
 
         // Tarkista, löytyykö näkymästä "Join the waiting list" -painike
         this.isWaitingList = this.$("button[name='waiting_list_button']").length > 0;
@@ -27,6 +26,7 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
                 .addClass("disabled-card") // Lisää mukautettu tyyli ei-aktiiviselle kortille
                 .removeClass("cursor-pointer"); // Poistaa cursor-pointer -luokan
             this.$("#register_self").prop("checked", true);
+            this._hideUnavailableOptionHelp();
         }
 
         // Käynnistetään widget vasta, kun modaalin sisältö on näkyvissä
@@ -64,6 +64,18 @@ publicWidget.registry.InviteOthersWidget = publicWidget.Widget.extend({
             const selectName = $(this).attr("name");
             self.coreTicketOptions[selectName] = $(this).html();
         });
+    },
+
+    /**
+     * Hides the help of the disabled "others" option on a waiting list, and
+     * the whole help box when nothing else is left in it.
+     * @private
+     */
+    _hideUnavailableOptionHelp: function () {
+        this.$("#registration_choice_help_others").addClass("d-none");
+        if (!this.$("#registration_choice_help_self").length) {
+            this.$("#registration_choice_help").addClass("d-none");
+        }
     },
 
     /**

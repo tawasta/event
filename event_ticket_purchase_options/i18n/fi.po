@@ -86,13 +86,11 @@ msgstr "<i class=\"fa fa-envelope\"/> Lähetä kutsu"
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.modal_ticket_registration_inherit
 msgid ""
-"<span class=\"form-text text-muted mt-3\">\n"
-"                If you are registering other participants, you will have the opportunity to invite them to fill in their contact details later.\n"
-"            </span>"
+"If you are registering other participants, you will have the opportunity to "
+"invite them to fill in their contact details later."
 msgstr ""
-"<span class=\"form-text text-muted mt-3\">\n"
-"                Jos rekisteröit muita osallistujia, sinulla on myöhemmin mahdollisuus kutsua heidät täyttämään yhteystietonsa.\n"
-"            </span>"
+"Jos rekisteröit muita osallistujia, sinulla on myöhemmin mahdollisuus kutsua "
+"heidät täyttämään yhteystietonsa."
 
 #. module: event_ticket_purchase_options
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.event_invitation_form
@@ -467,3 +465,81 @@ msgstr "Olet kutsuttu tapahtumaan {{ object.event_id.name }}"
 #: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.view_email_template_subscription_with_invitation
 msgid "for attendee"
 msgstr "osallistujalle"
+
+#. module: event_ticket_purchase_options
+#: model:ir.model.fields,field_description:event_ticket_purchase_options.field_res_config_settings__event_registration_self_help
+#: model:ir.model.fields,field_description:event_ticket_purchase_options.field_website__event_registration_self_help
+msgid "Help for Registering Only Myself"
+msgstr "Ohje: ilmoitan vain itseni"
+
+#. module: event_ticket_purchase_options
+#: model:ir.model.fields,field_description:event_ticket_purchase_options.field_res_config_settings__event_registration_others_help
+#: model:ir.model.fields,field_description:event_ticket_purchase_options.field_website__event_registration_others_help
+msgid "Help for Registering Other Participants"
+msgstr "Ohje: ilmoitan muita osallistujia"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "Help for registering only myself"
+msgstr "Ohje: ilmoitan vain itseni"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "Help for registering other participants"
+msgstr "Ohje: ilmoitan muita osallistujia"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "E.g. choose this when you attend the event yourself..."
+msgstr "Esim. valitse tämä, kun osallistut tapahtumaan itse..."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "E.g. choose this when you register colleagues..."
+msgstr "Esim. valitse tämä, kun ilmoitat kollegoitasi..."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "Registration options"
+msgstr "Ilmoittautumisvaihtoehdot"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "Shown in the ticket registration window. Leave empty to hide it."
+msgstr "Näytetään lippujen ilmoittautumisikkunassa. Jätä tyhjäksi, jos ohjetta ei näytetä."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "The help texts below apply to this website."
+msgstr "Alla olevat ohjeet koskevat tätä verkkosivua."
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.res_config_settings_view_form
+msgid "Website"
+msgstr "Verkkosivu"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.modal_ticket_registration_inherit
+msgid ""
+"<i class=\"fa fa-info-circle text-primary me-2\" aria-hidden=\"true\"/>Which "
+"option should I choose?"
+msgstr ""
+"<i class=\"fa fa-info-circle text-primary me-2\" aria-hidden=\"true\"/>Kumman "
+"vaihtoehdon valitsen?"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.modal_ticket_registration_inherit
+msgid ""
+"<i class=\"fa fa-user fa-fw me-1\" aria-hidden=\"true\"/>I am registering "
+"only myself"
+msgstr ""
+"<i class=\"fa fa-user fa-fw me-1\" aria-hidden=\"true\"/>Ilmoitan vain itseni"
+
+#. module: event_ticket_purchase_options
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options.modal_ticket_registration_inherit
+msgid ""
+"<i class=\"fa fa-users fa-fw me-1\" aria-hidden=\"true\"/>I am registering "
+"other participants"
+msgstr ""
+"<i class=\"fa fa-users fa-fw me-1\" aria-hidden=\"true\"/>Ilmoitan muita "
+"osallistujia"
