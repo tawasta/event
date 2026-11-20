@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.event.purchase.options.confirmation</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="event_ticket_purchase_options.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <setting id="event_registration_others_help_setting" position="after">
+                <setting
+                    id="event_invitation_confirmation_help_setting"
+                    string="Invitation instructions after payment"
+                    help="Shown with the invitation button on the order confirmation page. Leave empty to show only the button."
+                >
+                    <!-- The wrapper lets the editor use the full column width -->
+                    <div>
+                        <field
+                            name="event_invitation_confirmation_help"
+                            class="w-100"
+                            placeholder="E.g. send each participant an invitation, so that they can fill in their own details..."
+                        />
+                    </div>
+                </setting>
+            </setting>
+        </field>
+    </record>
+</odoo>

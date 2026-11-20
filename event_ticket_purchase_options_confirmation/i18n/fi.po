@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_ticket_purchase_options_confirmation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-19 00:00+0000\n"
+"PO-Revision-Date: 2026-11-19 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid ""
+"<i class=\"fa fa-users text-primary me-2\" aria-hidden=\"true\"/>Invite the"
+" other participants"
+msgstr ""
+"<i class=\"fa fa-users text-primary me-2\" aria-hidden=\"true\"/>Kutsu muut"
+" osallistujat"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model,name:event_ticket_purchase_options_confirmation.model_res_config_settings
+msgid "Config Settings"
+msgstr "Asetukset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Create an account and send invitations"
+msgstr "Luo tunnus ja lähetä kutsut"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid ""
+"E.g. send each participant an invitation, so that they can fill in their "
+"own details..."
+msgstr ""
+"Esim. lähetä jokaiselle osallistujalle kutsu, jotta hän voi täyttää omat "
+"tietonsa..."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model.fields,field_description:event_ticket_purchase_options_confirmation.field_res_config_settings__event_invitation_confirmation_help
+#: model:ir.model.fields,field_description:event_ticket_purchase_options_confirmation.field_website__event_invitation_confirmation_help
+msgid "Invitation Instructions on Order Confirmation"
+msgstr "Kutsuohje tilausvahvistussivulla"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid "Invitation instructions after payment"
+msgstr "Kutsuohje maksun jälkeen"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Log in and send invitations"
+msgstr "Kirjaudu ja lähetä kutsut"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Send invitations"
+msgstr "Lähetä kutsut"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid ""
+"Shown with the invitation button on the order confirmation page. Leave empty"
+" to show only the button."
+msgstr ""
+"Näytetään kutsupainikkeen kanssa tilausvahvistussivulla. Jätä tyhjäksi, "
+"jos näytetään vain painike."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "The invitations are sent from the Events page of your customer account."
+msgstr "Kutsut lähetetään asiakastilisi Tapahtumat-sivulta."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model,name:event_ticket_purchase_options_confirmation.model_website
+msgid "Website"
+msgstr "Verkkosivu"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "You can send the invitations once your payment has been confirmed."
+msgstr "Voit lähettää kutsut, kun maksusi on vahvistettu."
