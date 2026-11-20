@@ -51,7 +51,7 @@ addon | version | maintainers | summary
 [event_ticket_domain_filter](event_ticket_domain_filter/) | 17.0.1.2.1 |  | Show event tickets only to users matching a partner domain.
 [event_ticket_individual_invoice_lines](event_ticket_individual_invoice_lines/) | 17.0.1.1.0 |  | Splits e.g. line with 3 event tickets into separate invoice lines for each
 [event_ticket_product_qty_auto_discount](event_ticket_product_qty_auto_discount/) | 17.0.1.0.0 |  | Add automatic quantity discounts for event ticket products
-[event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.0.0 |  | Event Ticket Registration: Self or Invite Others
+[event_ticket_purchase_options](event_ticket_purchase_options/) | 17.0.1.1.0 |  | Event Ticket Registration: Self or Invite Others
 [event_use_tree_as_default_view](event_use_tree_as_default_view/) | 17.0.1.0.0 |  | Use tree instead of kanban as a default view for event
 [event_visibility](event_visibility/) | 17.0.1.1.0 |  | Event Visibility
 [partner_event_prioritize_users_and_contacts_when_finding_partner](partner_event_prioritize_users_and_contacts_when_finding_partner/) | 17.0.1.0.2 |  | Modify OCA module's partner searching logic to better support cases where there are multiple partners with same email address

@@ -1,0 +1,13 @@
+// The help text is free-form editor HTML, so its block spacing cannot be set
+// with utility classes on the elements themselves.
+.o_registration_choice_help_text {
+    > p,
+    > ul,
+    > ol {
+        margin-bottom: map-get($spacers, 2);
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}

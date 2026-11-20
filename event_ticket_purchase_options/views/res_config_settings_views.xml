@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.event.purchase.options</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="event.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <block name="registration_setting_container" position="after">
+                <block
+                    title="Registration options"
+                    name="event_registration_options_container"
+                >
+                    <!-- The help texts are per website, and this app has no
+                         website selector of its own -->
+                    <setting
+                        id="event_registration_help_website_setting"
+                        groups="website.group_multi_website"
+                        help="The help texts below apply to this website."
+                    >
+                        <field
+                            name="website_id"
+                            string="Website"
+                            options="{'no_open': True, 'no_create': True}"
+                        />
+                    </setting>
+                    <setting
+                        id="event_registration_self_help_setting"
+                        string="Help for registering only myself"
+                        help="Shown in the ticket registration window. Leave empty to hide it."
+                    >
+                        <div>
+                            <field
+                                name="event_registration_self_help"
+                                class="w-100"
+                                placeholder="E.g. choose this when you attend the event yourself..."
+                            />
+                        </div>
+                    </setting>
+                    <setting
+                        id="event_registration_others_help_setting"
+                        string="Help for registering other participants"
+                        help="Shown in the ticket registration window. Leave empty to hide it."
+                    >
+                        <div>
+                            <field
+                                name="event_registration_others_help"
+                                class="w-100"
+                                placeholder="E.g. choose this when you register colleagues..."
+                            />
+                        </div>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>
