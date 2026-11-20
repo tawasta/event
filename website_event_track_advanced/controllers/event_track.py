@@ -688,11 +688,18 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         # Speakers
         speaker_values = list()
+        # Only the logged-in submitter editing their own track updates its speakers
+        own_speaker_ids = (
+            [str(id_) for id_ in track_id.speaker_ids.ids]
+            if track_id and track_id.partner_id == request.env.user.partner_id
+            else []
+        )
         if post.get("speakers_input_index"):
             for speaker_index in range(1, int(post.get("speakers_input_index")) + 1):
+                speaker_id = post.get("speaker_id[%s]" % speaker_index)
                 speaker_values.append(
                     {
-                        "id": post.get("speaker_id[%s]" % speaker_index),
+                        "id": speaker_id if speaker_id in own_speaker_ids else False,
                         "lastname": post.get(
                             "speaker_lastname[%s]" % speaker_index
                         ).strip(),
@@ -882,7 +889,7 @@ class EventTrackControllerAdvanced(EventTrackController):
 
         return user, user_exists
 
-    def _create_organization(self, organization_values):
+    def _create_organization(self, organization_values, organization=False):
         """Find existing user organization partner by name and update it
         or create a new organization partner
 
@@ -893,8 +900,6 @@ class EventTrackControllerAdvanced(EventTrackController):
         if not organization_name or organization_name == "":
             _logger.warning(_("Could not create organization (missing name)"))
             return False
-
-        organization = False
 
         if not organization:
             organization_values["is_company"] = True
@@ -921,7 +926,7 @@ class EventTrackControllerAdvanced(EventTrackController):
         organization_name = partner_values.pop("organization", "")
         if organization_name:
             organization = self._create_organization(
-                {"name": organization_name.strip()}
+                {"name": organization_name.strip()}, existing_partner.parent_id
             )
             if organization:
                 partner_values["parent_id"] = organization.id
@@ -1130,7 +1135,10 @@ class EventTrackControllerAdvanced(EventTrackController):
             # 3. Add contact to organization
             if values.get("contact_organization"):
                 organization = self._create_organization(
-                    values.get("contact_organization")
+                    values.get("contact_organization"),
+                    partner.parent_id
+                    if partner and partner == request.env.user.partner_id
+                    else False,
                 )
                 # Add contact to the existing organization
                 if partner and partner != organization:

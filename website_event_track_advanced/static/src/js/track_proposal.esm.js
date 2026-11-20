@@ -279,6 +279,9 @@ publicWidget.registry.TrackProposalFormInstance = publicWidget.Widget.extend({
             newRow
                 .find("input[name^='speaker_title']")
                 .attr("name", `speaker_title[${speakerCount}]`);
+            newRow
+                .find("input[name^='speaker_id']")
+                .attr("name", `speaker_id[${speakerCount}]`);
 
             // Poista "disabled" attribuutti "Remove speaker" -painikkeesta kloonatuilla riveillä
             newRow.find(".btn-remove-speaker").removeAttr("disabled");

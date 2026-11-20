@@ -1425,7 +1425,10 @@
                                         t-att-required="None if not editable else 'required'"
                                     />
                                 </div>
-                                <input type="hidden" name="speaker_id" />
+                                <input
+                                    type="hidden"
+                                    t-attf-name="speaker_id[#{speaker_count}]"
+                                />
                             </div>
                         </div>
                     </t>
