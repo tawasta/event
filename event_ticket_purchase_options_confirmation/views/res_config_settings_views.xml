@@ -13,15 +13,15 @@
             <setting id="event_registration_others_help_setting" position="after">
                 <setting
                     id="event_invitation_confirmation_help_setting"
-                    string="Invitation instructions after payment"
-                    help="Shown with the invitation button on the order confirmation page. Leave empty to show only the button."
+                    string="Instructions on order confirmation"
+                    help="Shown in the registrations box of the order confirmation page, e.g. where the registrations are found and how the other participants are invited. Leave empty to hide the instructions."
                 >
                     <!-- The wrapper lets the editor use the full column width -->
                     <div>
                         <field
                             name="event_invitation_confirmation_help"
                             class="w-100"
-                            placeholder="E.g. send each participant an invitation, so that they can fill in their own details..."
+                            placeholder="E.g. your registrations are on the Events page of your account. If you registered other participants, send each of them an invitation there..."
                         />
                     </div>
                 </setting>

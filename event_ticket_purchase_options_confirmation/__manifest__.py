@@ -19,8 +19,8 @@
 ##############################################################################
 {
     "name": "Event Ticket Invitations on Order Confirmation",
-    "summary": "Guide buyers to send invitations from the order confirmation page",
-    "version": "17.0.1.0.0",
+    "summary": "Guide buyers to their registrations from the order confirmation page",
+    "version": "17.0.1.1.0",
     "category": "Event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",

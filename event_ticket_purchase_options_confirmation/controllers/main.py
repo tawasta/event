@@ -1,56 +1,74 @@
+from werkzeug.urls import url_encode
+
 from odoo.http import request
 from odoo.tools import is_html_empty
+from odoo.tools.sql import escape_psql
 
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
-INVITATION_PAGE_URL = "/my/events"
+REGISTRATIONS_PAGE_URL = "/my/events"
 
 
-class WebsiteSaleEventInvitation(WebsiteSale):
+class WebsiteSaleEventRegistrations(WebsiteSale):
     def _prepare_shop_payment_confirmation_values(self, order):
         values = super()._prepare_shop_payment_confirmation_values(order)
-        invite_registrations = order.order_line.registration_ids.filtered(
-            "invite_others"
+        registrations = order.order_line.registration_ids.filtered(
+            lambda registration: registration.state != "cancel"
         )
-        if not invite_registrations:
+        if not registrations:
             return values
 
         help_text = request.website.event_invitation_confirmation_help
-        values["event_invitation"] = {
+        values["event_registrations"] = {
             "help": False if is_html_empty(help_text) else help_text,
-            # Invitations can be sent only for confirmed registrations, and the
-            # invitation page lists no draft ones
-            "is_confirmed": any(
-                state in ("open", "done")
-                for state in invite_registrations.mapped("state")
+            # The registrations page lists no draft registrations, and
+            # invitations can be sent only for confirmed ones. Free tickets are
+            # confirmed before the payment, so all must be confirmed.
+            "is_confirmed": all(
+                state in ("open", "done") for state in registrations.mapped("state")
             ),
-            **self._get_event_invitation_access(order),
+            **self._get_event_registrations_access(order),
         }
         return values
 
-    def _get_event_invitation_access(self, order):
-        """Return the URL that takes the buyer to the invitation page, and
+    def _get_event_registrations_access(self, order):
+        """Return the URL that takes the buyer to the registrations page, and
         whether the buyer must log in or sign up on the way.
 
         A guest buyer can reach the page only through the account of the order
-        customer, so the same signup link that core offers on this page is
-        used, with the invitation page as the redirect.
+        customer. A customer with an account logs in, and a customer without
+        one gets the same signup link that core offers on this page, with the
+        registrations page as the redirect.
         """
         if not request.website.is_public_user():
-            return {"url": INVITATION_PAGE_URL, "access": "portal"}
+            return {"url": REGISTRATIONS_PAGE_URL, "access": "portal"}
 
         partner = order.partner_id
-        has_account = bool(partner.user_ids)
-        signup_allowed = (
-            request.env["res.users"]._get_signup_invitation_scope() == "b2c"
-        )
-        if not has_account and not signup_allowed:
+        if self._has_event_registrations_account(partner):
+            # No signup token: it would let the guest set the password of an
+            # existing account
+            query = url_encode({"redirect": REGISTRATIONS_PAGE_URL})
+            return {"url": f"/web/login?{query}", "access": "login"}
+
+        if request.env["res.users"]._get_signup_invitation_scope() != "b2c":
             return {}
 
         signup_urls = partner.with_context(
             relative_url=True, signup_valid=True
-        )._get_signup_url_for_action(url=INVITATION_PAGE_URL)
-        return {
-            "url": signup_urls[partner.id],
-            "access": "login" if has_account else "signup",
-        }
+        )._get_signup_url_for_action(url=REGISTRATIONS_PAGE_URL)
+        return {"url": signup_urls[partner.id], "access": "signup"}
+
+    def _has_event_registrations_account(self, partner):
+        """Whether the customer already has an account, also an archived one
+        or one with the same email: the guest checkout creates a new partner
+        even when the email has an account, and the signup would then fail.
+        """
+        domain = [("partner_id", "=", partner.id)]
+        if partner.email:
+            # Escaped, so that % and _ of the email are no wildcards that
+            # would reveal other logins
+            login = escape_psql(partner.email)
+            domain = ["|", ("login", "=ilike", login)] + domain
+        # sudo: a guest cannot read users; only their existence is used
+        users = request.env["res.users"].sudo().with_context(active_test=False)
+        return bool(users.search_count(domain, limit=1))
