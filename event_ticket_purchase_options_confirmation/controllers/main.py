@@ -2,7 +2,6 @@ from werkzeug.urls import url_encode
 
 from odoo.http import request
 from odoo.tools import is_html_empty
-from odoo.tools.sql import escape_psql
 
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
@@ -44,7 +43,7 @@ class WebsiteSaleEventRegistrations(WebsiteSale):
             return {"url": REGISTRATIONS_PAGE_URL, "access": "portal"}
 
         partner = order.partner_id
-        if self._has_event_registrations_account(partner):
+        if partner.user_ids:
             # No signup token: it would let the guest set the password of an
             # existing account
             query = url_encode({"redirect": REGISTRATIONS_PAGE_URL})
@@ -57,18 +56,3 @@ class WebsiteSaleEventRegistrations(WebsiteSale):
             relative_url=True, signup_valid=True
         )._get_signup_url_for_action(url=REGISTRATIONS_PAGE_URL)
         return {"url": signup_urls[partner.id], "access": "signup"}
-
-    def _has_event_registrations_account(self, partner):
-        """Whether the customer already has an account, also an archived one
-        or one with the same email: the guest checkout creates a new partner
-        even when the email has an account, and the signup would then fail.
-        """
-        domain = [("partner_id", "=", partner.id)]
-        if partner.email:
-            # Escaped, so that % and _ of the email are no wildcards that
-            # would reveal other logins
-            login = escape_psql(partner.email)
-            domain = ["|", ("login", "=ilike", login)] + domain
-        # sudo: a guest cannot read users; only their existence is used
-        users = request.env["res.users"].sudo().with_context(active_test=False)
-        return bool(users.search_count(domain, limit=1))

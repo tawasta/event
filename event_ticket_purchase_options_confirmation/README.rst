@@ -26,9 +26,9 @@ the registrations are found and how the other participants are invited. The
 text is translatable and supports formatting such as paragraphs, lists and
 links. Leave it empty to show only the button.
 
-A buyer who is not logged in gets a login button when the order customer or
-the email of the order already has an account. Without an account the buyer
-gets the signup button only when customers can sign up on the website
+A buyer who is not logged in gets a login button when the order customer
+already has an account. Without an account the buyer gets the signup button
+only when customers can sign up on the website
 (Website > Configuration > Settings > Privacy > Customer Account: Free sign
 up). Otherwise the box tells that the registrations are shown on the Events
 page of the customer account.

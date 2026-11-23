@@ -20,7 +20,7 @@
 {
     "name": "Event Ticket Invitations on Order Confirmation",
     "summary": "Guide buyers to their registrations from the order confirmation page",
-    "version": "17.0.1.1.0",
+    "version": "17.0.1.1.1",
     "category": "Event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
