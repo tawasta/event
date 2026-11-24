@@ -15,8 +15,7 @@
                 <!-- Kortti itselle ilmoittautumiseen -->
                 <label
                         for="register_self"
-                        class="card text-center border-primary cursor-pointer"
-                        style="width: 45%;"
+                        class="card text-center border-primary cursor-pointer w-50 flex-fill"
                     >
                     <div class="card-body p-3">
                         <input
@@ -38,8 +37,7 @@
                 <!-- Kortti muiden ilmoittamiseen -->
                 <label
                         for="register_others"
-                        class="card text-center border-secondary cursor-pointer"
-                        style="width: 45%;"
+                        class="card text-center border-secondary cursor-pointer w-50 flex-fill"
                     >
                     <div class="card-body p-3">
                         <input
@@ -58,7 +56,58 @@
                     </div>
                 </label>
             </div>
-            <span class="form-text text-muted mt-3">
+            <t
+                    t-set="registration_help"
+                    t-value="website._get_event_registration_help()"
+                />
+            <div
+                    t-if="registration_help"
+                    id="registration_choice_help"
+                    class="mt-3 p-3 bg-white border rounded"
+                    role="note"
+                    aria-labelledby="registration_choice_help_title"
+                >
+                <div id="registration_choice_help_title" class="fw-bold mb-2">
+                    <i
+                            class="fa fa-info-circle text-primary me-2"
+                            aria-hidden="true"
+                        />Which option should I choose?
+                </div>
+                <div
+                        t-if="registration_help.get('self')"
+                        id="registration_choice_help_self"
+                        class="border-top pt-2 mt-2"
+                    >
+                    <div class="fw-semibold mb-1">
+                        <i
+                                class="fa fa-user fa-fw me-1"
+                                aria-hidden="true"
+                            />I am registering only myself
+                    </div>
+                    <div
+                            class="o_registration_choice_help_text small"
+                            t-out="registration_help['self']"
+                        />
+                </div>
+                <div
+                        t-if="registration_help.get('others')"
+                        id="registration_choice_help_others"
+                        class="border-top pt-2 mt-2"
+                    >
+                    <div class="fw-semibold mb-1">
+                        <i
+                                class="fa fa-users fa-fw me-1"
+                                aria-hidden="true"
+                            />I am registering other participants
+                    </div>
+                    <div
+                            class="o_registration_choice_help_text small"
+                            t-out="registration_help['others']"
+                        />
+                </div>
+            </div>
+            <!-- Configured help replaces the generic hint to avoid repeating it -->
+            <span t-if="not registration_help" class="form-text text-muted mt-3">
                 If you are registering other participants, you will have the opportunity to invite them to fill in their contact details later.
             </span>
         </div>

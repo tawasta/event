@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="confirmation"
+        inherit_id="website_sale.confirmation"
+        name="Event Registrations on Order Confirmation"
+    >
+        <xpath
+            expr="//div[@id='oe_structure_website_sale_confirmation_1']"
+            position="before"
+        >
+            <div
+                t-if="event_registrations"
+                id="event_registrations_confirmation"
+                class="card mt-3"
+                role="note"
+                aria-labelledby="event_registrations_confirmation_title"
+            >
+                <div class="card-body">
+                    <!-- h4 follows the h3 of the page; it looks like a card title -->
+                    <h4
+                        id="event_registrations_confirmation_title"
+                        class="card-title h5"
+                    >
+                        <i
+                            class="fa fa-ticket text-primary me-2"
+                            aria-hidden="true"
+                        />Registrations
+                    </h4>
+                    <!-- The class gives editor HTML the same block spacing as the
+                         registration option help -->
+                    <div
+                        t-if="event_registrations['help']"
+                        class="o_registration_choice_help_text mb-3"
+                        t-out="event_registrations['help']"
+                    />
+                    <t t-if="not event_registrations['is_confirmed']">
+                        <p class="mb-0 text-muted">
+                            Your registrations are shown once your payment has been confirmed.
+                        </p>
+                    </t>
+                    <t t-elif="event_registrations.get('url')">
+                        <a
+                            role="button"
+                            class="btn btn-primary"
+                            t-att-href="event_registrations['url']"
+                        >
+                            <t
+                                t-if="event_registrations['access'] == 'signup'"
+                            >Create an account and show registrations</t>
+                            <t
+                                t-elif="event_registrations['access'] == 'login'"
+                            >Log in and show registrations</t>
+                            <t t-else="">My registrations</t>
+                            <i class="fa fa-arrow-right ms-2" aria-hidden="true" />
+                        </a>
+                    </t>
+                    <t t-else="">
+                        <p class="mb-0 text-muted">
+                            Your registrations are shown on the Events page of your customer account.
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* event_ticket_purchase_options_confirmation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-23 00:00+0000\n"
+"PO-Revision-Date: 2026-11-23 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid ""
+"<i class=\"fa fa-ticket text-primary me-2\" aria-hidden=\"true\"/>"
+"Registrations"
+msgstr ""
+"<i class=\"fa fa-ticket text-primary me-2\" aria-hidden=\"true\"/>"
+"Ilmoittautumiset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model,name:event_ticket_purchase_options_confirmation.model_res_config_settings
+msgid "Config Settings"
+msgstr "Asetukset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Create an account and show registrations"
+msgstr "Luo tili ja näytä ilmoittautumiset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid ""
+"E.g. your registrations are on the Events page of your account. If you "
+"registered other participants, send each of them an invitation there..."
+msgstr ""
+"Esim. ilmoittautumisesi löytyvät tilisi Tapahtumat-sivulta. Jos ilmoitit "
+"muita osallistujia, lähetä siellä jokaiselle heistä kutsu..."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid "Instructions on order confirmation"
+msgstr "Ohje tilausvahvistussivulla"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Log in and show registrations"
+msgstr "Kirjaudu sisään ja näytä ilmoittautumiset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "My registrations"
+msgstr "Omat ilmoittautumiset"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model.fields,field_description:event_ticket_purchase_options_confirmation.field_res_config_settings__event_invitation_confirmation_help
+#: model:ir.model.fields,field_description:event_ticket_purchase_options_confirmation.field_website__event_invitation_confirmation_help
+msgid "Registration Instructions on Order Confirmation"
+msgstr "Ilmoittautumisohje tilausvahvistussivulla"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.res_config_settings_view_form
+msgid ""
+"Shown in the registrations box of the order confirmation page, e.g. where "
+"the registrations are found and how the other participants are invited. "
+"Leave empty to hide the instructions."
+msgstr ""
+"Näytetään tilausvahvistussivun ilmoittautumislaatikossa, esim. mistä "
+"ilmoittautumiset löytyvät ja miten muut osallistujat kutsutaan. Jätä "
+"tyhjäksi, jos ohjetta ei haluta näyttää."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model:ir.model,name:event_ticket_purchase_options_confirmation.model_website
+msgid "Website"
+msgstr "Verkkosivu"
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Your registrations are shown on the Events page of your customer account."
+msgstr "Ilmoittautumisesi näkyvät asiakastilisi Tapahtumat-sivulla."
+
+#. module: event_ticket_purchase_options_confirmation
+#: model_terms:ir.ui.view,arch_db:event_ticket_purchase_options_confirmation.confirmation
+msgid "Your registrations are shown once your payment has been confirmed."
+msgstr "Ilmoittautumisesi näkyvät, kun maksusi on vahvistettu."

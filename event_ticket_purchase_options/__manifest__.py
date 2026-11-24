@@ -20,7 +20,7 @@
 {
     "name": "Event Ticket Registration: Self or Invite Others",
     "summary": "Event Ticket Registration: Self or Invite Others",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Event",
     "website": "https://github.com/tawasta/event",
     "author": "Futural",
@@ -34,12 +34,14 @@
         "views/event_templates.xml",
         "views/event_view.xml",
         "views/registration_invitation.xml",
+        "views/res_config_settings_views.xml",
         "security/ir.model.access.csv",
     ],
     "assets": {
         "web.assets_frontend": [
             "event_ticket_purchase_options/static/src/js/invitation.esm.js",
             "event_ticket_purchase_options/static/src/js/ticket.esm.js",
+            "event_ticket_purchase_options/static/src/scss/registration_choice_help.scss",
         ],
     },
 }
